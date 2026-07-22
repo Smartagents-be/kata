@@ -6,7 +6,7 @@
 @plugin "@tailwindcss/typography";
 
 /* Step content is authored as plain HTML, which Tailwind does not scan by default. */
-@source "./content/*.html";
+@source "./steps/**/*.html";
 
 @custom-variant dark (&:is(.dark *));
 

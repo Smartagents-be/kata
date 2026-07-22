@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { AppShell } from '@/components/AppShell'
-import { steps } from '@/content'
-import { StepPage } from '@/routes/StepPage'
+import { AppShell } from '@/shared/components/AppShell'
+import { steps } from '@/steps'
+import { StepPage } from '@/shared/routes/StepPage'
 
 export default function App() {
   return (

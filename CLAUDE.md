@@ -33,9 +33,41 @@ Two parts, both walking-skeleton thin:
 - **Frontend** (`front/`) — React + Vite + shadcn/ui. It owns the curriculum content and
   renders it for one of two audiences.
 
-The only exercise so far is `fizzbuzz`, wiring `FizzBuzzChecker` to
-`front/src/content/step-01-fizzbuzz.html`. It exists to prove the loop end to end and is
-disposable — delete it, along with `FizzBuzz` itself, once the first real step lands.
+Only `step1` exists so far, and it is a placeholder: a FizzBuzz warm-up that proves the loop
+end to end. Replace its contents once the real first step is written.
+
+## Layout: shared vs. per-step
+
+Both halves are split the same way — a `shared` part holding the application shell, and one
+folder per step holding only that step's material.
+
+```
+src/main/java/be/smartagents/kata/java/
+  KataApplication.java          entry point; stays at the root so component scanning
+                                reaches both shared and every step
+  shared/exercise/              ExerciseChecker, ExerciseCheckers, CheckResult
+  shared/web/                   HealthController, ExerciseController
+  step1/                        FizzBuzz, FizzBuzzChecker
+
+front/src/
+  main.tsx, App.tsx, index.css  entry point and routing
+  shared/components/            AppShell, StepNav, ModeToggle, ExercisePanel, … and ui/
+  shared/lib/                   api.ts, content.ts, utils.ts
+  shared/mode/                  the guided/self-learning toggle
+  shared/routes/, shared/step.ts
+  steps/index.ts                the ordered registry
+  steps/step1/                  content.html + index.ts
+```
+
+**Dependencies point one way: steps may import from `shared`, never the reverse.** That is
+why `ExerciseControllerTest` grades against a stub checker defined in the test rather than
+importing `FizzBuzzChecker` — a shared test that reaches into a step would invert the
+relationship. `ExerciseCheckers` finds checkers by collecting every `ExerciseChecker` bean,
+so `shared` never needs to name a step.
+
+`KataApplication` is the one thing that stays at the package root rather than moving into
+`shared`. `@SpringBootApplication` scans downward from its own package, so putting it inside
+`shared` would hide every step's beans.
 
 ## Running it
 
@@ -106,17 +138,23 @@ npm run lint    # oxlint, shipped with the Vite template
   patterns depend on this suffix).
 - Table-driven cases use `@ParameterizedTest` + `@CsvSource` with a `name` template, as in
   `FizzBuzzTest`.
-- Frontend imports go through the `@` alias (`@/lib/api`), configured in both
-  `tsconfig.app.json` and `vite.config.ts`. shadcn's generated components assume it.
+- Frontend imports go through the `@` alias (`@/shared/lib/api`), configured in both
+  `tsconfig.app.json` and `vite.config.ts`. `components.json` points shadcn at
+  `@/shared/components/ui`, so `npx shadcn@latest add …` keeps generating into `shared`.
 
 ## Adding a step
 
-1. Write `front/src/content/step-NN-name.html` — plain HTML, no wrapper element needed.
-2. Register it in `front/src/content/index.ts`. That list drives the sidebar and the
-   routes; nothing else needs touching.
-3. If the step asks for an answer, add an `ExerciseChecker` bean on the Java side and point
-   the step's `exerciseId` at it. Checkers self-register — `ExerciseCheckers` collects every
-   bean and indexes it by `exerciseId()`.
+1. `front/src/steps/stepN/content.html` — plain HTML, no wrapper element needed.
+2. `front/src/steps/stepN/index.ts` — default-export a `Step` (`id`, `title`, `html`, and
+   `exerciseId` if it asks for an answer).
+3. Append it to the array in `front/src/steps/index.ts`. That list drives both the sidebar
+   and the routes; nothing else needs touching.
+4. Java side, if the step is graded: `be.smartagents.kata.java.stepN`, with an
+   `ExerciseChecker` `@Component`. It registers itself by being a bean — no wiring, no
+   edits to `shared`.
+
+Step ids are `stepN` and become the URL (`/steps/step1`). Exercise ids are named after what
+they test (`fizzbuzz`), not after the step, so one step can grow several exercises.
 
 ### The audience rule
 
@@ -131,11 +169,11 @@ Any element in step HTML may carry `data-audience`:
 means always visible** — that is the common case, so reach for the attribute only when
 material genuinely belongs to one audience.
 
-`renderForMode` in `front/src/lib/content.ts` *removes* non-matching elements from the
+`renderForMode` in `front/src/shared/lib/content.ts` *removes* non-matching elements from the
 parsed document rather than hiding them. Keep it that way: text that is merely
 `display: none` is one devtools panel away during a lesson. That function also renders
 with `dangerouslySetInnerHTML`, which is safe only because the HTML is first-party and
 committed here — sanitise first if content ever arrives from an API, a user, or an LLM.
 
-Mode lives in `front/src/mode/`, defaults to guided, and persists under the `kata.mode`
-localStorage key.
+Mode lives in `front/src/shared/mode/`, defaults to guided, and persists under the
+`kata.mode` localStorage key.
