@@ -94,9 +94,10 @@ reverse.
 `AuxiliaryStage` beans at arbitrary positions. So the path through the code moves from request to
 request while the response does not.
 
-A tenth title is computed on every request and never published, because its `run.publish(...)` call
-is commented out. **This is a deliberate exercise, and the point is that it does not fall out of a
-search.** Four things protect it:
+A tenth entry is computed on every request and never published, because its `run.publish(...)` call
+is commented out. It is not a title but a flag, `{…}`-wrapped and leetspoken, so there is no
+mistaking it for catalogue prose once you have it. **This is a deliberate exercise, and the point is
+that it does not fall out of a search.** Four things protect it:
 
 - **Nothing is stored in plaintext.** All 41 non-publisher stages restore a string through
   `Scramble.unveil`, and they all look alike doing it. Only the nine publishers hold a literal, and
@@ -105,10 +106,12 @@ search.** Four things protect it:
   and 40 of the 41 restored strings carry it. So publishing is not the tell either: the auxiliaries
   publish for real and vanish.
 - **The commented-out publish is not unique.** Eleven stages have one, and uncommenting all eleven
-  is not a shortcut: five lines appear, four of them operational noise that reads nothing like a
-  catalogue entry. Six of the decoys carry the marker and vanish; four do not, on purpose. Which
-  of the five belongs in the catalogue is a judgement about the text, not something the structure
-  gives away.
+  is not a shortcut: five lines appear and all five are flags in the same shape. Six of the decoys
+  carry the marker and vanish; four do not, on purpose, and those four are flags too. Which of the
+  five is the real one is a judgement about what it says, not something the structure gives away.
+- **Stored lengths sit in one band.** The five flags are 22 to 25 characters, and every one of
+  those lengths is shared with a marked string. Sorting the 41 ciphertexts by length must not
+  separate them, so any new stored string has to land inside the band rather than at either end.
 - **The always-run set is padded to twenty on purpose.** Nine publishers plus those eleven. If the
   runner always ran exactly the ten title-bearing stages, nine would publish visibly and the tenth
   would be the answer by elimination.
