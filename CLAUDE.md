@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project state
 
 A Java coding-kata repository, freshly scaffolded. The only code present is
-`dev.sarrechia.kata.FizzBuzz` and its test — a placeholder so the build has something to
+`be.smartagents.kata.java.FizzBuzz` and its test — a placeholder so the build has something to
 compile. It carries no meaning for the project and should be deleted once a real exercise
 lands. There is no architecture to preserve yet; update this file when one appears.
 
@@ -45,7 +45,9 @@ All versions live in `<properties>` in `pom.xml`; change them there, not inline.
 
 ## Conventions
 
-- Package root `dev.sarrechia.kata`; standard `src/main/java` + `src/test/java` layout.
+- Package root `be.smartagents.kata.java` (Maven coordinates are
+  `be.smartagents:kata-agentic-java`, so the groupId and the package root deliberately
+  differ); standard `src/main/java` + `src/test/java` layout.
 - Tests are `*Test.java` mirroring the production package (Surefire's default include
   patterns depend on this suffix).
 - Table-driven cases use `@ParameterizedTest` + `@CsvSource` with a `name` template, as in

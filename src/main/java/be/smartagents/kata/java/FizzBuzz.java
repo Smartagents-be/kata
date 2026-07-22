@@ -1,4 +1,4 @@
-package dev.sarrechia.kata;
+package be.smartagents.kata.java;
 
 /** Placeholder kata, here so the build has something to compile. Replace with the real exercise. */
 public final class FizzBuzz {

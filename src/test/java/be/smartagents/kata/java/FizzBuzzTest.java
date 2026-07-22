@@ -1,4 +1,4 @@
-package dev.sarrechia.kata;
+package be.smartagents.kata.java;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
