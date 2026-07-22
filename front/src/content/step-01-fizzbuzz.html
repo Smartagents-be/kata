@@ -1,0 +1,35 @@
+<h2>Warm-up: FizzBuzz</h2>
+
+<p>
+  The backend already has a <code>FizzBuzz</code> class. Your job is to predict what it
+  produces, then check your answer against the running Java service.
+</p>
+
+<p>
+  Write out the values for <strong>1 through 15</strong>, separated by commas, and submit
+  them below.
+</p>
+
+<aside data-audience="self">
+  <strong>Notes</strong>
+  <p>
+    The rules: multiples of three become <code>Fizz</code>, multiples of five become
+    <code>Buzz</code>, and multiples of both become <code>FizzBuzz</code>. Everything else
+    stays as its own number.
+  </p>
+  <p>
+    The order of the checks matters. Test for divisibility by 15 <em>before</em> testing 3
+    and 5, otherwise 15 matches the <code>Fizz</code> branch and never reaches
+    <code>FizzBuzz</code>.
+  </p>
+</aside>
+
+<p data-audience="guided">
+  Your teacher will walk through the rules before you submit.
+</p>
+
+<p>
+  When you submit, the browser calls
+  <code>POST /api/exercises/fizzbuzz/check</code> and the Java service grades each value.
+  That round-trip is the thing this first step is really demonstrating.
+</p>

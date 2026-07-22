@@ -2,6 +2,11 @@ target/
 out/
 *.class
 
+node_modules/
+
+# Playwright MCP scratch output
+.playwright-mcp/
+
 *.iml
 .idea/modules.xml
 .idea/workspace.xml

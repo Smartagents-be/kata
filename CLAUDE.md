@@ -26,10 +26,30 @@ What this means when working here:
 
 ## Project state
 
-Freshly scaffolded — step one has not landed yet. The only code present is
-`be.smartagents.kata.java.FizzBuzz` and its test, a placeholder so the build has something
-to compile; it carries no meaning and should be deleted once the first real step arrives.
-There is no architecture to preserve yet.
+Two parts, both walking-skeleton thin:
+
+- **Backend** (repo root) — a Spring Boot service exposing `/api`. It grades submitted
+  answers; it does not serve the curriculum.
+- **Frontend** (`front/`) — React + Vite + shadcn/ui. It owns the curriculum content and
+  renders it for one of two audiences.
+
+The only exercise so far is `fizzbuzz`, wiring `FizzBuzzChecker` to
+`front/src/content/step-01-fizzbuzz.html`. It exists to prove the loop end to end and is
+disposable — delete it, along with `FizzBuzz` itself, once the first real step lands.
+
+## Running it
+
+Two servers, two terminals. Vite proxies `/api` to the backend, so the browser stays on one
+origin and Spring needs no CORS configuration.
+
+```bash
+mvn spring-boot:run     # backend on :8080
+cd front && npm run dev # frontend on :5173  ← open this one
+```
+
+Opening `:5173` with the backend down is a supported state: the header badge reads
+"Backend offline" and submitting an answer reports the same. That is the fastest way to
+tell a proxy problem from a UI problem.
 
 ## Build and test
 
@@ -51,19 +71,31 @@ mvn test -Dtest='FizzBuzzTest#mapsNumberToFizzBuzz' -DfailIfNoSpecifiedTests=fal
 mvn test -Dtest='*Test#shouldHandle*' -DfailIfNoSpecifiedTests=false
 ```
 
-There is no linter or formatter configured. `mvn verify` runs no static analysis.
+No static analysis runs on the Java side; `mvn verify` adds nothing beyond packaging.
+
+Frontend, from `front/`:
+
+```bash
+npm run build   # tsc -b + vite build — this is the type check, run it before committing
+npm run lint    # oxlint, shipped with the Vite template
+```
 
 ## Toolchain
 
-- **Java 25** via `maven.compiler.release`, so `javac` rejects APIs newer than 25 even
-  though the local JDK is Oracle GraalVM 25.0.3. Bumping the language level means editing
-  that one property.
-- **JUnit 5** (Jupiter) pinned through `junit-bom` — declare new JUnit artifacts
-  *without* a `<version>` so the BOM governs them.
-- **AssertJ** for assertions. Prefer `assertThat(...)` over JUnit's `Assertions.*`; the
-  existing test sets that precedent.
-
-All versions live in `<properties>` in `pom.xml`; change them there, not inline.
+- **Java 25** via Boot's `<java.version>` property, so `javac` rejects APIs newer than 25
+  even though the local JDK is Oracle GraalVM 25.0.3.
+- **Spring Boot 4.1.0** as parent POM. It manages every dependency version here — JUnit
+  (Jupiter 6.0.3) and AssertJ (3.27.7) included — so declare new Spring or test artifacts
+  **without** a `<version>`.
+- Boot 4 split the test slices out of `spring-boot-starter-test`. `@WebMvcTest` lives in
+  `org.springframework.boot.webmvc.test.autoconfigure` and needs the separate
+  `spring-boot-webmvc-test` dependency, already present. Expect other slices to need their
+  own artifact too.
+- **AssertJ** for plain assertions, MockMvc for controllers. Prefer `assertThat(...)` over
+  JUnit's `Assertions.*`.
+- Frontend pins are ordinary `package.json` entries; TypeScript is on the 6.x line, where
+  `baseUrl` is deprecated (`paths` alone resolves relative to the tsconfig) and
+  `erasableSyntaxOnly` rejects constructor parameter properties.
 
 ## Conventions
 
@@ -74,3 +106,36 @@ All versions live in `<properties>` in `pom.xml`; change them there, not inline.
   patterns depend on this suffix).
 - Table-driven cases use `@ParameterizedTest` + `@CsvSource` with a `name` template, as in
   `FizzBuzzTest`.
+- Frontend imports go through the `@` alias (`@/lib/api`), configured in both
+  `tsconfig.app.json` and `vite.config.ts`. shadcn's generated components assume it.
+
+## Adding a step
+
+1. Write `front/src/content/step-NN-name.html` — plain HTML, no wrapper element needed.
+2. Register it in `front/src/content/index.ts`. That list drives the sidebar and the
+   routes; nothing else needs touching.
+3. If the step asks for an answer, add an `ExerciseChecker` bean on the Java side and point
+   the step's `exerciseId` at it. Checkers self-register — `ExerciseCheckers` collects every
+   bean and indexes it by `exerciseId()`.
+
+### The audience rule
+
+Any element in step HTML may carry `data-audience`:
+
+```html
+<aside data-audience="self">Hint: check divisibility by 15 before 3 and 5.</aside>
+<p data-audience="guided">Your teacher will walk through this on the board.</p>
+```
+
+`"self"` shows only in self-learning mode, `"guided"` only in class, and **no attribute
+means always visible** — that is the common case, so reach for the attribute only when
+material genuinely belongs to one audience.
+
+`renderForMode` in `front/src/lib/content.ts` *removes* non-matching elements from the
+parsed document rather than hiding them. Keep it that way: text that is merely
+`display: none` is one devtools panel away during a lesson. That function also renders
+with `dangerouslySetInnerHTML`, which is safe only because the HTML is first-party and
+committed here — sanitise first if content ever arrives from an API, a user, or an LLM.
+
+Mode lives in `front/src/mode/`, defaults to guided, and persists under the `kata.mode`
+localStorage key.
