@@ -125,7 +125,7 @@
 @layer base {
   /* Notes revealed in self-learning mode read as an aside, not as body copy. */
   .prose aside[data-audience] {
-    @apply border-primary/30 bg-muted/50 text-muted-foreground my-6 rounded-md border-l-4 px-5 py-1;
+    @apply bg-muted/50 text-muted-foreground my-6 rounded-md px-5 py-1;
   }
 
   * {
@@ -137,4 +137,11 @@
   html {
     @apply font-sans;
     }
+}
+
+/* A unit whose whole prose belongs to one audience wraps it in a single element, so that wrapper
+   is what Typography sees first and the opening paragraph keeps a margin the page does not want.
+   Unlayered on purpose: inside `base` the plugin's own layer would win regardless of specificity. */
+.prose > div[data-audience] > :first-child {
+  margin-top: 0;
 }

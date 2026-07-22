@@ -1,0 +1,41 @@
+<p>
+  Label each item below with the layer it comes from. The labels are
+  <code>prompt</code>, <code>session</code>, <code>project</code>, <code>harness</code>,
+  <code>memory</code> and <code>external</code>. Submit the eight labels comma-separated, in
+  order.
+</p>
+
+<!-- Order must match ITEMS in be.smartagents.kata.java.step1.ContextLayersChecker. -->
+<ol>
+  <li>The sentence you just typed.</li>
+  <li>The "Conventions" section of this repo's <code>CLAUDE.md</code>.</li>
+  <li>The description of the <code>Read</code> tool, telling the agent it may open files.</li>
+  <li>Your "no, use AssertJ instead" from twenty turns ago.</li>
+  <li>Spring Boot release notes the agent fetched from the web.</li>
+  <li>A note saved last week, "this project has no Maven wrapper", reloaded today.</li>
+  <li>The output of the <code>mvn test</code> run the agent did earlier in this chat.</li>
+  <li>The branch you are on and the last five commits.</li>
+</ol>
+
+<aside data-audience="self">
+  <strong>Notes</strong>
+  <p>
+    Items 4 and 7 look like they could be <code>project</code>. Items 2 and 8 look like they could
+    be <code>session</code>. One question separates them: would this still be here after a
+    <code>/clear</code>?
+  </p>
+  <p>
+    A test run only exists because it happened in this conversation. Clear the session and it is
+    gone. <code>CLAUDE.md</code> and the git history are properties of the project, so a
+    brand-new session picks them up again without you doing anything.
+  </p>
+  <p>
+    Item 3 is the giveaway for <code>harness</code>. Nobody typed it, it is not in the repo, and
+    the agent knows it before your first message.
+  </p>
+</aside>
+
+<p data-audience="guided">
+  Before you submit, your teacher will show a live session: what is in the window right now, what
+  compaction does to it, and what survives a <code>/clear</code>.
+</p>

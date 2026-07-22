@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Button } from '@/shared/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/components/ui/card'
+import { useLocale } from '@/shared/i18n/useLocale'
 import { checkAnswer, type CheckResult } from '@/shared/lib/api'
 import { cn } from '@/shared/lib/utils'
 
@@ -10,9 +11,16 @@ type State =
   | { phase: 'checked'; result: CheckResult }
   | { phase: 'error'; message: string }
 
-export function ExercisePanel({ exerciseId }: { exerciseId: string }) {
+export function ExercisePanel({
+  exerciseId,
+  placeholder,
+}: {
+  exerciseId: string
+  placeholder?: string
+}) {
   const [answer, setAnswer] = useState('')
   const [state, setState] = useState<State>({ phase: 'idle' })
+  const { t } = useLocale()
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault()
@@ -20,43 +28,61 @@ export function ExercisePanel({ exerciseId }: { exerciseId: string }) {
     try {
       setState({ phase: 'checked', result: await checkAnswer(exerciseId, answer) })
     } catch {
-      setState({
-        phase: 'error',
-        message: 'Could not reach the backend. Is it running on port 8080?',
-      })
+      setState({ phase: 'error', message: t('exercise.offline') })
     }
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Your answer</CardTitle>
-        <CardDescription>Graded by the Java service, not the browser.</CardDescription>
+    <Card id="exercise" data-component="ExercisePanel">
+      <CardHeader id="exercise-header" data-component="ExercisePanel">
+        <CardTitle id="exercise-title" data-component="ExercisePanel">
+          {t('exercise.title')}
+        </CardTitle>
+        <CardDescription id="exercise-description" data-component="ExercisePanel">
+          {t('exercise.description')}
+        </CardDescription>
       </CardHeader>
-      <CardContent>
-        <form onSubmit={onSubmit} className="flex flex-col gap-3">
+      <CardContent id="exercise-content" data-component="ExercisePanel">
+        <form
+          id="exercise-form"
+          data-component="ExercisePanel"
+          onSubmit={onSubmit}
+          className="flex flex-col gap-3"
+        >
           <textarea
+            id="exercise-answer"
+            data-component="ExercisePanel"
             value={answer}
             onChange={(event) => setAnswer(event.target.value)}
             rows={3}
             spellCheck={false}
-            placeholder="1, 2, Fizz, 4, …"
-            aria-label="Your answer"
+            placeholder={placeholder ?? t('exercise.placeholder')}
+            aria-label={t('exercise.title')}
             className="border-input bg-background focus-visible:ring-ring/50 min-h-20 w-full rounded-md border px-3 py-2 font-mono text-sm focus-visible:ring-[3px] focus-visible:outline-none"
           />
-          <div className="flex items-center gap-3">
-            <Button type="submit" disabled={state.phase === 'checking' || answer.trim() === ''}>
-              {state.phase === 'checking' ? 'Checking…' : 'Check answer'}
+          <div id="exercise-actions" data-component="ExercisePanel" className="flex items-center gap-3">
+            <Button
+              id="exercise-submit"
+              data-component="ExercisePanel"
+              type="submit"
+              disabled={state.phase === 'checking' || answer.trim() === ''}
+            >
+              {state.phase === 'checking' ? t('exercise.submitting') : t('exercise.submit')}
             </Button>
           </div>
         </form>
 
         {state.phase === 'error' && (
-          <p className="text-destructive mt-4 text-sm">{state.message}</p>
+          <p id="exercise-error" data-component="ExercisePanel" className="text-destructive mt-4 text-sm">
+            {state.message}
+          </p>
         )}
 
         {state.phase === 'checked' && (
           <div
+            id="exercise-result"
+            data-component="ExercisePanel"
+            data-state={state.result.passed ? 'passed' : 'failed'}
             role="status"
             className={cn(
               'mt-4 rounded-md border px-4 py-3 text-sm',
@@ -65,11 +91,23 @@ export function ExercisePanel({ exerciseId }: { exerciseId: string }) {
                 : 'border-destructive/30 bg-destructive/10',
             )}
           >
-            <p className="font-medium">{state.result.message}</p>
+            <p id="exercise-result-message" data-component="ExercisePanel" className="font-medium">
+              {state.result.message}
+            </p>
             {state.result.details.length > 0 && (
-              <ul className="mt-2 list-disc space-y-1 pl-5 font-mono text-xs">
-                {state.result.details.map((detail) => (
-                  <li key={detail}>{detail}</li>
+              <ul
+                id="exercise-result-details"
+                data-component="ExercisePanel"
+                className="mt-2 list-disc space-y-1 pl-5 font-mono text-xs"
+              >
+                {state.result.details.map((detail, index) => (
+                  <li
+                    key={detail}
+                    id={`exercise-result-detail-${index}`}
+                    data-component="ExercisePanel"
+                  >
+                    {detail}
+                  </li>
                 ))}
               </ul>
             )}

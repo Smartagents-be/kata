@@ -1,0 +1,33 @@
+<p>
+  Notes written down on purpose in one session so they come back in the next one. Memory is the
+  only layer that survives a <code>/clear</code>, because something decided it was worth keeping.
+</p>
+
+<p>
+  That makes it useful and also makes it the layer most likely to be quietly out of date. A note
+  saying "this project has no Maven wrapper" stays true until the day somebody adds one.
+</p>
+
+<h2>Exercise</h2>
+
+<p>
+  You type <code>/clear</code> and keep working in the same repository. Which of these is still in
+  front of the agent afterwards? Answer <code>keep</code> or <code>gone</code> for each item,
+  comma-separated, in order.
+</p>
+
+<!-- Order must match ITEMS in be.smartagents.kata.java.step1.SurvivesClearChecker. -->
+<ol>
+  <li>The output of the <code>mvn test</code> run from earlier in this chat.</li>
+  <li>The "Conventions" section of this repo's <code>CLAUDE.md</code>.</li>
+  <li>A note you asked the agent to remember last week.</li>
+  <li>The prompt you typed three turns ago.</li>
+  <li>The description of the <code>Read</code> tool.</li>
+</ol>
+
+<aside data-audience="self">
+  <p>
+    Two of these are gone. Everything else comes back on its own, either because the agent reads
+    it out of the repository again or because it was there before you typed anything.
+  </p>
+</aside>

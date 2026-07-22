@@ -1,28 +1,32 @@
-import { useParams } from 'react-router-dom'
-import { ExercisePanel } from '@/shared/components/ExercisePanel'
-import { StepContent } from '@/shared/components/StepContent'
-import { findStep } from '@/steps'
+import { Navigate, useParams } from 'react-router-dom'
+import { useLocale } from '@/shared/i18n/useLocale'
+import { findStep, firstUnitPath } from '@/steps'
 
+/**
+ * A step has no page of its own: /steps/step1 opens its first unit. Only the "no such step" case
+ * renders anything here.
+ */
 export function StepPage() {
   const { stepId } = useParams()
+  const { t } = useLocale()
   const step = findStep(stepId)
 
   if (!step) {
     return (
-      <div className="text-muted-foreground">
-        <h1 className="text-foreground mb-2 text-xl font-semibold">Step not found</h1>
-        <p className="text-sm">
-          There is no step called <code className="font-mono">{stepId}</code>. Pick one from the
-          list on the left.
+      <div id="step-not-found" data-component="StepPage" className="text-muted-foreground">
+        <h1
+          id="step-not-found-title"
+          data-component="StepPage"
+          className="text-foreground mb-2 text-xl font-semibold"
+        >
+          {t('step.notFound.title')}
+        </h1>
+        <p id="step-not-found-body" data-component="StepPage" className="text-sm">
+          {t('step.notFound.body', { id: stepId ?? '' })}
         </p>
       </div>
     )
   }
 
-  return (
-    <div className="flex flex-col gap-8">
-      <StepContent html={step.html} />
-      {step.exerciseId && <ExercisePanel exerciseId={step.exerciseId} />}
-    </div>
-  )
+  return <Navigate to={firstUnitPath(step)} replace />
 }

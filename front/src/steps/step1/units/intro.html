@@ -1,0 +1,132 @@
+<!-- In class the teacher walks through this at the board, so the page keeps only the
+     diagram and the quiz. Self-learners read the whole thing. -->
+<div data-audience="self">
+  <p>
+    An agent has no memory of its own. Everything it knows when it answers you was assembled a
+    moment earlier, pulled together from a handful of separate sources and handed to the model as
+    one block of text. That block is the <strong>context</strong>.
+  </p>
+
+  <p>
+    Context is not a detail of how these tools work. It is the whole game.
+  </p>
+
+  <h2>A model is stateless, and it is a statistic</h2>
+
+  <p>
+    Between two messages an LLM keeps nothing. Not your last question, not the file it opened, not
+    the decision the two of you reached. Every request starts from zero. What feels like a
+    conversation is the entire transcript being sent again, from the top, every single time.
+  </p>
+
+  <p>
+    It is also a statistical model rather than a reasoning database. It predicts the most likely
+    continuation of the text it was given, using patterns from its training data. It holds no
+    opinion about your codebase. What it holds is an average.
+  </p>
+
+  <p>
+    That is why context is the only lever you have. The model gets better at your task at exactly
+    the moment you or the harness put your task in front of it. Give it nothing and it answers from
+    the average of everything it ever read.
+  </p>
+
+  <h2>Bad context, bad answers</h2>
+
+  <p>
+    Missing context produces generic output. You recognise it instantly: the tutorial answer, the
+    <code>UserServiceImpl</code>, the try-catch that swallows the exception. It is not wrong
+    exactly. It is just answering a question nobody in your team asked.
+  </p>
+
+  <p>
+    Wrong context is worse than none, because the model cannot tell that it is wrong. Paste a file
+    that is three versions old and it will happily build on top of it. Nothing in the window says
+    "stale". Everything in the window reads as true.
+  </p>
+
+  <h2>Why this bites hardest in code</h2>
+
+  <p>
+    There is far more bad code on the internet than good code. Abandoned tutorials, answers from
+    2011, snippets that never ran in production, homework. A model trained on all of it has seen the
+    thing you should not do thousands of times.
+  </p>
+
+  <p>
+    It cannot tell the two apart. "Good" and "bad" are not labels in the training data. Frequency is
+    the only signal, so a vague question returns the statistical middle of everything ever written
+    about the topic. That middle is mediocre code that happens to compile.
+  </p>
+
+  <p>
+    Give it your conventions, the pattern the rest of the package already uses, and the test that
+    has to pass, and the average stops deciding. You are no longer sampling the internet. You are
+    sampling your project. That is what raises the rate of getting something right the first time,
+    and first time right is the only speed that counts. Three rounds of review and re-prompting is
+    slower than writing the thing yourself.
+  </p>
+
+  <h2>More context is not free</h2>
+
+  <p>
+    Every token in the window is paid for, on every turn, because the whole context goes back to the
+    model with each message. A long session does not cost slightly more. It costs more per message,
+    for the rest of the session.
+  </p>
+
+  <p>
+    So the goal is not maximum context. It is context that is small enough and good enough. The file
+    that matters instead of the whole directory. Every extra token you throw in raises the cost.
+  </p>
+
+  <aside data-audience="self">
+    <p>
+      A quick test before you paste something in: would this change what the agent should do? If
+      not, leave it out. You pay for it either way, and volume is not the same thing as grounding.
+    </p>
+  </aside>
+
+  <h2>Entropy</h2>
+
+  <p>
+    In an agentic session the context only grows, and a lot of what lands in it is noise. Failed
+    attempts. A command that errored. The same file read at three different moments, in three
+    different states. An approach you abandoned halfway. None of it is removed, and the model weighs
+    all of it.
+  </p>
+
+  <p>
+    That is entropy: disorder in the window rises with every turn unless somebody spends energy
+    pushing it back down. The symptoms are easy to recognise once you know them. The agent starts
+    contradicting itself, re-proposes an idea you already rejected, or edits a file back to a
+    version you moved past an hour ago.
+  </p>
+
+  <h2>Amnesia and context fatigue</h2>
+
+  <p>
+    Because the window is finite, something eventually has to give. Older material is compacted into
+    a summary or drops out completely. The constraint you gave at the start is now one line in a
+    summary, or it is simply gone.
+  </p>
+
+  <p>
+    Then the agent forgets a decision from earlier, asks a question you already answered, or
+    re-reads a file it read twenty minutes ago. This is context fatigue, and it is worth being
+    precise about what happened. The model did not get tired and it did not get dumber. The evidence
+    left the room.
+  </p>
+
+  <p>
+    Repeating yourself louder does not fix that. Putting what matters somewhere that survives does:
+    a line in <code>CLAUDE.md</code>, a committed decision, or a fresh session started with the
+    right material in it.
+  </p>
+
+  <p>
+    The outline below is that window, drawn empty on purpose. The pages that follow take the layers
+    one at a time and drop them in, until you can name where any piece of context came from. The
+    step closes with a test.
+  </p>
+</div>
