@@ -36,6 +36,11 @@ export function fetchHealth(): Promise<Health> {
   return request<Health>('/health')
 }
 
+/** The catalogue the step 1 service assembles: whatever its stages published, in that order. */
+export function fetchTitles(): Promise<string[]> {
+  return request<string[]>('/titles')
+}
+
 export function checkAnswer(exerciseId: string, answer: string): Promise<CheckResult> {
   return request<CheckResult>(`/exercises/${encodeURIComponent(exerciseId)}/check`, {
     method: 'POST',

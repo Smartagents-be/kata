@@ -7,3 +7,92 @@
   It is also the layer people overload. Half of what gets typed into a prompt is already sitting
   in the repository, waiting to be read.
 </p>
+
+<h2>A reasonable question is not a good prompt</h2>
+
+<p>
+  You type an instruction, it reads fine, and an answer comes back. Nothing looks broken, so nobody
+  goes looking. That is the trap. A plain ask usually lands at about a third of what the same model
+  could have produced on the same day, and you never see the other two thirds.
+</p>
+
+<p>
+  Models work the question over before they answer. The harness exposes that as a reasoning level,
+  running from low up to max. Turn it up and the model spends more tokens thinking, which absorbs
+  some of the imprecision in what you wrote.
+</p>
+
+<p>
+  You pay for those tokens. Higher reasoning costs more per turn, and what you buy is tolerance for
+  a rougher prompt. Call that the baseline: the dial exists, and turning it up is the least
+  interesting thing you can do with it.
+</p>
+
+<p>
+  Worth knowing that the thinking is not only about your question. It also covers the agent's own
+  moves, which file to open next and what to hand itself as input for the step after that.
+</p>
+
+<h2>Let a model write the prompt</h2>
+
+<p>
+  Meta-prompting is what it sounds like. You say roughly what you want, a model writes the
+  instruction, and you read it back and fix the parts it got wrong.
+</p>
+
+<p>
+  Spend an expensive model on this. Writing a prompt is a few hundred tokens next to executing one,
+  so the top tier is cheap here. Running the task is where the money goes.
+</p>
+
+<h2>Plan mode</h2>
+
+<p>
+  Plan mode is meta-prompting the provider already built for you. The agent interviews you about
+  the task, hands back a plan, and waits. You edit it, ask for another pass, or approve it. Nothing
+  is written until you do.
+</p>
+
+<p>
+  In Claude Code you can watch this happen in this repository. Ask for a new unit in plan mode and
+  the questions come back before any file does: which step, guided or self-learning, graded by the
+  service or checked in the browser.
+</p>
+
+<p>
+  Here is the part people do not expect. A cheaper model driven through a plan routinely beats a
+  one-shot on the expensive one. The plan turned a vague ask into an exact instruction, and
+  precision was the missing ingredient all along, not model size.
+</p>
+
+<aside data-audience="self">
+  <p>
+    Try it once on something real. Take a task you were about to type as one line, run it through
+    plan mode instead, and read the plan before you approve it. The interview usually surfaces a
+    decision you had not made yet.
+  </p>
+</aside>
+
+<p data-audience="guided">
+  Your teacher runs a task through plan mode at the board, so you see the interview and the plan
+  before anything is executed.
+</p>
+
+<h2>What you steer after that</h2>
+
+<p>
+  Clear the context when you change subject. The debugging session you just finished is still in
+  the window, and it has nothing to do with the next feature. <code>/clear</code> costs you nothing
+  and hands the whole budget back.
+</p>
+
+<p>
+  Bundle what you want into one ask. Every follow-up is another turn, and every turn adds noise the
+  next turn has to read past. That is the entropy from the opening unit, and it compounds. Three
+  separate questions leave the window messier than one question covering all three.
+</p>
+
+<p>
+  Be exact about what changes. "Fix the login" and "make <code>ExerciseController</code> return a
+  400 when the answer is blank" go to the same model. Only one of them says what done looks like.
+</p>

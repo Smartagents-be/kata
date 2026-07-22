@@ -1,6 +1,6 @@
 import type { Step } from '@/shared/step'
 import { ContextDiagram } from './ContextDiagram'
-import { introQuiz } from './quiz'
+import { introQuiz, promptQuiz } from './quiz'
 import intro from './units/intro.html?raw'
 import introNl from './units/intro.nl.html?raw'
 import prompt from './units/prompt.html?raw'
@@ -42,6 +42,7 @@ const step1: Step = {
       id: 'prompt',
       title: { en: 'Your prompt', nl: 'Je prompt' },
       html: { en: prompt, nl: promptNl },
+      quiz: promptQuiz,
     },
     {
       id: 'session',

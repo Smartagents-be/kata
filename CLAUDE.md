@@ -28,8 +28,9 @@ What this means when working here:
 
 Two parts, both walking-skeleton thin:
 
-- **Backend** (repo root) — a Spring Boot service exposing `/api`. It grades submitted
-  answers; it does not serve the curriculum.
+- **Backend** (repo root) — a Spring Boot service exposing `/api`. It is now the *subject* of a
+  step rather than a grader for one: it serves a catalogue of book titles that the student will
+  instrument and trace. It does not serve the curriculum.
 - **Frontend** (`front/`) — React + Vite + shadcn/ui. It owns the curriculum content and
   renders it for one of two audiences.
 
@@ -37,7 +38,10 @@ Only `step1` exists so far: **context** — the layers an agent's context is ass
 (prompt, session, project, harness, memory, external) and the fact that they share one finite
 window. It runs to nine units, two of them graded by the service: `memory` asks what survives a
 `/clear`, and `evaluation` closes the step by asking the student to place eight items in the right
-layer. `intro` also carries a three-question multiple-choice quiz, graded in the browser.
+layer. `intro` and `prompt` each carry a three-question multiple-choice quiz, graded in the browser.
+`prompt` is the one unit that goes past naming its layer: after saying what the layer is, it covers
+how to write a better instruction (reasoning levels, meta-prompting, plan mode, and clearing,
+bundling and being exact).
 
 A **step** is a topic; a **unit** is one page inside it, holding prose, a quiz, an exercise, or any
 combination. The URL is `/steps/step1/session`; a bare `/steps/step1` forwards to the step's first
@@ -48,27 +52,31 @@ Two kinds of grading, on purpose. A free-text answer goes to the Java service th
 answer is one of the options already on screen and a round trip would add nothing. The quiz reads
 as backend-independent: it still works with the service down.
 
-## Layout: shared vs. per-step
+**The free-text half is currently unbacked.** `shared` held `/api/health` and
+`/api/exercises/{id}/check`, and it is gone (see below), so `survives-clear` and `context-layers`
+fail on submit and the header badge reads "Backend offline". The quizzes are unaffected. Restoring
+grading is a deliberate later decision, not an oversight.
 
-Both halves are split the same way — a `shared` part holding the application shell, and one
-folder per step holding only that step's material.
+## Layout
+
+The frontend still splits into a `shared` shell plus one folder per step. The backend no longer
+does: it is entirely step 1's, application class included.
 
 ```
-src/main/java/be/smartagents/kata/java/
-  KataApplication.java          entry point; stays at the root so component scanning
-                                reaches both shared and every step
-  shared/exercise/              ExerciseChecker, ExerciseCheckers, CheckResult, Answers
-  shared/web/                   HealthController, ExerciseController
-  step1/                        ContextLayer, ContextLayersChecker, SurvivesClearChecker
+src/main/java/be/smartagents/kata/java/step1/
+  Step1Application.java         entry point; the step owns its own @SpringBootApplication
+  TitleController.java          GET /api/titles
+  services/                     CatalogStage, AuxiliaryStage, CatalogRun, Catalog, Scramble
+                                and the fifty stage classes they walk
 
 front/src/
   main.tsx, App.tsx, index.css  entry point and routing
   shared/components/            AppShell, StepNav, UnitPager, SettingsSheet, ExercisePanel,
-                                QuizPanel, … and ui/
+                                QuizPanel, CatalogPanel, … and ui/
   shared/i18n/                  locale.ts, messages.ts, LocaleProvider, useLocale
   shared/lib/                   api.ts, content.ts, utils.ts
   shared/mode/                  the guided/self-learning toggle
-  shared/routes/                StepPage (forwards), UnitPage (renders a unit)
+  shared/routes/                StepPage (forwards), UnitPage (renders a unit), CatalogPage
   shared/step.ts                Step, Unit, QuizQuestion and QuizChoice
   steps/index.ts                the ordered registry, plus the flattened reading order
   steps/step1/index.tsx         the step's units, titles and exercise ids
@@ -76,15 +84,51 @@ front/src/
   steps/step1/units/            <unit>.html and <unit>.nl.html, one pair per unit
 ```
 
-**Dependencies point one way: steps may import from `shared`, never the reverse.** That is
-why `ExerciseControllerTest` grades against a stub checker defined in the test rather than
-importing `ContextLayersChecker` — a shared test that reaches into a step would invert the
-relationship. `ExerciseCheckers` finds checkers by collecting every `ExerciseChecker` bean,
-so `shared` never needs to name a step.
+On the frontend, dependencies still point one way: steps may import from `shared`, never the
+reverse.
 
-`KataApplication` is the one thing that stays at the package root rather than moving into
-`shared`. `@SpringBootApplication` scans downward from its own package, so putting it inside
-`shared` would hide every step's beans.
+### The catalogue, and the thing it is hiding
+
+`GET /api/titles` returns nine fictional book titles. `Catalog` builds them by walking every
+`CatalogStage` bean in `@Order` on every request, and folding in a random draw of one to ten
+`AuxiliaryStage` beans at arbitrary positions. So the path through the code moves from request to
+request while the response does not.
+
+A tenth title is computed on every request and never published, because its `run.publish(...)` call
+is commented out. **This is a deliberate exercise, and the point is that it does not fall out of a
+search.** Four things protect it:
+
+- **Nothing is stored in plaintext.** All 41 non-publisher stages restore a string through
+  `Scramble.unveil`, and they all look alike doing it. Only the nine publishers hold a literal, and
+  those are the visible output anyway.
+- **Almost everything published is thrown away.** `CatalogRun` drops any line containing `(draft)`,
+  and 40 of the 41 restored strings carry it. So publishing is not the tell either: the auxiliaries
+  publish for real and vanish.
+- **The commented-out publish is not unique.** Eleven stages have one, and uncommenting all eleven
+  is not a shortcut: five lines appear, four of them operational noise that reads nothing like a
+  catalogue entry. Six of the decoys carry the marker and vanish; four do not, on purpose. Which
+  of the five belongs in the catalogue is a judgement about the text, not something the structure
+  gives away.
+- **The always-run set is padded to twenty on purpose.** Nine publishers plus those eleven. If the
+  runner always ran exactly the ten title-bearing stages, nine would publish visibly and the tenth
+  would be the answer by elimination.
+
+Words a naive search reaches for — key, secret, hidden, vault, cipher, token, draft — appear in
+class names across all three groups, so grepping any of them proves nothing.
+
+The frontend has a page for calling all this: `/catalog`, linked under the steps in the sidebar.
+`CatalogPage` renders `CatalogPanel`, which fetches `/api/titles` on a button press and lists what
+came back, numbered, in arrival order. It is deliberately dumb: no caching, no massaging, no
+filtering, so what is on screen is what the service returned. It is not a unit and belongs to no
+step, because the step that uses it does not exist yet.
+
+**Do not add tracing here.** No hook, no callback, no candidate-logging method. Instrumenting this
+pipeline, running it and reading the trace is the student's work; shipping a seam does the exercise
+for them. The existing "I was here" logging never touches a computed value, and it must stay that
+way.
+
+The tests assert the nine known titles as a *subsequence* and size `>= 9`, never `== 9`, so a
+student who enables the tenth line does not land in a red build.
 
 ## Running it
 
@@ -98,7 +142,17 @@ cd front && npm run dev # frontend on :5173  ← open this one
 
 Opening `:5173` with the backend down is a supported state: the header badge reads
 "Backend offline" and submitting an answer reports the same. That is the fastest way to
-tell a proxy problem from a UI problem.
+tell a proxy problem from a UI problem. Right now the badge reads offline even with the backend
+up, because `/api/health` no longer exists.
+
+The catalogue is easiest to look at straight from the service:
+
+```bash
+curl -s localhost:8080/api/titles | jq
+mvn spring-boot:run -Dspring-boot.run.arguments=--logging.level.be.smartagents.kata.java.step1=DEBUG
+```
+
+The second one turns on the stage chatter, which is off by default.
 
 ## Build and test
 
@@ -115,8 +169,8 @@ Run a subset via Surefire's `-Dtest` filter. Add `-DfailIfNoSpecifiedTests=false
 typo'd or non-matching pattern is not a build failure:
 
 ```bash
-mvn test -Dtest='ContextLayersCheckerTest' -DfailIfNoSpecifiedTests=false
-mvn test -Dtest='ContextLayersCheckerTest#rejectsABlankAnswer' -DfailIfNoSpecifiedTests=false
+mvn test -Dtest='CatalogTest' -DfailIfNoSpecifiedTests=false
+mvn test -Dtest='CatalogTest#publishesEveryKnownTitleInStageOrder' -DfailIfNoSpecifiedTests=false
 mvn test -Dtest='*Test#shouldHandle*' -DfailIfNoSpecifiedTests=false
 ```
 
@@ -226,9 +280,9 @@ A component that renders one of several variants keeps one id and puts the varia
    `lesson-writing` apply on top of it.
 4. Append the step to the array in `front/src/steps/index.ts`. That list drives the sidebar,
    the routes and the previous/next pager; nothing else needs touching.
-5. Java side, for each graded unit: `be.smartagents.kata.java.stepN`, with an
-   `ExerciseChecker` `@Component`. It registers itself by being a bean — no wiring, no
-   edits to `shared`. Split the submitted answer with `Answers.commaSeparated`.
+5. Java side, if the step needs one: `be.smartagents.kata.java.stepN`, holding that step's own
+   `@SpringBootApplication` and whatever it exposes. There is no shared backend shell to register
+   with any more, and no shared grading endpoint — a step that wants one builds it.
 
 Step ids are `stepN`, unit ids are words (`session`, `evaluation`), and together they are the
 URL (`/steps/step1/session`). Exercise ids are named after what they test (`context-layers`,

@@ -7,3 +7,93 @@
   Het is ook de laag die mensen overladen. De helft van wat in een prompt belandt, staat al in de
   repository en wacht gewoon tot iemand het leest.
 </p>
+
+<h2>Een redelijke vraag is nog geen goede prompt</h2>
+
+<p>
+  Je typt een instructie, ze leest vlot, en er komt een antwoord terug. Er lijkt niets mis, dus
+  niemand kijkt verder. Daar zit de val. Een gewone vraag levert meestal ongeveer een derde op van
+  wat hetzelfde model die dag had kunnen maken, en die andere twee derde krijg je nooit te zien.
+</p>
+
+<p>
+  Modellen denken eerst over je vraag na voor ze antwoorden. De harness toont dat als een reasoning
+  level, van low tot max. Zet je het hoger, dan besteedt het model meer tokens aan nadenken, en dat
+  vangt een deel van de slordigheid in je prompt op.
+</p>
+
+<p>
+  Die tokens betaal je. Meer reasoning kost meer per beurt, en wat je koopt is speling op een vage
+  prompt. Noem dat de basisopstelling: de knop bestaat, en hem hoger zetten is het minst
+  interessante wat je ermee kan doen.
+</p>
+
+<p>
+  Nog dit: dat nadenken gaat niet alleen over jouw vraag. Het gaat ook over wat de agent zelf doet,
+  welk bestand hij nu opent en wat hij zichzelf meegeeft als input voor de stap daarna.
+</p>
+
+<h2>Laat een model je prompt schrijven</h2>
+
+<p>
+  Meta-prompting is wat het lijkt. Je zegt ruwweg wat je wil, een model schrijft de instructie, en
+  jij leest ze na en verbetert wat er fout in staat.
+</p>
+
+<p>
+  Gebruik daar gerust een duur model voor. Een prompt schrijven is een paar honderd tokens naast het
+  uitvoeren ervan, dus de topklasse is hier goedkoop. Het uitvoeren is waar het geld naartoe gaat.
+</p>
+
+<h2>Plan mode</h2>
+
+<p>
+  Plan mode is meta-prompting die de provider al voor je gebouwd heeft. De agent interviewt je over
+  de taak, geeft een plan terug en wacht. Jij past het aan, vraagt een extra ronde, of keurt het
+  goed. Voor die goedkeuring wordt er niets geschreven.
+</p>
+
+<p>
+  In Claude Code zie je dat in deze repository gebeuren. Vraag in plan mode om een nieuwe unit en de
+  vragen komen eerder terug dan een bestand: welke step, guided of self-learning, verbeterd door de
+  service of in de browser.
+</p>
+
+<p>
+  En dan het stuk dat mensen niet verwachten. Een goedkoper model dat door een plan gestuurd wordt,
+  klopt geregeld een one-shot op het dure model. Het plan maakte van een vage vraag een exacte
+  instructie, en die precisie was al die tijd het ontbrekende stuk, niet de grootte van het model.
+</p>
+
+<aside data-audience="self">
+  <p>
+    Probeer het een keer op iets echts. Neem een taak die je als één lijn ging typen, laat ze eerst
+    door plan mode gaan, en lees het plan voor je goedkeurt. Uit dat interview komt bijna altijd een
+    beslissing die je nog niet genomen had.
+  </p>
+</aside>
+
+<p data-audience="guided">
+  Je lesgever draait aan het bord een taak door plan mode, zodat je het interview en het plan ziet
+  voor er iets uitgevoerd wordt.
+</p>
+
+<h2>Waar je daarna aan stuurt</h2>
+
+<p>
+  Wis je context als je van onderwerp verandert. De debugsessie die je net afsloot staat nog in het
+  venster en heeft niets met de volgende feature te maken. <code>/clear</code> kost je niets en geeft
+  je het hele budget terug.
+</p>
+
+<p>
+  Bundel wat je wil in één vraag. Elke vervolgvraag is een extra beurt, en elke beurt voegt ruis toe
+  waar de volgende beurt doorheen moet lezen. Dat is de entropie uit de eerste unit, en ze stapelt
+  op. Drie losse vragen laten het venster rommeliger achter dan één vraag die de drie samen dekt.
+</p>
+
+<p>
+  Wees exact over wat er moet veranderen. "Fix de login" en "laat <code>ExerciseController</code>
+  een 400 teruggeven bij een leeg antwoord" gaan naar hetzelfde model. Maar één van de twee zegt
+  wanneer het klaar is.
+</p>

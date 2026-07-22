@@ -40,6 +40,16 @@ const en = {
   'quiz.question': 'Question {number} of {total}',
   'quiz.submit': 'Check answers',
 
+  'catalog.nav': 'Catalogue',
+  'catalog.kicker': 'The service',
+  'catalog.title': 'Titles from the service',
+  'catalog.description': 'One call to /api/titles. Whatever comes back is listed as it arrived.',
+  'catalog.fetch': 'Fetch titles',
+  'catalog.fetching': 'Fetching…',
+  'catalog.count': '{count} returned',
+  'catalog.empty': 'The service returned nothing at all.',
+  'catalog.error': 'Could not reach the backend. Is it running on port 8080?',
+
   'step.notFound.title': 'Step not found',
   'step.notFound.body': 'There is no step called “{id}”. Pick one from the list on the left.',
   'unit.notFound.title': 'Page not found',
@@ -81,6 +91,18 @@ const nl: Record<MessageKey, string> = {
   'quiz.title': 'Test jezelf',
   'quiz.question': 'Vraag {number} van {total}',
   'quiz.submit': 'Antwoorden nakijken',
+
+  'catalog.nav': 'Catalogus',
+  'catalog.kicker': 'De service',
+  'catalog.title': 'Titels uit de service',
+  // The titles themselves come from the Java service and stay English, like the grading messages.
+  'catalog.description':
+    'Eén oproep naar /api/titles. Wat terugkomt staat hieronder, in dezelfde volgorde. De titels zijn Engels.',
+  'catalog.fetch': 'Titels ophalen',
+  'catalog.fetching': 'Ophalen…',
+  'catalog.count': '{count} teruggekregen',
+  'catalog.empty': 'De service gaf helemaal niets terug.',
+  'catalog.error': 'Kan de backend niet bereiken. Draait die op poort 8080?',
 
   'step.notFound.title': 'Stap niet gevonden',
   'step.notFound.body': 'Er is geen stap “{id}”. Kies er een uit de lijst links.',

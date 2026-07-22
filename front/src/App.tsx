@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { AppShell } from '@/shared/components/AppShell'
+import { CatalogPage } from '@/shared/routes/CatalogPage'
 import { StepPage } from '@/shared/routes/StepPage'
 import { UnitPage } from '@/shared/routes/UnitPage'
 import { firstUnitPath, steps } from '@/steps'
@@ -12,6 +13,7 @@ export default function App() {
         {/* A step has no page of its own; StepPage forwards to its first unit. */}
         <Route path="steps/:stepId" element={<StepPage />} />
         <Route path="steps/:stepId/:unitId" element={<UnitPage />} />
+        <Route path="catalog" element={<CatalogPage />} />
         <Route path="*" element={<StepPage />} />
       </Route>
     </Routes>

@@ -137,3 +137,140 @@ export const introQuiz: QuizQuestion[] = [
     },
   },
 ]
+
+/**
+ * The three questions under the `prompt` unit, one per section of `units/prompt.html`: what plan
+ * mode actually buys you, why bundling beats a string of follow-ups, and what a reasoning level
+ * does. Each one hands the student a result and asks what caused it, because the misconception
+ * being tested is always a wrong cause (bigger model, tired model, more reading).
+ *
+ * Graded in the browser like `introQuiz`, so nothing here has a counterpart in the Java service.
+ */
+export const promptQuiz: QuizQuestion[] = [
+  {
+    id: 'plan-beats-one-shot',
+    question: {
+      en: 'A colleague types a vague one-line request into the most expensive model and gets something unusable. You run the same task through plan mode on a cheaper model, read the plan, approve it, and the result is solid. What made the difference?',
+      nl: 'Een collega typt een vage vraag van één lijn in het duurste model en krijgt iets onbruikbaars terug. Jij laat dezelfde taak via plan mode door een goedkoper model gaan, leest het plan, keurt het goed, en het resultaat klopt. Waar zit het verschil?',
+    },
+    choices: [
+      {
+        id: 'precision',
+        label: {
+          en: 'The plan turned a vague request into an exact instruction. Precision was what was missing, and no model size makes up for it.',
+          nl: 'Het plan maakte van een vage vraag een exacte instructie. Precisie was wat ontbrak, en daar weegt geen enkele modelgrootte tegenop.',
+        },
+        correct: true,
+      },
+      {
+        id: 'throttled',
+        label: {
+          en: 'The expensive model was throttled at that moment, so it returned a shorter and weaker answer than it normally would.',
+          nl: 'Het dure model werd op dat moment afgeknepen, dus gaf het een korter en zwakker antwoord dan het normaal doet.',
+        },
+      },
+      {
+        id: 'newer',
+        label: {
+          en: 'The cheaper model is the more recent of the two, so it was trained on better and more current code.',
+          nl: 'Het goedkopere model is het recentste van de twee, dus het is getraind op betere en actuelere code.',
+        },
+      },
+      {
+        id: 'cache',
+        label: {
+          en: 'Your run reused a cached answer from your colleague’s attempt, which the provider had already corrected.',
+          nl: 'Jouw run hergebruikte een gecachet antwoord van de poging van je collega, dat de provider al gecorrigeerd had.',
+        },
+      },
+    ],
+    explanation: {
+      en: 'A plan is a prompt written by a model and approved by you, so the second run started from an exact instruction instead of a vague one. Model size was never the bottleneck here; the missing detail was.',
+      nl: 'Een plan is een prompt die door een model geschreven is en door jou goedgekeurd, dus de tweede run vertrok van een exacte instructie in plaats van een vage. De grootte van het model was hier nooit het knelpunt, het ontbrekende detail wel.',
+    },
+  },
+  {
+    id: 'six-follow-ups',
+    question: {
+      en: 'You had one change in mind but asked for it in six follow-up messages, adjusting a little each time. By the last one the agent contradicts itself and reintroduces something you had it remove two messages ago. Why?',
+      nl: 'Je had één wijziging in gedachten, maar je vroeg ze in zes opvolgberichten, telkens met een kleine bijsturing. Bij het laatste spreekt de agent zichzelf tegen en zet hij iets terug dat je twee berichten eerder had laten weghalen. Hoe komt dat?',
+    },
+    choices: [
+      {
+        id: 'compounding',
+        label: {
+          en: 'Every turn added to the window, including the versions you rejected, and the model weighs all of it. The part that still matters is a smaller share each time.',
+          nl: 'Elke beurt voegde iets toe aan het venster, ook de versies die je afgewezen had, en het model weegt dat allemaal mee. Het stuk dat er nog toe doet, wordt elke keer een kleiner aandeel.',
+        },
+        correct: true,
+      },
+      {
+        id: 'last-message',
+        label: {
+          en: 'The model only really reads the most recent message, so the five corrections before it were dropped along the way.',
+          nl: 'Het model leest eigenlijk alleen het laatste bericht, dus de vijf correcties daarvoor zijn onderweg verdwenen.',
+        },
+      },
+      {
+        id: 'auto-summary',
+        label: {
+          en: 'The harness summarised your six messages into one before sending them, and the summary lost the details.',
+          nl: 'De harness heeft je zes berichten voor het versturen tot één samengevat, en die samenvatting verloor de details.',
+        },
+      },
+      {
+        id: 'less-effort',
+        label: {
+          en: 'Short messages get less effort from the model, so six small asks each received a fraction of the attention one long one would.',
+          nl: 'Korte berichten krijgen minder inspanning van het model, dus zes kleine vragen kregen elk een fractie van de aandacht die één lange zou krijgen.',
+        },
+      },
+    ],
+    explanation: {
+      en: 'Context only grows, and the attempts you rejected stay in it reading exactly like the ones you kept. Six turns leave six rounds of noise to read past, which is why one bundled ask holds up better.',
+      nl: 'Context groeit alleen maar, en de pogingen die je afwees blijven erin staan en lezen precies zoals de pogingen die je hield. Zes beurten laten zes rondes ruis achter om doorheen te lezen, en daarom houdt één gebundelde vraag beter stand.',
+    },
+  },
+  {
+    id: 'reasoning-level',
+    question: {
+      en: 'You raise the reasoning level from low to max, ask the same roughly worded question again, and the answer is noticeably better. The bill for that turn went up too. What did the higher level buy you?',
+      nl: 'Je zet het reasoning level van low naar max, stelt dezelfde slordig geformuleerde vraag opnieuw, en het antwoord is merkbaar beter. De rekening voor die beurt ging ook omhoog. Wat heeft dat hogere level je opgeleverd?',
+    },
+    choices: [
+      {
+        id: 'thinking-tokens',
+        label: {
+          en: 'The model spent more tokens working the question over before it answered, and that absorbed some of the imprecision in how you asked it.',
+          nl: 'Het model besteedde meer tokens aan het uitpluizen van de vraag voor het antwoordde, en dat ving een deel van de slordigheid in je vraagstelling op.',
+        },
+        correct: true,
+      },
+      {
+        id: 'bigger-model',
+        label: {
+          en: 'The harness moved you to a larger model, which is where both the extra cost and the better answer came from.',
+          nl: 'De harness zette je op een groter model, en daar komen zowel de extra kost als het betere antwoord vandaan.',
+        },
+      },
+      {
+        id: 'read-more',
+        label: {
+          en: 'The agent read more of your repository before answering, so it simply had more of your code in front of it.',
+          nl: 'De agent las meer van je repository voor hij antwoordde, dus hij had gewoon meer van je code voor zich.',
+        },
+      },
+      {
+        id: 'bigger-window',
+        label: {
+          en: 'You were given a larger context window for that turn, so less of the conversation had to be left out.',
+          nl: 'Je kreeg voor die beurt een groter context window, dus er moest minder van het gesprek wegvallen.',
+        },
+      },
+    ],
+    explanation: {
+      en: 'The reasoning level controls how much thinking happens before the answer, not which model runs or how much of your project gets read. You pay for that thinking, and what it buys is tolerance for a rougher prompt.',
+      nl: 'Het reasoning level bepaalt hoeveel er nagedacht wordt voor het antwoord, niet welk model draait of hoeveel van je project gelezen wordt. Dat nadenken betaal je, en wat je koopt is speling op een slordigere prompt.',
+    },
+  },
+]

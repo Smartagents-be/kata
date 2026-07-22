@@ -1,9 +1,10 @@
-import { Outlet } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 import { BackendStatus } from '@/shared/components/BackendStatus'
 import { SettingsSheet } from '@/shared/components/SettingsSheet'
 import { StepNav } from '@/shared/components/StepNav'
 import { Separator } from '@/shared/components/ui/separator'
 import { useLocale } from '@/shared/i18n/useLocale'
+import { cn } from '@/shared/lib/utils'
 
 export function AppShell() {
   const { t } = useLocale()
@@ -53,6 +54,22 @@ export function AppShell() {
           </p>
           <StepNav />
           <Separator id="app-sidebar-separator" data-component="AppShell" className="my-4" />
+          {/* Not a step: a page for poking at the service the later steps work on. */}
+          <NavLink
+            id="app-sidebar-catalog-link"
+            data-component="AppShell"
+            to="/catalog"
+            className={({ isActive }) =>
+              cn(
+                'block rounded-md px-3 py-2 text-sm transition-colors',
+                isActive
+                  ? 'bg-accent text-accent-foreground font-medium'
+                  : 'text-muted-foreground hover:bg-accent/50 hover:text-foreground',
+              )
+            }
+          >
+            {t('catalog.nav')}
+          </NavLink>
         </aside>
 
         <main id="app-main" data-component="AppShell" className="min-w-0 flex-1">
