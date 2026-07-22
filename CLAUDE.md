@@ -52,10 +52,3 @@ All versions live in `<properties>` in `pom.xml`; change them there, not inline.
   patterns depend on this suffix).
 - Table-driven cases use `@ParameterizedTest` + `@CsvSource` with a `name` template, as in
   `FizzBuzzTest`.
-
-## IntelliJ
-
-The original `kata-agentic-java.iml` and `.idea/modules.xml` predated the `pom.xml` and
-described a plain `GENERAL_MODULE` with no source roots, so they were deleted; both are now
-gitignored. Import the project from `pom.xml` and let IntelliJ regenerate them. The command
-line is authoritative — `mvn test` is the source of truth, not the IDE's view.
