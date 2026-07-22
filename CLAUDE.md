@@ -2,12 +2,34 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## How this kata works
+
+**This repository is built one step at a time.** It starts deliberately simple and works
+toward advanced topics, and each step builds directly on the code the previous step left
+behind. That progression is the point of the exercise, not an accident of history — so a
+request is almost always "add the next step", not "build the finished thing".
+
+What this means when working here:
+
+- **Implement only the step being asked for.** Do not jump ahead to a design that a later
+  step will introduce, even when the eventual shape is obvious. Skipping the intermediate
+  form destroys what the kata is teaching.
+- **Build on the existing code rather than replacing it.** Earlier steps are the
+  foundation. Refactor them when the current step genuinely calls for it, and say so —
+  but do not quietly rewrite working code from a previous step as a side effect.
+- **Leave every step green.** `mvn test` must pass at the end of a step; each step is a
+  coherent stopping point, ideally its own commit.
+- **When a step's scope is ambiguous, ask before expanding it.** Guessing wide is the
+  costly direction here.
+- **Record what changed.** As steps introduce real structure, update this file so the
+  architecture section below reflects where things stand.
+
 ## Project state
 
-A Java coding-kata repository, freshly scaffolded. The only code present is
-`be.smartagents.kata.java.FizzBuzz` and its test — a placeholder so the build has something to
-compile. It carries no meaning for the project and should be deleted once a real exercise
-lands. There is no architecture to preserve yet; update this file when one appears.
+Freshly scaffolded — step one has not landed yet. The only code present is
+`be.smartagents.kata.java.FizzBuzz` and its test, a placeholder so the build has something
+to compile; it carries no meaning and should be deleted once the first real step arrives.
+There is no architecture to preserve yet.
 
 ## Build and test
 
