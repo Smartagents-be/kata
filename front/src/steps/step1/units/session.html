@@ -1,11 +1,68 @@
-<p>
-  Everything earlier in this conversation. Your previous turns, the agent's replies, and usually
-  the bulk of it: tool results. A file it opened, a test run it executed, a stack trace you
-  pasted. All of that stays in the transcript and gets re-sent with every message.
+<p data-i18n="session.lead.1">
+  Everything earlier in this conversation. Your previous turns, the agent's replies, the system
+  messages the harness slipped in, every tool call it made and usually the bulk of it: the tool
+  results. A file it opened, a test run it executed, a stack trace you pasted. All of that stays in
+  the transcript and gets re-sent with every message.
 </p>
 
-<p>
+<p data-i18n="session.lead.2">
+  There is no running conversation on the other side. Each time you press enter, your new prompt is
+  appended to everything that came before and the whole pile goes out as one call to the model. Turn
+  twenty is not a short message. It is turn one through nineteen plus your sentence. That growing
+  pile is the session.
+</p>
+
+<p data-i18n="session.lead.3">
   This layer grows the whole time you work, and it is the one that disappears when you type
   <code>/clear</code>. It also explains why an agent can feel sharp at the start of a session and
   vague two hours later. The signal is still in there, buried under a hundred tool results.
 </p>
+
+<h2 data-i18n="session.sessions-where-money.heading">Sessions are where the money goes</h2>
+
+<p data-i18n="session.sessions-where-money.1">
+  Since the whole session is re-sent every turn, its size is your price per message. Read three
+  large files early and you keep paying for those three files on every question you ask afterwards,
+  whether or not they still matter. Managing the session is not tidiness. It is cost control.
+</p>
+
+<p data-i18n="session.sessions-where-money.2">
+  The flip side is the cheapest thing you can do. Once <code>Catalog</code> is in the window, asking
+  a second and a third question about it costs almost nothing extra, because the expensive part is
+  already loaded. Ask everything you want to know about a piece of code while it is in front of you,
+  rather than clearing and paying to load it again tomorrow.
+</p>
+
+<p data-i18n="session.sessions-where-money.3">
+  Do not read that as a licence to keep going forever. The same session that makes the second
+  question cheap makes the fiftieth question expensive and vague. Work a subject out, then move on
+  deliberately.
+</p>
+
+<h2 data-i18n="session.fixed-does-not.heading">Fixed does not mean gone</h2>
+
+<p data-i18n="session.fixed-does-not.1">
+  Say you spend twenty turns chasing a failing test and you fix it. The fix is in the code, but the
+  twenty turns are still in the window: the wrong diagnosis, the two edits you reverted, the error
+  output from a version of the file that no longer exists. The model reads all of it on your next
+  question and has no strong reason to believe the last version is the real one.
+</p>
+
+<p data-i18n="session.fixed-does-not.2">
+  That is the entropy from the opening unit, and this is where you push back on it. When a problem
+  is closed, clear the session and start the next one with what actually survived: the code on disk,
+  which is now correct, plus a sentence about where you are. You lose the noise and keep the work.
+</p>
+
+<p data-i18n="session.fixed-does-not.3">
+  Careful session management is most of what separates people who get good work out of an agent from
+  people who fight it. Not a bigger model, not a longer prompt. Knowing what is in the window right
+  now, and being willing to throw it away.
+</p>
+
+<aside data-audience="self" data-i18n="session.fixed-does-not.4">
+  <p>
+    Watch your own session once. Ask the agent what it has read so far in this conversation, and
+    check how much of that list still has anything to do with what you are doing now.
+  </p>
+</aside>

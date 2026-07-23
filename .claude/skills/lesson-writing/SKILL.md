@@ -74,9 +74,26 @@ sentence structure reads as translated. Write what a Dutch-speaking colleague wo
 keep the same headings and the same numbered items, and keep technical terms in English when
 that is what people say out loud (`prompt`, `commit`, `context window`).
 
-Translated files sit next to the English one: `units/memory.html` is English,
-`units/memory.nl.html` is Dutch, and `index.ts` maps them per locale. A missing translation falls
-back to English, so a half-finished language file is better left out than shipped half-done.
+The English is the HTML file. Every block of prose in it carries a key:
+
+```html
+<p data-i18n="setup.claude-md.2">It is also what makes it expensive…</p>
+```
+
+The Dutch for that key lives in the step's bundle, `steps/stepN/locales/nl.json`, as the block's
+inner HTML on one line:
+
+```json
+"setup.claude-md.2": "Het maakt het ook duur. Die tokens gaan bij elke beurt…"
+```
+
+Keys read `<unit>.<section>.<n>`: the section is the `<h2>` above the block, slugified, or `lead`
+before the first one, and a heading of its own is `<unit>.<section>.heading`. Add a paragraph and
+it needs a key and an entry; move one into another section and its key has to be renamed.
+
+A key with no entry keeps the English that is already on the page and warns in the browser
+console, so a half-translated unit is visible rather than silent. Blocks that are the same in
+every language, such as a `<pre>` code sample or a `<div data-figure>` slot, carry no key at all.
 
 Answers stay English in every language, because the Java checkers grade them. When a translated
 exercise asks for `keep` or `gone`, say plainly that those words are typed in English.
@@ -89,7 +106,7 @@ brochure, cut the adjectives.
 Then grep for the thing you always miss:
 
 ```bash
-grep -n '—\|–' front/src/steps/*/units/*.html
+grep -n '—\|–' front/src/steps/*/units/*.html front/src/steps/*/locales/*.json
 ```
 
 That must return nothing.

@@ -18,8 +18,10 @@ public class CatalogRun {
 
     public void publish(String title) {
         if (title.contains(WORKING_NOTE)) {
+            Tracer.offered(title, false);
             return;
         }
+        Tracer.offered(title, true);
         titles.add(title);
     }
 

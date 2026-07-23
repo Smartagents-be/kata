@@ -1,4 +1,5 @@
 import { SettingsIcon, XIcon } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/shared/components/ui/button'
 import {
   Sheet,
@@ -20,7 +21,8 @@ import { useMode } from '@/shared/mode/useMode'
  * are shown. Both settings persist, so a student picks them once.
  */
 export function SettingsSheet() {
-  const { locale, setLocale, t } = useLocale()
+  const { t } = useTranslation()
+  const { locale, setLocale } = useLocale()
   const { mode, setMode } = useMode()
   const selfLearning = mode === 'self'
 

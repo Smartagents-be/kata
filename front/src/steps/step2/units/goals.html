@@ -1,0 +1,81 @@
+<p data-i18n="goals.lead.1">
+  Say what you want to be true when the work is done, not which keys to press. "Move the em-dash
+  rule out of my head and into the repo" leaves room for a good answer. "Add a paragraph to
+  CLAUDE.md" already decided the answer, and if a skill was the better home you will never hear
+  about it.
+</p>
+
+<p data-i18n="goals.lead.2">
+  Working from a goal changes what you can ask for afterwards. You can ask why a route was chosen,
+  and you can reject the route without rejecting the goal. Working from instructions gives you one
+  thing to check: whether you were obeyed.
+</p>
+
+<p data-i18n="goals.lead.3">
+  Constraints still belong in the request, because a goal without edges drifts. Name the outcome,
+  name what must not change, name how you will check it. Then let the agent work out the middle.
+</p>
+
+<h2 data-i18n="goals.whole-job.heading">When the goal is the whole job</h2>
+
+<p data-i18n="goals.whole-job.1">
+  Some goals are far too big for one turn and still fit in one sentence. You inherit a service
+  written six years ago, in production, with almost no tests. The task you hand over is not "write
+  a test for <code>OrderService</code>". It is "get this module to a hundred percent line coverage
+  and leave <code>mvn test</code> green", and then you walk away from it.
+</p>
+
+<p data-i18n="goals.whole-job.2">
+  Code that was vibe-coded has its own version of that. A folder grew fast, nobody read it, and now
+  the methods are five levels deep. Do not hand over a cleanup list. Hand over a ceiling: no method
+  above a cyclomatic complexity of ten. Wire that check into the build first, because a limit the
+  build cannot measure is a limit nobody can hold the agent to.
+</p>
+
+<p data-i18n="goals.whole-job.3">
+  A third kind shows up whenever you write or change a skill. You added
+  <code>lesson-writing</code>, so the goal is that every unit under <code>front/src/steps/</code>
+  reads the way it says, not that step 2 gets fixed. Change a rule in <code>CLAUDE.md</code> and it
+  is the same shape. The goal is the codebase catching up with the rule, everywhere, in one run.
+</p>
+
+<pre><code>&gt; Goal: every method under apps/article scores 10 or lower on
+  cyclomatic complexity. Run `mvn verify` after each class you
+  change, keep it green, and do not change a public signature.</code></pre>
+
+<p data-i18n="goals.whole-job.4">
+  What makes those runs work is the loop underneath them. The agent does a pass, checks the result
+  against the goal you named, and goes back in on whatever failed. It reports when the check passes
+  or when it is properly stuck. You are not in that loop, and that is both the point and the price.
+</p>
+
+<p data-i18n="goals.whole-job.5">
+  Count the price honestly. A run like this burns a lot of tokens, and four hours is not unusual.
+  You gave up the steering you have in a short session, because you are not watching step two while
+  it happens. What comes back is work that ran your check until the check said yes. For a job that
+  is mechanical, wide and measurable, that trade is a good one.
+</p>
+
+<p data-i18n="goals.whole-job.6">
+  So the check has to be real. "A hundred percent coverage" is a number the build prints. "Cleaner
+  code" is not. If you cannot name the command that answers yes or no, you do not have a goal yet,
+  and after four hours you will get a confident report on a wish.
+</p>
+
+<h2 data-i18n="goals.own-worktree.heading">Give it its own worktree</h2>
+
+<p data-i18n="goals.own-worktree.1">
+  Meanwhile you still have a day of your own to get through. An agent rewriting forty classes for
+  four hours is touching the files you have open, which makes your branch unusable while it runs.
+  Ask for the goal to be pursued in a git worktree instead. That is a second checkout of the same
+  repository, on its own branch, in its own folder, sharing the same history.
+</p>
+
+<pre><code>git worktree add ../kata-complexity goal/complexity</code></pre>
+
+<p data-i18n="goals.own-worktree.2">
+  Then merge back in pieces instead of at the end. One module finished and green is a merge worth
+  doing, and it means you read a module of diff while the next one is still being written. It caps
+  the damage too. A run that goes wrong in hour three has not taken the first two hours down with
+  it.
+</p>

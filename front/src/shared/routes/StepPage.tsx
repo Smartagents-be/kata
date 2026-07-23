@@ -1,5 +1,5 @@
+import { useTranslation } from 'react-i18next'
 import { Navigate, useParams } from 'react-router-dom'
-import { useLocale } from '@/shared/i18n/useLocale'
 import { findStep, firstUnitPath } from '@/steps'
 
 /**
@@ -8,7 +8,7 @@ import { findStep, firstUnitPath } from '@/steps'
  */
 export function StepPage() {
   const { stepId } = useParams()
-  const { t } = useLocale()
+  const { t } = useTranslation()
   const step = findStep(stepId)
 
   if (!step) {

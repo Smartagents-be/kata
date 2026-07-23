@@ -1,12 +1,12 @@
+import { useTranslation } from 'react-i18next'
 import { CatalogPanel } from '@/shared/components/CatalogPanel'
-import { useLocale } from '@/shared/i18n/useLocale'
 
 /**
  * A page of its own rather than a unit: it belongs to no lesson yet, and it is the thing the
  * student will be pointing an agent at.
  */
 export function CatalogPage() {
-  const { t } = useLocale()
+  const { t } = useTranslation()
 
   return (
     <div id="catalog-page" data-component="CatalogPage" className="flex flex-col gap-8">

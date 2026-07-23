@@ -1,10 +1,11 @@
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { ExercisePanel } from '@/shared/components/ExercisePanel'
 import { QuizPanel } from '@/shared/components/QuizPanel'
 import { StepContent } from '@/shared/components/StepContent'
 import { UnitPager } from '@/shared/components/UnitPager'
-import { localise } from '@/shared/i18n/locale'
-import { useLocale } from '@/shared/i18n/useLocale'
+import { useStepText } from '@/shared/i18n/useStepText'
+import type { Step, Unit } from '@/shared/step'
 import { findStep, findUnit } from '@/steps'
 
 /**
@@ -13,7 +14,7 @@ import { findStep, findUnit } from '@/steps'
  */
 export function UnitPage() {
   const { stepId, unitId } = useParams()
-  const { locale, t } = useLocale()
+  const { t } = useTranslation()
   const step = findStep(stepId)
 
   if (!step) {
@@ -51,32 +52,48 @@ export function UnitPage() {
     )
   }
 
+  return <UnitView step={step} unit={unit} />
+}
+
+/**
+ * The unit itself. Separate from the lookup above because its text comes from the step's own
+ * i18next namespace, and the namespace is only known once the step has been found.
+ */
+function UnitView({ step, unit }: { step: Step; unit: Unit }) {
+  const { text } = useStepText(step.id)
+
   return (
-    <div id="unit" data-component="UnitPage" className="flex flex-col gap-8">
-      <header id="unit-header" data-component="UnitPage">
+    <div id="unit" data-component="UnitView" className="flex flex-col gap-8">
+      <header id="unit-header" data-component="UnitView">
         <p
           id="unit-step-title"
-          data-component="UnitPage"
+          data-component="UnitView"
           className="text-muted-foreground text-xs font-medium tracking-wide uppercase"
         >
-          {localise(step.title, locale)}
+          {text(step.title)}
         </p>
         <h1
           id="unit-title"
-          data-component="UnitPage"
+          data-component="UnitView"
           className="font-heading mt-1 text-2xl font-semibold"
         >
-          {localise(unit.title, locale)}
+          {text(unit.title)}
         </h1>
       </header>
 
-      {unit.html && <StepContent html={localise(unit.html, locale)} />}
+      {unit.html && (
+        <StepContent
+          html={unit.html}
+          namespace={step.id}
+          inlineFigures={unit.inlineFigures}
+        />
+      )}
 
       {unit.figure}
 
       {unit.quiz && (
         // Keyed so walking from one quiz to the next starts from unanswered questions.
-        <QuizPanel key={`${step.id}/${unit.id}`} questions={unit.quiz} />
+        <QuizPanel key={`${step.id}/${unit.id}`} questions={unit.quiz} namespace={step.id} />
       )}
 
       {unit.exerciseId && (
@@ -84,9 +101,7 @@ export function UnitPage() {
           // Keyed so walking from one graded unit to the next starts from an empty box.
           key={unit.exerciseId}
           exerciseId={unit.exerciseId}
-          placeholder={
-            unit.exercisePlaceholder ? localise(unit.exercisePlaceholder, locale) : undefined
-          }
+          placeholder={unit.exercisePlaceholder ? text(unit.exercisePlaceholder) : undefined}
         />
       )}
 

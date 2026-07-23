@@ -1,0 +1,48 @@
+{
+  "nav.steps": "Stappen",
+  "nav.units": "Pagina's in deze stap",
+
+  "unit.previous": "Terug",
+  "unit.next": "Verder",
+
+  "settings.open": "Instellingen",
+  "settings.title": "Instellingen",
+  "settings.description": "Taal, en hoe je de kata doorloopt.",
+  "settings.language": "Taal",
+  "settings.mode": "Zelfstudie",
+  "settings.mode.on": "Notities worden getoond",
+  "settings.mode.off": "Alleen oefeningen",
+  "settings.mode.aria": "Zelfstudiemodus aan- of uitzetten",
+  "settings.close": "Sluiten",
+
+  "backend.checking": "Verbinden…",
+  "backend.up": "Backend {{version}}",
+  "backend.down": "Backend offline",
+  "backend.down.hint": "Draait de backend? mvn spring-boot:run",
+
+  "exercise.title": "Jouw antwoord",
+  "exercise.description": "Nagekeken door de Java-service. De feedback is in het Engels.",
+  "exercise.placeholder": "Jouw antwoord…",
+  "exercise.submit": "Antwoord nakijken",
+  "exercise.submitting": "Nakijken…",
+  "exercise.offline": "Kan de backend niet bereiken. Draait die op poort 8080?",
+
+  "quiz.title": "Test jezelf",
+  "quiz.question": "Vraag {{number}} van {{total}}",
+  "quiz.submit": "Antwoorden nakijken",
+
+  "catalog.nav": "Catalogus",
+  "catalog.kicker": "De service",
+  "catalog.title": "Titels uit de service",
+  "catalog.description": "Eén oproep naar /api/titles. Wat terugkomt staat hieronder, in dezelfde volgorde. De titels zijn Engels.",
+  "catalog.fetch": "Titels ophalen",
+  "catalog.fetching": "Ophalen…",
+  "catalog.count": "{{count}} teruggekregen",
+  "catalog.empty": "De service gaf helemaal niets terug.",
+  "catalog.error": "Kan de backend niet bereiken. Draait die op poort 8080?",
+
+  "step.notFound.title": "Stap niet gevonden",
+  "step.notFound.body": "Er is geen stap “{{id}}”. Kies er een uit de lijst links.",
+  "unit.notFound.title": "Pagina niet gevonden",
+  "unit.notFound.body": "Deze stap heeft geen pagina “{{id}}”. Kies er een uit de lijst links."
+}

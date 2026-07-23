@@ -1,0 +1,56 @@
+{
+  "step.title": "Context",
+
+  "intro.title": "What context is",
+  "prompt.title": "Your prompt",
+  "session.title": "The session",
+  "harness.title": "The harness",
+  "external.title": "Material from outside",
+  "evaluation.title": "Step test",
+
+  "evaluation.placeholder": "prompt, session, harness, …",
+
+  "diagram.description": "One oval labelled context: everything the agent knows sits inside it.",
+
+  "quiz.forgets-this-morning.question": "You have been working on the same project all morning. At 14:00 you ask the agent something you already told it at 08:00, and it does not remember. What happened?",
+  "quiz.forgets-this-morning.window": "The window filled up. The morning was compacted into a summary or pushed out of the context, so it is no longer in front of the model.",
+  "quiz.forgets-this-morning.ignored": "Everything from 08:00 is still in the context, but the model decided it was no longer relevant.",
+  "quiz.forgets-this-morning.lookup": "The model looks your history up in a database per session, and this morning is in yesterday’s partition.",
+  "quiz.forgets-this-morning.learning": "The model learned during the day and overwrote the old instruction with something it liked better.",
+  "quiz.forgets-this-morning.explanation": "A model keeps nothing between two messages, so every turn re-sends the whole transcript into a finite window. Once the morning no longer fits, it is compacted into a summary or pushed out, and your 08:00 instruction goes with it.",
+
+  "quiz.invented-userservice.question": "You ask the model to explain what UserService in this repository does. It answers confidently, and the answer has nothing to do with the UserService that is actually there. Why?",
+  "quiz.invented-userservice.never-read": "It never read the file. With nothing from your project in the context, it answers from the average of every UserService it saw during training.",
+  "quiz.invented-userservice.too-complex": "It read the file, but the class is too long for the model to follow.",
+  "quiz.invented-userservice.cached": "It read a cached copy of the file from an earlier session, and the cache is stale.",
+  "quiz.invented-userservice.naming": "Your team uses a naming convention the model was never trained on, so it could not match the class.",
+  "quiz.invented-userservice.explanation": "With nothing from your project in the context, the model answers from the average of every UserService in its training data. It cannot tell you it never saw your file, so the guess arrives sounding like a fact.",
+
+  "quiz.quality-degrades.question": "A long session is running. The agent starts contradicting itself, proposes an approach you rejected an hour ago, and edits a file back to a version you moved past. What is going on?",
+  "quiz.quality-degrades.entropy": "Entropy. The context filled with the session’s leftovers: failed attempts, a command that errored, the same file read in three different states. The model weighs all of it.",
+  "quiz.quality-degrades.degrades": "The model degrades the longer it runs, the way a machine drifts as it heats up.",
+  "quiz.quality-degrades.downgrade": "The provider quietly moved you to a smaller model once the session got expensive.",
+  "quiz.quality-degrades.repo-grew": "The repository grew during the session, so there is more code than the model can handle.",
+  "quiz.quality-degrades.explanation": "Nothing leaves the context on its own, so the session fills with its own leftovers and the model weighs all of it. An idea you rejected an hour ago sits there reading exactly like a live one.",
+
+  "quiz.plan-beats-one-shot.question": "A colleague types a vague one-line request into the most expensive model and gets something unusable. You run the same task through plan mode on a cheaper model, read the plan, approve it, and the result is solid. What made the difference?",
+  "quiz.plan-beats-one-shot.precision": "The plan turned a vague request into an exact instruction. Precision was what was missing, and no model size makes up for it.",
+  "quiz.plan-beats-one-shot.throttled": "The expensive model was throttled at that moment, so it returned a shorter and weaker answer than it normally would.",
+  "quiz.plan-beats-one-shot.newer": "The cheaper model is the more recent of the two, so it was trained on better and more current code.",
+  "quiz.plan-beats-one-shot.cache": "Your run reused a cached answer from your colleague’s attempt, which the provider had already corrected.",
+  "quiz.plan-beats-one-shot.explanation": "A plan is a prompt written by a model and approved by you, so the second run started from an exact instruction instead of a vague one. Model size was never the bottleneck here; the missing detail was.",
+
+  "quiz.six-follow-ups.question": "You had one change in mind but asked for it in six follow-up messages, adjusting a little each time. By the last one the agent contradicts itself and reintroduces something you had it remove two messages ago. Why?",
+  "quiz.six-follow-ups.compounding": "Every turn added to the window, including the versions you rejected, and the model weighs all of it. The part that still matters is a smaller share each time.",
+  "quiz.six-follow-ups.last-message": "The model only really reads the most recent message, so the five corrections before it were dropped along the way.",
+  "quiz.six-follow-ups.auto-summary": "The harness summarised your six messages into one before sending them, and the summary lost the details.",
+  "quiz.six-follow-ups.less-effort": "Short messages get less effort from the model, so six small asks each received a fraction of the attention one long one would.",
+  "quiz.six-follow-ups.explanation": "Context only grows, and the attempts you rejected stay in it reading exactly like the ones you kept. Six turns leave six rounds of noise to read past, which is why one bundled ask holds up better.",
+
+  "quiz.reasoning-level.question": "You raise the reasoning level from low to max, ask the same roughly worded question again, and the answer is noticeably better. The bill for that turn went up too. What did the higher level buy you?",
+  "quiz.reasoning-level.thinking-tokens": "The model spent more tokens working the question over before it answered, and that absorbed some of the imprecision in how you asked it.",
+  "quiz.reasoning-level.bigger-model": "The harness moved you to a larger model, which is where both the extra cost and the better answer came from.",
+  "quiz.reasoning-level.read-more": "The agent read more of your repository before answering, so it simply had more of your code in front of it.",
+  "quiz.reasoning-level.bigger-window": "You were given a larger context window for that turn, so less of the conversation had to be left out.",
+  "quiz.reasoning-level.explanation": "The reasoning level controls how much thinking happens before the answer, not which model runs or how much of your project gets read. You pay for that thinking, and what it buys is tolerance for a rougher prompt."
+}

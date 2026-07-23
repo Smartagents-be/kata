@@ -1,13 +1,13 @@
+import { useTranslation } from 'react-i18next'
 import { useEffect, useState } from 'react'
 import { Badge } from '@/shared/components/ui/badge'
-import { useLocale } from '@/shared/i18n/useLocale'
 import { fetchHealth } from '@/shared/lib/api'
 
 type Status = { state: 'checking' } | { state: 'up'; version: string } | { state: 'down' }
 
 export function BackendStatus() {
   const [status, setStatus] = useState<Status>({ state: 'checking' })
-  const { t } = useLocale()
+  const { t } = useTranslation()
 
   useEffect(() => {
     let cancelled = false

@@ -18,13 +18,17 @@ second person, no hype. This file only adds what is specific to questions.
 front/src/steps/stepN/quiz.ts     the questions, both languages
 front/src/steps/stepN/index.tsx   the unit references them as `quiz: introQuiz`
 front/src/shared/step.ts          QuizQuestion and QuizChoice
+front/src/steps/stepN/locales/    the text the keys point at
 front/src/shared/components/QuizPanel.tsx   how it renders
 ```
 
 A `QuizQuestion` is an `id`, the `question`, its `choices` and an `explanation`. A `QuizChoice` is
 an `id`, a `label` and, on exactly one choice per question, `correct: true`. Every piece of text is
-`Localised<string>`: `en` is required, `nl` optional and written as a rewrite rather than a
-translation.
+a **message key** into the step's i18next namespace, and the text itself lives in
+`steps/stepN/locales/en.json` and `nl.json`. Keys read `quiz.<question-id>.question`,
+`quiz.<question-id>.<choice-id>` and `quiz.<question-id>.explanation`, so a question's entries sit
+together in the bundle. English is required; Dutch is optional and written as a rewrite rather
+than a translation, and a missing Dutch entry simply shows the English.
 
 Ids are kebab-case and describe the content, not the position: `forgets-this-morning`, not
 `question-1`. Choice ids are the same idea (`window`, `cached`, `naming`), which is what makes the

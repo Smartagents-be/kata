@@ -1,8 +1,8 @@
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/shared/components/ui/button'
-import { localise } from '@/shared/i18n/locale'
-import { useLocale } from '@/shared/i18n/useLocale'
+import { useStepText } from '@/shared/i18n/useStepText'
 import { neighbours, unitPath, type UnitLocation } from '@/steps'
 
 /**
@@ -11,7 +11,7 @@ import { neighbours, unitPath, type UnitLocation } from '@/steps'
  * the next one. At either end of the curriculum the button is simply absent.
  */
 export function UnitPager({ stepId, unitId }: { stepId: string; unitId: string }) {
-  const { t } = useLocale()
+  const { t } = useTranslation()
   const { previous, next } = neighbours(stepId, unitId)
 
   return (
@@ -39,7 +39,9 @@ function PagerLink({
   location: UnitLocation
   direction: 'previous' | 'next'
 }) {
-  const { locale, t } = useLocale()
+  const { t } = useTranslation()
+  // The neighbour may live in another step, so its title is read from that step's namespace.
+  const { text } = useStepText(location.step.id)
   const back = direction === 'previous'
 
   return (
@@ -74,7 +76,7 @@ function PagerLink({
             data-component="PagerLink"
             className="max-w-full truncate"
           >
-            {localise(location.unit.title, locale)}
+            {text(location.unit.title)}
           </span>
         </span>
         {!back && (

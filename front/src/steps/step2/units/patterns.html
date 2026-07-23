@@ -1,0 +1,76 @@
+<p data-i18n="patterns.lead.1">
+  The third time you type the same instruction, stop typing it. A correction you repeat is not a
+  prompt problem. It is a piece of knowledge that has no home yet, so it has to be carried in by
+  hand every session.
+</p>
+
+<p data-i18n="patterns.lead.2">
+  This repository has two of those already. Lesson prose kept coming back with em-dashes in it, and
+  quizzes kept getting written with throwaway distractors, so both rules moved into
+  <code>.claude/skills/</code> as <code>lesson-writing</code> and <code>quiz-writing</code>. Now
+  they load with the task instead of after the mistake.
+</p>
+
+<p data-i18n="patterns.lead.3">
+  Where a pattern lands depends on what it is. A convention goes in <code>CLAUDE.md</code>. A
+  procedure with steps becomes a skill. Something that must happen every time, whether or not
+  anybody remembers, becomes a hook. The habit worth building is noticing the repetition at all.
+</p>
+
+<h2 data-i18n="patterns.three-places.heading">Three places to put it</h2>
+
+<p data-i18n="patterns.three-places.1">
+  Take one you have already explained three times. A new step in this kata needs a folder under
+  <code>front/src/steps/</code>, one HTML file per unit, an <code>en.json</code> and an
+  <code>nl.json</code>, an <code>index.tsx</code> exporting the step, and a line in
+  <code>steps/index.ts</code>. That layout can live in three different places, and they are not
+  equally good.
+</p>
+
+<p data-i18n="patterns.three-places.2">
+  In <code>CLAUDE.md</code> it is a paragraph. Cheapest to write, read at the start of every
+  session, and paid for on every turn after that, whether the task is a new step or a typo. It also
+  describes the shape without producing it, so the agent still builds the folder by hand, slightly
+  differently each time.
+</p>
+
+<p data-i18n="patterns.three-places.3">
+  As a skill it is a procedure. It costs nothing until a task matches its description, it can be as
+  long as it needs to be, and it says do this, then this. Better. It is still prose being
+  interpreted, though, so two runs can come out different, and nothing outside a Claude session can
+  use it at all.
+</p>
+
+<p data-i18n="patterns.three-places.4">
+  So reach for the third option. Ask Claude to write the script, once:
+  <code>scripts/new-step.sh step3</code> creates the folder, both locale files, the unit stub and
+  the registry line. The skill then shrinks to about three lines. Take the name, run the script,
+  check what came out.
+</p>
+
+<p data-i18n="patterns.three-places.5">
+  A script wins for reasons that have nothing to do with agents. It is predictable: same input,
+  same output, no interpretation in between. It is replayable next month, on a colleague's machine,
+  in CI. And it is consistent, so step 3 and step 7 come out identical rather than similar.
+</p>
+
+<p data-i18n="patterns.three-places.6">
+  It is also a file in your repository. Changing the convention becomes a diff that somebody
+  reviews, with a commit message saying why, instead of a sentence that quietly moved in a markdown
+  file. Anybody can run it too: the colleague who does not use an agent, the new hire on day one,
+  the pipeline. A skill only helps the people who have Claude open.
+</p>
+
+<p data-i18n="patterns.three-places.7">
+  What stays in the skill is the judgement around the script. Is this name valid, did the result
+  hold together, and what happens when it did not. The model no longer has to be right about your
+  layout. It has to run one command and read the output, which is a far smaller thing to be right
+  about. And when it must happen whether or not anybody asks for it, a hook runs the same script.
+</p>
+
+<p data-i18n="patterns.three-places.8">
+  Not everything reduces to a script, and forcing it helps nobody. The em-dash rule in
+  <code>lesson-writing</code> is taste, and taste has no exit code. Its check is a
+  <code>grep</code>, though, so even that one ends in something runnable. When you can name the
+  check, script it. When you can only describe the taste, write it down and keep it short.
+</p>

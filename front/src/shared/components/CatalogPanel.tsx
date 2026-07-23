@@ -1,7 +1,7 @@
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { Button } from '@/shared/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/components/ui/card'
-import { useLocale } from '@/shared/i18n/useLocale'
 import { fetchTitles } from '@/shared/lib/api'
 
 type State =
@@ -16,7 +16,7 @@ type State =
  */
 export function CatalogPanel() {
   const [state, setState] = useState<State>({ phase: 'idle' })
-  const { t } = useLocale()
+  const { t } = useTranslation()
 
   async function onFetch() {
     setState({ phase: 'loading' })

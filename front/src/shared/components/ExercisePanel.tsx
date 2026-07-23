@@ -1,7 +1,7 @@
+import { useTranslation } from 'react-i18next'
 import { useState, type FormEvent } from 'react'
 import { Button } from '@/shared/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/components/ui/card'
-import { useLocale } from '@/shared/i18n/useLocale'
 import { checkAnswer, type CheckResult } from '@/shared/lib/api'
 import { cn } from '@/shared/lib/utils'
 
@@ -20,7 +20,7 @@ export function ExercisePanel({
 }) {
   const [answer, setAnswer] = useState('')
   const [state, setState] = useState<State>({ phase: 'idle' })
-  const { t } = useLocale()
+  const { t } = useTranslation()
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault()

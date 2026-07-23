@@ -16,6 +16,8 @@ public final class Scramble {
         for (int i = 0; i < chars.length; i++) {
             chars[i] = (char) (FIRST + Math.floorMod(chars[i] - FIRST - shift - (i % 3), RANGE));
         }
-        return new String(chars);
+        String result = new String(chars);
+        Tracer.restored(source, shift, result);
+        return result;
     }
 }

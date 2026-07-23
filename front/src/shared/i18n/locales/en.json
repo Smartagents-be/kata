@@ -1,0 +1,48 @@
+{
+  "nav.steps": "Steps",
+  "nav.units": "Pages in this step",
+
+  "unit.previous": "Back",
+  "unit.next": "Next",
+
+  "settings.open": "Settings",
+  "settings.title": "Settings",
+  "settings.description": "Language, and how you are working through the kata.",
+  "settings.language": "Language",
+  "settings.mode": "Self-learning",
+  "settings.mode.on": "Notes are shown",
+  "settings.mode.off": "Exercises only",
+  "settings.mode.aria": "Toggle self-learning mode",
+  "settings.close": "Close",
+
+  "backend.checking": "Connecting…",
+  "backend.up": "Backend {{version}}",
+  "backend.down": "Backend offline",
+  "backend.down.hint": "Is the backend running? mvn spring-boot:run",
+
+  "exercise.title": "Your answer",
+  "exercise.description": "Graded by the Java service, not the browser.",
+  "exercise.placeholder": "Your answer…",
+  "exercise.submit": "Check answer",
+  "exercise.submitting": "Checking…",
+  "exercise.offline": "Could not reach the backend. Is it running on port 8080?",
+
+  "quiz.title": "Check yourself",
+  "quiz.question": "Question {{number}} of {{total}}",
+  "quiz.submit": "Check answers",
+
+  "catalog.nav": "Catalogue",
+  "catalog.kicker": "The service",
+  "catalog.title": "Titles from the service",
+  "catalog.description": "One call to /api/titles. Whatever comes back is listed as it arrived.",
+  "catalog.fetch": "Fetch titles",
+  "catalog.fetching": "Fetching…",
+  "catalog.count": "{{count}} returned",
+  "catalog.empty": "The service returned nothing at all.",
+  "catalog.error": "Could not reach the backend. Is it running on port 8080?",
+
+  "step.notFound.title": "Step not found",
+  "step.notFound.body": "There is no step called “{{id}}”. Pick one from the list on the left.",
+  "unit.notFound.title": "Page not found",
+  "unit.notFound.body": "This step has no page called “{{id}}”. Pick one from the list on the left."
+}

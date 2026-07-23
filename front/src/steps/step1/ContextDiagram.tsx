@@ -1,6 +1,5 @@
 import { useId } from 'react'
-import { localise, type Localised } from '@/shared/i18n/locale'
-import { useLocale } from '@/shared/i18n/useLocale'
+import { useTranslation } from 'react-i18next'
 
 /**
  * The context window, drawn as one oval. Later units of this step fill it with the layers, so the
@@ -9,13 +8,8 @@ import { useLocale } from '@/shared/i18n/useLocale'
  *
  * The `viewBox` is the coordinate system every later oval will be placed in. Keep it.
  */
-const DESCRIPTION: Localised<string> = {
-  en: 'One oval labelled context: everything the agent knows sits inside it.',
-  nl: 'Eén ovaal met het label context: alles wat de agent weet, zit erin.',
-}
-
 export function ContextDiagram() {
-  const { locale } = useLocale()
+  const { t } = useTranslation('step1')
   const titleId = useId()
 
   return (
@@ -30,7 +24,7 @@ export function ContextDiagram() {
       >
         {/* useId, not a BEM id: aria-labelledby has to be unique per instance, not per component. */}
         <title id={titleId} data-component="ContextDiagram">
-          {localise(DESCRIPTION, locale)}
+          {t('diagram.description')}
         </title>
         <ellipse
           id="context-diagram-window"

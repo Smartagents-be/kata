@@ -1,8 +1,8 @@
 import { Fragment, useState, type FormEvent } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Button } from '@/shared/components/ui/button'
 import { Separator } from '@/shared/components/ui/separator'
-import { localise } from '@/shared/i18n/locale'
-import { useLocale } from '@/shared/i18n/useLocale'
+import { useStepText } from '@/shared/i18n/useStepText'
 import { cn } from '@/shared/lib/utils'
 import type { QuizChoice, QuizQuestion } from '@/shared/step'
 
@@ -32,8 +32,15 @@ function shuffled<T>(items: readonly T[]): T[] {
  * in a `useState` initialiser rather than during render, so picking an option or switching language
  * does not reshuffle the page under the student.
  */
-export function QuizPanel({ questions }: { questions: QuizQuestion[] }) {
-  const { t } = useLocale()
+export function QuizPanel({
+  questions,
+  namespace,
+}: {
+  questions: QuizQuestion[]
+  /** The step the questions belong to; their text is read from that step's namespace. */
+  namespace: string
+}) {
+  const { t } = useTranslation()
   const [order] = useState(() => shuffled(questions))
   const [picked, setPicked] = useState<Record<string, string>>({})
   const [checked, setChecked] = useState(false)
@@ -75,6 +82,7 @@ export function QuizPanel({ questions }: { questions: QuizQuestion[] }) {
             )}
             <Question
               question={question}
+              namespace={namespace}
               index={index}
               number={index + 1}
               total={order.length}
@@ -99,6 +107,7 @@ export function QuizPanel({ questions }: { questions: QuizQuestion[] }) {
 
 function Question({
   question,
+  namespace,
   index,
   number,
   total,
@@ -107,6 +116,7 @@ function Question({
   checked,
 }: {
   question: QuizQuestion
+  namespace: string
   /** Zero-based position on screen, used to build the ids. `number` is what the student reads. */
   index: number
   number: number
@@ -115,7 +125,8 @@ function Question({
   onPick: (choiceId: string) => void
   checked: boolean
 }) {
-  const { locale, t } = useLocale()
+  const { t } = useTranslation()
+  const { text } = useStepText(namespace)
   const [choices] = useState<QuizChoice[]>(() => shuffled(question.choices))
 
   const wrong = checked && choices.find((choice) => choice.id === picked)?.correct !== true
@@ -136,7 +147,7 @@ function Question({
         {t('quiz.question', { number, total })}
       </legend>
       <p id={`quiz-question-${index}-text`} data-component="Question" className="font-medium">
-        {localise(question.question, locale)}
+        {text(question.question)}
       </p>
 
       <div
@@ -172,7 +183,7 @@ function Question({
               id={`quiz-question-${index}-answer-${answerIndex}-text`}
               data-component="Question"
             >
-              {localise(choice.label, locale)}
+              {text(choice.label)}
             </span>
           </label>
         ))}
@@ -186,7 +197,7 @@ function Question({
           role="status"
           className="border-destructive/40 border-l-2 pl-3 text-sm"
         >
-          {localise(question.explanation, locale)}
+          {text(question.explanation)}
         </p>
       )}
     </fieldset>

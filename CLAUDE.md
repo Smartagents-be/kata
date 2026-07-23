@@ -34,14 +34,35 @@ Two parts, both walking-skeleton thin:
 - **Frontend** (`front/`) — React + Vite + shadcn/ui. It owns the curriculum content and
   renders it for one of two audiences.
 
-Only `step1` exists so far: **context** — the layers an agent's context is assembled from
-(prompt, session, project, harness, memory, external) and the fact that they share one finite
-window. It runs to nine units, two of them graded by the service: `memory` asks what survives a
-`/clear`, and `evaluation` closes the step by asking the student to place eight items in the right
-layer. `intro` and `prompt` each carry a three-question multiple-choice quiz, graded in the browser.
-`prompt` is the one unit that goes past naming its layer: after saying what the layer is, it covers
-how to write a better instruction (reasoning levels, meta-prompting, plan mode, and clearing,
-bundling and being exact).
+`step1` is **context** — the layers an agent's context is assembled from (prompt, session,
+harness, external) and the fact that they share one finite window. It runs to six units, one of
+them graded by the service: `evaluation` closes the step by asking the student to place six items
+in the right layer. `intro` and `prompt` each carry a three-question multiple-choice quiz, graded
+in the browser. `prompt` is the one unit that goes past naming its layer: after saying what the
+layer is, it covers how to write a better instruction (reasoning levels, meta-prompting, plan
+mode, and clearing, bundling and being exact).
+
+The step used to have three more units, `project`, `memory` and `window` (the last one on the
+finite window). They were dropped, along with the `survives-clear` exercise that hung off
+`memory`. `intro` still covers the window filling up, and the quizzes still ask about it.
+
+`step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Six
+units, one habit each: `setup` (what you write down once, in the repo), `engineering` (vibe coding versus the real thing: name the pattern, check the work while it runs,
+put tests, coverage and complexity limits in `CLAUDE.md`, and let DDD and ports-and-adapters
+boundaries do the scoping for you), `scoping` (cutting the
+work to a size that comes back right, and what starting the agent inside a domain folder buys and
+costs against starting at the root), `patterns` (moving a repeated correction into `CLAUDE.md`, a
+skill or a hook, and why a script a skill drives beats both: predictable, replayable, reviewable
+in git, and usable without an agent at all), `quality` (letting `mvn test` and `npm run build`
+decide, not the agent; then writing the standard down where the agent reads it first: a testing
+convention and a scaffolding skill, letting the agent draft `CLAUDE.md` from the repo before you
+trim it, and choosing metrics that carry weight — a coverage floor and a complexity ceiling wired
+into `mvn verify`, staying wary of a gamed proxy, and putting logging and comment hygiene in
+`CLAUDE.md`) and
+`goals` (asking for an outcome, not a keystroke, and then the long-running kind: coverage,
+complexity ceilings and applying a new skill across a codebase, what that costs in tokens, hours
+and control, and running it in a git worktree so you keep your own branch). Framing prose only so far: no quiz, no exercise,
+nothing that talks to the service.
 
 A **step** is a topic; a **unit** is one page inside it, holding prose, a quiz, an exercise, or any
 combination. The URL is `/steps/step1/session`; a bare `/steps/step1` forwards to the step's first
@@ -53,9 +74,9 @@ answer is one of the options already on screen and a round trip would add nothin
 as backend-independent: it still works with the service down.
 
 **The free-text half is currently unbacked.** `shared` held `/api/health` and
-`/api/exercises/{id}/check`, and it is gone (see below), so `survives-clear` and `context-layers`
-fail on submit and the header badge reads "Backend offline". The quizzes are unaffected. Restoring
-grading is a deliberate later decision, not an oversight.
+`/api/exercises/{id}/check`, and it is gone (see below), so `context-layers` fails on submit and
+the header badge reads "Backend offline". The quizzes are unaffected. Restoring grading is a
+deliberate later decision, not an oversight.
 
 ## Layout
 
@@ -73,15 +94,22 @@ front/src/
   main.tsx, App.tsx, index.css  entry point and routing
   shared/components/            AppShell, StepNav, UnitPager, SettingsSheet, ExercisePanel,
                                 QuizPanel, CatalogPanel, … and ui/
-  shared/i18n/                  locale.ts, messages.ts, LocaleProvider, useLocale
+  shared/i18n/                  i18n.ts (the instance), locales/, useLocale, useStepText
   shared/lib/                   api.ts, content.ts, utils.ts
   shared/mode/                  the guided/self-learning toggle
   shared/routes/                StepPage (forwards), UnitPage (renders a unit), CatalogPage
   shared/step.ts                Step, Unit, QuizQuestion and QuizChoice
-  steps/index.ts                the ordered registry, plus the flattened reading order
-  steps/step1/index.tsx         the step's units, titles and exercise ids
-  steps/step1/quiz.ts           the step's multiple-choice questions, both languages
-  steps/step1/units/            <unit>.html and <unit>.nl.html, one pair per unit
+  steps/index.ts                the ordered registry, the reading order, locale registration
+  steps/step1/index.tsx         the step's units, title keys and exercise ids
+  steps/step1/locales/          en.json and nl.json: this step's titles, quiz and prose
+  steps/step1/quiz.ts           the step's multiple-choice questions, as message keys
+  steps/step1/units/            <unit>.html, one file per unit, English, with data-i18n keys
+  steps/step2/index.tsx         agentic engineering; the units and the two trees they render
+  steps/step2/FileTree.tsx      draws a folder layout; both trees below are data for it
+  steps/step2/ProjectTree.tsx   the .claude/ layout, drawn inside the prose of `setup`
+  steps/step2/DomainTree.tsx    a DDD, ports-and-adapters layout, inside `engineering`
+  steps/step2/locales/          same pair; six units of framing prose so far
+  steps/step2/units/            same shape as step 1's
 ```
 
 On the frontend, dependencies still point one way: steps may import from `shared`, never the
@@ -259,18 +287,29 @@ A component that renders one of several variants keeps one id and puts the varia
 
 ## Adding a step
 
-1. `front/src/steps/stepN/units/<unit>.html` — one file per unit, plain HTML, no wrapper
-   element needed. Add `<unit>.nl.html` beside it for Dutch; see "Languages" below. Do not
-   write the unit's title into the HTML: it comes from the registry.
-2. `front/src/steps/stepN/index.tsx` — default-export a `Step` (`id`, `title`, `units`). Each
-   `Unit` has an `id`, a `title`, and then `html`, `exerciseId` (plus an optional
-   `exercisePlaceholder`), or both. Everything the student reads is `Localised<T>`: `{ en: … }`
-   is required, other locales optional.
+1. `front/src/steps/stepN/units/<unit>.html` — one file per unit, in English, plain HTML, no
+   wrapper element needed. Every block of prose carries a `data-i18n` key; see "Languages" below.
+   Do not write the unit's title into the HTML: it comes from the registry.
+2. `front/src/steps/stepN/locales/en.json` and `nl.json` — this step's messages, flat keys. The
+   English file holds the titles, quiz text and figure labels; the Dutch file holds those plus the
+   prose translations, since the prose has no English entry (the HTML is the English).
+3. `front/src/steps/stepN/index.tsx` — default-export a `Step` (`id`, `title`, `locales`,
+   `units`). Each `Unit` has an `id`, a `title`, and then `html`, `exerciseId` (plus an optional
+   `exercisePlaceholder`), or both. Everything the student reads is a **key** into this step's
+   namespace, except `html`, which is the imported file itself.
    A unit may also carry a `figure`: a React element rendered under the prose. Drawings live in
    the step folder (`steps/step1/ContextDiagram.tsx`), because their geometry and how they grow
    from unit to unit is the step's business. `shared` only gives the element a place to sit,
    which is why the registry is `.tsx` rather than `.ts`.
-3. Multiple choice, if the unit has any: `front/src/steps/stepN/quiz.ts` exports the
+   A drawing that only reads correctly *next to* the paragraph explaining it goes in
+   `inlineFigures` instead, keyed by name (`steps/step2/ProjectTree.tsx`). The unit's HTML leaves
+   an empty `<div data-figure="the-key"></div>` where it belongs, and
+   `StepContent` cuts the prose there: one `<article>` per run of HTML, the React element between
+   them. Only top-level markers are found. One nested inside a `<div data-audience>` renders as
+   the empty div it is, which is the symptom to look for. Portals into the rendered HTML were
+   tried first and do not survive: React discards children it put in a container that
+   `dangerouslySetInnerHTML` owns.
+4. Multiple choice, if the unit has any: `front/src/steps/stepN/quiz.ts` exports the
    `QuizQuestion[]`, and the unit references it as `quiz`. A question is an `id`, the
    `question`, its `choices` (exactly one carrying `correct: true`) and an `explanation`.
    `QuizPanel` answers the whole quiz first and checks it from one button at the bottom. A right
@@ -281,15 +320,16 @@ A component that renders one of several variants keeps one id and puts the varia
    choice instead. Use the `quiz-writing` skill in `.claude/skills/quiz-writing/`, which covers
    the data shape and what makes a distractor worth offering; the prose rules from
    `lesson-writing` apply on top of it.
-4. Append the step to the array in `front/src/steps/index.ts`. That list drives the sidebar,
-   the routes and the previous/next pager; nothing else needs touching.
-5. Java side, if the step needs one: `be.smartagents.kata.java.stepN`, holding that step's own
+5. Append the step to the array in `front/src/steps/index.ts`. That list drives the sidebar,
+   the routes, the previous/next pager and the registration of the step's locale bundles under a
+   namespace named after its id; nothing else needs touching.
+6. Java side, if the step needs one: `be.smartagents.kata.java.stepN`, holding that step's own
    `@SpringBootApplication` and whatever it exposes. There is no shared backend shell to register
    with any more, and no shared grading endpoint — a step that wants one builds it.
 
 Step ids are `stepN`, unit ids are words (`session`, `evaluation`), and together they are the
-URL (`/steps/step1/session`). Exercise ids are named after what they test (`context-layers`,
-`survives-clear`), not after the step or unit, so one step can grow several exercises.
+URL (`/steps/step1/session`). Exercise ids are named after what they test (`context-layers`), not
+after the step or unit, so one step can grow several exercises.
 
 ### The audience rule
 
@@ -304,11 +344,13 @@ Any element in step HTML may carry `data-audience`:
 means always visible** — that is the common case, so reach for the attribute only when
 material genuinely belongs to one audience.
 
-`renderForMode` in `front/src/shared/lib/content.ts` *removes* non-matching elements from the
+`prepareUnit` in `front/src/shared/lib/content.ts` *removes* non-matching elements from the
 parsed document rather than hiding them. Keep it that way: text that is merely
-`display: none` is one devtools panel away during a lesson. That function also renders
-with `dangerouslySetInnerHTML`, which is safe only because the HTML is first-party and
-committed here — sanitise first if content ever arrives from an API, a user, or an LLM.
+`display: none` is one devtools panel away during a lesson. The same pass then applies the
+`data-i18n` translations and cuts the result at the `data-figure` markers. What comes out is
+rendered with
+`dangerouslySetInnerHTML`, which is safe only because the HTML is first-party and committed
+here — sanitise first if content ever arrives from an API, a user, or an LLM.
 
 A unit whose *whole* prose belongs to one audience wraps it in a single
 `<div data-audience="…">` rather than tagging every paragraph. `step1/intro` does this: in class
@@ -324,18 +366,30 @@ Mode lives in `front/src/shared/mode/`, defaults to guided, and persists under t
 
 ### Languages
 
-English and Dutch. `front/src/shared/i18n/` mirrors `shared/mode/` exactly: a `locale.ts`
-holding the type, the default and the storage key (`kata.locale`), a context, a provider and a
-`useLocale()` hook. There is no i18n library.
+English and Dutch, on **i18next + react-i18next**, initialised once in
+`front/src/shared/i18n/i18n.ts` and imported by `main.tsx` for its side effect. The language is
+detected and cached by `i18next-browser-languagedetector` under the same `kata.locale` key it has
+always used. Everything is one mechanism now: a key, looked up in a namespace.
 
-Two different mechanisms, because the content is two different things:
+- **`ui`** is the chrome, in `shared/i18n/locales/en.json` and `nl.json`, read with
+  `useTranslation()` and `t('exercise.submit')`. `i18next.d.ts` types that namespace from the
+  English file, so an unknown key is a compile error, and `i18n.ts` annotates the Dutch bundle as
+  `Record<MessageKey, string>`, so a missing translation is one too. `{{name}}` placeholders are
+  i18next's own.
+- **One namespace per step**, named after the step id. The bundles live in
+  `steps/stepN/locales/{en,nl}.json` and are pushed in from `steps/index.ts` with
+  `registerStepLocales`, because `shared` never imports a step. Titles, quiz text, exercise
+  placeholders and figure labels are keys into it, read through `useStepText(step.id)`.
+- **Unit prose is one English HTML file**, and its blocks carry `data-i18n` keys into the same
+  namespace. `prepareUnit` swaps the *content* of a block when the active language has an entry
+  and leaves the English alone when it does not, so a half-translated unit degrades one paragraph
+  at a time. A missing translation warns in the console in dev, which is the closest thing prose
+  gets to the compile error the UI strings have.
 
-- **UI strings** live in `shared/i18n/messages.ts` and are read with `t('exercise.submit')`.
-  `MessageKey` is derived from the English object, so a key that is not translated into Dutch
-  is a compile error. `{name}` placeholders are filled by `t(key, params)`.
-- **Unit content** is per-locale files (`units/session.html`, `units/session.nl.html`)
-  referenced from the step's `index.ts`. `localise(value, locale)` in `shared/i18n/locale.ts`
-  falls back to English, so a unit with no translation still renders.
+Prose keys read `<unit>.<section>.<n>`, where the section is slugified from the `<h2>` above the
+block (`lead` before the first one) and the heading itself is `<unit>.<section>.heading`. That
+makes a key a location rather than a summary: moving a paragraph into another section means
+renaming its key, and the console will tell you if you forget.
 
 Grading messages come from the Java service and are **English in every language**. The Dutch
 `exercise.description` says so rather than letting it surprise anyone. The words a student

@@ -1,24 +1,52 @@
 import type { Mode } from '@/shared/mode/mode'
 
+/** One piece of a unit: a run of prose, or the name of a figure the unit registered for that spot. */
+export type Segment = { kind: 'html'; html: string } | { kind: 'figure'; name: string }
+
+export interface PrepareOptions {
+  /** Which audience is reading; see `data-audience` below. */
+  mode: Mode
+  /** The translation for a `data-i18n` key, or `null` to keep the English that is already there. */
+  translate: (key: string) => string | null
+}
+
 /**
- * Tailors a step's HTML to the active mode.
+ * Turns a unit's authored HTML into the pieces the page renders, in one pass over one parsed
+ * document. Three things happen to it, in this order.
  *
- * Authors mark audience-specific material with `data-audience` on any element:
+ * **The audience.** Authors mark audience-specific material with `data-audience` on any element:
  *
  * ```html
  * <aside data-audience="self">Hint: check divisibility by 15 first.</aside>
  * <p data-audience="guided">Your teacher will walk through this on the board.</p>
  * ```
  *
- * An element with no `data-audience` is always shown. Non-matching elements are *removed*
- * from the document rather than hidden with CSS — during class, text that is merely hidden
- * is still one devtools panel away.
+ * An element with no `data-audience` is always shown. Non-matching elements are *removed* from the
+ * document rather than hidden with CSS — during class, text that is merely hidden is still one
+ * devtools panel away.
  *
- * The HTML here is first-party content committed to this repo, so it is not sanitised. If a
- * later step ever renders HTML from an API, a user, or an LLM, sanitise it before it
- * reaches `dangerouslySetInnerHTML`.
+ * **The language.** The HTML file is the English. Every block of prose carries a `data-i18n` key,
+ * and when the active language has something for that key, the element's *content* is replaced
+ * with it. The element keeps its own tag and attributes, so a translated aside is still an aside
+ * for the same audience. No entry means the English stays, so an untranslated paragraph degrades
+ * on its own rather than taking the page with it. Keys never nest: a wrapper holding a whole
+ * page's prose carries none, and the elements inside it carry one each.
+ *
+ * ```html
+ * <p data-i18n="setup.intro">An agent starts every session knowing nothing…</p>
+ * ```
+ *
+ * **The figures.** `<div data-figure="project-tree"></div>` marks a spot for a React element the
+ * unit registered. The prose is cut there: one segment per run of HTML, one per figure. Only
+ * top-level markers count; one nested inside an `<aside>` is left alone and renders as the empty
+ * div it is, which is the symptom to look for. A run that is only whitespace is dropped rather
+ * than emitted as an empty article.
+ *
+ * The HTML here is first-party content committed to this repo, so it is not sanitised, and neither
+ * are the translations, which come from the same place. If a later step ever renders HTML from an
+ * API, a user, or an LLM, sanitise it before it reaches `dangerouslySetInnerHTML`.
  */
-export function renderForMode(html: string, mode: Mode): string {
+export function prepareUnit(html: string, { mode, translate }: PrepareOptions): Segment[] {
   const doc = new DOMParser().parseFromString(html, 'text/html')
 
   for (const element of doc.querySelectorAll('[data-audience]')) {
@@ -27,5 +55,43 @@ export function renderForMode(html: string, mode: Mode): string {
     }
   }
 
-  return doc.body.innerHTML
+  for (const element of doc.querySelectorAll('[data-i18n]')) {
+    // A unit written entirely for one audience wraps its prose in a single element, and the keys
+    // sit on the paragraphs inside it. Replacing an ancestor as well would throw them away.
+    if (element.parentElement?.closest('[data-i18n]')) {
+      continue
+    }
+    const translated = translate(element.getAttribute('data-i18n') ?? '')
+    if (translated !== null) {
+      element.innerHTML = translated
+    }
+  }
+
+  const segments: Segment[] = []
+  // Collecting into a detached element rather than concatenating outerHTML keeps comments and
+  // stray text nodes exactly as the author wrote them.
+  let run = doc.createElement('div')
+
+  const flush = () => {
+    if (run.innerHTML.trim()) {
+      segments.push({ kind: 'html', html: run.innerHTML })
+    }
+    run = doc.createElement('div')
+  }
+
+  for (const node of [...doc.body.childNodes]) {
+    const marker =
+      node.nodeType === Node.ELEMENT_NODE ? (node as Element).getAttribute('data-figure') : null
+
+    if (marker === null) {
+      run.append(node)
+      continue
+    }
+
+    flush()
+    segments.push({ kind: 'figure', name: marker })
+  }
+  flush()
+
+  return segments
 }

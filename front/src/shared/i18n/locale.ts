@@ -1,9 +1,11 @@
 /**
- * The languages this kata is available in. English is the source language: every UI string and
- * every step is written in it first, and anything not yet translated falls back to it.
+ * The languages this kata is available in. English is the source language: every UI string is
+ * written in it first, every unit's HTML is written in it, and anything not yet translated falls
+ * back to it.
  *
- * Shaped deliberately like `shared/mode/mode.ts` — same storage-key convention, same tolerance
- * for localStorage throwing.
+ * Resolution, persistence and fallback are i18next's job (see `i18n.ts`). What is left here is the
+ * vocabulary the app uses to talk about languages, plus the storage key, which is still
+ * `kata.locale` so a student's choice survives this change.
  */
 export type Locale = 'en' | 'nl'
 
@@ -17,34 +19,8 @@ export const LOCALES: ReadonlyArray<{ locale: Locale; label: string }> = [
   { locale: 'nl', label: 'Nederlands' },
 ]
 
+export const SUPPORTED_LOCALES: Locale[] = LOCALES.map(({ locale }) => locale)
+
 export function isLocale(value: unknown): value is Locale {
   return value === 'en' || value === 'nl'
-}
-
-export function readStoredLocale(): Locale {
-  try {
-    const stored = window.localStorage.getItem(LOCALE_STORAGE_KEY)
-    return isLocale(stored) ? stored : DEFAULT_LOCALE
-  } catch {
-    // Private browsing and similar can make localStorage throw; the app still works.
-    return DEFAULT_LOCALE
-  }
-}
-
-export function storeLocale(locale: Locale): void {
-  try {
-    window.localStorage.setItem(LOCALE_STORAGE_KEY, locale)
-  } catch {
-    // Persistence is a convenience, not a requirement.
-  }
-}
-
-/**
- * A value that exists in English and, optionally, in other languages. Requiring `en` is what
- * makes {@link localise} total: there is always something to render.
- */
-export type Localised<T> = { en: T } & Partial<Record<Locale, T>>
-
-export function localise<T>(value: Localised<T>, locale: Locale): T {
-  return value[locale] ?? value.en
 }

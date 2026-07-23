@@ -1,13 +1,13 @@
+import { useTranslation } from 'react-i18next'
 import { NavLink, Outlet } from 'react-router-dom'
 import { BackendStatus } from '@/shared/components/BackendStatus'
 import { SettingsSheet } from '@/shared/components/SettingsSheet'
 import { StepNav } from '@/shared/components/StepNav'
 import { Separator } from '@/shared/components/ui/separator'
-import { useLocale } from '@/shared/i18n/useLocale'
 import { cn } from '@/shared/lib/utils'
 
 export function AppShell() {
-  const { t } = useLocale()
+  const { t } = useTranslation()
 
   return (
     <div id="app" data-component="AppShell" className="min-h-svh">

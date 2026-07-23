@@ -1,25 +1,56 @@
-import { useMemo } from 'react'
-import { renderForMode } from '@/shared/lib/content'
+import { Fragment, useMemo, type ReactNode } from 'react'
+import { useStepText } from '@/shared/i18n/useStepText'
+import { prepareUnit } from '@/shared/lib/content'
 import { useMode } from '@/shared/mode/useMode'
 
-export function StepContent({ html }: { html: string }) {
+export function StepContent({
+  html,
+  namespace,
+  inlineFigures,
+}: {
+  /** The unit's prose, in English; its `data-i18n` keys carry the other languages. */
+  html: string
+  /** The step's i18next namespace, which is where those keys are looked up. */
+  namespace: string
+  /**
+   * Drawings that belong *inside* the prose rather than under it, keyed by the `data-figure` value
+   * of the empty div the unit's HTML leaves for them.
+   */
+  inlineFigures?: Record<string, ReactNode>
+}) {
   const { mode } = useMode()
-  const rendered = useMemo(() => renderForMode(html, mode), [html, mode])
+  const { lookup } = useStepText(namespace)
+  // One article per run of prose, with the figures between them. Portals into the rendered HTML
+  // would keep it to a single article, but React discards them: it owns the container's children
+  // only until the next commit re-applies dangerouslySetInnerHTML.
+  const segments = useMemo(
+    () => prepareUnit(html, { mode, translate: lookup }),
+    [html, mode, lookup],
+  )
 
   // A unit whose prose is entirely for the other audience renders nothing at all, rather than an
   // empty article that would still take a gap in the page's column.
-  if (!rendered.trim()) {
+  if (segments.length === 0) {
     return null
   }
 
   return (
-    <article
-      id="step-content"
-      data-component="StepContent"
-      // prose-code:before/after strip the literal backticks Typography adds around <code>.
-      className="prose prose-neutral dark:prose-invert prose-code:before:content-none prose-code:after:content-none max-w-none"
-      // Safe: first-party HTML from src/steps, already filtered by renderForMode.
-      dangerouslySetInnerHTML={{ __html: rendered }}
-    />
+    <div id="step-content" data-component="StepContent">
+      {segments.map((segment, index) =>
+        segment.kind === 'figure' ? (
+          <Fragment key={`figure-${index}`}>{inlineFigures?.[segment.name]}</Fragment>
+        ) : (
+          <article
+            key={`html-${index}`}
+            id={`step-content-part-${index}`}
+            data-component="StepContent"
+            // prose-code:before/after strip the literal backticks Typography adds around <code>.
+            className="prose prose-neutral dark:prose-invert prose-code:before:content-none prose-code:after:content-none max-w-none"
+            // Safe: first-party HTML from src/steps, already filtered by prepareUnit.
+            dangerouslySetInnerHTML={{ __html: segment.html }}
+          />
+        ),
+      )}
+    </div>
   )
 }
