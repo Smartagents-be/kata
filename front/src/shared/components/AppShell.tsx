@@ -1,4 +1,5 @@
 import { DatabaseIcon } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, Outlet } from 'react-router-dom'
 import { SettingsMenu } from '@/shared/components/SettingsMenu'
@@ -8,6 +9,20 @@ import { cn } from '@/shared/lib/utils'
 
 export function AppShell() {
   const { t } = useTranslation()
+
+  // Once the page scrolls far enough that the card has climbed under the pinned bar, the teal band
+  // is no longer behind the card's top corners. At rest the corners read as rounded against that
+  // band; scrolled, they would butt straight against the header and look square. So past that point
+  // we detach the card a sliver below the bar and back its top with the page colour, so the rounded
+  // corners read against the page (the way the bottom corners already do) with no teal on the card.
+  // 40px is just past where the card pins (its rest top sits ~36px below the bar).
+  const [scrolled, setScrolled] = useState(false)
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <div id="app" data-component="AppShell" className="min-h-svh">
@@ -51,16 +66,32 @@ export function AppShell() {
         className="relative z-10 mx-auto -mt-23 max-w-[1180px] px-8 pb-18"
       >
         {/*
-          A rounded lip in the card's colour that sticks right under the pinned bar. At rest it sits
-          exactly over the card's own rounded top, so the two read as one card; once the page scrolls
-          it stays put while the card slides up beneath it (higher z, opaque fill), so the rounded top
-          edge is never swallowed by the flat bar.
+          A pinned strip behind the cap that fills the cap's rounded-corner cut-outs so the rounded top
+          reads once the teal band has scrolled away. At rest it is the header teal, seamless with the
+          band the card floats on; scrolled, it turns the page colour and the cap drops a sliver lower
+          (see below), so the strip shows as a thin page-coloured gap under the bar and the corners read
+          against the page instead of butting straight onto the header.
+        */}
+        <div
+          id="app-card-cap-backing"
+          data-component="AppShell"
+          aria-hidden
+          className={cn('sticky top-15 z-10 h-6', scrolled ? 'bg-background' : 'bg-header')}
+        />
+        {/*
+          A rounded lip in the card's colour that sticks under the pinned bar. At rest it sits exactly
+          over the card's own rounded top, so the two read as one card. Scrolled, it pins a sliver lower
+          than the backing, leaving that page-coloured gap above it so its rounded corners are visible.
         */}
         <div
           id="app-card-cap"
           data-component="AppShell"
+          data-state={scrolled ? 'scrolled' : 'rest'}
           aria-hidden
-          className="bg-card sticky top-15 z-20 h-6 rounded-t-[22px]"
+          className={cn(
+            'bg-card sticky z-20 -mt-6 h-6 rounded-t-[22px]',
+            scrolled ? 'top-[70px]' : 'top-15',
+          )}
         />
         <div
           id="app-card"

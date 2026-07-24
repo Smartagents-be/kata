@@ -196,6 +196,13 @@
     @apply border-primary bg-primary/5 text-foreground/85 my-6 rounded-r-xl border-l-[3px] px-4 py-1;
   }
 
+  /* The coin from the welcome legend, dropped inline in prose to mark a cost-saving tip: sized to
+     the text around it, sitting on the baseline, and coloured to match the legend's coin. */
+  .prose svg[data-icon='coin'] {
+    @apply inline size-[1.1em] text-amber-500;
+    vertical-align: -0.15em;
+  }
+
   * {
     @apply border-border outline-ring/50;
     }

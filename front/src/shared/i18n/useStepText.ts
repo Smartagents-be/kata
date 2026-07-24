@@ -25,15 +25,18 @@ export function useStepText(namespace: string): StepText {
 
   return useMemo(
     () => ({
-      text: (key: string) => t(key),
+      // Read the value from the instance store rather than the hook's `t` whenever the key exists.
+      // After an SPA navigation into a step, react-i18next can hand back a `t` that returns the key
+      // until it marks that step's namespace ready for this hook, so `t(key)` would render the raw
+      // key (e.g. an `intro.title` heading) until a reload. The step bundles are registered
+      // synchronously at module load, so the store already holds the value `exists` confirms.
+      text: (key: string) =>
+        i18n.exists(key, { ns: namespace }) ? i18n.t(key, { ns: namespace }) : t(key),
       lookup: (key: string) => {
         if (i18n.exists(key, { ns: namespace })) {
-          // Read the value from the instance store rather than the hook's `t`. After an SPA
-          // navigation into a step, react-i18next can hand back a `t` that returns the key until it
-          // marks that step's namespace ready for this hook, and StepContent bakes the result into
-          // dangerouslySetInnerHTML through a useMemo whose deps don't change when readiness flips,
-          // so the raw key would stick until a reload. The step bundles are registered synchronously
-          // at module load, so the store already holds the value `exists` just confirmed.
+          // Same store read as `text`, for the same reason; StepContent additionally bakes the
+          // result into dangerouslySetInnerHTML through a useMemo whose deps don't change when
+          // readiness flips, so the raw key would otherwise stick until a reload.
           return i18n.t(key, { ns: namespace })
         }
         if (import.meta.env.DEV && i18n.resolvedLanguage !== 'en') {

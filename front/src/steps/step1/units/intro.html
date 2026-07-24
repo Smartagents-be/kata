@@ -7,25 +7,31 @@
     one block of text. That block is the <strong>context</strong>.
   </p>
 
-  <p data-i18n="intro.lead.2">
-    Context is not a detail of how these tools work. It is the whole game.
-  </p>
+  <h2 data-i18n="intro.model-stateless.heading">A model is stateless</h2>
 
-  <h2 data-i18n="intro.model-stateless-statistic.heading">A model is stateless, and it is a statistic</h2>
-
-  <p data-i18n="intro.model-stateless-statistic.1">
+  <p data-i18n="intro.model-stateless.1">
     Between two messages an LLM keeps nothing. Not your last question, not the file it opened, not
     the decision the two of you reached. Every request starts from zero. What feels like a
     conversation is the entire transcript being sent again, from the top, every single time.
   </p>
 
-  <p data-i18n="intro.model-stateless-statistic.2">
+  <p data-i18n="intro.model-stateless.2">
+    Sending that whole transcript again is not free. The longer you talk to an LLM, the bigger the
+    tasks and the more of them stack up, the more every turn costs. Keep that in mind and clear the
+    session <svg data-icon="coin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6" /><path d="M18.09 10.37A6 6 0 1 1 10.34 18" /><path d="M7 6h1v4" /><path d="m16.71 13.88.7.71-2.82 2.82" /></svg> often enough, especially when you
+    switch to something unrelated. A fresh session keeps the model focused, even when it has to
+    re-read a file to solve the problem in front of it.
+  </p>
+
+  <h2 data-i18n="intro.model-statistic.heading">And it is a statistic</h2>
+
+  <p data-i18n="intro.model-statistic.1">
     It is also a statistical model rather than a reasoning database. It predicts the most likely
     continuation of the text it was given, using patterns from its training data. It holds no
     opinion about your codebase. What it holds is an average.
   </p>
 
-  <p data-i18n="intro.model-stateless-statistic.3">
+  <p data-i18n="intro.model-statistic.2">
     That is why context is the only lever you have. The model gets better at your task at exactly
     the moment you or the harness put your task in front of it. Give it nothing and it answers from
     the average of everything it ever read.
