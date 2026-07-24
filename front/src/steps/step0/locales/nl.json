@@ -29,6 +29,8 @@
   "welcome.legend.gem.body": "Iets wat in je dagelijkse werk enorm handig is en makkelijk over het hoofd wordt gezien.",
   "welcome.legend.coin.title": "Kostenbesparing",
   "welcome.legend.coin.body": "Een kostenbesparing: dezelfde uitkomst voor minder tokens.",
+  "welcome.legend.pattern.title": "AI-ontwerppatroon",
+  "welcome.legend.pattern.body": "Een bewuste, herbruikbare manier om met een agent te werken.",
 
 
   "backend.lead.1": "De pagina's die je leest zijn maar de helft van de kata. Er is ook een Java-backend, opgesplitst per stap, die je met Maven op je eigen machine draait.",

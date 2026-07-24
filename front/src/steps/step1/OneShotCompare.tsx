@@ -30,8 +30,12 @@ export function OneShotCompare() {
 
   const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
     dragging.current = true
-    event.currentTarget.setPointerCapture(event.pointerId)
     setFromClientX(event.clientX)
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId)
+    } catch {
+      // No active pointer to capture (e.g. a synthetic event); dragging still works.
+    }
   }
 
   const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
@@ -40,7 +44,11 @@ export function OneShotCompare() {
 
   const onPointerUp = (event: PointerEvent<HTMLDivElement>) => {
     dragging.current = false
-    event.currentTarget.releasePointerCapture(event.pointerId)
+    try {
+      event.currentTarget.releasePointerCapture(event.pointerId)
+    } catch {
+      // Capture may never have been taken; nothing to release.
+    }
   }
 
   const onKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {

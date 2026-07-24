@@ -203,6 +203,13 @@
     vertical-align: -0.15em;
   }
 
+  /* The puzzle from the welcome legend, dropped inline in prose to mark an AI design pattern:
+     sized to the text around it and coloured to match the legend's puzzle. */
+  .prose svg[data-icon='pattern'] {
+    @apply inline size-[1.1em] text-violet-500;
+    vertical-align: -0.15em;
+  }
+
   * {
     @apply border-border outline-ring/50;
     }

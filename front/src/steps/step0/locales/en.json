@@ -19,6 +19,8 @@
   "welcome.legend.gem.body": "Something extremely useful in day-to-day work that is easy to miss.",
   "welcome.legend.coin.title": "Cost saver",
   "welcome.legend.coin.body": "A cost-saving measure: the same result for fewer tokens.",
+  "welcome.legend.pattern.title": "AI design pattern",
+  "welcome.legend.pattern.body": "A deliberate, repeatable way of working with an agent.",
 
   "hint.panel.title": "Try it: find the hidden code",
   "hint.panel.label": "The hidden code",

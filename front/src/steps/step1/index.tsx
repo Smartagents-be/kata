@@ -28,7 +28,10 @@ const step1: Step = {
       id: 'intro',
       title: 'intro.title',
       html: intro,
-      figure: <ContextDiagram />,
+      inlineFigures: {
+        'context-diagram': <ContextDiagram />,
+        'oneshot-compare': <OneShotCompare />,
+      },
       quiz: introQuiz,
     },
     {

@@ -1,4 +1,4 @@
-import { CoinsIcon, GemIcon } from 'lucide-react'
+import { CoinsIcon, GemIcon, PuzzleIcon } from 'lucide-react'
 import { useStepText } from '@/shared/i18n/useStepText'
 import { cn } from '@/shared/lib/utils'
 
@@ -25,6 +25,13 @@ export function Legend() {
       iconClass: 'text-amber-500',
       title: text('welcome.legend.coin.title'),
       body: text('welcome.legend.coin.body'),
+    },
+    {
+      id: 'pattern',
+      Icon: PuzzleIcon,
+      iconClass: 'text-violet-500',
+      title: text('welcome.legend.pattern.title'),
+      body: text('welcome.legend.pattern.body'),
     },
   ]
 

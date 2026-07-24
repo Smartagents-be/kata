@@ -13,7 +13,7 @@ export function ContextDiagram() {
   const titleId = useId()
 
   return (
-    <figure id="context-diagram" data-component="ContextDiagram" className="flex justify-center">
+    <figure id="context-diagram" data-component="ContextDiagram" className="mb-12 flex justify-center">
       <svg
         id="context-diagram-svg"
         data-component="ContextDiagram"
