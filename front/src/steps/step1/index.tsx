@@ -1,5 +1,6 @@
 import type { Step } from '@/shared/step'
 import { ContextDiagram } from './ContextDiagram'
+import { ContextFalloff } from './ContextFalloff'
 import { OneShotCompare } from './OneShotCompare'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
@@ -31,6 +32,7 @@ const step1: Step = {
       inlineFigures: {
         'context-diagram': <ContextDiagram />,
         'oneshot-compare': <OneShotCompare />,
+        'context-falloff': <ContextFalloff />,
       },
       quiz: introQuiz,
     },

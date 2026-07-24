@@ -65,7 +65,7 @@ export function OneShotCompare() {
   }
 
   return (
-    <figure id="oneshot-compare" data-component="OneShotCompare" className="my-8 flex flex-col gap-3">
+    <figure id="oneshot-compare" data-component="OneShotCompare" className="mt-8 mb-14 flex flex-col gap-3">
       <div
         id="oneshot-compare-viewport"
         data-component="OneShotCompare"

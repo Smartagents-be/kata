@@ -19,6 +19,11 @@
   "oneshot-compare.before-alt": "A plain, generic book-rental landing page from a prompt with no reference",
   "oneshot-compare.after-alt": "A more distinctive book-rental landing page from the same prompt plus a Dribbble reference",
 
+  "falloff.window": "context window",
+  "falloff.newest": "new turn in",
+  "falloff.dropped": "oldest drops off",
+  "falloff.description": "A context window drawn as a fixed frame full of turns. A new turn enters at the bottom while the oldest turns spill off the top, faded and tilted, out of the window.",
+
   "quiz.forgets-this-morning.question": "You have been working on the same project all morning. At 14:00 you ask the agent something you already told it at 08:00, and it does not remember. What happened?",
   "quiz.forgets-this-morning.window": "The window filled up. The morning was compacted into a summary or pushed out of the context, so it is no longer in front of the model.",
   "quiz.forgets-this-morning.ignored": "Everything from 08:00 is still in the context, but the model decided it was no longer relevant.",
