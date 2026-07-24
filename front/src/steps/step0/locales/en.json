@@ -1,0 +1,51 @@
+{
+  "step.title": "Start here",
+
+  "welcome.title": "How this kata works",
+  "backend.title": "The backend",
+
+  "code.panel.title": "Try it: clear this page",
+  "code.panel.label": "The page code",
+  "code.panel.hint": "Type the code from the paragraph above, braces and all, then press Check.",
+  "code.panel.help": "Look at the bold code in the paragraph just above this box: {f1r5t-5t3p5}. That whole string, braces included, is the answer. In a real step you have to work the code out or find it; here it is printed for you, so you can watch the box do its job.",
+  "code.panel.hint-button": "Hint",
+  "code.panel.placeholder": "{...}",
+  "code.panel.check": "Check",
+  "code.panel.wrong": "Not quite. Copy the bold code from the paragraph above, braces and all.",
+  "code.panel.solved": "Solved",
+  "code.panel.done": "That is it. Every written exercise in the kata clears the same way.",
+
+  "welcome.legend.gem.title": "Hidden gem",
+  "welcome.legend.gem.body": "Something extremely useful in day-to-day work that is easy to miss.",
+  "welcome.legend.coin.title": "Cost saver",
+  "welcome.legend.coin.body": "A cost-saving measure: the same result for fewer tokens.",
+
+  "hint.panel.title": "Try it: find the hidden code",
+  "hint.panel.label": "The hidden code",
+  "hint.panel.hint": "This box does not show its code in the prose. Press Hint to reveal it, then type it in, braces and all.",
+  "hint.panel.help": "Here is the code for this box: {34513r-t1m3}. That whole string, braces included, is the answer. On a real page you would have to work it out; here pressing Hint is all it takes, so you learn where the button is.",
+  "hint.panel.hint-button": "Hint",
+  "hint.panel.placeholder": "{...}",
+  "hint.panel.check": "Check",
+  "hint.panel.wrong": "Not quite. Press Hint to see the code, then copy it in, braces and all.",
+  "hint.panel.solved": "Solved",
+  "hint.panel.done": "That is it. The Hint button is there whenever a box has you stuck.",
+
+  "flag.panel.title": "Finish the intro",
+  "flag.panel.label": "The intro flag",
+  "flag.panel.hint": "Run the command above, then paste the flag it prints, braces and all.",
+  "flag.panel.help": "This flag is earned in the backend, not on this page. Start the project on step 1 and work through the tasks it gives you. Once that is done the build prints the flag on the line that says the intro is complete, so paste that code here, braces and all.",
+  "flag.panel.hint-button": "Hint",
+  "flag.panel.placeholder": "{...}",
+  "flag.panel.check": "Check",
+  "flag.panel.wrong": "Not that one. Read the flag straight from the build output.",
+  "flag.panel.solved": "Solved",
+  "flag.panel.done": "Done. That is a code earned from a build, exactly what step 2's workshop asks for.",
+
+  "quiz.what-the-code-is.question": "You are reading a page and hit a bold code in braces, like {f1r5t-5t3p5}. What is it doing there?",
+  "quiz.what-the-code-is.the-answer": "It is the answer to a written exercise. You type it into the box to clear the page.",
+  "quiz.what-the-code-is.run-it": "It is a snippet to run in your terminal, and its output is the real answer.",
+  "quiz.what-the-code-is.version": "It is an internal id for the page, there for the authors and safe to skip.",
+  "quiz.what-the-code-is.placeholder": "It is a placeholder that a tutor fills in during a guided session.",
+  "quiz.what-the-code-is.explanation": "A string in braces is the signifier for a written exercise: it is the answer itself. You clear the page by typing it back into the box, and it grades in your browser."
+}

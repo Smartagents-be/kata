@@ -1,3 +1,4 @@
+import { CircleCheckIcon, CircleXIcon } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useState, type FormEvent } from 'react'
 import { Button } from '@/shared/components/ui/button'
@@ -58,7 +59,7 @@ export function ExercisePanel({
             spellCheck={false}
             placeholder={placeholder ?? t('exercise.placeholder')}
             aria-label={t('exercise.title')}
-            className="border-input bg-background focus-visible:ring-ring/50 min-h-20 w-full rounded-md border px-3 py-2 font-mono text-sm focus-visible:ring-[3px] focus-visible:outline-none"
+            className="field min-h-20 w-full"
           />
           <div id="exercise-actions" data-component="ExercisePanel" className="flex items-center gap-3">
             <Button
@@ -85,13 +86,32 @@ export function ExercisePanel({
             data-state={state.result.passed ? 'passed' : 'failed'}
             role="status"
             className={cn(
-              'mt-4 rounded-md border px-4 py-3 text-sm',
+              'mt-4 rounded-xl border px-4 py-3 text-sm',
               state.result.passed
-                ? 'border-emerald-600/30 bg-emerald-600/10'
-                : 'border-destructive/30 bg-destructive/10',
+                ? 'border-success/30 bg-success/10 text-success-foreground'
+                : 'border-destructive/30 bg-destructive/10 text-destructive',
             )}
           >
-            <p id="exercise-result-message" data-component="ExercisePanel" className="font-medium">
+            <p
+              id="exercise-result-message"
+              data-component="ExercisePanel"
+              className="flex items-center gap-2 font-medium"
+            >
+              {state.result.passed ? (
+                <CircleCheckIcon
+                  id="exercise-result-icon"
+                  data-component="ExercisePanel"
+                  aria-hidden
+                  className="size-4 shrink-0"
+                />
+              ) : (
+                <CircleXIcon
+                  id="exercise-result-icon"
+                  data-component="ExercisePanel"
+                  aria-hidden
+                  className="size-4 shrink-0"
+                />
+              )}
               {state.result.message}
             </p>
             {state.result.details.length > 0 && (

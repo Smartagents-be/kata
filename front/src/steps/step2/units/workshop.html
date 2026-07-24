@@ -1,0 +1,138 @@
+<p data-i18n="workshop.lead.1">
+  You have read the six habits. This is where you run one. Nothing on this page grades how you
+  worked, because a process leaves no exit code. What it grades is the thing the last two units
+  argued you should always be able to name: a goal a build can answer yes or no to.
+</p>
+
+<p data-i18n="workshop.lead.2">
+  There is a small module in this repo built for it. Under
+  <code>src/main/java/be/smartagents/kata/java/step2</code> is a library loans domain, ports and
+  adapters, with a late-fee rule at the middle of it. It compiles and it passes its one shipped
+  test, so the default build is green. It is also exactly the kind of code the
+  <code>quality</code> unit described: one method far too branchy to read, and almost no tests
+  behind it.
+</p>
+
+<p data-i18n="workshop.lead.3">
+  Hand it to your agent as three outcomes, not a list of edits. Then let the build decide.
+</p>
+
+<h2 data-i18n="workshop.goals.heading">The three goals</h2>
+
+<p data-i18n="workshop.goals.1">
+  The goals live behind a Maven profile, off by default so the normal build stays green. Turn it on
+  and it measures the module against all three at once.
+</p>
+
+<pre><code>mvn verify -Pgraded</code></pre>
+
+<p data-i18n="workshop.goals.2">
+  Before you hand anything over, do the setup the first units asked for. Put
+  <code>mvn verify -Pgraded</code> in your <code>CLAUDE.md</code> as the command that validates this
+  work. That one line is what lets you give the agent a goal instead of a keystroke: it runs the
+  check itself after each change, and the build, not the agent's word that it is done, decides when a
+  flag is earned.
+</p>
+
+<p data-i18n="workshop.goals.3">
+  The first goal is a coverage floor: the domain has to reach ninety percent line coverage, which
+  means writing the tests the module never had. The second is the complexity ceiling from your
+  <code>CLAUDE.md</code>: no method may score above ten on cyclomatic complexity, so the late-fee
+  method has to come apart into pieces small enough to hold in your head. Meet a goal and the build
+  prints a flag for it, in the shape <code>{1337-5p34k}</code>. Miss one and it fails, and tells you
+  the number you are still short of.
+</p>
+
+<h2 data-i18n="workshop.honest.heading">The goal that resists gaming</h2>
+
+<p data-i18n="workshop.honest.1">
+  The third goal is the interesting one. Coverage is a proxy, and an agent will satisfy a proxy: a
+  hundred percent of the lines can run under tests that assert nothing, and the number will still
+  read green. So this goal is not coverage. It is whether the coverage is honest.
+</p>
+
+<p data-i18n="workshop.honest.2">
+  The build checks that by mutation testing. It changes the code in small ways, a plus for a minus,
+  a boundary nudged by one, and runs your tests again. A test suite that means something catches the
+  change and fails. One that only executes the lines lets it through. Reach eighty percent of those
+  mutations caught and the third flag is yours, and it is a flag you cannot earn by gaming the first.
+</p>
+
+<h2 data-i18n="workshop.build.heading">The fourth one is built, not tuned</h2>
+
+<p data-i18n="workshop.build.1">
+  The three goals above all sharpen code that already runs. The last flag is the other half of the
+  job: functionality that does not exist yet. The service has an endpoint for what a member tier owes,
+  and it answers with a 500, because the method behind it was never written.
+</p>
+
+<pre><code>curl localhost:8080/api/loans/statement/STUDENT</code></pre>
+
+<p data-i18n="workshop.build.2">
+  Nothing describes what that method should do except the tests. They are tagged, so the normal build
+  stays green and they only run when you ask for them. Read them as the requirement: what the
+  statement totals, what it counts, how it splits the money per media, and what it does with a loan
+  still inside its grace period, a lost item, and a tier that owes nothing.
+</p>
+
+<pre><code>mvn test -Pchallenge</code></pre>
+
+<p data-i18n="workshop.build.3">
+  Plan it before you write it. Read the failing tests, then ask Claude in plan mode for a plan
+  covering the whole spec, and check that plan against the tests yourself. Planning first is what
+  keeps an agent from solving the first assertion and calling it done. Approve the plan, let it
+  implement, and stop when <code>mvn test -Pchallenge</code> is green. Then call the endpoint again:
+  it answers with the totals and the code.
+</p>
+
+<h2 data-i18n="workshop.native.heading">The fifth resists a one-shot</h2>
+
+<p data-i18n="workshop.native.1">
+  The fourth flag added code that was missing. This one asks for something larger and of a different
+  kind again: step 2's application, compiled all the way down to a native executable. It is the goals
+  unit taken to its end, an outcome you hand over and nothing smaller. The build makes a jar today and
+  only a jar, and step 1's jar at that. Turning step 2 into a native image, pointed at its own
+  <code>Step2Application</code> rather than the pinned step 1 main, is the exercise, and, like the
+  graded profile, none of that wiring is in the <code>pom.xml</code> for you.
+</p>
+
+<p data-i18n="workshop.native.2">
+  Do not one-shot it. A native build is the long-running kind the last unit described, minutes each,
+  which makes it the wrong place to guess and retry. Plan it first. Open plan mode and have Claude
+  work out what a native build of step 2 needs: the GraalVM <code>native-maven-plugin</code>, the
+  ahead-of-time step, the right main class, and what inside a native image might not survive the move.
+  Read that plan, then spend the minutes once, ideally in a git worktree so your branch stays yours.
+</p>
+
+<pre><code>mvn -Pnative native:compile</code></pre>
+
+<p data-i18n="workshop.native.3">
+  The plan will still be a piece short, and the image will tell you which. It compiles, it starts, and
+  in place of the flag it prints a miss: the code lives in a resource, and a native image keeps only
+  the resources it is told to keep, so the plain build drops it. That miss is your real spec. Read it,
+  plan the fix it points at, a resource hint that keeps the file in the image, and build once more.
+</p>
+
+<pre><code>./target/kata-agentic-java</code></pre>
+
+<p data-i18n="workshop.native.4">
+  No profile prints this flag and no ordinary <code>mvn spring-boot:run</code> does either. It lives
+  only in the log of a native image that was built for step 2 and told to keep its resource. Get there
+  and the first lines it logs carry the code.
+</p>
+
+<h2 data-i18n="workshop.collect.heading">Collect the flags</h2>
+
+<p data-i18n="workshop.collect.1">
+  Each flag your run prints goes in the matching box below. They are checked here in the browser, so
+  this half works with the backend down. The flags are English text either way. Paste one in, and if
+  it is the real one the box turns green and stays that way.
+</p>
+
+<aside data-audience="self" data-i18n="workshop.collect.2">
+  <p>
+    If you get stuck, the honest move is the one the <code>goals</code> unit named: give the agent
+    the goal and the command that checks it, run it in a git worktree, and read the diff it comes
+    back with rather than the report.
+  </p>
+</aside>

@@ -1,6 +1,10 @@
 {
   "nav.steps": "Steps",
   "nav.units": "Pages in this step",
+  "nav.unitCount": "{{count}} pages",
+  "nav.unitCount_one": "{{count}} page",
+  "nav.unitCount_other": "{{count}} pages",
+  "nav.unitDone": "Completed",
 
   "unit.previous": "Back",
   "unit.next": "Next",
@@ -14,11 +18,6 @@
   "settings.mode.off": "Exercises only",
   "settings.mode.aria": "Toggle self-learning mode",
   "settings.close": "Close",
-
-  "backend.checking": "Connecting…",
-  "backend.up": "Backend {{version}}",
-  "backend.down": "Backend offline",
-  "backend.down.hint": "Is the backend running? mvn spring-boot:run",
 
   "exercise.title": "Your answer",
   "exercise.description": "Graded by the Java service, not the browser.",

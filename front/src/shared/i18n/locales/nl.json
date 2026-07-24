@@ -1,6 +1,10 @@
 {
   "nav.steps": "Stappen",
   "nav.units": "Pagina's in deze stap",
+  "nav.unitCount": "{{count}} pagina's",
+  "nav.unitCount_one": "{{count}} pagina",
+  "nav.unitCount_other": "{{count}} pagina's",
+  "nav.unitDone": "Afgerond",
 
   "unit.previous": "Terug",
   "unit.next": "Verder",
@@ -14,11 +18,6 @@
   "settings.mode.off": "Alleen oefeningen",
   "settings.mode.aria": "Zelfstudiemodus aan- of uitzetten",
   "settings.close": "Sluiten",
-
-  "backend.checking": "Verbinden…",
-  "backend.up": "Backend {{version}}",
-  "backend.down": "Backend offline",
-  "backend.down.hint": "Draait de backend? mvn spring-boot:run",
 
   "exercise.title": "Jouw antwoord",
   "exercise.description": "Nagekeken door de Java-service. De feedback is in het Engels.",

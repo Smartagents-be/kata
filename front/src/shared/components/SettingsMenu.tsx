@@ -1,15 +1,11 @@
-import { SettingsIcon, XIcon } from 'lucide-react'
+import { SettingsIcon } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/shared/components/ui/button'
 import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/shared/components/ui/sheet'
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/shared/components/ui/popover'
 import { Switch } from '@/shared/components/ui/switch'
 import { LOCALES } from '@/shared/i18n/locale'
 import { useLocale } from '@/shared/i18n/useLocale'
@@ -17,73 +13,62 @@ import { cn } from '@/shared/lib/utils'
 import { useMode } from '@/shared/mode/useMode'
 
 /**
- * The cogwheel in the header and the panel it opens from the left: language, and whether notes
- * are shown. Both settings persist, so a student picks them once.
+ * The cogwheel in the header and the panel it drops from it: language, and whether the notes are
+ * shown. Both settings persist, so a student picks them once. A popover rather than a full sheet,
+ * because there are only two things to set and the trigger is right there in the corner.
  */
-export function SettingsSheet() {
+export function SettingsMenu({ triggerClassName }: { triggerClassName?: string }) {
   const { t } = useTranslation()
   const { locale, setLocale } = useLocale()
   const { mode, setMode } = useMode()
   const selfLearning = mode === 'self'
 
   return (
-    <Sheet>
-      <SheetTrigger asChild>
+    <Popover>
+      <PopoverTrigger asChild>
         <Button
           id="settings-trigger"
-          data-component="SettingsSheet"
+          data-component="SettingsMenu"
           variant="ghost"
           size="icon-sm"
           aria-label={t('settings.open')}
+          className={triggerClassName}
         >
-          <SettingsIcon id="settings-trigger-icon" data-component="SettingsSheet" />
+          <SettingsIcon id="settings-trigger-icon" data-component="SettingsMenu" />
         </Button>
-      </SheetTrigger>
+      </PopoverTrigger>
 
-      {/* Own close button: the generated one in ui/sheet.tsx hardcodes an English label. */}
-      <SheetContent
+      <PopoverContent
         id="settings-panel"
-        data-component="SettingsSheet"
-        side="left"
-        className="gap-0"
-        showCloseButton={false}
+        data-component="SettingsMenu"
+        align="end"
+        sideOffset={10}
+        className="w-72"
       >
-        <SheetClose asChild>
-          <Button
-            id="settings-close"
-            data-component="SettingsSheet"
-            variant="ghost"
-            size="icon-sm"
-            className="absolute top-3 right-3"
-          >
-            <XIcon id="settings-close-icon" data-component="SettingsSheet" />
-            <span id="settings-close-label" data-component="SettingsSheet" className="sr-only">
-              {t('settings.close')}
-            </span>
-          </Button>
-        </SheetClose>
+        <div
+          id="settings-eyebrow"
+          data-component="SettingsMenu"
+          className="eyebrow text-muted-foreground mb-3"
+        >
+          {t('settings.title')}
+        </div>
 
-        <SheetHeader id="settings-header" data-component="SettingsSheet">
-          <SheetTitle id="settings-title" data-component="SettingsSheet">
-            {t('settings.title')}
-          </SheetTitle>
-          <SheetDescription id="settings-description" data-component="SettingsSheet">
-            {t('settings.description')}
-          </SheetDescription>
-        </SheetHeader>
-
-        <div id="settings-body" data-component="SettingsSheet" className="flex flex-col gap-6 px-4 py-2">
+        <div id="settings-body" data-component="SettingsMenu" className="flex flex-col gap-5">
           <section
             id="settings-language"
-            data-component="SettingsSheet"
+            data-component="SettingsMenu"
             className="flex flex-col gap-2"
           >
-            <h3 id="settings-language-title" data-component="SettingsSheet" className="text-sm font-medium">
+            <h3
+              id="settings-language-title"
+              data-component="SettingsMenu"
+              className="text-sm font-medium"
+            >
               {t('settings.language')}
             </h3>
             <div
               id="settings-language-options"
-              data-component="SettingsSheet"
+              data-component="SettingsMenu"
               role="radiogroup"
               aria-label={t('settings.language')}
               className="flex flex-col gap-1"
@@ -92,24 +77,26 @@ export function SettingsSheet() {
                 <button
                   key={option}
                   id={`settings-language-option-${index}`}
-                  data-component="SettingsSheet"
+                  data-component="SettingsMenu"
                   type="button"
                   role="radio"
                   aria-checked={locale === option}
                   lang={option}
                   onClick={() => setLocale(option)}
                   className={cn(
-                    'flex items-center justify-between rounded-md px-3 py-2 text-sm transition-colors',
+                    // Teal marks the current choice here for the same reason it marks the current
+                    // step in the sidebar: one colour the eye follows for "you are here".
+                    'flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors',
                     locale === option
-                      ? 'bg-accent text-accent-foreground font-medium'
-                      : 'text-muted-foreground hover:bg-accent/50 hover:text-foreground',
+                      ? 'bg-primary/10 text-primary font-medium'
+                      : 'text-muted-foreground hover:bg-accent hover:text-foreground',
                   )}
                 >
                   {label}
                   {locale === option && (
                     <span
                       id={`settings-language-option-${index}-check`}
-                      data-component="SettingsSheet"
+                      data-component="SettingsMenu"
                       aria-hidden
                     >
                       ✓
@@ -122,32 +109,36 @@ export function SettingsSheet() {
 
           <section
             id="settings-mode"
-            data-component="SettingsSheet"
+            data-component="SettingsMenu"
             className="flex items-start justify-between gap-4"
           >
-            <div id="settings-mode-text" data-component="SettingsSheet">
+            <div id="settings-mode-text" data-component="SettingsMenu">
               <label
                 id="settings-mode-label"
-                data-component="SettingsSheet"
+                data-component="SettingsMenu"
                 htmlFor="settings-mode-switch"
                 className="text-sm font-medium"
               >
                 {t('settings.mode')}
               </label>
-              <p id="settings-mode-hint" data-component="SettingsSheet" className="text-muted-foreground text-xs">
+              <p
+                id="settings-mode-hint"
+                data-component="SettingsMenu"
+                className="text-muted-foreground text-xs"
+              >
                 {selfLearning ? t('settings.mode.on') : t('settings.mode.off')}
               </p>
             </div>
             <Switch
               id="settings-mode-switch"
-              data-component="SettingsSheet"
+              data-component="SettingsMenu"
               checked={selfLearning}
               onCheckedChange={(checked) => setMode(checked ? 'self' : 'guided')}
               aria-label={t('settings.mode.aria')}
             />
           </section>
         </div>
-      </SheetContent>
-    </Sheet>
+      </PopoverContent>
+    </Popover>
   )
 }

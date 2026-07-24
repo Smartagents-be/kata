@@ -3,11 +3,6 @@
  * (see vite.config.ts), so these are same-origin requests and need no CORS handling.
  */
 
-export interface Health {
-  status: string
-  version: string
-}
-
 export interface CheckResult {
   passed: boolean
   message: string
@@ -30,10 +25,6 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     throw new ApiError(`${init?.method ?? 'GET'} ${path} failed`, response.status)
   }
   return (await response.json()) as T
-}
-
-export function fetchHealth(): Promise<Health> {
-  return request<Health>('/health')
 }
 
 /** The catalogue the step 1 service assembles: whatever its stages published, in that order. */

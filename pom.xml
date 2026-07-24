@@ -21,6 +21,8 @@
   <properties>
     <java.version>25</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- Surefire skips the step 2 challenge spec by default; the `challenge` profile empties this. -->
+    <surefire.excluded.groups>challenge</surefire.excluded.groups>
   </properties>
 
   <dependencies>
@@ -46,7 +48,198 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <!--
+            Two @SpringBootApplication classes now live in the tree (one per step), so the plugin can
+            no longer find a single main class on its own. Pin it to step 1 so plain `mvn spring-boot:run`
+            and `repackage` start step 1. Run step 2 with
+            `-Dspring-boot.run.main-class=be.smartagents.kata.java.step2.Step2Application`.
+          -->
+          <mainClass>be.smartagents.kata.java.step1.Step1Application</mainClass>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <!--
+            The step 2 challenge tests are the spec for functionality that is not written yet, so
+            they fail by design. Excluded here to keep a clean checkout green; `mvn test -Pchallenge`
+            turns them back on.
+          -->
+          <excludedGroups>${surefire.excluded.groups}</excludedGroups>
+        </configuration>
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <!--
+      The step 2 workshop. Off by default, so `mvn verify` stays green on a clean checkout. Turn it
+      on with `mvn verify -Pgraded` and it measures the loan module against three goals - a coverage
+      floor, a complexity ceiling and honest (mutation-tested) coverage - prints a flag for each goal
+      already met, and fails the build until all three are. Hardening the module to earn the flags is
+      the student's exercise; this profile only grades it.
+    -->
+    <profile>
+      <id>graded</id>
+      <properties>
+        <pitest.version>1.20.0</pitest.version>
+        <pitest.junit5.version>1.2.3</pitest.junit5.version>
+      </properties>
+      <build>
+        <plugins>
+          <!-- Line coverage and per-method cyclomatic complexity, read back from jacoco.xml. -->
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>jacoco-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+                <configuration>
+                  <!-- Fresh data each run, so a stale jacoco.exec cannot inflate the coverage. -->
+                  <append>false</append>
+                </configuration>
+              </execution>
+              <execution>
+                <id>jacoco-report</id>
+                <phase>prepare-package</phase>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+                <configuration>
+                  <!--
+                    The hardening exercise is about the loans module as it was. The challenge's own
+                    classes (the endpoint, its seed data and the statement stub) are covered by the
+                    challenge tests, which this profile does not run, so counting them here would
+                    put the coverage floor out of reach for reasons that are not the student's. The
+                    native-image flag runner is the same case: its body only runs inside a native
+                    image, so no JVM test can cover it.
+                  -->
+                  <excludes>
+                    <exclude>be/smartagents/kata/java/step2/web/**</exclude>
+                    <exclude>be/smartagents/kata/java/step2/config/**</exclude>
+                    <exclude>be/smartagents/kata/java/step2/aot/**</exclude>
+                    <exclude>be/smartagents/kata/java/step2/application/MemberStatements*</exclude>
+                  </excludes>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+
+          <!-- Mutation coverage: the check that the tests can actually fail, scoped to the domain. -->
+          <plugin>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-maven</artifactId>
+            <version>${pitest.version}</version>
+            <dependencies>
+              <dependency>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-junit5-plugin</artifactId>
+                <version>${pitest.junit5.version}</version>
+              </dependency>
+            </dependencies>
+            <configuration>
+              <!-- Mutate the domain logic; the reveal IT and step 1 are not the subject here. -->
+              <targetClasses>
+                <param>be.smartagents.kata.java.step2.domain.*</param>
+              </targetClasses>
+              <targetTests>
+                <param>be.smartagents.kata.java.step2.domain.*</param>
+              </targetTests>
+              <excludedTestClasses>
+                <param>be.smartagents.kata.java.step2.grading.*</param>
+              </excludedTestClasses>
+              <outputFormats>
+                <param>XML</param>
+              </outputFormats>
+              <!-- The reveal reads the score itself; do not let PIT's own threshold halt the build. -->
+              <failWhenNoMutations>false</failWhenNoMutations>
+              <timestampedReports>false</timestampedReports>
+            </configuration>
+            <executions>
+              <execution>
+                <id>pit-mutation-coverage</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>mutationCoverage</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+          <!-- Runs FlagRevealIT after the reports exist: prints earned flags, fails until all pass. -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <configuration>
+              <!-- Only step 2's reveal. Without this, failsafe would also run step 0's IntroRevealIT. -->
+              <includes>
+                <include>**/step2/**/*IT.java</include>
+              </includes>
+            </configuration>
+            <executions>
+              <execution>
+                <id>reveal-flags</id>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!--
+      The step 2 challenge. The tagged tests under it are the spec for `MemberStatements.forTier`,
+      which ships unimplemented, so `mvn test -Pchallenge` is red until the student writes it. That
+      red is the exercise: plan the implementation, build it, and the statement endpoint starts
+      answering with the code. The default build never runs these, so a clean checkout stays green.
+    -->
+    <profile>
+      <id>challenge</id>
+      <properties>
+        <!-- Nothing excluded, so the challenge tests run alongside the rest of the suite. -->
+        <surefire.excluded.groups></surefire.excluded.groups>
+      </properties>
+    </profile>
+
+    <!--
+      The step 0 intro. Off by default, so `mvn verify` stays green on a clean checkout. Turn it on
+      with `mvn verify -Pintro` and it runs IntroRevealIT, which prints the one flag that finishes
+      the intro's second page. There is no gate here: running it is the whole exercise, a miniature
+      of the `graded` profile above so the workflow is familiar before step 2 needs it.
+    -->
+    <profile>
+      <id>intro</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <configuration>
+              <!-- Only step 0's reveal, not step 2's FlagRevealIT (which needs the graded reports). -->
+              <includes>
+                <include>**/step0/**/*IT.java</include>
+              </includes>
+            </configuration>
+            <executions>
+              <execution>
+                <id>reveal-intro-flag</id>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

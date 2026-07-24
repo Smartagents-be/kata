@@ -5,6 +5,8 @@ import { QuizPanel } from '@/shared/components/QuizPanel'
 import { StepContent } from '@/shared/components/StepContent'
 import { UnitPager } from '@/shared/components/UnitPager'
 import { useStepText } from '@/shared/i18n/useStepText'
+import { unitKey } from '@/shared/progress/progress'
+import { useProgress } from '@/shared/progress/useProgress'
 import type { Step, Unit } from '@/shared/step'
 import { findStep, findUnit } from '@/steps'
 
@@ -61,6 +63,8 @@ export function UnitPage() {
  */
 function UnitView({ step, unit }: { step: Step; unit: Unit }) {
   const { text } = useStepText(step.id)
+  const { markComplete } = useProgress()
+  const markDone = () => markComplete(unitKey(step.id, unit.id))
 
   return (
     <div id="unit" data-component="UnitView" className="flex flex-col gap-8">
@@ -68,14 +72,14 @@ function UnitView({ step, unit }: { step: Step; unit: Unit }) {
         <p
           id="unit-step-title"
           data-component="UnitView"
-          className="text-muted-foreground text-xs font-medium tracking-wide uppercase"
+          className="eyebrow text-primary"
         >
           {text(step.title)}
         </p>
         <h1
           id="unit-title"
           data-component="UnitView"
-          className="font-heading mt-1 text-2xl font-semibold"
+          className="font-heading mt-2 text-3xl font-semibold tracking-tight"
         >
           {text(unit.title)}
         </h1>
@@ -93,7 +97,12 @@ function UnitView({ step, unit }: { step: Step; unit: Unit }) {
 
       {unit.quiz && (
         // Keyed so walking from one quiz to the next starts from unanswered questions.
-        <QuizPanel key={`${step.id}/${unit.id}`} questions={unit.quiz} namespace={step.id} />
+        <QuizPanel
+          key={`${step.id}/${unit.id}`}
+          questions={unit.quiz}
+          namespace={step.id}
+          onPass={markDone}
+        />
       )}
 
       {unit.exerciseId && (

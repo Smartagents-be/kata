@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-24T00:00:00Z",
+  "title": "Design System: Agentic Java",
+  "extensions": {
+    "colorMeta": {
+      "signal-teal": {
+        "role": "primary",
+        "displayName": "Signal Teal",
+        "canonical": "oklch(0.567 0.1 184.994)",
+        "tonalRamp": [
+          "oklch(0.15 0.06 185)",
+          "oklch(0.26 0.08 185)",
+          "oklch(0.37 0.09 185)",
+          "oklch(0.47 0.1 185)",
+          "oklch(0.567 0.1 185)",
+          "oklch(0.68 0.09 185)",
+          "oklch(0.8 0.07 185)",
+          "oklch(0.94 0.03 185)"
+        ]
+      },
+      "teal-black-ink": {
+        "role": "neutral",
+        "displayName": "Teal-Black Ink",
+        "canonical": "oklch(0.24 0.014 200)",
+        "tonalRamp": [
+          "oklch(0.16 0.014 200)",
+          "oklch(0.24 0.014 200)",
+          "oklch(0.34 0.012 200)",
+          "oklch(0.44 0.01 200)",
+          "oklch(0.52 0.008 200)",
+          "oklch(0.7 0.006 195)",
+          "oklch(0.86 0.006 195)",
+          "oklch(0.972 0.004 190)"
+        ]
+      },
+      "warm-teal-paper": {
+        "role": "neutral",
+        "displayName": "Warm Teal Paper",
+        "canonical": "oklch(0.984 0.004 190)",
+        "tonalRamp": [
+          "oklch(0.16 0.014 200)",
+          "oklch(0.24 0.014 200)",
+          "oklch(0.4 0.01 195)",
+          "oklch(0.6 0.008 195)",
+          "oklch(0.8 0.006 195)",
+          "oklch(0.9 0.006 195)",
+          "oklch(0.972 0.004 190)",
+          "oklch(0.984 0.004 190)"
+        ]
+      },
+      "pass-green": {
+        "role": "tertiary",
+        "displayName": "Pass Green",
+        "canonical": "oklch(0.58 0.13 163)",
+        "tonalRamp": [
+          "oklch(0.2 0.06 163)",
+          "oklch(0.3 0.08 163)",
+          "oklch(0.4 0.1 163)",
+          "oklch(0.44 0.11 163)",
+          "oklch(0.58 0.13 163)",
+          "oklch(0.7 0.11 163)",
+          "oklch(0.83 0.07 163)",
+          "oklch(0.94 0.03 163)"
+        ]
+      },
+      "fail-red": {
+        "role": "tertiary",
+        "displayName": "Fail Red",
+        "canonical": "oklch(0.577 0.245 27.325)",
+        "tonalRamp": [
+          "oklch(0.2 0.09 27)",
+          "oklch(0.32 0.14 27)",
+          "oklch(0.44 0.19 27)",
+          "oklch(0.577 0.245 27)",
+          "oklch(0.66 0.21 27)",
+          "oklch(0.76 0.15 27)",
+          "oklch(0.86 0.09 27)",
+          "oklch(0.95 0.03 27)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Section and unit headings inside prose." },
+      "title": { "displayName": "Title", "purpose": "App title and card titles." },
+      "body": { "displayName": "Body", "purpose": "All lesson prose and UI copy, Space Grotesk." },
+      "label": { "displayName": "Eyebrow / Label", "purpose": "Mono uppercase label above a heading, letter-spaced." },
+      "mono": { "displayName": "Machine Mono", "purpose": "Every machine-produced string: counts, flags, code, typed answers." }
+    },
+    "shadows": [
+      { "name": "hairline", "value": "0 1px 2px oklch(0.2 0.01 200 / 0.08)", "purpose": "Faintest lift; rarely needed since a border usually does this job." },
+      { "name": "raised", "value": "0 1px 2px oklch(0.2 0.01 200 / 0.05), 0 6px 16px oklch(0.2 0.01 200 / 0.06)", "purpose": "A surface sitting just above the page." },
+      { "name": "overlay", "value": "0 10px 24px oklch(0.2 0.01 200 / 0.1), 0 28px 56px oklch(0.2 0.01 200 / 0.13)", "purpose": "Reserved for things that genuinely float: settings sheet, dialogs." }
+    ],
+    "motion": [
+      { "name": "transition-all", "value": "all 150ms ease", "purpose": "Default state transition on buttons, badges, nav links." },
+      { "name": "press", "value": "translateY(1px)", "purpose": "Tactile press on active primary button." }
+    ],
+    "breakpoints": [
+      { "name": "container", "value": "72rem (max-w-6xl)" },
+      { "name": "sidebar", "value": "14rem (w-56)" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single most important next step; at most one per view. Hover darkens the teal; active presses down 1px.",
+      "html": "<button class=\"ds-btn-primary\">Check answer</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; height: 2rem; padding: 0 0.875rem; border: 1px solid transparent; border-radius: 10px; background: oklch(0.567 0.1 184.994); color: #fff; font-family: 'Space Grotesk Variable', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: background 150ms ease, transform 100ms ease; } .ds-btn-primary:hover { background: oklch(0.5 0.09 184.994); } .ds-btn-primary:focus-visible { outline: none; border-color: oklch(0.567 0.1 184.994); box-shadow: 0 0 0 3px oklch(0.567 0.1 184.994 / 0.5); } .ds-btn-primary:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "A hairline-bordered paper button for secondary actions.",
+      "html": "<button class=\"ds-btn-outline\">Run catalogue</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; height: 2rem; padding: 0 0.875rem; border: 1px solid oklch(0.9 0.006 195); border-radius: 10px; background: oklch(0.984 0.004 190); color: oklch(0.24 0.014 200); font-family: 'Space Grotesk Variable', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: background 150ms ease; } .ds-btn-outline:hover { background: oklch(0.94 0.006 195); } .ds-btn-outline:focus-visible { outline: none; border-color: oklch(0.567 0.1 184.994); box-shadow: 0 0 0 3px oklch(0.567 0.1 184.994 / 0.5); }"
+    },
+    {
+      "name": "Eyebrow",
+      "kind": "custom",
+      "refersTo": "label",
+      "description": "The mono uppercase label that introduces a section; teal for a section, muted elsewhere.",
+      "html": "<span class=\"ds-eyebrow\">01 &middot; Foundations</span>",
+      "css": ".ds-eyebrow { font-family: 'JetBrains Mono Variable', ui-monospace, monospace; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.567 0.1 184.994); }"
+    },
+    {
+      "name": "Status Badge",
+      "kind": "chip",
+      "refersTo": "badge-success",
+      "description": "Fully rounded pill. Success is a Pass-Green tint with deep-green ink; default is solid teal.",
+      "html": "<span class=\"ds-badge-success\">passed</span>",
+      "css": ".ds-badge-success { display: inline-flex; align-items: center; height: 1.5rem; padding: 0 0.625rem; border-radius: 26px; background: oklch(0.58 0.13 163 / 0.12); color: oklch(0.44 0.11 163); font-family: 'Space Grotesk Variable', system-ui, sans-serif; font-size: 0.75rem; font-weight: 500; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "A flat writing surface: Page White on the paper, marked out by a hairline border alone, no shadow.",
+      "html": "<div class=\"ds-card\"><div class=\"ds-card-title\">The service</div><div class=\"ds-card-body\">A catalogue you will instrument and trace.</div></div>",
+      "css": ".ds-card { border: 1px solid oklch(0.9 0.006 195); border-radius: 16px; background: #fff; padding: 1rem; color: oklch(0.24 0.014 200); font-family: 'Space Grotesk Variable', system-ui, sans-serif; } .ds-card-title { font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 0.25rem; } .ds-card-body { font-size: 0.875rem; line-height: 1.6; color: oklch(0.52 0.008 200); }"
+    },
+    {
+      "name": "Answer Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Monospace because the answer is machine-graded. Focus shifts the border to teal and paints a 3px teal ring.",
+      "html": "<input class=\"ds-field\" placeholder=\"paste the flag\" spellcheck=\"false\" />",
+      "css": ".ds-field { display: block; width: 100%; padding: 0.5rem 0.75rem; border: 1px solid oklch(0.86 0.006 195); border-radius: 10px; background: #fff; color: oklch(0.24 0.014 200); font-family: 'JetBrains Mono Variable', ui-monospace, monospace; font-size: 0.875rem; outline: none; } .ds-field::placeholder { color: oklch(0.52 0.008 200); } .ds-field:focus-visible { border-color: oklch(0.567 0.1 184.994); box-shadow: 0 0 0 3px oklch(0.567 0.1 184.994 / 0.25); }"
+    },
+    {
+      "name": "Verdict Panel (pass)",
+      "kind": "custom",
+      "refersTo": "field",
+      "description": "The result panel shown below a field on submit: Pass-Green tint, deep-green ink, a check glyph. Detail lines are mono.",
+      "html": "<div class=\"ds-verdict\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"m9 12 2 2 4-4\"/></svg><span>Correct. Flag accepted.</span></div>",
+      "css": ".ds-verdict { display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; border: 1px solid oklch(0.58 0.13 163 / 0.3); border-radius: 16px; background: oklch(0.58 0.13 163 / 0.1); color: oklch(0.44 0.11 163); font-family: 'Space Grotesk Variable', system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; } .ds-verdict svg { width: 1rem; height: 1rem; flex-shrink: 0; }"
+    },
+    {
+      "name": "Stepper Nav Item (active)",
+      "kind": "nav",
+      "refersTo": "button-primary",
+      "description": "A numbered mono bead on a rail; the active step's bead is solid teal and its title teal semibold.",
+      "html": "<div class=\"ds-step\"><span class=\"ds-step-bead\">02</span><span class=\"ds-step-title\">Agentic engineering</span></div>",
+      "css": ".ds-step { display: flex; align-items: center; gap: 0.75rem; font-family: 'Space Grotesk Variable', system-ui, sans-serif; } .ds-step-bead { display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 9999px; background: oklch(0.567 0.1 184.994); color: #fff; font-family: 'JetBrains Mono Variable', ui-monospace, monospace; font-size: 0.625rem; font-weight: 600; font-variant-numeric: tabular-nums; } .ds-step-title { font-size: 0.9375rem; font-weight: 600; color: oklch(0.567 0.1 184.994); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Lab Notebook",
+    "overview": "This is the interface of a precise, quietly technical workspace: a lab notebook a Java developer keeps open while they learn to direct a coding agent. Everything on the page is either something the student reads or something the machine produced, and the design's whole job is to keep that line sharp. Warm paper neutrals carry the prose; a single muted teal marks every live signal; and monospace type marks every reading the machine gave back. Nothing is decorative. The craft is in the restraint. The system commits to flatness the way a printed page does, to one accent so teal never competes with a second color, and to two typefaces doing one job each. The anti-reference is the clinical SaaS dashboard: cool grey fills, drop-shadowed cards, a rainbow of accents. This system rejects all of it.",
+    "keyCharacteristics": [
+      "One muted teal for every 'live' signal; nothing else borrows it.",
+      "Two typefaces as a semantic split: Space Grotesk for what is read, JetBrains Mono for what the machine produced.",
+      "Flat by default: separation is a 1px hairline border, not a shadow.",
+      "Faintly warm teal-tinted neutrals, never clinical grey.",
+      "Green means passed and red means failed, and those two colors mean nothing else."
+    ],
+    "rules": [
+      { "name": "The One Voice Rule", "body": "Signal Teal is the only accent. If a new element needs to signal 'act here' or 'you are here', it uses teal; if it needs anything else, it uses a neutral. Never introduce a second accent hue.", "section": "colors" },
+      { "name": "The Two-Color Verdict Rule", "body": "Green and red mean passed and failed and nothing else. A status that is neither a pass nor a fail is carried by a neutral panel.", "section": "colors" },
+      { "name": "The Warm-Neutral Rule", "body": "No pure grey. Every neutral carries the faint teal undertone (hue ~190-200). A #808080 anywhere in the system is a bug.", "section": "colors" },
+      { "name": "The Machine-Mono Rule", "body": "If the string was produced or checked by a machine, it is set in JetBrains Mono. If a person wrote it to be read, it is Space Grotesk. The typeface is the signal.", "section": "typography" },
+      { "name": "The Eyebrow Rule", "body": "A section is introduced by a mono, uppercase, letter-spaced eyebrow above its heading, not by a larger heading.", "section": "typography" },
+      { "name": "The Flat-Page Rule", "body": "Content surfaces are flat: a hairline border, no shadow. Only an overlay (sheet, dialog) is allowed to float on a shadow.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep Signal Teal as the only accent, on <=10% of any screen.",
+      "Do set every machine-produced string in JetBrains Mono and everything a person reads in Space Grotesk.",
+      "Do separate surfaces with the single 1px hairline border; reserve shadows for the settings sheet and dialogs.",
+      "Do give every field the shared field utility so focus paints the same 3px teal ring everywhere.",
+      "Do keep neutrals faintly warm (teal undertone, hue ~190-200).",
+      "Do introduce a section with a mono uppercase eyebrow, not a bigger heading.",
+      "Do darken teal on hover for a solid teal button; a fade reads as disabled.",
+      "Do pair every rendered element with an id (BEM, kebab-case) and a data-component, and carry variants on data-state."
+    ],
+    "donts": [
+      "Don't add a second accent color to rank importance; use teal or a neutral.",
+      "Don't use green or red for anything other than passed and failed.",
+      "Don't put a pure grey anywhere.",
+      "Don't float a content card on a drop shadow; flat with a hairline is the resting state.",
+      "Don't set prose in mono or machine output in the sans.",
+      "Don't load a webfont from a CDN; both faces are self-hosted variable fonts.",
+      "Don't ship dark mode as a user-facing theme."
+    ]
+  }
+}

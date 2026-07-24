@@ -38,6 +38,14 @@ void i18next
     defaultNS: 'ui',
     fallbackLng: DEFAULT_LOCALE,
     supportedLngs: SUPPORTED_LOCALES,
+    // Every resource here is inline (the bundles above plus the per-step bundles added
+    // synchronously from steps/index.ts), so there is nothing to load asynchronously. Left on its
+    // default, init defers to the next tick, and React's first render lands before i18next is
+    // ready: `t(key)` returns the key, and a step's prose flashes 'prompt.reasonable-question-not.1'
+    // in place of its text until init resolves. Initialising synchronously makes translations
+    // available on the first render and removes that flash. (This option was `initImmediate` before
+    // i18next 26.)
+    initAsync: false,
     // Keys are dotted names, not a nested tree: 'nav.steps' is one key with a dot in it.
     keySeparator: false,
     // React escapes what it renders, so escaping here as well would show &quot; on the page.

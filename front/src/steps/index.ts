@@ -1,5 +1,6 @@
 import { registerStepLocales } from '@/shared/i18n/i18n'
 import type { Step, Unit } from '@/shared/step'
+import step0 from './step0'
 import step1 from './step1'
 import step2 from './step2'
 
@@ -7,7 +8,7 @@ import step2 from './step2'
  * The curriculum, in order. Adding a step means creating src/steps/stepN/ with an index.ts and
  * its unit content, then appending it here — the sidebar and the routes both read this list.
  */
-export const steps: Step[] = [step1, step2]
+export const steps: Step[] = [step0, step1, step2]
 
 // Each step's messages go in under a namespace named after the step. This runs at module load,
 // before anything renders, and it is why `shared` never has to import a step.

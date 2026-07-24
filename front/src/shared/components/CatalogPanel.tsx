@@ -1,3 +1,4 @@
+import { PlayIcon } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { Button } from '@/shared/components/ui/button'
@@ -46,13 +47,19 @@ export function CatalogPanel() {
             onClick={onFetch}
             disabled={state.phase === 'loading'}
           >
+            <PlayIcon
+              id="catalog-fetch-icon"
+              data-component="CatalogPanel"
+              aria-hidden
+              data-icon="inline-start"
+            />
             {state.phase === 'loading' ? t('catalog.fetching') : t('catalog.fetch')}
           </Button>
           {state.phase === 'loaded' && (
             <span
               id="catalog-count"
               data-component="CatalogPanel"
-              className="text-muted-foreground text-sm tabular-nums"
+              className="text-muted-foreground font-mono text-sm tabular-nums"
             >
               {t('catalog.count', { count: state.titles.length })}
             </span>
@@ -75,13 +82,13 @@ export function CatalogPanel() {
               {t('catalog.empty')}
             </p>
           ) : (
-            <ol id="catalog-items" data-component="CatalogPanel" className="mt-4 flex flex-col gap-1">
+            <ol id="catalog-items" data-component="CatalogPanel" className="mt-4 flex flex-col gap-1.5">
               {state.titles.map((title, index) => (
                 <li
                   key={`${index}-${title}`}
                   id={`catalog-item-${index}`}
                   data-component="CatalogPanel"
-                  className="flex items-baseline gap-3 rounded-md border px-3 py-2 text-sm"
+                  className="bg-card flex items-baseline gap-3.5 rounded-lg border px-3.5 py-2.5 font-mono text-sm"
                 >
                   <span
                     id={`catalog-item-${index}-number`}
@@ -93,7 +100,6 @@ export function CatalogPanel() {
                   <span
                     id={`catalog-item-${index}-title`}
                     data-component="CatalogPanel"
-                    className="font-mono"
                   >
                     {title}
                   </span>

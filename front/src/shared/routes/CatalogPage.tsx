@@ -14,14 +14,14 @@ export function CatalogPage() {
         <p
           id="catalog-page-kicker"
           data-component="CatalogPage"
-          className="text-muted-foreground text-xs font-medium tracking-wide uppercase"
+          className="eyebrow text-primary"
         >
           {t('catalog.kicker')}
         </p>
         <h1
           id="catalog-page-title"
           data-component="CatalogPage"
-          className="font-heading mt-1 text-2xl font-semibold"
+          className="font-heading mt-2 text-3xl font-semibold tracking-tight"
         >
           {t('catalog.nav')}
         </h1>

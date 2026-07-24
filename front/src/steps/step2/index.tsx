@@ -1,6 +1,7 @@
 import type { Step } from '@/shared/step'
 import { DomainTree } from './DomainTree'
 import { ProjectTree } from './ProjectTree'
+import { Workshop } from './Workshop'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
 import setup from './units/setup.html?raw'
@@ -9,13 +10,15 @@ import scoping from './units/scoping.html?raw'
 import patterns from './units/patterns.html?raw'
 import quality from './units/quality.html?raw'
 import goals from './units/goals.html?raw'
+import workshop from './units/workshop.html?raw'
 
 /**
  * Step 2, agentic engineering: the six habits that decide whether working with an agent beats
  * writing the code yourself, one unit each. The step opens straight on the first of them.
  *
- * Framing prose only for now. No exercise and no quiz yet, so nothing here talks to the service.
- * `setup` and `engineering` each carry a drawing, which is why this registry is .tsx.
+ * `setup` and `engineering` each carry a drawing, and the closing `workshop` unit carries the flag
+ * board, which is why this registry is .tsx. The board is browser-graded, so the step still talks
+ * to the service only through the `mvn verify -Pgraded` run the student does outside the app.
  */
 const step2: Step = {
   id: 'step2',
@@ -55,6 +58,14 @@ const step2: Step = {
       id: 'goals',
       title: 'goals.title',
       html: goals,
+    },
+    {
+      id: 'workshop',
+      title: 'workshop.title',
+      html: workshop,
+      // The flag board sits under the prose. It grades in the browser, so it is a figure rather
+      // than an exerciseId (which would post to the service the step deliberately does not use).
+      figure: <Workshop />,
     },
   ],
 }

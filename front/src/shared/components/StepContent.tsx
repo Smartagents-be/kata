@@ -45,7 +45,9 @@ export function StepContent({
             id={`step-content-part-${index}`}
             data-component="StepContent"
             // prose-code:before/after strip the literal backticks Typography adds around <code>.
-            className="prose prose-neutral dark:prose-invert prose-code:before:content-none prose-code:after:content-none max-w-none"
+            // Not prose-neutral: index.css points Typography's own variables at the theme tokens,
+            // so the prose picks up the same faintly teal neutrals as everything around it.
+            className="prose prose-code:before:content-none prose-code:after:content-none max-w-none"
             // Safe: first-party HTML from src/steps, already filtered by prepareUnit.
             dangerouslySetInnerHTML={{ __html: segment.html }}
           />
