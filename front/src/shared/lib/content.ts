@@ -1,3 +1,4 @@
+import { iconSvg } from '@/shared/lib/icons'
 import type { Mode } from '@/shared/mode/mode'
 
 /** One piece of a unit: a run of prose, or the name of a figure the unit registered for that spot. */
@@ -36,6 +37,11 @@ export interface PrepareOptions {
  * <p data-i18n="setup.intro">An agent starts every session knowing nothing…</p>
  * ```
  *
+ * **The icons.** A prose author writes `<svg data-icon="coin"></svg>` and this pass fills it in
+ * from the icon registry, so the path data lives in one place rather than pasted into every unit
+ * and both languages. It runs after the language pass, so an icon dropped inside a translation is
+ * expanded too.
+ *
  * **The figures.** `<div data-figure="project-tree"></div>` marks a spot for a React element the
  * unit registered. The prose is cut there: one segment per run of HTML, one per figure. Only
  * top-level markers count; one nested inside an `<aside>` is left alone and renders as the empty
@@ -65,6 +71,17 @@ export function prepareUnit(html: string, { mode, translate }: PrepareOptions): 
     if (translated !== null) {
       element.innerHTML = translated
     }
+  }
+
+  // Expand icon markers into their SVG. After the language pass so a marker in a translation counts;
+  // parsing the markup on its own and importing it keeps the children in the SVG namespace.
+  for (const element of doc.querySelectorAll('svg[data-icon]')) {
+    const markup = iconSvg(element.getAttribute('data-icon') ?? '')
+    if (markup === null) {
+      continue
+    }
+    const svg = new DOMParser().parseFromString(markup, 'image/svg+xml').documentElement
+    element.replaceWith(doc.importNode(svg, true))
   }
 
   const segments: Segment[] = []

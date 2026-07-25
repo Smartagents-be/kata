@@ -210,6 +210,13 @@
     vertical-align: -0.15em;
   }
 
+  /* The gem, dropped inline in prose to mark the top-tier model: same inline sizing as the others,
+     coloured emerald to sit apart from the amber coin it usually travels with. */
+  .prose svg[data-icon='gem'] {
+    @apply inline size-[1.1em] text-emerald-500;
+    vertical-align: -0.15em;
+  }
+
   * {
     @apply border-border outline-ring/50;
     }

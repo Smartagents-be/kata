@@ -53,7 +53,7 @@
   "hint.panel.title": "Probeer het: vind de verborgen code",
   "hint.panel.label": "De verborgen code",
   "hint.panel.hint": "Dit veld toont zijn code niet in de tekst. Druk op Hint om hem te tonen, en typ hem dan in, mét accolades.",
-  "hint.panel.help": "Hier is de code voor dit veld: {34513r-t1m3}.",
+  "hint.panel.help": "Hier is de code voor dit veld: {34513r-t1m3}. Die hele string, accolades inbegrepen, is het antwoord. Op een echte pagina moet je hem zelf uitzoeken; hier volstaat een druk op Hint, zodat je weet waar de knop staat.",
   "hint.panel.hint-button": "Hint",
   "hint.panel.placeholder": "{...}",
   "hint.panel.check": "Controleer",

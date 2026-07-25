@@ -81,17 +81,23 @@ backend down).
   hidden catalogue flag, hardening the loans module for the graded flags,
   implementing `MemberStatements.forTier`), ship the framing and the spec, never
   the solution.
-- Backend: a single `@SpringBootApplication` (`Step1Application`) scans the
-  whole `be.smartagents.kata.java` tree, so a step adds an endpoint by writing a
-  controller. `@SpringBootTest` in step 2 must name the config class explicitly.
+- Backend: each step has its own `@SpringBootApplication` scoped to its own
+  package by the default component scan, so running one never drags in the
+  other. `spring-boot-maven-plugin` pins `<mainClass>` to `Step1Application`,
+  and step 2 is run by naming `Step2Application` explicitly. `@SpringBootTest`
+  in step 2 must name the config class explicitly too, since
+  `Step2Application` sits beside its tests rather than above them.
 - Frontend: a `shared` shell plus one folder per step; steps may import from
   `shared`, never the reverse. Content is HTML-per-unit with `data-i18n` keys,
   i18next namespaces per step, and a guided/self `data-audience` attribute that
   removes (not hides) non-matching material.
-- Two current steps: **step1** (context — the layers an agent's context is
+- Three current steps: **step0** ("Start here" — how the kata works and how to
+  run the backend), **step1** (context — the layers an agent's context is
   assembled from) and **step2** (agentic engineering — how you work with an
-  agent). Free-text grading is currently unbacked (the shared check endpoint was
-  removed); restoring it is a deliberate later decision.
+  agent). Free-text grading is unbacked (the shared check endpoint was removed)
+  and no unit uses it any more: every graded exercise is either a
+  multiple-choice quiz or a flag board, both checked in the browser. Restoring
+  free text is a deliberate later decision, not an outstanding bug.
 - Terminology to keep exact: *step* (topic), *unit* (page), *guided* /
   *self-learning* (audiences), *flag* (a leetspoken, `{…}`-wrapped exercise
   answer).
@@ -106,13 +112,13 @@ backend down).
   - One teal primary (`oklch(0.567 0.1 184.994)`) marks every primary/active
     signal; neutrals carry a faint teal undertone; `--success` and
     `--destructive` mean only passed and failed.
-  - Two typefaces carry a meaning: Space Grotesk for what a student *reads*,
+  - Two typefaces carry a meaning: Figtree for what a student *reads*,
     JetBrains Mono for anything the *machine produced* (code, counts, flags,
     catalogue titles, step numbers). Both are self-hosted variable fonts; nothing
     loads from a CDN.
   - The interface is nearly flat: separation is a 1px border, not a shadow;
     depth is reserved for things that genuinely float.
-  - The look derives from an external "Educational Design System v2" (a Claude
+  - The look derives from an external "Educational Design System v3" (a Claude
     Design project); the CSS tokens are its home in this repo.
 - Every rendered element carries an `id` (BEM, kebab-case, indexed in loops) and
   a `data-component` (the exact React function), so anything on screen can be
@@ -121,9 +127,11 @@ backend down).
 
 ## Evidence on Hand
 
-- Working two-step curriculum with real graded exercises (see step1 `evaluation`
-  and step2 `workshop`/challenge).
-- Screenshots in the repo root: `catalog.png`, `step2-engineering.png`.
+- Working three-step curriculum with real graded exercises (see step1
+  `evaluation` and step2 `workshop`/challenge).
+- Screenshots in the repo root: `catalog.png`, `step2-engineering.png`, and the
+  pair `oneshot-prompt.png` / `prompted-with-dribbble.png` that step1 `intro`
+  uses to show what one reference image does to a first draft.
 - Repo-local skills encode the house style: `lesson-writing`, `quiz-writing`.
 - No testimonials, customers, benchmarks, pricing, or deployment claims exist;
   future work must not fabricate them.

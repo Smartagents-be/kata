@@ -1,11 +1,15 @@
 /**
- * The three flags the workshop hands out, one per goal the `graded` build can answer yes or no to.
+ * The five flags the workshop hands out, and they come from three different places. The first three
+ * are one per goal the `graded` build can answer yes or no to, printed by `mvn verify -Pgraded` as
+ * each gate passes. The fourth comes from the running service once the student implements the
+ * statement endpoint. The fifth comes from the startup log of a compiled native image, so nothing
+ * on the JVM prints it at all.
+ *
  * The plaintext flag is deliberately not here: only a salted SHA-256 of it, so the answer is not
  * sitting in the bundle for a reader to lift. A pasted flag is hashed with the same salt and
  * compared. The salt just makes the digest specific to this exercise; it is not a secret.
  *
- * Each `hash` is `sha256Hex(SALT + flag)`, and the flags are the strings `mvn verify -Pgraded`
- * prints when its matching gate passes.
+ * Each `hash` is `sha256Hex(FLAG_SALT + flag)`.
  */
 export const FLAG_SALT = 'kata-step2-loans-v1'
 

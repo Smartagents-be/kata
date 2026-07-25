@@ -1,7 +1,13 @@
 {
+  "step.title": "Werken met een agent",
+  "setup.title": "Projectopzet",
+  "engineering.title": "Vakmanschap",
+  "scoping.title": "Afbakenen",
   "patterns.title": "Terugkerende patronen",
   "quality.title": "Kwaliteitsbewaking",
-  "goals.title": "Goal-oriented",
+  "goals.title": "Doelgericht",
+  "workshop.title": "Workshop",
+
   "tree.root.note": "de root van de repo",
   "tree.claude-md.note": "gelezen bij het begin van elke sessie",
   "tree.dot-claude.note": "alles wat de agent instelt",
@@ -123,7 +129,6 @@
   "goals.own-worktree.1": "Ondertussen heb je zelf ook een dag te doen. Een agent die vier uur lang veertig klassen herschrijft, zit aan de bestanden die jij open hebt staan, en dat maakt je branch onbruikbaar zolang het loopt. Vraag dus om het doel in een git worktree na te jagen. Dat is een tweede checkout van dezelfde repository, op een eigen branch, in een eigen map, met dezelfde history.",
   "goals.own-worktree.2": "Merge daarna in stukken in plaats van op het einde. Eén module af en groen is een merge waard, en zo lees jij een module diff terwijl de volgende nog geschreven wordt. Het beperkt ook de schade. Een run die in het derde uur ontspoort, sleurt de eerste twee uur niet mee.",
 
-  "workshop.title": "Workshop",
   "workshop.panel.title": "Flagbord",
   "workshop.panel.description": "Plak elke flag die je graded run afdrukte. Hier in de browser gecontroleerd.",
   "workshop.panel.progress": "{{solved}} van {{total}} verzameld",
@@ -159,7 +164,7 @@
   "workshop.honest.1": "Het derde doel is het interessante. Coverage is een proxy, en een agent zal een proxy tevredenstellen: honderd procent van de regels kan draaien onder tests die niets asserteren, en het getal blijft groen. Dit doel is dus geen coverage. Het is of die coverage eerlijk is.",
   "workshop.honest.2": "De build controleert dat met mutation testing. Het verandert de code op kleine manieren, een plus voor een min, een grens één opgeschoven, en draait je tests opnieuw. Een testsuite die iets betekent, betrapt de wijziging en faalt. Een die alleen de regels uitvoert, laat ze door. Vang je tachtig procent van die mutaties, dan is de derde flag van jou, en die flag kan je niet verdienen door de eerste te foppen.",
   "workshop.build.heading": "De vierde bouw je, je stemt hem niet bij",
-  "workshop.build.1": "De drie doelen hierboven scherpen code aan die al draait. De laatste flag is de andere helft van het werk: functionaliteit die nog niet bestaat. De service heeft een endpoint voor wat een member tier verschuldigd is, en het antwoordt met een 500, want de methode erachter is nooit geschreven.",
+  "workshop.build.1": "De drie doelen hierboven scherpen code aan die al draait. De vierde flag is de andere helft van het werk: functionaliteit die nog niet bestaat. De service heeft een endpoint voor wat een member tier verschuldigd is, en het antwoordt met een 500, want de methode erachter is nooit geschreven.",
   "workshop.build.2": "Niets beschrijft wat die methode moet doen, behalve de tests. Ze zijn getagd, dus de gewone build blijft groen en ze draaien alleen als je erom vraagt. Lees ze als de eis: wat het statement optelt, wat het telt, hoe het het geld per media opsplitst, en wat het doet met een lening die nog in haar grace zit, een verloren item, en een tier die niets verschuldigd is.",
   "workshop.build.3": "Plan het voor je het schrijft. Lees de falende tests, vraag Claude dan in plan mode om een plan dat de hele spec dekt, en toets dat plan zelf aan de tests. Eerst plannen is wat een agent belet de eerste assertie op te lossen en het klaar te noemen. Keur het plan goed, laat het implementeren, en stop wanneer <code>mvn test -Pchallenge</code> groen is. Roep daarna het endpoint opnieuw aan: het antwoordt met de totalen en de code.",
   "workshop.native.heading": "De vijfde weerstaat een one-shot",
@@ -169,5 +174,5 @@
   "workshop.native.4": "Geen profiel drukt deze flag af en geen gewone <code>mvn spring-boot:run</code> doet het ook. Hij bestaat alleen in het log van een native image die voor stap 2 is gebouwd en die zijn resource mag houden. Kom daar en de eerste regels die hij logt dragen de code.",
   "workshop.collect.heading": "Verzamel de flags",
   "workshop.collect.1": "Elke flag die je run afdrukt, gaat in het bijbehorende vak hieronder. Ze worden hier in de browser gecontroleerd, dus dit deel werkt ook met de backend uit. De flags zijn sowieso Engelse tekst. Plak er een in, en als het de echte is wordt het vak groen en blijft het zo.",
-  "workshop.collect.2": "Als je vastloopt, is de eerlijke zet die de <code>goals</code>-unit noemde: geef de agent het doel en het commando dat het controleert, draai het in een git worktree, en lees de diff die terugkomt in plaats van het rapport."
+  "workshop.collect.2": "<p> Als je vastloopt, is de eerlijke zet die de <code>goals</code>-unit noemde: geef de agent het doel en het commando dat het controleert, draai het in een git worktree, en lees de diff die terugkomt in plaats van het rapport. </p>"
 }

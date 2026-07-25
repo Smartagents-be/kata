@@ -35,12 +35,21 @@ Two parts, both walking-skeleton thin:
   Conventions. It owns the curriculum content and renders it for one of two audiences.
 
 `step1` is **context** — the layers an agent's context is assembled from (prompt, session,
-harness, external) and the fact that they share one finite window. It runs to six units, one of
-them graded by the service: `evaluation` closes the step by asking the student to place six items
-in the right layer. `intro` and `prompt` each carry a three-question multiple-choice quiz, graded
-in the browser. `prompt` is the one unit that goes past naming its layer: after saying what the
-layer is, it covers how to write a better instruction (reasoning levels, meta-prompting, plan
-mode, and clearing, bundling and being exact).
+harness, external) and the fact that they share one finite window. It runs to six units. `evaluation`
+closes the step with a flag board (like step 2's workshop): three flags the step 1 backend hides from
+its `GET /api/titles` response, one per way context is assembled. The student reads the source for the
+first (a literal in a branch that never runs), traces the running pipeline for the second (the hidden
+tenth entry it computes and drops), and turns the log level up for the third (a line printed only at
+DEBUG). The board grades in the browser against salted hashes, so it needs no backend. `intro` and
+`prompt` each carry a three-question multiple-choice quiz, graded in the browser. `prompt` is the one
+unit that goes past naming its layer: after saying what the layer is, it covers how to write a better
+instruction (reasoning levels, meta-prompting, plan mode, and clearing, bundling and being exact).
+
+The `evaluation` unit used to be a free-text exercise asking the student to place six items in the
+right layer, graded by a `context-layers` checker on the Java service. That checker was never
+restored after `shared` was removed, so the exercise was dead. It is retired: the flag board replaces
+it and the six-item exercise is gone. **Do not implement the flags for the student.** The three flags
+are the exercise; ship the puzzle, not the decode, the trace instrumentation or the DEBUG readout.
 
 The step used to have three more units, `project`, `memory` and `window` (the last one on the
 finite window). They were dropped, along with the `survives-clear` exercise that hung off
@@ -112,17 +121,20 @@ A **step** is a topic; a **unit** is one page inside it, holding prose, a quiz, 
 combination. The URL is `/steps/step1/session`; a bare `/steps/step1` forwards to the step's first
 unit.
 
-Two kinds of grading, on purpose. A free-text answer goes to the Java service through
-`ExercisePanel`. A multiple-choice question is graded by `QuizPanel` in the browser, because the
-answer is one of the options already on screen and a round trip would add nothing. The quiz reads
-as backend-independent: it still works with the service down.
+Two kinds of grading, on purpose. A multiple-choice question is graded by `QuizPanel` in the
+browser, because the answer is one of the options already on screen and a round trip would add
+nothing. A flag board (`FlagBoard` in step 1, `Workshop` in step 2) is graded the same way, against a
+salted SHA-256 hash: the work already happened against the backend, and the board only confirms the
+student read what it produced. Both read as backend-independent: they still work with the service
+down.
 
-**The free-text half is currently unbacked.** `shared` held `/api/health` and
-`/api/exercises/{id}/check`, and it is gone (see below), so `context-layers` fails on submit and
-says so where the answer box is. The quizzes are unaffected. Restoring grading is a deliberate
-later decision, not an oversight. The header used to carry a `BackendStatus` badge polling
-`/api/health`; with that endpoint gone it could only ever read "offline", so it is gone too, along
-with `fetchHealth` and the `backend.*` messages.
+**No unit posts a free-text answer to the service any more.** `shared` once held `/api/health` and
+`/api/exercises/{id}/check`, and both are gone; step 1's `evaluation` was the only free-text exercise
+and it is now the browser-graded flag board, so no `exerciseId` is left in the tree. `ExercisePanel`
+and `checkAnswer` in `shared/lib/api.ts` are still present but unused; retiring them is a later
+decision, not an oversight. The header used to carry a `BackendStatus` badge polling `/api/health`;
+with that endpoint gone it could only ever read "offline", so it is gone too, along with `fetchHealth`
+and the `backend.*` messages.
 
 ## Layout
 
@@ -178,7 +190,14 @@ front/src/
   shared/routes/                StepPage (forwards), UnitPage (renders a unit), CatalogPage
   shared/step.ts                Step, Unit, QuizQuestion and QuizChoice
   steps/index.ts                the ordered registry, the reading order, locale registration
-  steps/step1/index.tsx         the step's units, title keys and exercise ids
+  steps/step1/index.tsx         the step's units and title keys; evaluation carries the flag board
+  steps/step1/BundleCompare.tsx three follow-ups against one bundled ask, clicked through side by
+                                side. The left frame arrives `P1`, `A1`, `P2`, `R1 + A2`, `P3`,
+                                `R2 + A3`: a prompt goes alone, then the stack it dragged along
+                                shows up as a copy, so the frame fills with duplicates and scrolls.
+                                Inline figure in `prompt`
+  steps/step1/FlagBoard.tsx     the `evaluation` flag board, graded in the browser (figure slot)
+  steps/step1/flags.ts          the three context flags as salted hashes, never plaintext
   steps/step1/locales/          en.json and nl.json: this step's titles, quiz and prose
   steps/step1/quiz.ts           the step's multiple-choice questions, as message keys
   steps/step1/units/            <unit>.html, one file per unit, English, with data-i18n keys
@@ -204,8 +223,10 @@ request while the response does not.
 
 A tenth entry is computed on every request and never published, because its `run.publish(...)` call
 is commented out. It is not a title but a flag, `{…}`-wrapped and leetspoken, so there is no
-mistaking it for catalogue prose once you have it. **This is a deliberate exercise, and the point is
-that it does not fall out of a search.** Four things protect it:
+mistaking it for catalogue prose once you have it. This is the **trace flag**, the second of the three
+flags step 1's `evaluation` board grades: the student instruments the running pipeline to read it.
+**This is a deliberate exercise, and the point is that it does not fall out of a search.** Four things
+protect it:
 
 - **Nothing is stored in plaintext.** All 41 non-publisher stages restore a string through
   `Scramble.unveil`, and they all look alike doing it. Only the nine publishers hold a literal, and
@@ -216,7 +237,10 @@ that it does not fall out of a search.** Four things protect it:
 - **The commented-out publish is not unique.** Eleven stages have one, and uncommenting all eleven
   is not a shortcut: five lines appear and all five are flags in the same shape. Six of the decoys
   carry the marker and vanish; four do not, on purpose, and those four are flags too. Which of the
-  five is the real one is a judgement about what it says, not something the structure gives away.
+  five is the real one is a judgement about what it says, not something the structure gives away. The
+  board settles that judgement by hashing exactly one, `ManuscriptTallyStage`'s
+  `{pr0mpt1ng_w1th_tr4c3r5}` (`@Order(21)`): its text rewards tracing, and the other four stay decoys
+  the board rejects.
 - **Stored lengths sit in one band.** The five flags are 22 to 25 characters, and every one of
   those lengths is shared with a marked string. Sorting the 41 ciphertexts by length must not
   separate them, so any new stored string has to land inside the band rather than at either end.
@@ -227,16 +251,31 @@ that it does not fall out of a search.** Four things protect it:
 Words a naive search reaches for — key, secret, hidden, vault, cipher, token, draft — appear in
 class names across all three groups, so grepping any of them proves nothing.
 
+The other two flags the `evaluation` board grades hide by a different mechanism each, so the three
+tasks stay distinct. The **decode flag** (`{r34d_th3_d34d_c0d3}`) is a `Scramble.unveil` call in a
+branch of `VaultDoorStage` that can never run (`tally` is folded modulo 9973 and then compared
+`>= 9973`), so a trace never surfaces it and only reading the source plus reproducing `unveil` reaches
+it. That branch carries **no comment, on purpose**: it used to say "this never runs", which ended the
+exercise in one grep, and the whole `services` package has no other line comment besides the eleven
+commented publishes. Do not explain the dead branch in a comment. The **DEBUG flag** (`{d3bug_l3v3l_r3v34ls}`) is emitted by `AtlasBindingStage` at `log.debug`,
+decoded by a small inline shift rather than `Scramble.unveil` so it stays out of the unveil stream a
+trace would catch; it prints only when `logging.level.be.smartagents.kata.java.step1=DEBUG` is set. The
+three map onto the layers step 1 teaches: read the source (external), trace the run (session), turn the
+log level up (harness). **Do not decode, implement or reveal any of the three for the student.**
+
 The frontend has a page for calling all this: `/catalog`, linked under the steps in the sidebar.
 `CatalogPage` renders `CatalogPanel`, which fetches `/api/titles` on a button press and lists what
 came back, numbered, in arrival order. It is deliberately dumb: no caching, no massaging, no
-filtering, so what is on screen is what the service returned. It is not a unit and belongs to no
-step, because the step that uses it does not exist yet.
+filtering, so what is on screen is what the service returned. It is not a unit and belongs to no step,
+but step 1's `evaluation` unit now points the student at it to work the three flags.
 
 **Do not add tracing here.** No hook, no callback, no candidate-logging method. Instrumenting this
-pipeline, running it and reading the trace is the student's work; shipping a seam does the exercise
-for them. The existing "I was here" logging never touches a computed value, and it must stay that
-way.
+pipeline, running it and reading the trace is the student's work (it is the trace flag); shipping a
+seam does the exercise for them. A `Tracer` that logged every restored string at INFO was committed
+once and has been removed for exactly this reason: with it in place, a plain run printed the trace
+flag for free. Do not reintroduce it. The `log.debug("I was here…")` breadcrumbs are inert and must
+stay that way, with one deliberate exception: `AtlasBindingStage`'s `log.debug` carries the DEBUG
+flag, on purpose, and is the whole of that flag's exercise.
 
 The tests assert the nine known titles as a *subsequence* and size `>= 9`, never `== 9`, so a
 student who enables the tenth line does not land in a red build.
@@ -486,8 +525,9 @@ before knowing what it will say.
    with any more, and no shared grading endpoint — a step that wants one builds it.
 
 Step ids are `stepN`, unit ids are words (`session`, `evaluation`), and together they are the
-URL (`/steps/step1/session`). Exercise ids are named after what they test (`context-layers`), not
-after the step or unit, so one step can grow several exercises.
+URL (`/steps/step1/session`). No unit carries an `exerciseId` today (the free-text mechanism is
+unused; see above), but the field is still on `Unit`: an exercise id is named after what it tests,
+not after the step or unit, so one step could grow several.
 
 ### The audience rule
 

@@ -3,29 +3,39 @@
   carries most of your intent.
 </p>
 
+<!-- The same context oval as the intro, with the prompt drawn as one small region inside it: the
+     message you type is a subsection of the context, not the whole of it. -->
+<div data-figure="prompt-in-context"></div>
+
 <p data-i18n="prompt.lead.2">
-  It is also the layer people overload. Half of what gets typed into a prompt is already sitting
-  in the repository, waiting to be read.
+  What marks a prompt is that you typed it. It is user input, and usually the smallest part of the
+  context.
 </p>
 
-<h2 data-i18n="prompt.reasonable-question-not.heading">A reasonable question is not a good prompt</h2>
+<p data-i18n="prompt.lead.3">
+  The context usually holds more than one. Some prompts are fresh queries you type. Others come back
+  after the agent interviews you <svg data-icon="pattern"></svg> about the task. Every question you answer that way is a prompt
+  too, even when the agent suggested the answers itself.
+</p>
+
+<h2 data-i18n="prompt.reasonable-question-not.heading">A prompt is the basis of the instruction</h2>
 
 <p data-i18n="prompt.reasonable-question-not.1">
-  You type an instruction, it reads fine, and an answer comes back. Nothing looks broken, so nobody
-  goes looking. That is the trap. A plain ask usually lands at about a third of what the same model
-  could have produced on the same day, and you never see the other two thirds.
+  A prompt is an instruction that sets a lot more in motion. It cascades, each step building on the
+  one before. So make sure your prompt actually says what you want the model to do. Any inaccuracy
+  in it only compounds from there.
 </p>
 
 <p data-i18n="prompt.reasonable-question-not.2">
   Models work the question over before they answer. The harness exposes that as a reasoning level,
   running from low up to max. Turn it up and the model spends more tokens thinking, which absorbs
-  some of the imprecision in what you wrote.
+  some of the imprecision or missing information in what you wrote.
 </p>
 
 <p data-i18n="prompt.reasonable-question-not.3">
-  You pay for those tokens. Higher reasoning costs more per turn, and what you buy is tolerance for
-  a rougher prompt. Call that the baseline: the dial exists, and turning it up is the least
-  interesting thing you can do with it.
+  The higher the reasoning, the more tokens the model spends thinking. Those tokens stay in the
+  context and add to the cost <svg data-icon="coin"></svg> So weigh when you need more reasoning, and when you need
+  less.
 </p>
 
 <p data-i18n="prompt.reasonable-question-not.4">
@@ -42,21 +52,15 @@
 
 <p data-i18n="prompt.let-model-write.2">
   Spend an expensive model on this. Writing a prompt is a few hundred tokens next to executing one,
-  so the top tier is cheap here. Running the task is where the money goes.
+  so the top tier is cheap here <svg data-icon="gem"></svg> <svg data-icon="coin"></svg> Running the task is where the money goes.
 </p>
 
 <h2 data-i18n="prompt.plan-mode.heading">Plan mode</h2>
 
 <p data-i18n="prompt.plan-mode.1">
   Plan mode is meta-prompting the provider already built for you. The agent interviews you about
-  the task, hands back a plan, and waits. You edit it, ask for another pass, or approve it. Nothing
+  the task, hands back a plan, and waits. You edit it, ask for another pass, or approve it. No code
   is written until you do.
-</p>
-
-<p data-i18n="prompt.plan-mode.2">
-  In Claude Code you can watch this happen in this repository. Ask for a new unit in plan mode and
-  the questions come back before any file does: which step, guided or self-learning, graded by the
-  service or checked in the browser.
 </p>
 
 <p data-i18n="prompt.plan-mode.3">
@@ -87,12 +91,17 @@
 </p>
 
 <p data-i18n="prompt.what-steer-after.2">
-  Bundle what you want into one ask. Every follow-up is another turn, and every turn adds noise the
+  Bundle what you want within one part of the application <svg data-icon="gem"></svg> <svg data-icon="coin"></svg> Every follow-up is another turn, and every turn adds noise the
   next turn has to read past. That is the entropy from the opening unit, and it compounds. Three
   separate questions leave the window messier than one question covering all three.
 </p>
 
+<!-- Two sessions clicked through side by side: three follow-ups each re-sending the stack above
+     them, against one bundled ask answered in a single turn. -->
+<div data-figure="bundle-compare"></div>
+
 <p data-i18n="prompt.what-steer-after.3">
   Be exact about what changes. "Fix the login" and "make <code>ExerciseController</code> return a
-  400 when the answer is blank" go to the same model. Only one of them says what done looks like.
+  400 when the answer is blank" go to the same model. One is specific and lets the model focus. The
+  other makes the model think.
 </p>

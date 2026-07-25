@@ -33,7 +33,7 @@
   "catalog.nav": "Catalogue",
   "catalog.kicker": "The service",
   "catalog.title": "Titles from the service",
-  "catalog.description": "One call to /api/titles. Whatever comes back is listed as it arrived.",
+  "catalog.description": "One call to /api/titles. What comes back is listed below, in the same order.",
   "catalog.fetch": "Fetch titles",
   "catalog.fetching": "Fetching…",
   "catalog.count": "{{count}} returned",

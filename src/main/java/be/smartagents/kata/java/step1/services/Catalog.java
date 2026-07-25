@@ -33,9 +33,7 @@ public class Catalog {
 
     public List<String> titles() {
         CatalogRun run = new CatalogRun();
-        int index = 0;
         for (Consumer<CatalogRun> step : walk()) {
-            Tracer.ran(index++, Tracer.nameOf(step));
             step.accept(run);
         }
         return run.titles();
@@ -47,7 +45,7 @@ public class Catalog {
 
         List<Consumer<CatalogRun>> walk = new ArrayList<>();
         for (CatalogStage stage : stages) {
-            walk.add(Tracer.named(stage.getClass().getSimpleName(), stage::apply));
+            walk.add(stage::apply);
         }
 
         List<AuxiliaryStage> pool = new ArrayList<>(auxiliaries);
@@ -57,8 +55,7 @@ public class Catalog {
             FEWEST_AUXILIARIES + random.nextInt(MOST_AUXILIARIES - FEWEST_AUXILIARIES + 1));
         for (int i = 0; i < drawn; i++) {
             AuxiliaryStage auxiliary = pool.get(i);
-            walk.add(random.nextInt(walk.size() + 1),
-                Tracer.named(auxiliary.getClass().getSimpleName(), auxiliary::apply));
+            walk.add(random.nextInt(walk.size() + 1), auxiliary::apply);
         }
 
         return walk;
