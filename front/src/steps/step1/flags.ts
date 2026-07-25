@@ -26,7 +26,7 @@ export interface FlagSpec {
 
 export const flags: FlagSpec[] = [
   {
-    // External / static context: a literal in a branch that never runs. Read it, do not run it.
+    // Tools / static context: a literal in a branch that never runs. Read it, do not run it.
     id: 'decode-source',
     labelKey: 'flag.decode.label',
     hintKey: 'flag.decode.hint',

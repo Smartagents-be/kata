@@ -3,7 +3,8 @@ import type { QuizQuestion } from '@/shared/step'
 /**
  * The three questions under the `intro` unit. Each one is a symptom a student will have already
  * met at work, and each maps onto a section of `units/intro.html`: amnesia, missing context and
- * entropy. Keep them in that order, because that is the order the prose above them explains.
+ * entropy. Array order is not display order, because `QuizPanel` shuffles the questions and the
+ * choices on every mount, so a question has to stand on its own rather than lean on the one above.
  *
  * These are graded in the browser, so nothing here has a counterpart in the Java service. The
  * explanations are only read by a student who got the question wrong, which is why they are two
@@ -90,7 +91,8 @@ export const introQuiz: QuizQuestion[] = [
  * does. Each one hands the student a result and asks what caused it, because the misconception
  * being tested is always a wrong cause (bigger model, tired model, more reading).
  *
- * Graded in the browser like `introQuiz`, so nothing here has a counterpart in the Java service.
+ * Graded in the browser like `introQuiz`, so nothing here has a counterpart in the Java service,
+ * and shuffled on mount the same way, so array order is not what the student sees.
  */
 export const promptQuiz: QuizQuestion[] = [
   {

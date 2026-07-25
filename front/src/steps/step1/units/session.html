@@ -1,68 +1,111 @@
 <p data-i18n="session.lead.1">
   Everything earlier in this conversation. Your previous turns, the agent's replies, the system
-  messages the harness slipped in, every tool call it made and usually the bulk of it: the tool
-  results. A file it opened, a test run it executed, a stack trace you pasted. All of that stays in
-  the transcript and gets re-sent with every message.
+  messages the harness slipped in, every tool call it made. And usually the bulk of it: the tool
+  results. A file it opened, a test run it executed, a stack trace you pasted.
 </p>
 
 <p data-i18n="session.lead.2">
-  There is no running conversation on the other side. Each time you press enter, your new prompt is
-  appended to everything that came before and the whole pile goes out as one call to the model. Turn
-  twenty is not a short message. It is turn one through nineteen plus your sentence. That growing
-  pile is the session.
+  What sets this layer apart from the other three is time. A prompt is written for one turn, the
+  harness loads the same material into every request, a tool result arrives the moment something
+  runs. The session is the only layer with a history behind it, because it is the history.
 </p>
 
 <p data-i18n="session.lead.3">
-  This layer grows the whole time you work, and it is the one that disappears when you type
-  <code>/clear</code>. When it gets too big to fit, one of two things happens: the harness compacts
-  it into a summary, or you clear it yourself and open a fresh session. Either way explains why an
-  agent feels sharp at the start and vague two hours later, the signal buried under a hundred tool
-  results.
+  Which means the other layers end up here too. That documentation page the agent pulled off the web
+  was a tool result for exactly one turn. After that it is a paragraph in the transcript, going out
+  again with every message you send. The session is where everything settles.
+</p>
+
+<!-- In class the intro prose is walked through at the board rather than read, so this is where a
+     guided student first meets the re-send. Self-learners read it in `intro`. -->
+<p data-audience="guided" data-i18n="session.lead.4">
+  Nothing on the other side is keeping any of this for you. Each time you press enter, your message
+  is appended to everything that came before and the whole pile goes out as one call. Turn twenty is
+  turn one through nineteen plus your sentence.
+</p>
+
+<h2 data-i18n="session.wrote-almost-none.heading">You wrote almost none of it</h2>
+
+<p data-i18n="session.wrote-almost-none.1">
+  Count what is in there and your own words barely register. You type a sentence, and the agent reads
+  four files, runs the test suite and pastes the failure back. Your sentence is twenty tokens. The
+  answer to it is three thousand.
+</p>
+
+<!-- One short session weighed by where each block came from: the two teal ones are the only things
+     the student typed. The point of the figure is the share, not the growth, which `bundle-compare`
+     in the prompt unit already covers. -->
+<div data-figure="session-makeup"></div>
+
+<p data-i18n="session.wrote-almost-none.2">
+  Two bars in that stack are yours, and they are the short ones. Everything else landed there without
+  you typing a word. So this is the layer you author least and are still responsible for. It fills
+  itself up, mostly with output nobody read, while you were busy thinking about something else.
+</p>
+
+<p data-i18n="session.wrote-almost-none.3">
+  It is also the only layer you can do anything about afterwards. You cannot shorten the harness's
+  system prompt and you cannot un-send a turn. You can throw the session away. That is the whole
+  lever.
 </p>
 
 <h2 data-i18n="session.sessions-where-money.heading">Sessions are where the money goes</h2>
 
-<p data-i18n="session.sessions-where-money.1">
-  Since the whole session is re-sent every turn, its size is your price per message. Read three
-  large files early and you keep paying for those three files on every question you ask afterwards,
-  whether or not they still matter. Managing the session is not tidiness. It is cost control.
+<p data-audience="guided" data-i18n="session.sessions-where-money.1">
+  Since the whole session is re-sent every turn, its size is your price per message. Read three large
+  files early and you keep paying for them on every question you ask afterwards, whether or not they
+  still matter.
 </p>
 
 <p data-i18n="session.sessions-where-money.2">
-  The flip side is the cheapest thing you can do. Once <code>Catalog</code> is in the window, asking
-  a second and a third question about it costs almost nothing extra, because the expensive part is
-  already loaded. Ask everything you want to know about a piece of code while it is in front of you,
-  rather than clearing and paying to load it again tomorrow.
+  A long session cuts both ways. Once <code>Catalog</code> is in the window, a second
+  and a third question about it cost almost nothing extra. Harnesses cache the front of the pile, so
+  what has not changed since the last turn is billed at a fraction. Adding to a session is cheap.
+  Rebuilding one is not.
 </p>
 
 <p data-i18n="session.sessions-where-money.3">
-  Do not read that as a licence to keep going forever. The same session that makes the second
-  question cheap makes the fiftieth question expensive and vague. Work a subject out, then move on
-  deliberately.
+  Ask everything you want to know about a piece of code while it is in front of you, then. But not
+  forever: the same session that makes your second question cheap makes your fiftieth expensive and
+  vague.
 </p>
 
-<h2 data-i18n="session.fixed-does-not.heading">Fixed does not mean gone</h2>
+<h2 data-i18n="session.compaction-picks-moment.heading">Compaction picks the moment, or you do</h2>
 
-<p data-i18n="session.fixed-does-not.1">
-  Say you spend twenty turns chasing a failing test and you fix it. The fix is in the code, but the
-  twenty turns are still in the window: the wrong diagnosis, the two edits you reverted, the error
-  output from a version of the file that no longer exists. The model reads all of it on your next
-  question and has no strong reason to believe the last version is the real one.
+<p data-i18n="session.compaction-picks-moment.1">
+  When the pile stops fitting, the harness compacts it. A model reads the transcript, writes a
+  summary, and the summary is what you carry on with. Detail goes first. And it fires exactly when
+  the work got long and complicated, so it lands in the middle of the hardest thing you did all day.
 </p>
 
-<p data-i18n="session.fixed-does-not.2">
-  That is the entropy from the opening unit, and this is where you push back on it. When a problem
-  is closed, clear the session and start the next one with what actually survived: the code on disk,
-  which is now correct, plus a sentence about where you are. You lose the noise and keep the work.
+<p data-i18n="session.compaction-picks-moment.2">
+  <code>/clear</code> is the same loss on your own terms. You choose the seam, you decide what is
+  worth carrying across, and you open the next session with it. Both throw work away. Only one lets
+  you say what stays.
 </p>
 
-<p data-i18n="session.fixed-does-not.3">
+<h2 data-i18n="session.window-not-memory.heading">The window is not your memory</h2>
+
+<p data-i18n="session.window-not-memory.1">
+  Anything that has to survive a clear belongs somewhere other than the transcript. The code on disk
+  survives. A plan written to a file survives. <code>CLAUDE.md</code> is read again at the start of
+  every session, which is why a standing instruction goes there and not in a message you sent an hour
+  ago.
+</p>
+
+<p data-i18n="session.window-not-memory.2">
+  This is where you push back on the entropy from the opening unit. When a problem is closed, clear,
+  and start the next session with what survived: the code on disk, which is now correct, plus a
+  sentence about where you are.
+</p>
+
+<p data-i18n="session.window-not-memory.3">
   Careful session management is most of what separates people who get good work out of an agent from
   people who fight it. Not a bigger model, not a longer prompt. Knowing what is in the window right
   now, and being willing to throw it away.
 </p>
 
-<aside data-audience="self" data-i18n="session.fixed-does-not.4">
+<aside data-audience="self" data-i18n="session.window-not-memory.4">
   <p>
     Watch your own session once. Ask the agent what it has read so far in this conversation, and
     check how much of that list still has anything to do with what you are doing now.

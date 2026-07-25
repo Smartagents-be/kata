@@ -5,11 +5,14 @@ import { ContextFalloff } from './ContextFalloff'
 import { CoordinatorFanout } from './CoordinatorFanout'
 import { ExactAsk } from './ExactAsk'
 import { FlagBoard } from './FlagBoard'
+import { McpServer } from './McpServer'
 import { OneShotCompare } from './OneShotCompare'
 import { PatternMatch } from './PatternMatch'
 import { PromptInContext } from './PromptInContext'
 import { ReflectionLoop } from './ReflectionLoop'
 import { SequentialSteps } from './SequentialSteps'
+import { SessionMakeup } from './SessionMakeup'
+import { ToolsInContext } from './ToolsInContext'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
 import { introQuiz, promptQuiz } from './quiz'
@@ -17,7 +20,7 @@ import intro from './units/intro.html?raw'
 import prompt from './units/prompt.html?raw'
 import session from './units/session.html?raw'
 import harness from './units/harness.html?raw'
-import external from './units/external.html?raw'
+import tools from './units/tools.html?raw'
 import evaluation from './units/evaluation.html?raw'
 
 /**
@@ -60,6 +63,9 @@ const step1: Step = {
       id: 'session',
       title: 'session.title',
       html: session,
+      inlineFigures: {
+        'session-makeup': <SessionMakeup />,
+      },
     },
     {
       id: 'harness',
@@ -73,9 +79,13 @@ const step1: Step = {
       figure: <PatternMatch />,
     },
     {
-      id: 'external',
-      title: 'external.title',
-      html: external,
+      id: 'tools',
+      title: 'tools.title',
+      html: tools,
+      inlineFigures: {
+        'tools-in-context': <ToolsInContext />,
+        'mcp-server': <McpServer />,
+      },
     },
     {
       id: 'evaluation',

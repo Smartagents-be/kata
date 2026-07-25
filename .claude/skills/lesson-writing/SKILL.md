@@ -44,6 +44,68 @@ matters, explain why it matters and let the reader conclude it is important.
 **Vary the openings.** Three paragraphs in a row starting with "The" or "This" reads like a
 machine. Read the first three words of each paragraph in a section and check they differ.
 
+## Voice
+
+The rules above keep the text clean. This section is what makes it sound like the units already in
+the tree. `step1/intro.html` and `step1/harness.html` are the reference: when in doubt, read a
+section of one out loud and match its rhythm.
+
+**Open cold on the claim.** "An agent has no memory of its own." "The harness is the software you
+use to work with a model." No announcing what the paragraph is about.
+
+**End on the sharpest sentence.** The last line of a paragraph is the one worth remembering, and it
+is usually short: "What it holds is an average." "That middle is mediocre code that happens to
+compile." "The evidence left the room." Write the paragraph, then check the best line is not stuck
+in the middle. If it is, move it to the end.
+
+**Break the rhythm.** Two explanatory sentences, then a fragment or a five-word sentence that lands
+it. Fragments are allowed here and used on purpose: "The message you just typed." "Failed attempts.
+A command that errored."
+
+Five moves that recur across the existing units. Reach for these before inventing a new shape:
+
+- **Negate the wrong model, then state the right one.** "The model did not get tired and it did not
+  get dumber. The evidence left the room."
+- **Name the term last.** Describe the thing in plain words and let the label arrive as a closing
+  tag: "That pile-up in the context is entropy." Never define first and explain after.
+- **Define by contrast.** Two examples side by side beat an adjective: "Fix the login" against
+  "make `ExerciseController` return a 400 when the answer is blank".
+- **Tell the failure as a scenario**, present tense, second person: "Chase a bug through a long
+  session and finally kill it: the fix lands in your code, but the whole hunt stays in the window."
+  Not "stale context can cause regressions".
+- **Flag the counterintuitive bit out loud.** "Here is the part people do not expect."
+
+**Two metaphors, and no third.** Context is a space (the window, the room, things sitting there,
+the pile-up) and usage is money (paid for on every turn, the top rate, where the money goes). Both
+are already load-bearing across the step. Adding a third one to a single unit makes the step read
+like several authors.
+
+**Hedge with frequency, not with modals.** "usually", "mostly", "probably", "routinely" are honest
+about how often something happens. "may", "could potentially", "one might" do not appear anywhere
+in these units and should not start now.
+
+**Mostly uncontracted.** "do not", "cannot", "it is". Step 0 is warmer because it is talking the
+student through the site, so a "you'll" fits there. Step 1 is explanatory and stays level.
+
+**Dry, never jokey.** Understatement carries it: "homework" at the end of a list of bad training
+data, "mediocre code that happens to compile". No exclamation marks.
+
+**Headings are claims or plain labels**, sentence case and short: "A model is stateless", "More
+context is not free", "Bad context, bad answers", "Why this bites hardest in code". Never
+"Understanding X", never a gerund, never a question. They may run on from one another the way
+speech does: "A model is stateless" is followed by "And it is a statistic".
+
+**Instructions are one clause, imperative**, with the reason in the next sentence rather than
+padding the instruction: "Clear the context when you change subject." "Spend an expensive model on
+this."
+
+**Around a figure**, the prose earns it first, and the line after it says where to look and what it
+proves: "The one on the left is the prompt on its own." Never "as you can see in the diagram
+below".
+
+**The work is theirs and the agent is an it.** "your codebase", "your files", "your machine". The
+student is "you". A teacher only appears inside `data-audience="guided"`.
+
 ## Shape of a unit
 
 A unit is one page covering one idea, so it stays short: two or three paragraphs, sometimes an
@@ -102,6 +164,14 @@ exercise asks for `keep` or `gone`, say plainly that those words are typed in En
 
 Read the text out loud. If you run out of breath, the sentence is too long. If it sounds like a
 brochure, cut the adjectives.
+
+Then five questions, in order:
+
+1. Does the first sentence make a claim, or announce one?
+2. Is the last sentence of each paragraph the best one in it?
+3. Is there a fragment or a very short sentence in every section, so the rhythm breaks somewhere?
+4. Did you name a term before you showed the thing?
+5. Is any adjective doing work a concrete example should be doing?
 
 Then grep for the thing you always miss:
 

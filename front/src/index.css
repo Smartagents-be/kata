@@ -118,6 +118,11 @@
     --sidebar-accent-foreground: oklch(0.26 0.012 200);
     --sidebar-border: oklch(0.9 0.006 195);
     --sidebar-ring: oklch(0.567 0.1 184.994);
+
+    /* The warning triangle, held as a mask rather than a colour: the stroke is black so the alpha
+       is the shape, and whatever uses it paints itself. Lucide's triangle-alert, the same line
+       weight and round joins as the icons in shared/lib/icons.ts. */
+    --warning-triangle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3'/%3E%3Cpath d='M12 9v4'/%3E%3Cpath d='M12 17h.01'/%3E%3C/svg%3E");
 }
 
 /* The design system is drawn light. Dark keeps the same hues so the `dark:` variants scattered
@@ -183,9 +188,10 @@
 }
 
 @layer base {
-  /* A teacher note held back for class reads as an aside, not as body copy: a muted panel with a
-     hairline border, the same shape as a verdict but without the colour that carries one. */
-  .prose aside[data-audience='guided'] {
+  /* An aside is set off from body copy as a muted panel with a hairline border, the same shape as a
+     verdict but without the colour that carries one. This is what a teacher note held back for class
+     reads as, and what an aside carrying no audience at all reads as. */
+  .prose aside {
     @apply bg-muted text-muted-foreground border-border my-6 rounded-xl border px-5 py-1;
   }
 
@@ -194,6 +200,36 @@
      It only ever renders in self-learning mode, since prepareUnit drops it in class. */
   .prose aside[data-audience='self'] {
     @apply border-primary bg-primary/5 text-foreground/85 my-6 rounded-r-xl border-l-[3px] px-4 py-1;
+  }
+
+  /* A hazard note. A plain aside holds material set beside the argument; this one holds material
+     that costs you something if you skip it, so it carries amber and a triangle in the gutter. The
+     triangle is drawn here rather than dropped into the prose because it belongs to the shape of the
+     callout and not to the sentence: an author writes data-variant="warning" and gets it, and no
+     translation can lose it. Masked rather than inlined as a background, so the colour stays a
+     single declaration. */
+  .prose aside[data-variant='warning'] {
+    @apply border-amber-500/40 bg-amber-500/5 text-foreground/85 my-6 grid grid-cols-[1.4em_1fr] gap-x-4 rounded-xl border px-5 py-1;
+  }
+
+  .prose aside[data-variant='warning'] > * {
+    grid-column: 2;
+  }
+
+  /* 1.4em down is the middle of the first line: the paragraph's own top margin (1.25em) plus half a
+     line (0.875em), less half the triangle. It rides the text rather than the panel, so a note that
+     grows to three lines keeps its triangle beside the opening one. */
+  .prose aside[data-variant='warning']::before {
+    content: '';
+    grid-column: 1;
+    grid-row: 1;
+    @apply mt-[1.4em] size-[1.4em] bg-amber-500;
+    -webkit-mask-image: var(--warning-triangle);
+    mask-image: var(--warning-triangle);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
 
   /* The coin from the welcome legend, dropped inline in prose to mark a cost-saving tip: sized to
@@ -259,7 +295,15 @@
 }
 
 /* Inline code is something the machine produced, so it gets the mono face and a chip rather than
-   Typography's default, which only changes the weight. */
+   Typography's default, which only changes the weight. Long ones (a fully qualified property, an
+   mvn line with its arguments) have no space to break at, so they are allowed to break anywhere
+   rather than push the page sideways on a narrow screen. */
 .prose :not(pre) > code {
   @apply bg-secondary text-foreground rounded-sm px-1.5 py-0.5 font-normal;
+  overflow-wrap: anywhere;
+}
+
+/* A block of code keeps its line breaks, so it scrolls inside its own box instead. */
+.prose pre {
+  @apply overflow-x-auto;
 }

@@ -1,9 +1,10 @@
-import { DatabaseIcon } from 'lucide-react'
+import { ChevronDownIcon, DatabaseIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { SettingsMenu } from '@/shared/components/SettingsMenu'
 import { StepNav } from '@/shared/components/StepNav'
+import { Button } from '@/shared/components/ui/button'
 import { Separator } from '@/shared/components/ui/separator'
 import { cn } from '@/shared/lib/utils'
 
@@ -23,6 +24,22 @@ export function AppShell() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  // The window keeps its scroll position across a route change, so following the pager off the
+  // bottom of a long unit drops you into the middle of the next one. Every unit starts at its own
+  // top instead. A link carrying a hash is left alone (intro points at #entropy), or the browser's
+  // jump would be undone the moment it landed.
+  const { pathname, hash } = useLocation()
+  useEffect(() => {
+    if (hash) return
+    window.scrollTo(0, 0)
+  }, [pathname, hash])
+
+  // Below lg the sidebar is not a sidebar: it stacks above the article, where the whole curriculum
+  // would push the unit off the screen. So it collapses to its heading, and following a link closes
+  // it again, since the thing you navigated to is underneath it.
+  const [navOpen, setNavOpen] = useState(false)
+  useEffect(() => setNavOpen(false), [pathname])
 
   return (
     <div id="app" data-component="AppShell" className="min-h-svh">
@@ -63,7 +80,7 @@ export function AppShell() {
       <div
         id="app-body"
         data-component="AppShell"
-        className="relative z-10 mx-auto -mt-23 max-w-[1180px] px-8 pb-18"
+        className="relative z-10 mx-auto -mt-23 max-w-[1180px] px-4 pb-18 sm:px-6 lg:px-8"
       >
         {/*
           A pinned strip behind the cap that fills the cap's rounded-corner cut-outs so the rounded top
@@ -96,64 +113,95 @@ export function AppShell() {
         <div
           id="app-card"
           data-component="AppShell"
-          className="bg-card grid grid-cols-[248px_1fr] items-start gap-14 rounded-[22px] -mt-6 px-11 pt-10 pb-10 shadow-sm"
+          className="bg-card -mt-6 grid grid-cols-1 items-start gap-8 rounded-[22px] px-5 pt-8 pb-8 shadow-sm sm:px-8 lg:grid-cols-[248px_1fr] lg:gap-14 lg:px-11 lg:pt-10 lg:pb-10"
         >
           {/*
             self-start matters: a grid child stretches to the full height of the row by default, and
             an element as tall as the article has nothing left to stick against. Capping the height
-            keeps a long curriculum scrollable inside the sidebar rather than off the screen.
+            keeps a long curriculum scrollable inside the sidebar rather than off the screen. Both
+            only apply from lg, where this is a column beside the article; stacked above it, sticking
+            would pin the nav over what you came to read.
           */}
           <aside
             id="app-sidebar"
             data-component="AppShell"
-            className="sticky top-20 max-h-[calc(100svh-6rem)] self-start overflow-y-auto"
+            data-state={navOpen ? 'open' : 'closed'}
+            className="self-start lg:sticky lg:top-20 lg:max-h-[calc(100svh-6rem)] lg:overflow-y-auto"
           >
-            <p
-              id="app-sidebar-title"
+            <div
+              id="app-sidebar-header"
               data-component="AppShell"
-              className="eyebrow text-primary mb-5 px-0.5"
+              className="mb-5 flex items-center justify-between gap-3 px-0.5"
             >
-              {t('nav.steps')}
-            </p>
-            <StepNav />
-            <Separator id="app-sidebar-separator" data-component="AppShell" className="my-5" />
-            {/* Not a step: a page for poking at the service the later steps work on. */}
-            <NavLink
-              id="app-sidebar-catalog-link"
+              <p id="app-sidebar-title" data-component="AppShell" className="eyebrow text-primary">
+                {t('nav.steps')}
+              </p>
+              <Button
+                id="app-sidebar-toggle"
+                data-component="AppShell"
+                type="button"
+                variant="outline"
+                size="icon-sm"
+                aria-expanded={navOpen}
+                aria-controls="app-sidebar-nav"
+                aria-label={t('nav.toggleSteps')}
+                onClick={() => setNavOpen((open) => !open)}
+                className="text-muted-foreground lg:hidden"
+              >
+                <ChevronDownIcon
+                  id="app-sidebar-toggle-glyph"
+                  data-component="AppShell"
+                  aria-hidden
+                  className={cn('size-4 transition-transform', navOpen && 'rotate-180')}
+                />
+              </Button>
+            </div>
+
+            <div
+              id="app-sidebar-nav"
               data-component="AppShell"
-              to="/catalog"
-              className={({ isActive }) =>
-                cn(
-                  'flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors',
-                  isActive
-                    ? 'bg-primary/10 text-primary'
-                    : 'text-muted-foreground hover:bg-accent hover:text-foreground',
-                )
-              }
+              className={cn(navOpen ? 'block' : 'hidden', 'lg:block')}
             >
-              {({ isActive }) => (
-                <>
-                  <span
-                    id="app-sidebar-catalog-link-icon"
-                    data-component="AppShell"
-                    aria-hidden
-                    className={cn(
-                      'flex size-5.5 shrink-0 items-center justify-center rounded-md',
-                      isActive ? 'bg-primary text-primary-foreground' : 'bg-muted',
-                    )}
-                  >
-                    <DatabaseIcon
-                      id="app-sidebar-catalog-link-glyph"
+              <StepNav />
+              <Separator id="app-sidebar-separator" data-component="AppShell" className="my-5" />
+              {/* Not a step: a page for poking at the service the later steps work on. */}
+              <NavLink
+                id="app-sidebar-catalog-link"
+                data-component="AppShell"
+                to="/catalog"
+                className={({ isActive }) =>
+                  cn(
+                    'flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors',
+                    isActive
+                      ? 'bg-primary/10 text-primary'
+                      : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+                  )
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    <span
+                      id="app-sidebar-catalog-link-icon"
                       data-component="AppShell"
-                      className="size-3.5"
-                    />
-                  </span>
-                  <span id="app-sidebar-catalog-link-label" data-component="AppShell">
-                    {t('catalog.nav')}
-                  </span>
-                </>
-              )}
-            </NavLink>
+                      aria-hidden
+                      className={cn(
+                        'flex size-5.5 shrink-0 items-center justify-center rounded-md',
+                        isActive ? 'bg-primary text-primary-foreground' : 'bg-muted',
+                      )}
+                    >
+                      <DatabaseIcon
+                        id="app-sidebar-catalog-link-glyph"
+                        data-component="AppShell"
+                        className="size-3.5"
+                      />
+                    </span>
+                    <span id="app-sidebar-catalog-link-label" data-component="AppShell">
+                      {t('catalog.nav')}
+                    </span>
+                  </>
+                )}
+              </NavLink>
+            </div>
           </aside>
 
           <main id="app-main" data-component="AppShell" className="min-w-0">

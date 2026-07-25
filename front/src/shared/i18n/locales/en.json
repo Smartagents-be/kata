@@ -5,6 +5,7 @@
   "nav.unitCount_one": "{{count}} page",
   "nav.unitCount_other": "{{count}} pages",
   "nav.unitDone": "Completed",
+  "nav.toggleSteps": "Show or hide the steps",
 
   "unit.previous": "Back",
   "unit.next": "Next",
@@ -41,7 +42,7 @@
   "catalog.error": "Could not reach the backend. Is it running on port 8080?",
 
   "step.notFound.title": "Step not found",
-  "step.notFound.body": "There is no step called “{{id}}”. Pick one from the list on the left.",
+  "step.notFound.body": "There is no step called “{{id}}”. Pick one from the list of steps.",
   "unit.notFound.title": "Page not found",
-  "unit.notFound.body": "This step has no page called “{{id}}”. Pick one from the list on the left."
+  "unit.notFound.body": "This step has no page called “{{id}}”. Pick one from the list of steps."
 }

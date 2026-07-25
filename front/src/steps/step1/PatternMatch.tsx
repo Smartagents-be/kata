@@ -44,7 +44,9 @@ interface Point {
 }
 
 /**
- * The unit's closing exercise: four situations, four patterns, and a line to draw between them.
+ * The unit's closing exercise: three situations, four patterns, and a line to draw between them.
+ * Decomposition sits on the board with no situation pointing at it, so the fourth option is not
+ * free by elimination.
  *
  * Graded here in the browser, like the quizzes and the two flag boards. The answer is on screen
  * already, so a round trip to the service would add nothing, and this keeps working with the

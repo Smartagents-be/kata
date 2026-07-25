@@ -21,8 +21,10 @@ What this means when working here:
   coherent stopping point, ideally its own commit.
 - **When a step's scope is ambiguous, ask before expanding it.** Guessing wide is the
   costly direction here.
-- **Record what changed.** As steps introduce real structure, update this file so the
-  architecture section below reflects where things stand.
+- **Record decisions, not content.** When a step introduces a real constraint — a prohibition, a
+  gotcha, a deliberate piece of obfuscation, a reason something is shaped the way it is — write it
+  here. Do not summarise what a unit teaches: the unit HTML is the readable source for that, and a
+  summary here only rots. This file is the part of the repo the code cannot explain about itself.
 
 ## Project state
 
@@ -34,52 +36,59 @@ Two parts, both walking-skeleton thin:
 - **Frontend** (`front/`) — React + Vite + shadcn/ui, on the teal design system described under
   Conventions. It owns the curriculum content and renders it for one of two audiences.
 
-`step1` is **context** — the layers an agent's context is assembled from (prompt, session,
-harness, external) and the fact that they share one finite window. It runs to six units. `evaluation`
-closes the step with a flag board (like step 2's workshop): three flags the step 1 backend hides from
-its `GET /api/titles` response, one per way context is assembled. The student reads the source for the
+`step1` is **context**: the layers an agent's context is assembled from (prompt, session, harness,
+tools) and the fact that they share one finite window. Six units — `intro`, `prompt`, `session`,
+`harness`, `tools`, `evaluation` — and the unit HTML is the source for what each one teaches.
+Three editorial constraints the HTML does not state on its own: every layer unit goes past merely
+naming its layer, and none of the four is allowed to read as a stub (they sat within about a hundred
+words of each other until `tools` grew the MCP material, and that floor is the part that matters); the sub-agent starting blank is the point all three `harness` patterns turn on; and
+the pattern diagrams share one vocabulary (a teal frame is a context, a bar is something in it,
+dashes are what is not) that any new diagram should join. `intro` and `prompt` each carry a
+three-question quiz. `harness` closes on `PatternMatch`, a drag-to-connect exercise whose three
+situations against four patterns leave decomposition on the board with nothing pointing at it.
+
+`intro` and `session` overlap by design, and how the overlap is handled is the decision. `intro`
+already argues the re-send, the cost per message and the dead bug hunt, so `session` does not
+re-argue them: it owns what `intro` cannot, namely that this is the only layer with a time axis (the
+other three are one turn's worth, and they *settle* here, so a fetched page is a tool result for one
+turn and session content forever), that the student authored almost none of it by volume, and that it is
+therefore the only layer they can prune after the fact. The paragraphs that do restate `intro` are
+`data-audience="guided"` rather than deleted, because `intro`'s whole prose is self-only: in class
+that unit is walked through at the board, so `session` is the first prose a guided student reads and
+the bridge has to be there. Do not un-tag them and do not let the unit grow back into a second
+`intro`. Its figure, `SessionMakeup`, argues the *share* (two teal slivers against the files and test
+output around them) and deliberately says nothing about growth or re-sending, which is
+`BundleCompare`'s job in `prompt`.
+
+`tools` is the fourth layer, and it used to be `external` ("material from outside"). The rename is
+the decision: naming the mechanism (the model asks, your system runs it, the output is appended)
+beats naming the origin, because the origin was never the thing a student can act on. What survived
+the rename is the part that still holds for a tool result, namely that nothing in the window says
+who wrote it and that a result is usually the bulkiest thing in there. The layer is named in three
+other places (`session`'s time-axis paragraph, `evaluation`'s opening list and its read-the-source
+close), so a further rename has to visit them. Its figure, `ToolsInContext`, argues one thing only:
+the tool straddles the frame, so the half that runs is outside the window and only the result crosses
+back in. `McpServer` is the second figure and is deliberately *not* independent: it is the same
+frame, the same prompt bar and the same fills, so read on its own it says nothing. What it adds is
+the wire, and the wire is its whole argument: one line leaves the named box outside, crosses the
+border exactly once, and fans out into four description bars that then sit in the window like
+anything else. It drew four straddling tools once instead, which said only "there are four now" and
+left a large empty box beside them with nothing pointing into it. The crossing is the load-bearing
+part: dashed while the line is outside, solid once it is in, so the border keeps meaning what it
+means in every other diagram here. Redrawing either figure on its own geometry breaks the pair. The unit's order is
+the argument too, so keep it: what a tool is, where extra ones come from (MCP), what holding many of
+them costs, why the results are the least trustworthy layer, what they cost by volume.
+
+`evaluation` closes the step with a flag board: three flags the step 1 backend hides from its
+`GET /api/titles` response, one per way context is assembled. The student reads the source for the
 first (a literal in a branch that never runs), traces the running pipeline for the second (the hidden
 tenth entry it computes and drops), and turns the log level up for the third (a line printed only at
-DEBUG). The board grades in the browser against salted hashes, so it needs no backend. `intro` and
-`prompt` each carry a three-question multiple-choice quiz, graded in the browser. Two units go past
-naming their layer. `prompt` covers how to write a better instruction (reasoning levels,
-meta-prompting, plan mode, and clearing, bundling and being exact). `harness` covers which harness
-you run (the program between your machine and the provider's API, what it loads into every request
-on your behalf, where the providers differ from each other, the open-source ones, and an API key
-against a subscription) and then how a harness splits the work, one `<h3>` per pattern: the
-coordinator delegating to cheaper models with decomposition in front of it, the sequential workflow,
-and reflection spawning a context-free critic. Those three are the only `<h3>`s in the tree, and the
-sub-agent starting blank is the point all three turn on. Each pattern carries its own inline diagram,
-drawn in one shared vocabulary: a teal frame is a context, a bar is something in it, dashes are what
-is not. The unit then closes on `PatternMatch`, a drag-to-connect exercise (four situations, four
-patterns, one line each) graded in the browser like the quizzes.
-
-The `evaluation` unit used to be a free-text exercise asking the student to place six items in the
-right layer, graded by a `context-layers` checker on the Java service. That checker was never
-restored after `shared` was removed, so the exercise was dead. It is retired: the flag board replaces
-it and the six-item exercise is gone. **Do not implement the flags for the student.** The three flags
+DEBUG). **Do not implement the flags for the student.** The three flags
 are the exercise; ship the puzzle, not the decode, the trace instrumentation or the DEBUG readout.
 
-The step used to have three more units, `project`, `memory` and `window` (the last one on the
-finite window). They were dropped, along with the `survives-clear` exercise that hung off
-`memory`. `intro` still covers the window filling up, and the quizzes still ask about it.
-
 `step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Six
-units, one habit each: `setup` (what you write down once, in the repo), `engineering` (vibe coding versus the real thing: name the pattern, check the work while it runs,
-put tests, coverage and complexity limits in `CLAUDE.md`, and let DDD and ports-and-adapters
-boundaries do the scoping for you), `scoping` (cutting the
-work to a size that comes back right, and what starting the agent inside a domain folder buys and
-costs against starting at the root), `patterns` (moving a repeated correction into `CLAUDE.md`, a
-skill or a hook, and why a script a skill drives beats both: predictable, replayable, reviewable
-in git, and usable without an agent at all), `quality` (letting `mvn test` and `npm run build`
-decide, not the agent; then writing the standard down where the agent reads it first: a testing
-convention and a scaffolding skill, letting the agent draft `CLAUDE.md` from the repo before you
-trim it, and choosing metrics that carry weight — a coverage floor and a complexity ceiling wired
-into `mvn verify`, staying wary of a gamed proxy, and putting logging and comment hygiene in
-`CLAUDE.md`) and
-`goals` (asking for an outcome, not a keystroke, and then the long-running kind: coverage,
-complexity ceilings and applying a new skill across a codebase, what that costs in tokens, hours
-and control, and running it in a git worktree so you keep your own branch).
+units, one habit each — `setup`, `engineering`, `scoping`, `patterns`, `quality`, `goals` — all of
+them framing prose with no quiz, and the unit HTML is the source for what each argues.
 
 A seventh unit, `workshop`, closes the step as its capstone. It is the one part of step 2 a machine
 can grade, because it grades the thing `quality` and `goals` argue for: a goal a build answers yes
@@ -88,8 +97,7 @@ a `graded` Maven profile that measures it against three goals - a coverage floor
 ceiling and honest (mutation-tested) coverage. `mvn verify -Pgraded` prints a leetspoken flag for
 each goal met and fails until all three are. The student hardens the module (that is the exercise,
 so do not ship the tests or the refactor), reads the flags, and pastes them into the `workshop`
-flag board, which grades them in the browser against a salted hash and so works with the backend
-down.
+flag board.
 
 The board carries a **fourth flag of a different shape**. The first three sharpen code that already
 runs; this one is functionality that does not exist yet. `MemberStatements.forTier` ships
@@ -104,27 +112,15 @@ The board carries a **fifth flag of yet another shape**: not a profile and not t
 native image, and it is built to resist a one-shot so the student has to plan it. The seam is
 `step2/aot/NativeImageFlag`, an `ApplicationRunner` that prints only when `NativeDetector.inNativeImage()`
 is true, so `mvn spring-boot:run` and `mvn test` stay silent and the flag is proof of a native image.
-Three things stand between the student and it, each a plan-worthy step:
-
-- **The build makes a jar, and step 1's jar at that.** Wiring an ahead-of-time build is the exercise
-  and, like the graded profile, is not in the `pom.xml`. The student declares the GraalVM
-  `native-maven-plugin` (the Boot parent manages its version and binds `process-aot` under its own
-  `native` profile) and points it at *step 2's* app.
-- **The right main class.** `NativeImageFlag` lives under step 2, and the Boot plugin's `<mainClass>` is
-  pinned to step 1, so a native image has to be compiled for `Step2Application` (both the
-  `spring-boot-maven-plugin` and `native-maven-plugin` need its main class); a native image of step 1
-  never loads the runner.
-- **A resource the image drops.** The catch that stops a one-shot: the flag's shifted payload is not a
-  Java constant, it is a classpath resource, `src/main/resources/flags/native-image.veil`. A native
-  image keeps only the resources it is told to, so a plain compile builds an image that starts, cannot
-  find the resource, and prints a miss (`[ ] ... flag resource is not inside it`) instead of the code.
-  Reaching the flag needs a `RuntimeHintsRegistrar` wired with `@ImportRuntimeHints` that registers the
-  resource pattern.
+Its payload is a classpath resource rather than a Java constant, so an image built without thinking
+about resources starts, cannot find it, and prints a miss instead of the code. Three things stand
+between the student and the flag — wiring an ahead-of-time build, aiming it at step 2 rather than the
+pinned step 1 main class, and reading that runtime miss as the spec for the fix — and each is a
+plan-worthy step the unit tells them to work in plan mode.
 
 **Do not add a `native` profile to the `pom.xml`, and do not write the resource hint or a
 `RuntimeHintsRegistrar`**: wiring the build, targeting step 2, and planning the hint are the exercise.
-The unit tells the student to plan all of it in plan mode, using the runtime miss as the spec for the
-fix. The other six units are still framing prose with no quiz.
+Do not spell out the fix here either; the runtime miss is what the student is meant to read.
 
 A **step** is a topic; a **unit** is one page inside it, holding prose, a quiz, an exercise, or any
 combination. The URL is `/steps/step1/session`; a bare `/steps/step1` forwards to the step's first
@@ -137,13 +133,9 @@ salted SHA-256 hash: the work already happened against the backend, and the boar
 student read what it produced. Both read as backend-independent: they still work with the service
 down.
 
-**No unit posts a free-text answer to the service any more.** `shared` once held `/api/health` and
-`/api/exercises/{id}/check`, and both are gone; step 1's `evaluation` was the only free-text exercise
-and it is now the browser-graded flag board, so no `exerciseId` is left in the tree. `ExercisePanel`
-and `checkAnswer` in `shared/lib/api.ts` are still present but unused; retiring them is a later
-decision, not an oversight. The header used to carry a `BackendStatus` badge polling `/api/health`;
-with that endpoint gone it could only ever read "offline", so it is gone too, along with `fetchHealth`
-and the `backend.*` messages.
+**No unit posts a free-text answer to the service any more**, and no `exerciseId` is left in the
+tree. `ExercisePanel` and `checkAnswer` in `shared/lib/api.ts` are still present but unused;
+retiring them is a later decision, not an oversight, so leave them alone in either direction.
 
 ## Layout
 
@@ -241,7 +233,7 @@ exercise in one grep, and the whole `services` package has no other line comment
 commented publishes. Do not explain the dead branch in a comment. The **DEBUG flag** (`{d3bug_l3v3l_r3v34ls}`) is emitted by `AtlasBindingStage` at `log.debug`,
 decoded by a small inline shift rather than `Scramble.unveil` so it stays out of the unveil stream a
 trace would catch; it prints only when `logging.level.be.smartagents.kata.java.step1=DEBUG` is set. The
-three map onto the layers step 1 teaches: read the source (external), trace the run (session), turn the
+three map onto the layers step 1 teaches: read the source (tools), trace the run (session), turn the
 log level up (harness). **Do not decode, implement or reveal any of the three for the student.**
 
 The frontend has a page for calling all this: `/catalog`, linked under the steps in the sidebar.
@@ -382,11 +374,30 @@ else holds a colour: components name tokens, so a change to the palette is a cha
   failed; nothing else borrows them. `--success` tints a panel and `--success-foreground` is the
   darker ink that stays readable on that tint, which is why there are two. The one exception to the
   light UI is the header: `--header` is the single dark surface, with `--header-foreground` white
-  ink and a translucent-white cogwheel control sitting on it. It is a
-  band, not a bar: the 60px top bar stays pinned while a run of the same teal sits below it, and the
-  whole app rides in one white rounded card that pulls up to overlap that band and then slides under
-  the bar as the page scrolls. A finished unit's self-learning note is a teal left-rule callout
-  (`aside[data-audience="self"]`); a guided one stays a muted panel.
+  ink. It is a band, not a bar, and the app rides in one white card that overlaps it. A finished
+  unit's self-learning note is a teal left-rule callout (`aside[data-audience="self"]`); every other
+  aside is a muted panel, whether it is a teacher note or carries no audience at all, so an aside
+  meant for everybody needs no attribute and still reads as an aside. One aside is louder than that:
+  `aside[data-variant="warning"]` is the hazard shape, an amber panel with a triangle in the gutter,
+  and `tools`'s prompt-injection note is the only one so far. Amber is the caution colour and it was
+  already the coin's, so a warning panel and a cost tip share a hue on purpose; `--success` and
+  `--destructive` stay reserved for passed and failed. The triangle is drawn by `index.css` from the
+  `--warning-triangle` mask rather than written into the prose, because it is the callout's shape
+  rather than part of the sentence, and a translation that dropped it would drop the warning.
+- **Every route change starts at the top.** The window keeps its scroll position across a
+  navigation, so `AppShell` sends it back to 0 whenever the pathname changes; without it the pager
+  at the foot of a long unit drops you into the middle of the next one. A location carrying a hash
+  is exempt, or the browser's anchor jump would be undone the moment it landed (`intro` links to
+  `#entropy`).
+- **The two-column shell is an `lg` thing, and below that the sidebar is not a sidebar.** The card's
+  `248px` nav column, its wide gap and its wide padding all start at `lg`; under it the card is one
+  column, the nav stacks above the article, and it collapses behind a chevron because the whole
+  curriculum otherwise pushes the unit off the screen. Following a link closes it again. Two things
+  there are load-bearing: the nav's `sticky`, `max-h` and `overflow-y` are `lg:`-prefixed, or
+  stacked it would pin itself over what you navigated to; and the column is `grid-cols-1` by
+  default rather than a fixed track, or `#app-main` collapses to zero width and every unit
+  disappears. Long inline `<code>` breaks anywhere and a `<pre>` scrolls in its own box (both in
+  `index.css`), since a fully qualified property name has nothing to wrap at.
 - **Two typefaces, and the switch between them is the signal.** Figtree for everything a
   student reads, JetBrains Mono for anything the machine produced: code, counts, flags, catalogue
   titles, step numbers. Both are variable fonts imported in `index.css`; nothing loads from a CDN.
@@ -489,25 +500,15 @@ Mode lives in `front/src/shared/mode/`, defaults to guided, and persists under t
 
 ### Languages
 
-English and Dutch, on **i18next + react-i18next**, initialised once in
-`front/src/shared/i18n/i18n.ts` and imported by `main.tsx` for its side effect. The language is
-detected and cached by `i18next-browser-languagedetector` under the same `kata.locale` key it has
-always used. Everything is one mechanism now: a key, looked up in a namespace.
+English and Dutch, on i18next; `shared/i18n/i18n.ts` has the wiring. Everything is one mechanism: a
+key, looked up in a namespace — `ui` for the chrome, one namespace per step for everything else,
+pushed in from `steps/index.ts` because `shared` never imports a step.
 
-- **`ui`** is the chrome, in `shared/i18n/locales/en.json` and `nl.json`, read with
-  `useTranslation()` and `t('exercise.submit')`. `i18next.d.ts` types that namespace from the
-  English file, so an unknown key is a compile error, and `i18n.ts` annotates the Dutch bundle as
-  `Record<MessageKey, string>`, so a missing translation is one too. `{{name}}` placeholders are
-  i18next's own.
-- **One namespace per step**, named after the step id. The bundles live in
-  `steps/stepN/locales/{en,nl}.json` and are pushed in from `steps/index.ts` with
-  `registerStepLocales`, because `shared` never imports a step. Titles, quiz text, exercise
-  placeholders and figure labels are keys into it, read through `useStepText(step.id)`.
-- **Unit prose is one English HTML file**, and its blocks carry `data-i18n` keys into the same
-  namespace. `prepareUnit` swaps the *content* of a block when the active language has an entry
-  and leaves the English alone when it does not, so a half-translated unit degrades one paragraph
-  at a time. A missing translation warns in the console in dev, which is the closest thing prose
-  gets to the compile error the UI strings have.
+Three things about it are decisions rather than mechanics. **Unit prose is one English HTML file**,
+and its blocks carry `data-i18n` keys into the step's namespace, so a half-translated unit degrades
+one paragraph at a time rather than falling back wholesale. A missing UI key is a compile error; a
+missing prose translation only warns in the dev console, which is the closest prose gets to the same
+safety. And the English HTML is the English: there is no `en` entry for prose.
 
 Prose keys read `<unit>.<section>.<n>`, where the section is slugified from the `<h2>` above the
 block (`lead` before the first one) and the heading itself is `<unit>.<section>.heading`. That
@@ -519,13 +520,9 @@ Grading messages come from the Java service and are **English in every language*
 types as an answer (`prompt`, `session`, `keep`, `gone`) also stay English in every language:
 they are what the checkers grade, and the Dutch content says so where it asks for them.
 
-Both settings live behind the cogwheel in the header, which opens `SettingsMenu` as a popover
-dropping from it (it used to be a `SettingsSheet` sliding in from the left).
-
-Progress is tracked in the browser only, through `shared/progress/`: a unit is marked done when the
-student advances past it with the pager's Next, or aces its quiz. The sidebar then swaps that unit's
-number for a teal check. It is a convenience, not a grade, and it persists under the `kata.completed`
-localStorage key, degrading to "nothing done" if storage is unavailable.
+Both settings live behind the cogwheel in the header. Progress is browser-only
+(`shared/progress/`): a unit is marked done when the student pages past it or aces its quiz. It is a
+convenience, not a grade, and it degrades to "nothing done" if localStorage is unavailable.
 
 When writing or translating lesson text, use the `lesson-writing` skill in
 `.claude/skills/lesson-writing/`. Its main rule: no em-dashes anywhere in student-facing prose.

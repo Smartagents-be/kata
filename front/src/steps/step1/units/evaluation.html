@@ -1,7 +1,7 @@
 <p data-i18n="evaluation.lead.1">
   This step named the layers an agent's context comes from: the <code>prompt</code>,
-  the <code>session</code>, the <code>harness</code> and the <code>external</code> world. Each one
-  arrives from a different place and lands in the same window. Now you go the other way. You find
+  the <code>session</code>, the <code>harness</code> and the <code>tools</code> it can reach. Each
+  one arrives from a different place and lands in the same window. Now you go the other way. You find
   what a layer is holding when the thing holding it does not want to show you.
 </p>
 
@@ -59,8 +59,8 @@ curl -s localhost:8080/api/titles | jq</code></pre>
 </p>
 
 <p data-i18n="evaluation.read-the-source.4">
-  What you have used here is <code>external</code> context: the code on disk, as written. It is in
-  the window because you pointed at it, and nothing else was needed.
+  What you have used here is <code>tools</code> context: the code on disk, read back as written. It
+  is in the window because a tool went and got it, and nothing else was needed.
 </p>
 
 <h2 data-i18n="evaluation.trace-the-run.heading">Trace the run</h2>

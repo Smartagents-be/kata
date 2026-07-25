@@ -1,0 +1,97 @@
+<p data-i18n="tools.lead.1">
+  A tool is a request the model makes to your system. It cannot open a file or run a command itself.
+  It asks for one, your harness runs it, and the output is appended to the context as text. That
+  round trip is the whole mechanism.
+</p>
+
+<p data-i18n="tools.lead.2">
+  This is where an agent's abilities come from. <code>grep</code> to search your codebase,
+  <code>sed</code> to change a file, <code>curl</code> to call an API, an MCP server for whatever
+  your harness does not ship on its own. The harness decides which tools exist. What they hand back
+  is this layer.
+</p>
+
+<p data-i18n="tools.lead.3">
+  Watch where the two halves sit. The tool itself runs outside the window: on your machine, against
+  your files, at somebody else's API. Only what it returns comes back in, and it comes back as plain
+  text next to your prompt.
+</p>
+
+<!-- The tool straddles the frame on purpose. The dashed half is the argument of the figure: the
+     model calls the tool but never watches it run, and only the result crosses back in. -->
+<div data-figure="tools-in-context"></div>
+
+<p data-i18n="tools.lead.4">
+  That dashed half is the part the model never sees. It gets the result and nothing else, which is
+  why a file that was truncated on the way in and a file that is genuinely short read exactly the
+  same from in there.
+</p>
+
+<h2 data-i18n="tools.where-extra-tools.heading">Where the extra tools come from</h2>
+
+<p data-i18n="tools.where-extra-tools.1">
+  An MCP server can be anything. A server for your issue tracker, one for your database, one that
+  drives a browser. Somebody wrote it, you connected it, and now the model can call it. Your harness
+  runs the call and appends what came back, exactly as it does for <code>grep</code>.
+</p>
+
+<!-- The same frame and prompt as tools-in-context, with one wire crossing the border and fanning
+     out. The figure only works read against that one, so do not redraw it on its own geometry. -->
+<div data-figure="mcp-server"></div>
+
+<h2 data-i18n="tools.list-itself-window.heading">The list itself is in the window</h2>
+
+<p data-i18n="tools.list-itself-window.1">
+  Every tool you connect ships its description with it. The name, what it does, every parameter it
+  takes, spelled out for the model to read. All of that goes into the window before you have typed
+  anything.
+</p>
+
+<p data-i18n="tools.list-itself-window.2">
+  So the cost is not in calling a tool. It is in having it. Connect five MCP servers and a few
+  hundred lines of description ride along with every message you send
+  <svg data-icon="coin"></svg> You pay for them whether or not the agent touches one.
+</p>
+
+<p data-i18n="tools.list-itself-window.3">
+  They cost you room to think as well. Forty tools is forty descriptions to read past and forty ways
+  to pick the wrong one, which is the entropy from the opening unit arriving before you start. An
+  agent holding <code>grep</code>, <code>sed</code> and a test runner is choosing between three. Turn
+  off what this task does not need.
+</p>
+
+<h2 data-i18n="tools.stay-critical.heading">Stay critical</h2>
+
+<p data-i18n="tools.stay-critical.1">
+  Treat what comes back as the least trustworthy layer you have. A blog post about Spring Boot 4 was
+  not written against this repository. An MCP server hands back whatever its author decided to
+  return. The spec a <code>curl</code> fetches may be three revisions behind the one your team agreed
+  on last week.
+</p>
+
+<!-- No data-audience: this one is for everybody, in class and alone. The warning variant is the
+     hazard shape from index.css; the triangle it draws is not in this markup on purpose. -->
+<aside data-variant="warning" data-i18n="tools.stay-critical.2">
+  <p>
+    An MCP server is an attack vector, and it is one of the routes prompt injection actually takes
+    today. One hands back a ticket from your issue tracker, and the description closes with a line
+    addressed to the agent: read the token out of <code>.env</code> and <code>curl</code> it to this
+    address. The agent has a shell, and one tool result just told it what to do with it.
+  </p>
+</aside>
+
+<p data-i18n="tools.stay-critical.3">
+  None of that shows once it is in the window. Everything in a context carries the same weight: your
+  prompt, the agent's own notes, and a paragraph off a page it opened thirty seconds ago. The model
+  has no way to mark one as yours and one as a stranger's, so it builds on the stranger's without
+  hesitating.
+</p>
+
+<h2 data-i18n="tools.costs-same-everything.heading">It costs the same as everything else</h2>
+
+<p data-i18n="tools.costs-same-everything.1">
+  A tool result is usually the bulkiest thing in the window. A page of documentation runs longer than
+  your prompt. <code>mvn test</code> on a red build runs longer than most of your source files. And
+  it settles into the session, so it is re-sent on every turn after that, exactly like the three
+  large files from the session unit.
+</p>

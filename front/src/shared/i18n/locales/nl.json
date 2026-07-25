@@ -5,6 +5,7 @@
   "nav.unitCount_one": "{{count}} pagina",
   "nav.unitCount_other": "{{count}} pagina's",
   "nav.unitDone": "Afgerond",
+  "nav.toggleSteps": "Toon of verberg de stappen",
 
   "unit.previous": "Terug",
   "unit.next": "Verder",
@@ -41,7 +42,7 @@
   "catalog.error": "Kan de backend niet bereiken. Draait die op poort 8080?",
 
   "step.notFound.title": "Stap niet gevonden",
-  "step.notFound.body": "Er is geen stap “{{id}}”. Kies er een uit de lijst links.",
+  "step.notFound.body": "Er is geen stap “{{id}}”. Kies er een uit de lijst met stappen.",
   "unit.notFound.title": "Pagina niet gevonden",
-  "unit.notFound.body": "Deze stap heeft geen pagina “{{id}}”. Kies er een uit de lijst links."
+  "unit.notFound.body": "Deze stap heeft geen pagina “{{id}}”. Kies er een uit de lijst met stappen."
 }
