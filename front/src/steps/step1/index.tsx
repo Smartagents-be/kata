@@ -2,10 +2,14 @@ import type { Step } from '@/shared/step'
 import { BundleCompare } from './BundleCompare'
 import { ContextDiagram } from './ContextDiagram'
 import { ContextFalloff } from './ContextFalloff'
+import { CoordinatorFanout } from './CoordinatorFanout'
 import { ExactAsk } from './ExactAsk'
 import { FlagBoard } from './FlagBoard'
 import { OneShotCompare } from './OneShotCompare'
+import { PatternMatch } from './PatternMatch'
 import { PromptInContext } from './PromptInContext'
+import { ReflectionLoop } from './ReflectionLoop'
+import { SequentialSteps } from './SequentialSteps'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
 import { introQuiz, promptQuiz } from './quiz'
@@ -61,6 +65,12 @@ const step1: Step = {
       id: 'harness',
       title: 'harness.title',
       html: harness,
+      inlineFigures: {
+        'coordinator-fanout': <CoordinatorFanout />,
+        'sequential-steps': <SequentialSteps />,
+        'reflection-loop': <ReflectionLoop />,
+      },
+      figure: <PatternMatch />,
     },
     {
       id: 'external',

@@ -49,7 +49,10 @@ on your behalf, where the providers differ from each other, the open-source ones
 against a subscription) and then how a harness splits the work, one `<h3>` per pattern: the
 coordinator delegating to cheaper models with decomposition in front of it, the sequential workflow,
 and reflection spawning a context-free critic. Those three are the only `<h3>`s in the tree, and the
-sub-agent starting blank is the point all three turn on.
+sub-agent starting blank is the point all three turn on. Each pattern carries its own inline diagram,
+drawn in one shared vocabulary: a teal frame is a context, a bar is something in it, dashes are what
+is not. The unit then closes on `PatternMatch`, a drag-to-connect exercise (four situations, four
+patterns, one line each) graded in the browser like the quizzes.
 
 The `evaluation` unit used to be a free-text exercise asking the student to place six items in the
 right layer, graded by a `context-layers` checker on the Java service. That checker was never
@@ -184,49 +187,13 @@ src/test/java/be/smartagents/kata/java/step2/
   application/                  MemberStatementsTest: @Tag("challenge") spec for the missing method
   web/                          LoanControllerTest: @Tag("challenge") spec for the endpoint
   grading/                      FlagRevealIT, Flag, Veil: the graded-profile reveal, run by failsafe
-
-front/src/
-  main.tsx, App.tsx, index.css  entry point and routing
-  shared/components/            AppShell, StepNav, UnitPager, SettingsMenu, ExercisePanel,
-                                QuizPanel, CatalogPanel, … and ui/ (Popover among them)
-  shared/i18n/                  i18n.ts (the instance), locales/, useLocale, useStepText
-  shared/lib/                   api.ts, content.ts, hash.ts (sha256Hex for the flag board), utils.ts
-  shared/mode/                  the guided/self-learning toggle
-  shared/progress/              which units are done; a Set in localStorage, drawn as sidebar checks
-  shared/routes/                StepPage (forwards), UnitPage (renders a unit), CatalogPage
-  shared/step.ts                Step, Unit, QuizQuestion and QuizChoice
-  steps/index.ts                the ordered registry, the reading order, locale registration
-  steps/step1/index.tsx         the step's units and title keys; evaluation carries the flag board
-  steps/step1/BundleCompare.tsx three follow-ups against one bundled ask, clicked through side by
-                                side. The left frame arrives `P1`, `A1`, `P2`, `R1 + A2`, `P3`,
-                                `R2 + A3`: a prompt goes alone, then the stack it dragged along
-                                shows up as a copy, so the frame fills with duplicates and scrolls.
-                                A measured arrow runs from each copy up a left gutter and back in
-                                above its prompt, where the copy really sat in the request.
-                                Inline figure in `prompt`
-  steps/step1/ExactAsk.tsx      one form with two fields both labelled Name, the top label knocked
-                                out of place by an `mb-4`, the source beside it with the two ids in
-                                red, and the same fix asked for twice: "fix the form" against "fix
-                                the position for the label on #member-name". The ids in the code are
-                                displayed text, not the rendered ids, which stay BEM. Inline figure
-                                in `prompt`
-  steps/step1/FlagBoard.tsx     the `evaluation` flag board, graded in the browser (figure slot)
-  steps/step1/flags.ts          the three context flags as salted hashes, never plaintext
-  steps/step1/locales/          en.json and nl.json: this step's titles, quiz and prose
-  steps/step1/quiz.ts           the step's multiple-choice questions, as message keys
-  steps/step1/units/            <unit>.html, one file per unit, English, with data-i18n keys
-  steps/step2/index.tsx         agentic engineering; the units, the two trees and the flag board
-  steps/step2/FileTree.tsx      draws a folder layout; both trees below are data for it
-  steps/step2/ProjectTree.tsx   the .claude/ layout, drawn inside the prose of `setup`
-  steps/step2/DomainTree.tsx    a DDD, ports-and-adapters layout, inside `engineering`
-  steps/step2/Workshop.tsx      the `workshop` flag board, graded in the browser (figure slot)
-  steps/step2/flags.ts          the three flags as salted hashes, never plaintext
-  steps/step2/locales/          same pair; six units of prose plus the workshop
-  steps/step2/units/            same shape as step 1's; workshop.html is the capstone
 ```
 
-On the frontend, dependencies still point one way: steps may import from `shared`, never the
-reverse.
+The frontend layout is `front/src/`: a `shared/` shell (components, i18n, lib, mode, progress,
+routes) plus one `steps/stepN/` folder per step, holding that step's registry, figures, flags,
+locales, quiz and unit HTML. Read the folder rather than a list here. Two things about it are not
+visible from the tree: dependencies point one way, so steps may import from `shared` and never the
+reverse; and a step's `flags.ts` holds salted hashes only, never plaintext.
 
 ### The catalogue, and the thing it is hiding
 
@@ -333,11 +300,10 @@ its code once they do.
 
 Maven, single module, no wrapper — use the `mvn` on `PATH` (3.9.16 locally).
 
+The standard Maven invocations apply. The two that are not standard, and that carry the kata's
+meaning:
+
 ```bash
-mvn test                  # compile + run all tests
-mvn -q test               # same, quiet; prints only failures
-mvn verify                # full build through packaging
-mvn clean test            # after changing the compiler release or plugin versions
 mvn verify -Pgraded       # the step 2 workshop: grades the loan module, prints its flags
 mvn test -Pchallenge      # the step 2 challenge: the spec for the statement endpoint
 ```
@@ -357,26 +323,14 @@ the tests are the spec for `MemberStatements.forTier`, which ships as a stub tha
 endpoint pays out its code once they do. A new exercise spec of this kind belongs behind the same
 tag, so a clean checkout stays green.
 
-The fifth flag (native image) has no profile in this `pom.xml` on purpose, and unlike the earlier
-flags it is built to resist a one-shot (see the step 2 workshop notes above). Wiring the GraalVM
-`native-maven-plugin` and the ahead-of-time step is the exercise; the image must be compiled for step 2
-(main class `Step2Application`), since `NativeImageFlag` lives there and the default `<mainClass>` is
-step 1; and even then a plain compile only prints a miss, because the flag's payload is the classpath
-resource `flags/native-image.veil` and a native image keeps only the resources it is told to. The
-student reads that runtime miss, plans a `RuntimeHintsRegistrar` (`@ImportRuntimeHints`) that registers
-the resource, and rebuilds. `NativeImageFlag` gates on `NativeDetector.inNativeImage()`, so it is inert
-under `mvn test` and `mvn spring-boot:run`. Verified end to end with GraalVM 25: a plain native build
-of `Step2Application` prints the miss, and the same build with the resource hint prints the flag. **Do
-not add a `native` profile to the `pom.xml`, and do not write the resource hint.**
+The fifth flag (native image) has no profile in this `pom.xml` on purpose, and it is inert under
+`mvn test` and `mvn spring-boot:run` because it gates on `NativeDetector.inNativeImage()`. Wiring the
+ahead-of-time build is the exercise; the step 2 workshop notes above carry the detail, including the
+two prohibitions: **do not add a `native` profile to the `pom.xml`, and do not write the resource
+hint.** Verified end to end with GraalVM 25.
 
-Run a subset via Surefire's `-Dtest` filter. Add `-DfailIfNoSpecifiedTests=false` so a
-typo'd or non-matching pattern is not a build failure:
-
-```bash
-mvn test -Dtest='CatalogTest' -DfailIfNoSpecifiedTests=false
-mvn test -Dtest='CatalogTest#publishesEveryKnownTitleInStageOrder' -DfailIfNoSpecifiedTests=false
-mvn test -Dtest='*Test#shouldHandle*' -DfailIfNoSpecifiedTests=false
-```
+Run a subset via Surefire's `-Dtest` filter, adding `-DfailIfNoSpecifiedTests=false` so a typo'd
+pattern is not a build failure.
 
 No static analysis runs on the default Java build; plain `mvn verify` adds nothing beyond packaging.
 The `graded` profile is the exception: it runs JaCoCo and PIT over the `step2` module (see the step 2
@@ -391,10 +345,9 @@ npm run lint    # oxlint, shipped with the Vite template
 
 ## Toolchain
 
-- **Java 25** via Boot's `<java.version>` property, so `javac` rejects APIs newer than 25
-  even though the local JDK is Oracle GraalVM 25.0.3.
-- **Spring Boot 4.1.0** as parent POM. It manages every dependency version here — JUnit
-  (Jupiter 6.0.3) and AssertJ (3.27.7) included — so declare new Spring or test artifacts
+- The `pom.xml` has the versions. Two things it does not say: `javac` rejects APIs newer than
+  the `<java.version>` property even though the local JDK is Oracle GraalVM 25.0.3, and the Boot
+  parent manages every dependency version here, so declare new Spring or test artifacts
   **without** a `<version>`.
 - Boot 4 split the test slices out of `spring-boot-starter-test`. `@WebMvcTest` lives in
   `org.springframework.boot.webmvc.test.autoconfigure` and needs the separate
@@ -414,8 +367,7 @@ npm run lint    # oxlint, shipped with the Vite template
 - Tests are `*Test.java` mirroring the production package (Surefire's default include
   patterns depend on this suffix).
 - Table-driven cases use `@ParameterizedTest` + `@CsvSource` with a `name` template.
-- Frontend imports go through the `@` alias (`@/shared/lib/api`), configured in both
-  `tsconfig.app.json` and `vite.config.ts`. `components.json` points shadcn at
+- Frontend imports go through the `@` alias. `components.json` points shadcn at
   `@/shared/components/ui`, so `npx shadcn@latest add …` keeps generating into `shared`.
 
 ### The design system
@@ -424,22 +376,20 @@ The look comes from a design system authored outside this repo (a Claude Design 
 `Educational Design System v3.dc.html`) and lives here as tokens in `front/src/index.css`. Nothing
 else holds a colour: components name tokens, so a change to the palette is a change to one file.
 
-- **One teal does the heavy lifting.** `--primary` is `oklch(0.567 0.1 184.994)`, and it marks the
-  primary action, the active step, the active unit, the current language and the focus ring.
-  Neutrals carry a faint teal undertone (hue 190 to 200, chroma under 0.015), so surfaces read warm
-  rather than clinical grey. `--success` means passed and `--destructive` means failed; nothing else
-  borrows them. `--success` tints a panel and `--success-foreground` is the darker ink that stays
-  readable on that tint, which is why there are two. The one exception to the light UI is the
-  header: `--header` is a deep teal (`oklch(0.28 0.055 185)`), the single dark surface, with
-  `--header-foreground` white ink and a translucent-white cogwheel control sitting on it. It is a
+- **One teal does the heavy lifting.** `--primary` marks the primary action, the active step, the
+  active unit, the current language and the focus ring. Neutrals carry a faint teal undertone, so
+  surfaces read warm rather than clinical grey. `--success` means passed and `--destructive` means
+  failed; nothing else borrows them. `--success` tints a panel and `--success-foreground` is the
+  darker ink that stays readable on that tint, which is why there are two. The one exception to the
+  light UI is the header: `--header` is the single dark surface, with `--header-foreground` white
+  ink and a translucent-white cogwheel control sitting on it. It is a
   band, not a bar: the 60px top bar stays pinned while a run of the same teal sits below it, and the
   whole app rides in one white rounded card that pulls up to overlap that band and then slides under
   the bar as the page scrolls. A finished unit's self-learning note is a teal left-rule callout
   (`aside[data-audience="self"]`); a guided one stays a muted panel.
 - **Two typefaces, and the switch between them is the signal.** Figtree for everything a
   student reads, JetBrains Mono for anything the machine produced: code, counts, flags, catalogue
-  titles, step numbers. Both are variable fonts from `@fontsource-variable`, imported in
-  `index.css`; nothing loads from a CDN.
+  titles, step numbers. Both are variable fonts imported in `index.css`; nothing loads from a CDN.
 - **The interface stays nearly flat.** Separation is a 1px border, not a shadow. `--shadow-*` has
   three real steps (hairline, raised, overlay) drawn from one teal-black at four opacities, and
   depth is reserved for things that genuinely float: the settings sheet, dialogs.
@@ -498,50 +448,11 @@ before knowing what it will say.
 
 ## Adding a step
 
-1. `front/src/steps/stepN/units/<unit>.html` — one file per unit, in English, plain HTML, no
-   wrapper element needed. Every block of prose carries a `data-i18n` key; see "Languages" below.
-   Do not write the unit's title into the HTML: it comes from the registry.
-2. `front/src/steps/stepN/locales/en.json` and `nl.json` — this step's messages, flat keys. The
-   English file holds the titles, quiz text and figure labels; the Dutch file holds those plus the
-   prose translations, since the prose has no English entry (the HTML is the English).
-3. `front/src/steps/stepN/index.tsx` — default-export a `Step` (`id`, `title`, `locales`,
-   `units`). Each `Unit` has an `id`, a `title`, and then `html`, `exerciseId` (plus an optional
-   `exercisePlaceholder`), or both. Everything the student reads is a **key** into this step's
-   namespace, except `html`, which is the imported file itself.
-   A unit may also carry a `figure`: a React element rendered under the prose. Drawings live in
-   the step folder (`steps/step1/ContextDiagram.tsx`), because their geometry and how they grow
-   from unit to unit is the step's business. `shared` only gives the element a place to sit,
-   which is why the registry is `.tsx` rather than `.ts`.
-   A drawing that only reads correctly *next to* the paragraph explaining it goes in
-   `inlineFigures` instead, keyed by name (`steps/step2/ProjectTree.tsx`). The unit's HTML leaves
-   an empty `<div data-figure="the-key"></div>` where it belongs, and
-   `StepContent` cuts the prose there: one `<article>` per run of HTML, the React element between
-   them. Only top-level markers are found. One nested inside a `<div data-audience>` renders as
-   the empty div it is, which is the symptom to look for. Portals into the rendered HTML were
-   tried first and do not survive: React discards children it put in a container that
-   `dangerouslySetInnerHTML` owns.
-4. Multiple choice, if the unit has any: `front/src/steps/stepN/quiz.ts` exports the
-   `QuizQuestion[]`, and the unit references it as `quiz`. A question is an `id`, the
-   `question`, its `choices` (exactly one carrying `correct: true`) and an `explanation`.
-   `QuizPanel` answers the whole quiz first and checks it from one button at the bottom. A right
-   answer is marked right and says nothing further; only a wrong one prints its `explanation`,
-   so keep that to a sentence or two. Everything locks after checking, since the explanations
-   give the remaining answers away. The panel shuffles both the questions and each question's
-   choices on every load, so never write "the second option" into an explanation: describe the
-   choice instead. Use the `quiz-writing` skill in `.claude/skills/quiz-writing/`, which covers
-   the data shape and what makes a distractor worth offering; the prose rules from
-   `lesson-writing` apply on top of it.
-5. Append the step to the array in `front/src/steps/index.ts`. That list drives the sidebar,
-   the routes, the previous/next pager and the registration of the step's locale bundles under a
-   namespace named after its id; nothing else needs touching.
-6. Java side, if the step needs one: `be.smartagents.kata.java.stepN`, holding that step's own
-   `@SpringBootApplication` and whatever it exposes. There is no shared backend shell to register
-   with any more, and no shared grading endpoint — a step that wants one builds it.
+Use the `adding-a-step` skill in `.claude/skills/adding-a-step/`: it carries the six files a new
+step needs, in order, plus how figures and inline figures are wired and how unit ids become URLs.
 
 Step ids are `stepN`, unit ids are words (`session`, `evaluation`), and together they are the
-URL (`/steps/step1/session`). No unit carries an `exerciseId` today (the free-text mechanism is
-unused; see above), but the field is still on `Unit`: an exercise id is named after what it tests,
-not after the step or unit, so one step could grow several.
+URL (`/steps/step1/session`).
 
 ### The audience rule
 
