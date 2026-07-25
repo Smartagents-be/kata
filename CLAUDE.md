@@ -41,9 +41,15 @@ its `GET /api/titles` response, one per way context is assembled. The student re
 first (a literal in a branch that never runs), traces the running pipeline for the second (the hidden
 tenth entry it computes and drops), and turns the log level up for the third (a line printed only at
 DEBUG). The board grades in the browser against salted hashes, so it needs no backend. `intro` and
-`prompt` each carry a three-question multiple-choice quiz, graded in the browser. `prompt` is the one
-unit that goes past naming its layer: after saying what the layer is, it covers how to write a better
-instruction (reasoning levels, meta-prompting, plan mode, and clearing, bundling and being exact).
+`prompt` each carry a three-question multiple-choice quiz, graded in the browser. Two units go past
+naming their layer. `prompt` covers how to write a better instruction (reasoning levels,
+meta-prompting, plan mode, and clearing, bundling and being exact). `harness` covers which harness
+you run (the program between your machine and the provider's API, what it loads into every request
+on your behalf, where the providers differ from each other, the open-source ones, and an API key
+against a subscription) and then how a harness splits the work, one `<h3>` per pattern: the
+coordinator delegating to cheaper models with decomposition in front of it, the sequential workflow,
+and reflection spawning a context-free critic. Those three are the only `<h3>`s in the tree, and the
+sub-agent starting blank is the point all three turn on.
 
 The `evaluation` unit used to be a free-text exercise asking the student to place six items in the
 right layer, graded by a `context-layers` checker on the Java service. That checker was never
@@ -198,6 +204,12 @@ front/src/
                                 A measured arrow runs from each copy up a left gutter and back in
                                 above its prompt, where the copy really sat in the request.
                                 Inline figure in `prompt`
+  steps/step1/ExactAsk.tsx      one form with two fields both labelled Name, the top label knocked
+                                out of place by an `mb-4`, the source beside it with the two ids in
+                                red, and the same fix asked for twice: "fix the form" against "fix
+                                the position for the label on #member-name". The ids in the code are
+                                displayed text, not the rendered ids, which stay BEM. Inline figure
+                                in `prompt`
   steps/step1/FlagBoard.tsx     the `evaluation` flag board, graded in the browser (figure slot)
   steps/step1/flags.ts          the three context flags as salted hashes, never plaintext
   steps/step1/locales/          en.json and nl.json: this step's titles, quiz and prose

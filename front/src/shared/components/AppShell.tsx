@@ -47,7 +47,7 @@ export function AppShell() {
             data-component="AppShell"
             className="font-heading text-[1.0625rem] font-bold tracking-tight"
           >
-            Agentic Java
+            Agentic development
           </span>
           <SettingsMenu triggerClassName="rounded-full border border-white/20 bg-white/5 text-white/90 hover:bg-white/15 hover:text-white" />
         </div>

@@ -1,9 +1,89 @@
 <p data-i18n="harness.lead.1">
-  The part you did not write and mostly never see. The system prompt, the definitions of the
-  tools the agent may call, the skills available to it.
+  The harness is the software you use to work with a model. Claude Code in your terminal, Cursor,
+  the chat in your IDE. You type a question, the harness turns it into a request and sends it off
+  to the provider.
 </p>
 
 <p data-i18n="harness.lead.2">
-  This is the layer that explains why an agent already knows it can read a file or run a command
-  without you ever mentioning it.
+  Into that request it loads its own material: skills, tool definitions, system prompts, guardrails.
+  You wrote none of it and mostly never see it. That is why an agent already knows it can open a
+  file or run a command without you ever mentioning it.
+</p>
+
+<h2 data-i18n="harness.which-one-you-run.heading">Which harness you run</h2>
+
+<p data-i18n="harness.which-one-you-run.1">
+  That program does more than pass messages along. It reads your files, drives your terminal, sits in
+  your IDE, and holds the connection to your provider's API. Everything the model ever learns about your
+  work, it learns because the harness put it in the request.
+</p>
+
+<p data-i18n="harness.which-one-you-run.2">
+  This is also where the providers differ from each other. Each one ships its own harness around its
+  own models, and the gap between two of them is wider than most people expect. There are open-source
+  harnesses as well, which you point at whichever model you want.
+</p>
+
+<p data-i18n="harness.which-one-you-run.3">
+  Paying for it runs through the same layer. Either you hand the harness an API key and get billed
+  per token, or you sign in with a subscription and the usage comes out of your plan.
+</p>
+
+<h2 data-i18n="harness.splitting-work.heading">How a harness splits the work</h2>
+
+<p data-i18n="harness.splitting-work.1">
+  Your task does not have to go to one model in one conversation. Harnesses have a few ways of
+  cutting it up, and each one is a design pattern worth recognising, because it decides where your
+  context ends up.
+</p>
+
+<h3 data-i18n="harness.coordinator.heading">The coordinator</h3>
+
+<p data-i18n="harness.coordinator.1">
+  One model runs the job and hands pieces of it out. That one is usually the stronger and more
+  expensive model, and the pieces go to smaller, cheaper models (sub-agents). You pay the top rate
+  for working out what to do and a fraction of it for doing it
+  <svg data-icon="coin"></svg> Carrying the work out
+  usually costs more than working out what to do, so that is where the saving sits.
+</p>
+
+<p data-i18n="harness.coordinator.2">
+  A sub-agent starts on a fresh session with an empty context. The coordinator writes one base
+  instruction and hands it to that new context, and it is all the sub-agent gets. So a sub-agent is
+  probably missing a lot, and whatever it misses it has to fetch for itself: open the source files
+  and read them again. That is tokens and time, which is where this pattern gets expensive.
+</p>
+
+<p data-i18n="harness.coordinator.3">
+  Decomposition <svg data-icon="pattern"></svg> is what comes first, then. The coordinator breaks the
+  task into parts that stand on their own and writes one prompt per part. Cutting it well is most of
+  the work here, and it is the same skill as writing a good prompt yourself.
+</p>
+
+<h3 data-i18n="harness.sequential.heading">The sequential workflow</h3>
+
+<p data-i18n="harness.sequential.1">
+  Nothing is handed out here. The agent plans the steps first, then works through them one at a time,
+  and every step is validated before the next one starts. This gives you the option to stop, and
+  pick it back up later.
+</p>
+
+<p data-i18n="harness.sequential.2">
+  Reach for this when the steps depend on each other. What it costs you is the window: one session
+  carries the whole run, so a long workflow is a full context by the end of it.
+</p>
+
+<h3 data-i18n="harness.reflection.heading">Reflection</h3>
+
+<p data-i18n="harness.reflection.1">
+  Reflection <svg data-icon="pattern"></svg> is the agent putting a critic on its own work. The
+  sub-agent is told to attack the result rather than help with it: find what is wrong, say so, report
+  back. The idea comes from GANs, where one network produces something and another one tries to tear
+  it down.
+</p>
+
+<p data-i18n="harness.reflection.2">
+  The empty context is what makes it work. An agent reviewing its own transcript has spent the last
+  hour arguing for this design and will agree with itself. A critic that arrives with nothing but the
+  code has no such stake, so what it hands back is worth reading.
 </p>
