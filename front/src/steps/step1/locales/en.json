@@ -65,6 +65,14 @@
   "bundle-compare.restart": "Restart",
   "bundle-compare.hint": "This compounds: the more messages you send, the bigger the context gets.",
 
+  "exact-ask.form.label": "The form",
+  "exact-ask.form.field": "Name",
+  "exact-ask.code.label": "The code behind it",
+  "exact-ask.vague.label": "Vague",
+  "exact-ask.vague.prompt": "fix the form",
+  "exact-ask.exact.label": "Exact",
+  "exact-ask.exact.prompt": "fix the position for the label on #member-name",
+
   "falloff.window": "context window",
   "falloff.newest": "new turn in",
   "falloff.dropped": "oldest drops off",

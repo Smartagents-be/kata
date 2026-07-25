@@ -2,6 +2,7 @@ import type { Step } from '@/shared/step'
 import { BundleCompare } from './BundleCompare'
 import { ContextDiagram } from './ContextDiagram'
 import { ContextFalloff } from './ContextFalloff'
+import { ExactAsk } from './ExactAsk'
 import { FlagBoard } from './FlagBoard'
 import { OneShotCompare } from './OneShotCompare'
 import { PromptInContext } from './PromptInContext'
@@ -47,6 +48,7 @@ const step1: Step = {
       inlineFigures: {
         'prompt-in-context': <PromptInContext />,
         'bundle-compare': <BundleCompare />,
+        'exact-ask': <ExactAsk />,
       },
       quiz: promptQuiz,
     },

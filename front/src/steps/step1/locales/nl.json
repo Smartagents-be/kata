@@ -62,6 +62,14 @@
   "bundle-compare.restart": "Opnieuw",
   "bundle-compare.hint": "Dit stapelt op: hoe meer berichten je stuurt, hoe groter de context wordt.",
 
+  "exact-ask.form.label": "Het formulier",
+  "exact-ask.form.field": "Naam",
+  "exact-ask.code.label": "De code erachter",
+  "exact-ask.vague.label": "Vaag",
+  "exact-ask.vague.prompt": "fix het formulier",
+  "exact-ask.exact.label": "Exact",
+  "exact-ask.exact.prompt": "fix de positie van het label op #member-name",
+
   "falloff.window": "context window",
   "falloff.newest": "nieuwe beurt erbij",
   "falloff.dropped": "oudste valt eruit",
