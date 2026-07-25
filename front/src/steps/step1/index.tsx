@@ -1,4 +1,5 @@
 import type { Step } from '@/shared/step'
+import { BudgetWindow } from './BudgetWindow'
 import { BundleCompare } from './BundleCompare'
 import { ContextDiagram } from './ContextDiagram'
 import { ContextFalloff } from './ContextFalloff'
@@ -12,6 +13,7 @@ import { PromptInContext } from './PromptInContext'
 import { ReflectionLoop } from './ReflectionLoop'
 import { SequentialSteps } from './SequentialSteps'
 import { SessionMakeup } from './SessionMakeup'
+import { SpotInjection } from './SpotInjection'
 import { ToolsInContext } from './ToolsInContext'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
@@ -19,8 +21,8 @@ import { introQuiz, promptQuiz } from './quiz'
 import intro from './units/intro.html?raw'
 import prompt from './units/prompt.html?raw'
 import session from './units/session.html?raw'
-import harness from './units/harness.html?raw'
 import tools from './units/tools.html?raw'
+import harness from './units/harness.html?raw'
 import evaluation from './units/evaluation.html?raw'
 
 /**
@@ -68,6 +70,17 @@ const step1: Step = {
       },
     },
     {
+      id: 'tools',
+      title: 'tools.title',
+      html: tools,
+      inlineFigures: {
+        'tools-in-context': <ToolsInContext />,
+        'mcp-server': <McpServer />,
+        'spot-injection': <SpotInjection />,
+        'budget-window': <BudgetWindow />,
+      },
+    },
+    {
       id: 'harness',
       title: 'harness.title',
       html: harness,
@@ -77,15 +90,6 @@ const step1: Step = {
         'reflection-loop': <ReflectionLoop />,
       },
       figure: <PatternMatch />,
-    },
-    {
-      id: 'tools',
-      title: 'tools.title',
-      html: tools,
-      inlineFigures: {
-        'tools-in-context': <ToolsInContext />,
-        'mcp-server': <McpServer />,
-      },
     },
     {
       id: 'evaluation',

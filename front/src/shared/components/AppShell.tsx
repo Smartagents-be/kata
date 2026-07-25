@@ -164,7 +164,16 @@ export function AppShell() {
             >
               <StepNav />
               <Separator id="app-sidebar-separator" data-component="AppShell" className="my-5" />
-              {/* Not a step: a page for poking at the service the later steps work on. */}
+              {/* Not a step: a page for poking at the service the later steps work on. It gets its
+                  own eyebrow for the same reason the steps have one, since a link with nothing over
+                  it reads as a seventh step that lost its number. */}
+              <p
+                id="app-sidebar-service-title"
+                data-component="AppShell"
+                className="eyebrow text-primary mb-3 px-0.5"
+              >
+                {t('nav.service')}
+              </p>
               <NavLink
                 id="app-sidebar-catalog-link"
                 data-component="AppShell"

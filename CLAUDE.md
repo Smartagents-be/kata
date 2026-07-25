@@ -38,7 +38,9 @@ Two parts, both walking-skeleton thin:
 
 `step1` is **context**: the layers an agent's context is assembled from (prompt, session, harness,
 tools) and the fact that they share one finite window. Six units — `intro`, `prompt`, `session`,
-`harness`, `tools`, `evaluation` — and the unit HTML is the source for what each one teaches.
+`tools`, `harness`, `evaluation` — and the unit HTML is the source for what each one teaches.
+That order is the registry's, and `evaluation`'s opening list recites it, so moving a unit means
+visiting that sentence in the HTML and in `nl.json`.
 Three editorial constraints the HTML does not state on its own: every layer unit goes past merely
 naming its layer, and none of the four is allowed to read as a stub (they sat within about a hundred
 words of each other until `tools` grew the MCP material, and that floor is the part that matters); the sub-agent starting blank is the point all three `harness` patterns turn on; and
@@ -60,7 +62,8 @@ the bridge has to be there. Do not un-tag them and do not let the unit grow back
 output around them) and deliberately says nothing about growth or re-sending, which is
 `BundleCompare`'s job in `prompt`.
 
-`tools` is the fourth layer, and it used to be `external` ("material from outside"). The rename is
+`tools` is the third of the four layer units, and it used to be `external` ("material from outside").
+It once ran after `harness` and no longer does. The rename is
 the decision: naming the mechanism (the model asks, your system runs it, the output is appended)
 beats naming the origin, because the origin was never the thing a student can act on. What survived
 the rename is the part that still holds for a tool result, namely that nothing in the window says
@@ -78,6 +81,33 @@ part: dashed while the line is outside, solid once it is in, so the border keeps
 means in every other diagram here. Redrawing either figure on its own geometry breaks the pair. The unit's order is
 the argument too, so keep it: what a tool is, where extra ones come from (MCP), what holding many of
 them costs, why the results are the least trustworthy layer, what they cost by volume.
+
+Everything the student *does* sits below an `<hr>` at the foot of the unit, under one `<h2>` reading
+"Check yourself", which is the same wording `QuizPanel` puts over a quiz (`quiz.title`). That is the
+shape: prose first, then one rule, then the doing, in the order hands-on task, `SpotInjection`,
+`BudgetWindow`. Do not scatter the exercises back up into the sections they belong to, and do not
+give a second one its own heading. `harness` and `evaluation` still close on a bare exercise with no
+rule over it, so they are the two left to bring into line.
+
+`tools` carries the step's only hands-on task and its two graded exercises, and between them they
+hold advice the prose used to state and no longer does. `connect-one` is the task: add an MCP server
+to your own agent, then fetch the catalogue twice, once with `curl` and once by driving `/catalog`
+through the server. It names Claude Code's `claude mcp add <name> -- <command>` (verified against the
+CLI) and `npx @playwright/mcp@latest`, which is a server this repo already runs, so a copied line
+works. **The prose asks which result you would want back on every turn and does not answer it**: the
+comparison is the exercise, so do not add the sentence saying which route is bulkier. `SpotInjection`
+is four tool results with one instruction aimed at the agent, and two of the clean three exist to be
+mistaken for it (one gives orders to a human reader, one contains the word token twice), so a rewrite
+that makes them look harmless removes the exercise. `BudgetWindow` is six calls against one small
+change and grades the **exact set**, not the total, or filling the window and then adding the two
+right calls would pass; its line counts are data rather than prose and its two right calls come to 37
+lines. Both mark a wrong pick in `--destructive` and the answer the student missed in teal, because
+red here would read as the result having failed rather than the answer. Both shuffle once per mount
+through `shared/lib/shuffle.ts`, which `PatternMatch` also uses now.
+
+Machine output inside an exercise stays English in every language: `SpotInjection`'s four result
+bodies and sources and `BudgetWindow`'s six commands have no `nl` entry, on purpose, the same way
+flags and grading messages do. Everything framing them is translated.
 
 `evaluation` closes the step with a flag board: three flags the step 1 backend hides from its
 `GET /api/titles` response, one per way context is assembled. The student reads the source for the

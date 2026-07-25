@@ -6,6 +6,7 @@
   "nav.unitCount_other": "{{count}} pages",
   "nav.unitDone": "Completed",
   "nav.toggleSteps": "Show or hide the steps",
+  "nav.service": "The service",
 
   "unit.previous": "Back",
   "unit.next": "Next",

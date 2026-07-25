@@ -95,3 +95,52 @@
   it settles into the session, so it is re-sent on every turn after that, exactly like the three
   large files from the session unit.
 </p>
+
+<!-- Everything below the rule is the doing part of the unit, under one heading that matches the one
+     QuizPanel renders over a quiz. Order: the task against the running backend first, then the two
+     graded exercises. -->
+<hr />
+
+<h2 data-i18n="tools.check-yourself.heading">Check yourself</h2>
+
+<h3 data-i18n="tools.connect-one.heading">Connect one yourself</h3>
+
+<p data-i18n="tools.connect-one.1">
+  Reading about this layer is not the same as watching it fill up. Start the step 1 backend, then
+  hand your agent a tool it does not ship with.
+</p>
+
+<!-- Claude Code's own syntax, verified against `claude mcp add --help`. The server is the one this
+     repo already runs, so a student who copies the line gets something that works. -->
+<pre><code>mvn spring-boot:run
+claude mcp add playwright -- npx @playwright/mcp@latest</code></pre>
+
+<p data-i18n="tools.connect-one.2">
+  That second line is Claude Code's. Every harness has its own way to add a server, which is the next
+  unit's layer deciding what this one is allowed to hold.
+</p>
+
+<p data-i18n="tools.connect-one.3">
+  Now get the catalogue twice, by two routes. Once with <code>curl</code> against
+  <code>localhost:8080/api/titles</code>, and once through the server you just connected: open
+  <code>/catalog</code> in the browser, press the button, read the titles off the page.
+</p>
+
+<p data-i18n="tools.connect-one.4">
+  Same nine titles either way. Look at what each route left behind in the window, and ask yourself
+  which of the two you would want back on every turn for the rest of the session.
+</p>
+
+<aside data-audience="self" data-i18n="tools.connect-one.5">
+  <p>
+    Do the browser route in a fresh session. Then ask your agent to list everything it has read so
+    far, and check that list against what the question actually needed.
+  </p>
+</aside>
+
+<!-- Two of the clean three are meant to be mistaken for the poisoned one, so do not make them look
+     harmless. -->
+<div data-figure="spot-injection"></div>
+
+<!-- The two right calls are worth 37 lines, and every wrong one would also have worked. -->
+<div data-figure="budget-window"></div>

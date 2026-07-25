@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from '@/shared/components/ui/card'
 import { useStepText } from '@/shared/i18n/useStepText'
+import { shuffled } from '@/shared/lib/shuffle'
 import { cn } from '@/shared/lib/utils'
 
 /** The four ways of splitting the work this unit names, in the order the prose introduces them. */
@@ -27,16 +28,6 @@ const SCENARIOS: readonly Scenario[] = [
   { id: 'upgrade', answer: 'sequential' },
   { id: 'delegate', answer: 'coordinator' },
 ]
-
-/** Fisher-Yates on a copy: the module arrays above must not be reordered in place. */
-function shuffled<T>(items: readonly T[]): T[] {
-  const copy = [...items]
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[copy[i], copy[j]] = [copy[j], copy[i]]
-  }
-  return copy
-}
 
 interface Point {
   x: number
