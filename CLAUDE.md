@@ -195,6 +195,8 @@ front/src/
                                 side. The left frame arrives `P1`, `A1`, `P2`, `R1 + A2`, `P3`,
                                 `R2 + A3`: a prompt goes alone, then the stack it dragged along
                                 shows up as a copy, so the frame fills with duplicates and scrolls.
+                                A measured arrow runs from each copy up a left gutter and back in
+                                above its prompt, where the copy really sat in the request.
                                 Inline figure in `prompt`
   steps/step1/FlagBoard.tsx     the `evaluation` flag board, graded in the browser (figure slot)
   steps/step1/flags.ts          the three context flags as salted hashes, never plaintext

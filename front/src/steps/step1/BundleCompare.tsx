@@ -37,7 +37,29 @@ type Item =
   | { kind: 'bundle'; name: string; items: Item[] }
 
 /** One thing that appeared, and the click it appeared on. Nothing ever moves afterwards. */
-type Entry = { step: number; item: Item }
+type Entry = {
+  id: string
+  step: number
+  item: Item
+  /**
+   * The entry this one actually travelled in front of. A copy shows up under the prompt that dragged
+   * it along, because that is when you see it, but in the request it goes first. An arrow says so.
+   */
+  ahead?: string
+}
+
+/** One measured arrow: from the top of a late copy, up to the top of the prompt it went in front of. */
+type Arrow = { id: string; from: number; to: number }
+
+function sameArrows(a: Arrow[], b: Arrow[]) {
+  return (
+    a.length === b.length &&
+    a.every((one, index) => {
+      const other = b[index]
+      return one.id === other.id && one.from === other.from && one.to === other.to
+    })
+  )
+}
 
 const message = (message: Message): Item => ({ kind: 'message', message })
 const bundle = (name: string, items: Item[]): Item => ({ kind: 'bundle', name, items })
@@ -60,14 +82,14 @@ const R2 = bundle('R2', [R1, message(P2), message(A2)])
  * them, because that is the moment you find out what the turn cost.
  */
 const DRIP: Entry[] = [
-  { step: 1, item: message(P1) },
-  { step: 2, item: message(A1) },
-  { step: 3, item: message(P2) },
-  { step: 4, item: R1 },
-  { step: 4, item: message(A2) },
-  { step: 5, item: message(P3) },
-  { step: 6, item: R2 },
-  { step: 6, item: message(A3) },
+  { id: 'p1', step: 1, item: message(P1) },
+  { id: 'a1', step: 2, item: message(A1) },
+  { id: 'p2', step: 3, item: message(P2) },
+  { id: 'r1', step: 4, item: R1, ahead: 'p2' },
+  { id: 'a2', step: 4, item: message(A2) },
+  { id: 'p3', step: 5, item: message(P3) },
+  { id: 'r2', step: 6, item: R2, ahead: 'p3' },
+  { id: 'a3', step: 6, item: message(A3) },
 ]
 
 const B1: Message = { name: 'P1', role: 'you', key: 'bundle-compare.bundle.1', weight: 58 }
@@ -76,9 +98,9 @@ const BA: Message = { name: 'A1', role: 'agent', key: 'bundle-compare.bundle.3',
 
 /** One prompt carrying all three asks, one turn answering it, and nothing sent twice. */
 const BUNDLE: Entry[] = [
-  { step: 1, item: message(B1) },
-  { step: 2, item: message(BT) },
-  { step: 3, item: message(BA) },
+  { id: 'b1', step: 1, item: message(B1) },
+  { id: 'bt', step: 2, item: message(BT) },
+  { id: 'ba', step: 3, item: message(BA) },
 ]
 
 const STEPS = 6
@@ -97,8 +119,8 @@ function countOf(item: Item): number {
   return item.kind === 'message' ? 1 : item.items.reduce((sum, inner) => sum + countOf(inner), 0)
 }
 
-/** The scale both meters read against: everything the three follow-ups put on the wire. */
-const SCALE = DRIP.reduce((sum, entry) => sum + sizeOf(entry.item), 0)
+/** Everything a session ends up putting on the wire, which is what its own bar reads against. */
+const totalOf = (entries: Entry[]) => entries.reduce((sum, entry) => sum + sizeOf(entry.item), 0)
 
 /** Each block's tone: your prompts teal, the agent's work a plain panel, its thinking dashed. */
 const TONE: Record<Role, string> = {
@@ -120,19 +142,9 @@ export function BundleCompare() {
     return () => clearTimeout(done)
   }, [current])
 
-  // The left side's tell: from the first bundle on, lines you already paid for go out again.
-  const dripNote = DRIP.some((entry) => entry.step <= current && entry.item.kind === 'bundle')
-    ? t('bundle-compare.resent')
-    : ''
-
-  // The right side says nothing on its first click, works harder on the second, and is finished for
-  // the rest of them while the left side is still going.
-  let bundleNote = ''
-  if (current >= BUNDLE.length) {
-    bundleNote = t('bundle-compare.done')
-  } else if (current >= 2) {
-    bundleNote = t('bundle-compare.thinking')
-  }
+  // The right side gets one line, on the click where it does the extra thinking. The left side needs
+  // none: the copies and the arrows are the whole point, and they say it themselves.
+  const bundleNote = current === 2 ? t('bundle-compare.thinking') : ''
 
   return (
     <figure id="bundle-compare" data-component="BundleCompare" className="my-8 flex flex-col gap-4">
@@ -147,7 +159,7 @@ export function BundleCompare() {
           current={current}
           flash={flash}
           label={t('bundle-compare.drip.label')}
-          note={dripNote}
+          note=""
         />
         <Side
           slug="bundle"
@@ -229,13 +241,17 @@ type SideProps = {
 }
 
 /**
- * One session: a scrolling frame holding everything on the wire so far, a meter reading it against
- * `SCALE`, and the tally. Both columns share their row heights through a subgrid, so the frames are
+ * One session: a scrolling frame holding everything on the wire so far, a bar reading how far it has
+ * got through its own session (full once that session is done), and the tally, which is where the
+ * two sessions compare. Both columns share their row heights through a subgrid, so the frames are
  * the same size and only one of them fills up.
  */
 function Side({ slug, entries, current, flash, label, note }: SideProps) {
   const { t } = useTranslation('step1')
   const view = useRef<HTMLDivElement>(null)
+  const stack = useRef<HTMLDivElement>(null)
+  const rows = useRef<Record<string, HTMLDivElement | null>>({})
+  const [arrows, setArrows] = useState<Arrow[]>([])
 
   const here = entries.filter((entry) => entry.step <= current)
   const sent = here.reduce((sum, entry) => sum + sizeOf(entry.item), 0)
@@ -256,6 +272,34 @@ function Side({ slug, entries, current, flash, label, note }: SideProps) {
       clearTimeout(after)
     }
   }, [current])
+
+  // Where each arrow runs, in the stack's own pixels: from the copy that showed up late, to the top
+  // edge of the prompt it actually travelled in front of. Measured rather than guessed, because both
+  // ends move with the text, and re-measured while the new block is still growing.
+  useEffect(() => {
+    const measure = () => {
+      const next = entries.flatMap((entry) => {
+        if (!entry.ahead || entry.step > current) {
+          return []
+        }
+        const copy = rows.current[entry.id]
+        const ahead = rows.current[entry.ahead]
+        return copy && ahead ? [{ id: entry.id, from: copy.offsetTop, to: ahead.offsetTop }] : []
+      })
+      setArrows((shown) => (sameArrows(shown, next) ? shown : next))
+    }
+
+    measure()
+    const settled = setTimeout(measure, 620)
+    const observer = new ResizeObserver(measure)
+    if (stack.current) {
+      observer.observe(stack.current)
+    }
+    return () => {
+      clearTimeout(settled)
+      observer.disconnect()
+    }
+  }, [current, entries])
 
   return (
     // Three rows shared with the other column (label, frame, footer) through a subgrid, so the two
@@ -279,33 +323,76 @@ function Side({ slug, entries, current, flash, label, note }: SideProps) {
         ref={view}
         className="border-border bg-card h-[30rem] overflow-y-auto rounded-lg border p-3"
       >
-        {entries.map((entry, index) => {
-          const shown = entry.step <= current
-          const lit = flash && entry.step === current
-          return (
-            <div
-              key={index}
-              id={`bundle-compare-${slug}-entry-${index}`}
+        {/* The stack keeps a gutter on its left for the arrows, and is the box every offsetTop this
+            component measures is relative to, so the arrow layer and the blocks share one origin. */}
+        <div
+          id={`bundle-compare-${slug}-stack`}
+          data-component="Side"
+          ref={stack}
+          className="relative pl-8"
+        >
+          {arrows.length > 0 && (
+            <svg
+              id={`bundle-compare-${slug}-arrows`}
               data-component="Side"
-              data-state={shown ? (lit ? 'arriving' : 'shown') : 'pending'}
-              aria-hidden={!shown}
-              className="grid transition-all duration-500 ease-out"
-              style={{
-                gridTemplateRows: shown ? '1fr' : '0fr',
-                opacity: shown ? 1 : 0,
-                marginBottom: shown ? '0.5rem' : 0,
-              }}
+              role="img"
+              aria-label={t('bundle-compare.inserted')}
+              className="stroke-primary fill-primary pointer-events-none absolute inset-y-0 left-0 w-8 overflow-visible"
             >
-              <div className="overflow-hidden">
-                <ItemView
-                  item={entry.item}
-                  lit={lit}
-                  id={`bundle-compare-${slug}-entry-${index}-item`}
-                />
+              {arrows.map((arrow) => {
+                // Out of the copy, up the gutter, then back in at the gap above the prompt: the
+                // arrow ends where the bundle actually sits in the request.
+                const slot = arrow.to - 5
+                return (
+                  <g key={arrow.id} data-component="Side">
+                    <path
+                      d={
+                        `M 26 ${arrow.from + 18} L 21 ${arrow.from + 18} ` +
+                        `Q 15 ${arrow.from + 18} 15 ${arrow.from + 12} ` +
+                        `L 15 ${slot + 6} Q 15 ${slot} 21 ${slot} L 23 ${slot}`
+                      }
+                      fill="none"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                    />
+                    <path d={`M 31 ${slot} l -8 -4 l 0 8 z`} stroke="none" />
+                  </g>
+                )
+              })}
+            </svg>
+          )}
+
+          {entries.map((entry, index) => {
+            const shown = entry.step <= current
+            const lit = flash && entry.step === current
+            return (
+              <div
+                key={entry.id}
+                id={`bundle-compare-${slug}-entry-${index}`}
+                data-component="Side"
+                data-state={shown ? (lit ? 'arriving' : 'shown') : 'pending'}
+                aria-hidden={!shown}
+                ref={(node) => {
+                  rows.current[entry.id] = node
+                }}
+                className="grid transition-all duration-500 ease-out"
+                style={{
+                  gridTemplateRows: shown ? '1fr' : '0fr',
+                  opacity: shown ? 1 : 0,
+                  marginBottom: shown ? '0.5rem' : 0,
+                }}
+              >
+                <div className="overflow-hidden">
+                  <ItemView
+                    item={entry.item}
+                    lit={lit}
+                    id={`bundle-compare-${slug}-entry-${index}-item`}
+                  />
+                </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
 
       <div
@@ -322,7 +409,7 @@ function Side({ slug, entries, current, flash, label, note }: SideProps) {
         >
           <div
             className="bg-primary h-full rounded-full transition-all duration-500 ease-out"
-            style={{ width: `${Math.min(100, (sent / SCALE) * 100)}%` }}
+            style={{ width: `${Math.min(100, (sent / totalOf(entries)) * 100)}%` }}
           />
         </div>
 
