@@ -117,7 +117,7 @@ DEBUG). **Do not implement the flags for the student.** The three flags
 are the exercise; ship the puzzle, not the decode, the trace instrumentation or the DEBUG readout.
 
 `step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Seven
-units — `evolution`, `setup`, `engineering`, `scoping`, `patterns`, `quality`, `goals` — all of
+units — `evolution`, `setup`, `engineering`, `steering`, `patterns`, `quality`, `goals` — all of
 them framing prose with no quiz, and the unit HTML is the source for what each argues. Six carry one
 habit each; `evolution` opens the step and carries none, because its job is to put the other six in
 order: a version now costs an hour, so the step you hand over gets small and you take many of them.
@@ -152,6 +152,32 @@ should not cost more than an hour, and the section argues both edges (pulling de
 for now, leaving it too long turns into a regression). It closes the argument the `evolution` unit
 opens, so keep the pair of edges if you rewrite it. Cutting one leaves a lesson that only says
 "later".
+
+`steering` replaced `scoping` in slot four, and the replacement was deliberate rather than a rename:
+task sizing, which folder you open the agent in, and the `.claude` symlink trap were dropped
+outright, so nothing in the tree teaches them any more. `engineering` still draws the symlink in
+`DomainTree` and names it once, and that mention is now terminal on purpose. The unit argues the
+thing the step had no home for, namely what you do while the work is running rather than before or
+after it, and it owns three moves. Two of them are constrained by units either side of it.
+
+Its worktree section is **not** a second telling of `goals`. `goals` argues one worktree as
+isolation from your own day, so a four-hour run does not make your branch unusable. `steering` argues
+one worktree *per agent*, so several run at once without colliding, and closes on the cost `goals`
+does not raise: two agents are two contexts and two bills, and your reading is the bottleneck rather
+than their speed. Keep those two arguments apart. Merged, the step says "use a worktree" twice and
+neither time says why.
+
+The `gaps.md` section turns on its third part and nothing else. Never assume and write the gap down
+are bookkeeping; **stopping** is the lesson, because an agent that logs an assumption and then builds
+on it has told you what it guessed underneath a diff that already depends on the guess. The rule
+belongs in `CLAUDE.md` rather than a prompt, and the unit says so, because you cannot name a gap you
+do not know about yet. Do not soften the stop into "flag it and continue".
+
+The interrupt-or-go-back section deliberately does not name a keystroke. Rewinding to an earlier
+message is described as something "most harnesses let you do", since the binding differs per harness
+and a wrong one dates the unit. It carries the step's only `data-audience="self"` aside outside
+`setup`, `engineering` and `workshop`, which is what keeps the self-learning count level after
+`scoping`'s aside went with it.
 
 An eighth unit, `workshop`, closes the step as its capstone. It is the one part of step 2 a machine
 can grade, because it grades the thing `quality` and `goals` argue for: a goal a build answers yes

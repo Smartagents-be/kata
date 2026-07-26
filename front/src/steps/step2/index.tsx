@@ -9,7 +9,7 @@ import nl from './locales/nl.json'
 import evolution from './units/evolution.html?raw'
 import setup from './units/setup.html?raw'
 import engineering from './units/engineering.html?raw'
-import scoping from './units/scoping.html?raw'
+import steering from './units/steering.html?raw'
 import patterns from './units/patterns.html?raw'
 import quality from './units/quality.html?raw'
 import goals from './units/goals.html?raw'
@@ -57,9 +57,9 @@ const step2: Step = {
       inlineFigures: { 'domain-tree': <DomainTree /> },
     },
     {
-      id: 'scoping',
-      title: 'scoping.title',
-      html: scoping,
+      id: 'steering',
+      title: 'steering.title',
+      html: steering,
     },
     {
       id: 'patterns',

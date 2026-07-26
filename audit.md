@@ -1,472 +1,581 @@
 # Course audit — agentic-engineering kata
 
-**Question asked:** does the material currently in the frontend fill **6 hours** of course, in
-both delivery modes (guided classroom and self-learning), and what topics or information are
-missing? The three throughlines the author is aiming for are **cost consideration**,
-**concepts**, and **hidden gems**.
+**Date:** 26 July 2026. Verified against the working tree at `b99da34`.
 
-> **Two icons run through this document.** Wherever a heading or a line touches one of the
-> author's two signature throughlines, it is marked:
-> - 🪙 **coin — cost consideration.** A point about what something *costs*: tokens re-sent per
->   turn, the CLAUDE.md bill, a long run's token/hours price. Follow the coins to see where the
->   money is (and where the kata talks about it but never puts a number on it).
-> - 💎 **gem — hidden gem.** A non-obvious, high-leverage insight — usually one of the kata's
->   `data-audience="self"` asides, or an advanced move worth surfacing. Follow the gems to find
->   the sharp, memorable bits a first read might miss.
->
-> Concepts (the third throughline) is the connective tissue of the whole document, so it carries
-> no icon. A heading may carry both when a topic is a gem *and* a coin.
+**Question asked:** what is missing, what is inaccurate, what is duplicated, how does the course
+sequence and pace, and what would a professional student still miss? The course goal this audit
+measures against is the author's own: make working professionals **comfortable with AI-driven
+engineering**, **aware of costs**, and **strong enough to make the right decisions**.
 
-**Short answer:** the *conceptual foundation* (step 1) and the *engineering-habits* layer
-(step 2) are strong and unusually well written. But the material as it stands fills roughly
-**2h15–3h** of guided delivery, not 6h, and the gap is concentrated in four places: (1) the
-mechanics under the concepts (tokens, caching, the tool loop, model choice) are asserted but
-never taught first-hand, (2) there is no hands-on lab spine for step 1 — it is read-and-quiz
-only, (3) cost is discussed qualitatively but never *measured*, and (4) whole workflow topics a
-working Java dev meets on day one (reviewing agent output, git hygiene, debugging a stuck agent,
-MCP, subagents) are absent. This document maps what ships, quantifies the gap, and proposes the
-units and a 6h agenda to close it.
-
-> **Status, 25 July 2026.** Work has landed since this audit was written (commits `e25d572`,
-> `3b9862f`, `3d52fbe` and the working tree on top of them). Closed items are marked **✅** and
-> partially closed ones **◐** where they appear below; everything unmarked is still open, verified
-> against the tree on that date. §8 is the tracker.
+This replaces the previous `audit.md` (25 July), which answered a different question ("does this
+fill six hours?"). That document's open tracker is carried forward in §10 rather than discarded.
 
 ---
 
-## 1. Coverage map
+## 1. Verdict
 
-Legend: ● strong · ◐ present but thin · ○ absent. Columns are the author's three throughlines.
+The course is **well written, well designed, and structurally lopsided.**
 
-### step0 — "Start here"
+What is here is unusually good. The prose has a real voice, the exercises withhold the answer
+instead of demonstrating it, everything grades offline, and step 1's teaching of *context* is
+genuinely the best part of the material. Dutch is 100% complete. None of that is common.
 
-| Unit | Teaches | 🪙 Cost | Concepts | 💎 Gems |
-|------|---------|:----:|:--------:|:-----------:|
-| `welcome` | How the kata works; the "three ways to use it" (read alone / reference / guided at the board); the `{}` answer convention; the Hint button | ○ | ○ | ○ |
-| `backend` | The Maven backend is a separate half; offline grading; `mvn verify -Pintro` prints a code | ○ | ○ | ○ |
+Three things hold it back, in order of impact:
 
-Onboarding only, by design. Correct scope.
+1. **The cost goal is asserted, never demonstrated.** There is not a single number anywhere in the
+   16 units. No token count, no price, no percentage, no duration, no model name. A student finishes
+   the course believing cost matters and unable to estimate, measure or reduce it. This is the
+   largest gap against a stated goal.
+2. **Cadence collapses in step 2.** Seven consecutive units, ~4,600 words, with zero quizzes, zero
+   exercises and zero checks, ending abruptly in the hardest lab in the kata. Every quiz in the
+   entire course sits in the first three units.
+3. **The everyday verb is missing.** The course teaches how to *start* an agent well (prompt,
+   scoping, goals) and how to *judge the result* (quality, the build). It never teaches what happens
+   in between: steering a running agent, correcting it mid-flight, recovering when it is stuck, and
+   reading a diff you did not write. For "comfort", that is the gap that matters most.
 
-### step1 — "Context" (the conceptual spine)
-
-| Unit | Teaches | 🪙 Cost | Concepts | 💎 Gems |
-|------|---------|:----:|:--------:|:-----------:|
-| `intro` | Stateless + statistical model; missing vs wrong context; "why this bites hardest in code"; entropy; amnesia / context-fatigue; "more context is not free" | ● | ● | ◐ (the "would this change what the agent does?" aside) |
-| `prompt` | The prompt as the layer you write on purpose; reasoning level; meta-prompting; plan mode; `/clear`, bundling, being exact | ◐ (reasoning-level & meta-prompt cost) | ● | ◐ (run-a-task-through-plan-mode aside) |
-| `session` | Whole transcript re-sent every turn; "sessions are where the money goes"; fixed-does-not-mean-gone; session management as the core skill | ● | ● | ◐ (watch-your-own-session aside) |
-| `harness` | System prompt, tool definitions, skills — the layer you did not write | ○ | ◐ (two sentences only) | ○ |
-| `external` | Fetched material is the least-trusted layer | ○ | ◐ (one paragraph) | ○ |
-| `evaluation` ✅ | **Now a three-task hands-on lab** against the step 1 backend (read the source / trace the run / turn the log level up), graded in the browser by `FlagBoard` against salted hashes | ◐ | ● (synthesis test, now by doing) | ● (the stuck-ladder, and "one you could hand over, one needed you") |
-
-Concepts and cost are genuinely strong here. `harness` and `external` are **still stubs** — 52 and
-41 words respectively, byte-identical to the version this audit measured.
-
-✅ **The "read + quiz + one typed answer" finding is closed.** `evaluation` no longer posts free
-text to the removed `/exercises/{id}/check` endpoint; it is a browser-graded flag board
-(`step1/FlagBoard.tsx`, `step1/flags.ts`) over three flags the `GET /api/titles` pipeline hides, and
-no unit in the tree carries an `exerciseId` any more. The Java side was reworked to support it
-(`Tracer.java` deleted, the DEBUG flag in `AtlasBindingStage`, the dead branch in `VaultDoorStage`).
-The conceptual half now has a working, gradable hands-on element, so the "step 1 has no lab" finding
-below is closed too.
-
-◐ Two side effects worth recording, because this audit measured both. `intro`'s
-"would this change what the agent should do?" self-learning aside was deleted, so step 1 now carries
-**three** gems, not the four D1 corrected it to. And `intro`'s whole prose moved inside
-`data-audience="self"` wrappers, so guided delivery renders only its diagram and quiz: that *trims*
-guided time rather than adding it (see §2).
-
-### step2 — "Agentic engineering" (the habits)
-
-| Unit | Teaches | 🪙 Cost | Concepts | 💎 Gems |
-|------|---------|:----:|:--------:|:-----------:|
-| `setup` | CLAUDE.md (always-on, re-sent every turn); skills (frontmatter, load-on-match, `references/`); hooks introduced | ● (CLAUDE.md "bill you pay per message") | ● | ● (cover-the-body skill test) |
-| `engineering` | Vibe vs engineering; language-as-compression; checks while it runs; DDD + ports-and-adapters; the four-module domain shape | ● (boundaries "five files instead of fifty") | ● | ● (count-files-opened diagnostic) |
-| `scoping` | Task size; which folder you open the agent in; the `.claude` symlink trap; root vs in-domain | ◐ (per-turn reading cost) | ● | ● (ask-what-it-read symlink check) |
-| `patterns` | The third-time rule; CLAUDE.md vs skill vs hook vs **script**; why a script beats prose | ◐ | ● | ◐ |
-| `quality` | The build decides, not the agent; write the standard down; coverage / complexity / mutation; the gamed-proxy warning | ◐ | ● | ◐ |
-| `goals` | Outcome not keystroke; long-running runs; token/hours cost; git worktree | ● (the token/hours quote) | ● | ● (goal + worktree + read-the-diff) |
-| `workshop` | Capstone flag board; 5 flags (coverage floor, complexity ceiling, honest/mutation coverage, statement endpoint via plan mode, native image via plan mode + resource hints + worktree) | ◐ | ● | ● (the whole thing) |
-
-This step is the strongest asset in the kata: it has a real, gradable, hands-on capstone. Cost
-appears repeatedly but always qualitatively — never a number the student computes.
-
-### Throughline verdict
-
-- **Concepts** — well covered for *context and the model as a statistical, stateless,
-  finite-window predictor*, and for *engineering habits*. **Not** covered for the mechanics the
-  concepts sit on: tokens, the tool-use loop, model families, prompt caching, MCP, subagents.
-- 🪙 **Cost** — a genuine and repeated theme (per-turn re-send, CLAUDE.md bill, boundaries cut
-  reading, long-run token/hours). But it is entirely *qualitative*. The student never sees a
-  price, a token count, or a cache-hit line. This is the single biggest "information missing"
-  inside a topic the author already owns.
-- 💎 **Hidden gems** — the `data-audience="self"` asides are excellent and are the kata's signature
-  move. Step 1 and step 2 each carried four such asides, so the imbalance is in *what* they cover,
-  not the count: step 1's are diagnostics for the concepts, step 2's are power-user habits.
-  (Since this audit: step 1 is down to three, one deleted from `intro`, one gained in `evaluation`.
-  ✅ The throughlines are now also *marked in the prose itself* — `shared/lib/icons.ts` plus an
-  expansion pass in `prepareUnit` let a unit drop `<svg data-icon="coin">` inline, and step0's
-  legend gained a third icon, "AI design pattern". The icons were legend-only when this was written.)
-  Several power-features (git worktrees as an everyday habit, background tasks, custom slash
-  commands, MCP, subagents, `/context` and friends) never appear at all.
+Everything else in this document is smaller than these three.
 
 ---
 
-## 2. Time budget — how much course is actually here?
+## 2. Key strengths
 
-Estimated *guided* delivery time (teacher reads/works a unit at the board, runs the quiz or
-exercise, takes questions). Self-paced time is lower on talk, higher on lab.
-
-| Block | Guided | Self-paced |
-|-------|:------:|:----------:|
-| step0 (welcome, backend) | 10 min | 15 min |
-| step1 (6 units + 2 quizzes + 1 graded) | 55–70 min | 45–60 min |
-| step2 (6 prose units) | 55–70 min | 45–60 min |
-| step2 workshop (5 flags, hands-on) | 30–45 min shown / **2–4h if actually done** | 2–4h if actually done |
-| **Total, prose + quizzes** (step0+1+2 rows) | **~2h00–2h30** | **~1h45–2h15** |
-| **Total, if the workshop is truly worked** | **up to ~5–6h** | **up to ~6h** |
-
-◐ **Since this audit, the totals move but the planning figure holds.** The new `evaluation` lab is
-plausibly 30–45 min of real guided work where the row above budgeted a broken typed answer, while
-`intro` and `prompt` shed prose and `intro` went guided-figures-only. Net: prose + quizzes is still
-≈2h15, with the step 1 lab now on top of it rather than absent from it.
-
-**One planning figure to hold on to:** guided prose + quizzes ≈ **2h15**. A realistic 6h guided day
-= foundations + both concept steps + the workflow units + **one** worked workshop flag. The full
-workshop (all five flags) is a **separate half-day session**, not the tail of the first day.
-
-**The pivot point:** the kata already *can* fill 6h — but only if the workshop is run as a real,
-supervised hardening lab (coverage, complexity, mutation, the challenge endpoint, the native
-image). As pure prose-and-quiz it is a ~2.5h course. So the 6h question is really two questions:
-
-1. Is there a **lab spine** so the 6h is spent *doing*, not reading? Today only step 2 has one.
-2. Are the **foundational mechanics and workflow topics** present so a Java dev is not asked to
-   harden a module for a native image before anyone has shown them the tool loop, model choice,
-   how to review agent output, or how to read a token bill?
-
-The gap analysis below closes both.
+| Strength | Evidence |
+|---|---|
+| **Exercises withhold the answer** | Every flag ships the puzzle, not the decode. `forTier` ships as a stub, the native-image hint is deliberately unwritten, the dead branch carries no explaining comment. Enforced consistently across 8 flags. |
+| **Everything grades offline** | Salted SHA-256 in the browser for all quizzes and both flag boards. The course works with the backend down, which is the right call for a classroom. |
+| **`BudgetWindow` is a genuinely smart exercise** | Grades the **exact set**, not the total, so filling the window and then adding the two right calls fails. It defeats the obvious cheat by construction. |
+| **`SpotInjection` teaches a real threat** | Four tool results, two designed to be mistaken for the poisoned one. Prompt injection via MCP is the single most practically important security point for this audience, and it is taught properly. |
+| **Step 1's figure vocabulary is one system** | Teal frame = context, bar = something in it, dashes = what is not. `ToolsInContext` and `McpServer` are deliberately a pair. Diagrams argue rather than decorate. |
+| **The step 2 capstone is real** | Five flags of four different shapes (graded profile, running service, native image), measured by a build rather than by opinion. This is the strongest single asset in the kata. |
+| **Dutch is complete** | 273/273 prose keys across all three steps. Verified, not sampled. |
+| **Prose voice** | Consistent, spoken, no filler, no em-dashes. The `lesson-writing` skill is visibly working. |
+| **Deliberate design is documented** | `CLAUDE.md` records *why* things are shaped as they are, not what they say. Rare and valuable. |
 
 ---
 
-## 3. Gap analysis
+## 3. Topic assignment
 
-Each gap is tagged **[G]** guided / **[S]** self-learning / **[B]** both, and by throughline.
+Every topic the course touches or should touch, classified.
 
-### 3a. Concepts / foundations — the mechanics under the ideas
+**Legend:** ● solid · ◐ thin · ○ missing · ⟳ duplicated · ⚠ inaccurate
 
-- **Tokens & tokenization [B, concepts+cost 🪙].** The whole cost argument rests on "every token is
-  re-sent," yet the student never sees what a token *is*, how text becomes tokens, or how to
-  count them. This is the missing floor under both the concepts and the cost throughline.
-- **The tool-use / agentic loop [B, concepts].** step1 `harness` names tools in two sentences.
-  The student never sees the actual loop: model emits a tool call → harness runs it → result is
-  appended → model continues. This is *the* mechanic that makes an "agent" an agent, and it is
-  the missing link between step1's "context" and step2's "how you work."
-- **Model families & selection [B, concepts+cost 🪙].** `prompt` says "a cheaper model driven
-  through a plan beats a one-shot on the expensive one" but never introduces the model lineup
-  (Opus / Sonnet / Haiku), what each is for, or how to choose. A dev doing real work picks a
-  model daily.
-- **Prompt caching [B, cost 🪙].** The cost story is materially incomplete without it: caching is
-  precisely what makes "the whole session re-sent every turn" affordable, and it changes the
-  advice ("read everything while the file is loaded"). Currently absent.
-- ◐ **Context observability [B, concepts].** The student is told the window fills with entropy but
-  is never shown how to *look* at it (what is in context now, how full it is). Naming the actual
-  affordances (`/context`, `/clear`, compaction) turns an abstract warning into a habit.
-  **Partially closed:** compaction is now taught by name in `intro`'s entropy section and in
-  `session`, with the new `ContextFalloff` figure drawing it. `/context` and actually inspecting the
-  window are still absent.
+### Context and mechanics (step 1)
 
-### 3b. 🪙 Cost — make it measurable, not just cautionary
+| Topic | Where | Status |
+|---|---|:--:|
+| Model is stateless; transcript re-sent | `intro`, `session` | ● |
+| Model is statistical, not a database | `intro` | ● |
+| Missing vs wrong context | `intro` | ● |
+| Entropy in the window | `intro` | ● ⟳ |
+| Amnesia / compaction / context fatigue | `intro`, `session` | ● |
+| The prompt as an authored layer | `prompt` | ● |
+| Reasoning level and thinking tokens | `prompt` | ● |
+| Meta-prompting and plan mode | `prompt` | ● |
+| Bundling work; `/clear` | `prompt`, `session` | ● |
+| Session as the only layer with a time axis | `session` | ● |
+| You authored almost none of it by volume | `session` | ● |
+| Prompt caching | `session`, one clause | ◐ |
+| What a tool is; the tool loop | `tools` | ● |
+| MCP: what it is, wiring one | `tools` | ● |
+| Tool descriptions cost you by existing | `tools` | ● |
+| Tool results are the least trusted layer | `tools` | ● |
+| Prompt injection | `tools` | ● |
+| Harness: what it is, who ships it | `harness` | ● |
+| Billing model (API key vs subscription) | `harness`, one sentence | ◐ |
+| Coordinator / sequential / reflection patterns | `harness` | ● ⚠ |
+| Decomposition | `harness`, named only | ◐ |
+| **Tokens: what one is, how to count** | — | ○ |
+| **Model families and choosing between them** | — | ○ |
+| **Context observability (`/context`, inspecting the window)** | — | ○ |
 
-- **A pricing/economics unit [B, cost 🪙].** Per-token math, input vs output pricing, cache reads
-  vs writes, and a worked example ("this session cost roughly X; here is why turn 40 cost 8× turn
-  1"). The kata talks about cost more than most courses and *shows* it less. Closing this turns
-  the strongest qualitative theme into the most memorable quantitative one.
-- **Measuring spend in practice [B, cost 🪙].** How to actually see what a run cost. Pairs naturally
-  with the `goals` long-run unit ("four hours is not unusual") — right now that number is
-  asserted, never observed.
+### Engineering habits (step 2)
 
-### 3c. Workflow — what a working dev hits on day one
+| Topic | Where | Status |
+|---|---|:--:|
+| Iterate small because a version costs an hour | `evolution` | ● |
+| Walking skeleton; detail work comes later | `evolution` | ● |
+| The one-hour detail rule | `evolution` | ● |
+| `CLAUDE.md`: what belongs, what it costs | `setup` | ● ⟳ |
+| Skills: frontmatter, load-on-match, `references/` | `setup` | ● ⚠ |
+| Hooks | `setup`, `patterns` | ◐ |
+| Vibe coding vs agentic engineering | `engineering` | ● |
+| Domain language as compression | `engineering` | ● |
+| Checks as part of the work | `engineering`, `quality` | ● ⟳ |
+| DDD + ports and adapters | `engineering` | ● |
+| Boundaries cut token cost | `engineering` | ● |
+| Task sizing | `scoping` | ● |
+| Which folder you open the agent in | `scoping` | ● |
+| The `.claude` symlink trap | `scoping`, `engineering` | ● ⟳ |
+| The third-time rule | `patterns` | ● |
+| `CLAUDE.md` vs skill vs hook vs script | `patterns` | ● ⚠ |
+| The build decides, not the agent | `quality` | ● |
+| Coverage, complexity, mutation | `quality`, `workshop` | ● ⟳ |
+| Metrics are proxies and get gamed | `quality`, `workshop` | ● ⟳ |
+| Over-commenting / under-logging | `quality` | ● |
+| Goal vs instruction | `goals` | ● |
+| Long autonomous runs and their price | `goals` | ● |
+| Git worktrees | `goals`, `workshop` | ● ⟳ |
+| **Steering a running agent** | — | ○ |
+| **Recovering a stuck or looping agent** | — | ○ |
+| **Reviewing a diff you did not write** | — | ○ |
+| **Everyday git hygiene with agents** | — | ○ |
+| **Curating inputs (`@`-mentions, spec vs let-it-read)** | — | ○ |
+| **Subagents / delegation as a cost lever** | `harness` names it | ◐ |
+| **Permissions and settings depth** | named only | ◐ |
 
-- **Steering a running agent [B, concepts+gems 💎] — the biggest single miss.** `prompt` teaches how
-  to write a good *initial* instruction (plan mode, being exact), but nothing teaches the everyday
-  verb of *directing*: course-correcting a running agent, interrupting, "no, do it this way,"
-  giving feedback on a partial result, when to steer vs. when to restart. PRODUCT.md defines
-  success as "a developer who can direct an agent well" — and this, the central act of directing,
-  is absent. It outranks tokens, caching, MCP, subagents and permissions on relevance. `recovery`
-  (below) covers the failure case; this is the ordinary case.
-- **Curating the agent's inputs [B, concepts].** `scoping` covers task size and which folder to
-  open in, but not what you put *in front of* the agent: which files to point at, `@`-mentions,
-  when to hand it a spec vs. let it read. The input side of the same skill.
-- **Reviewing & verifying agent output [B, concepts+gems 💎].** step2 `quality` says "the build
-  decides," but reviewing a *diff you did not write* is its own skill (reading for intent, not
-  just green tests). Currently only gestured at ("still you reading the diff").
-- **Debugging a stuck / looping agent [B, gems 💎].** step1 explains entropy as *why* an agent
-  degrades; nothing teaches the recovery move in the moment (when to `/clear`, when to restate,
-  when to abandon the session). This is the practical payoff of the entropy concept.
-- **Git hygiene with agents [B, workflow].** Worktrees appear in `goals`/`workshop` as an
-  advanced move, but the everyday practice — branch per task, small reviewable commits, not
-  letting an agent commit blind — is missing. Natural home: promote it to a first-class habit.
-- **MCP in depth [B, concepts].** step1 `external` names "an MCP server's response" in one clause
-  and moves on. For a team course this deserves its own treatment: what MCP is, wiring a server,
-  and the trust posture (it is the least-trusted layer for a reason).
-- **Subagents / parallel work [S mostly, gems 💎].** Delegating to subagents and running work in
-  parallel is a major power-feature and a cost lever; entirely absent.
-- **Permissions & settings.json depth [B, workflow].** Named in `scoping`/`patterns` as where
-  the rules live, but never taught directly (allow/deny, hooks wiring, the safety posture).
+### Cost — the throughline
 
-### 3d. Delivery-mode gaps
+| Topic | Where | Status |
+|---|---|:--:|
+| Every token is re-sent every turn | `intro`, `session` | ● |
+| Long sessions cost more per message | `intro`, `session` | ● |
+| `CLAUDE.md` is a bill paid per message | `setup` | ● ⟳ |
+| Tool descriptions ride along every message | `tools` | ● |
+| Boundaries reduce reading per turn | `engineering`, `scoping` | ● |
+| Coordinator pattern as a cost saving | `harness` | ● |
+| Long runs burn tokens ("four hours is not unusual") | `goals` | ◐ |
+| **Any actual number** | — | ○ |
+| **Input vs output vs cache pricing** | — | ○ |
+| **How to measure what a run cost** | — | ○ |
+| **Model tiering as the primary cost lever** | — | ○ |
+| **Caching turned into an actionable habit** | — | ○ |
 
-- ✅ **step1 has no lab [B].** *Closed.* It was read + quiz + one typed answer, and the typed answer
-  was unbacked. `evaluation` is now a three-task lab (read the source, trace the run, turn the log
-  level up), each task tied back to the layer it exercises, graded in the browser and so working with
-  the backend down. It lands the highest-leverage addition this audit named for the self-learning
-  track, and does it against the real pipeline rather than the proposed `observing` session walk.
-- **The workshop is under-scaffolded for guided rooms [G].** As a capstone it is excellent solo,
-  but a teacher running it for a room needs checkpoints, expected timings, and a "if you are
-  stuck here, do this" ladder. Today it is one long page.
-- **No instructor guide / timing anywhere [G].** For a 6h guided course, the absence of per-unit
-  timings, demo scripts, and discussion prompts is itself a gap.
+### Decisions and professional judgement
 
-### 3e. Minor accuracy / doc-drift (found in passing)
-
-✅ Both fixed on 25 July 2026, along with three further drifts found while in the files.
-
-- ✅ `PRODUCT.md` described a "two-step curriculum" and omitted the shipped step0. Now three steps,
-  with step0 named. Fixed at the same time: Space Grotesk → Figtree and "Design System v2" → v3 in
-  Brand Commitments; the claim that a single `@SpringBootApplication` scans the whole
-  `be.smartagents.kata.java` tree (each step now has its own, scoped by the default scan); and the
-  free-text line, which read as an outstanding bug rather than the deliberate state it is (no unit
-  uses free text; everything graded is a quiz or a flag board, both in the browser).
-- ✅ `step2/flags.ts`'s docstring said "the three flags the workshop hands out" over five entries. It
-  now says five and names the three places they come from: the graded build, the running service,
-  and a native image's startup log. (Note: "six habits" in the registry and the workshop's "three
-  goals" heading are *not* drift — six prose units and a three-goal graded profile are both correct;
-  the fourth and fifth flags are added on top. `step1/flags.ts`, added since this audit, says three
-  and is correct.)
-
----
-
-## 4. Proposed units and steps to reach 6h
-
-Sized to close the gaps above while respecting the kata's rules: one topic per unit, each a green
-stopping point, and **withhold the student's work** (ship the spec and scaffold, not the answer).
-No full lesson prose here — titles and outlines only.
-
-### New **step "Foundations"** — a *2-unit bridge*, not a mini theory course
-
-Rationale: step1 opens on "context" without grounding the loop/model mechanics every later claim
-leans on. But keep it tight — this is a bridge for people learning to *direct* an agent, not an
-LLM-internals course. Only two units clearly earn a working Java dev's time here:
-
-1. `loop` — the tool-use loop drawn end to end (call → run → append → continue). Ties step1's
-   "context" to step2's "how you work." Figure-driven, like `ContextDiagram`. **[B, concepts]**
-2. `models` — the model families and how to choose; the plan-cheap-model-beats-one-shot claim
-   made concrete with a small side-by-side. **[B, concepts+cost 🪙]**
-
-Tokens/tokenization and prompt caching do **not** each get a unit — they fold into a *single cost
-unit* (below) as worked sections. A live in-browser tokenizer is off-scope for "direct an agent";
-use a static worked example (a real snippet with its token count and per-turn cost) instead.
-
-### New **🪙 cost unit** — make the strongest qualitative theme quantitative (one unit)
-
-3. `economics` — one unit that turns the kata's repeated cost talk into numbers: a token is the
-   billing atom (static worked example), input vs output pricing, what prompt caching does to the
-   curve and how it changes the "load-everything-once" advice, and how to see what a run actually
-   cost. Closes both §3b gaps and the caching/token pieces of §3a. **[B, cost 🪙]**
-
-### New unit(s) inside step1 (give the concepts a lab)
-
-4. ◐ step1 `observing` — a hands-on: open a real session, ask the agent what it has read, watch the
-   window fill, `/clear`, watch it reset. Turns entropy/amnesia from prose into a felt thing. The
-   self-learning track's missing lab. **[B, concepts+gems 💎]**
-   **Largely superseded:** the `evaluation` flag board now provides step 1's lab, and covers the
-   "find out what the agent reaches alone versus what you must put in front of it" half. What is left
-   unbuilt is only the window-watching half: filling the window on purpose, `/clear`, watching it
-   reset. Worth keeping as an aside inside `session` rather than a unit of its own.
-5. Expand `harness` and `external` from stubs into full units. *Still open, untouched.* Target ~step1-unit length each:
-   `harness` = system prompt + tool definitions + skills + hooks framed as *one layer you did not
-   write* (with the `/context` and observability affordances); `external` = MCP (what it is, wiring
-   a server) + the trust posture that makes it the least-trusted layer. **[B, concepts]**
-
-### New **step "Working with an agent"** — the day-one workflow (slots between step2 and the workshop, or extends step2)
-
-6. `steering` — **the core "direct an agent" unit, and the audit's headline addition.**
-   Course-correcting a running agent: interrupting, "no, do it this way," feedback on a partial
-   result, and the steer-vs-restart decision. This is the everyday verb PRODUCT.md names as
-   success and nothing currently teaches. **[B, concepts+gems 💎]**
-7. `review` — reading a diff you did not write; intent vs green build; the security-review reflex
-   on agent code. **[B, concepts+gems 💎]**
-8. `recovery` — debugging a stuck/looping agent; the in-the-moment `/clear`/restate/abandon
-   decision. The practical payoff of step1's entropy. **[B, gems 💎]**
-9. `git` — branch per task, small reviewable commits, worktrees as everyday not exotic;
-   fold the settings.json/permissions safety posture in here as an aside. **[B]**
-10. `delegation` — subagents and parallel work as a scoping + cost lever. Nice-to-have. **[S, gems 💎]**
-11. `mcp` deep dive — nice-to-have; audience-narrow (many teams won't wire servers in a 6h intro).
-
-### Instructor scaffolding (guided track)
-
-12. An `INSTRUCTOR.md` (not a unit): per-unit timings, demo scripts, discussion prompts,
-    workshop checkpoints and the "stuck here → do this" ladder. Closes 3d. **[G]**
-
-Each proposed unit closes a named gap; none ships the student's answer.
+| Topic | Where | Status |
+|---|---|:--:|
+| Naming the outcome so a build can answer it | `goals`, `quality` | ● |
+| Knowing when a task is ready to hand over | `scoping` | ● |
+| Trusting the build over the agent's word | `quality` | ● |
+| **When *not* to use an agent at all** | — | ○ |
+| **What agents are reliably bad at** | — | ○ |
+| **IP, data governance, what may leave the building** | — | ○ |
+| **Licensing of generated code** | — | ○ |
+| **Trust calibration: when to verify, when to accept** | — | ○ |
+| **Team norms: review, disclosure, onboarding colleagues** | — | ○ |
 
 ---
 
-## 5. Hour-by-hour 6h agenda
+## 4. Cadence and sequence
 
-Two tracks. Guided assumes a tutor at the board + a room doing short labs; self-learning assumes a
-learner alone with the site and a terminal. Times include the two 10-min breaks.
+### Measured
 
-**Honest framing first.** A 6h *guided* day realistically delivers **foundations + both concept
-steps + one worked workshop flag** — not the full workshop. The capstone is 2–4h of real work
-(the challenge endpoint and native image are each a plan-mode exercise of their own), so it wants a
-**separate session**, not the last 80 minutes of a full day. The agenda below is paced for that
-truth rather than pretending the workshop compresses.
+| Unit | Words | Figures | Interactive |
+|---|--:|--:|---|
+| step0 / welcome | 381 | 3 | 2 code boxes + quiz |
+| step0 / backend | 155 | 1 | 1 code box |
+| step1 / intro | 1141 | 4 | quiz (3q) |
+| step1 / prompt | 695 | 3 | quiz (3q) |
+| step1 / session | 818 | 1 | **none** |
+| step1 / tools | 995 | 4 | task + SpotInjection + BudgetWindow |
+| step1 / harness | 629 | 3 | PatternMatch |
+| step1 / workshop | 1028 | 0 | FlagBoard (3 flags) |
+| step2 / evolution | 532 | 3 | **none** |
+| step2 / setup | 604 | 1 | **none** |
+| step2 / engineering | 969 | 1 | **none** |
+| step2 / scoping | 620 | 0 | **none** |
+| step2 / patterns | 601 | 0 | **none** |
+| step2 / quality | 572 | 0 | **none** |
+| step2 / goals | 679 | 0 | **none** |
+| step2 / workshop | 1091 | 0 | Workshop (5 flags) |
 
-| Time | Guided (classroom) | Self-learning |
-|------|--------------------|------------|
-| 0:00–0:20 | step0 welcome + backend; get everyone's env running (expect stragglers) | step0; get env running |
-| 0:20–1:05 | **Foundations**: `loop` (demo live) + `models` + the `economics` cost unit (cost math on the board) | Foundations `loop` + `models` + `economics` |
-| 1:05–1:15 | Break | Break |
-| 1:15–2:05 | **step1**: intro + prompt + session (concepts core); run both quizzes as a room | step1 intro/prompt/session + quizzes |
-| 2:05–2:45 | **step1**: harness + external (expanded) + the ✅ `evaluation` flag-board lab, now worked live (its grading moved into the browser, so the room submits normally; the demo-only caveat is retired) | step1 remainder + `evaluation` lab worked solo |
-| 2:45–3:35 | **step2**: setup + engineering + scoping (habits core) | step2 setup/engineering/scoping |
-| 3:35–3:45 | Break | Break |
-| 3:45–4:25 | **step2**: patterns + quality + goals | step2 patterns/quality/goals |
-| 4:25–5:05 | **Working with an agent**: `steering` + `review` + `recovery` (live: interrupt a running agent, correct it, recover a stuck one) | steering + review + recovery + git |
-| 5:05–6:00 | **Workshop, one flag worked end to end** (coverage floor as a supervised hardening lab); complexity, honest-coverage, challenge endpoint and native image set as a **separate follow-up session** | Workshop: work the first flag; rest at own pace |
+### Cadence defects
 
-Both columns land at ~6h. The realism caveats the second GAN pass raised are built in: the room
-loses time to env setup, and the workshop is
-scoped to **one** flag in-class with the rest a named follow-up rather than an 80-minute miracle. If
-even the first flag runs long, the native image is the last thing to attempt — it is explicitly the
-stretch/plan-mode goal. Treating the full workshop as its own half-day is the honest way to use the
-kata's strongest asset.
+**C1 — Step 2 is a 4,577-word prose wall.** Seven units in a row with nothing to do. Four of them
+(`scoping`, `patterns`, `quality`, `goals`) have no figure either, so they are unbroken text. Then
+the student hits a five-flag capstone that is 2–4 hours of real work. That is the worst pacing
+transition in the course: the flattest run leads directly into the steepest climb.
 
----
+**C2 — All quizzes are in the first three units.** step0/`welcome`, step1/`intro`, step1/`prompt`.
+After unit 4 of 16, the course never asks the student a question again until a flag board. Retrieval
+practice stops exactly where the material gets harder.
 
-## 6. Priority verdict — what to build first for 6h
+**C3 — `step1/session` is the step 1 dip.** 818 words, one figure, nothing to do — and it sits
+between two of the most interactive units in the course (`prompt` with a quiz, `tools` with three
+exercises). It is also the unit carrying the most important single idea in step 1 ("careful session
+management is most of what separates people who get good work out of an agent from people who fight
+it") and it has no exercise attached to that claim.
 
-The ranking below reflects the second GAN pass's central correction: rank *directing-the-agent*
-skills above LLM-internals, since that is the kata's stated scope.
+**C4 — Interaction density is inverted against difficulty.** Step 1 (conceptual, easier) carries 4
+interactive components and 2 quizzes. Step 2 (habits, harder, more consequential) carries 1. The
+scaffolding is thickest where the material is thinnest.
 
-**Must-have (without these, 6h is padding, not teaching):**
-1. 💎 **`steering`** — course-correcting a running agent. The central verb of "direct an agent" and
-   currently taught nowhere. Highest relevance for this audience.
-2. 💎 **`review`** — reading a diff you did not write. Arguably the core competency; promoted out of
-   "high-value" because verifying agent output beats tokenization on relevance every time.
-3. ✅ **A step 1 lab** — *shipped*, as the `evaluation` flag board rather than the proposed
-   `observing` unit. The conceptual half now has something to do, and it grades offline.
-4. The **Foundations bridge** (`loop` + `models`) plus **expanding `harness`/`external`** — the
-   on-scope connective mechanics. Note this is *two* bridge units, not a four-unit theory step.
-   *Still open, all three.* With #3 shipped this is now the top unbuilt structural item.
+### Sequence defects
 
-**High-value (turn a good course into a complete one):**
-5. 🪙 The **`economics` cost unit** — one unit that makes the strongest qualitative theme
-   quantitative (token/pricing/caching/measuring folded together). Not four separate mechanics.
-   *Still open, and now more visible:* the inline coin icons mark cost in six places across step 1,
-   so the theme is flagged repeatedly and still never carries a number, a price or a cache line.
-6. **`recovery` + `git`** — the rest of the day-one workflow.
-7. **INSTRUCTOR.md** — the guided track cannot reliably hit 6h without timings and demo scripts.
+**S1 — The default mode hides the foundational unit.** `DEFAULT_MODE` is `guided`
+(`shared/mode/mode.ts`), but `step1/intro`'s entire prose sits inside four `data-audience="self"`
+wrappers. A student who lands on the site and never opens the cogwheel reads the course's
+foundational unit as **two diagrams and a quiz, with no prose at all**. `StepContent` renders `null`
+for filtered-empty content, so nothing signals that anything is missing.
 
-**Nice-to-have (depth, not blockers):** `delegation`/subagents, `mcp` deep dive, permissions
-(fold the last into `git` as an aside rather than a unit).
+This is defensible in a classroom where the tutor delivers `intro` at the board. It is not
+defensible as the default for anyone arriving alone, which is one of the three reading modes
+`welcome` explicitly promises.
 
-**Explicitly de-scoped:** a live in-browser tokenizer, and any standalone prompt-caching or
-LLM-internals unit — off-target for an audience learning to direct an agent; keep only the
-worked cost example inside `economics`.
+**S2 — Audience tagging has produced dangling cross-references.** This is the sharpest structural
+problem, because it breaks in *both* directions:
 
-**Free wins:** ✅ *taken.* The §3e doc-drift items are fixed, plus three more found in the same files.
+- `tools` says "exactly like the three large files from the session unit." That sentence
+  (`session.sessions-where-money.1`) is `data-audience="guided"`. **A self-learner never read it.**
+- `prompt`, `tools` and `session` each refer back to "the entropy from the opening unit." `intro`'s
+  prose is `self`-only. **A guided student never read it** — three dead callbacks to a unit they
+  saw only as diagrams.
 
----
+Every cross-unit reference needs to be checked against the audience of its target. Right now at
+least four land on nothing for one audience or the other.
 
-*This is the generator draft. It is hardened by two adversarial ("GAN") review passes — one for
-completeness/correctness against the actual kata, one for relevance — recorded in §7 below.*
+**S3 — The tutor has one slide.** `shared/deck/slides.tsx` sets `TOTAL = 1` — the opening question,
+"Where lies the line between vibe coding and agentic engineering?" Guided is the *default* mode, and
+there is no presenter material for the remaining 15 units. (step0/`welcome` says "Slides are not
+built yet. They are coming soon," so the content is honest about this; the gap is real, not drift.)
 
-## 7. Adversarial review log
+**S4 — No instructor scaffolding at all.** No `INSTRUCTOR.md`, no per-unit timings, no demo scripts,
+no workshop checkpoints, no "if the room is stuck here, do this" ladder. For a course whose default
+mode is guided, this is the biggest delivery gap after the slides.
 
-### Pass 1 — completeness & correctness (discriminator vs the codebase)
+**S5 — Step 2's order front-loads the heaviest unit.** `engineering` (969 words, DDD + ports and
+adapters + a four-module Maven layout) is unit 3, ahead of `scoping` (620 words). `scoping` is more
+fundamental, more immediately actionable, and needs no architecture background. Consider
+`evolution → setup → scoping → engineering → patterns → quality → goals`. This is a judgement call,
+not a defect, but the current order asks for the most background earliest.
 
-An adversarial reviewer re-verified every coverage claim against the source. The audit's core
-judgments survived: harness/external are stubs, cost is entirely qualitative, step 1 has no
-working lab, five flags ship, MCP appears in a single clause. Seven defects were found and **all
-are now fixed above**:
-
-- **D1** — the "hidden gems concentrated in step 2, step 1 has only three" claim was wrong: step 1
-  and step 2 each carry four self-learning asides. Corrected to "imbalance is in *what*, not count."
-- **D2** — `evaluation` was labeled a working graded exercise; the check endpoint was removed, so
-  it errors on submit. Now stated (and it strengthens the "no step 1 lab" point).
-- **D3** — the §3e doc-drift item was two-thirds wrong: "six habits" and "three goals" are correct,
-  not drift. The only real drift is `flags.ts`'s "three flags" docstring. Rewritten.
-- **D4** — the prose+quiz subtotal (2h15–2h55) overshot its own rows; corrected to 2h00–2h30.
-- **D5** — "self-paced" renamed to the product's own term, "self-learning," throughout.
-- **D6** — `welcome` reframed to its own "three ways to use it," not "two modes."
-- **D7** — the `tokens` lab now carries a build-cost / scope-stretch note and a cheaper first cut.
-
-### Pass 2 — relevance (discriminator on the audit's usefulness)
-
-A second adversarial reviewer judged whether the audit's content is worth a working Java dev's
-course time, given the kata's "direct a coding agent" scope. Its central finding: **the generator
-draft tilted toward LLM-internals and generic completeness and under-weighted directing the
-agent.** The draft has been restructured to fix that:
-
-- **Foundations shrunk from a 4-unit step to a 2-unit bridge** (`loop`, `models`); tokens and
-  caching folded into a single `economics` cost unit; the interactive tokenizer explicitly
-  de-scoped (§4, §6).
-- **The missing headline topic added:** `steering` — course-correcting a running agent — is now
-  the #1 must-have. The reviewer named it "the central verb of 'direct an agent'" and absent from
-  both kata and draft. A secondary miss, curating the agent's inputs, was added to §3c.
-- **`review` promoted to must-have** (was high-value); verifying agent output outranks
-  tokenization for this audience (§6).
-- **§5 agenda made honest:** it now states a 6h guided day realistically covers foundations + both
-  concept steps + workflow + **one** worked flag, with the full workshop a separate session; the
-  broken `evaluation` exercise is marked demo-only (it was scheduled as live grading); env-setup
-  slippage is budgeted.
-- **§2 now commits to one planning figure** (≈2h15 prose+quiz) instead of a 2:1 range.
-- **`harness`/`external` expansion given a target size and content spine** (§4), its one vague
-  actionable item before.
-
-Both passes are folded in. Remaining judgement calls left to the author: whether MCP and
-permissions each deserve a unit (audit says no, fold them), and whether the `economics` unit
-should show live pricing or a static worked example (audit recommends static, for scope).
+**S6 — Step 1's order is sound.** `intro → prompt → session → tools → harness → workshop` builds
+correctly, and the `tools`-before-`harness` swap is right: a student needs to know what a tool is
+before hearing that the harness decides which exist. No change recommended.
 
 ---
 
-## 8. Tracker — status as of 25 July 2026
+## 5. Inaccuracies
 
-Checked against the tree at commits `e25d572`, `3b9862f`, `3d52fbe` plus the working tree on top.
-✅ closed · ◐ partially closed · ○ open, verified untouched.
+Ordered by severity. All verified against the tree.
 
-| # | Item | Where | Status |
-|---|------|-------|:------:|
-| 1 | `steering` — course-correcting a running agent | §3c, §6 must-have 1 | ○ |
-| 2 | `review` — reading a diff you did not write | §3c, §6 must-have 2 | ○ |
-| 3 | A step 1 lab | §3d, §6 must-have 3 | ✅ |
-| 4 | Foundations bridge: `loop`, `models` | §4, §6 must-have 4 | ○ |
-| 5 | Expand `harness` / `external` from stubs | §4.5, §6 must-have 4 | ○ |
-| 6 | `economics` — cost made quantitative (tokens, pricing, caching, measuring) | §3a, §3b, §6.5 | ○ |
-| 7 | Context observability (`/context`, `/clear`, compaction) | §3a | ◐ |
-| 8 | The tool-use loop taught end to end | §3a | ○ |
-| 9 | Model families and selection | §3a | ○ |
-| 10 | `recovery` — the stuck/looping agent | §3c, §6.6 | ○ |
-| 11 | `git` — branch per task, small commits, worktrees as everyday | §3c, §6.6 | ○ |
-| 12 | Curating the agent's inputs (which files, `@`-mentions, spec vs. read) | §3c | ○ |
-| 13 | `delegation` — subagents and parallel work | §3c, nice-to-have | ○ |
-| 14 | `mcp` deep dive | §3c, nice-to-have | ○ |
-| 15 | Permissions / settings.json depth | §3c, fold into 11 | ○ |
-| 16 | Workshop scaffolding for guided rooms (checkpoints, timings, stuck-ladder) | §3d | ○ |
-| 17 | `INSTRUCTOR.md` | §4.12, §6.7 | ○ |
-| 18 | `evaluation` was unbacked free text | §1, §3a, §5, D2 | ✅ |
-| 19 | Doc drift: `PRODUCT.md` "two-step curriculum" (+ fonts, design-system version, the backend scan claim, the free-text line) | §3e | ✅ |
-| 20 | Doc drift: `step2/flags.ts` "three flags" docstring over five flags | §3e | ✅ |
+### High
 
-**What landed that this audit did not ask for**, and is worth knowing before the next pass: the
-throughline icons moved from step0's legend into the prose itself (`shared/lib/icons.ts` plus an
-expansion pass in `prepareUnit`, a third "AI design pattern" icon added); `intro` gained the
-`OneShotCompare` and `ContextFalloff` figures and moved its whole prose behind
-`data-audience="self"`; `prompt` gained `PromptInContext` and was rewritten around "a prompt is the
-basis of the instruction"; and the step 1 backend was reworked to carry the three flags
-(`Tracer.java` removed on purpose, so a plain run no longer prints the trace flag for free).
+**I1 — "This kata has two skills." It has three.**
+Stated in `setup.lead.3` ("the `CLAUDE.md` and the two skills today"), `setup.skills.1` ("This kata
+has two: `lesson-writing` … and `quiz-writing`"), `patterns.lead.2` ("This repository has two of
+those already"), and drawn as two in the `ProjectTree` figure. `.claude/skills/` actually contains
+**`adding-a-step`, `lesson-writing`, `quiz-writing`**. Root `CLAUDE.md` explicitly points students
+at `adding-a-step`. Four places to fix, plus the figure.
 
-The headline for a next pass is unchanged and now sharper: **the two must-haves at the top of §6,
-`steering` and `review`, are still absent**, and they outrank everything else on this list for an
-audience learning to direct an agent.
+**I2 — The `patterns` argument is stale, and its worked example does not exist.**
+`patterns.three-places.4` proposes: "Ask Claude to write the script, once: `scripts/new-step.sh
+step3` creates the folder, both locale files, the unit stub and the registry line." There is **no
+`scripts/` directory** in this repository. Worse, the repo already solved this exact problem the
+*other* way — with the `adding-a-step` skill — so the unit argues for a script while the codebase
+demonstrates a skill, and the student can check.
+
+The path is written in code voice and reads as real. `quality.write-it-down.2` repeats the same
+argument and cross-references `patterns`, so the staleness is in two units.
+
+This one matters more than its size: `patterns` is the unit teaching students to notice when a
+convention needs a home, and its own example is out of date with the repository it points at.
+
+### Medium
+
+**I3 — "The idea comes from GANs" is wrong as lineage.**
+`harness.reflection.1`, on the reflection pattern. Reflection and self-critique in agent systems
+trace to Reflexion, Self-Refine and constitutional/self-critique methods. A GAN is a *loose analogy*
+(one thing produces, another attacks), not an ancestor: GANs are a joint training objective for two
+networks, and nothing in agent reflection is trained. This is the one genuine subject-matter error
+in the course, and it is in front of an audience likely to know it. Recommend rephrasing to "the
+shape is the same as a GAN's" rather than claiming descent.
+
+**I4 — The `SessionMakeup` figure says `/api/titles` returns ten entries.**
+Its first block is "Why does `/api/titles` return ten entries?" and its sixth "And where does the
+tenth one go?" But `tools.connect-one.4` says "Same nine titles either way" and `workshop.lead.2`
+says "Nine book titles come back." The endpoint returns **nine**; ten is the internal count before
+the tenth is dropped.
+
+If this is foreshadowing the trace flag, it is too subtle and lands three units early — a student
+reads it as a plain factual claim about the endpoint and it contradicts two later units. Recommend
+rewording to "why does the pipeline compute ten and return nine?"
+
+**I5 — step0 `backend.lead.2` opens with a broken sentence.**
+English reads: "When a step does, the answer box still grades in your browser…". The Dutch is
+correct: "Als een stap dat vraagt" ("when a step asks for it"). The English lost its object. Per the
+standing convention that Dutch leads when the two disagree, rewrite the English from the Dutch.
+
+**I6 — step0 `backend`'s exercise instruction does not match its exercise.**
+Under "Test yourself" the prose says "Open the project from its directory, go to step 1, and complete
+the tasks it gives you," then renders a code box. But that box's code (`finishCode` in
+`step0/code.ts`) is earned by running `mvn verify -Pintro`, which is shown further up the page only
+as an "indicative" example. The student is told to go to step 1 and simultaneously asked for a code
+step 1 does not produce. Wrong in **both** languages, so this is a content gap rather than
+translation drift.
+
+### Low
+
+**I7 — `settings.json` vs `settings.local.json`.** `setup.skills.7`, `scoping.where-you-start.4` and
+the `ProjectTree` figure all name `settings.json`; the repo has only `.claude/settings.local.json`.
+`setup.lead.3` does hedge ("read the drawing as the shape rather than an inventory"), so this may be
+deliberate. Worth one sentence either way, since `settings.local.json` is the file a student will
+actually find and it is gitignored for a reason worth mentioning.
+
+**I8–I10 — `BudgetWindow`'s line counts do not match the repository.**
+
+| Figure says | Actual |
+|---|--:|
+| `TitleController.java` = 34 lines | 24 |
+| every file under `services/` = 2140 lines | 1250 |
+| "Fifty stage classes" | 52 |
+
+The exercise's design intent is that these are *data* rather than prose, and the grading is on the
+exact set, so nothing breaks. But the task is explicitly framed against *this* repository ("You are
+adding a `?limit=` parameter to `GET /api/titles`"), and a student who checks will find the numbers
+invented. The argument survives at real values: 1250 lines against 24 is still overwhelming. Fixing
+them costs nothing and removes the one thing a sceptical professional would poke at.
+
+Also: the derived claim "longer than the controller by a factor of eight" is 7.6× on the figure's own
+numbers and ~11× against the real 24-line controller.
+
+**I11 — Root `CLAUDE.md` never mentions `step0`.** It documents step1 and step2 in detail and is
+silent on the step that ships first and is the student's entry point. `PRODUCT.md` was fixed and
+correctly says three steps; `CLAUDE.md` was not.
+
+**I12 — Stale HTML comment.** `evolution.html:38` says the slot is "Filled by the **WalkingSkeleton**
+element"; the registry registers `UnitShot`.
+
+**I13 — i18n key drift in `prompt`.** Keys run `plan-mode.1, .3, .4, .5` — `.2` is missing, so a
+paragraph was deleted without renumbering. Separately, the section slug `reasonable-question-not` no
+longer matches its heading ("A prompt is the basis of the instruction"), which breaks the repo's own
+rule that a key is a location rather than a summary.
+
+**I14 — `front/README.md` is still the stock Vite template.**
+
+### Verified correct (stated so the next audit does not re-check)
+
+All three graded thresholds match `FlagRevealIT` exactly (90% coverage, complexity 10, 80%
+mutation). "Forty-one stages restore a string" and "eleven of them comment out the publish" are both
+exact. The `claude mcp add playwright -- npx @playwright/mcp@latest` syntax is correct. Java 25,
+AssertJ, the `graded`/`challenge`/`intro` profiles, the absence of a `native` profile, the pinned
+step 1 main class, the nine titles, and the `MemberStatements.forTier` / `Step2Application` names are
+all accurate.
+
+---
+
+## 6. Duplication
+
+### Genuine repetition worth pruning
+
+| Repeated idea | Where | Note |
+|---|---|---|
+| **Metrics are proxies and get gamed** | `quality.metrics.2`, `workshop.honest.1`, `flag.honest.help` | Stated three times, near-verbatim. `quality` and `workshop` use almost the same sentence ("a hundred percent coverage from tests that assert nothing"). Keep `quality`'s statement of the principle; let `workshop` assume it and just name the mutation goal. |
+| **Complexity ceiling of ten** | `engineering`, `goals` ×2, `quality`, `workshop`, flag hint | Six appearances. The number is fine to repeat as a target; the *argument* for it should be made once. |
+| **The new-step file layout** | `patterns.three-places.1`, `quality.write-it-down.2` | Listed twice, near-identically, and `quality` cross-references `patterns` while restating its conclusion ("identical instead of similar" vs "identical rather than similar"). One list, one owner. |
+| **`CLAUDE.md` is paid per turn** | `setup.claude-md.2`, `patterns.three-places.2`, `quality.write-it-down.3` | `setup` owns it. The other two can reference rather than re-argue. |
+| **The `.claude` symlink** | `engineering.structure.5`, `scoping.where-you-start.4` + its aside | Explained twice. `scoping` is the better home (it is a scoping consequence); `engineering` can name it in passing. |
+| **Git worktrees** | `goals.own-worktree`, `workshop.native.2`, `workshop.collect.2`, `flag.native.help` | Four places. `goals` owns the argument; the workshop mentions should be pointers. |
+| **"Ask the agent what it has read"** | `session.window-not-memory.4`, `tools.connect-one.5` | The same self-aside twice. Differentiate or drop one. |
+| **"`CLAUDE.md` is read at the start of every session"** | `intro.amnesia.3`, `session.window-not-memory.1` | Near-identical sentences. |
+| **"None of this is new"** | `evolution.details.1`, `engineering.structure.10` | The same rhetorical opener twice in one step. |
+| **Entropy** | `intro.entropy`, then back-referenced in `prompt`, `tools`, `session` | The explanation is fine once; the three back-references are the problem, and see **S2** — for guided students they point at prose that was filtered out. |
+
+### Deliberate overlap — leave alone
+
+`intro` and `session` overlap by design, and `CLAUDE.md` documents the reasoning: `session` does not
+re-argue the re-send or the cost per message, and the paragraphs that *do* restate `intro` are
+`data-audience="guided"` precisely because guided students never read `intro`'s prose. That is a
+considered decision, not duplication. It should not appear on a pruning list — but note it is also
+the mechanism that produced the broken cross-references in **S2**, so the decision is sound and its
+execution needs an audit pass.
+
+---
+
+## 7. Missing, against the three course goals
+
+### Goal 1 — comfort with AI-driven engineering
+
+**M1 — Steering a running agent.** *The single biggest miss.* The course teaches how to write a good
+opening instruction (`prompt`, `scoping`, `goals`) and how to judge the finished result (`quality`).
+It never teaches the middle: interrupting, saying "no, do it that way", giving feedback on a partial
+result, and the steer-versus-restart decision. `engineering` gets closest ("Stopping it there costs a
+sentence") but states it as a principle and moves on. For a professional whose day is spent in that
+middle, this is the gap that most affects comfort.
+
+**M2 — Recovering a stuck or looping agent.** `intro` explains entropy as *why* an agent degrades.
+Nothing teaches the move in the moment: when to `/clear`, when to restate, when to abandon the
+session and start over from the code on disk. `session` names `/clear` as a cost lever, not as a
+recovery tool.
+
+**M3 — What agents are reliably bad at.** The course is honest about cost and about trust in tool
+results, but never draws the capability boundary: novel algorithms, cross-cutting refactors without
+clear seams, performance work, anything where the feedback loop is slow or absent. A student with no
+map of the failure modes calibrates by getting burned.
+
+**M4 — Trust calibration.** Related but distinct: a rule of thumb for what to verify and what to
+accept. Right now the implicit answer is "verify everything via the build", which is correct and
+incomplete — `quality` itself admits "automation stops short of taste."
+
+**M5 — The team dimension.** These are professionals in company training. Nothing covers how a team
+adopts this: review norms for agent-written code, whether to disclose it in a PR, how to onboard a
+colleague, what to standardise across a team versus leave to individuals.
+
+### Goal 2 — awareness of costs
+
+**M6 — Any number at all.** Verified across all 16 units: no token count, no price, no percentage,
+no duration, no model name. The word "token" appears 12 times, never with a figure. The cost
+throughline is repeated, well-argued and entirely qualitative. A student leaves convinced cost
+matters and unable to estimate it, measure it, or explain it to a manager who asks what this costs
+per developer per month.
+
+This is the highest-leverage fix available, because the *argument* is already made everywhere. It
+needs one unit that puts numbers on the claims the other units already make.
+
+**M7 — Input vs output vs cache pricing.** `session` says "harnesses cache the front of the pile, so
+what has not changed since the last turn is billed at a fraction" — one clause, never developed. Yet
+this is the mechanic that makes the entire re-send story affordable, and it has a direct behavioural
+consequence: put stable material early, do not invalidate the prefix, batch reads. The course states
+the fact and never extracts the habit.
+
+**M8 — Measuring what a run cost.** `goals` says "a run like this burns a lot of tokens, and four
+hours is not unusual." The student is never shown how to look. A number they observed themselves
+would do more for cost awareness than every qualitative warning in the course combined.
+
+**M9 — Model selection.** Never mentioned. No model family is named anywhere. `prompt` makes the
+claim that "a cheaper model driven through a plan routinely beats a one-shot on the expensive one" —
+which is a *model-selection* claim — without ever introducing the lineup or how to choose. Choosing
+a model is a daily decision and the largest single cost lever a developer controls.
+
+**M10 — Delegation as a cost lever.** `harness` teaches the coordinator pattern and correctly notes
+where the saving sits, but nothing tells a student when to actually reach for a subagent in their own
+work.
+
+### Goal 3 — strength to make the right decisions
+
+**M11 — When *not* to use an agent.** The biggest missing decision aid. Every unit assumes the agent
+is the right tool and optimises how to use it. A course that made professionals *stronger* decision
+makers would name the cases where writing it yourself is faster, where the review cost exceeds the
+generation saving, and where the task is too ill-defined to hand over. `scoping` gets nearest ("when
+you cannot say those three things, the task is not ready to hand over yet") but frames it as "not
+yet", never as "not at all".
+
+**M12 — Reviewing a diff you did not write.** `quality` says "that is still you reading the diff" and
+stops. Reading code for intent when you did not form the intent is a distinct skill from reviewing a
+colleague's PR, and it is now the primary quality gate in an agentic workflow. Named repeatedly,
+taught nowhere.
+
+**M13 — IP, data governance and what may leave the building.** For professionals in *company*
+training this is a live question and it is absent. `tools` covers prompt injection well — the inbound
+threat — but nothing covers the outbound side: which repositories may be opened with an agent, what
+happens to proprietary code in a request, secrets in context, and who at their company decides.
+Students will be asked this by their security team and the course gives them nothing.
+
+**M14 — Licensing and provenance of generated code.** Not mentioned.
+
+**M15 — Everyday git hygiene.** Worktrees appear as an advanced move for four-hour runs. The ordinary
+practice — branch per task, small reviewable commits, never letting an agent commit blind — is
+missing, and it is the practical safety net behind every other recommendation in step 2.
+
+---
+
+## 8. What a professional would still miss
+
+Reading the course end to end as a working Java developer, these are the questions it leaves
+unanswered — ranked by how soon they arise in real use:
+
+1. **"It's going the wrong way — what do I do right now?"** (M1) — arises in hour one.
+2. **"What did that cost, and is it sustainable?"** (M6, M8) — arises the first time someone asks.
+3. **"It's stuck in a loop."** (M2) — arises in week one.
+4. **"How do I review 600 lines I didn't write?"** (M12) — arises immediately and permanently.
+5. **"Which model should I be using?"** (M9) — a daily decision, never addressed.
+6. **"Am I allowed to point this at our codebase?"** (M13) — arises before any of the above, and is
+   the one most likely to stop adoption outright.
+7. **"When should I just write it myself?"** (M11) — the mark of the mature practitioner.
+8. **"What is this bad at?"** (M3) — currently learned by being burned.
+
+Items 1–4 are the practical core of "being comfortable". Item 6 is the one that will be asked by
+someone other than the student, which makes it disproportionately important in a corporate setting.
+
+---
+
+## 9. Prioritised recommendations
+
+### Tier 1 — fix now, cheap, high return
+
+1. **Correct the "two skills" claim** in four places plus the `ProjectTree` figure. (I1)
+2. **Rewrite the `patterns` script argument** so it reflects that `adding-a-step` exists, or create
+   `scripts/new-step.sh` so the claim becomes true. Either resolves it; leaving a fictional path in
+   the unit that teaches conventions is the worst option. (I2)
+3. **Audit every cross-unit reference against its target's audience.** At least four callbacks land
+   on filtered-out prose. (S2)
+4. **Fix step0's broken English sentence and its mismatched exercise instruction.** (I5, I6)
+5. **Correct `BudgetWindow`'s line counts** to the real values — the argument holds at 1250 vs 24.
+   (I8–I10)
+6. **Reword the GAN attribution** to an analogy. (I3)
+7. **Reword the `SessionMakeup` ten-entries line.** (I4)
+8. **Add `step0` to the root `CLAUDE.md`.** (I11)
+
+### Tier 2 — the structural fixes
+
+9. **Break up step 2's prose wall.** The cheapest effective intervention is a short quiz on
+   `engineering`, `scoping` and `quality` — three questions each, browser-graded, using machinery
+   that already exists. That alone fixes C1 and C2. A figure for `scoping` and `goals` would fix the
+   unbroken-text half. (C1, C2, C4)
+10. **Give `session` something to do.** It carries step 1's most important claim and asks nothing.
+    (C3)
+11. **Decide what a default-mode visitor should see in `intro`.** Either default to `self`, or make
+    guided mode show a short summary rather than nothing. Silently rendering an empty foundational
+    unit is the worst of the three options. (S1)
+12. **Write `INSTRUCTOR.md`** — per-unit timings, demo scripts, workshop checkpoints, a stuck-ladder.
+    Guided is the default mode and has the least support. (S4)
+
+### Tier 3 — the content gaps, in order of value
+
+13. **`steering`** — course-correcting a running agent. (M1) *The single highest-value unit to add.*
+14. **`economics`** — one unit that turns the existing cost argument into numbers: what a token is,
+    input vs output vs cache, a worked example of a real session, and how to look at what a run cost.
+    Fold in model selection (M9) as the primary lever. (M6–M9)
+15. **`review`** — reading a diff you did not write. (M12)
+16. **`recovery`** — the stuck agent, and `git` hygiene as its safety net. (M2, M15)
+17. **`boundaries`** — when not to use an agent, what agents are bad at, and the IP/data-governance
+    question. (M3, M11, M13) *For corporate delivery, M13 alone may justify this unit.*
+18. Presenter slides for the guided track. (S3)
+
+### Explicitly not recommended
+
+- Do **not** deduplicate the `intro`/`session` overlap. It is a documented decision.
+- Do **not** add an LLM-internals unit. Tokenizer mechanics, attention, training — off-target for an
+  audience learning to direct an agent. The `economics` unit needs a worked example, not a theory
+  section.
+- Do **not** split MCP into its own unit. `tools` now covers it properly.
+
+---
+
+## 10. Tracker carried forward
+
+From the 25 July audit, re-verified against the tree today.
+
+| # | Item | Status |
+|---|---|:--:|
+| 1 | `steering` — course-correcting a running agent | ○ open |
+| 2 | `review` — reading a diff you did not write | ○ open |
+| 3 | A step 1 lab | ✅ closed (`workshop` flag board) |
+| 4 | Foundations bridge: the tool loop, model families | ◐ loop now argued in `tools`; models still ○ |
+| 5 | Expand `harness` / `external` from stubs | ✅ closed — `harness` 52→629 words + `PatternMatch`; `external`→`tools` now 995 words |
+| 6 | `economics` — cost made quantitative | ○ open |
+| 7 | Context observability (`/context`, `/clear`, compaction) | ◐ compaction taught; inspecting the window still ○ |
+| 8 | The tool-use loop taught end to end | ✅ closed (`tools`) |
+| 9 | Model families and selection | ○ open |
+| 10 | `recovery` — the stuck/looping agent | ○ open |
+| 11 | `git` — branch per task, small commits | ○ open |
+| 12 | Curating the agent's inputs | ○ open |
+| 13 | `delegation` — subagents as a cost lever | ◐ pattern taught in `harness`; the habit still ○ |
+| 14 | `mcp` deep dive | ✅ closed (`tools` + `McpServer` + `connect-one`) |
+| 15 | Permissions / settings depth | ○ open |
+| 16 | Workshop scaffolding for guided rooms | ○ open |
+| 17 | `INSTRUCTOR.md` | ○ open |
+| 18 | `evaluation` was unbacked free text | ✅ closed |
+| 19 | Doc drift: `PRODUCT.md` | ✅ closed |
+| 20 | Doc drift: `step2/flags.ts` docstring | ✅ closed |
+
+**Closed since the last audit:** items 3, 5, 8, 14, 18, 19, 20 — substantial progress, concentrated
+in step 1, which is now the strongest part of the course.
+
+**New in this audit:** the cadence collapse in step 2 (C1–C4), the audience-filtering cross-reference
+breakage (S2), the default-mode empty `intro` (S1), the "two skills" and `scripts/new-step.sh`
+inaccuracies (I1, I2), and the decision-making gaps M11 and M13.
+
+**Unchanged headline:** `steering` and `review` remain the two most valuable absent units, and
+`economics` remains the largest gap against a goal the course explicitly claims.

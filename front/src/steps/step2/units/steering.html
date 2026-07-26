@@ -1,0 +1,105 @@
+<p data-i18n="steering.lead.1">
+  You do not have to wait for it to finish. An agent that opens the wrong file or reaches for a
+  factory nobody asked for says so in its first few steps, and that is the cheapest moment there
+  will ever be. Stop it there, or type the correction while it keeps working. Either one costs you a
+  sentence. Letting it run to the end costs the whole diff, and you read that twice.
+</p>
+
+<p data-i18n="steering.lead.2">
+  What you do with that correction is the decision. There are two moves, they look almost the same
+  from the outside, and they leave very different windows behind.
+</p>
+
+<h2 data-i18n="steering.interrupt-or-go-back.heading">Interrupt, or go back</h2>
+
+<p data-i18n="steering.interrupt-or-go-back.1">
+  The obvious move is to type the correction as a new message. "Not that one, the rule lives in
+  <code>LateFeePolicy</code>." It works. The agent takes the correction and carries on, and you are
+  back on track in one turn.
+</p>
+
+<p data-i18n="steering.interrupt-or-go-back.2">
+  It also keeps everything. The file it should not have opened is still sitting in the window, in
+  full. Your correction sits underneath it. From here on the agent carries the wrong turn and the
+  fix together, and re-sends both on every turn for the rest of the session
+  <svg data-icon="coin"></svg> You paid for the mistake once when it happened. Now you pay for it
+  again, every message.
+</p>
+
+<p data-i18n="steering.interrupt-or-go-back.3">
+  The other move is to go back to the message that sent it wrong and change that message instead.
+  Most harnesses let you do this. Everything after it is dropped, and the agent starts again from
+  your better sentence. The wrong turn is not corrected. It never happened.
+</p>
+
+<p data-i18n="steering.interrupt-or-go-back.4">
+  Choose by asking what the work so far is worth. If it is good and you are adding something it did
+  not know, send a new message. If it is wrong because your request was wrong, go back and fix the
+  request. One adds to the pile. The other takes the wrong turn out of it.
+</p>
+
+<aside data-audience="self" data-i18n="steering.interrupt-or-go-back.5">
+  Worth doing once on something small. Send a deliberately vague request, let the agent start, then
+  go back and edit the request rather than correcting it. Ask it afterwards what it has read. The
+  file from the first attempt is not in the answer.
+</aside>
+
+<h2 data-i18n="steering.worktree-each.heading">A worktree each</h2>
+
+<p data-i18n="steering.worktree-each.1">
+  Steering one agent is a full-time job. Steering three is not three times the work, because most
+  of the waiting overlaps, and the last unit already gave you the tool for it. A worktree is a
+  second checkout of the same repository, on its own branch, in its own folder. Give every agent
+  one.
+</p>
+
+<pre><code>git worktree add ../kata-statement feat/statement
+git worktree add ../kata-native feat/native</code></pre>
+
+<p data-i18n="steering.worktree-each.2">
+  Now two agents work at once and neither can reach the other's files. No half-finished edit from
+  one shows up in the other's <code>mvn test</code>. They come back separately, you review them
+  separately, and you merge the one that is ready without waiting for the one that is not. A run
+  that goes wrong takes down its own folder and nothing else.
+</p>
+
+<p data-i18n="steering.worktree-each.3">
+  Here is the part people do not expect. Two agents are two full contexts and two bills, so
+  parallel is not free <svg data-icon="coin"></svg> And the second cost is yours: you now have two
+  diffs to read that you did not write, arriving at the same time. The agents got faster. Your
+  reading did not. Run as many as you can actually review.
+</p>
+
+<h2 data-i18n="steering.stop-at-the-gap.heading">Make it stop at the gap</h2>
+
+<p data-i18n="steering.stop-at-the-gap.1">
+  An agent will not tell you it guessed. It hits something nobody decided, a tier that has no grace
+  period written down anywhere, a currency the tests never name, and it does what it always does: it
+  picks the most likely continuation and keeps going. The code compiles. The tests you have still
+  pass. You find out at review, if you find out.
+</p>
+
+<p data-i18n="steering.stop-at-the-gap.2">
+  That is not a prompting mistake you can fix per request, because you do not know where the gaps
+  are. If you did, they would not be gaps. So make the rule standing, and put it where it arrives
+  before your first message.
+</p>
+
+<pre><code>## Gaps
+
+Never assume. When something you need is not decided anywhere in
+the repository, stop, write it into `gaps.md`, and ask me.
+Do not pick the most likely answer and carry on.</code></pre>
+
+<p data-i18n="steering.stop-at-the-gap.3">
+  Three parts, and the third is the one that matters. Writing the gap down is bookkeeping. Stopping
+  is the steering. An agent that logs its assumptions in a file and then implements them anyway has
+  told you what it guessed, at the bottom of a diff, after the work is built on top of it.
+</p>
+
+<p data-i18n="steering.stop-at-the-gap.4">
+  What you get back is a short list instead of a long argument. Four questions answered in one pass,
+  rather than four interruptions spread across an afternoon. The file is on disk too, so it outlives
+  the session that produced it. Clear the context, hand back <code>gaps.md</code>, and the decisions
+  you already made are still made.
+</p>
