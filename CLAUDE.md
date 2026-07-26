@@ -133,6 +133,26 @@ already say what the halves are, so a paragraph pointing at them would only say 
 halves live in one SVG so they stay side by side at any width; as two elements they would stack on a
 narrow screen and the comparison would turn into a sequence.
 
+Its other two figures are evidence rather than drawings, and they are a pair: this site as the
+skeleton it started as (the FizzBuzz warm-up on system fonts, one step in the sidebar) and the same
+site with the details in (the header, the palette, the grouped steps, the settings). They replaced
+prose that claimed the same thing, first the origin story in `walking-skeleton` (`GET /api/titles`
+and a page listing titles) and then the whole of what is now `details`, and that swap is the
+decision: the unit argues you get the shape working before you polish it, and two shots of this
+repository doing exactly that carry it better than a sentence asserting it. The paragraphs beside
+them read the pictures, so a replacement image has to keep what they point at, namely the sidebar
+and the question and answer section that were there from the start against the branding, colours,
+settings and navigation that were not. Both render through one component, `UnitShot`, which takes an
+`id` used as both the BEM block and the i18n prefix; a third shot is a file in `front/public/`, a
+slot in the HTML, and two keys per language. The images are served flat the way step 1's comparison
+shots are.
+
+The `details` section is the one place in the step where a habit is stated as a number: a detail
+should not cost more than an hour, and the section argues both edges (pulling detail forward is paid
+for now, leaving it too long turns into a regression). It closes the argument the `evolution` unit
+opens, so keep the pair of edges if you rewrite it. Cutting one leaves a lesson that only says
+"later".
+
 An eighth unit, `workshop`, closes the step as its capstone. It is the one part of step 2 a machine
 can grade, because it grades the thing `quality` and `goals` argue for: a goal a build answers yes
 or no to. It ships a small loans domain under `step2` (see below) that is green but un-hardened, and

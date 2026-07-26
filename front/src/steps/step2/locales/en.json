@@ -40,6 +40,11 @@
   "iteration-paths.start": "where you start",
   "iteration-paths.target": "intended result",
 
+  "walking-skeleton.alt": "An early screenshot of this site: black text on white, one step called Warm-up: FizzBuzz in the sidebar, a notes panel, and a box to type an answer into.",
+  "walking-skeleton.caption": "The first thing this repository rendered, before any of the design system existed.",
+  "added-details.alt": "The course as it looks now: a dark teal header carrying the title, a white card holding a grouped sidebar with ticks against finished pages, and a unit set in the design system's typefaces.",
+  "added-details.caption": "The same course after the detail work: the header, the colours, the grouped steps, and the settings behind the cogwheel.",
+
   "tree.root.note": "the repository root",
   "tree.claude-md.note": "read at the start of every session",
   "tree.dot-claude.note": "everything that configures the agent",

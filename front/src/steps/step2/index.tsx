@@ -2,6 +2,7 @@ import type { Step } from '@/shared/step'
 import { DomainTree } from './DomainTree'
 import { IterationPaths } from './IterationPaths'
 import { ProjectTree } from './ProjectTree'
+import { UnitShot } from './UnitShot'
 import { Workshop } from './Workshop'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
@@ -33,8 +34,13 @@ const step2: Step = {
       id: 'evolution',
       title: 'evolution.title',
       html: evolution,
-      // Sits inside the prose, at the <div data-figure="iteration-paths"> the unit's HTML leaves.
-      inlineFigures: { 'iteration-paths': <IterationPaths /> },
+      // Three slots inside the prose: the drawing under the lead, then this site as the skeleton
+      // it started as and as it looks with the details in.
+      inlineFigures: {
+        'iteration-paths': <IterationPaths />,
+        'walking-skeleton': <UnitShot id="walking-skeleton" src="/walking-skeleton.png" />,
+        'added-details': <UnitShot id="added-details" src="/added-details.png" />,
+      },
     },
     {
       id: 'setup',

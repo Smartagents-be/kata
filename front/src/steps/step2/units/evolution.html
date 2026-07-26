@@ -35,36 +35,51 @@
   structure, and a result that actually comes back.
 </p>
 
+<!-- Filled by the WalkingSkeleton element registered under this name in steps/step2/index.tsx. -->
+<div data-figure="walking-skeleton"></div>
+
 <p data-i18n="evolution.walking-skeleton.2">
-  This repository started exactly there. <code>GET /api/titles</code> returned a handful of book
-  titles and one page listed them, before either half was worth reading about. Everything since has
-  been a change to something that already ran. Ask an agent for a whole system and you get a
-  plausible one. Ask it for the next change to a running one and you can check the answer.
+  This is how the course looked at first. The idea of a sidebar, a question and answer section, some
+  explanation. What it did not have yet: branding, the colours, the styling, a few extras like the
+  settings, and a better way to get around.
 </p>
 
-<h2 data-i18n="evolution.refinement-long-part.heading">Refinement is the long part</h2>
-
-<p data-i18n="evolution.refinement-long-part.1">
-  After the skeleton the work stays small on purpose. One behaviour, a green build, a commit. This
-  kata is built that way from end to end: each step adds one topic on top of the code the previous
-  step left behind, and <code>mvn test</code> passes at the end of every one of them.
+<p data-i18n="evolution.walking-skeleton.3">
+  That is how it grew, too. A lot of the content went in first, and those things arrived after. Ask
+  an agent for a whole system and you get a plausible one. Ask it for the next change to a running
+  one and you can check the answer.
 </p>
 
-<p data-i18n="evolution.refinement-long-part.2">
-  Step size is also what keeps you in charge of the agent. A change you can describe in one
-  sentence is a change you can check in a minute. A change touching nine files is one you will
-  skim, and skimming is the moment a review stops being a review.
+<h2 data-i18n="evolution.details.heading">Adding details</h2>
+
+<p data-i18n="evolution.details.1">
+  None of this is new. Traditional software engineering works the same way. KISS. The detail work
+  comes after. Branding. A filter on a list. An extra attribute on the model, and every place that
+  has to read it.
 </p>
 
-<aside data-audience="self" data-i18n="evolution.refinement-long-part.3">
-  <p>
-    Try it on the next thing you would normally hand over whole. Cut it into three, hand over the
-    first, and count how much of your correcting lands on that first piece. That count is what the
-    other two would have inherited.
-  </p>
-</aside>
+<!-- Filled by the UnitShot element registered under this name in steps/step2/index.tsx. -->
+<div data-figure="added-details"></div>
 
-<p data-i18n="evolution.refinement-long-part.4">
+<p data-i18n="evolution.details.2">
+  That is the same course with the details in. Which side of that line a change falls on is yours to
+  decide as the engineer. Work out the bare minimum that makes something run and matter to the
+  project. The rest is detail work.
+</p>
+
+<p data-i18n="evolution.details.3">
+  Every detail you pull forward is paid for now, and it is one more thing that can break while the
+  shape is still moving. Leaving them too long has a price of its own. Add them late enough and
+  fitting them in breaks what already worked, so you are paying for a regression instead of for
+  functionality.
+</p>
+
+<p data-i18n="evolution.details.4">
+  As a rule of thumb, a detail should not cost you more than an hour. Longer than that and it was not
+  a detail, it was the next step. You get a feel for where that line sits the more you work this way.
+</p>
+
+<p data-i18n="evolution.details.5">
   Every one of those small loops opens the same way, with an agent that knows nothing about your
   project. What it reads before your first message is the next unit.
 </p>
