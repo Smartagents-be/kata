@@ -128,7 +128,7 @@ backend down).
 ## Evidence on Hand
 
 - Working three-step curriculum with real graded exercises (see step1
-  `evaluation` and step2 `workshop`/challenge).
+  `workshop` and step2 `workshop`/challenge).
 - Screenshots in the repo root: `catalog.png`, `step2-engineering.png`, and the
   pair `oneshot-prompt.png` / `prompted-with-dribbble.png` that step1 `intro`
   uses to show what one reference image does to a first draft.

@@ -41,7 +41,7 @@ export interface QuizQuestion {
 /**
  * One page of the kata. A unit covers a single idea: some prose, optionally an exercise under it.
  * Either half may be left out, so a unit can be prose with nothing to submit, or an exercise with
- * no lesson in front of it (the evaluation at the end of a step).
+ * no lesson in front of it (the workshop at the end of a step).
  */
 export interface Unit {
   /** Path segment for this unit, e.g. /steps/step1/prompt. Never translated: it is a URL. */

@@ -1,5 +1,5 @@
 /**
- * The three flags the evaluation board hands out, one per way an agent's context is assembled from
+ * The three flags the workshop board hands out, one per way an agent's context is assembled from
  * the step 1 backend: read the source, trace the run, or flip the config. The plaintext flag is
  * deliberately not here, only a salted SHA-256 of it, so the answer is not sitting in the bundle for
  * a reader to lift. A pasted flag is hashed with the same salt and compared. The salt just makes the

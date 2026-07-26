@@ -16,10 +16,13 @@
   "settings.description": "Language, and how you are working through the kata.",
   "settings.language": "Language",
   "settings.mode": "Self-learning",
-  "settings.mode.on": "Notes are shown",
-  "settings.mode.off": "Exercises only",
   "settings.mode.aria": "Toggle self-learning mode",
+  "settings.presentation": "Presentation",
   "settings.close": "Close",
+
+  "deck.exit": "Leave the presentation",
+  "deck.slide.opening.eyebrow": "Opening question",
+  "deck.slide.opening.question": "Where lies the line between <vibe>vibe coding</vibe> and <agentic>agentic engineering</agentic>?",
 
   "exercise.title": "Your answer",
   "exercise.description": "Graded by the Java service, not the browser.",

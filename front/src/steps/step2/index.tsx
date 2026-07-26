@@ -1,9 +1,11 @@
 import type { Step } from '@/shared/step'
 import { DomainTree } from './DomainTree'
+import { IterationPaths } from './IterationPaths'
 import { ProjectTree } from './ProjectTree'
 import { Workshop } from './Workshop'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
+import evolution from './units/evolution.html?raw'
 import setup from './units/setup.html?raw'
 import engineering from './units/engineering.html?raw'
 import scoping from './units/scoping.html?raw'
@@ -13,18 +15,27 @@ import goals from './units/goals.html?raw'
 import workshop from './units/workshop.html?raw'
 
 /**
- * Step 2, agentic engineering: the six habits that decide whether working with an agent beats
- * writing the code yourself, one unit each. The step opens straight on the first of them.
+ * Step 2, agentic engineering: the habits that decide whether working with an agent beats writing
+ * the code yourself, one unit each. `evolution` opens the step by putting the rest of them in
+ * order: small steps, taken often, on something that already runs.
  *
- * `setup` and `engineering` each carry a drawing, and the closing `workshop` unit carries the flag
- * board, which is why this registry is .tsx. The board is browser-graded, so the step still talks
- * to the service only through the `mvn verify -Pgraded` run the student does outside the app.
+ * `evolution`, `setup` and `engineering` each carry a drawing, and the closing `workshop` unit
+ * carries the flag board, which is why this registry is .tsx. The board is browser-graded, so the
+ * step still talks to the service only through the `mvn verify -Pgraded` run the student does
+ * outside the app.
  */
 const step2: Step = {
   id: 'step2',
   title: 'step.title',
   locales: { en, nl },
   units: [
+    {
+      id: 'evolution',
+      title: 'evolution.title',
+      html: evolution,
+      // Sits inside the prose, at the <div data-figure="iteration-paths"> the unit's HTML leaves.
+      inlineFigures: { 'iteration-paths': <IterationPaths /> },
+    },
     {
       id: 'setup',
       title: 'setup.title',

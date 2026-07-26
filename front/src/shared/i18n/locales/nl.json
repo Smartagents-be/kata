@@ -16,10 +16,13 @@
   "settings.description": "Taal, en hoe je de kata doorloopt.",
   "settings.language": "Taal",
   "settings.mode": "Zelfstudie",
-  "settings.mode.on": "Notities worden getoond",
-  "settings.mode.off": "Alleen oefeningen",
   "settings.mode.aria": "Zelfstudiemodus aan- of uitzetten",
+  "settings.presentation": "Presentatie",
   "settings.close": "Sluiten",
+
+  "deck.exit": "Presentatie verlaten",
+  "deck.slide.opening.eyebrow": "Openingsvraag",
+  "deck.slide.opening.question": "Waar ligt de grens tussen <vibe>vibe coding</vibe> en <agentic>agentic engineering</agentic>?",
 
   "exercise.title": "Jouw antwoord",
   "exercise.description": "Nagekeken door de Java-service. De feedback is in het Engels.",

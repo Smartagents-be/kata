@@ -1,6 +1,7 @@
 {
   "step.title": "Agentic engineering",
 
+  "evolution.title": "Project evolution",
   "setup.title": "Project setup",
   "engineering.title": "Engineering",
   "scoping.title": "Scoping",
@@ -15,7 +16,7 @@
   "workshop.panel.solved": "Solved",
   "workshop.panel.check": "Check",
   "workshop.panel.hint": "Hint",
-  "workshop.panel.placeholder": "{1337-5p34k}",
+  "workshop.panel.placeholder": "{...}",
   "workshop.panel.wrong": "Not that one. Read the flag straight from the build output.",
   "workshop.flag.coverage.label": "Coverage floor",
   "workshop.flag.coverage.hint": "Ninety percent line coverage on the loans domain.",
@@ -32,6 +33,12 @@
   "workshop.flag.native.label": "Native image",
   "workshop.flag.native.hint": "Plan a native image of step 2 that keeps its flag resource. A one-shot compiles but comes up empty.",
   "workshop.flag.native.help": "This is a plan-mode exercise like the statement flag, and a native build punishes guessing because each one costs minutes, so resist one-shotting it. In plan mode, have Claude plan a native image of step 2 pointed at Step2Application, not the pinned step 1 main, using the GraalVM native-maven-plugin and the ahead-of-time step. Build it once and it comes up short: the flag lives in a classpath resource, and a native image keeps only the resources it is told to keep, so the plain build drops it and prints a miss instead of the code. That miss is the spec for the second half. Plan the resource hint it asks for, a RuntimeHintsRegistrar wired with @ImportRuntimeHints that keeps the file in the image, then build once more. This is the goals lesson's long-running outcome, so run it in a git worktree and read the diff, not the agent's word that it is done.",
+
+  "iteration-paths.description": "Two routes from the same start to the same target. On the left, three long steps that stop beside it. On the right, twelve short ones that land in it.",
+  "iteration-paths.few": "Prototyping the old way took weeks",
+  "iteration-paths.many": "With AI you vibecode it in an hour",
+  "iteration-paths.start": "where you start",
+  "iteration-paths.target": "intended result",
 
   "tree.root.note": "the repository root",
   "tree.claude-md.note": "read at the start of every session",

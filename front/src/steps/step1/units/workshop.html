@@ -1,4 +1,4 @@
-<p data-i18n="evaluation.lead.1">
+<p data-i18n="workshop.lead.1">
   This step named the layers an agent's context comes from: the <code>prompt</code>,
   the <code>session</code>, the <code>tools</code> it can reach and the <code>harness</code> it all
   runs in. Each
@@ -6,7 +6,7 @@
   what a layer is holding when the thing holding it does not want to show you.
 </p>
 
-<p data-i18n="evaluation.lead.2">
+<p data-i18n="workshop.lead.2">
   The step 1 backend is your target. It has one endpoint, <code>GET /api/titles</code>, and the
   <code>Catalog</code> page in the sidebar calls it. Nine book titles come back. The pipeline behind
   them computes more than nine lines on every request and throws most of them away before you ever
@@ -14,12 +14,12 @@
   written in leetspeak so you cannot mistake one for a title.
 </p>
 
-<p data-i18n="evaluation.lead.3">
+<p data-i18n="workshop.lead.3">
   You have an agent. Use it. This is where you find out what it reaches on its own and what it can
   only reach because you put something in front of it.
 </p>
 
-<p data-i18n="evaluation.lead.4">
+<p data-i18n="workshop.lead.4">
   Do not expect one prompt to do it. Ask an agent to find the flags in this repo and it comes back
   fast, confident and wrong. Forty-one stages restore a string, eleven of them comment out the line
   that would publish it, and five of those eleven are flags in exactly the same shape. Nothing in the
@@ -28,7 +28,7 @@
   aimed back at you.
 </p>
 
-<p data-i18n="evaluation.lead.5">
+<p data-i18n="workshop.lead.5">
   Start the backend, then work the three sections below. They line up one for one with the three rows
   on the board.
 </p>
@@ -36,22 +36,22 @@
 <pre><code>mvn spring-boot:run
 curl -s localhost:8080/api/titles | jq</code></pre>
 
-<h2 data-i18n="evaluation.read-the-source.heading">Read the source</h2>
+<h2 data-i18n="workshop.read-the-source.heading">Read the source</h2>
 
-<p data-i18n="evaluation.read-the-source.1">
+<p data-i18n="workshop.read-the-source.1">
   One flag sits in the code and never executes. Somewhere in the <code>services</code> package a line
   restores a string inside a branch nothing can reach. Run the service all day and it never fires, so
   no trace will ever print it. Reading is the only way in.
 </p>
 
-<p data-i18n="evaluation.read-the-source.2">
+<p data-i18n="workshop.read-the-source.2">
   This is the layer your agent is best at, and your whole job is aiming it. Give it the
   <code>services</code> package and ask for a branch whose condition cannot be true. To turn the
   literal into text it also needs <code>Scramble</code> open, so say so, or watch whether it goes and
   gets the file itself. Two files in the window and the answer is there.
 </p>
 
-<p data-i18n="evaluation.read-the-source.3">
+<p data-i18n="workshop.read-the-source.3">
   One thing to insist on: make it <em>run</em> the decode rather than reason about it. An agent doing
   character arithmetic in prose will hand you a plausible string with two letters wrong, and it will
   sound just as sure as if it were right. A throwaway <code>main</code> or a line of
@@ -59,14 +59,14 @@ curl -s localhost:8080/api/titles | jq</code></pre>
   that checks.
 </p>
 
-<p data-i18n="evaluation.read-the-source.4">
+<p data-i18n="workshop.read-the-source.4">
   What you have used here is <code>tools</code> context: the code on disk, read back as written. It
   is in the window because a tool went and got it, and nothing else was needed.
 </p>
 
-<h2 data-i18n="evaluation.trace-the-run.heading">Trace the run</h2>
+<h2 data-i18n="workshop.trace-the-run.heading">Trace the run</h2>
 
-<p data-i18n="evaluation.trace-the-run.1">
+<p data-i18n="workshop.trace-the-run.1">
   The second flag is computed while the pipeline runs and dropped before the response is built. No
   amount of reading settles this one, so an agent staring at the source cannot settle it either. It
   has to make the pipeline talk. There is one place every restored string passes through: put a log
@@ -74,23 +74,23 @@ curl -s localhost:8080/api/titles | jq</code></pre>
   again.
 </p>
 
-<p data-i18n="evaluation.trace-the-run.2">
+<p data-i18n="workshop.trace-the-run.2">
   Notice what that costs. The agent edits a file, runs a command and reads the output, and all of it
   lands in the transcript as tool results. That is your <code>session</code> filling up with what
   happened this time round. It is the only layer that knows anything about this run, and it did not
   exist until something was executed.
 </p>
 
-<p data-i18n="evaluation.trace-the-run.3">
+<p data-i18n="workshop.trace-the-run.3">
   Then the part you cannot hand over. Five <code>{leetspoken}</code> lines come out of that trace and
   only one is the flag. They are the same shape and the same length band, and the code gives away
   nothing about which is which. The difference is what they say. One of them is about the thing you
   just did to find it. Your agent has no way to pick. You do.
 </p>
 
-<h2 data-i18n="evaluation.turn-up-the-logs.heading">Turn up the logs</h2>
+<h2 data-i18n="workshop.turn-up-the-logs.heading">Turn up the logs</h2>
 
-<p data-i18n="evaluation.turn-up-the-logs.1">
+<p data-i18n="workshop.turn-up-the-logs.1">
   The third flag is not readable in the source and not present in a normal run. It prints only when
   the log level is high enough. Start the service with debug logging on, call the endpoint again, and
   read the console.
@@ -98,27 +98,27 @@ curl -s localhost:8080/api/titles | jq</code></pre>
 
 <pre><code>mvn spring-boot:run -Dspring-boot.run.arguments=--logging.level.be.smartagents.kata.java.step1=DEBUG</code></pre>
 
-<p data-i18n="evaluation.turn-up-the-logs.2">
+<p data-i18n="workshop.turn-up-the-logs.2">
   Same code, same request, more output. A setting neither you nor the agent wrote decided what was
   visible, and until you changed it neither of you could see past it. That is <code>harness</code>
   context. Your agent sits inside one all day: a system prompt it did not choose and a set of tools
   it was handed, deciding what it can see and do before you type anything.
 </p>
 
-<h2 data-i18n="evaluation.the-board.heading">The board</h2>
+<h2 data-i18n="workshop.the-board.heading">The board</h2>
 
-<p data-i18n="evaluation.the-board.1">
+<p data-i18n="workshop.the-board.1">
   Each flag goes in its box below. The board checks it here in the browser against a hash, so this
   half grades with the backend down. It never tells you the answer. It only confirms you read what
   the pipeline was hiding.
 </p>
 
-<p data-i18n="evaluation.the-board.2">
+<p data-i18n="workshop.the-board.2">
   When all three are in, look back at how you got them. One you could hand over whole. One needed you
   to decide. Knowing which is which, before you start, is most of working well with an agent.
 </p>
 
-<aside data-audience="self" data-i18n="evaluation.the-board.3">
+<aside data-audience="self" data-i18n="workshop.the-board.3">
   <strong>Stuck?</strong>
   <p>
     For the first, look for a stage that folds a value into a small range and then compares it
@@ -132,7 +132,7 @@ curl -s localhost:8080/api/titles | jq</code></pre>
   </p>
 </aside>
 
-<p data-audience="guided" data-i18n="evaluation.the-board.4">
+<p data-audience="guided" data-i18n="workshop.the-board.4">
   Your teacher will run all three live: the branch that cannot fire, a trace of one request, and the
   same request again with debug on, so you can watch one pipeline give up three different things.
 </p>

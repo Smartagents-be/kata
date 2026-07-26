@@ -6,7 +6,7 @@
   "session.title": "The session",
   "harness.title": "The harness",
   "tools.title": "Tools",
-  "evaluation.title": "Find the flags",
+  "workshop.title": "Workshop",
 
   "flags.panel.title": "Flag board",
   "flags.panel.description": "Paste each flag you pried out of the step 1 backend. Checked here in the browser.",
@@ -14,7 +14,7 @@
   "flags.panel.solved": "Solved",
   "flags.panel.check": "Check",
   "flags.panel.hint": "Hint",
-  "flags.panel.placeholder": "{1337-5p34k}",
+  "flags.panel.placeholder": "{...}",
   "flags.panel.wrong": "Not that one. Go back to the pipeline and read what it was hiding.",
 
   "flag.decode.label": "Read the source",

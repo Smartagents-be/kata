@@ -49,7 +49,7 @@ unit.
    `@SpringBootApplication` and whatever it exposes. There is no shared backend shell to register
    with any more, and no shared grading endpoint — a step that wants one builds it.
 
-Step ids are `stepN`, unit ids are words (`session`, `evaluation`), and together they are the
+Step ids are `stepN`, unit ids are words (`session`, `workshop`), and together they are the
 URL (`/steps/step1/session`). No unit carries an `exerciseId` today (the free-text mechanism is
 unused; see the project state notes in `CLAUDE.md`), but the field is still on `Unit`: an exercise
 id is named after what it tests, not after the step or unit, so one step could grow several.

@@ -43,7 +43,7 @@ function writeSolved(solved: Set<string>) {
 }
 
 /**
- * The evaluation's flag board. Each row is one way the step 1 backend hides a value from the
+ * The workshop's flag board. Each row is one way the step 1 backend hides a value from the
  * response: read the source, trace the run, or turn the log level up. Paste the flag you found and
  * the row checks it here in the browser, against a salted hash, so this half works with the backend
  * down. Nothing here talks to the service: the discovery already happened against the running
