@@ -1,7 +1,7 @@
 # Course audit — agentic-engineering kata
 
-**Verified:** 27 July 2026, against `c414a4f` plus the uncommitted step 1 reorder in the working
-tree. Every claim below was re-checked against the tree; nothing is carried forward on trust.
+**Verified:** 27 July 2026, against `dcf4c1d` with a clean working tree. Every claim below was
+re-checked against the tree; nothing is carried forward on trust.
 
 **This document holds open findings only.** Anything solved is deleted rather than ticked, so there
 is no history here and no closure notes to read past. Finding ids (I1, M12, S5, N2) stay stable
@@ -12,31 +12,35 @@ sequence and pace, and what would a professional student still miss? The goals t
 against are the author's own: make working professionals **comfortable with AI-driven engineering**,
 **aware of costs**, and **strong enough to make the right decisions**.
 
-### What `c414a4f` changed, in one paragraph
+### What `dcf4c1d` changed, in one paragraph
 
-Step 1 grew two units and a shared-component layer. `tokens` opens the step with the unit of
-measurement (three figures, no quiz), `model` closes the prose with the tiers, a real price table and
-`PickTheTier`, `session` gained `SurviveTheClear`, `harness` gained its decomposition section, and
-`ConnectBoard` and `TaskCard` were lifted out so the two drag boards and the two task cards share one
-implementation. The working tree then reorders step 1 to `tokens → prompt → tools → intro → session →
-harness → model → workshop`, moving `intro` from first to fourth. The unit HTML has been adapted to
-that order; the repository's own documentation has not, which is **N7**.
+The step 1 reorder landed and was documented. The order is now `tokens → prompt → tools → context →
+session → harness → model → workshop`, and `intro` was **renamed to `context`**, id and all, so its
+URL is `/steps/step1/context` and its prose keys read `context.<section>.<n>`. The oval figures were
+turned into a sequence rather than an empty frame and two fillings of it: `PromptInContext` gave up
+its frame, `ToolsInContext` became the first teal frame in the step, and `ContextDiagram` is drawn
+populated as the payoff. `tools` gained `McpParts` and `McpOvals` on what an MCP server offers plus
+the `ReadYourWindow` task, which is where `/context` is now introduced and used. `model` lost its
+tier-naming lead to a dated caption, gained `model.cost.2` naming the frontier row of `ModelPricing`,
+and took the "API vs subscription" billing section off `harness`. Root `CLAUDE.md` and
+`TokenSplit`'s docstring were brought in line, which closes **N7**; `McpOvals` arrived undocumented,
+which opens **N8**.
 
 ---
 
 ## 1. Verdict
 
 The course is **well written, well designed, and structurally lopsided.** The lopsidedness has
-shifted rather than eased: step 1 absorbed two more units and four more interactive components while
-step 2 stayed exactly where it was.
+shifted rather than eased: step 1 has absorbed two more units, four more interactive components and
+three more figures while step 2 has not been touched.
 
 Three things hold it back, in order of impact:
 
-1. **Cadence collapses in step 2.** Six consecutive units, ~4,250 words, zero quizzes and zero
-   checks, ending in the hardest lab in the kata. Step 1 now runs 6,783 words across eight units with
-   eight interactive components and two quizzes; step 2 runs 6,143 words across eight units with one
+1. **Cadence collapses in step 2.** Six consecutive units, ~4,260 words, zero quizzes and zero
+   checks, ending in the hardest lab in the kata. Step 1 runs 6,802 words across eight units with
+   eight interactive components and two quizzes; step 2 runs 6,144 words across eight units with one
    graded board and one ungraded exercise. The scaffolding is thickest where the material is
-   easiest, and `c414a4f` widened that gap by another two units.
+   easiest, and the last two commits both widened that gap.
 2. **The everyday verb is half there.** `steering` covers interrupting and rewinding. What is still
    missing is recovering when the agent is stuck or looping (**M2**) and reading a diff you did not
    write (**M12**). Both are named in three units apiece and taught in none.
@@ -61,12 +65,13 @@ before anyone gets to lesson one.
 | **The cost throughline now has evidence under it** | `tokens` argues why identifiers cost more than prose, `model`'s `ModelPricing` is the one place in the course a number carries a currency, and `harness`'s "roughly a tenth" for a cache read is checkable against that table's read column by eye. Argument, figure and cross-check agree. |
 | **`BudgetWindow` is a genuinely smart exercise** | Grades the **exact set**, not the total, so filling the window and then adding the two right calls fails. |
 | **`SpotInjection` teaches a real threat** | Four tool results, two designed to be mistaken for the poisoned one. |
-| **Two drag boards, one implementation** | `PatternMatch` and `PickTheTier` are both `ConnectBoard`; `CutItUp` and `SurviveTheClear` are both `TaskCard`. Written after the two boards had already drifted, which is the right time to do it and the wrong time to skip it. |
+| **The shared-component layer is holding** | `PatternMatch` and `PickTheTier` are both `ConnectBoard`; `CutItUp`, `SurviveTheClear` and now `ReadYourWindow` are all `TaskCard`. Written after the two boards had already drifted, and the third task card landed in it rather than beside it, which is the test a shared component actually has to pass. `TaskCard` also grew an optional description in the process, so a caller may leave the key out. |
 | **`NextToken`'s branch tree holds up its own claim** | The invariant is real, not decorative: the first `then` of each pass's leading candidate is the token the next pass takes, verified across all three passes, which is what lets the taken path draw unbroken. |
-| **Step 1's figure vocabulary is one system** | Teal frame = context, bar = something in it, dashes = what is not. `ToolsInContext`/`McpServer` are a pair; `TokenSplit`, `TokenAttention` and `ModelTiers` stay outside the vocabulary on purpose. |
+| **Step 1's figure vocabulary is one system** | Teal frame = context, bar = something in it, dashes = what is not. `ToolsInContext`/`McpServer` are a pair, `McpParts`/`McpOvals` are a second pair on shared columns; `TokenSplit`, `TokenAttention`, `PromptInContext` and `ModelTiers` stay outside the frame vocabulary on purpose. |
+| **The oval figures now escalate rather than repeat** | `PromptInContext` (prompt, no frame) → `ToolsInContext` (first frame, tool across the border) → `McpServer` (same frame, one wire crossing it once) → `McpOvals` (three things, deliberately still unframed) → `ContextDiagram` (populated window). Each earns the next, and `ContextDiagram` is no longer an empty frame shown before there is anything to put in it. |
 | **The step 2 capstone is real** | Five flags of four shapes, measured by a build rather than by opinion. Still the strongest single asset in the kata. |
-| **Dutch is complete** | **340/340** prose keys (21 + 185 + 134), verified rather than sampled. Two new units and a rewritten `harness` landed in one commit and the Dutch kept up with all of it. |
-| **Deliberate design is documented** | `CLAUDE.md` records *why*, not *what*. Rare and valuable — see **N7** for the one place it has fallen behind. |
+| **Dutch is complete** | **340/340** prose keys (21 + 185 + 134), verified rather than sampled. A unit rename, three new figures and a moved section landed in one commit and the Dutch kept up with all of it. |
+| **Deliberate design is documented** | `CLAUDE.md` records *why*, not *what*, and it caught up with the reorder in the same commit that settled it. Rare and valuable — **N8** is the one thing it does not yet mention. |
 
 ---
 
@@ -81,11 +86,11 @@ before anyone gets to lesson one.
 | What a token is; why prose is cheap and ids are dear | `tokens` | ● |
 | Next-token prediction and sampling | `tokens`, `NextToken` | ● |
 | Attention: every pair, backwards only, quadratic | `tokens`, `TokenAttention` | ● |
-| Model is stateless; transcript re-sent | `intro`, `session` | ● |
-| Model is statistical, not a database | `intro`, `tokens` | ● |
-| Missing vs wrong context | `intro` | ● |
-| Entropy in the window | `intro` | ● |
-| Amnesia / compaction / context fatigue | `intro`, `session` | ● |
+| Model is stateless; transcript re-sent | `context`, `session` | ● |
+| Model is statistical, not a database | `context`, `tokens` | ● |
+| Missing vs wrong context | `context` | ● |
+| Entropy in the window | `context` | ● |
+| Amnesia / compaction / context fatigue | `context`, `session` | ● |
 | The prompt as an authored layer; the word *context* defined | `prompt` | ● |
 | Reasoning level and thinking tokens | `prompt`, `model` | ● |
 | Meta-prompting and plan mode | `prompt` | ● |
@@ -95,6 +100,7 @@ before anyone gets to lesson one.
 | Prompt caching, and what invalidates it | `harness` | ● |
 | What a tool is; the tool loop | `tools` | ● |
 | MCP: what it is, wiring one | `tools` | ● |
+| What an MCP server offers, and who decides (prompt / resource / tool) | `tools`, `McpParts`, `McpOvals` | ● |
 | Tool descriptions cost you by existing | `tools` | ● |
 | Tool results are the least trusted layer; prompt injection | `tools` | ● |
 | Harness: what it is, who ships it | `harness` | ● |
@@ -108,7 +114,7 @@ before anyone gets to lesson one.
 
 ### Engineering habits (step 2)
 
-Unchanged by `c414a4f`; re-verified.
+Untouched by `c414a4f` and `dcf4c1d` alike; re-verified.
 
 | Topic | Where | Status |
 |---|---|:--:|
@@ -145,12 +151,13 @@ Unchanged by `c414a4f`; re-verified.
 
 | Topic | Where | Status |
 |---|---|:--:|
-| Every token is re-sent every turn | `intro`, `session`, `tokens` | ● |
+| Every token is re-sent every turn | `context`, `session`, `tokens` | ● |
 | Reading grows faster than the thing read | `tokens` | ● |
 | Prose is cheap, identifiers and JSON are dear | `tokens` | ● |
 | Output is priced above input, and why | `tokens`, `model` | ● |
 | Price per million, per tier, with a currency | `model` / `ModelPricing` | ● |
 | Cache read at a tenth; what invalidates a cache | `harness`, `ModelPricing` | ● |
+| How the rates reach you: a key shows the number, a plan hides it until the limit | `model` | ● |
 | Model tiering as a cost lever | `model` | ● |
 | `CLAUDE.md` is a bill paid per message | `setup` | ● ⟳ |
 | Tool descriptions ride along every message | `tools` | ● |
@@ -197,11 +204,11 @@ slots outside comments, so `harness` reads 4 (three pattern diagrams plus the `C
 | step0 / backend | 104 | 1 | 1 code box |
 | step1 / tokens | 663 | 3 | 3 interactive figures, no quiz, no task |
 | step1 / prompt | 635 | 3 | quiz (3q) |
-| step1 / tools | 1037 | 7 | 2 tasks + SpotInjection + BudgetWindow |
-| step1 / intro | 1030 | 3 | quiz (3q) |
+| step1 / tools | 1037 | 7 | `connect-one` + SpotInjection + BudgetWindow + ReadYourWindow |
+| step1 / context | 1030 | 3 | quiz (3q) |
 | step1 / session | 768 | 2 | SurviveTheClear |
-| step1 / harness | 969 | 4 | CutItUp + PatternMatch |
-| step1 / model | 643 | 3 | PickTheTier |
+| step1 / harness | 966 | 4 | CutItUp + PatternMatch |
+| step1 / model | 665 | 3 | PickTheTier |
 | step1 / workshop | 1038 | 0 | FlagBoard (3 flags) |
 | step2 / evolution | 790 | 3 | ungraded exercise (15 minutes) |
 | step2 / setup | 609 | 1 | **none** |
@@ -212,49 +219,58 @@ slots outside comments, so `harness` reads 4 (three pattern diagrams plus the `C
 | step2 / goals | 681 | 0 | **none** |
 | step2 / workshop | 1096 | 0 | Workshop (5 flags) |
 
-Eighteen units. Step 1 is 6,783 words and step 2 is 6,143, so the two steps are now the same size and
+Eighteen units. Step 1 is 6,802 words and step 2 is 6,144, so the two steps are the same size and
 nothing else about them matches. `model` was the shortest prose unit in the course and is not any
-more: it took the billing section off `harness` and is now four sections, a figure pair and a board.
-`step2 / quality` at 579 words inherits the title, and it has neither a figure nor a check. The step
-1 rows were re-measured on 27 July 2026 and four of them had moved: `tools` grew the two MCP figures
-and the `/context` task, `model` lost its tier-naming lead, `intro` lost the `/context` sentence to
-`tools`, and `harness` drifted by three words. `model` and `harness` moved again the same day when
-"API vs subscription" was written and placed.
+more: it took the billing section off `harness`, gained the paragraph naming the frontier price row,
+and is now four sections, a figure pair and a board. `step2 / quality` at 579 words inherits the
+title, and it has neither a figure nor a check. Every row was re-measured against `dcf4c1d`; the two
+that moved since the last pass are `harness` (down three, the billing sentence leaving) and `model`
+(up twenty-two, the same sentence arriving with `model.cost.2` behind it). `tools` holds seven
+figures, three of them added in the last commit, which is what makes it the widest row in the table
+without being the longest.
 
 ### Cadence defects
 
-**C1 — Step 2 is a 4,250-word prose wall.** `setup`, `engineering`, `steering`, `patterns`,
+**C1 — Step 2 is a 4,258-word prose wall.** `setup`, `engineering`, `steering`, `patterns`,
 `quality`, `goals`: six units in a row with nothing to do. Four of them have no figure either, so
 they are unbroken text. Then the student hits a five-flag capstone that is 2–4 hours of real work.
 The flattest run in the course leads directly into the steepest climb.
 
 **C2 — Every quiz is in the first six units of eighteen.** step0/`welcome`, step1/`prompt`,
-step1/`intro`. After `intro` the course never asks the student a question again until a flag board,
-which is twelve units. The reorder moved both step 1 quizzes but did not spread them: they are now
-units 4 and 6 rather than 3 and 5.
+step1/`context`. After `context` the course never asks the student a question again until a flag
+board, which is twelve units. The reorder moved both step 1 quizzes but did not spread them: they are
+now units 4 and 6 rather than 3 and 5.
 
 **C3 — `tokens` opens the step with nothing to do.** Its three figures are genuinely interactive and
 the unit is right to have no quiz (the figures are the doing, and that is a documented decision).
 Noted here rather than as a defect to fix: it means step 1 opens with a figure-reading unit, and the
 first thing a student is *asked* is now two units in. Watch it if `tokens` grows.
 
-**C4 — Interaction density is inverted against difficulty, and the gap widened.** Step 1 now carries
-eight interactive components and two quizzes; step 2 carries one graded board and one ungraded
-exercise. `c414a4f` added four components and both of them landed in step 1.
+**C4 — Interaction density is inverted against difficulty, and the gap keeps widening.** Step 1
+carries eight interactive components, three interactive figures and two quizzes; step 2 carries one
+graded board and one ungraded exercise. `c414a4f` added four components and `dcf4c1d` added a fifth
+(`ReadYourWindow`); every one of them landed in step 1.
 
 ### Sequence defects
 
-**S1 — The default mode hides `intro`'s entire prose.** `DEFAULT_MODE` is `guided`
-(`shared/mode/mode.ts`), and `intro`'s prose still sits inside `data-audience="self"` wrappers. A
-student who never opens the cogwheel reads that unit as **one diagram and a quiz, with no prose at
-all**; `StepContent` renders `null` for filtered-empty content, so nothing signals the absence.
+**S1 — The default mode hides `context`'s entire prose.** `DEFAULT_MODE` is `guided`
+(`shared/mode/mode.ts`), and all 27 of `context`'s prose blocks sit inside seven
+`data-audience="self"` wrappers. A student who never opens the cogwheel reads that unit as **one
+diagram and a quiz, with no prose at all**; `StepContent` renders `null` for filtered-empty content,
+so nothing signals the absence. Two of the unit's three figures (`oneshot-compare`,
+`context-falloff`) carry the attribute too, so `ContextDiagram` is the only thing left on the page.
 
-The reorder changes the shape of this without fixing it. `intro` is no longer the first thing a
-student meets, and `tokens` and `prompt` now carry the load it used to (`tokens` has no audience
-attribute anywhere, deliberately, and `prompt` now defines the word *context*). So a guided student
-is no longer dropped into an empty page as their first experience. What they still lose is the whole
-of the stateless-model argument and the entropy section. It is no longer where `/context` lives: the
-command moved to `tools`, under the task that runs it, which is outside any audience wrapper.
+The reorder changed the shape of this without fixing it, and `dcf4c1d` left it where it was. `context`
+is no longer the first thing a student meets, and `tokens` and `prompt` carry the load it used to
+(`tokens` has no audience attribute anywhere, deliberately, and `prompt` defines the word *context*).
+So a guided student is no longer dropped into an empty page as their first experience. What they still
+lose is the whole of the stateless-model argument and the entropy section. It is no longer where
+`/context` lives: the command moved to `tools`, under `ReadYourWindow`, which is outside any audience
+wrapper. One thing genuinely improved and is worth recording so nobody re-argues it: the oval
+sequence survives guided mode intact, because none of the `data-figure` slots in `prompt` or `tools`
+carries an audience attribute. So the populated `ContextDiagram` still lands with `PromptInContext`,
+`ToolsInContext` and `McpOvals` behind it even for a student who reads no prose in this unit. What is
+missing in guided mode is the argument, not the pictures.
 
 **S3 — The tutor has one slide.** `shared/deck/slides.tsx` sets `TOTAL = 1`, the opening question.
 Guided is the default mode and there is no presenter material for the other 17 units. step0/`welcome`
@@ -270,31 +286,33 @@ needs no architecture background) is unit 4. Recommend `evolution → setup → 
 …`. What `steering` teaches is a day-one skill; ports and adapters is not. This does not fix **N2**,
 which no ordering fixes. A judgement call, not a defect.
 
-**S6 — Step 1's new order works, and one thing about it is load-bearing.** `tokens → prompt → tools →
-intro → session → harness → model → workshop` puts the two layers a student writes and reads for
-themselves first, and turns `intro` from the first sight of the window into a step back to it. The
-unit HTML has been reworked to match: `prompt` now defines *context* and draws the first frame,
-`intro` opens by pointing at what `prompt` and `tools` already put in that frame, and `tokens`
-declares itself not-a-layer without using the word. The load-bearing part is that `ContextDiagram` is
-no longer the first frame a student meets, `PromptInContext` is, and the empty oval in `intro` only
-argues anything because two units have already drawn things inside it. Anything that reorders these
-again has to visit that chain. The documentation has not caught up: see **N7**.
+**S6 — Step 1's order is settled, and the chain under it is load-bearing.** `tokens → prompt → tools
+→ context → session → harness → model → workshop` puts the two layers a student writes and reads for
+themselves first, and turns `context` from the first sight of the window into a step back to it. The
+unit HTML, the figures and the documentation all agree on it as of `dcf4c1d`, so this is no longer a
+defect. It stays in the audit as the one sequence a future edit can silently break, because four
+things now depend on the order rather than on any single file: `prompt` defines the word *context*
+and `context` must not define it again; `PromptInContext` deliberately has no frame; `ToolsInContext`
+is the first teal frame in the step, which is what the "draws no context frame" notes in `TokenSplit`
+and `TokenAttention` point at; and `ContextDiagram` is drawn populated because three figures have
+already built up to it. Reordering these again means visiting all four, plus `workshop`'s recital of
+the four layers, which is currently correct.
 
 ---
 
 ## 5. Inaccuracies
 
-Ordered by severity. All verified against the tree at `c414a4f` plus the working-tree reorder.
+Ordered by severity. All verified against the tree at `dcf4c1d`.
 
 ### High
 
 **I1 — "This kata has two skills." It has four.** Stated in `setup.lead.3` ("the `CLAUDE.md` and the
 two skills today"), `setup.skills.1` ("This kata has two: `lesson-writing` … and `quiz-writing`"),
 `patterns.lead.2` ("This repository has two of those already"), and drawn as two in the `ProjectTree`
-figure, whose own docstring asserts "CLAUDE.md and the two skills are real". `.claude/skills/` now
-contains **`adding-a-step`, `lesson-writing`, `quiz-writing`, `repo-setup`** — `c414a4f` added the
-fourth. Root `CLAUDE.md` points students at two of the three the unit does not mention. Three prose
-places to fix in both languages, plus the figure and its docstring.
+figure, whose own docstring asserts "CLAUDE.md and the two skills are real". `.claude/skills/`
+contains **`adding-a-step`, `lesson-writing`, `quiz-writing`, `repo-setup`**. Root `CLAUDE.md` points
+students at two of the three the unit does not mention. Three prose places to fix in both languages,
+plus the figure and its docstring.
 
 **I2 — The `patterns` argument is stale, and its worked example does not exist.**
 `patterns.three-places.4` proposes: "Ask Claude to write the script, once: `scripts/new-step.sh
@@ -339,7 +357,7 @@ find and it is gitignored for a reason worth mentioning.
 |---|--:|
 | `TitleController.java` = 34 lines | 24 |
 | every file under `services/` = 2140 lines | 1250 |
-| "Fifty stage classes" | 52 |
+| "Fifty stage classes" | 51 (52 `*Stage.java` files, one of which is the `CatalogStage` interface) |
 
 The numbers are *data* rather than prose and the grading is on the exact set, so nothing breaks. But
 the task is framed against *this* repository ("You are adding a `?limit=` parameter to `GET
@@ -351,18 +369,19 @@ against the real 24-line controller.
 One knock-on: root `CLAUDE.md` records that the exercise's two right calls "come to 37 lines", which
 is 3 + 34. Correcting the controller to 24 makes it 27, so the fix is two files.
 
-**I12 — Three comments describe code that has changed under them.** All internal, none
-student-facing, all cheap:
+**I12 — Two comments describe code that has changed under them.** Both internal, neither
+student-facing, both cheap:
 
 - `evolution.html:38` says the `walking-skeleton` slot is "Filled by the **WalkingSkeleton**
-  element"; the registry binds `UnitShot`. The `added-details` comment eight lines below names
-  `UnitShot` correctly, so two comments about two slots filled by one component disagree.
-- `tokens.html`, above `tokens.one-at-a-time.4`: "it is what the branch button on the figure above is
-  for". `NextToken` has one button and it advances or restarts; the branch tree is drawn without
-  being asked for, which is a documented decision. There is no branch button.
-- `TokenSplit.tsx`'s docstring says `ContextDiagram` "in `intro`" is the first teal frame a student
-  meets and that this figure sits "one page above it". After the reorder it is three pages above, and
-  the first frame is `PromptInContext`. The reasoning still holds; the geography does not.
+  element"; the registry binds `UnitShot` (`steps/step2/index.tsx:41`). The `added-details` comment
+  23 lines below names `UnitShot` correctly, so two comments about two slots filled by one component
+  disagree.
+- `tokens.html:66`, above `tokens.one-at-a-time.4`: "it is what the branch button on the figure above
+  is for". `NextToken` has exactly one `<Button>` and it advances or restarts; the branch tree is
+  drawn without being asked for, which is a documented decision. There is no branch button.
+
+`TokenSplit.tsx`'s docstring was the third entry here and is fixed: it now names `ToolsInContext` in
+`tools` as the first teal frame and explains why `PromptInContext` gave its own up.
 
 **I13 — i18n key drift.** Three units number their keys with a gap, which means a paragraph was
 deleted without renumbering and the key stopped being a location: `prompt.plan-mode` runs
@@ -374,19 +393,26 @@ of the instruction"), which breaks the same rule from the other end.
 
 ### Verified correct (stated so the next pass does not re-check)
 
-All three graded thresholds still match `FlagRevealIT` (90% coverage, complexity 10, 80% mutation).
-"Forty-one stages restore a string" and "eleven of them comment out the publish" are exact, out of 52
-stage classes. `claude mcp add playwright -- npx @playwright/mcp@latest` is correct. Java 25,
-AssertJ, the `graded`/`challenge`/`intro` profiles, the absence of a `native` profile, the nine
-titles, and the `MemberStatements.forTier` / `Step2Application` names are accurate. Every `cd
-kata/stepN/java` path in a unit matches the layout.
+All three graded thresholds still match `FlagRevealIT` (`COVERAGE_FLOOR = 90.0`,
+`COMPLEXITY_CEILING = 10`, `MUTATION_FLOOR = 80.0`). "Forty-one stages restore a string" and "eleven
+of them comment out the publish" are exact, out of 51 concrete stage classes. `claude mcp add
+playwright -- npx @playwright/mcp@latest` is correct. Java 25, AssertJ, the
+`graded`/`challenge`/`intro` profiles, the absence of a `native` profile, the nine titles, and the
+`MemberStatements.forTier` / `Step2Application` names are accurate. Every `cd kata/stepN/java` path in
+a unit matches the layout. `NextToken`'s taken-path invariant holds across all three passes
+(`timed → out`, `out → .`); `tokens.reads-all.3`'s arithmetic is right (7 tokens → 21 pairs, 14 → 91,
+not 42); `TokenSplit`'s prose row does contain a word that breaks (`unscrambled` at `unscr`/`ambled`,
+six of seven words whole).
 
-New this pass: `NextToken`'s taken-path invariant holds across all three passes (`timed → out`,
-`out → .`); `tokens.reads-all.3`'s arithmetic is right (7 tokens → 21 pairs, 14 → 91, not 42);
-`TokenSplit`'s prose row does contain a word that breaks (`unscrambled` at `unscr`/`ambled`, six of
-seven words whole); the three step 1 figures carry exactly the captions the design calls for
-(`TokenSplit` names its tokeniser, `NextToken` admits its scores are illustrative, `TokenAttention`
-has none); and Dutch is complete at 331/331 prose keys.
+New this pass, all four of the by-eye checks `ModelPricing` is built to support hold against its own
+rows: input at $1 / $3 / $5 across the three tiers, output at exactly five times input in every one of
+the four rows, a cache read at a tenth of input in every row, and Fable at $10 as the ceiling above
+the three. Sonnet is at its standing $3 rather than the introductory rate, as documented. The unit
+label (`pricing.unit`) sits above the table and outside the scrolling box, and the caption carries the
+month and nothing else. `ReadYourWindow` ticks once to `kata.step1.window`, inside the prefix
+`shared/lib/reset.ts` clears, alongside `kata.step1.cut` and `kata.step1.survive`. Dutch is complete
+at 340/340 prose keys, counted against every `data-i18n` key in every unit's HTML with comments
+stripped.
 
 ---
 
@@ -402,14 +428,20 @@ has none); and Dutch is complete at 331/331 prose keys.
 | **`CLAUDE.md` is paid per turn** | `setup.claude-md.2`, `patterns.three-places.2`, `quality.write-it-down.3` | `setup` owns it. The other two can reference rather than re-argue. |
 | **Git worktrees** | `goals.own-worktree`, `steering.worktree-each`, `workshop.native.2`, `workshop.collect.2`, `flag.native.help` | The two *arguments* are correctly split (`goals`: isolation from your own day; `steering`: one per agent). The **definition** is written twice. `steering` reads first, so it should keep the definition and `goals` should assume it. See **N2**. |
 | **"Ask the agent what it has read"** | `session.window-not-memory.4`, `tools.connect-one.5`, `steering.interrupt-or-go-back.5` | Three self-asides asking for the same move. `steering`'s has the best reason to exist (there, the answer proves something). `session` and `tools` are the pair to thin. |
-| **"`CLAUDE.md` is read at the start of every session"** | `intro.amnesia.3`, `session.window-not-memory.1` | Near-identical sentences. |
+| **"`CLAUDE.md` is read at the start of every session"** | `context.amnesia-context-fatigue.3`, `session.window-not-memory.1` | Near-identical sentences. `context`'s is inside a `self` wrapper, so in guided mode only `session`'s is read; that is a reason to keep `session`'s, not a reason to keep both. |
 | **"None of this is new"** | `evolution.details.1`, `engineering.structure` | The same rhetorical opener twice in one step, word for word. |
 
 ### Deliberate overlap — leave alone
 
-`intro` and `session` overlap by design, and `CLAUDE.md` documents the reasoning; the paragraphs that
-restate `intro` are `data-audience="guided"` precisely because guided students never read `intro`'s
-prose. Do not put it on a pruning list.
+`context` and `session` overlap by design, and `CLAUDE.md` documents the reasoning; the paragraphs
+that restate `context` are `data-audience="guided"` precisely because guided students never read
+`context`'s prose. Do not put it on a pruning list.
+
+`McpParts` and `McpOvals` say the same three words one screen apart, and that is a pair rather than a
+repetition: the cards sort the three by who decides, the ovals restate them as the shapes the step
+draws things in, on the cards' own columns, so the eye tracks straight down. They share the
+`mcp-parts.*.name` keys, which is what stops the two from drifting. Deduplicating them removes the
+bridge into `ContextDiagram`.
 
 `tokens` is the new pressure point and it holds. It touches output pricing and prompt caching and
 hands both off in one sentence naming the unit that owns them (`model`, `harness`), which is the same
@@ -427,8 +459,9 @@ refreshed with them.
 
 ### Goal 1 — comfort with AI-driven engineering
 
-**M2 — Recovering a stuck or looping agent.** The biggest miss. `intro` explains entropy as *why* an
-agent degrades. Nothing teaches the move in the moment: when to `/clear`, when to restate, when to
+**M2 — Recovering a stuck or looping agent.** The biggest miss. `context` explains entropy as *why* an
+agent degrades, and in guided mode that argument is not on the page at all (**S1**). Nothing teaches
+the move in the moment: when to `/clear`, when to restate, when to
 abandon the session and start over from the code on disk. `session` names `/clear` as a cost lever
 and now as a test of what survives it, not as a recovery tool. `steering` teaches the correction you
 make when the agent is going the wrong way, which is a different situation from the one where it is
@@ -447,23 +480,30 @@ accept. The implicit answer is "verify everything via the build", which is corre
 
 **M5 — The team dimension.** These are professionals in company training. Nothing covers how a team
 adopts this: review norms for agent-written code, whether to disclose it in a PR, how to onboard a
-colleague, what to standardise across a team versus leave to individuals.
+colleague, what to standardise across a team versus leave to individuals. The course now touches the
+team exactly once, in `model`'s billing section, which asks who holds the API key in a company and
+deliberately stops there. That is a foothold rather than coverage, and it is in the wrong step for
+the habits half of the course.
 
 ### Goal 2 — awareness of costs
 
-**M6 — The numbers never meet.** Narrowed hard by `c414a4f` and not closed. `tokens` gives the unit
-and its ratios, `model` gives dollars per million per tier, `harness` prices a cache read. No unit
-multiplies any of it. There is no worked example anywhere: no "this session was 40k tokens in and 6k
-out, here is the bill", no cost for a step 1 flag hunt, no number a student could take to a manager
-who asks what this costs per developer per month. Everything needed to build that example is now in
-the tree, in two adjacent units, which makes the omission cheaper to fix than it has ever been and
-more conspicuous.
+**M6 — The numbers never meet.** Narrowed hard over the last two commits and not closed. `tokens`
+gives the unit and its ratios, `model` gives dollars per million per tier, `harness` prices a cache
+read. No unit multiplies any of it. There is no worked example anywhere: no "this session was 40k
+tokens in and 6k out, here is the bill", no cost for a step 1 flag hunt, no number a student could
+take to a manager who asks what this costs per developer per month. Everything needed to build that
+example is in the tree, in two adjacent units, which makes the omission cheaper to fix than it has
+ever been and more conspicuous.
 
 **M8 — Measuring what a run cost.** `goals` says "a run like this burns a lot of tokens, and four
 hours is not unusual." The student is never shown how to look. A number they observed themselves
-would do more for cost awareness than every qualitative warning in the course combined. With
-`ModelPricing` in the tree, an observed token count is now one multiplication away from an observed
-bill.
+would do more for cost awareness than every qualitative warning in the course combined. Two things
+narrowed this and neither closes it. `ReadYourWindow` now has the student read a real token count off
+their own `/context`, twice, and subtract, so the course does put one observed number in front of
+them: what a connected MCP server costs by existing. And `model`'s billing section names *why* they
+may not be able to look, which is that a subscription hides the number until the cost arrives as
+waiting. What is still missing is the step from an observed count to an observed bill, which is one
+multiplication against a table two units away.
 
 **M10 — Delegation as a cost lever.** `harness` teaches the coordinator pattern and `model` adds why
 the split works (the small tiers are fine-tuned on the large one's output). Neither tells a student
@@ -491,7 +531,9 @@ workflow.
 training this is a live question and it is absent. `tools` covers prompt injection well, which is the
 inbound threat; nothing covers the outbound side: which repositories may be opened with an agent,
 what happens to proprietary code in a request, secrets in context, and who at their company decides.
-Students will be asked this by their security team and the course gives them nothing.
+Students will be asked this by their security team and the course gives them nothing. `model`'s
+billing section gets nearest, since it ends on who holds the key, and it is explicitly scoped to what
+the arrangement makes visible rather than to procurement, so it is not a partial answer to this.
 
 **M14 — Licensing and provenance of generated code.** Not mentioned.
 
@@ -534,8 +576,9 @@ disproportionately important in a corporate setting.
    conventions is the worst option. (I2)
 3. **Cut `steering`'s claim that the previous unit introduced worktrees.** The next sentence already
    defines one from scratch, so nothing is lost. (N2)
-4. **Bring the documentation back in line with the step 1 order** now that the reorder is settled:
-   root `CLAUDE.md`, `TokenSplit`'s docstring, and the two stale comments beside them. (N7, I12)
+4. **Fix the two stale comments** — `evolution.html:38`'s `WalkingSkeleton` and `tokens.html:66`'s
+   branch button — and **document `McpOvals`** in root `CLAUDE.md`, which currently has `McpParts`
+   closing a section it no longer closes. (I12, N8)
 5. **Correct `BudgetWindow`'s line counts** to the real values, and the "37 lines" in root
    `CLAUDE.md` with them. The argument holds at 1250 against 24. (I8–I10)
 6. **Fix step0's mismatched exercise instruction**, both languages. (I6)
@@ -549,19 +592,21 @@ disproportionately important in a corporate setting.
     already exists. That alone fixes C1 and C2. A figure for `steering` would fix the unbroken-text
     half and is the better candidate of the four: interrupt-versus-rewind is two windows side by
     side, which is exactly what step 1's figure vocabulary already draws. (C1, C2, C4)
-12. **Decide what a default-mode visitor should see in `intro`.** Either default to `self`, or make
+12. **Decide what a default-mode visitor should see in `context`.** Either default to `self`, or make
     guided mode show a short summary rather than nothing. Silently rendering a prose-less unit is the
-    worst of the three options. What it costs is now the stateless-model argument and the entropy
-    section rather than a command, since `/context` left for `tools`. (S1)
+    worst of the three options. What it costs is the stateless-model argument and the entropy section
+    rather than a command, since `/context` left for `tools`; the oval figures survive the filter, so
+    the fix is about the argument and not about the pictures. (S1)
 13. **Write `INSTRUCTOR.md`** — per-unit timings, demo scripts, workshop checkpoints, a stuck-ladder.
     Guided is the default mode and has the least support. (S4)
 
 ### Tier 3 — the content gaps, in order of value
 
-14. **A worked cost example, wherever it fits.** Not a unit any more: `tokens` and `model` did the
-    heavy lifting, so what is left is one figure or one section that multiplies a real session's
-    token count by a real rate and shows the student how to see both. The nearest host is `model`,
-    which already carries the rate, or `session`, which already argues about what fills the window.
+14. **A worked cost example, wherever it fits.** Not a unit any more: `tokens`, `model` and
+    `ReadYourWindow` did the heavy lifting, so what is left is the multiplication. The cheapest
+    version is one more move on `ReadYourWindow`, which already has the student reading a real token
+    count twice: multiply it by the input rate from `ModelPricing` and they have priced their own
+    window. The alternative host is `model`, which carries the rate but no observed count.
     (M6, M8)
 15. **`review`** — reading a diff you did not write. Three units name this as the bottleneck. (M12)
 16. **Recovery, as a section inside `steering` rather than a unit.** The stuck or looping agent, and
@@ -574,13 +619,20 @@ disproportionately important in a corporate setting.
 
 ### Explicitly not recommended
 
-- Do **not** deduplicate the `intro`/`session` overlap. It is a documented decision.
+- Do **not** deduplicate the `context`/`session` overlap. It is a documented decision.
+- Do **not** merge `McpParts` and `McpOvals`. They are a deliberate pair on shared columns and
+  shared keys, and the second is the bridge into `ContextDiagram`.
 - Do **not** add an LLM-internals unit. `tokens` now covers exactly as much of tokenisation,
   sampling and attention as a student directing an agent can act on, and it stops there on purpose.
   Anything past that is off-target.
-- Do **not** split MCP into its own unit. `tools` covers it properly.
-- Do **not** turn `ModelPricing` into a reference table. It is placed between two paragraphs as
-  evidence for a ratio, and the paragraph under it tells the student not to learn the numbers.
+- Do **not** split MCP into its own unit. `tools` covers it properly, and with `McpParts` and
+  `McpOvals` joining `McpServer` that section is now three figures and a definition deep.
+- Do **not** turn `ModelPricing` into a reference table, and do **not** drop its frontier row.
+  `model.cost.2` names that row as a ceiling on purpose, and the table is placed under the
+  one-three-five paragraph as evidence for a ratio rather than as a price list.
+- Do **not** fix **S1** by writing `/context` back into `context`. Whichever way the audience
+  question is settled, the command's introduction belongs with the task that runs it, which is
+  `ReadYourWindow` in `tools`.
 
 ---
 
@@ -589,7 +641,7 @@ disproportionately important in a corporate setting.
 | # | Item | Note |
 |---|---|---|
 | 2 | `review` — reading a diff you did not write | named in three units, taught in none |
-| 6 | A worked cost example | narrowed to one figure or section; the rate and the unit both exist now |
+| 6 | A worked cost example | narrowed to one move on `ReadYourWindow`; the rate, the unit and an observed count all exist now |
 | 10 | `recovery` — the stuck/looping agent | has a home to go into (`steering`) |
 | 11 | `git` — branch per task, small commits | worktrees taught in two units, the plain practice under them in none |
 | 12 | Curating the agent's inputs | `CutItUp` works one real problem; `@`-mentions and spec-versus-let-it-read still missing |
@@ -618,15 +670,18 @@ other worktree section is in `goals`, three units *later*. No reordering fixes t
 the next sentence already defines a worktree from scratch, so nothing is lost and `goals` becomes the
 one that refers back.
 
-**N7 — the repository's documentation describes the previous step 1 order.** The working tree runs
-`tokens → prompt → tools → intro → session → harness → model → workshop` and the unit HTML has been
-reworked to match. Root `CLAUDE.md` still lists the order as `tokens, intro, prompt, session, tools,
-harness, model, workshop`, still says that order is the registry's, and still carries two claims that
-the reorder inverted: that `ContextDiagram` is the first frame a student meets (`PromptInContext` is)
-and that `intro` defines the word *context* (`prompt` does). `workshop`'s recital of the four layers
-is correct against the new order and was wrong against the old one, so that sentence needs no change.
+**N8 — `McpOvals` is in the tree and in no documentation.** `tools` renders seven figures and
+`mcp-ovals` is the fourth of them, between `McpParts` and the "list itself is in the window" section.
+Root `CLAUDE.md` does not mention it anywhere, and the sentence it does carry is now wrong in a way
+that will mislead the next edit: "`McpParts` is the third figure and **closes that section**". It does
+not; `McpOvals` does. The component's own docstring is thorough about why it exists and what is
+load-bearing in it (the shared columns, the borrowed `ContextDiagram` radii and fills, the shared
+`mcp-parts.*.name` keys, the deliberate absence of a frame), so nothing is undocumented at the file
+level. What is missing is the one place a reader looks to find out that the figure exists at all.
 
-This is the highest-value documentation fix in the repo right now, because `CLAUDE.md` is the file
-that tells the next person what is deliberate. A stale claim there costs more than a stale comment:
-it is the only place recording *why* the empty oval in `intro` argues anything, and that reasoning
-now depends on a different unit than the one it names.
+This is a small fix with a specific risk behind it. Root `CLAUDE.md` sets out the oval sequence as
+three figures (`PromptInContext` → `ToolsInContext` → `ContextDiagram`) and states the frame decision
+for each. `McpOvals` is a fourth step in that sequence with a frame decision of its own, and that
+decision is recorded only in the component and in a comment in `tools.html`. So the file that exists
+to tell the next person what is deliberate is the one place that would let them add a frame to it
+without knowing they were breaking anything.
