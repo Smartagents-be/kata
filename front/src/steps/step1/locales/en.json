@@ -351,5 +351,54 @@
   "quiz.reasoning-level.bigger-model": "The harness moved you to a larger model, which is where both the extra cost and the better answer came from.",
   "quiz.reasoning-level.read-more": "The agent read more of your repository before answering, so it simply had more of your code in front of it.",
   "quiz.reasoning-level.bigger-window": "You were given a larger context window for that turn, so less of the conversation had to be left out.",
-  "quiz.reasoning-level.explanation": "The reasoning level controls how much thinking happens before the answer, not which model runs or how much of your project gets read. You pay for that thinking, and what it buys is tolerance for a rougher prompt."
+  "quiz.reasoning-level.explanation": "The reasoning level controls how much thinking happens before the answer, not which model runs or how much of your project gets read. You pay for that thinking, and what it buys is tolerance for a rougher prompt.",
+
+  "deck.tokens.split.title": "A model does not read words",
+  "deck.tokens.split.note": "Prose is the cheapest thing you can hand it. Identifiers and hashes are the dearest, and a codebase is made of those.",
+  "deck.tokens.next.title": "It writes one token at a time",
+  "deck.tokens.attention.title": "And it reads all of it, every turn",
+  "deck.tokens.attention.note": "Seven tokens is twenty-one pairs. Fourteen is ninety-one, not forty-two.",
+
+  "deck.prompt.in-context.title": "The part you wrote is the smallest part",
+  "deck.prompt.bundle.title": "Three questions, or one",
+  "deck.prompt.exact.title": "Be exact about what changes",
+  "deck.prompt.plan.title": "Precision was the missing ingredient, <hi>not model size</hi>",
+
+  "deck.tools.in-context.title": "The tool runs outside the window",
+  "deck.tools.in-context.note": "Only the result crosses back in, and it crosses back in as ordinary text.",
+  "deck.tools.mcp.title": "One wire, and everything on it is in your window",
+  "deck.tools.parts.title": "Read them by who decides",
+  "deck.tools.injection.title": "A tool result is the <hi>least trustworthy</hi> thing in the window",
+  "deck.tools.injection.note": "Nothing in there marks who wrote what.",
+  "deck.tools.budget.title": "Which two calls answer the question?",
+
+  "deck.context.diagram.title": "Different sources, one block of text",
+  "deck.context.oneshot.title": "Same prompt. One reference pinned.",
+  "deck.context.falloff.title": "The model did not get tired. <hi>The evidence left the room.</hi>",
+  "deck.context.entropy.title": "Disorder rises every turn unless someone <hi>spends energy</hi>",
+  "deck.context.entropy.note": "Nothing was deleted. The deciding line is still in there, weighed as less important than the bulk around it.",
+
+  "deck.session.makeup.title": "You typed half a percent of it",
+  "deck.session.clear.title": "The one layer you can still <hi>throw away</hi>",
+  "deck.session.clear.note": "Compaction picks the moment. A clear is the same loss on your terms.",
+
+  "deck.harness.decomposition.title": "What you ask for is always <mute>thinner</mute> than what you want",
+  "deck.harness.decomposition.note": "Cutting it up forces the decisions out. Vague does not survive being written as an instruction.",
+  "deck.harness.coordinator.title": "The coordinator",
+  "deck.harness.sequential.title": "The sequential workflow",
+  "deck.harness.reflection.title": "Reflection",
+  "deck.harness.reflection.note": "The empty context is what makes it work. An agent reviewing its own transcript has spent an hour arguing for this design.",
+  "deck.harness.cache.title": "The cache is a <hi>prefix match</hi> from the first byte",
+  "deck.harness.cache.note": "Connect a server mid-session and the whole window reprices. Walk away for five minutes and you pay for it again.",
+  "deck.harness.patterns.title": "Which pattern fits?",
+
+  "deck.model.tiers.title": "One family, three dispositions",
+  "deck.model.pricing.title": "One, three and five",
+  "deck.model.pricing.note": "Learn the shape of it, not the numbers.",
+  "deck.model.reasoning.title": "Reasoning level is <hi>not</hi> the tier",
+  "deck.model.reasoning.note": "How long one model thinks, against which model is thinking. Turning reasoning up on the small tier does not hand you the top one.",
+  "deck.model.pick.title": "Which tier would you run?",
+
+  "deck.workshop.flags.title": "Three flags, three ways context is assembled",
+  "deck.workshop.flags.note": "Read the source, trace the run, turn the log level up."
 }

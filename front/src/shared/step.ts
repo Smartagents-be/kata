@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import type { SlideSpec } from '@/shared/deck/slide-spec'
 import type { Locale } from '@/shared/i18n/locale'
 
 /**
@@ -90,4 +91,14 @@ export interface Step {
   locales: Partial<Record<Locale, Record<string, string>>>
   /** At least one; the first is where the step opens. */
   units: Unit[]
+  /**
+   * What the tutor puts on the board for this step, in order, appended to the deck at `/present`.
+   *
+   * This is authored slide content, not a second rendering of the units: no unit prose is painted
+   * onto a slide and nothing here iterates {@link units}. What it does reuse is the step's
+   * *figures*, so the drawing on the board is the same component the student has on their screen
+   * rather than a copy of it that can drift. `shared` never reaches into a step, so a step passes
+   * its slides in the same way it passes {@link Unit.figure}.
+   */
+  deck?: SlideSpec[]
 }

@@ -26,6 +26,7 @@ import { SurviveTheClear } from './SurviveTheClear'
 import { TokenAttention } from './TokenAttention'
 import { TokenSplit } from './TokenSplit'
 import { ToolsInContext } from './ToolsInContext'
+import deck from './deck'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
 import { contextQuiz, promptQuiz } from './quiz'
@@ -144,6 +145,9 @@ const step1: Step = {
       figure: <FlagBoard />,
     },
   ],
+  // What the tutor puts on the board for this step. Authored in `deck.tsx`, beside the figures it
+  // reuses; nothing in it renders unit prose.
+  deck,
 }
 
 export default step1

@@ -58,6 +58,26 @@ interface Point {
  * The situations always shuffle, once per mount, so nobody learns an answer as a position. The
  * targets shuffle only when the caller asks: an ordered scale scrambled reads as noise.
  */
+
+/**
+ * How much a transformed ancestor is magnifying the board, or 1 when nothing is.
+ *
+ * Every anchor is measured with `getBoundingClientRect`, which reports **post**-transform pixels,
+ * and is then drawn into the overlay `<svg>`, which carries no `viewBox` and is therefore addressed
+ * in the board's **pre**-transform layout pixels. On a unit page those two are the same thing and
+ * the distinction never comes up. Under a `transform: scale()` they are not, and every line
+ * overshoots its target by exactly the scale factor. The presentation deck magnifies these boards
+ * that way, which is how this surfaced.
+ *
+ * `offsetWidth` is the layout width and the rect is the painted one, so their ratio is the factor,
+ * whatever produced it. Dividing by it is a no-op wherever there is no transform, which is why the
+ * correction belongs here rather than in the caller that happens to magnify.
+ */
+function scaleOf(board: HTMLElement): number {
+  const painted = board.getBoundingClientRect().width
+  return painted > 0 && board.offsetWidth > 0 ? painted / board.offsetWidth : 1
+}
+
 export function ConnectBoard({
   block,
   namespace,
@@ -131,15 +151,22 @@ export function ConnectBoard({
       return
     }
     const origin = board.getBoundingClientRect()
+    const k = scaleOf(board)
     const handles: Record<string, Point> = {}
     for (const [id, node] of handleRefs.current) {
       const rect = node.getBoundingClientRect()
-      handles[id] = { x: rect.right - origin.left, y: rect.top + rect.height / 2 - origin.top }
+      handles[id] = {
+        x: (rect.right - origin.left) / k,
+        y: (rect.top + rect.height / 2 - origin.top) / k,
+      }
     }
     const targetPoints: Record<string, Point> = {}
     for (const [id, node] of targetRefs.current) {
       const rect = node.getBoundingClientRect()
-      targetPoints[id] = { x: rect.left - origin.left, y: rect.top + rect.height / 2 - origin.top }
+      targetPoints[id] = {
+        x: (rect.left - origin.left) / k,
+        y: (rect.top + rect.height / 2 - origin.top) / k,
+      }
     }
     setAnchors({ handles, targets: targetPoints })
   }, [])
@@ -192,8 +219,13 @@ export function ConnectBoard({
   }
 
   function toBoard(clientX: number, clientY: number): Point {
-    const origin = boardRef.current?.getBoundingClientRect()
-    return { x: clientX - (origin?.left ?? 0), y: clientY - (origin?.top ?? 0) }
+    const board = boardRef.current
+    if (!board) {
+      return { x: clientX, y: clientY }
+    }
+    const origin = board.getBoundingClientRect()
+    const k = scaleOf(board)
+    return { x: (clientX - origin.left) / k, y: (clientY - origin.top) / k }
   }
 
   /**

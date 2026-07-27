@@ -16,6 +16,51 @@ They do not iterate `reading` from `@/steps` and paint unit prose onto a slide, 
 start. A student can read a unit themselves, so a deck that mirrored one would be a worse copy of a
 page they already have. What belongs here is what only works out loud.
 
+**The figures are the one exception, and it is deliberate.** A slide's drawing is the step's own
+figure component, rendered exactly as the unit renders it, so a room looking up at the projector and
+down at their own screens sees one drawing rather than two that have drifted. That is reuse of a
+figure, not of prose, and the rule above is unchanged. Four figures are kept off the slides for a
+reason worth remembering: the three `TaskCard`s and `FlagBoard` write progress to localStorage, so
+on a slide they would tick the *tutor's* machine.
+
+**A slide is data, not JSX.** `SlideSpec` in `shared/deck/slide-spec.ts` is the shape, a step
+authors a list of them, and `SlideTemplate` renders every one. Adding a slide is adding an entry:
+`index` and `total` fall out of the array position, so there is no `TOTAL` to keep in step and no
+renumbering of everything after an insertion. `kind` is `divider`, `figure` or `statement`, and all
+it decides is how loud the heading is and what sits under it.
+
+**Placement is two values, not three, and the split is what the slide is competing for.** A
+`divider` and a `statement` are only their text, so they take `golden` and land exactly where the
+opening question does, eyebrow on 180px and the h1's top edge on the division at 255px. A `figure`
+slide is competing for room, so its heading takes `top` at 80px higher and every one of those pixels
+goes to the drawing. The masthead still holds still *within* a run of figure slides, which is what
+`top` is for; it steps once when the deck turns from talking to showing.
+
+Two smaller decisions in the same area. Emphasis inside a heading is marked up **in the message**
+and mapped in `SlideTemplate`, and the whole vocabulary is two tags, `<hi>` for teal and `<mute>` for
+a term set back; a tag the template does not know renders as literal text on the slide, which is how
+`<vibe>`/`<agentic>` on the opening question got normalised onto these two. And a step's slide text
+lives in **that step's** namespace rather than `ui`, because `i18n.ts` types Dutch as
+`Record<MessageKey, string>` and a `ui` key with no Dutch is a build failure; only the deck chrome
+and the cross-step opening slide stay in `ui`.
+
+`SlideFigure` is what makes the reuse work. A page figure is built for a prose column (the SVG ones
+cap at `max-w-xl`, the DOM ones are sized in rem, which the fixed canvas knows nothing about), so it
+is **magnified with a transform** rather than restyled, which handles both kinds identically and
+touches no figure. That is also the engine's own move: it scales the whole 1920x1080 canvas as one
+unit. `scale` is per slide, fitted so the figure fills about 95% of the room left under the heading.
+The two arbitrary variants in there earn their place: `[&_figure]:my-0` drops the `my-8` a figure
+carries for prose flow, and `[&_svg]:max-w-none` lifts the cap so the drawing fills its box before
+being magnified.
+
+One bug that transform exposed, fixed in `shared/components/ConnectBoard.tsx` rather than in the
+deck: the board measures anchors with `getBoundingClientRect` (post-transform) and draws them into
+an overlay `<svg>` that has no `viewBox` and is therefore addressed in layout pixels
+(pre-transform). On a unit page those are the same number. Under a scaled ancestor every line
+overshot its target by exactly the scale factor. `scaleOf()` divides it back out, and is a no-op
+wherever there is no transform, which is why the correction belongs in the board and not in the
+caller that happens to magnify it.
+
 `shared/deck/deck-stage.js` is **vendored verbatim** from the smartagents-website repo
 (`secured/presentations/shared/deck-stage.js`, commit dbdce4ae), and is the same engine every other
 deck of theirs runs on. What was not wanted from there is the Eleventy and Nunjucks templating, so
@@ -63,6 +108,10 @@ a number rather than a nudge precisely so the next slide of that kind lands in t
 opening question uses it, and it is one sentence and nothing else: the line under it telling the
 room to answer in one sentence was removed, because a tutor says that out loud and a slide that
 scripts them is a slide they read from.
+
+The deck asks for `golden` and `top`; `center` is capability rather than current practice, since
+every divider here carries a title and a centred one drifts with its own line count. It is kept
+because the arithmetic behind all three belongs in one place.
 
 ## The design system
 

@@ -511,5 +511,54 @@
   "workshop.the-board.1": "Elke flag gaat in zijn vakje hieronder. Het bord controleert hem hier in de browser tegen een hash, dus deze helft werkt met de backend uit. Het geeft je het antwoord nooit. Het bevestigt alleen dat je gelezen hebt wat de pipeline verborg.",
   "workshop.the-board.2": "Als alle drie binnen zijn, kijk dan terug hoe je ze gekregen hebt. Eén kon je volledig uit handen geven. Eén had jou nodig om te beslissen. Vooraf weten welke van de twee je voor je hebt, is het grootste deel van goed werken met een agent.",
   "workshop.the-board.3": "<strong>Vast?</strong> <p> Voor de eerste: zoek een stage die een waarde in een klein bereik vouwt en die dan vergelijkt met een grens die ze nooit kan overschrijden. De regel in die tak is degene die je decodeert. </p> <p> Voor de tweede: het instrument dat werkt is één logregel in <code>Scramble.unveil</code>. Elke herstelde string gaat daardoorheen, ook die nooit gepubliceerd worden. <code>CatalogRun.publish</code> loggen mist de flag, want de stage die hem draagt roept publish nooit aan. </p>",
-  "workshop.the-board.4": "Je lesgever draait alle drie live: de tak die niet kan afgaan, een trace van één aanvraag, en dezelfde aanvraag nog eens met debug aan, zodat je één pipeline drie verschillende dingen ziet prijsgeven."
+  "workshop.the-board.4": "Je lesgever draait alle drie live: de tak die niet kan afgaan, een trace van één aanvraag, en dezelfde aanvraag nog eens met debug aan, zodat je één pipeline drie verschillende dingen ziet prijsgeven.",
+
+  "deck.tokens.split.title": "Een model leest geen woorden",
+  "deck.tokens.split.note": "Proza is het goedkoopste dat je het kunt geven. Namen en hashes zijn het duurst, en een codebase bestaat daaruit.",
+  "deck.tokens.next.title": "Het schrijft één token per keer",
+  "deck.tokens.attention.title": "En het leest alles, elke beurt",
+  "deck.tokens.attention.note": "Zeven tokens zijn eenentwintig paren. Veertien zijn er eenennegentig, niet tweeënveertig.",
+
+  "deck.prompt.in-context.title": "Wat jij schreef is het kleinste deel",
+  "deck.prompt.bundle.title": "Drie vragen, of één",
+  "deck.prompt.exact.title": "Wees exact over wat er verandert",
+  "deck.prompt.plan.title": "Precisie was het ontbrekende ingrediënt, <hi>niet de omvang van het model</hi>",
+
+  "deck.tools.in-context.title": "De tool draait buiten het venster",
+  "deck.tools.in-context.note": "Alleen het resultaat komt terug, en het komt terug als gewone tekst.",
+  "deck.tools.mcp.title": "Eén draad, en alles eraan staat in je venster",
+  "deck.tools.parts.title": "Lees ze op wie beslist",
+  "deck.tools.injection.title": "Een toolresultaat is het <hi>minst betrouwbare</hi> in het venster",
+  "deck.tools.injection.note": "Niets daarin markeert wie wat geschreven heeft.",
+  "deck.tools.budget.title": "Welke twee calls beantwoorden de vraag?",
+
+  "deck.context.diagram.title": "Verschillende bronnen, één blok tekst",
+  "deck.context.oneshot.title": "Dezelfde prompt. Eén referentie vastgezet.",
+  "deck.context.falloff.title": "Het model werd niet moe. <hi>Het bewijs verliet de kamer.</hi>",
+  "deck.context.entropy.title": "Wanorde neemt elke beurt toe, tenzij iemand er <hi>energie in steekt</hi>",
+  "deck.context.entropy.note": "Er is niets verwijderd. De beslissende regel staat er nog, gewogen als minder belangrijk dan de massa eromheen.",
+
+  "deck.session.makeup.title": "Je typte er een half procent van",
+  "deck.session.clear.title": "De enige laag die je nog kunt <hi>weggooien</hi>",
+  "deck.session.clear.note": "Compactie kiest het moment. Een clear is hetzelfde verlies, maar op jouw voorwaarden.",
+
+  "deck.harness.decomposition.title": "Wat je vraagt is altijd <mute>dunner</mute> dan wat je wilt",
+  "deck.harness.decomposition.note": "Het opknippen dwingt de beslissingen naar buiten. Vaag overleeft het niet om als instructie opgeschreven te worden.",
+  "deck.harness.coordinator.title": "De coördinator",
+  "deck.harness.sequential.title": "De sequentiële workflow",
+  "deck.harness.reflection.title": "Reflectie",
+  "deck.harness.reflection.note": "De lege context is wat het laat werken. Een agent die zijn eigen transcript nakijkt, heeft een uur lang voor dit ontwerp gepleit.",
+  "deck.harness.cache.title": "De cache is een <hi>prefixmatch</hi> vanaf de eerste byte",
+  "deck.harness.cache.note": "Verbind halverwege een server en het hele venster wordt opnieuw geprijsd. Loop vijf minuten weg en je betaalt er opnieuw voor.",
+  "deck.harness.patterns.title": "Welk patroon past?",
+
+  "deck.model.tiers.title": "Eén familie, drie karakters",
+  "deck.model.pricing.title": "Eén, drie en vijf",
+  "deck.model.pricing.note": "Leer de vorm ervan, niet de getallen.",
+  "deck.model.reasoning.title": "Reasoning level is <hi>niet</hi> de tier",
+  "deck.model.reasoning.note": "Hoe lang één model nadenkt, tegenover welk model nadenkt. Reasoning hoger zetten op de kleine tier geeft je niet de bovenste.",
+  "deck.model.pick.title": "Welke tier zou jij draaien?",
+
+  "deck.workshop.flags.title": "Drie flags, drie manieren waarop context wordt samengesteld",
+  "deck.workshop.flags.note": "Lees de broncode, traceer de run, zet het logniveau hoger."
 }
