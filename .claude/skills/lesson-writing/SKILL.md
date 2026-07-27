@@ -47,7 +47,7 @@ machine. Read the first three words of each paragraph in a section and check the
 ## Voice
 
 The rules above keep the text clean. This section is what makes it sound like the units already in
-the tree. `step1/intro.html` and `step1/harness.html` are the reference: when in doubt, read a
+the tree. `step1/context.html` and `step1/harness.html` are the reference: when in doubt, read a
 section of one out loud and match its rhythm.
 
 **Open cold on the claim.** "An agent has no memory of its own." "The harness is the software you

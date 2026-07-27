@@ -6,7 +6,9 @@ import { useStepText } from '@/shared/i18n/useStepText'
  * task spelled out.
  *
  * Deliberately version-free. A card naming this quarter's release is wrong by the next one, and the
- * dispositions are what survive: the prose beside this figure says so.
+ * dispositions are what survive. The paragraph that used to say so out loud is gone, so the only
+ * thing dating these three is the small `(July 2026)` line under the figure, which dates the cards
+ * rather than the unit.
  */
 const TIERS = ['opus', 'sonnet', 'haiku'] as const
 

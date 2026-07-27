@@ -44,25 +44,47 @@ one-word name once `model` and the machinery around the window joined it, so the
 is in there rather than naming one of the three. The topic is still context, which is why the
 sentence above still opens that way. `FLAG_SALT` in `flags.ts` still reads `kata-step1-context-v1`
 and must not follow the title: it is a hash input, so renaming it invalidates every flag on the
-board. Eight units — `tokens`, `intro`, `prompt`, `session`,
-`tools`, `harness`, `model`, `workshop` — and the unit HTML is the source for what each one teaches.
+board. Eight units — `tokens`, `prompt`, `tools`, `context`, `session`,
+`harness`, `model`, `workshop` — and the unit HTML is the source for what each one teaches. The
+fourth was called `intro` until it was renamed, id and all, so its URL is `/steps/step1/context` and
+its prose keys read `context.<section>.<n>`. Old links to `/steps/step1/intro` are dead and there is
+no redirect, which is the decision: the app has no route aliases anywhere and one unit is not the
+place to start. A student mid-run loses that one unit's tick out of `kata.completed`, since progress
+is keyed by `step/unit`.
 That order is the registry's, and `workshop`'s opening list recites it, so moving a unit means
-visiting that sentence in the HTML and in `nl.json`. **Two of the eight are deliberately not in that
+visiting that sentence in the HTML and in `nl.json`. **The two layers a student writes and reads for
+themselves come before the theory**, which is why `prompt` and `tools` sit ahead of `context` rather
+than after it. Two things follow from that and are load-bearing: `prompt` is where the word
+*context* is defined (one paragraph, and `context` must not grow a second definition), and the three
+oval figures now run as a sequence rather than an empty frame followed by fillings of it.
+`PromptInContext` draws the prompt and nothing around it, `ToolsInContext` draws the frame with a
+tool across its border, and `ContextDiagram` in `context` is the populated window at the end,
+holding `prompt`, `resources` and `tools`. **`ContextDiagram` was drawn empty when `context` opened
+the step and is not any more**, so nothing may describe it as the empty one. **`PromptInContext`
+lost its frame on purpose and must not get it back**: a student meets that figure before they have
+met the window, so a frame there spent the vocabulary a unit early and left `ContextDiagram` re-showing
+a picture they had already seen. The first teal frame in the step is now `ToolsInContext` in `tools`,
+which is what the "draws no context frame" comments in `TokenSplit` and `TokenAttention` point at. Its
+oval instead carries `ContextDiagram`'s prompt region geometry and fills, so the two read as one
+shape seen twice; the component name still says `InContext` and no longer describes the drawing. Neither is to scale, and the share-by-volume figure is still `SessionMakeup` in `session`.
+One term is knowingly loose: `ContextDiagram`'s `resources` is the broad word for what the agent
+read, while `tools` defines `resource` narrowly as content an MCP server hands over uncalled.
+**Two of the eight are deliberately not in that
 list**: four layers fill the window, `tokens` is the unit it is counted in and `model` is the reader
 on the other end of it, so `workshop` names four and not six, and each of the two opens by saying so.
-Promoting either to a layer means visiting `workshop`, `intro` and every "four layers" sentence in
+Promoting either to a layer means visiting `workshop`, `context` and every "four layers" sentence in
 the step, which is a larger change than it looks.
 Three editorial constraints the HTML does not state on its own: every layer unit goes past merely
 naming its layer, and none of the four is allowed to read as a stub (they sat within about a hundred
 words of each other until `tools` grew the MCP material, and that floor is the part that matters); the sub-agent starting blank is the point the three sub-agent `harness` patterns turn on; and
 the pattern diagrams share one vocabulary (a teal frame is a context, a bar is something in it,
-dashes are what is not) that any new diagram should join. `intro` and `prompt` each carry a
+dashes are what is not) that any new diagram should join. `context` and `prompt` each carry a
 three-question quiz. `harness` closes on `PatternMatch`, a drag-to-connect exercise whose three
 situations against four patterns leave decomposition on the board with nothing pointing at it. It is
 the shared `ConnectBoard`, which `model`'s `PickTheTier` is too; the reasoning for that is under
 `model` below.
 
-`tokens` opens the step, ahead of `intro`, and gives the step's unit of measurement a page before
+`tokens` opens the step, ahead of `context`, and gives the step's unit of measurement a page before
 anything is measured in it. It is prose and three figures, with **no quiz and no "Check yourself"
 section**: the figures are the doing, and every quiz in the course already sits in the opening units.
 Nothing in it carries a currency; `ModelPricing` is still the only place in the course where a number
@@ -72,10 +94,10 @@ told the student to click something, or that recapped what the figure had just s
 one at a time. Do not write that layer back in.
 
 Four things about it are decisions. **Neither `TokenSplit` nor `TokenAttention` draws the teal
-context frame**, and that is what protects `intro`: `ContextDiagram` is the first frame a student
-meets and it is drawn empty on purpose, so a unit sitting above it stays out of that vocabulary
-rather than spending it early, the way `ModelTiers` does. The word *context* is likewise not used
-before `intro` defines it. **`NextToken` and `TokenAttention` are a pair on one sentence** (`the
+context frame**, and that is what protects `tools`: `ToolsInContext` is the first frame a student
+meets, so every unit above it stays out of that vocabulary rather than spending it early, the way
+`ModelTiers` does and the way `PromptInContext` does since it gave its own frame up. The word *context* is likewise not used before `prompt` defines it, which is
+one page later. **`NextToken` and `TokenAttention` are a pair on one sentence** (`the
 build failed because it timed out`): the first shows it being written a token at a time, the second
 takes the finished sentence apart, and the prose in between says so. Changing the sentence in one of
 them breaks the pair. **`TokenSplit`'s prose row has to contain a word that breaks**, which is why it
@@ -131,16 +153,16 @@ broken progress. And **`problem.md` has no answer key anywhere in the tree**: it
 on purpose, since a file that names them does the analysis for the student. Do not add a worked cut,
 a `solve.md`, a `plan-solve.md`, or an implementation.
 
-`intro` and `session` overlap by design, and how the overlap is handled is the decision. `intro`
+`context` and `session` overlap by design, and how the overlap is handled is the decision. `context`
 already argues the re-send, the cost per message and the dead bug hunt, so `session` does not
-re-argue them: it owns what `intro` cannot, namely that this is the only layer with a time axis (the
+re-argue them: it owns what `context` cannot, namely that this is the only layer with a time axis (the
 other three are one turn's worth, and they *settle* here, so a fetched page is a tool result for one
 turn and session content forever), that the student authored almost none of it by volume, and that it is
-therefore the only layer they can prune after the fact. The paragraphs that do restate `intro` are
-`data-audience="guided"` rather than deleted, because `intro`'s whole prose is self-only: in class
-that unit is walked through at the board, so `session` is the first prose a guided student reads and
-the bridge has to be there. Do not un-tag them and do not let the unit grow back into a second
-`intro`. Its figure, `SessionMakeup`, argues the *share* (two teal slivers against the files and test
+therefore the only layer they can prune after the fact. The paragraphs that do restate `context` are
+`data-audience="guided"` rather than deleted, because `context`'s whole prose is self-only: in class
+that unit is walked through at the board, so `session` is where a guided student first meets the
+re-send and the bridge has to be there. Do not un-tag them and do not let the unit grow back into a second
+`context`. Its figure, `SessionMakeup`, argues the *share* (two teal slivers against the files and test
 output around them) and deliberately says nothing about growth or re-sending, which is
 `BundleCompare`'s job in `prompt`.
 
@@ -154,14 +176,14 @@ example instruction on purpose: the line has to be one they were tired of repeat
 know which one that is. Ticked once, to `kata.step1.survive`, on the same reasoning `CutItUp` is
 ticked once.
 
-Both tasks are `shared/components/TaskCard.tsx`, which is the tick-card mechanics with the data
+All three tasks are `shared/components/TaskCard.tsx`, which is the tick-card mechanics with the data
 lifted out, the same move `ConnectBoard` made when a second drag board arrived. Keep additions there
 rather than in a caller, and keep **one tick per card and never one per move**: five or six boxes
 turn a run at a problem into an errand list. Every move stays one line, so whatever a second line
 would have explained belongs in the prose above the card.
 
-`tools` is the third of the four layer units, and it used to be `external` ("material from outside").
-It once ran after `harness` and no longer does. The rename is
+`tools` is the second of the four layer units, and it used to be `external` ("material from outside").
+It once ran after `harness`, then after `session`, and now runs before `context`. The rename is
 the decision: naming the mechanism (the model asks, your system runs it, the output is appended)
 beats naming the origin, because the origin was never the thing a student can act on. What survived
 the rename is the part that still holds for a tool result, namely that nothing in the window says
@@ -176,16 +198,29 @@ border exactly once, and fans out into four description bars that then sit in th
 anything else. It drew four straddling tools once instead, which said only "there are four now" and
 left a large empty box beside them with nothing pointing into it. The crossing is the load-bearing
 part: dashed while the line is outside, solid once it is in, so the border keeps meaning what it
-means in every other diagram here. Redrawing either figure on its own geometry breaks the pair. The unit's order is
-the argument too, so keep it: what a tool is, where extra ones come from (MCP), what holding many of
-them costs, why the results are the least trustworthy layer, what they cost by volume.
+means in every other diagram here. Redrawing either figure on its own geometry breaks the pair.
+`McpParts` is the third figure and closes that section: three cards naming what a server offers, and
+**nothing drawn between them**, which is the decision. None of the three has crossed into a context
+yet, so it carries no frame and no arrows, and the cards take `McpServer`'s dashed
+outside-the-window stroke while each glyph is borrowed from the step's own vocabulary (the solid
+prompt bar, the faint stack a tool result comes back as, the rounded tool outline). Wiring them
+together ends the argument. It is also where the word *resource* is defined, and the definition is by
+**who decides** rather than by where the content came from: you pick a prompt, your harness attaches
+a resource, the model asks for a tool. That is the sorting the figure exists for, so a card gaining a
+second line about cost or trust belongs in the prose instead. The unit's order is
+the argument too, so keep it: what a tool is, where extra ones come from (MCP, and the three things
+one offers), what holding many of them costs, why the results are the least trustworthy layer, what
+they cost by volume.
 
 `model` sits after `harness`: prose, one figure, and one exercise under the same `<hr>` and "Check
 yourself" heading `tools` and `harness` use. **It carries no version numbers anywhere, and that is
 the decision.** Tiers
-outlive releases, so the unit teaches Opus, Sonnet and Haiku as dispositions and says out loud that
-the names change and the shape does not; a card naming this quarter's release is wrong by the next
-one. Price and speed follow from that: they are ratios (roughly one, three and five per token,
+outlive releases, so the unit teaches Opus, Sonnet and Haiku as dispositions; a card naming this
+quarter's release is wrong by the next one. **The lead no longer says that out loud**: the paragraph
+naming the three tiers and telling the student the names change and the shape does not was cut, so
+the figure now opens the unit and the only thing dating it is the small `(July 2026)` line moved
+under it. What survives of the claim is `model.cost.3`, which says the ratios outlast the prices, and
+that is now the only place it is made. Price and speed follow from that: they are ratios (roughly one, three and five per token,
 output about five times input, the small tier four to five times faster) rather than figures, and
 the prose says the ratios outlast the numbers. Do not put a price list or a version back in.
 Two boundaries with units either side of it hold the unit up. `prompt` owns the **reasoning level**
@@ -212,11 +247,22 @@ on purpose, the way flags and machine output do.
 `ModelPricing` is the second figure and is the **one place in the whole course where a number carries
 a currency**, which is why it exists: the cost goal was argued everywhere and demonstrated nowhere.
 It is also the one thing in the unit that names versions, and that is a knowing exception rather than
-drift. `ModelTiers` beside it stays version-free on the reasoning the unit's own HTML comment gives
+drift. `ModelTiers` beside it stays version-free on the reasoning its own component comment gives
 (tier names outlive releases), so the table is placed to be read as *evidence for a claim* and never
-as a reference: it sits between the paragraph stating the one-three-five ratio and the paragraph
-saying the ratios outlive the numbers. Keep that sandwich. Moved anywhere else it becomes a price
-list, which is exactly what the paragraph under it tells the student not to learn.
+as a reference: it sits under the paragraph stating the one-three-five ratio, and the two paragraphs
+after it sort the rows and then say the ratios outlive the numbers. Keep that order. Moved anywhere
+else it becomes a price list, which is exactly what the paragraph under it tells the student not to
+learn.
+
+**The table has four rows, the step teaches three tiers, and both stay.** Dropping the frontier row
+was considered and rejected: the numbers are what a student would actually be billed, so the row is
+named rather than hidden. `model.cost.2` is that naming, and three things about it are the decision.
+It sits **after** the figure, because the row is the surprise and a warning ahead of the table spends
+it early. It sorts and stops: what the frontier tier is good at is not taught here, since this step
+is about the window rather than about the family. And it calls the row a ceiling rather than a fourth
+tier, which is what keeps `ModelTiers` at three cards, `model.cost.1` at one-three-five, `model.speed.1`
+at "the slowest of the three" and `PickTheTier` at three targets. Promoting it to a tier means
+visiting all four.
 Four claims the prose already makes can be checked against it by eye, and a row edited without them
 in mind breaks the unit: the small tier as one unit against three and five, output at five times
 input in every row, and a cache read at a tenth of input, which is the figure `harness`'s caching
@@ -238,6 +284,18 @@ did, arguing that you pay the tier's rate on the whole window every turn and tha
 therefore a multiplier on the four layer units. It went, and the removal is the decision: the four
 layers already argue the re-send, `harness`'s caching section already prices it, and the tier is a
 choice about the reader rather than about what fills the window. Do not write it back.
+
+"API vs subscription" is the section under `Cost`, and it is the billing model: an API key billed per token
+against a subscription drawn off a plan. It was one sentence in `harness` and was **moved here whole
+rather than copied**, so `harness`'s "Which harness you run" must not grow a billing line back. Where
+it sits is the decision. Directly under `ModelPricing` it reads as how the rates above reach you,
+which is also why it carries **no prices, no plan names and no currency of its own**: the one table
+in the course with a currency is a few inches up the page, and a second set of numbers here turns
+both into the price list `model.cost.3` tells the student not to learn. What it argues is the thing
+the table cannot: the tokens are the same either way, but a key shows you the number while a plan
+hides it until you hit the limit, and then the cost arrives as waiting. It closes on who holds the
+key in a company, which is **the only place in step 1 the team question appears**. That paragraph
+stops at what the arrangement makes visible to the student and is not a section on procurement.
 
 `PickTheTier` closes the unit, and it is `PatternMatch` with other data rather than a board that
 merely resembles it: both are `shared/components/ConnectBoard.tsx`, and a caller is a list of
@@ -268,15 +326,17 @@ every other line dims, because five lines onto three targets is otherwise hard t
 
 Everything the student *does* sits below an `<hr>` at the foot of the unit, under one `<h2>` reading
 "Check yourself", which is the same wording `QuizPanel` puts over a quiz (`quiz.title`). That is the
-shape: prose first, then one rule, then the doing, in the order hands-on task, `SpotInjection`,
-`BudgetWindow`. Do not scatter the exercises back up into the sections they belong to, and do not
-give a second one its own heading. `harness` follows the same shape now, with the `CutItUp` card
+shape: prose first, then one rule, then the doing, in the order `connect-one`, `SpotInjection`,
+`BudgetWindow`, `ReadYourWindow`. Do not scatter the exercises back up into the sections they belong
+to. The two `<h3>`s in there are the exception the rest of the step does not get: `connect-one` and
+`read-your-window` are hands-on tasks that need a sentence of setting, and everything between them
+carries none. `harness` follows the same shape now, with the `CutItUp` card
 under the rule and `PatternMatch` arriving after it from the registry, and so does `model`, whose
 `PickTheTier` board is the only thing under its rule. `workshop` is the one left that still closes
 on a bare exercise with no rule over it.
 
-`tools` carries one of the step's two hands-on tasks and its two graded exercises, and between them they
-hold advice the prose used to state and no longer does. `connect-one` is the task: add an MCP server
+`tools` carries two of the step's three hands-on tasks and its two graded exercises, and between them they
+hold advice the prose used to state and no longer does. `connect-one` is the first task: add an MCP server
 to your own agent, then fetch the catalogue twice, once with `curl` and once by driving `/catalog`
 through the server. It names Claude Code's `claude mcp add <name> -- <command>` (verified against the
 CLI) and `npx @playwright/mcp@latest`, which is a server this repo already runs, so a copied line
@@ -284,12 +344,32 @@ works. **The prose asks which result you would want back on every turn and does 
 comparison is the exercise, so do not add the sentence saying which route is bulkier. `SpotInjection`
 is four tool results with one instruction aimed at the agent, and two of the clean three exist to be
 mistaken for it (one gives orders to a human reader, one contains the word token twice), so a rewrite
-that makes them look harmless removes the exercise. `BudgetWindow` is six calls against one small
+that makes them look harmless removes the exercise. Its card asks for **the odd one out and does not
+say what makes it odd**: naming the instruction aimed at the agent turns four results into a search
+for one sentence, and the unit's warning aside is where a student who needs the term finds it. Do not
+put the giveaway back in the title or the description. `BudgetWindow` is six calls against one small
 change and grades the **exact set**, not the total, or filling the window and then adding the two
 right calls would pass; its line counts are data rather than prose and its two right calls come to 37
 lines. Both mark a wrong pick in `--destructive` and the answer the student missed in teal, because
 red here would read as the result having failed rather than the answer. Both shuffle once per mount
 through `shared/lib/shuffle.ts`, which `PatternMatch` also uses now.
+
+`ReadYourWindow` closes the unit and is the second task, ticked once to `kata.step1.window` like the
+other two. It is where **`/context` is introduced and where it is used**, and that pairing is the
+decision. The command lived in two sentences of `context`, whose prose is entirely
+`data-audience="self"`, so a guided student never met the only tool the course gives them for
+inspecting a window; and the sentences described the command without ever asking anyone to run it.
+Both halves are fixed by putting it here instead, so **do not write the introduction back into
+`context`** (a comment there says so) and do not let this one grow into a second description of the
+command. What earns the task its place in this unit rather than in `context` is the pairing either
+side of it: `BudgetWindow` above totals an invented window, this totals the student's own, and the
+first and last moves are one reading taken with the MCP server `connect-one` connected and one with
+it gone. That difference is the number, and it is the only place the course puts a figure on
+"a tool costs you by existing". Dropping either move leaves a count with nothing to compare it to.
+It is also the one task card with **no description line**, and the key is absent rather than empty:
+the two paragraphs above it already say where the work happens and that the number on screen is the
+point, so a description repeated them one element later. `TaskCard` looks the key up instead of
+assuming it, which is what any card may now leave out.
 
 Machine output inside an exercise stays English in every language: `SpotInjection`'s four result
 bodies and sources and `BudgetWindow`'s six commands have no `nl` entry, on purpose, the same way

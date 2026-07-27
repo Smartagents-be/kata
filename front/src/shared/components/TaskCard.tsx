@@ -31,10 +31,14 @@ function writeDone(storageKey: string, done: boolean) {
 }
 
 /**
- * A hands-on task on one card: a title, a line saying what the task is, the moves in the order they
- * are taken, and one tick for the whole thing. Nothing here is graded, and nothing is submitted.
- * Both of step 1's tasks are this component with different data (`CutItUp` in `harness`,
- * `SurviveTheClear` in `session`), so keep additions here rather than in a caller.
+ * A hands-on task on one card: a title, an optional line saying what the task is, the moves in the
+ * order they are taken, and one tick for the whole thing. The description is left out when the prose
+ * above the card already says where the work happens and what to watch for, which is why the key is
+ * looked up rather than assumed: `ReadYourWindow` has no `window.description` and no gap where one
+ * would have been. Nothing here is graded, and nothing is submitted.
+ * All three of step 1's tasks are this component with different data (`CutItUp` in `harness`,
+ * `SurviveTheClear` in `session`, `ReadYourWindow` in `tools`), so keep additions here rather than
+ * in a caller.
  *
  * **One tick for the task, never one per move.** A task is a single sitting, and a box per move
  * invites ticking them off separately, which turns a run at a problem into an errand list. The tick
@@ -62,8 +66,9 @@ export function TaskCard({
   /** The step the text belongs to; every key below is read from that step's namespace. */
   namespace: string
   /**
-   * The prefix the card's own keys sit under: `<prefix>.title`, `<prefix>.description`,
-   * `<prefix>.todo`, `<prefix>.done`, and `<prefix>.<move>.label` for each move.
+   * The prefix the card's own keys sit under: `<prefix>.title`, `<prefix>.todo`, `<prefix>.done`,
+   * and `<prefix>.<move>.label` for each move. `<prefix>.description` is optional; with no entry the
+   * card is a title and its moves.
    */
   prefix: string
   /**
@@ -75,7 +80,7 @@ export function TaskCard({
   moves: readonly string[]
   className?: string
 }) {
-  const { text } = useStepText(namespace)
+  const { text, has } = useStepText(namespace)
 
   const [done, setDone] = useState(() => readDone(storageKey))
 
@@ -97,9 +102,11 @@ export function TaskCard({
         <CardTitle id={`${block}-title`} data-component="TaskCard">
           {text(`${prefix}.title`)}
         </CardTitle>
-        <CardDescription id={`${block}-description`} data-component="TaskCard">
-          {text(`${prefix}.description`)}
-        </CardDescription>
+        {has(`${prefix}.description`) && (
+          <CardDescription id={`${block}-description`} data-component="TaskCard">
+            {text(`${prefix}.description`)}
+          </CardDescription>
+        )}
       </CardHeader>
 
       <CardContent id={`${block}-content`} data-component="TaskCard" className="flex flex-col gap-5">

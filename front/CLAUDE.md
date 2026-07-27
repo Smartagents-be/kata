@@ -89,7 +89,7 @@ else holds a colour: components name tokens, so a change to the palette is a cha
 - **Every route change starts at the top.** The window keeps its scroll position across a
   navigation, so `AppShell` sends it back to 0 whenever the pathname changes; without it the pager
   at the foot of a long unit drops you into the middle of the next one. A location carrying a hash
-  is exempt, or the browser's anchor jump would be undone the moment it landed (`intro` links to
+  is exempt, or the browser's anchor jump would be undone the moment it landed (`context` links to
   `#entropy`).
 - **The two-column shell is an `lg` thing, and below that the sidebar is not a sidebar.** The card's
   `248px` nav column, its wide gap and its wide padding all start at `lg`; under it the card is one
@@ -195,7 +195,7 @@ rendered with
 here — sanitise first if content ever arrives from an API, a user, or an LLM.
 
 A unit whose *whole* prose belongs to one audience wraps it in a single
-`<div data-audience="…">` rather than tagging every paragraph. `step1/intro` does this: in class
+`<div data-audience="…">` rather than tagging every paragraph. `step1/context` does this: in class
 the teacher works through it at the board, so the page keeps only the diagram and the quiz, both
 of which come from the registry and are outside the HTML. Two consequences worth knowing.
 `StepContent` renders `null` when nothing survives filtering, so an empty article does not take a

@@ -1,18 +1,28 @@
+<!-- This unit runs ahead of `context`, so the word `context` is defined here rather than there. Keep
+     the definition first and keep it to one paragraph: `context` is the unit that takes the window
+     apart, and a second telling here would turn this page into a smaller copy of it. -->
 <p data-i18n="prompt.lead.1">
-  The message you just typed. It is the smallest layer and the one you write on purpose, so it
-  carries most of your intent.
+  Everything an agent knows when it answers you was assembled a moment earlier, pulled together from
+  a handful of separate sources and handed to the model as one block of text. That block is the
+  <strong>context</strong>.
 </p>
-
-<!-- The same context oval as the intro, with the prompt drawn as one small region inside it: the
-     message you type is a subsection of the context, not the whole of it. -->
-<div data-figure="prompt-in-context"></div>
 
 <p data-i18n="prompt.lead.2">
-  What marks a prompt is that you typed it. It is user input, and usually the smallest part of the
-  context.
+  Your message is one part of it. The smallest part, and the one you write on purpose, so it carries
+  most of your intent.
 </p>
 
+<!-- The prompt on its own, with no frame around it. The frame is not drawn until `tools`, and the
+     window with everything in it is `context`'s payoff, so nothing here is allowed to pre-empt
+     either. Do not put the context oval back around this one. -->
+<div data-figure="prompt-in-context"></div>
+
 <p data-i18n="prompt.lead.3">
+  What marks a prompt is that you typed it. It is user input, and usually the smallest thing in
+  there.
+</p>
+
+<p data-i18n="prompt.lead.4">
   The context usually holds more than one. Some prompts are fresh queries you type. Others come back
   after the agent interviews you <svg data-icon="pattern"></svg> about the task. Every question you answer that way is a prompt
   too, even when the agent suggested the answers itself.

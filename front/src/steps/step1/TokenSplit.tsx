@@ -17,9 +17,9 @@ import { cn } from '@/shared/lib/utils'
  * tokeniser in the bundle, and shipping a megabyte of BPE ranks to split five sentences is not a
  * trade this page should make.
  *
- * It draws no context frame. `ContextDiagram` in `intro` is the first teal frame a student meets and
- * it is drawn empty on purpose, so a figure one page above it stays out of that vocabulary rather
- * than spending it early. `ModelTiers` sits outside the diagram vocabulary for the same reason.
+ * It draws no context frame. `ToolsInContext` in `tools` is the first teal frame a student meets,
+ * so every figure above it stays out of that vocabulary rather than spending it early.
+ * `PromptInContext` gave its frame up for the same reason, and `ModelTiers` never had one.
  */
 
 type Sample = {

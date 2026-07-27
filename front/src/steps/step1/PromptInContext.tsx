@@ -2,11 +2,16 @@ import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * The same context oval as the ContextDiagram, but with the prompt drawn as one small region inside
- * it. This is the point the `prompt` unit opens on: the message you type is the smallest layer, a
- * subsection of the context rather than the whole of it. The geometry (viewBox, ellipse, label) is
- * kept in step with ContextDiagram so the two read as the same window; only the inner prompt shape
- * is new.
+ * The prompt on its own: one oval, the thing you type, and nothing drawn around it.
+ *
+ * **It used to sit inside the context frame and deliberately does not any more.** `prompt` runs
+ * ahead of `context`, so a student meets this figure before they have met the window, and a frame
+ * here spent that vocabulary a unit early and made `ContextDiagram` a second telling of a picture
+ * they had already seen. What is left says one thing: this is a shape, and it is small. The frame
+ * arrives in `ToolsInContext`, and the populated window is `ContextDiagram`'s payoff.
+ *
+ * The oval keeps `ContextDiagram`'s prompt geometry (rx/ry, fills) so the two read as the same
+ * thing seen twice. Do not draw the other layers in here: naming them is `context`'s job.
  */
 export function PromptInContext() {
   const { t } = useTranslation('step1')
@@ -21,58 +26,34 @@ export function PromptInContext() {
       <svg
         id="prompt-in-context-svg"
         data-component="PromptInContext"
-        viewBox="0 0 640 320"
+        viewBox="0 0 320 128"
         role="img"
         aria-labelledby={titleId}
-        className="h-auto w-full max-w-xl"
+        className="h-auto w-full max-w-xs"
       >
         {/* useId, not a BEM id: aria-labelledby has to be unique per instance, not per component. */}
         <title id={titleId} data-component="PromptInContext">
           {t('prompt-in-context.description')}
         </title>
 
-        {/* the context window: the same teal oval as the ContextDiagram */}
-        <ellipse
-          id="prompt-in-context-window"
-          data-component="PromptInContext"
-          cx="320"
-          cy="160"
-          rx="290"
-          ry="140"
-          strokeWidth="2"
-          className="fill-primary/5 stroke-primary/40"
-        />
-        <text
-          id="prompt-in-context-window-label"
-          data-component="PromptInContext"
-          x="320"
-          y="70"
-          fontSize="28"
-          textAnchor="middle"
-          dominantBaseline="middle"
-          className="fill-foreground font-medium"
-        >
-          {t('prompt-in-context.context')}
-        </text>
-
-        {/* the prompt: one small subsection sitting inside the context, drawn as a smaller oval so
-            it reads as the same shape as the window it sits in */}
+        {/* the prompt, and nothing else. Same radii and fills as the region ContextDiagram draws
+            for it, so a student meets one shape twice rather than two drawings. */}
         <ellipse
           id="prompt-in-context-prompt"
           data-component="PromptInContext"
-          cx="320"
-          cy="185"
-          rx="95"
-          ry="48"
+          cx="160"
+          cy="64"
+          rx="74"
+          ry="42"
           strokeWidth="2"
-          className="fill-primary/15 stroke-primary/60"
+          className="fill-primary/20 stroke-primary/70"
         />
         <text
           id="prompt-in-context-prompt-label"
           data-component="PromptInContext"
-          x="320"
-          y="185"
-          fontSize="22"
+          x="160"
+          y="64"
+          fontSize="19"
           textAnchor="middle"
           dominantBaseline="middle"
           className="fill-foreground font-medium"

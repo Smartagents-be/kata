@@ -39,6 +39,32 @@
      out. The figure only works read against that one, so do not redraw it on its own geometry. -->
 <div data-figure="mcp-server"></div>
 
+<p data-i18n="tools.where-extra-tools.2">
+  Tools are not all a server offers. It can also hand over material it collected on its own: a page
+  out of a wiki, a design document, a row from your database. Nobody called anything to get it. Your
+  harness took it and put it in the window, and the model reads it there next to your prompt. Content
+  that arrives that way has a name of its own. A resource.
+</p>
+
+<p data-i18n="tools.where-extra-tools.3">
+  Prompts are the third thing. A server ships whole prompts with it, written by whoever built it, for
+  you to pick off a list. Claude Code puts them under a slash.
+</p>
+
+<!-- Three cards and nothing between them: none of it has crossed into a context yet. The dashed
+     stroke is McpServer's outside-the-window shape, and each glyph is the step's own vocabulary. -->
+<div data-figure="mcp-parts"></div>
+
+<p data-i18n="tools.where-extra-tools.4">
+  Read them by who decides. You pick the prompt, your harness attaches the resource, the model asks
+  for the tool. Three different hands, and all three end up in the same window.
+</p>
+
+<!-- The same three again, in the oval the step draws a thing as, on `mcp-parts`' own columns so each
+     one sits under the card it restates. Still nothing drawn around them: the window they land in is
+     `ContextDiagram`'s payoff in `context`, so do not put a frame on this one. -->
+<div data-figure="mcp-ovals"></div>
+
 <h2 data-i18n="tools.list-itself-window.heading">The list itself is in the window</h2>
 
 <p data-i18n="tools.list-itself-window.1">
@@ -116,8 +142,8 @@
 claude mcp add playwright -- npx @playwright/mcp@latest</code></pre>
 
 <p data-i18n="tools.connect-one.2">
-  That second line is Claude Code's. Every harness has its own way to add a server, which is the next
-  unit's layer deciding what this one is allowed to hold.
+  That second line is Claude Code's. Every harness has its own way to add a server, which is the
+  harness deciding what this layer is allowed to hold.
 </p>
 
 <p data-i18n="tools.connect-one.3">
@@ -144,3 +170,24 @@ claude mcp add playwright -- npx @playwright/mcp@latest</code></pre>
 
 <!-- The two right calls are worth 37 lines, and every wrong one would also have worked. -->
 <div data-figure="budget-window"></div>
+
+<h3 data-i18n="tools.read-your-window.heading">Read your own window</h3>
+
+<!-- The only place in the course `/context` is used rather than described, which is why the command
+     is introduced here and not in `context`: that unit's prose is self-only, so a guided student
+     never met it. Do not move the introduction back up. -->
+<p data-i18n="tools.read-your-window.1">
+  Those line counts were invented. Yours are real, and you can read them. <code>/context</code> lists
+  what is sitting in the window right now, grouped by where each part came from. The command is
+  Claude Code's, and every harness shows this its own way. Some show you nothing at all.
+</p>
+
+<p data-i18n="tools.read-your-window.2">
+  Run it before you type anything. The tool descriptions are in there already, so the count starts
+  above zero. Connect a server and it moves. That is the one claim in this unit you can put a number
+  on yourself.
+</p>
+
+<!-- The unit's second task. `BudgetWindow` above totals an invented window; this one totals the
+     student's own, against the server `connect-one` just told them to connect. -->
+<div data-figure="read-your-window"></div>

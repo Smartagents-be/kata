@@ -7,6 +7,8 @@ import { CoordinatorFanout } from './CoordinatorFanout'
 import { CutItUp } from './CutItUp'
 import { ExactAsk } from './ExactAsk'
 import { FlagBoard } from './FlagBoard'
+import { McpOvals } from './McpOvals'
+import { McpParts } from './McpParts'
 import { McpServer } from './McpServer'
 import { ModelPricing } from './ModelPricing'
 import { ModelTiers } from './ModelTiers'
@@ -15,6 +17,7 @@ import { OneShotCompare } from './OneShotCompare'
 import { PatternMatch } from './PatternMatch'
 import { PickTheTier } from './PickTheTier'
 import { PromptInContext } from './PromptInContext'
+import { ReadYourWindow } from './ReadYourWindow'
 import { ReflectionLoop } from './ReflectionLoop'
 import { SequentialSteps } from './SequentialSteps'
 import { SessionMakeup } from './SessionMakeup'
@@ -25,12 +28,12 @@ import { TokenSplit } from './TokenSplit'
 import { ToolsInContext } from './ToolsInContext'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
-import { introQuiz, promptQuiz } from './quiz'
+import { contextQuiz, promptQuiz } from './quiz'
 import tokens from './units/tokens.html?raw'
-import intro from './units/intro.html?raw'
 import prompt from './units/prompt.html?raw'
-import session from './units/session.html?raw'
 import tools from './units/tools.html?raw'
+import context from './units/context.html?raw'
+import session from './units/session.html?raw'
 import harness from './units/harness.html?raw'
 import model from './units/model.html?raw'
 import workshop from './units/workshop.html?raw'
@@ -39,6 +42,11 @@ import workshop from './units/workshop.html?raw'
  * Step 1, one layer of context per unit, plus two units that are not layers. `tokens` opens the step
  * and is the unit the window is counted in; `model` closes the prose and is the reader on the other
  * end of it. Neither fills the window, which is why `workshop` still names four layers and not six.
+ *
+ * The two layers a student writes and reads for themselves come first, so `prompt` and `tools` sit
+ * ahead of `context`. That makes `prompt` the unit that defines the word context, and it makes
+ * `context` the step back to the whole window rather than the first sight of it.
+ *
  * `workshop` closes the step with a flag board (like
  * step 2's workshop): three flags the `GET /api/titles` backend hides from its response, one per
  * way context is assembled - read the source, trace the run, turn the log level up. The board
@@ -63,17 +71,6 @@ const step1: Step = {
       },
     },
     {
-      id: 'intro',
-      title: 'intro.title',
-      html: intro,
-      inlineFigures: {
-        'context-diagram': <ContextDiagram />,
-        'oneshot-compare': <OneShotCompare />,
-        'context-falloff': <ContextFalloff />,
-      },
-      quiz: introQuiz,
-    },
-    {
       id: 'prompt',
       title: 'prompt.title',
       html: prompt,
@@ -85,23 +82,37 @@ const step1: Step = {
       quiz: promptQuiz,
     },
     {
-      id: 'session',
-      title: 'session.title',
-      html: session,
-      inlineFigures: {
-        'session-makeup': <SessionMakeup />,
-        'survive-the-clear': <SurviveTheClear />,
-      },
-    },
-    {
       id: 'tools',
       title: 'tools.title',
       html: tools,
       inlineFigures: {
         'tools-in-context': <ToolsInContext />,
         'mcp-server': <McpServer />,
+        'mcp-parts': <McpParts />,
+        'mcp-ovals': <McpOvals />,
         'spot-injection': <SpotInjection />,
         'budget-window': <BudgetWindow />,
+        'read-your-window': <ReadYourWindow />,
+      },
+    },
+    {
+      id: 'context',
+      title: 'context.title',
+      html: context,
+      inlineFigures: {
+        'context-diagram': <ContextDiagram />,
+        'oneshot-compare': <OneShotCompare />,
+        'context-falloff': <ContextFalloff />,
+      },
+      quiz: contextQuiz,
+    },
+    {
+      id: 'session',
+      title: 'session.title',
+      html: session,
+      inlineFigures: {
+        'session-makeup': <SessionMakeup />,
+        'survive-the-clear': <SurviveTheClear />,
       },
     },
     {

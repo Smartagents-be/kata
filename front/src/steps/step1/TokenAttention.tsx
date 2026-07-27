@@ -25,8 +25,8 @@ import { cn } from '@/shared/lib/utils'
  * carried a caption saying that and the caption was cut deliberately, so this comment is the only
  * remaining record: if a caption ever comes back here, that is what goes in it.
  *
- * Like `TokenSplit`, it draws no context frame: `ContextDiagram` in `intro` is the first teal frame
- * a student meets, and a figure one page above it stays out of that vocabulary.
+ * Like `TokenSplit`, it draws no context frame: `ToolsInContext` in `tools` is the first teal frame
+ * a student meets, and every figure above it stays out of that vocabulary.
  */
 
 /** Machine-shaped, so it stays English in every language, like `SpotInjection`'s result bodies. */

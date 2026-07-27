@@ -9,6 +9,12 @@ export interface StepText {
    * this: no entry means the authored English in the HTML file stays where it is.
    */
   lookup: (key: string) => string | null
+  /**
+   * Whether this namespace carries the key at all, in the active language or in the English
+   * fallback. Silent, unlike `lookup`: it answers a question about the content rather than
+   * reporting a missing translation, so an optional string can be left out on purpose.
+   */
+  has: (key: string) => boolean
 }
 
 /**
@@ -28,7 +34,7 @@ export function useStepText(namespace: string): StepText {
       // Read the value from the instance store rather than the hook's `t` whenever the key exists.
       // After an SPA navigation into a step, react-i18next can hand back a `t` that returns the key
       // until it marks that step's namespace ready for this hook, so `t(key)` would render the raw
-      // key (e.g. an `intro.title` heading) until a reload. The step bundles are registered
+      // key (e.g. a `context.title` heading) until a reload. The step bundles are registered
       // synchronously at module load, so the store already holds the value `exists` confirms.
       text: (key: string) =>
         i18n.exists(key, { ns: namespace }) ? i18n.t(key, { ns: namespace }) : t(key),
@@ -44,6 +50,7 @@ export function useStepText(namespace: string): StepText {
         }
         return null
       },
+      has: (key: string) => i18n.exists(key, { ns: namespace }),
     }),
     [t, i18n, namespace],
   )

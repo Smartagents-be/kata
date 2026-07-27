@@ -2,7 +2,7 @@
   "step.title": "Context, model, mechanisms",
 
   "tokens.title": "Tokens",
-  "intro.title": "Context",
+  "context.title": "Context",
   "prompt.title": "Your prompt",
   "session.title": "The session",
   "harness.title": "The harness",
@@ -55,10 +55,13 @@
   "token-attention.first": "Nothing is drawn for {{token}}. The first token has nothing in front of it.",
   "token-attention.held": "{{token}} weighs {{links}} tokens in front of it, and {{heaviest}} hardest.",
 
-  "diagram.description": "One oval labelled context: everything the agent knows sits inside it.",
+  "diagram.description": "One oval labelled context with three regions inside it: a small one labelled prompt, and two larger ones labelled resources and tools. Everything the agent knows sits inside the oval.",
+  "diagram.context": "context",
+  "diagram.prompt": "prompt",
+  "diagram.resources": "resources",
+  "diagram.tools": "tools",
 
-  "prompt-in-context.description": "The same context oval, with the prompt drawn as one small region inside it: your message is a subsection of the context, not the whole of it.",
-  "prompt-in-context.context": "context",
+  "prompt-in-context.description": "One oval labelled prompt, drawn on its own: the message you type, before anything else is put beside it.",
   "prompt-in-context.prompt": "prompt",
 
   "oneshot-compare.before": "Prompt only",
@@ -134,6 +137,14 @@
   "survive.clear.label": "Clear the session, or start a new one.",
   "survive.ask.label": "Ask for that work again without repeating the instruction, and watch whether it holds.",
 
+  "window.title": "Count what the tools cost",
+  "window.todo": "Mark this task done",
+  "window.done": "Done",
+  "window.fresh.label": "Start a fresh session and run /context before you type anything.",
+  "window.read.label": "Read what the tool descriptions cost you, with nothing asked yet.",
+  "window.ask.label": "Ask for a change that makes the agent open a few files, then run /context again.",
+  "window.remove.label": "Remove the server you added above, start over, and check the first number moved.",
+
   "cut.title": "Decomposition in practice",
   "cut.description": "The problem is in the repo at kata/step1/java/problem.md. A request from a library: short, reasonable, and full of holes. Work it in this order.",
   "cut.todo": "Mark this task done",
@@ -144,8 +155,8 @@
   "cut.plan.label": "Plan it in plan mode. Have it write the plan to plan-solve.md.",
   "cut.build.label": "Build it from the plan",
 
-  "spot.title": "One of these is talking to your agent",
-  "spot.description": "Four results came back this turn. Pick the one carrying an instruction aimed at the agent rather than at you. Checked here in the browser.",
+  "spot.title": "Pick the odd one out",
+  "spot.description": "Four results came back this turn. Checked here in the browser.",
   "spot.check": "Check",
   "spot.retry": "Try again",
   "spot.source.tests": "mvn test",
@@ -240,6 +251,16 @@
   "mcp-server.tool.2": "list_issues",
   "mcp-server.tool.3": "open_pr",
   "mcp-server.tool.4": "run_query",
+
+  "mcp-parts.description": "Three separate dashed cards standing side by side with nothing drawn between them: a prompt, shown as one solid teal bar, a resource, shown as a stack of three faint bars, and a tool, shown as a rounded outline.",
+  "mcp-parts.prompt.name": "prompt",
+  "mcp-parts.prompt.who": "you pick it",
+  "mcp-parts.resource.name": "resource",
+  "mcp-parts.resource.who": "your harness attaches it",
+  "mcp-ovals.description": "The same three parts drawn again as three plain ovals side by side, in the columns the cards above them stand in: a small one labelled prompt, a large one labelled resource, and a middling one labelled tool. Nothing is drawn around them.",
+
+  "mcp-parts.tool.name": "tool",
+  "mcp-parts.tool.who": "the model asks for it",
 
   "tiers.opus.name": "Opus",
   "tiers.opus.character": "Precision interpreter",

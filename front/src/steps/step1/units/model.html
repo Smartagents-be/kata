@@ -8,19 +8,13 @@
   they answer, and how well they hold a long task together.
 </p>
 
-<!-- Deliberately version-free. The tier names outlive the numbers, and a unit naming this quarter's
-     release is out of date by the next one. -->
-<p data-i18n="model.lead.3">
-  Three tiers below, and every provider ships something with this shape: a top one, a middle one,
-  and a small fast one. The names change every few months. What each is good at does not.
-</p>
-
-<!-- Dates the three cards below without dating the unit. The figure stays version-free, so this
-     says when these were the family rather than pinning the prose to a release, the same job the
-     month in `ModelPricing`'s caption does. -->
-<p data-i18n="model.lead.4"><small>(July 2026)</small></p>
-
 <div data-figure="model-tiers"></div>
+
+<!-- Dates the three cards above without dating the unit. The figure stays version-free, so this
+     says when these were the family rather than pinning the prose to a release, the same job the
+     month in `ModelPricing`'s caption does. It sits under the cards rather than over them, so it
+     reads as their caption. -->
+<p data-i18n="model.lead.3"><small>(July 2026)</small></p>
 
 <h2 data-i18n="model.cost.heading">Cost</h2>
 
@@ -36,9 +30,53 @@
      numbers, so it reads as evidence rather than as a reference table. -->
 <div data-figure="model-pricing"></div>
 
+<!-- The table has four rows and the step teaches three tiers, so this names the fourth one where
+     the student meets it. It goes after the figure rather than before it: the row is the surprise,
+     and a warning ahead of the table would spend it early. Keep it to the sorting. What the
+     frontier tier is good at belongs nowhere in this step, which is about the window rather than
+     about the family. -->
 <p data-i18n="model.cost.2">
+  The bottom row is not one of the three. Providers also ship a frontier model, priced past the top
+  tier and kept for work the top tier cannot hold together. It is a ceiling rather than a fourth
+  tier.
+</p>
+
+<p data-i18n="model.cost.3">
   Those ratios hold up better than the numbers do. Providers cut prices and ship new versions, and
   the top tier stays the top tier. Learn the shape rather than the price list.
+</p>
+
+<!-- Sits under `Cost` because it is how the rates above reach you, and it is why the section carries
+     no prices, no plan names and no currency of its own: `ModelPricing` is a few inches up the page
+     and this must not read as a second one. It was one sentence in `harness` and was moved here
+     whole rather than copied, so `harness` must not grow a billing line back. -->
+<h2 data-i18n="model.api-vs-subscription.heading">API vs subscription</h2>
+
+<p data-i18n="model.api-vs-subscription.1">
+  Two arrangements, and the harness is where you pick one. Hand it an API key and the provider bills
+  you per token, at the rates above, for exactly what went up and what came back. Sign in with a
+  subscription instead and the same usage comes off a plan you paid for before you started.
+</p>
+
+<p data-i18n="model.api-vs-subscription.2">
+  That choice also decides which models you can reach. A subscription buys you into one provider's
+  own program, so you get their family and nothing else. A key is looser. Most open-source harnesses
+  take one, and that is what lets you point the same tool at whichever tier you like.
+</p>
+
+<p data-i18n="model.api-vs-subscription.3">
+  The tokens are the same either way. What differs is whether you can see them. On a key, a long
+  window is a number growing on an invoice while you work, and you can go and look at it
+  <svg data-icon="coin"></svg> On a plan you wait for the limit to reset, in the middle of the thing
+  you were doing.
+</p>
+
+<!-- The only place in step 1 the team question comes up. It stops at what the arrangement makes
+     visible to the student and is not a section on procurement. -->
+<p data-i18n="model.api-vs-subscription.4">
+  In a company the choice is rarely yours. Someone bought seats, or someone holds a key and watches
+  what it spends. Worth finding out which, because it decides whether a long window is your problem
+  or a line on somebody's report.
 </p>
 
 <h2 data-i18n="model.speed.heading">Speed</h2>

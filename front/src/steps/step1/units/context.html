@@ -1,33 +1,37 @@
 <!-- In class the teacher walks through this at the board, so the page keeps only the
      diagram and the quiz. Self-learners read the whole thing. -->
+<!-- `prompt` defines the word and `tools` uses it, so this unit no longer names it. It steps back to
+     the whole window instead, which is what the populated oval below is for. -->
 <div data-audience="self">
-  <p data-i18n="intro.lead.1">
-    An agent has no memory of its own. Everything it knows when it answers you was assembled a
-    moment earlier, pulled together from a handful of separate sources and handed to the model as
-    one block of text. That block is the <strong>context</strong>.
-  </p>
-
-  <p data-i18n="intro.lead.2">
-    Claude Code can show your current context using the <code>/context</code> command. It prints the
-    current context grouped by where the context came from.
+  <p data-i18n="context.lead.1">
+    Your prompt, the resources the agent read and the tools it can call come from different places
+    and land in the same block of text. Once anything is in there, nothing marks where it came from,
+    and the model weighs all of it the same.
   </p>
 </div>
 
-<!-- The context window, drawn empty on purpose. Shown to both audiences: in class the page keeps
-     only the diagram and the quiz. The marker is top-level so it renders; later units of the step
-     fill this same oval with the layers. -->
+<!-- `/context` was introduced here in two self-only sentences and is now in `tools`, under the task
+     that runs it. This unit's prose is self-only, so a guided student never met the command; the
+     unit that uses it does not have that problem. Do not bring the sentence back. -->
+
+<!-- The window with what fills it in it, and the payoff of the two frames before it: `prompt` drew one
+     region against this oval and `tools` drew a tool across its border, so this is the first time a
+     student sees the lot sharing one frame. It was drawn empty when this unit opened the step and is
+     not any more. Not to scale; the share-by-volume figure is `SessionMakeup` in `session`. Shown to
+     both audiences, because in class the page keeps only the diagram and the quiz. The marker is
+     top-level so it renders. -->
 <div data-figure="context-diagram"></div>
 
 <div data-audience="self">
-  <h2 data-i18n="intro.model-stateless.heading">A model is stateless</h2>
+  <h2 data-i18n="context.model-stateless.heading">A model is stateless</h2>
 
-  <p data-i18n="intro.model-stateless.1">
+  <p data-i18n="context.model-stateless.1">
     Between two messages an LLM keeps nothing. Not your last question, not the file it opened, not
     the decision the two of you reached. Every request starts from zero. What feels like a
     conversation is the entire transcript being sent again, from the top, every single time.
   </p>
 
-  <p data-i18n="intro.model-stateless.2">
+  <p data-i18n="context.model-stateless.2">
     Sending that whole transcript again is not free. The longer you talk to an LLM, the bigger the
     tasks and the more of them stack up, the more every turn costs. Keep that in mind and clear the
     session <svg data-icon="coin"></svg> often enough, especially when you
@@ -35,15 +39,15 @@
     re-read a file to solve the problem in front of it.
   </p>
 
-  <h2 data-i18n="intro.model-statistic.heading">And it is a statistic</h2>
+  <h2 data-i18n="context.model-statistic.heading">And it is a statistic</h2>
 
-  <p data-i18n="intro.model-statistic.1">
+  <p data-i18n="context.model-statistic.1">
     It is also a statistical model rather than a reasoning database. It predicts the most likely
     continuation of the text it was given, using patterns from its training data. It holds no
     opinion about your codebase. What it holds is an average.
   </p>
 
-  <p data-i18n="intro.model-statistic.2">
+  <p data-i18n="context.model-statistic.2">
     That is why context is the only lever you have. The model gets better at your task at exactly
     the moment you or the harness put your task in front of it. Give it nothing and it answers from
     the average of everything it ever read.
@@ -56,7 +60,7 @@
      placed. -->
 <div data-figure="oneshot-compare" data-audience="self"></div>
 
-<p data-audience="self" data-i18n="intro.model-statistic.3">
+<p data-audience="self" data-i18n="context.model-statistic.3">
   The one on the left is the prompt on its own. The one on the right got the same prompt with one
   reference image from Dribbble pinned to it. That single piece of context steered it somewhere less
   generic straight away. It is not finished, but it is closer, and the distance left to cover is
@@ -64,26 +68,26 @@
 </p>
 
 <div data-audience="self">
-  <h2 data-i18n="intro.bad-context-bad.heading">Bad context, bad answers</h2>
+  <h2 data-i18n="context.bad-context-bad.heading">Bad context, bad answers</h2>
 
-  <p data-i18n="intro.bad-context-bad.1">
+  <p data-i18n="context.bad-context-bad.1">
     Missing context produces generic output. You recognise it instantly: the tutorial answer, the
     <code>UserServiceImpl</code>, the try-catch that swallows the exception. It is not wrong
     exactly. It is just answering a question nobody in your team asked.
   </p>
 
-  <p data-i18n="intro.bad-context-bad.2">
+  <p data-i18n="context.bad-context-bad.2">
     Often that gap is recoverable, because the harness can go and get what it lacks. When reading is
     not enough, it interviews you <svg data-icon="pattern"></svg> instead.
   </p>
 
-  <p data-i18n="intro.bad-context-bad.3">
+  <p data-i18n="context.bad-context-bad.3">
     Wrong context is the dangerous kind, because the model cannot tell that it is wrong. Paste a
     file that is three versions old and it builds on top of it without a second thought. Nothing in
     the window says "stale". Everything in the window reads as true.
   </p>
 
-  <p data-i18n="intro.bad-context-bad.4">
+  <p data-i18n="context.bad-context-bad.4">
     And it slips in by accident more than you would think. Chase a bug through a long session and
     finally kill it: the fix lands in your code, but the whole hunt stays in the window. The broken
     version, the wrong turns, the diff you reverted, all still sitting there. Ask for the next thing
@@ -92,64 +96,64 @@
     pile-up in the context is <a href="#entropy">entropy</a>.
   </p>
 
-  <h2 data-i18n="intro.why-bites-hardest.heading">Why this bites hardest in code</h2>
+  <h2 data-i18n="context.why-bites-hardest.heading">Why this bites hardest in code</h2>
 
-  <p data-i18n="intro.why-bites-hardest.1">
+  <p data-i18n="context.why-bites-hardest.1">
     There is far more bad code on the internet than good code. Abandoned tutorials, answers from
     2011, snippets that never ran in production, homework. A model trained on all of it has seen the
     thing you should not do thousands of times.
   </p>
 
-  <p data-i18n="intro.why-bites-hardest.2">
+  <p data-i18n="context.why-bites-hardest.2">
     It cannot tell the two apart. "Good" and "bad" are not labels in the training data. Frequency is
     the only signal, so a vague question returns the statistical middle of everything ever written
     about the topic. That middle is mediocre code that happens to compile.
   </p>
 
-  <h2 data-i18n="intro.more-context-not.heading">More context is not free</h2>
+  <h2 data-i18n="context.more-context-not.heading">More context is not free</h2>
 
-  <p data-i18n="intro.more-context-not.1">
+  <p data-i18n="context.more-context-not.1">
     Every token in the window is paid for, on every turn, because the whole context goes back to the
     model with each message. A long session does not cost slightly more. It costs more per message,
     for the rest of the session.
   </p>
 
-  <p data-i18n="intro.more-context-not.2">
+  <p data-i18n="context.more-context-not.2">
     So the goal is not maximum context. It is context that is small enough and good enough. The file
     that matters instead of the whole directory. Every extra token you throw in raises the cost.
   </p>
 
-  <h2 id="entropy" style="scroll-margin-top: 5rem" data-i18n="intro.entropy.heading">Entropy</h2>
+  <h2 id="entropy" style="scroll-margin-top: 5rem" data-i18n="context.entropy.heading">Entropy</h2>
 
-  <p data-i18n="intro.entropy.1">
+  <p data-i18n="context.entropy.1">
     In an agentic session the context only grows, and a lot of what lands in it is noise. Failed
     attempts. A command that errored. The same file read at three different moments, in three
     different states. An approach you abandoned halfway. None of it is removed, and the model weighs
     all of it.
   </p>
 
-  <p data-i18n="intro.entropy.2">
+  <p data-i18n="context.entropy.2">
     That is entropy: disorder in the window rises with every turn unless somebody spends energy
     pushing it back down. The symptoms are easy to recognise once you know them. The agent starts
     contradicting itself, re-proposes an idea you already rejected, or edits a file back to a
     version you moved past an hour ago.
   </p>
 
-  <p data-i18n="intro.entropy.3">
+  <p data-i18n="context.entropy.3">
     This has a name of its own: lost in the middle. Nothing was deleted. The line that decides the
     answer is still sitting in the window, but so is everything else, and the model reads straight
     past it because it weighed that line as less important than the bulk around it.
   </p>
 
-  <h2 data-i18n="intro.amnesia-context-fatigue.heading">Amnesia and context fatigue</h2>
+  <h2 data-i18n="context.amnesia-context-fatigue.heading">Amnesia and context fatigue</h2>
 
-  <p data-i18n="intro.amnesia-context-fatigue.1">
+  <p data-i18n="context.amnesia-context-fatigue.1">
     Because the window is finite, something eventually has to give. Older material is compacted into
     a summary or drops out completely. The constraint you gave at the start is now one line in a
     summary, or it is simply gone.
   </p>
 
-  <p data-i18n="intro.amnesia-context-fatigue.2">
+  <p data-i18n="context.amnesia-context-fatigue.2">
     Then the agent forgets a decision from earlier, asks a question you already answered, or
     re-reads a file it read twenty minutes ago. This is context fatigue, and it is worth being
     precise about what happened. The model did not get tired and it did not get dumber. The evidence
@@ -163,7 +167,7 @@
 <div data-figure="context-falloff" data-audience="self"></div>
 
 <div data-audience="self">
-  <p data-i18n="intro.amnesia-context-fatigue.3">
+  <p data-i18n="context.amnesia-context-fatigue.3">
     When the window is compacted, detail is the first thing to go. For an instruction that has to
     survive that, write it in <code>CLAUDE.md</code>, which is read at the start of every session. And keep the window from filling up in the first place: cut each task small enough that
     it finishes before the summarising begins.

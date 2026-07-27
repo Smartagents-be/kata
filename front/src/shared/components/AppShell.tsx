@@ -27,8 +27,8 @@ export function AppShell() {
 
   // The window keeps its scroll position across a route change, so following the pager off the
   // bottom of a long unit drops you into the middle of the next one. Every unit starts at its own
-  // top instead. A link carrying a hash is left alone (intro points at #entropy), or the browser's
-  // jump would be undone the moment it landed.
+  // top instead. A link carrying a hash is left alone (the `context` unit points at #entropy), or
+  // the browser's jump would be undone the moment it landed.
   const { pathname, hash } = useLocation()
   useEffect(() => {
     if (hash) return
