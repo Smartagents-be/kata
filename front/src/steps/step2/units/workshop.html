@@ -5,9 +5,10 @@
 </p>
 
 <p data-i18n="workshop.lead.2">
-  There is a small module in this repo built for it. Under
-  <code>src/main/java/be/smartagents/kata/java/step2</code> is a library loans domain, ports and
-  adapters, with a late-fee rule at the middle of it. It compiles and it passes its one shipped
+  There is a small module in this repo built for it. Under <code>kata/step2/java</code> is a library
+  loans domain, ports and adapters, with a late-fee rule at the middle of it. Every command on this
+  page runs from that folder, because each step of this kata is its own Maven project. It compiles
+  and it passes its one shipped
   test, so the default build is green. It is also exactly the kind of code the
   <code>quality</code> unit described: one method far too branchy to read, and almost no tests
   behind it.
@@ -24,7 +25,8 @@
   and it measures the module against all three at once.
 </p>
 
-<pre><code>mvn verify -Pgraded</code></pre>
+<pre><code>cd kata/step2/java
+mvn verify -Pgraded</code></pre>
 
 <p data-i18n="workshop.goals.2">
   Before you hand anything over, do the setup the first units asked for. Put
@@ -66,7 +68,8 @@
   and it answers with a 500, because the method behind it was never written.
 </p>
 
-<pre><code>curl localhost:8080/api/loans/statement/STUDENT</code></pre>
+<pre><code>mvn spring-boot:run
+curl localhost:8080/api/loans/statement/STUDENT</code></pre>
 
 <p data-i18n="workshop.build.2">
   Nothing describes what that method should do except the tests. They are tagged, so the normal build
@@ -91,16 +94,15 @@
   The fourth flag added code that was missing. This one asks for something larger and of a different
   kind again: step 2's application, compiled all the way down to a native executable. It is the goals
   unit taken to its end, an outcome you hand over and nothing smaller. The build makes a jar today and
-  only a jar, and step 1's jar at that. Turning step 2 into a native image, pointed at its own
-  <code>Step2Application</code> rather than the pinned step 1 main, is the exercise, and, like the
-  graded profile, none of that wiring is in the <code>pom.xml</code> for you.
+  only a jar. Turning step 2 into a native image is the exercise, and, like the graded profile, none
+  of that wiring is in the <code>pom.xml</code> for you.
 </p>
 
 <p data-i18n="workshop.native.2">
   Do not one-shot it. A native build is the long-running kind the last unit described, minutes each,
   which makes it the wrong place to guess and retry. Plan it first. Open plan mode and have Claude
   work out what a native build of step 2 needs: the GraalVM <code>native-maven-plugin</code>, the
-  ahead-of-time step, the right main class, and what inside a native image might not survive the move.
+  ahead-of-time step, and what inside a native image might not survive the move.
   Read that plan, then spend the minutes once, ideally in a git worktree so your branch stays yours.
 </p>
 
@@ -113,7 +115,7 @@
   plan the fix it points at, a resource hint that keeps the file in the image, and build once more.
 </p>
 
-<pre><code>./target/kata-agentic-java</code></pre>
+<pre><code>./target/kata-agentic-java-step2</code></pre>
 
 <p data-i18n="workshop.native.4">
   No profile prints this flag and no ordinary <code>mvn spring-boot:run</code> does either. It lives

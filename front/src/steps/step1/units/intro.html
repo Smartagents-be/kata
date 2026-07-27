@@ -6,6 +6,11 @@
     moment earlier, pulled together from a handful of separate sources and handed to the model as
     one block of text. That block is the <strong>context</strong>.
   </p>
+
+  <p data-i18n="intro.lead.2">
+    Claude Code can show your current context using the <code>/context</code> command. It prints the
+    current context grouped by where the context came from.
+  </p>
 </div>
 
 <!-- The context window, drawn empty on purpose. Shown to both audiences: in class the page keeps
@@ -55,8 +60,7 @@
   The one on the left is the prompt on its own. The one on the right got the same prompt with one
   reference image from Dribbble pinned to it. That single piece of context steered it somewhere less
   generic straight away. It is not finished, but it is closer, and the distance left to cover is
-  shorter. Relevant context does not only make an answer more correct. It raises the quality of the
-  first draft.
+  shorter. Relevant context does not only make an answer more correct. It raises the quality.
 </p>
 
 <div data-audience="self">
@@ -129,6 +133,12 @@
     pushing it back down. The symptoms are easy to recognise once you know them. The agent starts
     contradicting itself, re-proposes an idea you already rejected, or edits a file back to a
     version you moved past an hour ago.
+  </p>
+
+  <p data-i18n="intro.entropy.3">
+    This has a name of its own: lost in the middle. Nothing was deleted. The line that decides the
+    answer is still sitting in the window, but so is everything else, and the model reads straight
+    past it because it weighed that line as less important than the bulk around it.
   </p>
 
   <h2 data-i18n="intro.amnesia-context-fatigue.heading">Amnesia and context fatigue</h2>

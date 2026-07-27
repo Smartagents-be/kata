@@ -55,9 +55,9 @@
 
 <p data-i18n="tools.list-itself-window.3">
   They cost you room to think as well. Forty tools is forty descriptions to read past and forty ways
-  to pick the wrong one, which is the entropy from the opening unit arriving before you start. An
-  agent holding <code>grep</code>, <code>sed</code> and a test runner is choosing between three. Turn
-  off what this task does not need.
+  to pick the wrong one, so the window is noisy before you have asked for anything. An agent holding
+  <code>grep</code>, <code>sed</code> and a test runner is choosing between three. Turn off what this
+  task does not need.
 </p>
 
 <h2 data-i18n="tools.stay-critical.heading">Stay critical</h2>
@@ -92,8 +92,8 @@
 <p data-i18n="tools.costs-same-everything.1">
   A tool result is usually the bulkiest thing in the window. A page of documentation runs longer than
   your prompt. <code>mvn test</code> on a red build runs longer than most of your source files. And
-  it settles into the session, so it is re-sent on every turn after that, exactly like the three
-  large files from the session unit.
+  it settles into the session, so it is re-sent on every turn after that. That red build scrolls past
+  once and you keep paying for it on every question you ask afterwards.
 </p>
 
 <!-- Everything below the rule is the doing part of the unit, under one heading that matches the one
@@ -112,7 +112,7 @@
 
 <!-- Claude Code's own syntax, verified against `claude mcp add --help`. The server is the one this
      repo already runs, so a student who copies the line gets something that works. -->
-<pre><code>mvn spring-boot:run
+<pre><code>cd kata/step1/java &amp;&amp; mvn spring-boot:run
 claude mcp add playwright -- npx @playwright/mcp@latest</code></pre>
 
 <p data-i18n="tools.connect-one.2">

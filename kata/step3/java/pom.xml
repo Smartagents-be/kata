@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>4.1.0</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>be.smartagents</groupId>
+  <artifactId>kata-agentic-java-step3</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>kata-agentic-java-step3</name>
+  <description>Step 3: scaffold. Buildable and empty until the step's topic is decided.</description>
+
+  <properties>
+    <java.version>25</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <!--
+      The test starter only. Step 3's topic is not decided, so nothing here presumes a web tier;
+      add `spring-boot-starter-web` (and the `spring-boot-webmvc-test` slice) when the step needs
+      one, without a <version> - the Boot parent manages it.
+    -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <!--
+    No spring-boot-maven-plugin yet, on purpose: there is no @SpringBootApplication to point it at,
+    and declaring it would make `mvn package` fail on a scaffold that is meant to stay green. Add it
+    alongside Step3Application.
+  -->
+</project>

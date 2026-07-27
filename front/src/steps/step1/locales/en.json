@@ -97,6 +97,16 @@
   "reflection-loop.stake": "an hour of its own arguments",
   "reflection-loop.nostake": "no session, nothing to defend",
 
+  "cut.title": "Decomposition in practice",
+  "cut.description": "The problem is in the repo at kata/step1/java/problem.md. A request from a library: short, reasonable, and full of holes. Work it in this order.",
+  "cut.todo": "Mark this task done",
+  "cut.done": "Done",
+  "cut.alone.label": "Cut it up yourself. Write down how you would tackle this problem.",
+  "cut.agent.label": "Cut it up with the agent. Have it write its own approach to solve.md.",
+  "cut.compare.label": "Compare your write-up with solve.md",
+  "cut.plan.label": "Plan it in plan mode. Have it write the plan to plan-solve.md.",
+  "cut.build.label": "Build it from the plan",
+
   "spot.title": "One of these is talking to your agent",
   "spot.description": "Four results came back this turn. Pick the one carrying an instruction aimed at the agent rather than at you. Checked here in the browser.",
   "spot.check": "Check",

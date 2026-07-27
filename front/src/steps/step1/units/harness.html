@@ -29,6 +29,29 @@
   per token, or you sign in with a subscription and the usage comes out of your plan.
 </p>
 
+<h2 data-i18n="harness.caching.heading">Caching</h2>
+
+<p data-i18n="harness.caching.1">
+  Re-sending the whole window every turn would be ruinous at full price, and you do not pay full
+  price <svg data-icon="coin"></svg> The harness puts a mark in the request, and on the next turn
+  everything up to that mark is recognised and billed at roughly a tenth.
+</p>
+
+<p data-i18n="harness.caching.2">
+  What gets matched is a prefix, read from the first byte, so anything that changes early makes
+  everything behind it new again. Connect an MCP server halfway through a session and the tool
+  definitions at the top shift, so the whole window is priced from scratch. Switch models and the
+  cache does not come with you. Let compaction rewrite the pile and there is nothing left to match.
+</p>
+
+<p data-i18n="harness.caching.3">
+  An entry goes stale after about five minutes and is reset. It is worth real money to keep one
+  alive <svg data-icon="gem"></svg> <svg data-icon="coin"></svg> Walk away for a meeting and you come
+  back to a window priced from scratch, so picking up where you left off costs you the whole thing
+  again. Start a fresh session instead.
+</p>
+
+
 <h2 data-i18n="harness.splitting-work.heading">How a harness splits the work</h2>
 
 <p data-i18n="harness.splitting-work.1">
@@ -93,3 +116,18 @@
 </p>
 
 <div data-figure="reflection-loop"></div>
+
+<!-- Everything below the rule is the doing part of the unit, under the heading QuizPanel renders
+     over a quiz, the same shape `tools` uses. The hands-on task comes first and `PatternMatch`
+     arrives after it from the registry, which is what closes the unit. -->
+<hr />
+
+<h2 data-i18n="harness.check-yourself.heading">Check yourself</h2>
+
+<!-- Six paragraphs once said this, and the card replaced all of them. It carries the whole task, so
+     nothing is left to introduce it: no prose between the rule and the figure. -->
+<div data-figure="cut-it-up"></div>
+
+<aside data-audience="guided" data-i18n="harness.check-yourself.2">
+  <p>Cuts go on the board before anyone opens an agent. Three people, three different cuts.</p>
+</aside>

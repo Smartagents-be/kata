@@ -4,6 +4,7 @@ import { BundleCompare } from './BundleCompare'
 import { ContextDiagram } from './ContextDiagram'
 import { ContextFalloff } from './ContextFalloff'
 import { CoordinatorFanout } from './CoordinatorFanout'
+import { CutItUp } from './CutItUp'
 import { ExactAsk } from './ExactAsk'
 import { FlagBoard } from './FlagBoard'
 import { McpServer } from './McpServer'
@@ -88,6 +89,7 @@ const step1: Step = {
         'coordinator-fanout': <CoordinatorFanout />,
         'sequential-steps': <SequentialSteps />,
         'reflection-loop': <ReflectionLoop />,
+        'cut-it-up': <CutItUp />,
       },
       figure: <PatternMatch />,
     },

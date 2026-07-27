@@ -45,9 +45,12 @@ unit.
 5. Append the step to the array in `front/src/steps/index.ts`. That list drives the sidebar,
    the routes, the previous/next pager and the registration of the step's locale bundles under a
    namespace named after its id; nothing else needs touching.
-6. Java side, if the step needs one: `be.smartagents.kata.java.stepN`, holding that step's own
-   `@SpringBootApplication` and whatever it exposes. There is no shared backend shell to register
-   with any more, and no shared grading endpoint — a step that wants one builds it.
+6. Java side, if the step needs one: a **standalone Maven project** at `kata/stepN/java/`, holding
+   `be.smartagents.kata.java.stepN` with that step's own `@SpringBootApplication` and whatever it
+   exposes, plus its own `pom.xml` and `CLAUDE.md`. Copy `kata/step3/java`, which is a buildable
+   empty scaffold kept for this. There is no shared backend shell to register with, no shared
+   grading endpoint and no aggregator pom — a step that wants something builds it, and every Maven
+   command runs from inside its own folder.
 
 Step ids are `stepN`, unit ids are words (`session`, `workshop`), and together they are the
 URL (`/steps/step1/session`). No unit carries an `exerciseId` today (the free-text mechanism is

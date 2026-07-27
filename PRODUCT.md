@@ -60,6 +60,10 @@ backend down).
 - Runs as two servers in two terminals: a Spring Boot backend (`:8080`,
   serving `/api`) and a React + Vite frontend (`:5173`, the one to open). Vite
   proxies `/api` to the backend, so there is one origin and no CORS.
+- The backend is one standalone Maven project per step, under `kata/stepN/java`,
+  each with its own `pom.xml` and profiles. There is no aggregator and no pom at
+  the repo root, so every Maven command runs from inside a step's folder, and
+  only one step holds `:8080` at a time.
 - Opening the frontend with the backend down is a supported state: quizzes and
   the two hash-checked flag boards still work; a free-text submission reports it
   could not reach the service, at the answer box.

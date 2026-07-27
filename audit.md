@@ -22,10 +22,12 @@ genuinely the best part of the material. Dutch is 100% complete. None of that is
 
 Three things hold it back, in order of impact:
 
-1. **The cost goal is asserted, never demonstrated.** There is not a single number anywhere in the
-   16 units. No token count, no price, no percentage, no duration, no model name. A student finishes
-   the course believing cost matters and unable to estimate, measure or reduce it. This is the
-   largest gap against a stated goal.
+1. **The cost goal is asserted, almost never demonstrated.** The whole cost throughline runs on one
+   section's worth of figures: `harness`'s caching section (added 27 July) prices a cache read at
+   roughly a tenth and puts five minutes on the expiry. Nothing else in the 16 units carries a
+   number. No token count, no bill, no run duration, no model name. A student finishes the course
+   believing cost matters and unable to estimate, measure or reduce it. This is the largest gap
+   against a stated goal.
 2. **Cadence collapses in step 2.** Seven consecutive units, ~4,600 words, with zero quizzes, zero
    exercises and zero checks, ending abruptly in the hardest lab in the kata. Every quiz in the
    entire course sits in the first three units.
@@ -67,7 +69,7 @@ Every topic the course touches or should touch, classified.
 | Model is stateless; transcript re-sent | `intro`, `session` | ● |
 | Model is statistical, not a database | `intro` | ● |
 | Missing vs wrong context | `intro` | ● |
-| Entropy in the window | `intro` | ● ⟳ |
+| Entropy in the window | `intro` | ● |
 | Amnesia / compaction / context fatigue | `intro`, `session` | ● |
 | The prompt as an authored layer | `prompt` | ● |
 | Reasoning level and thinking tokens | `prompt` | ● |
@@ -75,7 +77,7 @@ Every topic the course touches or should touch, classified.
 | Bundling work; `/clear` | `prompt`, `session` | ● |
 | Session as the only layer with a time axis | `session` | ● |
 | You authored almost none of it by volume | `session` | ● |
-| Prompt caching | `session`, one clause | ◐ |
+| Prompt caching | `harness`, a section; `session`, one clause | ● |
 | What a tool is; the tool loop | `tools` | ● |
 | MCP: what it is, wiring one | `tools` | ● |
 | Tool descriptions cost you by existing | `tools` | ● |
@@ -87,7 +89,7 @@ Every topic the course touches or should touch, classified.
 | Decomposition | `harness`, named only | ◐ |
 | **Tokens: what one is, how to count** | — | ○ |
 | **Model families and choosing between them** | — | ○ |
-| **Context observability (`/context`, inspecting the window)** | — | ○ |
+| Context observability (`/context`, inspecting the window) | `intro`, one paragraph | ◐ |
 
 ### Engineering habits (step 2)
 
@@ -370,7 +372,16 @@ all accurate.
 | **"Ask the agent what it has read"** | `session.window-not-memory.4`, `tools.connect-one.5` | The same self-aside twice. Differentiate or drop one. |
 | **"`CLAUDE.md` is read at the start of every session"** | `intro.amnesia.3`, `session.window-not-memory.1` | Near-identical sentences. |
 | **"None of this is new"** | `evolution.details.1`, `engineering.structure.10` | The same rhetorical opener twice in one step. |
-| **Entropy** | `intro.entropy`, then back-referenced in `prompt`, `tools`, `session` | The explanation is fine once; the three back-references are the problem, and see **S2** — for guided students they point at prose that was filtered out. |
+
+**Resolved 27 July — entropy.** This table carried an eleventh row: the explanation in
+`intro.entropy`, back-referenced from `prompt`, `tools` and `session` as "the entropy from the
+opening unit". The ⟳ was the wrong mark. The three sentences never repeated each other (each applied
+the idea to its own layer) and the explanation was fine where it was; the pointers were the defect,
+because they aimed at `self`-only prose. All three now carry the mechanism in their own words and
+point nowhere: `prompt.what-steer-after.2` lets the term land on the sentence that defines it,
+`session.window-not-memory.2` names what an afternoon leaves behind, and
+`tools.list-itself-window.3` says the window is noisy before you have asked for anything. The row is
+gone rather than reworded, and nothing here needs pruning.
 
 ### Deliberate overlap — leave alone
 
@@ -414,20 +425,34 @@ colleague, what to standardise across a team versus leave to individuals.
 
 ### Goal 2 — awareness of costs
 
-**M6 — Any number at all.** Verified across all 16 units: no token count, no price, no percentage,
-no duration, no model name. The word "token" appears 12 times, never with a figure. The cost
-throughline is repeated, well-argued and entirely qualitative. A student leaves convinced cost
-matters and unable to estimate it, measure it, or explain it to a manager who asks what this costs
-per developer per month.
+**M6 — Almost any number at all.** Narrowed 27 July. As first written this said the 16 units carried
+no figure of any kind. One section now does: `harness`'s `caching` prices a cache read at
+roughly a tenth and gives the entry about five minutes. That is the whole of it. Everything else is
+unchanged: no token count, no bill, no run duration, no model name, and the word "token" still
+appears a dozen times without a figure beside it. A student leaves convinced cost matters and unable
+to estimate it, measure it, or explain it to a manager who asks what this costs per developer per
+month.
 
-This is the highest-leverage fix available, because the *argument* is already made everywhere. It
-needs one unit that puts numbers on the claims the other units already make.
+**Input vs output pricing** was M7's until that item closed, and it lands here: the caching section
+prices the window as one thing and says nothing about the split between what you send and what comes
+back. Note the two figures already in the tree set the register for whatever comes next, so a unit
+that arrives with a pricing table would not match them.
 
-**M7 — Input vs output vs cache pricing.** `session` says "harnesses cache the front of the pile, so
-what has not changed since the last turn is billed at a fraction" — one clause, never developed. Yet
-this is the mechanic that makes the entire re-send story affordable, and it has a direct behavioural
-consequence: put stable material early, do not invalidate the prefix, batch reads. The course states
-the fact and never extracts the habit.
+This is still the highest-leverage fix available, because the *argument* is already made everywhere.
+It needs one unit that puts numbers on the claims the other units already make.
+
+**M7 — Cache pricing. Closed 27 July.** This read: `session` states the mechanic in one clause
+("harnesses cache the front of the pile, so what has not changed since the last turn is billed at a
+fraction") and never develops it, so the course has the fact without the habit. `harness` now carries
+a three-paragraph section, `caching`, between the billing paragraph and the splitting-work
+heading. It argues the prefix match rather than the fact, which is what makes the habit derivable:
+what gets matched, the three things that invalidate it (an MCP server connected mid-session, a model
+switch, compaction rewriting the pile), and the five-minute expiry, closing on the one instruction
+the section gives, which is to start a fresh session after a break rather than resume a lapsed one. Two notes for the next audit. The section carries the first numbers in the course (a tenth
+of the price, five minutes), which is a deliberate precedent against **M6** and not an oversight. And
+input-vs-output pricing, which the old heading also claimed, is still absent: the section prices the
+window, not the split between what you send and what comes back. That belongs with **M6** now rather
+than here.
 
 **M8 — Measuring what a run cost.** `goals` says "a run like this burns a lot of tokens, and four
 hours is not unusual." The student is never shown how to look. A number they observed themselves
@@ -555,7 +580,7 @@ From the 25 July audit, re-verified against the tree today.
 | 4 | Foundations bridge: the tool loop, model families | ◐ loop now argued in `tools`; models still ○ |
 | 5 | Expand `harness` / `external` from stubs | ✅ closed — `harness` 52→629 words + `PatternMatch`; `external`→`tools` now 995 words |
 | 6 | `economics` — cost made quantitative | ○ open |
-| 7 | Context observability (`/context`, `/clear`, compaction) | ◐ compaction taught; inspecting the window still ○ |
+| 7 | Context observability (`/context`, `/clear`, compaction) | ◐ compaction and `/clear` taught; `/context` named in `intro.lead.2` (27 July), but in `self`-only prose and with nothing to do against it |
 | 8 | The tool-use loop taught end to end | ✅ closed (`tools`) |
 | 9 | Model families and selection | ○ open |
 | 10 | `recovery` — the stuck/looping agent | ○ open |

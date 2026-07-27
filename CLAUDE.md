@@ -17,8 +17,8 @@ What this means when working here:
 - **Build on the existing code rather than replacing it.** Earlier steps are the
   foundation. Refactor them when the current step genuinely calls for it, and say so —
   but do not quietly rewrite working code from a previous step as a side effect.
-- **Leave every step green.** `mvn test` must pass at the end of a step; each step is a
-  coherent stopping point, ideally its own commit.
+- **Leave every step green.** `mvn test` must pass in every `kata/stepN/java` at the end of a step;
+  each step is a coherent stopping point, ideally its own commit.
 - **When a step's scope is ambiguous, ask before expanding it.** Guessing wide is the
   costly direction here.
 - **Record decisions, not content.** When a step introduces a real constraint — a prohibition, a
@@ -30,9 +30,10 @@ What this means when working here:
 
 Two parts, both walking-skeleton thin:
 
-- **Backend** (repo root) — a Spring Boot service exposing `/api`. It is now the *subject* of a
-  step rather than a grader for one: it serves a catalogue of book titles that the student will
-  instrument and trace. It does not serve the curriculum.
+- **Backend** (`kata/stepN/java/`) — one standalone Spring Boot project per step, each exposing its
+  own `/api`. It is now the *subject* of a step rather than a grader for one: step 1 serves a
+  catalogue of book titles the student instruments and traces, step 2 a loans domain they harden. It
+  does not serve the curriculum.
 - **Frontend** (`front/`) — React + Vite + shadcn/ui, on the teal design system described under
   Conventions. It owns the curriculum content and renders it for one of two audiences.
 
@@ -48,6 +49,25 @@ the pattern diagrams share one vocabulary (a teal frame is a context, a bar is s
 dashes are what is not) that any new diagram should join. `intro` and `prompt` each carry a
 three-question quiz. `harness` closes on `PatternMatch`, a drag-to-connect exercise whose three
 situations against four patterns leave decomposition on the board with nothing pointing at it.
+
+Decomposition is answered by the task above that board rather than by a fourth situation, and that
+is the decision. `CutItUp` is that task, and it is one card and nothing else: no prose between the
+rule and the figure, because six paragraphs said this once and the card replaced all of them. The
+problem is `kata/step1/java/problem.md`, a deliberately under-specified library request, and the
+five numbered moves are cut it up yourself, cut it up with the agent (which writes its own
+`solve.md`), compare the two, plan it in plan mode into `plan-solve.md`, build it. Each move is one
+line, so anything a second line would have explained belongs in the prose above the card rather than
+back inside it. The three filenames are the shape of the exercise: the student's write-up and the
+agent's `solve.md` exist separately so the comparison has two things to compare, and merging them
+into one file ends the exercise.
+
+One tick for the whole card rather than one per move. The five are a single sitting, and five boxes
+invite ticking them off separately, which turns a run at a problem into an errand list. Nothing is
+graded, so the tick is a bookmark: it is written to `kata.step1.cut`, under the prefix
+`shared/lib/reset.ts` clears, because a tick that vanished on the next navigation would read as
+broken progress. And **`problem.md` has no answer key anywhere in the tree**: its gaps are unlisted
+on purpose, since a file that names them does the analysis for the student. Do not add a worked cut,
+a `solve.md`, a `plan-solve.md`, or an implementation.
 
 `intro` and `session` overlap by design, and how the overlap is handled is the decision. `intro`
 already argues the re-send, the cost per message and the dead bug hunt, so `session` does not
@@ -86,10 +106,11 @@ Everything the student *does* sits below an `<hr>` at the foot of the unit, unde
 "Check yourself", which is the same wording `QuizPanel` puts over a quiz (`quiz.title`). That is the
 shape: prose first, then one rule, then the doing, in the order hands-on task, `SpotInjection`,
 `BudgetWindow`. Do not scatter the exercises back up into the sections they belong to, and do not
-give a second one its own heading. `harness` and `workshop` still close on a bare exercise with no
-rule over it, so they are the two left to bring into line.
+give a second one its own heading. `harness` follows the same shape now, with the `CutItUp` card
+under the rule and `PatternMatch` arriving after it from the registry. `workshop` is the one left
+that still closes on a bare exercise with no rule over it.
 
-`tools` carries the step's only hands-on task and its two graded exercises, and between them they
+`tools` carries one of the step's two hands-on tasks and its two graded exercises, and between them they
 hold advice the prose used to state and no longer does. `connect-one` is the task: add an MCP server
 to your own agent, then fetch the catalogue twice, once with `curl` and once by driving `/catalog`
 through the server. It names Claude Code's `claude mcp add <name> -- <command>` (verified against the
@@ -186,7 +207,7 @@ and a wrong one dates the unit. It carries the step's only `data-audience="self"
 
 An eighth unit, `workshop`, closes the step as its capstone. It is the one part of step 2 a machine
 can grade, because it grades the thing `quality` and `goals` argue for: a goal a build answers yes
-or no to. It ships a small loans domain under `step2` (see below) that is green but un-hardened, and
+or no to. It ships a small loans domain in `kata/step2/java` that is green but un-hardened, and
 a `graded` Maven profile that measures it against three goals - a coverage floor, a complexity
 ceiling and honest (mutation-tested) coverage. `mvn verify -Pgraded` prints a leetspoken flag for
 each goal met and fails until all three are. The student hardens the module (that is the exercise,
@@ -207,14 +228,20 @@ native image, and it is built to resist a one-shot so the student has to plan it
 `step2/aot/NativeImageFlag`, an `ApplicationRunner` that prints only when `NativeDetector.inNativeImage()`
 is true, so `mvn spring-boot:run` and `mvn test` stay silent and the flag is proof of a native image.
 Its payload is a classpath resource rather than a Java constant, so an image built without thinking
-about resources starts, cannot find it, and prints a miss instead of the code. Three things stand
-between the student and the flag — wiring an ahead-of-time build, aiming it at step 2 rather than the
-pinned step 1 main class, and reading that runtime miss as the spec for the fix — and each is a
-plan-worthy step the unit tells them to work in plan mode.
+about resources starts, cannot find it, and prints a miss instead of the code. Two things stand
+between the student and the flag, wiring an ahead-of-time build and reading that runtime miss as the
+spec for the fix, and each is a plan-worthy step the unit tells them to work in plan mode.
 
-**Do not add a `native` profile to the `pom.xml`, and do not write the resource hint or a
-`RuntimeHintsRegistrar`**: wiring the build, targeting step 2, and planning the hint are the exercise.
-Do not spell out the fix here either; the runtime miss is what the student is meant to read.
+There used to be a third, and it is worth knowing why it went. Step 1 and step 2 once shared one
+Maven module, so the Boot plugin pinned `<mainClass>` to `Step1Application` and a naive native build
+compiled the wrong step; aiming it at step 2 was an obstacle in its own right. Splitting the steps
+into their own projects removed it, since `kata/step2/java` holds one main class and the build finds
+it. The `workshop` unit was rewritten to stop claiming otherwise. **If the exercise wants a third
+obstacle back, it needs a new one rather than that sentence.**
+
+**Do not add a `native` profile to `kata/step2/java/pom.xml`, and do not write the resource hint or a
+`RuntimeHintsRegistrar`**: wiring the build and planning the hint are the exercise. Do not spell out
+the fix here either; the runtime miss is what the student is meant to read.
 
 A **step** is a topic; a **unit** is one page inside it, holding prose, a quiz, an exercise, or any
 combination. The URL is `/steps/step1/session`; a bare `/steps/step1` forwards to the step's first
@@ -233,47 +260,48 @@ retiring them is a later decision, not an oversight, so leave them alone in eith
 
 ## Layout
 
-The frontend still splits into a `shared` shell plus one folder per step. The backend now has a web
-tier in both steps, and **each step has its own `@SpringBootApplication`** scoped to its own package
-by the default component scan (no `scanBasePackages`): `Step1Application` boots step 1 and only step
-1, `Step2Application` boots step 2 and only step 2. Running one never drags in the other. A step adds
-its Java by writing its own app plus whatever it exposes.
-
-Because two `@SpringBootApplication` classes now live in the tree, the Boot plugin can no longer find
-a single main class on its own, so `spring-boot-maven-plugin` pins `<mainClass>` to `Step1Application`
-in the `pom.xml`. That is what "running the app" means by default: `mvn spring-boot:run` starts step 1.
-Step 2 is run explicitly with
-`mvn spring-boot:run -Dspring-boot.run.main-class=be.smartagents.kata.java.step2.Step2Application`.
-The two steps no longer share a port at runtime; you run the one whose endpoints you want.
-
-One consequence worth knowing: `@SpringBootTest` searches *upwards* from its own package for the
-configuration class, and step 2's `Step2Application` sits beside its tests rather than above them. A
-step 2 test that boots the context names it, `@SpringBootTest(classes = Step2Application.class)`, the
-way `LoanControllerTest` does; naming it also keeps the boot to that step's slice.
+The repository has two roots, and they are not the same shape. The frontend is one app that splits
+into a `shared` shell plus one folder per step. The backend is not one app at all: **each step owns a
+standalone Maven project under `kata/stepN/java/`**, with its own `pom.xml`, its own profiles and its
+own `CLAUDE.md`.
 
 ```
-src/main/java/be/smartagents/kata/java/step1/
-  Step1Application.java         step 1's entry point; default scan of ...step1 only
-  TitleController.java          GET /api/titles
-  services/                     CatalogStage, AuxiliaryStage, CatalogRun, Catalog, Scramble
-                                and the fifty stage classes they walk
-src/main/java/be/smartagents/kata/java/step2/
-  Step2Application.java         step 2's entry point; default scan of ...step2 only
-  domain/                       Loan, MediaType, MemberTier, LateFeePolicy (the branchy method)
-  port/                         LoanRepository, the port the use case reads through
-  adapter/                      InMemoryLoanRepository
-  application/                  LateFeeReport, and MemberStatements (forTier is the challenge stub)
-  web/                          LoanController (GET /api/loans/statement/{tier}), StatementResponse,
-                                StatementCode (the fourth flag, kept shifted)
-  aot/                          NativeImageFlag: the fifth flag, printed only inside a native image
-                                (reads its payload from flags/native-image.veil, a dropped resource)
-  config/                       LoanDataConfig: the seeded overdue shelf the endpoint reports on
-src/test/java/be/smartagents/kata/java/step2/
-  domain/                       LateFeePolicyTest: the one thin shipped test (keeps default green)
-  application/                  MemberStatementsTest: @Tag("challenge") spec for the missing method
-  web/                          LoanControllerTest: @Tag("challenge") spec for the endpoint
-  grading/                      FlagRevealIT, Flag, Veil: the graded-profile reveal, run by failsafe
+kata/
+  step0/java/    test sources only: the intro reveal, behind `mvn verify -Pintro`
+  step1/java/    the catalogue service and the three flags hidden in it
+  step2/java/    the loans domain, the graded and challenge profiles, the native-image flag
+  step3/java/    an empty scaffold, buildable, waiting for the step's topic
+front/           the curriculum
 ```
+
+**There is no pom at the repo root, and no aggregator.** That is the decision, not an omission: a
+step is a folder a student opens on its own, and a project that has to be built from a parent is not
+that. So each project declares the Boot parent directly, and steps are free to drift apart in
+dependencies without negotiating. The cost is duplication across four poms, and it is accepted.
+Every Maven command in this repo is run from inside `kata/stepN/java`, never from the root.
+
+Two rules survive the split and are worth keeping in one place:
+
+- **Each step has its own `@SpringBootApplication`**, scoped to its own package by the default
+  component scan (no `scanBasePackages`). Running one never drags in another. Because a project now
+  holds exactly one main class, `spring-boot-maven-plugin` needs no `<mainClass>` pin; the one step 1
+  used to carry existed only because the two steps shared a module. Do not add it back.
+- **A step never reaches into another step's code.** There is no shared classpath to reach across
+  any more, and the duplication that rule causes is deliberate: step 0 has `Veil`, step 1 has
+  `Scramble`, step 2 has its own `Veil`, and a step owning its grading code is the point. Do not
+  factor them into a shared module.
+
+Each step's own `CLAUDE.md` carries the rest, and it is the readable source for that step's Java:
+what is in the package, how it is run, and **which parts of it are exercises that must not be
+implemented**. Those prohibitions are the load-bearing part, so in short, and in full at
+`kata/stepN/java/CLAUDE.md`:
+
+- **step 0** — do not decode or reveal the intro flag.
+- **step 1** — do not decode, implement or reveal any of the three flags, **do not add tracing**
+  to the catalogue pipeline (instrumenting it is the student's work), and **do not solve
+  `problem.md`**: no cut of it, no `solve.md`, no `plan-solve.md`, no shelves package.
+- **step 2** — do not harden the loans module, do not implement `MemberStatements.forTier`, and do
+  not add a `native` profile or write the resource hint.
 
 The frontend layout is `front/src/`: a `shared/` shell (components, deck, i18n, lib, mode, progress,
 routes) plus one `steps/stepN/` folder per step, holding that step's registry, figures, flags,
@@ -286,54 +314,12 @@ documented in `front/CLAUDE.md`. One rule belongs here because it survives a car
 anywhere: `shared/deck/deck-stage.js` is **vendored verbatim** from the smartagents-website repo so
 it can be re-synced, and must not be edited.
 
-### The catalogue, and the thing it is hiding
+### The catalogue
 
-`GET /api/titles` returns nine fictional book titles. `Catalog` builds them by walking every
-`CatalogStage` bean in `@Order` on every request, and folding in a random draw of one to ten
-`AuxiliaryStage` beans at arbitrary positions. So the path through the code moves from request to
-request while the response does not.
-
-A tenth entry is computed on every request and never published, because its `run.publish(...)` call
-is commented out. It is not a title but a flag, `{…}`-wrapped and leetspoken, so there is no
-mistaking it for catalogue prose once you have it. This is the **trace flag**, the second of the three
-flags step 1's `workshop` board grades: the student instruments the running pipeline to read it.
-**This is a deliberate exercise, and the point is that it does not fall out of a search.** Four things
-protect it:
-
-- **Nothing is stored in plaintext.** All 41 non-publisher stages restore a string through
-  `Scramble.unveil`, and they all look alike doing it. Only the nine publishers hold a literal, and
-  those are the visible output anyway.
-- **Almost everything published is thrown away.** `CatalogRun` drops any line containing `(draft)`,
-  and 40 of the 41 restored strings carry it. So publishing is not the tell either: the auxiliaries
-  publish for real and vanish.
-- **The commented-out publish is not unique.** Eleven stages have one, and uncommenting all eleven
-  is not a shortcut: five lines appear and all five are flags in the same shape. Six of the decoys
-  carry the marker and vanish; four do not, on purpose, and those four are flags too. Which of the
-  five is the real one is a judgement about what it says, not something the structure gives away. The
-  board settles that judgement by hashing exactly one, `ManuscriptTallyStage`'s
-  `{pr0mpt1ng_w1th_tr4c3r5}` (`@Order(21)`): its text rewards tracing, and the other four stay decoys
-  the board rejects.
-- **Stored lengths sit in one band.** The five flags are 22 to 25 characters, and every one of
-  those lengths is shared with a marked string. Sorting the 41 ciphertexts by length must not
-  separate them, so any new stored string has to land inside the band rather than at either end.
-- **The always-run set is padded to twenty on purpose.** Nine publishers plus those eleven. If the
-  runner always ran exactly the ten title-bearing stages, nine would publish visibly and the tenth
-  would be the answer by elimination.
-
-Words a naive search reaches for — key, secret, hidden, vault, cipher, token, draft — appear in
-class names across all three groups, so grepping any of them proves nothing.
-
-The other two flags the `workshop` board grades hide by a different mechanism each, so the three
-tasks stay distinct. The **decode flag** (`{r34d_th3_d34d_c0d3}`) is a `Scramble.unveil` call in a
-branch of `VaultDoorStage` that can never run (`tally` is folded modulo 9973 and then compared
-`>= 9973`), so a trace never surfaces it and only reading the source plus reproducing `unveil` reaches
-it. That branch carries **no comment, on purpose**: it used to say "this never runs", which ended the
-exercise in one grep, and the whole `services` package has no other line comment besides the eleven
-commented publishes. Do not explain the dead branch in a comment. The **DEBUG flag** (`{d3bug_l3v3l_r3v34ls}`) is emitted by `AtlasBindingStage` at `log.debug`,
-decoded by a small inline shift rather than `Scramble.unveil` so it stays out of the unveil stream a
-trace would catch; it prints only when `logging.level.be.smartagents.kata.java.step1=DEBUG` is set. The
-three map onto the layers step 1 teaches: read the source (tools), trace the run (session), turn the
-log level up (harness). **Do not decode, implement or reveal any of the three for the student.**
+`GET /api/titles` returns nine fictional book titles, and hides three flags the step 1 `workshop`
+board grades. How each of the three is hidden, why it does not fall out of a `grep`, and the several
+prohibitions that keep it that way are all in `kata/step1/java/CLAUDE.md`, which is where they can be
+maintained beside the code they describe. Read it before touching anything under `kata/step1/java/`.
 
 The frontend has a page for calling all this: `/catalog`, linked under the steps in the sidebar.
 `CatalogPage` renders `CatalogPanel`, which fetches `/api/titles` on a button press and lists what
@@ -341,25 +327,24 @@ came back, numbered, in arrival order. It is deliberately dumb: no caching, no m
 filtering, so what is on screen is what the service returned. It is not a unit and belongs to no step,
 but step 1's `workshop` unit now points the student at it to work the three flags.
 
-**Do not add tracing here.** No hook, no callback, no candidate-logging method. Instrumenting this
-pipeline, running it and reading the trace is the student's work (it is the trace flag); shipping a
-seam does the exercise for them. A `Tracer` that logged every restored string at INFO was committed
-once and has been removed for exactly this reason: with it in place, a plain run printed the trace
-flag for free. Do not reintroduce it. The `log.debug("I was here…")` breadcrumbs are inert and must
-stay that way, with one deliberate exception: `AtlasBindingStage`'s `log.debug` carries the DEBUG
-flag, on purpose, and is the whole of that flag's exercise.
-
-The tests assert the nine known titles as a *subsequence* and size `>= 9`, never `== 9`, so a
-student who enables the tenth line does not land in a red build.
-
 ## Running it
 
 Two servers, two terminals. Vite proxies `/api` to the backend, so the browser stays on one
 origin and Spring needs no CORS configuration.
 
 ```bash
-mvn spring-boot:run     # backend on :8080
-cd front && npm run dev # frontend on :5173  ← open this one
+cd kata/step1/java && mvn spring-boot:run   # step 1's backend on :8080
+cd front && npm run dev                     # frontend on :5173  ← open this one
+```
+
+There is no such thing as "the backend" any more: there is the step whose service you are running.
+Each step's project boots on `:8080`, so **only one at a time holds the port**, and the frontend's
+proxy reaches whichever that is. That is fine, because a student works one step at a time and the
+`/catalog` page belongs to step 1. Step 2 is the same command from `kata/step2/java`.
+
+```bash
+cd kata/step2/java && mvn spring-boot:run
+curl -s localhost:8080/api/loans/statement/STUDENT | jq
 ```
 
 Opening `:5173` with the backend down is a supported state: the quizzes and the two hash-checked
@@ -367,65 +352,39 @@ boards work as they always do, and submitting a free-text answer says it could n
 service. There is no longer a header badge to check first, so a proxy problem shows up where the
 call is made rather than in the chrome.
 
-The catalogue is easiest to look at straight from the service:
-
-```bash
-curl -s localhost:8080/api/titles | jq
-mvn spring-boot:run -Dspring-boot.run.arguments=--logging.level.be.smartagents.kata.java.step1=DEBUG
-```
-
-The second one turns on the stage chatter, which is off by default.
-
-Step 2 runs as its own application, so start it explicitly (default `spring-boot:run` is step 1); it
-answers per member tier on the same port:
-
-```bash
-mvn spring-boot:run -Dspring-boot.run.main-class=be.smartagents.kata.java.step2.Step2Application
-curl -s localhost:8080/api/loans/statement/STUDENT | jq
-```
-
-It returns a 500 until the student implements `MemberStatements.forTier`, which is the challenge, and
-its code once they do.
+Each step's `CLAUDE.md` carries the rest of its commands, including the DEBUG run that turns step 1's
+stage chatter on.
 
 ## Build and test
 
-Maven, single module, no wrapper — use the `mvn` on `PATH` (3.9.16 locally).
+Maven, no wrapper — use the `mvn` on `PATH` (3.9.16 locally). Four projects, none of them aggregated,
+so **every command runs from inside `kata/stepN/java`**. There is nothing to build at the repo root.
 
-The standard Maven invocations apply. The two that are not standard, and that carry the kata's
-meaning:
+`mvn test` must pass in every step, and on a clean checkout it does in all four. The invocations that
+carry the kata's meaning are all step 2's and step 0's, and they are documented where they live
+(`kata/step2/java/CLAUDE.md`, `kata/step0/java/CLAUDE.md`). What matters from here:
 
 ```bash
-mvn verify -Pgraded       # the step 2 workshop: grades the loan module, prints its flags
-mvn test -Pchallenge      # the step 2 challenge: the spec for the statement endpoint
+cd kata/step2/java && mvn verify -Pgraded    # the workshop: red until the student hardens the module
+cd kata/step2/java && mvn test -Pchallenge   # the challenge: red until they write forTier
+cd kata/step0/java && mvn verify -Pintro     # the intro: prints one flag, always green
 ```
 
-`mvn verify -Pgraded` is the student's target, and it is meant to be red on a fresh checkout: the
-`graded` profile wires JaCoCo (a coverage floor and a per-method complexity ceiling) and PIT
-(mutation coverage) over the `step2` module, and `FlagRevealIT` prints a flag for each goal already
-met, then fails until all three are. It is opt-in on purpose, so the default `mvn verify` (and every
-step of this kata) stays green. Do not harden the module to make it pass: that is the exercise. PIT
-and the reveal `*IT` run only under this profile.
+The first two are **meant to be red**, and making them green is the student's exercise rather than a
+build to fix. Every one of them is opt-in, so the default `mvn verify` stays green in all four
+projects, and the whole of the kata's "leave every step green" rule still holds.
 
-`mvn test -Pchallenge` is the other half, and it is red on a fresh checkout for a different reason:
-the tests are the spec for `MemberStatements.forTier`, which ships as a stub that throws. They carry
-`@Tag("challenge")` and the default build excludes that group through the
-`surefire.excluded.groups` property, which the `challenge` profile empties. **Do not implement
-`forTier` to make them pass**: planning and writing it is the student's exercise, and the statement
-endpoint pays out its code once they do. A new exercise spec of this kind belongs behind the same
-tag, so a clean checkout stays green.
+To check the lot after a change that crosses projects:
 
-The fifth flag (native image) has no profile in this `pom.xml` on purpose, and it is inert under
-`mvn test` and `mvn spring-boot:run` because it gates on `NativeDetector.inNativeImage()`. Wiring the
-ahead-of-time build is the exercise; the step 2 workshop notes above carry the detail, including the
-two prohibitions: **do not add a `native` profile to the `pom.xml`, and do not write the resource
-hint.** Verified end to end with GraalVM 25.
+```bash
+for s in step0 step1 step2 step3; do (cd kata/$s/java && mvn -q verify) || echo "$s FAILED"; done
+```
 
 Run a subset via Surefire's `-Dtest` filter, adding `-DfailIfNoSpecifiedTests=false` so a typo'd
 pattern is not a build failure.
 
 No static analysis runs on the default Java build; plain `mvn verify` adds nothing beyond packaging.
-The `graded` profile is the exception: it runs JaCoCo and PIT over the `step2` module (see the step 2
-notes above), but only when you ask for it with `-Pgraded`.
+Step 2's `graded` profile is the only exception, and only when you ask for it.
 
 Frontend, from `front/`:
 
@@ -436,10 +395,11 @@ npm run lint    # oxlint, shipped with the Vite template
 
 ## Toolchain
 
-- The `pom.xml` has the versions. Two things it does not say: `javac` rejects APIs newer than
-  the `<java.version>` property even though the local JDK is Oracle GraalVM 25.0.3, and the Boot
-  parent manages every dependency version here, so declare new Spring or test artifacts
-  **without** a `<version>`.
+- Each step's `pom.xml` has its own versions, and they are deliberately allowed to differ; a step
+  upgrading Boot is not an event the other three have to attend. Two things a pom does not say:
+  `javac` rejects APIs newer than the `<java.version>` property even though the local JDK is Oracle
+  GraalVM 25.0.3, and the Boot parent manages every dependency version, so declare new Spring or test
+  artifacts **without** a `<version>`.
 - Boot 4 split the test slices out of `spring-boot-starter-test`. `@WebMvcTest` lives in
   `org.springframework.boot.webmvc.test.autoconfigure` and needs the separate
   `spring-boot-webmvc-test` dependency, already present. Expect other slices to need their
@@ -452,9 +412,10 @@ npm run lint    # oxlint, shipped with the Vite template
 
 ## Conventions
 
-- Package root `be.smartagents.kata.java` (Maven coordinates are
-  `be.smartagents:kata-agentic-java`, so the groupId and the package root deliberately
-  differ); standard `src/main/java` + `src/test/java` layout.
+- Package root `be.smartagents.kata.java`, and a step's own code sits under `...java.stepN`. Maven
+  coordinates are `be.smartagents:kata-agentic-java-stepN`, so the groupId and the package root
+  deliberately differ. Standard `src/main/java` + `src/test/java` layout inside each project, which
+  means a package path is now `kata/stepN/java/src/main/java/be/smartagents/kata/java/stepN/`.
 - Tests are `*Test.java` mirroring the production package (Surefire's default include
   patterns depend on this suffix).
 - Table-driven cases use `@ParameterizedTest` + `@CsvSource` with a `name` template.
@@ -473,6 +434,12 @@ step needs, in order, plus how figures and inline figures are wired and how unit
 
 Step ids are `stepN`, unit ids are words (`session`, `workshop`), and together they are the
 URL (`/steps/step1/session`).
+
+A step that needs Java gets a seventh file, its own project at `kata/stepN/java/`, and the shortest
+honest way to start one is to copy `kata/step3/java`, which is a buildable empty scaffold kept for
+exactly that. Give it its own `pom.xml` (Boot parent, no aggregator, artifactId
+`kata-agentic-java-stepN`) and its own `CLAUDE.md`. Do not add a pom at the repo root to tie them
+together: the steps are independent on purpose, and the reasoning is under `## Layout`.
 
 The audience rule (`data-audience`), how mode filtering works, and the whole language and i18n
 mechanism live in `front/CLAUDE.md`, which loads when you work under `front/`. Two rules from there
