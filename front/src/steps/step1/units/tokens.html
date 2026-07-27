@@ -1,0 +1,113 @@
+<!-- No audience attribute anywhere in this unit, which is deliberate. `intro` is wrapped self-only
+     because the teacher walks it through at the board, so in a guided room this page is the first
+     prose of the step a student actually reads. It has to stand on its own for both audiences. -->
+<p data-i18n="tokens.lead.1">
+  The model does not read your words. Before anything reaches it your text is cut into chunks:
+  common words survive whole, rare ones break into pieces, and every chunk is swapped for a number.
+  Those chunks are <strong>tokens</strong>.
+</p>
+
+<!-- The not-a-layer move, mirrored from `model.lead.1`. It comes first in the step rather than late,
+     so it says what it is the unit of rather than what it is not a layer of. The word `context` is
+     deliberately not used yet: `intro` defines it on the very next page. -->
+<p data-i18n="tokens.lead.2">
+  This unit is not about what goes into an agent's head. It is about what the contents are counted
+  in. Everything an agent knows when it answers you is text, and text is limited, priced and re-read
+  by the token. Not by the word, and not by the character. Get the unit wrong and every number in
+  this step is wrong with it.
+</p>
+
+<p data-i18n="tokens.lead.3">
+  For ordinary English, four or five characters go into one token, so a page of prose runs to a few
+  hundred.
+</p>
+
+<h2 data-i18n="tokens.not-words.heading">Text does not split into words</h2>
+
+<p data-i18n="tokens.not-words.1">
+  A tokeniser has a fixed vocabulary, built once from a pile of text and frozen. It cuts your input
+  into the longest pieces that vocabulary already knows. Common English words are in there whole,
+  and so is the space in front of them. Anything the vocabulary has not seen often enough gets taken
+  apart until what is left does fit.
+</p>
+
+<div data-figure="token-split"></div>
+
+<p data-i18n="tokens.not-words.3">
+  This is why a pasted stack trace, a log full of ids, or a wall of minified JSON costs several times
+  what its length suggests. Prose is the cheapest thing you can put in front of a model. Identifiers,
+  hashes and ids are the dearest, and a codebase is made of those.
+</p>
+
+<h2 data-i18n="tokens.one-at-a-time.heading">It writes one token at a time</h2>
+
+<p data-i18n="tokens.one-at-a-time.1">
+  A model does one thing. Given everything it has been handed so far, it scores the tokens that could
+  come next, and one of them is taken. That token is stuck on the end, and the whole lot goes back
+  in. Again.
+</p>
+
+<div data-figure="next-token"></div>
+
+<p data-i18n="tokens.one-at-a-time.2">
+  There is no sentence being written out here. There are three separate passes, and on the third one
+  the model reads all seven tokens to produce one.
+</p>
+
+<!-- The correction that makes this section worth having: conditioned on everything before it, not on
+     the token before it. It is also the bridge into the attention section, which is that claim drawn.
+     Do not shorten it to "the previous token". -->
+<p data-i18n="tokens.one-at-a-time.3">
+  On its own, <code>it</code> predicts nothing at all. <code>the build failed because it</code> is
+  what makes <code>timed</code> the favourite. Everything you leave in front of a model is changing
+  what comes out of it, whether you meant it to or not.
+</p>
+
+<!-- Sampling, and the one place the unit says the top row is not a rule. It is what stops the figure
+     from teaching that a model is a lookup table with extra steps, and it is what the branch button
+     on the figure above is for. -->
+<p data-i18n="tokens.one-at-a-time.4">
+  The favourite is not always what comes out. Those scores are a distribution and the model samples
+  from it, so the second row is taken often enough that the same question can give you a different
+  answer twice in a row. None of the branches above were impossible. They were only less likely.
+</p>
+
+<!-- Points at `model`'s pricing rather than repeating it, the same rule the caching paragraph below
+     follows for `harness`. One consequence, named, and then it stops. -->
+<p data-i18n="tokens.one-at-a-time.5">
+  This is also why output is priced above input. A question arrives in one pass. An answer is built a
+  token at a time, and each one is paid for with a full read of everything before it. The
+  <code>model</code> unit puts numbers on that gap.
+</p>
+
+<h2 data-i18n="tokens.reads-all.heading">It reads all of it, every turn</h2>
+
+<p data-i18n="tokens.reads-all.1">
+  Inside every one of those passes, the model does not look anything up. Here is the part people do
+  not expect: each token is weighed against every token in front of it, and that whole weighing is
+  thrown away and redone on the next pass. There is no index, and no shortcut for the parts that did
+  not change.
+</p>
+
+<div data-figure="token-attention"></div>
+
+<p data-i18n="tokens.reads-all.2">
+  This is the sentence you just watched it write, finished. Hold <code>it</code> and the heaviest
+  line runs back to <code>build</code>, which is the answer you would have given. Hold the first
+  token and nothing is drawn at all. A token only ever looks backwards.
+</p>
+
+<p data-i18n="tokens.reads-all.3">
+  Seven tokens make twenty-one pairs. Double the tokens and it is ninety-one, not forty-two. The
+  reading grows faster than the thing being read, which is why a long session gets slower as well as
+  dearer, and why the cheapest token is the one you never put in
+  <svg data-icon="coin"></svg>.
+</p>
+
+<!-- Points at `harness`'s caching section rather than restating it, the same rule
+     `harness.coordinator.3` follows for decomposition. One consequence, named, and then it stops. -->
+<p data-i18n="tokens.reads-all.4">
+  Looking only backwards has one useful consequence. Adding to the end leaves every earlier weighing
+  exactly as it was, so the front of the pile can be kept and charged at a fraction next turn. That
+  is what a cache is here. The <code>harness</code> unit prices it.
+</p>

@@ -1,0 +1,89 @@
+<p data-i18n="model.lead.1">
+  Everything in this step so far fills the window. Something has to read it. Which model does that
+  is a choice.
+</p>
+
+<p data-i18n="model.lead.2">
+  A provider ships a family rather than a model. They differ in what they cost per token, how fast
+  they answer, and how well they hold a long task together.
+</p>
+
+<!-- Deliberately version-free. The tier names outlive the numbers, and a unit naming this quarter's
+     release is out of date by the next one. -->
+<p data-i18n="model.lead.3">
+  Three tiers below, and every provider ships something with this shape: a top one, a middle one,
+  and a small fast one. The names change every few months. What each is good at does not.
+</p>
+
+<!-- Dates the three cards below without dating the unit. The figure stays version-free, so this
+     says when these were the family rather than pinning the prose to a release, the same job the
+     month in `ModelPricing`'s caption does. -->
+<p data-i18n="model.lead.4"><small>(July 2026)</small></p>
+
+<div data-figure="model-tiers"></div>
+
+<h2 data-i18n="model.cost.heading">Cost</h2>
+
+<p data-i18n="model.cost.1">
+  Price is per token, and the tiers are further apart than most people expect. Call the small one
+  a single unit. The middle tier costs roughly three of those, the top tier roughly five
+  <svg data-icon="coin"></svg> Output runs about five times the price of input in every tier, so a
+  model that answers at length costs more than the same model answering briefly.
+</p>
+
+<!-- Filled by the ModelPricing element registered under this name in steps/step1/index.tsx. It sits
+     between the paragraph that states the ratios and the one that says the ratios outlive the
+     numbers, so it reads as evidence rather than as a reference table. -->
+<div data-figure="model-pricing"></div>
+
+<p data-i18n="model.cost.2">
+  Those ratios hold up better than the numbers do. Providers cut prices and ship new versions, and
+  the top tier stays the top tier. Learn the shape rather than the price list.
+</p>
+
+<h2 data-i18n="model.speed.heading">Speed</h2>
+
+<p data-i18n="model.speed.1">
+  The small tier answers roughly four to five times faster than the middle one, and the top tier is
+  the slowest of the three. On one question that is a few seconds and you will not care. Inside a
+  loop that runs a hundred times, it is the difference between a job you watch and a job you leave
+  running.
+</p>
+
+<p data-i18n="model.speed.2">
+  Here is where quick stops being cheap. A fast wrong answer costs you the run it broke plus the
+  second run to fix it, and you paid for both. The small tier wins when the task is specified
+  tightly enough that there is nothing left to get wrong.
+</p>
+
+<h2 data-i18n="model.reasoning-level.heading">Reasoning level</h2>
+
+<p data-i18n="model.reasoning-level.1">
+  Two dials, and they are easy to confuse. The reasoning level decides how long one model thinks
+  before it answers. The tier decides which model is doing the thinking. Turning reasoning up on the
+  small tier costs you tokens and time, and it does not hand you the top tier.
+</p>
+
+<h2 data-i18n="model.let-it-pick.heading">Or let it pick for you</h2>
+
+<!-- Points back at the coordinator section in `harness` rather than restating it. What this
+     paragraph adds is that the tier choice is one of the things that pattern automates. -->
+<p data-i18n="model.let-it-pick.1">
+  You do not have to make this call every time. The coordinator in the previous unit is this choice
+  handed to the machine: the expensive model works out what has to happen, and the parts go to
+  cheaper ones. Top rate for deciding, a fraction of it for doing.
+</p>
+
+<p data-i18n="model.let-it-pick.2">
+  There is a reason that split works as well as it does. Providers fine-tune the smaller tiers on
+  output from the larger ones, so an expensive model writing the brief is writing for something
+  trained on its own answers. Working out what the cheap model should do is the half it is best at.
+</p>
+
+<!-- The doing part, under the heading `QuizPanel` renders over a quiz, the same shape `tools` and
+     `harness` use. The card carries the whole task, so nothing sits between the rule and it. -->
+<hr />
+
+<h2 data-i18n="model.check-yourself.heading">Check yourself</h2>
+
+<div data-figure="pick-the-tier"></div>

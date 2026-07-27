@@ -8,26 +8,38 @@ import { CutItUp } from './CutItUp'
 import { ExactAsk } from './ExactAsk'
 import { FlagBoard } from './FlagBoard'
 import { McpServer } from './McpServer'
+import { ModelPricing } from './ModelPricing'
+import { ModelTiers } from './ModelTiers'
+import { NextToken } from './NextToken'
 import { OneShotCompare } from './OneShotCompare'
 import { PatternMatch } from './PatternMatch'
+import { PickTheTier } from './PickTheTier'
 import { PromptInContext } from './PromptInContext'
 import { ReflectionLoop } from './ReflectionLoop'
 import { SequentialSteps } from './SequentialSteps'
 import { SessionMakeup } from './SessionMakeup'
 import { SpotInjection } from './SpotInjection'
+import { SurviveTheClear } from './SurviveTheClear'
+import { TokenAttention } from './TokenAttention'
+import { TokenSplit } from './TokenSplit'
 import { ToolsInContext } from './ToolsInContext'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
 import { introQuiz, promptQuiz } from './quiz'
+import tokens from './units/tokens.html?raw'
 import intro from './units/intro.html?raw'
 import prompt from './units/prompt.html?raw'
 import session from './units/session.html?raw'
 import tools from './units/tools.html?raw'
 import harness from './units/harness.html?raw'
+import model from './units/model.html?raw'
 import workshop from './units/workshop.html?raw'
 
 /**
- * Step 1, one layer of context per unit. `workshop` closes the step with a flag board (like
+ * Step 1, one layer of context per unit, plus two units that are not layers. `tokens` opens the step
+ * and is the unit the window is counted in; `model` closes the prose and is the reader on the other
+ * end of it. Neither fills the window, which is why `workshop` still names four layers and not six.
+ * `workshop` closes the step with a flag board (like
  * step 2's workshop): three flags the `GET /api/titles` backend hides from its response, one per
  * way context is assembled - read the source, trace the run, turn the log level up. The board
  * grades in the browser against salted hashes, so it needs no backend and there is no Java checker.
@@ -40,6 +52,16 @@ const step1: Step = {
   title: 'step.title',
   locales: { en, nl },
   units: [
+    {
+      id: 'tokens',
+      title: 'tokens.title',
+      html: tokens,
+      inlineFigures: {
+        'token-split': <TokenSplit />,
+        'next-token': <NextToken />,
+        'token-attention': <TokenAttention />,
+      },
+    },
     {
       id: 'intro',
       title: 'intro.title',
@@ -68,6 +90,7 @@ const step1: Step = {
       html: session,
       inlineFigures: {
         'session-makeup': <SessionMakeup />,
+        'survive-the-clear': <SurviveTheClear />,
       },
     },
     {
@@ -92,6 +115,16 @@ const step1: Step = {
         'cut-it-up': <CutItUp />,
       },
       figure: <PatternMatch />,
+    },
+    {
+      id: 'model',
+      title: 'model.title',
+      html: model,
+      inlineFigures: {
+        'model-tiers': <ModelTiers />,
+        'model-pricing': <ModelPricing />,
+        'pick-the-tier': <PickTheTier />,
+      },
     },
     {
       id: 'workshop',

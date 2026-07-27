@@ -154,6 +154,14 @@ file. `QuizPanel` renders the section and the submit button, so those read `Quiz
 a shadcn primitive from `ui/` is used, the attribute names the caller, since that is the
 component whose behaviour you are looking for.
 
+**A shared component that a step renders more than once takes its block from the caller.**
+`TaskCard` and `ConnectBoard` both have a `block` prop, so `harness`'s task is `#cut-it-up-*` and
+`model`'s board is `#pick-the-tier-*` while both carry `data-component="TaskCard"` or
+`"ConnectBoard"`. That is the two attributes doing what they are for: the id says which thing on
+which page, and `data-component` says whose code to open when it misbehaves. The step-side wrapper
+holds the data and the reasons for it, so it renders no elements of its own and never appears in the
+DOM.
+
 Every component in `front/src/` follows this, `QuizPanel.tsx` included. Only three things are
 exempt: the generated primitives in `shared/components/ui/`, which are styled wrappers rather than
 components in their own right; `App.tsx`, which renders routes and no elements; and an id that has

@@ -38,17 +38,79 @@ Two parts, both walking-skeleton thin:
   Conventions. It owns the curriculum content and renders it for one of two audiences.
 
 `step1` is **context**: the layers an agent's context is assembled from (prompt, session, harness,
-tools) and the fact that they share one finite window. Six units — `intro`, `prompt`, `session`,
-`tools`, `harness`, `workshop` — and the unit HTML is the source for what each one teaches.
+tools) and the fact that they share one finite window. It is *titled* "Context, model, mechanisms"
+(NL "Context, model, mechanismen"), and the longer title is the decision: the step outgrew the
+one-word name once `model` and the machinery around the window joined it, so the sidebar says what
+is in there rather than naming one of the three. The topic is still context, which is why the
+sentence above still opens that way. `FLAG_SALT` in `flags.ts` still reads `kata-step1-context-v1`
+and must not follow the title: it is a hash input, so renaming it invalidates every flag on the
+board. Eight units — `tokens`, `intro`, `prompt`, `session`,
+`tools`, `harness`, `model`, `workshop` — and the unit HTML is the source for what each one teaches.
 That order is the registry's, and `workshop`'s opening list recites it, so moving a unit means
-visiting that sentence in the HTML and in `nl.json`.
+visiting that sentence in the HTML and in `nl.json`. **Two of the eight are deliberately not in that
+list**: four layers fill the window, `tokens` is the unit it is counted in and `model` is the reader
+on the other end of it, so `workshop` names four and not six, and each of the two opens by saying so.
+Promoting either to a layer means visiting `workshop`, `intro` and every "four layers" sentence in
+the step, which is a larger change than it looks.
 Three editorial constraints the HTML does not state on its own: every layer unit goes past merely
 naming its layer, and none of the four is allowed to read as a stub (they sat within about a hundred
-words of each other until `tools` grew the MCP material, and that floor is the part that matters); the sub-agent starting blank is the point all three `harness` patterns turn on; and
+words of each other until `tools` grew the MCP material, and that floor is the part that matters); the sub-agent starting blank is the point the three sub-agent `harness` patterns turn on; and
 the pattern diagrams share one vocabulary (a teal frame is a context, a bar is something in it,
 dashes are what is not) that any new diagram should join. `intro` and `prompt` each carry a
 three-question quiz. `harness` closes on `PatternMatch`, a drag-to-connect exercise whose three
-situations against four patterns leave decomposition on the board with nothing pointing at it.
+situations against four patterns leave decomposition on the board with nothing pointing at it. It is
+the shared `ConnectBoard`, which `model`'s `PickTheTier` is too; the reasoning for that is under
+`model` below.
+
+`tokens` opens the step, ahead of `intro`, and gives the step's unit of measurement a page before
+anything is measured in it. It is prose and three figures, with **no quiz and no "Check yourself"
+section**: the figures are the doing, and every quiz in the course already sits in the opening units.
+Nothing in it carries a currency; `ModelPricing` is still the only place in the course where a number
+has one. Its prose has been cut hard and deliberately: it opens cold, closes on the caching pointer
+with no summary or handoff, and the figures are left to be read rather than narrated. Sentences that
+told the student to click something, or that recapped what the figure had just shown, were taken out
+one at a time. Do not write that layer back in.
+
+Four things about it are decisions. **Neither `TokenSplit` nor `TokenAttention` draws the teal
+context frame**, and that is what protects `intro`: `ContextDiagram` is the first frame a student
+meets and it is drawn empty on purpose, so a unit sitting above it stays out of that vocabulary
+rather than spending it early, the way `ModelTiers` does. The word *context* is likewise not used
+before `intro` defines it. **`NextToken` and `TokenAttention` are a pair on one sentence** (`the
+build failed because it timed out`): the first shows it being written a token at a time, the second
+takes the finished sentence apart, and the prose in between says so. Changing the sentence in one of
+them breaks the pair. **`TokenSplit`'s prose row has to contain a word that breaks**, which is why it
+is the sentence it is: `unscrambled` comes apart at `unscr` and `ambled`, at a point that is neither
+a syllable nor a stem. No prose says so any more, so the figure has to carry it alone and a tidier
+sentence quietly ends the exercise. There is deliberately no second sentence in another language: an
+English row against a Dutch one made the figure an argument about languages instead of about tokens.
+And **the three
+figures are not equally trustworthy, which their captions no longer say.** `TokenSplit`'s splits are
+real output from `o200k_base`, stored as data with no `nl` entry. `NextToken`'s scores are
+hand-authored and its caption admits it. `TokenAttention`'s weights are hand-authored too and its
+caption was removed, so the only warning left is the comment in the component: if that figure ever
+grows a caption again, that is what belongs in it.
+
+`NextToken` draws a second view under the scores, a tree of what each candidate would have led to,
+and it exists to hold up one claim the prose makes and the scores alone cannot: **the top-scored
+token is not always the one taken.** It sat behind a Show button first and does not any more, which
+is the decision: a fan of roads not taken is the argument, and an argument you have to click to see
+is one most readers never meet. Without it the figure teaches that a model is a lookup table with
+extra steps. One invariant keeps the drawing honest, and it is easy to break by editing one list and
+not the other: the first `then` entry of each pass's first candidate is the token the *next* pass
+actually takes, which is what lets the tree draw one unbroken taken path.
+
+The unit carries two forward pointers and must not grow a third telling of either. Output being
+priced above input goes to `model`, and the prefix cache goes to `harness`, each in one paragraph
+naming the unit that owns it. That is the same rule `harness.coordinator.3` follows for
+decomposition. `TokenAttention`'s arcs running backwards only is what the caching pointer turns on,
+so it is load-bearing rather than a simplification: appending leaves every earlier weighing intact.
+
+Decomposition is the first of the four pattern sections, ahead of the coordinator, and it is the
+only one with no figure. It argues the gap rather than the mechanism: a request arrives thinner than
+the thing it asks for, the same way a requirement always has, and cutting it into parts that each
+need a prompt is what forces the unstated decisions out where you can answer them. `harness.coordinator.3`
+used to introduce decomposition and now points back at that section instead, so do not let it grow
+back into a second definition.
 
 Decomposition is answered by the task above that board rather than by a fourth situation, and that
 is the decision. `CutItUp` is that task, and it is one card and nothing else: no prose between the
@@ -82,6 +144,22 @@ the bridge has to be there. Do not un-tag them and do not let the unit grow back
 output around them) and deliberately says nothing about growth or re-sending, which is
 `BundleCompare`'s job in `prompt`.
 
+It closes on `SurviveTheClear`, under the same `<hr>` and "Check yourself" heading the other units
+use, with no prose between the rule and the card. Four moves: find a thing you would have to say
+again next time, write it into `CLAUDE.md` as one standing instruction, clear the session, ask for
+the work again without repeating yourself. The third move is the exercise. Writing the line down
+proves nothing, and a card that stopped there would be a note rather than a task, so do not drop the
+clear. It is worked **in the student's own project** rather than in this repo, and the card names no
+example instruction on purpose: the line has to be one they were tired of repeating, and only they
+know which one that is. Ticked once, to `kata.step1.survive`, on the same reasoning `CutItUp` is
+ticked once.
+
+Both tasks are `shared/components/TaskCard.tsx`, which is the tick-card mechanics with the data
+lifted out, the same move `ConnectBoard` made when a second drag board arrived. Keep additions there
+rather than in a caller, and keep **one tick per card and never one per move**: five or six boxes
+turn a run at a problem into an errand list. Every move stays one line, so whatever a second line
+would have explained belongs in the prose above the card.
+
 `tools` is the third of the four layer units, and it used to be `external` ("material from outside").
 It once ran after `harness` and no longer does. The rename is
 the decision: naming the mechanism (the model asks, your system runs it, the output is appended)
@@ -102,13 +180,100 @@ means in every other diagram here. Redrawing either figure on its own geometry b
 the argument too, so keep it: what a tool is, where extra ones come from (MCP), what holding many of
 them costs, why the results are the least trustworthy layer, what they cost by volume.
 
+`model` sits after `harness`: prose, one figure, and one exercise under the same `<hr>` and "Check
+yourself" heading `tools` and `harness` use. **It carries no version numbers anywhere, and that is
+the decision.** Tiers
+outlive releases, so the unit teaches Opus, Sonnet and Haiku as dispositions and says out loud that
+the names change and the shape does not; a card naming this quarter's release is wrong by the next
+one. Price and speed follow from that: they are ratios (roughly one, three and five per token,
+output about five times input, the small tier four to five times faster) rather than figures, and
+the prose says the ratios outlast the numbers. Do not put a price list or a version back in.
+Two boundaries with units either side of it hold the unit up. `prompt` owns the **reasoning level**
+and `model` owns the **tier**, and the section titled "Reasoning level" exists only to keep them
+apart, because a `promptQuiz` distractor is precisely that confusion. A section called "Which one
+you run" once argued how to match a tier to a task, and it went: the prose now states what the
+tiers cost, how fast they are and how they differ from the reasoning level, and **choosing between
+them is left to `PickTheTier` at the foot of the unit** rather than argued first and then
+exercised. What went with it is worth knowing before writing any of it back. It carried the
+sentence deferring to `prompt` on precision beating model size, and the one pricing a mid-task
+switch (the cache does not travel, so the window is billed again on the tier you moved to).
+Its closing section points back at `harness`'s coordinator instead of
+redefining it, the same rule `harness.coordinator.3` follows. It adds two things and no more: that
+the tier choice is one of the things that pattern automates, and **why the expensive model is good
+at writing the brief, namely that providers fine-tune the smaller tiers on output from the larger
+ones**, so it is writing for something trained on its own answers. The paragraph that used to sit
+there re-argued `harness`'s sub-agent refetch cost and was cut for that reason; do not put it back.
+`ModelTiers` is the figure and argues one thing only: three tiers, three dispositions, three kinds
+of task. Cost and speed stay in the prose because each needs a qualifying sentence that will not fit
+on a chip, and it is not an SVG, so it joins the step's diagram vocabulary by staying out of it
+rather than borrowing a frame that would mean nothing here. The three tier names have no `nl` entry
+on purpose, the way flags and machine output do.
+
+`ModelPricing` is the second figure and is the **one place in the whole course where a number carries
+a currency**, which is why it exists: the cost goal was argued everywhere and demonstrated nowhere.
+It is also the one thing in the unit that names versions, and that is a knowing exception rather than
+drift. `ModelTiers` beside it stays version-free on the reasoning the unit's own HTML comment gives
+(tier names outlive releases), so the table is placed to be read as *evidence for a claim* and never
+as a reference: it sits between the paragraph stating the one-three-five ratio and the paragraph
+saying the ratios outlive the numbers. Keep that sandwich. Moved anywhere else it becomes a price
+list, which is exactly what the paragraph under it tells the student not to learn.
+Four claims the prose already makes can be checked against it by eye, and a row edited without them
+in mind breaks the unit: the small tier as one unit against three and five, output at five times
+input in every row, and a cache read at a tenth of input, which is the figure `harness`'s caching
+section gives. Prices and model names have no `nl` entry, like every other machine-shaped string
+here; only the unit label, the column heads and the caption translate. The unit (`$ per million
+tokens`) sits **above** the table rather than only in the caption, and outside the scrolling box, so
+a reader who scans straight to the numbers knows what they count and the label does not slide away
+when the table is dragged sideways on a phone. It is said once: the caption underneath carries the
+month and nothing else. Sonnet is listed at its **standing** rate rather than the introductory one
+running until 1 September 2026, because the intro price breaks the ratio the prose teaches. The
+caption does not mention that, and the omission is the decision: the figure argues the shape of the
+pricing, and a footnote about one row's temporary rate is exactly the price-list reading the
+paragraph beneath it warns against. What the caption does carry is the month the prices were read,
+which is the thing that makes the table's staleness visible; a rewrite that drops it leaves the
+figure ageing silently.
+
+The section closes on the ratios and does not reach back across the step. A third paragraph once
+did, arguing that you pay the tier's rate on the whole window every turn and that the tier is
+therefore a multiplier on the four layer units. It went, and the removal is the decision: the four
+layers already argue the re-send, `harness`'s caching section already prices it, and the tier is a
+choice about the reader rather than about what fills the window. Do not write it back.
+
+`PickTheTier` closes the unit, and it is `PatternMatch` with other data rather than a board that
+merely resembles it: both are `shared/components/ConnectBoard.tsx`, and a caller is a list of
+situations, a list of choices and a key prefix. That is the decision, and it was made after the two
+copies drifted, with an arrowhead you could re-aim on one board and not on the other. **Anything
+about how the board behaves goes in `ConnectBoard`**, so a student who learned the interaction in
+`harness` meets the same one in `model`. What a caller may still choose is small and each choice has
+a reason: whether the right-hand column shuffles, whether its labels are mono, and the block the ids
+are built from. Five situations against three tiers here, so more than one lands on the same tier and
+nothing falls out by elimination. Three decisions in it are worth keeping. **The tier column does not
+shuffle**, which is the one place it departs from `PatternMatch`: an ordered scale scrambled reads as
+noise, and only the situations shuffle. **The tier names are mono**, because they are names the
+machine answers to. And **`redact` cannot be got wrong**: every tier will strip those log
+lines and only the amount that gets past the strip changes, so it comes back **amber** (the design
+system's caution colour, neither `--success` nor `--destructive`) with an explanation that prints
+whatever you picked, and it closes by pointing at step 2, because repeating work is that step's
+problem rather than this one's. Marking it right or wrong would teach that a lookup table exists
+here. That amber verdict is `ConnectBoard`'s `answer: 'any'`, so any board can have a row with no
+wrong answer; `PatternMatch` has none.
+
+Three things inside `ConnectBoard` are load-bearing and easy to break. An arrowhead can be
+**re-aimed by dragging it**, and the grip that does it is invisible on purpose: a dot on the arrow
+point reads as a third kind of marker on a board that already has handles and targets, so it is a
+bare hit area and the cursor is what advertises it. The grips layer needs its `z-10` or the target
+button covers it. And the grip must **stay mounted while it is dragged**, since it holds the pointer
+capture and unmounting it swallows the `pointerup` that ends the drag. While a situation is held,
+every other line dims, because five lines onto three targets is otherwise hard to read.
+
 Everything the student *does* sits below an `<hr>` at the foot of the unit, under one `<h2>` reading
 "Check yourself", which is the same wording `QuizPanel` puts over a quiz (`quiz.title`). That is the
 shape: prose first, then one rule, then the doing, in the order hands-on task, `SpotInjection`,
 `BudgetWindow`. Do not scatter the exercises back up into the sections they belong to, and do not
 give a second one its own heading. `harness` follows the same shape now, with the `CutItUp` card
-under the rule and `PatternMatch` arriving after it from the registry. `workshop` is the one left
-that still closes on a bare exercise with no rule over it.
+under the rule and `PatternMatch` arriving after it from the registry, and so does `model`, whose
+`PickTheTier` board is the only thing under its rule. `workshop` is the one left that still closes
+on a bare exercise with no rule over it.
 
 `tools` carries one of the step's two hands-on tasks and its two graded exercises, and between them they
 hold advice the prose used to state and no longer does. `connect-one` is the task: add an MCP server
@@ -267,7 +432,7 @@ own `CLAUDE.md`.
 
 ```
 kata/
-  step0/java/    test sources only: the intro reveal, behind `mvn verify -Pintro`
+  step0/java/    test sources only: the intro's one exercise, behind an opt-in profile
   step1/java/    the catalogue service and the three flags hidden in it
   step2/java/    the loans domain, the graded and challenge profiles, the native-image flag
   step3/java/    an empty scaffold, buildable, waiting for the step's topic
@@ -360,19 +525,26 @@ stage chatter on.
 Maven, no wrapper — use the `mvn` on `PATH` (3.9.16 locally). Four projects, none of them aggregated,
 so **every command runs from inside `kata/stepN/java`**. There is nothing to build at the repo root.
 
+Before any of that, on a fresh clone or when a failure smells environmental, use the `repo-setup`
+skill in `.claude/skills/repo-setup/`: it checks the toolchain (including the JDK Maven actually
+compiles with, which is not always the `java` on `PATH`) and installs `front/node_modules`. It
+deliberately never runs the profiles that are meant to be red, so a green doctor and a red `graded`
+are both correct.
+
 `mvn test` must pass in every step, and on a clean checkout it does in all four. The invocations that
-carry the kata's meaning are all step 2's and step 0's, and they are documented where they live
-(`kata/step2/java/CLAUDE.md`, `kata/step0/java/CLAUDE.md`). What matters from here:
+carry the kata's meaning are step 2's, and they are documented where they live
+(`kata/step2/java/CLAUDE.md`). What matters from here:
 
 ```bash
 cd kata/step2/java && mvn verify -Pgraded    # the workshop: red until the student hardens the module
 cd kata/step2/java && mvn test -Pchallenge   # the challenge: red until they write forTier
-cd kata/step0/java && mvn verify -Pintro     # the intro: prints one flag, always green
 ```
 
-The first two are **meant to be red**, and making them green is the student's exercise rather than a
-build to fix. Every one of them is opt-in, so the default `mvn verify` stays green in all four
-projects, and the whole of the kata's "leave every step green" rule still holds.
+Both are **meant to be red**, and making them green is the student's exercise rather than a build to
+fix. Step 0 has one of its own and it is **deliberately not written down here**: naming the profile
+is naming the exercise, and the unit that sets it is the only place a student should meet it. Every
+one of these is opt-in, so the default `mvn verify` stays green in all four projects, and the whole
+of the kata's "leave every step green" rule still holds.
 
 To check the lot after a change that crosses projects:
 

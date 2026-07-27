@@ -60,6 +60,30 @@
   context ends up.
 </p>
 
+<h3 data-i18n="harness.decomposition.heading">Decomposition</h3>
+
+<p data-i18n="harness.decomposition.1">
+  Whatever you ask for is thinner than what you want. "Add search to the catalogue" does not say what
+  an empty query returns, whether it matches on title only, or what comes back when nothing matches.
+  That is not an agent problem. Requirements have arrived under-specified since long before any of
+  this, and most of traditional software engineering is spent closing that gap. A task has no depth
+  until somebody gives it some.
+</p>
+
+<p data-i18n="harness.decomposition.2">
+  Decomposition <svg data-icon="pattern"></svg> is the harness cutting the task into parts that stand
+  on their own, before it builds any of them. Each part gets its own prompt, and a prompt has to say
+  what that part does. Vague does not survive the exercise. You cannot write "handle the empty case"
+  as an instruction without first deciding what handling it means.
+</p>
+
+<p data-i18n="harness.decomposition.3">
+  So the questions come back at you before the code does. Cutting is where the hidden requirements
+  surface: the case nobody thought about, the endpoint two parts both want to own, the decision that
+  was never made. An agent that starts typing instead would have guessed at every one of them, and
+  you find guesses in the diff.
+</p>
+
 <h3 data-i18n="harness.coordinator.heading">The coordinator</h3>
 
 <p data-i18n="harness.coordinator.1">
@@ -78,9 +102,9 @@
 </p>
 
 <p data-i18n="harness.coordinator.3">
-  Decomposition <svg data-icon="pattern"></svg> is what comes first, then. The coordinator breaks the
-  task into parts that stand on their own and writes one prompt per part. Cutting it well is most of
-  the work here, and it is the same skill as writing a good prompt yourself.
+  The coordinator decomposes first, for that reason. Every part it hands out is a prompt written into
+  an empty context, so cutting well is most of the work here. It is the same skill as writing a good
+  prompt yourself.
 </p>
 
 <div data-figure="coordinator-fanout"></div>
