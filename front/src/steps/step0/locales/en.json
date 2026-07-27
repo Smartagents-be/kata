@@ -6,8 +6,8 @@
 
   "code.panel.title": "Try it: clear this page",
   "code.panel.label": "The page code",
-  "code.panel.hint": "Type the code from the paragraph above, braces and all, then press Check.",
-  "code.panel.help": "Look at the bold code in the paragraph just above this box: {f1r5t-5t3p5}. That whole string, braces included, is the answer. In a real step you have to work the code out or find it; here it is printed for you, so you can watch the box do its job.",
+  "code.panel.hint": "Type the code from the paragraph above, braces and all.",
+  "code.panel.help": "Look at the bold code in the paragraph just above this box.",
   "code.panel.hint-button": "Hint",
   "code.panel.placeholder": "{...}",
   "code.panel.check": "Check",
@@ -24,8 +24,8 @@
 
   "hint.panel.title": "Try it: find the hidden code",
   "hint.panel.label": "The hidden code",
-  "hint.panel.hint": "This box does not show its code in the prose. Press Hint to reveal it, then type it in, braces and all.",
-  "hint.panel.help": "Here is the code for this box: {34513r-t1m3}. That whole string, braces included, is the answer. On a real page you would have to work it out; here pressing Hint is all it takes, so you learn where the button is.",
+  "hint.panel.hint": "Press Hint",
+  "hint.panel.help": "Here is the code for this box: {34513r-t1m3}.",
   "hint.panel.hint-button": "Hint",
   "hint.panel.placeholder": "{...}",
   "hint.panel.check": "Check",
@@ -35,7 +35,7 @@
 
   "flag.panel.title": "Finish the intro",
   "flag.panel.label": "The intro flag",
-  "flag.panel.hint": "Run the command above, then paste the flag it prints, braces and all.",
+  "flag.panel.hint": "Use your AI agent to run step 1, verify with the given profile.",
   "flag.panel.help": "This flag is earned in the backend, not on this page. Start the project on step 1 and work through the tasks it gives you. Once that is done the build prints the flag on the line that says the intro is complete, so paste that code here, braces and all.",
   "flag.panel.hint-button": "Hint",
   "flag.panel.placeholder": "{...}",

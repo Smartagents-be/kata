@@ -220,12 +220,29 @@ Grading messages come from the Java service and are **English in every language*
 types as an answer (`prompt`, `session`, `keep`, `gone`) also stay English in every language:
 they are what the checkers grade, and the Dutch content says so where it asks for them.
 
-Both settings live behind the cogwheel in the header, alongside the way into the deck. **Every row
-in that panel is its label and nothing else**, and the whole row is the target where the row does
-something: the explanatory line under a label was removed, and so was the small Start button beside
-the presentation label. Three items do not need explaining, a switch already says which way it is
-set, and a label next to a small button is a large piece of chrome pointing at a tiny one. Do not
-add the subtext back.
+Both settings live behind the cogwheel in the header, alongside the way into the deck and the way to
+throw a student's progress away. **Every row in that panel is its label and nothing else**, and the
+whole row is the target where the row does something: the explanatory line under a label was
+removed, and so was the small Start button beside the presentation label. The rows do not need
+explaining, a switch already says which way it is set, and a label next to a small button is a large
+piece of chrome pointing at a tiny one. Do not add the subtext back.
+
+The reset row is the one thing in the app that destroys something, and three things about it are
+decisions. Its confirm dialog is a **sibling** of the popover rather than a child, because closing
+the popover unmounts its subtree and a confirm that leaves with the panel that opened it is not a
+confirm; that is why the popover is controlled. It is deliberately **not tinted red**: `--destructive`
+means an answer failed everywhere else here, so the dialog carries the weight instead of the row.
+And it reloads the page after clearing, because every board reads its storage once at mount and
+would otherwise go on showing flags that are gone.
+
+The line it cuts along is **progress against preference**, and `shared/lib/reset.ts` is where that
+line is drawn. Progress is what you did, so the captured flags and the finished pages both go;
+preference is how you read, so the language and the mode both stay, and a room of machines can be
+handed to the next group without anyone setting the language again. The flags are cleared by **key
+shape, not by a list**: `shared` may not import a step, so it removes every `localStorage` key
+matching `kata.step<N>.`, plus `kata.completed`. Step 0 writes one key per answer box, step 1's
+board and step 2's workshop one key each. A step storing something under that prefix is opting into
+being cleared; anything that must survive a reset needs a key outside it, the way `kata.mode` does.
 
 Progress is browser-only
 (`shared/progress/`): a unit is marked done when the student pages past it or aces its quiz. It is a

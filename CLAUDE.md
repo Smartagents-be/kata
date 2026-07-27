@@ -121,7 +121,12 @@ units — `evolution`, `setup`, `engineering`, `steering`, `patterns`, `quality`
 them framing prose with no quiz, and the unit HTML is the source for what each argues. Six carry one
 habit each; `evolution` opens the step and carries none, because its job is to put the other six in
 order: a version now costs an hour, so the step you hand over gets small and you take many of them.
-It closes by handing off to `setup` by name, so a reordering there has to visit that last paragraph.
+Its prose closes by handing off to `setup` by name, so a reordering there has to visit that
+paragraph. Below that prose sits the step's only exercise outside `workshop`, under the same `<hr>`
+and "Check yourself" heading step 1's `tools` uses: fifteen minutes on the clock, one of three
+skeletons, and nothing graded. The constraint is the clock and the answer is the list of details the
+student did not get to, so do not add a checker, and keep each example's second sentence naming what
+is left out. That sentence is what makes it a skeleton rather than a small feature.
 Two things about it are decisions. It uses "vibecode" approvingly for a throwaway prototype while
 `engineering` argues flatly against vibe coding, and that is not a contradiction to tidy up: the
 first version you intend to delete is the one place the argument does not apply. And its figure,

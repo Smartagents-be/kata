@@ -1,7 +1,16 @@
-import { PresentationIcon, SettingsIcon } from 'lucide-react'
+import { PresentationIcon, RotateCcwIcon, SettingsIcon } from 'lucide-react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@/shared/components/ui/button'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/shared/components/ui/dialog'
 import {
   Popover,
   PopoverContent,
@@ -10,6 +19,7 @@ import {
 import { Switch } from '@/shared/components/ui/switch'
 import { LOCALES } from '@/shared/i18n/locale'
 import { useLocale } from '@/shared/i18n/useLocale'
+import { resetProgress } from '@/shared/lib/reset'
 import { cn } from '@/shared/lib/utils'
 import { useMode } from '@/shared/mode/useMode'
 
@@ -21,6 +31,12 @@ import { useMode } from '@/shared/mode/useMode'
  * Every option is its label and nothing else. The explanatory line under a label was removed on
  * purpose: it read as instructions in a panel with three items in it, and a switch already says
  * which way it is set. Do not put the subtext back.
+ *
+ * The last row throws the captured flags and the finished pages away, so it asks first. Its dialog
+ * is a sibling of the popover rather than a child: dismissing the popover unmounts everything
+ * inside it, and a confirm that vanishes with the panel that opened it is not a confirm. That is
+ * also why the popover is controlled here, since the row has to close it and open the dialog in the
+ * same press.
  */
 export function SettingsMenu({ triggerClassName }: { triggerClassName?: string }) {
   const { t } = useTranslation()
@@ -28,9 +44,21 @@ export function SettingsMenu({ triggerClassName }: { triggerClassName?: string }
   const { mode, setMode } = useMode()
   const navigate = useNavigate()
   const selfLearning = mode === 'self'
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [confirmingReset, setConfirmingReset] = useState(false)
+
+  function reset() {
+    resetProgress()
+    setConfirmingReset(false)
+    // Every board reads its storage once, when it mounts, so the page you are standing on would go
+    // on showing the flags that were just thrown away. Reloading is what makes them let go, and it
+    // costs nothing: language and mode survive in storage of their own.
+    window.location.reload()
+  }
 
   return (
-    <Popover>
+    <>
+    <Popover open={menuOpen} onOpenChange={setMenuOpen}>
       <PopoverTrigger asChild>
         <Button
           id="settings-trigger"
@@ -156,8 +184,69 @@ export function SettingsMenu({ triggerClassName }: { triggerClassName?: string }
             />
             {t('settings.presentation')}
           </button>
+
+          {/* Also not a setting: the one action in here that destroys something. It is the same
+              row shape as the presentation above it, and deliberately not tinted red, because
+              --destructive means an answer failed everywhere else in this app. The dialog is what
+              carries the weight. */}
+          <button
+            id="settings-reset"
+            data-component="SettingsMenu"
+            type="button"
+            onClick={() => {
+              setMenuOpen(false)
+              setConfirmingReset(true)
+            }}
+            className="hover:bg-accent -mx-2 flex items-center gap-2 rounded-lg px-2 py-2 text-sm font-medium transition-colors"
+          >
+            <RotateCcwIcon
+              id="settings-reset-glyph"
+              data-component="SettingsMenu"
+              className="text-muted-foreground size-4"
+              aria-hidden
+            />
+            {t('settings.reset')}
+          </button>
         </div>
       </PopoverContent>
     </Popover>
+
+    <Dialog open={confirmingReset} onOpenChange={setConfirmingReset}>
+      <DialogContent id="settings-reset-dialog" data-component="SettingsMenu">
+        <DialogHeader id="settings-reset-dialog-header" data-component="SettingsMenu">
+          <DialogTitle id="settings-reset-dialog-title" data-component="SettingsMenu">
+            {t('settings.reset.title')}
+          </DialogTitle>
+          <DialogDescription id="settings-reset-dialog-body" data-component="SettingsMenu">
+            {t('settings.reset.body')}
+          </DialogDescription>
+        </DialogHeader>
+        <div
+          id="settings-reset-dialog-actions"
+          data-component="SettingsMenu"
+          className="mt-2 flex items-center justify-end gap-2"
+        >
+          <DialogClose asChild>
+            <Button
+              id="settings-reset-dialog-cancel"
+              data-component="SettingsMenu"
+              type="button"
+              variant="outline"
+            >
+              {t('settings.reset.cancel')}
+            </Button>
+          </DialogClose>
+          <Button
+            id="settings-reset-dialog-confirm"
+            data-component="SettingsMenu"
+            type="button"
+            onClick={reset}
+          >
+            {t('settings.reset.confirm')}
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+    </>
   )
 }

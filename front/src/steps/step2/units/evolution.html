@@ -83,3 +83,52 @@
   Every one of those small loops opens the same way, with an agent that knows nothing about your
   project. What it reads before your first message is the next unit.
 </p>
+
+<!-- Everything below the rule is the doing part of the unit, under the same heading step 1 puts
+     over its exercises. There is no grading here: the clock is the constraint and what the student
+     left out is the answer. -->
+<hr />
+
+<h2 data-i18n="evolution.check-yourself.heading">Check yourself</h2>
+
+<h3 data-i18n="evolution.fifteen-minutes.heading">Fifteen minutes on a skeleton</h3>
+
+<p data-i18n="evolution.fifteen-minutes.1">
+  Reading about small steps is not the same as taking one. Put fifteen minutes on a clock and build
+  something that runs before it goes off. Not a plan for it. Something you can open in a browser or
+  hit with <code>curl</code>.
+</p>
+
+<p data-i18n="evolution.fifteen-minutes.2">
+  Pick one of these three and ask your agent for the shape only. Everything in the second sentence
+  is what you are leaving out.
+</p>
+
+<ul>
+  <li data-i18n="evolution.fifteen-minutes.example-1">
+    <strong>A search box over a list.</strong> One input above the nine titles from
+    <code>/api/titles</code>, and typing narrows them. No debounce, no empty state, no highlighting
+    of what matched.
+  </li>
+  <li data-i18n="evolution.fifteen-minutes.example-2">
+    <strong>A link shortener.</strong> <code>POST /api/links</code> takes a URL and answers with a
+    code, <code>GET /api/links/{code}</code> hands the URL back. A map in memory is the database, and
+    nothing checks for collisions, expiry or a URL that is nonsense.
+  </li>
+  <li data-i18n="evolution.fifteen-minutes.example-3">
+    <strong>An export button.</strong> One button that downloads what the page is showing as a CSV.
+    Two columns and a fixed file name, no column picker, no progress bar, no streaming for the big
+    case.
+  </li>
+</ul>
+
+<p data-i18n="evolution.fifteen-minutes.3">
+  Getting it running costs about five minutes. Spend the rest on one change at a time: run it, look
+  at what came back, pick the single next thing, ask for that alone. Keep each one small enough that
+  you can tell at a glance whether it worked.
+</p>
+
+<p data-i18n="evolution.fifteen-minutes.4">
+  When the clock goes, stop where you are and write down the three things you wanted to add and did
+  not. That list is your detail work. You built something that runs without any of it.
+</p>
