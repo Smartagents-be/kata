@@ -6,7 +6,12 @@ node_modules/
 
 # Playwright MCP scratch output
 .playwright-mcp/
-.impeccableß
+
+# Impeccable scratch output. design.json and live/config.json are the shared settings and
+# are committed; everything else in there is per-machine and per-session.
+.impeccable/hook.cache.json
+.impeccable/config.local.json
+.impeccable/live/sessions/
 
 *.iml
 .idea/modules.xml
