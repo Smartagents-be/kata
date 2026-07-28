@@ -133,7 +133,8 @@
   "survive.todo": "Mark this task done",
   "survive.done": "Done",
   "survive.find.label": "Find something you told the agent this session that you would have to say again next time.",
-  "survive.write.label": "Write it into CLAUDE.md as one standing instruction.",
+  "survive.write.claude.label": "Write it into CLAUDE.md as one standing instruction.",
+  "survive.write.copilot.label": "Write it into .github/copilot-instructions.md as one standing instruction.",
   "survive.clear.label": "Clear the session, or start a new one.",
   "survive.ask.label": "Ask for that work again without repeating the instruction, and watch whether it holds.",
 

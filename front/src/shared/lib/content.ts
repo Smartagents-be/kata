@@ -1,3 +1,4 @@
+import type { Assistant } from '@/shared/assistant/assistant'
 import { iconSvg } from '@/shared/lib/icons'
 import type { Mode } from '@/shared/mode/mode'
 
@@ -7,6 +8,8 @@ export type Segment = { kind: 'html'; html: string } | { kind: 'figure'; name: s
 export interface PrepareOptions {
   /** Which audience is reading; see `data-audience` below. */
   mode: Mode
+  /** Which assistant they are working with; see `data-assistant` below. */
+  assistant: Assistant
   /** The translation for a `data-i18n` key, or `null` to keep the English that is already there. */
   translate: (key: string) => string | null
 }
@@ -25,6 +28,22 @@ export interface PrepareOptions {
  * An element with no `data-audience` is always shown. Non-matching elements are *removed* from the
  * document rather than hidden with CSS — during class, text that is merely hidden is still one
  * devtools panel away.
+ *
+ * **The assistant.** The same shape again, on `data-assistant`, for the places where the
+ * instruction genuinely differs between the products:
+ *
+ * ```html
+ * <p data-assistant="claude">Put it in <code>CLAUDE.md</code>.</p>
+ * <p data-assistant="copilot">Put it in <code>.github/copilot-instructions.md</code>.</p>
+ * ```
+ *
+ * No attribute means every assistant, which is the common case: reach for it only where a student
+ * on the other product would be told something untrue. It is a separate pass from the audience
+ * rather than a combined one, so a paragraph carrying both attributes has to satisfy both, which is
+ * exactly why **no element in this tree carries both**: it would render for one reader in four and
+ * nothing would warn about the other three. Assistant variants nest inside the audience wrapper
+ * instead. Both filters run before the language pass, so the dev console's missing-translation
+ * warning only ever audits the page you are looking at.
  *
  * **The language.** The HTML file is the English. Every block of prose carries a `data-i18n` key,
  * and when the active language has something for that key, the element's *content* is replaced
@@ -45,18 +64,31 @@ export interface PrepareOptions {
  * **The figures.** `<div data-figure="project-tree"></div>` marks a spot for a React element the
  * unit registered. The prose is cut there: one segment per run of HTML, one per figure. Only
  * top-level markers count; one nested inside an `<aside>` is left alone and renders as the empty
- * div it is, which is the symptom to look for. A run that is only whitespace is dropped rather
+ * div it is, which is the symptom to look for. That is why **a marker is never wrapped in a
+ * `data-assistant` div**: the figure would vanish for one assistant only, silently, and the author
+ * is on the other one. Put the attribute on the marker itself if a figure ever has to differ. A run that is only whitespace is dropped rather
  * than emitted as an empty article.
  *
  * The HTML here is first-party content committed to this repo, so it is not sanitised, and neither
  * are the translations, which come from the same place. If a later step ever renders HTML from an
  * API, a user, or an LLM, sanitise it before it reaches `dangerouslySetInnerHTML`.
  */
-export function prepareUnit(html: string, { mode, translate }: PrepareOptions): Segment[] {
+export function prepareUnit(
+  html: string,
+  { mode, assistant, translate }: PrepareOptions,
+): Segment[] {
   const doc = new DOMParser().parseFromString(html, 'text/html')
 
   for (const element of doc.querySelectorAll('[data-audience]')) {
     if (element.getAttribute('data-audience') !== mode) {
+      element.remove()
+    }
+  }
+
+  // Removed rather than hidden for the same reason the audience is: a student following the wrong
+  // product's instructions should not be able to find them in devtools either.
+  for (const element of doc.querySelectorAll('[data-assistant]')) {
+    if (element.getAttribute('data-assistant') !== assistant) {
       element.remove()
     }
   }

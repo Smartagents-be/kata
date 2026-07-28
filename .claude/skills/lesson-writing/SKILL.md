@@ -18,7 +18,7 @@ pick one of these instead:
 | --- | --- |
 | Joining two full thoughts | A full stop. Two short sentences almost always read better. |
 | Tacking on an afterthought | A comma, or move it into the next sentence. |
-| Introducing a list or explanation | A colon. |
+| Introducing a list or explanation | A colon, but read "Do not announce the count" first. |
 | Dropping in a side remark | Parentheses, or cut the remark. |
 
 The same goes for the en-dash used as punctuation. Hyphens inside words (`self-learning`,
@@ -44,6 +44,14 @@ matters, explain why it matters and let the reader conclude it is important.
 **Vary the openings.** Three paragraphs in a row starting with "The" or "This" reads like a
 machine. Read the first three words of each paragraph in a section and check they differ.
 
+**Watch the Dutch showing through the English.** This course is written by Dutch speakers, and the
+words that survive the crossing are the ones that exist in both languages meaning different things.
+*Qualitative* is the one that keeps coming back: in English it means "to do with qualities rather
+than numbers", so an answer is never "more qualitative", it is better. The rest of the list is
+*actual* for current, *eventual* for possible, *control* for check, *sympathetic* for nice, *brave*
+for well behaved, *learn* for teach. English is the page every reader gets, whatever their language
+setting, so this is the leak that matters most.
+
 ## Voice
 
 The rules above keep the text clean. This section is what makes it sound like the units already in
@@ -52,6 +60,12 @@ section of one out loud and match its rhythm.
 
 **Open cold on the claim.** "An agent has no memory of its own." "The harness is the software you
 use to work with a model." No announcing what the paragraph is about.
+
+**Do not announce the count.** "That pays twice:", "Two things matter here", "There are three
+reasons". The tally tells the reader nothing they cannot see for themselves one comma later, and it
+is the part that sounds like a slide rather than a person. Say the things and let there be two of
+them: "You get better answers, and you pay fewer tokens for them." A colon is fine when what
+follows it is the thing itself. It is not fine when what precedes it is arithmetic.
 
 **End on the sharpest sentence.** The last line of a paragraph is the one worth remembering, and it
 is usually short: "What it holds is an average." "That middle is mediocre code that happens to
@@ -128,6 +142,21 @@ Keep paragraphs to three or four sentences. A wall of text loses a room.
 - Content is plain HTML with no wrapper element. Headings start at `<h2>`.
 - If the step is graded, the numbered list the checker grades must match the checker's item order.
   Say so in an HTML comment naming the Java class.
+- **The inline icons are markers, not markup you write out.** Drop
+  `<svg data-icon="coin"></svg>` for a way to spend fewer tokens, `gem` for the top-tier model,
+  `pattern` for an AI design pattern, and `prepareUnit` fills them in from
+  `shared/lib/icons.ts`. Step 0's legend is where the student learns what each one means, so use
+  them for that and nothing else. Placement is a convention worth copying from `step1/harness.html`:
+  the icon stands where the full stop would go and the next sentence starts straight after it, and
+  it takes a trailing period only when it ends the paragraph. In `nl.json` the quotes are escaped,
+  `<svg data-icon=\"coin\"></svg>`.
+- **`data-assistant="claude"` or `"copilot"`** where a student on the other product would be told
+  something untrue, typically a filename, a command or a menu. Never on the same element as
+  `data-audience`, and both siblings carry the attribute plus a key ending in the same word. The
+  full rule is in `front/CLAUDE.md`.
+- **British spelling**: `specialised`, `summarised`, `sanitise`.
+- **The course says "an agent" and "the agent".** "AI agent" is step 0 only, where the term is
+  introduced.
 
 ## Translations
 
@@ -160,18 +189,25 @@ every language, such as a `<pre>` code sample or a `<div data-figure>` slot, car
 Answers stay English in every language, because the Java checkers grade them. When a translated
 exercise asks for `keep` or `gone`, say plainly that those words are typed in English.
 
+**A paragraph edit is not finished until `nl.json` moves with it, in the same change.** Reword the
+English and leave the Dutch, and the two languages are now two different lessons, with nothing on
+screen saying so. When they have already drifted, the Dutch is usually the one that was thought
+through, so rewrite the English to match rather than the other way round.
+
 ## Before you finish
 
 Read the text out loud. If you run out of breath, the sentence is too long. If it sounds like a
 brochure, cut the adjectives.
 
-Then five questions, in order:
+Then seven questions, in order:
 
 1. Does the first sentence make a claim, or announce one?
 2. Is the last sentence of each paragraph the best one in it?
 3. Is there a fragment or a very short sentence in every section, so the rhythm breaks somewhere?
 4. Did you name a term before you showed the thing?
 5. Is any adjective doing work a concrete example should be doing?
+6. Does any sentence count the items before listing them?
+7. Did the Dutch change with it?
 
 Then grep for the thing you always miss:
 

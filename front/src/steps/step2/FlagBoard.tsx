@@ -20,70 +20,89 @@ import {
 import { useStepText } from '@/shared/i18n/useStepText'
 import { sha256Hex } from '@/shared/lib/hash'
 import { cn } from '@/shared/lib/utils'
-import { FLAG_SALT, flags, type FlagSpec } from './flags'
+import type { FlagSpec } from './flags'
 
-const STORAGE_KEY = 'kata.step2.flags'
+/**
+ * What one board needs to be itself. Step 2 has two of them, so the mechanics live here and a
+ * caller is a list of flags, a salt, a storage key and the block its element ids are built from.
+ * That is the same move `ConnectBoard` and `TaskCard` made when a second caller arrived: anything
+ * about how a board *behaves* belongs in here, so a student who learned the interaction on one
+ * board meets the same one on the other.
+ */
+export interface FlagBoardProps {
+  /** BEM block for every id inside the drawing, e.g. `flags` or `setup-flags`. */
+  block: string
+  /** localStorage key holding the solved ids. Must start `kata.step2.` so a reset clears it. */
+  storageKey: string
+  /** The salt the pasted flag is hashed with. One per exercise, so a digest is not portable. */
+  salt: string
+  flags: FlagSpec[]
+  /** Message-key prefix for the panel's own words, e.g. `workshop.panel`. */
+  panel: string
+}
 
 /** Which flags this browser has already solved. Kept so a page reload does not lose the collection. */
-function readSolved(): Set<string> {
+function readSolved(storageKey: string): Set<string> {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
+    const raw = localStorage.getItem(storageKey)
     return new Set(raw ? (JSON.parse(raw) as string[]) : [])
   } catch {
     return new Set()
   }
 }
 
-function writeSolved(solved: Set<string>) {
+function writeSolved(storageKey: string, solved: Set<string>) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...solved]))
+    localStorage.setItem(storageKey, JSON.stringify([...solved]))
   } catch {
     // A browser with storage blocked still grades in memory; it just forgets on reload.
   }
 }
 
 /**
- * The workshop's flag board. Each row is one goal from the `graded` build; paste the flag that
- * build printed and the row checks it here in the browser, against a salted hash, so it works with
- * the backend down. Nothing here talks to the service: the grading already happened in `mvn verify
- * -Pgraded`, and this only confirms the student read the flag it produced.
+ * A board of flags, graded in the browser against a salted hash so it works with the backend down.
+ * Nothing here talks to the service: the work already happened outside the app, and the board only
+ * confirms the student read what it produced.
  */
-export function Workshop() {
+export function FlagBoard({ block, storageKey, salt, flags, panel }: FlagBoardProps) {
   const { text } = useStepText('step2')
   const { t } = useTranslation('step2')
-  const [solved, setSolved] = useState<Set<string>>(readSolved)
+  const [solved, setSolved] = useState<Set<string>>(() => readSolved(storageKey))
 
   function markSolved(id: string) {
     setSolved((current) => {
       const next = new Set(current).add(id)
-      writeSolved(next)
+      writeSolved(storageKey, next)
       return next
     })
   }
 
   return (
-    <Card id="flags" data-component="Workshop" data-state={solved.size === flags.length ? 'complete' : 'partial'}>
-      <CardHeader id="flags-header" data-component="Workshop">
-        <CardTitle id="flags-title" data-component="Workshop">
-          {text('workshop.panel.title')}
+    <Card id={block} data-component="FlagBoard" data-state={solved.size === flags.length ? 'complete' : 'partial'}>
+      <CardHeader id={`${block}-header`} data-component="FlagBoard">
+        <CardTitle id={`${block}-title`} data-component="FlagBoard">
+          {text(`${panel}.title`)}
         </CardTitle>
-        <CardDescription id="flags-description" data-component="Workshop">
-          {text('workshop.panel.description')}
+        <CardDescription id={`${block}-description`} data-component="FlagBoard">
+          {text(`${panel}.description`)}
         </CardDescription>
       </CardHeader>
-      <CardContent id="flags-content" data-component="Workshop" className="flex flex-col gap-4">
+      <CardContent id={`${block}-content`} data-component="FlagBoard" className="flex flex-col gap-4">
         <p
-          id="flags-progress"
-          data-component="Workshop"
+          id={`${block}-progress`}
+          data-component="FlagBoard"
           className="text-muted-foreground text-sm tabular-nums"
         >
-          {t('workshop.panel.progress', { solved: solved.size, total: flags.length })}
+          {t(`${panel}.progress`, { solved: solved.size, total: flags.length })}
         </p>
 
-        <ol id="flags-items" data-component="Workshop" className="flex flex-col gap-3">
+        <ol id={`${block}-items`} data-component="FlagBoard" className="flex flex-col gap-3">
           {flags.map((flag, index) => (
             <FlagRow
               key={flag.id}
+              block={block}
+              panel={panel}
+              salt={salt}
               flag={flag}
               index={index}
               solved={solved.has(flag.id)}
@@ -99,11 +118,17 @@ export function Workshop() {
 type RowState = 'idle' | 'checking' | 'wrong'
 
 function FlagRow({
+  block,
+  panel,
+  salt,
   flag,
   index,
   solved,
   onSolved,
 }: {
+  block: string
+  panel: string
+  salt: string
   flag: FlagSpec
   index: number
   solved: boolean
@@ -116,7 +141,7 @@ function FlagRow({
   async function onSubmit(event: FormEvent) {
     event.preventDefault()
     setState('checking')
-    const digest = await sha256Hex(FLAG_SALT + value.trim())
+    const digest = await sha256Hex(salt + value.trim())
     if (digest === flag.hash) {
       onSolved()
     } else {
@@ -126,7 +151,7 @@ function FlagRow({
 
   return (
     <li
-      id={`flags-item-${index}`}
+      id={`${block}-item-${index}`}
       data-component="FlagRow"
       data-state={solved ? 'solved' : 'locked'}
       className={cn(
@@ -134,42 +159,42 @@ function FlagRow({
         solved ? 'border-success/30 bg-success/10' : 'border-border',
       )}
     >
-      <div id={`flags-item-${index}-heading`} data-component="FlagRow" className="flex items-center justify-between gap-3">
-        <span id={`flags-item-${index}-label`} data-component="FlagRow" className="font-medium">
+      <div id={`${block}-item-${index}-heading`} data-component="FlagRow" className="flex items-center justify-between gap-3">
+        <span id={`${block}-item-${index}-label`} data-component="FlagRow" className="font-medium">
           {text(flag.labelKey)}
         </span>
-        <div id={`flags-item-${index}-heading-actions`} data-component="FlagRow" className="flex items-center gap-2">
+        <div id={`${block}-item-${index}-heading-actions`} data-component="FlagRow" className="flex items-center gap-2">
           {solved && (
             <Badge
-              id={`flags-item-${index}-badge`}
+              id={`${block}-item-${index}-badge`}
               data-component="FlagRow"
               variant="success"
             >
-              {text('workshop.panel.solved')}
+              {text(`${panel}.solved`)}
             </Badge>
           )}
           <Dialog>
             <DialogTrigger asChild>
               <Button
-                id={`flags-item-${index}-help`}
+                id={`${block}-item-${index}-help`}
                 data-component="FlagRow"
                 type="button"
                 variant="ghost"
                 size="sm"
                 className="text-muted-foreground"
               >
-                {text('workshop.panel.hint')}
+                {text(`${panel}.hint`)}
               </Button>
             </DialogTrigger>
             <DialogContent
-              id={`flags-item-${index}-help-dialog`}
+              id={`${block}-item-${index}-help-dialog`}
               data-component="FlagRow"
             >
-              <DialogHeader id={`flags-item-${index}-help-dialog-header`} data-component="FlagRow">
-                <DialogTitle id={`flags-item-${index}-help-dialog-title`} data-component="FlagRow">
+              <DialogHeader id={`${block}-item-${index}-help-dialog-header`} data-component="FlagRow">
+                <DialogTitle id={`${block}-item-${index}-help-dialog-title`} data-component="FlagRow">
                   {text(flag.labelKey)}
                 </DialogTitle>
-                <DialogDescription id={`flags-item-${index}-help-dialog-body`} data-component="FlagRow">
+                <DialogDescription id={`${block}-item-${index}-help-dialog-body`} data-component="FlagRow">
                   {text(flag.helpKey)}
                 </DialogDescription>
               </DialogHeader>
@@ -179,7 +204,7 @@ function FlagRow({
       </div>
 
       <p
-        id={`flags-item-${index}-hint`}
+        id={`${block}-item-${index}-hint`}
         data-component="FlagRow"
         className="text-muted-foreground mt-1 text-sm"
       >
@@ -188,13 +213,13 @@ function FlagRow({
 
       {!solved && (
         <form
-          id={`flags-item-${index}-form`}
+          id={`${block}-item-${index}-form`}
           data-component="FlagRow"
           onSubmit={onSubmit}
           className="mt-3 flex items-center gap-2"
         >
           <input
-            id={`flags-item-${index}-input`}
+            id={`${block}-item-${index}-input`}
             data-component="FlagRow"
             value={value}
             onChange={(event) => {
@@ -204,29 +229,29 @@ function FlagRow({
               }
             }}
             spellCheck={false}
-            placeholder={text('workshop.panel.placeholder')}
+            placeholder={text(`${panel}.placeholder`)}
             aria-label={text(flag.labelKey)}
             className="field h-9 w-full max-w-xs"
           />
           <Button
-            id={`flags-item-${index}-submit`}
+            id={`${block}-item-${index}-submit`}
             data-component="FlagRow"
             type="submit"
             disabled={state === 'checking' || value.trim() === ''}
           >
-            {text('workshop.panel.check')}
+            {text(`${panel}.check`)}
           </Button>
         </form>
       )}
 
       {state === 'wrong' && (
         <p
-          id={`flags-item-${index}-error`}
+          id={`${block}-item-${index}-error`}
           data-component="FlagRow"
           role="status"
           className="text-destructive mt-2 text-sm"
         >
-          {text('workshop.panel.wrong')}
+          {text(`${panel}.wrong`)}
         </p>
       )}
     </li>

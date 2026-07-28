@@ -92,8 +92,29 @@ class, so the build points at step 2 by itself. Two plan-worthy steps remain, wi
 reading the miss, and the step 2 `workshop` unit no longer claims otherwise. Verified end to end with
 GraalVM 25.
 
+## The setup flags
+
+Three more, and no build prints any of them. They belong to the `setup` unit rather than the
+workshop, and each one sits in a file an agent reads instructions from, because the exercise is
+finding out that those files exist in a project nobody walked you through:
+
+- `.claude/skills/writing-style/SKILL.md`, this project's own skill, which is loaded on demand the
+  way any skill is.
+- this file, the project briefing.
+- `src/main/java/be/smartagents/kata/java/step2/domain/CLAUDE.md`, a briefing scoped to one package.
+
+They are **plaintext on purpose**, unlike the veiled workshop flags: reading the file is the whole
+task, so there is nothing to hide behind. Do not collect them into a list anywhere, do not put them
+in the frontend (which holds salted hashes only, in `setup-flags.ts`), and do not name the three
+files in the unit's prose or in a board hint. The unit tells the student to investigate this project
+and stops there, which is the exercise.
+
+The flag for this file is `{m0dul3-br13f1ng}`.
+
 ## Conventions
 
-The kata-wide ones are in the root `CLAUDE.md`. The two that bite most often here: the Boot parent
-manages every dependency version, so declare new artifacts **without** a `<version>`; and `javac`
-rejects APIs newer than the `<java.version>` property even though the local JDK is GraalVM 25.
+The kata-wide ones are in the root `CLAUDE.md`, and the prose ones are in
+`.claude/skills/writing-style/`, which loads when you write Javadoc, name a test or word a commit in
+here. The two that bite most often: the Boot parent manages every dependency version, so declare new
+artifacts **without** a `<version>`; and `javac` rejects APIs newer than the `<java.version>`
+property even though the local JDK is GraalVM 25.

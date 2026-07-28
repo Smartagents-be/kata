@@ -1,4 +1,5 @@
 import { Fragment, useMemo, type ReactNode } from 'react'
+import { useAssistant } from '@/shared/assistant/useAssistant'
 import { useStepText } from '@/shared/i18n/useStepText'
 import { prepareUnit } from '@/shared/lib/content'
 import { useMode } from '@/shared/mode/useMode'
@@ -19,13 +20,14 @@ export function StepContent({
   inlineFigures?: Record<string, ReactNode>
 }) {
   const { mode } = useMode()
+  const { assistant } = useAssistant()
   const { lookup } = useStepText(namespace)
   // One article per run of prose, with the figures between them. Portals into the rendered HTML
   // would keep it to a single article, but React discards them: it owns the container's children
   // only until the next commit re-applies dangerouslySetInnerHTML.
   const segments = useMemo(
-    () => prepareUnit(html, { mode, translate: lookup }),
-    [html, mode, lookup],
+    () => prepareUnit(html, { mode, assistant, translate: lookup }),
+    [html, mode, assistant, lookup],
   )
 
   // A unit whose prose is entirely for the other audience renders nothing at all, rather than an

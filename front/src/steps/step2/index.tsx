@@ -1,7 +1,10 @@
 import type { Step } from '@/shared/step'
 import { DomainTree } from './DomainTree'
+import { HookTree } from './HookTree'
 import { IterationPaths } from './IterationPaths'
 import { ProjectTree } from './ProjectTree'
+import { SetupFlags } from './SetupFlags'
+import { SkillTree } from './SkillTree'
 import { UnitShot } from './UnitShot'
 import { Workshop } from './Workshop'
 import en from './locales/en.json'
@@ -46,8 +49,16 @@ const step2: Step = {
       id: 'setup',
       title: 'setup.title',
       html: setup,
-      // Sits inside the prose, at the <div data-figure="project-tree"> the unit's HTML leaves.
-      inlineFigures: { 'project-tree': <ProjectTree /> },
+      // One drawing per section, each at the <div data-figure="..."> its HTML leaves: the
+      // CLAUDE.md files under the first heading, the skills under the second.
+      inlineFigures: {
+        'project-tree': <ProjectTree />,
+        'skill-tree': <SkillTree />,
+        'hook-tree': <HookTree />,
+      },
+      // And a second flag board under the prose, on the three files this unit is about. Graded in
+      // the browser like the workshop's, so the unit needs no service either.
+      figure: <SetupFlags />,
     },
     {
       id: 'engineering',

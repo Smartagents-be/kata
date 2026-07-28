@@ -17,6 +17,8 @@ import {
   PopoverTrigger,
 } from '@/shared/components/ui/popover'
 import { Switch } from '@/shared/components/ui/switch'
+import { ASSISTANTS } from '@/shared/assistant/assistant'
+import { useAssistant } from '@/shared/assistant/useAssistant'
 import { LOCALES } from '@/shared/i18n/locale'
 import { useLocale } from '@/shared/i18n/useLocale'
 import { resetProgress } from '@/shared/lib/reset'
@@ -24,9 +26,14 @@ import { cn } from '@/shared/lib/utils'
 import { useMode } from '@/shared/mode/useMode'
 
 /**
- * The cogwheel in the header and the panel it drops from it: language, whether the notes are shown,
- * and the way into the deck. The first two persist, so a student picks them once; the third is an
- * action, so it is a button rather than a switch, and the whole row is that button.
+ * The cogwheel in the header and the panel it drops from it: language, which assistant the student
+ * is working with, whether the notes are shown, and the way into the deck. The first three persist,
+ * so a student picks them once; the last is an action, so it is a button rather than a switch, and
+ * the whole row is that button.
+ *
+ * Language and assistant are the same shape, a list of radios, because they are the same kind of
+ * choice: one of a handful of named things, each named in its own words rather than in the
+ * interface's. Only the section headings above them are translated.
  *
  * Every option is its label and nothing else. The explanatory line under a label was removed on
  * purpose: it read as instructions in a panel with three items in it, and a switch already says
@@ -42,6 +49,7 @@ export function SettingsMenu({ triggerClassName }: { triggerClassName?: string }
   const { t } = useTranslation()
   const { locale, setLocale } = useLocale()
   const { mode, setMode } = useMode()
+  const { assistant, setAssistant } = useAssistant()
   const navigate = useNavigate()
   const selfLearning = mode === 'self'
   const [menuOpen, setMenuOpen] = useState(false)
@@ -130,6 +138,59 @@ export function SettingsMenu({ triggerClassName }: { triggerClassName?: string }
                   {locale === option && (
                     <span
                       id={`settings-language-option-${index}-check`}
+                      data-component="SettingsMenu"
+                      aria-hidden
+                    >
+                      ✓
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </section>
+
+          {/* Which product the instructions on the page should name. Its own section rather than a
+              third language, because the two are independent: a Dutch student on Copilot should not
+              have to give up one to get the other. */}
+          <section
+            id="settings-assistant"
+            data-component="SettingsMenu"
+            className="flex flex-col gap-2"
+          >
+            <h3
+              id="settings-assistant-title"
+              data-component="SettingsMenu"
+              className="text-sm font-medium"
+            >
+              {t('settings.assistant')}
+            </h3>
+            <div
+              id="settings-assistant-options"
+              data-component="SettingsMenu"
+              role="radiogroup"
+              aria-label={t('settings.assistant')}
+              className="flex flex-col gap-1"
+            >
+              {ASSISTANTS.map(({ assistant: option, label }, index) => (
+                <button
+                  key={option}
+                  id={`settings-assistant-option-${index}`}
+                  data-component="SettingsMenu"
+                  type="button"
+                  role="radio"
+                  aria-checked={assistant === option}
+                  onClick={() => setAssistant(option)}
+                  className={cn(
+                    'flex items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors',
+                    assistant === option
+                      ? 'bg-primary/10 text-primary font-medium'
+                      : 'text-muted-foreground hover:bg-accent hover:text-foreground',
+                  )}
+                >
+                  {label}
+                  {assistant === option && (
+                    <span
+                      id={`settings-assistant-option-${index}-check`}
                       data-component="SettingsMenu"
                       aria-hidden
                     >

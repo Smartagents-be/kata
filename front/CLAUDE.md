@@ -159,6 +159,11 @@ else holds a colour: components name tokens, so a change to the palette is a cha
   heading, colour left to the caller (teal for a section, muted for a sub-label). `field` is a
   typed answer box: mono, hairline border, and the same 3px teal focus ring on every field, so a
   keyboard user has one signal to follow. Reach for these instead of copying the class list.
+- **A numbered figure and the prose about it share one span.** `<span data-marker>2</span>` is a
+  teal numeral, styled by one unlayered rule in `index.css` so it looks the same inside `.prose` and
+  inside a `not-prose` figure. That is the point of it: the numeral beside a row in `ProjectTree`
+  and the numeral in the paragraph are one label rather than two decorations. A figure that numbers
+  its rows carries the data (`marker` on a `TreeNode`), and the prose points back with the span.
 - **Typography's own grey ramp is overridden**, not used: `.prose` in `index.css` points
   `--tw-prose-*` at the tokens, which is why `StepContent` renders `prose` without `prose-neutral`.
 
@@ -204,9 +209,9 @@ a shadcn primitive from `ui/` is used, the attribute names the caller, since tha
 component whose behaviour you are looking for.
 
 **A shared component that a step renders more than once takes its block from the caller.**
-`TaskCard` and `ConnectBoard` both have a `block` prop, so `harness`'s task is `#cut-it-up-*` and
-`model`'s board is `#pick-the-tier-*` while both carry `data-component="TaskCard"` or
-`"ConnectBoard"`. That is the two attributes doing what they are for: the id says which thing on
+`TaskCard`, `ConnectBoard` and step 2's `FlagBoard` all have a `block` prop, so `harness`'s task is
+`#cut-it-up-*`, `model`'s board is `#pick-the-tier-*` and `setup`'s is `#setup-flags-*` while each
+carries the shared component's name in `data-component`. That is the two attributes doing what they are for: the id says which thing on
 which page, and `data-component` says whose code to open when it misbehaves. The step-side wrapper
 holds the data and the reasons for it, so it renders no elements of its own and never appears in the
 DOM.
@@ -255,6 +260,75 @@ gap in the page. And the wrapper becomes Typography's first child, which is why 
 Mode lives in `front/src/shared/mode/`, defaults to guided, and persists under the
 `kata.mode` localStorage key.
 
+## The assistant rule
+
+The same shape a second time, on `data-assistant`, for the places where the instruction genuinely
+differs between the two products a student might be sitting in front of:
+
+```html
+<p data-assistant="claude">Put it in <code>CLAUDE.md</code>.</p>
+<p data-assistant="copilot">Put it in <code>.github/copilot-instructions.md</code>.</p>
+```
+
+`"claude"` is Claude Code, `"copilot"` is GitHub Copilot, and **no attribute means both**, which is
+almost everything: context windows, tokens, decomposition and the rest of the curriculum are about
+working with an agent rather than about a vendor. Reach for the attribute only where a student on
+the other product would be told something untrue, typically a filename, a command or a menu. It is
+filtered in the same pass and the same way as the audience, non-matching elements removed rather
+than hidden.
+
+**Every element of a variant set carries the attribute and a `data-i18n` key whose last segment is
+the same word.** Both siblings are suffixed; there is no "bare means Claude". A set occupies one
+position in the numbering, so `…1.claude` and `…1.copilot` are both paragraph 1 and adding a variant
+later renumbers nothing after it:
+
+```html
+<p data-assistant="claude" data-i18n="session.window-not-memory.1.claude">…<code>CLAUDE.md</code>…</p>
+<p data-assistant="copilot" data-i18n="session.window-not-memory.1.copilot">…<code>.github/copilot-instructions.md</code>…</p>
+```
+
+That is greppable, and more importantly it fails safe. A missing Dutch translation of a Copilot
+block leaves the **English Copilot** text on the page and names the key in the console, the way any
+untranslated paragraph does. The rejected alternative, one shared key resolved per assistant inside
+`useStepText`, can put the **Dutch Claude** paragraph under a Copilot heading and never warn, because
+`i18n.exists` is true for the base key. Do not build it.
+
+Three rules keep the two filters from breaking each other, and each of them fails silently if you
+get it wrong:
+
+- **Never put `data-audience` and `data-assistant` on the same element.** It would render for one
+  reader in four, with nothing warning about the other three. Nest the assistant variants inside the
+  existing `div[data-audience]` wrapper instead, which is what `step1/context` does. There is also
+  no `.prose > div[data-assistant]` first-child rule in `index.css`, so a whole-unit assistant
+  wrapper would ship a stray top margin; per-paragraph is the shape.
+- **A `data-figure` marker is always a direct child of the body and is never wrapped.** Only
+  top-level markers are cut into segments, so a wrapped one silently renders as an empty div and the
+  figure vanishes for that reader only. If a figure ever has to be assistant-specific, put the
+  attribute *on the marker itself*.
+- **The console only audits the page you are looking at**, since both filters run before the
+  translation pass. Auditing a unit's Dutch now means four passes, two modes by two assistants.
+
+Assistant lives in `front/src/shared/assistant/`, defaults to Claude Code and persists under the
+`kata.assistant` localStorage key. Two decisions in there are worth keeping. It is **its own
+setting rather than a third locale**, because which assistant you use and which language you read
+in are unrelated, and a Dutch student on Copilot should not have to give one up to get the other.
+And the two product names are **written in the module, not in the locales**, for the same reason
+`English` and `Nederlands` are: a product name is not translated, so only the section heading above
+the list is.
+
+**A label inside a figure or a task card is not reachable from the HTML**, because it comes from the
+step's locale bundle. The step-side wrapper picks the data instead, which is what those wrappers are
+for: `SurviveTheClear` types its moves as `Record<Assistant, readonly string[]>` and swaps one slug
+(`write.claude` against `write.copilot`), so `TaskCard` and `useStepText` stay untouched. Type it
+that way rather than defaulting: adding a third assistant is then a compile error naming every
+wrapper whose words have to be written, instead of silence and a Cursor student being told to edit
+`CLAUDE.md`. Ids are built from the move index, so swapping a slug moves no id. The same rule holds
+for a figure: it reads `useAssistant()` itself, and the `data-figure` marker never branches.
+
+Which units this is actually used in, and the places it deliberately is not, are in
+`front/src/steps/CLAUDE.md`. The short version: step 0 tells the student to set it, and step 1
+varies nine blocks. Everything else is shared on purpose.
+
 ## Languages
 
 English and Dutch, on i18next; `shared/i18n/i18n.ts` has the wiring. Everything is one mechanism: a
@@ -277,8 +351,10 @@ Grading messages come from the Java service and are **English in every language*
 types as an answer (`prompt`, `session`, `keep`, `gone`) also stay English in every language:
 they are what the checkers grade, and the Dutch content says so where it asks for them.
 
-Both settings live behind the cogwheel in the header, alongside the way into the deck and the way to
-throw a student's progress away. **Every row in that panel is its label and nothing else**, and the
+All three settings live behind the cogwheel in the header, alongside the way into the deck and the
+way to throw a student's progress away. Language and assistant are the same shape, a list of radios
+with the current choice in teal, because they are the same kind of choice; the mode is a switch
+because it is on or off. **Every row in that panel is its label and nothing else**, and the
 whole row is the target where the row does something: the explanatory line under a label was
 removed, and so was the small Start button beside the presentation label. The rows do not need
 explaining, a switch already says which way it is set, and a label next to a small button is a large

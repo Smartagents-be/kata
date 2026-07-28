@@ -167,10 +167,20 @@
 <div data-figure="context-falloff" data-audience="self"></div>
 
 <div data-audience="self">
-  <p data-i18n="context.amnesia-context-fatigue.3">
+  <!-- The assistant variants nest inside the audience wrapper rather than carrying both attributes:
+       an element with `data-audience` and `data-assistant` on it renders for one reader in four,
+       and nothing warns about the three it does not. -->
+  <p data-assistant="claude" data-i18n="context.amnesia-context-fatigue.3.claude">
     When the window is compacted, detail is the first thing to go. For an instruction that has to
     survive that, write it in <code>CLAUDE.md</code>, which is read at the start of every session. And keep the window from filling up in the first place: cut each task small enough that
     it finishes before the summarising begins.
+  </p>
+
+  <p data-assistant="copilot" data-i18n="context.amnesia-context-fatigue.3.copilot">
+    When the window is compacted, detail is the first thing to go. For an instruction that has to
+    survive that, write it in <code>.github/copilot-instructions.md</code>, which is read at the
+    start of every session. And keep the window from filling up in the first place: cut each task
+    small enough that it finishes before the summarising begins.
   </p>
 
 </div>

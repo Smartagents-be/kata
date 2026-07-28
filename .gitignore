@@ -6,6 +6,7 @@ node_modules/
 
 # Playwright MCP scratch output
 .playwright-mcp/
+.impeccableß
 
 *.iml
 .idea/modules.xml

@@ -46,9 +46,15 @@
   that arrives that way has a name of its own. A resource.
 </p>
 
-<p data-i18n="tools.where-extra-tools.3">
+<p data-assistant="claude" data-i18n="tools.where-extra-tools.3.claude">
   Prompts are the third thing. A server ships whole prompts with it, written by whoever built it, for
   you to pick off a list. Claude Code puts them under a slash.
+</p>
+
+<p data-assistant="copilot" data-i18n="tools.where-extra-tools.3.copilot">
+  Prompts are the third thing. A server ships whole prompts with it, written by whoever built it, for
+  you to pick off a list. Copilot puts them under a slash, as
+  <code>/mcp.server.prompt</code>.
 </p>
 
 <!-- Three cards and nothing between them: none of it has crossed into a context yet. The dashed
@@ -136,14 +142,24 @@
   hand your agent a tool it does not ship with.
 </p>
 
-<!-- Claude Code's own syntax, verified against `claude mcp add --help`. The server is the one this
-     repo already runs, so a student who copies the line gets something that works. -->
-<pre><code>cd kata/step1/java &amp;&amp; mvn spring-boot:run
+<!-- Each harness's own syntax, verified against `claude mcp add --help` and GitHub's `copilot mcp
+     add` reference. The server is the one this repo already runs, so a student who copies the line
+     gets something that works. Machine output, so no i18n key on either block. -->
+<pre data-assistant="claude"><code>cd kata/step1/java &amp;&amp; mvn spring-boot:run
 claude mcp add playwright -- npx @playwright/mcp@latest</code></pre>
 
-<p data-i18n="tools.connect-one.2">
+<pre data-assistant="copilot"><code>cd kata/step1/java &amp;&amp; mvn spring-boot:run
+copilot mcp add playwright -- npx @playwright/mcp@latest</code></pre>
+
+<p data-assistant="claude" data-i18n="tools.connect-one.2.claude">
   That second line is Claude Code's. Every harness has its own way to add a server, which is the
   harness deciding what this layer is allowed to hold.
+</p>
+
+<p data-assistant="copilot" data-i18n="tools.connect-one.2.copilot">
+  That second line is Copilot's, and it lands in <code>~/.copilot/mcp-config.json</code>. Every
+  harness has its own way to add a server, which is the harness deciding what this layer is allowed
+  to hold.
 </p>
 
 <p data-i18n="tools.connect-one.3">
@@ -176,10 +192,18 @@ claude mcp add playwright -- npx @playwright/mcp@latest</code></pre>
 <!-- The only place in the course `/context` is used rather than described, which is why the command
      is introduced here and not in `context`: that unit's prose is self-only, so a guided student
      never met it. Do not move the introduction back up. -->
-<p data-i18n="tools.read-your-window.1">
+<p data-assistant="claude" data-i18n="tools.read-your-window.1.claude">
   Those line counts were invented. Yours are real, and you can read them. <code>/context</code> lists
   what is sitting in the window right now, grouped by where each part came from. The command is
   Claude Code's, and every harness shows this its own way. Some show you nothing at all.
+</p>
+
+<p data-assistant="copilot" data-i18n="tools.read-your-window.1.copilot">
+  Those line counts were invented. Yours are real, and you can read them. <code>/context</code> lists
+  what is sitting in the window right now, grouped by where each part came from: the system prompt,
+  your custom instructions, the built-in tools, the tools an MCP server brought, the messages, and
+  what is still free. Copilot and Claude Code happen to use the same command. Every other harness
+  shows this its own way, and some show you nothing at all.
 </p>
 
 <p data-i18n="tools.read-your-window.2">

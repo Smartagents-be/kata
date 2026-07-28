@@ -307,3 +307,13 @@
 .prose pre {
   @apply overflow-x-auto;
 }
+
+/* The numeral that ties a drawing to the sentence about it: `<span data-marker>1</span>` in a
+   paragraph and the same span beside a row in a figure. It is one rule rather than two so the two
+   read as one label, which is the whole point of numbering anything. Teal, because the row it
+   points at is the subject of the section. It is unlayered for the same reason the audience rule
+   above it is: inside `@layer base` Typography's own layer would win regardless of specificity. */
+[data-marker] {
+  @apply bg-primary/15 text-primary mx-0.5 inline-flex size-[1.35em] items-center justify-center rounded font-mono text-[0.72em] font-medium;
+  vertical-align: 0.05em;
+}

@@ -1,95 +1,133 @@
 <p data-i18n="setup.lead.1">
-  An agent starts every session knowing nothing about how you work here. Project setup is the work
-  of writing that down once, in the repository, so it arrives before your first message instead of
-  after your third correction.
+  An agent starts every session knowing nothing about your project, your way of working or your
+  conventions. Arrange the repository so the agent can work efficiently in it. You get better
+  answers, and you pay fewer tokens for them <svg data-icon="coin"></svg>.
 </p>
 
 <p data-i18n="setup.lead.2">
-  Two places carry it, and they sit next to each other at the root of the project.
-</p>
-
-<!-- Filled by the ProjectTree element registered under this name in steps/step2/index.tsx. -->
-<div data-figure="project-tree"></div>
-
-<p data-i18n="setup.lead.3">
-  This repo has the <code>CLAUDE.md</code> and the two skills today. The
-  <code>settings.json</code>, the hooks and the <code>references/</code> folder are what you add
-  when you need them, so read the drawing as the shape rather than an inventory.
+  A few specialised files do that, and each one sits where it applies.
 </p>
 
 <h2 data-i18n="setup.claude-md.heading">CLAUDE.md</h2>
 
+<!-- Filled by the ProjectTree element registered under this name in steps/step2/index.tsx. -->
+<div data-figure="project-tree"></div>
+
 <p data-i18n="setup.claude-md.1">
-  Everything in <code>CLAUDE.md</code> is read at the start of the session and stays in the window
-  for the whole of it. That is what makes it useful: the agent knows Java is on 25, that assertions
-  use AssertJ, and that steps may import from <code>shared</code> but never the other way round,
-  before you have said a word.
+  The root <code>CLAUDE.md</code> <span data-marker>1</span> counts for the whole project. It is
+  read at the start of every session and stays in the window for all of it, wherever the agent is
+  working. So write what the project is about, what it is not about, and the ideas behind it.
+  Conventions for the frontend go in the folder that holds it <span data-marker>2</span>, and the
+  backend's in its own <span data-marker>3</span>, because each of these files is scoped. It only
+  joins the context once the agent goes in there.
 </p>
 
 <p data-i18n="setup.claude-md.2">
-  It is also what makes it expensive. Those tokens are re-sent on every single turn, so a file that
-  has grown to a thousand lines is a bill you pay per message, all session. Worse, the instruction
-  that actually mattered is now one line among hundreds, competing for attention with the rest.
+  So keep each of them lean, and scoped to what it covers. Less entropy, less context fatigue, and a
+  smaller bill on every turn <svg data-icon="coin"></svg> A line earns its place when it changes
+  what the agent writes and cannot be read off the code in a moment. The file is a briefing, not
+  documentation.
 </p>
 
-<p data-i18n="setup.claude-md.3">
-  So keep it lean. A line earns its place when it changes what the agent writes and cannot be read
-  off the code in a moment. Conventions, invariants, the command that runs the tests: yes. A
-  paragraph explaining what a controller is, or a list of every file in the project: no. The file
-  is a briefing, not documentation.
+<h2 data-i18n="setup.your-own-claude-md.heading">Your own CLAUDE.md</h2>
+
+<p data-i18n="setup.your-own-claude-md.1">
+  There is one more, and it is not in the repository. <code>~/.claude/CLAUDE.md</code> in your home
+  directory is read in every project you open on this machine. So it holds how you work rather than
+  what the project is: the language you want to be answered in, the tools you always reach for, the
+  thing you are tired of asking for twice a day.
 </p>
 
-<h2 data-i18n="setup.skills.heading">Skills</h2>
-
-<p data-i18n="setup.skills.1">
-  A skill is a folder under <code>.claude/skills/</code> with a <code>SKILL.md</code> in it,
-  holding a procedure you want followed the same way every time. This kata has two:
-  <code>lesson-writing</code>, which is why none of this text contains an em-dash, and
-  <code>quiz-writing</code>.
-</p>
-
-<p data-i18n="setup.skills.2">
-  The interesting part is when they load. Only the frontmatter of every skill is in the window at
-  the start. The body is read when the task matches, and costs nothing until then. That is the
-  difference between a skill and <code>CLAUDE.md</code>: one is always-on and paid for constantly,
-  the other is picked up on demand.
-</p>
-
-<p data-i18n="setup.skills.3">
-  Which puts the weight on the frontmatter. It is two fields, and they are not decoration:
-</p>
-
-<pre><code>---
-name: lesson-writing
-description: Write or revise kata lesson text (front/src/steps/*/units/*.html) so it
-  reads like a person explaining something out loud. Use whenever you add a step or
-  unit, rewrite lesson content, translate a lesson, or edit any student-facing prose
-  in this repo. Bans em-dashes.
----</code></pre>
-
-<p data-i18n="setup.skills.4">
-  The <code>name</code> matches the folder. The <code>description</code> has to say two things:
-  what the skill does, and when to reach for it. Write the second half with the words somebody
-  would actually type ("translate a lesson", "add a quiz"), because that is what the match is made
-  against. A description reading "helps with content" never fires.
-</p>
-
-<p data-i18n="setup.skills.5">
-  Keep the body short enough to read in one go and push the detail into <code>references/</code>
-  next to it. A skill nobody can finish reading has the same problem as a bloated
-  <code>CLAUDE.md</code>, just later in the session.
-</p>
-
-<aside data-audience="self" data-i18n="setup.skills.6">
+<aside data-variant="warning" data-i18n="setup.your-own-claude-md.2">
   <p>
-    A quick check on any skill you write: cover the body and read only the description. If you
-    cannot tell from it alone whether the skill applies to the task in front of you, neither can
-    the agent, because that is all it has at that moment.
+    Nothing in here reaches your team. It sits on your machine and not in the repository, so think
+    twice before a rule the code depends on ends up in it.
   </p>
 </aside>
 
-<p data-i18n="setup.skills.7">
-  Hooks are the third piece and the strictest one. They are declared in <code>settings.json</code>
-  and run a script at a fixed moment, whether or not anybody remembered to ask. The unit on
-  repeating patterns comes back to when that is the right answer.
+<h2 data-i18n="setup.skills.heading">Skills</h2>
+
+<!-- Filled by the SkillTree element registered under this name in steps/step2/index.tsx. -->
+<div data-figure="skill-tree"></div>
+
+<p data-i18n="setup.skills.1">
+  A skill can be considered a reusable high quality prompt. It is a folder under
+  <code>.claude/skills/</code> with a <code>SKILL.md</code> in it, holding a procedure you want
+  followed the same way every time.
+</p>
+
+<p data-i18n="setup.skills.2">
+  Take a job that comes back, adding an endpoint to a step's service:
+</p>
+
+<pre><code>---
+name: add-endpoint
+description: Add a REST endpoint to a step's Spring project the way the existing ones
+  are built - a controller under web/, a record for the response body, and the /api
+  prefix the Vite proxy expects. Use whenever you add a route, a response shape, or a
+  controller to kata/stepN/java.
+---</code></pre>
+
+<p data-i18n="setup.skills.3">
+  The <code>name</code> matches the folder, and it is what you type after the slash. The
+  <code>description</code> says what the skill does and when to reach for it, in the words somebody
+  would actually type ("add a route", "add a controller"), because that is what the match is made
+  against. A description reading "helps with the backend" never fires.
+</p>
+
+<p data-i18n="setup.skills.4">
+  Keep them small. A skill may point at another rather than repeat it: the one above ends by asking
+  for a commit, so it names <code>commit-message</code> instead of restating the rules for one.
+  Detail that will not fit goes in a <code>references/</code> folder beside the body, read only when
+  it is wanted.
+</p>
+
+<p data-i18n="setup.skills.5">
+  Be sparing with them. You pay for a description on every turn whether or not it fires, so thirty
+  skills are a table of contents the agent reads before every answer. Two that sound alike are
+  worse than one: if either could match, neither reliably does. Write one when you are tired of
+  correcting the same thing, not in anticipation of correcting it.
+</p>
+
+<h2 data-i18n="setup.hooks.heading">Hooks</h2>
+
+<!-- Filled by the HookTree element registered under this name in steps/step2/index.tsx. -->
+<div data-figure="hook-tree"></div>
+
+<p data-i18n="setup.hooks.1">
+  A hook is a script your harness runs at a fixed moment, whether or not anybody remembered to ask
+  for it. You declare it in <code>settings.json</code> against an event: before a tool runs, after a
+  file is written, when the session ends.
+</p>
+
+<p data-i18n="setup.hooks.2">
+  Which makes it the strictest of the three. A line in <code>CLAUDE.md</code> asks, a skill offers a
+  procedure, and both of them depend on the agent reading and following it. A hook just happens.
+  This one runs the formatter after every write:
+</p>
+
+<pre><code>{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          { "type": "command", "command": ".claude/hooks/format-on-write.sh" }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+
+<p data-i18n="setup.hooks.3">
+  So reach for one when the thing must happen every time and you would rather not find out that it
+  did not. The unit on repeating patterns comes back to when that is worth doing.
+</p>
+
+<hr />
+
+<h2 data-i18n="setup.check-yourself.heading">Check yourself</h2>
+
+<p data-i18n="setup.check-yourself.1">
+  Step 2 ships a Java project you have not opened, at <code>kata/step2/java</code>.
 </p>
