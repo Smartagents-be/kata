@@ -1,11 +1,16 @@
 import type { Step } from '@/shared/step'
+import { AuditExample } from './AuditExample'
 import { DomainTree } from './DomainTree'
+import { FlowDiagram } from './FlowDiagram'
 import { HookTree } from './HookTree'
 import { IterationPaths } from './IterationPaths'
 import { ProjectTree } from './ProjectTree'
 import { SetupFlags } from './SetupFlags'
 import { SkillTree } from './SkillTree'
 import { UnitShot } from './UnitShot'
+import { WhereWouldItGo } from './WhereWouldItGo'
+import { WorkflowTimeline } from './WorkflowTimeline'
+import { WorkflowWeights } from './WorkflowWeights'
 import { Workshop } from './Workshop'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
@@ -15,6 +20,7 @@ import engineering from './units/engineering.html?raw'
 import steering from './units/steering.html?raw'
 import patterns from './units/patterns.html?raw'
 import quality from './units/quality.html?raw'
+import workflows from './units/workflows.html?raw'
 import goals from './units/goals.html?raw'
 import workshop from './units/workshop.html?raw'
 
@@ -23,8 +29,8 @@ import workshop from './units/workshop.html?raw'
  * the code yourself, one unit each. `evolution` opens the step by putting the rest of them in
  * order: small steps, taken often, on something that already runs.
  *
- * `evolution`, `setup` and `engineering` each carry a drawing, and the closing `workshop` unit
- * carries the flag board, which is why this registry is .tsx. The board is browser-graded, so the
+ * `evolution`, `setup`, `engineering` and `workflows` each carry a drawing, and the closing
+ * `workshop` unit carries the flag board, which is why this registry is .tsx. The board is browser-graded, so the
  * step still talks to the service only through the `mvn verify -Pgraded` run the student does
  * outside the app.
  */
@@ -66,6 +72,9 @@ const step2: Step = {
       html: engineering,
       // Sits inside the prose, at the <div data-figure="domain-tree"> the unit's HTML leaves.
       inlineFigures: { 'domain-tree': <DomainTree /> },
+      // And the task under the prose, which sorts kata/step2/java against that same drawing. It
+      // grades nothing and posts nothing; the tick is a bookmark.
+      figure: <WhereWouldItGo />,
     },
     {
       id: 'steering',
@@ -81,6 +90,67 @@ const step2: Step = {
       id: 'quality',
       title: 'quality.title',
       html: quality,
+    },
+    {
+      id: 'workflows',
+      title: 'workflows.title',
+      html: workflows,
+      // Seven slots inside the prose. Four of them close a section with who talks to what, and they
+      // are a set: teal is what that workflow adds, so a change to one is a change to all four.
+      // Then the switchable audit, and the closing pair. None of them grades anything.
+      inlineFigures: {
+        // The project is the same frame in all four, and what is inside it is what changes. Here it
+        // holds the code and nothing else: there is no artifact, which is the section's point.
+        'flow-naive': (
+          <FlowDiagram
+            id="flow-naive"
+            nodes={['you', 'agent', { label: 'project', nodes: ['code'], links: [] }]}
+            links={['one', 'one']}
+          />
+        ),
+        'flow-plan': (
+          <FlowDiagram
+            id="flow-plan"
+            nodes={['you', 'agent', { label: 'project', nodes: ['code'], links: [] }]}
+            links={['both', 'one']}
+          />
+        ),
+        // The spec joins the code inside the frame, which is the section's claim drawn: a spec is
+        // not a document beside the work, it is a file in it.
+        'flow-spec': (
+          <FlowDiagram
+            id="flow-spec"
+            nodes={['you', 'agent', { label: 'project', nodes: ['spec', 'code'], links: ['one'] }]}
+            links={['both', 'both']}
+          />
+        ),
+        // The only one that closes, and the longest: the agent writes the audit, you read it, and
+        // it goes back to the agent as work. The return path lands on `audit.md` rather than on the
+        // start of the row, because what the run produces is a new version of that file, and the
+        // branch under it is the reading the rest of the row is not: you take the audit in before
+        // any of it becomes work. The spec inside the project is faint because an audit does not
+        // need one, which is what makes this the workflow you can bolt onto anything.
+        'flow-audit': (
+          <FlowDiagram
+            id="flow-audit"
+            nodes={[
+              'you',
+              'agent',
+              'audit',
+              'you',
+              'agent',
+              { label: 'project', nodes: ['spec', 'code'], links: ['one'], faint: ['spec'] },
+            ]}
+            links={['one', 'one', 'one', 'one', 'one']}
+            branch="you"
+            loop
+            loopTo={2}
+          />
+        ),
+        'audit-example': <AuditExample />,
+        'workflow-timeline': <WorkflowTimeline />,
+        'workflow-weights': <WorkflowWeights />,
+      },
     },
     {
       id: 'goals',

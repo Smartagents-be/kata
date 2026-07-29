@@ -1,10 +1,15 @@
 <p data-i18n="backend.lead.1">
-  There is also a Java backend, split by step. You need it for the exercises in this course.
+  There is also a Java backend, and it is not one project. Every step has its own under
+  <code>kata/</code>, so <code>kata/step0/java</code>, <code>kata/step1/java</code> and so on, each
+  with its own <code>pom.xml</code> and its own Maven build. Open the folder for the step you are on
+  and run Maven from in there. The ones that run a service boot on port 8080, so only one of them
+  runs at a time.
 </p>
 
 <p data-i18n="backend.lead.2">
-  A module can point you at a job to do in the codebase. Do it right and a flag becomes available.
-  Watch out, there are red herrings too.
+  That code is what the exercises work against. A module can point you at a job to do in its own
+  step's project. Do it right and a flag becomes available. From step 1 on, watch out for red
+  herrings: a string in braces is not always the one you are after.
 </p>
 
 <h2 data-i18n="backend.code-blocks.heading">Code blocks</h2>
@@ -17,9 +22,14 @@
 <pre><code>cd kata/step0/java
 mvn verify -Pintro</code></pre>
 
+<p data-i18n="backend.code-blocks.2">
+  Step 1 opens on <a href="/steps/step1/tokens">tokens</a>, which is what everything you send an
+  agent is counted in.
+</p>
+
 <hr>
 
-<h2 class="font-heading text-lg font-semibold" data-i18n="backend.run-it.heading">Test yourself</h2>
+<h2 data-i18n="ui:quiz.title">Test yourself</h2>
 
 <!-- Filled by the CodeCheck element registered under this name in steps/step0/index.tsx. -->
 <div data-figure="code-check"></div>

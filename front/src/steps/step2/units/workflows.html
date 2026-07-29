@@ -1,0 +1,153 @@
+<p data-i18n="workflows.lead.1">
+  How you hand the work over matters as much as what you hand over. A workflow is the shape of the
+  whole run: how much you write down before the agent types anything, and what tells you afterwards
+  that it worked.
+</p>
+
+<p data-i18n="workflows.lead.2">
+  What follows runs from cheapest to most deliberate. The further down you go, the more you settle
+  before any code exists and the less you have to re-read when it arrives. That trade is the
+  decision you are actually making.
+</p>
+
+<h2 data-i18n="workflows.naive.heading">Naive</h2>
+
+<p data-i18n="workflows.naive.1">
+  Almost everybody starts here. Ask for the feature, skim what comes back, run it. When it breaks,
+  paste the error and ask for a fix. Nothing is written down, because nothing was decided. The
+  <a href="/steps/step2/engineering">engineering unit</a> called this vibe coding and argued against
+  it.
+</p>
+
+<p data-i18n="workflows.naive.2">
+  It still has a place, and the place is real. A site for the baker on the corner. A trial version
+  built to find out whether the idea holds up at all. A one-line change in an otherwise careful
+  project: a padding, a log line, a column that should have been nullable. This is deliberately not
+  structuring or restructuring.
+</p>
+
+<p data-i18n="workflows.naive.3">
+  A throwaway that turns out to have users is recoverable. Point the agent at what already runs, ask
+  it to write the specs the code
+  implies, and read them for what it got wrong. You are retrofitting the workflow you skipped, and
+  it costs less than the rewrite you were bracing for.
+</p>
+
+<!-- Filled by the FlowDiagram element registered under this name in steps/step2/index.tsx. The
+     three flows are a set: read down the unit, the arrows are what each workflow adds. -->
+<div data-figure="flow-naive"></div>
+
+<h2 data-i18n="workflows.plan-based.heading">Plan-based</h2>
+
+<p data-i18n="workflows.plan-based.1">
+  One step up costs one keystroke. Ask for a plan instead of the change, every time, not only when
+  the task looks hard. <a href="/steps/step1/prompt">Step 1's unit on the prompt</a> introduced plan
+  mode as meta-prompting the provider already built for you. Using it once is a trick. Using it by
+  default is a workflow, and it buys better work at the price of waiting longer for it.
+</p>
+
+<p data-i18n="workflows.plan-based.2">
+  The plan is not the part worth having. The agent interviews you <svg data-icon="pattern"></svg>
+  and its questions are the ones you skipped: which tier gets a grace period, what happens when the
+  list comes back empty, whether this belongs in the domain at all. You answer them before a line
+  exists, which is what you would have done designing it yourself. The workflow put you back in the
+  design.
+</p>
+
+<!-- Filled by the FlowDiagram element registered under this name in steps/step2/index.tsx. -->
+<div data-figure="flow-plan"></div>
+
+<h2 data-i18n="workflows.spec-driven.heading">Spec-driven</h2>
+
+<p data-i18n="workflows.spec-driven.1">
+  Write the feature down before anybody builds it, one markdown file per feature, kept in the
+  repository beside the code. What it does, in detail. What it deliberately does not do. The
+  acceptance criteria somebody can hold the result to, and the specs this one depends on. The
+  out-of-scope half earns its place fastest, because that is where an agent invents things.
+</p>
+
+<p data-i18n="workflows.spec-driven.2">
+  What grows out of that is a living document rather than a folder of closed tickets. An agent
+  opening the repository reads the spec beside the code and knows what the code was meant to be.
+  Once there are more specs than anybody can hold in their head, add an <code>index.md</code> with a
+  line each <svg data-icon="gem"></svg> Finding the right one then costs one file instead of twenty.
+</p>
+
+<p data-i18n="workflows.spec-driven.3">
+  You do not write these cold either. Describe the feature in two sentences, ask for the spec in
+  your format, then cut what the agent invented. Reviewing a draft is faster than facing an empty
+  file, and a draft that guessed wrong shows you exactly what you never decided.
+</p>
+
+<!-- Filled by the FlowDiagram element registered under this name in steps/step2/index.tsx. -->
+<div data-figure="flow-spec"></div>
+
+<h2 data-i18n="workflows.audit-driven.heading">Audit-driven</h2>
+
+<p data-i18n="workflows.audit-driven.1">
+  Build however you like, then ask for the audit. The agent reads the files under scrutiny and
+  writes <code>audit.md</code>: is this complete, is it secure, does it follow the style the
+  repository already uses. That is the reflection pattern <svg data-icon="pattern"></svg> from
+  <a href="/steps/step1/harness">step 1's unit on the harness</a>, aimed at a project instead of at
+  a single answer.
+</p>
+
+<p data-i18n="workflows.audit-driven.2">
+  Ask for a format or you get an essay. A table holds it down to what you can act on: the topic,
+  where it lives, how solid it is, and what to do about it. This repository has one at the root, and
+  it is what the course gets rewritten from.
+</p>
+
+<!-- Filled by the AuditExample element registered under this name in steps/step2/index.tsx. The
+     switch in its corner is what the paragraph under it turns on, so the two move together. -->
+<div data-figure="audit-example"></div>
+
+<p data-i18n="workflows.audit-driven.3">
+  Flip it to markdown and nothing changes but the rendering. An audit is a file in your repository,
+  so it diffs and gets reviewed the way the code does, and it is still there next week when you have
+  forgotten which row you were on.
+</p>
+
+<p data-i18n="workflows.audit-driven.4">
+  Then work the table. Worst row first, fix it, run the audit again. The solid row with nothing
+  beside it counts as much as the rest, because that is one thing you can stop carrying around. And
+  the whole document stays short enough to read in one sitting, which is the difference between a
+  report and a plan.
+</p>
+
+<!-- Filled by the FlowDiagram element registered under this name in steps/step2/index.tsx. The
+     fourth of the set, and the only one that closes back on itself. -->
+<div data-figure="flow-audit"></div>
+
+<h2 data-i18n="workflows.pick-per-task.heading">Pick per task</h2>
+
+<p data-i18n="workflows.pick-per-task.1">
+  None of these is a camp you join. A throwaway prototype on Friday and a written spec for the
+  payment change on Monday is one engineer working sensibly. Plan mode sits inside spec-driven work,
+  where a good spec is what makes the plan short. An audit is worth running over any of them.
+</p>
+
+<!-- Filled by the WorkflowWeights element registered under this name in steps/step2/index.tsx. It
+     names the four, so it belongs here rather than under the lead. -->
+<div data-figure="workflow-weights"></div>
+
+<p data-i18n="workflows.pick-per-task.2">
+  Nothing on that drawing gets shorter. The work moves to the front or to the back, and what moves
+  with it is whether anything is left on disk when the session ends.
+</p>
+
+<p data-i18n="workflows.pick-per-task.3">
+  So read the task before you pick. How long does this code live, what does it cost to get wrong,
+  how much of the diff will you have to read yourself. Then take the cheapest workflow that answers
+  those. No method is perfect, and deciding between them is the engineering.
+</p>
+
+<p data-i18n="workflows.pick-per-task.4">
+  A project evolution timeline might look like this. Every move up the list is paid for by the one
+  before it, and the way back down is per row rather than per project. What that last pass changes
+  goes into the specs, or they quietly stop describing the thing you shipped.
+</p>
+
+<!-- Filled by the WorkflowTimeline element registered under this name in steps/step2/index.tsx. It
+     closes the unit, so nothing reads it afterwards and its own labels carry what it argues. -->
+<div data-figure="workflow-timeline"></div>

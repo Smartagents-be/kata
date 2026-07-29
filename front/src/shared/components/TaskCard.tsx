@@ -36,9 +36,9 @@ function writeDone(storageKey: string, done: boolean) {
  * above the card already says where the work happens and what to watch for, which is why the key is
  * looked up rather than assumed: `ReadYourWindow` has no `window.description` and no gap where one
  * would have been. Nothing here is graded, and nothing is submitted.
- * All three of step 1's tasks are this component with different data (`CutItUp` in `harness`,
- * `SurviveTheClear` in `session`, `ReadYourWindow` in `tools`), so keep additions here rather than
- * in a caller.
+ * Every task in the course is this component with different data (`CutItUp` in step 1's `harness`,
+ * `SurviveTheClear` in `session`, `ReadYourWindow` in `tools`, `WhereWouldItGo` in step 2's
+ * `engineering`), so keep additions here rather than in a caller.
  *
  * **One tick for the task, never one per move.** A task is a single sitting, and a box per move
  * invites ticking them off separately, which turns a run at a problem into an errand list. The tick

@@ -253,6 +253,14 @@
     vertical-align: -0.15em;
   }
 
+  /* The cogwheel from the header, dropped inline in prose where a sentence points at that control.
+     It names a piece of chrome rather than a legend entry, so it takes no colour of its own and
+     reads in the ink of the sentence around it. */
+  .prose svg[data-icon='cog'] {
+    @apply inline size-[1.1em];
+    vertical-align: -0.15em;
+  }
+
   * {
     @apply border-border outline-ring/50;
     }

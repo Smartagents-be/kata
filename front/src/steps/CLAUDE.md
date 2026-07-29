@@ -61,7 +61,7 @@ the shared `ConnectBoard`, which `model`'s `PickTheTier` is too; the reasoning f
 `model` below.
 
 `tokens` opens the step, ahead of `context`, and gives the step's unit of measurement a page before
-anything is measured in it. It is prose and three figures, with **no quiz and no "Check yourself"
+anything is measured in it. It is prose and three figures, with **no quiz and no "Test yourself"
 section**: the figures are the doing, and every quiz in the course already sits in the opening units.
 Nothing in it carries a currency; `ModelPricing` is still the only place in the course where a number
 has one. Its prose has been cut hard and deliberately: it opens cold, closes on the caching pointer
@@ -142,7 +142,7 @@ re-send and the bridge has to be there. Do not un-tag them and do not let the un
 output around them) and deliberately says nothing about growth or re-sending, which is
 `BundleCompare`'s job in `prompt`.
 
-It closes on `SurviveTheClear`, under the same `<hr>` and "Check yourself" heading the other units
+It closes on `SurviveTheClear`, under the same `<hr>` and "Test yourself" heading the other units
 use, with no prose between the rule and the card. Four moves: find a thing you would have to say
 again next time, write it into `CLAUDE.md` as one standing instruction, clear the session, ask for
 the work again without repeating yourself. The third move is the exercise. Writing the line down
@@ -311,7 +311,15 @@ capture and unmounting it swallows the `pointerup` that ends the drag. While a s
 every other line dims, because five lines onto three targets is otherwise hard to read.
 
 Everything the student *does* sits below an `<hr>` at the foot of the unit, under one `<h2>` reading
-"Check yourself", which is the same wording `QuizPanel` puts over a quiz (`quiz.title`). That is the
+"Test yourself". **That heading is the one place in the course where unit prose carries a shared key
+rather than its own**, and the exception is deliberate: every one of the eight writes
+`data-i18n="ui:quiz.title"`, which is the same string `QuizPanel` puts over a quiz, so the wording
+above a task and the wording above a quiz cannot drift apart. The `ui:` prefix works because
+`nsSeparator` is left at its default while only `keySeparator` is disabled, so i18next reads the
+namespace off the key and `useStepText`'s pinned `ns` gives way to it. Two things follow. A unit's
+"Test yourself" section has **no `<unit>.<section>.heading` key** in either bundle, which is the one
+break in "a key is a location", and changing the wording is one edit in `shared/i18n/locales`
+rather than eight. Reach for a `ui:` key nowhere else: prose belongs to its step. That is the
 shape: prose first, then one rule, then the doing, in the order `connect-one`, `SpotInjection`,
 `BudgetWindow`, `ReadYourWindow`. Do not scatter the exercises back up into the sections they belong
 to. The two `<h3>`s in there are the exception the rest of the step does not get: `connect-one` and
@@ -411,16 +419,19 @@ than a price list. What a Copilot reader needs instead is in `model.api-vs-subsc
 the one table in the course with a currency is a few inches up the page, and a second set of figures
 turns both into the price list `model.cost.3` tells the student not to learn.
 
-`step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Seven
-units — `evolution`, `setup`, `engineering`, `steering`, `patterns`, `quality`, `goals` — none of
-them carrying a quiz, and the unit HTML is the source for what each argues. Two of the seven close
+`step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Eight
+units — `evolution`, `setup`, `engineering`, `steering`, `patterns`, `quality`, `workflows`,
+`goals` — none of
+them carrying a quiz, and the unit HTML is the source for what each argues. Three of the eight close
 on something the student does: `evolution` on an ungraded fifteen-minute task, `setup` on a graded
-flag board. The other five are framing prose. Six carry one
+flag board, `engineering` on an ungraded `TaskCard`. The other five are framing prose. Six carry one
 habit each; `evolution` opens the step and carries none, because its job is to put the other six in
 order: a version now costs an hour, so the step you hand over gets small and you take many of them.
+`workflows` is the other one outside that count, and deliberately so: it carries four ways of
+handing work over rather than one habit, and its argument is the choice between them.
 Its prose closes by handing off to `setup` by name, so a reordering there has to visit that
 paragraph. Below that prose sits the step's only *ungraded* exercise, under the same `<hr>`
-and "Check yourself" heading step 1's `tools` uses: fifteen minutes on the clock, one of three
+and "Test yourself" heading step 1's `tools` uses: fifteen minutes on the clock, one of three
 skeletons, and nothing graded. The constraint is the clock and the answer is the list of details the
 student did not get to, so do not add a checker, and keep each example's second sentence naming what
 is left out. That sentence is what makes it a skeleton rather than a small feature.
@@ -454,6 +465,25 @@ should not cost more than an hour, and the section argues both edges (pulling de
 for now, leaving it too long turns into a regression). It closes the argument the `evolution` unit
 opens, so keep the pair of edges if you rewrite it. Cutting one leaves a lesson that only says
 "later".
+
+`engineering` closes on `WhereWouldItGo`, a `TaskCard` under the same `<hr>` and "Test yourself"
+heading, with no prose between the rule and the card: the card's description carries the setting, so
+a paragraph there would say it twice. Five moves, and the task exists because `DomainTree` and
+`kata/step2/java` genuinely disagree. The project keeps `port/` beside `domain/` rather than inside
+it, and its `adapter/` and `web/` packages split by technology with no `incoming/` and `outgoing/`
+above them, so the controller and the in-memory repository both land somewhere else in the figure,
+while `config/` and `aot/` land nowhere in it at all. **The card names none of that and gives no
+count.** Which packages disagree is the exercise, the same way `problem.md` has no answer key, and a
+move reading "three of them move" turns the sort into arithmetic. The unclassifiable two are the
+judgement the fourth move is after: the figure is a shape rather than a law, and framework wiring
+was never a domain concern.
+
+**Nothing is moved, and the fifth move says so twice** (plan mode, then accept nothing). That is not
+politeness about the agent. This project is `workshop`'s subject, so a package rename breaks
+`mvn verify -Pgraded`, the `challenge` tests and the native-image flag, and a student who accepted
+the plan would reach the capstone with a project that no longer builds. The description repeats the
+warning in the words a student reads first, which is why both carry it. It is also the first
+`TaskCard` outside step 1, ticked once to `kata.step2.where`.
 
 `steering` replaced `scoping` in slot four, and the replacement was deliberate rather than a rename:
 task sizing, which folder you open the agent in, and the `.claude` symlink trap were dropped
@@ -531,7 +561,119 @@ which is what makes the extraction invisible to anything that pointed at them. T
 the boards do not mark each other's rows solved, and both sit under `kata.step2.` where
 `shared/lib/reset.ts` can find them.
 
-An eighth unit, `workshop`, closes the step as its capstone. It is the one part of step 2 a machine
+`workflows` is four ways of handing work over, and **the order is the argument**: naive, plan-based,
+spec-driven, audit-driven, running from cheapest to most deliberate, with a closing section saying
+they are not exclusive. That close is the unit rather than a coda, so a rewrite that drops it leaves
+four techniques and no reason to pick one. It carries no exercise and no quiz, and the reason is
+that the choice is the lesson and there is nothing a card could ask for.
+
+Two of the four are already taught elsewhere, and the unit **points rather than repeats**, the same
+rule `harness.coordinator.3` follows in step 1. Plan mode belongs to `step1/prompt`, which defines it
+as meta-prompting the provider built for you, so the section here adds only what turns it into a
+workflow: doing it by default, and the interview making the engineer decide things they had skipped.
+Reflection belongs to `step1/harness`, so the audit section names it and moves on to what is new,
+namely that it is aimed at a project instead of at one answer. Neither may grow into a second
+definition.
+
+The naive section uses "vibe coding" disapprovingly and links to `engineering`, then defends it in
+one paragraph that lists three places. Two are throwaway code, which is the same tension `evolution`
+carries: what you intend to delete is where the argument does not apply. The third is the one that
+survives everything else in the step, namely that **nudging is not restructuring**, so a padding or
+a log line does not earn a workflow. That one is what `Plan/naive` at the end of `WorkflowTimeline`
+turns on, so the two move together, and it belongs in that paragraph rather than in a closer of its
+own: the section is about where naive belongs, and a second paragraph making the same kind of claim
+read as an afterthought. Do not tidy any of it into agreement with `engineering`.
+
+It carries seven figures, and four of them are one set. `FlowDiagram` closes each section with who
+talks to what: `you → agent → [project: code]`, then the same with a two-way link to the agent, then
+a spec joining the code inside the project, then `audit-driven`'s six-box chain closed into a cycle.
+**They are read down the unit rather than one at a time**, so a change to one is a change to all
+four, and the colour rule is what makes that work: a two-way link is teal, a one-way link is muted,
+a loop's return path is teal, so the teal is always the thing that section adds.
+
+Three things inside it are decisions. **The project is always a frame**, never a box, and what sits
+inside it is what changes across the four; that is the argument that a spec is a file in the
+repository rather than a document beside it. **`audit-driven`'s spec is faint**, dashed and set back
+on the step-1 reading of a dash, because an audit needs no spec: you can point one at a repository
+that never had one, which is what makes it the workflow you can bolt onto anything. And the labels
+are **bare nouns** (`agent`, `code`, `project`) rather than `the agent`: `audit-driven` runs to six
+boxes and five arrows, and the definite articles were what pushed it past the prose column into
+wrapping. The row gap is `gap-2` for the same reason.
+
+`audit-driven` is the long one and the only one drawn on two levels. Its row is
+`you → agent → audit.md → you → agent → [project]`, and around it runs a cycle in two halves that
+meet on the same two columns. Above the row, the project goes back into `audit.md` on a path
+labelled `update`, because what a pass produces is a new version of that file. Below it, a `you`
+**hangs under `audit.md`**, the project feeds it, and it feeds back up into `audit.md`. Splitting
+the cycle across both sides is what keeps either half from having to dodge the other.
+
+Four mechanical notes, and they are all one problem: a box's edges are not the row's edges. The
+paths are **measured** rather than inset by constants, since the boxes are words and the project
+frame is taller and wider than a plain box. `useLoopInset` reads the target box, the last box and
+the branch box under a `ResizeObserver`, and returns `left`/`right` for the two columns, `drop` for
+how far the target starts below the row's top, `rise` for how far it ends above the row's bottom,
+and the branch's width. Without `drop` and `rise` an arrowhead stops in mid-air, because the row is
+as tall as the project frame while the box being pointed at is not. Every arrowhead then keeps a
+`STANDOFF` from its box, so the two read as arriving rather than touching. And the arrows are
+`aria-hidden` with a per-figure `aria-label`, because direction is the whole content and the labels
+alone do not carry it.
+
+`AuditExample` is four rows of a security audit with a switch in its corner
+that turns the table into the markdown behind it, and both come off **one set of strings**, so the
+two views cannot drift: `toMarkdown` pads the same cells the table renders. That is the whole reason
+the switch exists rather than a second `<pre>`, and it is what the paragraph under the figure turns
+on, namely that an audit looks like a report and is a file that diffs. Three things in it are
+decisions. The subject is **security rather than this course**, because a reader can tell a missing
+`aud` check from a half-set header and cannot tell whether a curriculum unit is thin; the repository's
+own `audit.md` is named in the prose instead, which is where the evidence belongs, and the caption
+says the table is not a run against this repository. **Each status is used once**, so the four rows
+teach the legend by standing next to each other and the figure needs no legend line. And the solid
+row **carries no remark on purpose**, because the paragraph under it claims a row you can stop
+carrying around is worth as much as the rest. The table is sized to fit the prose column: only the
+markdown scrolls, since it is padded to align and therefore cannot wrap.
+
+`WorkflowWeights` and `WorkflowTimeline` are the closing section's pair, in that order, and they
+answer different questions: the first says how the four differ, the second says they combine. The
+weights sit mid-section, under the sentence about not joining a camp; **the timeline closes the
+unit**, with one paragraph of intro above it and nothing after it. That is the one place in the step
+where a figure has the last word, so its own labels have to carry what it argues: there is no
+paragraph below to read it.
+
+`WorkflowTimeline` is one project's path, naive to plan-based to spec-driven to audit-driven and
+back to `Plan/naive`. **That last label is the argument**: you drop back to a workflow you already
+used, and which one depends on the row, since a one-line header fix does not earn a plan. Nothing
+marks it as a return, because the repeated names say it. Three things it carries are load-bearing
+and live in the figure's own labels rather than in prose: the audit reflects on **your own spec
+work** rather than
+on the agent's answer, the closing plan exists because of what the audit turned up, and the return
+path under the last three stages writes the changes back into the specs. That last one is the way
+spec-driven work fails quietly, so removing the return line removes the warning. It is DOM rather
+than SVG on `ModelTiers`'s precedent: the notes wrap themselves in both languages, and the row
+becomes a column on a narrow screen with the arrows turned, which an arc drawn in SVG could not do.
+The return path is **three borders on one box**, so it is a bracket with two right angles rather
+than an arrow, and it reflows with the grid instead of carrying coordinates. A bare arrowhead was
+tried first and is the thing to avoid: it lands in the gap between two cards and reads as pointing
+at the wrong one. The chevron is `Up` and caps the left riser for the same reason. **Both risers sit
+on card centres**, `Spec-driven` and the last `Plan-based`, and the two margins that put them there
+are arithmetic rather than nudges: a percentage margin on a grid item resolves against its own grid
+area, so half a card is `(100% - 1rem) / 6 - 0.75rem` once the `size-4` arrow and `gap-2` ahead of
+each card are taken out. Change the parent's gap or a stage cell's lead-in and both numbers move.
+
+`WorkflowWeights` closes the unit and is the comparison. Four bars of **the same length**, each cut
+into what you settle first, what the agent runs, and what you read afterwards, so the drawing says
+the work moves rather than shrinks. That equal total is the argument, which is why the bars are one
+figure and not four: four separate drawings say nothing, the way `McpParts` and `McpOvals` only work
+as a pair. `naive` and `audit-driven` come out close on that axis deliberately, because they are
+close, and what separates them is the second thing the figure carries: the artifact. A kept artifact
+is a solid pill (`spec.md`, `audit.md`), the plan is a dashed outline on the step-1 reading of a
+dash, since it goes when the session does, and `naive` has no tag at all, which has to read as
+deliberate rather than as a gap. The proportions are hand-authored, and the only place that is
+recorded is the component's own docblock: it carried a caption saying so, on `NextToken`'s
+precedent, and the caption was **cut on purpose**. It sits in the closing section rather than under
+the lead, because it labels the four by name and a reader who met it earlier would be looking at
+four words they had not been given yet.
+
+A ninth unit, `workshop`, closes the step as its capstone. It is the one part of step 2 a machine
 can grade, because it grades the thing `quality` and `goals` argue for: a goal a build answers yes
 or no to. It ships a small loans domain in `kata/step2/java` that is green but un-hardened, and
 a `graded` Maven profile that measures it against three goals - a coverage floor, a complexity

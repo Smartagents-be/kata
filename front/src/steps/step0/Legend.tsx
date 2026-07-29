@@ -3,10 +3,11 @@ import { useStepText } from '@/shared/i18n/useStepText'
 import { cn } from '@/shared/lib/utils'
 
 /**
- * The icon legend on the welcome page. A couple of markers turn up in the margins as the kata goes
- * on, so this names them once and a reader knows them on sight: a gem for a hidden gem worth its own
- * detour, and a coin for a way to spend fewer tokens. Its wording comes from the step0 locale block
- * under `welcome.legend`, so it translates with the rest of the page.
+ * The icon legend on the welcome page. A few markers turn up inline as the kata goes on, so this
+ * names them once and a reader knows them on sight: a gem for a hidden gem worth its own
+ * detour, a coin for a way to spend fewer tokens, and a puzzle piece for an AI design pattern. Its
+ * wording comes from the step0 locale block under `welcome.legend`, so it translates with the rest
+ * of the page.
  */
 export function Legend() {
   const { text } = useStepText('step0')

@@ -229,6 +229,13 @@ Keys read `<unit>.<section>.<n>`: the section is the `<h2>` above the block, slu
 before the first one, and a heading of its own is `<unit>.<section>.heading`. Add a paragraph and
 it needs a key and an entry; move one into another section and its key has to be renamed.
 
+**One heading breaks that rule on purpose.** The `<h2>` over a unit's exercises is always
+`<h2 data-i18n="ui:quiz.title">Test yourself</h2>`, a shared key in the `ui` namespace rather than
+one of the step's own, so the wording above a task and the wording above a quiz cannot drift apart.
+It has no `.heading` entry in either step bundle, and rewording it is one edit in
+`shared/i18n/locales`. Copy that line verbatim when a unit grows an exercise, and reach for a `ui:`
+key nowhere else.
+
 The slug is the heading with its small words dropped, usually three of them:
 `Make the checks part of the work` is `make-checks-part`, `Domain-driven design` is
 `domain-driven-design`. **So rewording a heading renames every key in its section**, in the HTML and

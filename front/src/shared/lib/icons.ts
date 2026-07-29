@@ -1,6 +1,7 @@
 /**
  * The inline icons that appear inside lesson prose (a coin marking a cost tip, a puzzle marking an
- * AI design pattern). Prose is authored HTML injected with `dangerouslySetInnerHTML`, so an icon
+ * AI design pattern, a cog naming the control in the header the sentence is about). Prose is
+ * authored HTML injected with `dangerouslySetInnerHTML`, so an icon
  * cannot be a React component sitting in the paragraph. Instead the author drops the short marker
  *
  * ```html
@@ -23,6 +24,15 @@ const ICON_PATHS: Record<string, string> = {
     '<path d="M18.09 10.37A6 6 0 1 1 10.34 18" />' +
     '<path d="M7 6h1v4" />' +
     '<path d="m16.71 13.88.7.71-2.82 2.82" />',
+  cog:
+    '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 ' +
+    '2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15' +
+    '.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 ' +
+    '1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 ' +
+    '2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 ' +
+    '1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 ' +
+    '2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />' +
+    '<circle cx="12" cy="12" r="3" />',
   pattern:
     '<path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z" />',
 }
