@@ -12,119 +12,52 @@
 </p>
 
 <p data-i18n="engineering.lead.3">
-  Agentic engineering is a different job. You aim the harness at exactly what you want, you check
-  the work while it is happening, and you correct it there rather than after. The skills involved
-  are the ones you already have. What changes is that you are applying them to output you did not
-  type.
+  Software engineering has always been a craft. A problem arrives from the business, you break it
+  down until each part is small enough to be sure about, and you pour the result into a process that
+  runs as code. None of that changes when an agent does the typing.
 </p>
 
-<h2 data-i18n="engineering.say-language-craft.heading">Say it in the language of the craft</h2>
-
-<p data-i18n="engineering.say-language-craft.1">
-  Name the thing you want. "Put a repository in front of this JDBC call" lands somewhere specific.
-  "Clean this up a bit" lands in the statistical middle of every cleanup ever written. Design
-  pattern names, layer names and the vocabulary of your domain are compression: one word carries a
-  structure the model already knows in detail.
-</p>
-
-<p data-i18n="engineering.say-language-craft.2">
-  Then watch it work. An agent that is reading the wrong file, or has decided to introduce a
-  factory you did not want, tells you so in its first few steps. Stopping it there costs a
-  sentence. Letting it finish and then asking for a rewrite costs the whole diff, twice, and you
-  read it twice as well.
-</p>
-
-<h2 data-i18n="engineering.make-checks-part.heading">Make the checks part of the work</h2>
-
-<p data-i18n="engineering.make-checks-part.1">
-  Ask for tests with the change, not after it. <code>mvn test</code> is one command, so there is no
-  excuse for a feature arriving unproven. Ask what the coverage of the class you just touched
-  actually is, and which branch nobody exercised. Ask for the cyclomatic complexity of a method
-  that has grown three levels of nesting, then ask for it to come down.
-</p>
-
-<p data-i18n="engineering.make-checks-part.2">
-  Those requests do not belong in a prompt you retype every morning. They belong in
-  <code>CLAUDE.md</code>, where they apply to every change without you asking. A standard the agent
-  reads before it starts is a standard you stop enforcing by hand.
-</p>
-
-<h2 data-i18n="engineering.structure-biggest-lever.heading">Structure is the biggest lever</h2>
-
-<p data-i18n="engineering.structure-biggest-lever.1">
-  The techniques you already trust work here, and domain-driven design is the clearest example.
-  Split the code into domains and keep each one whole: its language, its rules and its data in one
-  place, named after what the business calls it. An agent asked to change how orders are priced
-  should find everything it needs in one folder.
-</p>
-
-<p data-i18n="engineering.structure-biggest-lever.2">
-  Ports and adapters do the other half. The domain talks to interfaces it owns, and the database,
-  the HTTP layer and the message broker sit behind adapters that implement them. That is a wall,
-  and walls are what stop a change to pricing from quietly growing a JPA annotation. This kata has
-  a small version of the same idea: steps may import from <code>shared</code>, never the other way
-  round.
-</p>
-
-<p data-i18n="engineering.structure-biggest-lever.3">
-  On disk that is a folder per domain, and the same four Maven modules inside every one of them.
-  Here is a service that publishes articles, with one domain opened up. Nothing below exists in this
-  repo, so read it as the shape.
-</p>
+<h2 data-i18n="engineering.domain-driven-design.heading">Domain-driven design</h2>
 
 <!-- Filled by the DomainTree element registered under this name in steps/step2/index.tsx. -->
 <div data-figure="domain-tree"></div>
 
-<p data-i18n="engineering.structure-biggest-lever.4">
-  Start with the modules. <code>article-domain</code> is the code itself: the aggregate, the use
-  cases and the adapters, in one module because they are one domain.
-  <code>article-configuration</code> wires Spring and owns the Liquibase changelog.
-  <code>article-bootstrap</code> holds the only main method, and <code>article-context</code> is the
-  small jar other domains are allowed to depend on.
+<p data-i18n="engineering.domain-driven-design.1">
+  Folders and concepts carry the same names the business uses. Hexagonal architecture sorts the
+  rest: the domain in the middle, the machinery behind adapters, and the direction of a call as a
+  folder you can point at. Both give you the logical shape, and a logical shape is what you can
+  prompt against <svg data-icon="gem"></svg> <svg data-icon="coin"></svg> Ask for a feature on
+  articles and the agent knows where to look before it opens anything.
 </p>
 
-<p data-i18n="engineering.structure-biggest-lever.5">
-  Around those sit the three things that make it a domain of this platform, and none of them are
-  decisions. A BOM listing the four modules, an entry in the root <code>pom.xml</code>, and a
-  <code>.claude</code> symlink so an agent working in <code>apps/article/</code> reads the same
-  instructions as everywhere else. It is identical in every domain, which is why creating one
-  should be a script you run rather than a conversation you have.
+<p data-i18n="engineering.domain-driven-design.2">
+  That is a bigger lever with an agent than it ever was with a team. A model reads your repository
+  as tokens and predicts what comes next. Plain English is what it predicts best, which is what
+  <a href="/steps/step1/tokens">step 1's unit on tokens</a> showed.
 </p>
 
-<p data-i18n="engineering.structure-biggest-lever.6">
-  Now read the domain module from the inside out. <code>domain/</code> holds the aggregate, the
-  rules that guard it, and the interfaces it needs from the world outside.
-  <code>ArticleRepository</code> and <code>Archive</code> are ports, and the domain wrote both of
-  them in its own words. <code>application/</code> is one class per use case, calling those
-  interfaces and nothing else. <code>adapter/</code> is where HTTP, JPA and S3 live, each class
-  implementing a port that was declared above it.
+<h2 data-i18n="engineering.use-correct-language.heading">Use the correct language</h2>
+
+<p data-i18n="engineering.use-correct-language.1">
+  Name the thing you want. "Put a repository in front of this JDBC call" lands somewhere specific.
+  "Clean this up a bit" lands in the statistical middle of every cleanup ever written. Design
+  pattern names, layer names and the vocabulary of your domain are compression. They keep an agent
+  on the task instead of on its own reading of what you meant. That is also what separates an app
+  built in half a day from one you can put in production.
 </p>
 
-<p data-i18n="engineering.structure-biggest-lever.7">
-  Every dependency in that picture points inward. <code>ArticleRow</code> knows about
-  <code>Article</code>, and <code>Article</code> has never heard of <code>ArticleRow</code>. Swap
-  Postgres for something else and only <code>adapter/persistence/</code> changes. That is also why
-  <code>author/</code> is drawn beside it: the shape repeats, so a new domain is a new folder rather
-  than an argument about where things go.
+<h2 data-i18n="engineering.quality-gates.heading">Quality gates</h2>
+
+<p data-i18n="engineering.quality-gates.1">
+  Skills and hooks turned up in <a href="/steps/step2/setup">project setup</a> as things a project
+  holds. This is where you put them to work. Line coverage, mutation coverage and a Sonar
+  reliability score still tell you whether software is fit to ship. They also hand an agent an
+  invariant, something fixed to hold itself to while it works <svg data-icon="gem"></svg>.
 </p>
 
-<p data-i18n="engineering.structure-biggest-lever.8">
-  Three things follow, and the third surprises people. Boundaries keep the agent focused, because
-  the code it must not touch is not in front of it. They let you scope a task precisely, because
-  you can name the domain and mean it. And they cut your token cost, because a well-bounded task
-  reads five files instead of fifty, on every turn, for the length of the session.
-</p>
-
-<aside data-audience="self" data-i18n="engineering.structure-biggest-lever.9">
-  <p>
-    A useful diagnostic: ask an agent to make a change and watch how many files it opens before it
-    writes anything. If it is wandering, that is your architecture answering the question, not the
-    model.
-  </p>
-</aside>
-
-<p data-i18n="engineering.structure-biggest-lever.10">
-  None of this is new. Tests, boundaries and clear names were already how you kept a large codebase
-  from turning on you. Agents did not change the practice. They raised the price of not having it,
-  because code now arrives faster than anyone can read it.
+<p data-i18n="engineering.quality-gates.2">
+  Wire that into the run rather than into your memory. A hook fires when the agent says it is
+  finished, <code>mvn verify</code> runs the analysis, and a number under the floor comes back as a
+  failure it has to answer for. The same rule written into <code>CLAUDE.md</code> is a request. This
+  one runs whether the agent remembers it or not.
 </p>

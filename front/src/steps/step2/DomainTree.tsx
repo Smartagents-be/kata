@@ -2,22 +2,31 @@ import { FileTree, type TreeNode } from './FileTree'
 
 /**
  * One domain of a fictional articles service, laid out the way domain-driven design and ports and
- * adapters leave it on disk, inside the four Maven modules a platform gives every domain. It sits
- * inside the prose of the `engineering` unit, at the `data-figure="domain-tree"` slot its HTML
- * leaves.
+ * adapters leave it on disk. It sits in the `engineering` unit, at the `data-figure="domain-tree"`
+ * slot its HTML leaves.
  *
- * Two things are being drawn at once. The outer half is the module skeleton, identical for every
- * domain and therefore worth scaffolding: a BOM, the four modules, the `.claude` symlink, and the
- * entry in the root `pom.xml`. The inner half is the part only this domain has: `domain/` names
- * what it needs and owns the interfaces, `adapter/` implements them, and nothing under `adapter/`
- * is mentioned anywhere above it. `author/` is there so the shape reads as repeatable rather than
- * as one lucky folder.
+ * It is an ordinary Maven project and nothing more: one `pom.xml`, one `src/main/java`, one main
+ * method. The four-module platform skeleton it drew before (a BOM plus a domain, configuration,
+ * bootstrap and context module for every domain) was a shape a student would have to be handed, and
+ * it spent the figure's room on scaffolding rather than on the packaging. What carries the lesson
+ * is inside `src/`, where a folder is a decision: `domain/` names what it needs and owns the
+ * interfaces, `application/` is one class per use case, `adapter/` implements those interfaces, and
+ * nothing under `adapter/` is mentioned anywhere above it. `author/` is there so the shape reads as
+ * repeatable rather than as one lucky folder, which is also why a domain is a package here and not
+ * a module: the next one costs a folder.
  *
- * `Article.java` appears twice on purpose. The aggregate lives in the domain module; the class
- * carrying `@SpringBootApplication` is named after the domain, so it lands on the same name one
- * package up in the configuration module. The notes beside them say which is which.
+ * `adapter/` splits by direction before it splits by technology: `incoming/` is what calls the
+ * domain, `outgoing/` is what the domain calls out to through a port it wrote itself. That is the
+ * driving and driven side of ports and adapters, and it is the level a reader sorts by first, which
+ * is why the technology sits under it and not the other way round. Below that the folders are
+ * written compound (`web/rest`, `persistence/postgres`) rather than as two rows each: the split
+ * that carries the figure is the first one, and drawing four more levels of indentation buys
+ * nothing but width on a phone. The package prefixes are compound for the same reason.
  *
- * Nothing here exists in this repo. It is an example, and the unit text says so.
+ * `src/test/java` is drawn, and as two files rather than an empty folder. Tests mirroring the
+ * package they cover is this repo's own rule, so the example keeps it.
+ *
+ * Nothing here exists in this repo. It is an example.
  */
 const TREE: TreeNode = {
   name: '.',
@@ -26,131 +35,79 @@ const TREE: TreeNode = {
   children: [
     { name: 'pom.xml', note: 'domain-tree.root-pom.note' },
     {
-      name: 'apps',
+      name: 'src/main/java/be/smartagents',
       directory: true,
-      note: 'domain-tree.apps.note',
       children: [
+        { name: 'ArticleApplication.java', note: 'domain-tree.application-class.note' },
         {
           name: 'article',
           directory: true,
           note: 'domain-tree.article.note',
           children: [
-            { name: 'pom.xml', note: 'domain-tree.domain-bom.note' },
-            { name: '.claude', directory: true, note: 'domain-tree.dot-claude.note' },
             {
-              name: 'article-domain',
+              name: 'domain',
               directory: true,
-              note: 'domain-tree.domain-module.note',
+              note: 'domain-tree.domain.note',
               children: [
-                { name: 'pom.xml' },
+                { name: 'Article.java', note: 'domain-tree.article-java.note' },
+                { name: 'Headline.java', note: 'domain-tree.headline.note' },
+                { name: 'ArticleRepository.java', note: 'domain-tree.repository-port.note' },
+                { name: 'Archive.java', note: 'domain-tree.archive-port.note' },
+              ],
+            },
+            {
+              name: 'application',
+              directory: true,
+              note: 'domain-tree.application.note',
+              children: [
+                { name: 'PublishArticle.java' },
+                { name: 'RewriteHeadline.java' },
+              ],
+            },
+            {
+              name: 'adapter',
+              directory: true,
+              note: 'domain-tree.adapter.note',
+              children: [
                 {
-                  name: 'src/main/java/be/smartagents/article',
+                  name: 'incoming',
                   directory: true,
+                  note: 'domain-tree.incoming.note',
                   children: [
                     {
-                      name: 'domain',
+                      name: 'web/rest',
                       directory: true,
-                      note: 'domain-tree.domain.note',
                       children: [
-                        { name: 'Article.java', note: 'domain-tree.article-java.note' },
-                        { name: 'Headline.java', note: 'domain-tree.headline.note' },
-                        { name: 'ArticleRepository.java', note: 'domain-tree.repository-port.note' },
-                        { name: 'Archive.java', note: 'domain-tree.archive-port.note' },
-                      ],
-                    },
-                    {
-                      name: 'application',
-                      directory: true,
-                      note: 'domain-tree.application.note',
-                      children: [
-                        { name: 'PublishArticle.java' },
-                        { name: 'RewriteHeadline.java' },
-                      ],
-                    },
-                    {
-                      name: 'adapter',
-                      directory: true,
-                      note: 'domain-tree.adapter.note',
-                      children: [
-                        {
-                          name: 'web',
-                          directory: true,
-                          children: [
-                            { name: 'ArticleController.java', note: 'domain-tree.controller.note' },
-                            { name: 'ArticleResponse.java' },
-                          ],
-                        },
-                        {
-                          name: 'persistence',
-                          directory: true,
-                          children: [
-                            {
-                              name: 'JpaArticleRepository.java',
-                              note: 'domain-tree.jpa-repository.note',
-                            },
-                            { name: 'ArticleRow.java', note: 'domain-tree.jpa-row.note' },
-                          ],
-                        },
-                        {
-                          name: 'archive',
-                          directory: true,
-                          children: [
-                            { name: 'S3Archive.java', note: 'domain-tree.s3-archive.note' },
-                          ],
-                        },
+                        { name: 'ArticleController.java', note: 'domain-tree.controller.note' },
+                        { name: 'ArticleResponse.java' },
                       ],
                     },
                   ],
                 },
-              ],
-            },
-            {
-              name: 'article-configuration',
-              directory: true,
-              note: 'domain-tree.configuration-module.note',
-              children: [
-                { name: 'pom.xml', note: 'domain-tree.configuration-pom.note' },
                 {
-                  name: 'src/main/java/be/smartagents/article',
+                  name: 'outgoing',
                   directory: true,
-                  children: [
-                    { name: 'Article.java', note: 'domain-tree.application-class.note' },
-                  ],
-                },
-                {
-                  name: 'src/main/resources',
-                  directory: true,
+                  note: 'domain-tree.outgoing.note',
                   children: [
                     {
-                      name: 'application-submodule.properties',
-                      note: 'domain-tree.properties.note',
+                      name: 'persistence/postgres',
+                      directory: true,
+                      children: [
+                        {
+                          name: 'JpaArticleRepository.java',
+                          note: 'domain-tree.jpa-repository.note',
+                        },
+                        { name: 'ArticleRow.java', note: 'domain-tree.jpa-row.note' },
+                      ],
                     },
                     {
-                      name: 'db/changelog/article-master.xml',
-                      note: 'domain-tree.changelog.note',
+                      name: 'archive/s3',
+                      directory: true,
+                      children: [{ name: 'S3Archive.java', note: 'domain-tree.s3-archive.note' }],
                     },
                   ],
                 },
               ],
-            },
-            {
-              name: 'article-bootstrap',
-              directory: true,
-              note: 'domain-tree.bootstrap-module.note',
-              children: [
-                { name: 'pom.xml' },
-                {
-                  name: 'src/main/java/be/smartagents/article/bootstrap',
-                  directory: true,
-                  children: [{ name: 'ApplicationRunner.java', note: 'domain-tree.runner.note' }],
-                },
-              ],
-            },
-            {
-              name: 'article-context',
-              directory: true,
-              note: 'domain-tree.context-module.note',
-              children: [{ name: 'pom.xml', note: 'domain-tree.context-pom.note' }],
             },
           ],
         },
@@ -159,6 +116,23 @@ const TREE: TreeNode = {
           directory: true,
           note: 'domain-tree.author.note',
         },
+      ],
+    },
+    {
+      name: 'src/main/resources',
+      directory: true,
+      children: [
+        { name: 'application.properties', note: 'domain-tree.properties.note' },
+        { name: 'db/changelog/article-master.xml', note: 'domain-tree.changelog.note' },
+      ],
+    },
+    {
+      name: 'src/test/java/be/smartagents/article',
+      directory: true,
+      note: 'domain-tree.test.note',
+      children: [
+        { name: 'domain/ArticleTest.java' },
+        { name: 'application/PublishArticleTest.java' },
       ],
     },
   ],

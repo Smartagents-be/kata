@@ -457,8 +457,8 @@ opens, so keep the pair of edges if you rewrite it. Cutting one leaves a lesson 
 
 `steering` replaced `scoping` in slot four, and the replacement was deliberate rather than a rename:
 task sizing, which folder you open the agent in, and the `.claude` symlink trap were dropped
-outright, so nothing in the tree teaches them any more. `engineering` still draws the symlink in
-`DomainTree` and names it once, and that mention is now terminal on purpose. The unit argues the
+outright, so nothing in the tree teaches them any more. `DomainTree` drew the symlink until its row
+was removed, so the trap is now absent from the course in every form. The unit argues the
 thing the step had no home for, namely what you do while the work is running rather than before or
 after it, and it owns three moves. Two of them are constrained by units either side of it.
 
@@ -477,11 +477,10 @@ do not know about yet. Do not soften the stop into "flag it and continue".
 
 The interrupt-or-go-back section deliberately does not name a keystroke. Rewinding to an earlier
 message is described as something "most harnesses let you do", since the binding differs per harness
-and a wrong one dates the unit. It carries one of the step's three `data-audience="self"` asides,
-the others being `engineering`'s and `workshop`'s. `setup` had a fourth, on reading a skill's
-description with the body covered, and it was cut with the hooks paragraph when that unit was
-trimmed; the self-learning count in step 2 is three and no longer level with what it was after
-`scoping` went.
+and a wrong one dates the unit. It carries one of the step's two `data-audience="self"` asides, the
+other being `workshop`'s. Two others are gone: `setup`'s, on reading a skill's description with the
+body covered, went with the hooks paragraph when that unit was trimmed, and `engineering`'s
+file-counting diagnostic went with the prose under its `Domain-driven design` heading.
 
 `setup` carries three drawings and they are one drawing three times: `ProjectTree` under the
 CLAUDE.md heading, `SkillTree` under Skills and `HookTree` under Hooks, each `FileTree` with `dim`
