@@ -23,8 +23,8 @@ interface Call {
 /** Six ways to spend the window on one small change. Message keys are built from the id. */
 const CALLS: readonly Call[] = [
   { id: 'grep', lines: 3, needed: true },
-  { id: 'controller', lines: 34, needed: true },
-  { id: 'services', lines: 2140, needed: false },
+  { id: 'controller', lines: 24, needed: true },
+  { id: 'services', lines: 1250, needed: false },
   { id: 'reference', lines: 1380, needed: false },
   { id: 'tree', lines: 260, needed: false },
   { id: 'listing', lines: 190, needed: false },

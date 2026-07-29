@@ -13,7 +13,7 @@
   "welcome.how-to-use-this-document.3": "<strong>Met een tutor</strong> die je bij elke stap aan het bord begeleidt.",
   "welcome.how-to-use-this-document.4": "<strong>Als naslag.</strong> Kom terug op een pagina zodra je aan je eigen bureau tegen datgene aanloopt wat ze beschrijft.",
   "welcome.how-to-use-this-document.5": "Achter het menu <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" width=\"1em\" height=\"1em\" style=\"display:inline-block;vertical-align:-0.15em\" aria-hidden=\"true\"><path d=\"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg> rechtsboven zet je een paar extra opties: je taal, met welke assistent je werkt, self-paced of begeleid, en slides.",
-  "welcome.how-to-use-this-document.6": "Zet de assistent op degene die je echt gebruikt. De pagina's noemen dan zijn commando's en zijn bestanden: <code>copilot mcp add</code> in plaats van <code>claude mcp add</code>, <code>.github/copilot-instructions.md</code> in plaats van <code>CLAUDE.md</code>. Wat de pagina's je leren verandert niet. Niets ervan gaat over één product.",
+  "welcome.how-to-use-this-document.6": "Zet de assistent op degene die je echt gebruikt. Waar de twee verschillen in een bestandsnaam of een commando, noemen de pagina's die van jou: <code>copilot mcp add</code> in plaats van <code>claude mcp add</code>, <code>.github/copilot-instructions.md</code> in plaats van <code>CLAUDE.md</code>. Die wissel loopt door deze stap en stap 1. Stap 2 noemt overal de bestanden van Claude Code, dus lees die op Copilot als het voorbeeld en niet als je eigen setup. Wat de pagina's je leren verandert niet, want niets ervan gaat over één product.",
 
   "welcome.how-exercises-work.heading": "Hoe oefeningen werken",
   "welcome.how-exercises-work.1": "Tijdens de oefeningen kom je codes tegen die zo geschreven zijn: <code>{f1r5t-5t3p5}</code>. Een string tussen <code>{}</code> duidt een flag aan. Jouw doel is de flags te capturen. Die moet je opsporen en in je browser in een veld terugtypen.",
@@ -37,7 +37,6 @@
   "backend.code-blocks.heading": "Codeblokken",
   "backend.code-blocks.1": "Soms vind je codeblokken in de cursus, zoals die hieronder. Het is belangrijk dat je deze gebruikt en ze met je AI-agent instrumenteert, anders zal de flag niet tonen.",
   "backend.run-it.heading": "Test jezelf",
-  "backend.run-it.1": "Open het project vanuit de map, ga naar stap 1, en maak de taken af die het je geeft.",
   "code.panel.title": "Probeer het: los deze pagina op",
   "code.panel.label": "De code van de pagina",
   "code.panel.hint": "Typ de code uit de alinea hierboven, mét accolades.",
@@ -62,8 +61,8 @@
 
   "flag.panel.title": "Rond de intro af",
   "flag.panel.label": "De intro-flag",
-  "flag.panel.hint": "Gebruik je AI-agent om stap 1 te draaien, verify met het gegeven profiel.",
-  "flag.panel.help": "Deze flag verdien je in de backend, niet op deze pagina. Start het project op stap 1 en werk de taken af die het je geeft. Als dat klaar is drukt de build de flag af op de regel die zegt dat de intro klaar is, dus plak die code hier, mét accolades.",
+  "flag.panel.hint": "Draai het blok hierboven via je agent.",
+  "flag.panel.help": "Open het project in kata/step0, start je agent en vraag om het blok hierboven uit te voeren. De build geeft je een taak. Doe die taak, draai het blok opnieuw, en de flag verschijnt op de regel die zegt dat de intro klaar is. Plak die code hier, mét accolades.",
   "flag.panel.hint-button": "Hint",
   "flag.panel.placeholder": "{...}",
   "flag.panel.check": "Controleer",

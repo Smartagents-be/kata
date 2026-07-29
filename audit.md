@@ -1,10 +1,10 @@
 # Course audit — agentic-engineering kata
 
-**Verified:** 28 July 2026, against `003bf6c` with a clean working tree. Every claim below was
-re-checked against the tree; nothing is carried forward on trust.
+**Verified:** 28 July 2026, against `a26c1ab` plus the Tier 1 corrections applied on top of it. Every
+claim below was re-checked against the tree; nothing is carried forward on trust.
 
 **This document holds open findings only.** Anything solved is deleted rather than ticked, so there
-is no history here and no closure notes to read past. Finding ids (I1, M12, S5, N2) stay stable
+is no history here and no closure notes to read past. Finding ids (I2, M12, S5, N11) stay stable
 across passes, which is why they have gaps: a gap means that item is gone, not that it moved.
 
 **Question asked:** what is missing, what is inaccurate, what is duplicated, how does the course
@@ -28,7 +28,8 @@ a **second graded flag board** whose three plaintext flags sit in a skill, a pro
 package briefing inside `kata/step2/java`. Root `CLAUDE.md` lost 456 lines to a new
 `front/src/steps/CLAUDE.md` that is now the readable source for what is deliberate about each unit.
 `003bf6c` added the eleven files `20847e8` had left untracked, so the two commits are one change and
-a checkout of `HEAD` compiles again.
+a checkout of `HEAD` compiles again. `a26c1ab` is housekeeping on top: a rewritten `prompt` lead and
+some Dutch, neither of which moves a word count this document tabulates.
 
 ---
 
@@ -41,10 +42,10 @@ passes.
 
 Three things hold it back, in order of impact:
 
-1. **Cadence still collapses in step 2, but less far.** Five consecutive units, ~3,650 words, zero
+1. **Cadence still collapses in step 2, but less far.** Five consecutive units, ~3,645 words, zero
    quizzes and zero checks, ending in the hardest lab in the kata. `setup` broke the wall in the
    middle. Step 1 runs 6,813 words across eight units with eight interactive components and two
-   quizzes; step 2 runs 6,255 across eight with two graded boards and one ungraded exercise.
+   quizzes; step 2 runs 6,251 across eight with two graded boards and one ungraded exercise.
 2. **The everyday verb is half there.** `steering` covers interrupting and rewinding. What is still
    missing is recovering when the agent is stuck or looping (**M2**) and reading a diff you did not
    write (**M12**). Both are named in three units apiece and taught in none.
@@ -53,10 +54,17 @@ Three things hold it back, in order of impact:
    has the student read a real count off their own window. No unit multiplies (**M6**, **M8**). The
    Copilot research names `/usage` as the one command that would close this loop, and nothing uses it.
 
-Behind those, two delivery risks specific to this audience. **Nothing covers IP, data governance or
+Behind those, one delivery risk specific to this audience. **Nothing covers IP, data governance or
 what may leave the building** (**M13**), which is the question a security team asks before anyone
-gets to lesson one. And the assistant switch, which is a genuine advance, currently **promises more
-than step 2 delivers** (**I15**).
+gets to lesson one.
+
+The assistant switch is no longer on that list. It still stops at the end of step 1, but `welcome`
+now says so, so a Copilot student meets `setup` knowing they are reading the worked example rather
+than their own setup. What remains is the work rather than the mismatch (tracker 18).
+
+**One inaccuracy is left in the tree, and it is `I2`.** It survives because it is a decision about
+what `patterns` should argue rather than a number to correct. Everything else in this document is
+structure and content, which is where the remaining value is.
 
 ---
 
@@ -79,7 +87,7 @@ than step 2 delivers** (**I15**).
 | **The oval figures escalate rather than repeat** | `PromptInContext` (prompt, no frame) → `ToolsInContext` (first frame, tool across the border) → `McpServer` (same frame, one wire crossing once) → `McpOvals` (three things, still unframed) → `ContextDiagram` (populated window). |
 | **The step 2 capstone is real** | Five flags of four shapes, measured by a build rather than by opinion. Still the strongest single asset in the kata. |
 | **Dutch is complete** | **353/353** prose keys (22 + 192 + 139), counted against every `data-i18n` key in every unit's HTML with comments stripped, and verified rather than sampled. Sixteen assistant-variant keys and a rebuilt `setup` unit landed in one commit and the Dutch kept up with all of it. |
-| **Deliberate design is documented, and the documentation was refactored before it broke** | Root `CLAUDE.md` handed 456 lines to `front/src/steps/CLAUDE.md`, which now loads only when you work under the curriculum. It records *why*, not *what*, and it is honest about the assistant boundary. **N8** and **N9** are the two things it gets wrong. |
+| **Deliberate design is documented, and the documentation was refactored before it broke** | Root `CLAUDE.md` handed 456 lines to `front/src/steps/CLAUDE.md`, which now loads only when you work under the curriculum. It records *why*, not *what*, and it is honest about the assistant boundary. Nothing in it is now wrong: it documents `McpOvals`, it says which of step 2's units carry an exercise, and it records where `BudgetWindow`'s line counts were measured so the next re-measure knows what to visit. |
 
 ---
 
@@ -153,7 +161,7 @@ than step 2 delivers** (**I15**).
 | Over-commenting / under-logging | `quality` | ● |
 | Goal vs instruction; long autonomous runs | `goals` | ● |
 | Git worktrees | `goals`, `steering`, `workshop` | ● |
-| **The same habits on a non-Claude assistant** | steps 0–1 only | ⚠ |
+| **The same habits on a non-Claude assistant** | steps 0–1 only, and `welcome` says so | ◐ |
 | **Recovering a stuck or looping agent** | — | ○ |
 | **Reviewing a diff you did not write** | — | ○ |
 | **Everyday git hygiene with agents** | — | ○ |
@@ -219,8 +227,8 @@ arriving separately from the registry.
 
 | Unit | Words | Figures | Interactive |
 |---|--:|--:|---|
-| step0 / welcome | 295 | 3 | 2 code boxes + quiz |
-| step0 / backend | 104 | 1 | 1 code box |
+| step0 / welcome | 331 | 3 | 2 code boxes + quiz |
+| step0 / backend | 118 | 1 | 1 code box |
 | step1 / tokens | 672 | 3 | 3 interactive figures, no quiz, no task |
 | step1 / prompt | 635 | 3 | quiz (3q) |
 | step1 / tools | 1037 | 7 | `connect-one` + SpotInjection + BudgetWindow + ReadYourWindow |
@@ -232,23 +240,22 @@ arriving separately from the registry.
 | step2 / evolution | 790 | 3 | ungraded exercise (15 minutes) |
 | step2 / setup | 720 | 3 | **SetupFlags (3 flags)** |
 | step2 / engineering | 974 | 1 | **none** |
-| step2 / steering | 808 | 0 | **none** |
-| step2 / patterns | 607 | 0 | **none** |
+| step2 / steering | 797 | 0 | **none** |
+| step2 / patterns | 614 | 0 | **none** |
 | step2 / quality | 579 | 0 | **none** |
 | step2 / goals | 681 | 0 | **none** |
 | step2 / workshop | 1096 | 0 | Workshop (5 flags) |
 
-Eighteen units. Step 1 is 6,813 words and step 2 is 6,255, so the two steps remain the same size. The
-rows that moved since the last pass are `welcome` (+51, the assistant paragraph), `tokens` (+9, a
-rewritten lead), `harness` (+2, Copilot joining the list of example harnesses) and `setup` (+111,
-three new sections against two cut ones). `setup` also went from one figure to three and from no
-check to a graded board, which is the single largest structural change in step 2 since the step was
-written. `step2 / quality` at 579 words is now the shortest prose unit in the course, and it has
-neither a figure nor a check.
+Eighteen units. Step 1 is 6,813 words and step 2 is 6,251, so the two steps remain the same size. The
+rows that moved this pass are all corrections and all small: `welcome` (+36, the sentence scoping the
+assistant switch to steps 0 and 1), `backend` (+14, an instruction that now matches its own code
+block), `patterns` (+7, two more skills named) and `steering` (-11, the cut worktree clause). Nothing
+structural moved, which is the point of the pass. `step2 / quality` at 579 words is still the
+shortest prose unit in the course, and it has neither a figure nor a check.
 
 ### Cadence defects
 
-**C1 — Step 2 is still a prose wall, now 3,649 words instead of 4,258.** `engineering`, `steering`,
+**C1 — Step 2 is still a prose wall, 3,645 words of it.** `engineering`, `steering`,
 `patterns`, `quality`, `goals`: five units in a row with nothing to do, four of them with no figure
 either. `setup` broke the run at position two, which helps the opening of the step and does nothing
 for its middle. The student still crosses five unbroken units before a five-flag capstone that is
@@ -302,12 +309,13 @@ and it now has a deck for one step out of three, which makes the surrounding sca
 conspicuous rather than less.
 
 **S5 — Step 2's order front-loads the heaviest unit, and `setup` grew.** `engineering` (974 words,
-DDD + ports and adapters + a four-module Maven layout) is unit 3; `steering` (808 words, immediately
+DDD + ports and adapters + a four-module Maven layout) is unit 3; `steering` (797 words, immediately
 actionable, needs no architecture background) is unit 4. Recommend `evolution → setup → steering →
 engineering → …`. `setup` at 720 words with three figures and a board is now a substantial second
 unit, which strengthens the case: the step opens well and then asks for architecture before it asks
-for anything a student can do on Monday. A judgement call, not a defect, and no ordering fixes
-**N2**.
+for anything a student can do on Monday. A judgement call, not a defect. One thing that used to
+block the reorder no longer does: `steering` claimed the unit before it had introduced worktrees,
+and that clause is cut, so the unit no longer refers backwards at all.
 
 **S6 — Step 1's order is settled, and the chain under it is load-bearing.** `tokens → prompt → tools
 → context → session → harness → model → workshop`. It stays in the audit as the one sequence a future
@@ -323,33 +331,9 @@ dependent: `steps/step1/deck.tsx` is authored in unit order.
 
 ## 5. Inaccuracies
 
-Ordered by severity. All verified against the tree at `003bf6c`.
+Ordered by severity. All verified against the tree.
 
 ### High
-
-**I15 — The assistant switch promises the whole course and delivers steps 0 and 1.** New this pass,
-and it is the cost of an otherwise excellent feature. `welcome.how-to-use-this-document.6` tells the
-student: "Set the assistant to the one you actually use. The pages then name its commands and its
-files: `copilot mcp add` instead of `claude mcp add`, `.github/copilot-instructions.md` instead of
-`CLAUDE.md`." Measured across the tree, **all sixteen assistant-marked elements are in step 1** (8
-pairs: `tools` ×4, `model` ×2, `context` ×1, `session` ×1). Step 2 has none, and step 2 is where the
-instruction files actually live: `setup` names `CLAUDE.md` five times, one of them the personal
-`~/.claude/CLAUDE.md`, plus `.claude/skills/` twice and a `settings.json` hook block, and
-`patterns`, `quality`, `goals`,
-`engineering` and `workshop` name `CLAUDE.md` nine more times between them. A Copilot student who
-set the switch on page one reads a whole step about a file they do not have.
-
-`front/src/steps/CLAUDE.md` states the boundary in writing ("**Steps 0 and 1 are written for two
-assistants**"), so this is a known scope line rather than drift. The defect is that the boundary is
-recorded in the documentation and not in the promise: nothing a student reads says the switch stops
-at the end of step 1. The cheap fix is one clause in `welcome.how-to-use-this-document.6`, in both
-languages. The real fix is variants in `setup`, which `copilot-specific.md` already has the sourced
-material for (custom-instruction file names and the reload caveat are both in there).
-
-One consequence to decide separately: `SetupFlags` sends the student into `kata/step2/java` to find
-three flags in a `.claude` skill, a `CLAUDE.md` and a package `CLAUDE.md`. Those files exist for
-every reader, so the exercise works either way, but what it teaches a Copilot student is Claude
-Code's layout. That is defensible (the repo is the worked example) and worth one sentence somewhere.
 
 **I2 — The `patterns` argument is stale, and its worked example does not exist.**
 `patterns.three-places.4` proposes: "Ask Claude to write the script, once: `scripts/new-step.sh
@@ -363,60 +347,10 @@ in two units and both languages.
 This matters more than its size: `patterns` is the unit teaching students to notice when a convention
 needs a home, and its own example is out of date with the repository it points at.
 
-### Medium
-
-**I1 — "This repository has two skills." It has four.** Narrowed to one place. `setup` no longer
-counts them: its skills section is built on the invented `add-endpoint` and `SkillTree`, both
-documented as deliberate, and `ProjectTree` was cut back to CLAUDE.md files only. What survives is
-`patterns.lead.2`, "This repository has two of those already", against `.claude/skills/` holding
-**`adding-a-step`, `lesson-writing`, `quiz-writing`, `repo-setup`**. One prose key, two languages.
-
-**I4 — The `SessionMakeup` figure says `/api/titles` returns ten entries.** Its first block is "Why
-does `/api/titles` return ten entries?" and its sixth "And where does the tenth one go?" But
-`tools.connect-one.4` says "Same nine titles either way" and `workshop.lead.2` says "Nine book titles
-come back." The endpoint returns **nine**; ten is the internal count before the tenth is dropped. If
-this is foreshadowing the trace flag it is too subtle and lands early. Recommend "why does the
-pipeline compute ten and return nine?"
-
-**I6 — step0 `backend`'s exercise instruction does not match its exercise.** The code block above the
-rule reads `cd kata/step0/java` / `mvn verify -Pintro` and the prose says plainly that running it is
-what makes the flag appear. The instruction under "Test yourself" still reads "Open the project from
-its directory, go to step 1, and complete the tasks it gives you", above a box whose code
-(`finishCode` in `step0/code.ts`) comes from that step 0 profile. The student is pointed at step 1
-for a code step 1 does not produce. Wrong in **both** languages.
-
-### Low
-
-**I8–I10 — `BudgetWindow`'s line counts do not match the repository.** Re-measured against
-`kata/step1/java/src/main/java/…/step1/`:
-
-| Figure says | Actual |
-|---|--:|
-| `TitleController.java` = 34 lines | 24 |
-| every file under `services/` = 2140 lines | 1250 |
-| "Fifty stage classes" | 51 (52 `*Stage.java` files, one of which is the `CatalogStage` interface) |
-
-The numbers are *data* rather than prose and the grading is on the exact set, so nothing breaks. But
-the task is framed against *this* repository ("You are adding a `?limit=` parameter to `GET
-/api/titles`"), and a student who checks will find them invented. The argument survives at real
-values: 1250 against 24 is still overwhelming. Also, `budget.explanation.tree`'s "longer than the
-controller by a factor of eight" is 7.6× on the figure's own numbers (260 against 34) and ~11×
-against the real 24-line controller.
-
-One knock-on, which moved rather than closed: the "two right calls come to 37 lines" note left root
-`CLAUDE.md` in the restructure and now lives as a comment at `tools.html:187`. Correcting the
-controller to 24 makes it 27, so the fix is still two files.
-
-**I12 — Two comments describe code that has changed under them.** Both internal, neither
-student-facing, both cheap:
-
-- `evolution.html:38` says the `walking-skeleton` slot is "Filled by the **WalkingSkeleton**
-  element"; the registry binds `UnitShot` (`steps/step2/index.tsx`). The `added-details` comment 23
-  lines below names `UnitShot` correctly, so two comments about two slots filled by one component
-  disagree.
-- `tokens.html:68`, above `tokens.one-at-a-time.4`: "it is what the branch button on the figure above
-  is for". `NextToken` has exactly one `<Button>` and it advances or restarts; the branch tree is
-  drawn without being asked for, which is a documented decision. There is no branch button.
+It is the last inaccuracy in the tree, and it is the one that needs a decision rather than a
+correction: rewrite the argument so it reflects that `adding-a-step` exists, or write
+`scripts/new-step.sh` so the claim becomes true. Both are defensible and they lead the unit
+somewhere different, which is why it outlived the pass that closed everything around it.
 
 ### Verified correct (stated so the next pass does not re-check)
 
@@ -446,6 +380,18 @@ same shape is sourced in `copilot-specific.md`. The `settings.json` hook block i
 illustrative and documented as such, so the fact that this repo carries only
 `.claude/settings.local.json` is no longer a mismatch anyone can catch.
 
+Corrected this pass and re-measured, so a later pass can stop at the numbers rather than the files.
+**`BudgetWindow`'s counts now come off `kata/step1/java`**: the controller is 24 lines, everything
+under `services/` is 1250, there are 51 concrete stage classes (52 `*Stage.java` files, one of them
+the `CatalogStage` interface), and the two right calls come to 27. `budget.explanation.services`
+says fifty-one, `budget.explanation.tree` says ten times the controller (260 against 24 is 10.8),
+`budget.explanation.listing`'s "one sixtieth" holds at 3 against 190, and the comment above the
+figure in `tools.html` says 27. `front/src/steps/CLAUDE.md` now records where the counts came from,
+so a re-measure has a list of what it has to visit. **`SessionMakeup` says nine**, in both languages,
+which is what the endpoint returns; the tenth is a follow-up question rather than a claim about the
+response. **step0 `backend`'s instruction matches its own code block**, and no longer sends the
+student to step 1 for a code step 1 does not produce.
+
 ---
 
 ## 6. Duplication
@@ -458,7 +404,7 @@ illustrative and documented as such, so the fact that this repo carries only
 | **Complexity ceiling of ten** | `engineering`, `goals` ×2, `quality`, `workshop`, flag hint | Six appearances. Fine to repeat as a target; the *argument* for it should be made once. |
 | **The new-step file layout** | `patterns.three-places.1`, `quality.write-it-down.2` | Listed twice, near-identically, and `quality` cross-references `patterns` while restating its conclusion. One list, one owner. |
 | **`CLAUDE.md` is paid per turn** | `setup.claude-md.2`, `patterns.three-places.2`, `quality.write-it-down.3` | `setup` owns it, and now argues it twice over in one unit (the file, then the skill description). The other two units can reference rather than re-argue. |
-| **Git worktrees** | `goals.own-worktree`, `steering.worktree-each`, `workshop.native.2`, `workshop.collect.2`, `flag.native.help` | The two *arguments* are correctly split (`goals`: isolation from your own day; `steering`: one per agent). The **definition** is written twice. `steering` reads first, so it should keep the definition and `goals` should assume it. See **N2**. |
+| **Git worktrees** | `goals.own-worktree`, `steering.worktree-each`, `workshop.native.2`, `workshop.collect.2`, `flag.native.help` | The two *arguments* are correctly split (`goals`: isolation from your own day; `steering`: one per agent). The **definition** is written twice. `steering` reads first, so it should keep the definition and `goals` should assume it. |
 | **"Ask the agent what it has read"** | `session.window-not-memory.4`, `tools.connect-one.5`, `steering.interrupt-or-go-back.5` | Three self-asides asking for the same move. `steering`'s has the best reason to exist (there, the answer proves something). `session` and `tools` are the pair to thin. |
 | **"`CLAUDE.md` is read at the start of every session"** | `context.amnesia-context-fatigue.3.*`, `session.window-not-memory.1.*`, `setup.claude-md.1` | Now three, each in two assistant variants, so the sentence exists six times in English and six in Dutch. `context`'s is inside a `self` wrapper and `setup` owns the topic outright, so `session`'s is the one to consider thinning. Any edit here is now a six-place edit, which is an argument for making it sooner. |
 | **"None of this is new"** | `evolution.details.1`, `engineering.structure` | The same rhetorical opener twice in one step, word for word. |
@@ -591,9 +537,11 @@ use:
    price a token, has the student read a real count, and still cannot answer this.
 4. **"Am I allowed to point this at our codebase?"** (M13) — arises before any of the above, and is
    the one most likely to stop adoption outright.
-5. **"I'm on Copilot: does step 2 apply to me?"** (I15) — arises the moment a student who set the
-   switch reaches `setup` and reads a step about a file they do not have. New this pass, and the only
-   item on this list the course created for itself.
+5. **"I'm on Copilot: does step 2 apply to me?"** (tracker 18) — arises the moment a student who set
+   the switch reaches `setup`. The question is now answered on page one, which is the difference
+   between a gap and a surprise, and it drops down this list accordingly: the student knows they are
+   reading Claude Code's files as the worked example, and they still have to translate every one of
+   them themselves.
 6. **"When should I just write it myself?"** (M11) — the mark of the mature practitioner.
 7. **"What is this bad at?"** (M3) — currently learned by being burned.
 
@@ -606,56 +554,46 @@ disproportionately important in a corporate setting.
 
 ### Tier 1 — cheap, high return
 
-1. **Scope the assistant promise in `welcome`**, both languages, so it says the pages name your
-   product's files where the two differ, and does not imply every page does. Then decide whether
-   `setup` gets Copilot variants; `copilot-specific.md` already carries the sourced material. (I15)
-2. **Rewrite the `patterns` script argument** so it reflects that `adding-a-step` exists, or create
+1. **Rewrite the `patterns` script argument** so it reflects that `adding-a-step` exists, or create
    `scripts/new-step.sh` so the claim becomes true. Leaving a fictional path in the unit that teaches
-   conventions is the worst option. (I2)
-3. **Correct `patterns.lead.2`'s "two"** to four, both languages. It is the last survivor of the
-   two-skills claim. (I1)
-4. **Cut `steering`'s clause claiming the previous unit introduced worktrees.** The next sentence
-   already defines one from scratch, so nothing is lost. (N2)
-5. **Fix the two stale comments** — `evolution.html:38`'s `WalkingSkeleton` and `tokens.html:68`'s
-   branch button. (I12)
-6. **Document `McpOvals`** in `front/src/steps/CLAUDE.md`, whose line 178 still says `McpParts`
-   "closes that section". It does not. (N8)
-7. **Fix the "only exercise outside `workshop`" sentence** in the same file, which `setup`'s new
-   board made false. (N9)
-8. **Correct `BudgetWindow`'s line counts** to the real values, and the "37 lines" comment at
-   `tools.html:187` with them. The argument holds at 1250 against 24. (I8–I10)
-9. **Fix step0's mismatched exercise instruction**, both languages. (I6)
-10. **Reword the `SessionMakeup` ten-entries line.** (I4)
+   conventions is the worst option. This is the only cheap fix left, and it is cheap in effort rather
+   than in thought: the two routes leave the unit arguing different things. (I2)
+2. **Decide whether `setup` gets Copilot variants**, now that `welcome` says the swap stops at the
+   end of step 1 and the promise no longer overshoots. `copilot-specific.md` already carries the
+   sourced material, custom-instruction file names and the reload caveat included. Worth one sentence
+   either way about `SetupFlags`, which sends every reader into a `.claude` skill and two `CLAUDE.md`
+   files: the exercise works on both products, but what it shows a Copilot student is Claude Code's
+   layout. (tracker 18)
 
 ### Tier 2 — the structural fixes
 
-11. **Break up step 2's remaining prose wall.** `setup` showed exactly how, and the pattern is
+3. **Break up step 2's remaining prose wall.** `setup` showed exactly how, and the pattern is
     repeatable: the cheapest effective intervention now is a short quiz on `engineering`, `steering`
     and `quality`, three questions each, browser-graded, on machinery that already exists. A figure
     for `steering` would fix the unbroken-text half and is the better candidate of the four:
     interrupt-versus-rewind is two windows side by side, which is what step 1's figure vocabulary
     already draws. (C1, C2, C4)
-12. **Decide what a default-mode visitor should see in `context`.** Either default to `self`, or make
+4. **Decide what a default-mode visitor should see in `context`.** Either default to `self`, or make
     guided mode show a short summary rather than nothing. Silently rendering a prose-less unit is the
     worst of the three options, and the paragraph a guided student now loses is the one naming the
     file an instruction has to be written into. (S1)
-13. **Author step 2's deck.** The mechanism is built, proven over 37 slides and drawing the step's
+5. **Author step 2's deck.** The mechanism is built, proven over 37 slides and drawing the step's
     own components; step 2 has three figures now and five prose units that are hardest to run at a
     board. (S3)
-14. **Write `INSTRUCTOR.md`** — per-unit timings, demo scripts, workshop checkpoints, a stuck-ladder.
+6. **Write `INSTRUCTOR.md`** — per-unit timings, demo scripts, workshop checkpoints, a stuck-ladder.
     (S4)
 
 ### Tier 3 — the content gaps, in order of value
 
-15. **A worked cost example, wherever it fits.** Not a unit: `tokens`, `model` and `ReadYourWindow`
+7. **A worked cost example, wherever it fits.** Not a unit: `tokens`, `model` and `ReadYourWindow`
     did the heavy lifting, so what is left is the multiplication. Two candidate moves, and the
     research picked the better one: add `/usage` (Copilot) or the equivalent usage readout beside
     `ReadYourWindow`, which puts a bill on screen for the session the student just ran. The
     alternative is multiplying the observed count by `ModelPricing`'s input rate. (M6, M8)
-16. **`review`** — reading a diff you did not write. Three units name this as the bottleneck. (M12)
-17. **Recovery, as a section inside `steering` rather than a unit.** The stuck or looping agent, and
+8. **`review`** — reading a diff you did not write. Three units name this as the bottleneck. (M12)
+9. **Recovery, as a section inside `steering` rather than a unit.** The stuck or looping agent, and
     `git` hygiene as its safety net. (M2, M15)
-18. **`boundaries`** — when not to use an agent, what agents are bad at, and the IP/data-governance
+10. **`boundaries`** — when not to use an agent, what agents are bad at, and the IP/data-governance
     question. For corporate delivery, M13 alone may justify this unit. It also has somewhere to put
     the task-sizing material that left with `scoping` (N1). (M3, M11, M13)
 
@@ -694,7 +632,7 @@ disproportionately important in a corporate setting.
 | 15 | Permissions depth | named only; hooks and settings now covered by `setup` |
 | 16 | Workshop scaffolding for guided rooms | — |
 | 17 | `INSTRUCTOR.md` | — |
-| 18 | Step 2 on a second assistant | the switch exists, the step does not use it |
+| 18 | Step 2 on a second assistant | the switch exists, the step does not use it, and `welcome` now says so out loud |
 | 19 | Step 2's deck | mechanism proven on step 1's 37 slides |
 
 ---
@@ -710,33 +648,6 @@ elsewhere in this document: **M11**'s nearest sentence was `scoping`'s, and §3'
 is ready to hand over" went from solid to missing without anything being wrong with it. The rebuilt
 `setup` reclaimed one adjacent piece of it, the scoping of instruction files, which is a different
 thing from the scoping of tasks.
-
-**N2 — `steering` claims the unit before it introduced worktrees. It did not.**
-`steering.worktree-each.1` reads "the last unit already gave you the tool for it", in both languages.
-`steering` is unit 4 and the unit before it is `engineering`, which never mentions a worktree; the
-other worktree section is in `goals`, three units *later*. No reordering fixes this. Cut the clause:
-the next sentence already defines a worktree from scratch, so nothing is lost and `goals` becomes the
-one that refers back.
-
-**N8 — `McpOvals` is in the tree and in no documentation.** `tools` renders seven figures and
-`mcp-ovals` is the fourth of them, between `McpParts` and the "list itself is in the window" section.
-The restructure carried the problem across intact: `front/src/steps/CLAUDE.md:178` now says
-"`McpParts` is the third figure and **closes that section**". It does not; `McpOvals` does. The
-component's own docstring is thorough about why it exists and what is load-bearing in it (the shared
-columns, the borrowed `ContextDiagram` radii and fills, the shared `mcp-parts.*.name` keys, the
-deliberate absence of a frame), so nothing is undocumented at the file level. What is missing is the
-one place a reader looks to find out that the figure exists at all, and that file sets out the oval
-sequence as three figures with a frame decision recorded for each. `McpOvals` is a fourth step in
-that sequence whose frame decision lives only in the component, so the file that exists to say what
-is deliberate is the one place that would let someone add a frame without knowing they broke
-anything.
-
-**N9 — `front/src/steps/CLAUDE.md` contradicts itself about step 2's exercises.** Line 400 calls
-`evolution`'s fifteen-minute task "the step's only exercise outside `workshop`"; line 489 says
-`setup`'s board "is the only exercise outside `workshop` **that a machine grades**". The second is
-right and the first was true until the same commit added the board. The paragraph above it also
-describes step 2's seven prose units as "all of them framing prose with no quiz", which is still
-literally true and now reads as though nothing in them is checkable. One sentence, one file.
 
 **N11 — One change went out as two commits, and the first of them did not build.** `20847e8`
 committed a `step2/index.tsx` importing four components that were not added until `003bf6c`, and a

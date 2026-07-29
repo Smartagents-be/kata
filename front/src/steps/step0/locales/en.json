@@ -35,8 +35,8 @@
 
   "flag.panel.title": "Finish the intro",
   "flag.panel.label": "The intro flag",
-  "flag.panel.hint": "Use your AI agent to run step 1, verify with the given profile.",
-  "flag.panel.help": "This flag is earned in the backend, not on this page. Start the project on step 1 and work through the tasks it gives you. Once that is done the build prints the flag on the line that says the intro is complete, so paste that code here, braces and all.",
+  "flag.panel.hint": "Run the block above through your agent.",
+  "flag.panel.help": "Open the project in kata/step0, start your agent and ask it to run the block above. The build hands you a job. Do that job, run the block again, and the flag prints on the line that says the intro is complete. Paste that code here, braces and all.",
   "flag.panel.hint-button": "Hint",
   "flag.panel.placeholder": "{...}",
   "flag.panel.check": "Check",

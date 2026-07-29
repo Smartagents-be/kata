@@ -175,7 +175,7 @@ anything else. It drew four straddling tools once instead, which said only "ther
 left a large empty box beside them with nothing pointing into it. The crossing is the load-bearing
 part: dashed while the line is outside, solid once it is in, so the border keeps meaning what it
 means in every other diagram here. Redrawing either figure on its own geometry breaks the pair.
-`McpParts` is the third figure and closes that section: three cards naming what a server offers, and
+`McpParts` is the third figure: three cards naming what a server offers, and
 **nothing drawn between them**, which is the decision. None of the three has crossed into a context
 yet, so it carries no frame and no arrows, and the cards take `McpServer`'s dashed
 outside-the-window stroke while each glyph is borrowed from the step's own vocabulary (the solid
@@ -183,7 +183,17 @@ prompt bar, the faint stack a tool result comes back as, the rounded tool outlin
 together ends the argument. It is also where the word *resource* is defined, and the definition is by
 **who decides** rather than by where the content came from: you pick a prompt, your harness attaches
 a resource, the model asks for a tool. That is the sorting the figure exists for, so a card gaining a
-second line about cost or trust belongs in the prose instead. The unit's order is
+second line about cost or trust belongs in the prose instead. `McpOvals` is the fourth figure and
+the one that closes that section, and it is a pair with `McpParts` rather than a repetition of it:
+the cards sort the three by who decides, the ovals say the same three are one kind of thing, on the
+cards' own columns (110, 320, 530) so the eye tracks straight down. Its radii and fills are
+`ContextDiagram`'s per thing, which is what makes it the bridge into that figure: a student meets
+these objects again inside the window rather than meeting a new set of shapes. Both alignments are
+easy to lose, so moving one figure's columns means moving the other's. The labels are shared
+`mcp-parts.*.name` keys, so a rewording moves both or neither. And **it carries no frame on
+purpose**, the same decision `PromptInContext` makes: the three have not crossed into a context yet,
+so a frame here would be the window told a third time before `context` tells it properly. Do not add
+one. The unit's order is
 the argument too, so keep it: what a tool is, where extra ones come from (MCP, and the three things
 one offers), what holding many of them costs, why the results are the least trustworthy layer, what
 they cost by volume.
@@ -325,8 +335,13 @@ say what makes it odd**: naming the instruction aimed at the agent turns four re
 for one sentence, and the unit's warning aside is where a student who needs the term finds it. Do not
 put the giveaway back in the title or the description. `BudgetWindow` is six calls against one small
 change and grades the **exact set**, not the total, or filling the window and then adding the two
-right calls would pass; its line counts are data rather than prose and its two right calls come to 37
-lines. Both mark a wrong pick in `--destructive` and the answer the student missed in teal, because
+right calls would pass; its line counts are data rather than prose and its two right calls come to 27
+lines. Those counts are **measured off `kata/step1/java`** rather than invented, because the task is
+framed against this repository and a student who checks will check them: the controller is 24 lines,
+everything under `services/` is 1250, and there are 51 concrete stage classes. Two message keys carry
+numbers derived from them (`budget.explanation.services` says fifty-one, `budget.explanation.tree`
+says ten times the controller), so a re-measure has to visit both, in both languages, plus the
+comment above the figure in `tools.html`. Both mark a wrong pick in `--destructive` and the answer the student missed in teal, because
 red here would read as the result having failed rather than the answer. Both shuffle once per mount
 through `shared/lib/shuffle.ts`, which `PatternMatch` also uses now.
 
@@ -366,7 +381,11 @@ dated are in **`copilot-specific.md` at the repo root**. Read it before writing 
 Copilot's billing changed under this course once already.
 Step 0's `welcome` is where the student is told to set it, in the paragraph after the one listing
 what sits behind the cogwheel; that is the only place the setting is explained, and both paragraphs
-have to be visited if the panel gains another row.
+have to be visited if the panel gains another row. **That paragraph also states the boundary**, so
+the scope line is on the page rather than only in here: it says the swap runs through steps 0 and 1
+and that step 2 names Claude Code's files throughout, which is what stops a Copilot student meeting
+`setup` and finding a whole step about a file they do not have. Give step 2 variants and that
+sentence is the first thing to cut.
 
 Nine blocks in step 1 vary and they are all the same kind of thing, a filename or a command:
 `tools.where-extra-tools.3`, the `<pre>` under `tools.connect-one.1` and `tools.connect-one.2`
@@ -393,12 +412,14 @@ the one table in the course with a currency is a few inches up the page, and a s
 turns both into the price list `model.cost.3` tells the student not to learn.
 
 `step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Seven
-units — `evolution`, `setup`, `engineering`, `steering`, `patterns`, `quality`, `goals` — all of
-them framing prose with no quiz, and the unit HTML is the source for what each argues. Six carry one
+units — `evolution`, `setup`, `engineering`, `steering`, `patterns`, `quality`, `goals` — none of
+them carrying a quiz, and the unit HTML is the source for what each argues. Two of the seven close
+on something the student does: `evolution` on an ungraded fifteen-minute task, `setup` on a graded
+flag board. The other five are framing prose. Six carry one
 habit each; `evolution` opens the step and carries none, because its job is to put the other six in
 order: a version now costs an hour, so the step you hand over gets small and you take many of them.
 Its prose closes by handing off to `setup` by name, so a reordering there has to visit that
-paragraph. Below that prose sits the step's only exercise outside `workshop`, under the same `<hr>`
+paragraph. Below that prose sits the step's only *ungraded* exercise, under the same `<hr>`
 and "Check yourself" heading step 1's `tools` uses: fifteen minutes on the clock, one of three
 skeletons, and nothing graded. The constraint is the clock and the answer is the list of details the
 student did not get to, so do not add a checker, and keep each example's second sentence naming what
