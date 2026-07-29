@@ -3,6 +3,12 @@
 **Verified:** 28 July 2026, against `a26c1ab` plus the Tier 1 corrections applied on top of it. Every
 claim below was re-checked against the tree; nothing is carried forward on trust.
 
+**Partially updated:** 29 July 2026, against `3a9d139`. This is not a fresh pass. The `engineering`
+unit was rebuilt and the rows that touch it were re-measured (word counts, prose keys, topic
+coverage, duplication); everything else carries forward from 28 July and is marked as of that date.
+Two figures below moved for a reason worth knowing: **step 2 lost 501 words and nine prose keys**,
+and one cost row went from solid to missing.
+
 **This document holds open findings only.** Anything solved is deleted rather than ticked, so there
 is no history here and no closure notes to read past. Finding ids (I2, M12, S5, N11) stay stable
 across passes, which is why they have gaps: a gap means that item is gone, not that it moved.
@@ -31,6 +37,18 @@ package briefing inside `kata/step2/java`. Root `CLAUDE.md` lost 456 lines to a 
 a checkout of `HEAD` compiles again. `a26c1ab` is housekeeping on top: a rewritten `prompt` lead and
 some Dutch, neither of which moves a word count this document tabulates.
 
+**Since then, one commit that does move them.** `74715de` rebuilt `engineering` at roughly half its
+length: 974 words to **473**, fifteen paragraphs to six. Domain-driven design leads the unit now, as
+a heading, the tree and two paragraphs, and the nine-paragraph walk through the platform modules is
+gone. `DomainTree` was redrawn as an ordinary Maven project with DDD packaging (one `pom.xml`, one
+`src/main/java`, a domain per package) rather than a four-module platform skeleton, and `adapter/`
+splits into `incoming/` and `outgoing/` before it splits by technology. The other two sections were
+renamed to the thing they are about, `Use the correct language` and `Quality gates`, with every key
+in each section renamed to match. `Quality gates` is new material rather than a trim: static
+analysis behind a hook, pointing back at `setup`. Two firsts arrived with it, both discussed below:
+the course's **first cross-unit links** (§11, N12), and a **cost argument leaving the tree** (§3,
+§7). `3a9d139` is the same lesson written back into the `lesson-writing` skill and changes no unit.
+
 ---
 
 ## 1. Verdict
@@ -42,10 +60,11 @@ passes.
 
 Three things hold it back, in order of impact:
 
-1. **Cadence still collapses in step 2, but less far.** Five consecutive units, ~3,645 words, zero
+1. **Cadence still collapses in step 2, but less far.** Five consecutive units, ~3,144 words, zero
    quizzes and zero checks, ending in the hardest lab in the kata. `setup` broke the wall in the
-   middle. Step 1 runs 6,813 words across eight units with eight interactive components and two
-   quizzes; step 2 runs 6,251 across eight with two graded boards and one ungraded exercise.
+   middle and the `engineering` rewrite took 501 words out of it. Step 1 runs 6,813 words across
+   eight units with eight interactive components and two quizzes; step 2 runs 5,750 across eight
+   with two graded boards and one ungraded exercise. The wall is shorter, and it is still a wall.
 2. **The everyday verb is half there.** `steering` covers interrupting and rewinding. What is still
    missing is recovering when the agent is stuck or looping (**M2**) and reading a diff you did not
    write (**M12**). Both are named in three units apiece and taught in none.
@@ -53,6 +72,8 @@ Three things hold it back, in order of impact:
    dollars per million with a currency in front of them, `harness` prices the cache, `ReadYourWindow`
    has the student read a real count off their own window. No unit multiplies (**M6**, **M8**). The
    Copilot research names `/usage` as the one command that would close this loop, and nothing uses it.
+   The throughline also lost a link this pass: **boundaries reducing what an agent reads per turn is
+   no longer argued anywhere** (**M16**), which was `engineering`'s contribution to it.
 
 Behind those, one delivery risk specific to this audience. **Nothing covers IP, data governance or
 what may leave the building** (**M13**), which is the question a security team asks before anyone
@@ -86,7 +107,7 @@ structure and content, which is where the remaining value is.
 | **Step 1's figure vocabulary is one system** | Teal frame = context, bar = something in it, dashes = what is not. `ToolsInContext`/`McpServer` are a pair, `McpParts`/`McpOvals` a second pair on shared columns; `TokenSplit`, `TokenAttention`, `PromptInContext` and `ModelTiers` stay outside the frame vocabulary on purpose. |
 | **The oval figures escalate rather than repeat** | `PromptInContext` (prompt, no frame) → `ToolsInContext` (first frame, tool across the border) → `McpServer` (same frame, one wire crossing once) → `McpOvals` (three things, still unframed) → `ContextDiagram` (populated window). |
 | **The step 2 capstone is real** | Five flags of four shapes, measured by a build rather than by opinion. Still the strongest single asset in the kata. |
-| **Dutch is complete** | **353/353** prose keys (22 + 192 + 139), counted against every `data-i18n` key in every unit's HTML with comments stripped, and verified rather than sampled. Sixteen assistant-variant keys and a rebuilt `setup` unit landed in one commit and the Dutch kept up with all of it. |
+| **Dutch is complete** | **343/343** prose keys (21 + 192 + 130) as of 29 July, counted against every `data-i18n` key in every unit's HTML with comments stripped, and verified rather than sampled. Step 2 lost nine keys in the `engineering` rewrite and the Dutch lost the same nine, in the same commit, including two heading renames that moved every key in their section. The step 0 count reads 21 here against the 22 recorded on 28 July, and that one key is worth resolving on the next full pass. |
 | **Deliberate design is documented, and the documentation was refactored before it broke** | Root `CLAUDE.md` handed 456 lines to `front/src/steps/CLAUDE.md`, which now loads only when you work under the curriculum. It records *why*, not *what*, and it is honest about the assistant boundary. Nothing in it is now wrong: it documents `McpOvals`, it says which of step 2's units carry an exercise, and it records where `BudgetWindow`'s line counts were measured so the next re-measure knows what to visit. |
 
 ---
@@ -142,15 +163,18 @@ structure and content, which is where the remaining value is.
 | **A personal `~/.claude/CLAUDE.md`, and that it never reaches your team** | `setup` | ● |
 | Skills: frontmatter, load-on-match, `references/` | `setup`, `SkillTree` | ● |
 | **Being sparing with skills; a description is paid whether or not it fires** | `setup` | ● |
-| Hooks: what they are, where they are declared, when to reach for one | `setup`, `HookTree`, `patterns` | ● |
+| Hooks: what they are, where they are declared, when to reach for one | `setup`, `HookTree`, `patterns`, `engineering` | ● |
 | **Reading the setup of a project nobody walked you through** | `setup` / `SetupFlags` | ● |
 | Vibe coding vs agentic engineering | `engineering` | ● |
-| Domain language as compression; DDD + ports and adapters | `engineering` | ● |
-| Boundaries cut token cost | `engineering` | ● |
+| Domain language as compression | `engineering` | ● |
+| DDD and ports and adapters as a layout | `engineering`, `DomainTree` | ◐ |
+| Why that layout helps a model specifically | `engineering`, linking `tokens` | ● |
+| Boundaries cut token cost | — | ○ |
 | Checks as part of the work | `engineering`, `quality` | ● ⟳ |
+| **Static analysis behind a hook, so the gate is not a request** | `engineering`, `setup` | ● |
 | **Task sizing** | — | ○ |
 | **Which folder you open the agent in** | — | ○ |
-| The `.claude` symlink trap | `engineering`, one clause | ◐ |
+| The `.claude` symlink trap | — | ○ |
 | Interrupt versus rewind, and what each leaves behind | `steering` | ● |
 | A worktree per agent, and the reading bottleneck | `steering` | ● |
 | Making the agent stop at a gap instead of guessing | `steering` | ● |
@@ -184,7 +208,7 @@ structure and content, which is where the remaining value is.
 | `CLAUDE.md` is a bill paid per message | `setup` | ● ⟳ |
 | **A skill description rides along on every turn whether or not it fires** | `setup` | ● |
 | Tool descriptions ride along every message | `tools` | ● |
-| Boundaries reduce reading per turn | `engineering` | ● |
+| **Boundaries reduce reading per turn** | — | ○ |
 | A correction you send is re-sent forever; a rewind is not | `steering` | ● |
 | Two agents are two contexts and two bills | `steering` | ● |
 | Coordinator pattern as a cost saving | `harness`, `model` | ● |
@@ -192,8 +216,12 @@ structure and content, which is where the remaining value is.
 | **What one session or one run actually costs, in money** | — | ○ |
 | **How to measure what a run cost** | — | ○ |
 
-The last two rows are the whole of what is left here. Every ingredient exists in the tree, in two
-adjacent units, and no unit ever multiplies them together.
+The last two rows were the whole of what was left here, and there are three now. Every ingredient
+for the first two exists in the tree, in two adjacent units, and no unit multiplies them together.
+The third is a regression rather than a gap: `engineering.structure-biggest-lever.8` argued that a
+well-bounded task reads five files instead of fifty, on every turn, for the length of the session,
+and it went with the rest of that section on 29 July. It is the only place the course connected
+architecture to the bill, and it is one sentence in a unit that still draws the boundaries (**M16**).
 
 ### Decisions and professional judgement
 
@@ -239,27 +267,31 @@ arriving separately from the registry.
 | step1 / workshop | 1038 | 0 | FlagBoard (3 flags) |
 | step2 / evolution | 790 | 3 | ungraded exercise (15 minutes) |
 | step2 / setup | 720 | 3 | **SetupFlags (3 flags)** |
-| step2 / engineering | 974 | 1 | **none** |
+| step2 / engineering | 473 | 1 | **none** |
 | step2 / steering | 797 | 0 | **none** |
 | step2 / patterns | 614 | 0 | **none** |
 | step2 / quality | 579 | 0 | **none** |
 | step2 / goals | 681 | 0 | **none** |
 | step2 / workshop | 1096 | 0 | Workshop (5 flags) |
 
-Eighteen units. Step 1 is 6,813 words and step 2 is 6,251, so the two steps remain the same size. The
-rows that moved this pass are all corrections and all small: `welcome` (+36, the sentence scoping the
-assistant switch to steps 0 and 1), `backend` (+14, an instruction that now matches its own code
-block), `patterns` (+7, two more skills named) and `steering` (-11, the cut worktree clause). Nothing
-structural moved, which is the point of the pass. `step2 / quality` at 579 words is still the
-shortest prose unit in the course, and it has neither a figure nor a check.
+Eighteen units. Step 1 is 6,813 words and step 2 is now 5,750, so the steps are no longer the same
+size: step 2 is **1,063 words shorter**, and the whole of that difference is one unit.
+`step2 / engineering` at 473 words is now the shortest prose unit in the course, taking that title
+from `quality` at 579. Neither has a check, and `engineering` has a figure while `quality` still has
+none.
+
+The 28 July rows moved for smaller reasons and are unchanged: `welcome` (+36, the sentence scoping
+the assistant switch to steps 0 and 1), `backend` (+14, an instruction that now matches its own code
+block), `patterns` (+7, two more skills named) and `steering` (-11, the cut worktree clause).
 
 ### Cadence defects
 
-**C1 — Step 2 is still a prose wall, 3,645 words of it.** `engineering`, `steering`,
+**C1 — Step 2 is still a prose wall, 3,144 words of it.** `engineering`, `steering`,
 `patterns`, `quality`, `goals`: five units in a row with nothing to do, four of them with no figure
 either. `setup` broke the run at position two, which helps the opening of the step and does nothing
 for its middle. The student still crosses five unbroken units before a five-flag capstone that is
-2–4 hours of real work.
+2–4 hours of real work. The `engineering` rewrite took 501 words out of the wall without adding
+anything to do in it, so the count improved and the shape did not.
 
 **C2 — Every quiz is still in the first six units of eighteen.** step0/`welcome`, step1/`prompt`,
 step1/`context`. After `context` the course never *asks* the student anything again: what it does
@@ -308,14 +340,15 @@ no workshop checkpoints, no "if the room is stuck here, do this" ladder. Guided 
 and it now has a deck for one step out of three, which makes the surrounding scaffolding more
 conspicuous rather than less.
 
-**S5 — Step 2's order front-loads the heaviest unit, and `setup` grew.** `engineering` (974 words,
-DDD + ports and adapters + a four-module Maven layout) is unit 3; `steering` (797 words, immediately
-actionable, needs no architecture background) is unit 4. Recommend `evolution → setup → steering →
-engineering → …`. `setup` at 720 words with three figures and a board is now a substantial second
-unit, which strengthens the case: the step opens well and then asks for architecture before it asks
-for anything a student can do on Monday. A judgement call, not a defect. One thing that used to
-block the reorder no longer does: `steering` claimed the unit before it had introduced worktrees,
-and that clause is cut, so the unit no longer refers backwards at all.
+**S5 — Step 2's order no longer front-loads the heaviest unit, and the case for reordering is
+mostly spent.** This finding read `engineering` at 974 words of DDD, ports and adapters and a
+four-module Maven layout sitting at unit 3, ahead of `steering` at 797 words of immediately
+actionable material, and recommended `evolution → setup → steering → engineering → …`. The rewrite
+took the weight out from under it: `engineering` is 473 words, the shortest unit in the course, and
+what it asks a reader to hold is a naming habit and one drawing rather than a platform layout. What
+survives of the argument is that unit 3 is still architecture and unit 4 is still the thing a
+student can do on Monday, which is a preference rather than a defect. Downgraded, not closed. One
+thing that used to block the reorder still does not: `steering` no longer refers backwards at all.
 
 **S6 — Step 1's order is settled, and the chain under it is load-bearing.** `tokens → prompt → tools
 → context → session → harness → model → workshop`. It stays in the audit as the one sequence a future
@@ -372,15 +405,26 @@ nowhere else in the tree, no unit prose names those files and no board hint does
 build` is green** (tsc -b + vite build), and `npm run lint` reports only the two pre-existing
 `only-export-components` warnings in generated `ui/` primitives. **Every prose key run in the course
 is contiguous and every section slug matches its heading**, checked across all eighteen units with
-assistant variants folded into the position they share. **Dutch is complete at 353/353 prose
-keys**, including all sixteen assistant variants; the English-only keys in `en.json`
+assistant variants folded into the position they share. **Dutch was complete at 353/353 prose
+keys** on that date, 343/343 as re-counted on 29 July, including all sixteen assistant variants; the English-only keys in `en.json`
 (`spot.*`, `budget.call.*`, `tiers.*.name`) are product and technical names, deliberately untranslated.
 `claude mcp add playwright -- npx @playwright/mcp@latest` is correct, and `copilot mcp add` with the
 same shape is sourced in `copilot-specific.md`. The `settings.json` hook block in `setup` is
 illustrative and documented as such, so the fact that this repo carries only
 `.claude/settings.local.json` is no longer a mismatch anyone can catch.
 
-Corrected this pass and re-measured, so a later pass can stop at the numbers rather than the files.
+New on 29 July, checked against the rewritten unit only. **Every section slug still matches its
+heading and every key run is contiguous** in `engineering`, across three renamed sections
+(`domain-driven-design`, `use-correct-language`, `quality-gates`) and in both files. **Dutch is
+343/343**, with no key in either bundle left pointing at a deleted block. **`npm run build` is
+green.** The two cross-unit links resolve: `/steps/step1/tokens` and `/steps/step2/setup` are both
+live routes, checked in a browser rather than read. `DomainTree`'s note keys were re-checked in both
+directions after eight of them were deleted, so the component asks for nothing the bundles lack and
+the bundles carry nothing the component dropped. The one path claim that changed with the figure was
+followed: `goals.html` named `apps/article`, which the redrawn tree no longer contains, and it now
+reads `article/`.
+
+Corrected on 28 July and re-measured, so a later pass can stop at the numbers rather than the files.
 **`BudgetWindow`'s counts now come off `kata/step1/java`**: the controller is 24 lines, everything
 under `services/` is 1250, there are 51 concrete stage classes (52 `*Stage.java` files, one of them
 the `CatalogStage` interface), and the two right calls come to 27. `budget.explanation.services`
@@ -401,13 +445,13 @@ student to step 1 for a code step 1 does not produce.
 | Repeated idea | Where | Note |
 |---|---|---|
 | **Metrics are proxies and get gamed** | `quality.metrics.2`, `workshop.honest.1`, `flag.honest.help` | Three times, near-verbatim; `quality` and `workshop` use almost the same sentence. Keep `quality`'s statement of the principle; let `workshop` name the mutation goal and assume it. |
-| **Complexity ceiling of ten** | `engineering`, `goals` ×2, `quality`, `workshop`, flag hint | Six appearances. Fine to repeat as a target; the *argument* for it should be made once. |
+| **Complexity ceiling of ten** | `goals` ×2, `quality`, `workshop`, flag hint | Five appearances since `engineering` stopped naming it. Fine to repeat as a target; the *argument* for it should be made once. |
 | **The new-step file layout** | `patterns.three-places.1`, `quality.write-it-down.2` | Listed twice, near-identically, and `quality` cross-references `patterns` while restating its conclusion. One list, one owner. |
 | **`CLAUDE.md` is paid per turn** | `setup.claude-md.2`, `patterns.three-places.2`, `quality.write-it-down.3` | `setup` owns it, and now argues it twice over in one unit (the file, then the skill description). The other two units can reference rather than re-argue. |
 | **Git worktrees** | `goals.own-worktree`, `steering.worktree-each`, `workshop.native.2`, `workshop.collect.2`, `flag.native.help` | The two *arguments* are correctly split (`goals`: isolation from your own day; `steering`: one per agent). The **definition** is written twice. `steering` reads first, so it should keep the definition and `goals` should assume it. |
 | **"Ask the agent what it has read"** | `session.window-not-memory.4`, `tools.connect-one.5`, `steering.interrupt-or-go-back.5` | Three self-asides asking for the same move. `steering`'s has the best reason to exist (there, the answer proves something). `session` and `tools` are the pair to thin. |
 | **"`CLAUDE.md` is read at the start of every session"** | `context.amnesia-context-fatigue.3.*`, `session.window-not-memory.1.*`, `setup.claude-md.1` | Now three, each in two assistant variants, so the sentence exists six times in English and six in Dutch. `context`'s is inside a `self` wrapper and `setup` owns the topic outright, so `session`'s is the one to consider thinning. Any edit here is now a six-place edit, which is an argument for making it sooner. |
-| **"None of this is new"** | `evolution.details.1`, `engineering.structure` | The same rhetorical opener twice in one step, word for word. |
+| **Coverage and mutation as the things a gate measures** | `engineering.quality-gates.1`, `quality`, `workshop` | New on 29 July. `engineering` names line coverage, mutation coverage and a Sonar score in one sentence and moves on, which is the light touch; `quality` still owns the argument. Watch it rather than prune it. |
 
 ### Deliberate overlap — leave alone
 
@@ -429,6 +473,11 @@ stated reason.
 `tokens` touches output pricing and prompt caching and hands both off in one sentence naming the unit
 that owns them, which is the same discipline `harness.coordinator.3` follows for decomposition. Three
 units sit on this pattern without any of them re-arguing another's material.
+
+`engineering.quality-gates` now sits on it too, and it is the first place the pattern is carried by a
+link rather than by a sentence naming the unit: it opens on `setup` by name and href, and closes on
+"the same rule written into `CLAUDE.md` is a request" without re-deriving why a hook is stricter,
+because `setup`'s hooks section owns that. Do not let it grow the derivation back.
 
 One cross-check is load-bearing rather than duplicated: `harness`'s "billed at roughly a tenth" and
 `ModelPricing`'s cache-read column say the same thing in two places on purpose, so a student can
@@ -484,6 +533,15 @@ observed count to an observed bill. **The assistant work handed this a new answe
 not taken it**: `copilot-specific.md` ranks `/usage`, which puts credits on screen for the session
 just run, as its own first candidate, at a cost of "one move on a task card, or one sentence". Claude
 Code's own usage readout is the mirror of it. This is the cheapest unclosed gap in the audit.
+
+**M16 — Boundaries no longer connect to the bill.** New on 29 July, and the only regression this
+document has had to record. `engineering` used to close its structure section on the cost of a wide
+boundary: a well-bounded task reads five files instead of fifty, every turn, for the length of the
+session. That paragraph went with the section around it, and nothing replaced it. What is left is
+the architecture argument (a model navigates named folders) without the money argument, in the one
+unit that had both. It is a sentence rather than a section, it belongs in
+`engineering.domain-driven-design.2` beside the tokens link, and it is the cheapest thing in §7 to
+close.
 
 **M10 — Delegation as a cost lever.** `harness` teaches the coordinator pattern and `model` adds why
 the split works. Neither tells a student when to actually reach for a subagent in their own work.
@@ -554,11 +612,14 @@ disproportionately important in a corporate setting.
 
 ### Tier 1 — cheap, high return
 
-1. **Rewrite the `patterns` script argument** so it reflects that `adding-a-step` exists, or create
+1. **Put the token cost of a boundary back into `engineering`**, one sentence, next to the tokens
+   link that is already there. It is the cheapest fix in the document and it restores the cost
+   throughline's only architectural link. (M16)
+2. **Rewrite the `patterns` script argument** so it reflects that `adding-a-step` exists, or create
    `scripts/new-step.sh` so the claim becomes true. Leaving a fictional path in the unit that teaches
    conventions is the worst option. This is the only cheap fix left, and it is cheap in effort rather
    than in thought: the two routes leave the unit arguing different things. (I2)
-2. **Decide whether `setup` gets Copilot variants**, now that `welcome` says the swap stops at the
+3. **Decide whether `setup` gets Copilot variants**, now that `welcome` says the swap stops at the
    end of step 1 and the promise no longer overshoots. `copilot-specific.md` already carries the
    sourced material, custom-instruction file names and the reload caveat included. Worth one sentence
    either way about `SetupFlags`, which sends every reader into a `.claude` skill and two `CLAUDE.md`
@@ -567,33 +628,33 @@ disproportionately important in a corporate setting.
 
 ### Tier 2 — the structural fixes
 
-3. **Break up step 2's remaining prose wall.** `setup` showed exactly how, and the pattern is
+4. **Break up step 2's remaining prose wall.** `setup` showed exactly how, and the pattern is
     repeatable: the cheapest effective intervention now is a short quiz on `engineering`, `steering`
     and `quality`, three questions each, browser-graded, on machinery that already exists. A figure
     for `steering` would fix the unbroken-text half and is the better candidate of the four:
     interrupt-versus-rewind is two windows side by side, which is what step 1's figure vocabulary
     already draws. (C1, C2, C4)
-4. **Decide what a default-mode visitor should see in `context`.** Either default to `self`, or make
+5. **Decide what a default-mode visitor should see in `context`.** Either default to `self`, or make
     guided mode show a short summary rather than nothing. Silently rendering a prose-less unit is the
     worst of the three options, and the paragraph a guided student now loses is the one naming the
     file an instruction has to be written into. (S1)
-5. **Author step 2's deck.** The mechanism is built, proven over 37 slides and drawing the step's
+6. **Author step 2's deck.** The mechanism is built, proven over 37 slides and drawing the step's
     own components; step 2 has three figures now and five prose units that are hardest to run at a
     board. (S3)
-6. **Write `INSTRUCTOR.md`** — per-unit timings, demo scripts, workshop checkpoints, a stuck-ladder.
+7. **Write `INSTRUCTOR.md`** — per-unit timings, demo scripts, workshop checkpoints, a stuck-ladder.
     (S4)
 
 ### Tier 3 — the content gaps, in order of value
 
-7. **A worked cost example, wherever it fits.** Not a unit: `tokens`, `model` and `ReadYourWindow`
+8. **A worked cost example, wherever it fits.** Not a unit: `tokens`, `model` and `ReadYourWindow`
     did the heavy lifting, so what is left is the multiplication. Two candidate moves, and the
     research picked the better one: add `/usage` (Copilot) or the equivalent usage readout beside
     `ReadYourWindow`, which puts a bill on screen for the session the student just ran. The
     alternative is multiplying the observed count by `ModelPricing`'s input rate. (M6, M8)
-8. **`review`** — reading a diff you did not write. Three units name this as the bottleneck. (M12)
-9. **Recovery, as a section inside `steering` rather than a unit.** The stuck or looping agent, and
+9. **`review`** — reading a diff you did not write. Three units name this as the bottleneck. (M12)
+10. **Recovery, as a section inside `steering` rather than a unit.** The stuck or looping agent, and
     `git` hygiene as its safety net. (M2, M15)
-10. **`boundaries`** — when not to use an agent, what agents are bad at, and the IP/data-governance
+11. **`boundaries`** — when not to use an agent, what agents are bad at, and the IP/data-governance
     question. For corporate delivery, M13 alone may justify this unit. It also has somewhere to put
     the task-sizing material that left with `scoping` (N1). (M3, M11, M13)
 
@@ -634,6 +695,7 @@ disproportionately important in a corporate setting.
 | 17 | `INSTRUCTOR.md` | — |
 | 18 | Step 2 on a second assistant | the switch exists, the step does not use it, and `welcome` now says so out loud |
 | 19 | Step 2's deck | mechanism proven on step 1's 37 slides |
+| 20 | Boundaries and the bill | one sentence, and the cheapest open item in this document (M16) |
 
 ---
 
@@ -642,7 +704,10 @@ disproportionately important in a corporate setting.
 Findings that are not inaccuracies and not gaps, but decisions worth re-examining once.
 
 **N1 — `scoping` was deleted and three topics went with it.** Task sizing, which folder you open the
-agent in, and the fuller `.claude` symlink explanation are taught nowhere. This is recorded as
+agent in, and the `.claude` symlink trap are taught nowhere. The third of those closed the last of
+its distance on 29 July: `engineering` carried the symlink in one clause and in `DomainTree`'s
+drawing, and the rewrite removed the clause and the row, so the topic is now absent from the course
+in every form rather than surviving as a mention. This is recorded as
 deliberate, so it is not drift. It is worth re-examining because two of the three had consequences
 elsewhere in this document: **M11**'s nearest sentence was `scoping`'s, and §3's "knowing when a task
 is ready to hand over" went from solid to missing without anything being wrong with it. The rebuilt
@@ -657,3 +722,16 @@ about the repo's own rules: "leave every step green, each step its own commit" i
 repository states and the course is about to start teaching (**M15**), and the check that would have
 caught it is the `npm run build` the frontend already documents as its type check. Worth one line in
 a pre-commit hook, which is also the worked example `setup`'s hooks section is short of.
+
+**N12 — The course now links between units, and each link reloads the app.** `engineering` carries
+the first two, `/steps/step1/tokens` and `/steps/step2/setup`. Both work and both are the right
+move: a unit that needs a claim another unit already argued should point at it rather than argue it
+again, which is the discipline §6 credits `tokens` and `harness.coordinator.3` with. The mechanism
+is the thing to watch. Unit prose is injected with `dangerouslySetInnerHTML`, so a link in it is a
+plain `<a>` rather than a React Router `Link`, and following one is a full page load: the SPA
+remounts, and any component state that is not in `localStorage` goes with it. Nothing on those two
+paths is harmed by that today, since progress and flags are stored. It becomes a real defect the
+first time a link points into a unit whose state matters, or the first time somebody links from a
+unit a student is halfway through an exercise in. The fix, if it is ever wanted, is a click handler
+on `.prose a[href^="/"]` in `StepContent` that hands the path to `navigate()`, and it belongs there
+rather than in any unit's HTML.
