@@ -387,9 +387,16 @@ one, because every exercise in the step already runs commands in a terminal agai
 The product detail behind those blocks, what the course leaves out on purpose, and which facts are
 dated are in **`copilot-specific.md` at the repo root**. Read it before writing a Copilot claim:
 Copilot's billing changed under this course once already.
-Step 0's `welcome` is where the student is told to set it, in the paragraph after the one listing
-what sits behind the cogwheel; that is the only place the setting is explained, and both paragraphs
-have to be visited if the panel gains another row. **That paragraph also states the boundary**, so
+Step 0's `welcome` is where the student is told to set it, in the paragraph after the one pointing
+at the cogwheel; that is the only place the setting is explained. The paragraph above it **no longer
+lists what is in the panel**, and that is the decision: it named four rows while the panel rendered
+five, so the list went and the student is told to open it and look instead. A panel that gains a row
+now costs nothing on the page, and putting the list back means keeping it in step with
+`SettingsMenu`. **One row is still named, by what it costs rather than by its label**: reset clears
+the captured flags and the finished pages, so a student who meets it unwarned loses work, and the
+closing sentence of that paragraph is the only place in the course it appears. Slides and the mode
+switch are deliberately left to the panel, since the three ways of reading are taught three
+paragraphs above and the deck belongs to the tutor. **The lower paragraph also states the boundary**, so
 the scope line is on the page rather than only in here: it says the swap runs through steps 0 and 1
 and that step 2 names Claude Code's files throughout, which is what stops a Copilot student meeting
 `setup` and finding a whole step about a file they do not have. Give step 2 variants and that
