@@ -31,6 +31,13 @@ you skipped. Aim for a mix: a couple of short sentences, then a longer one, then
 your files". Cut "simply", "just", "of course", "obviously", "it is worth noting that". If a
 sentence still works with a word removed, remove it.
 
+**Cut the gloss.** The sentence after a claim is usually the claim again in other words, and it is
+the first thing an author cuts when they read your draft. "…are compression: one word carries a
+structure the model already knows in detail" ends at `compression`. "Call a thing what the business
+calls it" does not need "that is what domain-driven design asks of you" in front of it. Watch the
+colon especially: it earns its place when what follows is the thing itself, and not when what
+follows is the same sentence explained.
+
 **Second person, active voice.** "You clear the session and it is gone", not "the session is
 cleared and the content is lost".
 
@@ -38,8 +45,11 @@ cleared and the content is lost".
 the general rule. `CLAUDE.md`, `mvn test`, `/clear`, `ExerciseChecker` all mean more to a student
 than "configuration" or "the tooling".
 
-**No hype.** Skip "powerful", "seamless", "unlock", "leverage", "game-changing". If something
-matters, explain why it matters and let the reader conclude it is important.
+**No hype, but do say what is at stake.** Skip "powerful", "seamless", "unlock", "leverage",
+"game-changing". What is banned is the adjective standing in for the argument, not the claim itself:
+"that is what separates an app built in half a day from one you can put in production" and "the
+biggest lever you have with an agent" are both fine, because each names the thing being weighed.
+Hedging a real claim into "this can be quite helpful" is the same failure from the other side.
 
 **Vary the openings.** Three paragraphs in a row starting with "The" or "This" reads like a
 machine. Read the first three words of each paragraph in a section and check they differ.
@@ -82,8 +92,11 @@ Five moves that recur across the existing units. Reach for these before inventin
   get dumber. The evidence left the room."
 - **Name the term last.** Describe the thing in plain words and let the label arrive as a closing
   tag: "That pile-up in the context is entropy." Never define first and explain after.
-- **Define by contrast.** Two examples side by side beat an adjective: "Fix the login" against
-  "make `ExerciseController` return a 400 when the answer is blank".
+- **Define by contrast, with something real.** Two examples side by side beat an adjective: "Fix
+  the login" against "make `ExerciseController` return a 400 when the answer is blank". Both halves
+  have to be things a reader would actually type or actually meet. An invented bad artifact
+  (a folder called `svc-impl-2`, a class called `ThingManager`) is a strawman, it dates the
+  paragraph, and it is the sentence that gets cut in review.
 - **Tell the failure as a scenario**, present tense, second person: "Chase a bug through a long
   session and finally kill it: the fix lands in your code, but the whole hunt stays in the window."
   Not "stale context can cause regressions".
@@ -109,13 +122,28 @@ context is not free", "Bad context, bad answers", "Why this bites hardest in cod
 "Understanding X", never a gerund, never a question. They may run on from one another the way
 speech does: "A model is stateless" is followed by "And it is a statistic".
 
+**When the section is about a named thing, the heading is the name.** A claim heading over a
+section that teaches a practice reads as a slogan for it, and the paragraph underneath then makes
+the same claim a second time in longer words. "Domain-driven design" beats "Structure is the biggest
+lever", "Quality gates" beats "Make the checks part of the work". Keep the claim shape for a section
+that argues something the reader would otherwise get wrong, which is what "More context is not free"
+is doing. Test it by reading the heading and the first sentence together: if they say the same
+thing, the heading should have been the name.
+
 **Instructions are one clause, imperative**, with the reason in the next sentence rather than
 padding the instruction: "Clear the context when you change subject." "Spend an expensive model on
 this."
 
 **Around a figure**, the prose earns it first, and the line after it says where to look and what it
 proves: "The one on the left is the prompt on its own." Never "as you can see in the diagram
-below".
+below". A heading, the figure, then one paragraph saying what it buys is the other accepted shape,
+and it is the right one when the heading already names the thing being drawn.
+
+**Never walk a figure row by row.** A drawing that needs a paragraph per branch is doing no work,
+and the paragraphs are what a reviewer deletes: `engineering` lost nine of them in one sitting and
+lost nothing else. Say what the shape gets you, and let the labels and notes inside the figure carry
+the rest. If a row needs explaining, the note beside it in the figure data is where the explanation
+goes.
 
 **The work is theirs and the agent is an it.** "your codebase", "your files", "your machine". The
 student is "you". A teacher only appears inside `data-audience="guided"`.
@@ -134,6 +162,17 @@ it. Headings inside a unit start at `<h2>`.
 
 Keep paragraphs to three or four sentences. A wall of text loses a room.
 
+**A section is a heading and one or two paragraphs.** Three is already a sign that two of them
+overlap, or that the second one is explaining the first. This is the rule most often broken by
+writing that was never reviewed out loud: the `engineering` unit ran to fifteen paragraphs before
+somebody read it and it came back at six, and every instruction in that review was a cut. Draft
+long if that is how you think, then cut before you commit, because the cut is coming either way.
+
+Two things follow from cutting a paragraph, and both are easy to miss. A paragraph that closed the
+unit is load bearing, so decide where the closer goes before you delete the section around it. And
+`front/src/steps/CLAUDE.md` counts things (asides, figures, which unit owns which argument), so grep
+it for the unit you just cut and fix what you invalidated in the same change.
+
 ## Repo conventions to respect
 
 - `data-audience="self"` for notes that would spoil a guided session, `data-audience="guided"` for
@@ -143,8 +182,9 @@ Keep paragraphs to three or four sentences. A wall of text loses a room.
 - If the step is graded, the numbered list the checker grades must match the checker's item order.
   Say so in an HTML comment naming the Java class.
 - **The inline icons are markers, not markup you write out.** Drop
-  `<svg data-icon="coin"></svg>` for a way to spend fewer tokens, `gem` for the top-tier model,
-  `pattern` for an AI design pattern, and `prepareUnit` fills them in from
+  `<svg data-icon="coin"></svg>` for a way to spend fewer tokens, `gem` for something useful in
+  day-to-day work that is easy to miss, `pattern` for an AI design pattern, and step 0's legend
+  (`welcome.legend.*`) is the definition of each. `prepareUnit` fills them in from
   `shared/lib/icons.ts`. Step 0's legend is where the student learns what each one means, so use
   them for that and nothing else. Placement is a convention worth copying from `step1/harness.html`:
   the icon stands where the full stop would go and the next sentence starts straight after it, and
@@ -154,6 +194,13 @@ Keep paragraphs to three or four sentences. A wall of text loses a room.
   something untrue, typically a filename, a command or a menu. Never on the same element as
   `data-audience`, and both siblings carry the attribute plus a key ending in the same word. The
   full rule is in `front/CLAUDE.md`.
+- **Point at another unit rather than teaching it twice.** A plain anchor on its path does it,
+  `<a href="/steps/step1/tokens">step 1's unit on tokens</a>`, and Typography paints it teal from
+  `--tw-prose-links`. Three things about it: the link text names the unit and therefore translates
+  with the rest of the sentence (`de unit over tokens in stap 1`), the path is the same string in
+  both languages, and it is an ordinary `<a>` inside injected HTML rather than a router `Link`, so
+  following it reloads the page. Reach for one when a claim you need has already been argued
+  somewhere, and say what it established rather than re-establishing it.
 - **British spelling**: `specialised`, `summarised`, `sanitise`.
 - **The course says "an agent" and "the agent".** "AI agent" is step 0 only, where the term is
   introduced.
@@ -182,6 +229,13 @@ Keys read `<unit>.<section>.<n>`: the section is the `<h2>` above the block, slu
 before the first one, and a heading of its own is `<unit>.<section>.heading`. Add a paragraph and
 it needs a key and an entry; move one into another section and its key has to be renamed.
 
+The slug is the heading with its small words dropped, usually three of them:
+`Make the checks part of the work` is `make-checks-part`, `Domain-driven design` is
+`domain-driven-design`. **So rewording a heading renames every key in its section**, in the HTML and
+in `nl.json`, in one change. It is mechanical and easy to skip, and skipping it leaves keys whose
+name says a section that no longer exists. Grep the old slug afterwards: nothing may still point at
+it, and nothing in either bundle may be left with no block asking for it.
+
 A key with no entry keeps the English that is already on the page and warns in the browser
 console, so a half-translated unit is visible rather than silent. Blocks that are the same in
 every language, such as a `<pre>` code sample or a `<div data-figure>` slot, carry no key at all.
@@ -199,7 +253,7 @@ through, so rewrite the English to match rather than the other way round.
 Read the text out loud. If you run out of breath, the sentence is too long. If it sounds like a
 brochure, cut the adjectives.
 
-Then seven questions, in order:
+Then ten questions, in order:
 
 1. Does the first sentence make a claim, or announce one?
 2. Is the last sentence of each paragraph the best one in it?
@@ -207,12 +261,17 @@ Then seven questions, in order:
 4. Did you name a term before you showed the thing?
 5. Is any adjective doing work a concrete example should be doing?
 6. Does any sentence count the items before listing them?
-7. Did the Dutch change with it?
+7. Which sentence only says the previous one again? Cut that one.
+8. Does any heading say what its first sentence says?
+9. Does any section run past two paragraphs, and would you defend the third out loud?
+10. Did the Dutch change with it?
 
-Then grep for the thing you always miss:
+Then grep for the two things you always miss:
 
 ```bash
 grep -n '—\|–' front/src/steps/*/units/*.html front/src/steps/*/locales/*.json
+grep -o 'data-i18n="[^"]*"' front/src/steps/stepN/units/*.html | sort   # against nl.json's keys
 ```
 
-That must return nothing.
+The first must return nothing. The second must line up with the bundle in both directions: every
+block has an entry, and no entry is left pointing at a block you deleted.
