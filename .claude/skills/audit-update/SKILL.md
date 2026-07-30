@@ -136,6 +136,22 @@ one, because it claims a pass that did not happen.
   present and argued twice).
 - `—` in a `Where` column means the topic has no home in the course. That is the **only** place an
   em-dash appears in this file, and the house ban on them in prose holds here too.
+- **Effort** sits behind status in every table and costs the fix, not the defect: `●○○` a clause or a
+  sentence in one place and its locale sibling · `●●○` a paragraph, section, figure or quiz, or an
+  edit across several files · `●●●` new material or a decision not yet taken. An **empty** cell means
+  the row asks for no edit, which is every row with an empty remarks cell plus the ones that say
+  `Fix: leave it`. Set it from the `Fix:` clause the row already carries; if a row has a remark and
+  no fix, estimate what closing it would cost. A row whose fix grows or shrinks gets its effort
+  re-set on the same pass.
+- A `Where` cell is a path of **module, unit, element**, module and unit by their rendered titles
+  rather than their folder ids: `soft skills/change management/change.conventions-live-repository.1`.
+  Two segments is a whole unit, three is one block or key in it, and a figure component hangs off the
+  end after a slash (`context, model, mechanisms/tokens` / `TokenSplit`). A cell naming a repository
+  file is a path from the repo root and carries no module. Write new rows this way; do not shorten a
+  cell back to a bare unit id because the table heading already names the step.
+- **Table 1 is one table per module, plus `1e` for what no module owns.** A row whose `Where` names a
+  module other than its table's belongs in another table. Re-file it rather than leaving it, and say
+  in the header that the pass moved it.
 - Remarks are written to be acted on: a claim, the evidence that makes it a defect, then `Fix:` and
   the smallest edit that closes it. Keep the register of the existing rows, which is direct and
   unhedged, and keep them short. Bold is for the fact that makes the row worth reading.
