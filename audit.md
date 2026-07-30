@@ -1,27 +1,16 @@
 # Course audit, fresh pass
 
-**Measured:** 30 July 2026, against `362c264` ("feat: truth, soft skills, and some other
-enhancements"), which is the whole working tree apart from this file. Every number here was taken
-off the files rather than carried forward.
+**Measured:** 30 July 2026, against `321e01e` ("chore: update audit") **plus the uncommitted
+assistant-parity change in the working tree**, which together are the whole tree apart from this
+file. Every number here was taken off the files rather than carried forward.
 
-`362c264` also carried the previous pass of this file, and that pass was measured against the commit
-before it, so **none of what this one did to the course had been measured**: a third step, a ninth
-unit in step 1, a tenth in step 2 replacing a cut one, a rewritten `steering` and a new section in
-`model`. Everything below is re-measured against the tree rather than restated, Tables 1a and 1b
-included. Step 0's numbers are the only ones that came back untouched, and one of its rows still
-moved: a claim it makes about the other steps is one step out of date. `npm run build` is green.
-
-**Structure of this pass.** The **Where** column now names the module, the unit and the element:
-`soft skills/change management/change.conventions-live-repository.1`, module and unit by their
-rendered titles rather than their folder ids, so a row can be read on its own and the two `workshop`
-units no longer collide. A cell that names a repository file (`front/src/steps/CLAUDE.md`, a
-docblock, a Java `CLAUDE.md`) is a path and carries no module. Naming the module made visible
-something the previous passes hid: **five rows had accumulated in Table 1c that are not about step 2
-at all**, filed there while step 2 was the last step in the course. They have been re-filed rather
-than rewritten. *What one run costs* moved to Table 1b, every source it names being a step 1 unit;
-*IP, data governance* moved to Table 1d, its own remark having named `change` as the home it does not
-use; and the three gaps no single step owns now sit in **Table 1e**. Table 2 keeps its own `step /
-unit` column, which already carried both.
+The one commit in the range touched only this file and the `audit-update` skill, so everything that
+moved is the uncommitted work: step 3's two `CLAUDE.md` mentions became `data-assistant` pairs, and
+step 0's `welcome` lost both the sentence saying where the assistant swap ends and the two filename
+examples under it. Neither loss is a step 0 row: the cog explains itself, and where the swap ends is
+step 2's gap, priced once in Table 1e. Three units' word counts moved, one down and two up, and
+**the two that went up did not get longer for any reader**: a paired paragraph is counted twice here
+and read once. Nothing else in the course changed. `npm run build` is green.
 
 **Legend:** ● solid · ◐ thin · ○ missing · ⟳ duplicated · ⚠ inaccurate
 
@@ -44,18 +33,21 @@ entities, counting whitespace-separated tokens containing a letter. The **assist
 applied**, so these are the full files rather than what one reader sees. That gap used to be small
 and is no longer: `tools` splits 1,032 words for a Claude Code reader against 1,065 for a Copilot
 one, but `model` now splits **915 against 717**, because its newest section is Claude-only whole.
+Step 3's two units now split as well and are the harmless kind: both halves of each pair are the
+same length, so 445 and 430 here are **391 and 379 to either reader**, which is what they were
+before the pairs existed.
 
 ---
 
 ## 1. Completeness
 
-### Table 1a. Step 0, "Start here" (2 units, 489 words)
+### Table 1a. Step 0, "Start here" (2 units, 440 words)
 
 | Topic | Where | Status | Effort | Remarks and proposed fix |
 |---|---|:--:|:--:|---|
 | How the kata is read: self-paced, guided, reference | `start here/how this kata works` | ● | | |
 | Where the cogwheel is, and to go and open it | `start here/how this kata works/welcome.how-to-use-this-document.5` | ● | | |
-| The assistant boundary: the swap stops after step 1 | `start here/how this kata works/welcome.how-to-use-this-document.6` | ● ⚠ | ●○○ | The paragraph names exactly three steps: the swap runs through step 0 and step 1, and "**Step 2** names Claude Code's files throughout, so on Copilot read those as the example". **Step 3 is not covered by that sentence and it names `CLAUDE.md` twice**, in `change.conventions-live-repository.1` and `impostor.nobody-doing-long.2`. A Copilot reader is told how to read one step's filenames and then meets another. Fix: "Steps 2 and 3 name Claude Code's files", in `welcome.html` and `nl.json`; naming the last step rather than counting them would survive the next one. |
+| Setting which assistant you use | `start here/how this kata works/welcome.how-to-use-this-document.6` | ● | | |
 | What a flag is, and that answer boxes have hints | `start here/how this kata works` / `CodeCheck` | ● | | |
 | The backend exists and is split by step | `start here/the backend` | ● | | |
 
@@ -104,7 +96,7 @@ one, but `model` now splits **915 against 717**, because its newest section is C
 | Asking the agent what it has read | `context, model, mechanisms/tools/tools.connect-one.5`, `context, model, mechanisms/the session/session.window-not-memory.4` | ⟳ | ●○○ | The same self-only exercise, two units apart, in nearly the same words. Fix: keep `session`'s, where the answer proves something about the layer being taught, and cut `tools`'. |
 | "Here is the part people do not expect" | `context, model, mechanisms/tokens/tokens.reads-all.1`, `context, model, mechanisms/your prompt/prompt.plan-mode.2` | ⟳ | ●○○ | The identical opener, verbatim, two units apart. Fix: reword one. |
 | Coordinator saving, phrased twice | `context, model, mechanisms/the harness/harness.coordinator.1`, `context, model, mechanisms/the model/model.let-it-pick.1` | ⟳ | ●○○ | "Top rate for deciding, a fraction of it for doing" appears near-verbatim in both. The back-pointer is deliberate; the phrasing collision is not. Fix: have `model` name the saving rather than restate it. |
-| What one run costs, in money, and how to measure it | — | ○ | ●●○ | **Re-filed from Table 1c in this pass**: every source it names is a step 1 unit. `tokens` gives the unit, `model` gives dollars per million, `harness` prices the cache, `ReadYourWindow` has the student read a real count off their own window. **No unit multiplies.** The usage readout this row asked for has arrived in `model`, and it is the wrong readout: it prints percentages of a session and a weekly allowance, not money, and it is Claude-only, so the reader on a metered key never sees it. The gap is unchanged and the cheap fix is now cheaper, since the figure is already on the page to reason from. |
+| What one run costs, in money, and how to measure it | — | ○ | ●●○ | **Re-filed from Table 1c in the previous pass**: every source it names is a step 1 unit. `tokens` gives the unit, `model` gives dollars per million, `harness` prices the cache, `ReadYourWindow` has the student read a real count off their own window. **No unit multiplies.** The usage readout this row asked for has arrived in `model`, and it is the wrong readout: it prints percentages of a session and a weekly allowance, not money, and it is Claude-only, so the reader on a metered key never sees it. The gap is unchanged and the cheap fix is now cheaper, since the figure is already on the page to reason from. |
 
 ### Table 1c. Step 2, "Agentic engineering" (10 units, 7,052 words)
 
@@ -161,7 +153,7 @@ one, but `model` now splits **915 against 717**, because its newest section is C
 | Stale docblocks | `front/src/steps/step2/FileTree.tsx`, `front/src/steps/step2/index.tsx` | ⚠ | ●○○ | Still two, and the header defect swapped for a slot one. Fixed: the header docblock now names all seven units that carry a drawing, `parallel` included, though it still does not mention `setup`'s board or the `engineering` task card. New: **`parallel`'s slot comment says `AgentsAtOnce` "names all three arrangements, so under `One agent at a time` it would spend two of them early"**. The figure draws **four** rows and the unit runs four sections, and both the component's own docblock and the comment in `parallel.html` say four and three. The registry is the only file of the three that undercounts. And `FileTree` still says step 2 draws two trees, `ProjectTree` and `DomainTree`; there are **four** callers, `SkillTree` and `HookTree` as well. None of it is student-facing, but all of it is the kind of drift `patterns` teaches students to notice. |
 | The record of the cut `quality` unit | `front/src/steps/CLAUDE.md` | ⚠ | ●○○ | The record exists so nobody restores half the unit, and it is wrong about which half survived. It says **"The proxy trap is the one argument that had no second home**, and it now survives only inside `workshop.flag.honest.help`". The trap is in fact argued in prose, for every reader, in `workshop.honest.1` ("Coverage is a proxy, and an agent will satisfy a proxy"), and the argument with no second home is over-commenting and under-logging, which the same sentence lists as covered. An author trusting this puts the trap back and leaves the logging rule out, which is the wrong way round. Fix: swap the two claims. |
 
-### Table 1d. Step 3, "Soft skills" (3 units, 1,147 words)
+### Table 1d. Step 3, "Soft skills" (3 units, 1,252 words)
 
 | Topic | Where | Status | Effort | Remarks and proposed fix |
 |---|---|:--:|:--:|---|
@@ -175,8 +167,8 @@ one, but `model` now splits **915 against 717**, because its newest section is C
 | Judgement is the work, and it is invisible | `soft skills/impostor syndrome` | ● | | |
 | Telling a real gap from the feeling | `soft skills/impostor syndrome` | ● | | |
 | Nobody has been doing this long | `soft skills/impostor syndrome` | ● | | |
-| IP, data governance, what may leave the building | — | ○ | ●●● | **Re-filed from Table 1c in this pass**, since `change` is the home it names. For professionals in company training this is the question asked before lesson one, and by someone other than the student. `context, model, mechanisms/the model`'s billing close and `agentic engineering/project setup`'s personal-file warning sit next to the hole without filling it. `change` is about what a team has to agree before any of this starts, and it argues habits and reviewers only. |
-| Anything the student does | — | ○ | ●●○ | **No figure, no quiz and no exercise in the whole step**, across three units and 1,147 words. Documented as deliberate, on the grounds that every unit here is a conversation rather than a command. That reasoning holds for an exercise and not for a quiz: guided mode is the default, these are the units most likely to be read in a room, and "what do you promise when you show a skeleton" is exactly a show-of-hands question. Fix: one three-question quiz, on `expectations`, which is the unit with the most checkable claims in it. |
+| IP, data governance, what may leave the building | — | ○ | ●●● | **Re-filed from Table 1c in the previous pass**, since `change` is the home it names. For professionals in company training this is the question asked before lesson one, and by someone other than the student. `context, model, mechanisms/the model`'s billing close and `agentic engineering/project setup`'s personal-file warning sit next to the hole without filling it. `change` is about what a team has to agree before any of this starts, and it argues habits and reviewers only. |
+| Anything the student does | — | ○ | ●●○ | **No figure, no quiz and no exercise in the whole step**, across three units and 1,252 words. Documented as deliberate, on the grounds that every unit here is a conversation rather than a command. That reasoning holds for an exercise and not for a quiz: guided mode is the default, these are the units most likely to be read in a room, and "what do you promise when you show a skeleton" is exactly a show-of-hands question. Fix: one three-question quiz, on `expectations`, which is the unit with the most checkable claims in it. |
 | An ending for the course | — | ○ | ●○○ | `impostor` closes on its own last section. The kata now runs four steps and 24 units and stops without saying so. Fix: two sentences at the end of `impostor`; the row that used to ask this of step 2's `workshop` moved here with the step. |
 
 ### Table 1e. Across the course
@@ -190,7 +182,7 @@ appended.
 |---|---|:--:|:--:|---|
 | Reviewing a diff you did not write | — | ○ | ●●● | `agentic engineering/goal-oriented`, `agentic engineering/steering`, `agentic engineering/enablement` and `agentic engineering/parallel workflows` all name the student's reading as the bottleneck of the whole workflow; none teaches it. `enablement.where-day-goes.1` states it hardest ("most of them go on driving the system end to end and reading whether it did what you wanted", "it is most of your week"), and `parallel.many-agents-once.3` adds the half nobody else says, that the tenth diff of the afternoon gets a worse read than the first. **Four units in step 2, and `soft skills/expectation management` makes it five.** Every one of them is a warning about the reading; not one is instruction in it. Now the clearest case for this table: the module that names it most is not the module that could teach it. |
 | When *not* to use an agent, and what agents are bad at | — | ○ | ●●● | Every unit in every module assumes the agent is the right tool. **Documented as deliberately absent** rather than overlooked: the notes rule it out of `steering`'s new section by name, on the grounds that half-telling it there is worse than leaving it out. That makes it a decision to revisit rather than a gap to plug, and the decision still has nowhere to land. `soft skills` is the module it could land in without half-telling it, since that module argues about the work rather than inside it. |
-| The same habits on a second assistant | `start here` and `context, model, mechanisms` only | ◐ | ●●● | `welcome` says the swap stops after step 1 out loud, so this is work outstanding rather than a mismatch, and it is the same defect Table 1a's assistant-boundary row and Table 1b's `data-assistant` count each see one module's end of. `SetupFlags` sends every reader into a `.claude` skill and two `CLAUDE.md` files; the exercise works on both products but shows Claude Code's layout. The parity inside step 1 got worse: `model`'s five-hour-window section is 250 words and two figures with no sibling, so the two readers no longer see the same unit (Table 1b). And `soft skills` now names `CLAUDE.md` twice with no swap behind it (Table 1a). |
+| The same habits on a second assistant | every module except `agentic engineering` | ◐ ⚠ | ●●● | **Step 2 is now the only module with no `data-assistant` anywhere in it**, step 3 having gained two pairs, and it is the module the swap fails hardest in: `SetupFlags` sends every reader into a `.claude` skill and two `CLAUDE.md` files, and the exercise works on both products while showing Claude Code's layout. What got worse in the same change is that the page **stopped saying so**. `welcome` now tells every reader the course "will modify the content of this course to include the relevant commands so you can easily follow along", a promise 7,052 words of step 2 do not keep, so what was work outstanding is now also a claim the course falsifies. The parity inside step 1 is unchanged and still short: `model`'s five-hour-window section is 250 words and two figures with no sibling, so the two readers do not see the same unit (Table 1b). |
 
 ---
 
@@ -202,7 +194,7 @@ both marks ● has an empty remarks cell.
 
 | # | Unit | Words | Fig | Interactive | Follows from | Cad | Seq | Eff | Remarks and proposed fix |
 |--:|---|--:|--:|---|---|:--:|:--:|:--:|---|
-| 1 | step0 / `welcome` | 314 | 3 | 2 code boxes + 1q quiz | — | ● | ◐ | ●○○ | **Closes on a figure with nothing after it** and never points at `backend`. Fix: one closing sentence. |
+| 1 | step0 / `welcome` | 265 | 3 | 2 code boxes + 1q quiz | — | ● | ◐ | ●○○ | **Closes on a figure with nothing after it** and never points at `backend`. Fix: one closing sentence. |
 | 2 | step0 / `backend` | 175 | 1 | 1 code box | `welcome` | ◐ | ● | ●●○ | Still the thinnest unit in the course, and one code box is all there is to do. |
 | 3 | step1 / `tokens` | 669 | 3 | 3 interactive figures, no quiz | `backend` | ● | ● | | |
 | 4 | step1 / `prompt` | 633 | 3 | quiz (3q) | `tokens` | ● | ◐ | ●○○ | Opens with no reference to `tokens` and **ends on a bare figure with no closing sentence**. Fix: a closing line into `tools`. |
@@ -223,9 +215,9 @@ both marks ● has an empty remarks cell.
 | 19 | step2 / `parallel` | 518 | 1 | none | `enablement` | ● | ◐ | | New, in the slot the cut `quality` unit left and not a rewrite of it. Four sections running most control to least and then landing in the middle, one drawing closing the unit, nothing to do. Cadence is fine: 518 words and a figure after 322 and two is a rise rather than a spike. Sequence: it opens on its first `<h2>` with no lead, which is documented, and `enablement` still does not hand into it. Against that it carries **four links to three other units**, more than any unit in step 2, and one of them is to `goals` in its last paragraph, so the seam into the capstone's run-up is at least threaded. Fix: nothing here; the closing sentence belongs to `enablement`. |
 | 20 | step2 / `goals` | 676 | 0 | none | `parallel` | ⚠ | ⚠ | ●○○ | One of the step's **two figureless, taskless units** and the one that carries the rule the entire capstone is built on. It hands off to nothing. Resolved since the last pass: `workshop`'s lead no longer counts back past it (Table 1c). Second telling of `git worktree add`, with `parallel` naming a worktree a third time without arguing it. Fix: name `workshop` in the closing line; still the cheapest sequencing fix in the step. |
 | 21 | step2 / `workshop` | 1090 | 0 | Workshop (5 flags) | `goals` | ● | ◐ | ●○○ | Third longest unit in the course now, behind `tools` and `steering`. The cadence complaint stays **spent**, and by more than it was: the run-up is 1,789 drawn words across `workflows`, `enablement` and `parallel`, then 676 flat ones in `goals`. It is 2 to 4 hours of real work and the strongest thing in the kata. The close is where it costs: a one-sentence self-only aside, no wrap-up of the step, and now **a whole step after it that it does not mention**. Fix: one closing sentence into `change`. |
-| 22 | step3 / `change` | 391 | 0 | none | step2 `workshop` | ◐ | ◐ | ●○○ | Opens the new step, and the drop is the largest in the course at 699 words: 1,090 with a five-flag board, then 391 with nothing at all. A step boundary earns a reset, so this is thin rather than wrong, and three links out of it keep it tied to what the student just did. Sequence: `workshop` does not hand into it and it opens cold. |
+| 22 | step3 / `change` | 445 | 0 | none | step2 `workshop` | ◐ | ◐ | ●○○ | Opens the new step, and the drop is the largest in the course at 699 words as either reader meets it: 1,090 with a five-flag board, then 391 with nothing at all (445 is the file, both halves of its assistant pair counted). A step boundary earns a reset, so this is thin rather than wrong, and three links out of it keep it tied to what the student just did. Sequence: `workshop` does not hand into it and it opens cold. |
 | 23 | step3 / `expectations` | 377 | 0 | none | `change` | ● | ◐ | ●○○ | Matches its predecessor almost exactly in length and shape. **Four links to four different units**, which ties `parallel` for the most in the course, and every one of them is load-bearing rather than decorative: it is the unit that reads back what steps 1 and 2 already argued. Opens cold, closes cold. |
-| 24 | step3 / `impostor` | 379 | 0 | none | `expectations` | ● | ◐ | ●○○ | Closes the course. One link. Its last paragraph is the right note to end on, and it ends the unit rather than the kata (Table 1d). |
+| 24 | step3 / `impostor` | 430 | 0 | none | `expectations` | ● | ◐ | ●○○ | Closes the course. One link. Its last paragraph is the right note to end on, and it ends the unit rather than the kata (Table 1d). |
 
 ### Cadence, in summary
 
@@ -240,14 +232,14 @@ both marks ● has an empty remarks cell.
   drawn in the slot `quality` left, so **no two undrawn units are adjacent** and what is
   unillustrated is `steering` and `goals` standing alone, 1,770 words with nothing to do in either.
   `steering` is the one worth drawing first and it got 301 words longer while nobody drew it. Step 3
-  is the new wall and it is a worse one: **three consecutive units, 1,147 words, no figure, no quiz
+  is the new wall and it is a worse one: **three consecutive units, 1,252 words, no figure, no quiz
   and no exercise anywhere in the step**, closing the course. Counted across everything, **ten of
   twenty-four units carry nothing the student does** (`truth`, `steering`, `patterns`, `workflows`,
   `enablement`, `parallel`, `goals`, and all three of step 3), against fourteen that do.
 - **Interaction density is inverted against difficulty.** Step 1 carries eight interactive
   components, three interactive figures and two quizzes across 8,079 words. Step 2 carries two graded
   boards, two ungraded tasks, one interactive figure and no quizzes across 7,052 words, and it is the
-  harder step. Step 3 carries nothing across 1,147. Every unit added since the last pass, in all
+  harder step. Step 3 carries nothing across 1,252. Every unit added since the last pass, in all
   three steps, added words and figures and nothing to do.
 - **The exercise heading is now one key.** Eight units carry
   `<h2 data-i18n="ui:quiz.title">Test yourself</h2>`, the shared `ui` key, so the wording over a task

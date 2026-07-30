@@ -1,6 +1,7 @@
 # Copilot-specific notes
 
-Reference material for whoever maintains the GitHub Copilot side of steps 0 and 1. It is **not
+Reference material for whoever maintains the GitHub Copilot side of the course, which is every step
+but step 2. Steps 0 and 1 are nearly all of it; step 3's share is two filename pairs. It is **not
 student-facing**: nothing here is rendered, and prose that belongs on a page belongs in that unit's
 HTML instead. What it holds is the product detail behind the `data-assistant="copilot"` blocks, the
 things the course deliberately leaves out, and the facts most likely to rot.

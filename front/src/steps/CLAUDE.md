@@ -506,9 +506,11 @@ tenth entry it computes and drops), and turns the log level up for the third (a 
 DEBUG). **Do not implement the flags for the student.** The three flags
 are the exercise; ship the puzzle, not the decode, the trace instrumentation or the DEBUG readout.
 
-**Steps 0 and 1 are written for two assistants**, Claude Code and GitHub Copilot, on the
-`data-assistant` rule in `front/CLAUDE.md`. The Copilot side assumes **Copilot CLI**, the terminal
-one, because every exercise in the step already runs commands in a terminal against a Maven backend.
+**Step 2 is the one step not written for two assistants**, and every other step is, on the
+`data-assistant` rule in `front/CLAUDE.md`. Steps 0 and 1 carry almost all of it; `step3`'s share is
+two filename pairs and is documented under that step. The Copilot side assumes **Copilot CLI**, the
+terminal one, because every exercise in step 1 already runs commands in a terminal against a Maven
+backend.
 The product detail behind those blocks, what the course leaves out on purpose, and which facts are
 dated are in **`copilot-specific.md` at the repo root**. Read it before writing a Copilot claim:
 Copilot's billing changed under this course once already.
@@ -521,11 +523,23 @@ now costs nothing on the page, and putting the list back means keeping it in ste
 the captured flags and the finished pages, so a student who meets it unwarned loses work, and the
 closing sentence of that paragraph is the only place in the course it appears. Slides and the mode
 switch are deliberately left to the panel, since the three ways of reading are taught three
-paragraphs above and the deck belongs to the tutor. **The lower paragraph also states the boundary**, so
-the scope line is on the page rather than only in here: it says the swap runs through steps 0 and 1
-and that step 2 names Claude Code's files throughout, which is what stops a Copilot student meeting
-`setup` and finding a whole step about a file they do not have. Give step 2 variants and that
-sentence is the first thing to cut.
+paragraphs above and the deck belongs to the tutor. **The lower paragraph no longer states the
+scope of the swap, and its last two sentences are cut rather than reworded.** They said step 2 is
+the exception and names Claude Code's files throughout, so on Copilot read those as the example, and
+then that what the pages teach does not change because none of it is about one product. What went
+with them is the only warning on any page that a Copilot student will meet `setup` and find a whole
+unit about a file they do not have. **That gap is now carried by `audit.md` alone**, so the page
+promises a swap it keeps everywhere but one step and says nothing about the one. A caveat written
+back into it is the wrong repair: **the repair is giving step 2 variants**, at which point there is
+nothing to caveat. Until then, do not restore a scope line as a substitute for the work.
+
+**The paragraph is two sentences and names no file or command**, which went in the same pass: it
+said the pages name yours, `copilot mcp add` instead of `claude mcp add` and
+`.github/copilot-instructions.md` instead of `CLAUDE.md`. What it says now is what the setting does
+rather than what it looks like, and the reasoning is that a student who has not met either file
+learns nothing from a pair of them here, while a student who has meets them in the unit that needs
+them. So the examples belong to `tools` and `session`, where they are the instruction rather than an
+illustration of a setting.
 
 Nine blocks in step 1 vary and they are all the same kind of thing, a filename or a command:
 `tools.where-extra-tools.3`, the `<pre>` under `tools.connect-one.1` and `tools.connect-one.2`
@@ -1217,9 +1231,14 @@ bare "Maybe." is doing. **Do not merge the two paragraphs and do not let the sec
 out of the first one.** `nobody-doing-long` closes on written-down work rather than on the feeling for
 the same reason: the answer the step offers is a repository, not encouragement.
 
-Three smaller things. It names `CLAUDE.md` and `audit.md` with **no `data-assistant` variant**, on
-step 2's precedent and on the scope line step 0's `welcome` states, so a Copilot reader meets Claude
-Code's filenames here as they do throughout step 2. It carries exactly **one inline icon**, the `gem`
+Three smaller things. **Both of the step's `CLAUDE.md` mentions carry a `data-assistant` pair**,
+`impostor.nobody-doing-long.2` and `change.conventions-live-repository.1`, and they did not until
+step 0's `welcome` stopped saying where the swap ends. The page makes no exception for any step now,
+so a mention written into this step without a pair is a Copilot reader being handed a filename they
+do not have, with nothing anywhere admitting it. What stays shared is as deliberate: `audit.md` is a
+file the team writes rather than either product's, and *skill* is a word both assistants use, so
+neither varies.
+It carries exactly **one inline icon**, the `gem`
 on looking at who has edited the convention files, because that diagnostic is the only thing in the
 step a reader would otherwise walk past. And it adds **no third metaphor**: the step is about people,
 so it reaches for neither the window nor the money, and a section that starts talking about

@@ -13,7 +13,7 @@
   "welcome.how-to-use-this-document.3": "<strong>Met een tutor</strong> die je bij elke stap aan het bord begeleidt.",
   "welcome.how-to-use-this-document.4": "<strong>Als naslag.</strong> Kom terug op een pagina zodra je aan je eigen bureau tegen datgene aanloopt wat ze beschrijft.",
   "welcome.how-to-use-this-document.5": "Achter het menu <svg data-icon=\"cog\"></svg> rechtsboven zitten een paar opties om deze cursus in te stellen.",
-  "welcome.how-to-use-this-document.6": "Zet de assistent op degene die je echt gebruikt. Waar de twee verschillen in een bestandsnaam of een commando, noemen de pagina's die van jou: <code>copilot mcp add</code> in plaats van <code>claude mcp add</code>, <code>.github/copilot-instructions.md</code> in plaats van <code>CLAUDE.md</code>. Die wissel loopt door deze stap en stap 1. Stap 2 noemt overal de bestanden van Claude Code, dus lees die op Copilot als het voorbeeld en niet als je eigen setup. Wat de pagina's je leren verandert niet, want niets ervan gaat over één product.",
+  "welcome.how-to-use-this-document.6": "Zet de assistent op degene die je echt gebruikt. Dat past de inhoud van deze cursus aan met de commando's die voor jou gelden, zodat je vlot kan meevolgen.",
 
   "welcome.how-exercises-work.heading": "Hoe oefeningen werken",
   "welcome.how-exercises-work.1": "Tijdens de oefeningen kom je codes tegen die zo geschreven zijn: <code>{f1r5t-5t3p5}</code>. Een string tussen <code>{}</code> duidt een flag aan. Jouw doel is de flags te capturen. Die moet je opsporen en in je browser in een veld terugtypen.",
