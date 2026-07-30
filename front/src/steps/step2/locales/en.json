@@ -134,6 +134,11 @@
   "iteration-paths.start": "where you start",
   "iteration-paths.target": "intended result",
 
+  "script-runs.description": "The same request run three times, drawn twice. In the top row it is worked out from prose again on every run and the three results come out different. In the bottom row a script runs it and the three results are identical.",
+  "script-runs.prose-note": "different every time",
+  "script-runs.script": "Run as a script",
+  "script-runs.script-note": "the same every time",
+
   "walking-skeleton.alt": "An early screenshot of this site: black text on white, one step called Warm-up: FizzBuzz in the sidebar, a notes panel, and a box to type an answer into.",
   "walking-skeleton.caption": "The first thing this repository rendered, before any of the design system existed.",
   "added-details.alt": "The course as it looks now: a dark teal header carrying the title, a white card holding a grouped sidebar with ticks against finished pages, and a unit set in the design system's typefaces.",

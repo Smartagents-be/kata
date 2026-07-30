@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next'
 /**
  * The two profile shapes side by side, under `enablement`'s `t-shaped` section at the
  * `data-figure="skill-shape"` slot. Nothing after it reads the drawing back, so its own labels carry
- * what it argues. That held when the section closed the unit and it still holds now the section has
- * moved up under `run-own-machine`.
+ * what it argues. That held when `t-shaped` closed the unit, and it still holds now that it is the
+ * middle section with `where-day-goes` and its two paragraphs beneath it.
  *
  * **The stem is the same depth in both, and that is the whole drawing.** Both stems start and end on
  * the same two lines, so the T is the I with a bar added on top rather than a shallower version of

@@ -538,10 +538,12 @@ the same set for the same reason, and `HookTree` follows the rule too: the scrip
 one the hooks `<pre>` declares.
 
 The Hooks section exists because the paragraph that used to introduce them was cut from the Skills
-section, and `patterns` uses the word twice while defining it nowhere. It is deliberately the
+section, and `patterns` used the word twice while defining it nowhere. It is deliberately the
 shortest of the three: what a hook is, why it is stricter than the other two (a `CLAUDE.md` line
-asks and a skill offers, both of which need the agent to read them, while a hook just happens), one
-`settings.json` block, and a pointer to `patterns` for when it is worth doing. `HookTree` paints
+asks and a skill offers, both of which need the agent to read them, while a hook just happens), and
+one `settings.json` block. **It is now the only place in the step that teaches hooks**, and its
+closing forward pointer to `patterns` was cut when that unit stopped mentioning them at all, so a
+paragraph written back into `patterns` about hooks means restoring the pointer with it. `HookTree` paints
 `settings.json`, `hooks/` and the script all teal on purpose: a hook is two files and a reader who
 takes away one of them has the wrong picture.
 
@@ -569,6 +571,41 @@ interaction on one meets the same one on the other. The workshop's ids are uncha
 which is what makes the extraction invisible to anything that pointed at them. Two storage keys, so
 the boards do not mark each other's rows solved, and both sit under `kata.step2.` where
 `shared/lib/reset.ts` can find them.
+
+`patterns` is one short lead paragraph, `Skill iteration`, then `Scripts`, and **the `script-runs`
+figure has the last word**: a closing section called "Around the script" was cut, along with the
+lead's second paragraph. What went with them is worth knowing before writing any of it back. The
+cut section argued that the judgement stays in the skill while the script does the mechanical part,
+that a hook calls the same script when it has to run unasked, and that not everything reduces to
+one (taste has no exit code, but the em-dash rule's check is still a `grep`). The cut lead paragraph
+was this repo's own four skills, `lesson-writing` and `quiz-writing` beside `adding-a-step` and
+`repo-setup`, as prose that arrived after the mistake. The first heading read "Give it a home" until
+it was renamed, so its keys are `patterns.skill-iteration.*`, and its prose was replaced along with
+it: the triage of convention against skill against hook went, and so did the new-step file list
+`quality.write-it-down.2` also carries. **The word "hook" now appears nowhere in the unit**, which
+is what `setup`'s Hooks section lost its forward pointer to. What the section argues now is the second
+pass. A skill feels like magic, the answers still come back slightly off, so you repair the output
+and have the agent work out what the skill failed to say. **Its two `<pre>` blocks are one skill
+twice and differ by exactly one rule**, the announced count added to the em-dash rule, so the reader
+diffs them by eye; rewrite one and the other moves with it, or the section's claim is on the page
+with nothing under it showing it. They carry no `data-i18n` key, like every other code sample. The
+closing paragraph is the payoff and names two things, corrections that stop coming back and a file
+the team shares. **The middle section names
+no script of its own, and that is the correction it was rewritten for.** It was called "A script
+instead" and argued at length for `scripts/new-step.sh`, a file this repository never wrote, closing
+on "a skill only helps the people who have Claude open" in a repo that chose the skill; `audit.md`
+carried that as a defect. What it argues now is general: your agent writes the Bash you do not, a
+skill that calls the script is what makes the agent aware of it, and what you buy is predictability
+plus the tokens the agent stops spending working the steps out again.
+
+`ScriptRuns` is its figure and it is **variance across runs and never the clock or step size**.
+`LoopsPerHour` in `enablement` owns how many turns fit in an hour and `IterationPaths` in
+`evolution` owns few-long against many-short, so drawing a run here as time spent collapses this
+into one of those. The same request three times, drawn twice: three muted cards whose bars differ,
+then three teal cards that are one set of widths repeated, which is the equality the section claims
+in words. The cards are the same size in both rows for the same reason. **Only the second row is
+labelled.** The first is what you already have and a name over it says prose twice, so what each row
+produces sits on the right instead, and that pair is the drawing.
 
 `workflows` is four ways of handing work over, and **the order is the argument**: naive, plan-based,
 spec-driven, audit-driven, running from cheapest to most deliberate, with a closing section saying
@@ -826,7 +863,11 @@ named is what the shape adds.
 
 A tenth unit, `workshop`, closes the step as its capstone. It is the one part of step 2 a machine
 can grade, because it grades the thing `quality` and `goals` argue for: a goal a build answers yes
-or no to. It ships a small loans domain in `kata/step2/java` that is green but un-hardened, and
+or no to. **`workshop.lead.1` names those two units rather than counting back to them**, and that is
+a correction rather than a style choice: it read "the last two units" until `enablement` landed
+between `workflows` and `goals`, at which point the count pointed at a unit that argues neither the
+bar nor the goal. Positional references to neighbouring units break silently on an insertion, so
+name the unit. It ships a small loans domain in `kata/step2/java` that is green but un-hardened, and
 a `graded` Maven profile that measures it against three goals - a coverage floor, a complexity
 ceiling and honest (mutation-tested) coverage. `mvn verify -Pgraded` prints a leetspoken flag for
 each goal met and fails until all three are. The student hardens the module (that is the exercise,

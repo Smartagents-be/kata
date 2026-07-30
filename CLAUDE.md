@@ -113,6 +113,15 @@ implemented**. Those prohibitions are the load-bearing part, so in short, and in
 commands and files those blocks name, what is deliberately left out, and which numbers are dated. It
 is authoring material rather than curriculum, and nothing renders from it.
 
+`audit.md` at the root is the standing critique of the course: completeness per topic, cadence and
+sequence per unit, and the delivery gaps. It is a **measured** document rather than a running one.
+Its first line names the commit it was measured against, and every number in it was taken off the
+files at that commit, so a row that nobody edited means "checked, still true" and an empty remarks
+cell means nothing is outstanding. Use the `audit-update` skill in `.claude/skills/audit-update/` to
+move it forward: it re-measures the counts, works out which rows the intervening commits actually
+touch, and leaves the rest alone. Updating the audit and fixing what it lists are two different
+jobs, and doing them in one commit makes the audit describe work the reader cannot see.
+
 The frontend layout is `front/src/`: a `shared/` shell (components, deck, i18n, lib, mode, progress,
 routes) plus one `steps/stepN/` folder per step, holding that step's registry, figures, flags,
 locales, quiz and unit HTML. Read the folder rather than a list here. Two things about it are not

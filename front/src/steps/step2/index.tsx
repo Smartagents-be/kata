@@ -6,6 +6,7 @@ import { HookTree } from './HookTree'
 import { IterationPaths } from './IterationPaths'
 import { LoopsPerHour } from './LoopsPerHour'
 import { ProjectTree } from './ProjectTree'
+import { ScriptRuns } from './ScriptRuns'
 import { SetupFlags } from './SetupFlags'
 import { SkillShape } from './SkillShape'
 import { SkillTree } from './SkillTree'
@@ -88,6 +89,9 @@ const step2: Step = {
       id: 'patterns',
       title: 'patterns.title',
       html: patterns,
+      // One slot, under the `Scripts` section, at the <div data-figure="script-runs"> the unit
+      // leaves. Nothing after it reads the drawing, so its own labels carry what it argues.
+      inlineFigures: { 'script-runs': <ScriptRuns /> },
     },
     {
       id: 'quality',
@@ -159,10 +163,12 @@ const step2: Step = {
       id: 'enablement',
       title: 'enablement.title',
       html: enablement,
-      // Two slots inside the prose, and they answer different halves of the unit. The bands close
-      // the section on shortcuts, because a shorter loop is what the shortcuts are for. The two
-      // profile shapes close the unit itself, so nothing reads them afterwards and their own labels
-      // have to carry the argument.
+      // Two slots inside the prose, one per section that has something to draw. The bands close
+      // `run-own-machine`, whose closing sentence is the agent writing a change in seconds and your
+      // check having to keep up, so they are that claim measured. The profile shapes close
+      // `t-shaped`, the middle section, and `where-day-goes` runs two paragraphs after them, so
+      // neither figure is read back by the prose and both have to carry their argument in their own
+      // labels.
       inlineFigures: {
         'loops-per-hour': <LoopsPerHour />,
         'skill-shape': <SkillShape />,

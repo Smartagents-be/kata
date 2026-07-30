@@ -1,62 +1,70 @@
 <p data-i18n="patterns.lead.1">
   The third time you type the same instruction, stop typing it. A correction you repeat is not a
-  prompt problem. It is a piece of knowledge with no home yet, so you carry it in by hand every
-  session <svg data-icon="pattern"></svg>.
+  prompt problem. It is a piece of knowledge with no home yet.
 </p>
 
-<p data-i18n="patterns.lead.2">
-  Lesson prose here kept coming back with em-dashes in it, and quizzes kept getting throwaway
-  distractors. Both rules now live in <code>.claude/skills/</code> as <code>lesson-writing</code>
-  and <code>quiz-writing</code>, next to <code>adding-a-step</code> and <code>repo-setup</code>,
-  which arrived the same way. They load with the task instead of after the mistake.
+<h2 data-i18n="patterns.skill-iteration.heading">Skill iteration</h2>
+
+<p data-i18n="patterns.skill-iteration.1">
+  The first skill you write feels like magic. A writing skill is the easy one: a line about the
+  voice you are after, and the correction you were tired of typing.
 </p>
 
-<h2 data-i18n="patterns.give-home.heading">Give it a home</h2>
+<pre><code>---
+name: lesson-writing
+description: Write or revise lesson text. Use whenever you add a unit or
+  edit any student-facing prose.
+---
 
-<p data-i18n="patterns.give-home.1">
-  A convention goes in <code>CLAUDE.md</code>. A procedure with steps becomes a skill. Something
-  that has to happen every time, whether or not anybody remembers, becomes a hook. The habit worth
-  building is noticing the repetition at all.
+Write like a colleague explaining something at a whiteboard.
+
+- No em-dashes, anywhere. Two short sentences almost always read
+  better than one long one.</code></pre>
+
+<p data-i18n="patterns.skill-iteration.2">
+  The answers do get better. They also come back slightly off, and you find yourself repairing the
+  same kind of sentence every time. That is where iteration comes in. Fix the output, by hand or
+  with the agent, then hand it both versions and ask what the skill failed to say. Paste them into
+  the prompt, or point it at the <code>git diff</code>. Write the answer back into the skill
+  <svg data-icon="pattern"></svg> Do that a few rounds and it starts sounding like you, which is
+  what the writing skill looks like one pass later.
 </p>
 
-<p data-i18n="patterns.give-home.2">
-  Take one you have already explained three times. A new step in this kata needs a folder under
-  <code>front/src/steps/</code>, one HTML file per unit, two locale files, an <code>index.tsx</code>
-  exporting the step and a line in <code>steps/index.ts</code>. In <code>CLAUDE.md</code> that is a
-  paragraph, read at the start of every session and paid for on every turn after it. As a skill it
-  is a procedure, and it costs nothing until a task matches its description
-  <svg data-icon="coin"></svg> Better. Both are prose being interpreted, though, so the agent builds
-  the folder by hand, slightly differently each time.
+<pre><code>---
+name: lesson-writing
+description: Write or revise lesson text. Use whenever you add a unit or
+  edit any student-facing prose.
+---
+
+Write like a colleague explaining something at a whiteboard.
+
+- No em-dashes, anywhere. Two short sentences almost always read
+  better than one long one.
+- Do not announce the count. "Two things matter here" tells the
+  reader nothing they cannot see for themselves one comma later.
+  Say the things and let there be two of them.</code></pre>
+
+<p data-i18n="patterns.skill-iteration.3">
+  The corrections stop coming back <svg data-icon="coin"></svg> And a skill is a file in the
+  repository rather than a habit in your head, so everyone on the team works from the same one
+  without anybody explaining it.
 </p>
 
-<h2 data-i18n="patterns.script-instead.heading">A script instead</h2>
+<h2 data-i18n="patterns.scripts.heading">Scripts</h2>
 
-<p data-i18n="patterns.script-instead.1">
-  Ask Claude to write the script, once: <code>scripts/new-step.sh step3</code> creates the folder,
-  both locale files, the unit stub and the registry line <svg data-icon="gem"></svg> The skill
-  shrinks to about three lines. Take the name, run the script, check what came out.
+<p data-i18n="patterns.scripts.1">
+  You may not write much Bash or Python. Your agent does. So when a repetition has an expected end
+  result, a script is usually worth writing <svg data-icon="gem"></svg> Adding a skill that calls it
+  makes your agent aware of its existence. Think of things like scaffolding a domain, printing a
+  one-pager, cleaning a database before a demo.
 </p>
 
-<p data-i18n="patterns.script-instead.2">
-  It wins for reasons that have nothing to do with agents. Same input, same output, no
-  interpretation in between, so step 3 and step 7 come out identical rather than similar. Changing
-  the convention is now a diff somebody reviews, instead of a sentence that quietly moved in a
-  markdown file. And anybody can run it: the colleague who does not use an agent, the new hire on
-  day one, the pipeline. A skill only helps the people who have Claude open.
+<p data-i18n="patterns.scripts.2">
+  A script is predictable. Same input, same output, no interpretation in
+  between. When it does the wrong thing you change the script, with the agent if you like, and it
+  stays changed for every run after that. The agent stops working the steps out again as well, so it
+  spends neither tokens nor time on something you already know the answer to
+  <svg data-icon="coin"></svg>.
 </p>
 
-<h2 data-i18n="patterns.around-script.heading">Around the script</h2>
-
-<p data-i18n="patterns.around-script.1">
-  What stays in the skill is the judgement. Is this name valid, did the result hold together, and
-  what do you do when it did not. When it has to run whether or not anybody asks, a hook calls the
-  same script. The model no longer has to be right about your layout: it has to run one command and
-  read the output, which is a far smaller thing to be right about.
-</p>
-
-<p data-i18n="patterns.around-script.2">
-  Not everything reduces to a script, and forcing it helps nobody. The em-dash rule in
-  <code>lesson-writing</code> is taste, and taste has no exit code. Its check is a <code>grep</code>,
-  though, so even that one ends in something runnable. When you can name the check, script it. When
-  you can only describe the taste, write it down and keep it short.
-</p>
+<div data-figure="script-runs"></div>
