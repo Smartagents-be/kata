@@ -4,8 +4,10 @@ import { DomainTree } from './DomainTree'
 import { FlowDiagram } from './FlowDiagram'
 import { HookTree } from './HookTree'
 import { IterationPaths } from './IterationPaths'
+import { LoopsPerHour } from './LoopsPerHour'
 import { ProjectTree } from './ProjectTree'
 import { SetupFlags } from './SetupFlags'
+import { SkillShape } from './SkillShape'
 import { SkillTree } from './SkillTree'
 import { UnitShot } from './UnitShot'
 import { WhereWouldItGo } from './WhereWouldItGo'
@@ -21,6 +23,7 @@ import steering from './units/steering.html?raw'
 import patterns from './units/patterns.html?raw'
 import quality from './units/quality.html?raw'
 import workflows from './units/workflows.html?raw'
+import enablement from './units/enablement.html?raw'
 import goals from './units/goals.html?raw'
 import workshop from './units/workshop.html?raw'
 
@@ -29,10 +32,10 @@ import workshop from './units/workshop.html?raw'
  * the code yourself, one unit each. `evolution` opens the step by putting the rest of them in
  * order: small steps, taken often, on something that already runs.
  *
- * `evolution`, `setup`, `engineering` and `workflows` each carry a drawing, and the closing
- * `workshop` unit carries the flag board, which is why this registry is .tsx. The board is browser-graded, so the
- * step still talks to the service only through the `mvn verify -Pgraded` run the student does
- * outside the app.
+ * `evolution`, `setup`, `engineering`, `workflows` and `enablement` each carry a drawing, and the
+ * closing `workshop` unit carries the flag board, which is why this registry is .tsx. The board is
+ * browser-graded, so the step still talks to the service only through the `mvn verify -Pgraded` run
+ * the student does outside the app.
  */
 const step2: Step = {
   id: 'step2',
@@ -150,6 +153,19 @@ const step2: Step = {
         'audit-example': <AuditExample />,
         'workflow-timeline': <WorkflowTimeline />,
         'workflow-weights': <WorkflowWeights />,
+      },
+    },
+    {
+      id: 'enablement',
+      title: 'enablement.title',
+      html: enablement,
+      // Two slots inside the prose, and they answer different halves of the unit. The bands close
+      // the section on shortcuts, because a shorter loop is what the shortcuts are for. The two
+      // profile shapes close the unit itself, so nothing reads them afterwards and their own labels
+      // have to carry the argument.
+      inlineFigures: {
+        'loops-per-hour': <LoopsPerHour />,
+        'skill-shape': <SkillShape />,
       },
     },
     {

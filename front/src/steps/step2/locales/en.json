@@ -8,6 +8,7 @@
   "patterns.title": "Solving repeating patterns",
   "quality.title": "Quality management",
   "workflows.title": "Workflows",
+  "enablement.title": "Enablement",
   "goals.title": "Goal-oriented",
   "workshop.title": "Workshop",
 
@@ -112,6 +113,20 @@
   "workflow-weights.plan-based": "Plan-based",
   "workflow-weights.spec-driven": "Spec-driven",
   "workflow-weights.audit-driven": "Audit-driven",
+
+  "loops-per-hour.description": "The same hour drawn twice. The first band gets through two turns and the start of a third, almost all of it waiting. The second gets through eleven, with the waiting cut to the size of the other two parts.",
+  "loops-per-hour.hour": "one hour",
+  "loops-per-hour.slow": "Not running it locally",
+  "loops-per-hour.fast": "Running it locally",
+  "loops-per-hour.turns": "{{turns}} goes",
+  "loops-per-hour.change": "you change something",
+  "loops-per-hour.wait": "you wait to get there",
+  "loops-per-hour.look": "you look at it",
+
+  "skill-shape.description": "Two profile shapes. On the left one deep bar and nothing either side. On the right the same bar, the same depth, with a wide crossbar added on top of it.",
+  "skill-shape.i-label": "I-shaped",
+  "skill-shape.t-label": "T-shaped",
+  "skill-shape.breadth": "enough of the rest to judge it",
 
   "iteration-paths.description": "Two routes from the same start to the same target. On the left, three long steps that stop beside it. On the right, twelve short ones that land in it.",
   "iteration-paths.few": "Prototyping the old way took weeks",

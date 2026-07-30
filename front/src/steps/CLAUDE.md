@@ -426,16 +426,18 @@ than a price list. What a Copilot reader needs instead is in `model.api-vs-subsc
 the one table in the course with a currency is a few inches up the page, and a second set of figures
 turns both into the price list `model.cost.3` tells the student not to learn.
 
-`step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Eight
+`step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Nine
 units — `evolution`, `setup`, `engineering`, `steering`, `patterns`, `quality`, `workflows`,
-`goals` — none of
-them carrying a quiz, and the unit HTML is the source for what each argues. Three of the eight close
+`enablement`, `goals` — none of
+them carrying a quiz, and the unit HTML is the source for what each argues. Three of the nine close
 on something the student does: `evolution` on an ungraded fifteen-minute task, `setup` on a graded
-flag board, `engineering` on an ungraded `TaskCard`. The other five are framing prose. Six carry one
+flag board, `engineering` on an ungraded `TaskCard`. The other six are framing prose. Six carry one
 habit each; `evolution` opens the step and carries none, because its job is to put the other six in
 order: a version now costs an hour, so the step you hand over gets small and you take many of them.
-`workflows` is the other one outside that count, and deliberately so: it carries four ways of
-handing work over rather than one habit, and its argument is the choice between them.
+`workflows` is outside that count too, and deliberately so: it carries four ways of
+handing work over rather than one habit, and its argument is the choice between them. `enablement`
+is the third one outside it, for its own reason: it is about what has to be true around you rather
+than about a habit you practise.
 Its prose closes by handing off to `setup` by name, so a reordering there has to visit that
 paragraph. Below that prose sits the step's only *ungraded* exercise, under the same `<hr>`
 and "Test yourself" heading step 1's `tools` uses: fifteen minutes on the clock, one of three
@@ -680,7 +682,149 @@ precedent, and the caption was **cut on purpose**. It sits in the closing sectio
 the lead, because it labels the four by name and a reader who met it earlier would be looking at
 four words they had not been given yet.
 
-A ninth unit, `workshop`, closes the step as its capstone. It is the one part of step 2 a machine
+`enablement` follows `workflows` and owns the one thing the rest of the step leaves out: **how long
+it takes to find out**. Every other unit decides what you hand over or what you do while it runs;
+this one is about the machinery around you that answers you in seconds instead of in a deploy. Three
+sections, no exercise and no quiz, on `workflows`'s reasoning rather than as an omission: there is
+nothing a card could ask for that the student's own project would not answer better. Run it locally
+front and back, grow the crossbar, and count where the day goes.
+
+**It opens straight on its first `<h2>` and carries no lead, which is deliberate.** The two lead
+paragraphs it was drafted with said the work comes back fast and the checking is what takes the
+afternoon, which is the unit's premise restated rather than anything a reader could use, and they
+were cut for that. Every section under the heading opens cold on its own claim, so nothing is
+missing. Do not write an introduction back in.
+
+`run-own-machine` is two paragraphs and neither says what the other does. The first is the aim and
+the premise together: frontend, backend and the database in a container, with data in it, so a wrong
+column shows up as a wrong column, closing on the agent writing the change in seconds and your check
+having to keep up. **It opens on
+what running it locally buys rather than on the instruction**, because the heading above it already
+says to run it on your own machine and a first line saying so again is the heading twice. **It names
+no project either, and that is the decision.** It was three sentences of this repository's own two-terminal
+setup (`mvn spring-boot:run`, `npm run dev`, the Vite proxy) plus a seeding argument about the
+expired tier and the member with three hundred loans, and a student reading it against their own
+stack had to translate every line of it first. What is left of the seeding is one clause, data that
+**covers the everyday cases and the edge cases**, and it is the only place in the step the local
+data is asked for, and it stays general rather than naming cases of its own.
+
+**A hinge paragraph sat between the two and was cut**, and what it said is the thing not to write
+back: the setup buys a short gap between changing something and finding out, code arrives in seconds
+so the gap sets your pace rather than the typing, make it as small as you can, and every loop is
+another chance to steer. It went when the first paragraph took the agent-speed claim into its
+closing sentence, because the two then made one argument twice. The premise is stated once now, at
+the end of paragraph one, and that is where it stays. What the cut costs is "make it as small as you
+can", the sentence that turned the premise into something a reader does, and "every loop you get
+through is another chance to steer", which was the only line in the section pointing at `steering`.
+Neither belongs back in the opener as an extra sentence; if either is wanted, it is a paragraph of
+its own with something to say beyond restating the close above it.
+
+The second is the
+agentic turn on all of it: hand the agent the running app and the browser server `connect-one`
+already had it connect, and it opens the page, reads the wrong column and fixes it before the work
+comes back to you. That paragraph is why the section belongs in this course rather than in general
+engineering advice, so it goes last. It points at
+`step1/tools` for the server **as something described there rather than something the student did**,
+since a reader who skipped that task should not be told they connected anything, and it names the
+unit rather than an MCP package, on the usual rule. It **opened on "the agent uses all of it too"**
+until the paragraph above it started naming the agent, and it now gives the setup and the behaviour
+one sentence each and stops on the fix. Two closers went in turn, "That is a whole loop that never
+reached you" and then the bare fragment "A whole loop that never reached you", so the paragraph ends
+on the gem with no line reading the scene back. Do not write a third one: the scene is the payoff.
+
+`LoopsPerHour` closes the section, under the agentic paragraph: one hour drawn twice, two turns
+against eleven, each turn cut into change, wait and look. **It was moved here when
+`reachable-one-step` was cut**, and the opening paragraph is what holds it here: that is where the
+agent writing a change in seconds and your check having to keep up is stated, and this figure is
+that claim measured. Its two labels were rewritten in the same pass, from "Deploying to
+find out" against "With the shortcuts in" to **"Not running it locally" against "Running it
+locally"**, because the first pair named the cut section's example and would have left a figure
+labelled for prose that is no longer in the unit. **It is on the clock and never on step size.** `IterationPaths` in `evolution` already owns few-long against
+many-short, measured as distance to a target, and the two collapse into one argument the moment
+either borrows the other's vocabulary. The bands are the same width because the hour is the same
+hour, which is the whole drawing. Two things in it were fixed after they were first drawn and should
+not come back. The **wait is drawn as nothing**, an empty part of the turn's box rather than a pale
+fill, so the figure costs three tones instead of six and the slow band reads as two mostly empty
+rooms. And the **band spans the full viewBox**, so its edges land on the prose column's edges; inset
+by a margin it read as a smaller picture sitting inside the text rather than as a measure of the
+column it is in.
+
+A third paragraph was cut and should not come back. It said that some of what you build has no
+frontend, so ask the agent for a single page that calls the endpoint and prints what comes back. The
+section is about running what you already have, and a detour into building a throwaway UI is a
+different task; `evolution`'s fifteen-minute skeleton is where building a rough thing to look at
+lives.
+
+**A `fitness-tests` section was cut**, and this is the record of it. It said an agent writes the
+happy path unasked and leaves out the empty list, the expired tier and the amount that is exactly
+zero, that naming those yourself is what holds the shape while the agent rewrites everything
+underneath, and it pointed at this step's own `graded` and `challenge` profiles as two fitness tests
+that answer in one command. All of that survives elsewhere: `quality` owns the written-down bar and
+`workshop` is where the two profiles are actually run, so what went was the third telling. Do not
+restore it as a section; if the edge cases are wanted in this unit, they belong to a paragraph that
+argues something `quality` does not.
+
+It points across two boundaries rather than re-arguing them, and each is easy to collapse.
+`steering` owns what you do mid-run, so `where-day-goes`
+is a paragraph and a link for that half. Its second paragraph is the hours that go on **thinking**,
+and it is where the cut `code-got-cheap` section's surviving instruction lives: work the
+implementation details, argue both sides, come out with a design decision you could defend, because
+a decision you did not make is one the agent made for you. Keep it about deciding rather than about
+structure, or it turns into `engineering` a second time. And `goals` owns "if you cannot name the command that answers yes or no,
+you do not have a goal": that is about the instruction you hand over, while this unit is about the
+harness on your own machine. Keep the two apart or the step tells a student twice to make things
+measurable and never says why the second one is different.
+
+**A section called `reachable-one-step` was cut from the unit**, heading, prose and Dutch keys, and
+this is the record of what went with it so nobody restores half of it. It argued the general rule
+that whatever you are working on should be one step away, with the twelve-minute deploy as its
+example and the bill a new person pays on a fresh clone as its second half, and it closed on one
+command for setup, hot reload, a component workbench, and the reminder that **the pipeline still runs
+on every push, because the shortcut is for the loop and not for the release**. Anything written back
+in here needs that last sentence, or the section reads as advice to skip CI.
+
+Two earlier drafts are buried in it and are worth knowing before writing anything of the kind again.
+It was first a section called "Shortcuts past the login" that taught the example and never stated the
+rule, which is the shape to avoid; the token-bearing `.http` file and the seeded dev profile went
+with that login. **Local data belongs to `run-own-machine` and is a clause there rather than an
+argument**, so a section written back in here does not get to make it either. `LoopsPerHour` was this section's figure and stayed in the unit rather than going with it,
+moved up under `run-own-machine`, which is where it is documented.
+
+`t-shaped` argues the shape from the agent rather than from the market. Implementation gets faster
+with every release, so what is asked of you moves up a level: keep the specialism, know enough of
+the contexts around it to judge what comes back, and take the closing pair as the point, namely that
+**the agent handles the detail for everyone alike, so knowing the detail is worth less than it was
+and knowing what good engineering looks like is not**. It said "the market moved first, which means
+the upskilling is on you" before, which put the cause outside the course and outside the agent. Keep
+the cause where it is now. The `engineering` pointer hangs off that closing sentence rather than
+standing as a paragraph of its own: as a second paragraph it opened on the link and then restated
+the breadth claim the section had already made three sentences earlier, which is what made it read
+oddly. One section, one paragraph, and the link names the unit rather than teaching it again. **The
+section now carries no example**, having dropped the database migration, the frontend state bug and
+the build pipeline it used to name, so `SkillShape` under it is the only concrete thing in it. That
+is the trade to know about before adding prose here: the figure is carrying the section.
+
+**A `code-got-cheap` section closed the unit and was cut.** It said code used to be the expensive
+part and a craftsman built it slowly, that this is over and nobody is buying code from you any more,
+and that what sells is knowing what to build and being able to tell whether what came back is right,
+so think while the agent types and be the architect rather than the bricklayer. Both halves of it
+have homes now: `t-shaped` carries the worth of the knowledge in one sentence, knowing the detail
+being worth less than it was and knowing what good engineering looks like not, and
+`where-day-goes`'s second paragraph carries the thinking. A section written back in would be one of
+those two a second time.
+
+`SkillShape` sits under `t-shaped`, which is now the middle section, so the
+figure closes neither the unit nor its own section's argument; `where-day-goes` closes the unit. Nothing after it reads the drawing back,
+which is the part that has to survive the move: its own labels carry
+what it argues. An I beside a T, and **the stem is the same depth in both**. A T drawn with a
+shortened stem argues "get shallower", which is not the claim under it. The crossbar is the only teal
+thing in the figure, on the step's rule that teal is what the shape adds. The dashed baseline both
+stems land on **carries no label**: it had one reading "the depth you already had, unchanged" and it
+was cut, because two stems ending on one line say that already and the key is gone from both bundles.
+Only the T's half is captioned now, which is the same rule the crossbar's colour follows: what is
+named is what the shape adds.
+
+A tenth unit, `workshop`, closes the step as its capstone. It is the one part of step 2 a machine
 can grade, because it grades the thing `quality` and `goals` argue for: a goal a build answers yes
 or no to. It ships a small loans domain in `kata/step2/java` that is green but un-hardened, and
 a `graded` Maven profile that measures it against three goals - a coverage floor, a complexity
