@@ -1,17 +1,15 @@
 # Course audit, fresh pass
 
-**Measured:** 30 July 2026, against `d41887a` ("feat: enablement"), which is the whole working tree
-apart from this file. Every number here was taken off the files rather than carried forward.
+**Measured:** 30 July 2026, against `421e4b6` ("feat: solving repeating patterns"), which is the
+whole working tree apart from this file. Every number here was taken off the files rather than
+carried forward.
 
-`d41887a` adds a tenth unit to step 2, `enablement`, with two figures of its own (`LoopsPerHour`,
-`SkillShape`) and no exercise. Step 2's counts, every row of Table 2 from unit 17 down, and both
-summaries under it are therefore re-measured rather than restated. `npm run build` is green.
-
-Two numbers moved for a reason that is not in that commit. Step 0 lost nine words because `153df17`,
-the commit that carried the previous pass of this file, also shortened
-`welcome.how-to-use-this-document.5`, and the pass measured that paragraph before its own edit: 498
-became 489. Step 1 has not been touched since, and every number in Table 1b was re-measured to the
-figure it already carried.
+`421e4b6` is also the commit that carried the previous pass of this file, and it rewrote `patterns`
+in the same breath, so step 2's numbers were recorded before three edits that landed beside them:
+`patterns` lost 55 words and gained its first figure, `setup` lost 13 to a cut sentence and
+`workshop` gained one. Step 2's total, five rows of Table 2 and both summaries under it are
+therefore re-measured rather than restated. Steps 0 and 1 have not been touched, and every number in
+Tables 1a and 1b was re-measured to the figure it already carried. `npm run build` is green.
 
 **Legend:** ● solid · ◐ thin · ○ missing · ⟳ duplicated · ⚠ inaccurate
 
@@ -78,17 +76,14 @@ roughly 90 words less in `tools` and `model` each.
 | "Here is the part people do not expect" | `tokens.reads-all.1`, `prompt.plan-mode.2` | ⟳ | The identical opener, verbatim, two units apart. Fix: reword one. |
 | Coordinator saving, phrased twice | `harness.coordinator.1`, `model.let-it-pick.1` | ⟳ | "Top rate for deciding, a fraction of it for doing" appears near-verbatim in both. The back-pointer is deliberate; the phrasing collision is not. Fix: have `model` name the saving rather than restate it. |
 
-### Table 1c. Step 2, "Agentic engineering" (10 units, 6,836 words)
-
-The previous pass headed this table 6,514, which was the nine units without `enablement`. The number
-above is all ten, and `enablement`'s 322 words are the smallest unit in the step by a wide margin.
+### Table 1c. Step 2, "Agentic engineering" (10 units, 6,769 words)
 
 | Topic | Where | Status | Remarks and proposed fix |
 |---|---|:--:|---|
 | Iterate small because a version costs an hour | `evolution` | ● | |
 | Walking skeleton, and the one-hour rule | `evolution` / two screenshots | ● | |
 | Which service the skeleton exercise runs against | `evolution` | ◐ | The search-box option points at `/api/titles`, which is **step 1's** service. Since each step is its own project and only one holds `:8080`, the student has to know to run step 1's app, and the unit does not say so. Fix: one clause. |
-| `CLAUDE.md`: what belongs, what it costs | `setup` / `ProjectTree` | ● ⟳ | `setup` owns it and argues it twice inside one unit (the file, then the skill description), which is the right place for both. `patterns` and `quality` also re-argue the per-turn cost. Fix: let those two reference rather than re-derive. |
+| `CLAUDE.md`: what belongs, what it costs | `setup` / `ProjectTree` | ● ⟳ | `setup` owns it and argues it twice inside one unit (the file, then the skill description), which is the right place for both. One outside re-derivation is left, `quality.write-it-down.3`'s "a file paid for on every turn earns its length or loses it"; `patterns` no longer makes the argument at all. Fix: let `quality` reference rather than re-derive. |
 | Instruction files are scoped and they nest | `setup` | ● | |
 | A personal `~/.claude/CLAUDE.md` | `setup` | ● | |
 | Skills: frontmatter, load-on-match, being sparing | `setup` / `SkillTree` | ● | |
@@ -105,13 +100,14 @@ above is all ten, and `enablement`'s 322 words are the smallest unit in the step
 | Interrupt versus rewind | `steering` | ● | |
 | A worktree per agent, and the reading bottleneck | `steering` | ● ⟳ | The definition is written twice, here and in `goals`. The two *arguments* are genuinely different and both worth having; neither unit points at the other. Fix: `steering` reads first, so it keeps the definition and `goals` assumes it. |
 | Making the agent stop at a gap | `steering` | ● | |
-| The third-time rule, and where knowledge lives | `patterns` | ● ⚠ | The rewrite tightened the prose and **sharpened the defect**: `scripts/new-step.sh step3` still **does not exist**, and it now has a section of its own (`A script instead`) plus a closing one (`Around the script`) built on top of it, while the lead two paragraphs above names the four skills this repo actually wrote, `adding-a-step` among them. So the unit now argues at length for a script the codebase declined to write, and says out loud that "a skill only helps the people who have Claude open" in a repo that chose the skill. Fix: either rewrite the argument to reflect that the skill won, or write the script. Still a decision rather than a correction, and now a costlier one. |
-| The new-step file list | `patterns.give-home.2`, `quality.write-it-down.2` | ⟳ | Listed twice, near-identically. The rewrite shortened `patterns`' copy to "two locale files" but kept the list. `quality` at least flags it as a callback. Fix: one list, one owner. |
+| The third-time rule, and scripting a repetition | `patterns` / `ScriptRuns` | ● | |
+| Iterating a skill on its own output | `patterns` | ● | |
+| The new-step file list | `quality.write-it-down.2` | ● | |
 | The build decides, not the agent | `quality` | ● | |
 | Coverage, complexity, mutation, and gaming them | `quality`, `workshop` | ● ⟳ | Stated in both, plus `engineering`. Fix: `quality` keeps the argument, `workshop` names the target and assumes it. |
 | Over-commenting and under-logging | `quality` | ● | |
 | Goal vs instruction; long autonomous runs | `goals` | ● | |
-| The workshop's dependence on `quality` and `goals` | `goals` → `workshop`, `workshop.lead.1` (both languages) | ○ ⚠ | `goals` is the unit `workshop` most directly pays off and **neither end of that link is on the page**. Worse since `enablement` landed: `workshop.lead.1` grades "the thing the last two units argued you should always be able to name", and the last two units are now `enablement` and `goals`, of which `enablement` argues neither the bar nor the yes-or-no goal. The two that do are `quality`, three units back, and `goals`. Counting units back was fragile and an insertion has now broken it. Fix: name `quality` and `goals` in `workshop.lead.1` and in `nl.json` instead of counting, and have `goals` close by naming `workshop`. |
+| The workshop's dependence on `quality` and `goals` | `goals` → `workshop`, `workshop.lead.1` (both languages) | ◐ | `workshop.lead.1` now names the two units instead of counting back to them, in both languages, so the end that broke on `enablement`'s insertion is fixed. **The other end is still absent**: `goals` is the unit `workshop` most directly pays off and closes without naming it. Fix: have `goals` close by naming `workshop`. |
 | The five capstone flags | `workshop` / `Workshop` | ● | |
 | The native flag's help text | `workshop.flag.native.help` (both languages) | ⚠ | Tells the student to point the image at `Step2Application`, "not the pinned step 1 main". **No `<mainClass>` exists in any pom**; step 1's carries only a comment saying the pin was removed with the project split. The unit HTML was rewritten to stop claiming this; the flag help was not. Fix: cut the clause from `en.json` and `nl.json`. |
 | The coverage floor's scope | `workshop.goals.3` | ⚠ | Says the floor is on "the domain". JaCoCo measures everything under the step 2 package minus `web/**`, `config/**`, `aot/**` and `MemberStatements*`, so it also covers `port/`, `adapter/`, `application/LateFeeReport` and `Step2Application`. Only the **mutation** gate is domain-only. A student reasoning from the prose mis-scopes where to write tests. Fix: "on the module, with the web and config layers excluded". |
@@ -131,7 +127,7 @@ above is all ten, and `enablement`'s 322 words are the smallest unit in the step
 | T-shaped: keep the depth, add the breadth | `enablement` / `SkillShape` | ◐ | One paragraph against a figure, and the section carries **no example**, the database migration, frontend state bug and build pipeline it was drafted with having gone, so `SkillShape` is the only concrete thing in it. Documented as a known trade rather than an oversight, and the same imbalance this table already flags for `DomainTree`. Fix: one concrete case, or leave it and accept that the figure is carrying the section. |
 | Where the hours go once you stop typing code | `enablement` | ● | |
 | Quizzes | — | ○ | Step 2 has **no `quiz.ts` at all**, now across ten units. |
-| Stale docblocks | `FileTree.tsx`, `step2/index.tsx`, `SkillShape.tsx` | ⚠ | Three, and the newest is the worst. **`step2/index.tsx`'s comment over `enablement`'s two figures describes an earlier draft of the unit rather than the one beside it**: it says the bands "close the section on shortcuts", and the committed unit has no shortcuts section (`reachable-one-step` never landed, and `front/src/steps/CLAUDE.md` records the cut), and that "the two profile shapes close the unit itself", when `skill-shape` sits under `t-shaped` and `where-day-goes` runs two paragraphs after it. That same `CLAUDE.md` states it correctly ("`where-day-goes` closes the unit"), so the registry and the curriculum notes disagree about a unit added in the same commit. `SkillShape`'s own docblock repeats the confusion in one clause, "now the section has moved up under `run-own-machine`", which is the phrase that file uses for `LoopsPerHour`'s move and reads as if this figure moved too. And `FileTree` still says step 2 draws two trees, `ProjectTree` and `DomainTree`; there are **four** callers, `SkillTree` and `HookTree` as well. Resolved from the previous pass: the over-width line in `step2/index.tsx` is gone, and the header now names `workflows` and `enablement`, though it still does not mention `setup`'s board or the `engineering` task card. None of it is student-facing, but all of it is the kind of drift `patterns` teaches students to notice. |
+| Stale docblocks | `FileTree.tsx`, `step2/index.tsx` | ⚠ | Two left, and the new one arrived with the figure it misses. **`step2/index.tsx`'s header docblock names the five units that carry a drawing, `evolution`, `setup`, `engineering`, `workflows` and `enablement`, and `patterns` now carries one too**, added in the commit that left the sentence alone; the slot comment ten lines down correctly documents `ScriptRuns`. It still does not mention `setup`'s board or the `engineering` task card either. And `FileTree` still says step 2 draws two trees, `ProjectTree` and `DomainTree`; there are **four** callers, `SkillTree` and `HookTree` as well. Fixed: `enablement`'s slot comment now describes the committed unit, and `SkillShape`'s clause no longer reads as if that figure moved. None of it is student-facing, but all of it is the kind of drift `patterns` teaches students to notice. |
 
 ---
 
@@ -154,15 +150,15 @@ both marks ● has an empty remarks cell.
 | 9 | step1 / `model` | 825 | 3 | PickTheTier | `harness` | ● | ● | |
 | 10 | step1 / `workshop` | 1033 | 0 | FlagBoard (3 flags) | `model` | ● | ◐ | The **only exercise in the step with no `<hr>` and no "Test yourself" heading** over it, and it does not close the step: no closing paragraph, no pointer into step 2. The only mention of step 2 in all of step 1 is buried inside a `PickTheTier` explanation. Fix: copy the `<hr />` and the shared `ui:quiz.title` heading the other eight units now use, and close the step. |
 | 11 | step2 / `evolution` | 788 | 3 | ungraded exercise | step1 `workshop` | ● | ● | |
-| 12 | step2 / `setup` | 697 | 3 | SetupFlags (3 flags) | `evolution` | ● | ● | |
+| 12 | step2 / `setup` | 684 | 3 | SetupFlags (3 flags) | `evolution` | ● | ◐ | **It no longer closes with a forward pointer.** `setup.hooks.3` ended on "the unit on repeating patterns comes back to when that is worth doing" and the clause was cut, correctly, because `patterns` stopped mentioning hooks. What it leaves is the last prose sentence in the unit ending on hooks alone, and the `setup` → `patterns` seam unmarked from both sides. Fix: one clause, on whatever `patterns` argues now. |
 | 13 | step2 / `engineering` | 474 | 1+card | WhereWouldItGo | `setup` | ● | ◐ | The bare `<h2>Test yourself</h2>` over the card is now **deliberate and documented**: the comment in the HTML says the card's own description carries the setting, which is the same shape step 1's four task units use (rule, rule line, figure, nothing in between). So what is left is one thing, not two: it opens cold and closes on the card with no line into `steering`. Fix: one closing sentence. |
-| 14 | step2 / `steering` | 793 | 0 | none | `engineering` | ⚠ | ◐ | **The wall starts here**, and it is now three units rather than four: `steering`, `patterns`, `quality`, 1,841 words with no figure and nothing to do, ending at `workflows`. Opens cold, closes cold. Fix: this is the best figure candidate left in the kata: interrupt-versus-rewind is two windows side by side, which is exactly what step 1's figure vocabulary already draws, and `workflows` has just proven the step will carry drawings. |
-| 15 | step2 / `patterns` | 478 | 0 | none | `steering` | ⚠ | ◐ | Second wall unit, **rewritten by the commit and 128 words shorter**, which makes it the shortest unit in the step. Eight paragraphs became seven across three headings, and it picked up three inline icons (pattern, coin, gem), which are markers rather than figures: there is still nothing drawn and nothing to do. It silently picks up `setup`'s forward pointer, the one thread through this stretch, and still never names `setup` back. Its worked example is still fictional, and the rewrite leaned on it harder (Table 1c). Fix: a three-question quiz, and name `setup` when it collects the pointer. |
-| 16 | step2 / `quality` | 570 | 0 | none | `patterns` | ⚠ | ⚠ | Third wall unit. It names the exact numbers the workshop grades, three units early, **without ever saying the student will do this in the workshop**. Fix: a quiz, plus one clause threading it to the capstone. |
+| 14 | step2 / `steering` | 793 | 0 | none | `engineering` | ◐ | ◐ | **The wall is gone and this is what is left of it**: 793 words, no figure, nothing to do, but with `engineering` drawn before it and `patterns` drawn after it, so it no longer opens a run. Opens cold, closes cold. Fix: this is the best figure candidate left in the kata: interrupt-versus-rewind is two windows side by side, which is exactly what step 1's figure vocabulary already draws, and two units either side of it now carry drawings. |
+| 15 | step2 / `patterns` | 423 | 1 | none | `steering` | ◐ | ◐ | **Rewritten again and drawn for the first time**, 55 words shorter and second thinnest in the step. Eight paragraphs became six across two headings (`Skill iteration`, `Scripts`), two `<pre>` blocks arrived that are one skill twice differing by exactly one rule, and `ScriptRuns` closes the unit, so the figureless run through the middle of the step is broken here. Still **nothing to do**, and now barely half its predecessor's length. Both seams are bare: it opens cold, `setup`'s pointer into it was cut with the hooks clause, and it names no other unit at all. Fix: a three-question quiz, and one clause naming `setup` where the skill it iterates was first written. |
+| 16 | step2 / `quality` | 570 | 0 | none | `patterns` | ◐ | ⚠ | The step's other undrawn, taskless unit, now standing between two drawn ones rather than closing a run of three. It names the exact numbers the workshop grades, four units early, **without ever saying the student will do this in the workshop**. Fix: a quiz, plus one clause threading it to the capstone. |
 | 17 | step2 / `workflows` | 949 | 7 | AuditExample | `quality` | ● | ◐ | **The wall is now broken here, properly.** Seven figures, the densest unit in step 2 and second in the course to `tools`: four `FlowDiagram`s that close a section each, `AuditExample` (the switch turns the rendered table into the markdown behind it, the only interactive element in the step outside the two boards), `WorkflowWeights` and `WorkflowTimeline` closing. Longest of the six prose units, `enablement` included. Still nothing the student **does**. Fix: it is the cheapest place left for a quiz, since the four workflows sort cleanly into questions. |
 | 18 | step2 / `enablement` | 322 | 2 | none | `workflows` | ◐ | ◐ | **The thinnest unit in the course outside step 0**, and it lands straight after the densest one: 949 words and seven figures, then 322 and two. Three sections of one or two paragraphs, drawn but with nothing to do. The drop is partly by design (no lead, every section opening cold on its own claim, both documented), and two figures keep it from reading as a return to the wall, so this is a spike in the other direction rather than a defect. Sequence is the real cost: it opens cold and closes on prose with no line into `goals`, which leaves `workflows` → `enablement` → `goals` three units of unmarked seams. Against that, it ties `workflows` for the **most cross-linked unit in the course**, pointing at `step1/tools`, `engineering` and `steering` from inside its own paragraphs. Fix: one closing sentence into `goals`. |
 | 19 | step2 / `goals` | 676 | 0 | none | `enablement` | ⚠ | ⚠ | **The last figureless, taskless unit in the step**, now sitting between `enablement` and the capstone rather than between `workflows` and it. Carries the rule the entire capstone is built on and hands off to nothing, and `workshop`'s own lead now miscounts back past it (Table 1c). Second telling of `git worktree add`. Fix: name `workshop` in the closing line; still the cheapest sequencing fix in the step. |
-| 20 | step2 / `workshop` | 1089 | 0 | Workshop (5 flags) | `goals` | ● | ● | Longest unit in the course. The cadence complaint is **spent**: the run-up is now 1,271 drawn words across `workflows` and `enablement` and then 676 flat ones in `goals`, rather than 2,645 unbroken. It is 2 to 4 hours of real work and the strongest thing in the kata. What remains is the close: a one-sentence self-only aside, with no wrap-up of the step or the course. Fix: give the course an ending. |
+| 20 | step2 / `workshop` | 1090 | 0 | Workshop (5 flags) | `goals` | ● | ● | Longest unit in the course. The cadence complaint is **spent**: the run-up is now 1,271 drawn words across `workflows` and `enablement` and then 676 flat ones in `goals`, rather than 2,645 unbroken. It is 2 to 4 hours of real work and the strongest thing in the kata. What remains is the close: a one-sentence self-only aside, with no wrap-up of the step or the course. Fix: give the course an ending. |
 
 ### Cadence, in summary
 
@@ -171,17 +167,18 @@ both marks ● has an empty remarks cell.
   instead, at units 10, 12 and 20. A board is a task, not a question, and in a guided room a tutor
   cannot get a show of hands from one. **Step 2 has no `quiz.ts` at all.** Fix: three questions each
   on `steering`, `patterns` and `quality`, browser-graded, on machinery that already exists.
-- **The wall is broken and stays broken.** `workflows` split the old five-unit stretch with seven
-  figures and `enablement` has now put two more between it and `goals`, so what is left unillustrated
-  is `steering`/`patterns`/`quality` (1,841 words, no figure, nothing to do) and `goals` on its own.
-  `steering` is the one worth drawing first. The *interaction* problem did not move and is now the
+- **The wall is gone.** `workflows` split the old five-unit stretch with seven figures, `enablement`
+  put two more between it and `goals`, and `ScriptRuns` has now drawn `patterns`, so **no two
+  undrawn units are adjacent anywhere in the step**. What is left unillustrated is three units
+  standing alone, `steering`, `quality` and `goals`, 2,039 words between them with nothing to do in
+  any of them. `steering` is still the one worth drawing first. The *interaction* problem did not move and is now the
   larger of the two: **six of step 2's ten units carry nothing the student does** (`steering`,
   `patterns`, `quality`, `workflows`, `enablement`, `goals`), against four that do. `workflows` is
   still the cheapest place for a quiz, because its four workflows are exactly the kind of thing three
   questions can sort.
 - **Interaction density is inverted against difficulty.** Step 1 carries eight interactive
   components, three interactive figures and two quizzes across 7,212 words. Step 2 carries two graded
-  boards, two ungraded tasks, one interactive figure and no quizzes across 6,836 words, and it is the
+  boards, two ungraded tasks, one interactive figure and no quizzes across 6,769 words, and it is the
   harder step. The gap widened with `enablement`, which added words and figures and nothing to do.
 - **The exercise heading is now one key.** Eight units carry
   `<h2 data-i18n="ui:quiz.title">Test yourself</h2>`, the shared `ui` key, so the wording over a task
@@ -194,13 +191,15 @@ both marks ● has an empty remarks cell.
 ### Sequence, in summary
 
 - **Transitions are the course's weakest structural habit.** Of twenty units, four open with an
-  explicit back-reference (`model`, both `workshop`s, `setup` by implication) and **three** close
-  with a forward pointer (`backend`, `evolution`, `setup`). Everything else opens cold and closes on
+  explicit back-reference (`model`, both `workshop`s, `setup` by implication) and **two** close
+  with a forward pointer (`backend`, `evolution`). Everything else opens cold and closes on
   a bare figure, card or board. The house style is to open cold on the claim, which is right at the
   *paragraph* level and has been applied at the *unit* level, where it costs the student the thread.
 - **The two seams that matter most are still unmarked**: `engineering` → `steering` (a bare heading
   into a cold open), and `goals` → `workshop` (the unit that argues the rule, into the unit that
-  grades it). The step0 → step1 seam is closed. `enablement` lengthened the unmarked stretch to
+  grades it). A third joined them: `setup` → `patterns` was marked from the `setup` side and the
+  clause was cut with the hooks pointer, so the only marked seam inside step 2 is now
+  `evolution` → `setup`. The step0 → step1 seam is closed. `enablement` lengthened the unmarked stretch to
   `workflows` → `enablement` → `goals` and, at the same time, showed the cheap way out of it: like
   `workflows`, it carries three links to other units from inside its own paragraphs, and none of them
   cost it a transition sentence. **The habit is almost entirely step 2's**: `workflows` and
@@ -220,7 +219,7 @@ both marks ● has an empty remarks cell.
 
 | Gap | Status | Remarks and proposed fix |
 |---|:--:|---|
-| The deck covers step 1 only | ◐ | 37 slides, data-driven, drawing the step's own figure components so board and page cannot drift. Step 0 has the opening question; **step 2 has no `deck.tsx`** for any of its ten units, and step 2 is the step whose units are hardest to run at a board. The gap grows with the step: `enablement` brings step 2 to **16 inline figures** with no slide behind any of them, and all 16 are the reusable kind, since the three that could not go on a slide (`SetupFlags`, `WhereWouldItGo`, `Workshop`, which write progress to localStorage) are boards and cards rather than drawings. The mechanism is built and proven, so this is authoring, not engineering. |
+| The deck covers step 1 only | ◐ | 37 slides, data-driven, drawing the step's own figure components so board and page cannot drift. Step 0 has the opening question; **step 2 has no `deck.tsx`** for any of its ten units, and step 2 is the step whose units are hardest to run at a board. The gap grows with the step: `patterns`' `ScriptRuns` brings step 2 to **17 inline figures** with no slide behind any of them, and all 17 are the reusable kind, since the three that could not go on a slide (`SetupFlags`, `WhereWouldItGo`, `Workshop`, which write progress to localStorage) are boards and cards rather than drawings. The mechanism is built and proven, so this is authoring, not engineering. |
 | No instructor scaffolding | ○ | No `INSTRUCTOR.md`, no per-unit timings, no demo scripts, no checkpoints, no "if the room is stuck here, do this". Guided is the **default** mode, which makes the absence louder. |
 | Dutch completeness | ● | |
 | Em-dash rule | ● | |

@@ -1,4 +1,6 @@
+import { UnitShot } from '@/shared/components/UnitShot'
 import type { Step } from '@/shared/step'
+import { AnswerProvenance } from './AnswerProvenance'
 import { BudgetWindow } from './BudgetWindow'
 import { BundleCompare } from './BundleCompare'
 import { ContextDiagram } from './ContextDiagram'
@@ -21,11 +23,13 @@ import { ReadYourWindow } from './ReadYourWindow'
 import { ReflectionLoop } from './ReflectionLoop'
 import { SequentialSteps } from './SequentialSteps'
 import { SessionMakeup } from './SessionMakeup'
+import { SessionWindows } from './SessionWindows'
 import { SpotInjection } from './SpotInjection'
 import { SurviveTheClear } from './SurviveTheClear'
 import { TokenAttention } from './TokenAttention'
 import { TokenSplit } from './TokenSplit'
 import { ToolsInContext } from './ToolsInContext'
+import { TrainedOrGrounded } from './TrainedOrGrounded'
 import deck from './deck'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
@@ -37,12 +41,14 @@ import context from './units/context.html?raw'
 import session from './units/session.html?raw'
 import harness from './units/harness.html?raw'
 import model from './units/model.html?raw'
+import truth from './units/truth.html?raw'
 import workshop from './units/workshop.html?raw'
 
 /**
- * Step 1, one layer of context per unit, plus two units that are not layers. `tokens` opens the step
- * and is the unit the window is counted in; `model` closes the prose and is the reader on the other
- * end of it. Neither fills the window, which is why `workshop` still names four layers and not six.
+ * Step 1, one layer of context per unit, plus three units that are not layers. `tokens` opens the
+ * step and is the unit the window is counted in; `model` is the reader on the other end of it and
+ * `truth` is where that reader's answers come from. None of the three fills the window, which is why
+ * `workshop` still names four layers and not seven.
  *
  * The two layers a student writes and reads for themselves come first, so `prompt` and `tools` sit
  * ahead of `context`. That makes `prompt` the unit that defines the word context, and it makes
@@ -135,7 +141,24 @@ const step1: Step = {
       inlineFigures: {
         'model-tiers': <ModelTiers />,
         'model-pricing': <ModelPricing />,
+        // Both slots are `data-assistant="claude"` in the HTML, so a Copilot reader never asks for
+        // them. The attribute sits on the marker rather than on a wrapper, which is the one way a
+        // figure may be assistant-specific.
+        'usage-readout': <UnitShot id="usage-readout" src="/session-usage.png" namespace="step1" />,
+        'session-windows': <SessionWindows />,
         'pick-the-tier': <PickTheTier />,
+      },
+    },
+    {
+      id: 'truth',
+      title: 'truth.title',
+      html: truth,
+      inlineFigures: {
+        // Two figures on one argument, and they take different cuts of it. The first is two whole
+        // answers, one window apart; the second is one answer whose parts did not all come from the
+        // same place. Neither may borrow the other's shape, or the unit draws its point twice.
+        'trained-or-grounded': <TrainedOrGrounded />,
+        'answer-provenance': <AnswerProvenance />,
       },
     },
     {

@@ -1,4 +1,5 @@
 import type { SlideSpec } from '@/shared/deck/slide-spec'
+import { AnswerProvenance } from './AnswerProvenance'
 import { BudgetWindow } from './BudgetWindow'
 import { BundleCompare } from './BundleCompare'
 import { ContextDiagram } from './ContextDiagram'
@@ -20,6 +21,7 @@ import { SessionMakeup } from './SessionMakeup'
 import { TokenAttention } from './TokenAttention'
 import { TokenSplit } from './TokenSplit'
 import { ToolsInContext } from './ToolsInContext'
+import { TrainedOrGrounded } from './TrainedOrGrounded'
 
 /**
  * Step 1 on the board.
@@ -373,6 +375,51 @@ const deck: SlideSpec[] = [
     figure: <PickTheTier />,
     scale: 1.17,
     figureWidth: 1250,
+  },
+
+  // ── truth ─────────────────────────────────────────────────────────────────────────────────
+  // The statement goes first, ahead of both figures, on the harness block's precedent. Both
+  // drawings are the same claim measured, so the room needs the claim before either of them means
+  // anything, and the cutoff has no figure to arrive on.
+  {
+    id: 'deck-truth',
+    kind: 'divider',
+    ns: 'step1',
+    eyebrow: 'step.title',
+    title: 'truth.title',
+  },
+  {
+    id: 'deck-truth-sounds-same',
+    kind: 'statement',
+    ns: 'step1',
+    eyebrow: 'truth.title',
+    title: 'deck.truth.sounds-same.title',
+    note: 'deck.truth.sounds-same.note',
+  },
+  {
+    id: 'deck-truth-grounded',
+    kind: 'figure',
+    ns: 'step1',
+    eyebrow: 'truth.title',
+    title: 'deck.truth.grounded.title',
+    figure: <TrainedOrGrounded />,
+    // 1.85 fits the frame's width but crowds it: the panel titles run into the heading and the
+    // answer chips land on the footer's 88px clearance. This is the largest that still reads as a
+    // drawing under a heading rather than a drawing pushing one out of the way.
+    scale: 1.7,
+  },
+  {
+    id: 'deck-truth-provenance',
+    kind: 'figure',
+    ns: 'step1',
+    eyebrow: 'truth.title',
+    title: 'deck.truth.provenance.title',
+    figure: <AnswerProvenance />,
+    // Laid out wide and magnified less than the drawing above it. This one is text in two columns,
+    // so `width * scale` has to stay inside the frame or `SlideFigure`'s `overflow-hidden` takes
+    // the left edge off the symbols, which is where the claims are.
+    scale: 1.5,
+    figureWidth: 1100,
   },
 
   // ── workshop ──────────────────────────────────────────────────────────────────────────────

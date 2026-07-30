@@ -13,10 +13,31 @@ import { useTranslation } from 'react-i18next'
  *
  * The dashed tail on the left half is the distance nobody got to cover, drawn dashed the way the
  * step 1 diagrams draw what is not there.
+ *
+ * `ABANDONED` is the same reading of a dash a second time: nodes on the right-hand path throw off
+ * versions that were built and dropped. Every one of them **heads for the same target and is a few
+ * degrees off it**, which is what makes it a version of the work rather than a detour, and **most are
+ * a single step**, since a version you throw away is usually one swing. They start **early as well as
+ * late**, so branching is not something that only happens near the finish, and one node carries two of
+ * them because taking the same step three ways is the point. Only the right half has any, and that is
+ * the argument: a step you can take again is a step you can afford to take twice, which the left half
+ * at weeks a version cannot, so the left half never branches.
+ *
+ * Three geometric constraints, all easy to break and none of them visible in a diff. The spurs live
+ * in the empty wedge below the main path, no two of them overlap in x unless they leave the same node
+ * (which is what keeps them from crossing each other), and none comes within the target ring's radius
+ * of its centre, or a dropped version reads as arriving. Moving a point on `MANY` means re-checking
+ * all four by eye.
  */
 const FEW = '60,250 170,190 110,120 205,105'
 const MANY =
   '60,250 86,246 83,211 115,213 117,183 145,181 151,156 174,149 184,127 205,117 217,99 235,86 250,70'
+const ABANDONED = [
+  '86,246 114,231',
+  '115,213 145,197',
+  '205,117 259,101',
+  '205,117 232,127 256,120',
+]
 
 const toPoints = (path: string) =>
   path.split(' ').map((pair) => pair.split(',').map(Number) as [number, number])
@@ -144,6 +165,32 @@ export function IterationPaths() {
           >
             {t('iteration-paths.target')}
           </text>
+
+          {/* the versions that did not survive, drawn under the path that did */}
+          {ABANDONED.map((branch, index) => (
+            <g key={branch} id={`iteration-paths-many-branch-${index}`} data-component="IterationPaths">
+              <polyline
+                points={branch}
+                strokeWidth="2"
+                strokeLinejoin="round"
+                strokeDasharray="4 4"
+                className="fill-none stroke-primary/50"
+                data-component="IterationPaths"
+              />
+              {toPoints(branch)
+                .slice(1)
+                .map(([x, y]) => (
+                  <circle
+                    key={`${x},${y}`}
+                    cx={x}
+                    cy={y}
+                    r="3"
+                    className="fill-primary/50"
+                    data-component="IterationPaths"
+                  />
+                ))}
+            </g>
+          ))}
 
           <polyline
             id="iteration-paths-many-line"

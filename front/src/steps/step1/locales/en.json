@@ -8,6 +8,7 @@
   "harness.title": "The harness",
   "tools.title": "Tools",
   "model.title": "The model",
+  "truth.title": "Truth",
   "workshop.title": "Workshop",
 
   "flags.panel.title": "Flag board",
@@ -293,6 +294,18 @@
   "pricing.head.output": "Output",
   "pricing.caption": "As listed in July 2026.",
 
+  "usage-readout.alt": "A terminal readout with three labelled bars. The current session is 6% used and resets at 5:29pm, the current week across all models is 13% used and resets on 4 August, and the current week for one model is 2% used.",
+  "usage-readout.caption": "The /usage readout in Claude Code, July 2026.",
+
+  "session-windows.description": "One working day of eight hours at the desk, drawn twice, with the same two five-hour windows on it. In the first row the windows start whenever the day happened to start, so the seam between them falls in the middle of the afternoon and two and a half hours of window are left over after you have gone home. In the second row the first window opens five hours before the break, so it ends exactly at the break, the next one covers the break and the whole afternoon, and only an hour is left over.",
+  "session-windows.day": "your day",
+  "session-windows.break": "break",
+  "session-windows.leave": "you leave",
+  "session-windows.drifted": "whenever you happen to start",
+  "session-windows.aligned": "five hours before your break",
+  "session-windows.length": "5 hours",
+  "session-windows.spare": "already gone home",
+
   "pick.title": "Which model would you run it on?",
   "pick.description": "Drag a line from each situation to the tier you would give it. Three tiers, five situations, so more than one lands on the same tier. Checked here in the browser.",
   "pick.armed": "Now pick the tier you would give it.",
@@ -311,6 +324,20 @@
   "pick.explanation.limit": "Ordinary coding, spelled out, with the tests named. That is the middle tier, which is where most agentic coding sits and the place to start.",
   "pick.explanation.plan": "The plan already did the hard thinking, which is the argument the prompt unit made. What is left is carrying it out across files that interlock, and that is the middle tier rather than a job for the top one.",
   "pick.explanation.flaky": "No reproduction and no obvious cause, so this one runs long and wanders. Holding a hunt together across many steps is the thing you pay the top tier for.",
+
+  "trained-or-grounded.description": "The same question answered out of two context windows. The left one holds only the prompt, the right one holds the prompt and the file it was told to read. The two answers below them are drawn the same size and the same shade, and they say different versions.",
+  "trained-or-grounded.trained": "from training",
+  "trained-or-grounded.grounded": "grounded",
+  "trained-or-grounded.prompt": "prompt",
+  "trained-or-grounded.empty": "nothing else in here",
+  "trained-or-grounded.answer": "answer",
+
+  "answer-provenance.claim": "what the answer says",
+  "answer-provenance.source": "what it was read from",
+  "answer-provenance.missing": "read nowhere",
+  "answer-provenance.titles": "returns the list the catalogue page shows",
+  "answer-provenance.filter": "filters those titles by author",
+  "answer-provenance.endpoint": "is the endpoint behind them",
 
   "quiz.forgets-this-morning.question": "You have been working on the same project all morning. At 14:00 you ask the agent something you already told it at 08:00, and it does not remember. What happened?",
   "quiz.forgets-this-morning.window": "The window filled up. The morning was compacted into a summary or pushed out of the context, so it is no longer in front of the model.",
@@ -399,6 +426,11 @@
   "deck.model.reasoning.title": "Reasoning level is <hi>not</hi> the tier",
   "deck.model.reasoning.note": "How long one model thinks, against which model is thinking. Turning reasoning up on the small tier does not hand you the top one.",
   "deck.model.pick.title": "Which tier would you run?",
+
+  "deck.truth.sounds-same.title": "It sounds <hi>the same</hi> either way",
+  "deck.truth.sounds-same.note": "Trained or grounded, read off disk or filled in. Confidence is not the signal, so ask where the answer came from.",
+  "deck.truth.grounded.title": "Same question, <mute>two windows</mute>",
+  "deck.truth.provenance.title": "One answer, and only some of it was <hi>read</hi>",
 
   "deck.workshop.flags.title": "Three flags, three ways context is assembled",
   "deck.workshop.flags.note": "Read the source, trace the run, turn the log level up."

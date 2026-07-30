@@ -39,7 +39,9 @@ Two parts, both walking-skeleton thin:
 
 `step1` is **context, model, mechanisms**: the layers an agent's context is assembled from and the
 machinery around the window they share. `step2` is **agentic engineering**: how you work with an
-agent, as opposed to what it knows. What is deliberate about each of their units, and why, is in
+agent, as opposed to what it knows. `step3` is **soft skills**: what happens around the work rather
+than in it, and it is the one step with no Java behind it and nothing for a machine to grade. What is
+deliberate about each of their units, and why, is in
 **`front/src/steps/CLAUDE.md`**, which loads when you work under that directory. Read it before
 touching any unit HTML, figure, locale file or step registry: a great deal of what looks like an
 oversight in there is load bearing, and that file is the only place the reasoning is written down.
@@ -73,9 +75,14 @@ kata/
   step0/java/    test sources only: the intro's one exercise, behind an opt-in profile
   step1/java/    the catalogue service and the three flags hidden in it
   step2/java/    the loans domain, the graded and challenge profiles, the native-image flag
-  step3/java/    an empty scaffold, buildable, waiting for the step's topic
+  step3/java/    an empty scaffold, buildable, kept as the template a Java step is copied from
 front/           the curriculum
 ```
+
+**The number on that scaffold no longer names a step.** `front/src/steps/step3` is soft skills, which
+is worked in the student's own head and their own team rather than against a project, so it has no
+Java and the folder it would have owned stays the empty template. A step that does need Java is the
+next number along, and copying this one means renaming the artifactId and the package with it.
 
 **There is no pom at the repo root, and no aggregator.** That is the decision, not an omission: a
 step is a folder a student opens on its own, and a project that has to be built from a parent is not

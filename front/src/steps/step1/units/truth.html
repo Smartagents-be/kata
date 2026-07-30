@@ -1,0 +1,92 @@
+<p data-i18n="truth.lead.1">
+  The same question can have more than one true answer, and which one you get depends on where the
+  agent looked. Part of what it knows was fixed on the day its training stopped. None of it was ever
+  about your company. Not your repository, not your conventions, not the version you are actually
+  on.
+</p>
+
+<p data-i18n="truth.lead.2">
+  Everything else has to reach it somehow. You put it in the window yourself, or you send it to find
+  out with <a href="/steps/step1/tools">a tool</a>. Ask which version of Spring Boot this project
+  builds on and you might get the version most projects were on when it was trained, because nothing
+  sent it to look. Tell it to read <code>pom.xml</code> first and the number is in the window before
+  the answer is.
+</p>
+
+<p data-i18n="truth.lead.3">
+  So which of the three is the truth? The one it went and discovered, the one you handed it, or the
+  one it already had. All three arrive in the same voice.
+</p>
+
+<h2 data-i18n="truth.cutoff.heading">The cutoff</h2>
+
+<p data-i18n="truth.cutoff.1">
+  Training stopped on a date. Whatever was published after it is not something the model knows less
+  well, it is something the model has never seen. A framework released last spring, the API your
+  team deprecated in March, the library that threw out its whole configuration format: none of that
+  is in there.
+</p>
+
+<p data-i18n="truth.cutoff.2">
+  The answer still arrives. It describes the version before yours, in the same level tone as
+  everything else, and it is out of date rather than wrong, which is the harder thing to spot. This
+  is the half of the model that ages while you are not looking.
+</p>
+
+<h2 data-i18n="truth.grounding.heading">Grounding</h2>
+
+<p data-i18n="truth.grounding.1">
+  Put the thing in the window and the answer changes source. The <code>pom.xml</code> on disk, the
+  release notes fetched off the web, the output of a command that ran a second ago: once any of it
+  is in the context, the model is reading rather than remembering. That is a grounded answer, and it
+  is the one you want for anything with a fact behind it.
+</p>
+
+<!-- The same question answered out of two windows. The two answer chips are drawn identically on
+     purpose: what differs is what is in the window above them, which is the one thing the student
+     cannot see from the answer. -->
+<div data-figure="trained-or-grounded"></div>
+
+<p data-i18n="truth.grounding.2">
+  Only the window changed. Getting the file in there is
+  <a href="/steps/step1/tools">the unit on tools</a>, and what is on you is asking for it. "Which
+  version does this project use" invites a guess. "Read <code>pom.xml</code> and tell me which
+  version this project uses" does not.
+</p>
+
+<h2 data-i18n="truth.proof.heading">Proof</h2>
+
+<p data-i18n="truth.proof.1">
+  Grounded is still not proved. The agent read a file and told you what it says, and you are taking
+  its word for the reading. Anything that can be run should be run: <code>mvn test</code>, a
+  <code>curl</code> at the endpoint, one line of <code>jshell</code>. An answer with a command
+  behind it is a different kind of answer.
+</p>
+
+<p data-i18n="truth.proof.2">
+  Ask for the check rather than the conclusion, then. Not "does this handle an empty list" but a
+  test that goes red on an empty list <svg data-icon="gem"></svg> Reasoning about what the code does
+  and running it are two different claims, and only one of them can fail in front of you.
+</p>
+
+<h2 data-i18n="truth.hallucinations.heading">Hallucinations</h2>
+
+<p data-i18n="truth.hallucinations.1">
+  With nothing in the window to read, the model answers anyway. Answering is what it does. Ask which
+  method on <code>Catalog</code> filters titles by author and you get
+  <code>findAllByAuthorOrdered</code>, spelled the way the rest of that class spells things, on a
+  class that has no such method. Nothing was looked up and nothing was invented on purpose. The next
+  likely token landed where a fact should have been, and that is a hallucination.
+</p>
+
+<!-- One answer taken apart into its claims. The left column is uniform on purpose: nothing about
+     the invented claim looks different, and everything that varies sits in the column the student
+     never gets handed. -->
+<div data-figure="answer-provenance"></div>
+
+<p data-i18n="truth.hallucinations.2">
+  Two of those were read and one was not, and the answer says the same thing about all three. That
+  is what makes it expensive. No wobble in the tone, no hedge, no shorter sentence, because the
+  model sounds the same whether it read your file or filled the gap. Stop reading the tone and start
+  asking where the answer came from.
+</p>

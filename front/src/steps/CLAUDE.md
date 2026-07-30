@@ -20,8 +20,8 @@ one-word name once `model` and the machinery around the window joined it, so the
 is in there rather than naming one of the three. The topic is still context, which is why the
 sentence above still opens that way. `FLAG_SALT` in `flags.ts` still reads `kata-step1-context-v1`
 and must not follow the title: it is a hash input, so renaming it invalidates every flag on the
-board. Eight units — `tokens`, `prompt`, `tools`, `context`, `session`,
-`harness`, `model`, `workshop` — and the unit HTML is the source for what each one teaches. The
+board. Nine units — `tokens`, `prompt`, `tools`, `context`, `session`,
+`harness`, `model`, `truth`, `workshop` — and the unit HTML is the source for what each one teaches. The
 fourth was called `intro` until it was renamed, id and all, so its URL is `/steps/step1/context` and
 its prose keys read `context.<section>.<n>`. Old links to `/steps/step1/intro` are dead and there is
 no redirect, which is the decision: the app has no route aliases anywhere and one unit is not the
@@ -45,11 +45,13 @@ oval instead carries `ContextDiagram`'s prompt region geometry and fills, so the
 shape seen twice; the component name still says `InContext` and no longer describes the drawing. Neither is to scale, and the share-by-volume figure is still `SessionMakeup` in `session`.
 One term is knowingly loose: `ContextDiagram`'s `resources` is the broad word for what the agent
 read, while `tools` defines `resource` narrowly as content an MCP server hands over uncalled.
-**Two of the eight are deliberately not in that
-list**: four layers fill the window, `tokens` is the unit it is counted in and `model` is the reader
-on the other end of it, so `workshop` names four and not six, and each of the two opens by saying so.
-Promoting either to a layer means visiting `workshop`, `context` and every "four layers" sentence in
-the step, which is a larger change than it looks.
+**Three of the nine are deliberately not in that
+list**: four layers fill the window, `tokens` is the unit it is counted in, `model` is the reader
+on the other end of it and `truth` is where that reader's answers come from, so `workshop` names four
+and not seven. `tokens` and `model` each open by saying so; `truth` does not, because it arrives after
+`model` has already put the reader outside the four.
+Promoting any of them to a layer means visiting `workshop`, `context` and every "four layers"
+sentence in the step, which is a larger change than it looks.
 Three editorial constraints the HTML does not state on its own: every layer unit goes past merely
 naming its layer, and none of the four is allowed to read as a stub (they sat within about a hundred
 words of each other until `tools` grew the MCP material, and that floor is the part that matters); the sub-agent starting blank is the point the three sub-agent `harness` patterns turn on; and
@@ -271,6 +273,47 @@ therefore a multiplier on the four layer units. It went, and the removal is the 
 layers already argue the re-send, `harness`'s caching section already prices it, and the tier is a
 choice about the reader rather than about what fills the window. Do not write it back.
 
+**`The five-hour window` is the step's only Claude-only section**, and the gating is on every element
+of it, both `data-figure` markers included. That is what the marker rule in `front/CLAUDE.md` is for:
+a wrapped marker is not cut into a segment, so the figure would silently vanish for everybody. There
+is no Copilot sibling anywhere in it, and the absence is the decision rather than an unwritten half.
+A seat meters premium requests over a calendar month, so there is no rolling window to place and
+none of it would be true for that reader, and the alternative was a paragraph telling them at length
+about a product they do not have. Because there is no sibling, the keys carry no `.claude` suffix:
+the suffix exists so a missing Dutch half of a *pair* falls back to the right language, and a block
+with no pair cannot do that.
+
+It is **one section over four paragraphs and two figures**, which is longer than the rule the rest of
+the course keeps to, and it was written as two headings before they were merged. Placing the window
+is not a second subject: it is what the first two paragraphs are for, and a heading between them made
+the mechanic read as background to a tip. So `five-hour-window.3` and `.4` sit under the same heading
+as `.1` and `.2`, and a rewrite that splits them again has to answer why the first half is worth
+knowing on its own.
+
+Three things in there are easy to break. The section **hedges on purpose**: a provider *might* give
+you a session limit and it is *usually* five hours, because this is one vendor's arrangement rather
+than how models are billed, and a flat claim here dates faster than anything else in the unit. The
+word *session* is that arrangement's word and not this step's, so `.1` says so in a clause and links
+to `session`; drop it and the unit has two meanings for one word one page apart. And the five minutes
+in `harness`'s caching section are a different clock entirely, so neither may be rewritten in terms
+of the other.
+
+`usage-readout` is the shot of what the harness prints, and it is `UnitShot` from `shared`, which
+moved out of step 2 when this became its second caller. Its caption names the tool and the month and
+says nothing about what is in the picture, because `five-hour-window.2` already says what the
+readout carries. The image is **uncropped**, promo line and all: it is machine output, and tidying
+one is the same move as inventing one. What makes it age visibly is the month in the caption, the
+same job `ModelPricing`'s caption does.
+
+`SessionWindows` is the second figure and argues one thing: the two rows carry the *same* two
+five-hour windows, so the only thing that changed is the hour the first one opened. Both rows are
+measured against the break and the hour you go home, which is what the two guide lines are for, and
+they are drawn last so a bar cannot hide the alignment that is the whole reading. The dashed tail on
+the top row is the step-1 reading of a dash, namely window nobody is there to spend. The `hi` beside
+each opening dot is hard-coded rather than translated, like the model names in `ModelPricing`: it is
+a word the student types. Move the worked day (08:00, the break at 13:00, home at 18:00) and every
+number in both rows moves with it.
+
 "API vs subscription" is the section under `Cost`, and it is the billing model: an API key billed per token
 against a subscription drawn off a plan. It was one sentence in `harness` and was **moved here whole
 rather than copied**, so `harness`'s "Which harness you run" must not grow a billing line back. Where
@@ -374,6 +417,88 @@ Machine output inside an exercise stays English in every language: `SpotInjectio
 bodies and sources and `BudgetWindow`'s six commands have no `nl` entry, on purpose, the same way
 flags and grading messages do. Everything framing them is translated.
 
+`truth` sits between `model` and `workshop` and owns **where an answer came from**. Four sections,
+in the order they have to be read: `The cutoff` (training stopped on a date), `Grounding` (put the
+evidence in the window), `Proof` (run the thing) and `Hallucinations` (the failure that survives all
+three). It carries no quiz and no exercise: `model` closes on `PickTheTier` and `workshop` is a whole
+board, so a card here would sit between two exercises with nothing new to ask for.
+
+**The lead poses the question and does not answer it**, which is what the four sections are for. It
+names three sources for one answer, discovered, instructed and trained, and closes on which of them
+is the truth. The question is rhetorical on purpose: the unit's answer is that you cannot tell from
+the answer, so a lead that picked a winner would spend `Hallucinations` five paragraphs early.
+Three things in it are load bearing. It states the cutoff **in a clause** and leaves the argument to
+`The cutoff`, so that section keeps its opening. It says the model was never trained on your company
+at all, which is the half a cutoff date does not cover and which nothing else in the step says. And
+`lead.2` carries the unit's **second link to `tools`**, half a sentence like `grounding.2`'s: this
+one is where discovery is first named, that one is how the file gets in. Two anchors on one page is
+the decision, since a reader landing mid-unit meets whichever comes first.
+
+Two figures, `TrainedOrGrounded` under `Grounding` and `AnswerProvenance` under `Hallucinations`,
+and **they take different cuts of one argument rather than drawing it twice**. The first is two
+*whole* answers a window apart; the second is one answer whose parts did not all come from the same
+place. Collapse either into the other's shape and the unit makes its point twice.
+`The cutoff` and `Proof` are deliberately left undrawn: a date has no shape, and running a command is
+something the student does rather than something to look at.
+
+**`TrainedOrGrounded`'s two answer chips are identical in size, fill and position**, and that is the
+figure. What differs is the window above them, which is the part an answer never tells you about, so
+a tick, a cross, a colour or a heavier weight on either chip is the drawing contradicting the prose.
+Their strings differ (`3.5.0` against `4.1.0`) because the trained answer is not a wrong-*looking*
+answer, it is the previous release stated as levelly as the current one. **`4.1.0` is what
+`kata/step1/java/pom.xml` actually declares**, so a student who checks finds the figure honest; a
+Boot upgrade in that project means moving the number here. Nothing else in it is new: the teal frame,
+the solid prompt bar and the faint stack are the step's own vocabulary, which is what lets it be read
+without a legend.
+
+**`AnswerProvenance`'s left column is uniform on purpose** and the second column is where everything
+varies, because the second column is the one a student is never handed. The three claims are true of
+`kata/step1/java` apart from the middle one, which is a method `Catalog` does not have, so both
+sources can be opened and checked. The invented row is **the step's dashed stroke rather than
+`--destructive`**: nothing failed, and a red row would say the agent was caught. Amber is wrong for
+the same reason, since it belongs to a cost tip and a hazard aside. It is DOM rather than SVG on
+`ModelTiers`'s precedent, since there is no geometry in it. Its symbols and filenames are
+machine-shaped, so they are data in the component with no key and no `nl` entry, the way
+`ModelPricing`'s numbers are.
+
+Both figures are read by the paragraph under them and neither carries a caption, on the rule that a
+caption states provenance and the prose does the explaining. `truth.grounding.2` opens on "Only the
+window changed" and `truth.hallucinations.2` on two of the three having been read, so **rewriting
+either figure means visiting that opening sentence**, in both languages.
+
+Both are on the deck, and the block leads with **the statement slide rather than a figure**, on
+`harness`'s precedent: the two drawings are one claim measured, so the room needs the claim before
+either means anything, and `The cutoff` has nothing to arrive on. `AnswerProvenance` is laid out at
+1100 and magnified less than the drawing above it, because `SlideFigure` clips rather than shrinks:
+`width * scale` past the frame takes the left edge off the symbols, which is where the claims are.
+
+Three boundaries hold it up, and each of them is a unit away. **`context` owns the average**, so
+this unit must never re-argue that a model is a statistic, that frequency beats quality, or that
+there is more bad code on the internet than good. What `context` never says is that training has a
+*date*, and the cutoff is that gap filled. `contextQuiz`'s `invented-userservice` question is the
+one place the two genuinely meet: it is this unit's scenario asked four units early, and it never
+names the term. Leave it where it is. A quiz sitting on the page that owns the word would be graded
+before the word had been given. **`tools` owns how evidence gets into the window**, so
+`truth.lead.2` and `truth.grounding.2` each link to it in half a sentence rather than describing a
+fetch; `tools` also owns
+"a tool result is the least trustworthy layer", which is why grounding here stops at *reading rather
+than remembering* and does not grow a paragraph about the source being stale. And **`workshop`'s
+`read-the-source.3` is this unit's proof section applied**: it tells the student to make the agent
+run the decode rather than reason about it, in the words of that exercise. The general rule belongs
+here and the applied one belongs there, so do not let either grow into the other. Step 2's `goals`
+is the third neighbour worth knowing about: it owns "if you cannot name the command that answers yes
+or no, you do not have a goal", which is about the instruction you hand over. `Proof` is about
+checking an answer you already have. Keep them apart.
+
+Two smaller decisions. **`Hallucinations` comes last rather than first**, because the term is only
+worth having once the reader knows what grounding and proof would have caught, and the section
+names it in its closing clause on the step's name-the-term-last rule. And **every example in it is
+this repository**: the version number out of `kata/step1/java`'s `pom.xml` across the first three
+sections, then a method that does not exist on `Catalog` in the fourth. The version is deliberately
+one question asked three ways (guessed, grounded, proved), which is what lets those sections read as
+one argument instead of three topics; `Catalog` is picked because the student has already called it
+from `/catalog`, so the invented method is measured against a class they have met.
+
 `workshop` closes the step with a flag board: three flags the step 1 backend hides from its
 `GET /api/titles` response, one per way context is assembled. The student reads the source for the
 first (a literal in a branch that never runs), traces the running pipeline for the second (the hidden
@@ -411,6 +536,11 @@ Nine blocks in step 1 vary and they are all the same kind of thing, a filename o
 `harness.lead.1` names Copilot for **every** reader instead of splitting, because that sentence is a
 list of example harnesses and a list is where a second product belongs.
 
+**The one thing that is not a filename or a command is `model`'s pair of window sections**, which
+are Claude-only whole and have no Copilot half at all. They are the exception to the shape above, and
+the reasoning is under `model`; do not read the sentence about nine blocks as saying that everything
+that varies is a word.
+
 **What is deliberately shared is the more useful half of this, so do not "fix" it later.**
 `/clear` and `/context` are the same command in both, so `prompt.what-steer-after.1`,
 `session.compaction-picks-moment.2` and the whole of `ReadYourWindow` carry no variant: the task
@@ -427,17 +557,36 @@ the one table in the course with a currency is a few inches up the page, and a s
 turns both into the price list `model.cost.3` tells the student not to learn.
 
 `step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Nine
-units — `evolution`, `setup`, `engineering`, `steering`, `patterns`, `quality`, `workflows`,
-`enablement`, `goals` — none of
+units — `evolution`, `setup`, `engineering`, `steering`, `patterns`, `workflows`,
+`enablement`, `parallel`, `goals` — none of
 them carrying a quiz, and the unit HTML is the source for what each argues. Three of the nine close
 on something the student does: `evolution` on an ungraded fifteen-minute task, `setup` on a graded
-flag board, `engineering` on an ungraded `TaskCard`. The other six are framing prose. Six carry one
-habit each; `evolution` opens the step and carries none, because its job is to put the other six in
+flag board, `engineering` on an ungraded `TaskCard`. The other six are framing prose. Five carry one
+habit each; `evolution` opens the step and carries none, because its job is to put the rest in
 order: a version now costs an hour, so the step you hand over gets small and you take many of them.
 `workflows` is outside that count too, and deliberately so: it carries four ways of
-handing work over rather than one habit, and its argument is the choice between them. `enablement`
-is the third one outside it, for its own reason: it is about what has to be true around you rather
+handing work over rather than one habit, and its argument is the choice between them. `parallel` is
+outside it on the same reasoning, three arrangements of agents rather than one habit. `enablement`
+is the fourth one outside it, for its own reason: it is about what has to be true around you rather
 than about a habit you practise.
+
+**A `quality` unit sat in slot six and was replaced by `parallel`**, and this is the record of what
+went with it so nobody restores half of it. It ran three sections: the build rather than the agent
+deciding when work is finished (`mvn test` and `npm run build`, both cheap, both on demand), writing
+the standard down where the agent meets it before it writes (the `*Test.java` and AssertJ house
+style as a skill, the new-step file list as a scaffolding skill, and having the agent draft
+`CLAUDE.md` off the repository rather than writing it from memory), and picking metrics that carry
+weight (a coverage floor and a complexity ceiling wired into `mvn verify`, the proxy trap that a
+hundred percent coverage from tests asserting nothing is green and worthless, and an agent
+over-commenting and under-logging). Most of it was a third telling: `engineering`'s `Quality gates`
+owns the bar in the build, `patterns` owns turning a repeated correction into a skill, `setup` owns
+`CLAUDE.md`, and `goals` owns the check that answers yes or no. **The proxy trap is the one argument
+that had no second home**, and it now survives only inside `workshop.flag.honest.help`, which states
+it without attributing it to a unit. That is the thing to notice before writing a section about
+metrics anywhere in the step. Three references were repointed in the same change rather than left
+dangling: `workshop.lead.1` names `engineering` and `goals`, `workshop.lead.2` says "the kind of code
+a quality gate exists for" instead of naming the unit, and `step3`'s
+`change.sceptics-reading-diff.2` links to `engineering`.
 Its prose closes by handing off to `setup` by name, so a reordering there has to visit that
 paragraph. Below that prose sits the step's only *ungraded* exercise, under the same `<hr>`
 and "Test yourself" heading step 1's `tools` uses: fifteen minutes on the clock, one of three
@@ -455,6 +604,22 @@ already say what the halves are, so a paragraph pointing at them would only say 
 halves live in one SVG so they stay side by side at any width; as two elements they would stack on a
 narrow screen and the comparison would turn into a sequence.
 
+**Only the right half branches**, and that asymmetry is the second thing the figure argues: three of
+its nodes throw off versions that were built and dropped, dashed on the step 1 reading of a dash,
+each **heading for the same target a few degrees off** and **most of them a single step**, while the
+surviving path carries on into the ring. They start **early as well as late**, so branching does not
+read as something that only happens near the finish. Aiming them at the target is what makes them
+versions of the work rather than detours, and the geometry that keeps them from crossing is recorded
+in the component. A step you can take again
+is a step you can afford to take twice, which the left half at weeks a version cannot, so the left
+half must never grow a branch. `evolution.lead.3` is the claim in prose (the same step more than once,
+and the best one survives) and it is a **third lead paragraph rather than a line under the figure**,
+because nothing below this drawing reads it and that rule still holds. It also states the practice
+and not the picture, which is what keeps it from being a caption. Do not confuse it with
+`prototype-conversation`: that section is several takes put in front of *people* to get a reaction,
+this is several attempts at one step of your own work. And it is not `ScriptRuns` either, which is
+variance across runs of one request rather than alternatives you choose between.
+
 Its other two figures are evidence rather than drawings, and they are a pair: this site as the
 skeleton it started as (the FizzBuzz warm-up on system fonts, one step in the sidebar) and the same
 site with the details in (the header, the palette, the grouped steps, the settings). They replaced
@@ -464,10 +629,12 @@ decision: the unit argues you get the shape working before you polish it, and tw
 repository doing exactly that carry it better than a sentence asserting it. The paragraphs beside
 them read the pictures, so a replacement image has to keep what they point at, namely the sidebar
 and the question and answer section that were there from the start against the branding, colours,
-settings and navigation that were not. Both render through one component, `UnitShot`, which takes an
-`id` used as both the BEM block and the i18n prefix; a third shot is a file in `front/public/`, a
-slot in the HTML, and two keys per language. The images are served flat the way step 1's comparison
-shots are.
+settings and navigation that were not. Both render through one component, `UnitShot`, which lives in
+`shared/components/` rather than in this step: step 1's `usage-readout` became its second caller, and
+that is the move `TaskCard` and `FlagBoard` made for the same reason. It takes an `id` used as both
+the BEM block and the i18n prefix, plus the `namespace` its two keys live in, since `shared` never
+imports a step. A third shot is a file in `front/public/`, a slot in the HTML, and two keys per
+language. The images are served flat the way step 1's comparison shots are.
 
 The `details` section is the one place in the step where a habit is stated as a number: a detail
 should not cost more than an hour, and the section argues both edges (pulling detail forward is paid
@@ -499,7 +666,38 @@ task sizing, which folder you open the agent in, and the `.claude` symlink trap 
 outright, so nothing in the tree teaches them any more. `DomainTree` drew the symlink until its row
 was removed, so the trap is now absent from the course in every form. The unit argues the
 thing the step had no home for, namely what you do while the work is running rather than before or
-after it, and it owns three moves. Two of them are constrained by units either side of it.
+after it, and it owns five moves. Two of them are constrained by units either side of it.
+
+**It opens straight on its first `<h2>` and carries no lead**, on `enablement`'s precedent. The two
+lead paragraphs it was written with are cut, keys and all: the first argued that a wrong turn shows
+in the agent's first few steps and that stopping it there costs a sentence while letting it run costs
+the whole diff, and the second said what you do with the correction is the decision, two moves that
+look alike and leave very different windows behind. Both were the section below them stated ahead of
+time, which is what `Interrupt, or go back` argues at length. Do not write an introduction back in.
+
+`Mid-flight` opens the unit instead, and it is the **mechanics** of correcting a run rather than the
+choice between them: interrupt while it is thinking and there is nothing on disk, queue a sentence
+while it works, or stop it and throw the session away. The two sections under it argue the choice, so
+this one sorts the moves by where the agent is when you catch it and stops. Three decisions in it.
+It **names Escape**, which is the only keystroke in the whole course; `Interrupt, or go back`
+deliberately names none for rewinding, because that binding differs per harness, while stopping a
+run is Escape in both assistants the course is written for. Its third paragraph is the destructive
+move and is deliberately thin, because `When it is going nowhere` owns when to reach for it and
+`step1/session` owns `/clear` itself, so it hands off with "there is a section on that below" rather
+than naming a position that an insertion would break. And it must not grow the window argument: what
+an interrupt *leaves behind* is the section after it, and a paragraph here about the wrong turn being
+re-sent every turn is that section a page early.
+
+`When it is going nowhere` is the newest of the five, and **where it sits is the argument**:
+directly after `Interrupt, or go back`, because it is that section's counterpart. One is an agent
+going the *wrong* way, the other one going nowhere, and the reader has to have met rewinding before
+being told the case where it does not apply. So the section **names rewinding and rules it out**
+rather than leaving the reader to work out that there is no good message to go back to. Two limits
+on it. `/clear` belongs to `step1/session`, which owns choosing the seam and deciding what carries
+across, so this points at that unit and must not grow a second description of the command. And it
+stops at recovering the run: **when not to use an agent at all is a different topic**, absent from
+the course on purpose rather than half-told here, so a paragraph about what agents are bad at does
+not belong in this section.
 
 Its worktree section is **not** a second telling of `goals`. `goals` argues one worktree as
 isolation from your own day, so a four-hour run does not make your branch unusable. `steering` argues
@@ -530,8 +728,8 @@ drawing are invented**, which is the decision rather than a shortcut. This repos
 `adding-a-step`, `lesson-writing`, `quiz-writing` and `repo-setup`, and every one of them belongs to
 the person writing the course rather than the person taking it, so drawing them showed a student the
 author's toolbox. A testing skill was the obvious student-owned alternative and is ruled out for a
-different reason: `quality` and `workshop.flag.coverage.help` ask the student to write one
-themselves, so spending it here gives away an exercise two units early. What is left is a plausible
+different reason: `workshop.flag.coverage.help` asks the student to write one themselves, so
+spending it here gives away part of the capstone. What is left is a plausible
 skill for the work the exercises actually involve, and the rule that survives all of it is that
 **the tree and the `<pre>` name the same skill**. `skills.4`'s cross-reference example is drawn from
 the same set for the same reason, and `HookTree` follows the rule too: the script it draws is the
@@ -581,8 +779,8 @@ one (taste has no exit code, but the em-dash rule's check is still a `grep`). Th
 was this repo's own four skills, `lesson-writing` and `quiz-writing` beside `adding-a-step` and
 `repo-setup`, as prose that arrived after the mistake. The first heading read "Give it a home" until
 it was renamed, so its keys are `patterns.skill-iteration.*`, and its prose was replaced along with
-it: the triage of convention against skill against hook went, and so did the new-step file list
-`quality.write-it-down.2` also carries. **The word "hook" now appears nowhere in the unit**, which
+it: the triage of convention against skill against hook went, and so did the new-step file list the
+cut `quality` unit also carried. **The word "hook" now appears nowhere in the unit**, which
 is what `setup`'s Hooks section lost its forward pointer to. What the section argues now is the second
 pass. A skill feels like magic, the answers still come back slightly off, so you repair the output
 and have the agent work out what the skill failed to say. **Its two `<pre>` blocks are one skill
@@ -796,10 +994,10 @@ lives.
 happy path unasked and leaves out the empty list, the expired tier and the amount that is exactly
 zero, that naming those yourself is what holds the shape while the agent rewrites everything
 underneath, and it pointed at this step's own `graded` and `challenge` profiles as two fitness tests
-that answer in one command. All of that survives elsewhere: `quality` owns the written-down bar and
-`workshop` is where the two profiles are actually run, so what went was the third telling. Do not
-restore it as a section; if the edge cases are wanted in this unit, they belong to a paragraph that
-argues something `quality` does not.
+that answer in one command. All of that survives elsewhere: `engineering`'s `Quality gates` owns the
+written-down bar and `workshop` is where the two profiles are actually run, so what went was the
+third telling. Do not restore it as a section; if the edge cases are wanted in this unit, they belong
+to a paragraph that argues something `engineering` does not.
 
 It points across two boundaries rather than re-arguing them, and each is easy to collapse.
 `steering` owns what you do mid-run, so `where-day-goes`
@@ -861,12 +1059,91 @@ was cut, because two stems ending on one line say that already and the key is go
 Only the T's half is captioned now, which is the same rule the crossbar's colour follows: what is
 named is what the shape adds.
 
+`parallel` follows `enablement` and took the slot the cut `quality` unit left, though it is not a
+rewrite of it: what it owns is **how many agents you have running, and what each arrangement costs
+you in control**. Four sections and the order is the argument: `One agent at a time` (the most
+control, and the shape for work that is deep rather than wide), `Many agents at once` (output up,
+control down, and all of the reading arriving at the end), `The orchestrator` (the same four agents
+with the coordination moved into one of them), then `One in front, the rest behind`
+(control back in the middle, which is what most days actually look like). Running most-to-least and
+then landing in the middle is what makes the last section read as the answer rather than as a fourth
+option. It carries no quiz and no exercise, on `workflows`'s reasoning: the choice is the lesson and
+there is nothing a card could ask for that the student's own week would not answer better. **It opens
+straight on its first `<h2>` and carries no lead**, on `enablement`'s and `steering`'s precedent.
+
+**`The orchestrator` sits directly after `Many agents at once` because it is that section answered**,
+not because it is the next thing in a list. Four sessions you opened yourself and four sub-agents one
+agent briefs are the same amount of work running; what changes is who holds the wires. So the
+section opens on "a better-managed version of that" and stops at where the coordination went. Move
+it and that opening sentence stops pointing at anything.
+
+**It is one paragraph, and it ran to two until the second was cut.** What went with it is worth
+knowing before writing any of it back: the fan-out never reaching your screen, four runs therefore
+arriving as one thing to read, one plan behind all four making them less likely to write over each
+other, and what you give up being which sub-agent decided what, so the brief is the thing to ask
+for. Two things follow. The warning aside under `Many agents at once` **no longer has an answer
+anywhere in the unit**, which is the decision rather than an oversight: the ceiling that section
+names is your attention, and a paragraph saying an orchestrator lifts the collision half of it was
+arguing with the strongest claim in the unit while leaving the other half standing. And
+`agents-at-once.orchestrated.note` ("four runs, one thing to read") is now **the only place that
+claim is made**, so the figure carries it alone and a rewrite of that note drops it from the course.
+
+Its name is a knowing exception. **`step1/harness` calls this the coordinator**, and it owns the
+whole mechanism: the expensive model on top and cheap sub-agents below, a sub-agent starting on an
+empty context with nothing but the base instruction, and decomposing first because every part handed
+out is a prompt written into that empty context. None of it may be re-derived here. The heading says
+`The orchestrator` because that is the name the pattern travels under, and `orchestrator.1` bridges to
+step 1's word **in its own second sentence** rather than leaving the course with two unconnected
+terms. If either name changes, the other has to move with it. `model`'s closing section is the second
+neighbour: it owns why the expensive tier is the one that writes the brief, and this section no
+longer mentions a brief at all, so do not let it grow a sentence about who writes one. And the paragraph carries
+the `pattern` icon, since this is one of the course's AI design patterns rather than a habit.
+
+Four boundaries hold the unit up and every one of them is another unit a second time, so each is a
+link and a clause rather than a paragraph. **`steering` owns the mid-run window**,
+which is what `one-agent-time.1` points at instead of describing interrupting, and **`steering` owns
+one worktree per agent**, which is why `many-agents-once.2` names the worktree in half a sentence and
+does not argue for it. **`goals` owns the long-running outcome**, so `one-front-rest.2` says the jobs
+behind you are goals rather than instructions and hands off. The agents-are-two-bills argument is
+`steering`'s too and must not turn up here.
+
+The warning aside closes `Many agents at once` and it is **step 2's second
+`data-variant="warning"`**, `setup`'s being the first. It carries the two costs no other unit states:
+two agents on the same code writing over each other, and **your attention degrading rather than
+running short**. That second one is easy to collapse into `steering`'s "your reading is the
+bottleneck rather than their speed", and it is not the same claim. `steering` says reading is slower
+than producing; this says the tenth diff of the afternoon gets a worse read than the first did. Keep
+them apart, or the step loses the only place it says an agent can hand you more than you can stay
+sharp for.
+
+`AgentsAtOnce` is the figure and **closes the unit rather than opening it**, which is
+`WorkflowWeights`'s placement decision made again: it names all four arrangements, so under the
+first heading it would put three labels in front of a reader who has not been given them. Nothing
+below it reads it back, so its row names and its right-hand notes carry the comparison, the way
+`ScriptRuns` puts what each row produces on the right instead of into prose. **Teal is the agent you
+are actually watching**, and that is the only colour rule in it, which is why row two has no teal at
+all: four at once is nobody watched. It borrows `flow.node.you` and `flow.node.agent` from
+`FlowDiagram` rather than declaring its own words, so the two figures name the same boxes and a
+rewording moves both.
+
+**Rows two and three are the pair the figure exists for**, and two things keep them a pair. They run
+**the same number of agents**, so the comparison is about who holds the wires and not about volume,
+and the orchestrator's extra box sits at `LEAD_X` in the gap between `you` and the agent column every
+row shares, so the drawing says what an orchestrator is: a hop inserted between you and the work.
+Its sub-agents are **muted but solid** rather than dashed, which is the one place the colour rule
+needs reading carefully: dashed means nobody is watching, and here somebody is, just not you. That is
+what makes row four different from row three at a glance. Changing the sub-agent count, or dashing
+them, ends both arguments. `AgentsAtOnce`'s own docblock carries the geometry.
+
 A tenth unit, `workshop`, closes the step as its capstone. It is the one part of step 2 a machine
-can grade, because it grades the thing `quality` and `goals` argue for: a goal a build answers yes
-or no to. **`workshop.lead.1` names those two units rather than counting back to them**, and that is
-a correction rather than a style choice: it read "the last two units" until `enablement` landed
+can grade, because it grades the thing `engineering` and `goals` argue for: a goal a build answers
+yes or no to. **`workshop.lead.1` names those two units rather than counting back to them**, and that
+is a correction rather than a style choice: it read "the last two units" until `enablement` landed
 between `workflows` and `goals`, at which point the count pointed at a unit that argues neither the
-bar nor the goal. Positional references to neighbouring units break silently on an insertion, so
+bar nor the goal. It named `quality` until that unit was cut, and it has also **stopped counting the
+habits** for the same reason the positional reference went: "the six habits" was a number an
+insertion or a cut could falsify silently, and cutting `quality` did. Positional references to
+neighbouring units break silently on an insertion, so
 name the unit. It ships a small loans domain in `kata/step2/java` that is green but un-hardened, and
 a `graded` Maven profile that measures it against three goals - a coverage floor, a complexity
 ceiling and honest (mutation-tested) coverage. `mvn verify -Pgraded` prints a leetspoken flag for
@@ -902,3 +1179,48 @@ obstacle back, it needs a new one rather than that sentence.**
 **Do not add a `native` profile to `kata/step2/java/pom.xml`, and do not write the resource hint or a
 `RuntimeHintsRegistrar`**: wiring the build and planning the hint are the exercise. Do not spell out
 the fix here either; the runtime miss is what the student is meant to read.
+
+`step3` is **soft skills**: the part of working this way that is not about the agent. Three units,
+`change`, `expectations` and `impostor`, and **the order runs from the team inwards**: the habits a
+team has to pick up, then what the people around you now believe about your speed, then what the
+change does to you. `impostor` closes the step because it is the personal one and there is nothing
+useful after it. Unit ids are single words on the tree's own convention (`session`, `goals`,
+`steering`) while the titles are the two-word terms a reader would search for, so the URL is
+`/steps/step3/expectations` and the sidebar says "Expectation management".
+
+**Nothing in the step is graded, drawn or quizzed, and that is the decision rather than an unfinished
+state.** Every unit here is a conversation with a colleague, a stakeholder or yourself, so there is no
+command a checker could run and no shape a figure would carry that the sentences do not. It is also
+the first step with no Java at all: `kata/step3/java` stays the empty scaffold, on the reasoning in the
+root `CLAUDE.md`. If an exercise is ever wanted here, the honest shape is step 2's `TaskCard`, ticked
+once and grading nothing, and the thing it asks for has to happen away from the keyboard.
+
+**Every section leans on a step 2 unit and none of them may re-argue it**, which is the same rule
+`harness.coordinator.3` follows in step 1 and the constraint most easily lost in a rewrite here. The
+soft skill is the new part; the engineering claim underneath it is already argued and gets a link and
+one clause. `change.start-work-hurts` points at `goals` for the wide, mechanical, measurable
+handover, `change.sceptics-reading-diff` at `engineering` for the floor and the ceiling,
+`change.conventions-live-repository` at `setup` for a convention being a file. `expectations.lead` is
+`evolution`'s skeleton with the details left out, `expectations.estimate-still-matters` borrows
+`enablement`'s count of where the day goes and `steering`'s line about the agents getting faster while
+your reading does not, and `expectations.one-good-run` is `ScriptRuns`'s spread named in prose.
+`impostor.you-still-engineer` hands the level-moved-up argument to `enablement` and keeps only what
+that unit does not say, namely that judgement produces nothing visible at five o'clock. Grow any of
+those into a second telling and the step turns into step 2 with feelings.
+
+`impostor.feeling-from-signal` is the load-bearing section and it is easy to soften into
+reassurance. It separates a real comprehension gap from the feeling, and it says the gap out loud
+first: if you cannot follow the diff, that is not impostor syndrome, and accepting code you do not
+understand is how a codebase becomes somebody else's. The second paragraph is the feeling, and it is
+the only place in the course that argues with the reader rather than teaching them, which is what the
+bare "Maybe." is doing. **Do not merge the two paragraphs and do not let the section comfort anybody
+out of the first one.** `nobody-doing-long` closes on written-down work rather than on the feeling for
+the same reason: the answer the step offers is a repository, not encouragement.
+
+Three smaller things. It names `CLAUDE.md` and `audit.md` with **no `data-assistant` variant**, on
+step 2's precedent and on the scope line step 0's `welcome` states, so a Copilot reader meets Claude
+Code's filenames here as they do throughout step 2. It carries exactly **one inline icon**, the `gem`
+on looking at who has edited the convention files, because that diagnostic is the only thing in the
+step a reader would otherwise walk past. And it adds **no third metaphor**: the step is about people,
+so it reaches for neither the window nor the money, and a section that starts talking about
+"momentum" or "buy-in" is the one to cut.

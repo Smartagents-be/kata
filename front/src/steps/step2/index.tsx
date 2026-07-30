@@ -1,4 +1,6 @@
+import { UnitShot } from '@/shared/components/UnitShot'
 import type { Step } from '@/shared/step'
+import { AgentsAtOnce } from './AgentsAtOnce'
 import { AuditExample } from './AuditExample'
 import { DomainTree } from './DomainTree'
 import { FlowDiagram } from './FlowDiagram'
@@ -10,7 +12,6 @@ import { ScriptRuns } from './ScriptRuns'
 import { SetupFlags } from './SetupFlags'
 import { SkillShape } from './SkillShape'
 import { SkillTree } from './SkillTree'
-import { UnitShot } from './UnitShot'
 import { WhereWouldItGo } from './WhereWouldItGo'
 import { WorkflowTimeline } from './WorkflowTimeline'
 import { WorkflowWeights } from './WorkflowWeights'
@@ -22,9 +23,9 @@ import setup from './units/setup.html?raw'
 import engineering from './units/engineering.html?raw'
 import steering from './units/steering.html?raw'
 import patterns from './units/patterns.html?raw'
-import quality from './units/quality.html?raw'
 import workflows from './units/workflows.html?raw'
 import enablement from './units/enablement.html?raw'
+import parallel from './units/parallel.html?raw'
 import goals from './units/goals.html?raw'
 import workshop from './units/workshop.html?raw'
 
@@ -33,7 +34,8 @@ import workshop from './units/workshop.html?raw'
  * the code yourself, one unit each. `evolution` opens the step by putting the rest of them in
  * order: small steps, taken often, on something that already runs.
  *
- * `evolution`, `setup`, `engineering`, `workflows` and `enablement` each carry a drawing, and the
+ * `evolution`, `setup`, `engineering`, `patterns`, `workflows`, `enablement` and `parallel` each
+ * carry a drawing, and the
  * closing `workshop` unit carries the flag board, which is why this registry is .tsx. The board is
  * browser-graded, so the step still talks to the service only through the `mvn verify -Pgraded` run
  * the student does outside the app.
@@ -51,8 +53,10 @@ const step2: Step = {
       // it started as and as it looks with the details in.
       inlineFigures: {
         'iteration-paths': <IterationPaths />,
-        'walking-skeleton': <UnitShot id="walking-skeleton" src="/walking-skeleton.png" />,
-        'added-details': <UnitShot id="added-details" src="/added-details.png" />,
+        'walking-skeleton': (
+          <UnitShot id="walking-skeleton" src="/walking-skeleton.png" namespace="step2" />
+        ),
+        'added-details': <UnitShot id="added-details" src="/added-details.png" namespace="step2" />,
       },
     },
     {
@@ -92,11 +96,6 @@ const step2: Step = {
       // One slot, under the `Scripts` section, at the <div data-figure="script-runs"> the unit
       // leaves. Nothing after it reads the drawing, so its own labels carry what it argues.
       inlineFigures: { 'script-runs': <ScriptRuns /> },
-    },
-    {
-      id: 'quality',
-      title: 'quality.title',
-      html: quality,
     },
     {
       id: 'workflows',
@@ -173,6 +172,15 @@ const step2: Step = {
         'loops-per-hour': <LoopsPerHour />,
         'skill-shape': <SkillShape />,
       },
+    },
+    {
+      id: 'parallel',
+      title: 'parallel.title',
+      html: parallel,
+      // One slot, and it closes the unit rather than sitting under the first section: the drawing
+      // names all three arrangements, so under `One agent at a time` it would spend two of them
+      // early. Nothing below it reads it back, which is why its rows carry their own notes.
+      inlineFigures: { 'agents-at-once': <AgentsAtOnce /> },
     },
     {
       id: 'goals',

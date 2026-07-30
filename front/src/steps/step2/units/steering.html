@@ -1,13 +1,25 @@
-<p data-i18n="steering.lead.1">
-  You do not have to wait for it to finish. An agent that opens the wrong file or reaches for a
-  factory nobody asked for says so in its first few steps, and that is the cheapest moment there
-  will ever be. Stop it there, or type the correction while it keeps working. Either one costs you a
-  sentence. Letting it run to the end costs the whole diff, and you read that twice.
+<h2 data-i18n="steering.mid-flight.heading">Mid-flight</h2>
+
+<p data-i18n="steering.mid-flight.1">
+  You are watching it work and something is wrong. The wrong file is open, it misread what you asked,
+  or your request left out the one thing that mattered. Escape stops it where it stands, and where it
+  stands is what the correction costs. While it is still thinking there is nothing on disk, so you say
+  the missing thing and it goes again from there. Once it is writing files, you are deciding what to
+  revert as well.
 </p>
 
-<p data-i18n="steering.lead.2">
-  What you do with that correction is the decision. There are two moves, they look almost the same
-  from the outside, and they leave very different windows behind.
+<p data-i18n="steering.mid-flight.2">
+  Cheaper than stopping it is not stopping it at all. Type the clarification while it works and it
+  arrives on the next turn <svg data-icon="gem"></svg> That is the move for something small, a name it
+  got wrong or the file you actually meant. It is the wrong move for a wrong direction, because it
+  keeps building while your sentence waits.
+</p>
+
+<p data-i18n="steering.mid-flight.3">
+  The heaviest move is to stop it and throw the session away. You lose everything the run worked out,
+  which is why you reach for it last, and it is also why it works: whatever sent it wrong goes with
+  it. Keep it for the run that is not going the wrong way but going nowhere. There is a section on
+  that below.
 </p>
 
 <h2 data-i18n="steering.interrupt-or-go-back.heading">Interrupt, or go back</h2>
@@ -43,6 +55,26 @@
   go back and edit the request rather than correcting it. Ask it afterwards what it has read. The
   file from the first attempt is not in the answer.
 </aside>
+
+<h2 data-i18n="steering.going-nowhere.heading">When it is going nowhere</h2>
+
+<p data-i18n="steering.going-nowhere.1">
+  Another kind of run does not go the wrong way. The agent is in the right file, the test fails the
+  way it failed before, and the fix it just wrote undoes the one before it. It says it sees the
+  problem now. It said that last time. Nothing here is wrong enough to correct, so you sit through
+  four more rounds. Every failed attempt is still in the window, and on that file they are the
+  strongest pattern the model has to go on, so it writes another one. The loop is in the window.
+</p>
+
+<p data-i18n="steering.going-nowhere.2">
+  Rewinding does not help here, because the message that started it was fine. Stop it and clear
+  instead. Carry across the one thing the round produced, usually the error and the approach that
+  does not work, and start the next session with that, the seam
+  <a href="/steps/step1/session">step 1's unit on the session</a> tells you to pick yourself. Then
+  change something before you ask again: paste the failing output in, name the thing it may not try,
+  or do the awkward step by hand and give it the rest. A second attempt from a clean window beats a
+  fifth from a dirty one.
+</p>
 
 <h2 data-i18n="steering.worktree-each.heading">A worktree each</h2>
 
