@@ -33,7 +33,6 @@ export function CoordinatorFanout() {
         aria-labelledby={titleId}
         className="h-auto w-full max-w-xl"
       >
-        {/* useId, not a BEM id: aria-labelledby has to be unique per instance, not per component. */}
         <title id={titleId} data-component="CoordinatorFanout">
           {t('coordinator-fanout.description')}
         </title>

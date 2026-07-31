@@ -123,8 +123,9 @@ is authoring material rather than curriculum, and nothing renders from it.
 `audit.md` at the root is the standing critique of the course: completeness per topic, cadence and
 sequence per unit, and the delivery gaps. It is a **measured** document rather than a running one.
 Its first line names the commit it was measured against, and every number in it was taken off the
-files at that commit, so a row that nobody edited means "checked, still true" and an empty remarks
-cell means nothing is outstanding. Use the `audit-update` skill in `.claude/skills/audit-update/` to
+files at that commit, so a row that nobody edited means "checked, still true". Table 1 reads by
+`where` and lists only what is left to handle, so a place with no topics under it is a place with no
+work in it. Use the `audit-update` skill in `.claude/skills/audit-update/` to
 move it forward: it re-measures the counts, works out which rows the intervening commits actually
 touch, and leaves the rest alone. Updating the audit and fixing what it lists are two different
 jobs, and doing them in one commit makes the audit describe work the reader cannot see.

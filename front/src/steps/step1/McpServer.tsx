@@ -44,7 +44,6 @@ export function McpServer() {
         aria-labelledby={titleId}
         className="h-auto w-full max-w-xl"
       >
-        {/* useId, not a BEM id: aria-labelledby has to be unique per instance, not per component. */}
         <title id={titleId} data-component="McpServer">
           {t('mcp-server.description')}
         </title>
@@ -166,7 +165,6 @@ export function McpServer() {
           className="stroke-primary/50"
         />
 
-        {/* and what it fans out into */}
         <path
           id="mcp-server-fan"
           data-component="McpServer"

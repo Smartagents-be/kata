@@ -453,7 +453,6 @@ export function ConnectBoard({
             })}
           </div>
 
-          {/* the situations */}
           <ol
             id={`${block}-scenarios`}
             data-component="ConnectBoard"
@@ -574,7 +573,6 @@ export function ConnectBoard({
             })}
           </ol>
 
-          {/* the choices */}
           <ul
             id={`${block}-targets`}
             data-component="ConnectBoard"

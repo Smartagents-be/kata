@@ -37,7 +37,6 @@ export function McpParts() {
         aria-labelledby={titleId}
         className="h-auto w-full max-w-xl"
       >
-        {/* useId, not a BEM id: aria-labelledby has to be unique per instance, not per component. */}
         <title id={titleId} data-component="McpParts">
           {t('mcp-parts.description')}
         </title>

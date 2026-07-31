@@ -280,7 +280,7 @@
 
   "tiers.haiku.name": "Haiku",
   "tiers.haiku.character": "Formulaic executor",
-  "tiers.haiku.body": "Follows instructions closely and consistently. Near-frontier intelligence on a task that is already well specified, at four to five times Sonnet's speed. Predictable and high-throughput, as long as nothing is left open.",
+  "tiers.haiku.body": "Follows instructions closely and consistently. Close to the top tier on a task that is already well specified, at four to five times Sonnet's speed. Predictable and high-throughput, as long as nothing is left open.",
   "tiers.haiku.tag.1": "classification",
   "tiers.haiku.tag.2": "structured extraction",
   "tiers.haiku.tag.3": "routing layers",

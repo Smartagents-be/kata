@@ -7,9 +7,11 @@ import { ConnectBoard, type ConnectItem } from '@/shared/components/ConnectBoard
  * what keeps an answer from being learned as a position.
  *
  * Names come from `tiers.*.name`, the keys the figure above already uses, so the board and the cards
- * cannot drift apart.
+ * cannot drift apart. The order is theirs too, cheapest first, which is `ModelPricing`'s and the one
+ * the ratio in `model.cost.1` reads in. The answers are keyed by tier rather than by position, so
+ * reordering this column moves no answer, only the scale the student reads down.
  */
-const TIERS = ['opus', 'sonnet', 'haiku'] as const
+const TIERS = ['haiku', 'sonnet', 'opus'] as const
 
 /**
  * Five situations against three tiers, so nothing falls out by elimination the way a one-to-one

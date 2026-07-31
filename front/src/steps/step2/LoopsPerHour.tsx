@@ -177,7 +177,6 @@ export function LoopsPerHour() {
         aria-labelledby={titleId}
         className="h-auto w-full"
       >
-        {/* useId, not a BEM id: aria-labelledby has to be unique per instance, not per component. */}
         <title id={titleId} data-component="LoopsPerHour">
           {t('loops-per-hour.description')}
         </title>

@@ -101,7 +101,6 @@ export function ScriptRuns() {
         aria-labelledby={titleId}
         className="h-auto w-full"
       >
-        {/* useId, not a BEM id: aria-labelledby has to be unique per instance, not per component. */}
         <title id={titleId} data-component="ScriptRuns">
           {t('script-runs.description')}
         </title>

@@ -90,7 +90,9 @@ too.
 `/context` is the same command in both assistants, which is why `ReadYourWindow` needed no variant
 at all. The Copilot readout is grouped by origin and names: **System Prompt, Custom Instructions,
 System Tools, MCP Tools, Messages, Free Space, Buffer**. That is step 1's four layers plus the
-headroom, which is what `tools.read-your-window.1.copilot` lists.
+headroom, and `tools.read-your-window.1.copilot` now lists all seven **in those words and in that
+order**, rather than paraphrasing them in lowercase and dropping Buffer. They are the labels on the
+reader's own screen, so a rewording that tidies them costs the paragraph its whole point.
 
 `/usage` is the other one, and the course does not mention it: it prints **AI credits used in the
 current session**, the session duration, lines of code edited, and a token breakdown. See the
@@ -118,14 +120,17 @@ Flags include `--env`, `--header`, `--transport`, `--tools`, `--timeout`. Config
 Two facts the course could use and does not:
 
 - **The GitHub MCP server is built in** and available with no configuration. So a Copilot student's
-  window already carries a set of MCP tool descriptions before they connect anything, which is a
-  free demonstration of `tools`'s "the list itself is in the window" claim. The `ReadYourWindow`
-  task works either way, because its first and last moves compare a reading with and without the
-  server *they* added.
-- MCP prompts are documented as reachable under a slash as `/mcp.servername.promptname`. **This is
-  documented for Copilot generally, and the Copilot CLI slash-command reference does not list it.**
-  `tools.where-extra-tools.3.copilot` states it; if you can disprove it against the CLI, that is the
-  sentence to correct.
+  window already carries a set of MCP tool descriptions before they connect anything. This is now
+  in the course: `tools.list-itself-window.2.copilot` is that reader's version of "the list itself
+  is in the window", since the Claude half tells them to connect five servers and count from zero.
+  The `ReadYourWindow` task still needs no variant, because its first and last moves compare a
+  reading with and without the server *they* added.
+- MCP prompts are documented as reachable under a slash as `/mcp.servername.promptname`, **for
+  Copilot generally**. The Copilot CLI command reference lists 40-odd slash commands and none of
+  them is a prompt (re-read 30 July 2026), so `tools.where-extra-tools.3.copilot` no longer claims
+  it: it names `/mcp`, which the CLI does document, and says that surfacing a server's prompts is
+  the harness's call. Absent from a reference is not the same as absent from the product, so if you
+  see one under a slash in a real session, that sentence goes back.
 
 ## Plan mode
 
@@ -155,10 +160,7 @@ Ranked by how much they would add against how much prose they cost:
    only show the student tokens. `/usage` puts credits on the screen for the session they just ran,
    which is the closest the course could get to closing the loop between the window and the bill.
    The cost is one move on a task card, or one sentence.
-2. **The built-in GitHub MCP server** as a concrete example in `tools`, where the unit argues that
-   tool descriptions are in the window before you type. A Copilot reader has a live example already
-   loaded.
-3. **The instructions-file reload caveat**, if `session`'s exercise ever stops clearing the session.
+2. **The instructions-file reload caveat**, if `session`'s exercise ever stops clearing the session.
    Today the clear hides it.
 
 None of these are errors. They are things a Copilot student would benefit from and can currently
@@ -170,11 +172,12 @@ Verified against the linked pages on 28 July 2026: the billing change and every 
 the credit-to-token mechanics, code completions being excluded, the instructions file list and the
 reload requirement, `/context`'s field names, the compaction thresholds, `copilot mcp add` syntax and
 config path, the `/mcp` subcommands, plan mode, `/usage`'s output, and the built-in GitHub MCP
-server.
+server. Re-read on 30 July 2026 when `tools` was adapted: `/context`'s seven field names and their
+order, and the CLI's full slash-command list.
 
 Not verified: whether **Copilot CLI specifically** exposes MCP prompts under a slash (documented for
-Copilot, absent from the CLI reference), and how long the flex allotments in the table hold, since
-GitHub says outright that they will move.
+Copilot, absent from the CLI's own command reference, which is why the unit stopped claiming it),
+and how long the flex allotments in the table hold, since GitHub says outright that they will move.
 
 ## Sources
 

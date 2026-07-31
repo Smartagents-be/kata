@@ -31,7 +31,6 @@ export function PromptInContext() {
         aria-labelledby={titleId}
         className="h-auto w-full max-w-xs"
       >
-        {/* useId, not a BEM id: aria-labelledby has to be unique per instance, not per component. */}
         <title id={titleId} data-component="PromptInContext">
           {t('prompt-in-context.description')}
         </title>

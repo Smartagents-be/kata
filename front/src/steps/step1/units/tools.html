@@ -51,10 +51,13 @@
   you to pick off a list. Claude Code puts them under a slash.
 </p>
 
+<!-- Copilot documents MCP prompts under a slash for the product generally, and the Copilot CLI
+     command reference does not list them (re-read 30 July 2026). So this half names what the CLI
+     does document, `/mcp`, and says the surfacing is the harness's call. -->
 <p data-assistant="copilot" data-i18n="tools.where-extra-tools.3.copilot">
   Prompts are the third thing. A server ships whole prompts with it, written by whoever built it, for
-  you to pick off a list. Copilot puts them under a slash, as
-  <code>/mcp.server.prompt</code>.
+  you to pick off a list. Whether you ever see them is your harness's call: Copilot CLI gives you
+  <code>/mcp</code> for the servers and names nothing for their prompts.
 </p>
 
 <!-- Three cards and nothing between them: none of it has crossed into a context yet. The dashed
@@ -73,15 +76,27 @@
 
 <h2 data-i18n="tools.list-itself-window.heading">The list itself is in the window</h2>
 
+<!-- Not "every tool you connect": Copilot CLI holds a server nobody connected, which the paragraph
+     under this one is about. -->
 <p data-i18n="tools.list-itself-window.1">
-  Every tool you connect ships its description with it. The name, what it does, every parameter it
-  takes, spelled out for the model to read. All of that goes into the window before you have typed
+  Every tool ships its description with it. The name, what it does, every parameter it takes,
+  spelled out for the model to read. All of that goes into the window before you have typed
   anything.
 </p>
 
-<p data-i18n="tools.list-itself-window.2">
+<p data-assistant="claude" data-i18n="tools.list-itself-window.2.claude">
   So the cost is not in calling a tool. It is in having it. Connect five MCP servers and a few
   hundred lines of description ride along with every message you send
+  <svg data-icon="coin"></svg> You pay for them whether or not the agent touches one.
+</p>
+
+<!-- The GitHub server is on with no configuration, so a Copilot reader is paying for MCP tool
+     descriptions before this unit asks them to connect anything. `ReadYourWindow` still works: its
+     first and last moves compare a reading with and without the server they added themselves. -->
+<p data-assistant="copilot" data-i18n="tools.list-itself-window.2.copilot">
+  So the cost is not in calling a tool. It is in having it. Copilot CLI ships with the GitHub server
+  already on, so a few hundred lines of description ride along with every message you send before
+  you connect anything yourself
   <svg data-icon="coin"></svg> You pay for them whether or not the agent touches one.
 </p>
 
@@ -157,7 +172,7 @@ copilot mcp add playwright -- npx @playwright/mcp@latest</code></pre>
 </p>
 
 <p data-assistant="copilot" data-i18n="tools.connect-one.2.copilot">
-  That second line is Copilot's, and it lands in <code>~/.copilot/mcp-config.json</code>. Every
+  That second line is Copilot CLI's, and it lands in <code>~/.copilot/mcp-config.json</code>. Every
   harness has its own way to add a server, which is the harness deciding what this layer is allowed
   to hold.
 </p>
@@ -198,12 +213,14 @@ copilot mcp add playwright -- npx @playwright/mcp@latest</code></pre>
   Claude Code's, and every harness shows this its own way. Some show you nothing at all.
 </p>
 
+<!-- The seven groups are the labels the readout prints, in the order it prints them, so they are
+     capitalised as it capitalises them (re-read 30 July 2026). -->
 <p data-assistant="copilot" data-i18n="tools.read-your-window.1.copilot">
   Those line counts were invented. Yours are real, and you can read them. <code>/context</code> lists
-  what is sitting in the window right now, grouped by where each part came from: the system prompt,
-  your custom instructions, the built-in tools, the tools an MCP server brought, the messages, and
-  what is still free. Copilot and Claude Code happen to use the same command. Every other harness
-  shows this its own way, and some show you nothing at all.
+  what is sitting in the window right now, grouped by where each part came from: System Prompt,
+  Custom Instructions, System Tools, MCP Tools, Messages, Free Space and Buffer. Copilot CLI and
+  Claude Code happen to use the same command. Every other harness shows this its own way, and some
+  show you nothing at all.
 </p>
 
 <p data-i18n="tools.read-your-window.2">

@@ -1,16 +1,22 @@
 import { useStepText } from '@/shared/i18n/useStepText'
 
 /**
- * The three tiers, top to bottom, cheapest last. Order is the argument: the student reads down from
- * the model that costs the most and holds the most together to the one that is fast and needs the
- * task spelled out.
+ * The three tiers, top to bottom, cheapest first: the student reads down from the one that is fast
+ * and needs the task spelled out to the one that holds the most together.
+ *
+ * **The order is `ModelPricing`'s and must stay it.** That table runs cheapest first because the
+ * ratio the prose states reads in that direction (call the small one a unit, the middle three, the
+ * top five), and `model.speed.1` twelve lines further down reads the same way. These cards sat
+ * most-expensive-first against it, so the unit sorted the same three things in two directions on one
+ * page. Flipping either of the two figures now means flipping the other, and `PickTheTier`'s column
+ * with them.
  *
  * Deliberately version-free. A card naming this quarter's release is wrong by the next one, and the
  * dispositions are what survive. The paragraph that used to say so out loud is gone, so the only
  * thing dating these three is the small `(July 2026)` line under the figure, which dates the cards
  * rather than the unit.
  */
-const TIERS = ['opus', 'sonnet', 'haiku'] as const
+const TIERS = ['haiku', 'sonnet', 'opus'] as const
 
 const TAGS = [1, 2, 3] as const
 

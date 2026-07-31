@@ -70,9 +70,11 @@ prose to fourteen and five thousand" and the prose now says fourteen, the row is
 
 For each row in play, decide between four outcomes and nothing else:
 
-- **Resolved.** The change did what the fix asked. Update the status symbol and **clear the remarks
-  cell**. An empty remarks cell is the document's way of saying "checked, nothing outstanding", so
-  clearing it is the point rather than tidying. Do not leave a note saying it used to be broken.
+- **Resolved.** The change did what the fix asked. **Delete the row**, and if it was the last one
+  under its `Where`, leave that place behind as the empty `●` row described under Conventions.
+  Deleting is the point rather than tidying: Table 1 lists what is left to handle, so a resolved
+  topic leaves no trace beyond the place it was in going solid. Do not keep the row with a note
+  saying it used to be broken, and renumber the remarks after it.
 - **Moved.** Still a defect, but different now. Rewrite the remarks to describe the current state,
   and say what the change did if that matters to the reader. Where a rewrite makes a defect worse,
   say so plainly; `patterns` in the current file is the model for that ("the rewrite tightened the
@@ -92,17 +94,20 @@ This is the case with the most bookkeeping, and the easiest to do half of:
 
 1. Add or remove the Table 2 row, **in registry order** (which is course order, and Table 2 is
    numbered in it).
-2. Renumber the `#` column for every row after it.
+2. Renumber the `#` column for every row after it, and the remark sequence across the whole file.
 3. Fix the `Follows from` cell of the unit that now follows something else.
 4. Update the step's Table 1 heading: unit count and word total, comma-grouped (`6,514`).
-5. Add the unit's topics to the step's Table 1 as rows, and check whether it fills a `○` gap row
-   somewhere. A new unit is the usual way a `○` becomes `●`.
+5. Give the unit its `Where` in the step's Table 1, in registry order: an empty `●` row if nothing
+   in it is outstanding, otherwise a group with a row per topic that is. Check whether it fills a
+   `○` gap row somewhere; a new unit is the usual way a `○` disappears, and the gap row goes with
+   it rather than turning `●`.
 6. Re-read both summary sections. They make counting claims ("of nineteen units", "every quiz is in
    the first six units", which units form the wall) that a new unit can falsify silently.
 7. Verify the bookkeeping mechanically before you go near the header, because half-done is how this
    has actually shipped: a pass has landed with the new unit's Table 1 rows and re-measured heading
    in place while Table 2 held no row for it, the next unit still named the old predecessor, and
-   both summaries kept the old unit count and word total. So check: Table 2 holds exactly one row
+   both summaries kept the old unit count and word total. So check: Table 1 names every registry
+   unit in its `Where` column, heading a group or as an empty `●` row; Table 2 holds exactly one row
    per registry unit; the `Follows from` column read top to bottom reproduces the registry order
    unbroken; and every number in both summaries re-derives from the tables as they now stand. Grep
    the summaries for digits if that helps you not skim. Note that measure.sh flags a row with no
@@ -143,12 +148,35 @@ one, because it claims a pass that did not happen.
   `Fix: leave it`. Set it from the `Fix:` clause the row already carries; if a row has a remark and
   no fix, estimate what closing it would cost. A row whose fix grows or shrinks gets its effort
   re-set on the same pass.
-- A `Where` cell is a path of **module, unit, element**, module and unit by their rendered titles
-  rather than their folder ids: `soft skills/change management/change.conventions-live-repository.1`.
-  Two segments is a whole unit, three is one block or key in it, and a figure component hangs off the
-  end after a slash (`context, model, mechanisms/tokens` / `TokenSplit`). A cell naming a repository
-  file is a path from the repo root and carries no module. Write new rows this way; do not shorten a
-  cell back to a bare unit id because the table heading already names the step.
+- **`Where` is the leading column of Table 1, and Table 1 lists only what is left to handle.** A
+  `Where` cell is `module/unit` and nothing else, module and unit by their rendered titles rather
+  than their folder ids: `soft skills/change management`. Comma-separate when a topic spans more
+  than one unit, and **never name the same unit twice in one cell**. A module on its own means the
+  whole module, and a cell naming a repository file is a path from the repo root and carries no
+  module. Do not shorten a cell back to a bare unit id because the table heading already names the
+  step, and do not put an element on the end of it: the block id, locale key or figure component
+  belongs at the head of the remark, so a row says where once and points at the exact thing once.
+- **Rows group under their `Where`, and a group's continuation rows leave the cell blank.** The
+  first topic under a place carries the place; every topic after it carries an empty `Where`, which
+  reads as "same place as above". Order the groups the way the registry orders the units, and put a
+  topic that spans two units in the group of the unit its cell names first, with both names on its
+  own row.
+- **A `Where` whose topic cell is empty was checked and has nothing outstanding**: `●`, no effort,
+  no remark. That row is the whole record of a unit with no work left in it, and it is why resolved
+  topics are not listed anywhere: naming what a unit already does well is what the unit is for. So
+  **every unit in the step must appear somewhere in its table**, either heading a group or as one of
+  these empty rows, and a unit missing from the table reads as unchecked. Verify that before you
+  finish. When the last outstanding topic under a place is resolved, do not delete the group:
+  collapse it to the empty row.
+- **Remarks are numbered, in one sequence running from Table 1a to Table 3**, so an item can be
+  cited without quoting it. A cell with no remark carries no number. The number opens the cell as
+  `**23.**`, followed where there is one by the block id, locale key or figure component the remark
+  is about, in backticks, then a colon and the remark:
+  `**23.** \`session.wrote-almost-none.1\` / \`SessionMakeup\`: prose says …`. A colon rather than a
+  dash, because the em-dash ban holds here and `—` still means only "no home in the course". Prefix
+  only what the remark is genuinely about; a figure that merely sits in the section is not it. **Adding, removing or emptying a remark renumbers every cell after it**, so
+  re-run the sequence over the whole file before you finish, and check it comes out 1..N with no gap
+  and no repeat.
 - **Table 1 is one table per module, plus `1e` for what no module owns.** A row whose `Where` names a
   module other than its table's belongs in another table. Re-file it rather than leaving it, and say
   in the header that the pass moved it.

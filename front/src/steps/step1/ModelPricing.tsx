@@ -5,6 +5,9 @@ import { useStepText } from '@/shared/i18n/useStepText'
  * the order the prose above reads them in: call the small one a single unit, the middle tier is
  * roughly three of those, the top tier roughly five.
  *
+ * `ModelTiers` twelve lines up the page runs the same three in the same direction, and did not until
+ * the cards were flipped to match this table. Neither figure may be reordered on its own.
+ *
  * The numbers are data rather than prose, so they carry no `data-i18n` and no `nl` entry, the same
  * way `BudgetWindow`'s line counts and `SpotInjection`'s result bodies do. Model names are proper
  * nouns and stay English for the same reason. Only the column headings and the caption translate.

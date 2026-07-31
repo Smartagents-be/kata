@@ -242,6 +242,14 @@ after it sort the rows and then say the ratios outlive the numbers. Keep that or
 else it becomes a price list, which is exactly what the paragraph under it tells the student not to
 learn.
 
+**Three things on this page sort the same three tiers, and all three now run cheapest first**:
+`ModelTiers`, this table and `PickTheTier`'s column. The cards ran most-expensive-first until they
+were flipped to match, which had the unit sorting one scale in two directions twelve lines apart
+while each component's comment defended its own. The direction is the table's because the prose reads
+in it: `model.cost.1` calls the small one a unit and counts up to three and five, and `model.speed.1`
+opens on the small tier and closes on the top being slowest. So reordering any one of the three means
+reordering all three, and reversing them means rewriting both of those paragraphs first.
+
 **The table has four rows, the step teaches three tiers, and both stay.** Dropping the frontier row
 was considered and rejected: the numbers are what a student would actually be billed, so the row is
 named rather than hidden. `model.cost.2` is that naming, and three things about it are the decision.
@@ -541,19 +549,32 @@ learns nothing from a pair of them here, while a student who has meets them in t
 them. So the examples belong to `tools` and `session`, where they are the instruction rather than an
 illustration of a setting.
 
-Nine blocks in step 1 vary and they are all the same kind of thing, a filename or a command:
+Ten blocks in step 1 vary and nearly all of them are the same kind of thing, a filename or a command:
 `tools.where-extra-tools.3`, the `<pre>` under `tools.connect-one.1` and `tools.connect-one.2`
 (`claude mcp add` against `copilot mcp add`, which lands in `~/.copilot/mcp-config.json`),
-`tools.read-your-window.1`, `session.window-not-memory.1`, `context.amnesia-context-fatigue.3`
+`tools.read-your-window.1`, `tools.list-itself-window.2`, `session.window-not-memory.1`,
+`context.amnesia-context-fatigue.3`
 (nested inside the audience wrapper, never both attributes on one element),
 `model.api-vs-subscription.2` and `.3`, plus `survive.write.*.label` on the task card.
 `harness.lead.1` names Copilot for **every** reader instead of splitting, because that sentence is a
 list of example harnesses and a list is where a second product belongs.
 
-**The one thing that is not a filename or a command is `model`'s pair of window sections**, which
-are Claude-only whole and have no Copilot half at all. They are the exception to the shape above, and
-the reasoning is under `model`; do not read the sentence about nine blocks as saying that everything
-that varies is a word.
+Two of the ten are not a filename or a command, so do not read that sentence as saying everything
+that varies is a word. `model`'s pair of window sections is the larger one: Claude-only whole, with
+no Copilot half at all, and the reasoning is under `model`. `tools.list-itself-window.2` is the
+smaller and it is a **product fact**. Copilot CLI holds the GitHub MCP server with no configuration,
+so that reader is already paying for MCP tool descriptions when the section claims a tool costs you
+by existing, and the Claude half's "connect five MCP servers" would have them counting from zero.
+`list-itself-window.1` above it was made assistant-neutral in the same change ("every tool" rather
+than "every tool you connect") so the two paragraphs do not contradict each other, and
+`ReadYourWindow` needs no variant either way: its first and last moves compare a reading with and
+without the server the student added themselves.
+
+**Where a variant block names the product, `tools` says `Copilot CLI` rather than `Copilot`**,
+because the CLI is the surface the course assumes and a command, a config path or a `/context`
+readout is untrue of the editor. Two places stay on the bare name and both are right to:
+`model.api-vs-subscription` is about a seat rather than about a client, and `harness.lead.1` says
+"Copilot in your terminal", which names the surface in words.
 
 **What is deliberately shared is the more useful half of this, so do not "fix" it later.**
 `/clear` and `/context` are the same command in both, so `prompt.what-steer-after.1`,

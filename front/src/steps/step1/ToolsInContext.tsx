@@ -35,7 +35,6 @@ export function ToolsInContext() {
         aria-labelledby={titleId}
         className="h-auto w-full max-w-xl"
       >
-        {/* useId, not a BEM id: aria-labelledby has to be unique per instance, not per component. */}
         <title id={titleId} data-component="ToolsInContext">
           {t('tools-in-context.description')}
         </title>
@@ -54,7 +53,6 @@ export function ToolsInContext() {
           </marker>
         </defs>
 
-        {/* the context window */}
         <rect
           id="tools-in-context-window"
           data-component="ToolsInContext"

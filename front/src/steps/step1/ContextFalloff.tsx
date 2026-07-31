@@ -30,7 +30,6 @@ export function ContextFalloff() {
         aria-labelledby={titleId}
         className="h-auto w-full max-w-md"
       >
-        {/* useId, not a BEM id: aria-labelledby has to be unique per instance, not per component. */}
         <title id={titleId} data-component="ContextFalloff">
           {t('falloff.description')}
         </title>

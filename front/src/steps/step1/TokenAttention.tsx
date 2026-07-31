@@ -126,7 +126,6 @@ export function TokenAttention() {
           aria-labelledby={titleId}
           className="h-auto w-full"
         >
-          {/* useId, not a BEM id: aria-labelledby has to be unique per instance. */}
           <title id={titleId} data-component="TokenAttention">
             {t('token-attention.description')}
           </title>

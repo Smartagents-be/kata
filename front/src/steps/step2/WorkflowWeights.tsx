@@ -98,7 +98,6 @@ export function WorkflowWeights() {
         aria-labelledby={titleId}
         className="h-auto w-full"
       >
-        {/* useId, not a BEM id: aria-labelledby has to be unique per instance, not per component. */}
         <title id={titleId} data-component="WorkflowWeights">
           {t('workflow-weights.description')}
         </title>

@@ -117,7 +117,6 @@ export function OneShotCompare() {
           {t('oneshot-compare.after')}
         </span>
 
-        {/* divider + grip */}
         <div
           id="oneshot-compare-divider"
           data-component="OneShotCompare"
