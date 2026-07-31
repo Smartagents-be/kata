@@ -530,7 +530,7 @@ Ten blocks in step 1 vary and nearly all of them are the same kind of thing, a f
 list of example harnesses and a list is where a second product belongs.
 
 Two of the ten are not a filename or a command, so do not read that sentence as saying everything
-that varies is a word. `model`'s pair of window sections is the larger one: Claude-only whole, with
+that varies is a word. `model`'s window section is the larger one: Claude-only whole, with
 no Copilot half at all, and the reasoning is under `model`. `tools.list-itself-window.2` is the
 smaller and it is a **product fact**. Copilot CLI holds the GitHub MCP server with no configuration,
 so that reader is already paying for MCP tool descriptions when the section claims a tool costs you
