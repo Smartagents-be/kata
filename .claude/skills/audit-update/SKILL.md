@@ -60,7 +60,7 @@ split per step (1a, 1b, 1c and so on); "Table 1" below always means the changed 
 | `steps/stepN/quiz.ts` | the `Interactive` column, the quiz rows, and the cadence summary's "every quiz is in the first six units" claim |
 | `steps/stepN/locales/*.json` | rows whose fix names a locale key, the Dutch completeness row, and locale file hygiene |
 | `kata/stepN/java/**` | Table 1 rows about the service, flags, profiles or a Javadoc; several `⚠` rows are about Java text disagreeing with prose |
-| `front/src/steps/CLAUDE.md`, `kata/*/CLAUDE.md` | rows that cite one of those files as the thing a student reads or as the repo disagreeing with itself |
+| `front/src/steps/CLAUDE.md`, `front/src/steps/*/CLAUDE.md`, `kata/*/CLAUDE.md` | rows that cite one of those files as the thing a student reads or as the repo disagreeing with itself |
 | `shared/deck/deck.tsx` | the delivery-gap row about deck coverage |
 
 A change to a file listed by a row's **fix** is the strongest signal: if the fix said "change the

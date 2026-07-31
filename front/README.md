@@ -58,8 +58,9 @@ Three files carry the reasoning, and each loads when you work in the directory i
 - **`front/CLAUDE.md`** for anything visual or structural: the design system and its tokens, the
   `id`/`data-component` naming every rendered element follows, the audience and assistant filters,
   the language mechanism, and the presentation deck.
-- **`front/src/steps/CLAUDE.md`** for the content: what is deliberate about each unit, why a figure
-  is drawn the way it is, and which parts are student exercises that must not be solved.
+- **`front/src/steps/stepN/CLAUDE.md`** for the content, one per step: what is deliberate about each
+  unit, why a figure is drawn the way it is, and which parts are student exercises that must not be
+  solved. `front/src/steps/CLAUDE.md` above them carries only what spans the steps.
 - **`CLAUDE.md`** at the repo root for how the kata is built and what applies across both halves.
 
 Two rules from those files are worth knowing before you touch a line, because both are easy to break

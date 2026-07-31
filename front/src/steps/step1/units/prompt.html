@@ -28,39 +28,39 @@
   too, even when the agent suggested the answers itself.
 </p>
 
-<h2 data-i18n="prompt.basis-of-instruction.heading">A prompt is the basis of the instruction</h2>
+<h2 data-i18n="prompt.instruction.heading">Instruction</h2>
 
-<p data-i18n="prompt.basis-of-instruction.1">
+<p data-i18n="prompt.instruction.1">
   A prompt is an instruction that sets a lot more in motion. It cascades, each step building on the
   one before. So make sure your prompt actually says what you want the model to do. Any inaccuracy
   in it only compounds from there.
 </p>
 
-<p data-i18n="prompt.basis-of-instruction.2">
+<p data-i18n="prompt.instruction.2">
   Models work the question over before they answer. The harness exposes that as a reasoning level,
   running from low up to max. Turn it up and the model spends more tokens thinking, which absorbs
   some of the imprecision or missing information in what you wrote.
 </p>
 
-<p data-i18n="prompt.basis-of-instruction.3">
+<p data-i18n="prompt.instruction.3">
   The higher the reasoning, the more tokens the model spends thinking. Those tokens stay in the
   context and add to the cost <svg data-icon="coin"></svg> So weigh when you need more reasoning, and when you need
   less.
 </p>
 
-<p data-i18n="prompt.basis-of-instruction.4">
+<p data-i18n="prompt.instruction.4">
   Worth knowing that the thinking is not only about your question. It also covers the agent's own
   moves, which file to open next and what to hand itself as input for the step after that.
 </p>
 
-<h2 data-i18n="prompt.let-model-write.heading">Let a model write the prompt</h2>
+<h2 data-i18n="prompt.meta-prompting.heading">Meta-prompting</h2>
 
-<p data-i18n="prompt.let-model-write.1">
-  Meta-prompting is what it sounds like. You say roughly what you want, a model writes the
+<p data-i18n="prompt.meta-prompting.1">
+  Meta-prompting is letting a model write the prompt. You say roughly what you want, it writes the
   instruction, and you read it back and fix the parts it got wrong.
 </p>
 
-<p data-i18n="prompt.let-model-write.2">
+<p data-i18n="prompt.meta-prompting.2">
   Spend an expensive model on this. Writing a prompt is a few hundred tokens next to executing one,
   so the top tier is cheap here <svg data-icon="gem"></svg> <svg data-icon="coin"></svg> Running the task is where the money goes.
 </p>

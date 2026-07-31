@@ -42,9 +42,11 @@ machinery around the window they share. `step2` is **agentic engineering**: how 
 agent, as opposed to what it knows. `step3` is **soft skills**: what happens around the work rather
 than in it, and it is the one step with no Java behind it and nothing for a machine to grade. What is
 deliberate about each of their units, and why, is in
-**`front/src/steps/CLAUDE.md`**, which loads when you work under that directory. Read it before
-touching any unit HTML, figure, locale file or step registry: a great deal of what looks like an
-oversight in there is load bearing, and that file is the only place the reasoning is written down.
+**`front/src/steps/stepN/CLAUDE.md`**, one per step, each loading when you work under its own step;
+what spans the steps is in **`front/src/steps/CLAUDE.md`** above them. Read the one for the step
+before touching any of its unit HTML, figures, locale files or registry: a great deal of what looks
+like an oversight in there is load bearing, and those files are the only place the reasoning is
+written down.
 The prohibitions that protect the student exercises are repeated under `## Layout` below, so they
 hold whether or not that file is loaded.
 

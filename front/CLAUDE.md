@@ -329,6 +329,7 @@ wrapper whose words have to be written, instead of silence and a Cursor student 
 for a figure: it reads `useAssistant()` itself, and the `data-figure` marker never branches.
 
 Which units this is actually used in, and the places it deliberately is not, are in
+`front/src/steps/step0/CLAUDE.md` and `front/src/steps/step1/CLAUDE.md`, with the cross-step scope in
 `front/src/steps/CLAUDE.md`. The short version: step 0 tells the student to set it, and step 1
 varies nine blocks. Everything else is shared on purpose.
 

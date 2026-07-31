@@ -41,7 +41,7 @@ void i18next
     // Every resource here is inline (the bundles above plus the per-step bundles added
     // synchronously from steps/index.ts), so there is nothing to load asynchronously. Left on its
     // default, init defers to the next tick, and React's first render lands before i18next is
-    // ready: `t(key)` returns the key, and a step's prose flashes 'prompt.basis-of-instruction.1'
+    // ready: `t(key)` returns the key, and a step's prose flashes 'prompt.instruction.1'
     // in place of its text until init resolves. Initialising synchronously makes translations
     // available on the first render and removes that flash. (This option was `initImmediate` before
     // i18next 26.)

@@ -170,8 +170,8 @@ long if that is how you think, then cut before you commit, because the cut is co
 
 Two things follow from cutting a paragraph, and both are easy to miss. A paragraph that closed the
 unit is load bearing, so decide where the closer goes before you delete the section around it. And
-`front/src/steps/CLAUDE.md` counts things (asides, figures, which unit owns which argument), so grep
-it for the unit you just cut and fix what you invalidated in the same change.
+that step's `front/src/steps/stepN/CLAUDE.md` counts things (asides, figures, which unit owns which
+argument), so grep it for the unit you just cut and fix what you invalidated in the same change.
 
 ## Repo conventions to respect
 
