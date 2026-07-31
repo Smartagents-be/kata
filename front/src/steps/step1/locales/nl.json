@@ -361,7 +361,7 @@
   "prompt.let-model-write.2": "Gebruik daar gerust een duur model voor. Een prompt schrijven is een paar honderd tokens naast het uitvoeren ervan, dus de topklasse is hier goedkoop <svg data-icon=\"gem\"></svg> <svg data-icon=\"coin\"></svg> Het uitvoeren is waar het geld naartoe gaat.",
   "prompt.plan-mode.heading": "Plan mode",
   "prompt.plan-mode.1": "Plan mode is meta-prompting die de provider al voor je gebouwd heeft. De agent interviewt je over de taak, geeft een plan terug en wacht. Jij past het aan, vraagt een extra ronde, of keurt het goed. Voor die goedkeuring wordt er geen code geschreven.",
-  "prompt.plan-mode.2": "En dan het stuk dat mensen niet verwachten. Een goedkoper model dat door een plan gestuurd wordt, verslaat geregeld een one-shot van een duur model. Het plan maakte van een vage vraag een exacte instructie, en die precisie was al die tijd het ontbrekende stuk, niet de grootte van het model.",
+  "prompt.plan-mode.2": "Een goedkoper model dat door een plan gestuurd wordt, verslaat geregeld een one-shot van een duur model. De meeste mensen denken dat net andersom. Het plan maakte van een vage vraag een exacte instructie, en die precisie was al die tijd het ontbrekende stuk, niet de grootte van het model.",
   "prompt.plan-mode.3": "<p> Probeer het een keer op iets echts. Neem een taak die je als één lijn ging typen, laat ze eerst door plan mode gaan, en lees het plan voor je goedkeurt. Uit dat interview komt bijna altijd een beslissing die je nog niet genomen had. </p>",
   "prompt.plan-mode.4": "Je lesgever draait aan het bord een taak door plan mode, zodat je het interview en het plan ziet voor er iets uitgevoerd wordt.",
   "prompt.what-steer-after.heading": "Waar je daarna aan stuurt",
