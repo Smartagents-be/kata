@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/**
+ * Both faces are self-hosted, the same variable files the app ships, so a render never reaches
+ * for a CDN and the video's type matches the product exactly.
+ */
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-display: block;
+  font-weight: 300 900;
+  src: url("../public/fonts/figtree-latin-wght-normal.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-display: block;
+  font-weight: 100 800;
+  src: url("../public/fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2-variations");
+}
