@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>kata step 1 · the flag on the page</title>
+
+    <!--
+      A standalone page with nothing behind it: no build, no dependencies, no server. The student's
+      agent opens it through a browser MCP server and screenshots what it finds.
+
+      Two things in here are the exercise and must stay the way they are.
+
+      The flag is NOT in this file as text. `CIPHER` is the string with each byte XORed against a
+      rolling key, so a grep, a Read of the source or a glance at the markup hands nothing over: the
+      only way to the flag is to run the page. Do not write the plaintext into this file, into a
+      comment, into the title, or into any CLAUDE.md.
+
+      And nothing on this page addresses the agent. The unit two sections below this exercise teaches
+      prompt injection, so a page telling a browsing agent what to do next would be the course
+      demonstrating the attack while warning about it. The moves on the task card are where the
+      student is told what to do.
+    -->
+    <style>
+      :root {
+        --bg: oklch(0.16 0.014 200);
+        --fg: oklch(0.95 0.004 190);
+        --muted: oklch(0.68 0.008 200);
+        --primary: oklch(0.68 0.1 184.994);
+        --paper: oklch(0.97 0.005 100);
+        --ink: oklch(0.28 0.014 200);
+        --mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, Consolas, monospace;
+        --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 3rem 1.5rem;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: var(--sans);
+        overflow-x: hidden;
+      }
+
+      /* Two slow teal blooms drifting behind everything. Nothing is drawn on top of them. */
+      .aurora {
+        position: fixed;
+        inset: -30%;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(40rem 30rem at 25% 30%, oklch(0.68 0.1 185 / 0.22), transparent 70%),
+          radial-gradient(34rem 26rem at 78% 70%, oklch(0.62 0.09 210 / 0.18), transparent 70%);
+        animation: drift 24s ease-in-out infinite alternate;
+      }
+
+      @keyframes drift {
+        to {
+          transform: translate3d(4%, -3%, 0) scale(1.12);
+        }
+      }
+
+      /* Token fragments rising through the page. `unscrambled` comes apart the way the step's own
+         TokenSplit figure splits it, so the confetti is this course's vocabulary and not decoration. */
+      .chips {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .chips span {
+        position: absolute;
+        bottom: -3rem;
+        padding: 0.2rem 0.6rem;
+        border: 1px solid oklch(1 0 0 / 0.12);
+        border-radius: 999px;
+        background: oklch(1 0 0 / 0.04);
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        white-space: nowrap;
+        animation: rise linear infinite;
+      }
+
+      @keyframes rise {
+        from {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0;
+        }
+        12% {
+          opacity: 0.5;
+        }
+        88% {
+          opacity: 0.5;
+        }
+        to {
+          transform: translateY(-115vh) rotate(14deg);
+          opacity: 0;
+        }
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
+        width: min(46rem, 100%);
+        text-align: center;
+      }
+
+      .eyebrow {
+        margin: 0 0 1.25rem;
+        color: var(--primary);
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.25rem, 6vw, 3.75rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+      }
+
+      .lede {
+        margin: 1.25rem auto 0;
+        max-width: 34rem;
+        color: var(--muted);
+        font-size: 1.05rem;
+        line-height: 1.6;
+      }
+
+      button {
+        margin-top: 2.5rem;
+        padding: 0.85rem 1.75rem;
+        border: 0;
+        border-radius: 999px;
+        background: var(--primary);
+        color: oklch(0.17 0.014 200);
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+        box-shadow: 0 0 0 0 oklch(0.68 0.1 185 / 0.5);
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0.75rem 2rem oklch(0.68 0.1 185 / 0.35);
+      }
+
+      button:focus-visible {
+        outline: 3px solid var(--primary);
+        outline-offset: 4px;
+      }
+
+      body[data-state='revealed'] button {
+        display: none;
+      }
+
+      .booth {
+        display: grid;
+        justify-items: center;
+        margin-top: 2.5rem;
+      }
+
+      /* A camera drawn in three boxes and a circle. The print slides out from behind it, so the
+         camera has to stay wider than the print or it reads as sitting on top of it. */
+      .camera {
+        position: relative;
+        z-index: 2;
+        width: min(19rem, 100%);
+        height: 6rem;
+        border-radius: 1.25rem 1.25rem 0.6rem 0.6rem;
+        background: linear-gradient(oklch(0.3 0.014 200), oklch(0.22 0.014 200));
+        box-shadow: 0 1.5rem 3rem oklch(0 0 0 / 0.45);
+      }
+
+      .lens {
+        position: absolute;
+        top: 1.1rem;
+        left: 50%;
+        translate: -50% 0;
+        width: 3.4rem;
+        height: 3.4rem;
+        border: 0.35rem solid oklch(0.38 0.014 200);
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, oklch(0.55 0.06 200), oklch(0.18 0.02 210));
+      }
+
+      .bulb {
+        position: absolute;
+        top: 1.4rem;
+        right: 1.4rem;
+        width: 0.7rem;
+        height: 0.7rem;
+        border-radius: 50%;
+        background: var(--primary);
+        box-shadow: 0 0 1rem var(--primary);
+        animation: blink 2.4s ease-in-out infinite;
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0.25;
+        }
+      }
+
+      .slot {
+        position: absolute;
+        bottom: 0.55rem;
+        left: 50%;
+        translate: -50% 0;
+        width: 13rem;
+        height: 0.4rem;
+        border-radius: 999px;
+        background: oklch(0.12 0.014 200);
+      }
+
+      .print {
+        position: relative;
+        z-index: 1;
+        margin-top: -1.5rem;
+        padding: 0.85rem 0.85rem 0;
+        width: min(17rem, 100%);
+        border-radius: 0.25rem;
+        background: var(--paper);
+        box-shadow: 0 1.5rem 2.5rem oklch(0 0 0 / 0.5);
+        opacity: 0;
+        transform: translateY(-4.5rem) rotate(-3deg) scale(0.96);
+        pointer-events: none;
+      }
+
+      /* Ease-out-expo, not a spring. The print is pushed out of a slot and stops; an overshoot
+         would have it bouncing back into a camera it just left. */
+      body[data-state='revealed'] .print {
+        animation: eject 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        pointer-events: auto;
+      }
+
+      @keyframes eject {
+        from {
+          opacity: 0;
+          transform: translateY(-4.5rem) rotate(-3deg) scale(0.96);
+        }
+        60% {
+          opacity: 1;
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) rotate(-1.5deg) scale(1);
+        }
+      }
+
+      .photo {
+        display: grid;
+        place-items: center;
+        aspect-ratio: 1 / 0.82;
+        border-radius: 0.15rem;
+        background:
+          radial-gradient(circle at 50% 30%, oklch(0.32 0.05 195), transparent 65%),
+          linear-gradient(oklch(0.2 0.02 205), oklch(0.14 0.02 210));
+      }
+
+      /* The developing bath. It resolves once, and lands sharp so a screenshot taken a second later
+         is readable. */
+      body[data-state='revealed'] .photo {
+        animation: develop 1.7s 0.35s ease-out backwards;
+      }
+
+      @keyframes develop {
+        from {
+          filter: blur(12px) saturate(0.15) brightness(1.9);
+        }
+        to {
+          filter: none;
+        }
+      }
+
+      /* One line, always. A flag that wraps in the middle of itself is a flag a student mistypes
+         off the screenshot, so it shrinks to fit rather than breaking. */
+      .flag {
+        margin: 0;
+        padding: 0 0.4rem;
+        color: var(--primary);
+        font-family: var(--mono);
+        font-size: clamp(0.8rem, 3.4vw, 1.15rem);
+        font-weight: 600;
+        white-space: nowrap;
+        user-select: all;
+      }
+
+      .caption {
+        margin: 0;
+        padding: 0.9rem 0.2rem 1.1rem;
+        color: var(--ink);
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        text-align: center;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .aurora,
+        .chips span,
+        .bulb {
+          animation: none;
+        }
+
+        body[data-state='revealed'] .print,
+        body[data-state='revealed'] .photo {
+          animation: none;
+          opacity: 1;
+          transform: none;
+          filter: none;
+        }
+
+        .flash {
+          display: none;
+        }
+      }
+
+      .flash {
+        position: fixed;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+        background: oklch(1 0 0);
+        opacity: 0;
+      }
+
+      .flash[data-firing] {
+        animation: pop 0.32s ease-out;
+      }
+
+      @keyframes pop {
+        0% {
+          opacity: 0;
+        }
+        18% {
+          opacity: 0.85;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="aurora"></div>
+    <div class="chips" aria-hidden="true"></div>
+
+    <main>
+      <p class="eyebrow">kata · step 1 · tools</p>
+
+      <h1>Somebody had to go and look.</h1>
+
+      <p class="lede">
+        The flag is not in this file. It is put together while the page runs, so reading the source
+        hands over nothing. A browser does.
+      </p>
+
+      <button id="reveal" type="button">Reveal the flag</button>
+
+      <div class="booth">
+        <div class="camera" aria-hidden="true">
+          <div class="lens"></div>
+          <div class="bulb"></div>
+          <div class="slot"></div>
+        </div>
+
+        <figure class="print" aria-live="polite">
+          <div class="photo">
+            <p class="flag" id="flag"></p>
+          </div>
+          <figcaption class="caption">step 1 · tools</figcaption>
+        </figure>
+      </div>
+    </main>
+
+    <div class="flash"></div>
+
+    <script>
+      // Each byte of the flag XORed against a rolling key, then base64. Assembled below at the
+      // moment the button is pressed, so the string never exists in the markup a Read would return.
+      const CIPHER = 'UkAGRnYgIHdRBkISTPfg7w=='
+
+      function assemble() {
+        const bytes = atob(CIPHER)
+        let out = ''
+        for (let i = 0; i < bytes.length; i++) {
+          out += String.fromCharCode(bytes.charCodeAt(i) ^ ((i * 7 + 41) & 255))
+        }
+        return out
+      }
+
+      // The confetti, built here rather than written out sixteen times in the markup.
+      const FRAGMENTS = ['un', 'scr', 'ambled', '{', '}', 'ctx', 't0k', '->', '/api', '0x1f']
+      const chips = document.querySelector('.chips')
+      for (let i = 0; i < 16; i++) {
+        const chip = document.createElement('span')
+        chip.textContent = FRAGMENTS[i % FRAGMENTS.length]
+        chip.style.left = `${(i * 6.4 + 3) % 96}%`
+        chip.style.animationDuration = `${14 + (i % 5) * 3.5}s`
+        chip.style.animationDelay = `${-i * 1.7}s`
+        chips.append(chip)
+      }
+
+      const flash = document.querySelector('.flash')
+
+      document.querySelector('#reveal').addEventListener('click', () => {
+        document.querySelector('#flag').textContent = assemble()
+        document.body.dataset.state = 'revealed'
+        flash.dataset.firing = ''
+        flash.addEventListener('animationend', () => delete flash.dataset.firing, { once: true })
+      })
+    </script>
+  </body>
+</html>

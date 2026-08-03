@@ -50,3 +50,21 @@ export const flags: FlagSpec[] = [
     hash: '53285327e48e2e3f5c05abd97bd6c6a50fb12da948358286b205952c7ee0590b',
   },
 ]
+
+/**
+ * The fourth flag, and **not one of the board's three**. It is hidden in `kata/step1/front/`, a
+ * standalone page with no server behind it, and the only way to it is to drive a browser: the page
+ * assembles the string while it runs, so reading the file returns nothing. `ShutterFlag` grades it
+ * under the browser task in `tools`, where the work happens.
+ *
+ * It stays out of `flags` on purpose. That array is what `workshop` closes the step with, one row
+ * per way context is assembled from the backend, and a browser flag is neither of those three. It
+ * shares `FLAG_SALT` because the salt is not a secret; it only makes a digest specific to this step.
+ */
+export const shutterFlag: FlagSpec = {
+  id: 'shutter',
+  labelKey: 'shutter.flag.label',
+  hintKey: 'shutter.flag.hint',
+  helpKey: 'shutter.flag.help',
+  hash: '15f266cf9593babbc256601202db66bccd409de40333ddc42ab8bea92ae27249',
+}

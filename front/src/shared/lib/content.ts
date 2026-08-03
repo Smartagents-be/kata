@@ -29,6 +29,11 @@ export interface PrepareOptions {
  * document rather than hidden with CSS — during class, text that is merely hidden is still one
  * devtools panel away.
  *
+ * On top of that per-element filter, **guided mode drops every run of prose**,
+ * `data-audience="guided"` blocks included: in class the teacher does the telling, so the page
+ * keeps only its figures, each under the section title it sat beneath, and the quiz or board a
+ * unit carries lives in the registry rather than in this HTML.
+ *
  * **The assistant.** The same shape again, on `data-assistant`, for the places where the
  * instruction genuinely differs between the products:
  *
@@ -78,6 +83,26 @@ export function prepareUnit(
   { mode, assistant, translate }: PrepareOptions,
 ): Segment[] {
   const doc = new DOMParser().parseFromString(html, 'text/html')
+
+  // In class the teacher carries the prose out loud, so guided mode keeps only each figure and the
+  // section title above it, which keeps a page of drawings organised. The title usually sits inside
+  // the self-audience wrapper the next pass is about to remove, so each top-level figure marker
+  // adopts the nearest heading before it in reading order *now*: moved to sit directly above the
+  // marker, where the audience pass cannot take it and the language pass still finds it. A heading
+  // serves at most one figure, so a section with two drawings titles the first.
+  const keptHeadings = new Set<Node>()
+  if (mode === 'guided') {
+    let lastHeading: Element | null = null
+    for (const element of doc.body.querySelectorAll('h2, h3, [data-figure]')) {
+      if (!element.hasAttribute('data-figure')) {
+        lastHeading = element
+      } else if (element.parentElement === doc.body && lastHeading) {
+        doc.body.insertBefore(lastHeading, element)
+        keptHeadings.add(lastHeading)
+        lastHeading = null
+      }
+    }
+  }
 
   for (const element of doc.querySelectorAll('[data-audience]')) {
     if (element.getAttribute('data-audience') !== mode) {
@@ -133,6 +158,12 @@ export function prepareUnit(
       node.nodeType === Node.ELEMENT_NODE ? (node as Element).getAttribute('data-figure') : null
 
     if (marker === null) {
+      // The guided cut: everything that is not a figure or its adopted title goes, the
+      // `data-audience="guided"` blocks included. A unit's quiz or board comes from the registry
+      // rather than this HTML, so it is untouched.
+      if (mode === 'guided' && !keptHeadings.has(node)) {
+        continue
+      }
       run.append(node)
       continue
     }

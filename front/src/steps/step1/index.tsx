@@ -3,6 +3,7 @@ import type { Step } from '@/shared/step'
 import { AnswerProvenance } from './AnswerProvenance'
 import { BudgetWindow } from './BudgetWindow'
 import { BundleCompare } from './BundleCompare'
+import { ConnectOne } from './ConnectOne'
 import { ContextDiagram } from './ContextDiagram'
 import { ContextFalloff } from './ContextFalloff'
 import { CoordinatorFanout } from './CoordinatorFanout'
@@ -17,6 +18,7 @@ import { ModelTiers } from './ModelTiers'
 import { NextToken } from './NextToken'
 import { OneShotCompare } from './OneShotCompare'
 import { PatternMatch } from './PatternMatch'
+import { PickTheNext } from './PickTheNext'
 import { PickTheTier } from './PickTheTier'
 import { PromptInContext } from './PromptInContext'
 import { ReadYourWindow } from './ReadYourWindow'
@@ -24,12 +26,15 @@ import { ReflectionLoop } from './ReflectionLoop'
 import { SequentialSteps } from './SequentialSteps'
 import { SessionMakeup } from './SessionMakeup'
 import { SessionWindows } from './SessionWindows'
+import { ShutterFlag } from './ShutterFlag'
 import { SpotInjection } from './SpotInjection'
 import { SurviveTheClear } from './SurviveTheClear'
 import { TokenAttention } from './TokenAttention'
 import { TokenSplit } from './TokenSplit'
 import { ToolsInContext } from './ToolsInContext'
 import { TrainedOrGrounded } from './TrainedOrGrounded'
+import { UnderSpecified } from './UnderSpecified'
+import { WordsIntoTokens } from './WordsIntoTokens'
 import deck from './deck'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
@@ -47,17 +52,18 @@ import workshop from './units/workshop.html?raw'
 /**
  * Step 1, one layer of context per unit, plus three units that are not layers. `tokens` opens the
  * step and is the unit the window is counted in; `model` is the reader on the other end of it and
- * `truth` is where that reader's answers come from. None of the three fills the window, which is why
- * `workshop` still names four layers and not seven.
+ * `truth` is where that reader's answers come from. None of the three fills the window.
  *
  * The two layers a student writes and reads for themselves come first, so `prompt` and `tools` sit
  * ahead of `context`. That makes `prompt` the unit that defines the word context, and it makes
  * `context` the step back to the whole window rather than the first sight of it.
  *
- * `workshop` closes the step with a flag board (like
+ * `workshop` closes the step as its capstone, a flag board (like
  * step 2's workshop): three flags the `GET /api/titles` backend hides from its response, one per
  * way context is assembled - read the source, trace the run, turn the log level up. The board
  * grades in the browser against salted hashes, so it needs no backend and there is no Java checker.
+ * The unit's prose is the game and nothing else: the per-flag technique lives on the board's own
+ * rows, and the house rules the hunt is played under live in step 0's `welcome`.
  *
  * Every string here is a key into `locales/`, except the unit HTML, which *is* the English and
  * carries `data-i18n` keys for the rest. The flags themselves stay English/mono in every language.
@@ -72,9 +78,11 @@ const step1: Step = {
       title: 'tokens.title',
       html: tokens,
       inlineFigures: {
+        'words-into-tokens': <WordsIntoTokens />,
         'token-split': <TokenSplit />,
         'next-token': <NextToken />,
         'token-attention': <TokenAttention />,
+        'pick-the-next': <PickTheNext />,
       },
     },
     {
@@ -97,6 +105,8 @@ const step1: Step = {
         'mcp-server': <McpServer />,
         'mcp-parts': <McpParts />,
         'mcp-ovals': <McpOvals />,
+        'connect-one': <ConnectOne />,
+        'shutter-flag': <ShutterFlag />,
         'spot-injection': <SpotInjection />,
         'budget-window': <BudgetWindow />,
         'read-your-window': <ReadYourWindow />,
@@ -127,6 +137,7 @@ const step1: Step = {
       title: 'harness.title',
       html: harness,
       inlineFigures: {
+        'under-specified': <UnderSpecified />,
         'coordinator-fanout': <CoordinatorFanout />,
         'sequential-steps': <SequentialSteps />,
         'reflection-loop': <ReflectionLoop />,

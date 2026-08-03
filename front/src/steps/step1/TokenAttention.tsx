@@ -12,6 +12,19 @@ import { cn } from '@/shared/lib/utils'
  * and the pairs more than quadruple) is prose, not a control on the figure, because a second beat
  * here would bury the first one.
  *
+ * **The numbers only appear once a token is held.** The opening state is the mass of arcs and
+ * nothing else, because a grid of twenty-one figures is a table rather than a picture. Holding one
+ * token puts its own shares under every token behind it, so "which of these did it lean on" is read
+ * off the page instead of guessed from how thick a curve looks, and the box behind the heavier
+ * number is filled harder for the same reason. All three encodings are the same number: the arc,
+ * the fill and the printed share never disagree.
+ *
+ * **A held row adds to 100, and that is the second thing this figure now teaches.** The weighing is
+ * shared out rather than handed out, so a token cannot lean hard on everything behind it, and every
+ * token it leans on more is another it leans on less. That is what makes the numbers worth printing
+ * at all: seven arcs of varying thickness say "some more than others", and seven shares that add up
+ * say what is actually going on.
+ *
  * **Arcs run backwards only, and that is not a simplification.** A token in a decoder weighs itself
  * against what came before it and never against what comes after. Two things fall out of that, and
  * the unit uses both: the first token has nothing to look back at, and appending to the end of a
@@ -23,7 +36,10 @@ import { cn } from '@/shared/lib/utils'
  * word". The sentence was picked so the one link a student will look for is the one they expect (`it`
  * back to `build`), and what the figure is honest about is the shape rather than the numbers. It
  * carried a caption saying that and the caption was cut deliberately, so this comment is the only
- * remaining record: if a caption ever comes back here, that is what goes in it.
+ * remaining record: if a caption ever comes back here, that is what goes in it. Printing the shares
+ * raises the stakes on that rather than settling it: what the rows are honest about is that they add
+ * to a hundred, which every real attention row does, and not the twenty-one numbers making them up,
+ * which are picked so one sentence reads the way a reader expects.
  *
  * Like `TokenSplit`, it draws no context frame: `ToolsInContext` in `tools` is the first teal frame
  * a student meets, and every figure above it stays out of that vocabulary.
@@ -33,23 +49,34 @@ import { cn } from '@/shared/lib/utils'
 const TOKENS = ['the', 'build', 'failed', 'because', 'it', 'timed', 'out']
 
 /**
- * `WEIGHTS[i][j]` is how hard token `i` weighs token `j`, and every row is one shorter than its
- * index because a token only looks back. Row 0 is empty on purpose: the first token has nothing
- * behind it, which is worth a student noticing.
+ * `WEIGHTS[i][j]` is the share of token `i`'s weighing that lands on token `j`, in whole percent,
+ * and every row is one shorter than its index because a token only looks back. Row 0 is empty on
+ * purpose: the first token has nothing behind it, which is worth a student noticing.
+ *
+ * **Every row adds to 100 and that is the shape of the real thing.** A row of attention is a softmax
+ * over what came before, so a token spreads a fixed amount of weighing backwards rather than scoring
+ * each earlier token on its own; there is no way for one to lean hard on everything. Whole percent
+ * rather than a fraction is what keeps that checkable in the source and on the screen, so a row
+ * edited to 99 or 104 is a bug rather than a rounding. What is left out of the hundred is the token
+ * weighing *itself*, which a real row includes: this figure is about what a token looks back at, so
+ * the share is a share of that.
  */
 const WEIGHTS: number[][] = [
   [],
-  [0.35],
-  [0.1, 0.75],
-  [0.1, 0.3, 0.6],
-  [0.1, 0.9, 0.4, 0.25],
-  [0.05, 0.5, 0.45, 0.2, 0.55],
-  [0.05, 0.35, 0.3, 0.15, 0.4, 0.85],
+  [100],
+  [12, 88],
+  [10, 30, 60],
+  [6, 55, 24, 15],
+  [3, 29, 26, 11, 31],
+  [2, 17, 14, 7, 19, 41],
 ]
 
 const BOX_Y = 286
 const BOX_HEIGHT = 30
 const GAP = 8
+
+/** Centre line of the printed weight, sitting under the boxes rather than inside them. */
+const WEIGHT_Y = 328
 
 /** Wide enough for the label at 14px mono, with the padding written into the constant. */
 function widthOf(label: string): number {
@@ -96,6 +123,19 @@ export function TokenAttention() {
       ? null
       : WEIGHTS[selected].indexOf(Math.max(...WEIGHTS[selected]))
 
+  /**
+   * How hard a link is drawn, on 0 to 1, and it is **always measured against its own row's heaviest**
+   * rather than against a hundred. Two reasons, and the second is the one that matters. A row's
+   * shares get smaller as the row gets longer (the last token's largest share is 41), so drawing the
+   * absolute number fades the end of the sentence out and would fade a held row out just as it
+   * became the only thing on screen. And drawing the absolute number puts the two thickest arcs in
+   * the figure at the very start, where a token with one thing to look at spends everything on it,
+   * which reads as "the beginning matters most" and is not what this figure says. The printed share
+   * carries the absolute truth; the ink says which of the ones behind it this token leans on.
+   */
+  const intensity = (weight: number, row: number): number =>
+    weight / Math.max(...WEIGHTS[row], 1)
+
   return (
     <figure id="token-attention" data-component="TokenAttention" className="my-8 flex flex-col gap-3">
       <span
@@ -119,9 +159,10 @@ export function TokenAttention() {
           id="token-attention-svg"
           data-component="TokenAttention"
           // Cropped to the drawing rather than starting at 0. The tallest arc peaks at y=61 and the
-          // boxes end at 316, so anything outside this band is empty and would only push the figure
-          // taller.
-          viewBox="0 45 640 285"
+          // printed weights end at 334, so anything outside this band is empty and would only push
+          // the figure taller. The band is held whether or not a weight is on screen: a viewBox that
+          // grew on the first click would resize the whole figure under the pointer.
+          viewBox="0 45 640 292"
           role="group"
           aria-labelledby={titleId}
           className="h-auto w-full"
@@ -143,9 +184,15 @@ export function TokenAttention() {
                 id={`token-attention-link-${link.index}-${link.target}`}
                 data-component="TokenAttention"
                 d={arc(link.index, link.target)}
-                strokeWidth={selected === null ? 1 + link.weight : 1 + link.weight * 3}
+                strokeWidth={
+                  selected === null
+                    ? 1 + intensity(link.weight, link.index)
+                    : 1 + intensity(link.weight, link.index) * 3
+                }
                 strokeOpacity={
-                  selected === null ? 0.06 + link.weight * 0.18 : 0.2 + link.weight * 0.7
+                  selected === null
+                    ? 0.06 + intensity(link.weight, link.index) * 0.18
+                    : 0.2 + intensity(link.weight, link.index) * 0.7
                 }
                 strokeLinecap="round"
                 className="stroke-primary"
@@ -157,6 +204,10 @@ export function TokenAttention() {
             const box = LAYOUT[index]
             const isSelected = index === selected
             const isTarget = selected !== null && index < selected
+            // What the held token weighs this one at, and null for every token that is not being
+            // weighed right now: the selected token itself, everything after it, and the whole
+            // opening state.
+            const weight = isTarget && selected !== null ? WEIGHTS[selected][index] : null
             return (
               <g
                 key={label + String(index)}
@@ -193,12 +244,24 @@ export function TokenAttention() {
                   height={BOX_HEIGHT}
                   rx="8"
                   strokeWidth="2"
+                  // A weighed box is tinted by its own weight rather than by a flat class, so the
+                  // row reads as a ramp before a single number is read. The opacity is an attribute
+                  // and the colour is still a token, which is what keeps this out of `index.css`'s
+                  // way: there is no arbitrary `fill-primary/[0.37]` to generate.
+                  fillOpacity={
+                    weight === null || selected === null
+                      ? undefined
+                      : 0.06 + intensity(weight, selected) * 0.34
+                  }
+                  strokeOpacity={
+                    weight === null || selected === null
+                      ? undefined
+                      : 0.25 + intensity(weight, selected) * 0.55
+                  }
                   className={cn(
-                    isSelected
+                    isSelected || isTarget
                       ? 'fill-primary stroke-primary'
-                      : isTarget
-                        ? 'fill-primary/15 stroke-primary/50'
-                        : 'fill-muted stroke-border',
+                      : 'fill-muted stroke-border',
                   )}
                 />
                 {/* The focus ring is drawn rather than inherited: an SVG group takes no box shadow,
@@ -232,6 +295,26 @@ export function TokenAttention() {
                 >
                   {label}
                 </text>
+                {/* Mono, because it is a number the machine came up with, and the heaviest one is
+                    the only teal in the row: a student looking for what `it` leans on finds it
+                    without comparing seven figures. */}
+                {weight === null ? null : (
+                  <text
+                    id={`token-attention-token-${index}-weight`}
+                    data-component="TokenAttention"
+                    x={box.cx}
+                    y={WEIGHT_Y}
+                    fontSize="11"
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    className={cn(
+                      'pointer-events-none font-mono',
+                      index === heaviest ? 'fill-primary' : 'fill-muted-foreground',
+                    )}
+                  >
+                    {weight}%
+                  </text>
+                )}
               </g>
             )
           })}
@@ -254,6 +337,8 @@ export function TokenAttention() {
                 token: TOKENS[selected],
                 links: WEIGHTS[selected].length,
                 heaviest: TOKENS[heaviest],
+                // The same string the drawing prints, so a screen reader and the page agree.
+                weight: `${String(WEIGHTS[selected][heaviest])}%`,
               })}
       </p>
     </figure>

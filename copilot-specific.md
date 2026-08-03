@@ -127,7 +127,7 @@ Two facts the course could use and does not:
   reading with and without the server *they* added.
 - MCP prompts are documented as reachable under a slash as `/mcp.servername.promptname`, **for
   Copilot generally**. The Copilot CLI command reference lists 40-odd slash commands and none of
-  them is a prompt (re-read 30 July 2026), so `tools.where-extra-tools.3.copilot` no longer claims
+  them is a prompt (re-read 30 July 2026), so `tools.extra-tools.3.copilot` no longer claims
   it: it names `/mcp`, which the CLI does document, and says that surfacing a server's prompts is
   the harness's call. Absent from a reference is not the same as absent from the product, so if you
   see one under a slash in a real session, that sentence goes back.

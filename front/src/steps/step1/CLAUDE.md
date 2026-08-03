@@ -24,8 +24,8 @@ its prose keys read `context.<section>.<n>`. Old links to `/steps/step1/intro` a
 no redirect, which is the decision: the app has no route aliases anywhere and one unit is not the
 place to start. A student mid-run loses that one unit's tick out of `kata.completed`, since progress
 is keyed by `step/unit`.
-That order is the registry's, and `workshop`'s opening list recites it, so moving a unit means
-visiting that sentence in the HTML and in `nl.json`. **The two layers a student writes and reads for
+That order is the registry's, and nothing recites it any more: `workshop`'s opening list went with
+its capstone rewrite, so moving a unit is a registry change and nothing else. **The two layers a student writes and reads for
 themselves come before the theory**, which is why `prompt` and `tools` sit ahead of `context` rather
 than after it. Two things follow from that and are load-bearing: `prompt` is where the word
 *context* is defined (one paragraph, and `context` must not grow a second definition), and the three
@@ -44,10 +44,11 @@ One term is knowingly loose: `ContextDiagram`'s `resources` is the broad word fo
 read, while `tools` defines `resource` narrowly as content an MCP server hands over uncalled.
 **Three of the nine are deliberately not in that
 list**: four layers fill the window, `tokens` is the unit it is counted in, `model` is the reader
-on the other end of it and `truth` is where that reader's answers come from, so `workshop` names four
-and not seven. `tokens` and `model` each open by saying so; `truth` does not, because it arrives after
-`model` has already put the reader outside the four.
-Promoting any of them to a layer means visiting `workshop`, `context` and every "four layers"
+on the other end of it and `truth` is where that reader's answers come from. `tokens` and `model`
+each open by saying so; `truth` does not, because it arrives after
+`model` has already put the reader outside the four. `workshop` no longer recites the four at all;
+on that page the layers are named only by the board's `flag.*.help` keys, each of which opens on its
+own. Promoting any of them to a layer means visiting those keys, `context` and every "four layers"
 sentence in the step, which is a larger change than it looks.
 Three editorial constraints the HTML does not state on its own: every layer unit goes past merely
 naming its layer, and none of the four is allowed to read as a stub (they sat within about a hundred
@@ -60,20 +61,24 @@ the shared `ConnectBoard`, which `model`'s `PickTheTier` is too; the reasoning f
 `model` below.
 
 `tokens` opens the step, ahead of `context`, and gives the step's unit of measurement a page before
-anything is measured in it. It is prose and three figures, with **no quiz and no "Test yourself"
-section**: the figures are the doing, and every quiz in the course already sits in the opening units.
-**Its prose is self-only**, the same wrapper shape `context` uses: in class the teacher talks it
-through at the board, so a guided student gets the three figures and nothing else. The figure
-markers stay top-level and carry no attribute, which is what keeps them on both audiences' pages,
-and the wrapper closes before each one and reopens after it.
+anything is measured in it. It is prose, four figures and one exercise. **It still carries no quiz**,
+and that half of the old decision holds: every quiz in the course already sits in the opening units,
+and `contextQuiz` and `promptQuiz` are two pages away on either side. What it does carry is
+`PickTheNext` under the usual "Test yourself" heading, and the reasoning for it is under that
+component below. **Its prose is self-only**, the same wrapper shape `context` uses: in class the
+teacher talks it through at the board, so a guided student gets the four figures and the exercise and
+nothing else. The figure markers stay top-level and carry no attribute, which is what keeps them on
+both audiences' pages, and the wrapper closes before each one and reopens after it. `WordsIntoTokens`
+is the only marker in the step with no heading above it, so it is also the one figure a guided page
+opens on untitled.
 Nothing in it carries a currency; `ModelPricing` is still the only place in the course where a number
 has one. Its prose has been cut hard and deliberately: it opens cold, closes on the caching pointer
 with no summary or handoff, and the figures are left to be read rather than narrated. Sentences that
 told the student to click something, or that recapped what the figure had just shown, were taken out
 one at a time. Do not write that layer back in.
 
-Four things about it are decisions. **Neither `TokenSplit` nor `TokenAttention` draws the teal
-context frame**, and that is what protects `tools`: `ToolsInContext` is the first frame a student
+Four things about it are decisions. **Nothing in the unit draws the teal context frame**, not one of
+the four figures and not the exercise, and that is what protects `tools`: `ToolsInContext` is the first frame a student
 meets, so every unit above it stays out of that vocabulary rather than spending it early, the way
 `ModelTiers` does and the way `PromptInContext` does since it gave its own frame up. The word *context* is likewise not used before `prompt` defines it, which is
 one page later. **`NextToken` and `TokenAttention` are a pair on one sentence** (`the
@@ -84,12 +89,77 @@ is the sentence it is: `unscrambled` comes apart at `unscr` and `ambled`, at a p
 a syllable nor a stem. No prose says so any more, so the figure has to carry it alone and a tidier
 sentence quietly ends the exercise. There is deliberately no second sentence in another language: an
 English row against a Dutch one made the figure an argument about languages instead of about tokens.
-And **the three
-figures are not equally trustworthy, which their captions no longer say.** `TokenSplit`'s splits are
-real output from `o200k_base`, stored as data with no `nl` entry. `NextToken`'s scores are
+**The unit does make that argument, in `not-words.3`, and it is prose on purpose.** That paragraph
+draws the line from the tokeniser to the training pile, since a vocabulary built from what the model
+read makes rare-in-the-split and rare-in-training the same thing, and it closes on asking in the
+language the model has read most of. It states the link **in one clause and stops**, because
+`context` owns what a model being an average means and this unit must not argue it four pages early.
+So the claim belongs there rather than in `TokenSplit`: a Dutch row added now would look like the
+figure catching up with the prose, and it would cost the figure the same way it did the first time.
+And **the figures are not equally trustworthy, which their captions no longer say.** `TokenSplit`'s
+splits are real output from `o200k_base`, stored as data with no `nl` entry, and `WordsIntoTokens`
+carries the same sentence and the same splits. `NextToken`'s scores are
 hand-authored and its caption admits it. `TokenAttention`'s weights are hand-authored too and its
 caption was removed, so the only warning left is the comment in the component: if that figure ever
-grows a caption again, that is what belongs in it.
+grows a caption again, that is what belongs in it. **Holding a token now prints its weights under the
+boxes as shares, and every row adds to 100.** That is the row of a real attention head, which is a
+softmax over what came before, so the figure is honest about the thing that has a shape (a token
+spreads a fixed weighing backwards and cannot lean hard on everything) while the twenty-one numbers
+making up those rows stay picked so one sentence reads the way a reader expects. They are whole
+percent rather than a fraction so a row edited to 99 is a bug rather than a rounding. The one thing
+the hundred leaves out is the token weighing itself, which a real row includes: this figure is about
+what a token looks *back* at, and the wording in every locale key says share of that.
+
+`WordsIntoTokens` is the lead figure, and it follows **one word the whole way in and one token back
+out**: `unscrambled`, the two tokens it breaks into, the first of those as a column of numbers, the
+model as a field of numbers, the numbers that come back, and the token they stand for. Six stages,
+and the prose above says none of it. It is one word rather than the sentence because a sentence drawn
+this way is eight columns of the same move, and the move is the figure.
+
+**Nothing in it is captioned, and the stages did carry a caption each before they were cut.** Six
+lines of prose under six boxes is a paragraph laid out sideways, and it turned a drawing that reads
+in one second into one to be worked through. What names the stages instead is the step's own
+vocabulary (given text in the muted fill, a token in teal, numbers in mono) plus the eyebrow, which
+**names the process rather than stating a claim about the drawing**: it read `text at both ends,
+numbers in between` and now reads `tokenization process`, because a label that argues the picture is
+one more thing to read before the picture. The panel's screen-reader description
+still walks the whole chain, since none of that vocabulary reaches a reader who cannot see it, so a
+stage added later has to be added there too.
+
+Four more things in it are decisions. **Every number is invented, and the kind of number is why that is
+fine**: a vector and a weight are not claims a student can check, a token id is, and there is no
+tokeniser in this repository to produce real ids with. Reach for ids and the figure acquires the one
+thing in it that can be caught out. **It follows one token**, with `ambled` dimmed rather than
+deleted, which is now the only thing carrying that, because `reads-all` argues four paragraphs
+later that everything in front of a token goes in with it; this is one token's path, not a claim
+about what the model is handed. **It is a column that becomes a row**, rather than a row that wraps,
+since a wrapped six-stage chain puts stage four under stage one. And **it carries no caption**,
+unlike `TokenSplit`, which states the provenance of the same word and the same splits further down
+the same page: two identical captions read as a copy rather than as a source. That shared data makes
+the two a pair the way `NextToken` and `TokenAttention` are, so the "word that breaks" rule above now
+protects both of them.
+
+`PickTheNext` closes the unit and is its one exercise: three roads out of `the pull request was`, and
+the answer is all three. It asks what the branch tree under `NextToken` only shows, which is that the
+top-scored token is not a rule, so a student who read that figure as a lookup table finds out here
+rather than four units later. Four things in it are decisions. **The sentence is not the pair's**
+(`the build failed because it timed out`), because a question answered by the figure above it is not
+a question. **The fan is drawn flat until it is checked** and then lights whole: marking a road
+before the answer is in gives it away, and marking one after says the model has a right answer here.
+**The scores are shown, and they are what make the question worth asking**: a fan of three roads with
+no weights on it can be answered by shrugging, while `merged` at 46% against `approved` at 23% makes
+picking the favourite the reasonable thing to do and still not the answer. That is the misreading the
+exercise exists to catch. They are hand-authored like `NextToken`'s, and the admission stays in that
+figure's caption two drawings up the same page rather than being repeated in a caption here. **They
+add to 100, unlike `NextToken`'s**, and what separates the two is the caption: that figure draws five
+of a distribution whose tail is too long to draw and says so underneath, while three numbers on a
+card with nothing under them are three numbers a student adds up, and a missing seventeen points
+reads as an error rather than as a tail. It also keeps the right answer exactly true, since the roads
+on screen are then all the roads there are. They stay muted when the fan lights, since the answer is
+the three words rather than the numbers beside them. And
+the catch-all choice is **pinned last rather than shuffled**, unlike `SpotInjection`'s four results:
+a catch-all that turns up second reads as a bug. It is graded in the browser like everything else
+here and writes no progress key, because one question is not a sitting.
 
 `NextToken` draws a second view under the scores, a tree of what each candidate would have led to,
 and it exists to hold up one claim the prose makes and the scores alone cannot: **the top-scored
@@ -106,12 +176,25 @@ naming the unit that owns it. That is the same rule `harness.coordinator.3` foll
 decomposition. `TokenAttention`'s arcs running backwards only is what the caching pointer turns on,
 so it is load-bearing rather than a simplification: appending leaves every earlier weighing intact.
 
-Decomposition is the first of the four pattern sections, ahead of the coordinator, and it is the
-only one with no figure. It argues the gap rather than the mechanism: a request arrives thinner than
-the thing it asks for, the same way a requirement always has, and cutting it into parts that each
-need a prompt is what forces the unstated decisions out where you can answer them. `harness.coordinator.3`
+Decomposition is the first of the four pattern sections, ahead of the coordinator. It argues the gap
+rather than the mechanism: a request arrives thinner than the thing it asks for, the same way a
+requirement always has, and cutting it into parts that each need a prompt is what forces the unstated
+decisions out where you can answer them. `harness.coordinator.3`
 used to introduce decomposition and now points back at that section instead, so do not let it grow
 back into a second definition.
+
+`UnderSpecified` is its figure, and three things in it are decisions. **It carries no context
+frame**, which is the one place it departs from the other three pattern diagrams: nothing has been
+handed to anybody yet, so this is the task being cut up rather than the windows it ends up in, and a
+frame here would draw the coordinator one section early. What it does share is the vocabulary, a bar
+is something you have and dashes are what you do not, so the dashed space under the ask on the left
+comes back as three solid prompt bars and three open questions on the right. **The three questions
+are `harness.decomposition.1`'s own three** (empty query, title only, nothing found), which is what
+keeps the drawing and the paragraph on one example; rewording the example means moving the figure
+with it, in both languages. And **the parts are stacked rather than laid out side by side**, so a
+question stays one left-aligned line: three columns would need the questions wrapped by hand, and
+the Dutch is longer than the English every time. On the deck it replaced a statement slide, and the
+note went with it, since the note said what the right-hand column now draws.
 
 Decomposition is answered by the task above that board rather than by a fourth situation, and that
 is the decision. `CutItUp` is that task, and it is one card and nothing else: no prose between the
@@ -155,7 +238,7 @@ example instruction on purpose: the line has to be one they were tired of repeat
 know which one that is. Ticked once, to `kata.step1.survive`, on the same reasoning `CutItUp` is
 ticked once.
 
-All three tasks are `shared/components/TaskCard.tsx`, which is the tick-card mechanics with the data
+All four tasks are `shared/components/TaskCard.tsx`, which is the tick-card mechanics with the data
 lifted out, the same move `ConnectBoard` made when a second drag board arrived. Keep additions there
 rather than in a caller, and keep **one tick per card and never one per move**: five or six boxes
 turn a run at a problem into an errand list. Every move stays one line, so whatever a second line
@@ -166,9 +249,9 @@ It once ran after `harness`, then after `session`, and now runs before `context`
 the decision: naming the mechanism (the model asks, your system runs it, the output is appended)
 beats naming the origin, because the origin was never the thing a student can act on. What survived
 the rename is the part that still holds for a tool result, namely that nothing in the window says
-who wrote it and that a result is usually the bulkiest thing in there. The layer is named in three
-other places (`session`'s time-axis paragraph, `workshop`'s opening list and its read-the-source
-close), so a further rename has to visit them. Its figure, `ToolsInContext`, argues one thing only:
+who wrote it and that a result is usually the bulkiest thing in there. The layer is named in two
+other places (`session`'s time-axis paragraph and the board's `flag.decode.help`, which opens on
+it), so a further rename has to visit them. Its figure, `ToolsInContext`, argues one thing only:
 the tool straddles the frame, so the half that runs is outside the window and only the result crosses
 back in. `McpServer` is the second figure and is deliberately *not* independent: it is the same
 frame, the same prompt bar and the same fills, so read on its own it says nothing. What it adds is
@@ -288,7 +371,9 @@ figure ageing silently.
 The section closes on `model.cost.4`, the one place in the course that multiplies: the count
 `/context` printed in `tools` against the table's rate is one turn in money. It reaches back across
 the step on purpose, because the two halves of the multiplication live a unit apart, and it carries
-no currency of its own, so `ModelPricing` stays the only number with one. A different paragraph once
+no currency of its own, so `ModelPricing` stays the only number with one. Step 0's last house rule
+tells the student a hunt was not free and says step 1 hands them the numbers, which is a forward
+pointer with no command and no arithmetic in it, so this stays the only paragraph that multiplies. A different paragraph once
 closed the section and went: it argued that you pay the tier's rate on the whole window every turn
 and that the tier is therefore a multiplier on the four layer units. That removal stands, because
 the four layers already argue the re-send, `harness`'s caching section already prices it, and the
@@ -385,8 +470,8 @@ namespace off the key and `useStepText`'s pinned `ns` gives way to it. Two thing
 "Test yourself" section has **no `<unit>.<section>.heading` key** in either bundle, which is the one
 break in "a key is a location", and changing the wording is one edit in `shared/i18n/locales`
 rather than eight. Reach for a `ui:` key nowhere else: prose belongs to its step. That is the
-shape: prose first, then one rule, then the doing, in the order `connect-one`, `SpotInjection`,
-`BudgetWindow`, `ReadYourWindow`. Do not scatter the exercises back up into the sections they belong
+shape: prose first, then one rule, then the doing, in the order `connect-one`, `ShutterFlag`,
+`SpotInjection`, `BudgetWindow`, `ReadYourWindow`. Do not scatter the exercises back up into the sections they belong
 to. The two `<h3>`s in there are the exception the rest of the step does not get: `connect-one` and
 `read-your-window` are hands-on tasks that need a sentence of setting, and everything between them
 carries none. `harness` follows the same shape now, with the `CutItUp` card
@@ -394,13 +479,53 @@ under the rule and `PatternMatch` arriving after it from the registry, and so do
 `PickTheTier` board is the only thing under its rule. `workshop` is the one left that still closes
 on a bare exercise with no rule over it.
 
-`tools` carries two of the step's three hands-on tasks and its two graded exercises, and between them they
-hold advice the prose used to state and no longer does. `connect-one` is the first task: add an MCP server
-to your own agent, then fetch the catalogue twice, once with `curl` and once by driving `/catalog`
-through the server. It names Claude Code's `claude mcp add <name> -- <command>` (verified against the
-CLI) and `npx @playwright/mcp@latest`, which is a server this repo already runs, so a copied line
-works. **The prose asks which result you would want back on every turn and does not answer it**: the
-comparison is the exercise, so do not add the sentence saying which route is bulkier. `SpotInjection`
+`tools` carries two of the step's four hands-on tasks and its three graded exercises, and between them they
+hold advice the prose used to state and no longer does. `ConnectOne` is the first task and is a
+`TaskCard` like the other three, on seven moves: add an MCP server to your own agent, fetch the
+catalogue twice, once with `curl` and once by driving `/catalog` through the server, drive the
+browser once more at a page with no service behind it and screenshot what it finds, then compare and
+choose. It was two paragraphs of prose before that, and the change is the decision: a unit whose
+closing section is a card, a card and a card had one instruction in the middle written as reading,
+and a student skims a paragraph they would have worked through as a list. What stayed in the prose is
+the pair of `<pre>` blocks, because a command is machine output rather than a move, and the sentence
+above them naming Claude Code's `claude mcp add <name> -- <command>` (verified against the CLI) and
+`npx @playwright/mcp@latest`, which is a server this repo already runs, so a copied line works. **The
+moves name no command for that reason**, which also keeps the card readable in class, where the
+`<pre>` is cut with the rest of the prose. **The last move asks which result you would want back on
+every turn and nothing answers it**: the comparison is the exercise, so do not add the sentence
+saying which route is bulkier, in the card, the description or the prose. Ticked once to
+`kata.step1.connect`.
+
+**The third route is `kata/step1/front/index.html`, and the two moves that work it sit in the middle
+of the card rather than at the end**, so `choose` stays the closer. It is one standalone page with no
+build, no dependencies and no service behind it, which is what keeps a third server off a student who
+is already running two: the agent opens the file off disk through the same MCP server. What it hides
+is **step 1's fourth flag**, and the way it hides it is the exercise. The string is XORed and base64'd
+in the source and assembled in the browser when a button is pressed, so reading the file, grepping it
+or asking the agent what it says all come back empty. `shutterFlag` in `flags.ts` holds the salted
+hash and nothing else, and `kata/step1/front/CLAUDE.md` carries the prohibitions beside the page:
+**do not decode it, do not reveal it, and do not let the plaintext reach any file in this repo.**
+Two decisions in the page itself are load-bearing and are written up there rather than here: it
+addresses the agent nowhere, because the same unit teaches prompt injection two sections later, and
+the flag stays readable under `prefers-reduced-motion`, because a screenshot with the animation off
+has to work too.
+
+`ShutterFlag` grades it, and it sits directly under the card whose moves earn it. It is **one row and
+no progress counter**: `FlagBoard`'s "n of three collected" is a collection, and one row printing
+"0 of 1" is arithmetic nobody asked for, which is the whole reason it is a caller rather than
+`FlagBoard` with a shorter array. The row itself is `FlagRow`, lifted out of `FlagBoard.tsx` into its
+own module when this second caller arrived, the same move `TaskCard` and `ConnectBoard` made, with
+the localStorage helpers going a step further into `solved.ts` so `FlagRow.tsx` stays a file that
+exports only a component and Fast Refresh keeps working on it. It
+takes the BEM `block` as a prop, so the workshop's rows are still `#flags-item-N` and nothing that
+pointed at them moved, and it takes `wrongKey`, because "go back to the pipeline and read what it was
+hiding" is the wrong sentence on a board about a browser. **Anything about how a row behaves goes in
+`FlagRow`.** The flag stays **out of the `flags` array** on purpose: that array is what `workshop`
+closes the step with, one row per way context is assembled out of the backend, and a browser is
+none of the three. It shares `FLAG_SALT`, which the file already says is not a secret. Nothing checks
+the screenshot, and that is deliberate: the PNG in `.playwright-mcp/` is proof for the student rather
+than for the app, and a grader that reached into their working copy would be the one thing on this
+page that needs a backend. `SpotInjection`
 is four tool results with one instruction aimed at the agent, and two of the clean three exist to be
 mistaken for it (one gives orders to a human reader, one contains the word token twice), so a rewrite
 that makes them look harmless removes the exercise. Its card asks for **the odd one out and does not
@@ -507,9 +632,10 @@ duplicate, and rewording either side means visiting the other, in both languages
 `truth.lead.2` and `truth.grounding.2` each link to it in half a sentence rather than describing a
 fetch; `tools` also owns
 "a tool result is the least trustworthy layer", which is why grounding here stops at *reading rather
-than remembering* and does not grow a paragraph about the source being stale. And **`workshop`'s
-`read-the-source.3` is this unit's proof section applied**: it tells the student to make the agent
-run the decode rather than reason about it, in the words of that exercise. The general rule belongs
+than remembering* and does not grow a paragraph about the source being stale. And **step 0's `welcome.house-rules.4`, with
+`flag.decode.help` behind the workshop board's Hint, is this unit's proof section applied**: both
+tell the student to make the agent run the decode rather than reason about it, in the words of that
+exercise. The general rule belongs
 here and the applied one belongs there, so do not let either grow into the other. Step 2's `goals`
 is the third neighbour worth knowing about: it owns "if you cannot name the command that answers yes
 or no, you do not have a goal", which is about the instruction you hand over. `Proof` is about
@@ -531,10 +657,52 @@ tenth entry it computes and drops), and turns the log level up for the third (a 
 DEBUG). **Do not implement the flags for the student.** The three flags
 are the exercise; ship the puzzle, not the decode, the trace instrumentation or the DEBUG readout.
 
+The unit is a capstone and deliberately the leanest page in the step. It once walked each flag
+through its own section, and the board now carries all of that itself: a row's hint line and its
+Hint dialog (the `flag.*` keys) hold the per-flag technique, so the prose must not grow a second
+telling of any of it. **A hint line is two halves, what the flag is and what to do about it**, and
+all three carry both: instrument the run and read it back, raise the log level and hit the endpoint,
+find it in the source and run the decode rather than reason it out. `flag.decode.hint` ended on
+"point your agent at it" until it was rewritten, which named no work at all, and the half it gained
+is the trap the help dialog spends three sentences on: an agent doing character arithmetic in prose
+sounds exactly as sure when it is wrong. **The five house rules moved to step 0's `welcome`**, where they are the rules
+of every board in the course rather than of this one, so `lead.2` links to them in half a sentence
+and the unit keeps only the game (two lead paragraphs and the command that starts the agent). Do not
+write a rule back onto this page: a rule that is true here and nowhere else is the sign the rule is
+wrong rather than misplaced. What went with the move is worth knowing. The old `house-rules.5` was
+the course's second pointer at `model.cost.4`, so that paragraph is now reached from nowhere but its
+own unit, and the intro's version names no command and does no arithmetic, which is what keeps
+`cost.4` the one place the course multiplies. The old `house-rules.4` carried the five same-shape
+lines the trace prints, a measured fact of the backend; **`flag.trace.help` is now the only place
+that number appears**, so a change under `kata/step1/java` visits that key alone, in both languages.
+**`The board` is now a heading, the board and one guided line**, and both things that sat above it
+are gone. The `Stuck?` aside carried two deep hints and went because the Hint dialog is where a
+stuck student is meant to look: its second hint was already `flag.trace.help` almost verbatim, and
+its first is now folded into `flag.decode.help` as the shape of the impossible condition (a value
+folded into a small range, compared against a bound it can never cross), in both languages. So a
+board hint is the only place a technique is written down, which is what the paragraph above says.
+The debrief went with it: it opened on the board grading in the browser, which
+`flags.panel.description` says for itself one element lower, and closed by asking the student to
+tell before they start which flag they could hand over whole and which needed their judgement, which
+is `the-board.1`'s own claim about the step and is now made nowhere. Written back, it belongs under
+the board rather than over it, since it is a look-back.
+
+Two more cuts hold the lead to its own job. **`lead.1` stops at what the flags look like**: it closed
+on three sentences, one per flag, saying that one sits in unreachable source, one exists only while
+the pipeline runs and one prints only at DEBUG, and those are the board's three `flag.*.hint` lines
+said again a screen earlier. And **the `<pre>` starts the agent and nothing else.** It ran
+`mvn spring-boot:run` and a `curl` at the endpoint, which is the student doing by hand the two things
+the first house rule hands over, so a page that opens on the rules of the hunt was demonstrating the
+one move the rules forbid. What is left is `cd kata/step1/java` and the launcher, so the working
+folder is still named and everything after it is asked for rather than typed; `lead.2` closes on that
+in a clause. It is the step's only assistant-varied block outside `tools`, `session`, `context` and
+`model`, and it varies for the ordinary reason: the launcher is a command.
+
 ## The assistant variants
 
-Ten blocks in step 1 vary and nearly all of them are the same kind of thing, a filename or a command:
-`tools.where-extra-tools.3`, the `<pre>` under `tools.connect-one.1` and `tools.connect-one.2`
+Eleven blocks in step 1 vary and nearly all of them are the same kind of thing, a filename or a
+command: the `<pre>` under `workshop.lead.2` (`claude` against `copilot`, each after the same `cd`),
+`tools.extra-tools.3`, the `<pre>` under `tools.connect-one.1` and `tools.connect-one.2`
 (`claude mcp add` against `copilot mcp add`, which lands in `~/.copilot/mcp-config.json`),
 `tools.read-your-window.1`, `tools.list-itself-window.2`, `session.window-not-memory.1`,
 `context.amnesia-context-fatigue.3`

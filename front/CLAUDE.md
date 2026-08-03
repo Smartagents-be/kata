@@ -243,6 +243,15 @@ Any element in step HTML may carry `data-audience`:
 means always visible** — that is the common case, so reach for the attribute only when
 material genuinely belongs to one audience.
 
+**Guided mode goes further: it drops every run of prose, whatever its audience attribute says.**
+In class the teacher does the telling, so a unit page keeps only its figures, its quiz and its
+board, and above each figure the nearest heading before it, so a page of drawings stays organised.
+That heading usually lives inside the self-audience wrapper, so `prepareUnit` moves it out to sit
+directly above the figure marker before the audience pass runs; a heading titles at most one
+figure, and a figure with no heading before it (a lead figure) gets none. Quizzes and boards come
+from the registry and were never in the HTML to begin with. The per-element filter above still
+matters for self mode, and a `data-audience="guided"` paragraph is now prose that nobody sees.
+
 `prepareUnit` in `front/src/shared/lib/content.ts` *removes* non-matching elements from the
 parsed document rather than hiding them. Keep it that way: text that is merely
 `display: none` is one devtools panel away during a lesson. The same pass then applies the

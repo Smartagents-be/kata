@@ -27,9 +27,9 @@
   same from in there.
 </p>
 
-<h2 data-i18n="tools.where-extra-tools.heading">Where the extra tools come from</h2>
+<h2 data-i18n="tools.extra-tools.heading">Extra tools</h2>
 
-<p data-i18n="tools.where-extra-tools.1">
+<p data-i18n="tools.extra-tools.1">
   An MCP server can be anything. A server for your issue tracker, one for your database, one that
   drives a browser. Somebody wrote it, you connected it, and now the model can call it. Your harness
   runs the call and appends what came back, exactly as it does for <code>grep</code>.
@@ -39,14 +39,14 @@
      out. The figure only works read against that one, so do not redraw it on its own geometry. -->
 <div data-figure="mcp-server"></div>
 
-<p data-i18n="tools.where-extra-tools.2">
+<p data-i18n="tools.extra-tools.2">
   Tools are not all a server offers. It can also hand over material it collected on its own: a page
   out of a wiki, a design document, a row from your database. Nobody called anything to get it. Your
   harness took it and put it in the window, and the model reads it there next to your prompt. Content
   that arrives that way has a name of its own. A resource.
 </p>
 
-<p data-assistant="claude" data-i18n="tools.where-extra-tools.3.claude">
+<p data-assistant="claude" data-i18n="tools.extra-tools.3.claude">
   Prompts are the third thing. A server ships whole prompts with it, written by whoever built it, for
   you to pick off a list. Claude Code puts them under a slash.
 </p>
@@ -54,7 +54,7 @@
 <!-- Copilot documents MCP prompts under a slash for the product generally, and the Copilot CLI
      command reference does not list them (re-read 30 July 2026). So this half names what the CLI
      does document, `/mcp`, and says the surfacing is the harness's call. -->
-<p data-assistant="copilot" data-i18n="tools.where-extra-tools.3.copilot">
+<p data-assistant="copilot" data-i18n="tools.extra-tools.3.copilot">
   Prompts are the third thing. A server ships whole prompts with it, written by whoever built it, for
   you to pick off a list. Whether you ever see them is your harness's call: Copilot CLI gives you
   <code>/mcp</code> for the servers and names nothing for their prompts.
@@ -64,7 +64,7 @@
      stroke is McpServer's outside-the-window shape, and each glyph is the step's own vocabulary. -->
 <div data-figure="mcp-parts"></div>
 
-<p data-i18n="tools.where-extra-tools.4">
+<p data-i18n="tools.extra-tools.4">
   Read them by who decides. You pick the prompt, your harness attaches the resource, the model asks
   for the tool. Three different hands, and all three end up in the same window.
 </p>
@@ -153,8 +153,8 @@
 <h3 data-i18n="tools.connect-one.heading">Connect one yourself</h3>
 
 <p data-i18n="tools.connect-one.1">
-  Reading about this layer is not the same as watching it fill up. Start the step 1 backend, then
-  hand your agent a tool it does not ship with.
+  Reading about this layer is not the same as watching it fill up. The two lines below start the
+  step 1 backend and hand your agent a tool it does not ship with.
 </p>
 
 <!-- Each harness's own syntax, verified against `claude mcp add --help` and GitHub's `copilot mcp
@@ -177,16 +177,14 @@ copilot mcp add playwright -- npx @playwright/mcp@latest</code></pre>
   to hold.
 </p>
 
-<p data-i18n="tools.connect-one.3">
-  Now get the catalogue twice, by two routes. Once with <code>curl</code> against
-  <code>localhost:8080/api/titles</code>, and once through the server you just connected: open
-  <code>/catalog</code> in the browser, press the button, read the titles off the page.
-</p>
+<!-- The unit's first task. The three fetches and the comparison are the card's moves, so no paragraph
+     here narrates them, and nothing anywhere says which of the routes comes back bulkier. -->
+<div data-figure="connect-one"></div>
 
-<p data-i18n="tools.connect-one.4">
-  Same nine titles either way. Look at what each route left behind in the window, and ask yourself
-  which of the two you would want back on every turn for the rest of the session.
-</p>
+<!-- The one graded thing in the step that is not on `workshop`'s board. It sits directly under the
+     card whose moves earn it, and it carries its own hint, so no prose here says where the flag is
+     or how the page hides it. -->
+<div data-figure="shutter-flag"></div>
 
 <!-- Two of the clean three are meant to be mistaken for the poisoned one, so do not make them look
      harmless. -->

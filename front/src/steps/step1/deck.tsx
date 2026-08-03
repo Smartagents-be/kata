@@ -22,6 +22,7 @@ import { TokenAttention } from './TokenAttention'
 import { TokenSplit } from './TokenSplit'
 import { ToolsInContext } from './ToolsInContext'
 import { TrainedOrGrounded } from './TrainedOrGrounded'
+import { UnderSpecified } from './UnderSpecified'
 
 /**
  * Step 1 on the board.
@@ -36,10 +37,10 @@ import { TrainedOrGrounded } from './TrainedOrGrounded'
  * interactive: the tutor advances `NextToken` a pass at a time at the board, holds a token in
  * `TokenAttention`, and steps `BundleCompare` through its six moves in front of the room.
  *
- * Four are deliberately absent. `CutItUp`, `SurviveTheClear` and `ReadYourWindow` are `TaskCard`s
- * and `FlagBoard` keeps a solved set, so all four write progress to localStorage: on a slide they
- * would tick the *tutor's* machine, which is the one place a stray flag or a half-done task is most
- * confusing. Their units keep a divider and a statement instead. `McpOvals` is left out too, for a
+ * Five are deliberately absent. `CutItUp`, `SurviveTheClear`, `ConnectOne` and `ReadYourWindow` are
+ * `TaskCard`s and `FlagBoard` keeps a solved set, so all five write progress to localStorage: on a
+ * slide they would tick the *tutor's* machine, which is the one place a stray flag or a half-done
+ * task is most confusing. Their units keep a divider and a statement instead. `McpOvals` is left out too, for a
  * different reason: it restates `McpParts` and only earns that next to the paragraph explaining
  * why it is being restated.
  *
@@ -278,11 +279,14 @@ const deck: SlideSpec[] = [
   },
   {
     id: 'deck-harness-decomposition',
-    kind: 'statement',
+    kind: 'figure',
     ns: 'step1',
     eyebrow: 'harness.title',
+    // The note went when the figure arrived: it said the cutting forces the decisions out, which is
+    // now the drawing's whole right-hand column.
     title: 'deck.harness.decomposition.title',
-    note: 'deck.harness.decomposition.note',
+    figure: <UnderSpecified />,
+    scale: 1.55,
   },
   {
     id: 'deck-harness-coordinator',

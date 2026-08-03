@@ -70,12 +70,14 @@ retiring them is a later decision, not an oversight, so leave them alone in eith
 The repository has two roots, and they are not the same shape. The frontend is one app that splits
 into a `shared` shell plus one folder per step. The backend is not one app at all: **each step owns a
 standalone Maven project under `kata/stepN/java/`**, with its own `pom.xml`, its own profiles and its
-own `CLAUDE.md`.
+own `CLAUDE.md`. A `kata/stepN/` folder is not only that project, though: `java/` is one thing a step
+can put in front of a student, and step 1 also puts `front/` there, a page its browser task drives.
 
 ```
 kata/
   step0/java/    test sources only: the intro's one exercise, behind an opt-in profile
   step1/java/    the catalogue service and the three flags hidden in it
+  step1/front/   one standalone page, no build and no server: the browser task's target
   step2/java/    the loans domain, the graded and challenge profiles, the native-image flag
   step3/java/    an empty scaffold, buildable, kept as the template a Java step is copied from
 front/           the curriculum
@@ -111,7 +113,9 @@ implemented**. Those prohibitions are the load-bearing part, so in short, and in
 - **step 0** — do not decode or reveal the intro flag.
 - **step 1** — do not decode, implement or reveal any of the three flags, **do not add tracing**
   to the catalogue pipeline (instrumenting it is the student's work), and **do not solve
-  `problem.md`**: no cut of it, no `solve.md`, no `plan-solve.md`, no shelves package.
+  `problem.md`**: no cut of it, no `solve.md`, no `plan-solve.md`, no shelves package. The step has a
+  **fourth flag**, in `kata/step1/front/`, under the same prohibition and for the same reason: that
+  page assembles it in the browser so it cannot be read out of the file, which is the exercise.
 - **step 2** — do not harden the loans module, do not implement `MemberStatements.forTier`, and do
   not add a `native` profile or write the resource hint. The project also carries **three plaintext
   setup flags**, one in its own `.claude` skill, one in its `CLAUDE.md` and one in the `domain`

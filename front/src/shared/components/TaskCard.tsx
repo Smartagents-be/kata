@@ -37,8 +37,8 @@ function writeDone(storageKey: string, done: boolean) {
  * looked up rather than assumed: `ReadYourWindow` has no `window.description` and no gap where one
  * would have been. Nothing here is graded, and nothing is submitted.
  * Every task in the course is this component with different data (`CutItUp` in step 1's `harness`,
- * `SurviveTheClear` in `session`, `ReadYourWindow` in `tools`, `WhereWouldItGo` in step 2's
- * `engineering`), so keep additions here rather than in a caller.
+ * `SurviveTheClear` in `session`, `ConnectOne` and `ReadYourWindow` in `tools`, `WhereWouldItGo` in
+ * step 2's `engineering`), so keep additions here rather than in a caller.
  *
  * **One tick for the task, never one per move.** A task is a single sitting, and a box per move
  * invites ticking them off separately, which turns a run at a problem into an errand list. The tick
