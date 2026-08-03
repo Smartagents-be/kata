@@ -62,6 +62,10 @@ the shared `ConnectBoard`, which `model`'s `PickTheTier` is too; the reasoning f
 `tokens` opens the step, ahead of `context`, and gives the step's unit of measurement a page before
 anything is measured in it. It is prose and three figures, with **no quiz and no "Test yourself"
 section**: the figures are the doing, and every quiz in the course already sits in the opening units.
+**Its prose is self-only**, the same wrapper shape `context` uses: in class the teacher talks it
+through at the board, so a guided student gets the three figures and nothing else. The figure
+markers stay top-level and carry no attribute, which is what keeps them on both audiences' pages,
+and the wrapper closes before each one and reopens after it.
 Nothing in it carries a currency; `ModelPricing` is still the only place in the course where a number
 has one. Its prose has been cut hard and deliberately: it opens cold, closes on the caching pointer
 with no summary or handoff, and the figures are left to be read rather than narrated. Sentences that
@@ -226,7 +230,11 @@ Its closing section points back at `harness`'s coordinator instead of
 redefining it, the same rule `harness.coordinator.3` follows. It adds two things and no more: that
 the tier choice is one of the things that pattern automates, and **why the expensive model is good
 at writing the brief, namely that providers fine-tune the smaller tiers on output from the larger
-ones**, so it is writing for something trained on its own answers. The paragraph that used to sit
+ones**, so it is writing for something trained on its own answers. It closes by **naming the saving
+in this unit's own ratio** (the gap priced above, five against one) rather than in `harness`'s words:
+it carried "top rate for deciding, a fraction of it for doing" near-verbatim from
+`harness.coordinator.1`, and a back-pointer that repeats the sentence it points at is the pointer
+failing. Do not let that phrasing come back. The paragraph that used to sit
 there re-argued `harness`'s sub-agent refetch cost and was cut for that reason; do not put it back.
 `ModelTiers` is the figure and argues one thing only: three tiers, three dispositions, three kinds
 of task. Cost and speed stay in the prose because each needs a qualifying sentence that will not fit

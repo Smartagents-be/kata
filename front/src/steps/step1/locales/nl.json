@@ -471,7 +471,7 @@
   "model.reasoning-level.heading": "Reasoning level",
   "model.reasoning-level.1": "Het reasoning level kwam al langs in <a href=\"/steps/step1/prompt\">de unit over de prompt</a>: hoe lang een model nadenkt voor het antwoordt. De tier is de andere knop, en die bepaalt welk model dat denkwerk doet. Die twee worden makkelijk verward. Reasoning hoger zetten op het kleine model kost je tokens en tijd, en het levert je het topmodel niet op.",
   "model.let-it-pick.heading": "Of laat het kiezen",
-  "model.let-it-pick.1": "Je hoeft die afweging niet elke keer zelf te maken. De coördinator uit de vorige unit is deze keuze die aan de machine gegeven wordt: het dure model zoekt uit wat er moet gebeuren, en de stukken gaan naar goedkopere. Het topbedrag voor beslissen, een fractie ervan voor doen.",
+  "model.let-it-pick.1": "Je hoeft die afweging niet elke keer zelf te maken. De coördinator uit de vorige unit is deze keuze die aan de machine gegeven wordt: het dure model zoekt uit wat er moet gebeuren, en de stukken gaan naar goedkopere. De besparing is het gat dat je hierboven geprijsd hebt, vijf tegen één.",
   "model.let-it-pick.2": "Er is een reden dat die verdeling zo goed werkt. Providers fine-tunen de kleinere tiers op output van de grotere, dus een duur model dat de opdracht schrijft, schrijft voor iets dat op zijn eigen antwoorden getraind is. Uitzoeken wat het goedkope model moet doen, is de helft waar het het sterkst in is.",
 
   "truth.lead.1": "Dezelfde vraag kan meer dan één waar antwoord hebben, en welk je krijgt hangt af van waar de agent gekeken heeft. Een deel van wat hij weet lag vast op de dag dat zijn training stopte. Niets ervan ging ooit over jouw bedrijf. Niet je repository, niet je afspraken, niet de versie waar je echt op zit.",
