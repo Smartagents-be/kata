@@ -489,7 +489,9 @@ there is more bad code on the internet than good. What `context` never says is t
 *date*, and the cutoff is that gap filled. `contextQuiz`'s `invented-userservice` question is the
 one place the two genuinely meet: it is this unit's scenario asked four units early, and it never
 names the term. Leave it where it is. A quiz sitting on the page that owns the word would be graded
-before the word had been given. **`tools` owns how evidence gets into the window**, so
+before the word had been given. `truth.hallucinations.1` closes by naming that quiz as the place the
+student already diagnosed the case, so the early ask is a paid-off callback rather than a silent
+duplicate, and rewording either side means visiting the other, in both languages. **`tools` owns how evidence gets into the window**, so
 `truth.lead.2` and `truth.grounding.2` each link to it in half a sentence rather than describing a
 fetch; `tools` also owns
 "a tool result is the least trustworthy layer", which is why grounding here stops at *reading rather
