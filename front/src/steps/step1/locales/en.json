@@ -10,6 +10,7 @@
   "model.title": "The model",
   "truth.title": "Truth",
   "workshop.title": "Workshop",
+  "recap.title": "Recap",
 
   "flags.panel.title": "Flag board",
   "flags.panel.description": "Paste each flag you pried out of the step 1 backend. Checked here in the browser.",
@@ -22,13 +23,13 @@
 
   "flag.decode.label": "Read the source",
   "flag.decode.hint": "A line that restores a string in a branch nothing can reach. Find it in the source, then run the decode rather than reason it out.",
-  "flag.decode.help": "This is the tools layer: the code on disk, read back exactly as written. Ask your agent for a branch in the services package whose condition cannot be true: a value folded into a small range, then compared against a bound it can never cross. It needs Scramble open too, to turn the literal into text. Make it run the decode rather than reason about it: a throwaway main or a line of jshell. An agent doing character arithmetic in prose sounds just as sure when it is wrong. The service never executes this line, so no trace will show it.",
+  "flag.decode.help": "This answer can only be read, never run. The line sits in a branch the service cannot reach, so no trace and no log level will ever surface it. Ask your agent for a branch in the services package whose condition cannot be true: a value folded into a small range, then compared against a bound it can never cross. It needs Scramble open too, to turn the literal into text. Make it run the decode rather than reason about it: a throwaway main or a line of jshell. An agent doing character arithmetic in prose sounds just as sure when it is wrong.",
   "flag.trace.label": "Trace the run",
   "flag.trace.hint": "The tenth line the pipeline computes and drops. Instrument the run and read it back.",
-  "flag.trace.help": "This is the session layer: what happened this run. GET /api/titles returns nine titles but computes more. Put one log line in Scramble.unveil, the place every restored string passes through, then hit the endpoint. Logging CatalogRun.publish misses it, because the stage holding the flag never publishes. Five leetspoken lines come out of the trace and only one is about the thing you did to find it. Your agent cannot pick; you can.",
+  "flag.trace.help": "This answer exists only while the service is running. Nothing on disk holds it in one piece, so you have to make the run tell you. GET /api/titles returns nine titles but computes more. Put one log line in Scramble.unveil, the place every restored string passes through, then hit the endpoint. Logging CatalogRun.publish misses it, because the stage holding the flag never publishes. Five leetspoken lines come out of the trace and only one is about the thing you did to find it. Your agent cannot pick; you can.",
   "flag.debug.label": "Turn up the logs",
   "flag.debug.hint": "A line that prints only at DEBUG. Raise the log level and hit the endpoint.",
-  "flag.debug.help": "This is the harness layer: a setting decides what you see. Start step 1 with logging.level.be.smartagents.kata.java.step1=DEBUG and call GET /api/titles. One breadcrumb in the console carries the flag. At the default log level it never prints, for you or for the agent.",
+  "flag.debug.help": "This answer is not hidden in the code at all. A default setting decides what reaches your screen, and this line falls the wrong side of it. Start step 1 with logging.level.be.smartagents.kata.java.step1=DEBUG and call GET /api/titles. One breadcrumb in the console carries the flag. Your agent cannot see past that setting either.",
 
   "pick-next.title": "Pick what comes next",
   "pick-next.description": "The model has read four tokens and is about to write the fifth.",
@@ -190,6 +191,15 @@
   "window.read.label": "Read what the tool descriptions cost you, with nothing asked yet.",
   "window.ask.label": "Ask for a change that makes the agent open a few files, then run /context again.",
   "window.remove.label": "Remove the server you added above, start over, and check the first number moved.",
+
+  "hunt.title": "One window, three flags",
+  "hunt.description": "The flags are the work. The number on screen while you do it is what this step has been about.",
+  "hunt.todo": "Mark this task done",
+  "hunt.done": "Done",
+  "hunt.read.label": "Run /context before you ask for anything, and write the number down.",
+  "hunt.work.label": "Work all three flags out of that one session, without clearing it.",
+  "hunt.count.label": "Run /context again when the third flag lands, and put the two numbers side by side.",
+  "hunt.judge.label": "Say which flag you could hand over whole, and which one needed your own judgement.",
 
   "cut.title": "Decomposition in practice",
   "cut.description": "The problem is in the repo at kata/step1/java/problem.md. A request from a library: short, reasonable, and full of holes. Work it in this order.",
@@ -475,6 +485,13 @@
   "deck.truth.grounded.title": "Same question, <mute>two windows</mute>",
   "deck.truth.provenance.title": "One answer, and only some of it was <hi>read</hi>",
 
-  "deck.workshop.flags.title": "Three flags, three ways context is assembled",
-  "deck.workshop.flags.note": "Read the source, trace the run, turn the log level up."
+  "deck.workshop.flags.title": "Three flags, three places an answer can come from",
+  "deck.workshop.flags.note": "Read the source, trace the run, turn the log level up.",
+
+  "deck.recap.one-window.title": "It was all <hi>one window</hi>",
+  "deck.recap.one-window.note": "Eight units on what fills it, what it costs and who reads it.",
+  "deck.recap.moves.title": "Every move on that list <hi>sends less of it</hi>",
+  "deck.recap.moves.note": "Ask in the language it has read most of, bundle, clear at your own seam, turn off what you do not need.",
+  "deck.recap.next.title": "Step 2: <mute>not what it knows,</mute> but how you hand it work",
+  "deck.recap.next.note": "Everything in this step still holds there. You go on with it in mind."
 }

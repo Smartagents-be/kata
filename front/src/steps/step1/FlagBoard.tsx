@@ -43,6 +43,9 @@ export function FlagBoard() {
       id="flags"
       data-component="FlagBoard"
       data-state={solved.size === flags.length ? 'complete' : 'partial'}
+      // The board is an inline figure now rather than the registry's trailing `figure`, so it is no
+      // longer spaced by `UnitView`'s `gap-8` and carries its own margin like every other marker.
+      className="my-8"
     >
       <CardHeader id="flags-header" data-component="FlagBoard">
         <CardTitle id="flags-title" data-component="FlagBoard">

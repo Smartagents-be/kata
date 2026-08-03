@@ -1,20 +1,34 @@
 <!-- The capstone, and deliberately the leanest unit in the step. The per-flag technique lives on
      the board itself (each row's hint line and its Hint dialog, the `flag.*` keys), so the prose
      does not repeat it, and the five house rules now live in step 0's `welcome`, so `lead.2` links
-     to them rather than restating any of them. What the page keeps is the game and the one command
-     that starts it: the debrief that used to sit over the board went with the Stuck? aside, since
-     the board says for itself that it grades in the browser and the Hint dialogs carry the rest.
+     to them rather than restating any of them.
+
+     The three flags are read as `truth`'s question asked three times, not as the four layers. They
+     were labelled tools / session / harness once, and the three nouns all meant something other
+     than the unit that owns them: a Spring request is not the student's session, and Spring's log
+     config is not the harness. What actually separates the three is where the answer comes from,
+     which is the unit directly above this one. `lead.1` links back to it and the three
+     `flag.*.help` keys open on the provenance rather than on a layer.
 
      `lead.1` used to close on three sentences, one per flag, saying where each one sits. They were
-     the board's own hint lines a second time, so they went. The `<pre>` is the agent and nothing
-     else for the same reason: it ran `mvn spring-boot:run` and a `curl` before, which is the
-     student doing by hand the two things the first house rule hands to the agent. -->
+     the board's own hint lines a second time, so they went, and nothing on this page may name a
+     technique again. The `<pre>` is the agent and nothing else for the same reason: it ran
+     `mvn spring-boot:run` and a `curl` before, which is the student doing by hand the two things
+     the first house rule hands to the agent.
+
+     `OneWindow` is what makes this a step 1 capstone rather than a puzzle: the board grades three
+     flags and asks nothing about the window, so the card frames the whole hunt as one session with
+     a `/context` reading at either end. The board is the last thing on the page: the step's close
+     moved to `recap`, so nothing follows the hunt here. It stays an inline figure so the pair reads
+     as one, and a heading above it would be adopted by the card's marker in guided mode, so the
+     board deliberately has none. -->
 
 <p data-i18n="workshop.lead.1">
   The backend has been holding out on you. <code>GET /api/titles</code> returns nine book titles,
   and the <code>Catalog</code> page in the sidebar shows them. The pipeline behind them computes
-  more than nine lines on every request, and three of the lines it throws away are flags:
-  leetspeak, wrapped in <code>{curly braces}</code>.
+  more than nine lines on every request, and three of the lines it throws away are flags: leetspeak,
+  wrapped in <code>{curly braces}</code>. One service, three answers, and
+  <a href="/steps/step1/truth">where each one came from</a> is the only thing separating them.
 </p>
 
 <p data-i18n="workshop.lead.2">
@@ -30,10 +44,19 @@ claude</code></pre>
 <pre data-assistant="copilot"><code>cd kata/step1/java
 copilot</code></pre>
 
-<h2 data-i18n="workshop.the-board.heading">The board</h2>
+<hr />
 
-<p data-audience="guided" data-i18n="workshop.the-board.1">
-  Your teacher will run all three live: the branch that cannot fire, a trace of one request, and
-  the same request again with debug on, so you can watch one pipeline give up three different
-  things.
+<h2 data-i18n="ui:quiz.title">Test yourself</h2>
+
+<h3 data-i18n="workshop.one-window.heading">One window</h3>
+
+<p data-i18n="workshop.one-window.1">
+  Work all three from a single session. Nothing here needs a clear between the flags, and keeping
+  them together is the point: the hunt fills a window in front of you, with source files, a trace
+  and a console dump going in one after another. You have spent eight units on what that costs.
+  Read the number at both ends and watch it happen to you.
 </p>
+
+<div data-figure="one-window"></div>
+
+<div data-figure="flag-board"></div>

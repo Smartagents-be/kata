@@ -17,6 +17,7 @@ import { ModelPricing } from './ModelPricing'
 import { ModelTiers } from './ModelTiers'
 import { NextToken } from './NextToken'
 import { OneShotCompare } from './OneShotCompare'
+import { OneWindow } from './OneWindow'
 import { PatternMatch } from './PatternMatch'
 import { PickTheNext } from './PickTheNext'
 import { PickTheTier } from './PickTheTier'
@@ -48,6 +49,7 @@ import harness from './units/harness.html?raw'
 import model from './units/model.html?raw'
 import truth from './units/truth.html?raw'
 import workshop from './units/workshop.html?raw'
+import recap from './units/recap.html?raw'
 
 /**
  * Step 1, one layer of context per unit, plus three units that are not layers. `tokens` opens the
@@ -58,12 +60,20 @@ import workshop from './units/workshop.html?raw'
  * ahead of `context`. That makes `prompt` the unit that defines the word context, and it makes
  * `context` the step back to the whole window rather than the first sight of it.
  *
- * `workshop` closes the step as its capstone, a flag board (like
+ * `workshop` is the step's capstone, a flag board (like
  * step 2's workshop): three flags the `GET /api/titles` backend hides from its response, one per
- * way context is assembled - read the source, trace the run, turn the log level up. The board
- * grades in the browser against salted hashes, so it needs no backend and there is no Java checker.
- * The unit's prose is the game and nothing else: the per-flag technique lives on the board's own
- * rows, and the house rules the hunt is played under live in step 0's `welcome`.
+ * place an answer can come from - read the source, trace the run, turn the log level up. That is
+ * `truth`'s question asked three times, which is why that unit sits directly above this one. The
+ * board grades in the browser against salted hashes, so it needs no backend and there is no Java
+ * checker. Above it, `OneWindow` frames the hunt as one measured session, because the flags on
+ * their own ask nothing about the window the step spent eight units on. The unit's prose is the
+ * game and nothing else: the per-flag technique lives on the board's own rows, and the house rules
+ * the hunt is played under live in step 0's `welcome`.
+ *
+ * `recap` closes the step behind that: one bullet per unit ahead of `workshop`, each a cost and the
+ * move that answers it, plus the pointer at step 2 that used to sit under the board. It is prose and
+ * nothing else, so in class the page filters down to nothing and the recap happens at the board off
+ * the deck.
  *
  * Every string here is a key into `locales/`, except the unit HTML, which *is* the English and
  * carries `data-i18n` keys for the rest. The flags themselves stay English/mono in every language.
@@ -176,7 +186,17 @@ const step1: Step = {
       id: 'workshop',
       title: 'workshop.title',
       html: workshop,
-      figure: <FlagBoard />,
+      inlineFigures: {
+        // The card frames the hunt and the board grades it, so the two sit together in the HTML
+        // rather than one of them arriving from the registry's trailing `figure` slot.
+        'one-window': <OneWindow />,
+        'flag-board': <FlagBoard />,
+      },
+    },
+    {
+      id: 'recap',
+      title: 'recap.title',
+      html: recap,
     },
   ],
   // What the tutor puts on the board for this step. Authored in `deck.tsx`, beside the figures it

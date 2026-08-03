@@ -19,9 +19,10 @@ page they already have. What belongs here is what only works out loud.
 **The figures are the one exception, and it is deliberate.** A slide's drawing is the step's own
 figure component, rendered exactly as the unit renders it, so a room looking up at the projector and
 down at their own screens sees one drawing rather than two that have drifted. That is reuse of a
-figure, not of prose, and the rule above is unchanged. Four figures are kept off the slides for a
-reason worth remembering: the three `TaskCard`s and `FlagBoard` write progress to localStorage, so
-on a slide they would tick the *tutor's* machine.
+figure, not of prose, and the rule above is unchanged. Some figures are kept off the slides for a
+reason worth remembering: every `TaskCard` and `FlagBoard` writes progress to localStorage, so on a
+slide they would tick the *tutor's* machine. That is a rule rather than a list, since a step gains a
+card more often than the deck gains a slide.
 
 **A slide is data, not JSX.** `SlideSpec` in `shared/deck/slide-spec.ts` is the shape, a step
 authors a list of them, and `SlideTemplate` renders every one. Adding a slide is adding an entry:
@@ -340,7 +341,7 @@ for a figure: it reads `useAssistant()` itself, and the `data-figure` marker nev
 Which units this is actually used in, and the places it deliberately is not, are in
 `front/src/steps/step0/CLAUDE.md` and `front/src/steps/step1/CLAUDE.md`, with the cross-step scope in
 `front/src/steps/CLAUDE.md`. The short version: step 0 tells the student to set it, and step 1
-varies nine blocks. Everything else is shared on purpose.
+varies eleven blocks. Everything else is shared on purpose.
 
 ## Languages
 

@@ -17,8 +17,8 @@ one-word name once `model` and the machinery around the window joined it, so the
 is in there rather than naming one of the three. The topic is still context, which is why the
 sentence above still opens that way. `FLAG_SALT` in `flags.ts` still reads `kata-step1-context-v1`
 and must not follow the title: it is a hash input, so renaming it invalidates every flag on the
-board. Nine units — `tokens`, `prompt`, `tools`, `context`, `session`,
-`harness`, `model`, `truth`, `workshop` — and the unit HTML is the source for what each one teaches. The
+board. Ten units — `tokens`, `prompt`, `tools`, `context`, `session`,
+`harness`, `model`, `truth`, `workshop`, `recap` — and the unit HTML is the source for what each one teaches. The
 fourth was called `intro` until it was renamed, id and all, so its URL is `/steps/step1/context` and
 its prose keys read `context.<section>.<n>`. Old links to `/steps/step1/intro` are dead and there is
 no redirect, which is the decision: the app has no route aliases anywhere and one unit is not the
@@ -42,14 +42,15 @@ oval instead carries `ContextDiagram`'s prompt region geometry and fills, so the
 shape seen twice; the component name still says `InContext` and no longer describes the drawing. Neither is to scale, and the share-by-volume figure is still `SessionMakeup` in `session`.
 One term is knowingly loose: `ContextDiagram`'s `resources` is the broad word for what the agent
 read, while `tools` defines `resource` narrowly as content an MCP server hands over uncalled.
-**Three of the nine are deliberately not in that
+**Three of them are deliberately not in that
 list**: four layers fill the window, `tokens` is the unit it is counted in, `model` is the reader
 on the other end of it and `truth` is where that reader's answers come from. `tokens` and `model`
 each open by saying so; `truth` does not, because it arrives after
-`model` has already put the reader outside the four. `workshop` no longer recites the four at all;
-on that page the layers are named only by the board's `flag.*.help` keys, each of which opens on its
-own. Promoting any of them to a layer means visiting those keys, `context` and every "four layers"
-sentence in the step, which is a larger change than it looks.
+`model` has already put the reader outside the four. **`workshop` does not name a layer anywhere**,
+which is newer than it looks: the board's three `flag.*.help` keys each opened on one until the
+mapping was found to be a pun, and they open on the answer's provenance now. Promoting any of the
+three units to a layer means visiting `context` and every "four layers" sentence in the step, which
+is a larger change than it looks.
 Three editorial constraints the HTML does not state on its own: every layer unit goes past merely
 naming its layer, and none of the four is allowed to read as a stub (they sat within about a hundred
 words of each other until `tools` grew the MCP material, and that floor is the part that matters); the sub-agent starting blank is the point the three sub-agent `harness` patterns turn on; and
@@ -238,7 +239,7 @@ example instruction on purpose: the line has to be one they were tired of repeat
 know which one that is. Ticked once, to `kata.step1.survive`, on the same reasoning `CutItUp` is
 ticked once.
 
-All four tasks are `shared/components/TaskCard.tsx`, which is the tick-card mechanics with the data
+All five tasks are `shared/components/TaskCard.tsx`, which is the tick-card mechanics with the data
 lifted out, the same move `ConnectBoard` made when a second drag board arrived. Keep additions there
 rather than in a caller, and keep **one tick per card and never one per move**: five or six boxes
 turn a run at a problem into an errand list. Every move stays one line, so whatever a second line
@@ -476,10 +477,12 @@ to. The two `<h3>`s in there are the exception the rest of the step does not get
 `read-your-window` are hands-on tasks that need a sentence of setting, and everything between them
 carries none. `harness` follows the same shape now, with the `CutItUp` card
 under the rule and `PatternMatch` arriving after it from the registry, and so does `model`, whose
-`PickTheTier` board is the only thing under its rule. `workshop` is the one left that still closes
-on a bare exercise with no rule over it.
+`PickTheTier` board is the only thing under its rule. `workshop` was the last one outside the family
+and is in it now, with `OneWindow` and the board under the same `<hr>` and heading, and nothing after
+them. `recap` is outside all of this and always will be: it asks for nothing, so it has no rule, no
+`<hr>` and no "Test yourself".
 
-`tools` carries two of the step's four hands-on tasks and its three graded exercises, and between them they
+`tools` carries two of the step's five hands-on tasks and its three graded exercises, and between them they
 hold advice the prose used to state and no longer does. `ConnectOne` is the first task and is a
 `TaskCard` like the other three, on seven moves: add an MCP server to your own agent, fetch the
 catalogue twice, once with `curl` and once by driving `/catalog` through the server, drive the
@@ -521,7 +524,7 @@ takes the BEM `block` as a prop, so the workshop's rows are still `#flags-item-N
 pointed at them moved, and it takes `wrongKey`, because "go back to the pipeline and read what it was
 hiding" is the wrong sentence on a board about a browser. **Anything about how a row behaves goes in
 `FlagRow`.** The flag stays **out of the `flags` array** on purpose: that array is what `workshop`
-closes the step with, one row per way context is assembled out of the backend, and a browser is
+closes the step with, one row per place an answer about the backend can come from, and a browser is
 none of the three. It shares `FLAG_SALT`, which the file already says is not a secret. Nothing checks
 the screenshot, and that is deliberate: the PNG in `.playwright-mcp/` is proof for the student rather
 than for the app, and a grader that reached into their working copy would be the one thing on this
@@ -650,12 +653,59 @@ one question asked three ways (guessed, grounded, proved), which is what lets th
 one argument instead of three topics; `Catalog` is picked because the student has already called it
 from `/catalog`, so the invented method is measured against a class they have met.
 
-`workshop` closes the step with a flag board: three flags the step 1 backend hides from its
-`GET /api/titles` response, one per way context is assembled. The student reads the source for the
-first (a literal in a branch that never runs), traces the running pipeline for the second (the hidden
-tenth entry it computes and drops), and turns the log level up for the third (a line printed only at
-DEBUG). **Do not implement the flags for the student.** The three flags
+`workshop` is the step's capstone, a flag board: three flags the step 1 backend hides from its
+`GET /api/titles` response, **one per place an answer about that service can come from**. The student
+reads the source for the first (a literal in a branch that never runs), traces the running pipeline
+for the second (the hidden tenth entry it computes and drops), and turns the log level up for the
+third (a line printed only at DEBUG). **Do not implement the flags for the student.** The three flags
 are the exercise; ship the puzzle, not the decode, the trace instrumentation or the DEBUG readout.
+
+**The three rows were labelled tools, session and harness once, and that mapping is gone.** Each of
+the three `flag.*.help` keys opened by naming a layer, and in all three cases the noun meant
+something other than the unit that owns it: `tools` is tool calls rather than code on disk, a Spring
+request is not the student's session, and this project's log config is not the harness. So the board
+wore the step's vocabulary while exercising none of it. What actually separates the three is
+provenance, which is `truth`, the unit directly above this one, so each help key now opens on where
+the answer lives: one can only be read, one exists only while the service runs, one is a default
+setting away. `flag.decode.help` lost its closing "no trace will show it" and `flag.debug.help` its
+closing "at the default log level it never prints" in the same change, because both had become the
+new opening sentence said twice. Do not write a layer name back into any of the three, and do not
+let a help key close on what its first sentence already said. The two ends of the seam are marked
+now: `truth.hallucinations.2` closes on the workshop and `workshop.lead.1` links back, so rewording
+either means visiting the other, in both languages.
+
+**`OneWindow` is what makes this a capstone rather than a puzzle**, and it is the answer to the
+complaint that the board grades nothing the step taught. Three flags can be collected without ever
+looking at a window, counting a token or asking what a turn cost, which left a step about the window
+ending on a page that never mentions one. The card frames the whole hunt as **one session with a
+`/context` reading at either end**: read the number, work all three flags without clearing, read it
+again, then say which flag you could hand over whole. It is `TaskCard` like the step's other four,
+ticked once to `kata.step1.hunt`, and it grades nothing. The first and third moves are a pair on
+`ReadYourWindow`'s reasoning, so dropping either leaves a number with nothing to compare it to, and
+the fourth move is the debrief that used to sit over the board as prose: it belongs after the work,
+because which flag you could hand over whole is something you find out by handing it over. It also
+means this page is where the student watches the window fill with the bulkiest thing in the course,
+a trace and a console dump, which is `tools`'s claim about volume met in their own session.
+
+**The board is an inline figure rather than the registry's trailing `figure`**, which it was until a
+closing section arrived under it. That section is gone again and the board is the last thing on the
+page, so the two slots would now render identically; it stays inline because the card and the board
+are one shape and both being markers is what says so. The board deliberately carries **no heading**:
+in guided mode a heading is adopted by the *next* top-level marker, so one written for the board
+would be pulled up over the task card instead.
+
+The unit follows the step's exercise shape at last, which is audit item 46 closed: an `<hr>`, the
+shared `<h2 data-i18n="ui:quiz.title">`, and one `<h3>` under it. That is the same exception `tools`
+gets and for the same reason, that a hands-on task needs a sentence of setting. **The step no longer
+ends here.** `Looking back`, two sentences saying step 1 was over and naming step 2, sat under the
+board until `recap` arrived, and it went whole: a page that closes on the hunt closes better than one
+that steps away from it to summarise, and the forward pointer belongs on the page that looks back.
+
+**`workshop.the-board.1` was deleted rather than moved.** It was a `data-audience="guided"`
+paragraph, and guided mode drops every run of prose whatever its attribute says, so it rendered for
+nobody: not for a self-learner, who is not its audience, and not in class, where the prose is cut
+wholesale. It also recited all three techniques, which is the thing the board's own hint lines
+already do. Anything a teacher needs to say out loud here belongs in the deck.
 
 The unit is a capstone and deliberately the leanest page in the step. It once walked each flag
 through its own section, and the board now carries all of that itself: a row's hint line and its
@@ -667,7 +717,8 @@ find it in the source and run the decode rather than reason it out. `flag.decode
 is the trap the help dialog spends three sentences on: an agent doing character arithmetic in prose
 sounds exactly as sure when it is wrong. **The five house rules moved to step 0's `welcome`**, where they are the rules
 of every board in the course rather than of this one, so `lead.2` links to them in half a sentence
-and the unit keeps only the game (two lead paragraphs and the command that starts the agent). Do not
+and the unit keeps only the game (two lead paragraphs, the command that starts the agent, the rule
+over the task card and the two sentences that close the step). Do not
 write a rule back onto this page: a rule that is true here and nowhere else is the sign the rule is
 wrong rather than misplaced. What went with the move is worth knowing. The old `house-rules.5` was
 the course's second pointer at `model.cost.4`, so that paragraph is now reached from nowhere but its
@@ -675,17 +726,16 @@ own unit, and the intro's version names no command and does no arithmetic, which
 `cost.4` the one place the course multiplies. The old `house-rules.4` carried the five same-shape
 lines the trace prints, a measured fact of the backend; **`flag.trace.help` is now the only place
 that number appears**, so a change under `kata/step1/java` visits that key alone, in both languages.
-**`The board` is now a heading, the board and one guided line**, and both things that sat above it
-are gone. The `Stuck?` aside carried two deep hints and went because the Hint dialog is where a
+The `Stuck?` aside carried two deep hints and went because the Hint dialog is where a
 stuck student is meant to look: its second hint was already `flag.trace.help` almost verbatim, and
 its first is now folded into `flag.decode.help` as the shape of the impossible condition (a value
 folded into a small range, compared against a bound it can never cross), in both languages. So a
 board hint is the only place a technique is written down, which is what the paragraph above says.
 The debrief went with it: it opened on the board grading in the browser, which
-`flags.panel.description` says for itself one element lower, and closed by asking the student to
-tell before they start which flag they could hand over whole and which needed their judgement, which
-is `the-board.1`'s own claim about the step and is now made nowhere. Written back, it belongs under
-the board rather than over it, since it is a look-back.
+`flags.panel.description` says for itself one element lower, and closed by asking which flag the
+student could hand over whole and which needed their judgement. **That question is back, as
+`OneWindow`'s fourth move rather than as prose**, which is where it wanted to be: it is a look-back,
+so it sits after the work instead of ahead of it. Nothing else from the debrief came with it.
 
 Two more cuts hold the lead to its own job. **`lead.1` stops at what the flags look like**: it closed
 on three sentences, one per flag, saying that one sits in unreachable source, one exists only while
@@ -697,6 +747,44 @@ one move the rules forbid. What is left is `cd kata/step1/java` and the launcher
 folder is still named and everything after it is asked for rather than typed; `lead.2` closes on that
 in a clause. It is the step's only assistant-varied block outside `tools`, `session`, `context` and
 `model`, and it varies for the ordinary reason: the launcher is a command.
+
+`recap` closes the step, and it is **the one unit allowed to say what another unit already said**.
+Everything else in the course points at the page that owns a claim rather than restating it. This one
+is **a single list and nothing else**: one bullet per unit ahead of `workshop`, in the order the
+student met them, and **every bullet is a cost and the move that answers it**, on one line. The bold
+half states what it costs you and carries the link back to the unit that argued it; the half after it
+is what to do about it. What keeps the page from being a second course is that line. **A claim
+needing a third sentence belongs in the unit it came from**, and nothing here re-argues anything,
+which cuts both ways: rewriting a unit's argument means visiting its bullet, in both languages.
+
+**It ran as two lists first, the costs and then the advice, and that is the shape to keep it out
+of.** The halves did not line up. Eight units do not have one money-saver each, so the reader was
+left pairing a bullet in one list against a bullet in the other by eye, and the two most useful
+things on the page sat a screen apart. Merging them is what fixed it, and splitting them again puts
+it back.
+
+**Every icon is lifted rather than chosen.** The move half carries the marker the unit itself put on
+that advice (the language to ask in, bundling, clearing at your own seam, turning tools off, keeping
+a cache warm, the expensive model writing the brief, the five-hour window, asking for the check), so
+`welcome`'s legend still means what it says. An icon here that is not on the paragraph it came from
+is drift, in one direction or the other, and **the session bullet carries none because that unit
+marks none**. Do not invent one to even the list up.
+
+Four more decisions. **`workshop` is not in the list**, because a capstone is not a claim and the
+student has just worked it. **The five-hour bullet is last, Claude-only, and has no Copilot
+sibling**, the same shape and the same reasoning as `model`'s section, so its key carries no
+`.claude` suffix: there is no pair for a missing translation to fall back to. It sits after the eight
+rather than inside them because it is an extra rather than a unit's line, which is also what keeps
+the one-bullet-per-unit rule readable when a Copilot reader is shown eight. **There is no figure,
+card or quiz**, which leaves
+the page **empty in guided mode**, since prose is dropped wholesale there. That is a supported state
+rather than an oversight (`StepContent` renders `null` and the article takes no gap): in class the
+recap happens out loud off the deck, where the step's last block is a divider and three statements,
+the window, the one move all eight bullets are, and step 2. The empty page and that block are one
+decision, so a room that loses the block loses the recap altogether. And **`Where this goes` is the step's only forward pointer and
+the only place the course says a step has ended**, which came over from `workshop`'s deleted
+`Looking back`; the sentence naming step 2 is that paragraph's, near enough, and it is the one thing
+from it worth keeping.
 
 ## The assistant variants
 
@@ -718,10 +806,11 @@ halves have to reach both readers, and gating it would hand each of them one sid
 a difference. It is also the only ungated block that names `Copilot CLI` in full, which the paragraph
 below asks of a variant block and which holds here too, since the built-in server is the CLI's.
 
-Two of the ten are not a filename or a command, so do not read that sentence as saying everything
-that varies is a word. `model`'s window section is the larger one: Claude-only whole, with
-no Copilot half at all, and the reasoning is under `model`. `tools.list-itself-window.2` is the
-smaller and it is a **product fact**. Copilot CLI holds the GitHub MCP server with no configuration,
+Two things in the step are not a filename or a command, so do not read that sentence as saying
+everything that varies is a word. `model`'s window section is the larger one and it is **not one of
+the eleven at all**: it is Claude-only whole, with no Copilot half to pair with, and the reasoning is
+under `model`. `tools.list-itself-window.2` is the smaller, it is one of the eleven, and it is a
+**product fact**. Copilot CLI holds the GitHub MCP server with no configuration,
 so that reader is already paying for MCP tool descriptions when the section claims a tool costs you
 by existing, and the Claude half's "connect five MCP servers" would have them counting from zero.
 `list-itself-window.1` above it was made assistant-neutral in the same change ("every tool" rather

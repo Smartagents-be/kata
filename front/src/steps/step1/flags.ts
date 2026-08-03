@@ -1,6 +1,10 @@
 /**
- * The three flags the workshop board hands out, one per way an agent's context is assembled from
- * the step 1 backend: read the source, trace the run, or flip the config. The plaintext flag is
+ * The three flags the workshop board hands out, one per place an answer about the step 1 backend
+ * can come from: read the source, trace the run, or flip the config. That is `truth`'s question
+ * asked three times, and the three `flag.*.help` keys open on the provenance for that reason. They
+ * opened on a layer once (tools, session, harness) and the mapping was a pun in all three cases: a
+ * Spring request is not the student's session and Spring's log config is not the harness. Do not
+ * put the layer names back. The plaintext flag is
  * deliberately not here, only a salted SHA-256 of it, so the answer is not sitting in the bundle for
  * a reader to lift. A pasted flag is hashed with the same salt and compared. The salt just makes the
  * digest specific to this exercise; it is not a secret.
@@ -58,7 +62,7 @@ export const flags: FlagSpec[] = [
  * under the browser task in `tools`, where the work happens.
  *
  * It stays out of `flags` on purpose. That array is what `workshop` closes the step with, one row
- * per way context is assembled from the backend, and a browser flag is neither of those three. It
+ * per place an answer about the backend can come from, and a browser page is none of those three. It
  * shares `FLAG_SALT` because the salt is not a secret; it only makes a digest specific to this step.
  */
 export const shutterFlag: FlagSpec = {

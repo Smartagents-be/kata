@@ -37,12 +37,14 @@ import { UnderSpecified } from './UnderSpecified'
  * interactive: the tutor advances `NextToken` a pass at a time at the board, holds a token in
  * `TokenAttention`, and steps `BundleCompare` through its six moves in front of the room.
  *
- * Five are deliberately absent. `CutItUp`, `SurviveTheClear`, `ConnectOne` and `ReadYourWindow` are
- * `TaskCard`s and `FlagBoard` keeps a solved set, so all five write progress to localStorage: on a
- * slide they would tick the *tutor's* machine, which is the one place a stray flag or a half-done
- * task is most confusing. Their units keep a divider and a statement instead. `McpOvals` is left out too, for a
- * different reason: it restates `McpParts` and only earns that next to the paragraph explaining
- * why it is being restated.
+ * Seven are deliberately absent. `CutItUp`, `SurviveTheClear`, `ConnectOne`, `ReadYourWindow` and
+ * `OneWindow` are `TaskCard`s, and `FlagBoard` and `ShutterFlag` keep a solved set, so all seven
+ * write progress to localStorage: on a slide they would tick the *tutor's* machine, which is the one
+ * place a stray flag or a half-done task is most confusing. Their units keep a divider and a
+ * statement instead. `McpOvals` is left out too, for a different reason: it restates `McpParts` and
+ * only earns that next to the paragraph explaining why it is being restated. `WordsIntoTokens` and
+ * `PickTheNext` are absent for no reason at all: neither writes progress, so they are two slides
+ * nobody has placed rather than two decisions.
  *
  * Eyebrows and divider headings reuse the unit title keys the sidebar already uses, so the name on
  * the board and the name in the nav cannot disagree and neither needs translating twice.
@@ -441,6 +443,44 @@ const deck: SlideSpec[] = [
     eyebrow: 'workshop.title',
     title: 'deck.workshop.flags.title',
     note: 'deck.workshop.flags.note',
+  },
+
+  // ── recap ─────────────────────────────────────────────────────────────────────────────────
+  // The unit is prose and nothing else, so guided mode leaves its page empty and this block is the
+  // whole of the recap in a room. Three statements rather than the unit's nine bullets: the room has
+  // just worked the board, and reading a list back to it is what the page is for. The middle slide
+  // keeps the cost and the move on one line, the way the unit does, because splitting them into a
+  // list of prices and a list of advice is the shape that unit was written out of.
+  {
+    id: 'deck-recap',
+    kind: 'divider',
+    ns: 'step1',
+    eyebrow: 'step.title',
+    title: 'recap.title',
+  },
+  {
+    id: 'deck-recap-one-window',
+    kind: 'statement',
+    ns: 'step1',
+    eyebrow: 'recap.title',
+    title: 'deck.recap.one-window.title',
+    note: 'deck.recap.one-window.note',
+  },
+  {
+    id: 'deck-recap-moves',
+    kind: 'statement',
+    ns: 'step1',
+    eyebrow: 'recap.title',
+    title: 'deck.recap.moves.title',
+    note: 'deck.recap.moves.note',
+  },
+  {
+    id: 'deck-recap-next',
+    kind: 'statement',
+    ns: 'step1',
+    eyebrow: 'recap.title',
+    title: 'deck.recap.next.title',
+    note: 'deck.recap.next.note',
   },
 ]
 
