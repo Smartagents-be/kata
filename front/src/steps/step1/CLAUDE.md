@@ -537,7 +537,11 @@ Ten blocks in step 1 vary and nearly all of them are the same kind of thing, a f
 (nested inside the audience wrapper, never both attributes on one element),
 `model.api-vs-subscription.2` and `.3`, plus `survive.write.*.label` on the task card.
 `harness.lead.1` names Copilot for **every** reader instead of splitting, because that sentence is a
-list of example harnesses and a list is where a second product belongs.
+list of example harnesses and a list is where a second product belongs. `harness.which-one-you-run.2`
+is the second ungated naming and it is there on the same reasoning: it is a **comparison**, so both
+halves have to reach both readers, and gating it would hand each of them one side of a sentence about
+a difference. It is also the only ungated block that names `Copilot CLI` in full, which the paragraph
+below asks of a variant block and which holds here too, since the built-in server is the CLI's.
 
 Two of the ten are not a filename or a command, so do not read that sentence as saying everything
 that varies is a word. `model`'s window section is the larger one: Claude-only whole, with
@@ -548,7 +552,13 @@ by existing, and the Claude half's "connect five MCP servers" would have them co
 `list-itself-window.1` above it was made assistant-neutral in the same change ("every tool" rather
 than "every tool you connect") so the two paragraphs do not contradict each other, and
 `ReadYourWindow` needs no variant either way: its first and last moves compare a reading with and
-without the server the student added themselves.
+without the server the student added themselves. **That product fact is now spent twice, and what
+keeps the two from being one duplicate is the argument each makes of it.** `tools` owns the cost
+(the coin, "you pay for them whether or not the agent touches one") and is gated to the reader it is
+true of; `harness.which-one-you-run.2` owns the difference, namely that two harnesses do not start
+you in the same place, and reaches everybody because a comparison has two halves. So a coin or a
+"you pay" line must not follow the fact into `harness`, which is also what keeps that section clear
+of the billing line `model` took off it, and `tools` must not grow the comparison.
 
 **Where a variant block names the product, `tools` says `Copilot CLI` rather than `Copilot`**,
 because the CLI is the surface the course assumes and a command, a config path or a `/context`

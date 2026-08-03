@@ -13,15 +13,20 @@
 <h2 data-i18n="harness.which-one-you-run.heading">Which harness you run</h2>
 
 <p data-i18n="harness.which-one-you-run.1">
-  That program does more than pass messages along. It reads your files, drives your terminal, sits in
-  your IDE, and holds the connection to your provider's API. Everything the model ever learns about your
-  work, it learns because the harness put it in the request.
+  Everything the model ever learns about your work, it learns because the harness put it in the
+  request: it reads your files, drives your terminal and holds the connection to your provider's API.
 </p>
 
+<!-- Both products are named for every reader, on `harness.lead.1`'s reasoning: a comparison needs
+     both halves, and gating it would leave each reader with one side of it. The built-in GitHub
+     server is `copilot-specific.md`'s fact, and `tools.list-itself-window.2.copilot` spends it on
+     what holding a tool costs. This section spends it on harnesses not starting in the same place,
+     so do not let a coin icon or a "you pay for them" line follow it back here. -->
 <p data-i18n="harness.which-one-you-run.2">
-  This is also where the providers differ from each other. Each one ships its own harness around its
-  own models, and the gap between two of them is wider than most people expect. There are open-source
-  harnesses as well, which you point at whichever model you want.
+  Each provider ships its own harness around its own models, and there are open-source ones you point
+  at whichever model you want. They do not start you in the same place. Copilot CLI arrives with the
+  GitHub MCP server already connected, so those tool definitions are in every request from the first
+  turn. Claude Code starts with none until you add one.
 </p>
 
 <h2 data-i18n="harness.caching.heading">Caching</h2>
