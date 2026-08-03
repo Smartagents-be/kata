@@ -247,10 +247,10 @@ a currency**, which is why it exists: the cost goal was argued everywhere and de
 It is also the one thing in the unit that names versions, and that is a knowing exception rather than
 drift. `ModelTiers` beside it stays version-free on the reasoning its own component comment gives
 (tier names outlive releases), so the table is placed to be read as *evidence for a claim* and never
-as a reference: it sits under the paragraph stating the one-three-five ratio, and the two paragraphs
-after it sort the rows and then say the ratios outlive the numbers. Keep that order. Moved anywhere
-else it becomes a price list, which is exactly what the paragraph under it tells the student not to
-learn.
+as a reference: it sits under the paragraph stating the one-three-five ratio, and the paragraphs
+after it sort the rows, say the ratios outlive the numbers, and close on `cost.4` putting the
+student's own count against them. Keep that order. Moved anywhere else it becomes a price list,
+which is exactly what the paragraph under it tells the student not to learn.
 
 **Three things on this page sort the same three tiers, and all three now run cheapest first**:
 `ModelTiers`, this table and `PickTheTier`'s column. The cards ran most-expensive-first until they
@@ -285,11 +285,15 @@ paragraph beneath it warns against. What the caption does carry is the month the
 which is the thing that makes the table's staleness visible; a rewrite that drops it leaves the
 figure ageing silently.
 
-The section closes on the ratios and does not reach back across the step. A third paragraph once
-did, arguing that you pay the tier's rate on the whole window every turn and that the tier is
-therefore a multiplier on the four layer units. It went, and the removal is the decision: the four
-layers already argue the re-send, `harness`'s caching section already prices it, and the tier is a
-choice about the reader rather than about what fills the window. Do not write it back.
+The section closes on `model.cost.4`, the one place in the course that multiplies: the count
+`/context` printed in `tools` against the table's rate is one turn in money. It reaches back across
+the step on purpose, because the two halves of the multiplication live a unit apart, and it carries
+no currency of its own, so `ModelPricing` stays the only number with one. A different paragraph once
+closed the section and went: it argued that you pay the tier's rate on the whole window every turn
+and that the tier is therefore a multiplier on the four layer units. That removal stands, because
+the four layers already argue the re-send, `harness`'s caching section already prices it, and the
+tier is a choice about the reader rather than about what fills the window. `cost.4` measures and
+argues none of that, so do not let it grow back into the argument.
 
 **`The five-hour window` is the step's only Claude-only section**, and the gating is on every element
 of it, both `data-figure` markers included. That is what the marker rule in `front/CLAUDE.md` is for:
