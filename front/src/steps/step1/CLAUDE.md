@@ -537,7 +537,10 @@ Ten blocks in step 1 vary and nearly all of them are the same kind of thing, a f
 (nested inside the audience wrapper, never both attributes on one element),
 `model.api-vs-subscription.2` and `.3`, plus `survive.write.*.label` on the task card.
 `harness.lead.1` names Copilot for **every** reader instead of splitting, because that sentence is a
-list of example harnesses and a list is where a second product belongs. `harness.which-one-you-run.2`
+list of example harnesses and a list is where a second product belongs. **Both languages carry the
+list, and the Dutch had dropped Copilot out of it**, which is what an ungated block looks like when
+it drifts: nothing filters it, nothing warns, and the second product is simply missing for one
+language. So a rewording of either half visits `nl.json`. `harness.which-one-you-run.2`
 is the second ungated naming and it is there on the same reasoning: it is a **comparison**, so both
 halves have to reach both readers, and gating it would hand each of them one side of a sentence about
 a difference. It is also the only ungated block that names `Copilot CLI` in full, which the paragraph
