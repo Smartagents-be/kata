@@ -10,8 +10,9 @@
   The step 1 backend is your target. It has one endpoint, <code>GET /api/titles</code>, and the
   <code>Catalog</code> page in the sidebar calls it. Nine book titles come back. The pipeline behind
   them computes more than nine lines on every request and throws most of them away before you ever
-  see them. Three of the thrown-away lines are flags, each wrapped in <code>{curly braces}</code> and
-  written in leetspeak so you cannot mistake one for a title.
+  see them. One of the thrown-away lines is a flag. Two more are flags a normal request never
+  computes at all. All three are wrapped in <code>{curly braces}</code> and written in leetspeak, so
+  you cannot mistake one for a title.
 </p>
 
 <p data-i18n="workshop.lead.3">
