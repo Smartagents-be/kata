@@ -284,6 +284,16 @@ one. The unit's order is
 the argument too, so keep it: what a tool is, where extra ones come from (MCP, and the three things
 one offers), what holding many of them costs, why the results are the least trustworthy layer, what
 they cost by volume.
+`list-itself-window.4` is the section's closing aside and **the only number the course puts on a
+tool count**: four or five in one context, and past that the job gets its own specialised agent. It
+carries no `data-audience`, because a rule of thumb is as useful to a student in class as to one
+alone, unlike the two "try it once yourself" asides in `prompt` and `session`. Two things keep it
+from being a duplicate of something else. It is the only place the unit escalates past "turn off
+what this task does not need", which is what earns it a shape of its own rather than a fourth
+paragraph in a section that already runs three. And it stops at the tool list: **`harness` owns
+what a sub-agent costs** (an empty context, and refetching whatever it was not told), so a sentence
+about the coordinator, the fresh session or the refetch does not belong here. That is the same rule
+that took the sub-agent paragraph out of `model`.
 
 `model` sits after `harness`: prose, one figure, and one exercise under the same `<hr>` and "Check
 yourself" heading `tools` and `harness` use. **It carries no version numbers anywhere, and that is

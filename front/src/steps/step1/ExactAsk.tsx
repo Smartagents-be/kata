@@ -6,28 +6,33 @@ import { cn } from '@/shared/lib/utils'
  * One broken form, asked about two ways.
  *
  * The form has two fields and both labels read "Name", so "fix the form" cannot say which one it
- * means, or what fixed would look like. The label on the top field carries an `mb-4` that pushes its
- * input away, so it hangs off on its own. The source next to it is the only place the two fields are
- * told apart, which is why the ids are the thing drawn in colour: naming one of them is what turns
- * the vague ask into an exact one.
+ * means, or what fixed would look like. The label on the top field carries an `mb-8` that pushes its
+ * input away, so it hangs off on its own.
+ *
+ * The fault is drawn rather than left to be spotted: the margin is a dashed band carrying its own
+ * size, and the label above it goes red. That is the only thing on the card in colour, so a reader
+ * knows where to look before reading a word of it, and the same red on `member-name` in the source
+ * is what carries them from the fault to the name for it. `contact-name` is deliberately left plain:
+ * a second red beside the first competes with the fault, and the two ids differ in the text anyway,
+ * which is all the reader needs to see that the source is the only place the fields are told apart.
  *
  * It sits next to the "be exact" paragraph in the `prompt` unit, so it lives in `inlineFigures` and
  * the geometry stays here in the step rather than in the unit HTML.
  */
 
-/** A run of source, where an object is an id and gets drawn in red rather than as plain code. */
+/** A run of source, where an object is the id of the broken field and gets drawn in red. */
 type Part = string | { id: string }
 
 const CODE: Part[][] = [
   ['<div class="field">'],
-  ['  <label class="mb-4"'],
+  ['  <label class="mb-8"'],
   ['         for="', { id: 'member-name' }, '">Name</label>'],
   ['  <input id="', { id: 'member-name' }, '">'],
   ['</div>'],
   [''],
   ['<div class="field">'],
-  ['  <label for="', { id: 'contact-name' }, '">Name</label>'],
-  ['  <input id="', { id: 'contact-name' }, '">'],
+  ['  <label for="contact-name">Name</label>'],
+  ['  <input id="contact-name">'],
   ['</div>'],
 ]
 
@@ -67,10 +72,22 @@ export function ExactAsk() {
                 id="exact-ask-form-field-0-label"
                 data-component="ExactAsk"
                 htmlFor="exact-ask-form-field-0-input"
-                className="text-muted-foreground mb-4 text-sm"
+                className="text-destructive text-sm font-medium"
               >
                 {t('exact-ask.form.field')}
               </label>
+              {/* The margin itself, drawn. 26px plus the 6px gap on either side of it is the 32px the
+                  source shows, so the band measures what it says it does. It is dashed and shallow so
+                  it cannot be mistaken for a third input, and the size is machine-shaped, so it is
+                  mono and stays the same in every language. */}
+              <div
+                id="exact-ask-form-field-0-gap"
+                data-component="ExactAsk"
+                aria-hidden="true"
+                className="border-destructive/40 bg-destructive/5 text-destructive/80 flex h-[26px] items-center justify-center rounded-md border border-dashed font-mono text-xs"
+              >
+                32px
+              </div>
               <input
                 id="exact-ask-form-field-0-input"
                 data-component="ExactAsk"
