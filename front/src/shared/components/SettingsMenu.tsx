@@ -17,6 +17,11 @@ import {
   PopoverTrigger,
 } from '@/shared/components/ui/popover'
 import { Switch } from '@/shared/components/ui/switch'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/shared/components/ui/tooltip'
 import { ASSISTANTS } from '@/shared/assistant/assistant'
 import { useAssistant } from '@/shared/assistant/useAssistant'
 import { LOCALES } from '@/shared/i18n/locale'
@@ -67,18 +72,30 @@ export function SettingsMenu({ triggerClassName }: { triggerClassName?: string }
   return (
     <>
     <Popover open={menuOpen} onOpenChange={setMenuOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          id="settings-trigger"
-          data-component="SettingsMenu"
-          variant="ghost"
-          size="icon-sm"
-          aria-label={t('settings.open')}
-          className={triggerClassName}
-        >
-          <SettingsIcon id="settings-trigger-icon" data-component="SettingsMenu" />
-        </Button>
-      </PopoverTrigger>
+      {/*
+        The tooltip is pinned shut while the panel is open. Radix would otherwise keep it up over
+        the panel the click just opened, which is a label for a thing that is no longer hidden.
+        `undefined` hands control back, rather than pinning it open the rest of the time.
+      */}
+      <Tooltip open={menuOpen ? false : undefined}>
+        <TooltipTrigger asChild>
+          <PopoverTrigger asChild>
+            <Button
+              id="settings-trigger"
+              data-component="SettingsMenu"
+              variant="ghost"
+              size="icon-sm"
+              aria-label={t('settings.open')}
+              className={triggerClassName}
+            >
+              <SettingsIcon id="settings-trigger-icon" data-component="SettingsMenu" />
+            </Button>
+          </PopoverTrigger>
+        </TooltipTrigger>
+        <TooltipContent id="settings-trigger-tooltip" data-component="SettingsMenu" sideOffset={6}>
+          {t('settings.open')}
+        </TooltipContent>
+      </Tooltip>
 
       <PopoverContent
         id="settings-panel"

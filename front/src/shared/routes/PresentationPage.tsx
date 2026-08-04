@@ -3,6 +3,11 @@ import { useCallback, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '@/shared/components/ui/button'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/shared/components/ui/tooltip'
 import { DeckSlides } from '@/shared/deck/slides'
 import { firstUnitPath, steps } from '@/steps'
 // Imported for its side effect: defines the <deck-stage> element before anything below renders.
@@ -131,18 +136,35 @@ export function PresentationPage() {
         data-component="PresentationPage"
         className="fixed top-6 right-6 z-[2147483400] flex items-center rounded-full bg-black/55 p-1 opacity-20 backdrop-blur-sm transition-opacity duration-200 hover:opacity-100 focus-within:opacity-100"
       >
-        <Button
-          id="presentation-exit"
-          data-component="PresentationPage"
-          type="button"
-          variant="ghost"
-          size="icon-sm"
-          onClick={leave}
-          aria-label={t('deck.exit')}
-          className="rounded-full text-white/90 hover:bg-white/15 hover:text-white"
-        >
-          <XIcon id="presentation-exit-glyph" data-component="PresentationPage" />
-        </Button>
+        {/*
+          The tooltip portals to the body, where its own `z-50` would put it under the deck. It has
+          to be lifted to the same z-index as the control it labels, which is the one number in this
+          app chosen to clear the engine's own overlay.
+        */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              id="presentation-exit"
+              data-component="PresentationPage"
+              type="button"
+              variant="ghost"
+              size="icon-sm"
+              onClick={leave}
+              aria-label={t('deck.exit')}
+              className="rounded-full text-white/90 hover:bg-white/15 hover:text-white"
+            >
+              <XIcon id="presentation-exit-glyph" data-component="PresentationPage" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent
+            id="presentation-exit-tooltip"
+            data-component="PresentationPage"
+            sideOffset={8}
+            className="z-[2147483400]"
+          >
+            {t('deck.exit')}
+          </TooltipContent>
+        </Tooltip>
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import { CheckIcon } from 'lucide-react'
+import { motion } from 'motion/react'
 import { useState } from 'react'
 import {
   Card,
@@ -9,6 +9,8 @@ import {
 } from '@/shared/components/ui/card'
 import { useStepText } from '@/shared/i18n/useStepText'
 import { cn } from '@/shared/lib/utils'
+import { CheckTick } from '@/shared/motion/CheckTick'
+import { GESTURE_STATES } from '@/shared/motion/motion'
 
 function readDone(storageKey: string): boolean {
   try {
@@ -134,29 +136,24 @@ export function TaskCard({
           ))}
         </ol>
 
-        <button
+        {/*
+          The gestures are recognised here and worn by the tick, which is why the button is a
+          `motion` element with nothing of its own to animate: the target is the whole row, and a
+          disc that answered to its own 24 pixels would be a second, smaller control sitting inside
+          the first. `GESTURE_STATES` carries the two names both sides agree on.
+        */}
+        <motion.button
           type="button"
           role="checkbox"
           aria-checked={done}
           onClick={toggle}
+          {...GESTURE_STATES}
           id={`${block}-toggle`}
           data-component="TaskCard"
           data-state={done ? 'done' : 'open'}
           className="flex w-full items-center gap-3 rounded-lg border p-3 text-left font-medium outline-none transition-colors hover:bg-muted/60 focus-visible:ring-3 focus-visible:ring-ring/50"
         >
-          <span
-            id={`${block}-toggle-tick`}
-            data-component="TaskCard"
-            aria-hidden="true"
-            className={cn(
-              'flex size-6 shrink-0 items-center justify-center rounded-full border transition-colors',
-              done
-                ? 'border-primary bg-primary text-primary-foreground'
-                : 'border-border bg-transparent text-transparent',
-            )}
-          >
-            <CheckIcon className="size-4" strokeWidth={3} />
-          </span>
+          <CheckTick id={`${block}-toggle-tick`} component="TaskCard" checked={done} />
           <span
             id={`${block}-toggle-label`}
             data-component="TaskCard"
@@ -164,7 +161,7 @@ export function TaskCard({
           >
             {text(done ? `${prefix}.done` : `${prefix}.todo`)}
           </span>
-        </button>
+        </motion.button>
       </CardContent>
     </Card>
   )

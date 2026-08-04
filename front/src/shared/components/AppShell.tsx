@@ -6,6 +6,11 @@ import { SettingsMenu } from '@/shared/components/SettingsMenu'
 import { StepNav } from '@/shared/components/StepNav'
 import { Button } from '@/shared/components/ui/button'
 import { Separator } from '@/shared/components/ui/separator'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/shared/components/ui/tooltip'
 import { cn } from '@/shared/lib/utils'
 
 export function AppShell() {
@@ -136,25 +141,42 @@ export function AppShell() {
               <p id="app-sidebar-title" data-component="AppShell" className="eyebrow text-primary">
                 {t('nav.steps')}
               </p>
-              <Button
-                id="app-sidebar-toggle"
-                data-component="AppShell"
-                type="button"
-                variant="outline"
-                size="icon-sm"
-                aria-expanded={navOpen}
-                aria-controls="app-sidebar-nav"
-                aria-label={t('nav.toggleSteps')}
-                onClick={() => setNavOpen((open) => !open)}
-                className="text-muted-foreground lg:hidden"
-              >
-                <ChevronDownIcon
-                  id="app-sidebar-toggle-glyph"
+              {/*
+                This control is `lg:hidden`, so the tooltip only ever reaches a mouse in a narrow
+                window: below that breakpoint the reader is usually on a touch screen, where hover
+                never fires. It costs nothing and the label is already written, so it is here for
+                the narrow-window case rather than for the common one.
+              */}
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    id="app-sidebar-toggle"
+                    data-component="AppShell"
+                    type="button"
+                    variant="outline"
+                    size="icon-sm"
+                    aria-expanded={navOpen}
+                    aria-controls="app-sidebar-nav"
+                    aria-label={t('nav.toggleSteps')}
+                    onClick={() => setNavOpen((open) => !open)}
+                    className="text-muted-foreground lg:hidden"
+                  >
+                    <ChevronDownIcon
+                      id="app-sidebar-toggle-glyph"
+                      data-component="AppShell"
+                      aria-hidden
+                      className={cn('size-4 transition-transform', navOpen && 'rotate-180')}
+                    />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent
+                  id="app-sidebar-toggle-tooltip"
                   data-component="AppShell"
-                  aria-hidden
-                  className={cn('size-4 transition-transform', navOpen && 'rotate-180')}
-                />
-              </Button>
+                  sideOffset={6}
+                >
+                  {t('nav.toggleSteps')}
+                </TooltipContent>
+              </Tooltip>
             </div>
 
             <div

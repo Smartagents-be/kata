@@ -156,7 +156,13 @@ else holds a colour: components name tokens, so a change to the palette is a cha
   titles, step numbers. Both are variable fonts imported in `index.css`; nothing loads from a CDN.
 - **The interface stays nearly flat.** Separation is a 1px border, not a shadow. `--shadow-*` has
   three real steps (hairline, raised, overlay) drawn from one teal-black at four opacities, and
-  depth is reserved for things that genuinely float: the settings popover, dialogs.
+  depth is reserved for things that genuinely float: the settings popover, dialogs, tooltips. The
+  first two take the overlay step and the tooltip takes the raised one, because it is a label rather
+  than a surface you work in. The tooltip's edge is an `outline` and not a `border`, and that is
+  load bearing rather than a preference: its arrow overlaps the panel edge and paints out the line
+  behind itself, which only works if there is an outline for it to sit on top of. Turning it into a
+  border draws a seam across the base of the point. The reasoning is repeated in `ui/tooltip.tsx`,
+  which is also where the component's Skiper UI provenance is recorded.
 - **Two utilities carry the repeated shapes.** `eyebrow` is the small mono uppercase label above a
   heading, colour left to the caller (teal for a section, muted for a sub-label). `field` is a
   typed answer box: mono, hairline border, and the same 3px teal focus ring on every field, so a
