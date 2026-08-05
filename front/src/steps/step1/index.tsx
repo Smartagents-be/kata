@@ -119,7 +119,6 @@ const step1: Step = {
         'shutter-flag': <ShutterFlag />,
         'spot-injection': <SpotInjection />,
         'budget-window': <BudgetWindow />,
-        'read-your-window': <ReadYourWindow />,
       },
     },
     {
@@ -130,6 +129,9 @@ const step1: Step = {
         'context-diagram': <ContextDiagram />,
         'oneshot-compare': <OneShotCompare />,
         'context-falloff': <ContextFalloff />,
+        // The step's only task under a unit that also carries a quiz. It reads the window this unit
+        // takes apart, with the server `tools` connected still in it.
+        'read-your-window': <ReadYourWindow />,
       },
       quiz: contextQuiz,
     },

@@ -1,7 +1,8 @@
 <!-- In class the teacher walks through this at the board, so the page keeps only the
      diagram and the quiz. Self-learners read the whole thing. -->
-<!-- `prompt` defines the word and `tools` uses it, so this unit no longer names it. It steps back to
-     the whole window instead, which is what the populated oval below is for. -->
+<!-- `prompt` and `tools` both use the word before this unit arrives, so it steps back to the whole
+     window rather than naming it, which is what the populated oval below is for. `prompt` used to
+     open on a definition of it and no longer does; nothing defines it now. -->
 <div data-audience="self">
   <p data-i18n="context.lead.1">
     Your prompt, the resources the agent read and the tools it can call come from different places
@@ -10,9 +11,6 @@
   </p>
 </div>
 
-<!-- `/context` was introduced here in two self-only sentences and is now in `tools`, under the task
-     that runs it. This unit's prose is self-only, so a guided student never met the command; the
-     unit that uses it does not have that problem. Do not bring the sentence back. -->
 
 <!-- The window with what fills it in it, and the payoff of the two frames before it: `prompt` drew one
      region against this oval and `tools` drew a tool across its border, so this is the first time a
@@ -65,6 +63,17 @@
   reference image from Dribbble pinned to it. That single piece of context steered it somewhere less
   generic straight away. It is not finished, but it is closer, and the distance left to cover is
   shorter. Relevant context does not only make an answer more correct. It raises the quality.
+</p>
+
+<!-- The figure's payoff turned on the student's own repository. It stays descriptive on purpose:
+     arranging a repository so an agent works well in it is step 2's `setup`, and this paragraph is
+     only why the codebase counts as context at all. -->
+<p data-audience="self" data-i18n="context.model-statistic.4">
+  Your codebase is that reference. Every file the agent opens on the way to yours is context too,
+  and it steers the answer the same way that image did. Keep one way of doing things and the agent
+  copies it. Work in a project that drifted years ago and it copies that instead, every turn and
+  every session. That is why an old codebase feels heavy: the agent is not looking past the old
+  habits, it is following them.
 </p>
 
 <div data-audience="self">
@@ -184,3 +193,21 @@
   </p>
 
 </div>
+
+<!-- The doing part of the unit, under the same rule and the same shared heading every other unit in
+     the step uses. This is the one unit carrying both a task and a registry quiz, so QuizPanel puts
+     that heading on the page a second time under its own separator; the shape is worth more than the
+     repetition. The prose here is deliberately outside the self-audience wrapper the rest of the
+     unit sits in: a task is worked by both audiences, and guided mode drops the run either way. -->
+<hr />
+
+<h2 data-i18n="ui:quiz.title">Test yourself</h2>
+
+<h3 data-i18n="context.read-your-window.heading">Read your own window</h3>
+
+<!-- The unit's one task, and the only place in the course `/context` is used rather than described:
+     the prose that described it was removed and nothing above may grow a replacement. The card
+     carries the whole instruction, opening the project itself in the first move. The second and
+     last moves are a reading with the MCP server from `tools` connected and one with it gone, so
+     neither can be dropped without leaving a number with nothing to compare it to. -->
+<div data-figure="read-your-window"></div>

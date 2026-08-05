@@ -78,6 +78,27 @@ export interface PrepareOptions {
  * are the translations, which come from the same place. If a later step ever renders HTML from an
  * API, a user, or an LLM, sanitise it before it reaches `dangerouslySetInnerHTML`.
  */
+/**
+ * The shared heading a unit writes above the things it asks the student to do. It is the one place
+ * unit prose reaches into the `ui` namespace, so the wording above a task and the wording above a
+ * quiz cannot drift apart.
+ */
+export const EXERCISE_HEADING_KEY = 'ui:quiz.title'
+
+/**
+ * Whether the page this unit is about to render already carries that heading. A unit holding both a
+ * task and a registry quiz writes it itself, above the task, and `QuizPanel` then has to arrive
+ * *under* it rather than print a second one a few inches down. Answered by running the same pass the
+ * page runs, so the guided cut is not re-implemented here: in class the prose goes and the heading
+ * with it, and the quiz owns the heading again.
+ */
+export function showsExerciseHeading(html: string, mode: Mode, assistant: Assistant): boolean {
+  return prepareUnit(html, { mode, assistant, translate: () => null }).some(
+    (segment) =>
+      segment.kind === 'html' && segment.html.includes(`data-i18n="${EXERCISE_HEADING_KEY}"`),
+  )
+}
+
 export function prepareUnit(
   html: string,
   { mode, assistant, translate }: PrepareOptions,

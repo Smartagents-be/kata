@@ -276,6 +276,16 @@ gap in the page. And the wrapper becomes Typography's first child, which is why 
 `.prose > div[data-audience] > :first-child` rule at the bottom of `index.css` exists; inside
 `@layer base` the plugin's own layer would beat it whatever its specificity.
 
+One thing composes across that cut. A unit holding both a task and a registry quiz writes the shared
+`<h2 data-i18n="ui:quiz.title">` above its task itself, and `QuizPanel` would then print the same
+heading again a few inches down. So `showsExerciseHeading` in `content.ts` runs the same pass the
+page runs and answers whether the heading is already there, and `UnitPage` hands `QuizPanel`
+`heading={false}` when it is: one "Test yourself", the task under it, the separator, then the
+questions. It is asked of the *prepared* page rather than of the registry, because guided mode drops
+every run of prose and takes that heading with it, so in class the quiz owns the heading again. The
+separator stays either way, since inside a shared section it is what divides the task from the
+questions.
+
 Mode lives in `front/src/shared/mode/`, defaults to guided, and persists under the
 `kata.mode` localStorage key.
 

@@ -1,10 +1,14 @@
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
+import { useAssistant } from '@/shared/assistant/useAssistant'
 import { ExercisePanel } from '@/shared/components/ExercisePanel'
 import { QuizPanel } from '@/shared/components/QuizPanel'
 import { StepContent } from '@/shared/components/StepContent'
 import { UnitPager } from '@/shared/components/UnitPager'
 import { useStepText } from '@/shared/i18n/useStepText'
+import { showsExerciseHeading } from '@/shared/lib/content'
+import { useMode } from '@/shared/mode/useMode'
 import { unitKey } from '@/shared/progress/progress'
 import { useProgress } from '@/shared/progress/useProgress'
 import type { Step, Unit } from '@/shared/step'
@@ -63,8 +67,19 @@ export function UnitPage() {
  */
 function UnitView({ step, unit }: { step: Step; unit: Unit }) {
   const { text } = useStepText(step.id)
+  const { mode } = useMode()
+  const { assistant } = useAssistant()
   const { markComplete } = useProgress()
   const markDone = () => markComplete(unitKey(step.id, unit.id))
+
+  // A unit carrying both a task and a quiz writes "Test yourself" above the task itself, so the
+  // quiz joins that section instead of opening a second one with the same name. It is asked of the
+  // prepared page rather than of the registry, because the guided cut takes the heading with the
+  // rest of the prose and the quiz owns it again in class.
+  const sharedHeading = useMemo(
+    () => (unit.html ? showsExerciseHeading(unit.html, mode, assistant) : false),
+    [unit.html, mode, assistant],
+  )
 
   return (
     <div id="unit" data-component="UnitView" className="flex flex-col gap-8">
@@ -102,6 +117,7 @@ function UnitView({ step, unit }: { step: Step; unit: Unit }) {
           questions={unit.quiz}
           namespace={step.id}
           onPass={markDone}
+          heading={!sharedHeading}
         />
       )}
 

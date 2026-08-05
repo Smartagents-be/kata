@@ -91,8 +91,9 @@
 </p>
 
 <!-- The GitHub server is on with no configuration, so a Copilot reader is paying for MCP tool
-     descriptions before this unit asks them to connect anything. `ReadYourWindow` still works: its
-     first and last moves compare a reading with and without the server they added themselves. -->
+     descriptions before this unit asks them to connect anything. `ReadYourWindow` in `context` still
+     works: its first and last moves compare a reading with and without the server they added
+     themselves. -->
 <p data-assistant="copilot" data-i18n="tools.list-itself-window.2.copilot">
   So the cost is not in calling a tool. It is in having it. Copilot CLI ships with the GitHub server
   already on, so a few hundred lines of description ride along with every message you send before
@@ -154,8 +155,8 @@
 </p>
 
 <!-- Everything below the rule is the doing part of the unit, under one heading that matches the one
-     QuizPanel renders over a quiz. Order: the task against the running backend first, then the two
-     graded exercises. -->
+     QuizPanel renders over a quiz. Order: the task against the running backend first, then the
+     three graded exercises. -->
 <hr />
 
 <h2 data-i18n="ui:quiz.title">Test yourself</h2>
@@ -203,33 +204,7 @@ copilot mcp add playwright -- npx @playwright/mcp@latest</code></pre>
 <!-- The two right calls are worth 27 lines, and every wrong one would also have worked. -->
 <div data-figure="budget-window"></div>
 
-<h3 data-i18n="tools.read-your-window.heading">Read your own window</h3>
-
-<!-- The only place in the course `/context` is used rather than described, which is why the command
-     is introduced here and not in `context`: that unit's prose is self-only, so a guided student
-     never met it. Do not move the introduction back up. -->
-<p data-assistant="claude" data-i18n="tools.read-your-window.1.claude">
-  Those line counts were invented. Yours are real, and you can read them. <code>/context</code> lists
-  what is sitting in the window right now, grouped by where each part came from. The command is
-  Claude Code's, and every harness shows this its own way. Some show you nothing at all.
-</p>
-
-<!-- The seven groups are the labels the readout prints, in the order it prints them, so they are
-     capitalised as it capitalises them (re-read 30 July 2026). -->
-<p data-assistant="copilot" data-i18n="tools.read-your-window.1.copilot">
-  Those line counts were invented. Yours are real, and you can read them. <code>/context</code> lists
-  what is sitting in the window right now, grouped by where each part came from: System Prompt,
-  Custom Instructions, System Tools, MCP Tools, Messages, Free Space and Buffer. Copilot CLI and
-  Claude Code happen to use the same command. Every other harness shows this its own way, and some
-  show you nothing at all.
-</p>
-
-<p data-i18n="tools.read-your-window.2">
-  Run it before you type anything. The tool descriptions are in there already, so the count starts
-  above zero. Connect a server and it moves. That is the one claim in this unit you can put a number
-  on yourself.
-</p>
-
-<!-- The unit's second task. `BudgetWindow` above totals an invented window; this one totals the
-     student's own, against the server `connect-one` just told them to connect. -->
-<div data-figure="read-your-window"></div>
+<!-- `/context` and the `ReadYourWindow` task closed this unit until they moved to `context`, which is
+     where the window they read is taken apart. The server `connect-one` connects is what its last
+     move removes, so the two tasks are still a pair one unit apart. Do not bring the command back
+     down here. -->

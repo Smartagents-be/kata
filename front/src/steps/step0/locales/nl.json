@@ -35,8 +35,8 @@
   "welcome.how-workshops-work.1": "De meeste stappen eindigen op een workshop. Een workshop is een bord met flags: sommige zitten verstopt in de code en moet je opsporen, andere print een build zodra je het project hebt waar de stap het hebben wil. Wat je vindt typ je in het bord, en dat controleert je antwoord in de browser.",
 
   "welcome.house-rules.heading": "Spelregels",
-  "welcome.house-rules.1": "<strong>Alleen je agent jaagt.</strong> Ga de code niet zelf lezen. Vraag wat je wil weten en laat de agent het halen. De flags zijn niet de hoofdprijs: de hoofdprijs is ontdekken wat je agent op eigen kracht bereikt en wat hij alleen bereikt omdat jij er iets voor hem hebt neergelegd.",
-  "welcome.house-rules.2": "<strong>Knip voor je prompt.</strong> \"Zoek de flags in deze repo\" komt snel terug, vol vertrouwen, en fout. Elke flag heeft zijn eigen weg naar binnen. Bepaal eerst de weg, en schrijf dan één precieze vraag per flag.",
+  "welcome.house-rules.1": "<strong>Alleen je agent jaagt.</strong> Ga de code niet zelf lezen. Vraag wat je wil weten en laat de agent het halen.",
+  "welcome.house-rules.2": "<strong>Knip voor je prompt.</strong> \"Zoek de flags in deze repo\" komt snel terug, vol vertrouwen, en fout. Elke flag heeft zijn eigen weg naar binnen.",
   "welcome.house-rules.3": "<strong>Eén flag, één sessie.</strong> Een jacht laat een spoor van doodlopende paden achter, en de volgende flag moet daar allemaal doorheen lezen. Begin elke flag op een verse sessie <svg data-icon=\"coin\"></svg>.",
   "welcome.house-rules.4": "<strong>Laat hem de controle draaien.</strong> Uitgedacht in proza is een flag een geloofwaardige string met twee letters ernaast, even zeker gebracht. Laat de agent het ding draaien en het antwoord printen. En als er meerdere kandidaten terugkomen in precies de vorm van de flag, is de keuze aan jou. De agent kan het niet zien. Jij wel.",
   "welcome.house-rules.5": "<strong>Reken de jacht af als ze voorbij is.</strong> Een flag is een paar tekens lang. De weg ernaartoe niet, en je hebt elke beurt onderweg betaald. Stap 1 geeft je de cijfers om erop te zetten.",

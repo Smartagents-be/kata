@@ -39,7 +39,7 @@ function writeDone(storageKey: string, done: boolean) {
  * looked up rather than assumed: `ReadYourWindow` has no `window.description` and no gap where one
  * would have been. Nothing here is graded, and nothing is submitted.
  * Every task in the course is this component with different data (`CutItUp` in step 1's `harness`,
- * `SurviveTheClear` in `session`, `ConnectOne` and `ReadYourWindow` in `tools`, `OneWindow` in
+ * `SurviveTheClear` in `session`, `ConnectOne` in `tools`, `ReadYourWindow` in `context`, `OneWindow` in
  * `workshop`, `WhereWouldItGo` in step 2's `engineering`), so keep additions here rather than in a
  * caller.
  *

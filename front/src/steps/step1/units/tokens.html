@@ -25,7 +25,7 @@
     A token is the unit a language model works in. Everything an agent knows when it answers you is
     text, and that text is limited, priced and re-read by the token. Not by the word, and not by the
     character. So what follows is not about what goes into an agent, but about what you measure it
-    in. Get the unit wrong and every number in this step is wrong with it.
+    in.
   </p>
 
   <p data-i18n="tokens.lead.3">
@@ -69,9 +69,8 @@
   <h2 data-i18n="tokens.one-at-a-time.heading">It writes one token at a time</h2>
 
   <p data-i18n="tokens.one-at-a-time.1">
-    A model does one thing. Given everything it has been handed so far, it scores the tokens that could
-    come next, and one of them is taken. That token is stuck on the end, and the whole lot goes back
-    in. Again.
+    Given everything it has been handed so far, it scores the tokens that could come next, and one of
+    them is taken. That token is stuck on the end, and the whole lot goes back in. Again.
   </p>
 </div>
 
@@ -112,10 +111,9 @@
   <h2 data-i18n="tokens.reads-all.heading">It reads all of it, every turn</h2>
 
   <p data-i18n="tokens.reads-all.1">
-    Inside every one of those passes, the model does not look anything up. Here is the part people do
-    not expect: each token is weighed against every token in front of it, and that whole weighing is
-    thrown away and redone on the next pass. There is no index, and no shortcut for the parts that did
-    not change.
+    Inside every one of those passes, the model does not look anything up. Each token is weighed
+    against every token in front of it, and that whole weighing is thrown away and redone on the next
+    pass. There is no index, and no shortcut for the parts that did not change.
   </p>
 </div>
 

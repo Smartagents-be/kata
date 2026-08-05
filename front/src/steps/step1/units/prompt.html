@@ -1,15 +1,10 @@
-<!-- This unit runs ahead of `context`, so the word `context` is defined here rather than there. Keep
-     the definition first and keep it to one paragraph: `context` is the unit that takes the window
-     apart, and a second telling here would turn this page into a smaller copy of it. -->
+<!-- The lead opens on the prompt and does not define `context`. It used to, because this unit runs
+     ahead of `context`, and the definition arrived before a student had any use for it. The word is
+     an ordinary one here and `context` is the unit that takes the window apart. Do not write the
+     definition back in. -->
 <p data-i18n="prompt.lead.1">
-  Everything an agent knows when it answers you was assembled a moment earlier, pulled together from
-  a handful of separate sources and handed to the model as one block of text. That block is the
-  <strong>context</strong>.
-</p>
-
-<p data-i18n="prompt.lead.2">
-  Your message is one part of it. The smallest part, and the one you write on purpose, so it carries
-  most of your intent.
+  All user input is a prompt. Of everything a model is handed it is usually the smallest. It is also
+  the most valuable, because it is the one part carrying your intent.
 </p>
 
 <!-- The prompt on its own, with no frame around it. The frame is not drawn until `tools`, and the
@@ -17,13 +12,8 @@
      either. Do not put the context oval back around this one. -->
 <div data-figure="prompt-in-context"></div>
 
-<p data-i18n="prompt.lead.3">
-  What marks a prompt is that you typed it. It is user input, and usually the smallest thing in
-  there.
-</p>
-
-<p data-i18n="prompt.lead.4">
-  The context usually holds more than one. Some prompts are fresh queries you type. Others come back
+<p data-i18n="prompt.lead.2">
+  You rarely send just one. Some prompts are fresh queries you type. Others come back
   after the agent interviews you <svg data-icon="pattern"></svg> about the task. Every question you answer that way is a prompt
   too, even when the agent suggested the answers itself.
 </p>
@@ -36,10 +26,15 @@
   in it only compounds from there.
 </p>
 
+<!-- The term arrives last, after the thing it names. `model.reasoning-level.1` opens by pointing back
+     at this paragraph, so a rewrite here visits that one. What it does not say is what the thinking
+     costs: that is `instruction.3` below, and the two said it twice until this one stopped. -->
 <p data-i18n="prompt.instruction.2">
-  Models work the question over before they answer. The harness exposes that as a reasoning level,
-  running from low up to max. Turn it up and the model spends more tokens thinking, which absorbs
-  some of the imprecision or missing information in what you wrote.
+  Models work the question over before they answer. A prompt is seldom enough on its own to carry
+  everything you meant by it. That working over is the <strong>reasoning level</strong>, and it runs
+  from low up to max. Turn it up and the model reflects on your question rather than answering it
+  straight <svg data-icon="pattern"></svg> That absorbs some of the imprecision and the missing
+  information, so what comes back is closer to what you actually meant.
 </p>
 
 <p data-i18n="prompt.instruction.3">
@@ -79,7 +74,15 @@
   precision was the missing ingredient all along, not model size.
 </p>
 
-<aside data-audience="self" data-i18n="prompt.plan-mode.3">
+<!-- The boundary on the section, and it closes the prose rather than opening it: the payoff above has
+     to land before the exception to it is worth reading. -->
+<p data-i18n="prompt.plan-mode.3">
+  It is not the move every time. A task you have already cut down to one file and one obvious change
+  is a task whose decisions are made, and an interview about it hands them back to you as a document
+  to approve. Ask for it straight instead <svg data-icon="coin"></svg>.
+</p>
+
+<aside data-audience="self" data-i18n="prompt.plan-mode.4">
   <p>
     Try it once on something real. Take a task you were about to type as one line, run it through
     plan mode instead, and read the plan before you approve it. The interview usually surfaces a
@@ -87,7 +90,7 @@
   </p>
 </aside>
 
-<p data-audience="guided" data-i18n="prompt.plan-mode.4">
+<p data-audience="guided" data-i18n="prompt.plan-mode.5">
   Your teacher runs a task through plan mode at the board, so you see the interview and the plan
   before anything is executed.
 </p>

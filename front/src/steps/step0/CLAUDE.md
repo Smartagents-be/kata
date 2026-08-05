@@ -47,8 +47,13 @@ here and pointed at from there. `step1/workshop`'s `lead.2` carries the link.
 
 The first rule is the one the section exists for: **only the agent hunts**. A student who opens the
 source themselves gets the flag and none of the lesson, so the board stops measuring anything. It is
-written as an instruction and then the reason, rather than as advice, because it is the one house
-rule that can be broken without noticing you broke it.
+written as a flat instruction rather than as advice, because it is the one house rule that can be
+broken without noticing you broke it. **The line justifying it is deliberately gone**: it told the
+student the flags are not the prize and the prize is finding out what their agent reaches on its
+own, which is the lesson the whole course is, and a rule that argues its own case reads weaker than
+one that just says the thing. Rule two lost its closing instruction in the same pass, for the same
+reason: it now names the failure ("find the flags in this repo" comes back confident and wrong) and
+leaves the fix to the student.
 
 Three things about the section are decisions, and each of them is a thing the step 1 version could
 say and this one cannot. **It names no command**, so `/clear` and `/context` stay introduced where

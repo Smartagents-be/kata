@@ -27,9 +27,13 @@ is keyed by `step/unit`.
 That order is the registry's, and nothing recites it any more: `workshop`'s opening list went with
 its capstone rewrite, so moving a unit is a registry change and nothing else. **The two layers a student writes and reads for
 themselves come before the theory**, which is why `prompt` and `tools` sit ahead of `context` rather
-than after it. Two things follow from that and are load-bearing: `prompt` is where the word
-*context* is defined (one paragraph, and `context` must not grow a second definition), and the three
-oval figures now run as a sequence rather than an empty frame followed by fillings of it.
+than after it. Two things follow from that and are load-bearing. **No unit defines the word
+*context* any more**: `prompt` carried the definition as its opening paragraph, on the reasoning that
+the word is needed before `context` arrives, and it was cut because a definition of the window is
+the wrong thing to open a page about the prompt with. The word is used as an ordinary one from
+`prompt.lead.1` onward and `context` is where the window is taken apart. Do not write a definition
+back into `prompt`, and if one is ever wanted again, `context` is the unit that owns it. The other is
+that the three oval figures run as a sequence rather than an empty frame followed by fillings of it.
 `PromptInContext` draws the prompt and nothing around it, `ToolsInContext` draws the frame with a
 tool across its border, and `ContextDiagram` in `context` is the populated window at the end,
 holding `prompt`, `resources` and `tools`. **`ContextDiagram` was drawn empty when `context` opened
@@ -245,6 +249,37 @@ graded, so the tick is a bookmark: it is written to `kata.step1.cut`, under the 
 broken progress. And **`problem.md` has no answer key anywhere in the tree**: its gaps are unlisted
 on purpose, since a file that names them does the analysis for the student. Do not add a worked cut,
 a `solve.md`, a `plan-solve.md`, or an implementation.
+
+`model-statistic.4` closes the statistic section and is `OneShotCompare`'s payoff turned on the
+student's own repository: the codebase is the reference image they hand over every turn, so a
+project that drifted is the drift being copied rather than worked around. It reads the figure from
+the other side, which is why it sits under it rather than opening a section of its own, and it is
+the section's fourth paragraph knowingly. **It stays descriptive and must not grow an instruction**:
+arranging a repository so an agent works well in it is step 2's `setup`, and this paragraph only
+says why what is already in the codebase counts as context. It is `data-audience="self"` like the
+figure and the paragraph above it, so in class it is walked at the board with the rest.
+
+`context` closes on `ReadYourWindow`, ticked once to `kata.step1.window`, and **`/context` is used
+here and described nowhere**. The command had two paragraphs above the card, one per assistant, plus
+a third on the count starting above zero, and all three were cut: a page that explains what the
+readout carries has answered the question the card exists to make the student answer for themselves.
+So the card is the whole instruction now, and nothing above it may grow a description of the command
+back. What went with them is the "read what the tool descriptions cost you" move, since a reading
+taken before anything is asked is what move two already does.
+The unit is the one in the step carrying a task *and*
+a registry quiz, so the two share one "Test yourself", which is written up under the exercise
+shape below. Three things about the card. **The first move opens `kata/step1/java` with an agent in
+it**, which nothing did while the prose was there, and it is the only move that names a command, so
+it is the only one that splits by assistant (`window.open.claude.label` against
+`window.open.copilot.label`). **The second and last moves are one reading with the MCP server
+`connect-one` connected and one with it gone**, which is the
+only place the course puts a figure on "a tool costs you by existing", so dropping either leaves a
+count with nothing to compare it to; the server is a unit back rather than up the page now, and
+`window.remove.label` names `tools` rather than saying "above", in both languages. And it is the one
+task card with **no description line**, the key absent rather than empty: with the prose gone the
+moves are what says where the work happens, and a description would be the cut paragraphs coming
+back one sentence at a time. `TaskCard`
+looks that key up instead of assuming it, which is what any card may leave out.
 
 `context` and `session` overlap by design, and how the overlap is handled is the decision. `context`
 already argues the re-send, the cost per message and the dead bug hunt, so `session` does not
@@ -503,28 +538,36 @@ every other line dims, because five lines onto three targets is otherwise hard t
 
 Everything the student *does* sits below an `<hr>` at the foot of the unit, under one `<h2>` reading
 "Test yourself". **That heading is the one place in the course where unit prose carries a shared key
-rather than its own**, and the exception is deliberate: every one of the eight writes
+rather than its own**, and the exception is deliberate: every unit with something to do writes
 `data-i18n="ui:quiz.title"`, which is the same string `QuizPanel` puts over a quiz, so the wording
 above a task and the wording above a quiz cannot drift apart. The `ui:` prefix works because
 `nsSeparator` is left at its default while only `keySeparator` is disabled, so i18next reads the
 namespace off the key and `useStepText`'s pinned `ns` gives way to it. Two things follow. A unit's
 "Test yourself" section has **no `<unit>.<section>.heading` key** in either bundle, which is the one
 break in "a key is a location", and changing the wording is one edit in `shared/i18n/locales`
-rather than eight. Reach for a `ui:` key nowhere else: prose belongs to its step. That is the
+rather than one per unit. Reach for a `ui:` key nowhere else: prose belongs to its step. That is the
 shape: prose first, then one rule, then the doing, in the order `connect-one`, `ShutterFlag`,
-`SpotInjection`, `BudgetWindow`, `ReadYourWindow`. Do not scatter the exercises back up into the sections they belong
-to. The two `<h3>`s in there are the exception the rest of the step does not get: `connect-one` and
-`read-your-window` are hands-on tasks that need a sentence of setting, and everything between them
-carries none. `harness` follows the same shape now, with the `CutItUp` card
+`SpotInjection`, `BudgetWindow`. Do not scatter the exercises back up into the sections they belong
+to. The `<h3>` over `connect-one` is the exception the rest of the step does not get: it is a
+hands-on task that needs a sentence of setting, and the three graded exercises after it carry
+none. `context` gets the same exception for `read-your-window`, and it is
+**the one unit in the step carrying a task and a registry quiz**, so the two share the heading the
+prose wrote: `UnitPage` asks `showsExerciseHeading` whether the prepared page already carries the
+`ui:quiz.title` block and hands `QuizPanel` `heading={false}` when it does, leaving the questions
+under the task with the separator between them. It printed the heading twice before that, which was
+a knowing price and is not one any more; the fix went into the shared components rather than into
+this unit, so do not give the task a heading of its own or lift the rule off it. In guided mode the
+prose goes and the authored heading with it, and the quiz prints its own again, which is why the
+question is asked of the prepared page and not of the registry. `harness` follows the same shape now, with the `CutItUp` card
 under the rule and `PatternMatch` arriving after it from the registry, and so does `model`, whose
 `PickTheTier` board is the only thing under its rule. `workshop` was the last one outside the family
 and is in it now, with `OneWindow` and the board under the same `<hr>` and heading, and nothing after
 them. `recap` is outside all of this and always will be: it asks for nothing, so it has no rule, no
 `<hr>` and no "Test yourself".
 
-`tools` carries two of the step's five hands-on tasks and its three graded exercises, and between them they
-hold advice the prose used to state and no longer does. `ConnectOne` is the first task and is a
-`TaskCard` like the other three, on seven moves: add an MCP server to your own agent, fetch the
+`tools` carries one of the step's five hands-on tasks and all three of its graded exercises, and between them they
+hold advice the prose used to state and no longer does. `ConnectOne` is that task and is a
+`TaskCard` like the other four, on seven moves: add an MCP server to your own agent, fetch the
 catalogue twice, once with `curl` and once by driving `/catalog` through the server, drive the
 browser once more at a page with no service behind it and screenshot what it finds, then compare and
 choose. It was two paragraphs of prose before that, and the change is the decision: a unit whose
@@ -586,23 +629,6 @@ says ten times the controller), so a re-measure has to visit both, in both langu
 comment above the figure in `tools.html`. Both mark a wrong pick in `--destructive` and the answer the student missed in teal, because
 red here would read as the result having failed rather than the answer. Both shuffle once per mount
 through `shared/lib/shuffle.ts`, which `PatternMatch` also uses now.
-
-`ReadYourWindow` closes the unit and is the second task, ticked once to `kata.step1.window` like the
-other two. It is where **`/context` is introduced and where it is used**, and that pairing is the
-decision. The command lived in two sentences of `context`, whose prose is entirely
-`data-audience="self"`, so a guided student never met the only tool the course gives them for
-inspecting a window; and the sentences described the command without ever asking anyone to run it.
-Both halves are fixed by putting it here instead, so **do not write the introduction back into
-`context`** (a comment there says so) and do not let this one grow into a second description of the
-command. What earns the task its place in this unit rather than in `context` is the pairing either
-side of it: `BudgetWindow` above totals an invented window, this totals the student's own, and the
-first and last moves are one reading taken with the MCP server `connect-one` connected and one with
-it gone. That difference is the number, and it is the only place the course puts a figure on
-"a tool costs you by existing". Dropping either move leaves a count with nothing to compare it to.
-It is also the one task card with **no description line**, and the key is absent rather than empty:
-the two paragraphs above it already say where the work happens and that the number on screen is the
-point, so a description repeated them one element later. `TaskCard` looks the key up instead of
-assuming it, which is what any card may now leave out.
 
 Machine output inside an exercise stays English in every language: `SpotInjection`'s four result
 bodies and sources and `BudgetWindow`'s six commands have no `nl` entry, on purpose, the same way
@@ -832,10 +858,13 @@ Eleven blocks in step 1 vary and nearly all of them are the same kind of thing, 
 command: the `<pre>` under `workshop.lead.2` (`claude` against `copilot`, each after the same `cd`),
 `tools.extra-tools.3`, the `<pre>` under `tools.connect-one.1` and `tools.connect-one.2`
 (`claude mcp add` against `copilot mcp add`, which lands in `~/.copilot/mcp-config.json`),
-`tools.read-your-window.1`, `tools.list-itself-window.2`, `session.window-not-memory.1`,
+`tools.list-itself-window.2`, `session.window-not-memory.1`,
 `context.amnesia-context-fatigue.3`
 (nested inside the audience wrapper, never both attributes on one element),
-`model.api-vs-subscription.2` and `.3`, plus `survive.write.*.label` on the task card.
+`model.api-vs-subscription.2` and `.3`, plus `survive.write.*.label` and `window.open.*.label` on
+the task cards. The last of those replaced `context.read-your-window.1`, which was the Claude and
+Copilot descriptions of `/context`: the paragraphs went and the variant moved onto the move that
+starts the agent.
 `harness.lead.1` names Copilot for **every** reader instead of splitting, because that sentence is a
 list of example harnesses and a list is where a second product belongs. **Both languages carry the
 list, and the Dutch had dropped Copilot out of it**, which is what an ungated block looks like when
@@ -855,8 +884,8 @@ so that reader is already paying for MCP tool descriptions when the section clai
 by existing, and the Claude half's "connect five MCP servers" would have them counting from zero.
 `list-itself-window.1` above it was made assistant-neutral in the same change ("every tool" rather
 than "every tool you connect") so the two paragraphs do not contradict each other, and
-`ReadYourWindow` needs no variant either way: its first and last moves compare a reading with and
-without the server the student added themselves. **That product fact is now spent twice, and what
+`ReadYourWindow`'s readings need no variant either way: its second and last moves compare a window
+with and without the server the student added themselves, whatever the harness starts them with. **That product fact is now spent twice, and what
 keeps the two from being one duplicate is the argument each makes of it.** `tools` owns the cost
 (the coin, "you pay for them whether or not the agent touches one") and is gated to the reader it is
 true of; `harness.which-one-you-run.2` owns the difference, namely that two harnesses do not start
@@ -864,18 +893,19 @@ you in the same place, and reaches everybody because a comparison has two halves
 "you pay" line must not follow the fact into `harness`, which is also what keeps that section clear
 of the billing line `model` took off it, and `tools` must not grow the comparison.
 
-**Where a variant block names the product, `tools` says `Copilot CLI` rather than `Copilot`**,
-because the CLI is the surface the course assumes and a command, a config path or a `/context`
-readout is untrue of the editor. Two places stay on the bare name and both are right to:
+**Where a variant block names the product, `tools` and `window.open.copilot.label` say `Copilot CLI`
+rather than `Copilot`**, because the CLI is the surface the course assumes and a command, a config
+path or a `/context` readout is untrue of the editor. Two places stay on the bare name and both are right to:
 `model.api-vs-subscription` is about a seat rather than about a client, and `harness.lead.1` says
 "Copilot in your terminal", which names the surface in words.
 
 **What is deliberately shared is the more useful half of this, so do not "fix" it later.**
 `/clear` and `/context` are the same command in both, so `prompt.what-steer-after.1`,
-`session.compaction-picks-moment.2` and the whole of `ReadYourWindow` carry no variant: the task
-runs verbatim either way, and Copilot CLI's readout (system prompt, custom instructions, system
-tools, MCP tools, messages, free space, buffer) is this step's four layers under other names, which
-is why the Copilot paragraph lists them. Plan mode exists in both, so `prompt`'s plan-mode section
+`session.compaction-picks-moment.2` and every move of `ReadYourWindow` after the first carry no
+variant: the readings run verbatim either way, and Copilot CLI's readout (system prompt, custom
+instructions, system tools, MCP tools, messages, free space, buffer) is this step's four layers
+under other names, so a student on either product reads the same shape off the screen. The paragraph
+that used to list those seven groups is gone with the rest of the section's prose. Plan mode exists in both, so `prompt`'s plan-mode section
 and `CutItUp` are untouched. Compaction is automatic in both, from about 80% in Copilot CLI, so
 `session`'s compaction argument holds as written. And `ModelTiers`, `ModelPricing` and
 `PickTheTier` stay exactly as they are: the tiers are taught as dispositions, Copilot's own picker

@@ -23,6 +23,10 @@ function shuffled<T>(items: readonly T[]): T[] {
  * Plain text on the page, ruled off by separators. The exercise below it is a card because it talks
  * to the service and can fail; a quiz has nothing to announce, so it stays part of the reading.
  *
+ * The "Test yourself" heading is the same `ui` key a unit writes above its own tasks, and a unit
+ * that already wrote it hands `heading={false}` so the two sit under one. The separator stays either
+ * way: inside a shared section it is what divides the task from the questions.
+ *
  * The whole quiz is answered first and checked once, from the button at the bottom. A right answer
  * says nothing beyond marking itself right; only a wrong one is worth a sentence of explanation.
  * Everything locks after that, because the explanations give the remaining answers away.
@@ -36,12 +40,19 @@ export function QuizPanel({
   questions,
   namespace,
   onPass,
+  heading = true,
 }: {
   questions: QuizQuestion[]
   /** The step the questions belong to; their text is read from that step's namespace. */
   namespace: string
   /** Fired once, on check, when every question was answered correctly. Marks the unit done. */
   onPass?: () => void
+  /**
+   * False when the unit's own prose already put "Test yourself" on the page, above a task the quiz
+   * arrives after. The two then share one heading instead of printing it twice; the rule is
+   * upstream, in `showsExerciseHeading`.
+   */
+  heading?: boolean
 }) {
   const { t } = useTranslation()
   const [order] = useState(() => shuffled(questions))
@@ -62,16 +73,24 @@ export function QuizPanel({
   }
 
   return (
-    <section id="quiz" data-component="QuizPanel" className="flex flex-col gap-6">
+    <section
+      id="quiz"
+      data-component="QuizPanel"
+      // Labelled by the heading it prints, or by the one the prose above it printed instead.
+      aria-label={heading ? undefined : t('quiz.title')}
+      className="flex flex-col gap-6"
+    >
       <Separator id="quiz-separator" data-component="QuizPanel" />
 
-      <h2
-        id="quiz-title"
-        data-component="QuizPanel"
-        className="font-heading text-lg font-semibold"
-      >
-        {t('quiz.title')}
-      </h2>
+      {heading && (
+        <h2
+          id="quiz-title"
+          data-component="QuizPanel"
+          className="font-heading text-lg font-semibold"
+        >
+          {t('quiz.title')}
+        </h2>
+      )}
 
       {/* mt-2 on top of the section gap: the header needs to sit clear of the first counter. */}
       <form
