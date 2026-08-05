@@ -84,10 +84,11 @@ const deck: SlideSpec[] = [
     eyebrow: 'tokens.title',
     title: 'deck.tokens.next.title',
     figure: <NextToken />,
-    // The tallest figure in the step: the candidate list and the branch tree under it stack. It is
-    // the one figure that is height-bound rather than width-bound, so it sits narrower than the
-    // rest and that is correct rather than something to scale away.
-    scale: 0.8,
+    // Still the height-bound figure of the step rather than a width-bound one, so it is fitted
+    // against the room under the heading and comes out narrower than its neighbours. It was drawn at
+    // 0.8 when the candidate list and the branch tree stacked under each other; one fan is a good
+    // deal shorter than that pair was, which is where the room to grow came from.
+    scale: 1.15,
     figureWidth: 1250,
   },
   {

@@ -45,13 +45,20 @@ notice while you are in the file is a sentence in your report to the user, never
   decision rather than a defect goes back to the user as a question, because closing it means
   reversing the decision and that is not a fix.
 
-## 2. Interview, but only where it is a judgement call
+## 2. Interview
 
 This is the course's own pattern, taught in `step1/prompt` and used as a workflow in
 `step2/workflows`: the agent interviews you, and its questions are the decisions you skipped.
 
+There are two reasons to run it, and they are not the same reason. Either **the row left a decision
+open** and you need the author to take it, or **you cannot tell what the row is asking for** and you
+need the row explained. The first is the common one. The second is the dangerous one, because the
+tempting move there is a plausible edit rather than a question.
+
 **Do not ask when the row names the exact edit and the tree agrees with it.** Make the edit. A row
 that says "change the prose to fourteen and five thousand" has already been decided.
+
+### 2a. The row left the decision open
 
 Ask in four cases:
 
@@ -67,6 +74,53 @@ Use `AskUserQuestion`, one round where you can manage it, your recommendation fi
 choice is prose, draft the actual sentences in the option previews**, so the user is choosing
 between sentences rather than between descriptions of sentences. Then restate the answers in one
 line before you edit, so the spec you worked from is on the record.
+
+### 2b. You cannot tell what the row wants
+
+A row is written in the author's shorthand, months after the thing it describes, and some of them no
+longer parse on their own. The failure mode is not asking too many questions. It is making the edit
+that fits your reading of an ambiguous row, which lands a change nobody asked for and deletes the
+row that would have caught it.
+
+**Exhaust the reading before you ask.** Most rows that look unclear are clear one file later, and a
+question you could have answered yourself spends the user's attention on nothing:
+
+- The thing at the head of the remark: the block id, the locale key, the figure component, the path.
+  Read the actual text, in both languages.
+- That step's `front/src/steps/stepN/CLAUDE.md`, and `front/src/steps/CLAUDE.md` above it. A row
+  that reads as a non sequitur is often enforcing a rule written down there.
+- The row's neighbours. Rows under one `Where` were written in one pass and frequently share a
+  premise that only the first of them spells out.
+- `git log -1 --format=%h audit.md` against the `**Measured:**` anchor, then the diff since. The row
+  may describe a state the tree has already moved past.
+
+**Then name the ambiguity rather than the confusion.** "I do not understand item 23" hands the whole
+job back. Quote the row, quote what is actually in the tree, and say exactly where the two part:
+which word has two readings, which of two files the `Where` points at, which defect the remark names
+when the evidence shows a different one.
+
+**Ask with candidate edits, never with an open question.** The interview's value is that it makes
+the decision cheap to take, so every option is a fix the user can say yes to:
+
+- Two or three readings of the row, each carrying the concrete edit it implies, prose drafted in the
+  preview where the edit is prose.
+- Where useful, **the row is wrong** as an option in its own right: the defect is already fixed, or
+  the row describes a deliberate decision, or the row's evidence no longer matches the tree. Section
+  1 says a row like that goes back to the user, and this is how it goes back.
+- Say what you would pick and why, in one clause. An interview with no recommendation is a survey.
+
+**A second round is allowed here.** One round is the aim, but when the first answer only narrows the
+question, ask again rather than filling the rest in yourself. Two rounds and a right edit beat one
+round and a guess.
+
+**If it is still not actionable after the interview, stop.** Some rows need a decision the course
+has not taken, and the honest outcome is an untouched row plus a report saying what the decision is
+and what it would cost. That is a finished run of this skill, not a failed one. What is never
+acceptable is a plausible edit made because a question felt like too much friction.
+
+Whichever branch you took, **restate the answers in one line before you edit**, so the spec you
+worked from is on the record. An interview is a spec, not a fix: the row closes in section 5, after
+the edit and the ripple check, never on the strength of an answer alone.
 
 ## 3. Fix it
 
@@ -164,6 +218,11 @@ covered and cleared, and anything you noticed but deliberately did not touch.
 ## What not to do
 
 - **Do not resolve a second item because you were already in the file.** One row per run.
+- **Do not edit your way past a row you cannot read.** A plausible fix to a misread row is the one
+  mistake here that leaves no trace: the defect stays, the row is gone, and a change nobody asked
+  for is in the course. Ask, or leave the row and say why.
+- **Do not ask before you have read the file, the step's `CLAUDE.md` and the row's neighbours.**
+  Half the questions worth asking answer themselves there, and the other half get sharper.
 - **Do not delete a row you only partly closed.**
 - **Do not skip the ripple check because the edit was one word.** A change made in English with no
   Dutch sibling is this repo's commonest drift, and it is invisible until a reader switches language.

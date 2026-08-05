@@ -1,6 +1,8 @@
 <p data-i18n="engineering.lead.1">
   Good agentic projects start with good software engineering. That is the whole line between vibe
   coding and agentic engineering, and it is worth being blunt about which side you are on.
+  <a href="/steps/step2/evolution">Project evolution</a> put you on the other side of it for an
+  hour, on a version built to be thrown away, and that is the one place the line does not hold.
 </p>
 
 <p data-i18n="engineering.lead.2">
@@ -26,7 +28,8 @@
   rest: the domain in the middle, the machinery behind adapters, and the direction of a call as a
   folder you can point at. Both give you the logical shape, and a logical shape is what you can
   prompt against <svg data-icon="gem"></svg> <svg data-icon="coin"></svg> Ask for a feature on
-  articles and the agent knows where to look before it opens anything.
+  articles and the agent knows where to look before it opens anything. Nothing above
+  <code>adapter/</code> names Postgres or S3, so swapping the database out is one folder's work.
 </p>
 
 <p data-i18n="engineering.domain-driven-design.2">
@@ -51,7 +54,9 @@
   Skills and hooks turned up in <a href="/steps/step2/setup">project setup</a> as things a project
   holds. This is where you put them to work. Line coverage, mutation coverage and a Sonar
   reliability score still tell you whether software is fit to ship. They also hand an agent an
-  invariant, something fixed to hold itself to while it works <svg data-icon="gem"></svg>.
+  invariant, something fixed to hold itself to while it works <svg data-icon="gem"></svg> Each of
+  them is a proxy, though, and an agent will satisfy a proxy rather than the thing behind it. The
+  gate worth wiring in is the one that is expensive to fake.
 </p>
 
 <p data-i18n="engineering.quality-gates.2">

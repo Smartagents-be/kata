@@ -85,7 +85,9 @@ meets, so every unit above it stays out of that vocabulary rather than spending 
 one page later. **`NextToken` and `TokenAttention` are a pair on one sentence** (`the
 build failed because it timed out`): the first shows it being written a token at a time, the second
 takes the finished sentence apart, and the prose in between says so. Changing the sentence in one of
-them breaks the pair. **`TokenSplit`'s prose row has to contain a word that breaks**, which is why it
+them breaks the pair. Since the reader now picks the tokens in the first of them, what holds the pair
+together is its **favourite chain**, the top-scored token at each of the three passes, and the rule
+protecting that is written up under `NextToken` below. **`TokenSplit`'s prose row has to contain a word that breaks**, which is why it
 is the sentence it is: `unscrambled` comes apart at `unscr` and `ambled`, at a point that is neither
 a syllable nor a stem. No prose says so any more, so the figure has to carry it alone and a tidier
 sentence quietly ends the exercise. There is deliberately no second sentence in another language: an
@@ -141,9 +143,13 @@ the two a pair the way `NextToken` and `TokenAttention` are, so the "word that b
 protects both of them.
 
 `PickTheNext` closes the unit and is its one exercise: three roads out of `the pull request was`, and
-the answer is all three. It asks what the branch tree under `NextToken` only shows, which is that the
-top-scored token is not a rule, so a student who read that figure as a lookup table finds out here
-rather than four units later. Four things in it are decisions. **The sentence is not the pair's**
+the answer is all three. It asks in an answerable form what `NextToken` above it lets the student do
+but never grades, which is that the top-scored token is not a rule, so a student who read that figure
+as a lookup table finds out here rather than four units later. **That overlap is closer than it used
+to be** and the exercise still earns its place: the figure now lets a reader take a runner-up, but
+taking one is not the same as being asked whether they could have, and nothing up there tells them
+whether they understood what they were doing. If either side is ever rewritten, this is the seam to
+check. Four things in it are decisions. **The sentence is not the pair's**
 (`the build failed because it timed out`), because a question answered by the figure above it is not
 a question. **The fan is drawn flat until it is checked** and then lights whole: marking a road
 before the answer is in gives it away, and marking one after says the model has a right answer here.
@@ -162,14 +168,38 @@ the catch-all choice is **pinned last rather than shuffled**, unlike `SpotInject
 a catch-all that turns up second reads as a bug. It is graded in the browser like everything else
 here and writes no progress key, because one question is not a sitting.
 
-`NextToken` draws a second view under the scores, a tree of what each candidate would have led to,
-and it exists to hold up one claim the prose makes and the scores alone cannot: **the top-scored
-token is not always the one taken.** It sat behind a Show button first and does not any more, which
-is the decision: a fan of roads not taken is the argument, and an argument you have to click to see
-is one most readers never meet. Without it the figure teaches that a model is a lookup table with
-extra steps. One invariant keeps the drawing honest, and it is easy to break by editing one list and
-not the other: the first `then` entry of each pass's first candidate is the token the *next* pass
-actually takes, which is what lets the tree draw one unbroken taken path.
+**`NextToken` is worked by the reader rather than watched, and that is the change that matters in
+it.** It took the favourite for them on every pass once, with a static tree underneath drawing what
+the other candidates would have led to. The claim both halves were there to hold up is the one the
+prose makes and the scores alone cannot, that **the top-scored token is not always the one taken**,
+and a figure that only ever walked the top row was making that claim on the reader's behalf. Now
+every candidate is a control: take `was` instead of `timed` and a different sentence comes out of the
+same machine and the same numbers. Without that the figure teaches that a model is a lookup table
+with extra steps.
+
+Five things in it are decisions. **The fan is replaced on every pass rather than accumulated**, so
+what is on screen is one pass of the model and not a picture of the reader's clicks; a road not taken
+is drawn for exactly as long as it is a road. **The favourite chain is pinned to
+`timed` -> `out` -> `.`**, which is what keeps the pair with `TokenAttention` intact: the first entry
+of every candidate list at every depth is the favourite, so a reader who only ever takes the top one
+lands on the sentence the next figure takes apart. That invariant replaces the old
+`then`-first-entry one and breaks the same way, by reordering one list and not the others.
+**Nothing marks a winner**: the arms carry their score as ink (thicker and less transparent the
+likelier, `TokenAttention`'s intensity move, so the colour stays a token) and the favourite is
+simply the heaviest arm rather than a highlighted row. **The drawing is a spine and a set of parallel
+arms, all the same length**, which it was not at first: a bouquet of beziers running from the root to
+each word gave every candidate a different run of ink, so a thick short curve and a thin long one
+read the same, and right-aligning the words against the curve ends left the figure with no straight
+edge anywhere. Equal arms are comparable and the two text columns get hard edges. And **the drawing
+is sized once to the widest fan in the tree** and every fan centred in it, so a pass with three
+candidates does not resize the figure under the pointer that is about to click it.
+
+Two smaller ones. The **advance button takes the favourite** rather than advancing blindly, which is
+what keeps the deck usable (a presenter reaches the paired sentence in three clicks) and gives a
+reader who does not want to choose a way through. And the **likelihood line is the second thing the
+figure teaches**: three scores multiplied, so even the favourite three times over comes out at 19%.
+It is floored at `<1%`, because a road the reader just walked printed as `0%` says the thing on
+screen never happened.
 
 The unit carries two forward pointers and must not grow a third telling of either. Output being
 priced above input goes to `model`, and the prefix cache goes to `harness`, each in one paragraph

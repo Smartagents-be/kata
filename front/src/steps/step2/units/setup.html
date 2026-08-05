@@ -118,7 +118,9 @@ description: Add a REST endpoint to a step's Spring project the way the existing
 
 <p data-i18n="setup.hooks.3">
   So reach for one when the thing must happen every time and you would rather not find out that it
-  did not.
+  did not. Then keep it fast and keep it narrow. That script runs on every Write and every Edit, and
+  a broken one hands the agent an error it did not cause, which it works around instead of writing
+  your code.
 </p>
 
 <hr />
@@ -126,5 +128,7 @@ description: Add a REST endpoint to a step's Spring project the way the existing
 <h2 data-i18n="ui:quiz.title">Test yourself</h2>
 
 <p data-i18n="setup.check-yourself.1">
-  Step 2 ships a Java project you have not opened, at <code>kata/step2/java</code>.
+  Step 2 ships a Java project you have not opened, at <code>kata/step2/java</code>. Three flags are
+  hidden in it, in plain text and wrapped in <code>{curly braces}</code>, in the small number of
+  files a project uses to tell an agent how to work.
 </p>

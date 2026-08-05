@@ -11,11 +11,12 @@ system and the audience and assistant mechanisms are in `front/CLAUDE.md`, and t
 prohibitions are in the root `CLAUDE.md`. None of them is repeated here.
 
 `step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Nine
-units — `evolution`, `setup`, `engineering`, `steering`, `patterns`, `workflows`,
-`enablement`, `parallel`, `goals` — none of
-them carrying a quiz, and the unit HTML is the source for what each argues. Three of the nine close
+units, `evolution`, `setup`, `engineering`, `steering`, `patterns`, `workflows`,
+`enablement`, `parallel` and `goals`, exactly one of
+them carrying a quiz, and the unit HTML is the source for what each argues. Four of the nine close
 on something the student does: `evolution` on an ungraded fifteen-minute task, `setup` on a graded
-flag board, `engineering` on an ungraded `TaskCard`. The other six are framing prose. Five carry one
+flag board, `engineering` on an ungraded `TaskCard`, `workflows` on that quiz. The other five are
+framing prose. Five carry one
 habit each; `evolution` opens the step and carries none, because its job is to put the rest in
 order: a version now costs an hour, so the step you hand over gets small and you take many of them.
 `workflows` is outside that count too, and deliberately so: it carries four ways of
@@ -37,10 +38,14 @@ owns the bar in the build, `patterns` owns turning a repeated correction into a 
 `CLAUDE.md`, and `goals` owns the check that answers yes or no. **The proxy trap is the one argument
 that had no second home**, and it now survives only inside `workshop.flag.honest.help`, which states
 it without attributing it to a unit. That is the thing to notice before writing a section about
-metrics anywhere in the step. Three references were repointed in the same change rather than left
+metrics anywhere in the step. **`engineering.quality-gates.1` now closes on the trap**, two sentences
+saying a metric is a proxy an agent will satisfy and that the gate worth wiring in is the expensive
+one to fake. It carries no example on purpose: `workshop.honest.1` keeps the hundred percent of lines
+under tests asserting nothing, and the mutation answer to it, so keep the plant and the payoff apart.
+Three references were repointed in the same change rather than left
 dangling: `workshop.lead.1` names `engineering` and `goals`, `workshop.lead.2` says "the kind of code
 a quality gate exists for" instead of naming the unit, and `step3`'s
-`change.sceptics-reading-diff.2` links to `engineering`.
+`change.you-test-engineer.2` links to `engineering`.
 Its prose closes by handing off to `setup` by name, so a reordering there has to visit that
 paragraph. Below that prose sits the step's only *ungraded* exercise, under the same `<hr>`
 and "Test yourself" heading step 1's `tools` uses: fifteen minutes on the clock, one of three
@@ -49,7 +54,10 @@ student did not get to, so do not add a checker, and keep each example's second 
 is left out. That sentence is what makes it a skeleton rather than a small feature.
 Two things about it are decisions. It uses "vibecode" approvingly for a throwaway prototype while
 `engineering` argues flatly against vibe coding, and that is not a contradiction to tidy up: the
-first version you intend to delete is the one place the argument does not apply. And its figure,
+first version you intend to delete is the one place the argument does not apply. **`engineering.lead.1`
+now says so in as many words**, naming this unit and calling it the one place the line does not hold,
+which is what turns the collision into a contrast a reader can use; do not cut that sentence as
+redundant, and do not answer it from this side. And its figure,
 `IterationPaths`, splits the work between label and drawing on purpose. The labels carry the cause
 (weeks against an hour) and the picture carries the effect (three long moves stopping beside the
 target against twelve short ones landing in it), which is why neither reads as a caption of the
@@ -160,6 +168,12 @@ does not raise: two agents are two contexts and two bills, and your reading is t
 than their speed. Keep those two arguments apart. Merged, the step says "use a worktree" twice and
 neither time says why.
 
+**The definition, though, is `steering`'s alone**, because `steering` reads first: a second checkout
+of the same repository, on its own branch, in its own folder, sharing the same history.
+`goals.own-worktree.1` used to write it out a second time and now names the worktree in half a
+sentence and links here, which is what `parallel.many-agents-once.2` already did. Two arguments, one
+definition. Do not let a third site explain what a worktree is.
+
 The `gaps.md` section turns on its third part and nothing else. Never assume and write the gap down
 are bookkeeping; **stopping** is the lesson, because an agent that logs an assumption and then builds
 on it has told you what it guessed underneath a diff that already depends on the guess. The rule
@@ -172,6 +186,12 @@ and a wrong one dates the unit. It carries one of the step's two `data-audience=
 other being `workshop`'s. Two others are gone: `setup`'s, on reading a skill's description with the
 body covered, went with the hooks paragraph when that unit was trimmed, and `engineering`'s
 file-counting diagnostic went with the prose under its `Domain-driven design` heading.
+
+The cost argument is told twice inside `setup` and that is deliberate: `claude-md.2` on what earns a
+line in the file, `skills.5` on paying for a description on every turn whether or not it fires. It is
+one argument about two things, and both are where a student needs them. The unit that used to
+re-derive it from outside was `quality`, and it is gone, so `setup` is now the only place in the step
+that argues it. **Do not open a third site.**
 
 `setup` carries three drawings and they are one drawing three times: `ProjectTree` under the
 CLAUDE.md heading, `SkillTree` under Skills and `HookTree` under Hooks, each `FileTree` with `dim`
@@ -193,7 +213,12 @@ The Hooks section exists because the paragraph that used to introduce them was c
 section, and `patterns` used the word twice while defining it nowhere. It is deliberately the
 shortest of the three: what a hook is, why it is stricter than the other two (a `CLAUDE.md` line
 asks and a skill offers, both of which need the agent to read them, while a hook just happens), and
-one `settings.json` block. **It is now the only place in the step that teaches hooks**, and its
+one `settings.json` block. **What it costs when it is wrong lives in the closing paragraph rather
+than in a fourth one**, which is what keeps the section the shortest while still answering the
+strictness it has just sold: keep it fast and keep it narrow, because the script runs on every write
+and a broken one hands the agent an error it works around instead of writing the code. That argument
+is latency and blast radius and **never tokens**, on the two-site rule above, so a coin icon in this
+section is the third site. **It is now the only place in the step that teaches hooks**, and its
 closing forward pointer to `patterns` was cut when that unit stopped mentioning them at all, so a
 paragraph written back into `patterns` about hooks means restoring the pointer with it. `HookTree` paints
 `settings.json`, `hooks/` and the script all teal on purpose: a hook is two files and a reader who
@@ -205,7 +230,10 @@ under that project's own `.claude`, the project briefing, and the briefing scope
 package. **The prose names none of the three files, and no board hint names one either.** That is
 the exercise: the unit says a project you have not opened was set up before you got there, go and
 find out how, and stops. A sentence listing the files, or a hint reading "look in
-`.claude/skills/`", ends it. **Do not collect the three flags anywhere in the tree**, including in
+`.claude/skills/`", ends it. What `check-yourself.1` may say is where the line sits: it gives the
+*shape* of a flag (plain text, in curly braces) and the *size* of the search (the small number of
+files a project uses to instruct an agent), which is what a student needs to know they are looking
+for the right kind of thing, and neither of those narrows the hunt to a path. **Do not collect the three flags anywhere in the tree**, including in
 a comment; `setup-flags.ts` holds salted hashes and its own salt, on the reasoning its own file
 gives.
 
@@ -262,8 +290,24 @@ produces sits on the right instead, and that pair is the drawing.
 `workflows` is four ways of handing work over, and **the order is the argument**: naive, plan-based,
 spec-driven, audit-driven, running from cheapest to most deliberate, with a closing section saying
 they are not exclusive. That close is the unit rather than a coda, so a rewrite that drops it leaves
-four techniques and no reason to pick one. It carries no exercise and no quiz, and the reason is
-that the choice is the lesson and there is nothing a card could ask for.
+four techniques and no reason to pick one. It carries no exercise, and the reason stands: there is
+nothing a card could ask the student to *do* here that would not be a smaller version of the
+workshop.
+
+**It does carry the step's only quiz, and that reverses an earlier decision.** The record used to
+say no quiz either, on the grounds that the choice is the lesson. That reasoning was aimed at the
+wrong instrument. A card asks for work and there is none to ask for, but a question can ask which
+workflow a situation wants, and "which one for a log line in a careful project" is exactly the
+choice the unit spends nine hundred words teaching. So the three questions in `quiz.ts` are
+situations rather than definitions, one per workflow that has something to get wrong: naive against
+the pull to be consistent, what plan mode buys that is not a better draft, and the format rule that
+makes an audit a file you can work. **Spec-driven has no question of its own**, on purpose, because
+it is the baseline the other three are measured against and it turns up inside all of them. Do not
+add a fourth to even the set up.
+
+The quiz renders under the closing figure from the registry, so the unit's HTML gets no
+`<h2 data-i18n="ui:quiz.title">`: that heading belongs to a task card, and `QuizPanel` writes its
+own. `evolution`, `setup` and `engineering` carry the heading because they carry cards.
 
 Two of the four are already taught elsewhere, and the unit **points rather than repeats**, the same
 rule `harness.coordinator.3` follows in step 1. Plan mode belongs to `step1/prompt`, which defines it
@@ -374,8 +418,11 @@ four words they had not been given yet.
 `enablement` follows `workflows` and owns the one thing the rest of the step leaves out: **how long
 it takes to find out**. Every other unit decides what you hand over or what you do while it runs;
 this one is about the machinery around you that answers you in seconds instead of in a deploy. Three
-sections, no exercise and no quiz, on `workflows`'s reasoning rather than as an omission: there is
-nothing a card could ask for that the student's own project would not answer better. Run it locally
+sections and no exercise, on `workflows`'s reasoning rather than as an omission: there is
+nothing a card could ask for that the student's own project would not answer better. **It has no
+quiz either, and that half is no longer borrowed from `workflows`**, which now carries one. It
+stands on its own here: this unit is about what has to be true around you, and a condition has no
+wrong answer to offer a question the way a choice between four workflows does. Run it locally
 front and back, grow the crossbar, and count where the day goes.
 
 **It opens straight on its first `<h2>` and carries no lead, which is deliberate.** The two lead
@@ -489,9 +536,14 @@ the cause where it is now. The `engineering` pointer hangs off that closing sent
 standing as a paragraph of its own: as a second paragraph it opened on the link and then restated
 the breadth claim the section had already made three sentences earlier, which is what made it read
 oddly. One section, one paragraph, and the link names the unit rather than teaching it again. **The
-section now carries no example**, having dropped the database migration, the frontend state bug and
-the build pipeline it used to name, so `SkillShape` under it is the only concrete thing in it. That
-is the trade to know about before adding prose here: the figure is carrying the section.
+section carries exactly one example and it sits in the middle of that paragraph**: the migration that
+drops a column two other services still read, put back after the section spent a while with none at
+all and `SkillShape` carrying the whole of the concrete. It went in there rather than at either end
+because the opening claim and the closing pair are both load bearing, and it is the migration rather
+than the frontend state bug or the build pipeline the section used to name alongside it, because
+`run-own-machine` above it already runs its scenario in the browser and the cut `reachable-one-step`
+section was the one that talked about pipelines. One case is the budget. A second turns the paragraph
+into a list and the closing pair stops landing.
 
 **A `code-got-cheap` section closed the unit and was cut.** It said code used to be the expensive
 part and a craftsman built it slowly, that this is over and nobody is buying code from you any more,
@@ -521,8 +573,12 @@ control down, and all of the reading arriving at the end), `The orchestrator` (t
 with the coordination moved into one of them), then `One in front, the rest behind`
 (control back in the middle, which is what most days actually look like). Running most-to-least and
 then landing in the middle is what makes the last section read as the answer rather than as a fourth
-option. It carries no quiz and no exercise, on `workflows`'s reasoning: the choice is the lesson and
-there is nothing a card could ask for that the student's own week would not answer better. **It opens
+option. It carries no exercise, on `workflows`'s reasoning: there is nothing a card could ask for
+that the student's own week would not answer better. **It carries no quiz, and that is not a
+decision this file has taken.** It used to rest on `workflows` deciding that the choice is the
+lesson, and `workflows` has since reversed exactly that half: a question can ask which arrangement a
+situation wants. So the absence here is an open row rather than a reason, and `audit.md` is where it
+is tracked. **It opens
 straight on its first `<h2>` and carries no lead**, on `enablement`'s and `steering`'s precedent.
 
 **`The orchestrator` sits directly after `Many agents at once` because it is that section answered**,

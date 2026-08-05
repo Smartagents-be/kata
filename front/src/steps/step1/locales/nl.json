@@ -52,12 +52,15 @@
   "token-split.count": "{{chars}} tekens · {{tokens}} tokens · {{ratio}} tekens per token",
   "token-split.caption": "Opgeknipt met o200k_base, een publieke tokenizer.",
 
-  "next-token.label": "vijf tokens erin, één token eruit, drie keer",
+  "next-token.label": "wat er kan volgen, hoe waarschijnlijk elk daarvan is, en welk jij neemt",
   "next-token.description": "Wat het model tot nu toe binnenkrijgt: {{text}}",
-  "next-token.advance": "Neem het volgende token",
+  "next-token.favourite": "Neem de favoriet",
   "next-token.restart": "Opnieuw",
-  "next-token.branches.description": "Een boom van waar elke kandidaat toe geleid zou hebben. De genomen tak staat in het teal, de overgeslagen takken in het grijs.",
+  "next-token.branches.description": "Alles wat het model afweegt tegen het token waar de zin nu op eindigt, getekend als een waaier. Hoe dikker de lijn, hoe waarschijnlijker het token aan het eind ervan. Neem er een en de waaier wordt opnieuw getekend vanuit wat je nam.",
+  "next-token.candidate": "Neem {{token}}, score {{score}}",
   "next-token.pass": "Beurt {{pass}}. Het model leest alle {{read}} tokens om er één te maken.",
+  "next-token.likelihood": "De weg die je tot nu toe genomen hebt had {{likelihood}} kans.",
+  "next-token.likelihood-done": "Die hele zin had {{likelihood}} kans, de drie scores hierboven vermenigvuldigd. Zelfs elke keer de favoriet nemen komt onder een vijfde uit.",
   "next-token.done": "Klaar in {{passes}} beurten. Geen enkele beurt wist wat de volgende zou kiezen.",
   "next-token.caption": "De scores zijn illustratief. Een echte verdeling loopt over de hele woordenlijst, en de samplinginstellingen kneden ze nog eens voor er iets genomen wordt. De vorm klopt wel: één duidelijke favoriet, een paar geloofwaardige achtervolgers, en een staart die te lang is om te tekenen.",
 

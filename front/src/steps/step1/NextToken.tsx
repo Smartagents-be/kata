@@ -1,119 +1,440 @@
-import { useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
+import { useReducedMotion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/shared/components/ui/button'
+import { DURATION, EASE_QUIET } from '@/shared/motion/motion'
 import { cn } from '@/shared/lib/utils'
 
 /**
- * The loop. Five tokens go in, the model scores what could come next, the top one is appended, and
- * the whole thing goes back round. Clicking through it three times is the argument: there was never
- * a plan for the sentence, only a next token, three times over.
+ * The loop. Five tokens go in, the model scores what could come next, one of them is appended, and
+ * the whole thing goes back round. Three passes, and **the reader picks the token on every one of
+ * them**, which is the argument: there was never a plan for the sentence, only a next token, three
+ * times over, and each time it could have gone somewhere else.
  *
- * The sentence it writes is the sentence `TokenAttention` then takes apart, on purpose. The two are
- * a pair the way `ToolsInContext` and `McpServer` are: this one shows the sentence being written a
- * token at a time, the next one shows what each of those passes was reading. Changing the sentence
- * in one of them breaks the pair.
+ * It took the favourite for you until it did not, and that is the decision. The unit's prose says
+ * the scores are a distribution and the favourite is not a rule (`tokens.one-at-a-time.4`), and a
+ * figure that only ever walked the top row was making that claim on the reader's behalf. Now the
+ * claim is a thing they do: take `was` instead of `timed` and a different sentence comes out, built
+ * by the same machine out of the same numbers.
  *
- * The counter under the candidates is the part that carries the cost claim, and it is why the input
- * is redrawn in full on every pass rather than only the new chip: what the model reads on pass three
- * is not the token it just wrote, it is all seven again.
+ * The sentence it writes **when you take the favourite three times** is the sentence
+ * `TokenAttention` then takes apart, on purpose. The two are a pair the way `ToolsInContext` and
+ * `McpServer` are: this one shows the sentence being written a token at a time, the next one shows
+ * what each of those passes was reading. So the first child of every node is the favourite, and the
+ * favourite chain is pinned to `timed` -> `out` -> `.`. Editing the head of `TREE`, or the head of
+ * its first child, or the head of that one's first child, breaks the pair.
+ *
+ * **The fan is replaced on every pass rather than accumulated.** A tree that kept every road it had
+ * ever drawn would be a picture of the reader's clicks, and the thing being drawn is one pass of the
+ * model: everything it is weighing right now, out of one token. The road not taken is on screen for
+ * exactly as long as it is a road, which is the honest window.
+ *
+ * The counter under the fan is the part that carries the cost claim, and it is why the input is
+ * redrawn in full on every pass rather than only the new chip: what the model reads on pass three is
+ * not the token it just wrote, it is all seven again.
+ *
+ * **The likelihood line is the second thing this figure now teaches.** Take the favourite at every
+ * turn and the sentence you get was still only about a fifth likely, because three near-certainties
+ * multiplied are not a certainty. That number is the product of the scores on screen and nothing
+ * more, which the caption's admission already covers.
  *
  * **The probabilities are illustrative and the caption says so**, the same rule `TokenAttention`
  * follows for its weights. A real distribution runs over the entire vocabulary and is shaped by the
  * sampling settings on top of that. The shape is what is honest here: one clear favourite, a couple
- * of plausible runners-up, and a long tail that is not worth drawing.
+ * of plausible runners-up, and a long tail that is not worth drawing. Nothing in a fan adds to 100
+ * for that reason, which is the line between this figure and `PickTheNext` at the foot of the unit.
+ *
+ * The likelihood a candidate carries is drawn as ink as well as printed: an arm is thicker and less
+ * transparent the likelier its token, the way `TokenAttention` draws its arcs. The colour stays a
+ * token and the intensity is an attribute, so there is no arbitrary `stroke-primary/[0.37]` for the
+ * design system to have an opinion about. No candidate is marked as the winner, which is deliberate:
+ * the fan is a distribution, and the favourite is simply the heaviest arm in it.
  */
 
 /** Machine-shaped, so English in every language, like `TokenAttention`'s sentence. */
 const PROMPT = ['the', 'build', 'failed', 'because', 'it']
 
-type Candidate = {
+/** How many tokens the reader gets to take before the sentence is called finished. */
+const PASSES = 3
+
+type Branch = {
   token: string
   p: number
   /**
-   * What this token would most likely have been followed by. Two each, so the branch view is a tree
-   * and not a comb. Absent means the branch ends there, which only the full stop does.
+   * What the model would weigh next if this token were taken. Absent only at the last pass, where
+   * nothing is drawn from it anyway.
    *
-   * The first entry of the first candidate is the token the *next* pass actually takes, in every
-   * pass. That is what lets the branch view draw one unbroken taken path, so keep them lined up if
-   * you edit either list.
+   * **The first entry is the favourite**, in every list at every depth, so a reader who only ever
+   * takes the top one walks `timed` -> `out` -> `.` and lands on the sentence `TokenAttention`
+   * takes apart. That is the pair, and it is easy to break by reordering one list.
    */
-  then?: [string, string]
+  next?: Branch[]
 }
 
-/** One entry per pass. The first candidate is the one taken, so the list is ordered by score. */
-const PASSES: Candidate[][] = [
-  [
-    { token: 'timed', p: 0.34, then: ['out', 'itself'] },
-    { token: 'was', p: 0.22, then: ['not', 'still'] },
-    { token: 'ran', p: 0.14, then: ['out', 'too'] },
-    { token: 'could', p: 0.09, then: ['not', 'never'] },
-    { token: 'never', p: 0.07, then: ['finished', 'started'] },
-  ],
-  [
-    { token: 'out', p: 0.89, then: ['.', 'after'] },
-    { token: 'out.', p: 0.04, then: ['The', 'It'] },
-    { token: 'itself', p: 0.02, then: ['out', 'off'] },
-    { token: 'again', p: 0.01, then: ['after', 'and'] },
-  ],
-  [
-    { token: '.', p: 0.62 },
-    { token: 'after', p: 0.12, then: ['30', 'two'] },
-    { token: 'on', p: 0.08, then: ['the', 'a'] },
-    { token: 'waiting', p: 0.06, then: ['for', 'on'] },
-  ],
+/** Everything that could follow `the build failed because it`, three passes deep. */
+const TREE: Branch[] = [
+  {
+    token: 'timed',
+    p: 0.34,
+    next: [
+      {
+        token: 'out',
+        p: 0.89,
+        next: [
+          { token: '.', p: 0.62 },
+          { token: 'after', p: 0.12 },
+          { token: 'on', p: 0.08 },
+          { token: 'waiting', p: 0.06 },
+        ],
+      },
+      {
+        token: 'itself',
+        p: 0.04,
+        next: [
+          { token: 'out', p: 0.44 },
+          { token: 'off', p: 0.13 },
+          { token: 'down', p: 0.07 },
+        ],
+      },
+      {
+        token: 'again',
+        p: 0.02,
+        next: [
+          { token: 'after', p: 0.29 },
+          { token: 'and', p: 0.14 },
+          { token: 'on', p: 0.08 },
+        ],
+      },
+    ],
+  },
+  {
+    token: 'was',
+    p: 0.22,
+    next: [
+      {
+        token: 'not',
+        p: 0.31,
+        next: [
+          { token: 'ready', p: 0.24 },
+          { token: 'cached', p: 0.15 },
+          { token: 'found', p: 0.11 },
+        ],
+      },
+      {
+        token: 'still',
+        p: 0.18,
+        next: [
+          { token: 'running', p: 0.41 },
+          { token: 'building', p: 0.17 },
+          { token: 'waiting', p: 0.12 },
+        ],
+      },
+      {
+        token: 'missing',
+        p: 0.12,
+        next: [
+          { token: 'a', p: 0.35 },
+          { token: 'the', p: 0.22 },
+          { token: 'one', p: 0.08 },
+        ],
+      },
+      {
+        token: 'already',
+        p: 0.09,
+        next: [
+          { token: 'running', p: 0.33 },
+          { token: 'gone', p: 0.14 },
+          { token: 'stale', p: 0.09 },
+        ],
+      },
+    ],
+  },
+  {
+    token: 'ran',
+    p: 0.14,
+    next: [
+      {
+        token: 'out',
+        p: 0.57,
+        next: [
+          { token: 'of', p: 0.81 },
+          { token: '.', p: 0.06 },
+          { token: 'again', p: 0.03 },
+        ],
+      },
+      {
+        token: 'too',
+        p: 0.16,
+        next: [
+          { token: 'long', p: 0.47 },
+          { token: 'many', p: 0.19 },
+          { token: 'late', p: 0.1 },
+        ],
+      },
+      {
+        token: 'into',
+        p: 0.11,
+        next: [
+          { token: 'a', p: 0.38 },
+          { token: 'the', p: 0.21 },
+          { token: 'an', p: 0.12 },
+        ],
+      },
+    ],
+  },
+  {
+    token: 'could',
+    p: 0.09,
+    next: [
+      {
+        token: 'not',
+        p: 0.72,
+        next: [
+          { token: 'find', p: 0.26 },
+          { token: 'reach', p: 0.18 },
+          { token: 'resolve', p: 0.13 },
+        ],
+      },
+      {
+        token: 'never',
+        p: 0.11,
+        next: [
+          { token: 'finish', p: 0.31 },
+          { token: 'reach', p: 0.16 },
+          { token: 'resolve', p: 0.09 },
+        ],
+      },
+      {
+        token: 'only',
+        p: 0.05,
+        next: [
+          { token: 'see', p: 0.22 },
+          { token: 'reach', p: 0.14 },
+          { token: 'run', p: 0.11 },
+        ],
+      },
+    ],
+  },
+  {
+    token: 'never',
+    p: 0.07,
+    next: [
+      {
+        token: 'finished',
+        p: 0.38,
+        next: [
+          { token: '.', p: 0.48 },
+          { token: 'the', p: 0.16 },
+          { token: 'at', p: 0.07 },
+        ],
+      },
+      {
+        token: 'started',
+        p: 0.21,
+        next: [
+          { token: '.', p: 0.44 },
+          { token: 'at', p: 0.15 },
+          { token: 'because', p: 0.06 },
+        ],
+      },
+      {
+        token: 'ran',
+        p: 0.09,
+        next: [
+          { token: 'at', p: 0.52 },
+          { token: '.', p: 0.13 },
+          { token: 'the', p: 0.06 },
+        ],
+      },
+    ],
+  },
 ]
 
-const ROW_HEIGHT = 26
-const TOP_PAD = 16
-/** Root, the candidates, then what each of them would have led to. */
-const COLUMN_X = [60, 250, 440]
-/**
- * How far short of a node a limb stops. Labels are centred on their column, so this has to clear the
- * half-width of the longest one at 13px mono (`finished`, eight characters) or the line is drawn
- * through the word and reads as a strikethrough.
- */
-const NODE_GAP = 36
+const ROW_HEIGHT = 30
+const PAD = 16
+const FONT = 13
 
 /**
- * One row per leaf, so a branch with two continuations takes two rows and a branch that ends takes
- * one. Everything else in the drawing hangs off these: a candidate sits at the middle of its own
- * rows, and the root sits at the middle of the lot.
+ * The drawing is five verticals, and every one of them is straight.
+ *
+ * It was a bouquet of beziers first, one curve per candidate running from the root to its own word,
+ * and two things were wrong with it. The curves were all different lengths, so a thick short one and
+ * a thin long one carried the same amount of ink and the weighting could not be read off them; and
+ * the words were right-aligned against the ends of those curves, which left the drawing with no
+ * straight edge anywhere. So it is a spine and a set of arms now: the arms are **parallel and the
+ * same length**, which is what makes their weights comparable at a glance, and the word and the
+ * score each get a column with a hard edge.
  */
-function layout(candidates: Candidate[]) {
-  const rows: { candidate: number; child: string | null }[] = []
-  candidates.forEach((candidate, index) => {
-    if (!candidate.then) {
-      rows.push({ candidate: index, child: null })
-      return
-    }
-    for (const child of candidate.then) {
-      rows.push({ candidate: index, child })
-    }
-  })
+/** Centre of the root token, which is whatever the sentence currently ends on. */
+const ROOT_X = 96
+/** The spine every arm leaves from. */
+const TRUNK_X = 216
+/** Where every arm stops. Same length for all of them, which is the point. */
+const ARM_END = 420
+/**
+ * Right edge of the score column, and the score sits **before** the word rather than after it. Both
+ * columns are then tight against each other: putting the number last leaves a channel between a
+ * three-character word and its score that is wider than either of them. It also reads in the order
+ * the figure argues, weight then word: the arm is the score drawn, the number is the score written,
+ * and the token is what you get for it.
+ */
+const SCORE_RIGHT = 464
+/** Left edge of the word column. */
+const WORD_X = 482
+/** A row's hover and focus box, fixed rather than fitted, so the highlight does not jag row to row. */
+const ROW_LEFT = 430
+const ROW_RIGHT = 552
+/** JetBrains Mono is a 0.6em advance, so this is exact rather than measured. */
+const CHAR = FONT * 0.6
 
-  const y = (row: number) => TOP_PAD + row * ROW_HEIGHT + ROW_HEIGHT / 2
-  const centres = candidates.map((_, index) => {
-    const own = rows.map((row, i) => (row.candidate === index ? i : -1)).filter((i) => i >= 0)
-    return (y(own[0]) + y(own[own.length - 1])) / 2
-  })
-
-  return { rows, y, centres, height: rows.length * ROW_HEIGHT + TOP_PAD * 2 }
+function widthOf(label: string): number {
+  return label.length * CHAR
 }
 
-/** A flat S between two columns, so the branches read as one fan rather than a bundle of elbows. */
-function limb(x1: number, y1: number, x2: number, y2: number): string {
-  const mid = (x1 + x2) / 2
-  return `M ${x1} ${y1} C ${mid} ${y1} ${mid} ${y2} ${x2} ${y2}`
+/**
+ * The tallest fan anywhere in the tree, worked out once. The drawing is sized to it and every fan is
+ * centred inside that, so a pass with four candidates does not resize the figure under the pointer
+ * that is about to click it.
+ */
+const WIDEST = (function widest(branches: Branch[]): number {
+  return branches.reduce(
+    (most, branch) => Math.max(most, branch.next ? widest(branch.next) : 0),
+    branches.length,
+  )
+})(TREE)
+
+const HEIGHT = WIDEST * ROW_HEIGHT + PAD * 2
+const ROOT_Y = HEIGHT / 2
+
+/** Where a fan of `n` sits, centred in the fixed drawing. */
+function rowY(index: number, n: number): number {
+  return (HEIGHT - n * ROW_HEIGHT) / 2 + index * ROW_HEIGHT + ROW_HEIGHT / 2
+}
+
+const EASE = `cubic-bezier(${EASE_QUIET.join(', ')})`
+
+/**
+ * Whole percent, with a floor. Three scores multiplied get small fast, and a road the reader just
+ * walked printed as `0%` says the thing on screen never happened.
+ */
+function percent(p: number): string {
+  const whole = Math.round(p * 100)
+  return whole === 0 && p > 0 ? '<1%' : `${whole}%`
 }
 
 export function NextToken() {
   const { t } = useTranslation('step1')
-  const [taken, setTaken] = useState(0)
+  const titleId = useId()
+  const still = useReducedMotion()
 
-  const written = PASSES.slice(0, taken).map((pass) => pass[0].token)
+  /** Which candidate was taken on each pass so far, by index into that pass's fan. */
+  const [path, setPath] = useState<number[]>([])
+  /** The candidate on its way to the root slot, while the fan it came from clears. */
+  const [leaving, setLeaving] = useState<number | null>(null)
+  /** True for one frame after a commit, so the new fan has something to transition out of. */
+  const [entering, setEntering] = useState(false)
+  const [focused, setFocused] = useState<number | null>(null)
+  const timer = useRef<number | null>(null)
+  /**
+   * Set when the take came from the keyboard. Committing unmounts the group that was focused, which
+   * would drop focus to the body and leave a keyboard reader with nowhere in the figure to be, so
+   * the next fan takes it instead.
+   */
+  const restore = useRef(false)
+
+  useEffect(() => {
+    return () => {
+      if (timer.current !== null) {
+        clearTimeout(timer.current)
+      }
+    }
+  }, [])
+
+  // Two frames rather than one: React commits the hidden state synchronously, and a single rAF can
+  // still run before the browser has painted it, which would drop the transition entirely.
+  useEffect(() => {
+    if (!entering) {
+      return
+    }
+    let inner = 0
+    const outer = requestAnimationFrame(() => {
+      inner = requestAnimationFrame(() => {
+        setEntering(false)
+      })
+    })
+    return () => {
+      cancelAnimationFrame(outer)
+      cancelAnimationFrame(inner)
+    }
+  }, [entering])
+
+  useEffect(() => {
+    if (!restore.current) {
+      return
+    }
+    restore.current = false
+    const next =
+      document.querySelector<SVGGElement>('#next-token-fan-node-0') ??
+      document.querySelector<HTMLButtonElement>('#next-token-restart')
+    next?.focus()
+  }, [path])
+
+  /** The branches taken so far, and the fan hanging off the last of them. */
+  const taken: Branch[] = []
+  let fan: Branch[] = TREE
+  for (const index of path) {
+    const branch = fan[index]
+    taken.push(branch)
+    fan = branch.next ?? []
+  }
+
+  const written = taken.map((branch) => branch.token)
   const sofar = [...PROMPT, ...written]
-  const done = taken === PASSES.length
-  const candidates = done ? [] : PASSES[taken]
+  const done = path.length === PASSES
+  const head = sofar[sofar.length - 1]
+  const strongest = Math.max(...fan.map((branch) => branch.p), 0.0001)
+
+  /** The product of what was taken, which is what the whole sentence was worth before it existed. */
+  const likelihood = taken.reduce((product, branch) => product * branch.p, 1)
+
+  const ms = (seconds: number) => (still ? 0 : seconds * 1000)
+
+  const commit = (index: number) => {
+    setPath((walked) => [...walked, index])
+    setLeaving(null)
+    setEntering(true)
+    setFocused(null)
+  }
+
+  const take = (index: number, byKey = false) => {
+    if (done || leaving !== null) {
+      return
+    }
+    restore.current = byKey
+    // Dropped before anything moves. The ring is drawn around the row rather than around the word,
+    // so a ring left on the candidate that is travelling to the root slot flies there with it.
+    setFocused(null)
+    if (still) {
+      commit(index)
+      return
+    }
+    setLeaving(index)
+    timer.current = window.setTimeout(() => {
+      timer.current = null
+      commit(index)
+    }, ms(DURATION.state))
+  }
+
+  const restart = () => {
+    if (timer.current !== null) {
+      clearTimeout(timer.current)
+      timer.current = null
+    }
+    setPath([])
+    setLeaving(null)
+    setFocused(null)
+    setEntering(true)
+  }
 
   return (
     <figure id="next-token" data-component="NextToken" className="my-8 flex flex-col gap-3">
@@ -134,22 +455,30 @@ export function NextToken() {
           aria-label={t('next-token.description', { text: sofar.join(' ') })}
           className="flex flex-wrap items-center gap-1"
         >
-          {sofar.map((token, index) => (
-            <span
-              key={`${token}-${index}`}
-              id={`next-token-input-${index}`}
-              data-component="NextToken"
-              data-state={index < PROMPT.length ? 'given' : 'written'}
-              className={cn(
-                'rounded border px-1.5 py-0.5 font-mono text-sm',
-                index < PROMPT.length
-                  ? 'border-border bg-muted text-muted-foreground'
-                  : 'border-primary/40 bg-primary/15 text-foreground',
-              )}
-            >
-              {token}
-            </span>
-          ))}
+          {sofar.map((token, index) => {
+            const fresh = index === sofar.length - 1 && index >= PROMPT.length && entering
+            return (
+              <span
+                key={`${token}-${index}`}
+                id={`next-token-input-${index}`}
+                data-component="NextToken"
+                data-state={index < PROMPT.length ? 'given' : 'written'}
+                className={cn(
+                  'rounded border px-1.5 py-0.5 font-mono text-sm',
+                  index < PROMPT.length
+                    ? 'border-border bg-muted text-muted-foreground'
+                    : 'border-primary/40 bg-primary/15 text-foreground',
+                )}
+                style={{
+                  opacity: fresh ? 0 : 1,
+                  transform: fresh ? 'scale(0.85)' : 'scale(1)',
+                  transition: `opacity ${ms(DURATION.state)}ms ${EASE}, transform ${ms(DURATION.state)}ms ${EASE}`,
+                }}
+              >
+                {token}
+              </span>
+            )
+          })}
           {!done ? (
             <span
               id="next-token-input-pending"
@@ -161,180 +490,274 @@ export function NextToken() {
           ) : null}
         </div>
 
-        {!done ? (
-          <ul id="next-token-candidates" data-component="NextToken" className="flex flex-col gap-1">
-            {candidates.map((candidate, index) => (
-              <li
-                key={candidate.token}
-                id={`next-token-candidate-${index}`}
-                data-component="NextToken"
-                data-state={index === 0 ? 'taken' : 'passed'}
-                className="grid grid-cols-[5rem_1fr_3rem] items-center gap-2"
-              >
-                <span
-                  id={`next-token-candidate-${index}-token`}
-                  data-component="NextToken"
-                  className={cn(
-                    'truncate text-right font-mono text-sm',
-                    index === 0 ? 'text-foreground' : 'text-muted-foreground',
-                  )}
-                >
-                  {candidate.token}
-                </span>
-                <span
-                  id={`next-token-candidate-${index}-bar`}
-                  data-component="NextToken"
-                  className="flex h-2 items-center"
-                >
-                  <span
-                    className={cn(
-                      'h-full min-w-[3px] rounded-sm',
-                      index === 0 ? 'bg-primary' : 'bg-primary/30',
-                    )}
-                    style={{ width: `${candidate.p * 100}%` }}
-                  />
-                </span>
-                <span
-                  id={`next-token-candidate-${index}-score`}
-                  data-component="NextToken"
-                  className="text-muted-foreground text-right font-mono text-xs tabular-nums"
-                >
-                  {Math.round(candidate.p * 100)}%
-                </span>
-              </li>
-            ))}
-          </ul>
-        ) : null}
-
         {/*
-          What the other four scores were worth. The taken path is drawn solid and everything else
-          muted, so the shape of the argument is one road through a fan of roads that were all
-          available. It reads the same at every pass, which is why the geometry is derived rather
-          than placed: pass three has a branch that ends, and the rows absorb that on their own.
+          One pass of the model: the token it is reading from, and everything it is weighing against
+          it. Taking one clears the fan and grows the next, so the road not taken is on screen for
+          exactly as long as it is a road.
         */}
         {!done ? (
-          <div id="next-token-tree" data-component="NextToken" className="border-border border-t pt-3">
-            {(() => {
-              const { rows, y, centres, height } = layout(candidates)
-              const rootY = height / 2
-              return (
-                <svg
-                  id="next-token-tree-svg"
-                  data-component="NextToken"
-                  viewBox={`0 0 640 ${height}`}
-                  role="img"
-                  aria-label={t('next-token.branches.description')}
-                  className="h-auto w-full"
-                >
-                  <g fill="none" strokeWidth="1.5">
-                    {candidates.map((candidate, index) => (
-                      <path
-                        key={`limb-${candidate.token}`}
-                        id={`next-token-tree-limb-${index}`}
-                        data-component="NextToken"
-                        d={limb(COLUMN_X[0] + 22, rootY, COLUMN_X[1] - NODE_GAP, centres[index])}
-                        className={index === 0 ? 'stroke-primary' : 'stroke-border'}
-                      />
-                    ))}
-                    {rows.map((row, index) =>
-                      row.child === null ? null : (
-                        <path
-                          key={`twig-${index}`}
-                          id={`next-token-tree-twig-${index}`}
-                          data-component="NextToken"
-                          d={limb(
-                            COLUMN_X[1] + NODE_GAP,
-                            centres[row.candidate],
-                            COLUMN_X[2] - NODE_GAP,
-                            y(index),
-                          )}
-                          className={
-                            row.candidate === 0 && rows[index - 1]?.candidate !== 0
-                              ? 'stroke-primary'
-                              : 'stroke-border'
-                          }
-                        />
-                      ),
-                    )}
-                  </g>
+          <div id="next-token-fan" data-component="NextToken" className="border-border border-t pt-3">
+            {/*
+              role="group" rather than role="img", the same call `TokenAttention` makes: the
+              candidates below are real controls, and an img role would take them away from a screen
+              reader along with the rest of the subtree.
+            */}
+            <svg
+              id="next-token-fan-svg"
+              data-component="NextToken"
+              viewBox={`0 0 640 ${HEIGHT}`}
+              role="group"
+              aria-labelledby={titleId}
+              className="h-auto w-full"
+            >
+              <title id={titleId} data-component="NextToken">
+                {t('next-token.branches.description')}
+              </title>
 
-                  <text
-                    id="next-token-tree-root"
-                    data-component="NextToken"
-                    x={COLUMN_X[0]}
-                    y={rootY}
-                    fontSize="13"
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    className="fill-foreground font-mono"
-                  >
-                    {sofar[sofar.length - 1]}
-                  </text>
+              {/* The spine, which is structure rather than weighting, so it stays a hairline and
+                  neutral. It fades as a whole; only the arms are drawn on. */}
+              <g
+                id="next-token-fan-spine"
+                data-component="NextToken"
+                fill="none"
+                strokeWidth="1"
+                strokeLinecap="round"
+                className="stroke-border"
+                style={{
+                  opacity: entering || leaving !== null ? 0 : 1,
+                  transition: `opacity ${ms(DURATION.state)}ms ${EASE}`,
+                }}
+              >
+                <path d={`M ${ROOT_X + widthOf(head) / 2 + 12} ${ROOT_Y} H ${TRUNK_X}`} />
+                {fan.length > 1 ? (
+                  <path
+                    d={`M ${TRUNK_X} ${rowY(0, fan.length)} V ${rowY(fan.length - 1, fan.length)}`}
+                  />
+                ) : null}
+              </g>
 
-                  {candidates.map((candidate, index) => (
-                    <text
-                      key={`node-${candidate.token}`}
-                      id={`next-token-tree-node-${index}`}
+              {/* One arm per candidate, all the same length and all parallel, so the only thing that
+                  differs between them is how heavily they are drawn, which is the score. */}
+              {/* Butt caps rather than round: an arm meets the spine flush this way, and a rounded
+                  cap on a four-unit stroke turns the heavier arms into floating capsules. */}
+              <g fill="none" strokeLinecap="butt">
+                {fan.map((branch, index) => {
+                  const intensity = branch.p / strongest
+                  return (
+                    <path
+                      key={`arm-${branch.token}-${index}`}
+                      id={`next-token-fan-arm-${index}`}
                       data-component="NextToken"
-                      data-state={index === 0 ? 'taken' : 'passed'}
-                      x={COLUMN_X[1]}
-                      y={centres[index]}
-                      fontSize="13"
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      className={cn(
-                        'font-mono',
-                        index === 0 ? 'fill-primary font-semibold' : 'fill-muted-foreground',
-                      )}
-                    >
-                      {candidate.token}
-                    </text>
-                  ))}
+                      d={`M ${TRUNK_X} ${rowY(index, fan.length)} H ${ARM_END}`}
+                      pathLength="1"
+                      strokeDasharray="1"
+                      strokeDashoffset={entering || leaving !== null ? 1 : 0}
+                      strokeWidth={1.5 + intensity * 3}
+                      strokeOpacity={0.3 + intensity * 0.6}
+                      className="stroke-primary"
+                      style={{
+                        // Drawn on over a panel's worth of time and staggered, because arriving is
+                        // the part worth watching; retracted over a state's worth and all together,
+                        // so the arms and the spine they hang off leave as one thing.
+                        transition: `stroke-dashoffset ${ms(
+                          entering ? DURATION.panel : DURATION.state,
+                        )}ms ${EASE} ${entering ? index * 35 : 0}ms`,
+                      }}
+                    />
+                  )
+                })}
+              </g>
 
-                  {rows.map((row, index) =>
-                    row.child === null ? null : (
-                      <text
-                        key={`leaf-${index}`}
-                        id={`next-token-tree-leaf-${index}`}
+              {/*
+                The token the fan hangs off. It fades as a candidate flies onto the same spot, and
+                faster than that candidate travels, so the two never sit on top of each other at full
+                strength. On the frame after the commit it is simply the token that arrived.
+              */}
+              <text
+                id="next-token-fan-root"
+                data-component="NextToken"
+                x={ROOT_X}
+                y={ROOT_Y}
+                fontSize={FONT}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                className="fill-foreground font-mono"
+                style={{
+                  opacity: leaving === null ? 1 : 0,
+                  transition: `opacity ${ms(DURATION.tap)}ms ${EASE}`,
+                }}
+              >
+                {head}
+              </text>
+
+              {fan.map((branch, index) => {
+                const gone = leaving !== null && leaving !== index
+                const flying = leaving === index
+                const score = percent(branch.p)
+                return (
+                  <g
+                    key={`node-${branch.token}-${index}`}
+                    id={`next-token-fan-node-${index}`}
+                    data-component="NextToken"
+                    data-state={flying ? 'taken' : index === 0 ? 'favourite' : 'idle'}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={t('next-token.candidate', { token: branch.token, score })}
+                    onClick={() => {
+                      take(index)
+                    }}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault()
+                        take(index, true)
+                      }
+                    }}
+                    onFocus={() => {
+                      setFocused(index)
+                    }}
+                    onBlur={() => {
+                      setFocused(null)
+                    }}
+                    className={cn(
+                      'group outline-none',
+                      // Nothing in the fan is aimable while one of them is on its way out, so the
+                      // hover backing cannot light up on a row that is about to be replaced.
+                      leaving === null ? 'cursor-pointer' : 'pointer-events-none',
+                    )}
+                    style={{
+                      // The taken candidate lands with its word centred on the root, so the text that
+                      // replaces it on the next frame is already in the right place and nothing jumps.
+                      transform: flying
+                        ? `translate(${ROOT_X - (WORD_X + widthOf(branch.token) / 2)}px, ${ROOT_Y}px)`
+                        : `translate(0px, ${rowY(index, fan.length)}px)`,
+                      opacity: entering || gone ? 0 : 1,
+                      transition:
+                        `transform ${ms(DURATION.state)}ms ${EASE}, ` +
+                        `opacity ${ms(entering ? DURATION.panel : DURATION.state)}ms ${EASE} ${
+                          entering ? index * 35 : 0
+                        }ms`,
+                    }}
+                  >
+                    <rect
+                      id={`next-token-fan-node-${index}-hit`}
+                      data-component="NextToken"
+                      x={ROW_LEFT}
+                      y={-ROW_HEIGHT / 2 + 2}
+                      width={ROW_RIGHT - ROW_LEFT}
+                      height={ROW_HEIGHT - 4}
+                      rx="6"
+                      className="fill-muted opacity-0 transition-opacity group-hover:opacity-100"
+                    />
+                    {/* An SVG group takes no box shadow, so a keyboard user gets a drawn ring or none. */}
+                    {focused === index ? (
+                      <rect
+                        id={`next-token-fan-node-${index}-focus`}
                         data-component="NextToken"
-                        x={COLUMN_X[2]}
-                        y={y(index)}
-                        fontSize="13"
-                        textAnchor="middle"
-                        dominantBaseline="middle"
-                        className={cn(
-                          'font-mono',
-                          row.candidate === 0 && rows[index - 1]?.candidate !== 0
-                            ? 'fill-primary'
-                            : 'fill-muted-foreground/70',
-                        )}
-                      >
-                        {row.child}
-                      </text>
-                    ),
-                  )}
-                </svg>
-              )
-            })()}
+                        x={ROW_LEFT - 3}
+                        y={-ROW_HEIGHT / 2 - 1}
+                        width={ROW_RIGHT - ROW_LEFT + 6}
+                        height={ROW_HEIGHT + 2}
+                        rx="9"
+                        fill="none"
+                        strokeWidth="3"
+                        className="stroke-ring"
+                      />
+                    ) : null}
+                    {/* Written before the word, which is also where it sits, so the DOM order a
+                        screen reader walks is the order the row reads in. */}
+                    <text
+                      id={`next-token-fan-node-${index}-score`}
+                      data-component="NextToken"
+                      x={SCORE_RIGHT}
+                      y={0}
+                      fontSize="11"
+                      textAnchor="end"
+                      dominantBaseline="middle"
+                      className="fill-muted-foreground pointer-events-none font-mono"
+                      style={{
+                        opacity: flying ? 0 : 1,
+                        transition: `opacity ${ms(DURATION.tap)}ms ${EASE}`,
+                      }}
+                    >
+                      {score}
+                    </text>
+                    <text
+                      id={`next-token-fan-node-${index}-token`}
+                      data-component="NextToken"
+                      x={WORD_X}
+                      y={0}
+                      fontSize={FONT}
+                      textAnchor="start"
+                      dominantBaseline="middle"
+                      className="fill-foreground pointer-events-none font-mono"
+                    >
+                      {branch.token}
+                    </text>
+                  </g>
+                )
+              })}
+            </svg>
           </div>
-        ) : null}
+        ) : (
+          /*
+            What three choices were worth, multiplied out. Machine-shaped throughout, so the tokens,
+            the signs and the numbers are all inline: the line is arithmetic rather than a sentence.
+          */
+          <div
+            id="next-token-recap"
+            data-component="NextToken"
+            className="border-border flex flex-wrap items-center gap-x-2 gap-y-1 border-t pt-3 font-mono text-sm"
+          >
+            {taken.map((branch, index) => (
+              <span
+                key={`recap-${branch.token}-${index}`}
+                id={`next-token-recap-${index}`}
+                data-component="NextToken"
+                className="text-muted-foreground"
+              >
+                {index > 0 ? <span aria-hidden="true">{'× '}</span> : null}
+                <span className="text-foreground">{branch.token}</span> {percent(branch.p)}
+              </span>
+            ))}
+            <span
+              id="next-token-recap-total"
+              data-component="NextToken"
+              className="text-primary tabular-nums"
+            >
+              = {percent(likelihood)}
+            </span>
+          </div>
+        )}
 
         <div
           id="next-token-controls"
           data-component="NextToken"
           className="flex flex-wrap items-center gap-3"
         >
+          {/* Still here so a presenter can walk the paired sentence out in three clicks, and so a
+              reader who does not want to choose is not stuck. */}
           <Button
-            id="next-token-advance"
+            id="next-token-favourite"
             data-component="NextToken"
             type="button"
             size="sm"
-            variant={done ? 'outline' : 'default'}
+            disabled={done}
             onClick={() => {
-              setTaken(done ? 0 : taken + 1)
+              take(0)
             }}
           >
-            {t(done ? 'next-token.restart' : 'next-token.advance')}
+            {t('next-token.favourite')}
+          </Button>
+          <Button
+            id="next-token-restart"
+            data-component="NextToken"
+            type="button"
+            size="sm"
+            variant="outline"
+            disabled={path.length === 0}
+            onClick={restart}
+          >
+            {t('next-token.restart')}
           </Button>
 
           {/* The cost line. It counts what went in on this pass, not what came out of it. */}
@@ -345,10 +768,23 @@ export function NextToken() {
             className="text-muted-foreground text-xs"
           >
             {done
-              ? t('next-token.done', { passes: PASSES.length })
-              : t('next-token.pass', { pass: taken + 1, read: sofar.length })}
+              ? t('next-token.done', { passes: PASSES })
+              : t('next-token.pass', { pass: path.length + 1, read: sofar.length })}
           </p>
         </div>
+
+        {/* Held at a fixed height so the panel does not jump on the first pick. */}
+        <p
+          id="next-token-likelihood"
+          data-component="NextToken"
+          className="text-muted-foreground min-h-4 text-xs"
+        >
+          {path.length === 0
+            ? ''
+            : t(done ? 'next-token.likelihood-done' : 'next-token.likelihood', {
+                likelihood: percent(likelihood),
+              })}
+        </p>
       </div>
 
       <figcaption

@@ -3,5 +3,21 @@
 
   "change.title": "Change management",
   "expectations.title": "Expectation management",
-  "impostor.title": "Impostor syndrome"
+  "impostor.title": "Impostor syndrome",
+
+  "pipeline-shift.description": "The same five stages twice, drawn on one scale. Above, the way it ran when a person typed the code: deciding, waiting, a wide block of writing, verifying, releasing. Below, the way it runs with agents: writing is a sliver run as three lanes at once, verifying is the widest solid block, and both waiting stages are wider than they were. Under that second row, a dashed strip shows the verifying three lanes need. It runs well past the block above it, and a mark on it shows where the checking actually stopped.",
+  "pipeline-shift.traditional": "Traditional",
+  "pipeline-shift.agentic": "With an agent",
+  "pipeline-shift.decide": "decide",
+  "pipeline-shift.wait": "wait",
+  "pipeline-shift.write": "write",
+  "pipeline-shift.check": "verify",
+  "pipeline-shift.ship": "release",
+  "pipeline-shift.work": "hands on the work",
+  "pipeline-shift.process": "waiting on the process",
+  "pipeline-shift.write-many": "write x3",
+  "pipeline-shift.bottleneck": "bottleneck",
+  "pipeline-shift.checked": "checked",
+  "pipeline-shift.needed": "what three lanes needed",
+  "pipeline-shift.caption": "The proportions are illustrative rather than measured."
 }

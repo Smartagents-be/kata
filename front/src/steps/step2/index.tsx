@@ -18,6 +18,7 @@ import { WorkflowWeights } from './WorkflowWeights'
 import { Workshop } from './Workshop'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
+import { workflowsQuiz } from './quiz'
 import evolution from './units/evolution.html?raw'
 import setup from './units/setup.html?raw'
 import engineering from './units/engineering.html?raw'
@@ -157,6 +158,11 @@ const step2: Step = {
         'workflow-timeline': <WorkflowTimeline />,
         'workflow-weights': <WorkflowWeights />,
       },
+      // The step's only quiz, and it sits here because the unit's argument is the choice between
+      // the four workflows rather than the four themselves, which is the one thing in step 2 a
+      // question can ask for. It renders its own heading under the closing figure, so the HTML
+      // needs no `ui:quiz.title` the way a unit with a task card does.
+      quiz: workflowsQuiz,
     },
     {
       id: 'enablement',

@@ -51,7 +51,7 @@
   "workshop.flag.statement.help": "This one is a plan-mode exercise, so resist typing the fix. Run mvn test -Pchallenge, then open plan mode and ask Claude to read the failing tests and plan the implementation of MemberStatements.forTier before writing anything. Check the plan against the tests yourself: it should account for filtering by tier, the loans that cost nothing, the media breakdown and the lost item, not just the first assertion. The steering lesson is why you stop it at the first gap rather than let it guess, and the engineering lesson is why the domain already hands you the fee calculation. Approve, let it implement, and stop when the tests are green. Then curl localhost:8080/api/loans/statement/STUDENT and the code is in the response.",
   "workshop.flag.native.label": "Native image",
   "workshop.flag.native.hint": "Plan a native image of step 2 that keeps its flag resource. A one-shot compiles but comes up empty.",
-  "workshop.flag.native.help": "This is a plan-mode exercise like the statement flag, and a native build punishes guessing because each one costs minutes, so resist one-shotting it. In plan mode, have Claude plan a native image of step 2 pointed at Step2Application, not the pinned step 1 main, using the GraalVM native-maven-plugin and the ahead-of-time step. Build it once and it comes up short: the flag lives in a classpath resource, and a native image keeps only the resources it is told to keep, so the plain build drops it and prints a miss instead of the code. That miss is the spec for the second half. Plan the resource hint it asks for, a RuntimeHintsRegistrar wired with @ImportRuntimeHints that keeps the file in the image, then build once more. This is the goals lesson's long-running outcome, so run it in a git worktree and read the diff, not the agent's word that it is done.",
+  "workshop.flag.native.help": "This is a plan-mode exercise like the statement flag, and a native build punishes guessing because each one costs minutes, so resist one-shotting it. In plan mode, have Claude plan a native image of step 2 using the GraalVM native-maven-plugin and the ahead-of-time step. Build it once and it comes up short: the flag lives in a classpath resource, and a native image keeps only the resources it is told to keep, so the plain build drops it and prints a miss instead of the code. That miss is the spec for the second half. Plan the resource hint it asks for, a RuntimeHintsRegistrar wired with @ImportRuntimeHints that keeps the file in the image, then build once more. This is the goals lesson's long-running outcome, so run it in a git worktree and read the diff, not the agent's word that it is done.",
 
   "where.title": "Sort this project against the figure",
   "where.description": "The loans module in kata/step2/java is laid out its own way. Work out where its packages would sit in the shape above, and move nothing: the workshop needs this project exactly as it is.",
@@ -187,5 +187,26 @@
   "domain-tree.properties.note": "points Liquibase at the changelog below",
   "domain-tree.changelog.note": "empty until the first change",
   "domain-tree.test.note": "tests mirror the package they cover",
-  "domain-tree.author.note": "the next domain, same three packages"
+  "domain-tree.author.note": "the next domain, same three packages",
+
+  "quiz.small-change-no-spec.question": "Your team keeps one spec file per feature and you follow it. Today's list is a log line in the wrong place and a column that should have been nullable. Writing the specs would take longer than the changes do. What is the right call?",
+  "quiz.small-change-no-spec.nudge": "Make them naive, straight into the code. Nudging is not restructuring, and a change that decides nothing does not earn a workflow.",
+  "quiz.small-change-no-spec.consistency": "Write the specs anyway. A workflow you apply only when you feel like it stops being a workflow, and the exceptions are where the drift starts.",
+  "quiz.small-change-no-spec.batch": "Hold the small changes back until there are enough of them to cover in one spec, so the file count stays sensible.",
+  "quiz.small-change-no-spec.audit": "Make the changes, then run an audit over the repository, which is the pass that catches whatever the small ones broke.",
+  "quiz.small-change-no-spec.explanation": "A spec is worth writing when something is being decided. A log line and a nullable column decide nothing, so the spec is cost with no answer in it.",
+
+  "quiz.plan-mode-interview.question": "You stop asking for changes and start asking for a plan first, every time. The work that comes back is better, which surprises you, because you approve most of the plans with barely an edit. Where did the gain come from?",
+  "quiz.plan-mode-interview.interview": "The plan interviewed you. Its questions were the decisions you had skipped, and you answered them before a line of code existed.",
+  "quiz.plan-mode-interview.thinking": "The model reasons for longer before it writes, and that extra thinking comes back to you as a better first draft.",
+  "quiz.plan-mode-interview.document": "The plan stays in the repository beside the code, so the next session starts from what this one decided.",
+  "quiz.plan-mode-interview.review": "Reading a plan is faster than reading a diff, so you catch the mistakes earlier and it costs you less to say no.",
+  "quiz.plan-mode-interview.explanation": "You approve most plans because answering the questions was the work. The agent asks which tier gets a grace period and what happens when the list comes back empty, and the workflow puts you back in the design.",
+
+  "quiz.audit-as-essay.question": "You ask an agent whether a module is complete, secure and consistent with the rest of the repository. Back come four pages of prose. You read it once, agree with most of it, and a week later you cannot remember which parts you dealt with. What went wrong?",
+  "quiz.audit-as-essay.format": "You did not ask for a format. A table holds it down to what you can act on, and it lives in the repository, so next week it still says which row you were on.",
+  "quiz.audit-as-essay.scope": "You asked about three things at once. Run completeness, security and style as separate passes and each answer comes back short enough to act on.",
+  "quiz.audit-as-essay.memory": "The session ended and the reading went with it. Paste the report back in at the start of the next one and carry on from where it stopped.",
+  "quiz.audit-as-essay.model": "Prose is what a model falls back on when it is not confident. A narrower question would have got you a narrower answer.",
+  "quiz.audit-as-essay.explanation": "An audit is a file in your repository, so it diffs and gets reviewed the way the code does. Ask for the topic, where it lives, how solid it is and what to do about it, and you have rows to work rather than paragraphs to re-read."
 }
