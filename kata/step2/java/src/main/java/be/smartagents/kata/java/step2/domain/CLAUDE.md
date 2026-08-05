@@ -10,7 +10,8 @@ carries what is true of these four types and nothing else.
   refactor it, do not add the tests it is missing, and do not split it into smaller methods. The
   `workshop` unit asks the student to do exactly that against `mvn verify -Pgraded`, and a tidy
   version of it ends the exercise.
-- Money is `BigDecimal` and never `double`. A rounding change here shows up as a wrong fee three
+- Money is a whole number of cents in a `long`, never a floating point type. `assess` returns cents
+  and every total built on it stays in cents. A rounding change here shows up as a wrong fee three
   layers away, in a response nobody is looking at.
 - Nothing in this package imports from `adapter`, `web` or `config`. The dependency points inwards,
   which is what makes the domain testable without a Spring context.

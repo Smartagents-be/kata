@@ -36,8 +36,8 @@ import workshop from './units/workshop.html?raw'
  * order: small steps, taken often, on something that already runs.
  *
  * `evolution`, `setup`, `engineering`, `patterns`, `workflows`, `enablement` and `parallel` each
- * carry a drawing, and the
- * closing `workshop` unit carries the flag board, which is why this registry is .tsx. The board is
+ * carry a drawing, `engineering` closes on an ungraded task card, and `setup` and the closing
+ * `workshop` unit each carry a flag board, which is why this registry is .tsx. Both boards are
  * browser-graded, so the step still talks to the service only through the `mvn verify -Pgraded` run
  * the student does outside the app.
  */
@@ -184,7 +184,7 @@ const step2: Step = {
       title: 'parallel.title',
       html: parallel,
       // One slot, and it closes the unit rather than sitting under the first section: the drawing
-      // names all three arrangements, so under `One agent at a time` it would spend two of them
+      // names all four arrangements, so under `One agent at a time` it would spend three of them
       // early. Nothing below it reads it back, which is why its rows carry their own notes.
       inlineFigures: { 'agents-at-once': <AgentsAtOnce /> },
     },

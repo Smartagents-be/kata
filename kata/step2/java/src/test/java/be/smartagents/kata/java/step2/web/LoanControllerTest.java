@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
  *
  * <p>The application is named explicitly: {@code @SpringBootTest} only searches upwards from its own
  * package for a configuration, and step 2's {@link Step2Application} sits beside this test's package,
- * not above it. Naming it also keeps the boot to step 2's slice, without step 1 on the context.
+ * not above it.
  */
 @Tag("challenge")
 @SpringBootTest(classes = Step2Application.class)

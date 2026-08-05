@@ -2,8 +2,9 @@ import { FileCode, FileJson, FileText, Folder, type LucideIcon } from 'lucide-re
 import { useTranslation } from 'react-i18next'
 
 /**
- * A folder layout drawn as a tree. Step 2 draws two of them, `ProjectTree` and `DomainTree`, so the
- * rendering lives here and each figure supplies nothing but its own data and its own block id.
+ * A folder layout drawn as a tree. Step 2 draws four of them, `ProjectTree`, `SkillTree` and
+ * `HookTree` in `setup` and `DomainTree` in `engineering`, so the rendering lives here and each
+ * figure supplies nothing but its own data and its own block id.
  *
  * The paths are the same in every language; the notes beside them are message keys into this step's
  * namespace.

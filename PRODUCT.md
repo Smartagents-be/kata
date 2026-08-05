@@ -85,12 +85,13 @@ backend down).
   hidden catalogue flag, hardening the loans module for the graded flags,
   implementing `MemberStatements.forTier`), ship the framing and the spec, never
   the solution.
-- Backend: each step has its own `@SpringBootApplication` scoped to its own
-  package by the default component scan, so running one never drags in the
-  other. `spring-boot-maven-plugin` pins `<mainClass>` to `Step1Application`,
-  and step 2 is run by naming `Step2Application` explicitly. `@SpringBootTest`
-  in step 2 must name the config class explicitly too, since
-  `Step2Application` sits beside its tests rather than above them.
+- Backend: each step is a standalone Maven project with its own
+  `@SpringBootApplication`, scoped to its own package by the default component
+  scan, so running one never drags in another. A project holds one main class,
+  so the Boot plugin needs no `<mainClass>` pin and plain `mvn spring-boot:run`
+  from `kata/stepN/java` starts that step. `@SpringBootTest` in step 2 must
+  name the config class explicitly, since `Step2Application` sits beside its
+  tests rather than above them.
 - Frontend: a `shared` shell plus one folder per step; steps may import from
   `shared`, never the reverse. Content is HTML-per-unit with `data-i18n` keys,
   i18next namespaces per step, and a guided/self `data-audience` attribute that

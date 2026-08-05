@@ -26,7 +26,7 @@ import org.w3c.dom.NodeList;
  */
 class FlagRevealIT {
 
-    /** Line coverage the domain must reach, as a percentage. */
+    /** Line coverage the module must reach, as a percentage. */
     private static final double COVERAGE_FLOOR = 90.0;
 
     /** No method may score above this on cyclomatic complexity. */
@@ -68,7 +68,7 @@ class FlagRevealIT {
         System.out.println();
 
         assertThat(coverageMet)
-            .as("line coverage of the domain is at least %.1f%%", COVERAGE_FLOOR)
+            .as("line coverage of the module is at least %.1f%%", COVERAGE_FLOOR)
             .isTrue();
         assertThat(complexityMet)
             .as("no method scores above %d on cyclomatic complexity", COMPLEXITY_CEILING)

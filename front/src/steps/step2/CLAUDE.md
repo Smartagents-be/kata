@@ -21,7 +21,7 @@ habit each; `evolution` opens the step and carries none, because its job is to p
 order: a version now costs an hour, so the step you hand over gets small and you take many of them.
 `workflows` is outside that count too, and deliberately so: it carries four ways of
 handing work over rather than one habit, and its argument is the choice between them. `parallel` is
-outside it on the same reasoning, three arrangements of agents rather than one habit. `enablement`
+outside it on the same reasoning, four arrangements of agents rather than one habit. `enablement`
 is the fourth one outside it, for its own reason: it is about what has to be true around you rather
 than about a habit you practise.
 
@@ -35,10 +35,12 @@ weight (a coverage floor and a complexity ceiling wired into `mvn verify`, the p
 hundred percent coverage from tests asserting nothing is green and worthless, and an agent
 over-commenting and under-logging). Most of it was a third telling: `engineering`'s `Quality gates`
 owns the bar in the build, `patterns` owns turning a repeated correction into a skill, `setup` owns
-`CLAUDE.md`, and `goals` owns the check that answers yes or no. **The proxy trap is the one argument
-that had no second home**, and it now survives only inside `workshop.flag.honest.help`, which states
-it without attributing it to a unit. That is the thing to notice before writing a section about
-metrics anywhere in the step. **`engineering.quality-gates.1` now closes on the trap**, two sentences
+`CLAUDE.md`, and `goals` owns the check that answers yes or no. **Over-commenting and under-logging
+is the one argument that had no second home**, and it survives nowhere in the course: neither term
+is in a unit, in a board hint or in a skill file, in either language. The proxy trap went the other
+way and has three homes, `workshop.honest.1`, `engineering.quality-gates.1` and
+`workshop.flag.honest.help`, so it needs no fourth. That is the thing to notice before writing a
+section about metrics anywhere in the step. **`engineering.quality-gates.1` now closes on the trap**, two sentences
 saying a metric is a proxy an agent will satisfy and that the gate worth wiring in is the expensive
 one to fake. It carries no example on purpose: `workshop.honest.1` keeps the hundred percent of lines
 under tests asserting nothing, and the mutation answer to it, so keep the plant and the payoff apart.
@@ -654,7 +656,10 @@ bar nor the goal. It named `quality` until that unit was cut, and it has also **
 habits** for the same reason the positional reference went: "the six habits" was a number an
 insertion or a cut could falsify silently, and cutting `quality` did. Positional references to
 neighbouring units break silently on an insertion, so
-name the unit. It ships a small loans domain in `kata/step2/java` that is green but un-hardened, and
+name the unit. **`goals` closes by naming this unit back**, one sentence on the end of
+`goals.own-worktree.2` rather than a paragraph of its own, which is the shape `t-shaped`'s
+`engineering` pointer already uses: the goal it argues for is the goal the capstone hands over, so
+the two ends of that pair now point at each other. It ships a small loans domain in `kata/step2/java` that is green but un-hardened, and
 a `graded` Maven profile that measures it against three goals - a coverage floor, a complexity
 ceiling and honest (mutation-tested) coverage. `mvn verify -Pgraded` prints a leetspoken flag for
 each goal met and fails until all three are. The student hardens the module (that is the exercise,

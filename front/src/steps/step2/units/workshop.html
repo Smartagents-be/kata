@@ -37,8 +37,9 @@ mvn verify -Pgraded</code></pre>
 </p>
 
 <p data-i18n="workshop.goals.3">
-  The first goal is a coverage floor: the domain has to reach ninety percent line coverage, which
-  means writing the tests the module never had. The second is the complexity ceiling from your
+  The first goal is a coverage floor: the module has to reach ninety percent line coverage, with the
+  web and config layers left out, which means writing the tests it never had. The second is the
+  complexity ceiling from your
   <code>CLAUDE.md</code>: no method may score above ten on cyclomatic complexity, so the late-fee
   method has to come apart into pieces small enough to hold in your head. Meet a goal and the build
   prints a flag for it, in the shape <code>{1337-5p34k}</code>. Miss one and it fails, and tells you
