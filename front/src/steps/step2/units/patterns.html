@@ -7,7 +7,8 @@
 
 <p data-i18n="patterns.skill-iteration.1">
   The first skill you write feels like magic. A writing skill is the easy one: a line about the
-  voice you are after, and the correction you were tired of typing.
+  voice you are after, and the correction you were tired of typing, in the file shape
+  <a href="/steps/step2/setup">the setup unit</a> drew.
 </p>
 
 <pre><code>---
@@ -23,11 +24,11 @@ Write like a colleague explaining something at a whiteboard.
 
 <p data-i18n="patterns.skill-iteration.2">
   The answers do get better. They also come back slightly off, and you find yourself repairing the
-  same kind of sentence every time. That is where iteration comes in. Fix the output, by hand or
-  with the agent, then hand it both versions and ask what the skill failed to say. Paste them into
-  the prompt, or point it at the <code>git diff</code>. Write the answer back into the skill
-  <svg data-icon="pattern"></svg> Do that a few rounds and it starts sounding like you, which is
-  what the writing skill looks like one pass later.
+  same kind of sentence every time. Fix the output, by hand or with the agent, then hand it both
+  versions and ask what the skill failed to say. Paste them into the prompt, or point it at the
+  <code>git diff</code>. Write the answer back into the skill <svg data-icon="pattern"></svg> Do
+  that a few rounds and it starts sounding like you. Here is that writing skill one pass later, one
+  rule longer.
 </p>
 
 <pre><code>---
@@ -45,18 +46,17 @@ Write like a colleague explaining something at a whiteboard.
   Say the things and let there be two of them.</code></pre>
 
 <p data-i18n="patterns.skill-iteration.3">
-  The corrections stop coming back <svg data-icon="coin"></svg> And a skill is a file in the
-  repository rather than a habit in your head, so everyone on the team works from the same one
-  without anybody explaining it.
+  The corrections stop coming back. And a skill is a file in the repository rather than a habit in
+  your head, so everyone on the team works from the same one without anybody explaining it.
 </p>
 
 <h2 data-i18n="patterns.scripts.heading">Scripts</h2>
 
 <p data-i18n="patterns.scripts.1">
   You may not write much Bash or Python. Your agent does. So when a repetition has an expected end
-  result, a script is usually worth writing <svg data-icon="gem"></svg> Adding a skill that calls it
-  makes your agent aware of its existence. Think of things like scaffolding a domain, printing a
-  one-pager, cleaning a database before a demo.
+  result, scaffolding a domain or cleaning a database before a demo, a script is usually worth
+  writing <svg data-icon="gem"></svg> Then add a skill that calls it, or the agent will never know
+  it is there.
 </p>
 
 <p data-i18n="patterns.scripts.2">
@@ -68,3 +68,11 @@ Write like a colleague explaining something at a whiteboard.
 </p>
 
 <div data-figure="script-runs"></div>
+
+<!-- The doing part of the unit, under the same rule and heading the rest of the course puts over
+     its exercises. The card is the SameEveryRun element registered in steps/step2/index.tsx, and it
+     goes straight under the heading, with the quiz below it: the card's description carries the
+     setting, so a paragraph here would say it twice. -->
+<hr />
+
+<h2 data-i18n="ui:quiz.title">Test yourself</h2>

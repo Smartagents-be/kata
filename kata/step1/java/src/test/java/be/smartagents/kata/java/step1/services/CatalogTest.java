@@ -19,14 +19,14 @@ class CatalogTest {
 
     private static final List<String> PUBLISHED = List.of(
         "Refactoring by Candlelight",
-        "Secret Key to Great Code",
-        "Hidden Software Tricks",
-        "Seventeen Ways to Break a Build",
+        "Unbound Folios and the Secret Key",
+        "Notes Toward a Hidden Cipher",
+        "Ink, Vellum and the Missing Token",
         "The Compiler Told Me Nothing",
-        "Whispered Wisdom of the Legacy Monolith",
-        "Cathedral of the Nightly Build",
-        "The Lost Art of Naming Things",
-        "Vault of Forgotten Regressions");
+        "Legends of the Legacy Monolith",
+        "1,000 Ways to Lose a Page",
+        "Vault of Forgotten Regressions",
+        "3 Hands on the Press");
 
     @Autowired
     private Catalog catalog;

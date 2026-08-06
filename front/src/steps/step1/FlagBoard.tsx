@@ -15,15 +15,15 @@ import { readSolved, writeSolved } from './solved'
 const STORAGE_KEY = 'kata.step1.flags'
 
 /**
- * The workshop's flag board. Each row is one way the step 1 backend hides a value from the
- * response: read the source, trace the run, or turn the log level up. Paste the flag you found and
- * the row checks it here in the browser, against a salted hash, so this half works with the backend
- * down. Nothing here talks to the service: the discovery already happened against the running
- * pipeline, and this only confirms you read what it was hiding.
+ * The workshop's flag board. Each row is one place an answer can come from, easiest first and
+ * outside in: read what your own machine told the agent, read the running system, turn the log level
+ * up, read the source, trace the run. Paste the flag you found and the row checks it here in the
+ * browser, against a salted hash, so this half works with the backend down. Nothing here talks to
+ * the service: the discovery already happened, and this only confirms you read what came back.
  *
  * The rows themselves are {@link FlagRow}, shared with `ShutterFlag` in `tools`. What is left here
- * is the board around them: the three-of-three counter, which is the one thing a one-row board has
- * no use for.
+ * is the board around them: the five-of-five counter and the line that closes the hunt once all five
+ * are in, both of which a one-row board has no use for.
  */
 export function FlagBoard() {
   const { text } = useStepText('step1')
@@ -76,6 +76,27 @@ export function FlagBoard() {
             />
           ))}
         </ol>
+
+        {/*
+          The capstone used to end on a bare count collected and nothing else, which is a counter
+          rather than a close. This line says what the five together proved, which is the provenance
+          eyebrow on every row read as one sentence: the student has just answered `truth`'s question
+          by doing it five times. It is the `--success` tint a solved row already wears, on the
+          flatness rule: no shadow, no panel that floats, no second voice. And it **states what was
+          proved and stops**. It carries no pointer at `recap` and none at step 2: the unit's closing
+          section was deliberately deleted, the step no longer ends on this page, and a forward
+          pointer here puts it back.
+        */}
+        {solved.size === flags.length && (
+          <p
+            id="flags-complete"
+            data-component="FlagBoard"
+            role="status"
+            className="border-success/30 bg-success/10 text-success-foreground rounded-xl border px-4 py-3 text-sm"
+          >
+            {text('flags.panel.complete')}
+          </p>
+        )}
       </CardContent>
     </Card>
   )

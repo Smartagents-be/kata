@@ -82,15 +82,17 @@ of the code. That runtime miss is the spec for the fix, and reading it is a plan
 own right.
 
 **Do not add a `native` profile to the `pom.xml`, and do not write the resource hint or a
-`RuntimeHintsRegistrar`**: wiring the ahead-of-time build and planning the hint are the exercise. Do
-not spell out the fix here either; the runtime miss is what the student is meant to read.
+`RuntimeHintsRegistrar`**: planning the hint is the exercise. The profile needs no adding in any
+case, for the reason below. Do not spell out the fix here either; the runtime miss is what the
+student is meant to read.
 
 One obstacle this exercise used to have is gone, and it went with the split into per-step projects.
 Step 1 and step 2 once shared a module, so `spring-boot-maven-plugin` pinned `<mainClass>` to
 `Step1Application` and a naive native build compiled the wrong step. This project holds one main
-class, so the build points at step 2 by itself. Two plan-worthy steps remain, wiring the build and
-reading the miss, and the step 2 `workshop` unit no longer claims otherwise. Verified end to end with
-GraalVM 25.
+class, so the build points at step 2 by itself. One plan-worthy step remains, and it is reading the miss. The Boot parent ships its own `native`
+profile, so `mvn -Pnative native:compile` compiles this project with no pom change; verified end to
+end on GraalVM 25.0.3, under a minute, binary prints the miss. The step 2 `workshop` unit said the
+wiring was the student's until that was measured, and was corrected in the same pass.
 
 ## The setup flags
 

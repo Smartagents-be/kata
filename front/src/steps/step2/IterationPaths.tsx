@@ -15,8 +15,8 @@ import { useTranslation } from 'react-i18next'
  * step 1 diagrams draw what is not there.
  *
  * `ABANDONED` is the same reading of a dash a second time: nodes on the right-hand path throw off
- * versions that were built and dropped. Every one of them **heads for the same target and is a few
- * degrees off it**, which is what makes it a version of the work rather than a detour, and **most are
+ * versions that were built and dropped. Every one of them **is aimed at the same target and none of
+ * them arrives**, which is what makes it a version of the work rather than a detour, and **most are
  * a single step**, since a version you throw away is usually one swing. They start **early as well as
  * late**, so branching is not something that only happens near the finish, and one node carries two of
  * them because taking the same step three ways is the point. Only the right half has any, and that is

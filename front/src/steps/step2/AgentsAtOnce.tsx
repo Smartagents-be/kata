@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 /**
  * Four ways of arranging agents, drawn as how much of your attention each one gets: one agent on a
- * live wire, four agents on four thin ones, four behind an orchestrator you brief instead, and one
+ * live wire, four agents on four dashed ones, four behind an orchestrator you brief instead, and one
  * live wire with three running behind it.
  *
  * It closes the `parallel` unit rather than opening it, on `WorkflowWeights`'s reasoning: the rows
@@ -11,12 +11,13 @@ import { useTranslation } from 'react-i18next'
  * shapes they had not been given yet. So the last row is the section it sits under, and the three
  * above it are what the reader has already read.
  *
- * **Teal is the agent you are actually watching**, and that is the only colour rule in here. Row one
- * has one. Row two has none, because four at once is nobody watched, and the wires are thin for the
- * same reason. Row three has the teal on the orchestrator, and its sub-agents are muted but solid,
- * because somebody is watching them even though it is not you. Row four has the teal back plus three
- * dashed wires, on the step 1 reading of a dash: what is running without anyone. The count is not the
- * argument; where the teal is, is.
+ * **Teal is the agent you are actually watching**, and it is the only colour rule in here. The dash
+ * carries the rest of the grammar, on the step 1 reading of one: solid means somebody has it, dashed
+ * means nobody does. Row one is a single teal wire. Row two is four dashed ones and no teal at all,
+ * because four at once is nobody watched, which is exactly what the paragraph above the figure says.
+ * Row three keeps the teal on the orchestrator and leaves its sub-agents muted but solid, because
+ * somebody is watching them even though it is not you. Row four is the teal back plus three dashed
+ * wires. What tells rows two and four apart is that teal, and not the wires.
  *
  * **Rows two and three run the same four agents and differ only in who holds the wires**, which is
  * the whole reason the orchestrator gets a row rather than a sentence. Its extra box sits in the gap
@@ -74,10 +75,10 @@ const ROWS: readonly Row[] = [
     dy: 74,
     youY: 63,
     agents: [
-      { y: 24, h: 20, state: 'idle' },
-      { y: 52, h: 20, state: 'idle' },
-      { y: 80, h: 20, state: 'idle' },
-      { y: 108, h: 20, state: 'idle' },
+      { y: 24, h: 20, state: 'background' },
+      { y: 52, h: 20, state: 'background' },
+      { y: 80, h: 20, state: 'background' },
+      { y: 108, h: 20, state: 'background' },
     ],
   },
   {

@@ -10,6 +10,6 @@ public class SecretShelfStage implements CatalogStage {
 
     @Override
     public void apply(CatalogRun run) {
-        run.publish("Seventeen Ways to Break a Build");
+        run.publish("Ink, Vellum and the Missing Token");
     }
 }

@@ -1,46 +1,49 @@
 <p data-i18n="workshop.lead.1">
   You have read the habits. This is where you run one. Nothing on this page grades how you
   worked, because a process leaves no exit code. What it grades is the thing the
-  <code>engineering</code> and <code>goals</code> units argued you should always be able to name: a
-  goal a build can answer yes or no to.
+  <a href="/steps/step2/engineering">engineering</a> and <a href="/steps/step2/goals">goals</a> units
+  argued you should always be able to name: a goal a build can answer yes or no to.
 </p>
 
 <p data-i18n="workshop.lead.2">
   There is a small module in this repo built for it. Under <code>kata/step2/java</code> is a library
-  loans domain, ports and adapters, with a late-fee rule at the middle of it. Every command on this
-  page runs from that folder, because each step of this kata is its own Maven project. It compiles
+  loans domain, ports and adapters, with a late-fee rule at the middle of it. It compiles
   and it passes its one shipped
   test, so the default build is green. It is also exactly the kind of code a quality gate exists
   for: one method far too branchy to read, and almost no tests behind it.
 </p>
 
 <p data-i18n="workshop.lead.3">
-  Hand it to your agent as three outcomes, not a list of edits. Then let the build decide.
+  Hand it to your agent as three outcomes, not a list of edits. Then let the build decide. Set aside
+  an afternoon for it: the first three flags come out of one hardening pass, and the fourth and the
+  fifth are separate jobs with their own builds.
 </p>
 
 <h2 data-i18n="workshop.goals.heading">The three goals</h2>
 
 <p data-i18n="workshop.goals.1">
-  The goals live behind a Maven profile, off by default so the normal build stays green. Turn it on
-  and it measures the module against all three at once.
+  Every command on this page runs from <code>kata/step2/java</code>, because each step of this kata
+  is its own Maven project. The goals live behind a Maven profile there, off by default so the normal
+  build stays green. Turn it on and it measures the module against all three at once.
 </p>
 
 <pre><code>cd kata/step2/java
 mvn verify -Pgraded</code></pre>
 
 <p data-i18n="workshop.goals.2">
-  Before you hand anything over, do the setup the first units asked for. Put
-  <code>mvn verify -Pgraded</code> in your <code>CLAUDE.md</code> as the command that validates this
-  work. That one line is what lets you give the agent a goal instead of a keystroke: it runs the
-  check itself after each change, and the build, not the agent's word that it is done, decides when a
-  flag is earned.
+  Before you hand anything over, do the setup <a href="/steps/step2/setup">the setup unit</a> asked
+  for. Put <code>mvn verify -Pgraded</code> in your <code>CLAUDE.md</code> as the command that
+  validates this work. That one line is what lets you give the agent a goal instead of a keystroke:
+  it runs the check itself after each change, and the build, not the agent's word that it is done,
+  decides when a flag is earned.
 </p>
 
 <p data-i18n="workshop.goals.3">
   The first goal is a coverage floor: the module has to reach ninety percent line coverage, with the
-  web and config layers left out, which means writing the tests it never had. The second is the
-  complexity ceiling from your
-  <code>CLAUDE.md</code>: no method may score above ten on cyclomatic complexity, so the late-fee
+  web and config layers left out, and the code the last two flags ask you to write left out with
+  them, which means writing the tests it never had. The second is the complexity ceiling
+  <a href="/steps/step2/goals">goals</a> told you to hand over: no method may score above ten on
+  cyclomatic complexity, so the late-fee
   method has to come apart into pieces small enough to hold in your head. Meet a goal and the build
   prints a flag for it, in the shape <code>{1337-5p34k}</code>. Miss one and it fails, and tells you
   the number you are still short of.
@@ -55,10 +58,11 @@ mvn verify -Pgraded</code></pre>
 </p>
 
 <p data-i18n="workshop.honest.2">
-  The build checks that by mutation testing. It changes the code in small ways, a plus for a minus,
-  a boundary nudged by one, and runs your tests again. A test suite that means something catches the
-  change and fails. One that only executes the lines lets it through. Reach eighty percent of those
-  mutations caught and the third flag is yours, and it is a flag you cannot earn by gaming the first.
+  The build checks that by mutation testing the domain. It changes the code in small ways, a plus for
+  a minus, a boundary nudged by one, and runs your tests again. A test suite that means something
+  catches the change and fails. One that only executes the lines lets it through. Reach eighty
+  percent of those mutations caught and the third flag is yours, and it is a flag you cannot earn by
+  gaming the first.
 </p>
 
 <h2 data-i18n="workshop.build.heading">The fourth one is built, not tuned</h2>
@@ -82,7 +86,7 @@ curl localhost:8080/api/loans/statement/STUDENT</code></pre>
 <pre><code>mvn test -Pchallenge</code></pre>
 
 <p data-i18n="workshop.build.3">
-  Plan it before you write it. Read the failing tests, then ask Claude in plan mode for a plan
+  Plan it before you write it. Read the failing tests, then ask your agent in plan mode for a plan
   covering the whole spec, and check that plan against the tests yourself. Planning first is what
   keeps an agent from solving the first assertion and calling it done. Approve the plan, let it
   implement, and stop when <code>mvn test -Pchallenge</code> is green. Then call the endpoint again:
@@ -94,16 +98,16 @@ curl localhost:8080/api/loans/statement/STUDENT</code></pre>
 <p data-i18n="workshop.native.1">
   The fourth flag added code that was missing. This one asks for something larger and of a different
   kind again: step 2's application, compiled all the way down to a native executable. It is the goals
-  unit taken to its end, an outcome you hand over and nothing smaller. The build makes a jar today and
-  only a jar. Turning step 2 into a native image is the exercise, and, like the graded profile, none
-  of that wiring is in the <code>pom.xml</code> for you.
+  unit taken to its end, an outcome you hand over and nothing smaller. Boot's parent pom already
+  carries the profile that builds one, so there is nothing to assemble first. What you do need is a
+  GraalVM JDK on your PATH, and the minutes it takes to compile.
 </p>
 
 <p data-i18n="workshop.native.2">
-  Do not one-shot it. A native build is the long-running kind the last unit described, minutes each,
-  which makes it the wrong place to guess and retry. Plan it first. Open plan mode and have Claude
-  work out what a native build of step 2 needs: the GraalVM <code>native-maven-plugin</code>, the
-  ahead-of-time step, and what inside a native image might not survive the move.
+  Do not one-shot it. A native build is the long-running kind
+  <a href="/steps/step2/goals">the goals unit</a> described, minutes each, which makes it the wrong
+  place to guess and retry. Plan it first. Open plan mode and have your agent work out what inside a
+  native image might not survive the move, and how you would find out.
   Read that plan, then spend the minutes once, ideally in a git worktree so your branch stays yours.
 </p>
 
@@ -128,14 +132,20 @@ curl localhost:8080/api/loans/statement/STUDENT</code></pre>
 
 <p data-i18n="workshop.collect.1">
   Each flag your run prints goes in the matching box below. They are checked here in the browser, so
-  this half works with the backend down. The flags are English text either way. Paste one in, and if
-  it is the real one the box turns green and stays that way.
+  this half works with the backend down. The flags are English whichever language you are reading in,
+  like every answer this course asks you to type. Paste one in, and if it is the real one the box
+  turns green and stays that way.
 </p>
 
-<aside data-audience="self" data-i18n="workshop.collect.2">
+<p data-i18n="workshop.collect.2">
+  That is the step. What is left is not about the agent at all: what changes around the work when
+  this is how the work gets done. <a href="/steps/step3/change">Step 3</a> is that.
+</p>
+
+<aside data-audience="self" data-i18n="workshop.collect.3">
   <p>
-    If you get stuck, the honest move is the one the <code>goals</code> unit named: give the agent
-    the goal and the command that checks it, run it in a git worktree, and read the diff it comes
-    back with rather than the report.
+    If you get stuck, the honest move is the one the <a href="/steps/step2/goals">goals</a> unit
+    named: give the agent the goal and the command that checks it, run it in a git worktree, and read
+    the diff it comes back with rather than the report.
   </p>
 </aside>

@@ -4,11 +4,15 @@
   round trip is the whole mechanism.
 </p>
 
+<!-- `harness` is defined in unit 6 and used throughout this one, so the word is anchored at first use
+     with a link rather than a second definition. No agent in this course changes a file with `sed`:
+     both products edit through a dedicated edit tool, which `/context` shows a unit later, and
+     `tools-in-context.commands.1` names `find` beside `grep` for the same reason. -->
 <p data-i18n="tools.lead.2">
-  This is where an agent's abilities come from. <code>grep</code> to search your codebase,
-  <code>sed</code> to change a file, <code>curl</code> to call an API, an MCP server for whatever
-  your harness does not ship on its own. The harness decides which tools exist. What they hand back
-  is this layer.
+  This is where an agent's abilities come from. <code>grep</code> to search your codebase, an edit
+  tool to change a file, <code>curl</code> to call an API, an MCP server for whatever your harness
+  does not ship on its own. The <a href="/steps/step1/harness">harness</a> decides which tools
+  exist. What they hand back is this layer.
 </p>
 
 <p data-i18n="tools.lead.3">
@@ -22,31 +26,33 @@
 <div data-figure="tools-in-context"></div>
 
 <p data-i18n="tools.lead.4">
-  That dashed half is the part the model never sees. It gets the result and nothing else, which is
-  why a file that was truncated on the way in and a file that is genuinely short read exactly the
-  same from in there.
+  That dashed half is the part the model never sees. A file the harness decided to cut short and a
+  file that is genuinely short are the same file from in there, unless something in the result says
+  otherwise.
 </p>
 
-<h2 data-i18n="tools.extra-tools.heading">Extra tools</h2>
+<h2 data-i18n="tools.mcp-servers.heading">MCP servers</h2>
 
-<p data-i18n="tools.extra-tools.1">
-  An MCP server can be anything. A server for your issue tracker, one for your database, one that
-  drives a browser. Somebody wrote it, you connected it, and now the model can call it. Your harness
-  runs the call and appends what came back, exactly as it does for <code>grep</code>.
+<p data-i18n="tools.mcp-servers.1">
+  An MCP server can be anything. Model Context Protocol is the standard your harness speaks to reach
+  one, and what is on the other end is up to whoever wrote it: a server for your issue tracker, one
+  for your database, one that drives a browser. Somebody else wrote it. You connected it, and now
+  the model can call it. Your harness runs the call and appends what came back, exactly as it does
+  for <code>grep</code>.
 </p>
 
 <!-- The same frame and prompt as tools-in-context, with one wire crossing the border and fanning
      out. The figure only works read against that one, so do not redraw it on its own geometry. -->
 <div data-figure="mcp-server"></div>
 
-<p data-i18n="tools.extra-tools.2">
+<p data-i18n="tools.mcp-servers.2">
   Tools are not all a server offers. It can also hand over material it collected on its own: a page
-  out of a wiki, a design document, a row from your database. Nobody called anything to get it. Your
-  harness took it and put it in the window, and the model reads it there next to your prompt. Content
-  that arrives that way has a name of its own. A resource.
+  out of a wiki, or last quarter's design document. Nobody called anything to get it. Your harness
+  took it and put it in the window, and the model reads it there next to your prompt. Content that
+  arrives that way has a name of its own. A resource.
 </p>
 
-<p data-assistant="claude" data-i18n="tools.extra-tools.3.claude">
+<p data-assistant="claude" data-i18n="tools.mcp-servers.3.claude">
   Prompts are the third thing. A server ships whole prompts with it, written by whoever built it, for
   you to pick off a list. Claude Code puts them under a slash.
 </p>
@@ -54,7 +60,7 @@
 <!-- Copilot documents MCP prompts under a slash for the product generally, and the Copilot CLI
      command reference does not list them (re-read 30 July 2026). So this half names what the CLI
      does document, `/mcp`, and says the surfacing is the harness's call. -->
-<p data-assistant="copilot" data-i18n="tools.extra-tools.3.copilot">
+<p data-assistant="copilot" data-i18n="tools.mcp-servers.3.copilot">
   Prompts are the third thing. A server ships whole prompts with it, written by whoever built it, for
   you to pick off a list. Whether you ever see them is your harness's call: Copilot CLI gives you
   <code>/mcp</code> for the servers and names nothing for their prompts.
@@ -64,9 +70,10 @@
      stroke is McpServer's outside-the-window shape, and each glyph is the step's own vocabulary. -->
 <div data-figure="mcp-parts"></div>
 
-<p data-i18n="tools.extra-tools.4">
+<p data-i18n="tools.mcp-servers.4">
   Read them by who decides. You pick the prompt, your harness attaches the resource, the model asks
-  for the tool. Three different hands, and all three end up in the same window.
+  for the tool. Three different hands, and all three end up in the same window, taking up very
+  different amounts of it.
 </p>
 
 <!-- The same three again, in the oval the step draws a thing as, on `mcp-parts`' own columns so each
@@ -104,15 +111,18 @@
 <p data-i18n="tools.list-itself-window.3">
   They cost you room to think as well. Forty tools is forty descriptions to read past and forty ways
   to pick the wrong one, so the window is noisy before you have asked for anything. An agent holding
-  <code>grep</code>, <code>sed</code> and a test runner is choosing between three. Turn off what this
+  <code>grep</code>, an edit tool and a test runner is choosing between three. Turn off what this
   task does not need.
 </p>
 
-<!-- The step's only number for a tool count, and the only place it escalates past turning tools
-     off. It must not grow into the coordinator argument: `harness` owns what a sub-agent costs. -->
+<!-- The step's only number on how many servers to hold, and the only place it escalates past
+     turning tools off. It counts what the student adds rather than what they hold, because both
+     harnesses start them well past four: a reader who runs `/context` a unit later sees the list.
+     It must not grow into the coordinator argument: `harness` owns what a sub-agent costs. -->
 <aside data-i18n="tools.list-itself-window.4">
   <p>
-    Four or five tools is the most one context holds well. Past that the agent spends its attention
+    Four or five <em>added</em> servers' worth of tools is about the most one context holds well, on
+    top of whatever your harness already starts you with. Past that the agent spends its attention
     picking between them, and a longer list is rarely the answer. Give that job its own specialised
     agent, with the tools it needs and nothing else.
   </p>
@@ -138,16 +148,19 @@
   </p>
 </aside>
 
+<!-- The marking is real: results arrive in their own blocks, with their own role, and providers
+     train an instruction hierarchy on top of that. What it does not do is hold, which is the claim
+     `SpotInjection` grades below. Do not write "nothing marks it" back in. -->
 <p data-i18n="tools.stay-critical.3">
-  None of that shows once it is in the window. Everything in a context carries the same weight: your
-  prompt, the agent's own notes, and a paragraph off a page it opened thirty seconds ago. The model
-  has no way to mark one as yours and one as a stranger's, so it builds on the stranger's without
-  hesitating.
+  None of that shows once it is in the window. Your prompt, the agent's own notes and a paragraph
+  off a page it opened thirty seconds ago all arrive marked, and the marking does not hold: the
+  model was trained to trust you over a tool result, not built to. It reads the stranger's line and
+  builds on it anyway.
 </p>
 
-<h2 data-i18n="tools.costs-same-everything.heading">It costs the same as everything else</h2>
+<h2 data-i18n="tools.pay-every-turn-after.heading">You pay for it on every turn after</h2>
 
-<p data-i18n="tools.costs-same-everything.1">
+<p data-i18n="tools.pay-every-turn-after.1">
   A tool result is usually the bulkiest thing in the window. A page of documentation runs longer than
   your prompt. <code>mvn test</code> on a red build runs longer than most of your source files. And
   it settles into the session, so it is re-sent on every turn after that. That red build scrolls past

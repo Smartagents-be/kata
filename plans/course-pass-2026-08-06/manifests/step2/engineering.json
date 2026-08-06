@@ -1,0 +1,21 @@
+{
+  "unit": "engineering",
+  "deck": [
+    {
+      "file": "front/src/steps/step2/deck.tsx",
+      "action": "insert one slide",
+      "where": "In the `// ── engineering ──` block, directly after the `deck-step2-engineering` divider entry and directly before `deck-step2-engineering-domain`. It is the lead claim the step's spine rests on and nothing on the board carries it today, so it opens the unit's run of slides.",
+      "code": "  {\n    id: 'deck-step2-engineering-vibe',\n    kind: 'statement',\n    ns: 'step2',\n    eyebrow: 'engineering.title',\n    title: 'deck.engineering.vibe.title',\n    note: 'deck.engineering.vibe.note',\n  },",
+      "keys": "deck.engineering.vibe.title and deck.engineering.vibe.note are in patches/step2/engineering.json, both languages. No other deck.tsx change is asked for by this unit."
+    }
+  ],
+  "registry": [],
+  "quiz": [],
+  "notes": [
+    "en.json engineering.title becomes 'Craft' via patches/step2/engineering.json. The unit id stays `engineering`, so no URL, prose key, deck eyebrow or audit.md row identifier moves.",
+    "Ripple on that rename, tracked in cross-unit note 7 of the work order and NOT written by this unit: nl.json workflows.naive.1 (the `workflows` agent's item 5 already sets its Dutch link text to 'de unit over vakmanschap') and step3 nl.json change.you-test-engineer.2 (already says 'vakmanschap'; step 3's work order forbids touching it). Verify both after the merge.",
+    "The `Use the correct language` heading is now `The right words`, so engineering.use-correct-language.heading and .1 are renamed to engineering.right-words.* in the HTML and in nl.json (removeNl + nl in the patch). Nothing else in the tree pointed at the old slug.",
+    "engineering.quality-gates.3 is a new paragraph above the <hr>, so the Quality gates section now runs to three paragraphs. That is the work order's call, not drift.",
+    "FileTree.tsx gained an optional `caption` message key and its root element is now a <figure> (AuditExample's shape). Only DomainTree passes one. ProjectTree, SkillTree and HookTree are untouched and deliberately carry no caption."
+  ]
+}

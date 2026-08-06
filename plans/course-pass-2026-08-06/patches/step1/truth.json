@@ -1,0 +1,70 @@
+{
+  "en": {
+    "quiz.no-signal-in-the-answer.question": "The agent gives you four sentences about your service and every one of them sounds equally sure. Which part of the answer tells you which sentences were read off disk?",
+    "quiz.no-signal-in-the-answer.nothing-does": "Nothing in the answer does. The only way to know is to look at what was in the window when it answered.",
+    "quiz.no-signal-in-the-answer.names-a-filename": "The sentences that name a filename were read; an invented claim has nothing concrete in it.",
+    "quiz.no-signal-in-the-answer.hedged-ones": "The hedged sentences are the invented ones; a model hedges when it is filling a gap.",
+    "quiz.no-signal-in-the-answer.quoted-code": "The sentences that quote code exactly were read; a model cannot reproduce code it never saw.",
+    "quiz.no-signal-in-the-answer.explanation": "An answer carries no marker for where its parts came from. Two of the three claims in the figure were read and one was not, and they are written the same way.",
+
+    "quiz.config-format-changed.question": "A library threw out its configuration format last spring. You ask the agent to write the config and it confidently writes the old format, with no warning.",
+    "quiz.config-format-changed.past-the-cutoff": "The change is on the far side of the training cutoff, so the model has never seen the new format. It answered with what it did see.",
+    "quiz.config-format-changed.knows-but-common": "The model knows the new format but writes the one most projects still use.",
+    "quiz.config-format-changed.read-the-docs": "It read the library's docs and picked the version that matched your other dependencies.",
+    "quiz.config-format-changed.scores-higher": "The old format appears more often in its training data, so it scores higher.",
+    "quiz.config-format-changed.explanation": "After the cutoff there is nothing to be more or less sure about. The answer is not a worse version of the right one, it is the last one the model saw.",
+
+    "quiz.read-it-and-said-so.question": "You asked whether the empty-list case is covered. The agent read the test file and told you it is. It is not.",
+    "quiz.read-it-and-said-so.still-a-reading": "You asked for a conclusion. Reading a file and reporting what it says is still the agent's reading, and nothing ran.",
+    "quiz.read-it-and-said-so.file-too-long": "The file was too long, so the relevant test fell outside what the model could attend to.",
+    "quiz.read-it-and-said-so.after-cutoff": "The test file was written after the model's cutoff, so it could not interpret it.",
+    "quiz.read-it-and-said-so.nothing-in-window": "Nothing from your project was in the window, so it answered from training.",
+    "quiz.read-it-and-said-so.explanation": "Grounded is not proved. Ask for the check rather than the conclusion, and a test that goes red is a claim that can fail in front of you.",
+
+    "deck.truth.proof.title": "Ask for <hi>the check</hi>, not the conclusion",
+    "deck.truth.proof.note": "Not \"does this handle an empty list\", but a test that goes red on an empty list. Only one of those can fail in front of you."
+  },
+
+  "nl": {
+    "truth.lead.1": "Dezelfde vraag kan meer dan één waar antwoord hebben, en welk antwoord je krijgt hangt af van waar de agent gekeken heeft. Een deel van wat hij weet lag vast op de dag dat zijn training stopte. Niets ervan ging ooit over jouw bedrijf. Niet je repository, niet je afspraken, niet de versie waar je echt op zit.",
+    "truth.lead.2": "Al de rest moet er op een of andere manier geraken. Jij zet het in het venster, of je laat hem het zelf uitzoeken met <a href=\"/steps/step1/tools\">een tool</a>. Vraag op welke versie van Spring Boot dit project draait en je krijgt misschien de versie waar de meeste projecten op zaten toen hij getraind werd, want niets stuurde hem gaan kijken. Zeg hem eerst <code>pom.xml</code> te lezen en het getal staat in het venster voor het antwoord er staat.",
+    "truth.lead.3": "Welk van de drie is dan de waarheid? Dat wat hij ging uitzoeken, dat wat jij hem aanreikte, of dat wat hij al had. Alle drie klinken ze even stellig.",
+    "truth.cutoff.1": "De training stopte op een datum. Wat daarna verscheen, kent het model niet minder goed, het heeft het nooit gezien. Een framework van vorig voorjaar, een library die haar hele configuratieformaat overboord gooide tussen twee minor versies: niets daarvan zit erin.",
+    "truth.cutoff.2": "Het antwoord komt er toch. Het beschrijft de versielijn vóór de jouwe, in dezelfde vlakke toon als al de rest, en het is verouderd in plaats van fout, en dat is het lastigste om te zien. Dit is de helft van het model die veroudert terwijl je niet kijkt.",
+    "truth.proof.1": "Grounded is nog altijd niet bewezen, en dat is het antwoord op de vraag van hierboven: de bron is niet hetzelfde als de controle. De agent las een bestand en vertelde je wat erin staat, en je neemt zijn lezing op zijn woord aan. Alles wat je kan draaien, draai je: <code>mvn test</code>, een <code>curl</code> naar het endpoint, één regel <code>jshell</code>. Een antwoord met een commando erachter is een ander soort antwoord.",
+    "truth.hallucinations.1": "Met niets in het venster om te lezen, antwoordt het model toch. Antwoorden is wat het doet. Vraag welke methode op <code>Catalog</code> titels op auteur filtert en je krijgt <code>findAllByAuthorOrdered</code>, geschreven precies zoals een Spring-methode geschreven wordt, op een klasse die zo'n methode niet heeft. Er werd niets opgezocht en er werd niets bewust verzonnen. Het volgende waarschijnlijke token landde waar een feit had moeten staan, en dat is een hallucinatie. Je bent dit al eens tegengekomen: de quiz in <a href=\"/steps/step1/context\">de context-unit</a> vroeg waarom een zelfverzekerd antwoord over een UserService de klasse volledig miste, en daar stelde je de diagnose al zonder het woord.",
+    "truth.hallucinations.2": "Twee daarvan zijn gelezen en één niet, en het antwoord zegt over alle drie hetzelfde. Dat is wat het duur maakt. Geen aarzeling in de toon, geen slag om de arm, want het model klinkt hetzelfde of het nu jouw bestand las of het gat opvulde. Stop met de toon te lezen en begin te vragen waar het antwoord vandaan komt. <a href=\"/steps/step1/workshop\">De workshop</a> is die vraag drie keer achter elkaar.",
+
+    "quiz.no-signal-in-the-answer.question": "De agent geeft je vier zinnen over je service, en ze klinken alle vier even stellig. Welk deel van het antwoord zegt je welke zinnen van schijf gelezen zijn?",
+    "quiz.no-signal-in-the-answer.nothing-does": "Geen enkel deel. De enige manier om het te weten is kijken wat er in het venster stond toen hij antwoordde.",
+    "quiz.no-signal-in-the-answer.names-a-filename": "De zinnen die een bestandsnaam noemen zijn gelezen; in een verzonnen bewering staat niets concreets.",
+    "quiz.no-signal-in-the-answer.hedged-ones": "De zinnen met een slag om de arm zijn de verzonnen zinnen; een model twijfelt wanneer het een gat opvult.",
+    "quiz.no-signal-in-the-answer.quoted-code": "De zinnen die code letterlijk citeren zijn gelezen; code die het nooit gezien heeft kan een model niet naschrijven.",
+    "quiz.no-signal-in-the-answer.explanation": "Een antwoord draagt nergens een merkteken van waar zijn onderdelen vandaan komen. Twee van de drie beweringen in de figuur zijn gelezen en één niet, en alle drie staan ze er op dezelfde manier.",
+
+    "quiz.config-format-changed.question": "Een library gooide vorig voorjaar haar configuratieformaat overboord. Je vraagt de agent om de config te schrijven en hij schrijft vol vertrouwen het oude formaat, zonder enige waarschuwing.",
+    "quiz.config-format-changed.past-the-cutoff": "De wijziging ligt aan de andere kant van de training cutoff, dus het model heeft het nieuwe formaat nooit gezien. Het antwoordde met wat het wel gezien heeft.",
+    "quiz.config-format-changed.knows-but-common": "Het model kent het nieuwe formaat, maar schrijft het formaat dat de meeste projecten nog gebruiken.",
+    "quiz.config-format-changed.read-the-docs": "Het las de docs van de library en koos de versie die bij je andere dependencies paste.",
+    "quiz.config-format-changed.scores-higher": "Het oude formaat komt vaker voor in zijn trainingsdata, dus het scoort hoger.",
+    "quiz.config-format-changed.explanation": "Na de cutoff valt er niets meer om zekerder of onzekerder over te zijn. Het antwoord is geen slechtere versie van het juiste, het is het laatste dat het model gezien heeft.",
+
+    "quiz.read-it-and-said-so.question": "Je vroeg of het geval van de lege lijst afgedekt is. De agent las het testbestand en zei je van wel. Dat is niet zo.",
+    "quiz.read-it-and-said-so.still-a-reading": "Je vroeg om een conclusie. Een bestand lezen en zeggen wat erin staat blijft de lezing van de agent, en er liep niets.",
+    "quiz.read-it-and-said-so.file-too-long": "Het bestand was te lang, dus de test in kwestie viel buiten wat het model kon meenemen.",
+    "quiz.read-it-and-said-so.after-cutoff": "Het testbestand is geschreven na de cutoff van het model, dus het kon het niet lezen.",
+    "quiz.read-it-and-said-so.nothing-in-window": "Er stond niets van jouw project in het venster, dus antwoordde het vanuit de training.",
+    "quiz.read-it-and-said-so.explanation": "Grounded is niet bewezen. Vraag om de controle en niet om de conclusie, en een test die rood wordt is een bewering die voor je ogen kan falen.",
+
+    "deck.truth.proof.title": "Vraag om <hi>de check</hi>, niet om de conclusie",
+    "deck.truth.proof.note": "Niet \"gaat dit om met een lege lijst\", maar een test die rood wordt op een lege lijst. Maar één van die twee kan voor je ogen falen."
+  },
+
+  "afterEn": {
+    "deck.truth.proof.title": "deck.truth.provenance.title"
+  },
+
+  "afterNl": {
+    "deck.truth.proof.title": "deck.truth.provenance.title"
+  }
+}

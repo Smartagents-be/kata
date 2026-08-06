@@ -1,0 +1,47 @@
+{
+  "en": {
+    "sequential-steps.description": "Three steps inside one session, each validated before the next one starts, with a marked place to stop between two of them. A fill along the bottom of the session rises with every step, until there is almost no free space left above it.",
+    "sequential-steps.filling": "no room left for step four",
+
+    "match.scenario.critic": "The refactor is finished and you want a second agent on it before you merge. It should come back with objections, not with more code.",
+    "match.scenario.delegate": "The same API migration has to land in forty files, and each one needs a small judgement call.",
+    "match.explanation.critic": "A second agent is the coordinator's move too. What makes this one different is what you ask it for: objections rather than code, from something that was not in the room while you decided. That is reflection.",
+
+    "deck.harness.decomposition.note": "Cuts go on the board before anyone opens an agent. Three people, three different cuts.",
+    "deck.harness.coordinator.note": "A sub-agent starts blank. One base instruction is all it gets, and whatever it was not told it fetches again.",
+    "deck.harness.sequential.note": "For steps that depend on each other. One session carries the whole run, so a long workflow is a full window by the end."
+  },
+
+  "nl": {
+    "sequential-steps.description": "Drie stappen binnen één sessie, elk gevalideerd voor de volgende begint, met een aangeduide plek om tussendoor te stoppen. Onderaan de sessie loopt een vulling die met elke stap stijgt, tot er bijna geen vrije ruimte meer boven zit.",
+    "sequential-steps.filling": "geen plaats meer voor stap vier",
+
+    "match.scenario.critic": "De refactor is klaar en je wil er een tweede agent op zetten voor je merget. Die moet terugkomen met bezwaren, niet met meer code.",
+    "match.scenario.delegate": "Dezelfde API-migratie moet in veertig bestanden landen, en elk bestand vraagt een kleine afweging.",
+    "match.explanation.critic": "Een tweede agent inzetten is ook de zet van de coördinator. Wat dit anders maakt is wat je hem vraagt: bezwaren in plaats van code, van iets dat er niet bij was toen jij besliste. Dat is reflectie.",
+
+    "harness.lead.3": "Alles wat het model ooit over jouw werk te weten komt, weet het omdat het harness het in de request gezet heeft: het leest je bestanden, bestuurt je terminal en houdt de verbinding met de API van je provider open.",
+    "harness.caching.1": "Het hele venster elke beurt opnieuw sturen zou onbetaalbaar zijn aan het volle tarief, en dat volle tarief betaal je niet <svg data-icon=\"coin\"></svg> Het harness markeert de request, en bij de volgende beurt wordt alles tot aan die markering herkend en aan ongeveer een tiende aangerekend. Die markering zetten is niet gratis. Die eerste beurt kost een kwart meer dan gewone input, dus een cache verdient zichzelf pas terug vanaf de tweede beurt.",
+    "harness.caching.3": "Een entry verschaalt standaard na een minuut of vijf, en voor het dubbele van het inputtarief houd je hem een uur vast. Het loont echt om er eentje in leven te houden <svg data-icon=\"gem\"></svg> <svg data-icon=\"coin\"></svg> Loop je weg voor een vergadering, dan kom je terug bij een venster dat van nul aangerekend wordt, dus verdergaan waar je gebleven was kost je het hele ding opnieuw. Je betaalt sowieso om het venster opnieuw op te bouwen. Bouw dan het venster op dat je nodig hebt.",
+    "harness.decomposition.2": "Decompositie <svg data-icon=\"pattern\"></svg> is het harness dat de opdracht in stukken knipt die op zichzelf staan, voor het er ook maar één bouwt. Elk stuk krijgt zijn eigen prompt, en een prompt moet zeggen wat dat stuk doet, want er zit verder niets bij in het venster. Vaag overleeft die oefening niet. Je kan \"vang het lege geval op\" niet als instructie schrijven zonder eerst te beslissen wat opvangen betekent.",
+    "harness.reflection.1": "Reflectie <svg data-icon=\"pattern\"></svg> is de agent die een criticus op zijn eigen werk zet. De sub-agent krijgt de opdracht het resultaat aan te vallen in plaats van mee te helpen: zoek wat er fout zit, zeg het, en rapporteer terug.",
+
+    "deck.harness.decomposition.note": "Drie mensen knippen het op, drie verschillende resultaten, en die gaan op het bord.",
+    "deck.harness.coordinator.note": "Een sub-agent begint blanco. Eén basisinstructie is alles wat hij krijgt, en wat hij niet verteld kreeg, haalt hij opnieuw op.",
+    "deck.harness.sequential.note": "Voor stappen die van elkaar afhangen. Eén sessie draagt de hele run, dus een lange workflow is aan het eind een vol venster."
+  },
+
+  "removeNl": [
+    "harness.which-one-you-run.1",
+    "harness.check-yourself.1"
+  ],
+
+  "afterEn": {
+    "sequential-steps.filling": "sequential-steps.session"
+  },
+
+  "afterNl": {
+    "sequential-steps.filling": "sequential-steps.session",
+    "harness.lead.3": "harness.lead.2"
+  }
+}

@@ -13,6 +13,13 @@ import { useTranslation } from 'react-i18next'
  * and once in the drawing. What each row produces is on the right of it, and that pair is the
  * figure: different every time against the same every time.
  *
+ * **The three bars are the parts of one job**, named in the gutter beside the leftmost card of each
+ * row: a database reset drops, seeds and checks, which is the example the `Scripts` section gives.
+ * Without those names the cards are six bars of arbitrary length and a reader cannot say what
+ * varies, so the naming is what turns the top row into "the same three steps came out a different
+ * size every time". They are muted in both rows and worded identically, since the whole comparison
+ * is that the job is the same one.
+ *
  * **This figure is about variance across runs, and never about the clock or about step size.**
  * `LoopsPerHour` in `enablement` already owns how many turns fit in an hour and `IterationPaths` in
  * `evolution` owns few-long against many-short. Draw a run here as time spent and this becomes one
@@ -22,24 +29,34 @@ import { useTranslation } from 'react-i18next'
  * The teal is the step's rule, what the shape adds. A prose run is muted because it is what you
  * already have, a script run is teal because it is what the section is arguing for.
  */
-const X0 = 1
-const CARD_W = 200
+
+/** The left column the bar names sit in, which is what pushes the cards off the frame's edge. */
+const X0 = 62
+const CARD_W = 180
 const CARD_H = 68
 const GAP = 19
 
 /** Widest a bar can be: the card less its padding on both sides. */
 const PAD = 14
 
+/** The parts of one job, top to bottom, in the order a database reset takes them. */
+const PARTS = ['dropped', 'seeded', 'checked'] as const
+
 /** Three runs off the same prose, each worked out again and each landing somewhere else. */
 const PROSE: number[][] = [
-  [34, 96, 128],
-  [112, 150, 84],
-  [162, 70, 134],
+  [30, 85, 113],
+  [99, 133, 74],
+  [143, 62, 118],
 ]
 
 /** Three runs of one script. One set of widths, drawn three times, which is the argument. */
-const SCRIPT_RUN = [140, 104, 132]
+const SCRIPT_RUN = [124, 92, 117]
 const SCRIPT: number[][] = [SCRIPT_RUN, SCRIPT_RUN, SCRIPT_RUN]
+
+/** Where a bar sits inside its card, so a name and the bar it names share one number. */
+function barY(rowY: number, index: number) {
+  return rowY + 12 + index * 18
+}
 
 /** One run: a card with what came out of it drawn as bars. */
 function Run({
@@ -75,11 +92,33 @@ function Run({
           id={`script-runs-${block}-run-${index}-bar-${barIndex}`}
           data-component="Run"
           x={x + PAD}
-          y={y + 12 + barIndex * 18}
+          y={barY(y, barIndex)}
           width={width}
           height={10}
           className={fill}
         />
+      ))}
+    </g>
+  )
+}
+
+/** The three bar names, in the gutter to the left of a row's first card. */
+function Parts({ block, y, t }: { block: string; y: number; t: (key: string) => string }) {
+  return (
+    <g id={`script-runs-${block}-parts`} data-component="Parts">
+      {PARTS.map((part, index) => (
+        <text
+          key={part}
+          id={`script-runs-${block}-part-${index}`}
+          data-component="Parts"
+          x={X0 - 10}
+          y={barY(y, index) + 8}
+          fontSize="11"
+          textAnchor="end"
+          className="fill-muted-foreground"
+        >
+          {t(`script-runs.${part}`)}
+        </text>
       ))}
     </g>
   )
@@ -116,6 +155,7 @@ export function ScriptRuns() {
         >
           {t('script-runs.prose-note')}
         </text>
+        <Parts block="prose" y={30} t={t} />
         {PROSE.map((bars, index) => (
           <Run
             key={index}
@@ -148,6 +188,7 @@ export function ScriptRuns() {
         >
           {t('script-runs.script-note')}
         </text>
+        <Parts block="script" y={144} t={t} />
         {SCRIPT.map((bars, index) => (
           <Run key={index} block="script" index={index} bars={bars} y={144} fill="fill-primary" />
         ))}

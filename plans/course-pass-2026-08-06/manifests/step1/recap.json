@@ -1,0 +1,22 @@
+{
+  "deck": [
+    {
+      "file": "front/src/steps/step1/deck.tsx",
+      "action": "none",
+      "note": "Work order item 4 is two retitles and both are pure locale values, so deck.tsx needs no edit. deck.recap.one-window.title, deck.recap.one-window.note and deck.recap.divider.3 are in patches/step1/recap.json. The slide deck-recap-one-window stays: step1/CLAUDE.md records the recap block (divider, one-window, moves, next) and the empty guided page as one decision, so deleting the slide would have to go through that file."
+    }
+  ],
+  "claudeMd": [
+    {
+      "file": "front/src/steps/step1/CLAUDE.md",
+      "action": "replace",
+      "old": "An icon here that is not on the paragraph it came from\nis drift, in one direction or the other, and **the session bullet carries none because that unit\nmarks none**. Do not invent one to even the list up.",
+      "new": "An icon here that is not on the paragraph it came from\nis drift, in one direction or the other. **The session bullet carries a coin because\n`session.sessions-where-money.3` now carries one**, which is the rule working rather than the list\nbeing evened up: the unit marks its one actionable cost-saver and the recap lifts it. Never choose a\nmarker here.",
+      "note": "The exact whitespace/line wrapping in CLAUDE.md may differ from the `old` text above; match on the sentence 'the session bullet carries none because that unit marks none. Do not invent one to even the list up.' inside the `recap` paragraph. THE SESSION UNIT'S AGENT IS ASKED FOR THE SAME EDIT (session item 6). Apply it once. If session's agent has already rewritten this sentence, leave it alone.",
+      "reason": "recap item 2 puts a coin on recap.what-costs-do.5's move half, which the old sentence forbids. The HTML comment at the top of units/recap.html was updated in the same pass (owned by this unit, already done)."
+    }
+  ],
+  "quiz": [],
+  "registry": [],
+  "shared": []
+}

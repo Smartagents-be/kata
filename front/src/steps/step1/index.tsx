@@ -21,13 +21,17 @@ import { OneWindow } from './OneWindow'
 import { PatternMatch } from './PatternMatch'
 import { PickTheNext } from './PickTheNext'
 import { PickTheTier } from './PickTheTier'
+import { PlanItTwice } from './PlanItTwice'
+import { PriceOneTurn } from './PriceOneTurn'
 import { PromptInContext } from './PromptInContext'
 import { ReadYourWindow } from './ReadYourWindow'
+import { ReasoningCost } from './ReasoningCost'
 import { ReflectionLoop } from './ReflectionLoop'
 import { SequentialSteps } from './SequentialSteps'
 import { SessionMakeup } from './SessionMakeup'
 import { SessionWindows } from './SessionWindows'
 import { ShutterFlag } from './ShutterFlag'
+import { SpeedAtScale } from './SpeedAtScale'
 import { SpotInjection } from './SpotInjection'
 import { SurviveTheClear } from './SurviveTheClear'
 import { TokenAttention } from './TokenAttention'
@@ -35,11 +39,12 @@ import { TokenSplit } from './TokenSplit'
 import { ToolsInContext } from './ToolsInContext'
 import { TrainedOrGrounded } from './TrainedOrGrounded'
 import { UnderSpecified } from './UnderSpecified'
+import { WhereTheSeamFalls } from './WhereTheSeamFalls'
 import { WordsIntoTokens } from './WordsIntoTokens'
 import deck from './deck'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
-import { contextQuiz, promptQuiz } from './quiz'
+import { contextQuiz, promptQuiz, truthQuiz } from './quiz'
 import tokens from './units/tokens.html?raw'
 import prompt from './units/prompt.html?raw'
 import tools from './units/tools.html?raw'
@@ -57,13 +62,18 @@ import recap from './units/recap.html?raw'
  * `truth` is where that reader's answers come from. None of the three fills the window.
  *
  * The two layers a student writes and reads for themselves come first, so `prompt` and `tools` sit
- * ahead of `context`. That makes `prompt` the unit that defines the word context, and it makes
- * `context` the step back to the whole window rather than the first sight of it.
+ * ahead of `context`. No unit defines the word before then: it is used as an ordinary one from
+ * `prompt.lead.1` onward, and the definition sits in one clause inside `context.lead.1`, which is
+ * the unit named after it and the unit that takes the window apart.
  *
  * `workshop` is the step's capstone, a flag board (like
- * step 2's workshop): three flags the `GET /api/titles` backend hides from its response, one per
- * place an answer can come from - read the source, trace the run, turn the log level up. That is
- * `truth`'s question asked three times, which is why that unit sits directly above this one. The
+ * step 2's workshop): five flags, one per place an answer can come from. Ask what your own machine
+ * told the agent, read the whole response, turn the log level up, read the source, trace the run, in
+ * that order because it runs easiest first and outside in. Only the first comes from no project at
+ * all, and it was planted at install time rather than here: `install.txt` at the repo root asks the
+ * student's agent to run `kata/step1/machine-context.mjs`, so by the time they reach this board the
+ * line has been in every session they have opened for hours. That is `truth`'s question asked five
+ * times, which is why that unit sits directly above this one. The
  * board grades in the browser against salted hashes, so it needs no backend and there is no Java
  * checker. Above it, `OneWindow` frames the hunt as one measured session, because the flags on
  * their own ask nothing about the window the step spent eight units on. The unit's prose is the
@@ -101,8 +111,10 @@ const step1: Step = {
       html: prompt,
       inlineFigures: {
         'prompt-in-context': <PromptInContext />,
+        'reasoning-cost': <ReasoningCost />,
         'bundle-compare': <BundleCompare />,
         'exact-ask': <ExactAsk />,
+        'plan-it-twice': <PlanItTwice />,
       },
       quiz: promptQuiz,
     },
@@ -141,6 +153,9 @@ const step1: Step = {
       html: session,
       inlineFigures: {
         'session-makeup': <SessionMakeup />,
+        // The same afternoon cut twice. The section's argument is where the seam falls, and
+        // position is the one thing the prose can only assert.
+        'where-the-seam-falls': <WhereTheSeamFalls />,
         'survive-the-clear': <SurviveTheClear />,
       },
     },
@@ -169,6 +184,10 @@ const step1: Step = {
         // figure may be assistant-specific.
         'usage-readout': <UnitShot id="usage-readout" src="/session-usage.png" namespace="step1" />,
         'session-windows': <SessionWindows />,
+        'speed-at-scale': <SpeedAtScale />,
+        // The sum `model.cost.4` describes, asked for, and it sits above the board because the
+        // paragraph set it up a screen earlier.
+        'price-one-turn': <PriceOneTurn />,
         'pick-the-tier': <PickTheTier />,
       },
     },
@@ -183,6 +202,10 @@ const step1: Step = {
         'trained-or-grounded': <TrainedOrGrounded />,
         'answer-provenance': <AnswerProvenance />,
       },
+      // The unit writes no "Test yourself" heading of its own, so `QuizPanel` prints one, the way
+      // it does under `prompt`. It is also the only thing on this page that survives guided mode,
+      // where the prose goes and two figures would otherwise be the whole lesson.
+      quiz: truthQuiz,
     },
     {
       id: 'workshop',

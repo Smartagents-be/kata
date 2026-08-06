@@ -1,8 +1,8 @@
 <p data-i18n="engineering.lead.1">
   Good agentic projects start with good software engineering. That is the whole line between vibe
-  coding and agentic engineering, and it is worth being blunt about which side you are on.
-  <a href="/steps/step2/evolution">Project evolution</a> put you on the other side of it for an
-  hour, on a version built to be thrown away, and that is the one place the line does not hold.
+  coding and agentic engineering, and you are on one side of it or the other.
+  <a href="/steps/step2/evolution">Project evolution</a> put you on the other side for an hour, on a
+  version built to be thrown away, and that is the one place the line does not hold.
 </p>
 
 <p data-i18n="engineering.lead.2">
@@ -28,7 +28,7 @@
   rest: the domain in the middle, the machinery behind adapters, and the direction of a call as a
   folder you can point at. Both give you the logical shape, and a logical shape is what you can
   prompt against <svg data-icon="gem"></svg> <svg data-icon="coin"></svg> Ask for a feature on
-  articles and the agent knows where to look before it opens anything. Nothing above
+  articles and the agent knows where to look before it opens anything. No class outside
   <code>adapter/</code> names Postgres or S3, so swapping the database out is one folder's work.
 </p>
 
@@ -38,9 +38,9 @@
   <a href="/steps/step1/tokens">step 1's unit on tokens</a> showed.
 </p>
 
-<h2 data-i18n="engineering.use-correct-language.heading">Use the correct language</h2>
+<h2 data-i18n="engineering.right-words.heading">The right words</h2>
 
-<p data-i18n="engineering.use-correct-language.1">
+<p data-i18n="engineering.right-words.1">
   Name the thing you want. "Put a repository in front of this JDBC call" lands somewhere specific.
   "Clean this up a bit" lands in the statistical middle of every cleanup ever written. Design
   pattern names, layer names and the vocabulary of your domain are compression. They keep an agent
@@ -51,19 +51,25 @@
 <h2 data-i18n="engineering.quality-gates.heading">Quality gates</h2>
 
 <p data-i18n="engineering.quality-gates.1">
-  Skills and hooks turned up in <a href="/steps/step2/setup">project setup</a> as things a project
-  holds. This is where you put them to work. Line coverage, mutation coverage and a Sonar
-  reliability score still tell you whether software is fit to ship. They also hand an agent an
-  invariant, something fixed to hold itself to while it works <svg data-icon="gem"></svg> Each of
-  them is a proxy, though, and an agent will satisfy a proxy rather than the thing behind it. The
-  gate worth wiring in is the one that is expensive to fake.
+  Line coverage and mutation coverage still tell you whether software is fit to ship. So does a
+  Sonar reliability rating. They also hand an agent an invariant, something fixed to hold itself to
+  while it works <svg data-icon="gem"></svg> Each of them is a proxy, though, and an agent will
+  satisfy a proxy rather than the thing behind it. The gate worth wiring in is the one that is
+  expensive to fake.
 </p>
 
 <p data-i18n="engineering.quality-gates.2">
-  Wire that into the run rather than into your memory. A hook fires when the agent says it is
-  finished, <code>mvn verify</code> runs the analysis, and a number under the floor comes back as a
-  failure it has to answer for. The same rule written into <code>CLAUDE.md</code> is a request. This
-  one runs whether the agent remembers it or not.
+  Wire that into the run rather than into your memory. A hook fires once the agent says it is
+  finished, which is the one moment a hook can afford to be slow. <code>mvn verify</code> runs
+  whatever analysis your build has wired in, and a number under the floor comes back as a failure it
+  has to answer for. The same rule written into <code>CLAUDE.md</code> is a request. This one runs
+  whether the agent remembers it or not.
+</p>
+
+<p data-i18n="engineering.quality-gates.3">
+  None of that is about the agent being careful. It is the side of the line you are standing on,
+  written down where the work happens. What is left is the part you cannot write down in advance,
+  which is what <a href="/steps/step2/steering">steering</a> is about.
 </p>
 
 <!-- The doing part of the unit, under the same rule and heading the rest of the course puts over

@@ -21,6 +21,6 @@ public class AtlasBindingStage implements CatalogStage {
             }
             log.debug("binding check {}", new String(mark));
         }
-        run.publish("Secret Key to Great Code");
+        run.publish("Unbound Folios and the Secret Key");
     }
 }

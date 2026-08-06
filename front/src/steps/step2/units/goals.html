@@ -1,17 +1,19 @@
 <p data-i18n="goals.lead.1">
   Some ways of working burn a day of tokens in an afternoon. That is not automatically waste. A run
   that costs ten ordinary sessions and hands back a module that had no tests this morning is a trade
-  worth making. What decides it is what you get for the spend, and when you spend it.
+  worth making. The moves below are the expensive ones: a goal you walk away from, a fleet of
+  agents, a long turn on the frontier model, a design pass. What decides it is what you get for the
+  spend, and when you spend it.
 </p>
 
 <p data-i18n="goals.lead.2">
   When matters because of how you are billed.
   <a href="/steps/step1/model">Step 1's unit on the model</a> set out the two arrangements: a key
-  bills you per token, a subscription meters you in a rolling window. Under a window, five hours on
-  most plans, what you leave unused is not carried anywhere. Forty minutes of window is not something
-  you can save for tomorrow, so the thing to do with a window is spend it out. The limit that
-  actually binds sits behind it, weekly or monthly depending on the plan, and that is the one to
-  keep an eye on.
+  bills you per token, a subscription comes off a plan you paid for before you started. Where a plan
+  meters you in a rolling window, usually about five hours, what you leave unused is not carried
+  anywhere. Forty minutes of window is not something you can save for tomorrow, so the thing to do
+  with a window is spend it out. The limit that actually binds sits behind it, weekly or monthly
+  depending on the plan, and that is the one to keep an eye on.
 </p>
 
 <!-- Filled by the WindowSpend element registered under this name in steps/step2/index.tsx. It sits
@@ -62,7 +64,7 @@
 <p data-i18n="goals.whole-job.1">
   Some goals are far too big for one turn and still fit in one sentence. You inherit a service
   written six years ago, in production, with almost no tests. What you hand over is not "write a test
-  for <code>OrderService</code>". It is "get this module to a hundred percent line coverage and leave
+  for <code>OrderService</code>". It is "get this module to ninety percent line coverage and leave
   <code>mvn test</code> green", and then you walk away from it.
 </p>
 
@@ -76,16 +78,16 @@
 <p data-i18n="goals.whole-job.3">
   Both of those run for hours and burn tokens the whole time. Four hours is not unusual, and you gave
   up the steering a short session gives you, because nobody is watching step two while it happens.
-  What comes back is work that ran your check until the check said yes. For a job that is mechanical,
-  wide and measurable, that is a good trade.
+  What comes back is work that ran your check until the check said yes. For a job that is mechanical
+  and wide, and that a command can measure, that is a good trade.
 </p>
 
 <h2 data-i18n="goals.most-waiting.heading">Most of it is waiting</h2>
 
 <p data-i18n="goals.most-waiting.1">
   Look at where those four hours actually go. The agent writes a class in seconds.
-  <code>mvn verify</code> then takes two minutes, and the pass after it takes two more, and forty
-  passes later the build has had most of the afternoon. Tokens are burning the whole time, but the
+  <code>mvn verify</code> then takes four minutes, and the pass after it takes four more, and forty
+  passes later the build has had nearly three hours of it. Tokens are burning the whole time, but the
   clock is being run by your own test suite.
 </p>
 
@@ -102,10 +104,10 @@
   Meanwhile you still have a day of your own to get through. An agent rewriting forty classes for
   four hours is touching the files you have open, which makes your branch unusable while it runs.
   Ask for the goal to be pursued in a git worktree instead, the second checkout
-  <a href="/steps/step2/steering">steering</a> gives every agent.
+  <a href="/steps/step2/steering">the steering unit</a> gives every agent.
 </p>
 
-<pre><code>git worktree add ../kata-complexity goal/complexity</code></pre>
+<pre><code>git worktree add -b goal/complexity ../kata-complexity</code></pre>
 
 <p data-i18n="goals.own-worktree.2">
   Then merge back in pieces instead of at the end. One module finished and green is a merge worth
@@ -145,11 +147,11 @@
 <h2 data-i18n="goals.research-frontier-model.heading">Research on the frontier model</h2>
 
 <p data-i18n="goals.research-frontier-model.1">
-  There is a tier above the three. <a href="/steps/step1/model">The model unit</a> named it and
-  stopped, because what it is good at is a question about work rather than about windows. Broad
-  research is the answer. Point it at something with a lot of surface, a migration nobody here has
-  done or a library nobody has read, and what comes back is worth more than the same hours from the
-  tier below.
+  Above the three sits the frontier model. <a href="/steps/step1/model">The model unit</a> called it
+  a ceiling rather than a fourth tier and stopped there, because what it is good at is a question
+  about work rather than about windows. Broad research is the answer. Point it at something with a
+  lot of surface, a migration nobody here has done or a library nobody has read, and what comes back
+  is worth more than the same hours from the tier below.
 </p>
 
 <p data-i18n="goals.research-frontier-model.2">
@@ -183,9 +185,9 @@
   the end of a window, on something you actually want redrawn.
 </p>
 
-<h2 data-i18n="goals.read-came-back.heading">Read what came back</h2>
+<h2 data-i18n="goals.left-with.heading">What you are left with</h2>
 
-<p data-i18n="goals.read-came-back.1">
+<p data-i18n="goals.left-with.1">
   Every move in this unit hands you work you did not watch being made. A fleet that ran while you
   were at lunch, a design system you did not draw, forty classes rewritten by a run you left alone.
   Spending the tokens is the easy half. <a href="/steps/step2/workshop">The workshop</a> is where you

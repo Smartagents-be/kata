@@ -10,6 +10,6 @@ public class NightBellStage implements CatalogStage {
 
     @Override
     public void apply(CatalogRun run) {
-        run.publish("Cathedral of the Nightly Build");
+        run.publish("1,000 Ways to Lose a Page");
     }
 }

@@ -14,7 +14,7 @@ import { useTranslation } from 'react-i18next'
  * change to all four.
  *
  * The labels are bare nouns rather than `the agent` and `the code`, which is a width decision as
- * much as a style one: `audit-driven` runs to five boxes and four arrows, and the definite articles
+ * much as a style one: `audit-driven` runs to six boxes and five arrows, and the definite articles
  * are what pushed it past the prose column and into wrapping.
  *
  * DOM rather than SVG, like `WorkflowTimeline`: the labels are words, so they size themselves in

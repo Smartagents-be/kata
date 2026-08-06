@@ -10,6 +10,6 @@ public class QuillEngravingStage implements CatalogStage {
 
     @Override
     public void apply(CatalogRun run) {
-        run.publish("Hidden Software Tricks");
+        run.publish("Notes Toward a Hidden Cipher");
     }
 }

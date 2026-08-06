@@ -1,0 +1,58 @@
+{
+  "unit": "truth",
+  "step": "step1",
+
+  "quiz": [
+    {
+      "file": "front/src/steps/step1/quiz.ts",
+      "action": "append a third exported quiz after `promptQuiz`, at the end of the file",
+      "note": "The locale keys for every string below are already merged by patches/step1/truth.json. Choice ids and their key suffixes must match exactly.",
+      "code": "\n/**\n * The three questions under the `truth` unit. Each one hands the student a result and asks where\n * the answer came from, which is the unit's whole question: an answer read off disk, an answer from\n * the far side of the training cutoff, and a reading reported as a conclusion.\n *\n * `contextQuiz`'s `invented-userservice` owns the missing-context case and is deliberately not\n * repeated here. Nothing in these three re-argues that a model is an average either; `context` owns\n * that and this unit owns the date.\n */\nexport const truthQuiz: QuizQuestion[] = [\n  {\n    id: 'no-signal-in-the-answer',\n    question: 'quiz.no-signal-in-the-answer.question',\n    choices: [\n      {\n        id: 'nothing-does',\n        label: 'quiz.no-signal-in-the-answer.nothing-does',\n        correct: true,\n      },\n      {\n        id: 'names-a-filename',\n        label: 'quiz.no-signal-in-the-answer.names-a-filename',\n      },\n      {\n        id: 'hedged-ones',\n        label: 'quiz.no-signal-in-the-answer.hedged-ones',\n      },\n      {\n        id: 'quoted-code',\n        label: 'quiz.no-signal-in-the-answer.quoted-code',\n      },\n    ],\n    explanation: 'quiz.no-signal-in-the-answer.explanation',\n  },\n  {\n    id: 'config-format-changed',\n    question: 'quiz.config-format-changed.question',\n    choices: [\n      {\n        id: 'past-the-cutoff',\n        label: 'quiz.config-format-changed.past-the-cutoff',\n        correct: true,\n      },\n      {\n        id: 'knows-but-common',\n        label: 'quiz.config-format-changed.knows-but-common',\n      },\n      {\n        id: 'read-the-docs',\n        label: 'quiz.config-format-changed.read-the-docs',\n      },\n      {\n        id: 'scores-higher',\n        label: 'quiz.config-format-changed.scores-higher',\n      },\n    ],\n    explanation: 'quiz.config-format-changed.explanation',\n  },\n  {\n    id: 'read-it-and-said-so',\n    question: 'quiz.read-it-and-said-so.question',\n    choices: [\n      {\n        id: 'still-a-reading',\n        label: 'quiz.read-it-and-said-so.still-a-reading',\n        correct: true,\n      },\n      {\n        id: 'file-too-long',\n        label: 'quiz.read-it-and-said-so.file-too-long',\n      },\n      {\n        id: 'after-cutoff',\n        label: 'quiz.read-it-and-said-so.after-cutoff',\n      },\n      {\n        id: 'nothing-in-window',\n        label: 'quiz.read-it-and-said-so.nothing-in-window',\n      },\n    ],\n    explanation: 'quiz.read-it-and-said-so.explanation',\n  },\n]\n"
+    }
+  ],
+
+  "registry": [
+    {
+      "file": "front/src/steps/step1/index.tsx",
+      "action": "widen the quiz import on line 42",
+      "from": "import { contextQuiz, promptQuiz } from './quiz'",
+      "to": "import { contextQuiz, promptQuiz, truthQuiz } from './quiz'"
+    },
+    {
+      "file": "front/src/steps/step1/index.tsx",
+      "action": "attach the quiz to the `truth` unit entry, after its `inlineFigures` block",
+      "context": "the entry currently reads:\n    {\n      id: 'truth',\n      title: 'truth.title',\n      html: truth,\n      inlineFigures: {\n        // Two figures on one argument, ...\n        'trained-or-grounded': <TrainedOrGrounded />,\n        'answer-provenance': <AnswerProvenance />,\n      },\n    },",
+      "insertAfterInlineFigures": "      // The unit writes no \"Test yourself\" heading of its own, so `QuizPanel` prints one, the way\n      // it does under `prompt`. It is also the only thing on this page that survives guided mode,\n      // where the prose goes and two figures would otherwise be the whole lesson.\n      quiz: truthQuiz,"
+    }
+  ],
+
+  "deck": [
+    {
+      "file": "front/src/steps/step1/deck.tsx",
+      "action": "insert one slide directly after `deck-truth-provenance`, at the end of the truth block and before the workshop block",
+      "code": "  {\n    id: 'deck-truth-proof',\n    kind: 'statement',\n    ns: 'step1',\n    eyebrow: 'truth.title',\n    title: 'deck.truth.proof.title',\n    note: 'deck.truth.proof.note',\n  },",
+      "note": "Keys are merged by patches/step1/truth.json. It goes after the two figures rather than before them, which keeps the block's documented shape (statement, then the drawings) and hands straight into the workshop divider. `Proof` had no slide although it is one of the four sections and one of the divider's three points; the recorded reason it is undrawn is about a figure, and this is a statement."
+    }
+  ],
+
+  "claudeMd": [
+    {
+      "file": "front/src/steps/step1/CLAUDE.md",
+      "action": "replace the sentence in the `truth` paragraph that says the unit carries no quiz",
+      "from": "It carries no quiz and no exercise: `model` closes on `PickTheTier` and `workshop` is a whole board, so a card here would sit between two exercises with nothing new to ask for.",
+      "to": "It carries a registry quiz and no exercise. The card was proposed and rejected on the constraint that still holds: `model` closes on `PickTheTier` and `workshop` is a whole board, so a card here would sit between two exercises with nothing new to ask for. The quiz is there for the other half of the problem, which the rejection did not cover: this unit has no `data-audience` wrapper, no task and no board, so guided mode filtered it down to two figures and nothing else. `truthQuiz` is the one thing on the page that survives into the classroom, and the unit writes no heading of its own, so `QuizPanel` prints it the way it does under `prompt`. Its three questions ask where an answer came from, and none of them re-argues the average: `contextQuiz`'s `invented-userservice` still owns the missing-context case."
+    },
+    {
+      "file": "front/src/steps/step1/CLAUDE.md",
+      "action": "correct the description of the trained answer chip, which is a version line rather than a release (`3.5.0` against `4.1.0`)",
+      "from": "it is the previous release stated as levelly as the current one",
+      "to": "it is the previous version line stated as levelly as the current one"
+    }
+  ],
+
+  "notes": [
+    "`audit.md` row 33 asks for this quiz. Updating the audit is a separate job from doing the work (root CLAUDE.md), so nothing here touches `audit.md`; run the `audit-update` skill afterwards.",
+    "No HTML change was needed for the quiz: a unit with a registry quiz and no task writes no heading of its own, which `prompt` already establishes.",
+    "`truth.html` itself was edited directly and needs nothing from the integrator."
+  ]
+}

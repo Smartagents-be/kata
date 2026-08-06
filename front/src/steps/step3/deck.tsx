@@ -38,6 +38,14 @@ const deck: SlideSpec[] = [
     note: 'deck.change.test-engineer.note',
   },
   {
+    id: 'deck-step3-change-business',
+    kind: 'statement',
+    ns: 'step3',
+    eyebrow: 'change.title',
+    title: 'deck.change.business.title',
+    note: 'deck.change.business.note',
+  },
+  {
     id: 'deck-step3-change-pipelines',
     kind: 'figure',
     ns: 'step3',
@@ -62,6 +70,16 @@ const deck: SlideSpec[] = [
     ns: 'step3',
     eyebrow: 'change.title',
     title: 'deck.change.gates.title',
+  },
+  // It names no file: a SlideSpec has no assistant mechanism, so naming CLAUDE.md here would be
+  // wrong for half the room with nothing filtering it.
+  {
+    id: 'deck-step3-change-environment',
+    kind: 'statement',
+    ns: 'step3',
+    eyebrow: 'change.title',
+    title: 'deck.change.environment.title',
+    note: 'deck.change.environment.note',
   },
 
   // ── expectations ──────────────────────────────────────────────────────────────────────────
@@ -91,6 +109,24 @@ const deck: SlideSpec[] = [
     eyebrow: 'expectations.title',
     title: 'deck.expectations.missing.title',
     note: 'deck.expectations.missing.note',
+  },
+  // The one of the three sections the manager has to hear, and it was on no slide. It names no
+  // concrete edge case and must not grow one: `change` and `impostor` each enumerate three already.
+  {
+    id: 'deck-step3-expectations-burden',
+    kind: 'statement',
+    ns: 'step3',
+    eyebrow: 'expectations.title',
+    title: 'deck.expectations.burden.title',
+    note: 'deck.expectations.burden.note',
+  },
+  {
+    id: 'deck-step3-expectations-estimate',
+    kind: 'statement',
+    ns: 'step3',
+    eyebrow: 'expectations.title',
+    title: 'deck.expectations.estimate.title',
+    note: 'deck.expectations.estimate.note',
   },
   {
     id: 'deck-step3-expectations-velocity',
@@ -125,6 +161,17 @@ const deck: SlideSpec[] = [
     eyebrow: 'impostor.title',
     title: 'deck.impostor.signal.title',
     note: 'deck.impostor.signal.note',
+  },
+  // The last slide of step 3 and therefore of the whole deck. The deck ended on the unit's middle
+  // section, a diagnostic, while `deck.impostor.divider.3` promised this claim and never delivered
+  // it. No filename on it, for the same reason `take.line.label` names none.
+  {
+    id: 'deck-step3-impostor-written',
+    kind: 'statement',
+    ns: 'step3',
+    eyebrow: 'impostor.title',
+    title: 'deck.impostor.written.title',
+    note: 'deck.impostor.written.note',
   },
 ]
 

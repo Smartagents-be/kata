@@ -10,6 +10,6 @@ public class HiddenGalleryStage implements CatalogStage {
 
     @Override
     public void apply(CatalogRun run) {
-        run.publish("Whispered Wisdom of the Legacy Monolith");
+        run.publish("Legends of the Legacy Monolith");
     }
 }

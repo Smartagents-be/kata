@@ -12,11 +12,12 @@ prohibitions are in the root `CLAUDE.md`. None of them is repeated here.
 
 `step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Nine
 units, `evolution`, `setup`, `engineering`, `steering`, `patterns`, `workflows`,
-`enablement`, `parallel` and `goals`, two of
-them carrying a quiz, and the unit HTML is the source for what each argues. Five of the nine close
-on something the student does: `evolution` on an ungraded fifteen-minute task, `setup` on a graded
-flag board, `engineering` on an ungraded `TaskCard`, `workflows` and `goals` on a quiz each. The
-other four are framing prose. Five carry one
+`enablement`, `parallel` and `goals`, four of
+them carrying a quiz, and the unit HTML is the source for what each argues. Eight of the nine close
+on something the student does: `evolution`, `engineering`, `steering`, `patterns` and `enablement`
+on an ungraded `TaskCard`, `setup` on a graded flag board, and `steering`, `patterns`, `workflows`
+and `goals` on a quiz, three of them under a card. `workflows` is the one that is framing prose and
+a quiz with no card. Five carry one
 habit each; `evolution` opens the step and carries none, because its job is to put the rest in
 order: a version now costs an hour, so the step you hand over gets small and you take many of them.
 `workflows` is outside that count too, and deliberately so: it carries four ways of
@@ -70,7 +71,7 @@ narrow screen and the comparison would turn into a sequence.
 
 **Only the right half branches**, and that asymmetry is the second thing the figure argues: three of
 its nodes throw off versions that were built and dropped, dashed on the step 1 reading of a dash,
-each **heading for the same target a few degrees off** and **most of them a single step**, while the
+each **aimed at the same target and none of them arriving** and **most of them a single step**, while the
 surviving path carries on into the ring. They start **early as well as late**, so branching does not
 read as something that only happens near the finish. Aiming them at the target is what makes them
 versions of the work rather than detours, and the geometry that keeps them from crossing is recorded
@@ -205,7 +206,23 @@ The `gaps.md` section turns on its third part and nothing else. Never assume and
 are bookkeeping; **stopping** is the lesson, because an agent that logs an assumption and then builds
 on it has told you what it guessed underneath a diff that already depends on the guess. The rule
 belongs in `CLAUDE.md` rather than a prompt, and the unit says so, because you cannot name a gap you
-do not know about yet. Do not soften the stop into "flag it and continue".
+do not know about yet. Do not soften the stop into "flag it and continue". That the rule belongs in
+`CLAUDE.md` is now stated on the page rather than only here: `stop-at-the-gap.2` names the file and
+links `setup`, which is the seam where the unit turns from moves you make in flight into a file you
+edit once.
+
+`steering` closes on an ungraded `TaskCard`, `SteerARun`, under the same `<hr>` and `ui:quiz.title`
+heading the rest of the step uses, with the quiz under it. **Four moves rather than five**, because
+the `data-audience="self"` aside owns the rewind experiment and a fifth move would say it twice to
+the one reader who gets both. **The `gap` move is why the card exists**: `LateFeePolicy` computes in
+cents and names no currency anywhere in `kata/step2/java`, so asking for the fee in euros is the only
+place in the course where a student watches an agent decline to guess. Nothing on the card is graded,
+and nothing it asks for touches a package, so `mvn verify -Pgraded` and the `challenge` tests are
+safe from it.
+
+**A gap is a *leemte* in Dutch and never an *opening***, which in that language is an aperture or a
+vacancy. It runs through `stop-at-the-gap.heading`, `.2`, `.3` and `workshop.flag.statement.help`, so
+a rewording of any of them keeps the noun.
 
 The interrupt-or-go-back section deliberately does not name a keystroke. Rewinding to an earlier
 message is described as something "most harnesses let you do", since the binding differs per harness
@@ -245,9 +262,12 @@ than in a fourth one**, which is what keeps the section the shortest while still
 strictness it has just sold: keep it fast and keep it narrow, because the script runs on every write
 and a broken one hands the agent an error it works around instead of writing the code. That argument
 is latency and blast radius and **never tokens**, on the two-site rule above, so a coin icon in this
-section is the third site. **It is now the only place in the step that teaches hooks**, and its
-closing forward pointer to `patterns` was cut when that unit stopped mentioning them at all, so a
-paragraph written back into `patterns` about hooks means restoring the pointer with it. `HookTree` paints
+section is the third site. **It is now the only place in the step that teaches hooks**, and the
+closing forward pointer to `patterns` is back on new grounds: the old one handed off hooks and went
+when that unit stopped mentioning them, while this one hands off the case a hook does not cover, a
+correction that keeps coming back rather than a command that has to run. `patterns.skill-iteration.1`
+names `setup` from the other side, so the two sentences are one seam and a cut to either end leaves
+the other pointing at nothing. `HookTree` paints
 `settings.json`, `hooks/` and the script all teal on purpose: a hook is two files and a reader who
 takes away one of them has the wrong picture.
 
@@ -279,9 +299,14 @@ which is what makes the extraction invisible to anything that pointed at them. T
 the boards do not mark each other's rows solved, and both sit under `kata.step2.` where
 `shared/lib/reset.ts` can find them.
 
-`patterns` is one short lead paragraph, `Skill iteration`, then `Scripts`, and **the `script-runs`
-figure has the last word**: a closing section called "Around the script" was cut, along with the
-lead's second paragraph. What went with them is worth knowing before writing any of it back. The
+`patterns` is one short lead paragraph, `Skill iteration`, then `Scripts`, and **it closes on a card
+and a quiz** under an `<hr>` and the shared `ui:quiz.title`, with no prose between the rule and the
+card. The `script-runs` figure had the last word until they landed: a closing section called
+"Around the script" was cut, along with the lead's second paragraph. `SameEveryRun` **asks for no
+tests** (spending `workshop.flag.coverage.help`'s testing skill is the capstone's job) and **touches
+no package** (a rename breaks `mvn verify -Pgraded`, the `challenge` tests and the native-image
+flag). Its `twice` move is `ScriptRuns`'s claim made testable, and its `find` move is the only place
+in the course where a skill's `description` is tested rather than described. What went with them is worth knowing before writing any of it back. The
 cut section argued that the judgement stays in the skill while the script does the mechanical part,
 that a hook calls the same script when it has to run unasked, and that not everything reduces to
 one (taste has no exit code, but the em-dash rule's check is still a `grep`). The cut lead paragraph
@@ -334,7 +359,8 @@ add a fourth to even the set up.
 
 The quiz renders under the closing figure from the registry, so the unit's HTML gets no
 `<h2 data-i18n="ui:quiz.title">`: that heading belongs to a task card, and `QuizPanel` writes its
-own. `evolution`, `setup` and `engineering` carry the heading because they carry cards. `goals`
+own. `evolution`, `setup`, `engineering`, `steering`, `patterns` and `enablement` carry the heading
+because they carry cards. `goals`
 follows this unit's shape rather than theirs, for the same reason.
 
 Two of the four are already taught elsewhere, and the unit **points rather than repeats**, the same
@@ -424,7 +450,7 @@ The return path is **three borders on one box**, so it is a bracket with two rig
 than an arrow, and it reflows with the grid instead of carrying coordinates. A bare arrowhead was
 tried first and is the thing to avoid: it lands in the gap between two cards and reads as pointing
 at the wrong one. The chevron is `Up` and caps the left riser for the same reason. **Both risers sit
-on card centres**, `Spec-driven` and the last `Plan-based`, and the two margins that put them there
+on card centres**, `Spec-driven` and `Plan/naive`, and the two margins that put them there
 are arithmetic rather than nudges: a percentage margin on a grid item resolves against its own grid
 area, so half a card is `(100% - 1rem) / 6 - 0.75rem` once the `size-4` arrow and `gap-2` ahead of
 each card are taken out. Change the parent's gap or a stage cell's lead-in and both numbers move.
@@ -446,12 +472,25 @@ four words they had not been given yet.
 `enablement` follows `workflows` and owns the one thing the rest of the step leaves out: **how long
 it takes to find out**. Every other unit decides what you hand over or what you do while it runs;
 this one is about the machinery around you that answers you in seconds instead of in a deploy. Three
-sections and no exercise, on `workflows`'s reasoning rather than as an omission: there is
-nothing a card could ask for that the student's own project would not answer better. **It has no
-quiz either, and that half is no longer borrowed from `workflows`**, which now carries one. It
-stands on its own here: this unit is about what has to be true around you, and a condition has no
-wrong answer to offer a question the way a choice between four workflows does. Run it locally
-front and back, grow the crossbar, and count where the day goes.
+sections, and it closes on `CountTheDay`, an ungraded `TaskCard` under the same `<hr>` and "Test
+yourself" heading the rest of the course uses. The unit told the student to count where the hours
+go and then asked them to count nothing, which is what the card answers. **It names no project and
+no command**, and that is a condition of it existing: `run-own-machine` was stripped of this
+repository's own two-terminal setup so a reader on their own stack would not have to translate it,
+and a card naming `mvn spring-boot:run` puts that straight back. Its `fit` move sends the reader
+back into `LoopsPerHour` with a number of their own, which is what turns that figure from a drawing
+into a measurement. **It has no quiz, and that half is no longer borrowed from `workflows`**, which
+now carries one. It stands on its own here: this unit is about what has to be true around you, and
+a condition has no wrong answer to offer a question the way a choice between four workflows does.
+Run it locally front and back, grow the crossbar, and count where the day goes.
+
+**It was `Enablement` and is now `What it asks of you`**, on `goals`'s precedent: the unit id, the
+URL, the namespace prefix, the deck eyebrow key and every `/steps/step2/enablement` link stay where
+they are, so nothing that pointed at it moved. The old title was the one abstract noun in a step of
+plain ones, it appeared in neither language's prose, and it was all that bound three sections that
+do not build on one another. The new one reads back onto all three: your check has to keep up, what
+is asked of you moves up a level, and the week is what it asks of your time. Three step 3 blocks
+called the unit by its old title and were repointed with it, in both languages.
 
 **It opens straight on its first `<h2>` and carries no lead, which is deliberate.** The two lead
 paragraphs it was drafted with said the work comes back fast and the checking is what takes the
@@ -602,11 +641,14 @@ with the coordination moved into one of them), then `One in front, the rest behi
 (control back in the middle, which is what most days actually look like). Running most-to-least and
 then landing in the middle is what makes the last section read as the answer rather than as a fourth
 option. It carries no exercise, on `workflows`'s reasoning: there is nothing a card could ask for
-that the student's own week would not answer better. **It carries no quiz, and that is not a
-decision this file has taken.** It used to rest on `workflows` deciding that the choice is the
-lesson, and `workflows` has since reversed exactly that half: a question can ask which arrangement a
-situation wants. So the absence here is an open row rather than a reason, and `audit.md` is where it
-is tracked. **It opens
+that the student's own week would not answer better. **It does carry a quiz**, on the reasoning
+`workflows` arrived at: a card asks for work and there is none to ask for here, but a question can
+ask which arrangement a situation wants. The three in `quiz.ts` are situations, one per arrangement
+with something to get wrong. `One in front, the rest behind` has none, because it is the answer the
+other three are measured against and it turns up as a choice inside two of them. **No distractor may
+claim an orchestrator stops two agents writing over each other**: that claim was cut from the unit
+while still half believed, and a distractor this file does not flatly reject is one a careful student
+can defend. **It opens
 straight on its first `<h2>` and carries no lead**, on `enablement`'s and `steering`'s precedent.
 
 **`The orchestrator` sits directly after `Many agents at once` because it is that section answered**,
@@ -623,8 +665,9 @@ for. Two things follow. The warning aside under `Many agents at once` **no longe
 anywhere in the unit**, which is the decision rather than an oversight: the ceiling that section
 names is your attention, and a paragraph saying an orchestrator lifts the collision half of it was
 arguing with the strongest claim in the unit while leaving the other half standing. And
-`agents-at-once.orchestrated.note` ("four runs, one thing to read") is now **the only place that
-claim is made**, so the figure carries it alone and a rewrite of that note drops it from the course.
+`agents-at-once.orchestrated.note` ("four runs, one thing to read") carries that claim in the unit,
+and the quiz's `coordination-moves` choice is the only other place it is made, so a rewrite of the
+note leaves the claim standing only in an answer a student reads once.
 
 Its name is a knowing exception. **`step1/harness` calls this the coordinator**, and it owns the
 whole mechanism: the expensive model on top and cheap sub-agents below, a sub-agent starting on an
@@ -646,10 +689,11 @@ behind you are goals rather than instructions and hands off. The agents-are-two-
 `steering`'s too and must not turn up here.
 
 The warning aside closes `Many agents at once` and it is **step 2's second
-`data-variant="warning"`**, `setup`'s being the first. It carries the two costs no other unit states:
-two agents on the same code writing over each other, and **your attention degrading rather than
-running short**. That second one is easy to collapse into `steering`'s "your reading is the
-bottleneck rather than their speed", and it is not the same claim. `steering` says reading is slower
+`data-variant="warning"`**, `setup`'s being the first. It carries the one cost no other unit states,
+**your attention degrading rather than running short**. The collision cost is `steering`'s, and the
+paragraph directly above the aside already raises it, so the step's only amber callout is not spent
+on a problem that has just been answered. The cost it does carry is easy to collapse into
+`steering`'s "your reading is the bottleneck rather than their speed", and it is not the same claim. `steering` says reading is slower
 than producing; this says the tenth diff of the afternoon gets a worse read than the first did. Keep
 them apart, or the step loses the only place it says an agent can hand you more than you can stay
 sharp for.
@@ -659,8 +703,10 @@ sharp for.
 first heading it would put three labels in front of a reader who has not been given them. Nothing
 below it reads it back, so its row names and its right-hand notes carry the comparison, the way
 `ScriptRuns` puts what each row produces on the right instead of into prose. **Teal is the agent you
-are actually watching**, and that is the only colour rule in it, which is why row two has no teal at
-all: four at once is nobody watched. It borrows `flow.node.you` and `flow.node.agent` from
+are actually watching**, and that is the only colour rule in it. The dash carries the rest: solid
+means somebody has the wire, dashed means nobody does. So row two is four dashed wires and no teal at
+all, which is the sentence the paragraph above the figure makes, that nobody reads four runs as they
+happen. It borrows `flow.node.you` and `flow.node.agent` from
 `FlowDiagram` rather than declaring its own words, so the two figures name the same boxes and a
 rewording moves both.
 
@@ -747,7 +793,7 @@ insertion or a cut could falsify silently, and cutting `quality` did. Positional
 neighbouring units break silently on an insertion, so
 name the unit. **`goals` closes by naming this unit back**, and where that sentence sits moved when
 `goals` was rewritten: it was the end of `goals.own-worktree.2`, and it is now the end of
-`goals.read-came-back.1`, which is the last paragraph of the unit. What is load bearing is the pair
+`goals.left-with.1`, which is the last paragraph of the unit. What is load bearing is the pair
 rather than its address, so a rewrite of either end has to leave the other pointing at something.
 It ships a small loans domain in `kata/step2/java` that is green but un-hardened, and
 a `graded` Maven profile that measures it against three goals - a coverage floor, a complexity
@@ -755,6 +801,15 @@ ceiling and honest (mutation-tested) coverage. `mvn verify -Pgraded` prints a le
 each goal met and fails until all three are. The student hardens the module (that is the exercise,
 so do not ship the tests or the refactor), reads the flags, and pastes them into the `workshop`
 flag board.
+
+**The capstone carries no figure, and that is a decision rather than a gap.** The honest flag exists
+so the student *discovers* that assertion-free tests hold a coverage bar green, and any drawing
+measuring a hundred percent of the lines against a mutation score hands them that discovery above the
+board, before they have run anything. The same reasoning rules out a quiz (five hash-checked flags
+already grade the work, so a question would grade whether the page was read) and a `TaskCard` (the
+whole page is one instruction set ending in the board, and its two ungraded moves are plan mode
+before the statement and plan mode before the native build, which are both better as a sentence than
+as a tick).
 
 The board carries a **fourth flag of a different shape**. The first three sharpen code that already
 runs; this one is functionality that does not exist yet. `MemberStatements.forTier` ships
@@ -770,9 +825,13 @@ native image, and it is built to resist a one-shot so the student has to plan it
 `step2/aot/NativeImageFlag`, an `ApplicationRunner` that prints only when `NativeDetector.inNativeImage()`
 is true, so `mvn spring-boot:run` and `mvn test` stay silent and the flag is proof of a native image.
 Its payload is a classpath resource rather than a Java constant, so an image built without thinking
-about resources starts, cannot find it, and prints a miss instead of the code. Two things stand
-between the student and the flag, wiring an ahead-of-time build and reading that runtime miss as the
-spec for the fix, and each is a plan-worthy step the unit tells them to work in plan mode.
+about resources starts, cannot find it, and prints a miss instead of the code. **One thing stands between the student and the flag, and it is not the build.**
+`spring-boot-starter-parent:4.1.0` ships its own `native` profile, so `mvn -Pnative native:compile`
+compiles this project with no pom change at all: verified on GraalVM 25.0.3, under a minute, and the
+binary starts and prints the miss. What is left is reading that runtime miss as the spec for the fix,
+which is the plan-worthy step the unit tells them to work in plan mode. `workshop.native.1` and `.2`
+claimed the wiring was the student's and were corrected in the same pass, along with
+`workshop.flag.native.help`.
 
 There used to be a third, and it is worth knowing why it went. Step 1 and step 2 once shared one
 Maven module, so the Boot plugin pinned `<mainClass>` to `Step1Application` and a naive native build

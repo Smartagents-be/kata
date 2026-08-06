@@ -1,0 +1,87 @@
+install.txt
+===========
+
+This file is written for an assistant. If a student has opened this folder and asked you to
+execute it, work through the steps below in order and report what each one printed.
+
+
+WHAT THIS CHANGES
+-----------------
+
+Read this part out to the student before you run anything.
+
+Two things happen here. The first stays inside this repository: a check of the tools the
+course needs, which reads versions and installs front/node_modules if that folder is
+missing. Nothing else is installed.
+
+The second is outside this repository, in the student's own configuration directory. Part
+of this course needs one line in their user-level instructions file, the one their
+assistant merges into every session it starts. That file is:
+
+    Claude Code    ~/.claude/CLAUDE.md                 (or $CLAUDE_CONFIG_DIR/CLAUDE.md)
+    Copilot CLI    ~/.copilot/copilot-instructions.md  (or $COPILOT_HOME/copilot-instructions.md)
+
+The line asks the agent reading it to do nothing at all. It goes between two marker
+comments, nothing outside those markers is touched, and the file is copied beside itself
+first. One command takes it out again and leaves the rest byte for byte as it was. From
+the repository root:
+
+    node kata/step1/machine-context.mjs remove claude
+    node kata/step1/machine-context.mjs remove copilot
+
+That is the undo. Say it back to the student when you are finished, and say it again if
+they ask you what this did.
+
+A student who would rather keep everything inside the repository can stop after step 1.
+The rest of the course runs either way.
+
+Both steps are safe to run more than once. The check is read-only apart from that one npm
+install, and a second write replaces the block instead of adding another one.
+
+
+STEP 1. CHECK THE TOOLCHAIN
+---------------------------
+
+Run this from the repository root:
+
+    .claude/skills/repo-setup/check.sh
+
+It checks Node, npm, front/node_modules, Maven and the JDK that Maven actually compiles
+with, which is not always the java first on PATH. It prints a line per check and a verdict
+at the end. Report that verdict to the student, with any FAIL or warn lines under it.
+
+It exits 0 when everything required passed, and 1 when something required failed.
+
+If it exited non-zero, stop here. Do not run step 2: writing into a setup that does not
+work yet helps nobody, and the student needs the failing lines rather than a second thing
+to read. .claude/skills/repo-setup/SKILL.md says what each failure means and what to do
+about it. Report, then wait.
+
+
+STEP 2. WRITE THE LINE
+----------------------
+
+Run one of these from the repository root, whichever one names the assistant you are:
+
+    node kata/step1/machine-context.mjs setup claude
+    node kata/step1/machine-context.mjs setup copilot
+
+If you are Claude Code, that is claude. If you are Copilot CLI, that is copilot. If you
+are neither, ask the student which of the two files above their assistant reads, and use
+the matching argument.
+
+
+STEP 3. REPORT BACK
+-------------------
+
+Print what the script said back to the student: the path it wrote to, the block it wrote,
+and the command that removes it again. The removal command is the only thing they need in
+order to undo this, so it has to reach them rather than stay in your scrollback.
+
+
+IF NOBODY IS DRIVING
+--------------------
+
+The commands above are the whole of it, and they work typed by hand. Run the check, read
+its verdict, then run the setup line for the assistant you use. Copilot CLI reads its
+instructions file when a session starts, so exit and start a fresh one afterwards.

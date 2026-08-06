@@ -2,7 +2,7 @@
 
 One file, `index.html`, and nothing behind it. It is what the student's agent opens through a
 browser MCP server in the `connect-one` task of `front/src/steps/step1/units/tools.html`, and it
-hides step 1's fourth flag.
+hides step 1's sixth flag, the one that is not on the `workshop` board.
 
 **Do not decode, reveal or reimplement that flag.** It is not in the markup as text: `CIPHER` is the
 string with each byte XORed against a rolling key, and the page assembles it in the browser when the

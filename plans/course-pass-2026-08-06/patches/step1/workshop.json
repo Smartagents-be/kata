@@ -1,0 +1,21 @@
+{
+  "en": {
+    "hunt.count.label": "Run /context again when the third flag lands, put the two numbers side by side, and take the gap to the rates in the model unit.",
+    "deck.workshop.divider.1": "Three flags hidden in <hi>one service</hi>",
+    "deck.workshop.debrief.title": "Which flag could you have <hi>handed over whole</hi>?"
+  },
+  "nl": {
+    "workshop.lead.1": "De backend houdt iets voor je achter. <code>GET /api/titles</code> geeft negen boektitels terug, en de Catalogus-pagina in de zijbalk toont ze. De pipeline erachter doet bij elke aanvraag een pak meer dan die negen regels laten uitschijnen, en niet alles daarvan in het volle zicht. Drie van de dingen die hij je niet vertelt zijn flags: leetspeak, tussen <code>{accolades}</code>. Eén service, drie antwoorden, en <a href=\"/steps/step1/truth\">waar elk antwoord vandaan komt</a> is het enige dat ze uit elkaar houdt.",
+    "workshop.one-window.1": "Werk alle drie vanuit één sessie. Geen van deze flags heeft er een clear tussen nodig, en ze bij elkaar houden is precies de bedoeling: de jacht vult een venster onder je ogen, met bronbestanden, een <a href=\"/steps/step1/tools\">trace en een consoledump</a> die er de een na de ander in gaan. Je hebt acht units besteed aan wat dat kost. Lees het getal aan beide kanten en zie het jezelf overkomen.",
+    "hunt.count.label": "Draai /context opnieuw zodra de derde flag binnen is, leg de twee getallen naast elkaar, en neem het verschil mee naar de tarieven in de unit over het model.",
+    "flags.panel.wrong": "Niet die. Ga terug naar de pipeline en lees wat hij verborg.",
+    "deck.workshop.divider.1": "Drie flags verstopt in <hi>één service</hi>",
+    "deck.workshop.debrief.title": "Welke flag had je <hi>in zijn geheel kunnen doorgeven</hi>?"
+  },
+  "afterEn": {
+    "deck.workshop.debrief.title": "deck.workshop.flags.note"
+  },
+  "afterNl": {
+    "deck.workshop.debrief.title": "deck.workshop.flags.note"
+  }
+}

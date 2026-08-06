@@ -1,34 +1,32 @@
 <p data-i18n="backend.lead.1">
-  There is also a Java backend, and it is not one project. Every step has its own under
-  <code>kata/</code>, so <code>kata/step0/java</code>, <code>kata/step1/java</code> and so on, each
-  with its own <code>pom.xml</code> and its own Maven build. Open the folder for the step you are on
-  and run Maven from in there. The ones that run a service boot on port 8080, so only one of them
-  runs at a time.
+  There is Java behind this kata, and it is not one project. Three steps have their own under
+  <code>kata/</code>: <code>kata/step0/java</code>, <code>kata/step1/java</code> and
+  <code>kata/step2/java</code>, each with its own <code>pom.xml</code> and its own Maven build. Open
+  the folder for the step you are on and run Maven from in there. Two of them boot a service on port
+  8080, so only one runs at a time. Start the second while the first is still up and the boot fails
+  on the port rather than on anything you did.
 </p>
 
 <p data-i18n="backend.lead.2">
-  That code is what the exercises work against. A module can point you at a job to do in its own
-  step's project. Do it right and a flag becomes available. From step 1 on, watch out for red
-  herrings: a string in braces is not always the one you are after.
+  That code is what the exercises work against. A unit points you at a job in its own step's project,
+  and doing the job is what puts the flag within reach: sometimes the build prints it, sometimes you
+  have to go and find it. Watch out for red herrings from the last page of this step on: a string in
+  braces is not always the one you are after.
 </p>
 
 <h2 data-i18n="backend.code-blocks.heading">Code blocks</h2>
 
 <p data-i18n="backend.code-blocks.1">
-  Sometimes you find code blocks in the course, like the one below. It matters that you use them and
-  drive them through your AI agent, or the flag will not show up.
+  Some pages hand you a code block, like the one below. Give it to your agent to run rather than
+  pasting it into a terminal yourself. Nothing in the build checks which of you ran it. House rule
+  one is the reason, and this is the cheapest place in the course to start keeping it.
 </p>
 
 <pre><code>cd kata/step0/java
 mvn verify -Pintro</code></pre>
 
+<div data-figure="intro-loop"></div>
+
 <p data-i18n="backend.code-blocks.2">
-  Step 1 opens on <a href="/steps/step1/tokens">tokens</a>, which is what everything you send an
-  agent is counted in.
+  The next page puts three of those runs on a board, and this block is the first of them.
 </p>
-
-<hr>
-
-<h2 data-i18n="ui:quiz.title">Test yourself</h2>
-
-<div data-figure="code-check"></div>

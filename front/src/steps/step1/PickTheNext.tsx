@@ -11,10 +11,11 @@ import { useTranslation } from 'react-i18next'
 import { cn } from '@/shared/lib/utils'
 
 /**
- * The unit's one exercise, and it asks the question `NextToken`'s branch tree only shows: given three
- * roads out of the same prompt, which word comes next. The answer is all three, because the scores
- * are a distribution and the model draws from it, which is exactly what `tokens.one-at-a-time.4`
- * argues. A student who has read the figure as a lookup table picks a word and finds out here.
+ * The unit's one exercise, and it asks the question `NextToken`'s fan of scores only shows: given
+ * three roads out of the same prompt, which word comes next. The answer is all three, because the
+ * scores are a distribution and the model draws from it, which is exactly what
+ * `tokens.one-at-a-time.3` argues. A student who has read the figure as a lookup table picks a word
+ * and finds out here.
  *
  * **A different sentence from `NextToken` and `TokenAttention` on purpose.** Those two are a pair on
  * `the build failed because it timed out`, and reusing it would have this exercise answered by the

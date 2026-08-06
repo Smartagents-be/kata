@@ -11,8 +11,9 @@ import { useTranslation } from 'react-i18next'
  * come out close to each other on that axis, because they are close: what separates them is the
  * artifact, which is the second thing the figure carries.
  *
- * The proportions are hand-authored. `NextToken` in step 1 sets the precedent for that and the
- * caption admits it here the same way, because a bar chart invites being read as a measurement.
+ * The proportions are hand-authored, and this docblock is the only place that is written down.
+ * `NextToken` in step 1 admits as much in a caption; the caption drafted for this figure was cut on
+ * purpose, so nothing on the page says it. Nobody may read a measurement off these bars.
  */
 const ROWS = [
   { id: 'naive', before: 20, run: 230, after: 250 },

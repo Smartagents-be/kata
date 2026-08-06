@@ -1,0 +1,11 @@
+{
+  "claudeMd": [
+    {
+      "file": "front/src/steps/step2/CLAUDE.md",
+      "why": "setup.hooks.3 now closes on a forward pointer to `patterns` again, but on different grounds than the one that was cut. The recorded sentence says the pointer only comes back if `patterns` writes a hooks paragraph back in, which is no longer what the pointer is for: it hands off recurring corrections, not hooks. Leaving the note as it stands would tell the next author to delete a link that is deliberate.",
+      "find": "**It is now the only place in the step that teaches hooks**, and its\nclosing forward pointer to `patterns` was cut when that unit stopped mentioning them at all, so a\nparagraph written back into `patterns` about hooks means restoring the pointer with it.",
+      "replace": "**It is now the only place in the step that teaches hooks**, and the\nclosing forward pointer to `patterns` is back on new grounds: the old one handed off hooks and went\nwhen that unit stopped mentioning them, while this one hands off the case a hook does not cover, a\ncorrection that keeps coming back rather than a command that has to run. `patterns.skill-iteration.1`\nnames `setup` from the other side, so the two sentences are one seam and a cut to either end leaves\nthe other pointing at nothing.",
+      "note": "Match on the prose rather than on line numbers; the paragraph is in the section beginning 'The Hooks section exists because'. If the exact wrapping differs, keep the meaning and the surrounding sentences intact."
+    }
+  ]
+}

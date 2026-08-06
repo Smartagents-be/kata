@@ -1,13 +1,16 @@
 <!-- In class the teacher walks through this at the board, so the page keeps only the
      diagram and the quiz. Self-learners read the whole thing. -->
-<!-- `prompt` and `tools` both use the word before this unit arrives, so it steps back to the whole
-     window rather than naming it, which is what the populated oval below is for. `prompt` used to
-     open on a definition of it and no longer does; nothing defines it now. -->
+<!-- `prompt` and `tools` both use the word before this unit arrives, and `prompt` used to open on a
+     definition of it. That definition lives here now, in one clause inside the sentence that already
+     describes the block, because this is the unit named after the word and the unit that takes the
+     window apart. `recap` and step 3 both link back here for it. The populated oval below is the
+     same claim drawn. -->
 <div data-audience="self">
   <p data-i18n="context.lead.1">
     Your prompt, the resources the agent read and the tools it can call come from different places
-    and land in the same block of text. Once anything is in there, nothing marks where it came from,
-    and the model weighs all of it the same.
+    and land in the same block of text. That block is the context, and it is all the model ever
+    sees. Once anything is in there, the model weighs all of it the same, whatever it arrived
+    marked as.
   </p>
 </div>
 
@@ -30,19 +33,18 @@
   </p>
 
   <p data-i18n="context.model-stateless.2">
-    Sending that whole transcript again is not free. The longer you talk to an LLM, the bigger the
-    tasks and the more of them stack up, the more every turn costs. Keep that in mind and clear the
-    session <svg data-icon="coin"></svg> often enough, especially when you
-    switch to something unrelated. A fresh session keeps the model focused, even when it has to
-    re-read a file to solve the problem in front of it.
+    Sending that whole transcript again has consequences beyond the bill. Clear the session
+    <svg data-icon="coin"></svg> often enough, especially when you switch to something unrelated. A
+    fresh session keeps the model focused, even when it has to re-read a file to solve the problem
+    in front of it.
   </p>
 
   <h2 data-i18n="context.model-statistic.heading">And it is a statistic</h2>
 
   <p data-i18n="context.model-statistic.1">
-    It is also a statistical model rather than a reasoning database. It predicts the most likely
-    continuation of the text it was given, using patterns from its training data. It holds no
-    opinion about your codebase. What it holds is an average.
+    It is also a statistical model rather than a reasoning database. It weighs what could come next
+    in the text it was given, using patterns from its training data. It holds no opinion about your
+    codebase. What it holds is an average.
   </p>
 
   <p data-i18n="context.model-statistic.2">
@@ -62,7 +64,7 @@
   The one on the left is the prompt on its own. The one on the right got the same prompt with one
   reference image from Dribbble pinned to it. That single piece of context steered it somewhere less
   generic straight away. It is not finished, but it is closer, and the distance left to cover is
-  shorter. Relevant context does not only make an answer more correct. It raises the quality.
+  shorter. The left one is correct too. Nobody would ship it.
 </p>
 
 <!-- The figure's payoff turned on the student's own repository. It stays descriptive on purpose:
@@ -110,21 +112,21 @@
   <p data-i18n="context.why-bites-hardest.1">
     There is far more bad code on the internet than good code. Abandoned tutorials, answers from
     2011, snippets that never ran in production, homework. A model trained on all of it has seen the
-    thing you should not do thousands of times.
+    thing you should not do thousands of times, and unlike a bad paragraph, a bad function compiles.
   </p>
 
   <p data-i18n="context.why-bites-hardest.2">
-    It cannot tell the two apart. "Good" and "bad" are not labels in the training data. Frequency is
-    the only signal, so a vague question returns the statistical middle of everything ever written
-    about the topic. That middle is mediocre code that happens to compile.
+    From the pile alone it cannot tell the two apart. "Good" and "bad" are not labels in what it
+    read. Later training teaches it manners and taste in general, not what your team settled on in
+    2019, so frequency is what is left. A vague question returns the statistical middle of
+    everything ever written about the topic. That middle is mediocre code that happens to compile.
   </p>
 
   <h2 data-i18n="context.more-context-not.heading">More context is not free</h2>
 
   <p data-i18n="context.more-context-not.1">
-    Every token in the window is paid for, on every turn, because the whole context goes back to the
-    model with each message. A long session does not cost slightly more. It costs more per message,
-    for the rest of the session.
+    Every token in the window goes back to the model on every turn. A long session does not cost
+    slightly more. It costs more per message, for the rest of the session.
   </p>
 
   <p data-i18n="context.more-context-not.2">
@@ -149,17 +151,19 @@
   </p>
 
   <p data-i18n="context.entropy.3">
-    This has a name of its own: lost in the middle. Nothing was deleted. The line that decides the
-    answer is still sitting in the window, but so is everything else, and the model reads straight
-    past it because it weighed that line as less important than the bulk around it.
+    A window with no leftovers in it has a failure of its own, and it has a name: lost in the
+    middle. Nothing was deleted. The line that decides the answer is still sitting in the window,
+    and where it sits is what went wrong. A model uses what is near the top of the window and what
+    is near the bottom. Put the deciding line halfway up a long context and it reads straight past
+    it.
   </p>
 
   <h2 data-i18n="context.amnesia-context-fatigue.heading">Amnesia and context fatigue</h2>
 
   <p data-i18n="context.amnesia-context-fatigue.1">
-    Because the window is finite, something eventually has to give. Older material is compacted into
-    a summary or drops out completely. The constraint you gave at the start is now one line in a
-    summary, or it is simply gone.
+    Because the window is finite, something eventually has to give. Older material is summarised,
+    and the summary is what stays. The constraint you gave at the start is now one line in it, or it
+    did not make the cut at all.
   </p>
 
   <p data-i18n="context.amnesia-context-fatigue.2">
@@ -170,7 +174,10 @@
   </p>
 </div>
 
-<!-- The window losing its oldest turns. Top-level on purpose: a data-figure marker nested inside a
+<!-- The window's oldest turns collapsing into a summary that stays inside the frame, with the detail
+     leaving it. It draws the paragraph above it rather than the branch that paragraph no longer
+     claims: nothing drops out of a window either of this course's harnesses runs, and the two
+     tilted ghosts used to say it did. Top-level on purpose: a data-figure marker nested inside a
      data-audience wrapper is left as an empty div, so the wrapper is closed above and reopened
      below, each line still self-learning only. -->
 <div data-figure="context-falloff" data-audience="self"></div>

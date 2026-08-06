@@ -41,10 +41,27 @@ function iconFor(node: TreeNode): LucideIcon {
  * `dim` is for a drawing that has a subject. It sets every row that is not marked `highlight` back
  * to the muted ink, so the marked ones carry the eye on their own rather than by being one teal
  * thing among several. A tree without a subject leaves it off and every row reads the same.
+ *
+ * `caption` is a message key, and only `DomainTree` passes one. The rule is `AuditExample`'s: a
+ * caption states where the drawing came from, and it is there when a reader could otherwise take
+ * the tree for a folder in this repository. The three trees in `setup` draw the shape of a real
+ * project and sit under nothing that compares them to one, so they carry none.
  */
-export function FileTree({ id, root, dim = false }: { id: string; root: TreeNode; dim?: boolean }) {
+export function FileTree({
+  id,
+  root,
+  dim = false,
+  caption,
+}: {
+  id: string
+  root: TreeNode
+  dim?: boolean
+  caption?: string
+}) {
+  const { t } = useTranslation('step2')
+
   return (
-    <div
+    <figure
       id={id}
       data-component="FileTree"
       // not-prose: Typography would otherwise style these lists as bullets and indent them again.
@@ -53,7 +70,17 @@ export function FileTree({ id, root, dim = false }: { id: string; root: TreeNode
       <ul id={`${id}-root`} data-component="FileTree" className="flex flex-col gap-1.5">
         <TreeItem block={id} node={root} path="0" dim={dim} />
       </ul>
-    </div>
+
+      {caption && (
+        <figcaption
+          id={`${id}-caption`}
+          data-component="FileTree"
+          className="text-muted-foreground mt-3 border-t pt-3 font-mono text-xs"
+        >
+          {t(caption)}
+        </figcaption>
+      )}
+    </figure>
   )
 }
 

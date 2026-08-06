@@ -17,12 +17,17 @@ and there is nothing useful after it. Unit ids are single words on the tree's ow
 `steering`) while the titles are the two-word terms a reader would search for, so the URL is
 `/steps/step3/expectations` and the sidebar says "Expectation management".
 
-**Nothing in the step is graded or quizzed, and that is the decision rather than an unfinished
-state.** Every unit here is a conversation with a colleague, a stakeholder or yourself, so there is no
-command a checker could run. It is also
-the first step with no Java at all: `kata/step3/java` stays the empty scaffold, on the reasoning in the
-root `CLAUDE.md`. If an exercise is ever wanted here, the honest shape is step 2's `TaskCard`, ticked
-once and grading nothing, and the thing it asks for has to happen away from the keyboard.
+**Nothing in the step is graded by a machine**, and that is still the decision. Every unit here is a
+conversation with a colleague, a stakeholder or yourself, so there is no command a checker could run,
+and it is the first step with no Java at all: `kata/step3/java` stays the empty scaffold, on the
+reasoning in the root `CLAUDE.md`. What the step does carry is one browser-graded quiz on
+`expectations` and one ungraded `TaskCard` at the foot of `impostor`. The conversation reasoning holds
+against an *exercise* and not against a multiple-choice question, which a room answers by show of
+hands, and the quiz landed on `expectations` because it is the unit with the most checkable claims and
+because it and `impostor` both rendered empty in guided mode. The card is the shape this file
+pre-authorised: ticked once, grading nothing, and four of its five moves happening away from the
+keyboard. **It must never grow a checker, a hash, a text box or a sixth move.** The moment one of them
+is graded, the step is lying about what it is.
 
 **The step has exactly one drawing, `PipelineShift` in `change`, and the bar for a second one is
 where it has always been.** The rule that held for a long time was that no figure carries anything
@@ -34,15 +39,16 @@ step no sentence can make without a reader taking it on trust, and it is the rea
 here rather than in `expectations`, which is about a date rather than about what got read. Its own
 file carries the proportions that have to keep holding, and they are load bearing in both
 directions: make the second row look like a win and the drawing argues the opposite of the section
-above it. Note what it does to guided mode: `change` now renders a heading and a drawing in class
-where the step used to render nothing at all, so it is the one unit here a tutor can put on the
-board.
+above it. Note what it does to guided mode: `change` renders a heading and a drawing in class where the step
+used to render nothing at all. It is no longer the only one that does, since `expectations` keeps its
+quiz and `impostor` its card, but it is the only unit here a tutor can put a drawing on the board
+from.
 
 **Every section leans on a unit that already argued its engineering claim and none of them may
 re-argue it**, which is the same rule `harness.coordinator.3` follows in step 1 and the constraint
 most easily lost in a rewrite here. The soft skill is the new part; the claim underneath it gets a
 link and one clause. Almost every lean points at step 2. `change` takes six of them, one per section
-and no unit twice: `you-test-engineer` at `engineering` for the floor and the ceiling,
+and no unit twice: `you-test-engineer` at `engineering` for the floor,
 `business-moves-closer` at `evolution` for a prototype starting a conversation,
 `process-was-bottleneck` at `enablement` for one person carrying more of the stack,
 `way-working-decision` at `patterns` for something done by hand turning into a script, `code-got-cheap`
@@ -83,7 +89,7 @@ included, because it does not exist until the thing is half built. That last one
 the three the manager has to hear, and it is the reason the burden moved rather than lifted. Keep the
 lists apart: `change` and `impostor` each name three concrete cases, so
 `detail-nobody-specified` deliberately names none and stays on returns alone. A third enumeration of
-empty lists and expired tiers turns the step into one paragraph told three times.
+empty lists and zero amounts turns the step into one paragraph told three times.
 
 `change` and `expectations` are the long units of the step, six sections and five of them against
 `impostor`'s three, and in both cases that is the argument rather than a draft nobody trimmed. `change`
@@ -106,7 +112,7 @@ artefact and the ritual.
 `recap`'s shape (a `<strong>` claim, then what to do about it), then a closing paragraph: the three
 are independent, none of them explains another, and as prose they read as one argument made three
 times. The examples are chosen to be checkable rather than rhetorical. The deck is this repository
-(`shared/deck/`, HTML built from the units' own figure components), so the section names a thing the
+(`shared/deck/`, `SlideSpec` entries whose drawings are the units' own figure components), so the section names a thing the
 student is looking at instead of inventing a strawman, and the review and the sprint are the two
 practices a team would defend hardest. **It asks and does not answer.** Nobody knows what replaces a
 sprint, and a section that named a replacement would be the one thing in the step that dates, which
@@ -149,6 +155,18 @@ the only place in the course that argues with the reader rather than teaching th
 bare "Maybe." is doing. **Do not merge the two paragraphs and do not let the section comfort anybody
 out of the first one.** `nobody-doing-long` closes on written-down work rather than on the feeling for
 the same reason: the answer the step offers is a repository, not encouragement.
+
+`nobody-doing-long` now has a third paragraph and it is the end of the course rather than the end of
+the section, which nothing said before. It continues **from** the repository on purpose, quoting
+`context.model-stateless.1` back at the reader ("Between two messages an LLM keeps nothing") and
+landing on a repository nobody set up for them. No encouragement, and no third metaphor. Under it sits
+`WhatYouTakeBack`, the course's closing exercise: five moves, one each on
+`change.process-was-bottleneck`, `expectations.say-what-missing`, `change.environment-beats-project`,
+`change.way-working-decision` and the adoption half the step has no unit for. Its `line` move says
+"the repository's own instruction file" and **must not name one**: a task-card move is a locale string
+with no assistant mechanism, so a filename there is wrong for half the room with nothing filtering it,
+and typing the moves per assistant the way step 1's `SurviveTheClear` does is not worth building for
+one word.
 
 Three smaller things. **Both of the step's `CLAUDE.md` mentions carry a `data-assistant` pair**,
 `impostor.nobody-doing-long.2` and `change.environment-beats-project.1`, and they did not until

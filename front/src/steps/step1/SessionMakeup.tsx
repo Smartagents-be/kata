@@ -26,7 +26,7 @@ type Block = {
 }
 
 /**
- * Half an hour on the catalogue: two questions, four files read, one test run. Nothing unusual
+ * Half an hour on the catalogue: two questions, two files read, one test run. Nothing unusual
  * happens in it, which is why the tally is worth looking at.
  */
 const BLOCKS: Block[] = [

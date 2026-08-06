@@ -42,7 +42,7 @@ follows is the same sentence explained.
 cleared and the content is lost".
 
 **Concrete before abstract.** Name a real file, command, or moment from this repo before stating
-the general rule. `CLAUDE.md`, `mvn test`, `/clear`, `ExerciseChecker` all mean more to a student
+the general rule. `CLAUDE.md`, `mvn test`, `/clear`, `TitleController` all mean more to a student
 than "configuration" or "the tooling".
 
 **No hype, but do say what is at stake.** Skip "powerful", "seamless", "unlock", "leverage",
@@ -93,7 +93,7 @@ Five moves that recur across the existing units. Reach for these before inventin
 - **Name the term last.** Describe the thing in plain words and let the label arrive as a closing
   tag: "That pile-up in the context is entropy." Never define first and explain after.
 - **Define by contrast, with something real.** Two examples side by side beat an adjective: "Fix
-  the login" against "make `ExerciseController` return a 400 when the answer is blank". Both halves
+  the login" against "make `TitleController` return a 404 when the catalogue comes back empty". Both halves
   have to be things a reader would actually type or actually meet. An invented bad artifact
   (a folder called `svc-impl-2`, a class called `ThingManager`) is a strawman, it dates the
   paragraph, and it is the sentence that gets cut in review.

@@ -127,10 +127,27 @@ Two facts the course could use and does not:
   reading with and without the server *they* added.
 - MCP prompts are documented as reachable under a slash as `/mcp.servername.promptname`, **for
   Copilot generally**. The Copilot CLI command reference lists 40-odd slash commands and none of
-  them is a prompt (re-read 30 July 2026), so `tools.extra-tools.3.copilot` no longer claims
+  them is a prompt (re-read 30 July 2026), so `tools.mcp-servers.3.copilot` no longer claims
   it: it names `/mcp`, which the CLI does document, and says that surfacing a server's prompts is
   the harness's call. Absent from a reference is not the same as absent from the product, so if you
   see one under a slash in a real session, that sentence goes back.
+
+## Reasoning level (checked August 2026)
+
+Both products have the dial, and only one of them publishes a stable set of names for it.
+
+**Claude Code** calls it the effort level. It takes `low`, `medium`, `high` or `xhigh`, is set with
+`/effort` in a session, persists to `settings.json` as `effortLevel`, and is overridden for one
+session by `--effort` or `CLAUDE_CODE_EFFORT_LEVEL`. Read off `code.claude.com/docs/en/settings`.
+
+**Copilot CLI** exposes a Thinking Effort submenu on models that reason, so the levels on offer
+depend on which model is picked rather than on the CLI. There is no documented CLI-wide scale to
+name.
+
+So `prompt.reasoning-level.1` scopes its clause ("In Claude Code it runs from low up to xhigh")
+rather than splitting on `data-assistant`: a Copilot reader is told nothing untrue by a sentence that
+names the product it is about. The step said "low up to max" before this was checked, and that was
+wrong.
 
 ## Plan mode
 
@@ -146,6 +163,18 @@ therefore hold for both assistants without a variant. `CutItUp` asks for the pla
 the most recent local session, `/resume` picks an older one. Tool use is approved per call, or for
 the rest of the session. Copilot CLI also has **skills** and **hooks**, which is step 2 territory
 rather than step 1's, and step 2 has not been adapted.
+
+**Esc and Ctrl+C are not the same key here, and step 2 assumes they are.** Read off
+docs.github.com/en/copilot/concepts/agents/copilot-cli/cancel-and-roll-back, 6 August 2026: a single
+Esc gives "more gradual, staged control", the running operation "is canceled only if you press Esc
+again within half a second", and while prompts are queued "pressing Esc again removes the most
+recently queued prompt". Ctrl+C "acts immediately, without a confirming second press". So for a
+Copilot CLI reader with a prompt queued, which is exactly what `steering.mid-flight.2` has them do
+one paragraph earlier, Escape removes the queued sentence rather than stopping the run.
+`steering.mid-flight.1` and `steer.escape.label` are therefore step 2's first genuine
+`data-assistant` candidates. **No pair has been introduced**, because step 2 is the one step not
+written for two assistants (`front/src/steps/CLAUDE.md`) and splitting a block here is a step-wide
+decision rather than a unit's.
 
 Three surfaces exist and they are not interchangeable: the **CLI** (what the course assumes), **VS
 Code agent mode** (MCP through `.vscode/mcp.json`, a new chat rather than `/clear`, no `/context` to

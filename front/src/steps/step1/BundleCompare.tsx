@@ -217,14 +217,6 @@ export function BundleCompare() {
           {t('bundle-compare.step', { current, total: STEPS })}
         </span>
       </div>
-
-      <figcaption
-        id="bundle-compare-hint"
-        data-component="BundleCompare"
-        className="text-muted-foreground font-mono text-xs"
-      >
-        {t('bundle-compare.hint')}
-      </figcaption>
     </figure>
   )
 }

@@ -34,8 +34,8 @@
   It also keeps everything. The file it should not have opened is still sitting in the window, in
   full. Your correction sits underneath it. From here on the agent carries the wrong turn and the
   fix together, and re-sends both on every turn for the rest of the session
-  <svg data-icon="coin"></svg> You paid for the mistake once when it happened. Now you pay for it
-  again, every message.
+  <svg data-icon="coin"></svg> The cache makes that cheap. It does not make it small: every turn you
+  have left is read against a file you did not want opened.
 </p>
 
 <p data-i18n="steering.interrupt-or-go-back.3">
@@ -53,9 +53,11 @@
 <div data-figure="two-windows"></div>
 
 <aside data-audience="self" data-i18n="steering.interrupt-or-go-back.5">
-  Worth doing once on something small. Send a deliberately vague request, let the agent start, then
-  go back and edit the request rather than correcting it. Ask it afterwards what it has read. The
-  file from the first attempt is not in the answer.
+  <p>
+    Worth doing once on something small. Send a deliberately vague request, let the agent start,
+    then go back and edit the request rather than correcting it. Ask it afterwards what it has
+    read. The file from the first attempt is not in the answer.
+  </p>
 </aside>
 
 <h2 data-i18n="steering.going-nowhere.heading">When it is going nowhere</h2>
@@ -63,15 +65,19 @@
 <p data-i18n="steering.going-nowhere.1">
   Another kind of run does not go the wrong way. The agent is in the right file, the test fails the
   way it failed before, and the fix it just wrote undoes the one before it. It says it sees the
-  problem now. It said that last time. Nothing here is wrong enough to correct, so you sit through
-  four more rounds. Every failed attempt is still in the window, and on that file they are the
-  strongest pattern the model has to go on, so it writes another one. The loop is in the window.
+  problem now. It said that last time.
 </p>
 
 <p data-i18n="steering.going-nowhere.2">
+  Nothing here is wrong enough to correct, so you sit through four more rounds. Every failed attempt
+  is still in the window. On that file they are the strongest pattern the model has to go on, so it
+  writes another one. The loop is in the window.
+</p>
+
+<p data-i18n="steering.going-nowhere.3">
   Rewinding does not help here, because the message that started it was fine. Stop it and clear
   instead. Carry across the one thing the round produced, usually the error and the approach that
-  does not work, and start the next session with that, the seam
+  does not work. That is the seam
   <a href="/steps/step1/session">step 1's unit on the session</a> tells you to pick yourself. Then
   change something before you ask again: paste the failing output in, name the thing it may not try,
   or do the awkward step by hand and give it the rest. A second attempt from a clean window beats a
@@ -88,8 +94,8 @@
   branch, in its own folder, sharing the same history. Give every agent one.
 </p>
 
-<pre><code>git worktree add ../kata-statement feat/statement
-git worktree add ../kata-native feat/native</code></pre>
+<pre><code>git worktree add -b feat/statement ../kata-statement
+git worktree add -b feat/native ../kata-native</code></pre>
 
 <p data-i18n="steering.worktree-each.2">
   Now two agents work at once and neither can reach the other's files. No half-finished edit from
@@ -117,9 +123,10 @@ git worktree add ../kata-native feat/native</code></pre>
 </p>
 
 <p data-i18n="steering.stop-at-the-gap.2">
-  That is not a prompting mistake you can fix per request, because you do not know where the gaps
-  are. If you did, they would not be gaps. So make the rule standing, and put it where it arrives
-  before your first message.
+  You cannot fix that per request, because you do not know where the gaps are. If you did, they
+  would not be gaps. So make the rule standing, in the
+  <a href="/steps/step2/setup">CLAUDE.md the setup unit gave you</a>, where it arrives before your
+  first message.
 </p>
 
 <pre><code>## Gaps
@@ -129,9 +136,9 @@ the repository, stop, write it into `gaps.md`, and ask me.
 Do not pick the most likely answer and carry on.</code></pre>
 
 <p data-i18n="steering.stop-at-the-gap.3">
-  Three parts, and the third is the one that matters. Writing the gap down is bookkeeping. Stopping
-  is the steering. An agent that logs its assumptions in a file and then implements them anyway has
-  told you what it guessed, at the bottom of a diff, after the work is built on top of it.
+  Stopping is the part that matters. Writing the gap down is bookkeeping. An agent that logs its
+  assumptions in a file and then implements them anyway has told you what it guessed, at the bottom
+  of a diff, after the work is built on top of it.
 </p>
 
 <p data-i18n="steering.stop-at-the-gap.4">
@@ -140,3 +147,11 @@ Do not pick the most likely answer and carry on.</code></pre>
   the session that produced it. Clear the context, hand back <code>gaps.md</code>, and the decisions
   you already made are still made.
 </p>
+
+<!-- The doing part of the unit, under the same rule and heading the rest of the course puts over
+     its exercises. The card is the SteerARun element registered in steps/step2/index.tsx, and the
+     quiz renders under it from the same registry, so `showsExerciseHeading` hands QuizPanel
+     heading={false} and this h2 is the only "Test yourself" on the page. -->
+<hr />
+
+<h2 data-i18n="ui:quiz.title">Test yourself</h2>

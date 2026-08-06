@@ -1,7 +1,7 @@
 <p data-i18n="setup.lead.1">
-  An agent starts every session knowing nothing about your project, your way of working or your
-  conventions. Arrange the repository so the agent can work efficiently in it. You get better
-  answers, and you pay fewer tokens for them <svg data-icon="coin"></svg>.
+  An agent starts every session knowing nothing about your project. Arrange the repository so you
+  do not have to tell it the same things twice. You get better answers, and you pay fewer tokens
+  for them <svg data-icon="coin"></svg>.
 </p>
 
 <p data-i18n="setup.lead.2">
@@ -13,9 +13,11 @@
 <div data-figure="project-tree"></div>
 
 <p data-i18n="setup.claude-md.1">
-  The root <code>CLAUDE.md</code> <span data-marker>1</span> counts for the whole project. It is
-  read at the start of every session and stays in the window for all of it, wherever the agent is
-  working. So write what the project is about, what it is not about, and the ideas behind it.
+  <a href="/steps/step1/session">Step 1's unit on the session</a> said a standing instruction belongs
+  in the file that is read again at the start of every session. What that unit did not say: the root
+  <code>CLAUDE.md</code> <span data-marker>1</span> stays in the window for the rest of it, wherever
+  the agent is working. So write what the project is about, what it is not about,
+  and the ideas behind it.
   Conventions for the frontend go in the folder that holds it <span data-marker>2</span>, and the
   backend's in its own <span data-marker>3</span>, because each of these files is scoped. It only
   joins the context once the agent goes in there.
@@ -49,7 +51,7 @@
 <div data-figure="skill-tree"></div>
 
 <p data-i18n="setup.skills.1">
-  A skill can be considered a reusable high quality prompt. It is a folder under
+  A skill is a reusable prompt, written once and written properly. It is a folder under
   <code>.claude/skills/</code> with a <code>SKILL.md</code> in it, holding a procedure you want
   followed the same way every time.
 </p>
@@ -74,10 +76,10 @@ description: Add a REST endpoint to a step's Spring project the way the existing
 </p>
 
 <p data-i18n="setup.skills.4">
-  Keep them small. A skill may point at another rather than repeat it: the one above ends by asking
-  for a commit, so it names <code>commit-message</code> instead of restating the rules for one.
-  Detail that will not fit goes in a <code>references/</code> folder beside the body, read only when
-  it is wanted.
+  Keep them small. A skill may point at another rather than repeat it: a skill that ends by asking
+  for a commit names <code>commit-message</code> instead of restating the rules for one. Detail that
+  will not fit goes in a <code>references/</code> folder beside the body, read only when it is
+  wanted.
 </p>
 
 <p data-i18n="setup.skills.5">
@@ -119,8 +121,9 @@ description: Add a REST endpoint to a step's Spring project the way the existing
 <p data-i18n="setup.hooks.3">
   So reach for one when the thing must happen every time and you would rather not find out that it
   did not. Then keep it fast and keep it narrow. That script runs on every Write and every Edit, and
-  a broken one hands the agent an error it did not cause, which it works around instead of writing
-  your code.
+  a broken one hands the agent an error it did not cause. The agent works around that instead of
+  writing your code. When the thing that keeps coming back is a correction rather than a command,
+  <a href="/steps/step2/patterns">the patterns unit</a> is where it goes.
 </p>
 
 <hr />

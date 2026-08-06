@@ -12,7 +12,7 @@ import { cn } from '@/shared/lib/utils'
  * times over, and each time it could have gone somewhere else.
  *
  * It took the favourite for you until it did not, and that is the decision. The unit's prose says
- * the scores are a distribution and the favourite is not a rule (`tokens.one-at-a-time.4`), and a
+ * the scores are a distribution and the favourite is not a rule (`tokens.one-at-a-time.3`), and a
  * figure that only ever walked the top row was making that claim on the reader's behalf. Now the
  * claim is a thing they do: take `was` instead of `timed` and a different sentence comes out, built
  * by the same machine out of the same numbers.

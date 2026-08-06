@@ -61,7 +61,7 @@ they are used (`step1/session` and `ReadYourWindow` in `step1/tools`), and rules
 the habit instead: start each flag on a fresh session, and look at what the hunt cost. **It carries
 no numbers and does no arithmetic**, so `model.cost.4` stays the one paragraph in the course that
 multiplies; rule five says step 1 hands you the numbers and stops there. And **it counts nothing**,
-since it covers boards with three flags, five flags and one, which is what the step 1 wording
+since it covers boards of one, three and five flags, which is what the step 1 wording
 ("three flags, three routes in", "five lines come out of the trace") could not do.
 
 **It sits after the legend rather than after `How exercises work`**, which is the one placement worth

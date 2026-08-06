@@ -1,0 +1,41 @@
+{
+  "en": {
+    "engineering.title": "Craft",
+    "domain-tree.caption": "An example project, not one in this repository.",
+    "deck.engineering.vibe.title": "Vibe coding works <hi>for about an hour</hi>",
+    "deck.engineering.vibe.note": "Then the fixes break each other and you are steering a system nobody has read."
+  },
+
+  "nl": {
+    "engineering.title": "Vakmanschap",
+    "engineering.lead.1": "Goede agentic projecten beginnen bij goede software engineering. Dat is meteen het verschil tussen vibe coding en agentic engineering, en je staat aan de ene kant of aan de andere. <a href=\"/steps/step2/evolution\">Projectevolutie</a> zette je er een uur lang aan de andere kant van, op een versie die je toch weggooit, en dat is de enige plek waar die lijn niet geldt.",
+    "engineering.domain-driven-design.1": "Mappen en concepten dragen dezelfde namen als de business gebruikt. Hexagonale architectuur sorteert de rest: het domein in het midden, de machinerie erachter in adapters, en de richting van een aanroep als een map die je kan aanwijzen. Allebei geven ze de logische vorm, en tegen een logische vorm kan je prompten <svg data-icon=\"gem\"></svg> <svg data-icon=\"coin\"></svg> Vraag een feature op artikels en de agent weet waar hij moet kijken nog voor hij iets opent. Geen klasse buiten <code>adapter/</code> noemt Postgres of S3, dus de database vervangen is het werk van één map.",
+    "engineering.right-words.heading": "De juiste woorden",
+    "engineering.right-words.1": "Noem het ding bij naam. \"Zet een repository voor deze JDBC-call\" komt ergens specifiek terecht. \"Maak dit wat properder\" komt in het statistische midden van elke opkuis die ooit geschreven is. Namen van design patterns, van lagen en van je domein zijn compressie. Ze houden een agent bij de taak in plaats van bij zijn eigen invulling van wat je bedoelde. Dat is ook het verschil tussen een app die je op een halve dag bouwt en een app die je in productie kan zetten.",
+    "engineering.quality-gates.1": "Line coverage en mutation coverage zeggen nog altijd of software klaar is om te leveren. Een Sonar reliability rating ook. Ze geven een agent ook een invariant, iets vast om zich aan te houden terwijl hij werkt <svg data-icon=\"gem\"></svg> Elk van die drie is wel een proxy, en een agent voldoet aan de proxy in plaats van aan wat erachter zit. De gate die het waard is om in te bouwen, is degene die duur is om te faken.",
+    "engineering.quality-gates.2": "Steek dat in de run in plaats van in je geheugen. Een hook vuurt zodra de agent zegt dat hij klaar is, en dat is het enige moment waarop een hook traag mag zijn. <code>mvn verify</code> draait wat je build aan analyse heeft ingebouwd, en een cijfer onder de drempel komt terug als een falen waar hij mee verder moet. Diezelfde regel in <code>CLAUDE.md</code> is een vraag. Deze draait, of de agent er nu aan denkt of niet.",
+    "engineering.quality-gates.3": "Niets daarvan gaat over een agent die oplet. Het is de kant van de lijn waar jij staat, opgeschreven op de plek waar het werk gebeurt. Wat overblijft is het stuk dat je niet vooraf kunt opschrijven, en dat is wat je doet terwijl een run bezig is.",
+    "domain-tree.caption": "Een voorbeeldproject, geen project uit deze repository.",
+    "deck.engineering.divider.3": "Gates horen in de run, <mute>niet in je geheugen</mute>",
+    "deck.engineering.vibe.title": "Vibe coding werkt <hi>ongeveer een uur</hi>",
+    "deck.engineering.vibe.note": "Daarna breken de fixes elkaar en stuur je een systeem dat niemand gelezen heeft."
+  },
+
+  "removeNl": [
+    "engineering.use-correct-language.heading",
+    "engineering.use-correct-language.1"
+  ],
+
+  "afterEn": {
+    "deck.engineering.vibe.title": "deck.setup.flags.note",
+    "deck.engineering.vibe.note": "deck.engineering.vibe.title"
+  },
+
+  "afterNl": {
+    "engineering.right-words.heading": "engineering.domain-driven-design.2",
+    "engineering.right-words.1": "engineering.right-words.heading",
+    "engineering.quality-gates.3": "engineering.quality-gates.2",
+    "deck.engineering.vibe.title": "deck.setup.flags.note",
+    "deck.engineering.vibe.note": "deck.engineering.vibe.title"
+  }
+}

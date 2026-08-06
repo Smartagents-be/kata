@@ -76,6 +76,10 @@
     <profile>
       <id>graded</id>
       <properties>
+        <!-- JaCoCo is managed by neither the Boot parent nor spring-boot-dependencies, so an
+             unpinned plugin resolves to whatever the latest release is that day. Pin it: this
+             profile is the command the whole workshop unit hangs on. -->
+        <jacoco.version>0.8.15</jacoco.version>
         <pitest.version>1.20.0</pitest.version>
         <pitest.junit5.version>1.2.3</pitest.junit5.version>
       </properties>
@@ -85,6 +89,7 @@
           <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
+            <version>${jacoco.version}</version>
             <executions>
               <execution>
                 <id>jacoco-agent</id>

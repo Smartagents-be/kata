@@ -81,8 +81,8 @@ export function WorkflowTimeline() {
           Three borders on one box are the whole path, which is what keeps it in step with a layout
           that reflows: no coordinates to recompute when the row becomes a column.
 
-          The two margins put the risers on the *centres* of `Spec-driven` and the last
-          `Plan-based`, rather than on their edges, and they are arithmetic rather than nudges. A
+          The two margins put the risers on the *centres* of `Spec-driven` and `Plan/naive`, the
+          last card, rather than on their edges, and they are arithmetic rather than nudges. A
           percentage margin on a grid item resolves against its own grid area, so `100%` is this
           box's three columns plus the two `gap-2`s between them: one column is `(100% - 1rem) / 3`,
           a card is that less the `size-4` arrow and `gap-2` ahead of it, and half a card either

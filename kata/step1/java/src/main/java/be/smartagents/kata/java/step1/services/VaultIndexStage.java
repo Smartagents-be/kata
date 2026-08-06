@@ -10,6 +10,6 @@ public class VaultIndexStage implements CatalogStage {
 
     @Override
     public void apply(CatalogRun run) {
-        run.publish("Vault of Forgotten Regressions");
+        run.publish("3 Hands on the Press");
     }
 }

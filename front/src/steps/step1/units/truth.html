@@ -22,13 +22,13 @@
 
 <p data-i18n="truth.cutoff.1">
   Training stopped on a date. Whatever was published after it is not something the model knows less
-  well, it is something the model has never seen. A framework released last spring, the API your
-  team deprecated in March, the library that threw out its whole configuration format: none of that
-  is in there.
+  well, it is something the model has never seen. A framework released last spring, a library that
+  threw out its whole configuration format between one minor version and the next: none of that is
+  in there.
 </p>
 
 <p data-i18n="truth.cutoff.2">
-  The answer still arrives. It describes the version before yours, in the same level tone as
+  The answer still arrives. It describes the version line before yours, in the same level tone as
   everything else, and it is out of date rather than wrong, which is the harder thing to spot. This
   is the half of the model that ages while you are not looking.
 </p>
@@ -57,7 +57,8 @@
 <h2 data-i18n="truth.proof.heading">Proof</h2>
 
 <p data-i18n="truth.proof.1">
-  Grounded is still not proved. The agent read a file and told you what it says, and you are taking
+  Grounded is still not proved, and that is the answer to the question up top: the source is not
+  the same thing as the check. The agent read a file and told you what it says, and you are taking
   its word for the reading. Anything that can be run should be run: <code>mvn test</code>, a
   <code>curl</code> at the endpoint, one line of <code>jshell</code>. An answer with a command
   behind it is a different kind of answer.
@@ -74,10 +75,10 @@
 <p data-i18n="truth.hallucinations.1">
   With nothing in the window to read, the model answers anyway. Answering is what it does. Ask which
   method on <code>Catalog</code> filters titles by author and you get
-  <code>findAllByAuthorOrdered</code>, spelled the way the rest of that class spells things, on a
-  class that has no such method. Nothing was looked up and nothing was invented on purpose. The next
-  likely token landed where a fact should have been, and that is a hallucination. You have met this
-  one before: the quiz back in <a href="/steps/step1/context">the context unit</a> asked why a
+  <code>findAllByAuthorOrdered</code>, spelled exactly the way a Spring method is spelled, on a
+  class that has no such method. Nothing was looked up, and nothing was deliberately made up. The
+  next likely token landed where a fact should have been, and that is a hallucination. You have met
+  this one before: the quiz back in <a href="/steps/step1/context">the context unit</a> asked why a
   confident answer about a UserService missed the class entirely, and you diagnosed it there
   without the word.
 </p>
@@ -89,8 +90,8 @@
 
 <p data-i18n="truth.hallucinations.2">
   Two of those were read and one was not, and the answer says the same thing about all three. That
-  is what makes it expensive. No wobble in the tone, no hedge, no shorter sentence, because the
-  model sounds the same whether it read your file or filled the gap. Stop reading the tone and start
-  asking where the answer came from. <a href="/steps/step1/workshop">The workshop</a> is that
-  question three times over.
+  is what makes it expensive. No wobble in the tone, no hedge, because the model sounds the same
+  whether it read your file or filled the gap. Stop reading the tone and start asking where the
+  answer came from. <a href="/steps/step1/workshop">The workshop</a> is that question three times
+  over.
 </p>

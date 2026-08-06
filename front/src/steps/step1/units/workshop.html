@@ -3,20 +3,51 @@
      does not repeat it, and the five house rules now live in step 0's `welcome`, so `lead.2` links
      to them rather than restating any of them.
 
-     The three flags are read as `truth`'s question asked three times, not as the four layers. They
-     were labelled tools / session / harness once, and the three nouns all meant something other
-     than the unit that owns them: a Spring request is not the student's session, and Spring's log
-     config is not the harness. What actually separates the three is where the answer comes from,
-     which is the unit directly above this one. `lead.1` links back to it and the three
+     The two lead paragraphs are the game and nothing else: `lead.1` is what is on the board and
+     `lead.2` is how the hunt is played, with the launcher under it. The page carries the game and
+     the board carries every technique. There was a third paragraph and a second `<pre>` pair here,
+     the consent for the setup script and the command that ran it, and both went when the line
+     moved to install time. Do not write either back: `install.txt` carries the consent now, the
+     student's agent runs it long before they reach this page, and a page that says a line was
+     planted has ended the first row's hunt.
+
+     The five flags are read as `truth`'s question asked five times, not as the four layers. Three
+     of them were labelled tools / session / harness once, and the three nouns all meant something
+     other than the unit that owns them: a Spring request is not the student's session, and Spring's
+     log config is not the harness. What actually separates them is where the answer comes from,
+     which is the unit directly above this one. `lead.1` links back to it and the five
      `flag.*.help` keys open on the provenance rather than on a layer.
+
+     `system` is the one flag no file holds: it is the whole response read as a whole rather than
+     anything hidden in the pipeline. So `lead.1` no longer says the flags are things the pipeline
+     keeps back, and the Catalogue page is an instrument on this page rather than a mention. The
+     design and the one rule protecting it are in `front/src/steps/step1/CLAUDE.md`.
+
+     `lead.1` is one set of five under one provenance rule, and it must stay that. It said four
+     flags and then a fifth once, which made the reader hold two counts before they had seen the
+     board: the machine flag is one of the five, named as coming from outside the service in the
+     same sentence as the four that come out of it, and it is not an exception bolted on afterwards.
+
+     `machine` is the row that opens the board and the only one that came off the student's own
+     machine rather than out of this service. Nothing on this page says where to look: the path,
+     what merges those files into a session and the command that puts the machine back all live in
+     `flag.machine.help.claude` and `.copilot`, which survive guided mode where this prose does not.
+     Do not grow them back onto the page.
 
      `lead.1` used to close on three sentences, one per flag, saying where each one sits. They were
      the board's own hint lines a second time, so they went, and nothing on this page may name a
-     technique again. The `<pre>` is the agent and nothing else for the same reason: it ran
-     `mvn spring-boot:run` and a `curl` before, which is the student doing by hand the two things
-     the first house rule hands to the agent.
+     technique again. The launcher `<pre>` is the agent and nothing
+     else for the same reason: it ran `mvn spring-boot:run` and a `curl` before, which is the
+     student doing by hand the two things the first house rule hands to the agent.
 
-     `OneWindow` is what makes this a step 1 capstone rather than a puzzle: the board grades three
+     The Catalogue pointer sits in `lead.2` rather than in `lead.1`, with the fact that the service
+     has to stay up beside it: `lead.1` promised that page before anything had started the service,
+     so the pointer failed silently. `lead.1` keeps the endpoint, the nine titles, what a flag looks
+     like and the link to `truth`, and nothing else. `one-window.1` names itself as the exception to
+     step 0's third house rule, which is the hedge that rule already carries; the reconciliation is
+     done here rather than on `welcome`, so `welcome` is untouched.
+
+     `OneWindow` is what makes this a step 1 capstone rather than a puzzle: the board grades four
      flags and asks nothing about the window, so the card frames the whole hunt as one session with
      a `/context` reading at either end. The board is the last thing on the page: the step's close
      moved to `recap`, so nothing follows the hunt here. It stays an inline figure so the pair reads
@@ -25,17 +56,18 @@
 
 <p data-i18n="workshop.lead.1">
   The backend has been holding out on you. <code>GET /api/titles</code> returns nine book titles,
-  and the <code>Catalog</code> page in the sidebar shows them. The pipeline behind them computes
-  more than nine lines on every request, and three of the lines it throws away are flags: leetspeak,
-  wrapped in <code>{curly braces}</code>. One service, three answers, and
+  and there is a great deal more to that response and the pipeline behind it than nine lines let on.
+  Five flags sit on the board below, leetspeak wrapped in <code>{curly braces}</code>. Four of them
+  come out of this service and one comes off your own machine, and
   <a href="/steps/step1/truth">where each one came from</a> is the only thing separating them.
 </p>
 
 <p data-i18n="workshop.lead.2">
-  Getting all three onto the board below is this whole step. Each row names its flag's way in, the
+  Getting all five onto that board is this whole step. Each row names its flag's way in, the
   Hint behind it says where to aim, and your agent does the legwork, under
   <a href="/steps/step0/welcome">the house rules from the intro</a>. Start it in the backend and ask
-  from there: running the service and calling the endpoint are its job, not yours.
+  from there: running the service and calling the endpoint are its job, not yours. Leave the service
+  up while you work, and the Catalogue page in the sidebar shows you the nine it will admit to.
 </p>
 
 <pre data-assistant="claude"><code>cd kata/step1/java
@@ -51,10 +83,11 @@ copilot</code></pre>
 <h3 data-i18n="workshop.one-window.heading">One window</h3>
 
 <p data-i18n="workshop.one-window.1">
-  Work all three from a single session. Nothing here needs a clear between the flags, and keeping
-  them together is the point: the hunt fills a window in front of you, with source files, a trace
-  and a console dump going in one after another. You have spent eight units on what that costs.
-  Read the number at both ends and watch it happen to you.
+  Work all five from a single session. One flag, one session is the house rule, and this is the step
+  that says otherwise. Nothing here needs a clear between the flags, and keeping them together is the
+  point: the hunt fills a window in front of you, with source files, a whole response read back, a
+  <a href="/steps/step1/tools">trace and a console dump</a> going in one after another. You have
+  spent eight units on what that costs. Read the number at both ends and watch it happen to you.
 </p>
 
 <div data-figure="one-window"></div>

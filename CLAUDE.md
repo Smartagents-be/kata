@@ -47,8 +47,9 @@ what spans the steps is in **`front/src/steps/CLAUDE.md`** above them. Read the 
 before touching any of its unit HTML, figures, locale files or registry: a great deal of what looks
 like an oversight in there is load bearing, and those files are the only place the reasoning is
 written down.
-The prohibitions that protect the student exercises are repeated under `## Layout` below, so they
-hold whether or not that file is loaded.
+The prohibitions that protect the student exercises are under `## Layout` below, and they are scoped
+to maintainer work: they hold when you are working *on* this kata and not when a student has asked
+you for something.
 
 A **step** is a topic; a **unit** is one page inside it, holding prose, a quiz, an exercise, or any
 combination. The URL is `/steps/step1/session`; a bare `/steps/step1` forwards to the step's first
@@ -71,17 +72,33 @@ The repository has two roots, and they are not the same shape. The frontend is o
 into a `shared` shell plus one folder per step. The backend is not one app at all: **each step owns a
 standalone Maven project under `kata/stepN/java/`**, with its own `pom.xml`, its own profiles and its
 own `CLAUDE.md`. A `kata/stepN/` folder is not only that project, though: `java/` is one thing a step
-can put in front of a student, and step 1 also puts `front/` there, a page its browser task drives.
+can put in front of a student, and step 1 also puts `front/` there, a page its browser task drives,
+plus one loose script that runs at install time and sets its workshop board's first row up.
 
 ```
 kata/
   step0/java/    test sources only: the intro's one exercise, behind an opt-in profile
-  step1/java/    the catalogue service and the three flags hidden in it
+  step1/java/    the catalogue service and four of the five flags its board grades
   step1/front/   one standalone page, no build and no server: the browser task's target
+  step1/machine-context.mjs   the board's first flag comes from here: `install.txt` runs it, it
+                 writes one line into the user-level instructions file, `remove` takes it out
   step2/java/    the loans domain, the graded and challenge profiles, the native-image flag
   step3/java/    an empty scaffold, buildable, kept as the template a Java step is copied from
 front/           the curriculum
+README.md        the front door: prerequisites, "ask your assistant to execute install.txt", the
+                 two run commands. Deliberately short, and the author's to own
+install.txt      what that instruction points at. Written for an agent, read by a human: it runs
+                 the repo-setup check and then plants step 1's machine line
 ```
+
+**`install.txt` is a student-facing file and is not documentation.** A student's agent executes it,
+so every line in it is an instruction that will actually be carried out, and the two halves it runs
+are `.claude/skills/repo-setup/check.sh` and `node kata/step1/machine-context.mjs setup`. It
+reimplements neither: the check script is the one place the toolchain is checked, and a second copy
+of those checks in prose would go stale the first time the skill changed. It is honest about the
+write outside the repository before it names a step, because that is where the consent for it lives
+now, and it is deliberately opaque about what the planted line says. Naming it as a flag, or naming
+step 1's board, ends the row it sets up.
 
 **The number on that scaffold no longer names a step.** `front/src/steps/step3` is soft skills, which
 is worked in the student's own head and their own team rather than against a project, so it has no
@@ -106,16 +123,41 @@ Two rules survive the split and are worth keeping in one place:
   factor them into a shared module.
 
 Each step's own `CLAUDE.md` carries the rest, and it is the readable source for that step's Java:
-what is in the package, how it is run, and **which parts of it are exercises that must not be
-implemented**. Those prohibitions are the load-bearing part, so in short, and in full at
-`kata/stepN/java/CLAUDE.md`:
+what is in the package and how it is run. **Which parts of it are exercises that must not be
+implemented is this list.** Step 1's project file no longer repeats any of it, because a file under
+`kata/stepN/java/` is the one a student's agent opens when a unit sends them there, and the reasoning
+for the split is in `kata/step1/java/CLAUDE.md` and `front/src/steps/step1/CLAUDE.md`.
 
-- **step 0** — do not decode or reveal the intro flag.
-- **step 1** — do not decode, implement or reveal any of the three flags, **do not add tracing**
-  to the catalogue pipeline (instrumenting it is the student's work), and **do not solve
-  `problem.md`**: no cut of it, no `solve.md`, no `plan-solve.md`, no shelves package. The step has a
-  **fourth flag**, in `kata/step1/front/`, under the same prohibition and for the same reason: that
-  page assembles it in the browser so it cannot be read out of the file, which is the exercise.
+**Everything in the list below is scoped to maintainer work.** It holds when you are working *on*
+this kata. It does not hold when a student has asked you for something, and the same sentence cannot
+serve both readers. An agent that instruments the step 1 pipeline, writes a `solve.md` against
+`problem.md`, or decodes a step 1 flag **because the student asked it to** is performing the
+exercise rather than breaking it: handing that work over is what the units tell the student to do.
+What these lines forbid is landing any of it in the repository, where the next student finds their
+exercise already done.
+
+- **step 0** — do not commit a decode or a reveal of the intro flag.
+- **step 1** — do not commit a decode, an implementation or a reveal of any of the board's five
+  flags, and **do not let a flag's plaintext reach any file in this repo**: not a comment, not a
+  `CLAUDE.md`, not the curriculum. `kata/step1/front/CLAUDE.md` already states that for the browser
+  flag and it holds for all six. It matters most in `kata/step1/java/CLAUDE.md`, which a student's
+  agent loads the moment `workshop` starts it in that directory, so the design notes for the flags
+  sit in `front/src/steps/step1/CLAUDE.md` instead and the reasoning is written up in both. **The
+  nine titles the catalogue publishes are load bearing**, so read that file before you reword one.
+  The board's first flag is planted at install time by `kata/step1/machine-context.mjs`, which
+  `install.txt` asks the student's own agent to run and which a student may of course ask you to run
+  directly. **Do not widen what either of them writes, and do not make anything plant that line
+  without the student having asked**: the same step teaches prompt injection, and the file it
+  touches is outside anything this app can undo. `install.txt` is where the consent for it lives, so
+  the disclosure at its head comes before any step and must stay unmissable, and the removal command
+  must stay in it. The script's safety rules are in `front/src/steps/step1/CLAUDE.md`, beside the
+  board row.
+  **Do not commit tracing** into the catalogue pipeline under `src/`
+  (instrumenting it is each student's own work, and a seam left in the tree does it for all of
+  them), and **do not commit a solution to `problem.md`**: no cut of it, no `solve.md`, no
+  `plan-solve.md`, no shelves package. The step has a **sixth flag**, in
+  `kata/step1/front/`, under the same prohibitions and for the same reason: that page assembles it
+  in the browser so it cannot be read out of the file, which is the exercise.
 - **step 2** — do not harden the loans module, do not implement `MemberStatements.forTier`, and do
   not add a `native` profile or write the resource hint. The project also carries **three plaintext
   setup flags**, one in its own `.claude` skill, one in its `CLAUDE.md` and one in the `domain`
@@ -149,16 +191,22 @@ it can be re-synced, and must not be edited.
 
 ### The catalogue
 
-`GET /api/titles` returns nine fictional book titles, and hides three flags the step 1 `workshop`
-board grades. How each of the three is hidden, why it does not fall out of a `grep`, and the several
-prohibitions that keep it that way are all in `kata/step1/java/CLAUDE.md`, which is where they can be
-maintained beside the code they describe. Read it before touching anything under `kata/step1/java/`.
+`GET /api/titles` returns nine fictional book titles, and four of the step 1 `workshop` board's five
+flags are graded against it. **The nine titles are load bearing**, so rewriting one is never a
+cosmetic change. How each flag is carried, why none of them falls out of a
+`grep`, and the prohibitions that keep it that way are in **`front/src/steps/step1/CLAUDE.md`**,
+beside the board that grades them, and not beside the code they describe. That is the trade: a file
+under `kata/step1/java/` is one a student's agent loads on its own, and design notes there hand the
+capstone over before the student's first prompt. Read that file before touching anything under
+`kata/step1/java/services/`.
 
 The frontend has a page for calling all this: `/catalog`, linked under the steps in the sidebar.
 `CatalogPage` renders `CatalogPanel`, which fetches `/api/titles` on a button press and lists what
 came back, numbered, in arrival order. It is deliberately dumb: no caching, no massaging, no
 filtering, so what is on screen is what the service returned. It is not a unit and belongs to no step,
-but step 1's `workshop` unit now points the student at it to work the three flags.
+but step 1's `workshop` unit now points the student at it to work the flags. **Neither that
+dumbness nor the "in the same order" promise in `catalog.description` may be softened**: they are
+what makes the page trustworthy as an instrument, which is what the board now leans on.
 
 ## Running it
 
@@ -197,7 +245,8 @@ Before any of that, on a fresh clone or when a failure smells environmental, use
 skill in `.claude/skills/repo-setup/`: it checks the toolchain (including the JDK Maven actually
 compiles with, which is not always the `java` on `PATH`) and installs `front/node_modules`. It
 deliberately never runs the profiles that are meant to be red, so a green doctor and a red `graded`
-are both correct.
+are both correct. That script is also what `install.txt` calls for its first step, so a change to
+what it checks reaches a student's first minutes in this repository.
 
 `mvn test` must pass in every step, and on a clean checkout it does in all four. The invocations that
 carry the kata's meaning are step 2's, and they are documented where they live

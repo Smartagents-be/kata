@@ -1,0 +1,69 @@
+{
+  "en": {
+    "falloff.summarised": "summarised",
+    "falloff.dropped": "the detail goes",
+    "falloff.description": "A context window drawn as a fixed frame. A new turn enters at the bottom, the oldest turns have collapsed into one short summary bar at the top of the frame, and the detail that did not survive that summary drifts away above it, faded and tilted.",
+
+    "window.title": "Count what fills it",
+
+    "quiz.quality-degrades.entropy": "Entropy. The context filled with the session's leftovers: failed attempts, a command that errored, the same file read in three different states. The model weighs all of it.",
+    "quiz.plan-beats-one-shot.cache": "Your run reused a cached answer from your colleague's attempt, which the provider had already corrected.",
+
+    "quiz.pasted-old-file.question": "You paste a config file into the session so the agent has something to work from. It is two releases old and you have forgotten that. The agent builds on it confidently and the result is wrong. What went wrong?",
+    "quiz.pasted-old-file.reads-as-true": "Nothing in the window marks anything as stale. The old file sits there reading exactly like a current one, so the model builds on it without a second thought.",
+    "quiz.pasted-old-file.should-have-checked": "The agent should have opened the file on disk to check the version before using what you pasted.",
+    "quiz.pasted-old-file.too-old": "The file predates the model's training cutoff, so the format is unfamiliar to it.",
+    "quiz.pasted-old-file.window-too-small": "The config did not fit in the window alongside everything else, so only part of it was read.",
+    "quiz.pasted-old-file.explanation": "A model has no way to date what it is handed. Wrong context is more dangerous than missing context for exactly that reason: missing context is a gap the harness can go and fill, and wrong context is an answer built on top of.",
+
+    "deck.context.stale.title": "Nothing in the window says <mute>stale</mute>",
+    "deck.context.stale.note": "Kill the bug and the whole hunt stays in there. Ask for the next thing and the model reads the dead code as live.",
+    "deck.context.bad-code.title": "There is <hi>far more bad code</hi> on the internet than good",
+    "deck.context.bad-code.note": "Good and bad are not labels in what it read, and later training teaches manners rather than your team's taste. A vague question returns the statistical middle of everything ever written.",
+    "deck.context.entropy.note": "Nothing was deleted. The deciding line is still in there, halfway up a window the model reads from both ends."
+  },
+
+  "nl": {
+    "context.lead.1": "Je prompt, de resources die de agent gelezen heeft en de tools die hij kan aanroepen komen van verschillende plekken en landen in hetzelfde blok tekst. Dat blok is de context, en het is alles wat het model ooit te zien krijgt. Zodra iets erin staat, geeft niets nog aan waar het vandaan kwam, en het model weegt alles even zwaar.",
+    "context.model-stateless.2": "Dat volledige transcript opnieuw meesturen heeft meer gevolgen dan alleen de rekening. Clear de sessie <svg data-icon=\"coin\"></svg> vaak genoeg, zeker wanneer je overschakelt naar iets dat er niets mee te maken heeft. Een verse sessie houdt het model scherp, ook al moet het een bestand opnieuw lezen om het probleem voor zich op te lossen.",
+    "context.model-statistic.1": "Het is ook een statistisch model, geen databank die redeneert. Het weegt af wat er op de tekst die het gekregen heeft zou kunnen volgen, op basis van patronen uit zijn trainingsdata. Het heeft geen mening over jouw codebase. Wat het heeft, is een gemiddelde.",
+    "context.model-statistic.3": "Die links is de prompt op zichzelf. Die rechts kreeg dezelfde prompt met één referentiebeeld van Dribbble erbij. Dat ene stuk context stuurde ze meteen ergens minder generieks heen. Ze is niet af, maar ze staat dichterbij, en de weg die nog te gaan is, is korter. Die links klopt ook. Niemand zou ze zo online zetten.",
+    "context.why-bites-hardest.1": "Er staat veel meer slechte code op het internet dan goede. Doodgebloede tutorials, antwoorden uit 2011, snippets die nooit in productie gedraaid hebben, huiswerk. Een model dat op dat alles getraind is, heeft duizenden keren gezien wat je net niet moet doen, en anders dan een slechte alinea compileert een slechte functie gewoon.",
+    "context.why-bites-hardest.2": "Uit de stapel alleen kan het de twee niet uit elkaar houden. \"Goed\" en \"slecht\" zijn geen labels in wat het gelezen heeft. De training die erna komt leert het manieren en algemene smaak aan, niet wat jullie team in 2019 afgesproken heeft, dus blijft frequentie over. Een vage vraag geeft je het statistische midden van alles wat ooit over het onderwerp geschreven is. Dat midden is middelmatige code die toevallig compileert.",
+    "context.more-context-not.1": "Elke token in het venster gaat opnieuw mee, en dat bij elke beurt, want de volledige context gaat met elk bericht opnieuw naar het model. Een lange sessie kost niet een beetje meer. Ze kost meer per bericht, voor de rest van de sessie.",
+    "context.more-context-not.2": "Het doel is dus niet maximale context. Het doel is context die klein genoeg is en goed genoeg. Het bestand dat ertoe doet in plaats van de hele map. Elke token die je er extra bij gooit, verhoogt namelijk de kosten.",
+    "context.entropy.3": "Dit heeft een eigen naam: lost in the middle. Er is niets weggegooid. De regel waar het antwoord op draait staat nog in het venster, en waar ze staat is precies het probleem. Een model gebruikt wat vooraan in het venster staat en wat achteraan staat. Zet de beslissende regel halverwege een lange context en het leest er zo overheen.",
+    "context.amnesia-context-fatigue.1": "Omdat het venster eindig is, moet er vroeg of laat iets wijken. Ouder materiaal wordt samengevat, en die samenvatting is wat blijft. De randvoorwaarde die je in het begin meegaf is nu één regel daarin, of ze heeft de samenvatting niet gehaald.",
+
+    "falloff.summarised": "samengevat",
+    "falloff.dropped": "het detail gaat weg",
+    "falloff.description": "Een context window als een vast kader. Onderaan komt een nieuwe beurt erbij, bovenaan zijn de oudste beurten samengetrokken tot één korte balk met de samenvatting, en het detail dat die samenvatting niet gehaald heeft drijft daarboven weg, vervaagd en gekanteld.",
+
+    "window.title": "Tel wat erin zit",
+
+    "quiz.pasted-old-file.question": "Je plakt een configuratiebestand in de sessie zodat de agent iets heeft om mee te werken. Het is twee releases oud en dat ben je vergeten. De agent bouwt er vol vertrouwen op verder en het resultaat klopt niet. Wat is er misgelopen?",
+    "quiz.pasted-old-file.reads-as-true": "Niets in het venster markeert iets als verouderd. Dat oude bestand staat er en leest precies zoals een actueel bestand, dus bouwt het model er zonder aarzelen op verder.",
+    "quiz.pasted-old-file.should-have-checked": "De agent had het bestand op schijf moeten openen om de versie te controleren voor hij gebruikte wat jij geplakt had.",
+    "quiz.pasted-old-file.too-old": "Het bestand dateert van na de trainingscutoff van het model, dus kent het model dat formaat niet.",
+    "quiz.pasted-old-file.window-too-small": "De config paste niet in het venster naast al de rest, dus is er maar een stuk van gelezen.",
+    "quiz.pasted-old-file.explanation": "Een model kan niet dateren wat het krijgt. Verkeerde context is net daarom gevaarlijker dan ontbrekende context: een gat kan het harness zelf gaan opvullen, verkeerde context is een antwoord waar bovenop gebouwd wordt.",
+
+    "deck.context.stale.title": "Niets in het venster zegt <mute>verouderd</mute>",
+    "deck.context.stale.note": "Los de bug op en de hele jacht blijft erin staan. Vraag het volgende en het model leest die dode code als levend.",
+    "deck.context.bad-code.title": "Er staat <hi>veel meer slechte code</hi> op het internet dan goede",
+    "deck.context.bad-code.note": "Goed en slecht zijn geen labels in wat het gelezen heeft, en de training daarna leert manieren aan, niet de smaak van jullie team. Een vage vraag levert het statistische midden van alles wat er ooit geschreven is.",
+    "deck.context.entropy.note": "Er is niets verwijderd. De beslissende regel staat er nog, halverwege een venster dat het model van beide kanten leest."
+  },
+
+  "afterEn": {
+    "quiz.pasted-old-file.question": "quiz.quality-degrades.explanation",
+    "deck.context.stale.title": "deck.context.diagram.title",
+    "deck.context.bad-code.title": "deck.context.oneshot.title"
+  },
+
+  "afterNl": {
+    "quiz.pasted-old-file.question": "quiz.quality-degrades.explanation",
+    "deck.context.stale.title": "deck.context.diagram.title",
+    "deck.context.bad-code.title": "deck.context.oneshot.title"
+  }
+}

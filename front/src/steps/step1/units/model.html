@@ -4,8 +4,9 @@
 </p>
 
 <p data-i18n="model.lead.2">
-  A provider ships a family rather than a model. They differ in what they cost per token, how fast
-  they answer, and how well they hold a long task together.
+  A provider ships a family rather than a model. They differ in what they cost per token and how
+  fast they answer, and in the one the cards below are about: how well each holds a long task
+  together.
 </p>
 
 <div data-figure="model-tiers"></div>
@@ -14,7 +15,7 @@
      says when these were the family rather than pinning the prose to a release, the same job the
      month in `ModelPricing`'s caption does. It sits under the cards rather than over them, so it
      reads as their caption. -->
-<p data-i18n="model.lead.3"><small>(July 2026)</small></p>
+<p data-i18n="model.lead.3"><small>The family as it stood in July 2026.</small></p>
 
 <h2 data-i18n="model.cost.heading">Cost</h2>
 
@@ -50,9 +51,10 @@
      rate. It reaches back across the step on purpose, because the two halves of the multiplication
      live a unit apart, and it carries no currency of its own, so `ModelPricing` stays the only
      number with one. It measures and argues nothing; the tier-as-multiplier paragraph that once
-     closed this section stays out. -->
+     closed this section stays out. The sum itself is asked for by `PriceOneTurn` at the foot of the
+     unit, so this paragraph states the method and the card collects the answer. -->
 <p data-i18n="model.cost.4">
-  Money on your own window takes one division. <code>/context</code> printed your count back in
+  Money on your own window is one sum. <code>/context</code> printed your count back in
   <a href="/steps/step1/context">the context unit</a>, and the table above prices a million of those.
   Multiply, and that is what sending the window up once costs, before the model has written a word.
 </p>
@@ -92,7 +94,7 @@
 </p>
 
 <p data-assistant="copilot" data-i18n="model.api-vs-subscription.3.copilot">
-  The tokens are the same either way. What differs is whether you can see them. On a key, a long
+  The tokens are the same either way. What differs is how the bill reaches you. On a key, a long
   window is a number growing on an invoice while you work, and you can go and look at it
   <svg data-icon="coin"></svg> A Copilot seat draws the same tokens out of a monthly allowance:
   input, output and the cached ones, each at the rate of the model you picked. That allowance does
@@ -123,7 +125,7 @@
 <h2 data-assistant="claude" data-i18n="model.five-hour-window.heading">The five-hour window</h2>
 
 <p data-assistant="claude" data-i18n="model.five-hour-window.1">
-  Your provider might give you a session limit, and it is usually a sliding window of five hours.
+  Some providers give you a session limit, and it is usually a sliding window of five hours.
   Your first message opens one. Everything you send lands inside it, and when the five hours are up
   the next thing you type opens the next window. This is a clock, not the pile of turns
   <a href="/steps/step1/session">the session unit</a> is about. The two share a word by accident.
@@ -156,11 +158,18 @@
 <h2 data-i18n="model.speed.heading">Speed</h2>
 
 <p data-i18n="model.speed.1">
-  The small tier answers roughly four to five times faster than the middle one, and the top tier is
+  The small tier answers roughly two to three times faster than the middle one, and the top tier is
   the slowest of the three. On one question that is a few seconds and you will not care. Inside a
   loop that runs a hundred times, it is the difference between a job you watch and a job you leave
   running.
 </p>
+
+<!-- The paragraph above makes a threshold claim and prices neither side of it, so this draws where
+     the threshold falls: three counts of calls on one axis, with the minute you stop watching as a
+     guide line. The section had a table for cost and nothing for speed until it arrived. It carries
+     no context frame, on the rule the whole step follows, and its numbers are hand-authored, which
+     the caption says the way `NextToken`'s does. -->
+<div data-figure="speed-at-scale"></div>
 
 <p data-i18n="model.speed.2">
   Here is where quick stops being cheap. A fast wrong answer costs you the run it broke plus the
@@ -190,19 +199,27 @@
 <p data-i18n="model.let-it-pick.1">
   You do not have to make this call every time. The coordinator in the previous unit is this choice
   handed to the machine: the expensive model works out what has to happen, and the parts go to
-  cheaper ones. The saving is the gap you priced above, five against one.
+  cheaper ones. The saving is the gap you priced above, five against one
+  <svg data-icon="gem"></svg> <svg data-icon="coin"></svg>
 </p>
 
 <p data-i18n="model.let-it-pick.2">
-  There is a reason that split works as well as it does. Providers fine-tune the smaller tiers on
-  output from the larger ones, so an expensive model writing the brief is writing for something
-  trained on its own answers. Working out what the cheap model should do is the half it is best at.
+  There is a reason that split works as well as it does. Smaller tiers are commonly trained on
+  output from larger ones, so an expensive model writing the brief is writing for something shaped
+  by its own answers. Working out what the cheap model should do is the half it is best at.
 </p>
 
 <!-- The doing part, under the heading `QuizPanel` renders over a quiz, the same shape `tools` and
-     `harness` use. The card carries the whole task, so nothing sits between the rule and it. -->
+     `harness` use. Nothing sits between the rule and the first card, and nothing between the two:
+     the sum comes before the sorting because `cost.4` set it up a screen earlier and the board
+     answers a different question. -->
 <hr />
 
 <h2 data-i18n="ui:quiz.title">Test yourself</h2>
+
+<!-- What `cost.4` describes, asked for. The count comes from `ReadYourWindow` two units back, which
+     nothing else in the course ever spends, and the rate comes off the table above. Nothing grades
+     it: the number is the student's own and the card is a tick. -->
+<div data-figure="price-one-turn"></div>
 
 <div data-figure="pick-the-tier"></div>

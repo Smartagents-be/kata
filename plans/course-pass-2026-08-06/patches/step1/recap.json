@@ -1,0 +1,13 @@
+{
+  "en": {
+    "deck.recap.one-window.title": "Eight units, and every one of them <hi>filled the same window</hi>",
+    "deck.recap.one-window.note": "What fills it, what it costs and who reads it.",
+    "deck.recap.divider.3": "What you learned here <hi>still holds</hi> in step 2"
+  },
+  "nl": {
+    "recap.what-costs-do.5": "<strong>Je hebt bijna niets van de <a href=\"/steps/step1/session\">sessie</a> zelf getypt, en alles gaat bij elke beurt opnieuw mee.</strong> Wat het vroeg gelezen heeft, is waar je blijft voor betalen, dus vraag alles wat je wilt weten over een stuk code zolang het nog voor je ligt <svg data-icon=\"coin\"></svg>.",
+    "deck.recap.one-window.title": "Acht units, en elke ervan <hi>vulde hetzelfde venster</hi>",
+    "deck.recap.one-window.note": "Wat het vult, wat het kost en wie het leest.",
+    "deck.recap.divider.3": "Wat je hier leerde, <hi>geldt daar nog steeds</hi>"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "en": {
+    "assistant.title": "Set your assistant",
+    "assistant.todo": "Mark this task done",
+    "assistant.done": "Done",
+    "assistant.pick.label": "Open the cogwheel, top right. Set the assistant to the one you use, and check the language while you are in there.",
+
+    "code.panel.label": "The page flag",
+    "code.panel.hint": "Type the flag from the paragraph above, braces and all.",
+    "code.panel.help": "Look at the string in braces in the paragraph just above this box.",
+    "code.panel.wrong": "Not quite. Copy the flag from the paragraph above, braces and all.",
+
+    "hint.panel.title": "Try it: find the hidden flag",
+    "hint.panel.label": "The hidden flag",
+    "hint.panel.help": "Here is the flag for this box: {34513r-t1m3}.",
+    "hint.panel.wrong": "Not quite. Press Hint to see the flag, then copy it in, braces and all.",
+
+    "quiz.what-the-code-is.question": "You are reading a page and hit a string in braces, like {f1r5t-5t3p5}. What is it doing there?",
+    "quiz.what-the-code-is.explanation": "A string in braces is a flag, which means it is the answer itself. You clear the page by typing it back into the box, and it grades in your browser.",
+
+    "quiz.agent-says-it-found-it.question": "You ask your agent for a flag. It comes back with a string in the right shape and says it is confident. It never ran anything. What have you got?",
+    "quiz.agent-says-it-found-it.a-guess": "A guess. Have it run the thing and print the output, then read the flag off that.",
+    "quiz.agent-says-it-found-it.it-read-the-file": "A flag. It read the file, so the string came out of the code rather than out of the model.",
+    "quiz.agent-says-it-found-it.right-shape": "A flag, as long as the shape is right. The shape is what the board checks your answer against.",
+    "quiz.agent-says-it-found-it.only-builds": "Nothing usable. Only a build can print a flag, so a flag found by reading is never the right one.",
+    "quiz.agent-says-it-found-it.explanation": "Worked out in prose, a flag is a plausible string with two letters wrong, said just as surely. The board hashes one exact string, so the cheap check is to make the agent run the thing and read the answer out of the output."
+  },
+
+  "nl": {
+    "welcome.lead.1": "Deze kata leert je werken met een coding agent, stap voor stap. Ze begint eenvoudig en elke stap bouwt op de vorige.",
+    "welcome.lead.2": "Drie dingen moeten op je machine staan voor dit werkt: deze repository gekloond, een JDK 25 of nieuwer met Maven op je pad, en een coding agent die je in een terminal kan draaien. De laatste pagina van deze stap controleert ze alle drie voor je.",
+
+    "welcome.how-to-use-this-document.5": "Achter het menu <svg data-icon=\"cog\"></svg> rechtsboven zitten een paar opties om deze cursus in te stellen. Eén ervan gooit je voortgang weg: elke flag die je gevangen hebt en elke pagina die als afgerond staat.",
+    "welcome.how-to-use-this-document.6": "Zet de assistent op degene die je echt gebruikt. De pagina's noemen dan de commando's die voor jou gelden, in plaats van die van het andere product.",
+
+    "assistant.title": "Zet je assistent",
+    "assistant.todo": "Markeer deze taak als afgerond",
+    "assistant.done": "Klaar",
+    "assistant.pick.label": "Open het tandwiel rechtsboven. Zet de assistent op degene die jij gebruikt, en kijk meteen de taal na.",
+
+    "welcome.how-exercises-work.1": "Tijdens de oefeningen kom je strings tegen zoals <code>{f1r5t-5t3p5}</code>. Een string tussen accolades is een flag. Die spoor je op en typ je in je browser in een veld terug.",
+
+    "welcome.hints.1": "Elk antwoordveld heeft een Hint-knop. Als je vastzit kan je hierop drukken om hulp te krijgen.",
+
+    "welcome.how-workshops-work.1": "Een workshop is een bord met flags: sommige zitten verstopt in de code en moet je opsporen, andere print een build zodra je het project hebt waar de stap het hebben wil. Wat je vindt typ je in het bord, en dat controleert je antwoord in de browser. Stap 0, stap 1 en stap 2 hebben er elk een.",
+
+    "welcome.house-rules.heading": "Huisregels",
+    "welcome.house-rules.3": "<strong>Eén flag, één sessie.</strong> Een jacht laat een spoor van doodlopende paden achter, en de volgende flag moet daar allemaal doorheen lezen. Begin elke flag op een verse sessie, tenzij de stap iets anders zegt <svg data-icon=\"coin\"></svg>.",
+    "welcome.house-rules.5": "<strong>Reken de jacht af als ze voorbij is.</strong> Een flag is een paar tekens lang. De weg ernaartoe niet, en je hebt elke beurt onderweg betaald. Stap 1 geeft je de cijfers om erop te zetten. De volgende pagina gaat over de code waar die flags in zitten, en de pagina daarna is het bord van deze stap.",
+
+    "code.panel.label": "De flag van de pagina",
+    "code.panel.hint": "Typ de flag uit de alinea hierboven, mét accolades.",
+    "code.panel.help": "Kijk naar de string tussen accolades in de alinea net boven dit veld.",
+    "code.panel.wrong": "Net niet. Kopieer de flag uit de alinea hierboven, mét accolades.",
+
+    "hint.panel.title": "Probeer het: vind de verborgen flag",
+    "hint.panel.label": "De verborgen flag",
+    "hint.panel.help": "Hier is de flag voor dit veld: {34513r-t1m3}.",
+    "hint.panel.wrong": "Net niet. Druk op Hint om de flag te zien, en kopieer hem dan in, mét accolades.",
+
+    "quiz.what-the-code-is.question": "Je leest een pagina en stuit op een string tussen accolades, zoals {f1r5t-5t3p5}. Wat doet die daar?",
+    "quiz.what-the-code-is.explanation": "Een string tussen accolades is een flag, en dus het antwoord zelf. Je lost de pagina op door hem terug te typen in het veld, en het nakijken gebeurt in je browser.",
+
+    "quiz.agent-says-it-found-it.question": "Je vraagt je agent om een flag. Hij komt terug met een string in de juiste vorm en zegt dat hij zeker is. Hij heeft niets gedraaid. Wat heb je?",
+    "quiz.agent-says-it-found-it.a-guess": "Een gok. Laat hem het ding draaien en de uitvoer printen, en lees de flag daarvan af.",
+    "quiz.agent-says-it-found-it.it-read-the-file": "Een flag. Hij heeft het bestand gelezen, dus de string komt uit de code en niet uit het model.",
+    "quiz.agent-says-it-found-it.right-shape": "Een flag, zolang de vorm klopt. Op de vorm kijkt het bord je antwoord na.",
+    "quiz.agent-says-it-found-it.only-builds": "Niets bruikbaars. Alleen een build kan een flag printen, dus een flag die je leest is nooit de juiste.",
+    "quiz.agent-says-it-found-it.explanation": "Uitgedacht in proza is een flag een geloofwaardige string met twee letters ernaast, even zeker gebracht. Het bord hasht één exacte string, dus de goedkoopste controle is de agent het ding laten draaien en het antwoord uit de uitvoer lezen."
+  },
+
+  "afterEn": {
+    "assistant.title": "backend.title",
+    "assistant.todo": "assistant.title",
+    "assistant.done": "assistant.todo",
+    "assistant.pick.label": "assistant.done",
+
+    "quiz.agent-says-it-found-it.question": "quiz.what-the-code-is.explanation",
+    "quiz.agent-says-it-found-it.a-guess": "quiz.agent-says-it-found-it.question",
+    "quiz.agent-says-it-found-it.it-read-the-file": "quiz.agent-says-it-found-it.a-guess",
+    "quiz.agent-says-it-found-it.right-shape": "quiz.agent-says-it-found-it.it-read-the-file",
+    "quiz.agent-says-it-found-it.only-builds": "quiz.agent-says-it-found-it.right-shape",
+    "quiz.agent-says-it-found-it.explanation": "quiz.agent-says-it-found-it.only-builds"
+  },
+
+  "afterNl": {
+    "assistant.title": "welcome.how-to-use-this-document.6",
+    "assistant.todo": "assistant.title",
+    "assistant.done": "assistant.todo",
+    "assistant.pick.label": "assistant.done",
+
+    "quiz.agent-says-it-found-it.question": "quiz.what-the-code-is.explanation",
+    "quiz.agent-says-it-found-it.a-guess": "quiz.agent-says-it-found-it.question",
+    "quiz.agent-says-it-found-it.it-read-the-file": "quiz.agent-says-it-found-it.a-guess",
+    "quiz.agent-says-it-found-it.right-shape": "quiz.agent-says-it-found-it.it-read-the-file",
+    "quiz.agent-says-it-found-it.only-builds": "quiz.agent-says-it-found-it.right-shape",
+    "quiz.agent-says-it-found-it.explanation": "quiz.agent-says-it-found-it.only-builds"
+  }
+}

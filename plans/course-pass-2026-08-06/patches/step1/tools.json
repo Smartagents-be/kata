@@ -1,0 +1,66 @@
+{
+  "en": {
+    "connect.browser.label": "Ask it for the same nine titles again through the server: open localhost:5173/catalog in the browser it drives, press the button, read them off the page.",
+
+    "deck.tools.list.title": "The list itself is <hi>in the window</hi>",
+    "deck.tools.list.note": "Every description rides along on every message, called or not. Four or five added servers' worth is the most one context holds well.",
+    "deck.tools.spot.title": "Pick the odd one out"
+  },
+
+  "nl": {
+    "connect.browser.label": "Vraag dezelfde negen titels opnieuw via de server: open localhost:5173/catalog in de browser die hij bestuurt, druk op de knop, lees ze van de pagina.",
+
+    "tools.lead.2": "Daar komt alles vandaan wat een agent kan. <code>grep</code> om je codebase te doorzoeken, een edit tool om een bestand aan te passen, <code>curl</code> om een API aan te roepen, een MCP-server voor wat je harness zelf niet meelevert. Het harness bepaalt welke tools er zijn, en wat een harness precies is, staat in <a href=\"/steps/step1/harness\">de unit over het harness</a>. Wat die teruggeven, is deze laag.",
+    "tools.lead.4": "Die gestreepte helft is het stuk dat het model nooit ziet. Een bestand dat het harness kort besloot te houden en een bestand dat echt kort is, zijn daarbinnen hetzelfde bestand, tenzij er iets in het resultaat staat dat het tegenspreekt.",
+
+    "tools.mcp-servers.heading": "MCP-servers",
+    "tools.mcp-servers.1": "Een MCP-server kan van alles zijn. Model Context Protocol is de standaard die je harness spreekt om er een te bereiken, en wat er aan de andere kant hangt, beslist wie hem geschreven heeft: een server voor je issue tracker, een voor je databank, een die een browser bestuurt. Iemand anders heeft hem geschreven. Jij hebt hem aangesloten, en nu kan het model hem aanroepen. Jouw harness voert de oproep uit en plakt erachter wat er terugkwam, net zoals bij <code>grep</code>.",
+    "tools.mcp-servers.2": "Tools zijn niet het enige wat een server aanbiedt. Hij kan ook materiaal doorgeven dat hij zelf verzameld heeft: een pagina uit een wiki, of het ontwerpdocument van vorig kwartaal. Er is niets aangeroepen om het te krijgen. Jouw harness heeft het opgehaald en in het venster gezet, en het model leest het daar naast je prompt. Inhoud die zo binnenkomt heeft een eigen naam. Een resource.",
+    "tools.mcp-servers.3.claude": "Prompts zijn het derde. Een server brengt hele prompts mee, geschreven door wie hem gebouwd heeft, klaar om uit een lijstje te kiezen. Claude Code zet ze achter een slash.",
+    "tools.mcp-servers.3.copilot": "Prompts zijn het derde. Een server brengt hele prompts mee, geschreven door wie hem gebouwd heeft, klaar om uit een lijstje te kiezen. Of je ze ooit te zien krijgt, beslist je harness: Copilot CLI geeft je <code>/mcp</code> voor de servers en noemt niets voor hun prompts.",
+    "tools.mcp-servers.4": "Lees ze aan wie beslist. Jij kiest de prompt, jouw harness hangt de resource eraan, het model vraagt om de tool. Drie verschillende handen, en alle drie belanden ze in hetzelfde venster, waar ze heel verschillend veel plaats innemen.",
+
+    "tools.list-itself-window.3": "Ze kosten je ook denkruimte. Veertig tools zijn veertig beschrijvingen om doorheen te lezen en veertig manieren om de verkeerde te kiezen, dus het venster staat vol ruis voor je iets gevraagd hebt. Een agent met <code>grep</code>, een edit tool en een testrunner kiest tussen drie. Zet af wat deze taak niet nodig heeft.",
+    "tools.list-itself-window.4": "<p> Vier of vijf aangesloten servers is ongeveer het meeste dat één context goed draagt, bovenop wat je harness je sowieso al meegeeft. Daarboven gaat de aandacht van de agent naar het kiezen tussen die tools, en een langere lijst is zelden het antwoord. Geef dat werk zijn eigen gespecialiseerde agent, met de tools die het nodig heeft en verder niets. </p>",
+
+    "tools.stay-critical.3": "Daar zie je niets meer van zodra het in het venster zit. Jouw prompt, de notities van de agent zelf en een alinea van een pagina die hij dertig seconden geleden opende komen allemaal gemarkeerd binnen, en die markering houdt niet: het model is getraind om jou meer te vertrouwen dan een tool result, niet gebouwd om dat te doen. Het leest de regel van de vreemde en bouwt er toch op verder.",
+
+    "tools.pay-every-turn-after.heading": "Je betaalt ervoor bij elke beurt daarna",
+    "tools.pay-every-turn-after.1": "Een tool result is meestal het lijvigste dat in het venster staat. Een pagina documentatie is langer dan je prompt. <code>mvn test</code> op een rode build is langer dan de meeste van je bronbestanden. En het bezinkt in de sessie, dus het gaat bij elke beurt daarna opnieuw mee. Die rode build scrollt één keer voorbij en je betaalt ervoor bij elke vraag die je daarna nog stelt.",
+
+    "deck.tools.list.title": "De lijst zelf staat <hi>in het venster</hi>",
+    "deck.tools.list.note": "Elke beschrijving reist mee met elk bericht, aangeroepen of niet. Vier of vijf aangesloten servers is het meeste dat één context goed houdt.",
+    "deck.tools.spot.title": "Kies de vreemde eend"
+  },
+
+  "removeNl": [
+    "tools.extra-tools.heading",
+    "tools.extra-tools.1",
+    "tools.extra-tools.2",
+    "tools.extra-tools.3.claude",
+    "tools.extra-tools.3.copilot",
+    "tools.extra-tools.4",
+    "tools.costs-same-everything.heading",
+    "tools.costs-same-everything.1"
+  ],
+
+  "afterEn": {
+    "deck.tools.list.title": "deck.tools.parts.title",
+    "deck.tools.list.note": "deck.tools.list.title",
+    "deck.tools.spot.title": "deck.tools.injection.note"
+  },
+
+  "afterNl": {
+    "tools.mcp-servers.heading": "tools.lead.4",
+    "tools.mcp-servers.1": "tools.mcp-servers.heading",
+    "tools.mcp-servers.2": "tools.mcp-servers.1",
+    "tools.mcp-servers.3.claude": "tools.mcp-servers.2",
+    "tools.mcp-servers.3.copilot": "tools.mcp-servers.3.claude",
+    "tools.mcp-servers.4": "tools.mcp-servers.3.copilot",
+    "tools.pay-every-turn-after.heading": "tools.stay-critical.3",
+    "tools.pay-every-turn-after.1": "tools.pay-every-turn-after.heading",
+    "deck.tools.list.title": "deck.tools.parts.title",
+    "deck.tools.list.note": "deck.tools.list.title",
+    "deck.tools.spot.title": "deck.tools.injection.note"
+  }
+}

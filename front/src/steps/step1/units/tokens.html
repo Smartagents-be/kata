@@ -1,5 +1,5 @@
-<!-- In class the teacher talks through this at the board, so the page keeps only the three
-     figures: every prose block is self-learning only, the same wrapper shape `context` uses.
+<!-- In class the teacher talks through this at the board, so the page keeps only the four figures and
+     the exercise: every prose block is self-learning only, the same wrapper shape `context` uses.
      The figure markers stay top-level and carry no attribute so both audiences get them; a marker
      nested inside a data-audience wrapper is left as an empty div, which is why the wrapper closes
      before each figure and reopens after it. -->
@@ -12,25 +12,24 @@
 </div>
 
 <!-- The lead figure, and the one figure in the unit with no heading above it, so a guided room opens
-     on the drawing rather than on a title. It draws the paragraph above it and nothing else: the
-     sentence, then the chunks, grouped by the word each came out of. -->
+     on the drawing rather than on a title. It follows one word all the way in and one token back
+     out, and the paragraph above it says none of that. -->
 <div data-figure="words-into-tokens"></div>
 
 <div data-audience="self">
   <!-- The not-a-layer move, mirrored from `model.lead.1`, but it states the unit first and lets the
        negation fall out of it, because this comes first in the step and there is no layer vocabulary
-       to negate yet. The word `context` is deliberately not used either: `prompt` defines it on the
-       very next page. -->
+       to negate yet. The word `context` is deliberately not used either: no unit defines it before
+       `context` itself takes the window apart. -->
   <p data-i18n="tokens.lead.2">
     A token is the unit a language model works in. Everything an agent knows when it answers you is
     text, and that text is limited, priced and re-read by the token. Not by the word, and not by the
-    character. So what follows is not about what goes into an agent, but about what you measure it
-    in.
+    character. So this unit is not about what goes into an agent, but about what you measure it in.
   </p>
 
   <p data-i18n="tokens.lead.3">
-    For ordinary English, four or five characters go into one token, so a page of prose runs to a few
-    hundred.
+    For ordinary English, roughly four to six characters go into one token, so a page of prose runs
+    to a few hundred.
   </p>
 
   <h2 data-i18n="tokens.not-words.heading">Text does not split into words</h2>
@@ -39,7 +38,8 @@
     A tokeniser has a fixed vocabulary, built once from a pile of text and then frozen. It cuts your
     input into the longest pieces that vocabulary already knows, so common English words come through
     whole, the space in front of them included. Anything it has not seen often enough gets taken
-    apart until what is left does fit.
+    apart until what is left does fit. Every provider ships its own vocabulary, so the boundaries
+    differ in detail. The shape does not.
   </p>
 </div>
 
@@ -61,7 +61,7 @@
   <p data-i18n="tokens.not-words.3">
     The vocabulary comes from the pile the model was trained on, so what breaks into fragments is also
     what it has read least of. Plain English it has seen endlessly. Your class names and a language
-    with little text online it has not, and the answers are shakier for it
+    with little text online it has not, and it answers worse on both
     <svg data-icon="gem"></svg> Ask in the language the model has read most of. The same question
     costs fewer tokens and comes back better answered <svg data-icon="coin"></svg>.
   </p>
@@ -69,32 +69,27 @@
   <h2 data-i18n="tokens.one-at-a-time.heading">It writes one token at a time</h2>
 
   <p data-i18n="tokens.one-at-a-time.1">
-    Given everything it has been handed so far, it scores the tokens that could come next, and one of
-    them is taken. That token is stuck on the end, and the whole lot goes back in. Again.
+    Given everything it has been handed so far, the model scores the tokens that could come next, and
+    one of them is taken. That token is stuck on the end, and the whole lot goes back in. Again.
   </p>
 </div>
 
 <div data-figure="next-token"></div>
 
 <div data-audience="self">
-  <p data-i18n="tokens.one-at-a-time.2">
-    No sentence is being written out here. Three separate passes, and on the third one the model
-    reads all seven tokens to produce one.
-  </p>
-
   <!-- The correction that makes this section worth having: conditioned on everything before it, not on
        the token before it. It is also the bridge into the attention section, which is that claim drawn.
        Do not shorten it to "the previous token". -->
-  <p data-i18n="tokens.one-at-a-time.3">
+  <p data-i18n="tokens.one-at-a-time.2">
     On its own, <code>it</code> predicts nothing at all. <code>the build failed because it</code> is
     what makes <code>timed</code> the favourite. Everything you leave in front of a model changes what
     comes out of it, whether you meant it to or not.
   </p>
 
   <!-- Sampling, and the one place the unit says the top row is not a rule. It is what stops the figure
-       from teaching that a model is a lookup table with extra steps, and it is what the branch tree
-       under the scores on the figure above is for. -->
-  <p data-i18n="tokens.one-at-a-time.4">
+       from teaching that a model is a lookup table with extra steps, and it is what the fan of scores
+       on the figure above is for. -->
+  <p data-i18n="tokens.one-at-a-time.3">
     The favourite is not always what comes out. Those scores are a distribution and the model samples
     from it, so the same question can give you a different answer twice in a row. None of the branches
     above were impossible. They were only less likely.
@@ -102,18 +97,18 @@
 
   <!-- Points at `model`'s pricing rather than repeating it, the same rule the caching paragraph below
        follows for `harness`. One consequence, named, and then it stops. -->
-  <p data-i18n="tokens.one-at-a-time.5">
+  <p data-i18n="tokens.one-at-a-time.4">
     This is also why output is priced above input. A question arrives in one pass. An answer is built a
     token at a time, and each one is paid for with a full read of everything before it. The
-    <code>model</code> unit puts numbers on that gap.
+    <a href="/steps/step1/model">model unit</a> puts numbers on that gap.
   </p>
 
   <h2 data-i18n="tokens.reads-all.heading">It reads all of it, every turn</h2>
 
   <p data-i18n="tokens.reads-all.1">
     Inside every one of those passes, the model does not look anything up. Each token is weighed
-    against every token in front of it, and that whole weighing is thrown away and redone on the next
-    pass. There is no index, and no shortcut for the parts that did not change.
+    against every token in front of it, and every one of those weighings is worked out rather than
+    fetched. There is no index, and nothing to search.
   </p>
 </div>
 
@@ -121,9 +116,10 @@
 
 <div data-audience="self">
   <p data-i18n="tokens.reads-all.2">
-    This is the sentence you just watched it write, finished. Hold <code>it</code> and the heaviest
-    line runs back to <code>build</code>, which is the answer you would have given. Hold the first
-    token and nothing is drawn at all. A token only ever looks backwards.
+    Take the favourite three times above and this is the sentence you get, with the full stop left
+    off. Hold <code>it</code> and the heaviest line runs back to <code>build</code>, which is the
+    answer you would have given. Hold the first token and nothing is drawn at all. A token only ever
+    looks backwards.
   </p>
 
   <p data-i18n="tokens.reads-all.3">
@@ -138,7 +134,7 @@
   <p data-i18n="tokens.reads-all.4">
     Looking only backwards has one useful consequence. Adding to the end leaves every earlier weighing
     exactly as it was, so the front of the pile can be kept and charged at a fraction next turn. That
-    is what a cache is here. The <code>harness</code> unit prices it.
+    is what a cache is here. The <a href="/steps/step1/harness">harness unit</a> prices it.
   </p>
 </div>
 

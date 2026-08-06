@@ -3,7 +3,9 @@ import type { Step } from '@/shared/step'
 import deck from './deck'
 import { AgentsAtOnce } from './AgentsAtOnce'
 import { AuditExample } from './AuditExample'
+import { CountTheDay } from './CountTheDay'
 import { DomainTree } from './DomainTree'
+import { FifteenMinutes } from './FifteenMinutes'
 import { FlowDiagram } from './FlowDiagram'
 import { GoalGate } from './GoalGate'
 import { HookTree } from './HookTree'
@@ -13,8 +15,10 @@ import { LoopsPerHour } from './LoopsPerHour'
 import { ModelRelay } from './ModelRelay'
 import { ProjectTree } from './ProjectTree'
 import { ReadEachTime } from './ReadEachTime'
+import { SameEveryRun } from './SameEveryRun'
 import { ScriptRuns } from './ScriptRuns'
 import { SetupFlags } from './SetupFlags'
+import { SteerARun } from './SteerARun'
 import { SkillShape } from './SkillShape'
 import { SkillTree } from './SkillTree'
 import { TwoWindows } from './TwoWindows'
@@ -26,7 +30,7 @@ import { WorktreeEach } from './WorktreeEach'
 import { Workshop } from './Workshop'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
-import { spendingQuiz, workflowsQuiz } from './quiz'
+import { parallelQuiz, patternsQuiz, spendingQuiz, steeringQuiz, workflowsQuiz } from './quiz'
 import evolution from './units/evolution.html?raw'
 import setup from './units/setup.html?raw'
 import engineering from './units/engineering.html?raw'
@@ -44,10 +48,11 @@ import workshop from './units/workshop.html?raw'
  * order: small steps, taken often, on something that already runs.
  *
  * `evolution`, `setup`, `engineering`, `steering`, `patterns`, `workflows`, `enablement`,
- * `parallel` and `goals` each carry a drawing, `engineering` closes on an ungraded task card, and `setup` and
- * the closing `workshop` unit each carry a flag board, which is why this registry is .tsx. Both
- * boards are browser-graded, so the step still talks to the service only through the `mvn verify -Pgraded` run
- * the student does outside the app.
+ * `parallel` and `goals` each carry a drawing. `evolution`, `engineering`, `steering`, `patterns`
+ * and `enablement` close on an ungraded task card; `steering`, `patterns`, `workflows` and `goals`
+ * carry a quiz; and `setup` and the closing `workshop` unit each carry a flag board, which is why
+ * this registry is .tsx. Both boards are browser-graded, so the step still talks to the service
+ * only through the `mvn verify -Pgraded` run the student does outside the app.
  */
 const step2: Step = {
   id: 'step2',
@@ -67,6 +72,10 @@ const step2: Step = {
         ),
         'added-details': <UnitShot id="added-details" src="/added-details.png" namespace="step2" />,
       },
+      // And the exercise under the prose. It is prose in the HTML too, and guided mode drops
+      // that, so this is what a class is left with. It grades nothing: the clock is the
+      // constraint and the answer is the list of details the student did not reach.
+      figure: <FifteenMinutes />,
     },
     {
       id: 'setup',
@@ -106,6 +115,11 @@ const step2: Step = {
         'loop-in-window': <LoopInWindow />,
         'worktree-each': <WorktreeEach />,
       },
+      // Then the task under the prose, four moves against kata/step2/java, and the quiz under
+      // that. The unit writes the `ui:quiz.title` heading itself, so `showsExerciseHeading` hands
+      // QuizPanel `heading={false}` and the page carries one "Test yourself".
+      figure: <SteerARun />,
+      quiz: steeringQuiz,
     },
     {
       id: 'patterns',
@@ -114,6 +128,12 @@ const step2: Step = {
       // One slot, under the `Scripts` section, at the <div data-figure="script-runs"> the unit
       // leaves. Nothing after it reads the drawing, so its own labels carry what it argues.
       inlineFigures: { 'script-runs': <ScriptRuns /> },
+      // The card closes the unit, under the same <hr> and "Test yourself" heading the rest of the
+      // course puts over its exercises, with the questions below it. Ungraded: the unit's two
+      // claims are worth running rather than answering, so the card asks for the run and the quiz
+      // asks for the choice.
+      figure: <SameEveryRun />,
+      quiz: patternsQuiz,
     },
     {
       id: 'workflows',
@@ -195,6 +215,11 @@ const step2: Step = {
         'loops-per-hour': <LoopsPerHour />,
         'skill-shape': <SkillShape />,
       },
+      // And the task under the prose, at the <hr> and the shared heading the unit's HTML now
+      // writes. The section tells the student to count where the hours go, so the card is that
+      // instruction with a stopwatch on it. It grades nothing and posts nothing; the tick is a
+      // bookmark.
+      figure: <CountTheDay />,
     },
     {
       id: 'parallel',
@@ -204,6 +229,11 @@ const step2: Step = {
       // names all four arrangements, so under `One agent at a time` it would spend three of them
       // early. Nothing below it reads it back, which is why its rows carry their own notes.
       inlineFigures: { 'agents-at-once': <AgentsAtOnce /> },
+      // Three questions, and they are situations rather than definitions: which arrangement a piece
+      // of work wants, what four unread diffs actually cost, and what an orchestrator moves. The
+      // unit carries no task card, so the HTML writes no `ui:quiz.title` and `QuizPanel` prints its
+      // own heading under the closing figure, the way `workflows` and `goals` do.
+      quiz: parallelQuiz,
     },
     {
       id: 'goals',

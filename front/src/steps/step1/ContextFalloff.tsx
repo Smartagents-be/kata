@@ -2,19 +2,23 @@ import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * The finite context window losing its oldest content. The window is a fixed frame filled with
- * turns; a new turn enters at the bottom and the oldest turns spill off the top, faded and tilted,
- * out of the frame. That is the amnesia the `amnesia-context-fatigue` section describes: nothing is
- * deleted on purpose, the window is just full and the evidence has left the room. Static on
- * purpose, like the ContextDiagram it sits above, so it reads at a glance.
+ * The finite context window making room. The window is a fixed frame filled with turns; a new turn
+ * enters at the bottom, and at the top the oldest two have collapsed into one short summary bar
+ * that is still inside the frame. What leaves the frame is the detail, the faded tilted bars rising
+ * off that summary rather than off the window itself.
+ *
+ * That distinction is the figure. It drew the oldest turns spilling out of the frame once, which is
+ * the branch `amnesia-context-fatigue.1` no longer claims: both harnesses this course targets
+ * compact automatically, so the summary is what a student actually meets and the detail is what
+ * they lose. Static on purpose, like the ContextDiagram it sits below, so it reads at a glance.
  */
 export function ContextFalloff() {
   const { t } = useTranslation('step1')
   const titleId = useId()
 
-  // Top edge of each turn inside the window, oldest first. The last one is the newest turn, and it
-  // is drawn solid; the rest fade back into the stack.
-  const turns = [90, 126, 162, 198, 234, 270]
+  // Top edge of each turn still carried in full, oldest first. The last one is the newest turn, and
+  // it is drawn solid; the rest fade back into the stack.
+  const turns = [126, 157, 188, 219, 250, 281]
 
   return (
     <figure
@@ -39,41 +43,67 @@ export function ContextFalloff() {
           id="context-falloff-window"
           data-component="ContextFalloff"
           x="170"
-          y="78"
+          y="86"
           width="180"
-          height="234"
+          height="228"
           rx="18"
           strokeWidth="2"
           className="fill-primary/5 stroke-primary/40"
         />
 
-        {/* the oldest turns, spilling off the top of the frame: faded and tilted, on their way out */}
+        {/* the detail that did not survive the summary: faded and tilted, on its way out of the
+            frame, and drawn rising off the short bar below rather than off the stack of turns */}
         <g className="fill-primary/20 stroke-primary/30" strokeWidth="1.5">
           <rect
             id="context-falloff-gone-0"
             data-component="ContextFalloff"
-            x="182"
-            y="58"
-            width="156"
-            height="28"
-            rx="6"
+            x="198"
+            y="52"
+            width="124"
+            height="18"
+            rx="5"
             opacity="0.5"
-            transform="rotate(-6 260 72)"
+            transform="rotate(-6 260 61)"
           />
           <rect
             id="context-falloff-gone-1"
             data-component="ContextFalloff"
-            x="192"
-            y="22"
-            width="150"
-            height="28"
-            rx="6"
+            x="208"
+            y="20"
+            width="110"
+            height="18"
+            rx="5"
             opacity="0.3"
-            transform="rotate(-13 260 36)"
+            transform="rotate(-13 263 29)"
           />
         </g>
 
-        {/* the turns still inside, newest at the bottom drawn solid */}
+        {/* the oldest turns, now one short bar inside the frame */}
+        <g id="context-falloff-summary-group" data-component="ContextFalloff">
+          <rect
+            id="context-falloff-summary"
+            data-component="ContextFalloff"
+            x="196"
+            y="98"
+            width="128"
+            height="18"
+            rx="5"
+            strokeWidth="1.5"
+            className="fill-primary/15 stroke-primary/35"
+          />
+          <rect
+            id="context-falloff-summary-line"
+            data-component="ContextFalloff"
+            x="208"
+            y="105"
+            width="76"
+            height="4"
+            rx="2"
+            className="fill-primary/40"
+          />
+        </g>
+
+        {/* the turns still carried in full, newest at the bottom drawn solid */}
         {turns.map((y, index) => {
           const newest = index === turns.length - 1
           return (
@@ -84,7 +114,7 @@ export function ContextFalloff() {
                 x="182"
                 y={y}
                 width="156"
-                height="28"
+                height="25"
                 rx="6"
                 strokeWidth="1.5"
                 className={
@@ -93,7 +123,7 @@ export function ContextFalloff() {
               />
               <rect
                 x="194"
-                y={y + 11}
+                y={y + 10}
                 width="104"
                 height="5"
                 rx="2.5"
@@ -103,25 +133,39 @@ export function ContextFalloff() {
           )
         })}
 
-        {/* connectors and labels: oldest leaving the top, newest arriving at the bottom */}
-        <line x1="352" y1="52" x2="336" y2="66" strokeWidth="1.5" className="stroke-muted-foreground/50" />
+        {/* connectors and labels: the detail leaving at the top, the summary it left behind, and the
+            newest turn arriving at the bottom */}
+        <line x1="352" y1="54" x2="328" y2="54" strokeWidth="1.5" className="stroke-muted-foreground/50" />
         <text
           id="context-falloff-dropped-label"
           data-component="ContextFalloff"
           x="356"
-          y="56"
+          y="58"
           fontSize="14"
           className="fill-muted-foreground"
         >
           {t('falloff.dropped')}
         </text>
 
-        <line x1="356" y1="284" x2="342" y2="284" strokeWidth="1.5" className="stroke-muted-foreground/50" />
+        <line x1="166" y1="107" x2="192" y2="107" strokeWidth="1.5" className="stroke-muted-foreground/50" />
+        <text
+          id="context-falloff-summarised-label"
+          data-component="ContextFalloff"
+          x="160"
+          y="111"
+          fontSize="14"
+          textAnchor="end"
+          className="fill-muted-foreground"
+        >
+          {t('falloff.summarised')}
+        </text>
+
+        <line x1="356" y1="294" x2="342" y2="294" strokeWidth="1.5" className="stroke-muted-foreground/50" />
         <text
           id="context-falloff-newest-label"
           data-component="ContextFalloff"
           x="360"
-          y="288"
+          y="298"
           fontSize="14"
           className="fill-foreground"
         >

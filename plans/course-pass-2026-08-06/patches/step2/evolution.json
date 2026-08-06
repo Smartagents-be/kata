@@ -1,0 +1,71 @@
+{
+  "en": {
+    "iteration-paths.description": "Two routes from the same start to the same target. On the left, three long steps that stop beside it. On the right, twelve short ones that land in it, and four dropped versions branching off along the way, each aimed at the target and none of them arriving.",
+    "iteration-paths.many": "With AI you vibe-code it in an hour",
+
+    "fifteen.title": "Fifteen minutes on a skeleton",
+    "fifteen.description": "Nothing is graded and nothing is submitted. The clock is the constraint, and the list of details you did not reach is the answer.",
+    "fifteen.todo": "Mark this task done",
+    "fifteen.done": "Done",
+    "fifteen.clock.label": "Put fifteen minutes on a clock.",
+    "fifteen.pick.label": "Pick one of the three above: a search box, a link shortener, or an export button.",
+    "fifteen.shape.label": "Ask for the shape only, and leave out everything in that option's second sentence.",
+    "fifteen.loop.label": "Run it, pick the single next thing, ask for that alone.",
+    "fifteen.write.label": "When the clock goes, write down the three details you did not reach.",
+
+    "deck.evolution.divider.4": "Three takes in front of people, <mute>not one argument about them</mute>"
+  },
+
+  "nl": {
+    "iteration-paths.description": "Twee routes van hetzelfde vertrekpunt naar hetzelfde doel. Links drie lange stappen die ernaast stoppen. Rechts twaalf korte die binnenkomen, en onderweg vier versies die eraf takken, elk richting het doel en geen ervan komt aan.",
+    "iteration-paths.few": "Traditioneel prototypen kostte weken",
+    "iteration-paths.many": "Met AI vibe-code je het in een uurtje",
+
+    "fifteen.title": "Vijftien minuten op een skelet",
+    "fifteen.description": "Er wordt niets beoordeeld en niets verstuurd. De klok is de beperking, en de lijst details die je niet gehaald hebt is het antwoord.",
+    "fifteen.todo": "Markeer deze taak als klaar",
+    "fifteen.done": "Klaar",
+    "fifteen.clock.label": "Zet vijftien minuten op een klok.",
+    "fifteen.pick.label": "Kies er een van de drie hierboven: een zoekvak, een link shortener of een exportknop.",
+    "fifteen.shape.label": "Vraag alleen de vorm, en laat alles weg wat in de tweede zin van die optie staat.",
+    "fifteen.loop.label": "Draai het, kies het ene volgende ding, vraag alleen dat.",
+    "fifteen.write.label": "Als de klok afgaat, schrijf de drie details op die je niet gehaald hebt.",
+
+    "evolution.prototype-conversation.1": "De eerste versie bestaat om een reactie los te krijgen. Bouw drie varianten van hetzelfde scherm in de tijd die één discussie erover kost, leg ze naast elkaar en kijk waar mensen over beginnen.",
+    "evolution.prototype-conversation.2": "Neem de sterkste stukken van elk ervan mee. Wat je overhoudt is meestal een kruising van twee, niet één van de drie.",
+    "evolution.walking-skeleton.1": "Begin het bouwen met een heel ruwe versie. Hou de details eruit, want elk detail kost extra <svg data-icon=\"coin\"></svg> <svg data-icon=\"gem\"></svg> Wat die eerste versie wel juist moet hebben, is de vorm: een eigen label, een plek in de applicatiestructuur, en een resultaat dat er echt uit komt.",
+    "evolution.walking-skeleton.3": "Zo is dit ook geëvolueerd. Eerst werd er veel content ingevuld, en pas daarna kwamen die zaken erbij.",
+    "evolution.walking-skeleton.4": "Vraag een agent een heel systeem en je krijgt een aannemelijk systeem. Vraag hem de volgende wijziging aan iets dat draait en je kunt het antwoord nakijken.",
+    "evolution.details.4": "Als vuistregel mag een detail je niet meer dan een uur kosten. Dat is het uur dat een versie kost, dus alles wat langer duurt was geen detail maar de volgende stap. Naarmate je meer op deze manier werkt, krijg je vanzelf gevoel voor waar die lijn ligt.",
+    "evolution.fifteen-minutes.3": "Het draaiend krijgen kost je een minuut of vijf. De rest gaat naar één wijziging tegelijk: draai het, bekijk wat eruit komt, kies het volgende ding, vraag alleen dat. Hou elke vraag klein genoeg dat je in één blik ziet of het gelukt is.",
+
+    "deck.evolution.divider.4": "Drie varianten voor mensen neerzetten, <mute>in plaats van er één keer over discussiëren</mute>"
+  },
+
+  "afterEn": {
+    "fifteen.title": "where.plan.label",
+    "fifteen.description": "fifteen.title",
+    "fifteen.todo": "fifteen.description",
+    "fifteen.done": "fifteen.todo",
+    "fifteen.clock.label": "fifteen.done",
+    "fifteen.pick.label": "fifteen.clock.label",
+    "fifteen.shape.label": "fifteen.pick.label",
+    "fifteen.loop.label": "fifteen.shape.label",
+    "fifteen.write.label": "fifteen.loop.label",
+    "deck.evolution.divider.4": "deck.evolution.divider.3"
+  },
+
+  "afterNl": {
+    "fifteen.title": "where.plan.label",
+    "fifteen.description": "fifteen.title",
+    "fifteen.todo": "fifteen.description",
+    "fifteen.done": "fifteen.todo",
+    "fifteen.clock.label": "fifteen.done",
+    "fifteen.pick.label": "fifteen.clock.label",
+    "fifteen.shape.label": "fifteen.pick.label",
+    "fifteen.loop.label": "fifteen.shape.label",
+    "fifteen.write.label": "fifteen.loop.label",
+    "evolution.walking-skeleton.4": "evolution.walking-skeleton.3",
+    "deck.evolution.divider.4": "deck.evolution.divider.3"
+  }
+}

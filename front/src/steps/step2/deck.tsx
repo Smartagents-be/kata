@@ -3,10 +3,13 @@ import type { SlideSpec } from '@/shared/deck/slide-spec'
 import { AgentsAtOnce } from './AgentsAtOnce'
 import { DomainTree } from './DomainTree'
 import { FlowDiagram } from './FlowDiagram'
+import { GoalGate } from './GoalGate'
 import { HookTree } from './HookTree'
 import { IterationPaths } from './IterationPaths'
 import { LoopsPerHour } from './LoopsPerHour'
+import { ModelRelay } from './ModelRelay'
 import { ProjectTree } from './ProjectTree'
+import { ReadEachTime } from './ReadEachTime'
 import { ScriptRuns } from './ScriptRuns'
 import { SkillShape } from './SkillShape'
 import { SkillTree } from './SkillTree'
@@ -14,6 +17,7 @@ import { TwoWindows } from './TwoWindows'
 import { WindowSpend } from './WindowSpend'
 import { WorkflowTimeline } from './WorkflowTimeline'
 import { WorkflowWeights } from './WorkflowWeights'
+import { WorktreeEach } from './WorktreeEach'
 
 /**
  * Step 2 on the board, on step 1's shape: one divider per unit in registry order, that unit's own
@@ -28,12 +32,9 @@ import { WorkflowWeights } from './WorkflowWeights'
  * naming what the student does, never what they find: the three setup files stay unnamed, and the
  * workshop's five flags are named by shape only.
  *
- * `steering`'s other two drawings are off the board for reasons of their own rather than by
- * oversight. `LoopInWindow` argues what its slide's title already says, and that slide's three
- * points are the recovery moves, which the drawing does not carry, so putting the figure there
- * costs the moves and buys the claim twice. `WorktreeEach` has no slide to sit on: neither the
- * divider nor either steering slide raises worktrees, and one worktree per agent reaches the board
- * through `parallel`.
+ * `LoopInWindow` is off the board for a reason of its own rather than by oversight. It argues what
+ * its slide's title already says, and that slide's three points are the recovery moves, which the
+ * drawing does not carry, so putting the figure there costs the moves and buys the claim twice.
  *
  * The four `FlowDiagram` instances repeat the registry's props exactly, so the board and the unit
  * page draw one set of diagrams; a change there is a change here.
@@ -62,6 +63,7 @@ const deck: SlideSpec[] = [
       'deck.evolution.divider.1',
       'deck.evolution.divider.2',
       'deck.evolution.divider.3',
+      'deck.evolution.divider.4',
     ],
   },
   {
@@ -165,6 +167,14 @@ const deck: SlideSpec[] = [
     ],
   },
   {
+    id: 'deck-step2-engineering-vibe',
+    kind: 'statement',
+    ns: 'step2',
+    eyebrow: 'engineering.title',
+    title: 'deck.engineering.vibe.title',
+    note: 'deck.engineering.vibe.note',
+  },
+  {
     id: 'deck-step2-engineering-domain',
     kind: 'figure',
     ns: 'step2',
@@ -200,6 +210,19 @@ const deck: SlideSpec[] = [
     title: 'steering.title',
     points: ['deck.steering.divider.1', 'deck.steering.divider.2', 'deck.steering.divider.3'],
   },
+  // The unit opened on its second section until this landed.
+  {
+    id: 'deck-step2-steering-midflight',
+    kind: 'statement',
+    ns: 'step2',
+    eyebrow: 'steering.title',
+    title: 'deck.steering.midflight.title',
+    points: [
+      'deck.steering.midflight.1',
+      'deck.steering.midflight.2',
+      'deck.steering.midflight.3',
+    ],
+  },
   // The slide's own title is what this drawing argues, so it stopped being a statement the moment
   // the unit was drawn: the two windows are on the board and on the student's screen, one drawing.
   {
@@ -214,6 +237,18 @@ const deck: SlideSpec[] = [
     // and at 1.5 the note sat on the drawing's own column labels.
     scale: 1.3,
   },
+  // The one drawing in the unit the board had no slide for. TwoWindows rides 1.3 at 640x306; this
+  // one is 640x262 with a note, so it takes a little more room.
+  {
+    id: 'deck-step2-steering-worktree',
+    kind: 'figure',
+    ns: 'step2',
+    eyebrow: 'steering.title',
+    title: 'deck.steering.worktree.title',
+    note: 'deck.steering.worktree.note',
+    figure: <WorktreeEach />,
+    scale: 1.4,
+  },
   {
     id: 'deck-step2-steering-nowhere',
     kind: 'statement',
@@ -226,6 +261,14 @@ const deck: SlideSpec[] = [
       'deck.steering.nowhere.3',
     ],
   },
+  {
+    id: 'deck-step2-steering-gaps',
+    kind: 'statement',
+    ns: 'step2',
+    eyebrow: 'steering.title',
+    title: 'deck.steering.gaps.title',
+    points: ['deck.steering.gaps.1', 'deck.steering.gaps.2', 'deck.steering.gaps.3'],
+  },
 
   // ── patterns ──────────────────────────────────────────────────────────────────────────────
   {
@@ -236,12 +279,15 @@ const deck: SlideSpec[] = [
     title: 'patterns.title',
     points: ['deck.patterns.divider.1', 'deck.patterns.divider.2', 'deck.patterns.divider.3'],
   },
+  // Its old title duplicated `deck.patterns.divider.1` one slide later, which left the section with
+  // nothing said about it. The divider keeps the lead's claim; this slide is the second pass.
   {
-    id: 'deck-step2-patterns-third-time',
+    id: 'deck-step2-patterns-iteration',
     kind: 'statement',
     ns: 'step2',
     eyebrow: 'patterns.title',
-    title: 'deck.patterns.third-time.title',
+    title: 'deck.patterns.iteration.title',
+    note: 'deck.patterns.iteration.note',
   },
   {
     id: 'deck-step2-patterns-runs',
@@ -387,6 +433,14 @@ const deck: SlideSpec[] = [
     figure: <SkillShape />,
     scale: 1.5,
   },
+  {
+    id: 'deck-step2-enablement-day',
+    kind: 'statement',
+    ns: 'step2',
+    eyebrow: 'enablement.title',
+    title: 'deck.enablement.day.title',
+    note: 'deck.enablement.day.note',
+  },
 
   // ── parallel ──────────────────────────────────────────────────────────────────────────────
   {
@@ -395,7 +449,14 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'step.title',
     title: 'parallel.title',
-    points: ['deck.parallel.divider.1', 'deck.parallel.divider.2', 'deck.parallel.divider.3'],
+    // The key number and the array position deliberately differ: `.3` is the unit's answer and
+    // keeps the last slot, and `.4` is the orchestrator, which the unit argues before it.
+    points: [
+      'deck.parallel.divider.1',
+      'deck.parallel.divider.2',
+      'deck.parallel.divider.4',
+      'deck.parallel.divider.3',
+    ],
   },
   {
     id: 'deck-step2-parallel-arrangements',
@@ -424,7 +485,28 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'step.title',
     title: 'goals.title',
-    points: ['deck.goals.divider.1', 'deck.goals.divider.2', 'deck.goals.divider.3'],
+    points: [
+      'deck.goals.divider.1',
+      'deck.goals.divider.2',
+      'deck.goals.divider.3',
+      'deck.goals.divider.4',
+    ],
+  },
+  // `WindowSpend` sits under the unit's lead and is the one figure in the step read forwards, so
+  // on the board it arrives before the conclusion `deck.goals.divider.3` states.
+  {
+    id: 'deck-step2-goals-window',
+    kind: 'figure',
+    ns: 'step2',
+    eyebrow: 'goals.title',
+    title: 'deck.goals.window.title',
+    // Columns against a ceiling, so the drawing carries to the back of a room at a scale the wire
+    // figures cannot take. The title deliberately says something the drawing does not: the figure's
+    // own labels already carry the unspent half, so a heading repeating them buys nothing.
+    figure: <WindowSpend />,
+    // 1.9 clipped "one window" off the left edge: this drawing runs the full width of its viewBox,
+    // so it reaches the frame sooner than a figure with margins does.
+    scale: 1.7,
   },
   {
     id: 'deck-step2-goals-true',
@@ -443,26 +525,42 @@ const deck: SlideSpec[] = [
     points: ['deck.goals.shape.1', 'deck.goals.shape.2', 'deck.goals.shape.3'],
   },
   {
-    id: 'deck-step2-goals-window',
+    id: 'deck-step2-goals-gate',
     kind: 'figure',
     ns: 'step2',
     eyebrow: 'goals.title',
-    title: 'deck.goals.window.title',
-    // Columns against a ceiling, so the drawing carries to the back of a room at a scale the wire
-    // figures cannot take. The title deliberately says something the drawing does not: the figure's
-    // own labels already carry the unspent half, so a heading repeating them buys nothing.
-    figure: <WindowSpend />,
-    // 1.9 clipped "one window" off the left edge: this drawing runs the full width of its viewBox,
-    // so it reaches the frame sooner than a figure with margins does.
+    // The shortest drawing in the step at 640x204, so it takes the same magnification WindowSpend
+    // (640x228) does. The title names the exit rather than the command: `deck.goals.divider.2` and
+    // `deck.goals.shape.3` already say name the command, and a third telling on the slide that
+    // draws it would be the drawing read out loud.
+    title: 'deck.goals.gate.title',
+    figure: <GoalGate />,
     scale: 1.7,
   },
   {
     id: 'deck-step2-goals-fleet',
-    kind: 'statement',
+    kind: 'figure',
     ns: 'step2',
     eyebrow: 'goals.title',
     title: 'deck.goals.fleet.title',
     note: 'deck.goals.fleet.note',
+    // 640x288 with a note under it. The title was already the drawing's whole argument, so the
+    // board was paraphrasing a figure the students have; carrying the figure costs no extra slide.
+    figure: <ReadEachTime />,
+    scale: 1.4,
+  },
+  {
+    id: 'deck-step2-goals-relay',
+    kind: 'figure',
+    ns: 'step2',
+    eyebrow: 'goals.title',
+    // 640x246 and no note, so it rides where LoopsPerHour (640x250) does. The title names what the
+    // two teal arrows are labelled with rather than what the tiers are like, which keeps it off
+    // ModelTiers's ground in step 1. The `<small>` date under the figure belongs to the unit page:
+    // the slide does not carry it and the tutor says it out loud.
+    title: 'deck.goals.relay.title',
+    figure: <ModelRelay />,
+    scale: 1.5,
   },
 
   // ── workshop ──────────────────────────────────────────────────────────────────────────────
@@ -481,6 +579,14 @@ const deck: SlideSpec[] = [
     eyebrow: 'workshop.title',
     title: 'deck.workshop.flags.title',
     points: ['deck.workshop.flags.1', 'deck.workshop.flags.2', 'deck.workshop.flags.3'],
+  },
+  {
+    id: 'deck-step2-workshop-honest',
+    kind: 'statement',
+    ns: 'step2',
+    eyebrow: 'workshop.title',
+    title: 'deck.workshop.honest.title',
+    note: 'deck.workshop.honest.note',
   },
   {
     id: 'deck-step2-workshop-goal',

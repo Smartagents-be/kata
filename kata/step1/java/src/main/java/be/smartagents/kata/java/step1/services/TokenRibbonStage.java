@@ -10,6 +10,6 @@ public class TokenRibbonStage implements CatalogStage {
 
     @Override
     public void apply(CatalogRun run) {
-        run.publish("The Lost Art of Naming Things");
+        run.publish("Vault of Forgotten Regressions");
     }
 }

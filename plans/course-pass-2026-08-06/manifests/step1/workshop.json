@@ -1,0 +1,37 @@
+{
+  "deck": [
+    {
+      "file": "front/src/steps/step1/deck.tsx",
+      "action": "insert",
+      "where": "immediately after the `deck-workshop-flags` object literal and before the `// ── recap ──` banner comment",
+      "code": "  // The card's fourth move, asked out loud. A question to the room is the purest thing a slide can\n  // carry, and this one is a look-back, so the tutor puts it up after the hunt rather than before\n  // it. No note: the room answers it.\n  {\n    id: 'deck-workshop-debrief',\n    kind: 'statement',\n    ns: 'step1',\n    eyebrow: 'workshop.title',\n    title: 'deck.workshop.debrief.title',\n  },\n",
+      "note": "Both message keys (en + nl) are in patches/step1/workshop.json. `deck.workshop.divider.1` is retitled in the same patch: 'Three flags hidden in <hi>one service</hi>' / 'Drie flags verstopt in <hi>één service</hi>'. No deck.tsx change is needed for that retitle."
+    }
+  ],
+  "claudeMd": [
+    {
+      "file": "front/src/steps/step1/CLAUDE.md",
+      "action": "replace",
+      "reason": "`hunt.count.label` now points at `model.cost.4`, so the recorded claim that the paragraph is reached from nowhere but its own unit is no longer true. The half that must survive is the reason: the pointer carries no arithmetic, so `cost.4` stays the one place the course multiplies.",
+      "old": "The old `house-rules.5` was\nthe course's second pointer at `model.cost.4`, so that paragraph is now reached from nowhere but its\nown unit, and the intro's version names no command and does no arithmetic, which is what keeps\n`cost.4` the one place the course multiplies.",
+      "new": "The old `house-rules.5` was\nthe course's second pointer at `model.cost.4`, and `hunt.count.label` is what replaced it: the card\nsends the student's two `/context` readings to the rates rather than working them out here, so\n`cost.4` is still the one place the course multiplies. The intro's version names no command and does\nno arithmetic for the same reason, and neither may grow one."
+    }
+  ],
+  "escalations": [
+    {
+      "file": "audit.md",
+      "action": "append to the existing row 2 cell (`One flag one session, against the capstone's one window`)",
+      "reason": "Work order item 6. The fix belongs in step 0, but the collision is wider than the row records: it is also on one slide, two lines apart.",
+      "text": "The collision is on the deck too, and in a tighter space: `deck.workshop.divider.*` states house rule 1 verbatim (\"Only your agent hunts\") and contradicts rule 3 two bullets later on the same slide, so whatever clause qualifies rule 3 has to be true of that slide as well.",
+      "handledHere": "no"
+    },
+    {
+      "file": "kata/step1/java/CLAUDE.md",
+      "action": "replace one number",
+      "reason": "Work order item 6. Two counts in that file disagree, and the '40' is the stale one. Re-measured without decoding anything: 41 stages call `Scramble.unveil` (43 grep hits less the method definition, less `VaultDoorStage`'s second call), 11 carry a commented-out `run.publish`, and the file's own account says uncommenting all eleven makes five lines appear while six carry the marker and vanish. Five unmarked strings out of 41 leaves 36 carrying `(draft)`, not 40. `flag.trace.help`'s \"five\" agrees, so the student-facing number is right and the prose number is wrong.",
+      "old": "and 40 of the 41 restored strings carry it",
+      "new": "and 36 of the 41 restored strings carry it",
+      "handledHere": "no, this file is not mine to edit"
+    }
+  ]
+}

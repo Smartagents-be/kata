@@ -1,0 +1,74 @@
+{
+  "unit": "step1/tools",
+
+  "deck": [
+    {
+      "what": "F1b. Rewrite the absences paragraph in deck.tsx's file doc comment so it accounts for every figure that is not on the board. Today it says 'Seven are deliberately absent', enumerates seven localStorage writers, then explains McpOvals separately, which is eight; SessionWindows and usage-readout are absent and unnamed, and SpotInjection was too until the slide below places it.",
+      "file": "front/src/steps/step1/deck.tsx",
+      "find": " * Seven are deliberately absent. `CutItUp`, `SurviveTheClear`, `ConnectOne`, `ReadYourWindow` and\n * `OneWindow` are `TaskCard`s, and `FlagBoard` and `ShutterFlag` keep a solved set, so all seven\n * write progress to localStorage: on a slide they would tick the *tutor's* machine, which is the one\n * place a stray flag or a half-done task is most confusing. Their units keep a divider and a\n * statement instead. `McpOvals` is left out too, for a different reason: it restates `McpParts` and\n * only earns that next to the paragraph explaining why it is being restated. `WordsIntoTokens` and\n * `PickTheNext` were absent for no reason for a while and are placed now: the first leads the\n * tokens block the way it leads the unit, and the exercise closes it, worked by the room the way\n * `NextToken` is.",
+      "replace": " * Seven are absent for one reason. `CutItUp`, `SurviveTheClear`, `ConnectOne`, `ReadYourWindow`\n * and `OneWindow` are `TaskCard`s, and `FlagBoard` and `ShutterFlag` keep a solved set, so all\n * seven write progress to localStorage: on a slide they would tick the *tutor's* machine, which is\n * the one place a stray flag or a half-done task is most confusing. Their units keep a divider and\n * a statement instead.\n *\n * Three more are absent for reasons of their own, and they are named here so the next editor can\n * tell a judgement from an oversight. `McpOvals` restates `McpParts`, and it only earns that next\n * to the paragraph explaining why it is being restated. `SessionWindows` and `usage-readout` are\n * `model`'s five-hour section, which is Claude-only, and the deck has no assistant filter: either\n * of them on the board tells a Copilot room about an arrangement it does not have. Everything else\n * a step 1 unit draws is up there. `WordsIntoTokens` and `PickTheNext` were absent for no reason\n * for a while and are placed now: the first leads the tokens block the way it leads the unit, and\n * the exercise closes it, worked by the room the way `NextToken` is.",
+      "ifSpotSlideDropped": "If the `deck-tools-spot` slide below is not shipped, change 'Three more' to 'Four more' and add `SpotInjection` to that sentence with its reason, e.g. after the `McpOvals` sentence: '`SpotInjection` is the tallest DOM figure in the step and would not read from the back of the room.'"
+    },
+    {
+      "what": "New slide `deck-tools-list`. `deck.tools.divider.2` promises 'A tool costs you by existing' and nothing in the block proves it, and the course's only number on how many servers to hold is on no slide. Keep it to the tool list: `harness` owns what a sub-agent costs, so no coordinator or refetch sentence may follow the number here.",
+      "file": "front/src/steps/step1/deck.tsx",
+      "position": "after the `deck-tools-parts` entry, before `deck-tools-injection`",
+      "code": "  {\n    id: 'deck-tools-list',\n    kind: 'statement',\n    ns: 'step1',\n    eyebrow: 'tools.title',\n    title: 'deck.tools.list.title',\n    note: 'deck.tools.list.note',\n  },",
+      "keys": "deck.tools.list.title and deck.tools.list.note are in patches/step1/tools.json, both bundles."
+    },
+    {
+      "what": "New slide `deck-tools-spot`. Same shape as `deck-tools-budget`, which is already on the deck: same unit, same 'Test yourself' run, graded in the browser, no localStorage write. THE TITLE MUST NOT NAME WHAT MAKES THE RESULT ODD, which is the same prohibition the card carries.",
+      "file": "front/src/steps/step1/deck.tsx",
+      "position": "after the `deck-tools-injection` entry, before `deck-tools-budget`",
+      "import": "import { SpotInjection } from './SpotInjection' — place it after the `SessionMakeup` import line.",
+      "code": "  {\n    id: 'deck-tools-spot',\n    kind: 'figure',\n    ns: 'step1',\n    eyebrow: 'tools.title',\n    title: 'deck.tools.spot.title',\n    figure: <SpotInjection />,\n    scale: 0.95,\n    figureWidth: 1450,\n  },",
+      "keys": "deck.tools.spot.title is in patches/step1/tools.json, both bundles.",
+      "gate": "This is the tallest DOM figure in the step, so fit it by eye at /present. If it will not read from the back of the room, drop this slide, remove the import, remove deck.tools.spot.title from both bundles, and apply `ifSpotSlideDropped` above."
+    }
+  ],
+
+  "claudeMd": [
+    {
+      "file": "front/src/steps/step1/CLAUDE.md",
+      "what": "The tool-count sentence moves with the rescope in `tools.list-itself-window.4`. The number now counts the servers the student adds, on top of whatever their harness starts them with, because Claude Code ships on the order of fourteen built-in tools and Copilot CLI ships its own set plus the whole GitHub MCP server, which `list-itself-window.2.copilot` says two blocks above.",
+      "line": 352,
+      "find": "`list-itself-window.4` is the section's closing aside and **the only number the course puts on a\ntool count**: four or five in one context, and past that the job gets its own specialised agent.",
+      "replace": "`list-itself-window.4` is the section's closing aside and **the only number the course puts on how\nmany servers to hold**: four or five *added* ones in a context, and past that the job gets its own\nspecialised agent. It counts what the student connects rather than what they hold, and that scope is\nload bearing: both harnesses start a reader well past four, Copilot CLI with the GitHub server the\nsame section names two blocks above, so an unscoped ceiling had the page telling that reader they\nwere over it. A student who runs `/context` a unit later sees the list."
+    },
+    {
+      "file": "front/src/steps/step1/CLAUDE.md",
+      "what": "Key rename ripple: `Extra tools` is now `MCP servers`, so `tools.extra-tools.3` is `tools.mcp-servers.3`. Grep the old slug afterwards; nothing may still point at it.",
+      "line": 859,
+      "find": "`tools.extra-tools.3`, the `<pre>` under `tools.connect-one.1` and `tools.connect-one.2`",
+      "replace": "`tools.mcp-servers.3`, the `<pre>` under `tools.connect-one.1` and `tools.connect-one.2`"
+    },
+    {
+      "file": "front/src/steps/step1/CLAUDE.md",
+      "what": "Two renamed headings in `tools`, recorded so neither is renamed back. Append to the `tools` paragraph that ends 'why the results are the least trustworthy layer, what they cost by volume.' (around line 351, immediately before the `list-itself-window.4` sentence above).",
+      "append": "**Two of its headings were argued with their own sections and renamed.** `Extra tools` became\n`MCP servers`, because the section's second paragraph opens on tools not being all a server offers\nand half of it is about the two things that are explicitly not tools. `It costs the same as\neverything else` became `You pay for it on every turn after`, because the paragraph under it argues\nvolume rather than rate; the Dutch heading had already drifted to the truer claim, and the English\nwas taken to the Dutch. Both renames moved every key in their sections, in the HTML and in\n`nl.json`."
+    },
+    {
+      "file": "front/src/steps/step1/CLAUDE.md",
+      "what": "Record the who-decides gap as a decision rather than leaving it unwritten. The work order asked for this explicitly, in place of the one-question quiz that was proposed and rejected. Append to the same `tools` paragraph, after the entry above.",
+      "append": "**The who-decides sorting is taught, drawn twice and never checked, and that is a knowing gap.** A\none-question registry quiz was proposed for it and rejected: four graded or ticked things already\nsit under this unit's one \"Test yourself\", `promptQuiz` is one page back and `contextQuiz` one page\nforward, and a fifth thing to do makes the busiest page in the course busier. If the unit ever loses\nan exercise, this is the question to add."
+    }
+  ],
+
+  "shared": [
+    {
+      "file": "copilot-specific.md",
+      "line": 130,
+      "what": "Key rename ripple from the `Extra tools` to `MCP servers` heading change.",
+      "find": "`tools.extra-tools.3.copilot`",
+      "replace": "`tools.mcp-servers.3.copilot`"
+    }
+  ],
+
+  "quiz": [],
+  "registry": [],
+
+  "notes": [
+    "connect.browser.label: the work order's EN wraps the host in <code>, but TaskCard renders a move label as plain text ({text(...)} in JSX), so markup would print literally. The label ships bare, matching the sibling connect.curl.label which already writes localhost:8080/api/titles with no markup.",
+    "`tools-in-context.commands.1` in both bundles still reads 'grep · sed'. The work order's sed item names only lead.2 and list-itself-window.3, and in the figure sed is one of four example commands that run on your system rather than the agent's way of changing a file, so it was left alone. Flagging it in case the figure ever gets re-read."
+  ]
+}

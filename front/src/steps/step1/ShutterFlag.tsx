@@ -59,7 +59,6 @@ export function ShutterFlag() {
             flag={shutterFlag}
             index={0}
             solved={solved}
-            wrongKey="shutter.panel.wrong"
             onSolved={markSolved}
           />
         </ol>

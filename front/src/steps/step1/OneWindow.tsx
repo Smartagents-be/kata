@@ -2,7 +2,7 @@ import { TaskCard } from '@/shared/components/TaskCard'
 
 /**
  * Four moves, and the first and third are a pair: the same reading taken before the hunt starts and
- * again when the last flag lands. The board underneath grades the three flags; this card grades
+ * again when the last flag lands. The board underneath grades the five flags; this card grades
  * nothing and is what makes the hunt a step 1 capstone rather than a puzzle, because it is the only
  * thing on the page that asks the student to look at their own window while they work.
  *

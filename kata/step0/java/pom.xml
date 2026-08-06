@@ -17,7 +17,7 @@
   <packaging>jar</packaging>
 
   <name>kata-agentic-java-step0</name>
-  <description>Step 0: the intro. Test sources only - one reveal, run behind the `intro` profile.</description>
+  <description>Step 0: the intro. Test sources only - three reveals, each behind its own opt-in profile.</description>
 
   <properties>
     <java.version>25</java.version>
@@ -38,10 +38,16 @@
 
   <profiles>
     <!--
-      The step 0 intro. Off by default, so `mvn verify` stays green on a clean checkout. Turn it on
-      with `mvn verify -Pintro` and it runs IntroRevealIT, which prints the one flag that finishes
-      the intro's second page. There is no gate here: running it is the whole exercise, a miniature
-      of step 2's `graded` profile so the workflow is familiar before step 2 needs it.
+      Three reveals, three profiles, and every one of them opt-in, so `mvn verify` stays green and
+      silent on a clean checkout. Each profile names its own IT in <includes>: failsafe's default
+      patterns would pick up all three, and a student running one profile would be handed the other
+      two steps' flags without doing the work.
+    -->
+
+    <!--
+      The step 0 intro. `mvn verify -Pintro` runs IntroRevealIT, which prints the one flag that the
+      board's first row asks for. There is no gate here: running it is the whole exercise, a
+      miniature of step 2's `graded` profile so the workflow is familiar before step 2 needs it.
     -->
     <profile>
       <id>intro</id>
@@ -50,9 +56,76 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
+            <configuration>
+              <includes>
+                <include>**/IntroRevealIT.java</include>
+              </includes>
+            </configuration>
             <executions>
               <execution>
                 <id>reveal-intro-flag</id>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!--
+      The readiness check. `mvn verify -Pready` runs ReadyRevealIT, which prints one row per thing
+      the rest of the course assumes and the flag when the ones that gate it pass. This is the one
+      profile in the step that can fail: a missing JDK or a half-downloaded repository stops it, by
+      name, on the page where fixing it costs five minutes.
+    -->
+    <profile>
+      <id>ready</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <configuration>
+              <includes>
+                <include>**/ReadyRevealIT.java</include>
+              </includes>
+            </configuration>
+            <executions>
+              <execution>
+                <id>reveal-ready-flag</id>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!--
+      The pick. `mvn verify -Ppick` runs PickRevealIT, which prints two strings in the flag's shape
+      and ticks one line. Reading which is the exercise, so the profile passes either way.
+    -->
+    <profile>
+      <id>pick</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <configuration>
+              <includes>
+                <include>**/PickRevealIT.java</include>
+              </includes>
+            </configuration>
+            <executions>
+              <execution>
+                <id>reveal-pick-flag</id>
                 <goals>
                   <goal>integration-test</goal>
                   <goal>verify</goal>

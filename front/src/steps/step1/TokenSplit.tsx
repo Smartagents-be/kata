@@ -17,6 +17,13 @@ import { cn } from '@/shared/lib/utils'
  * tokeniser in the bundle, and shipping a megabyte of BPE ranks to split five sentences is not a
  * trade this page should make.
  *
+ * The rate strip under the chips is the comparison the panel cannot make. The prose claims prose is
+ * the cheapest thing you can hand a model and an id the dearest, and a panel showing one sample at a
+ * time leaves the reader to click, remember and subtract. All four rows are always up, on one scale,
+ * and only the emphasis follows the selection. It is a rate readout and **not a second sample**: a
+ * Dutch row here would make the figure an argument about languages, which is the reason there is no
+ * second sentence in the data.
+ *
  * It draws no context frame. `ToolsInContext` in `tools` is the first teal frame a student meets,
  * so every figure above it stays out of that vocabulary rather than spending it early.
  * `PromptInContext` gave its frame up for the same reason, and `ModelTiers` never had one.
@@ -120,6 +127,17 @@ const SAMPLES: Sample[] = [
   },
 ]
 
+/**
+ * Tokens per hundred characters, worked out from the same data the chips are drawn from rather than
+ * written down beside it, so the strip cannot drift away from the panel it sits above.
+ */
+function rateOf(entry: Sample): number {
+  return Math.round((entry.pieces.length / entry.pieces.join('').length) * 100)
+}
+
+const RATES = SAMPLES.map(rateOf)
+const WIDEST = Math.max(...RATES)
+
 export function TokenSplit() {
   const { t, i18n } = useTranslation('step1')
   const [selected, setSelected] = useState(0)
@@ -164,6 +182,77 @@ export function TokenSplit() {
           >
             {t(`token-split.sample.${entry.id}`)}
           </button>
+        ))}
+      </div>
+
+      {/* One scale, no ticks and no gridlines: the four lengths are the whole reading, and a rule
+          behind them would invite the numbers to be read off it instead of off the mono column. The
+          bars are aria-hidden because every row already prints its name and its number as text. */}
+      <div id="token-split-rate" data-component="TokenSplit" className="flex flex-col gap-1.5">
+        <div
+          id="token-split-rate-head"
+          data-component="TokenSplit"
+          className="text-muted-foreground flex items-baseline justify-between text-xs"
+        >
+          <span id="token-split-rate-label" data-component="TokenSplit">
+            {t('token-split.rate.label')}
+          </span>
+          {/* The unit of measure takes the `eyebrow` utility, which is what `ModelPricing` puts
+              over its own table for the same job. */}
+          <span id="token-split-rate-unit" data-component="TokenSplit" className="eyebrow">
+            {t('token-split.rate.unit')}
+          </span>
+        </div>
+
+        {SAMPLES.map((entry, index) => (
+          <div
+            key={entry.id}
+            id={`token-split-rate-row-${index}`}
+            data-component="TokenSplit"
+            data-state={index === selected ? 'selected' : 'idle'}
+            className="flex items-center gap-3"
+          >
+            <span
+              id={`token-split-rate-name-${index}`}
+              data-component="TokenSplit"
+              className={cn(
+                'w-28 shrink-0 text-sm',
+                index === selected ? 'text-foreground' : 'text-muted-foreground',
+              )}
+            >
+              {t(`token-split.sample.${entry.id}`)}
+            </span>
+
+            <span
+              id={`token-split-rate-track-${index}`}
+              data-component="TokenSplit"
+              aria-hidden="true"
+              className="flex-1"
+            >
+              <span
+                id={`token-split-rate-bar-${index}`}
+                data-component="TokenSplit"
+                style={{ width: `${(RATES[index] / WIDEST) * 100}%` }}
+                className={cn(
+                  'block h-2 rounded-sm border transition-[width,background-color]',
+                  index === selected
+                    ? 'border-primary bg-primary'
+                    : 'border-border bg-muted',
+                )}
+              />
+            </span>
+
+            <span
+              id={`token-split-rate-value-${index}`}
+              data-component="TokenSplit"
+              className={cn(
+                'w-8 shrink-0 text-right font-mono text-sm tabular-nums',
+                index === selected ? 'text-foreground' : 'text-muted-foreground',
+              )}
+            >
+              {RATES[index]}
+            </span>
+          </div>
         ))}
       </div>
 
