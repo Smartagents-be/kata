@@ -2,6 +2,7 @@ import type { Step } from '@/shared/step'
 import { CodeCheck } from './CodeCheck'
 import { Legend } from './Legend'
 import { finishCode, hintCode, introCode } from './code'
+import deck from './deck'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
 import { understoodQuiz } from './quiz'
@@ -43,6 +44,9 @@ const step0: Step = {
       inlineFigures: { 'code-check': <CodeCheck key={finishCode.id} code={finishCode} /> },
     },
   ],
+  // What the tutor puts on the board for this step. Authored in `deck.tsx`, beside the reasoning
+  // for what stays off it.
+  deck,
 }
 
 export default step0

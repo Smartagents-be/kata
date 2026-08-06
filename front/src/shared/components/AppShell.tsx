@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { SettingsMenu } from '@/shared/components/SettingsMenu'
+import { SmartAgentsMark } from '@/shared/components/SmartAgentsMark'
 import { StepNav } from '@/shared/components/StepNav'
 import { Button } from '@/shared/components/ui/button'
 import { Separator } from '@/shared/components/ui/separator'
@@ -240,6 +241,39 @@ export function AppShell() {
           </main>
         </div>
       </div>
+
+      {/*
+        The same watermark the deck's slide footer carries, so the page and the projector are
+        signed the same way. Pinned to the bottom right of the window rather than set at the foot
+        of the page, so it is on screen wherever a student has scrolled to.
+
+        Three things keep it a watermark rather than a widget. It is `pointer-events-none`, so it
+        never takes a click meant for what is underneath it; it carries no panel, no border and no
+        shadow, only quiet ink, because depth here is reserved for things you actually work in (the
+        settings popover, a dialog); and it is set back, because on a narrow window it lands on top
+        of a line of prose and a mark at full strength would argue with the sentence. It is a
+        sibling of `#app-body` rather than a child: that body is a z-10 stacking context, and a
+        fixed element inside it could not be layered against the header at all.
+
+        Untranslated, like the slide footer: a wordmark is a name, not something a room reads.
+      */}
+      <footer
+        id="app-watermark"
+        data-component="AppShell"
+        className="text-muted-foreground pointer-events-none fixed right-4 bottom-4 z-40 flex items-center gap-2 text-xs opacity-70 sm:right-6 sm:gap-2.5 sm:text-sm lg:right-8"
+      >
+        <SmartAgentsMark size={18} />
+        <span
+          id="app-watermark-name"
+          data-component="AppShell"
+          className="text-foreground font-semibold"
+        >
+          SmartAgents
+        </span>
+        <span id="app-watermark-copyright" data-component="AppShell">
+          © 2026
+        </span>
+      </footer>
     </div>
   )
 }

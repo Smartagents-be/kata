@@ -1,28 +1,69 @@
 <p data-i18n="goals.lead.1">
-  Say what you want to be true when the work is done, not which keys to press. "Move the em-dash
-  rule out of my head and into the repo" leaves room for a good answer. "Add a paragraph to
-  CLAUDE.md" already decided the answer, and if a skill was the better home you will never hear
-  about it.
+  Some ways of working burn a day of tokens in an afternoon. That is not automatically waste. A run
+  that costs ten ordinary sessions and hands back a module that had no tests this morning is a trade
+  worth making. What decides it is what you get for the spend, and when you spend it.
 </p>
 
 <p data-i18n="goals.lead.2">
-  Working from a goal changes what you can ask for afterwards. You can ask why a route was chosen,
-  and you can reject the route without rejecting the goal. Working from instructions gives you one
-  thing to check: whether you were obeyed.
+  When matters because of how you are billed.
+  <a href="/steps/step1/model">Step 1's unit on the model</a> set out the two arrangements: a key
+  bills you per token, a subscription meters you in a rolling window. Under a window, five hours on
+  most plans, what you leave unused is not carried anywhere. Forty minutes of window is not something
+  you can save for tomorrow, so the thing to do with a window is spend it out. The limit that
+  actually binds sits behind it, weekly or monthly depending on the plan, and that is the one to
+  keep an eye on.
 </p>
 
-<p data-i18n="goals.lead.3">
-  Constraints still belong in the request, because a goal without edges drifts. Name the outcome,
-  name what must not change, name how you will check it. Then let the agent work out the middle.
+<!-- Filled by the WindowSpend element registered under this name in steps/step2/index.tsx. It sits
+     under the lead because the tail of a window is the timing argument two later sections lean on,
+     so this is the one drawing in the unit that is read forwards rather than backwards. -->
+<div data-figure="window-spend"></div>
+
+<h2 data-i18n="goals.goal-oriented.heading">Goal-oriented</h2>
+
+<p data-i18n="goals.goal-oriented.1">
+  A goal is a task with an outcome something else can measure. Say what has to be true when the work
+  is done, not which keys to press. "Move the em-dash rule out of my head and into the repo" leaves
+  room for a good answer. "Add a paragraph to CLAUDE.md" has already picked one, and if a skill was
+  the better home you will never hear about it. An instruction leaves you one thing to check:
+  whether you were obeyed.
 </p>
+
+<p data-i18n="goals.goal-oriented.2">
+  A goal without edges drifts, so the request still carries them. Name the outcome, name what must
+  not change, name how you will check it. The middle is the agent's to work out.
+</p>
+
+<pre><code>&gt; Goal: every method under article/ scores 10 or lower on
+  cyclomatic complexity. Run `mvn verify` after each class you
+  change, keep it green, and do not change a public signature.</code></pre>
+
+<p data-i18n="goals.goal-oriented.3">
+  Hand one of those over and the agent stops asking you things. It does a pass, runs your check, and
+  goes back in on whatever failed. It comes back when the check passes or when it is properly stuck.
+  You are not in that loop, and that is both the point and the price.
+</p>
+
+<h2 data-i18n="goals.check-exit.heading">The check is the exit</h2>
+
+<p data-i18n="goals.check-exit.1">
+  So the check has to be something that answers on its own. "Ninety percent line coverage" is a
+  number the build prints. "Cleaner code" is not. If you cannot name the command that answers yes or
+  no, you do not have a goal yet, and four hours later you get a confident report on a wish.
+</p>
+
+<!-- Filled by the GoalGate element registered under this name in steps/step2/index.tsx. It closes
+     the section that argues the command, and the box it turns on is where the wall clock goes, which
+     is what the next section picks up. -->
+<div data-figure="goal-gate"></div>
 
 <h2 data-i18n="goals.whole-job.heading">When the goal is the whole job</h2>
 
 <p data-i18n="goals.whole-job.1">
   Some goals are far too big for one turn and still fit in one sentence. You inherit a service
-  written six years ago, in production, with almost no tests. The task you hand over is not "write
-  a test for <code>OrderService</code>". It is "get this module to a hundred percent line coverage
-  and leave <code>mvn test</code> green", and then you walk away from it.
+  written six years ago, in production, with almost no tests. What you hand over is not "write a test
+  for <code>OrderService</code>". It is "get this module to a hundred percent line coverage and leave
+  <code>mvn test</code> green", and then you walk away from it.
 </p>
 
 <p data-i18n="goals.whole-job.2">
@@ -33,33 +74,26 @@
 </p>
 
 <p data-i18n="goals.whole-job.3">
-  A third kind shows up whenever you write or change a skill. You added
-  <code>lesson-writing</code>, so the goal is that every unit under <code>front/src/steps/</code>
-  reads the way it says, not that step 2 gets fixed. Change a rule in <code>CLAUDE.md</code> and it
-  is the same shape. The goal is the codebase catching up with the rule, everywhere, in one run.
+  Both of those run for hours and burn tokens the whole time. Four hours is not unusual, and you gave
+  up the steering a short session gives you, because nobody is watching step two while it happens.
+  What comes back is work that ran your check until the check said yes. For a job that is mechanical,
+  wide and measurable, that is a good trade.
 </p>
 
-<pre><code>&gt; Goal: every method under article/ scores 10 or lower on
-  cyclomatic complexity. Run `mvn verify` after each class you
-  change, keep it green, and do not change a public signature.</code></pre>
+<h2 data-i18n="goals.most-waiting.heading">Most of it is waiting</h2>
 
-<p data-i18n="goals.whole-job.4">
-  What makes those runs work is the loop underneath them. The agent does a pass, checks the result
-  against the goal you named, and goes back in on whatever failed. It reports when the check passes
-  or when it is properly stuck. You are not in that loop, and that is both the point and the price.
+<p data-i18n="goals.most-waiting.1">
+  Look at where those four hours actually go. The agent writes a class in seconds.
+  <code>mvn verify</code> then takes two minutes, and the pass after it takes two more, and forty
+  passes later the build has had most of the afternoon. Tokens are burning the whole time, but the
+  clock is being run by your own test suite.
 </p>
 
-<p data-i18n="goals.whole-job.5">
-  Count the price honestly. A run like this burns a lot of tokens, and four hours is not unusual.
-  You gave up the steering you have in a short session, because you are not watching step two while
-  it happens. What comes back is work that ran your check until the check said yes. For a job that
-  is mechanical, wide and measurable, that trade is a good one.
-</p>
-
-<p data-i18n="goals.whole-job.6">
-  So the check has to be real. "A hundred percent coverage" is a number the build prints. "Cleaner
-  code" is not. If you cannot name the command that answers yes or no, you do not have a goal yet,
-  and after four hours you will get a confident report on a wish.
+<p data-i18n="goals.most-waiting.2">
+  Which is why this shape is worth starting before you need it. You changed a rule in
+  <code>CLAUDE.md</code>, so the goal is the codebase catching up with it everywhere, in one run.
+  Start it in the morning and read it after lunch <svg data-icon="gem"></svg> Nothing in that job
+  needs you in the room, and the hours it costs are not hours off your day.
 </p>
 
 <h2 data-i18n="goals.own-worktree.heading">Give it its own worktree</h2>
@@ -76,7 +110,84 @@
 <p data-i18n="goals.own-worktree.2">
   Then merge back in pieces instead of at the end. One module finished and green is a merge worth
   doing, and it means you read a module of diff while the next one is still being written. It caps
-  the damage too. A run that goes wrong in hour three has not taken the first two hours down with
-  it. The <a href="/steps/step2/workshop">workshop</a> is where you write one of these goals for real
-  and let the build say whether you hit it.
+  the damage too. A run that goes wrong in hour three has not taken the first two hours down with it.
+</p>
+
+<h2 data-i18n="goals.ultracode.heading">Ultracode</h2>
+
+<p data-i18n="goals.ultracode.1">
+  Ask for ultracode and the harness stops working the task itself. It writes a script that fans
+  agents out across the work, runs them, and gathers up what comes back.
+  You are not handing over one job. You are handing over a fleet.
+</p>
+
+<p data-i18n="goals.ultracode.2">
+  It pays when you already know what you want built. Write the specs first, the way
+  <a href="/steps/step2/workflows">the workflows unit</a> describes, one per piece of work, and let
+  the fleet implement them at the same time. Five specs, five agents, an afternoon of work arriving
+  at once. With nothing written down it is five agents guessing in parallel, and you read five wrong
+  answers instead of one.
+</p>
+
+<p data-i18n="goals.ultracode.3">
+  Count what that costs before you reach for it. Every agent starts on an empty context, so every one
+  of them reads its way into the project again: the same <code>CLAUDE.md</code>, the same files, the
+  same working out. You pay for that reading once per agent, and none of them learn anything from the
+  others. It is the least efficient way to spend tokens in this unit, and it is also the fastest way
+  to get five things done.
+</p>
+
+<!-- Filled by the ReadEachTime element registered under this name in steps/step2/index.tsx. It sits
+     under the cost paragraph rather than under the fan-out one: what it draws is the bill, and the
+     bracket under the second bar is the only place the four extra readings are counted. -->
+<div data-figure="read-each-time"></div>
+
+<h2 data-i18n="goals.research-frontier-model.heading">Research on the frontier model</h2>
+
+<p data-i18n="goals.research-frontier-model.1">
+  There is a tier above the three. <a href="/steps/step1/model">The model unit</a> named it and
+  stopped, because what it is good at is a question about work rather than about windows. Broad
+  research is the answer. Point it at something with a lot of surface, a migration nobody here has
+  done or a library nobody has read, and what comes back is worth more than the same hours from the
+  tier below.
+</p>
+
+<p data-i18n="goals.research-frontier-model.2">
+  Then do not let it write the code. Read what it found, take the part that survives into a planning
+  session on the top tier, and hand that plan down to the middle tier to implement, turn after turn
+  <svg data-icon="coin"></svg> Each step down costs less per token than the one above it, and the
+  frontier model is spent on the one thing only it does. You are the digestion in the middle, and
+  that is the part of the chain nobody can hand over.
+</p>
+
+<!-- Filled by the ModelRelay element registered under this name in steps/step2/index.tsx. The three
+     names in it are dated by the small line under it, the way `model.lead.3` dates step 1's tier
+     cards, so the drawing can name models the prose deliberately does not. -->
+<div data-figure="model-relay"></div>
+
+<p data-i18n="goals.research-frontier-model.3"><small>(August 2026)</small></p>
+
+<h2 data-i18n="goals.design-tools.heading">Design tools</h2>
+
+<p data-i18n="goals.design-tools.1">
+  A design tool is the same spend in a different shape. Claude Design takes a brief and builds a
+  whole design system out of it, then redraws the thing while you watch: every colour, every
+  component, every state, over and over. The teal on this page, its two typefaces and every token
+  behind them came out of one of those sessions.
+</p>
+
+<p data-i18n="goals.design-tools.2">
+  What it costs is a lot, quickly. Each pass renders the whole system again, and you are not steering
+  it sentence by sentence the way you steer a coding session. Half an hour of it empties a window
+  that a morning of careful work barely touched. So it belongs in the same slot as the fleet, near
+  the end of a window, on something you actually want redrawn.
+</p>
+
+<h2 data-i18n="goals.read-came-back.heading">Read what came back</h2>
+
+<p data-i18n="goals.read-came-back.1">
+  Every move in this unit hands you work you did not watch being made. A fleet that ran while you
+  were at lunch, a design system you did not draw, forty classes rewritten by a run you left alone.
+  Spending the tokens is the easy half. <a href="/steps/step2/workshop">The workshop</a> is where you
+  write one of these goals for real and let the build say whether you hit it.
 </p>

@@ -35,6 +35,13 @@
   "change.process-was-bottleneck.1": "Management hoort over agents en rekent een factor uit. Tien keer zoveel output, of vijf, of wat het artikel ook zei. Die komt er niet, en niet omdat de tool tegenvalt. Typen was nooit waar de kalender op wachtte.",
   "change.process-was-bottleneck.2": "Haal het typen eruit en de kalender beweegt nauwelijks. Drie dagen op een review, twee weken op een omgeving, een release window op de laatste donderdag van de maand. Niets daarvan werd sneller, en er gaat meer door dan vroeger. <a href=\"/steps/step2/enablement\">Enablement</a> pleit ervoor dat één iemand meer van de stack draagt, en elke overdracht die daarmee wegvalt is een wachtrij die ophoudt te bestaan. De rest blijft staan omdat het het stuk is dat iedereen al kan.",
 
+  "change.way-working-decision.heading": "De manier van werken is een keuze",
+  "change.way-working-decision.1": "Elke gewoonte die je hebt, is ontstaan uit een beperking, en sommige van die beperkingen zijn weg. <a href=\"/steps/step2/patterns\">De unit over terugkerende patronen</a> maakt die omschakeling aan je eigen bureau, waar iets wat je met de hand deed een script wordt. Dezelfde omschakelingen zitten in de manier waarop je team werkt, en niemand gaat ze voor jou aanwijzen.",
+  "change.way-working-decision.2": "<strong>Er zit geen PowerPoint in deze cursus.</strong> De slides zijn HTML in de repository, opgebouwd uit dezelfde figuurcomponenten als de units, zodat wat op de beamer staat niet kan verschillen van wat op jouw scherm staat. Niemand vond PowerPoint slecht. De reden waarom het de logische keuze was, is weg.",
+  "change.way-working-decision.3": "<strong>Code review is er gekomen om te vangen wat iemand moe op vrijdag typte.</strong> Vraag je af wat ze vangt als een agent de diff schrijft en een andere agent ze nakijkt. Niet óf er iemand leest, maar waarop die let.",
+  "change.way-working-decision.4": "<strong>Een sprint van twee weken was een eerlijke portie werk toen een increment twee weken duurde.</strong> Het skelet staat er nu op donderdag. Of Scrum daar nog de juiste vorm omheen is, mag je team opnieuw bekijken.",
+  "change.way-working-decision.5": "Niemand heeft opgeschreven wat daarvoor in de plaats komt. De vraag stellen is voor je organisatie meer waard dan wat je deze week oplevert.",
+
   "change.code-got-cheap.heading": "Code is goedkoop geworden",
   "change.code-got-cheap.1": "Perfecte code was de moeite waard toen ze schrijven een week kostte, en dat kostte een week omdat een mens ze typte. Een module opnieuw genereren uit een scherpere beschrijving kost een namiddag. De code is dus de goedkope helft geworden, en het denkwerk erachter de dure.",
   "change.code-got-cheap.2": "Laat kwaliteit driften waar drift te overleven valt. Een naamgevingsconventie waar je vroeger een merge voor tegenhield, is een herschrijving van vijf minuten, en de aandacht die dat vrijmaakt gaat naar de vraag of het domein juist gemodelleerd is. <a href=\"/steps/step2/workflows\">Spec-driven werken</a> houdt de beschrijving bij in plaats van de output. De gates blijven staan. Wat losser mag, is smaak.",
@@ -44,12 +51,20 @@
   "change.environment-beats-project.1.copilot": "Wat dit kwartaal opgeleverd wordt, weegt minder dan wat de volgende vier mensen maandag kunnen. Een omgeving waarin mensen en agents allebei goed werken is het echte resultaat: een <code>.github/copilot-instructions.md</code> die zegt hoe deze repository werkt, een skill voor de klus die iedereen met de hand slecht doet, een build die groen is op een verse clone. In <a href=\"/steps/step2/setup\">projectopzet</a> wordt elk daarvan gebouwd.",
   "change.environment-beats-project.2": "Het is ook het werk dat niemand inplant. Tel deze week hoe vaak je een agent iets vertelde dat je al eens verteld had <svg data-icon=\"gem\"></svg> Elke keer is een regel die in een bestand ontbreekt, en die regel is het verschil tussen een truc van jou en een team dat anders werkt.",
 
-  "expectations.lead.1": "De mensen rond jou zagen hetzelfde als jij. Een werkende versie van iets, op het scherm, één namiddag nadat iemand het gevraagd had. Wat zij eruit meenamen, is dat alles nu een namiddag duurt.",
+  "expectations.lead.1": "De mensen rond jou zagen hetzelfde als jij. Een werkende versie van iets, op het scherm, één namiddag nadat iemand het gevraagd had. Sommigen vroegen het niet eens: dezelfde tools staan op hun laptop, en een manager zet over de middag zelf een prototype in elkaar. Wat iedereen eruit meenam, is dat alles nu een namiddag duurt.",
   "expectations.lead.2": "<a href=\"/steps/step2/evolution\">Projectevolutie</a> zei al wat die versie is: een skelet met de details eruit. De afstand tussen dat skelet en iets dat je aan een klant durft te tonen, is waar de beloftes stuklopen.",
 
+  "expectations.tool-not-advantage.heading": "De tool is de voorsprong niet",
+  "expectations.tool-not-advantage.1": "Je concurrent zit op dezelfde modellen, in dezelfde week, en leest hetzelfde artikel erover. Wat de tooling jou geeft, geeft ze hen ook. <a href=\"/steps/step3/change\">Change management</a> liet al zien dat die factor er niet komt, en dit is de andere helft ervan, de helft die ook geldt waar de winst er wel is. Winst die iedereen krijgt, is de nieuwe bodem en geen voorsprong.",
+  "expectations.tool-not-advantage.2": "Op het gratis deel zit bovendien een plafond. Een model antwoordt vanuit een gemiddelde, waar <a href=\"/steps/step1/context\">de context-unit</a> over ging, dus op een doorsnee instructie komt doorsnee werk terug. Wat overblijft om beter in te zijn, is wat jij weet over dit domein, deze codebase en de mensen die ermee werken. Dat kwam niet mee met de tool.",
+
   "expectations.say-what-missing.heading": "Zeg wat er nog niet in zit",
-  "expectations.say-what-missing.1": "Toon de ruwe versie, en benoem daarna wat ze nog niet doet. Geen validatie, één hard-coded member, niets dat een refresh overleeft. Eén zin, en die koopt het enige wat je uit dat overleg nodig had: dat iedereen weet wat er net op het scherm stond.",
+  "expectations.say-what-missing.1": "Toon de ruwe versie, en benoem daarna wat ze nog niet doet. Geen validatie, één hard-coded member, niets dat een refresh overleeft. Eén zin, en die koopt het enige wat je uit dat overleg nodig had: dat iedereen weet wat er net op het scherm stond. Is het prototype van hen in plaats van van jou, dan is het dezelfde zin en moet jij ze nog altijd zeggen.",
   "expectations.say-what-missing.2": "Laat je het weg, dan wordt die zin later alsnog gezegd. Door iemand die vraagt waarom de feature die net goedgekeurd werd omvalt op een lege lijst, en dan leg je hetzelfde detail uit van een slechtere positie.",
+
+  "expectations.detail-nobody-specified.heading": "Het detail dat niemand opschreef",
+  "expectations.detail-nobody-specified.1": "Een agent implementeert de zin die hij kreeg, en die zin is oppervlakkig. Vraag om teruggaves en je krijgt teruggaves afgehandeld, getest, langs het pad dat jij beschreven hebt. De tijd gaat daarna op aan de gevallen die niemand in gedachten had toen die zin geschreven werd, en niemand is inclusief jij. Sommige bestaan pas als het ding half af is.",
+  "expectations.detail-nobody-specified.2": "Van buitenaf lijkt dat op werk dat donderdag klaar was en daarna toch nog drie weken doorliep. <a href=\"/steps/step2/engineering\">Noemen wat je wil</a> levert een scherpere eerste versie op, en levert het detail dat niemand nog kende niet op. De last is dus verschoven en niet verdwenen. Ze ligt bij de mensen die dat detail kunnen vinden, en vinden vraagt ruimte in de week in plaats van een datum aan het eind ervan.",
 
   "expectations.estimate-still-matters.heading": "De schatting doet nog altijd mee",
   "expectations.estimate-still-matters.1": "Code schrijven werd sneller. Beslissen wat je bouwt niet, en de deploy ook niet. <a href=\"/steps/step2/enablement\">Enablement</a> telt waar de dag echt naartoe gaat, en typen was daar nooit het dure stuk van.",
@@ -57,7 +72,7 @@
 
   "expectations.one-good-run.heading": "Één goede run is geen snelheid",
   "expectations.one-good-run.1": "Geef dezelfde vraag twee keer door en er komt geen twee keer hetzelfde terug. <a href=\"/steps/step2/patterns\">De unit over terugkerende patronen</a> tekent die spreiding en zet daarna een script rond het deel dat helemaal niet hoort te variëren. Zolang je dat niet gedaan hebt, is de namiddag die goed liep één meting.",
-  "expectations.one-good-run.2": "Beloof het volgende checkpoint in plaats van het einde. Een skelet op vrijdag en een groene build op maandag kosten je bij een slechte run een dag. Een datum die ervan uitging dat elke run landt, heeft nergens meer naartoe zodra er één niet landt.",
+  "expectations.one-good-run.2": "De correctie die je daar vroeger op toepaste, is ook weg. Jij schatte vanuit jaren hetzelfde werk doen, en je manager las de kwaliteit af aan wie er in het team zat; allebei zijn dat metingen van een job die intussen van vorm veranderd is. Iedereen is tegelijk aan het herijken, dus de eerlijke belofte is het volgende checkpoint in plaats van het einde. Een skelet op vrijdag, een groene build op maandag. Een datum die ervan uitging dat elke run landt, heeft nergens meer naartoe zodra er één niet landt.",
 
   "impostor.lead.1": "Het komt binnen de eerste keer dat een agent in tien minuten doet waar jij een dag voor had vrijgehouden. En het werk is goed. Dat is het stuk dat pijn doet.",
   "impostor.lead.2": "De route was van de agent. De beslissing om ze te nemen was van jou: jij benoemde het doel, jij zette de check die ja zei, en jij las na wat er terugkwam voor het ergens naartoe ging. Niets in die reeks gebeurde vanzelf.",
@@ -73,5 +88,31 @@
   "impostor.nobody-doing-long.heading": "Niemand doet dit al lang",
   "impostor.nobody-doing-long.1": "De tools waar deze cursus over gaat zijn een paar jaar oud, en ze veranderden twee keer terwijl hij geschreven werd. Wie er zeker over klinkt, las vorige week iets, net als jij. Er is hier geen decennium ervaring om op achter te lopen.",
   "impostor.nobody-doing-long.2.claude": "Wat wel opbouwt, is wat je opgeschreven hebt. Een <code>CLAUDE.md</code> die scherper werd, een skill die dezelfde correctie niet meer nodig heeft, een <code>audit.md</code> die je tegen vorige maand kan diffen. Dat is de ervaring, en ze staat in de repository in plaats van in hoe je je op een donderdag voelt.",
-  "impostor.nobody-doing-long.2.copilot": "Wat wel opbouwt, is wat je opgeschreven hebt. Een <code>.github/copilot-instructions.md</code> die scherper werd, een skill die dezelfde correctie niet meer nodig heeft, een <code>audit.md</code> die je tegen vorige maand kan diffen. Dat is de ervaring, en ze staat in de repository in plaats van in hoe je je op een donderdag voelt."
+  "impostor.nobody-doing-long.2.copilot": "Wat wel opbouwt, is wat je opgeschreven hebt. Een <code>.github/copilot-instructions.md</code> die scherper werd, een skill die dezelfde correctie niet meer nodig heeft, een <code>audit.md</code> die je tegen vorige maand kan diffen. Dat is de ervaring, en ze staat in de repository in plaats van in hoe je je op een donderdag voelt.",
+  "deck.change.test-engineer.title": "Jij bent nu <hi>de testengineer</hi>",
+  "deck.change.test-engineer.note": "Elke regel lezen schaalt niet. De case waar de agent niet aan dacht wel.",
+  "deck.change.pipelines.title": "Het proces was <hi>de bottleneck</hi>",
+  "deck.change.rethink.title": "De manier van werken is <hi>een keuze</hi>",
+  "deck.change.rethink.1": "PowerPoint, of <hi>slides die je kan diffen</hi>",
+  "deck.change.rethink.2": "Review, als <mute>een agent de diff schreef</mute>",
+  "deck.change.rethink.3": "De sprint, als <mute>donderdag al werkt</mute>",
+  "deck.change.gates.title": "De smaak versoepelt. <hi>De gates niet.</hi>",
+  "deck.expectations.floor.title": "Winst die je concurrent ook krijgt is <mute>een vloer, geen voorsprong</mute>",
+  "deck.expectations.missing.title": "Zeg wat er ontbreekt <hi>op het moment dat je het laat zien</hi>",
+  "deck.expectations.missing.note": "Die zin zeg je hoe dan ook. Later, en vanuit een slechtere positie.",
+  "deck.expectations.velocity.title": "Eén goede run is geen <hi>velocity</hi>",
+  "deck.expectations.velocity.note": "Beloof het volgende checkpoint, niet de finish.",
+  "deck.impostor.engineer.title": "Jij bent nog steeds <hi>de engineer</hi>",
+  "deck.impostor.engineer.note": "De route was van de agent. Het doel, de check en het lezen waren van jou.",
+  "deck.impostor.signal.title": "Onderscheid het gevoel van <hi>het signaal</hi>",
+  "deck.impostor.signal.note": "Een diff die je niet kunt volgen is een gat met een oplossing.",
+  "deck.change.divider.1": "Code produceren is <mute>niet de job</mute>",
+  "deck.change.divider.2": "Business schuift wekelijks aan, <mute>niet pas bij de demo</mute>",
+  "deck.change.divider.3": "Typen was nooit waar de kalender op wachtte",
+  "deck.expectations.divider.1": "Ze zagen één middag, <mute>en prijsden alles op een middag</mute>",
+  "deck.expectations.divider.2": "De schatting bevat ook het nakijken",
+  "deck.expectations.divider.3": "Klaar moet <hi>één ding</hi> betekenen in de kamer",
+  "deck.impostor.divider.1": "Het slaat toe wanneer de agent <hi>goed</hi> is",
+  "deck.impostor.divider.2": "Oordeel levert niets zichtbaars op om vijf uur",
+  "deck.impostor.divider.3": "Wat optelt is <hi>wat je opschreef</hi>"
 }

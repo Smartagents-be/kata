@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { SmartAgentsMark } from '@/shared/components/SmartAgentsMark'
 import { cn } from '@/shared/lib/utils'
 
 /**
@@ -30,14 +31,24 @@ export function Slide({
   total,
   label,
   align = 'top',
+  surface = 'light',
   children,
 }: {
   index: number
   total: number
   label: string
   align?: 'top' | 'center' | 'golden'
+  /**
+   * Which ground the slide sits on. `light` is the warm off-white every content slide keeps;
+   * `dark` is the app's one dark surface, the deep-teal header, which the four module title cards
+   * borrow so a step boundary reads from the back of the room. This is a per-slide surface, not
+   * dark mode: the deck's dark-mode wrapper was removed on purpose and stays removed.
+   */
+  surface?: 'light' | 'dark'
   children: ReactNode
 }) {
+  const dark = surface === 'dark'
+
   return (
     <section
       id={`deck-slide-${index}`}
@@ -46,7 +57,10 @@ export function Slide({
       data-label={label}
       // The engine's canvas is hard white and lives in its shadow root, where document CSS cannot
       // reach it. The slide covers the canvas edge to edge, so the ground colour is painted here.
-      className="bg-background text-foreground font-sans relative overflow-hidden"
+      className={cn(
+        'font-sans relative overflow-hidden',
+        dark ? 'bg-header text-header-foreground' : 'bg-background text-foreground',
+      )}
     >
       <div
         id={`deck-slide-${index}-frame`}
@@ -60,10 +74,15 @@ export function Slide({
         {children}
       </div>
 
+      {/* The hairline is the footer's own top edge, so the 88px reserve above it stays honest:
+          16px of clearance under the line, then the 26px text row, all inside the reserve. */}
       <footer
         id={`deck-slide-${index}-footer`}
         data-component="Slide"
-        className="absolute right-[120px] bottom-[40px] left-[120px] flex items-baseline justify-between"
+        className={cn(
+          'absolute right-[120px] bottom-[40px] left-[120px] flex items-center justify-between border-t pt-[16px]',
+          dark ? 'border-header-foreground/20' : 'border-border',
+        )}
       >
         <span
           id={`deck-slide-${index}-wordmark`}
@@ -72,13 +91,27 @@ export function Slide({
         >
           Agentic development
         </span>
-        {/* A count, so it is set in the machine face like every other count in the app. */}
         <span
-          id={`deck-slide-${index}-pageno`}
+          id={`deck-slide-${index}-watermark`}
           data-component="Slide"
-          className="text-muted-foreground font-mono text-[20px] tabular-nums"
+          className={cn(
+            'flex items-center gap-[10px] text-[20px]',
+            dark ? 'text-header-foreground/70' : 'text-muted-foreground',
+          )}
         >
-          {index + 1} / {total}
+          <SmartAgentsMark size={26} />
+          <span className={cn('font-semibold', dark ? 'text-header-foreground' : 'text-foreground')}>
+            SmartAgents
+          </span>
+          <span>© 2026</span>
+          {/* A count, so it is set in the machine face like every other count in the app. */}
+          <span
+            id={`deck-slide-${index}-pageno`}
+            data-component="Slide"
+            className="ml-[14px] font-mono text-[20px] tabular-nums"
+          >
+            {index + 1} / {total}
+          </span>
         </span>
       </footer>
     </section>

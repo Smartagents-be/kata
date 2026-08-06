@@ -8,14 +8,17 @@ import type { ReactNode } from 'react'
  * renumbering every slide after it. So a slide is now a spec in a list, `SlideTemplate` renders it,
  * and the numbering falls out of the array position.
  *
- * The kind decides two things, and the reasoning for both is in `SlideTemplate`. It decides how loud
- * the heading is: a `divider` is a punctuation mark between units and is the largest, a `statement`
+ * The kind decides three things, and the reasoning is in `SlideTemplate`. It decides how loud the
+ * heading is: a `title` and a `divider` are punctuation marks and are the largest, a `statement`
  * is one claim and nothing else, and a `figure` slide sets its heading back so the drawing under it
- * is what the room looks at. And it decides where the slide sits, which is a split rather than three
- * choices: the two text-only kinds take `golden` and land where the opening question does, while a
- * `figure` slide takes `top` and hands the 80px it saves to the drawing.
+ * is what the room looks at. It decides where the slide sits, which is a split rather than a
+ * choice per kind: the text-only kinds take `golden` and land where the opening question does,
+ * while a `figure` slide takes `top` and hands the 80px it saves to the drawing. And it decides
+ * the ground: a `title` is a step's own card, one per module, and is the only slide on the dark
+ * header surface, so the deck's rhythm is four dark cards and everything light between them. A
+ * `divider` marks a unit inside a module and stays on the light ground for exactly that reason.
  */
-export type SlideKind = 'divider' | 'figure' | 'statement'
+export type SlideKind = 'title' | 'divider' | 'figure' | 'statement'
 
 export interface SlideSpec {
   /**
@@ -38,6 +41,13 @@ export interface SlideSpec {
   title: string
   /** Message key for a single supporting line under the heading. Use it rarely; see SlideTemplate. */
   note?: string
+  /**
+   * Message keys, one per line, for the rare slide that is a short list rather than one claim:
+   * an exercise's moves, a recap's costs. Lean on purpose - three or four entries, each a few
+   * words, or the slide becomes the tutor's script. Takes the same `<hi>`/`<mute>` markup as the
+   * title. A slide carries `note` or `points`, not both.
+   */
+  points?: string[]
   /**
    * The drawing, which on these slides is a course figure rendered exactly as the unit renders it.
    * `shared` never reaches into a step, so the step passes the element in, the same arrangement

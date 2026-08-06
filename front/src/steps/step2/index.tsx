@@ -1,24 +1,32 @@
 import { UnitShot } from '@/shared/components/UnitShot'
 import type { Step } from '@/shared/step'
+import deck from './deck'
 import { AgentsAtOnce } from './AgentsAtOnce'
 import { AuditExample } from './AuditExample'
 import { DomainTree } from './DomainTree'
 import { FlowDiagram } from './FlowDiagram'
+import { GoalGate } from './GoalGate'
 import { HookTree } from './HookTree'
 import { IterationPaths } from './IterationPaths'
+import { LoopInWindow } from './LoopInWindow'
 import { LoopsPerHour } from './LoopsPerHour'
+import { ModelRelay } from './ModelRelay'
 import { ProjectTree } from './ProjectTree'
+import { ReadEachTime } from './ReadEachTime'
 import { ScriptRuns } from './ScriptRuns'
 import { SetupFlags } from './SetupFlags'
 import { SkillShape } from './SkillShape'
 import { SkillTree } from './SkillTree'
+import { TwoWindows } from './TwoWindows'
 import { WhereWouldItGo } from './WhereWouldItGo'
+import { WindowSpend } from './WindowSpend'
 import { WorkflowTimeline } from './WorkflowTimeline'
 import { WorkflowWeights } from './WorkflowWeights'
+import { WorktreeEach } from './WorktreeEach'
 import { Workshop } from './Workshop'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
-import { workflowsQuiz } from './quiz'
+import { spendingQuiz, workflowsQuiz } from './quiz'
 import evolution from './units/evolution.html?raw'
 import setup from './units/setup.html?raw'
 import engineering from './units/engineering.html?raw'
@@ -35,10 +43,10 @@ import workshop from './units/workshop.html?raw'
  * the code yourself, one unit each. `evolution` opens the step by putting the rest of them in
  * order: small steps, taken often, on something that already runs.
  *
- * `evolution`, `setup`, `engineering`, `patterns`, `workflows`, `enablement` and `parallel` each
- * carry a drawing, `engineering` closes on an ungraded task card, and `setup` and the closing
- * `workshop` unit each carry a flag board, which is why this registry is .tsx. Both boards are
- * browser-graded, so the step still talks to the service only through the `mvn verify -Pgraded` run
+ * `evolution`, `setup`, `engineering`, `steering`, `patterns`, `workflows`, `enablement`,
+ * `parallel` and `goals` each carry a drawing, `engineering` closes on an ungraded task card, and `setup` and
+ * the closing `workshop` unit each carry a flag board, which is why this registry is .tsx. Both
+ * boards are browser-graded, so the step still talks to the service only through the `mvn verify -Pgraded` run
  * the student does outside the app.
  */
 const step2: Step = {
@@ -89,6 +97,15 @@ const step2: Step = {
       id: 'steering',
       title: 'steering.title',
       html: steering,
+      // Three slots inside the prose, one per section that argues something spatial. The two
+      // windows share one frame geometry on purpose: the unit's vocabulary is the window, so they
+      // are one window in two states. The worktree drawing sits before the cost paragraph, so the
+      // two-bills argument keeps the last word in prose.
+      inlineFigures: {
+        'two-windows': <TwoWindows />,
+        'loop-in-window': <LoopInWindow />,
+        'worktree-each': <WorktreeEach />,
+      },
     },
     {
       id: 'patterns',
@@ -192,6 +209,19 @@ const step2: Step = {
       id: 'goals',
       title: 'goals.title',
       html: goals,
+      // Four slots, one per expensive move the unit surveys. `window-spend` sits under the lead
+      // because the tail of a window is what two later sections lean on, and it is the only figure
+      // in the step read forwards. The other three close the section that argues them, and none of
+      // them is read back by prose, so each carries its argument in its own labels.
+      inlineFigures: {
+        'window-spend': <WindowSpend />,
+        'goal-gate': <GoalGate />,
+        'read-each-time': <ReadEachTime />,
+        'model-relay': <ModelRelay />,
+      },
+      // The step's second quiz. One question per expensive move, since the unit's argument is what
+      // each of them costs rather than what each of them is.
+      quiz: spendingQuiz,
     },
     {
       id: 'workshop',
@@ -202,6 +232,9 @@ const step2: Step = {
       figure: <Workshop />,
     },
   ],
+  // What the tutor puts on the board for this step. Authored in `deck.tsx`, beside the figures it
+  // reuses and the reasons three of them stay off it.
+  deck,
 }
 
 export default step2

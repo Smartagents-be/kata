@@ -12,11 +12,11 @@ prohibitions are in the root `CLAUDE.md`. None of them is repeated here.
 
 `step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Nine
 units, `evolution`, `setup`, `engineering`, `steering`, `patterns`, `workflows`,
-`enablement`, `parallel` and `goals`, exactly one of
-them carrying a quiz, and the unit HTML is the source for what each argues. Four of the nine close
+`enablement`, `parallel` and `goals`, two of
+them carrying a quiz, and the unit HTML is the source for what each argues. Five of the nine close
 on something the student does: `evolution` on an ungraded fifteen-minute task, `setup` on a graded
-flag board, `engineering` on an ungraded `TaskCard`, `workflows` on that quiz. The other five are
-framing prose. Five carry one
+flag board, `engineering` on an ungraded `TaskCard`, `workflows` and `goals` on a quiz each. The
+other four are framing prose. Five carry one
 habit each; `evolution` opens the step and carries none, because its job is to put the rest in
 order: a version now costs an hour, so the step you hand over gets small and you take many of them.
 `workflows` is outside that count too, and deliberately so: it carries four ways of
@@ -176,6 +176,31 @@ of the same repository, on its own branch, in its own folder, sharing the same h
 sentence and links here, which is what `parallel.many-agents-once.2` already did. Two arguments, one
 definition. Do not let a third site explain what a worktree is.
 
+**The unit is drawn now, three figures, and the two windows are a pair.** `TwoWindows` sits under
+`Interrupt, or go back`, after the choosing paragraph and above the self aside, so the aside stays
+the section's exit; `LoopInWindow` closes `When it is going nowhere`. They share one frame geometry
+on purpose: the unit's vocabulary is the window, so they are one window in two states rather than
+two drawings, and what keeps them apart is the stack, four different turns against five copies of
+one. Teal is what you typed or chose to carry (the correction, the rewritten request, the block
+that crosses the clear); what the window merely holds is muted bulk. **The rewound window's dropped
+turns are not drawn, not even dashed**: a dashed ghost inside the frame says they are still in
+there, so the emptiness is the drawing, on `LoopsPerHour`'s rule that the wait is drawn as nothing,
+and the note under the frame carries the words. `LoopInWindow`'s fifth fix is an outline, never
+dashed and never teal: it is being written, it is just the same shape again, and its label says so.
+Neither window figure may borrow the other's argument, wrong direction against no direction, and
+neither is about the clock, which is `LoopsPerHour`'s.
+
+`WorktreeEach` sits between the isolation paragraph and the cost paragraph, so the two-bills
+argument keeps the last word in prose rather than under a drawing that does not make it. **It names
+the same two folders and branches as the `<pre>` above it**, on the `SkillTree` rule that the
+drawing and the pre name the same thing, and those labels are literals rather than locale keys
+because a path is not translated. Its teal is the frame rather than the boxes, the one figure in
+the step where that is true: the folder line is what the section adds, and the agents stay muted
+because whose attention they get is `AgentsAtOnce`'s argument in `parallel`. It borrows
+`flow.node.agent` and `flow.node.code`, so a rewording of `FlowDiagram`'s vocabulary moves this
+drawing too. No line runs between the two frames, and the note under the history box reads that
+absence out loud; do not wire them together.
+
 The `gaps.md` section turns on its third part and nothing else. Never assume and write the gap down
 are bookkeeping; **stopping** is the lesson, because an agent that logs an assumption and then builds
 on it has told you what it guessed underneath a diff that already depends on the guess. The rule
@@ -296,7 +321,7 @@ four techniques and no reason to pick one. It carries no exercise, and the reaso
 nothing a card could ask the student to *do* here that would not be a smaller version of the
 workshop.
 
-**It does carry the step's only quiz, and that reverses an earlier decision.** The record used to
+**It does carry a quiz, and that reverses an earlier decision.** The record used to
 say no quiz either, on the grounds that the choice is the lesson. That reasoning was aimed at the
 wrong instrument. A card asks for work and there is none to ask for, but a question can ask which
 workflow a situation wants, and "which one for a log line in a careful project" is exactly the
@@ -309,7 +334,8 @@ add a fourth to even the set up.
 
 The quiz renders under the closing figure from the registry, so the unit's HTML gets no
 `<h2 data-i18n="ui:quiz.title">`: that heading belongs to a task card, and `QuizPanel` writes its
-own. `evolution`, `setup` and `engineering` carry the heading because they carry cards.
+own. `evolution`, `setup` and `engineering` carry the heading because they carry cards. `goals`
+follows this unit's shape rather than theirs, for the same reason.
 
 Two of the four are already taught elsewhere, and the unit **points rather than repeats**, the same
 rule `harness.coordinator.3` follows in step 1. Plan mode belongs to `step1/prompt`, which defines it
@@ -647,6 +673,69 @@ needs reading carefully: dashed means nobody is watching, and here somebody is, 
 what makes row four different from row three at a glance. Changing the sub-agent count, or dashing
 them, ends both arguments. `AgentsAtOnce`'s own docblock carries the geometry.
 
+`goals` was **`Goal-oriented` and is now `Spending tokens`**, which is a widening rather than a
+rename. The unit used to argue one thing, handing over an outcome instead of an instruction, and it
+now surveys four ways of spending a lot of tokens on purpose: a goal-shaped run, a fan-out under
+`ultracode`, research on the frontier model, and a design tool. **The unit id, the URL and the
+namespace prefix all stay `goals`**, so nothing that pointed at it moved, and the references from
+`parallel`, `workshop` and the flag help texts still read "the goals lesson" the way `patterns` is
+referenced by id rather than by title. The old argument is intact and is the first three sections;
+what went is `whole-job.3` (the skill sweep, which now closes `most-waiting` as the thing you start
+before lunch) and `lead.2`'s middle, since asking why a route was chosen was the paragraph nobody
+was going to act on. Its last sentence survives as the close of `goal-oriented.1`, because
+`deck.goals.true.note` is that sentence on a slide.
+
+**The organising idea is the window, and it is stated once, in the lead.** Unspent window is not
+carried anywhere, so an expensive move belongs at the tail of one, with the weekly or monthly cap as
+the limit that actually binds. `ultracode` and `design-tools` both close on that slot and neither
+re-argues it. The lead points at `step1/model` for the two billing arrangements rather than
+describing them, on the usual rule.
+
+**The check is a section of its own now**, `The check is the exit`, and it still owns the sentence
+the capstone is built on: if you cannot name the command that answers yes or no, you do not have a
+goal. `enablement.where-day-goes` hands to it and must not restate it.
+
+Four figures, and each is drawn to stay out of another one's argument, which is the constraint to
+read before touching any of them. `WindowSpend` measures **money against a ceiling** and is drawn as
+columns, never as a band cut into turns, because `LoopsPerHour` in `enablement` owns the band and
+owns the clock. `GoalGate` draws the loop with the command as its only exit, and the waiting is a
+line **inside the gate box** rather than a stretch of time, for the same reason. `ReadEachTime`
+draws **what each agent is holding**, one context against five identical copies of it, and never
+the arrangement, because `AgentsAtOnce` in `parallel` owns how many agents you have running and what
+that costs your attention. It was two bars measuring the bill first, and the boxes replaced them:
+the cost is easier to feel as the same three blocks bought again than as a longer bar. That makes it
+stacked blocks inside a frame, which is `steering`'s vocabulary, so **the repetition is what keeps
+the two apart**: `TwoWindows` and `LoopInWindow` are one window in two states, and this is one
+context copied. The three teal blocks are identical in all six boxes and only the left one labels
+them. Relabel a copy, resize it or reorder it and the figure stops arguing anything. `ModelRelay` draws **what you spend each tier on and in which order**, never what the
+tiers are like, because `ModelTiers` in `step1/model` owns the dispositions. Its two teal arrows are
+the figure: they are labelled with what you do, since the digestion between the tiers is the part
+that cannot be handed over.
+
+`ModelRelay` is also the one dated thing in the step. The prose says "the frontier model", "the top
+tier" and "the middle tier" and names no release; the drawing tags its three columns `Fable`, `Opus`
+and `Sonnet`, and `research-frontier-model.3` under it is a `<small>` line saying when. That split is
+`model.lead.3`'s precedent in step 1, and it is what lets the figure be concrete without dating the
+unit. The tags are literals rather than locale keys, like every model name in the course.
+
+The frontier tier is the seam worth knowing about: **`step1/model` names it and deliberately stops**,
+on the grounds that what it is good at is a question about work rather than about windows. This
+section is the answer to that, so the two are a pair and the step-1 half must not grow one of its
+own.
+
+`Ultracode` is described at the level of what it does to your bill, a fleet fanned out
+programmatically, and it stays there on purpose: naming a flag, a menu or a script shape dates the
+unit the way `copilot-specific.md` records that Copilot's billing already dated a claim once. It
+points at `workflows` for the specs rather than arguing spec-driven a second time.
+
+`Design tools` grounds itself in this repository's own design system, which came out of a Claude
+Design project, and that is the only concrete in the section. It is the shortest of the four and
+should stay that way: what it adds to the unit is the timing, and the timing is the lead's.
+
+The quiz is the step's second and is in `quiz.ts` beside `workflowsQuiz`. One question per expensive
+move that has a wrong branch, so the relay has none, on the same reasoning that leaves spec-driven
+out of the `workflows` quiz.
+
 A tenth unit, `workshop`, closes the step as its capstone. It is the one part of step 2 a machine
 can grade, because it grades the thing `engineering` and `goals` argue for: a goal a build answers
 yes or no to. **`workshop.lead.1` names those two units rather than counting back to them**, and that
@@ -656,10 +745,11 @@ bar nor the goal. It named `quality` until that unit was cut, and it has also **
 habits** for the same reason the positional reference went: "the six habits" was a number an
 insertion or a cut could falsify silently, and cutting `quality` did. Positional references to
 neighbouring units break silently on an insertion, so
-name the unit. **`goals` closes by naming this unit back**, one sentence on the end of
-`goals.own-worktree.2` rather than a paragraph of its own, which is the shape `t-shaped`'s
-`engineering` pointer already uses: the goal it argues for is the goal the capstone hands over, so
-the two ends of that pair now point at each other. It ships a small loans domain in `kata/step2/java` that is green but un-hardened, and
+name the unit. **`goals` closes by naming this unit back**, and where that sentence sits moved when
+`goals` was rewritten: it was the end of `goals.own-worktree.2`, and it is now the end of
+`goals.read-came-back.1`, which is the last paragraph of the unit. What is load bearing is the pair
+rather than its address, so a rewrite of either end has to leave the other pointing at something.
+It ships a small loans domain in `kata/step2/java` that is green but un-hardened, and
 a `graded` Maven profile that measures it against three goals - a coverage floor, a complexity
 ceiling and honest (mutation-tested) coverage. `mvn verify -Pgraded` prints a leetspoken flag for
 each goal met and fails until all three are. The student hardens the module (that is the exercise,

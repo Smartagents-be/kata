@@ -27,15 +27,62 @@ card more often than the deck gains a slide.
 **A slide is data, not JSX.** `SlideSpec` in `shared/deck/slide-spec.ts` is the shape, a step
 authors a list of them, and `SlideTemplate` renders every one. Adding a slide is adding an entry:
 `index` and `total` fall out of the array position, so there is no `TOTAL` to keep in step and no
-renumbering of everything after an insertion. `kind` is `divider`, `figure` or `statement`, and all
-it decides is how loud the heading is and what sits under it.
+renumbering of everything after an insertion. `kind` is `title`, `divider`, `figure` or
+`statement`, and it decides how loud the heading is, what sits under it, and which ground the
+slide takes.
+
+**Only a module gets the dark card.** A `title` slide is a step's own card, one per step at the
+head of its deck, and it is the only slide on the deep-teal `--header` surface: four dark cards
+across the whole deck is what makes them read as module boundaries, and that number was chosen by
+the tutor, so a unit `divider` stays on the light ground and must not be promoted back. The dark
+surface is a per-slide `surface` prop on `Slide`, not dark mode; the removed dark-mode wrapper
+stays removed. On the dark card the emphasis vocabulary lightens (`chart-3` where light slides use
+`primary`, white ink set back where they use `muted-foreground`), mapped in `SlideTemplate` like
+the rest of it.
+
+**Every slide carries the SmartAgents watermark**, in the footer beside the page number: the mark,
+the name, `© 2026`, above a hairline that spans the frame. The mark is
+`shared/components/SmartAgentsMark.tsx`, a static port of the geometry
+`video/src/components/Logo.tsx` rebuilt from `smartagents.be/assets/logo.svg`, and its cyan-to-blue
+gradient is deliberately not a token: it is the brand's own and not ours to restyle, so it lives
+inside that component and nowhere else. The gradient id is per instance (`useId`), because the mark
+is on every slide and two SVG gradients with one id resolve to the first. It sits in `components`
+rather than in `deck` because the page carries the same watermark: `AppShell` signs the course with
+it (`#app-watermark`), so the projector and the browser are signed the same way. Both are
+untranslated, the way a name is.
+
+**The page's copy is pinned to the window**, bottom right, at the tutor's own asking: it is a
+watermark rather than a colophon, so it stays on screen wherever the student has scrolled to, and
+it is a sibling of `#app-body` rather than a child, since that body is a `z-10` stacking context a
+fixed element could not be layered out of. It is `pointer-events-none` and set back to 70%, which
+is what keeps it a mark and not a widget: on a narrow window it lands on top of a line of prose,
+and it must lose that argument rather than win it. Do not give it a panel or a border to fix that;
+the flatness rule below is the reason, and a chip in the corner reads as a control.
+
+**`points` is the third shape**, a short list under the heading, in the same `<hi>`/`<mute>`
+markup as the title, at three to five entries of a few words each: a longer list is the tutor's
+script, which is what `note`'s rule already forbids. A slide carries `note` or `points`, not both.
+**Every unit divider carries the unit's essence as points**, deck-wide and at the tutor's own
+asking: a bare title on a slide gave a room nothing to hold on to, so the divider states the
+unit's two or three claims and the slides after it are the proof. Only the four module `title`
+cards stay bare, which is part of what makes them read as a different kind of slide. On a
+`statement`, points stay for the slide that is genuinely a list (the house rules, a goal's three
+names).
+
+**Slide ids are unique across the whole deck**, because the deck is one list. Step 1 owns the bare
+`deck-<unit>` names from before the other steps had decks, so every other step prefixes with its
+step id (`deck-step2-workflows`); both steps have a `workshop`, which is the collision the prefix
+exists for. A raster figure (`UnitShot`) rides at `scale` 1 with a large `figureWidth`, since
+magnifying a PNG past its layout width only softens it on the projector.
 
 **Placement is two values, not three, and the split is what the slide is competing for.** A
-`divider` and a `statement` are only their text, so they take `golden` and land exactly where the
-opening question does, eyebrow on 180px and the h1's top edge on the division at 255px. A `figure`
-slide is competing for room, so its heading takes `top` at 80px higher and every one of those pixels
-goes to the drawing. The masthead still holds still *within* a run of figure slides, which is what
-`top` is for; it steps once when the deck turns from talking to showing.
+`title`, a `divider` and a `statement` are only their text, so they take `golden` and land exactly
+where the opening question does, eyebrow on 180px and the h1's top edge on the division at 255px;
+a `title` carries no eyebrow (there is nothing above a module to name), so it sits the documented
+75px higher. A `figure` slide is competing for room, so its heading takes `top` at 80px higher and
+every one of those pixels goes to the drawing. The masthead still holds still *within* a run of
+figure slides, which is what `top` is for; it steps once when the deck turns from talking to
+showing.
 
 Two smaller decisions in the same area. Emphasis inside a heading is marked up **in the message**
 and mapped in `SlideTemplate`, and the whole vocabulary is two tags, `<hi>` for teal and `<mute>` for

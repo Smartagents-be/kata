@@ -85,5 +85,20 @@
   "quiz.what-the-code-is.run-it": "Het is een stukje code om in je terminal te draaien, en de uitvoer is het echte antwoord.",
   "quiz.what-the-code-is.version": "Het is een intern id voor de pagina, bedoeld voor de auteurs en veilig om over te slaan.",
   "quiz.what-the-code-is.placeholder": "Het is een plaatshouder die een tutor invult tijdens een begeleide sessie.",
-  "quiz.what-the-code-is.explanation": "Een string tussen accolades is het teken voor een schriftelijke oefening: het is het antwoord zelf. Je lost de pagina op door hem terug te typen in het veld, en het nakijken gebeurt in je browser."
+  "quiz.what-the-code-is.explanation": "Een string tussen accolades is het teken voor een schriftelijke oefening: het is het antwoord zelf. Je lost de pagina op door hem terug te typen in het veld, en het nakijken gebeurt in je browser.",
+  "deck.title": "Introductie",
+  "deck.welcome.divider.1": "Lees het alleen, of in de les aan het bord",
+  "deck.welcome.divider.2": "Kies je assistent achter het tandwiel",
+  "deck.welcome.divider.3": "Een antwoord tussen <hi>accolades</hi> is een flag",
+  "deck.welcome.divider.4": "Jouw agent jaagt erop, <mute>je browser kijkt na</mute>",
+  "deck.welcome.rules.title": "Huisregels, voor elk bord",
+  "deck.welcome.rules.1": "Alleen <hi>je agent</hi> jaagt",
+  "deck.welcome.rules.2": "Knip voor je prompt",
+  "deck.welcome.rules.3": "Eén flag per sessie",
+  "deck.welcome.rules.4": "Laat hem de check <hi>uitvoeren</hi>",
+  "deck.welcome.rules.5": "Reken de jacht achteraf af",
+  "deck.backend.divider.1": "Elke stap is een eigen Maven-project",
+  "deck.backend.divider.2": "Maar één service houdt <hi>:8080</hi> vast",
+  "deck.backend.divider.3": "Codeblokken lopen via <hi>je agent</hi>, niet via je klembord",
+  "deck.backend.herrings.title": "Niet elke string tussen accolades is <hi>de flag</hi>"
 }

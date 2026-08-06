@@ -49,5 +49,20 @@
   "quiz.what-the-code-is.run-it": "It is a snippet to run in your terminal, and its output is the real answer.",
   "quiz.what-the-code-is.version": "It is an internal id for the page, there for the authors and safe to skip.",
   "quiz.what-the-code-is.placeholder": "It is a placeholder that a tutor fills in during a guided session.",
-  "quiz.what-the-code-is.explanation": "A string in braces is the signifier for a written exercise: it is the answer itself. You clear the page by typing it back into the box, and it grades in your browser."
+  "quiz.what-the-code-is.explanation": "A string in braces is the signifier for a written exercise: it is the answer itself. You clear the page by typing it back into the box, and it grades in your browser.",
+  "deck.title": "Introduction",
+  "deck.welcome.divider.1": "Read it alone, or in class at the board",
+  "deck.welcome.divider.2": "Set your assistant behind the cogwheel",
+  "deck.welcome.divider.3": "An answer in <hi>curly braces</hi> is a flag",
+  "deck.welcome.divider.4": "Your agent hunts it, <mute>your browser grades it</mute>",
+  "deck.welcome.rules.title": "House rules, for every board",
+  "deck.welcome.rules.1": "Only <hi>your agent</hi> hunts",
+  "deck.welcome.rules.2": "Cut before you prompt",
+  "deck.welcome.rules.3": "One flag per session",
+  "deck.welcome.rules.4": "Make it <hi>run</hi> the check",
+  "deck.welcome.rules.5": "Price the hunt afterwards",
+  "deck.backend.divider.1": "Each step is its own Maven project",
+  "deck.backend.divider.2": "Only one service holds <hi>:8080</hi>",
+  "deck.backend.divider.3": "Code blocks run through <hi>your agent</hi>, not your clipboard",
+  "deck.backend.herrings.title": "Not every braced string is <hi>the flag</hi>"
 }

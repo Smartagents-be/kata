@@ -1,4 +1,5 @@
 import type { Step } from '@/shared/step'
+import deck from './deck'
 import { PipelineShift } from './PipelineShift'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
@@ -43,6 +44,9 @@ const step3: Step = {
       html: impostor,
     },
   ],
+  // What the tutor puts on the board for this step. Authored in `deck.tsx`; mostly statements,
+  // because this step is argued out loud by design.
+  deck,
 }
 
 export default step3
