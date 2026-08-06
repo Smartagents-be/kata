@@ -1,151 +1,141 @@
 <p data-i18n="workshop.lead.1">
-  You have read the habits. This is where you run one. Nothing on this page grades how you
-  worked, because a process leaves no exit code. What it grades is the thing the
-  <a href="/steps/step2/engineering">engineering</a> and <a href="/steps/step2/goals">goals</a> units
-  argued you should always be able to name: a goal a build can answer yes or no to.
+  You do not write the code on this page. Not the tests, not the refactor, not the missing method,
+  not the native build. You set the project up, you say what has to be true, and you read what came
+  back. Everything else is the agent's.
 </p>
 
 <p data-i18n="workshop.lead.2">
-  There is a small module in this repo built for it. Under <code>kata/step2/java</code> is a library
-  loans domain, ports and adapters, with a late-fee rule at the middle of it. It compiles
-  and it passes its one shipped
-  test, so the default build is green. It is also exactly the kind of code a quality gate exists
-  for: one method far too branchy to read, and almost no tests behind it.
+  Point your agent at <code>kata/step2/java</code>: a library loans domain, ports and adapters, with a
+  late-fee rule in the middle of it. It compiles, and the one test it ships with passes, so the
+  default build is green. It is also exactly the kind of code a quality gate exists for. One method
+  too branchy to read, and almost nothing behind it.
 </p>
 
 <p data-i18n="workshop.lead.3">
-  Hand it to your agent as three outcomes, not a list of edits. Then let the build decide. Set aside
-  an afternoon for it: the first three flags come out of one hardening pass, and the fourth and the
-  fifth are separate jobs with their own builds.
+  Run the commands below from <code>kata/step2/java</code> unless the block says otherwise, because
+  each step of this kata is its own Maven project. Set an afternoon aside.
 </p>
 
-<h2 data-i18n="workshop.goals.heading">The three goals</h2>
+<!-- Filled by the RunSheet element registered under this name in steps/step2/index.tsx. It is the
+     page in one drawing, read forwards: the sections below work its stages in order, and the two it
+     draws side by side share one section because they run at once. In guided mode it is most of
+     what survives, so it carries every command the page issues. -->
+<div data-figure="run-sheet"></div>
 
-<p data-i18n="workshop.goals.1">
-  Every command on this page runs from <code>kata/step2/java</code>, because each step of this kata
-  is its own Maven project. The goals live behind a Maven profile there, off by default so the normal
-  build stays green. Turn it on and it measures the module against all three at once.
+<h2 data-i18n="workshop.pre-flight.heading">Pre-flight</h2>
+
+<p data-i18n="workshop.pre-flight.1">
+  Run the check before you change anything. It goes red. The rows it prints are your three goals
+  with the numbers you are short of. Clear one and a flag in braces takes that number's place. The
+  machine wrote your brief, so this page does not have to.
 </p>
 
 <pre><code>cd kata/step2/java
 mvn verify -Pgraded</code></pre>
 
-<p data-i18n="workshop.goals.2">
-  Before you hand anything over, do the setup <a href="/steps/step2/setup">the setup unit</a> asked
-  for. Put <code>mvn verify -Pgraded</code> in your <code>CLAUDE.md</code> as the command that
-  validates this work. That one line is what lets you give the agent a goal instead of a keystroke:
-  it runs the check itself after each change, and the build, not the agent's word that it is done,
-  decides when a flag is earned.
+<p data-i18n="workshop.pre-flight.2">
+  Then spend ten minutes on the repository rather than the code, on what
+  <a href="/steps/step2/setup">the setup unit</a> had you go looking for. Hand those ten minutes over
+  as well. An agent that reads this project writes a better briefing for it than you will from
+  memory.
 </p>
 
-<p data-i18n="workshop.goals.3">
-  The first goal is a coverage floor: the module has to reach ninety percent line coverage, with the
-  web and config layers left out, and the code the last two flags ask you to write left out with
-  them, which means writing the tests it never had. The second is the complexity ceiling
-  <a href="/steps/step2/goals">goals</a> told you to hand over: no method may score above ten on
-  cyclomatic complexity, so the late-fee
-  method has to come apart into pieces small enough to hold in your head. Meet a goal and the build
-  prints a flag for it, in the shape <code>{1337-5p34k}</code>. Miss one and it fails, and tells you
-  the number you are still short of.
+<!-- Filled by the Preflight element registered under this name in steps/step2/index.tsx. Five moves
+     the project and the harness need before the first message, and no flag for any of them. -->
+<div data-figure="preflight"></div>
+
+<h2 data-i18n="workshop.goal.heading">One goal, three flags</h2>
+
+<p data-i18n="workshop.goal.1">
+  Hand the module over as an outcome with the check in it: one sentence, no list of tests and no
+  refactor plan. Then leave it alone, the way <a href="/steps/step2/goals">the goals unit</a>
+  describes. This module is small, so the wait is minutes rather than the afternoon that unit priced.
+  The sentence you hand over is the same sentence at any size.
 </p>
 
-<h2 data-i18n="workshop.honest.heading">The goal that resists gaming</h2>
+<pre><code>&gt; Goal: `mvn verify -Pgraded` goes green in kata/step2/java.
+  Run it after every class you change, keep the default build
+  green, and do not change a public signature.</code></pre>
 
-<p data-i18n="workshop.honest.1">
-  The third goal is the interesting one. Coverage is a proxy, and an agent will satisfy a proxy: a
-  hundred percent of the lines can run under tests that assert nothing, and the number will still
-  read green. So this goal is not coverage. It is whether the coverage is honest.
+<p data-i18n="workshop.goal.2">
+  If it comes back with a question instead of a diff, the rule you wrote in the pre-flight is doing
+  its job.
 </p>
 
-<p data-i18n="workshop.honest.2">
-  The build checks that by mutation testing the domain. It changes the code in small ways, a plus for
-  a minus, a boundary nudged by one, and runs your tests again. A test suite that means something
-  catches the change and fails. One that only executes the lines lets it through. Reach eighty
-  percent of those mutations caught and the third flag is yours, and it is a flag you cannot earn by
-  gaming the first.
+<p data-i18n="workshop.goal.3">
+  One of the three does not move when you add tests. When the other two are green and that number is
+  still short, stop writing tests and read what the row is measuring.
 </p>
 
-<h2 data-i18n="workshop.build.heading">The fourth one is built, not tuned</h2>
+<h2 data-i18n="workshop.two-jobs.heading">Two jobs, neither waits</h2>
 
-<p data-i18n="workshop.build.1">
-  The three goals above all sharpen code that already runs. The fourth flag is the other half of the
-  job: functionality that does not exist yet. The service has an endpoint for what a member tier owes,
-  and it answers with a 500, because the method behind it was never written.
+<p data-i18n="workshop.two-jobs.1">
+  The last two flags are independent, so run them at once. They cannot share a folder, because two
+  Maven builds in one <code>target/</code> fight over it, so give each its own worktree. The two
+  <code>git</code> lines are the exception to the rule above; they run from the repository root, and
+  each job gets its own terminal opened at that root. Both come back while you are still reading the
+  first one.
 </p>
 
-<pre><code>mvn spring-boot:run
+<pre><code>cd ../../..
+git worktree add -b feat/statement ../kata-statement
+git worktree add -b feat/native ../kata-native</code></pre>
+
+<p data-i18n="workshop.two-jobs.2">
+  In the first, the spec exists and it is failing. A tagged suite describes a method nobody wrote,
+  and the endpoint behind it answers with a 500. Open plan mode against those tests, then check what
+  it produces against the test names, one by one. Green tests, then call the endpoint. The code is in
+  the response.
+</p>
+
+<pre><code>cd ../kata-statement/kata/step2/java
+mvn test -Pchallenge
+mvn spring-boot:run
 curl localhost:8080/api/loans/statement/STUDENT</code></pre>
 
-<p data-i18n="workshop.build.2">
-  Nothing describes what that method should do except the tests. They are tagged, so the normal build
-  stays green and they only run when you ask for them. Read them as the requirement: what the
-  statement totals, what it counts, how it splits the money per media, and what it does with a loan
-  still inside its grace period, a lost item, and a tier that owes nothing.
+<p data-i18n="workshop.two-jobs.3">
+  In the second, nothing is failing, because nothing has been built. Compile step 2 all the way down
+  to a native executable. That needs a GraalVM JDK on your <code>PATH</code>. Each attempt costs
+  minutes, which makes it the worst place in this kata to guess, so plan it first. It compiles, it
+  starts, and where the flag should be it prints a miss. Your plan was a piece short, and the image
+  is the thing that tells you which piece.
 </p>
 
-<pre><code>mvn test -Pchallenge</code></pre>
+<pre><code>cd ../kata-native/kata/step2/java
+mvn -Pnative native:compile
+SERVER_PORT=8081 ./target/kata-agentic-java-step2</code></pre>
 
-<p data-i18n="workshop.build.3">
-  Plan it before you write it. Read the failing tests, then ask your agent in plan mode for a plan
-  covering the whole spec, and check that plan against the tests yourself. Planning first is what
-  keeps an agent from solving the first assertion and calling it done. Approve the plan, let it
-  implement, and stop when <code>mvn test -Pchallenge</code> is green. Then call the endpoint again:
-  it answers with the totals and the code.
-</p>
+<aside data-audience="self" data-i18n="workshop.two-jobs.4">
+  <p>
+    If a run stalls, cut the goal down. Take the one failing test, or the one line the image
+    printed, and hand that back on its own.
+  </p>
+</aside>
 
-<h2 data-i18n="workshop.native.heading">The fifth resists a one-shot</h2>
-
-<p data-i18n="workshop.native.1">
-  The fourth flag added code that was missing. This one asks for something larger and of a different
-  kind again: step 2's application, compiled all the way down to a native executable. It is the goals
-  unit taken to its end, an outcome you hand over and nothing smaller. Boot's parent pom already
-  carries the profile that builds one, so there is nothing to assemble first. What you do need is a
-  GraalVM JDK on your PATH, and the minutes it takes to compile.
-</p>
-
-<p data-i18n="workshop.native.2">
-  Do not one-shot it. A native build is the long-running kind
-  <a href="/steps/step2/goals">the goals unit</a> described, minutes each, which makes it the wrong
-  place to guess and retry. Plan it first. Open plan mode and have your agent work out what inside a
-  native image might not survive the move, and how you would find out.
-  Read that plan, then spend the minutes once, ideally in a git worktree so your branch stays yours.
-</p>
-
-<pre><code>mvn -Pnative native:compile</code></pre>
-
-<p data-i18n="workshop.native.3">
-  The plan will still be a piece short, and the image will tell you which. It compiles, it starts, and
-  in place of the flag it prints a miss: the code lives in a resource, and a native image keeps only
-  the resources it is told to keep, so the plain build drops it. That miss is your real spec. Read it,
-  plan the fix it points at, a resource hint that keeps the file in the image, and build once more.
-</p>
-
-<pre><code>./target/kata-agentic-java-step2</code></pre>
-
-<p data-i18n="workshop.native.4">
-  No profile prints this flag and no ordinary <code>mvn spring-boot:run</code> does either. It lives
-  only in the log of a native image that was built for step 2 and told to keep its resource. Get there
-  and the first lines it logs carry the code.
-</p>
-
-<h2 data-i18n="workshop.collect.heading">Collect the flags</h2>
+<h2 data-i18n="workshop.collect.heading">The board</h2>
 
 <p data-i18n="workshop.collect.1">
-  Each flag your run prints goes in the matching box below. They are checked here in the browser, so
-  this half works with the backend down. The flags are English whichever language you are reading in,
-  like every answer this course asks you to type. Paste one in, and if it is the real one the box
-  turns green and stays that way.
+  Each flag your run printed goes in the box beside its name, in English whichever language you are
+  reading in.
 </p>
 
-<p data-i18n="workshop.collect.2">
+<!-- The flag board, registered under this name in steps/step2/index.tsx. It grades in the browser
+     against a salted hash, so nothing on this page talks to the service, and every row it turns
+     green lights a pip in the run sheet above. -->
+<div data-figure="flag-board"></div>
+
+<h2 data-i18n="workshop.debrief.heading">Debrief</h2>
+
+<p data-i18n="workshop.debrief.1">
+  Five green rows say the code is right. They say nothing about how you got there, because a process
+  leaves no exit code. Go and look.
+</p>
+
+<!-- Filled by the Debrief element registered under this name in steps/step2/index.tsx. Three moves,
+     none of them worth a flag, and the last one writes back into the skill the pre-flight opened. -->
+<div data-figure="debrief"></div>
+
+<p data-i18n="workshop.debrief.2">
   That is the step. What is left is not about the agent at all: what changes around the work when
   this is how the work gets done. <a href="/steps/step3/change">Step 3</a> is that.
 </p>
-
-<aside data-audience="self" data-i18n="workshop.collect.3">
-  <p>
-    If you get stuck, the honest move is the one the <a href="/steps/step2/goals">goals</a> unit
-    named: give the agent the goal and the command that checks it, run it in a git worktree, and read
-    the diff it comes back with rather than the report.
-  </p>
-</aside>

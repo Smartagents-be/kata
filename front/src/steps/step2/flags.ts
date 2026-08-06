@@ -13,6 +13,12 @@
  */
 export const FLAG_SALT = 'kata-step2-loans-v1'
 
+/**
+ * Where the board keeps what this browser has solved. Exported because two components read it: the
+ * board writes it, and `RunSheet` reads it to fill its pips. One constant, so the two cannot drift.
+ */
+export const FLAGS_STORAGE_KEY = 'kata.step2.flags'
+
 export interface FlagSpec {
   /** Stable id, used to build element ids and to remember which flags are solved. */
   id: string

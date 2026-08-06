@@ -10,6 +10,7 @@ import { LoopsPerHour } from './LoopsPerHour'
 import { ModelRelay } from './ModelRelay'
 import { ProjectTree } from './ProjectTree'
 import { ReadEachTime } from './ReadEachTime'
+import { RunSheet } from './RunSheet'
 import { ScriptRuns } from './ScriptRuns'
 import { SkillShape } from './SkillShape'
 import { SkillTree } from './SkillTree'
@@ -26,11 +27,12 @@ import { WorktreeEach } from './WorktreeEach'
  * owns the bare `deck-<unit>` names; `workshop` exists in both steps, so the prefix is what keeps
  * the blocks apart.
  *
- * Kept off on purpose: `SetupFlags`, `Workshop` and `WhereWouldItGo` write progress to
- * localStorage, so on a slide they would tick the tutor's machine, and `AuditExample` only earns
- * its toggle beside the paragraph that reads it. The exercises those boards carry get a statement
- * naming what the student does, never what they find: the three setup files stay unnamed, and the
- * workshop's five flags are named by shape only.
+ * Kept off on purpose: `SetupFlags`, `Workshop`, `WhereWouldItGo`, `Preflight` and `Debrief` write
+ * progress to localStorage, so on a slide they would tick the tutor's machine, and `AuditExample`
+ * only earns its toggle beside the paragraph that reads it. The exercises those boards carry get a
+ * statement naming what the student does, never what they find: the three setup files stay unnamed,
+ * and the workshop's five flags are named by shape only. `RunSheet` is the one workshop element on
+ * the board, because it stores nothing and it is the capstone's map rather than any part of it.
  *
  * `LoopInWindow` is off the board for a reason of its own rather than by oversight. It argues what
  * its slide's title already says, and that slide's three points are the recovery moves, which the
@@ -571,6 +573,36 @@ const deck: SlideSpec[] = [
     eyebrow: 'step.title',
     title: 'workshop.title',
     points: ['deck.workshop.divider.1', 'deck.workshop.divider.2', 'deck.workshop.divider.3'],
+  },
+  // The house rule the capstone is built on, and the only slide in the step aimed at what the
+  // student may not do. It goes ahead of the map, because the map is five stages of somebody else
+  // typing.
+  {
+    id: 'deck-step2-workshop-rule',
+    kind: 'statement',
+    ns: 'step2',
+    eyebrow: 'workshop.title',
+    title: 'deck.workshop.rule.title',
+    note: 'deck.workshop.rule.note',
+  },
+  // The one workshop element that is safe on a slide: `RunSheet` writes no progress, unlike the
+  // board and the two cards around it, so a room can look at the whole capstone at once.
+  {
+    id: 'deck-step2-workshop-sheet',
+    kind: 'figure',
+    ns: 'step2',
+    eyebrow: 'workshop.title',
+    title: 'deck.workshop.sheet.title',
+    // `live={false}`: the pips read the viewer's own collection, and the viewer here is the tutor.
+    figure: <RunSheet live={false} />,
+    // Fitted rather than chosen, and height is the binding constraint: the drawing measures 722px
+    // tall at any layout width from 1000 to 1200, against 755 of room under a `top` heading, so 1.04
+    // is the ceiling and this sits just under it. Above that `SlideFigure`'s overflow clips, and
+    // what it takes first is the two `no flag` stages the figure argues from. `figureWidth` buys
+    // back some of the frame's width without touching the type size, which stays what it is: this
+    // is a dense drawing and it cannot be a large one. Re-measure both if a stage gains a line.
+    scale: 1.03,
+    figureWidth: 1100,
   },
   {
     id: 'deck-step2-workshop-flags',

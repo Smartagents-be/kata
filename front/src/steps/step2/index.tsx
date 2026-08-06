@@ -4,6 +4,7 @@ import deck from './deck'
 import { AgentsAtOnce } from './AgentsAtOnce'
 import { AuditExample } from './AuditExample'
 import { CountTheDay } from './CountTheDay'
+import { Debrief } from './Debrief'
 import { DomainTree } from './DomainTree'
 import { FifteenMinutes } from './FifteenMinutes'
 import { FlowDiagram } from './FlowDiagram'
@@ -13,8 +14,10 @@ import { IterationPaths } from './IterationPaths'
 import { LoopInWindow } from './LoopInWindow'
 import { LoopsPerHour } from './LoopsPerHour'
 import { ModelRelay } from './ModelRelay'
+import { Preflight } from './Preflight'
 import { ProjectTree } from './ProjectTree'
 import { ReadEachTime } from './ReadEachTime'
+import { RunSheet } from './RunSheet'
 import { SameEveryRun } from './SameEveryRun'
 import { ScriptRuns } from './ScriptRuns'
 import { SetupFlags } from './SetupFlags'
@@ -53,6 +56,9 @@ import workshop from './units/workshop.html?raw'
  * carry a quiz; and `setup` and the closing `workshop` unit each carry a flag board, which is why
  * this registry is .tsx. Both boards are browser-graded, so the step still talks to the service
  * only through the `mvn verify -Pgraded` run the student does outside the app.
+ *
+ * `workshop` is the odd one: it is a run rather than a page, so it holds two ungraded cards and the
+ * board as inline figures and closes on none of them.
  */
 const step2: Step = {
   id: 'step2',
@@ -240,8 +246,8 @@ const step2: Step = {
       title: 'goals.title',
       html: goals,
       // Four slots, one per expensive move the unit surveys. `window-spend` sits under the lead
-      // because the tail of a window is what two later sections lean on, and it is the only figure
-      // in the step read forwards. The other three close the section that argues them, and none of
+      // because the tail of a window is what two later sections lean on, so it is the one figure in
+      // this unit read forwards. The other three close the section that argues them, and none of
       // them is read back by prose, so each carries its argument in its own labels.
       inlineFigures: {
         'window-spend': <WindowSpend />,
@@ -257,9 +263,21 @@ const step2: Step = {
       id: 'workshop',
       title: 'workshop.title',
       html: workshop,
-      // The flag board sits under the prose. It grades in the browser, so it is a figure rather
-      // than an exerciseId (which would post to the service the step deliberately does not use).
-      figure: <Workshop />,
+      // Four slots and no closing `figure`, because the capstone is a run rather than a page with
+      // an exercise under it. `run-sheet` opens it and is read forwards: the sections below work
+      // its stages in order, with the two it draws side by side sharing one section because they
+      // run at once. Then one element per stage that produces something other than a flag, and the
+      // board where the flags land. Guided mode drops every run of prose, so in class the page is
+      // exactly this: the map, the two cards and the board, and the map is what carries the
+      // commands the prose would have.
+      inlineFigures: {
+        'run-sheet': <RunSheet />,
+        preflight: <Preflight />,
+        // Graded in the browser against a salted hash, which is why it is a figure rather than an
+        // exerciseId: an exerciseId would post to the service this step deliberately does not use.
+        'flag-board': <Workshop />,
+        debrief: <Debrief />,
+      },
     },
   ],
   // What the tutor puts on the board for this step. Authored in `deck.tsx`, beside the figures it

@@ -159,7 +159,10 @@ exercise already done.
   `kata/step1/front/`, under the same prohibitions and for the same reason: that page assembles it
   in the browser so it cannot be read out of the file, which is the exercise.
 - **step 2** — do not harden the loans module, do not implement `MemberStatements.forTier`, and do
-  not add a `native` profile or write the resource hint. The project also carries **three plaintext
+  not add a `native` profile or write the resource hint. **Do not decide what a `MemberTier.PARTNER`
+  loan costs either**, and do not name that constant in any file a student's agent loads: it is a
+  deliberate gap planted for the capstone's `## Gaps` rule to catch, and the reasoning is in
+  `front/src/steps/step2/CLAUDE.md` beside the card that sets the rule. The project also carries **three plaintext
   setup flags**, one in its own `.claude` skill, one in its `CLAUDE.md` and one in the `domain`
   package's: do not gather them anywhere, and do not name those three files in the `setup` unit's
   prose or in a board hint. Finding out that a project holds files like that is the exercise.

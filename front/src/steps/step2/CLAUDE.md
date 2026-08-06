@@ -39,16 +39,21 @@ owns the bar in the build, `patterns` owns turning a repeated correction into a 
 `CLAUDE.md`, and `goals` owns the check that answers yes or no. **Over-commenting and under-logging
 is the one argument that had no second home**, and it survives nowhere in the course: neither term
 is in a unit, in a board hint or in a skill file, in either language. The proxy trap went the other
-way and has three homes, `workshop.honest.1`, `engineering.quality-gates.1` and
-`workshop.flag.honest.help`, so it needs no fourth. That is the thing to notice before writing a
-section about metrics anywhere in the step. **`engineering.quality-gates.1` now closes on the trap**, two sentences
-saying a metric is a proxy an agent will satisfy and that the gate worth wiring in is the expensive
-one to fake. It carries no example on purpose: `workshop.honest.1` keeps the hundred percent of lines
-under tests asserting nothing, and the mutation answer to it, so keep the plant and the payoff apart.
+way and has two homes now, `engineering.quality-gates.1` and `workshop.flag.honest.help`, so it
+needs no third. That is the thing to notice before writing a section about metrics anywhere in the
+step. **`engineering.quality-gates.1` carries the claim**, two sentences saying a metric is a proxy
+an agent will satisfy and that the gate worth wiring in is the expensive one to fake, and it carries
+no example on purpose. **The example is now behind the board's Hint**, in
+`workshop.flag.honest.help`, which is the moment a student has a row that will not move and wants it.
+The capstone's prose deliberately does not spell it out: `workshop.goal.2` says only that one of the
+three will not fall to more tests, because the whole reason the honest flag exists is that the
+student finds out why, and a page that explains the trap before the run springs it on nobody. The
+old `workshop.honest.1` and `.2` did explain it, and cutting them is the change to know about before
+writing prose about mutation anywhere in this unit.
 Three references were repointed in the same change rather than left
-dangling: `workshop.lead.1` names `engineering` and `goals`, `workshop.lead.2` says "the kind of code
-a quality gate exists for" instead of naming the unit, and `step3`'s
-`change.you-test-engineer.2` links to `engineering`.
+dangling: `workshop.lead.2` says "the kind of code a quality gate exists for" instead of naming the
+unit, `step3`'s `change.you-test-engineer.2` links to `engineering`, and the capstone's pointer at
+`engineering` and `goals` is now a chip in `RunSheet` rather than a link in `workshop.lead.1`.
 Its prose closes by handing off to `setup` by name, so a reordering there has to visit that
 paragraph. Below that prose sits the step's only *ungraded* exercise, under the same `<hr>`
 and "Test yourself" heading step 1's `tools` uses: fifteen minutes on the clock, one of three
@@ -782,34 +787,162 @@ The quiz is the step's second and is in `quiz.ts` beside `workflowsQuiz`. One qu
 move that has a wrong branch, so the relay has none, on the same reasoning that leaves spec-driven
 out of the `workflows` quiz.
 
-A tenth unit, `workshop`, closes the step as its capstone. It is the one part of step 2 a machine
-can grade, because it grades the thing `engineering` and `goals` argue for: a goal a build answers
-yes or no to. **`workshop.lead.1` names those two units rather than counting back to them**, and that
-is a correction rather than a style choice: it read "the last two units" until `enablement` landed
-between `workflows` and `goals`, at which point the count pointed at a unit that argues neither the
-bar nor the goal. It named `quality` until that unit was cut, and it has also **stopped counting the
-habits** for the same reason the positional reference went: "the six habits" was a number an
-insertion or a cut could falsify silently, and cutting `quality` did. Positional references to
-neighbouring units break silently on an insertion, so
-name the unit. **`goals` closes by naming this unit back**, and where that sentence sits moved when
-`goals` was rewritten: it was the end of `goals.own-worktree.2`, and it is now the end of
-`goals.left-with.1`, which is the last paragraph of the unit. What is load bearing is the pair
-rather than its address, so a rewrite of either end has to leave the other pointing at something.
-It ships a small loans domain in `kata/step2/java` that is green but un-hardened, and
-a `graded` Maven profile that measures it against three goals - a coverage floor, a complexity
-ceiling and honest (mutation-tested) coverage. `mvn verify -Pgraded` prints a leetspoken flag for
-each goal met and fails until all three are. The student hardens the module (that is the exercise,
-so do not ship the tests or the refactor), reads the flags, and pastes them into the `workshop`
-flag board.
+A tenth unit, `workshop`, closes the step as its capstone, and **it is a run rather than a page**.
+That is the shape to hold on to before editing anything in it. The page is not five flags described
+one after another; it is five stages a student works in order, and the flags fall out of three of
+them. The rewrite that made it one is recorded below, along with what the old shape got right, so
+nobody restores half of either.
 
-**The capstone carries no figure, and that is a decision rather than a gap.** The honest flag exists
-so the student *discovers* that assertion-free tests hold a coverage bar green, and any drawing
-measuring a hundred percent of the lines against a mutation score hands them that discovery above the
-board, before they have run anything. The same reasoning rules out a quiz (five hash-checked flags
-already grade the work, so a question would grade whether the page was read) and a `TaskCard` (the
-whole page is one instruction set ending in the board, and its two ungraded moves are plan mode
-before the statement and plan mode before the native build, which are both better as a sentence than
-as a tick).
+**One rule carries the page, and it is `workshop.lead.1`: the student writes none of the code.** Not
+the tests, not the refactor, not the missing method, not the build wiring. What is left for them is
+the three things the step spent nine units on, setting the project up, saying what has to be true,
+and reading what came back. Nothing enforces it and nothing can, which is the point: it is a
+constraint the student holds themselves to, and every stage under it is written as work you hand
+over. A move that asks the student to type Java is the one kind of move this page may not grow.
+
+The five stages are `Pre-flight`, `One goal, three flags`, the two inside `Two jobs, neither waits`,
+and `Debrief`, with `Collect the flags` and the board between the last two. Four `<h2>`s for five
+stages, because the pair shares a section: that is the point of the pair and not a mismatch to tidy.
+**The escalation is the argument**: nothing handed over, then one outcome you walk away from, then
+two outcomes at once in two worktrees, then a pass that earns nothing. Pre-flight and the debrief
+are the stages with no flag, and that absence is deliberate on both ends: the work step 2 actually
+teaches is the part no build pays out for.
+
+**The capstone now carries a figure, `RunSheet`, and that reverses a recorded decision.** The old
+record said it carried none, on the grounds that any drawing measuring a hundred percent of the
+lines against a mutation score hands the student the honest-coverage discovery above the board.
+That reasoning is intact and `RunSheet` does not break it: the drawing is the five stages, what you
+hand over at each, the command that answers, and how many flags fall out, and it names no gate and
+no number. A figure of the *gates* is still forbidden here for exactly the old reason. What the
+drawing buys is the thing prose could not: **in guided mode every run of prose is dropped**, and
+before this the class was left with a heading, a board and no capstone at all.
+
+Six things inside it are load bearing, and four of them were arrived at by cutting a worse version.
+**A border means containment and nothing else, so only the third stage has one.** Stages one, two and
+four are rows on the figure's own ground, and the stage that holds two jobs is a frame around them,
+which is `FlowDiagram`'s rule from `workflows` (the project is always a frame, never a box) applied
+here. Boxing all four made the frame read as the tall row rather than as the one stage holding
+others, and that was most of what made the drawing read as a table with a picture in it.
+
+**The third stage is a frame with the two jobs inside it, and that frame is the drawing**:
+one stage holding two boxes is what "at once" looks like, and it is `FlowDiagram`'s own vocabulary
+from `workflows`, where the project is always a frame and what changes is what sits inside. Two
+versions failed here and neither may come back. The first indented the pair under a teal hairline,
+which reads as subordination and rests the argument on a 1.7:1 rule. The second put them in a bare
+two-column grid whose gap matched the column gap, so nothing said they shared a slot, and under `sm`
+they stacked into exactly the list `IterationPaths` was drawn as one SVG to avoid. The frame survives
+stacking, which is the whole reason it is a frame.
+
+**The stage numbers are the page's `<h2>`s and stop at four**, with the two jobs named and unnumbered
+because they are one stage, and the stage names are the headings word for word so the map and the
+page cannot drift. `The board` gets no row on purpose: it is not a stage, it is where three of them
+pay out, which is what the pips say. **Teal is a flag collected and nothing else is teal**: structure
+is geometry, colour is progress, which is what lets that rule hold once the numerals are muted and
+the pair's grouping is a plain frame. Pips sit on a stage and never on a job, so flags are counted at
+one level, and the two unpaid stages say `no flag` in words rather than showing empty pips, which
+would read as a stage the student failed. **The pips are live**, filling as the board below turns
+green; `FLAGS_CHANGED_EVENT` on `FlagBoard` carries it, the figure reads the board's key and writes
+nothing, and `live={false}` on the slide keeps a tutor's own collection off the projector.
+
+**Each stage names the units it draws on**, which is what makes the page a capstone rather than a
+sixth exercise: between them they name all nine, beside the stage where each is used. **Every chip
+has to be a unit the stage genuinely runs.** Three were cut for failing that: `evolution` on the
+native row, whose lesson that stage suspends; `enablement` on the endpoint row, which was one `curl`;
+and `evolution` again on the goal row, where it was crediting that unit for a sentence `goals` wrote.
+A chip that only looks apt is the next one to go. They are plain text and **not links**: a dozen
+router links inside one figure took the first dozen tab stops on the page and would have been a way
+out of the deck, so the prose keeps the two links that matter (`goals` in `workshop.goal.1`, `setup`
+in `workshop.pre-flight.2`) and the chips do the naming.
+
+**Two ungraded `TaskCard`s now sit in it, `Preflight` and `Debrief`, and that reverses the other
+recorded decision.** The old record ruled a card out because the whole page was one instruction set
+ending in the board, which was true of the old page and is not true of this one: the run has a stage
+before the first flag and a stage after the last, and neither is graded by anything. A page of prose
+asking for them is a page a student skips on the way to the goal. What they hold is the step's own
+habits made into moves. `Preflight` runs five: see the check answer, put it in `CLAUDE.md`, wire the
+same command as a Stop hook, add the `## Gaps` rule, and put the house test style in a skill. Three
+of those are `setup`'s and one is `steering`'s. `Debrief` runs three, and they are `workflows` (the
+audit turned on the student's own diff, closing its worst row rather than filing it), `enablement`
+(count where the afternoon went) and `patterns`.
+
+**The hook is the move worth defending.** `engineering.quality-gates.2` describes exactly it, a hook
+that fires once the agent says it is finished, and nothing in the step ever asked a student to write
+one, so this is the only place in the course where they do. Having the `CLAUDE.md` line *and* the
+hook on one card is the pair `setup.hooks.2` argues, a line that asks beside a script that happens,
+and not a duplication to trim.
+
+**The `skill` move is `setup`'s and not `patterns`'s, and the wording is what keeps it so.** It asks
+for the convention this project already uses, which is writing down a decision somebody already made.
+Asking for a skill in anticipation of a correction would contradict `setup.skills.5` and
+`patterns.lead.1` in the same breath, and an earlier draft of the card did exactly that.
+
+**The `## Gaps` move has something to catch, and what it catches is planted.** A standing rule
+nothing ever triggers is a rule a student writes down and never sees work, which is what the
+capstone was missing: `steering`'s in-flight moves belong to its own card, but the gap rule is
+written here and had nothing to fire on, because nothing in the graded path was undecided.
+`MemberTier.PARTNER` is what fixes that. It is a fifth constant with a Javadoc saying partners lend
+on a rate negotiated with the partner rather than the public one, **and that the arrangement is not
+written down in this repository**. It adds no branch to `assess`, so the coverage floor, the
+complexity ceiling and the mutation score are all untouched, and no test names it. What it does is
+put a cell in the tier table an agent cannot fill honestly: the code answers (no grace, no
+discount, capped), the Javadoc says that answer is the wrong rate, and nothing reconciles them. An
+agent with the rule stops and asks. An agent without it asserts the accidental behaviour and moves
+on, which is the whole demonstration.
+
+**Do not resolve it, and do not name it anywhere a student's agent reads.** Not in
+`kata/step2/java/CLAUDE.md`, not in the `domain` package's briefing, not in a test, and not in the
+`workshop` prose or a board hint. It is documented here for the same reason step 1's flag design is
+documented on this side: a file under `kata/step2/java/` is one a student's agent opens on its own,
+and a note there hands the exercise over before the first prompt. The page sets it up by asking for
+the rule and stops.
+
+**The `skill` move and the `keep` move are one loop and must stay a pair.** Pre-flight opens the
+skill from what the project already decided, the run gives it an afternoon of corrections, and the
+debrief writes those back into it. That is `patterns`'s skill iteration performed across a capstone
+instead of described in a section, and it is the only place in the course where a student runs both
+halves of it. Cut either move and the other is a chore. The card descriptions carry a second small
+loop of the same kind: `set-up-first.description` tells the student to note the time they start,
+which is the only thing that makes `look-at-afternoon`'s `count` move answerable.
+
+**Pre-flight's `red` move is the one to defend hardest.** Running `mvn verify -Pgraded` once on the
+untouched module prints three locked rows with the numbers the student is short of, measured and
+verified: `39.0% >= 90.0%`, `worst method 21 <= 10`, `42.4% >= 80.0%`. (The first of those was 38.2%
+before `MemberTier.PARTNER` landed: a new enum constant is a covered line in `<clinit>`. The gate is
+untouched, the printed number is not, so re-measure it here rather than trusting this sentence.) That output is a better brief
+than the page could write, and having the machine give it is `evolution`'s walking skeleton applied
+to the exercise: the check runs end to end before any work exists. It is also what lets the prose
+stop describing the gates one by one, which is most of where the page's word count went.
+
+The prose is 1170 words down to about 640, and **the per-flag detail moved onto the board rather
+than being cut**, so the honest figure for what a student reads is nearer a third off than a half:
+about 270 words moved into the card labels, the row hints and the help dialogs. Each flag's `hint` says what earns it and each `help` dialog says how to hand it over
+and which unit argues that shape. That is the trade the rewrite is built on: a student reading the
+page sees the run, and a student stuck on one row opens that row. Do not move the detail back into
+prose; the page is short because the board is doing the work.
+
+**The figure carries every command the page issues, `cd`s included, and that is a requirement
+rather than a nicety.** Guided mode drops every `<pre>` along with the prose, so a command that is
+only in a `<pre>` is a command a class cannot see. The `cd`s are the part that is easy to think is
+navigation and is not: `cd ../../..` decides whether the worktrees land beside the repository or
+inside it, and the two job `cd`s are the only thing making "one worktree each" true rather than two
+builds in one `target/`. A version of the figure that left them out put both of those bugs back for
+the one audience with no paragraph to fall back on. Add a command to this page and it goes in
+`RunSheet` too, or the class loses it.
+
+**Still no quiz, and the old reasoning stands unchanged.** Five hash-checked flags already grade the
+work, so a question would grade whether the page was read.
+
+Everything the machine does is unchanged by the rewrite, on purpose. The same five flags, the same
+salted hashes in `flags.ts`, the same `graded` and `challenge` profiles, the same endpoint and the
+same native image. The revision was about how the work is handed over, which is what step 2 is about,
+and re-cutting the Java would have thrown away the one part of the step a machine can grade to buy
+nothing.
+
+It ships a small loans domain in `kata/step2/java` that is green but un-hardened, and a `graded`
+Maven profile that measures it against three goals: a coverage floor, a complexity ceiling and
+honest (mutation-tested) coverage. `mvn verify -Pgraded` prints a leetspoken flag for each goal met
+and fails until all three are. The student hardens the module (that is the exercise, so do not ship
+the tests or the refactor), reads the flags, and pastes them into the `workshop` flag board.
 
 The board carries a **fourth flag of a different shape**. The first three sharpen code that already
 runs; this one is functionality that does not exist yet. `MemberStatements.forTier` ships
@@ -829,18 +962,64 @@ about resources starts, cannot find it, and prints a miss instead of the code. *
 `spring-boot-starter-parent:4.1.0` ships its own `native` profile, so `mvn -Pnative native:compile`
 compiles this project with no pom change at all: verified on GraalVM 25.0.3, under a minute, and the
 binary starts and prints the miss. What is left is reading that runtime miss as the spec for the fix,
-which is the plan-worthy step the unit tells them to work in plan mode. `workshop.native.1` and `.2`
-claimed the wiring was the student's and were corrected in the same pass, along with
-`workshop.flag.native.help`.
+which is the plan-worthy step the unit tells them to work in plan mode. `workshop.side-by-side.3`
+carries that whole argument in one paragraph now, and it is where the correction to the old
+`workshop.native.1` and `.2` (which claimed the wiring was the student's) survives.
 
-There used to be a third, and it is worth knowing why it went. Step 1 and step 2 once shared one
-Maven module, so the Boot plugin pinned `<mainClass>` to `Step1Application` and a naive native build
-compiled the wrong step; aiming it at step 2 was an obstacle in its own right. Splitting the steps
-into their own projects removed it, since `kata/step2/java` holds one main class and the build finds
-it. The `workshop` unit was rewritten to stop claiming otherwise. **If the exercise wants a third
-obstacle back, it needs a new one rather than that sentence.**
+**Those two flags are the pair the `two-jobs` stage exists for**, and the reason they may be run at
+once is genuine rather than staged: the challenge lives in `application/` and `web/`, the image lives
+in the build and `aot/`, and neither job touches the other's files. What they cannot share is a
+folder, because two Maven builds in one `target/` fight over it, and **that is the one concrete
+reason the worktrees are needed here**, so the paragraph states it rather than asserting isolation in
+the abstract. If a future exercise makes the two jobs overlap, the stage loses its argument and the
+side-by-side row in `RunSheet` goes with it. The cost the stage closes on is `steering`'s, two diffs
+arriving together and your reading being the bottleneck, and it is deliberately half a sentence
+rather than an argument: `steering` owns it, and `parallel`'s aside owns the attention half.
+
+**Three things about the commands in that stage are load bearing, and each of them was a bug
+first.** The `git` lines are the one exception to "every command runs from `kata/step2/java`", and
+the page says so: left unqualified they resolve to `kata/step2/kata-statement`, which plants two full
+checkouts of this repository inside the working tree. So the worktree `<pre>` runs `cd ../../..` and
+stops there, and **each job's own `<pre>` opens with its own `cd` from the repository root**, because
+a single trailing `cd` put both jobs in the statement worktree and straight back into the one
+`target/` the paragraph above had just said they could not share. And the native binary starts with
+`SERVER_PORT=8081`, because it is a Boot web app and the statement job is holding 8080 while it runs;
+the page tells the student to run these two at once, so the collision is the page's to prevent. It is
+an environment prefix rather than `--server.port=8081` for a reason that is only visible on screen:
+a browser takes a line break after a hyphen, and the flag split across two lines in the middle of
+`RunSheet`. `steering.worktree-each`'s identical `<pre>` needs none of this, because that unit never
+says where the reader is standing.
+
+There used to be a third obstacle on the native flag, and it is worth knowing why it went. Step 1 and
+step 2 once shared one Maven module, so the Boot plugin pinned `<mainClass>` to `Step1Application`
+and a naive native build compiled the wrong step; aiming it at step 2 was an obstacle in its own
+right. Splitting the steps into their own projects removed it, since `kata/step2/java` holds one main
+class and the build finds it. **If the exercise wants a third obstacle back, it needs a new one
+rather than that sentence.**
 
 **Do not add a `native` profile to `kata/step2/java/pom.xml`, and do not write the resource hint or a
 `RuntimeHintsRegistrar`**: wiring the build and planning the hint are the exercise. Do not spell out
 the fix here either; the runtime miss is what the student is meant to read.
 
+**`goals` closes by naming this unit back**, at the end of `goals.left-with.1`, which is the last
+paragraph of that unit. What is load bearing is the pair rather than its address, so a rewrite of
+either end has to leave the other pointing at something. The other end moved in this rewrite:
+`workshop.lead.1` is now the house rule and names no unit, and the pointers it used to carry are the
+`RunSheet` chips.
+
+The section keys were renamed with the sections, so anything written against the old page is looking
+for keys that are gone: `workshop.goals.*`, `workshop.honest.*`, `workshop.build.*` and
+`workshop.native.*` are now `workshop.pre-flight.*`, `workshop.goal.*` and `workshop.two-jobs.*`, and
+`workshop.collect.2` is `workshop.debrief.2`. The self aside moved with them, from the end of the
+page to the end of `two-jobs`, which is where a stuck student actually is, and it now gives a move
+the page does not already give (narrow the goal to the one number you are short of) rather than
+repeating `goals`. The two cards' own key families are `set-up-first.*` and `look-at-afternoon.*`,
+named for the task rather than for the section, on the rule every other card in the course follows:
+prefixes matching the `<h2>` above them printed the heading twice in guided mode, where the prose is
+gone and the card's title is all that is left.
+
+The deck gained two slides in the same change, `deck-step2-workshop-rule` (the house rule, as a
+statement) and `deck-step2-workshop-sheet` (`RunSheet` at 1.03, height-fitted). **`RunSheet` is the only workshop
+element that may go on a slide**, and the reason is the deck's own rule: the board and both cards
+write to localStorage, so on a projector they would tick the tutor's machine. The drawing stores
+nothing.

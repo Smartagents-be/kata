@@ -60,6 +60,15 @@ function writeSolved(storageKey: string, solved: Set<string>) {
 }
 
 /**
+ * Fired on `window` whenever a row goes green, carrying the storage key that changed. The board
+ * still owns the progress and still writes it to localStorage; this only lets something else on the
+ * same page notice. `RunSheet` is the one listener, and it re-reads the key rather than trusting the
+ * event's payload, so a listener can never end up holding a different set from the board. The
+ * `storage` event would not do this job: it fires in *other* tabs only.
+ */
+export const FLAGS_CHANGED_EVENT = 'kata:flags-changed'
+
+/**
  * A board of flags, graded in the browser against a salted hash so it works with the backend down.
  * Nothing here talks to the service: the work already happened outside the app, and the board only
  * confirms the student read what it produced.
@@ -73,6 +82,7 @@ export function FlagBoard({ block, storageKey, salt, flags, panel }: FlagBoardPr
     setSolved((current) => {
       const next = new Set(current).add(id)
       writeSolved(storageKey, next)
+      window.dispatchEvent(new CustomEvent(FLAGS_CHANGED_EVENT, { detail: storageKey }))
       return next
     })
   }

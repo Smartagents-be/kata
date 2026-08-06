@@ -5,5 +5,10 @@ public enum MemberTier {
     STANDARD,
     STUDENT,
     SENIOR,
-    STAFF
+    STAFF,
+    /**
+     * Partner institution, billed on a rate negotiated with it rather than on the public one. That
+     * arrangement is not written down in this repository.
+     */
+    PARTNER
 }

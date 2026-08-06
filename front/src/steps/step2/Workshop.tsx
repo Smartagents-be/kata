@@ -1,5 +1,5 @@
 import { FlagBoard } from './FlagBoard'
-import { FLAG_SALT, flags } from './flags'
+import { FLAGS_STORAGE_KEY, FLAG_SALT, flags } from './flags'
 
 /**
  * The workshop's flag board: one row per goal the `graded` build can answer yes or no to, plus the
@@ -11,7 +11,7 @@ export function Workshop() {
   return (
     <FlagBoard
       block="flags"
-      storageKey="kata.step2.flags"
+      storageKey={FLAGS_STORAGE_KEY}
       salt={FLAG_SALT}
       flags={flags}
       panel="workshop.panel"
