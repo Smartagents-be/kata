@@ -132,7 +132,7 @@ export function BudgetWindow() {
       </p>
 
       {checked && (
-        <PanelNote id="budget-window-verdict" tone={right ? 'success' : 'destructive'}>
+        <PanelNote id="budget-window-verdict" tone={right ? 'success' : 'destructive'} rule={false}>
           <span id="budget-window-verdict-line" data-component="BudgetWindow" className="block">
             {t(right ? 'budget.right' : 'budget.wrong', { picked: total, ideal: IDEAL })}
           </span>

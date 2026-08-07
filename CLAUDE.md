@@ -82,6 +82,8 @@ kata/
   step1/front/   one standalone page, no build and no server: the browser task's target
   step1/machine-context.mjs   the board's first flag comes from here: `install.txt` runs it, it
                  writes one line into the user-level instructions file, `remove` takes it out
+  step1/check-entry.mjs       scores `prompt`'s task over HTTP against the running service, and sits
+                 out here rather than in `java/` on purpose
   step2/java/    the loans domain, the graded and challenge profiles, the native-image flag
   step3/java/    an empty scaffold, buildable, kept as the template a Java step is copied from
 front/           the curriculum
@@ -152,6 +154,10 @@ exercise already done.
   the disclosure at its head comes before any step and must stay unmissable, and the removal command
   must stay in it. The script's safety rules are in `front/src/steps/step1/CLAUDE.md`, beside the
   board row.
+  **Do not implement `EntryController`**, whose empty body is `prompt`'s task, and **do not write
+  what it should do into any file under `kata/step1/java/`**: what it should do belongs on the page
+  that asks for it, and a student's agent works inside that project. The design notes for it are in
+  `front/src/steps/step1/CLAUDE.md`, beside the task, for the reason the flags' are.
   **Do not commit tracing** into the catalogue pipeline under `src/`
   (instrumenting it is each student's own work, and a seam left in the tree does it for all of
   them), and **do not commit a solution to `problem.md`**: no cut of it, no `solve.md`, no

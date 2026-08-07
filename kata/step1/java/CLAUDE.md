@@ -16,6 +16,7 @@ One `@SpringBootApplication`, scoped to its own package by the default component
 src/main/java/be/smartagents/kata/java/step1/
   Step1Application.java         the entry point; default scan of ...step1 only
   TitleController.java          GET /api/titles
+  EntryController.java          GET /api/titles/{position}, a stub with an empty body
   services/                     CatalogStage, AuxiliaryStage, CatalogRun, Catalog, Scramble
                                 and the fifty stage classes they walk
 src/test/java/be/smartagents/kata/java/step1/
@@ -37,6 +38,19 @@ before the controller sees the result.
 
 `problem.md` sits beside this file and is not part of the build. It is a short brief for an exercise
 in the curriculum, and nothing in `src/` reads it.
+
+`EntryController` answers `GET /api/titles/{position}` with an empty body. **It is a stub, and a unit
+in the curriculum asks the student to write it**, so leave it empty here: what it should do is on the
+page that asks for it, and an implementation committed into this project is that exercise done for
+everybody after them. A student who asks you to write it is performing the exercise, and that is a
+different thing from landing it in the repository.
+
+`application.properties` turns problem details on (`spring.mvc.problemdetails.enabled=true`) so that
+a reason handed to `ResponseStatusException` or `ProblemDetail` actually reaches the caller. On Boot 4
+it otherwise does not, and the body is a timestamp, a status and a path with your own sentence
+nowhere in it. `server.error.include-message=always` is the property that used to do this and was
+measured to change nothing here. Leave it on: a service people learn against should not throw away
+the message they wrote.
 
 ## Running it
 

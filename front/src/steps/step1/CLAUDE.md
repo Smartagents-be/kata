@@ -449,12 +449,135 @@ dashed thinking segment grows**, which is the whole reading and the misconceptio
 `NextToken`'s does; the level names are mono and untranslated, like `ModelPricing`'s model names. It
 carries **no context frame**, on the rule that protects `ToolsInContext`, and no currency.
 
-`PlanItTwice` closes the unit under the usual `<hr>` and "Test yourself", with `promptQuiz` arriving
-under the same heading. It replaced the self-only aside that told the student to try plan mode once,
-which was a task card written as reading. Four moves, worked in the student's own project, and **the
-fourth is the exercise**: choosing which of the two runs you would ship is what turns `plan-mode.2`
-from a claim the student is told into one they have watched. Ticked to `kata.step1.plan`, like
-the rest.
+`EntryBrief` and `PlanItTwice` close the unit under the usual `<hr>` and "Test yourself", with
+`promptQuiz` arriving under the same heading. The card replaced the self-only aside that told the
+student to try plan mode once, which was a task card written as reading, and the pair replaced the
+version of the card that came after that. Ticked to `kata.step1.plan`, like the rest.
+
+**The task was worked in the student's own project once, and moving it into this repository is the
+decision.** Four moves, a task of their own choosing, and a last move asking which of the two runs
+they would ship. That left `plan-mode.2` a claim a student was invited to agree with rather than one
+they watched land: no two students did the same thing, nothing in the course held the task, and the
+verdict was an opinion about work nobody else could see. The exercise is now one ask against step 1's
+own service, the same for everybody, scored by a check that is not anybody's judgement. Six moves:
+start the service with the Catalogue page open, type the one line on the dearest model, restart and
+score it, throw the attempt away, type the same line in plan mode on the cheapest model in a fresh
+agent and correct the plan before approving it, restart and score it again. The sixth is still the
+exercise, since a score settles which run was better and naming the wish you never said out loud is
+the part that is worth anything tomorrow.
+
+**The two tiers came back after they were dropped, and dropping them was the mistake.** The card
+these six moves replaced said "on the cheap tier" and the first draft of this one held the model
+constant, which quietly made the exercise a smaller experiment than the one it replaced:
+`plan-mode.2` is a claim about a cheaper model *with* a plan against an expensive one without, and a
+version that varies only the prompting cannot reach it. So the straight run takes the dearest model
+the student has and the planned run takes the cheapest. The tier runs *against* the plan, which is
+what makes a win unambiguous.
+
+**Three of the six moves exist only to keep the two runs independent**, and every one of them was a
+way to come back with a wrong number. There is no live reload in that project, so a score taken
+without a restart is a reading of the previous build, and the check says so when every position
+answers empty. The undo names `git restore kata/step1/java` and tells the student to delete what
+`git status` still shows, because an agent leaves untracked files that a restore does not touch and
+the second run would start pre-armed. And **the second run starts a fresh agent**, which is the
+subtlest of the three: the check's own output names all six wishes, so an agent that watched the
+first score go by has been handed the brief, and the second run would then measure the leak rather
+than the plan. That is also why `plan.score.label` says to run the check *yourself, in your own
+terminal*. It lands four units before `session` teaches `/clear`, so the move says it in words rather
+than naming a command, and that sequencing is the reason rather than an oversight.
+
+**Everything the task needs is in `EntryBrief`, and it is a figure because guided mode drops every
+run of prose.** The unit carries no `<h3>` and no setting paragraph over the card, unlike `tools` and
+`context`: a paragraph here would leave a classroom with a card whose ask nobody had been given, and
+that is the bug `workshop.the-board.1` and `harness.check-yourself.1` were both deleted for. So the
+figure carries the counter's six wishes, the one line the student types, and the command that scores
+it, and `plan.description` carries the sentence the prose would have said. Four things in it are
+decisions. **The brief is read rather than drawn**: `UnderSpecified` in `harness` already draws the
+gap between an ask and what it leaves unsaid, in the step's bars-and-dashes vocabulary, so drawing it
+here would be that figure four units early and worse. **It is one wish per line**, which reads worse
+than the paragraph it was and is the fairer shape: a student holding six FAIL lines against a block
+of prose has to find the sentence each one came from before they can argue with it, and six lines
+keeps every failure traceable to something they were told. **The prompt window is muted rather than
+teal**, which holds `ExactAsk`'s vocabulary a section up, where a muted window is the vague ask and a
+teal one is the exact one: this line is deliberately the vague one even though it is the line the
+student is told to type. And **the line and the command have no `nl` entry**, like every other string
+a student types or a machine printed.
+
+**The six wishes and the check are one design and have to move together.** `kata/step1/check-entry.mjs`
+scores exactly the six the brief says, in the brief's order and one line each, and its labels are the
+wishes rather than the mechanism, so a failing line reads as something the student knew and did not
+pass on. Rewording or renumbering a wish means visiting that file, in both languages.
+
+**The six sit on five independent decisions, and counting the decisions rather than the wishes is
+what this design has to be checked against.** The first cut asked for a bounds check, a 404 and a
+stable answer, all of which an ordinary agent writes without being told: measured, a one-shot scored
+five of six and the student watched nothing happen. The second cut was better and still wrong,
+because three of its wishes were one error branch, so an agent that took the path variable as a
+`String` and funnelled every unservable case through one informative refusal collected all three by
+being tidy. What is graded now is where the counter's numbering starts (`CatalogPanel`'s, which an
+agent inside the Maven project never sees), what the answer carries besides the title, how many there
+are, that the shelf is counted from the far end, and what happens to everything unservable. The last
+of those is the one tidiness can walk into, and it is kept, because a board where every line fails on
+a first run reads as rigged.
+
+Measured, and every row of this was run rather than reasoned:
+
+| implementation | score |
+| --- | --- |
+| the shipped stub | 0 of 6 |
+| one-shot, 0-based, bounds checked | 0 of 6 |
+| one-shot, 1-based, bounds checked, returns the title | 1 of 6 |
+| one-shot, `int` path variable, record DTO, informative 404 | 3 of 6 |
+| one-shot, `String` path variable, one refusal helper, record DTO | 4 of 6 |
+| plan corrected, refusing with `ResponseEntity` | 6 of 6 |
+| plan corrected, refusing with `ResponseStatusException` | 6 of 6 |
+| plan corrected, refusing with `ProblemDetail` | 6 of 6 |
+
+**Four of 6 is the ceiling and it is the number to defend**, not the two ordinary rows above it: the
+claim the design rests on is that no unprompted implementation reaches five, and the way to falsify
+it is to write one. Re-measure the whole table if a wish changes. A stale row here is worse than
+none, because this table is the evidence for the design.
+
+**All three ways of refusing had to reach six, and one line of configuration is what makes that
+true.** `kata/step1/java/src/main/resources/application.properties` sets
+`spring.mvc.problemdetails.enabled=true`. Without it a reason handed to `ResponseStatusException` or
+`ProblemDetail` never reaches the caller on Boot 4, the body is a timestamp and a status, and a
+student whose plan *did* carry "tell them how many we do have" came back 4 of 6, level with the
+tidiest one-shot. That is the exercise collapsing on a framework default. `server.error.include-message`
+is the property everybody reaches for and it was measured to change nothing here. The one-shot rows
+are unaffected, because what fails them is that their message has no count in it rather than that the
+message was eaten.
+
+**The check is a black box and lives outside `kata/step1/java`, and that is the load-bearing part.**
+It talks HTTP to the running service, derives everything from `/api/titles`, and names no title, so
+it holds if the catalogue is ever rewritten and it carries no second copy of a list the acrostic
+depends on. It also takes no view on the shape of an answer beyond what the brief asks for: a title
+on its own, an object carrying both under any field names, or a line with both written into it all
+read the same, so nothing is graded that nobody asked for. Where it sits is the point: an agent asked
+to write the endpoint works inside that Maven project, and a file in there setting out what to build
+would hand the student's own knowledge to the model for free, which is the one thing this task
+measures. The same reasoning is why `kata/step1/java/CLAUDE.md` says the endpoint is a stub and says
+nothing about what it should do, and why `EntryController`'s own comment says the same and stops.
+**Do not move the check into that project, do not write the six wishes into any file under it, and do
+not implement `EntryController`**: an agent that writes it *because a student asked* is doing the
+exercise, and an implementation committed here is that exercise done for everybody after them.
+
+The one spoiling route left is pointing an agent at the check before both runs are in, which is the
+same trade the repository already takes for `flags.ts` and for `front/` as a whole. **The root
+`CLAUDE.md` names the file and deliberately does not say it holds the answers**, because that file
+loads for any agent started at the repository root and a prohibition that advertises the answer key
+is the leak it was written to prevent. Keep it that way if the prohibition is ever reworded.
+
+**The feature is a position lookup rather than search on purpose.** `UnderSpecified` in `harness`
+owns "Add search to the catalogue" as the course's canonical under-specified ask, with three open
+questions pinned to `harness.decomposition.1`, and building search here would spend that figure four
+units before it is drawn. The two units also answer under-specification differently and must be
+allowed to: `prompt` says be exact and let the plan carry what you know, `harness` says cut it into
+parts. Neither is the other's example.
+
+`EntryBrief` is deliberately **not on the deck**. Every `TaskCard` is kept off it because a slide
+would tick the tutor's own machine, and a brief on its own is the card's input rather than a drawing
+the room reads, so the block would put an exercise sheet on the projector with nothing to do with it.
 
 `PromptInContext` is written up above and the prohibition on it holds here: no frame, no other
 layers, no to-scale sliver.
@@ -501,19 +624,28 @@ one. The unit's order is
 the argument too, so keep it: what a tool is, where extra ones come from (MCP, and the three things
 one offers), what holding many of them costs, why the results are the least trustworthy layer, what
 they cost by volume.
-**Two of its headings were argued with their own sections and renamed.** `Extra tools` became
+**Three of its headings were argued with their own sections and renamed.** `Extra tools` became
 `MCP servers`, because the section's second paragraph opens on tools not being all a server offers
 and half of it is about the two things that are explicitly not tools. `It costs the same as
 everything else` became `You pay for it on every turn after`, because the paragraph under it argues
 volume rather than rate; the Dutch heading had already drifted to the truer claim, and the English
-was taken to the Dutch. Both renames moved every key in their sections, in the HTML and in
-`nl.json`.
+was taken to the Dutch. `The list itself is in the window` became `What MCP costs you`, because the
+old one named the mechanism the first paragraph states and left the section's actual claim, that
+you pay for a tool by holding it, to be found; the keys are `tools.what-mcp-costs-you.*` now, and
+`copilot-specific.md` quoted the old wording. All three renames moved every key in their sections,
+in the HTML and in `nl.json`.
+**Prompts lost their paragraph.** `tools.mcp-servers.3` was the section's third offering written
+out, one assistant-varied block naming where each product surfaces a server's prompts, and it was
+cut: `McpParts` draws the prompt card, `McpOvals` repeats it and `mcp-servers.4` sorts it by who
+decides, so the prose was the fourth telling and the only one that dated. The third offering is
+carried by the two figures and that sorting paragraph now, so a prompts paragraph written back in
+has to answer what it adds to them.
 **The who-decides sorting is taught, drawn twice and never checked, and that is a knowing gap.** A
 one-question registry quiz was proposed for it and rejected: four graded or ticked things already
 sit under this unit's one "Test yourself", `promptQuiz` is one page back and `contextQuiz` one page
 forward, and a fifth thing to do makes the busiest page in the course busier. If the unit ever loses
 an exercise, this is the question to add.
-`list-itself-window.4` is the section's closing aside and **the only number the course puts on how
+`what-mcp-costs-you.4` is the section's closing aside and **the only number the course puts on how
 many servers to hold**: four or five *added* ones in a context, and past that the job gets its own
 specialised agent. It counts what the student connects rather than what they hold, and that scope is
 load bearing: both harnesses start a reader well past four, Copilot CLI with the GitHub server the
@@ -812,7 +944,12 @@ mistaken for it (one gives orders to a human reader, one contains the word token
 that makes them look harmless removes the exercise. Its card asks for **the odd one out and does not
 say what makes it odd**: naming the instruction aimed at the agent turns four results into a search
 for one sentence, and the unit's warning aside is where a student who needs the term finds it. Do not
-put the giveaway back in the title or the description. `BudgetWindow` is six calls against one small
+put the giveaway back in the title, and note that **it has no description at all now**, the key
+absent rather than empty the way `ReadYourWindow`'s is: the line under the title said four results
+had come back, which the four rows say by being there, and that the check happens in the browser,
+which is true of everything in the course. `BudgetWindow`'s description lost the same second
+sentence and keeps one instruction, that more than one call is wanted, since the exact set is what
+it grades. `BudgetWindow` is six calls against one small
 change and grades the **exact set**, not the total, or filling the window and then adding the two
 right calls would pass; its line counts are data rather than prose and its two right calls come to 27
 lines. Those counts are **measured off `kata/step1/java`** rather than invented, because the task is
@@ -821,9 +958,16 @@ everything under `services/` is 1250, and there are 50 concrete stage classes (5
 files, two of which are the `CatalogStage` and `AuxiliaryStage` interfaces). Two message keys carry
 numbers derived from them (`budget.explanation.services` says fifty, `budget.explanation.tree`
 says ten times the controller), so a re-measure has to visit both, in both languages, plus the
-comment above the figure in `tools.html`. Both mark a wrong pick in `--destructive` and the answer the student missed in teal, because
+comment above the figure in `tools.html`. **The right verdict no longer prints the count**, so 27 is
+a number the student adds up off the rows rather than one the panel hands back; the wrong verdict
+still prints what they spent against what it would have taken, because that comparison is the whole
+correction. Both mark a wrong pick in `--destructive` and the answer the student missed in teal, because
 red here would read as the result having failed rather than the answer. Both shuffle once per mount
-through `shared/lib/shuffle.ts`, which `PatternMatch` also uses now.
+through `shared/lib/shuffle.ts`, which `PatternMatch` also uses now. **Both verdicts take
+`PanelNote`'s `rule={false}`**, which is where that option came from: the rows above have just been
+marked in the same two colours, so a coloured bar down the side of the sentence explaining them was
+the verdict said twice. A note that stands on its own keeps its rule, so `FlagRow`, the two boards
+and `ConnectBoard` are untouched.
 
 Machine output inside an exercise stays English in every language: `SpotInjection`'s four result
 bodies and sources and `BudgetWindow`'s six commands have no `nl` entry, on purpose, the same way
@@ -1360,19 +1504,19 @@ in there, that is their build to unpick and the flags above are what they have d
 
 ## The assistant variants
 
-Eleven blocks in step 1 vary and nearly all of them are the same kind of thing, a filename or a
+Ten blocks in step 1 vary and nearly all of them are the same kind of thing, a filename or a
 command: the launcher `<pre>` pair under `workshop`'s lead (`claude` against `copilot`, each after
 the same `cd`), which is the only pair left there now that the setup command has moved to
 `install.txt`,
-`tools.mcp-servers.3`, the `<pre>` under `tools.connect-one.1` and `tools.connect-one.2`
+the `<pre>` under `tools.connect-one.1` and `tools.connect-one.2`
 (`claude mcp add` against `copilot mcp add`, which lands in `~/.copilot/mcp-config.json`),
-`tools.list-itself-window.2`, `session.window-not-memory.1`,
+`tools.what-mcp-costs-you.2`, `session.window-not-memory.1`,
 `context.amnesia-context-fatigue.3`
 (nested inside the audience wrapper, never both attributes on one element),
 `model.api-vs-subscription.2` and `.3`, plus `survive.write.*.label` and `window.open.*.label` on
 the task cards. The last of those replaced `context.read-your-window.1`, which was the Claude and
 Copilot descriptions of `/context`: the paragraphs went and the variant moved onto the move that
-starts the agent. `flag.machine.help.*` is the twelfth variant set and the only one on a flag
+starts the agent. `flag.machine.help.*` is the eleventh variant set and the only one on a flag
 board; it is counted apart because it is not a block of prose in a unit file, and the mechanism it
 needed is written up under `workshop`.
 `harness.lead.1` names Copilot for **every** reader instead of splitting, because that sentence is a
@@ -1388,11 +1532,11 @@ below asks of a variant block and which holds here too, since the built-in serve
 Two things in the step are not a filename or a command, so do not read that sentence as saying
 everything that varies is a word. `model`'s window section is the larger one and it is **not one of
 the twelve at all**: it is Claude-only whole, with no Copilot half to pair with, and the reasoning is
-under `model`. `tools.list-itself-window.2` is the smaller, it is one of the twelve, and it is a
+under `model`. `tools.what-mcp-costs-you.2` is the smaller, it is one of the ten, and it is a
 **product fact**. Copilot CLI holds the GitHub MCP server with no configuration,
 so that reader is already paying for MCP tool descriptions when the section claims a tool costs you
 by existing, and the Claude half's "connect five MCP servers" would have them counting from zero.
-`list-itself-window.1` above it was made assistant-neutral in the same change ("every tool" rather
+`what-mcp-costs-you.1` above it was made assistant-neutral in the same change ("every tool" rather
 than "every tool you connect") so the two paragraphs do not contradict each other, and
 `ReadYourWindow`'s readings need no variant either way: its second and last moves compare a window
 with and without the server the student added themselves, whatever the harness starts them with. **That product fact is now spent twice, and what

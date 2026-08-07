@@ -7,7 +7,10 @@
 <!-- `harness` is defined in unit 6 and used throughout this one, so the word is anchored at first use
      with a link rather than a second definition. No agent in this course changes a file with `sed`:
      both products edit through a dedicated edit tool, which `/context` shows a unit later, and
-     `tools-in-context.commands.1` names `find` beside `grep` for the same reason. -->
+     `tools-in-context.commands.1` names `find` beside `grep` for the same reason. Every line in
+     that figure's outside column is a command your system actually runs, which is why `mcp` is not
+     one of them: a server is where a tool comes from rather than a thing that runs, and `McpServer`
+     two figures down owns it. -->
 <p data-i18n="tools.lead.2">
   This is where an agent's abilities come from. <code>grep</code> to search your codebase, an edit
   tool to change a file, <code>curl</code> to call an API, an MCP server for whatever your harness
@@ -52,22 +55,10 @@
   arrives that way has a name of its own. A resource.
 </p>
 
-<p data-assistant="claude" data-i18n="tools.mcp-servers.3.claude">
-  Prompts are the third thing. A server ships whole prompts with it, written by whoever built it, for
-  you to pick off a list. Claude Code puts them under a slash.
-</p>
-
-<!-- Copilot documents MCP prompts under a slash for the product generally, and the Copilot CLI
-     command reference does not list them (re-read 30 July 2026). So this half names what the CLI
-     does document, `/mcp`, and says the surfacing is the harness's call. -->
-<p data-assistant="copilot" data-i18n="tools.mcp-servers.3.copilot">
-  Prompts are the third thing. A server ships whole prompts with it, written by whoever built it, for
-  you to pick off a list. Whether you ever see them is your harness's call: Copilot CLI gives you
-  <code>/mcp</code> for the servers and names nothing for their prompts.
-</p>
-
 <!-- Three cards and nothing between them: none of it has crossed into a context yet. The dashed
-     stroke is McpServer's outside-the-window shape, and each glyph is the step's own vocabulary. -->
+     stroke is McpServer's outside-the-window shape, and each glyph is the step's own vocabulary.
+     Prompts have no paragraph of their own: `mcp-servers.3` said what the first card and `.4`'s
+     "you pick the prompt" already say, so the figures carry the third offering alone. -->
 <div data-figure="mcp-parts"></div>
 
 <p data-i18n="tools.mcp-servers.4">
@@ -81,17 +72,17 @@
      `ContextDiagram`'s payoff in `context`, so do not put a frame on this one. -->
 <div data-figure="mcp-ovals"></div>
 
-<h2 data-i18n="tools.list-itself-window.heading">The list itself is in the window</h2>
+<h2 data-i18n="tools.what-mcp-costs-you.heading">What MCP costs you</h2>
 
 <!-- Not "every tool you connect": Copilot CLI holds a server nobody connected, which the paragraph
      under this one is about. -->
-<p data-i18n="tools.list-itself-window.1">
+<p data-i18n="tools.what-mcp-costs-you.1">
   Every tool ships its description with it. The name, what it does, every parameter it takes,
   spelled out for the model to read. All of that goes into the window before you have typed
   anything.
 </p>
 
-<p data-assistant="claude" data-i18n="tools.list-itself-window.2.claude">
+<p data-assistant="claude" data-i18n="tools.what-mcp-costs-you.2.claude">
   So the cost is not in calling a tool. It is in having it. Connect five MCP servers and a few
   hundred lines of description ride along with every message you send
   <svg data-icon="coin"></svg> You pay for them whether or not the agent touches one.
@@ -101,14 +92,14 @@
      descriptions before this unit asks them to connect anything. `ReadYourWindow` in `context` still
      works: its first and last moves compare a reading with and without the server they added
      themselves. -->
-<p data-assistant="copilot" data-i18n="tools.list-itself-window.2.copilot">
+<p data-assistant="copilot" data-i18n="tools.what-mcp-costs-you.2.copilot">
   So the cost is not in calling a tool. It is in having it. Copilot CLI ships with the GitHub server
   already on, so a few hundred lines of description ride along with every message you send before
   you connect anything yourself
   <svg data-icon="coin"></svg> You pay for them whether or not the agent touches one.
 </p>
 
-<p data-i18n="tools.list-itself-window.3">
+<p data-i18n="tools.what-mcp-costs-you.3">
   They cost you room to think as well. Forty tools is forty descriptions to read past and forty ways
   to pick the wrong one, so the window is noisy before you have asked for anything. An agent holding
   <code>grep</code>, an edit tool and a test runner is choosing between three. Turn off what this
@@ -119,7 +110,7 @@
      turning tools off. It counts what the student adds rather than what they hold, because both
      harnesses start them well past four: a reader who runs `/context` a unit later sees the list.
      It must not grow into the coordinator argument: `harness` owns what a sub-agent costs. -->
-<aside data-i18n="tools.list-itself-window.4">
+<aside data-i18n="tools.what-mcp-costs-you.4">
   <p>
     Four or five <em>added</em> servers' worth of tools is about the most one context holds well, on
     top of whatever your harness already starts you with. Past that the agent spends its attention

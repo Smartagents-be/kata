@@ -352,15 +352,22 @@ export function ChoiceMark({ idBase, state }: { idBase: string; state: ChoiceSta
  * Amber is the third tone because the design system already spends it that way: it is the caution
  * colour on a warning aside and on a cost tip, and `ConnectBoard`'s row with no wrong answer needs a
  * verdict that is neither `--success` nor `--destructive`.
+ *
+ * `rule={false}` drops the left rule and keeps the tint and the ink, which is what an exercise that
+ * has just marked its own rows wants: the marks carry the verdict already, so a coloured bar beside
+ * the sentence explaining them is the same claim said a second time and louder. A note that stands
+ * on its own, beside prose or under a board, keeps the rule.
  */
 export function PanelNote({
   id,
   tone,
+  rule = true,
   children,
   className,
 }: {
   id: string
   tone: 'success' | 'destructive' | 'note'
+  rule?: boolean
   children: ReactNode
   className?: string
 }) {
@@ -371,7 +378,8 @@ export function PanelNote({
       data-state={tone}
       role="status"
       className={cn(
-        'max-w-[56ch] rounded-r-lg border-l-2 py-1.5 pr-3 pl-3.5 text-sm leading-relaxed',
+        'max-w-[56ch] py-1.5 text-sm leading-relaxed',
+        rule ? 'rounded-r-lg border-l-2 pr-3 pl-3.5' : 'rounded-lg px-3',
         tone === 'success' && 'border-success/60 bg-success/6 text-success-foreground',
         tone === 'destructive' && 'border-destructive/50 bg-destructive/5 text-destructive',
         tone === 'note' && 'border-amber-500/50 bg-amber-500/5 text-foreground/85',

@@ -121,16 +121,18 @@ Two facts the course could use and does not:
 
 - **The GitHub MCP server is built in** and available with no configuration. So a Copilot student's
   window already carries a set of MCP tool descriptions before they connect anything. This is now
-  in the course: `tools.list-itself-window.2.copilot` is that reader's version of "the list itself
-  is in the window", since the Claude half tells them to connect five servers and count from zero.
+  in the course: `tools.what-mcp-costs-you.2.copilot` is that reader's version of what MCP costs
+  you, since the Claude half tells them to connect five servers and count from zero.
   The `ReadYourWindow` task still needs no variant, because its first and last moves compare a
   reading with and without the server *they* added.
 - MCP prompts are documented as reachable under a slash as `/mcp.servername.promptname`, **for
   Copilot generally**. The Copilot CLI command reference lists 40-odd slash commands and none of
-  them is a prompt (re-read 30 July 2026), so `tools.mcp-servers.3.copilot` no longer claims
-  it: it names `/mcp`, which the CLI does document, and says that surfacing a server's prompts is
-  the harness's call. Absent from a reference is not the same as absent from the product, so if you
-  see one under a slash in a real session, that sentence goes back.
+  them is a prompt (re-read 30 July 2026). The course used to carry that difference in
+  `tools.mcp-servers.3`, a Claude/Copilot pair on where each product surfaces a server's prompts,
+  and that paragraph is gone: the two MCP figures draw the prompt and `tools.mcp-servers.4` sorts
+  it, so nothing in the course names a surface for it any more. This entry is the reason it was
+  never worth one command reference's worth of hedging. Absent from a reference is not the same as
+  absent from the product, so check here before writing that claim back.
 
 ## Reasoning level (checked August 2026)
 

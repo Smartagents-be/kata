@@ -8,6 +8,7 @@ import { ContextDiagram } from './ContextDiagram'
 import { ContextFalloff } from './ContextFalloff'
 import { CoordinatorFanout } from './CoordinatorFanout'
 import { CutItUp } from './CutItUp'
+import { EntryBrief } from './EntryBrief'
 import { ExactAsk } from './ExactAsk'
 import { FlagBoard } from './FlagBoard'
 import { McpOvals } from './McpOvals'
@@ -34,6 +35,7 @@ import { ShutterFlag } from './ShutterFlag'
 import { SpeedAtScale } from './SpeedAtScale'
 import { SpotInjection } from './SpotInjection'
 import { SurviveTheClear } from './SurviveTheClear'
+import { TheCutoff } from './TheCutoff'
 import { TokenAttention } from './TokenAttention'
 import { TokenSplit } from './TokenSplit'
 import { ToolsInContext } from './ToolsInContext'
@@ -114,6 +116,9 @@ const step1: Step = {
         'reasoning-cost': <ReasoningCost />,
         'bundle-compare': <BundleCompare />,
         'exact-ask': <ExactAsk />,
+        // The task's whole input, in a figure so it survives guided mode: the six wishes, the one
+        // line to type, and the check that scores what came back. The card under it is the moves.
+        'entry-brief': <EntryBrief />,
         'plan-it-twice': <PlanItTwice />,
       },
       quiz: promptQuiz,
@@ -196,9 +201,12 @@ const step1: Step = {
       title: 'truth.title',
       html: truth,
       inlineFigures: {
-        // Two figures on one argument, and they take different cuts of it. The first is two whole
-        // answers, one window apart; the second is one answer whose parts did not all come from the
-        // same place. Neither may borrow the other's shape, or the unit draws its point twice.
+        // Three figures on one argument, and they take different cuts of it. This one is the time
+        // axis, which is the only place the step draws it: the cutoff is a date, and what is on the
+        // far side of it was never seen rather than half-remembered. The next is two whole answers,
+        // one window apart; the third is one answer whose parts did not all come from the same
+        // place. None may borrow another's shape, or the unit draws its point twice.
+        'the-cutoff': <TheCutoff />,
         'trained-or-grounded': <TrainedOrGrounded />,
         'answer-provenance': <AnswerProvenance />,
       },

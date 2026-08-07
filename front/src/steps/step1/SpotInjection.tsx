@@ -41,7 +41,6 @@ export function SpotInjection() {
       block="spot-injection"
       state={checked ? 'checked' : 'open'}
       title={text('spot.title')}
-      description={text('spot.description')}
       className="my-8"
       contentClassName="flex flex-col gap-5"
     >
@@ -108,7 +107,7 @@ export function SpotInjection() {
       </ul>
 
       {checked && (
-        <PanelNote id="spot-injection-verdict" tone={right ? 'success' : 'destructive'}>
+        <PanelNote id="spot-injection-verdict" tone={right ? 'success' : 'destructive'} rule={false}>
           <span id="spot-injection-verdict-line" data-component="SpotInjection" className="block">
             {text(right ? 'spot.right' : 'spot.wrong')}
           </span>
