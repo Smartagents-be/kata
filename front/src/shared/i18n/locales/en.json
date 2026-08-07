@@ -41,6 +41,9 @@
   "quiz.question": "Question {{number}} of {{total}}",
   "quiz.submit": "Check answers",
 
+  "task.progress": "{{done}} of {{total}} done",
+  "task.moveDone": "Done",
+
   "catalog.nav": "Catalogue",
   "catalog.kicker": "The service",
   "catalog.title": "Titles from the service",

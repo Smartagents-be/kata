@@ -129,7 +129,7 @@ politeness about the agent. This project is `workshop`'s subject, so a package r
 `mvn verify -Pgraded`, the `challenge` tests and the native-image flag, and a student who accepted
 the plan would reach the capstone with a project that no longer builds. The description repeats the
 warning in the words a student reads first, which is why both carry it. It is also the first
-`TaskCard` outside step 1, ticked once to `kata.step2.where`.
+`TaskCard` outside step 1, ticked to `kata.step2.where`.
 
 `steering` replaced `scoping` in slot four, and the replacement was deliberate rather than a rename:
 task sizing, which folder you open the agent in, and the `.claude` symlink trap were dropped

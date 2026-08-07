@@ -12,7 +12,7 @@
 
   "code.panel.title": "Try it: clear this page",
   "code.panel.label": "The page flag",
-  "code.panel.hint": "Type the flag from the paragraph above, braces and all.",
+  "code.panel.hint": "Type or paste the flag from the paragraph above, braces and all.",
   "code.panel.help": "Look at the string in braces in the paragraph just above this box.",
   "code.panel.hint-button": "Hint",
   "code.panel.placeholder": "{...}",
@@ -50,7 +50,7 @@
   "loop.you.body": "read the ticked line",
   "loop.box.body": "paste it in",
 
-  "flags.panel.title": "Three runs, three flags",
+  "flags.panel.title": "First workshop",
   "flags.panel.description": "Everything on this board comes out of a build in kata/step0/java. Start your agent in there and work down the rows.",
   "flags.panel.progress": "{{solved}} of {{total}} collected",
   "flags.panel.hint": "Hint",
@@ -60,10 +60,10 @@
   "flags.panel.wrong": "Not that one. Read the flag straight from the build output.",
 
   "flag.run.label": "The run",
-  "flag.run.hint": "It is the block on the page before this one. Have your agent run it.",
+  "flag.run.hint": "Instruct your agent to run the application.",
   "flag.run.help": "This is the code block on the previous page, run for real. Open kata/step0/java, start your agent in there and ask it to run that block. There is nothing to work out: the build prints the flag on the line that says the intro is complete. Paste that code here, braces and all.",
   "flag.ready.label": "Ready to hunt",
-  "flag.ready.hint": "Have your agent run mvn verify -Pready from the same folder.",
+  "flag.ready.hint": "Have your agent run mvn verify -Pready from the same folder. If you kept row one's session, your harness often suggests this run before you ask.",
   "flag.ready.help": "It checks what the rest of the course assumes about your machine: the JDK Maven actually compiles with, and whether the other steps' projects are on disk. Pass both and the last row prints the flag. Fail one and the build names the check that failed and what to do about it, and prints no flag. The native-image row is a warning about step 2's last flag and never stops you.",
   "flag.pick.label": "Two candidates",
   "flag.pick.hint": "mvn verify -Ppick prints two strings in flag shape. Only one line is ticked.",
@@ -92,7 +92,6 @@
   "deck.welcome.rules.2": "Cut before you prompt",
   "deck.welcome.rules.3": "One flag per session",
   "deck.welcome.rules.4": "Make it <hi>run</hi> the check",
-  "deck.welcome.rules.5": "Price the hunt afterwards",
   "deck.backend.divider.1": "Each step is its own Maven project",
   "deck.backend.divider.2": "Only one service holds <hi>:8080</hi>",
   "deck.backend.divider.3": "Code blocks run through <hi>your agent</hi>, not your clipboard",

@@ -68,6 +68,21 @@
     --shadow-lg: 0 10px 24px var(--shade-10), 0 28px 56px var(--shade-13);
     --shadow-xl: 0 10px 24px var(--shade-10), 0 28px 56px var(--shade-13);
     --shadow-2xl: 0 16px 48px var(--shade-10);
+    /* An explanation rolls out the way an accordion opens: the grid row grows from 0fr to 1fr,
+       which lands on the content's own height without anybody measuring it. The element sits at
+       1fr already, so the animation is only the way in and `motion-reduce:animate-none` leaves it
+       open rather than shut. */
+    --animate-rollout: rollout 260ms ease-out;
+    @keyframes rollout {
+        from {
+            grid-template-rows: 0fr;
+            opacity: 0;
+        }
+        to {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+    }
 }
 
 :root {
@@ -81,7 +96,9 @@
     /* One teal does the heavy lifting: actions, active navigation, focus rings, "you are here". */
     --primary: oklch(0.567 0.1 184.994);
     --primary-foreground: oklch(1 0 0);
-    /* The top bar is the one deliberately dark surface: a deep teal the light UI hangs beneath. */
+    /* The deep teal the light UI hangs beneath, and the header band is the only thing wearing it.
+       The unit pager's forward half took it for a while and gave it back: one dark surface per
+       page is what makes the band read as the band. */
     --header: oklch(0.28 0.055 185);
     --header-foreground: oklch(1 0 0);
     --secondary: oklch(0.94 0.006 195);
@@ -289,7 +306,7 @@
   --tw-prose-links: var(--primary);
   --tw-prose-bold: var(--foreground);
   --tw-prose-counters: var(--muted-foreground);
-  --tw-prose-bullets: var(--border);
+  --tw-prose-bullets: var(--primary);
   --tw-prose-hr: var(--border);
   --tw-prose-quotes: var(--foreground);
   --tw-prose-quote-borders: var(--border);

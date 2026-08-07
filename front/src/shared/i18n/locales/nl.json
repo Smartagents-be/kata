@@ -41,6 +41,9 @@
   "quiz.question": "Vraag {{number}} van {{total}}",
   "quiz.submit": "Antwoorden nakijken",
 
+  "task.progress": "{{done}} van {{total}} klaar",
+  "task.moveDone": "Klaar",
+
   "catalog.nav": "Catalogus",
   "catalog.kicker": "De service",
   "catalog.title": "Titels uit de service",

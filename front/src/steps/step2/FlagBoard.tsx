@@ -1,26 +1,9 @@
 import { useState, type ClipboardEvent, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Badge } from '@/shared/components/ui/badge'
-import { Button } from '@/shared/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/shared/components/ui/card'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/shared/components/ui/dialog'
+import { Board, AnswerLine, PanelChip, PanelNote, BoardRow } from '@/shared/components/Panel'
 import { useStepText } from '@/shared/i18n/useStepText'
 import { isWholeFlag } from '@/shared/lib/flag-paste'
 import { sha256Hex } from '@/shared/lib/hash'
-import { cn } from '@/shared/lib/utils'
 import type { FlagSpec } from './flags'
 
 /**
@@ -29,6 +12,10 @@ import type { FlagSpec } from './flags'
  * That is the same move `ConnectBoard` and `TaskCard` made when a second caller arrived: anything
  * about how a board *behaves* belongs in here, so a student who learned the interaction on one
  * board meets the same one on the other.
+ *
+ * How a board *looks* is one level up again, in `shared/components/Panel.tsx`, which every step's
+ * board is drawn with. The split is worth keeping: this file is step 2's grading, that one is the
+ * course's vocabulary, and a change to either should not have to touch the other.
  */
 export interface FlagBoardProps {
   /** BEM block for every id inside the drawing, e.g. `flags` or `setup-flags`. */
@@ -89,40 +76,26 @@ export function FlagBoard({ block, storageKey, salt, flags, panel }: FlagBoardPr
   }
 
   return (
-    <Card id={block} data-component="FlagBoard" data-state={solved.size === flags.length ? 'complete' : 'partial'}>
-      <CardHeader id={`${block}-header`} data-component="FlagBoard">
-        <CardTitle id={`${block}-title`} data-component="FlagBoard">
-          {text(`${panel}.title`)}
-        </CardTitle>
-        <CardDescription id={`${block}-description`} data-component="FlagBoard">
-          {text(`${panel}.description`)}
-        </CardDescription>
-      </CardHeader>
-      <CardContent id={`${block}-content`} data-component="FlagBoard" className="flex flex-col gap-4">
-        <p
-          id={`${block}-progress`}
-          data-component="FlagBoard"
-          className="text-muted-foreground text-sm tabular-nums"
-        >
-          {t(`${panel}.progress`, { solved: solved.size, total: flags.length })}
-        </p>
-
-        <ol id={`${block}-items`} data-component="FlagBoard" className="flex flex-col gap-3">
-          {flags.map((flag, index) => (
-            <FlagRow
-              key={flag.id}
-              block={block}
-              panel={panel}
-              salt={salt}
-              flag={flag}
-              index={index}
-              solved={solved.has(flag.id)}
-              onSolved={() => markSolved(flag.id)}
-            />
-          ))}
-        </ol>
-      </CardContent>
-    </Card>
+    <Board
+      block={block}
+      state={solved.size === flags.length ? 'complete' : 'partial'}
+      eyebrow={t(`${panel}.progress`, { solved: solved.size, total: flags.length })}
+      title={text(`${panel}.title`)}
+      description={text(`${panel}.description`)}
+    >
+      {flags.map((flag, index) => (
+        <FlagRow
+          key={flag.id}
+          block={block}
+          panel={panel}
+          salt={salt}
+          flag={flag}
+          index={index}
+          solved={solved.has(flag.id)}
+          onSolved={() => markSolved(flag.id)}
+        />
+      ))}
+    </Board>
   )
 }
 
@@ -177,111 +150,46 @@ function FlagRow({
   }
 
   return (
-    <li
-      id={`${block}-item-${index}`}
-      data-component="FlagRow"
-      data-state={solved ? 'solved' : 'locked'}
-      className={cn(
-        'rounded-xl border px-4 py-3',
-        solved ? 'border-success/30 bg-success/10' : 'border-border',
-      )}
+    <BoardRow
+      block={block}
+      index={index}
+      state={solved ? 'solved' : 'locked'}
+      solved={solved}
+      title={text(flag.labelKey)}
+      chip={
+        solved ? (
+          <PanelChip id={`${block}-item-${index}-badge`}>{text(`${panel}.solved`)}</PanelChip>
+        ) : undefined
+      }
+      body={text(flag.hintKey)}
     >
-      <div id={`${block}-item-${index}-heading`} data-component="FlagRow" className="flex items-center justify-between gap-3">
-        <span id={`${block}-item-${index}-label`} data-component="FlagRow" className="font-medium">
-          {text(flag.labelKey)}
-        </span>
-        <div id={`${block}-item-${index}-heading-actions`} data-component="FlagRow" className="flex items-center gap-2">
-          {solved && (
-            <Badge
-              id={`${block}-item-${index}-badge`}
-              data-component="FlagRow"
-              variant="success"
-            >
-              {text(`${panel}.solved`)}
-            </Badge>
-          )}
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button
-                id={`${block}-item-${index}-help`}
-                data-component="FlagRow"
-                type="button"
-                variant="ghost"
-                size="sm"
-                className="text-muted-foreground"
-              >
-                {text(`${panel}.hint`)}
-              </Button>
-            </DialogTrigger>
-            <DialogContent
-              id={`${block}-item-${index}-help-dialog`}
-              data-component="FlagRow"
-            >
-              <DialogHeader id={`${block}-item-${index}-help-dialog-header`} data-component="FlagRow">
-                <DialogTitle id={`${block}-item-${index}-help-dialog-title`} data-component="FlagRow">
-                  {text(flag.labelKey)}
-                </DialogTitle>
-                <DialogDescription id={`${block}-item-${index}-help-dialog-body`} data-component="FlagRow">
-                  {text(flag.helpKey)}
-                </DialogDescription>
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
-        </div>
-      </div>
-
-      <p
-        id={`${block}-item-${index}-hint`}
-        data-component="FlagRow"
-        className="text-muted-foreground mt-1 text-sm"
-      >
-        {text(flag.hintKey)}
-      </p>
-
       {!solved && (
-        <form
-          id={`${block}-item-${index}-form`}
-          data-component="FlagRow"
+        <AnswerLine
+          idBase={`${block}-item-${index}`}
+          value={value}
+          onValueChange={(next) => {
+            setValue(next)
+            if (state === 'wrong') {
+              setState('idle')
+            }
+          }}
+          onPaste={onPaste}
           onSubmit={onSubmit}
-          className="mt-3 flex items-center gap-2"
-        >
-          <input
-            id={`${block}-item-${index}-input`}
-            data-component="FlagRow"
-            value={value}
-            onChange={(event) => {
-              setValue(event.target.value)
-              if (state === 'wrong') {
-                setState('idle')
-              }
-            }}
-            onPaste={onPaste}
-            spellCheck={false}
-            placeholder={text(`${panel}.placeholder`)}
-            aria-label={text(flag.labelKey)}
-            className="field h-9 w-full max-w-xs"
-          />
-          <Button
-            id={`${block}-item-${index}-submit`}
-            data-component="FlagRow"
-            type="submit"
-            disabled={state === 'checking' || value.trim() === ''}
-          >
-            {text(`${panel}.check`)}
-          </Button>
-        </form>
+          busy={state === 'checking'}
+          label={text(flag.labelKey)}
+          placeholder={text(`${panel}.placeholder`)}
+          checkLabel={text(`${panel}.check`)}
+          hintLabel={text(`${panel}.hint`)}
+          helpTitle={text(flag.labelKey)}
+          helpBody={text(flag.helpKey)}
+        />
       )}
 
       {state === 'wrong' && (
-        <p
-          id={`${block}-item-${index}-error`}
-          data-component="FlagRow"
-          role="status"
-          className="text-destructive mt-2 text-sm"
-        >
+        <PanelNote id={`${block}-item-${index}-error`} tone="destructive">
           {text(`${panel}.wrong`)}
-        </p>
+        </PanelNote>
       )}
-    </li>
+    </BoardRow>
   )
 }

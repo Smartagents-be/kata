@@ -47,20 +47,28 @@ export function ModelPricing() {
   const { text } = useStepText('step1')
 
   return (
-    <div id="model-pricing" data-component="ModelPricing" className="my-8 rounded-xl border">
+    <div id="model-pricing" data-component="ModelPricing" className="my-8">
       {/*
         The unit sits above the numbers rather than only under them, because a reader who scans
         straight to a figure has to know what it counts before the figure means anything. It is
         outside the scrolling box on purpose, so it stays put when the table is dragged sideways on
         a narrow screen.
       */}
-      <p
-        id="model-pricing-unit"
+      <div
+        id="model-pricing-header"
         data-component="ModelPricing"
-        className="eyebrow text-muted-foreground px-4 pt-4"
+        className="mb-1 flex items-baseline gap-3"
       >
-        {text('pricing.unit')}
-      </p>
+        <p id="model-pricing-unit" data-component="ModelPricing" className="eyebrow text-primary">
+          {text('pricing.unit')}
+        </p>
+        <span
+          id="model-pricing-header-rule"
+          data-component="ModelPricing"
+          aria-hidden
+          className="bg-border/70 h-px flex-1"
+        />
+      </div>
 
       <div id="model-pricing-scroll" data-component="ModelPricing" className="overflow-x-auto">
         <table
@@ -69,7 +77,11 @@ export function ModelPricing() {
           className="w-full caption-bottom border-collapse text-sm"
         >
           <thead id="model-pricing-head" data-component="ModelPricing">
-            <tr id="model-pricing-head-row" data-component="ModelPricing" className="border-b">
+            <tr
+              id="model-pricing-head-row"
+              data-component="ModelPricing"
+              className="border-border/70 border-b"
+            >
               <th
                 id="model-pricing-head-model"
                 data-component="ModelPricing"
@@ -98,13 +110,13 @@ export function ModelPricing() {
                 key={row.id}
                 id={`model-pricing-row-${index}`}
                 data-component="ModelPricing"
-                className="border-b last:border-b-0"
+                className="border-border/50 border-b last:border-b-0"
               >
                 <th
                   id={`model-pricing-row-${index}-model`}
                   data-component="ModelPricing"
                   scope="row"
-                  className="px-4 py-3 text-left font-medium whitespace-nowrap"
+                  className="py-3 pr-4 text-left font-medium whitespace-nowrap"
                 >
                   {row.name}
                 </th>
@@ -125,7 +137,7 @@ export function ModelPricing() {
           <caption
             id="model-pricing-caption"
             data-component="ModelPricing"
-            className="text-muted-foreground px-4 py-3 text-left text-xs"
+            className="text-muted-foreground pt-3 text-left text-xs"
           >
             {text('pricing.caption')}
           </caption>

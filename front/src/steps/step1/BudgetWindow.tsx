@@ -1,15 +1,10 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { ChoiceMark, Panel, PanelNote } from '@/shared/components/Panel'
 import { Button } from '@/shared/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/shared/components/ui/card'
 import { useStepText } from '@/shared/i18n/useStepText'
 import { shuffled } from '@/shared/lib/shuffle'
+import { choiceLabelClass, choiceRowClass } from '@/shared/lib/choice'
 import { cn } from '@/shared/lib/utils'
 
 interface Call {
@@ -63,159 +58,130 @@ export function BudgetWindow() {
   }
 
   return (
-    <Card
-      id="budget-window"
-      data-component="BudgetWindow"
-      data-state={checked ? 'checked' : 'open'}
+    <Panel
+      block="budget-window"
+      state={checked ? 'checked' : 'open'}
+      title={text('budget.title')}
+      description={text('budget.description')}
       className="my-8"
+      contentClassName="flex flex-col gap-5"
     >
-      <CardHeader id="budget-window-header" data-component="BudgetWindow">
-        <CardTitle id="budget-window-title" data-component="BudgetWindow">
-          {text('budget.title')}
-        </CardTitle>
-        <CardDescription id="budget-window-description" data-component="BudgetWindow">
-          {text('budget.description')}
-        </CardDescription>
-      </CardHeader>
-
-      <CardContent
-        id="budget-window-content"
+      {/* The brief the six calls are weighed against, in the left-rule shape every note here takes. */}
+      <p
+        id="budget-window-task"
         data-component="BudgetWindow"
-        className="flex flex-col gap-5"
+        className="border-primary bg-primary/5 max-w-[56ch] rounded-r-lg border-l-2 py-1.5 pr-3 pl-3.5 text-sm leading-relaxed"
       >
-        <p
-          id="budget-window-task"
-          data-component="BudgetWindow"
-          className="border-primary bg-primary/5 rounded-r-xl border-l-[3px] px-4 py-3 text-sm"
-        >
-          {text('budget.task')}
-        </p>
+        {text('budget.task')}
+      </p>
 
-        <ul id="budget-window-calls" data-component="BudgetWindow" className="flex flex-col gap-3">
-          {calls.map((call, index) => {
-            const isPicked = picked.includes(call.id)
-            const state = !checked
+      <ul id="budget-window-calls" data-component="BudgetWindow" className="border-border/70 border-t">
+        {calls.map((call, index) => {
+          const isPicked = picked.includes(call.id)
+          const state = !checked
+            ? isPicked
+              ? 'picked'
+              : 'open'
+            : isPicked === call.needed
               ? isPicked
-                ? 'picked'
-                : 'open'
-              : isPicked === call.needed
-                ? isPicked
-                  ? 'right'
-                  : 'clean'
-                : isPicked
-                  ? 'wrong'
-                  : 'missed'
-            return (
-              <li key={call.id} id={`budget-window-call-${index}`} data-component="BudgetWindow">
-                <button
-                  id={`budget-window-call-${index}-pick`}
+                ? 'right'
+                : 'clean'
+              : isPicked
+                ? 'wrong'
+                : 'answer'
+          return (
+            <li key={call.id} id={`budget-window-call-${index}`} data-component="BudgetWindow">
+              <button
+                id={`budget-window-call-${index}-pick`}
+                data-component="BudgetWindow"
+                data-state={state}
+                type="button"
+                disabled={checked}
+                aria-pressed={isPicked}
+                onClick={() => toggle(call.id)}
+                className={choiceRowClass(state, checked)}
+              >
+                <span
+                  id={`budget-window-call-${index}-label`}
                   data-component="BudgetWindow"
-                  data-state={state}
-                  type="button"
-                  disabled={checked}
-                  aria-pressed={isPicked}
-                  onClick={() => toggle(call.id)}
-                  className={cn(
-                    'flex w-full items-baseline gap-4 rounded-xl border px-4 py-3 text-left transition-colors',
-                    'focus-visible:ring-ring focus-visible:ring-[3px] focus-visible:outline-none',
-                    state === 'open' && 'border-border hover:border-primary hover:bg-primary/5',
-                    state === 'picked' && 'border-primary bg-primary/5',
-                    state === 'clean' && 'border-border opacity-60',
-                    state === 'right' && 'border-success/50 bg-success/10',
-                    state === 'wrong' && 'border-destructive/50',
-                    state === 'missed' && 'border-primary bg-primary/5',
-                  )}
+                  className={cn(choiceLabelClass(state), 'font-mono')}
                 >
-                  <span
-                    id={`budget-window-call-${index}-label`}
-                    data-component="BudgetWindow"
-                    className="flex-1 font-mono text-sm"
-                  >
-                    {text(`budget.call.${call.id}`)}
-                  </span>
-                  <span
-                    id={`budget-window-call-${index}-lines`}
-                    data-component="BudgetWindow"
-                    className="text-muted-foreground font-mono text-xs tabular-nums"
-                  >
-                    {t('budget.lines', { lines: call.lines })}
-                  </span>
-                </button>
-              </li>
-            )
-          })}
-        </ul>
+                  {text(`budget.call.${call.id}`)}
+                </span>
+                <span
+                  id={`budget-window-call-${index}-lines`}
+                  data-component="BudgetWindow"
+                  className="text-muted-foreground font-mono text-xs tabular-nums"
+                >
+                  {t('budget.lines', { lines: call.lines })}
+                </span>
+                <ChoiceMark idBase={`budget-window-call-${index}`} state={state} />
+              </button>
+            </li>
+          )
+        })}
+      </ul>
 
-        <p
-          id="budget-window-running"
-          data-component="BudgetWindow"
-          role="status"
-          className="text-muted-foreground text-sm tabular-nums"
-        >
-          {t('budget.running', { lines: total })}
-        </p>
+      <p
+        id="budget-window-running"
+        data-component="BudgetWindow"
+        role="status"
+        className="text-muted-foreground text-sm tabular-nums"
+      >
+        {t('budget.running', { lines: total })}
+      </p>
 
-        {checked && (
-          <div
-            id="budget-window-verdict"
+      {checked && (
+        <PanelNote id="budget-window-verdict" tone={right ? 'success' : 'destructive'}>
+          <span id="budget-window-verdict-line" data-component="BudgetWindow" className="block">
+            {t(right ? 'budget.right' : 'budget.wrong', { picked: total, ideal: IDEAL })}
+          </span>
+          {/* One line per call that went the wrong way, whether it was taken or left. */}
+          <ul
+            id="budget-window-explanations"
             data-component="BudgetWindow"
-            data-state={right ? 'right' : 'wrong'}
-            role="status"
-            className={cn(
-              'rounded-xl border px-4 py-3 text-sm',
-              right ? 'border-success/40 bg-success/10 text-success-foreground' : 'border-border',
-            )}
+            className="mt-2 flex flex-col gap-2"
           >
-            <p id="budget-window-verdict-line" data-component="BudgetWindow">
-              {t(right ? 'budget.right' : 'budget.wrong', { picked: total, ideal: IDEAL })}
-            </p>
-            {/* One line per call that went the wrong way, whether it was taken or left. */}
-            <ul
-              id="budget-window-explanations"
-              data-component="BudgetWindow"
-              className="mt-2 flex flex-col gap-2"
-            >
-              {missteps.map((call, index) => (
-                <li
-                  key={call.id}
-                  id={`budget-window-explanation-${index}`}
-                  data-component="BudgetWindow"
-                  className="text-muted-foreground"
-                >
-                  {text(`budget.explanation.${call.id}`)}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+            {missteps.map((call, index) => (
+              <li
+                key={call.id}
+                id={`budget-window-explanation-${index}`}
+                data-component="BudgetWindow"
+                className="text-muted-foreground"
+              >
+                {text(`budget.explanation.${call.id}`)}
+              </li>
+            ))}
+          </ul>
+        </PanelNote>
+      )}
 
-        <div id="budget-window-actions" data-component="BudgetWindow" className="flex justify-end">
-          {checked ? (
-            <Button
-              id="budget-window-retry"
-              data-component="BudgetWindow"
-              type="button"
-              variant="outline"
-              onClick={() => {
-                setPicked([])
-                setChecked(false)
-              }}
-            >
-              {text('budget.retry')}
-            </Button>
-          ) : (
-            <Button
-              id="budget-window-check"
-              data-component="BudgetWindow"
-              type="button"
-              disabled={picked.length === 0}
-              onClick={() => setChecked(true)}
-            >
-              {text('budget.check')}
-            </Button>
-          )}
-        </div>
-      </CardContent>
-    </Card>
+      <div id="budget-window-actions" data-component="BudgetWindow" className="flex justify-end">
+        {checked ? (
+          <Button
+            id="budget-window-retry"
+            data-component="BudgetWindow"
+            type="button"
+            variant="outline"
+            onClick={() => {
+              setPicked([])
+              setChecked(false)
+            }}
+          >
+            {text('budget.retry')}
+          </Button>
+        ) : (
+          <Button
+            id="budget-window-check"
+            data-component="BudgetWindow"
+            type="button"
+            disabled={picked.length === 0}
+            onClick={() => setChecked(true)}
+          >
+            {text('budget.check')}
+          </Button>
+        )}
+      </div>
+    </Panel>
   )
 }

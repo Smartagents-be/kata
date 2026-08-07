@@ -279,11 +279,16 @@ back inside it. The three filenames are the shape of the exercise: the student's
 agent's `solve.md` exist separately so the comparison has two things to compare, and merging them
 into one file ends the exercise.
 
-One tick for the whole card rather than one per move. The five are a single sitting, and five boxes
-invite ticking them off separately, which turns a run at a problem into an errand list. Nothing is
-graded, so the tick is a bookmark: it is written to `kata.step1.cut`, under the prefix
-`shared/lib/reset.ts` clears, because a tick that vanished on the next navigation would read as
-broken progress. And **`problem.md` has no answer key anywhere in the tree**: its gaps are unlisted
+Every move carries its own tick and the card keeps one of its own underneath, with the count of the
+first on the opening rule. **This card is where that shape was designed**, so `TaskCard` is the
+readable source for why there are two kinds of tick and this file does not re-argue it. What is
+step 1's here is that the five moves are a long sitting: cutting a real under-specified file up
+twice and then building it is not an evening, and the ticks are what let a student put it down after
+the comparison and pick it up at the plan. The card ran on one tick until then, on the argument that
+five boxes turn a run at a problem into an errand list, and that argument lost to the one above it.
+Nothing is graded either way, so both kinds of tick are a bookmark: they are written to
+`kata.step1.cut` and `kata.step1.cut.moves`, under the prefix `shared/lib/reset.ts` clears, because
+a tick that vanished on the next navigation would read as broken progress. And **`problem.md` has no answer key anywhere in the tree**: its gaps are unlisted
 on purpose, since a file that names them does the analysis for the student. Do not add a worked cut,
 a `solve.md`, a `plan-solve.md`, or an implementation.
 
@@ -312,7 +317,7 @@ for it and rejected: this is the heaviest unit in the step, the step's diagram v
 bars and dashes, and a plotted curve with axes would be the only one of its kind in the course.
 Revisit only if the unit is ever split.
 
-`context` closes on `ReadYourWindow`, ticked once to `kata.step1.window`, and **`/context` is used
+`context` closes on `ReadYourWindow`, ticked to `kata.step1.window`, and **`/context` is used
 here and described nowhere**. The command had two paragraphs above the card, one per assistant, plus
 a third on the count starting above zero, and all three were cut: a page that explains what the
 readout carries has answered the question the card exists to make the student answer for themselves.
@@ -379,14 +384,16 @@ the work again without repeating yourself. The third move is the exercise. Writi
 proves nothing, and a card that stopped there would be a note rather than a task, so do not drop the
 clear. It is worked **in the student's own project** rather than in this repo, and the card names no
 example instruction on purpose: the line has to be one they were tired of repeating, and only they
-know which one that is. Ticked once, to `kata.step1.survive`, on the same reasoning `CutItUp` is
-ticked once.
+know which one that is. Ticked to `kata.step1.survive`, on the same reasoning `CutItUp` is ticked.
 
 All seven tasks are `shared/components/TaskCard.tsx`, which is the tick-card mechanics with the data
 lifted out, the same move `ConnectBoard` made when a second drag board arrived. Keep additions there
-rather than in a caller, and keep **one tick per card and never one per move**: five or six boxes
-turn a run at a problem into an errand list. Every move stays one line, so whatever a second line
-would have explained belongs in the prose above the card.
+rather than in a caller. **Two kinds of tick, and what each is for is `TaskCard`'s to say**: a move's
+tick is where you are in the sitting and the card's is whether the sitting is behind you, so a caller
+choosing between them is a caller with a decision that does not belong to it. The card's tick is
+never derived from the moves, since a run at a problem can be finished with a move skipped on
+purpose. Every move stays one line, so whatever a second line would have explained belongs in the
+prose above the card.
 
 `prompt` runs six sections where it ran four, and both splits were forced by something outside the
 unit. **`Reasoning level` is a heading rather than a paragraph inside `Instruction`** because
@@ -416,7 +423,7 @@ carries **no context frame**, on the rule that protects `ToolsInContext`, and no
 under the same heading. It replaced the self-only aside that told the student to try plan mode once,
 which was a task card written as reading. Four moves, worked in the student's own project, and **the
 fourth is the exercise**: choosing which of the two runs you would ship is what turns `plan-mode.2`
-from a claim the student is told into one they have watched. Ticked once, to `kata.step1.plan`, like
+from a claim the student is told into one they have watched. Ticked to `kata.step1.plan`, like
 the rest.
 
 `PromptInContext` is written up above and the prohibition on it holds here: no frame, no other
@@ -590,7 +597,7 @@ argues none of that, so do not let it grow back into the argument.
 `PriceOneTurn` is that sum asked for, at the foot of the unit above `PickTheTier`. It exists because
 `cost.4` was an instruction delivered as prose with nothing collecting the result, and because
 `ReadYourWindow`'s `/context` count was a measurement the course took two units earlier and never
-spent. Three moves, one tick to `kata.step1.price`, and **no description line**, the way
+spent. Three moves, ticked to `kata.step1.price`, and **no description line**, the way
 `ReadYourWindow` carries none: the paragraph above it is what says where the work happens. It grades
 nothing, and it cannot: the window is the student's own. It carries **no assistant variant**, since
 `/context` is the same command in both, which is what the rest of the step already relies on. The
@@ -733,7 +740,7 @@ above them naming Claude Code's `claude mcp add <name> -- <command>` (verified a
 moves name no command for that reason**, which also keeps the card readable in class, where the
 `<pre>` is cut with the rest of the prose. **The last move asks which result you would want back on
 every turn and nothing answers it**: the comparison is the exercise, so do not add the sentence
-saying which route is bulkier, in the card, the description or the prose. Ticked once to
+saying which route is bulkier, in the card, the description or the prose. Ticked to
 `kata.step1.connect`.
 
 **The third route is `kata/step1/front/index.html`, and the two moves that work it sit in the middle
@@ -1097,7 +1104,7 @@ looking at a window, counting a token or asking what a turn cost, which left a s
 ending on a page that never mentions one. The card frames the whole hunt as **one session with a
 `/context` reading at either end**: read the number, work all five flags without clearing, read it
 again, then say which flag you could hand over whole. It is `TaskCard` like the step's other six,
-ticked once to `kata.step1.hunt`, and it grades nothing. The first and third moves are a pair on
+ticked to `kata.step1.hunt`, and it grades nothing. The first and third moves are a pair on
 `ReadYourWindow`'s reasoning, so dropping either leaves a number with nothing to compare it to, and
 the fourth move is the debrief that used to sit over the board as prose: it belongs after the work,
 because which flag you could hand over whole is something you find out by handing it over. It also
@@ -1144,7 +1151,7 @@ saying what the rule is, so it says the answer is in the nine titles together ra
 of them and stops there; naming the rule is the help dialog's job. `flag.decode.hint` ended on
 "point your agent at it" until it was rewritten, which named no work at all, and the half it gained
 is the trap the help dialog spends three sentences on: an agent doing character arithmetic in prose
-sounds exactly as sure when it is wrong. **The five house rules moved to step 0's `welcome`**, where they are the rules
+sounds exactly as sure when it is wrong. **The house rules moved to step 0's `welcome`**, where they are the rules
 of every board in the course rather than of this one, so `lead.2` links to them in half a sentence
 and the unit keeps only the game (two lead paragraphs, the launcher, the rule
 over the task card and the two sentences that close the step). Do not
@@ -1152,8 +1159,10 @@ write a rule back onto this page: a rule that is true here and nowhere else is t
 wrong rather than misplaced. What went with the move is worth knowing. The old `house-rules.5` was
 the course's second pointer at `model.cost.4`, and `hunt.count.label` is what replaced it: the card
 sends the student's two `/context` readings to the rates rather than working them out here, so
-`cost.4` is still the one place the course multiplies. The intro's version names no command and does
-no arithmetic for the same reason, and neither may grow one. The old `house-rules.4` carried the five same-shape
+`cost.4` is still the one place the course multiplies. The intro's version of that rule has since
+been cut as well (step 0's own file says why), so `hunt.count.label` is now the only thing anywhere
+near a board that points at what a hunt cost. It names no command and does no arithmetic, and it may
+not grow either. The old `house-rules.4` carried the five same-shape
 lines the trace prints, a measured fact of the backend; **`flag.trace.help` is now the only place
 that number appears**, so a change under `kata/step1/java` visits that key alone, in both languages.
 The `Stuck?` aside carried two deep hints and went because the Hint dialog is where a

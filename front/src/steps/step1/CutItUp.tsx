@@ -12,7 +12,11 @@ const MOVES = ['alone', 'agent', 'compare', 'plan', 'build'] as const
  *
  * Six paragraphs said this once, and the compression is the point: the student reads the moves at a
  * glance and spends the time on the problem instead. Anything about how the card behaves, including
- * why there is one tick rather than five, belongs in `TaskCard` rather than here.
+ * why a move ticks as well as the card, belongs in `TaskCard` rather than here.
+ *
+ * This is the card the per-move tick was designed against, and the five moves are why: cutting a
+ * real under-specified file up twice and then building it is not one evening, so the ticks are what
+ * let a student put it down after `compare` and pick it up at `plan`.
  */
 export function CutItUp() {
   return (

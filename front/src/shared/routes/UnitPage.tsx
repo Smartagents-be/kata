@@ -82,7 +82,13 @@ function UnitView({ step, unit }: { step: Step; unit: Unit }) {
   )
 
   return (
-    <div id="unit" data-component="UnitView" className="flex flex-col gap-8">
+    // `[&>*]:my-0` is the one thing in here that is not obvious. A figure carries `my-8` so it is
+    // spaced when it sits inside a run of prose, but the registry's trailing figure is a *direct*
+    // child of this column, where the flex gap already spaces it and margins do not collapse into a
+    // gap. Left alone the two stack, and a board landing after a task came out with 96px of empty
+    // page between them. Only direct children are reset, so an inline figure inside `StepContent`
+    // keeps the margin it needs.
+    <div id="unit" data-component="UnitView" className="flex flex-col gap-8 [&>*]:my-0">
       <header id="unit-header" data-component="UnitView">
         <p
           id="unit-step-title"

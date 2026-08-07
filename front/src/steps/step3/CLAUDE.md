@@ -25,8 +25,7 @@ reasoning in the root `CLAUDE.md`. What the step does carry is one browser-grade
 against an *exercise* and not against a multiple-choice question, which a room answers by show of
 hands, and the quiz landed on `expectations` because it is the unit with the most checkable claims and
 because it and `impostor` both rendered empty in guided mode. The card is the shape this file
-pre-authorised: ticked once, grading nothing, and four of its five moves happening away from the
-keyboard. **It must never grow a checker, a hash, a text box or a sixth move.** The moment one of them
+pre-authorised: ungraded, and four of its five moves happening away from the keyboard. **It must never grow a checker, a hash, a text box or a sixth move.** The moment one of them
 is graded, the step is lying about what it is.
 
 **The step has exactly one drawing, `PipelineShift` in `change`, and the bar for a second one is

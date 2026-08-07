@@ -1,27 +1,9 @@
-import { LightbulbIcon } from 'lucide-react'
 import { useState, type ClipboardEvent, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Badge } from '@/shared/components/ui/badge'
-import { Button } from '@/shared/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/shared/components/ui/card'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/shared/components/ui/dialog'
+import { Board, AnswerLine, PanelChip, PanelNote, BoardRow } from '@/shared/components/Panel'
 import { useStepText } from '@/shared/i18n/useStepText'
 import { isWholeFlag } from '@/shared/lib/flag-paste'
 import { sha256Hex } from '@/shared/lib/hash'
-import { cn } from '@/shared/lib/utils'
 import { FLAG_SALT, flags, type FlagSpec } from './flags'
 
 const STORAGE_KEY = 'kata.step0.flags'
@@ -52,7 +34,10 @@ function writeSolved(solved: Set<string>) {
  * It is step 1's board written again rather than step 1's board imported, which is the same decision
  * the root `CLAUDE.md` records for the grading code in Java: a step owns what grades it, and steps do
  * not reach into each other. So the counter, the rows and the two storage helpers are all here, and
- * the price is a file that reads like its neighbour.
+ * the price is a file that reads like its neighbour. **What is not duplicated is the drawing**: the
+ * board and its rows come from `shared/components/Panel.tsx`, so the three boards in the course
+ * cannot drift apart visually while each keeps its own grading. That is the line to hold when
+ * anything here grows: behaviour per step, appearance shared.
  *
  * `STORAGE_KEY` sits under the `kata.step0.` prefix `shared/lib/reset.ts` clears by key shape, so a
  * student's reset takes the collection with the rest of their progress.
@@ -71,42 +56,23 @@ export function FlagBoard() {
   }
 
   return (
-    <Card
-      id="flags"
-      data-component="FlagBoard"
-      data-state={solved.size === flags.length ? 'complete' : 'partial'}
-      className="my-8"
+    <Board
+      block="flags"
+      state={solved.size === flags.length ? 'complete' : 'partial'}
+      eyebrow={t('flags.panel.progress', { solved: solved.size, total: flags.length })}
+      title={text('flags.panel.title')}
+      description={text('flags.panel.description')}
     >
-      <CardHeader id="flags-header" data-component="FlagBoard">
-        <CardTitle id="flags-title" data-component="FlagBoard">
-          {text('flags.panel.title')}
-        </CardTitle>
-        <CardDescription id="flags-description" data-component="FlagBoard">
-          {text('flags.panel.description')}
-        </CardDescription>
-      </CardHeader>
-      <CardContent id="flags-content" data-component="FlagBoard" className="flex flex-col gap-4">
-        <p
-          id="flags-progress"
-          data-component="FlagBoard"
-          className="text-muted-foreground text-sm tabular-nums"
-        >
-          {t('flags.panel.progress', { solved: solved.size, total: flags.length })}
-        </p>
-
-        <ol id="flags-items" data-component="FlagBoard" className="flex flex-col gap-3">
-          {flags.map((flag, index) => (
-            <FlagRow
-              key={flag.id}
-              flag={flag}
-              index={index}
-              solved={solved.has(flag.id)}
-              onSolved={() => markSolved(flag.id)}
-            />
-          ))}
-        </ol>
-      </CardContent>
-    </Card>
+      {flags.map((flag, index) => (
+        <FlagRow
+          key={flag.id}
+          flag={flag}
+          index={index}
+          solved={solved.has(flag.id)}
+          onSolved={() => markSolved(flag.id)}
+        />
+      ))}
+    </Board>
   )
 }
 
@@ -114,8 +80,7 @@ type RowState = 'idle' | 'checking' | 'wrong'
 
 /**
  * One graded flag: a label, the line saying which run prints it, a hint behind a dialog, and a box
- * to paste into. The Hint button is `CodeCheck`'s, outline and lightbulb and all, because that is
- * the button the student pressed two pages ago.
+ * to paste into. Everything visible is `BoardRow` and `AnswerLine`; what is here is the check.
  */
 function FlagRow({
   flag,
@@ -160,121 +125,46 @@ function FlagRow({
   }
 
   return (
-    <li
-      id={`flags-item-${index}`}
-      data-component="FlagRow"
-      data-state={solved ? 'solved' : 'locked'}
-      className={cn(
-        'rounded-xl border px-4 py-3',
-        solved ? 'border-success/30 bg-success/10' : 'border-border',
-      )}
+    <BoardRow
+      block="flags"
+      index={index}
+      state={solved ? 'solved' : 'locked'}
+      solved={solved}
+      title={text(flag.labelKey)}
+      chip={
+        solved ? (
+          <PanelChip id={`flags-item-${index}-badge`}>{text('flags.panel.solved')}</PanelChip>
+        ) : undefined
+      }
+      body={text(flag.hintKey)}
     >
-      <div
-        id={`flags-item-${index}-heading`}
-        data-component="FlagRow"
-        className="flex items-center justify-between gap-3"
-      >
-        <span id={`flags-item-${index}-label`} data-component="FlagRow" className="font-medium">
-          {text(flag.labelKey)}
-        </span>
-        <div
-          id={`flags-item-${index}-heading-actions`}
-          data-component="FlagRow"
-          className="flex items-center gap-2"
-        >
-          {solved && (
-            <Badge id={`flags-item-${index}-badge`} data-component="FlagRow" variant="success">
-              {text('flags.panel.solved')}
-            </Badge>
-          )}
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button
-                id={`flags-item-${index}-help`}
-                data-component="FlagRow"
-                type="button"
-                variant="outline"
-                size="sm"
-                className="text-muted-foreground"
-              >
-                <LightbulbIcon
-                  id={`flags-item-${index}-help-icon`}
-                  data-component="FlagRow"
-                  aria-hidden
-                  className="text-yellow-500"
-                />
-                {text('flags.panel.hint')}
-              </Button>
-            </DialogTrigger>
-            <DialogContent id={`flags-item-${index}-help-dialog`} data-component="FlagRow">
-              <DialogHeader id={`flags-item-${index}-help-dialog-header`} data-component="FlagRow">
-                <DialogTitle id={`flags-item-${index}-help-dialog-title`} data-component="FlagRow">
-                  {text(flag.labelKey)}
-                </DialogTitle>
-                <DialogDescription
-                  id={`flags-item-${index}-help-dialog-body`}
-                  data-component="FlagRow"
-                >
-                  {text(flag.helpKey)}
-                </DialogDescription>
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
-        </div>
-      </div>
-
-      <p
-        id={`flags-item-${index}-hint`}
-        data-component="FlagRow"
-        className="text-muted-foreground mt-1 text-sm"
-      >
-        {text(flag.hintKey)}
-      </p>
-
       {!solved && (
-        <form
-          id={`flags-item-${index}-form`}
-          data-component="FlagRow"
+        <AnswerLine
+          idBase={`flags-item-${index}`}
+          value={value}
+          onValueChange={(next) => {
+            setValue(next)
+            if (state === 'wrong') {
+              setState('idle')
+            }
+          }}
+          onPaste={onPaste}
           onSubmit={onSubmit}
-          className="mt-3 flex items-center gap-2"
-        >
-          <input
-            id={`flags-item-${index}-input`}
-            data-component="FlagRow"
-            value={value}
-            onChange={(event) => {
-              setValue(event.target.value)
-              if (state === 'wrong') {
-                setState('idle')
-              }
-            }}
-            onPaste={onPaste}
-            spellCheck={false}
-            placeholder={text('flags.panel.placeholder')}
-            aria-label={text(flag.labelKey)}
-            className="field h-9 w-full max-w-xs"
-          />
-          <Button
-            id={`flags-item-${index}-submit`}
-            data-component="FlagRow"
-            type="submit"
-            disabled={state === 'checking' || value.trim() === ''}
-          >
-            {text('flags.panel.check')}
-          </Button>
-        </form>
+          busy={state === 'checking'}
+          label={text(flag.labelKey)}
+          placeholder={text('flags.panel.placeholder')}
+          checkLabel={text('flags.panel.check')}
+          hintLabel={text('flags.panel.hint')}
+          helpTitle={text(flag.labelKey)}
+          helpBody={text(flag.helpKey)}
+        />
       )}
 
       {state === 'wrong' && (
-        <p
-          id={`flags-item-${index}-error`}
-          data-component="FlagRow"
-          role="status"
-          className="text-destructive mt-2 text-sm"
-        >
+        <PanelNote id={`flags-item-${index}-error`} tone="destructive">
           {text('flags.panel.wrong')}
-        </p>
+        </PanelNote>
       )}
-    </li>
+    </BoardRow>
   )
 }

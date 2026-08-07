@@ -1,3 +1,4 @@
+import { PanelChip } from '@/shared/components/Panel'
 import { useStepText } from '@/shared/i18n/useStepText'
 
 /**
@@ -35,13 +36,20 @@ export function ModelTiers() {
   const { text } = useStepText('step1')
 
   return (
-    <div id="model-tiers" data-component="ModelTiers" className="my-8 flex flex-col gap-4">
+    /*
+      Three hairline-ruled rows rather than three cards. The tier name is the eyebrow riding on each
+      rule, which is the same gesture a panel opens on, so the three read as one figure instead of as
+      a stack of boxes. **No numeral gutter here**, unlike a task's moves or a board's rows: these
+      three are a scale rather than a sequence, and numbering them would say to do the first one
+      first.
+    */
+    <div id="model-tiers" data-component="ModelTiers" className="my-8">
       {TIERS.map((tier, index) => (
         <div
           key={tier}
           id={`model-tiers-item-${index}`}
           data-component="ModelTiers"
-          className="bg-card rounded-xl border p-5"
+          className="border-border/50 border-t py-5 first:border-t-0 first:pt-0"
         >
           <div
             id={`model-tiers-item-${index}-header`}
@@ -67,7 +75,7 @@ export function ModelTiers() {
           <p
             id={`model-tiers-item-${index}-body`}
             data-component="ModelTiers"
-            className="text-muted-foreground mt-2 text-sm"
+            className="text-muted-foreground mt-2 max-w-[58ch] text-sm leading-relaxed"
           >
             {text(`tiers.${tier}.body`)}
           </p>
@@ -78,13 +86,10 @@ export function ModelTiers() {
             className="mt-3 flex flex-wrap gap-2"
           >
             {TAGS.map((tag) => (
-              <li
-                key={tag}
-                id={`model-tiers-item-${index}-tag-${tag - 1}`}
-                data-component="ModelTiers"
-                className="text-muted-foreground rounded-full border px-2.5 py-0.5 text-xs"
-              >
-                {text(`tiers.${tier}.tag.${tag}`)}
+              <li key={tag}>
+                <PanelChip id={`model-tiers-item-${index}-tag-${tag - 1}`} tone="muted">
+                  {text(`tiers.${tier}.tag.${tag}`)}
+                </PanelChip>
               </li>
             ))}
           </ul>

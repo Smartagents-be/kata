@@ -1,13 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Panel, PanelNote } from '@/shared/components/Panel'
 import { Button } from '@/shared/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/shared/components/ui/card'
 import { useStepText } from '@/shared/i18n/useStepText'
 import { shuffled } from '@/shared/lib/shuffle'
 import { cn } from '@/shared/lib/utils'
@@ -249,166 +243,283 @@ export function ConnectBoard({
   const complete = linked === scenarios.length
 
   return (
-    <Card
-      id={block}
-      data-component="ConnectBoard"
-      data-state={checked ? 'checked' : 'open'}
+    <Panel
+      block={block}
+      state={checked ? 'checked' : 'open'}
+      title={text(`${prefix}.title`)}
+      description={text(`${prefix}.description`)}
+      /*
+        The running count rides on the opening hairline rather than sitting as a line under the
+        intro, which is where a flag board's counter goes: it is the one thing on the block that
+        changes as the student works, so it belongs where a section label belongs. It doubles as the
+        "now pick a tier" prompt while a situation is armed, which is why it is not always a number.
+      */
+      eyebrow={
+        armed && !checked
+          ? text(`${prefix}.armed`)
+          : t(`${prefix}.progress`, { linked, total: scenarios.length })
+      }
       className={className}
+      contentClassName="flex flex-col gap-5"
     >
-      <CardHeader id={`${block}-header`} data-component="ConnectBoard">
-        <CardTitle id={`${block}-title`} data-component="ConnectBoard">
-          {text(`${prefix}.title`)}
-        </CardTitle>
-        <CardDescription id={`${block}-description`} data-component="ConnectBoard">
-          {text(`${prefix}.description`)}
-        </CardDescription>
-      </CardHeader>
-
-      <CardContent
-        id={`${block}-content`}
+      <div
+        id={`${block}-board`}
         data-component="ConnectBoard"
-        className="flex flex-col gap-5"
+        ref={boardRef}
+        className="relative grid grid-cols-1 gap-x-16 gap-y-3 md:grid-cols-2"
       >
-        <p
-          id={`${block}-progress`}
+        {/* The lines. Behind the cards and deaf to the pointer: every hit lands on a control. */}
+        <svg
+          id={`${block}-lines`}
           data-component="ConnectBoard"
-          role="status"
-          className="text-muted-foreground text-sm tabular-nums"
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 hidden size-full md:block"
         >
-          {armed && !checked
-            ? text(`${prefix}.armed`)
-            : t(`${prefix}.progress`, { linked, total: scenarios.length })}
-        </p>
+          {/* One marker per verdict: a marker's fill comes from its own definition, not from the
+              line that references it, so `currentColor` here would draw ink-black arrowheads. */}
+          <defs>
+            {(
+              [
+                ['open', 'fill-primary/60'],
+                ['right', 'fill-success'],
+                ['wrong', 'fill-destructive'],
+                ['note', 'fill-amber-500'],
+              ] as const
+            ).map(([state, fill]) => (
+              <marker
+                key={state}
+                id={`${block}-arrowhead-${state}`}
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="6"
+                markerHeight="6"
+                orient="auto-start-reverse"
+              >
+                <path d="M 0 0 L 10 5 L 0 10 z" className={fill} />
+              </marker>
+            ))}
+          </defs>
 
-        <div
-          id={`${block}-board`}
-          data-component="ConnectBoard"
-          ref={boardRef}
-          className="relative grid grid-cols-1 gap-x-16 gap-y-3 md:grid-cols-2"
-        >
-          {/* The lines. Behind the cards and deaf to the pointer: every hit lands on a control. */}
-          <svg
-            id={`${block}-lines`}
-            data-component="ConnectBoard"
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 hidden size-full md:block"
-          >
-            {/* One marker per verdict: a marker's fill comes from its own definition, not from the
-                line that references it, so `currentColor` here would draw ink-black arrowheads. */}
-            <defs>
-              {(
-                [
-                  ['open', 'fill-primary/60'],
-                  ['right', 'fill-success'],
-                  ['wrong', 'fill-destructive'],
-                  ['note', 'fill-amber-500'],
-                ] as const
-              ).map(([state, fill]) => (
-                <marker
-                  key={state}
-                  id={`${block}-arrowhead-${state}`}
-                  viewBox="0 0 10 10"
-                  refX="8"
-                  refY="5"
-                  markerWidth="6"
-                  markerHeight="6"
-                  orient="auto-start-reverse"
-                >
-                  <path d="M 0 0 L 10 5 L 0 10 z" className={fill} />
-                </marker>
-              ))}
-            </defs>
-
-            {scenarios.map((scenario, index) => {
-              const target = links[scenario.id]
-              const from = anchors.handles[scenario.id]
-              const to = target ? anchors.targets[target] : undefined
-              // The line being re-aimed is replaced by the dashed one below, not drawn twice.
-              if (!target || !from || !to || drag?.scenarioId === scenario.id) {
-                return null
-              }
-              const state = verdictOf(scenario, target) ?? 'open'
-              const bend = Math.max(28, (to.x - from.x) / 2)
-              return (
-                <path
-                  key={scenario.id}
-                  id={`${block}-line-${index}`}
-                  data-component="ConnectBoard"
-                  data-state={state}
-                  d={`M ${from.x} ${from.y} C ${from.x + bend} ${from.y}, ${to.x - bend} ${to.y}, ${to.x} ${to.y}`}
-                  fill="none"
-                  strokeWidth="2"
-                  markerEnd={`url(#${block}-arrowhead-${state})`}
-                  className={cn(
-                    'transition-opacity',
-                    state === 'open' && 'stroke-primary/60',
-                    state === 'right' && 'stroke-success',
-                    state === 'wrong' && 'stroke-destructive',
-                    state === 'note' && 'stroke-amber-500',
-                    focused && focused !== scenario.id && 'opacity-25',
-                  )}
-                />
-              )
-            })}
-
-            {/* the line being dragged: dashed, because it is not a connection yet */}
-            {drag && anchors.handles[drag.scenarioId] && (
+          {scenarios.map((scenario, index) => {
+            const target = links[scenario.id]
+            const from = anchors.handles[scenario.id]
+            const to = target ? anchors.targets[target] : undefined
+            // The line being re-aimed is replaced by the dashed one below, not drawn twice.
+            if (!target || !from || !to || drag?.scenarioId === scenario.id) {
+              return null
+            }
+            const state = verdictOf(scenario, target) ?? 'open'
+            const bend = Math.max(28, (to.x - from.x) / 2)
+            return (
               <path
-                id={`${block}-line-dragging`}
+                key={scenario.id}
+                id={`${block}-line-${index}`}
                 data-component="ConnectBoard"
-                d={`M ${anchors.handles[drag.scenarioId].x} ${anchors.handles[drag.scenarioId].y} L ${drag.point.x} ${drag.point.y}`}
+                data-state={state}
+                d={`M ${from.x} ${from.y} C ${from.x + bend} ${from.y}, ${to.x - bend} ${to.y}, ${to.x} ${to.y}`}
                 fill="none"
                 strokeWidth="2"
-                strokeDasharray="6 5"
-                markerEnd={`url(#${block}-arrowhead-open)`}
-                className="stroke-primary"
+                markerEnd={`url(#${block}-arrowhead-${state})`}
+                className={cn(
+                  'transition-opacity',
+                  state === 'open' && 'stroke-primary/60',
+                  state === 'right' && 'stroke-success',
+                  state === 'wrong' && 'stroke-destructive',
+                  state === 'note' && 'stroke-amber-500',
+                  focused && focused !== scenario.id && 'opacity-25',
+                )}
               />
-            )}
-          </svg>
+            )
+          })}
 
-          {/* The grips on the arrowheads, in their own layer: the SVG above takes no pointer events,
-              so a control that has to be grabbed cannot live inside it. `z-10` is load-bearing. A
-              grip sits on the left edge of its target, and both columns are painted after this
-              layer, so without it the target button covers the grip and swallows the press. */}
-          <div
-            id={`${block}-grips`}
-            data-component="ConnectBoard"
-            className="pointer-events-none absolute inset-0 z-10 hidden size-full md:block"
-          >
-            {scenarios.map((scenario, index) => {
-              const target = links[scenario.id]
-              const dragging = drag?.from === 'grip' && drag.scenarioId === scenario.id
-              const to = target ? anchors.targets[target] : undefined
-              // While it is held, the grip rides the cursor instead of sitting on its old anchor.
-              const at = dragging ? drag.point : to
-              if (checked || !at || (!target && !dragging)) {
-                return null
-              }
-              return (
-                <button
-                  key={scenario.id}
-                  id={`${block}-grip-${index}`}
+          {/* the line being dragged: dashed, because it is not a connection yet */}
+          {drag && anchors.handles[drag.scenarioId] && (
+            <path
+              id={`${block}-line-dragging`}
+              data-component="ConnectBoard"
+              d={`M ${anchors.handles[drag.scenarioId].x} ${anchors.handles[drag.scenarioId].y} L ${drag.point.x} ${drag.point.y}`}
+              fill="none"
+              strokeWidth="2"
+              strokeDasharray="6 5"
+              markerEnd={`url(#${block}-arrowhead-open)`}
+              className="stroke-primary"
+            />
+          )}
+        </svg>
+
+        {/* The grips on the arrowheads, in their own layer: the SVG above takes no pointer events,
+            so a control that has to be grabbed cannot live inside it. `z-10` is load-bearing. A
+            grip sits on the left edge of its target, and both columns are painted after this
+            layer, so without it the target button covers the grip and swallows the press. */}
+        <div
+          id={`${block}-grips`}
+          data-component="ConnectBoard"
+          className="pointer-events-none absolute inset-0 z-10 hidden size-full md:block"
+        >
+          {scenarios.map((scenario, index) => {
+            const target = links[scenario.id]
+            const dragging = drag?.from === 'grip' && drag.scenarioId === scenario.id
+            const to = target ? anchors.targets[target] : undefined
+            // While it is held, the grip rides the cursor instead of sitting on its old anchor.
+            const at = dragging ? drag.point : to
+            if (checked || !at || (!target && !dragging)) {
+              return null
+            }
+            return (
+              <button
+                key={scenario.id}
+                id={`${block}-grip-${index}`}
+                data-component="ConnectBoard"
+                data-state={dragging ? 'dragging' : 'placed'}
+                type="button"
+                aria-label={text(`${prefix}.aria.grip`)}
+                style={{ left: at.x, top: at.y }}
+                onPointerDown={(event) => {
+                  event.currentTarget.setPointerCapture(event.pointerId)
+                  setDrag({
+                    scenarioId: scenario.id,
+                    from: 'grip',
+                    point: toBoard(event.clientX, event.clientY),
+                  })
+                  setArmed(scenario.id)
+                }}
+                onPointerMove={(event) => {
+                  if (drag?.scenarioId !== scenario.id) {
+                    return
+                  }
+                  setDrag({
+                    scenarioId: scenario.id,
+                    from: 'grip',
+                    point: toBoard(event.clientX, event.clientY),
+                  })
+                  setHovered(targetUnder(event.clientX, event.clientY))
+                }}
+                onPointerUp={(event) => {
+                  const dropped = targetUnder(event.clientX, event.clientY)
+                  setDrag(null)
+                  setHovered(null)
+                  // Dropped on nothing: the line goes back where it was rather than vanishing.
+                  if (dropped) {
+                    justConnected.current = true
+                    connect(scenario.id, dropped)
+                  }
+                  setArmed(null)
+                }}
+                onPointerCancel={() => {
+                  setDrag(null)
+                  setHovered(null)
+                  setArmed(null)
+                }}
+                // Keyboard reaches the same rewiring through the row's own handle, so this grip
+                // only arms the row and lets the target column take the second press.
+                onClick={() => {
+                  // The click that closes a successful drag is not a second interaction.
+                  if (justConnected.current) {
+                    justConnected.current = false
+                    return
+                  }
+                  setArmed(scenario.id)
+                }}
+                // Deliberately invisible: a dot drawn on the arrowhead reads as a third kind of
+                // marker on a board that already has handles and targets. This is a hit area over
+                // the point of the arrow, sized for a comfortable grab, and the cursor is the only
+                // thing that advertises it. The focus ring still draws, so a keyboard can find it.
+                className={cn(
+                  'pointer-events-auto absolute size-5 -translate-x-1/2 -translate-y-1/2 touch-none rounded-full bg-transparent',
+                  'cursor-grab active:cursor-grabbing',
+                  'focus-visible:ring-ring focus-visible:ring-[3px] focus-visible:outline-none',
+                )}
+              />
+            )
+          })}
+        </div>
+
+        <ol
+          id={`${block}-scenarios`}
+          data-component="ConnectBoard"
+          className="relative flex flex-col gap-3"
+        >
+          {scenarios.map((scenario, index) => {
+            const target = links[scenario.id]
+            const verdict = verdictOf(scenario, target)
+            return (
+              <li
+                key={scenario.id}
+                id={`${block}-scenario-${index}`}
+                data-component="ConnectBoard"
+                data-state={verdict ?? (target ? 'linked' : 'open')}
+                /*
+                  These two columns keep a border where every other pickable row in the course lost
+                  one, and that is the exception rather than an oversight: a line is drawn between
+                  them, so each has to be an edge the eye can see a line arrive at. What they take
+                  from the shared vocabulary is the tint and the radius, so a picked row here and a
+                  picked row in the quiz are the same colour.
+                */
+                className={cn(
+                  'flex items-start gap-3 rounded-lg border px-4 py-3 text-sm transition-colors',
+                  !checked && armed === scenario.id && 'border-primary bg-primary/7',
+                  !checked && armed !== scenario.id && 'border-border/60',
+                  verdict === 'right' && 'border-success/40 bg-success/8',
+                  verdict === 'wrong' && 'border-destructive/40 bg-destructive/6',
+                  verdict === 'note' && 'border-amber-500/50 bg-amber-500/6',
+                )}
+              >
+                <p
+                  id={`${block}-scenario-${index}-text`}
                   data-component="ConnectBoard"
-                  data-state={dragging ? 'dragging' : 'placed'}
+                  className="flex-1"
+                >
+                  {text(`${prefix}.scenario.${scenario.id}`)}
+                  {/* Below md there are no lines to read, so the pick is named in words. */}
+                  {target && (
+                    <span
+                      id={`${block}-scenario-${index}-pick`}
+                      data-component="ConnectBoard"
+                      className={cn(
+                        'text-muted-foreground mt-1 block md:hidden',
+                        targetFont === 'mono' && 'font-mono text-xs',
+                      )}
+                    >
+                      {text(targetKey(target))}
+                    </span>
+                  )}
+                </p>
+
+                <button
+                  id={`${block}-scenario-${index}-handle`}
+                  data-component="ConnectBoard"
                   type="button"
-                  aria-label={text(`${prefix}.aria.grip`)}
-                  style={{ left: at.x, top: at.y }}
+                  disabled={checked}
+                  aria-label={text(`${prefix}.aria.handle`)}
+                  aria-pressed={armed === scenario.id}
+                  ref={(node) => {
+                    if (node) {
+                      handleRefs.current.set(scenario.id, node)
+                    } else {
+                      handleRefs.current.delete(scenario.id)
+                    }
+                  }}
                   onPointerDown={(event) => {
+                    if (checked) {
+                      return
+                    }
+                    // Arming is the click's job, further down. Doing it here too would let the
+                    // click that ends a plain press toggle it straight back off.
                     event.currentTarget.setPointerCapture(event.pointerId)
                     setDrag({
                       scenarioId: scenario.id,
-                      from: 'grip',
+                      from: 'handle',
                       point: toBoard(event.clientX, event.clientY),
                     })
-                    setArmed(scenario.id)
                   }}
                   onPointerMove={(event) => {
-                    if (drag?.scenarioId !== scenario.id) {
+                    if (!drag || drag.scenarioId !== scenario.id) {
                       return
                     }
                     setDrag({
                       scenarioId: scenario.id,
-                      from: 'grip',
+                      from: 'handle',
                       point: toBoard(event.clientX, event.clientY),
                     })
                     setHovered(targetUnder(event.clientX, event.clientY))
@@ -417,268 +528,140 @@ export function ConnectBoard({
                     const dropped = targetUnder(event.clientX, event.clientY)
                     setDrag(null)
                     setHovered(null)
-                    // Dropped on nothing: the line goes back where it was rather than vanishing.
                     if (dropped) {
                       justConnected.current = true
                       connect(scenario.id, dropped)
                     }
-                    setArmed(null)
                   }}
                   onPointerCancel={() => {
                     setDrag(null)
                     setHovered(null)
-                    setArmed(null)
                   }}
-                  // Keyboard reaches the same rewiring through the row's own handle, so this grip
-                  // only arms the row and lets the target column take the second press.
                   onClick={() => {
                     // The click that closes a successful drag is not a second interaction.
                     if (justConnected.current) {
                       justConnected.current = false
                       return
                     }
-                    setArmed(scenario.id)
+                    setArmed((current) => (current === scenario.id ? null : scenario.id))
                   }}
-                  // Deliberately invisible: a dot drawn on the arrowhead reads as a third kind of
-                  // marker on a board that already has handles and targets. This is a hit area over
-                  // the point of the arrow, sized for a comfortable grab, and the cursor is the only
-                  // thing that advertises it. The focus ring still draws, so a keyboard can find it.
                   className={cn(
-                    'pointer-events-auto absolute size-5 -translate-x-1/2 -translate-y-1/2 touch-none rounded-full bg-transparent',
-                    'cursor-grab active:cursor-grabbing',
+                    'mt-0.5 size-5 shrink-0 touch-none rounded-full border-2 transition-colors',
                     'focus-visible:ring-ring focus-visible:ring-[3px] focus-visible:outline-none',
+                    checked ? 'cursor-default' : 'cursor-grab active:cursor-grabbing',
+                    armed === scenario.id || drag?.scenarioId === scenario.id || target
+                      ? 'border-primary bg-primary/30'
+                      : 'border-primary/40 bg-background',
+                    verdict === 'right' && 'border-success bg-success/30',
+                    verdict === 'wrong' && 'border-destructive bg-destructive/20',
+                    verdict === 'note' && 'border-amber-500 bg-amber-500/30',
                   )}
                 />
-              )
-            })}
-          </div>
-
-          <ol
-            id={`${block}-scenarios`}
-            data-component="ConnectBoard"
-            className="relative flex flex-col gap-3"
-          >
-            {scenarios.map((scenario, index) => {
-              const target = links[scenario.id]
-              const verdict = verdictOf(scenario, target)
-              return (
-                <li
-                  key={scenario.id}
-                  id={`${block}-scenario-${index}`}
-                  data-component="ConnectBoard"
-                  data-state={verdict ?? (target ? 'linked' : 'open')}
-                  className={cn(
-                    'flex items-start gap-3 rounded-xl border px-4 py-3 text-sm transition-colors',
-                    !checked && armed === scenario.id && 'border-primary bg-primary/5',
-                    !checked && armed !== scenario.id && 'border-border',
-                    verdict === 'right' && 'border-success/40 bg-success/10',
-                    verdict === 'wrong' && 'border-destructive/40',
-                    verdict === 'note' && 'border-amber-500/50 bg-amber-500/5',
-                  )}
-                >
-                  <p
-                    id={`${block}-scenario-${index}-text`}
-                    data-component="ConnectBoard"
-                    className="flex-1"
-                  >
-                    {text(`${prefix}.scenario.${scenario.id}`)}
-                    {/* Below md there are no lines to read, so the pick is named in words. */}
-                    {target && (
-                      <span
-                        id={`${block}-scenario-${index}-pick`}
-                        data-component="ConnectBoard"
-                        className={cn(
-                          'text-muted-foreground mt-1 block md:hidden',
-                          targetFont === 'mono' && 'font-mono text-xs',
-                        )}
-                      >
-                        {text(targetKey(target))}
-                      </span>
-                    )}
-                  </p>
-
-                  <button
-                    id={`${block}-scenario-${index}-handle`}
-                    data-component="ConnectBoard"
-                    type="button"
-                    disabled={checked}
-                    aria-label={text(`${prefix}.aria.handle`)}
-                    aria-pressed={armed === scenario.id}
-                    ref={(node) => {
-                      if (node) {
-                        handleRefs.current.set(scenario.id, node)
-                      } else {
-                        handleRefs.current.delete(scenario.id)
-                      }
-                    }}
-                    onPointerDown={(event) => {
-                      if (checked) {
-                        return
-                      }
-                      // Arming is the click's job, further down. Doing it here too would let the
-                      // click that ends a plain press toggle it straight back off.
-                      event.currentTarget.setPointerCapture(event.pointerId)
-                      setDrag({
-                        scenarioId: scenario.id,
-                        from: 'handle',
-                        point: toBoard(event.clientX, event.clientY),
-                      })
-                    }}
-                    onPointerMove={(event) => {
-                      if (!drag || drag.scenarioId !== scenario.id) {
-                        return
-                      }
-                      setDrag({
-                        scenarioId: scenario.id,
-                        from: 'handle',
-                        point: toBoard(event.clientX, event.clientY),
-                      })
-                      setHovered(targetUnder(event.clientX, event.clientY))
-                    }}
-                    onPointerUp={(event) => {
-                      const dropped = targetUnder(event.clientX, event.clientY)
-                      setDrag(null)
-                      setHovered(null)
-                      if (dropped) {
-                        justConnected.current = true
-                        connect(scenario.id, dropped)
-                      }
-                    }}
-                    onPointerCancel={() => {
-                      setDrag(null)
-                      setHovered(null)
-                    }}
-                    onClick={() => {
-                      // The click that closes a successful drag is not a second interaction.
-                      if (justConnected.current) {
-                        justConnected.current = false
-                        return
-                      }
-                      setArmed((current) => (current === scenario.id ? null : scenario.id))
-                    }}
-                    className={cn(
-                      'mt-0.5 size-5 shrink-0 touch-none rounded-full border-2 transition-colors',
-                      'focus-visible:ring-ring focus-visible:ring-[3px] focus-visible:outline-none',
-                      checked ? 'cursor-default' : 'cursor-grab active:cursor-grabbing',
-                      armed === scenario.id || drag?.scenarioId === scenario.id || target
-                        ? 'border-primary bg-primary/30'
-                        : 'border-primary/40 bg-background',
-                      verdict === 'right' && 'border-success bg-success/30',
-                      verdict === 'wrong' && 'border-destructive bg-destructive/20',
-                      verdict === 'note' && 'border-amber-500 bg-amber-500/30',
-                    )}
-                  />
-                </li>
-              )
-            })}
-          </ol>
-
-          <ul
-            id={`${block}-targets`}
-            data-component="ConnectBoard"
-            className="relative mt-3 flex flex-col gap-3 md:mt-0 md:justify-center"
-          >
-            {choices.map((target, index) => (
-              <li key={target} id={`${block}-target-${index}`} data-component="ConnectBoard">
-                <button
-                  id={`${block}-target-${index}-button`}
-                  data-component="ConnectBoard"
-                  type="button"
-                  disabled={checked}
-                  aria-label={text(targetKey(target))}
-                  ref={(node) => {
-                    if (node) {
-                      targetRefs.current.set(target, node)
-                    } else {
-                      targetRefs.current.delete(target)
-                    }
-                  }}
-                  onClick={() => {
-                    if (armed) {
-                      connect(armed, target)
-                    }
-                  }}
-                  className={cn(
-                    'w-full rounded-xl border px-4 py-3 text-left transition-colors',
-                    'focus-visible:ring-ring focus-visible:ring-[3px] focus-visible:outline-none',
-                    targetFont === 'mono' ? 'font-mono text-sm' : 'text-sm font-medium',
-                    hovered === target && 'border-primary bg-primary/10',
-                    hovered !== target && 'border-border',
-                    !checked && armed && 'hover:border-primary hover:bg-primary/5',
-                    checked && 'cursor-default',
-                  )}
-                >
-                  {text(targetKey(target))}
-                </button>
               </li>
-            ))}
-          </ul>
-        </div>
+            )
+          })}
+        </ol>
 
-        {/* A right answer is already marked right, so only a wrong one is worth a sentence. The
-            amber row is the exception: it prints whatever you picked, because the sentence is the
-            whole result there rather than a correction. */}
-        {checked && (
-          <ul
-            id={`${block}-explanations`}
-            data-component="ConnectBoard"
-            className="flex flex-col gap-2"
-          >
-            {scenarios.map((scenario, index) => {
-              const verdict = verdictOf(scenario, links[scenario.id])
-              if (verdict !== 'wrong' && verdict !== 'note') {
-                return null
-              }
-              return (
-                <li
-                  key={scenario.id}
+        <ul
+          id={`${block}-targets`}
+          data-component="ConnectBoard"
+          className="relative mt-3 flex flex-col gap-3 md:mt-0 md:justify-center"
+        >
+          {choices.map((target, index) => (
+            <li key={target} id={`${block}-target-${index}`} data-component="ConnectBoard">
+              <button
+                id={`${block}-target-${index}-button`}
+                data-component="ConnectBoard"
+                type="button"
+                disabled={checked}
+                aria-label={text(targetKey(target))}
+                ref={(node) => {
+                  if (node) {
+                    targetRefs.current.set(target, node)
+                  } else {
+                    targetRefs.current.delete(target)
+                  }
+                }}
+                onClick={() => {
+                  if (armed) {
+                    connect(armed, target)
+                  }
+                }}
+                className={cn(
+                  'w-full rounded-lg border px-4 py-3 text-left transition-colors',
+                  'focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none',
+                  targetFont === 'mono' ? 'font-mono text-sm' : 'text-sm font-medium',
+                  hovered === target && 'border-primary bg-primary/10',
+                  hovered !== target && 'border-border/60',
+                  !checked && armed && 'hover:border-primary hover:bg-primary/7',
+                  checked && 'cursor-default',
+                )}
+              >
+                {text(targetKey(target))}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* A right answer is already marked right, so only a wrong one is worth a sentence. The
+          amber row is the exception: it prints whatever you picked, because the sentence is the
+          whole result there rather than a correction. */}
+      {checked && (
+        <ul
+          id={`${block}-explanations`}
+          data-component="ConnectBoard"
+          className="flex flex-col gap-2"
+        >
+          {scenarios.map((scenario, index) => {
+            const verdict = verdictOf(scenario, links[scenario.id])
+            if (verdict !== 'wrong' && verdict !== 'note') {
+              return null
+            }
+            return (
+              <li key={scenario.id}>
+                <PanelNote
                   id={`${block}-explanation-${index}`}
-                  data-component="ConnectBoard"
-                  data-state={verdict}
-                  className={cn(
-                    'border-l-2 pl-3 text-sm',
-                    verdict === 'wrong' && 'border-destructive/40',
-                    verdict === 'note' && 'border-amber-500/50',
-                  )}
+                  tone={verdict === 'note' ? 'note' : 'destructive'}
                 >
                   {text(`${prefix}.explanation.${scenario.id}`)}
-                </li>
-              )
-            })}
-          </ul>
-        )}
+                </PanelNote>
+              </li>
+            )
+          })}
+        </ul>
+      )}
 
-        <div id={`${block}-actions`} data-component="ConnectBoard" className="flex justify-end">
-          {checked ? (
-            <Button
-              id={`${block}-retry`}
-              data-component="ConnectBoard"
-              type="button"
-              variant="outline"
-              onClick={() => {
-                setLinks({})
-                setChecked(false)
-                setArmed(null)
-              }}
-            >
-              {text(`${prefix}.retry`)}
-            </Button>
-          ) : (
-            <Button
-              id={`${block}-check`}
-              data-component="ConnectBoard"
-              type="button"
-              disabled={!complete}
-              onClick={() => {
-                setChecked(true)
-                setArmed(null)
-              }}
-            >
-              {text(`${prefix}.check`)}
-            </Button>
-          )}
-        </div>
-      </CardContent>
-    </Card>
+      <div id={`${block}-actions`} data-component="ConnectBoard" className="flex justify-end">
+        {checked ? (
+          <Button
+            id={`${block}-retry`}
+            data-component="ConnectBoard"
+            type="button"
+            variant="outline"
+            onClick={() => {
+              setLinks({})
+              setChecked(false)
+              setArmed(null)
+            }}
+          >
+            {text(`${prefix}.retry`)}
+          </Button>
+        ) : (
+          <Button
+            id={`${block}-check`}
+            data-component="ConnectBoard"
+            type="button"
+            disabled={!complete}
+            onClick={() => {
+              setChecked(true)
+              setArmed(null)
+            }}
+          >
+            {text(`${prefix}.check`)}
+          </Button>
+        )}
+      </div>
+    </Panel>
   )
 }

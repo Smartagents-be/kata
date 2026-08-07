@@ -6,31 +6,31 @@
      instructions, so nothing here repeats a command, and the `cd` / `mvn verify -Pintro` block is
      one click back on `backend` rather than printed a second time.
 
-     `Two candidates` is house rule four practised. Row 3's build prints two strings in the flag's
-     shape and ticks one line, which is why `backend.lead.2` now scopes red herrings from this page
-     on rather than from step 1. The section closes the step by pointing at `tokens`. -->
+     It is one line now, and it is the habit rather than the board: read a workshop's `README.md`
+     and its instructions file before working it. What went to make room for it was the count of the
+     rows and where they come from, which the board itself says, and the pointer at house rule one,
+     which `welcome` states for every board in the course. Do not write either back.
 
-<p data-i18n="workshop.lead.1">
-  Three runs, three flags, one board. Everything on it comes out of <code>kata/step0/java</code>, and
-  every flag is checked here in your browser, so the board works with nothing else running.
+     It is the step's one `data-assistant` pair, and it has to be: the file it names is `CLAUDE.md`
+     on one machine and `.github/copilot-instructions.md` on the other, so a single line would send
+     half the room after a file they do not have. The `README.md` half is the same in both, which is
+     why the pair is two whole sentences rather than a variant fragment inside one: the filter
+     removes elements, it does not splice them.
+
+     There was a `Two candidates` section here, saying row 3's build prints two strings in the flag's
+     shape and only one line is ticked, and it is gone: house rule four already tells the student
+     that several candidates can come back in the flag's exact shape and the pick is theirs, and
+     `backend.lead.2` already warns that a string in braces is not always the one you are after from
+     this page on. Both of those stay. The section also closed the step by pointing at `tokens`, and
+     that is the pager's job. Do not write either back. -->
+
+<p data-assistant="claude" data-i18n="workshop.lead.1.claude">
+  When a workshop has a <code>README.md</code> or a <code>CLAUDE.md</code> in it, read them first.
 </p>
 
-<p data-i18n="workshop.lead.2">
-  Every row here is house rule one. Hand the run to your agent and read the flag off what it prints
-  back.
+<p data-assistant="copilot" data-i18n="workshop.lead.1.copilot">
+  When a workshop has a <code>README.md</code> or a
+  <code>.github/copilot-instructions.md</code> in it, read them first.
 </p>
 
 <div data-figure="flags"></div>
-
-<h2 data-i18n="workshop.two-candidates.heading">Two candidates</h2>
-
-<p data-i18n="workshop.two-candidates.1">
-  The last row's build prints two strings in flag shape. Only one line is ticked. An agent that
-  summarises the run for you will hand back both, or the wrong one, and it will sound equally sure
-  either way. Read the output.
-</p>
-
-<p data-i18n="workshop.two-candidates.2">
-  Step 1 opens on <a href="/steps/step1/tokens">tokens</a>, which is what everything you send an
-  agent is counted in.
-</p>

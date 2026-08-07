@@ -35,14 +35,14 @@ export function AnswerProvenance() {
   const { text } = useStepText('step1')
 
   return (
-    <div id="answer-provenance" data-component="AnswerProvenance" className="my-8 rounded-xl border">
+    <div id="answer-provenance" data-component="AnswerProvenance" className="my-8">
       <div
         id="answer-provenance-head"
         data-component="AnswerProvenance"
         // Same track sizes as the rows below, so a heading always sits over its own column. The
         // claims are longer than the filenames and they are the part that must not break mid-symbol
         // on a phone, which is what the wider first track buys.
-        className="grid grid-cols-[1.4fr_1fr] gap-x-4 border-b px-4 py-3"
+        className="border-border/70 grid grid-cols-[1.4fr_1fr] gap-x-4 border-b py-3"
       >
         <p
           id="answer-provenance-head-claim"
@@ -66,7 +66,7 @@ export function AnswerProvenance() {
           id={`answer-provenance-item-${index}`}
           data-component="AnswerProvenance"
           data-state={claim.source ? 'read' : 'invented'}
-          className="grid grid-cols-[1.4fr_1fr] items-center gap-x-4 border-b px-4 py-3 last:border-b-0"
+          className="border-border/50 grid grid-cols-[1.4fr_1fr] items-center gap-x-4 border-b py-3 last:border-b-0"
         >
           <div id={`answer-provenance-item-${index}-claim`} data-component="AnswerProvenance">
             <p

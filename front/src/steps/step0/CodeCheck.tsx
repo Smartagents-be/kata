@@ -1,25 +1,8 @@
-import { LightbulbIcon } from 'lucide-react'
 import { useState, type ClipboardEvent, type FormEvent } from 'react'
-import { Badge } from '@/shared/components/ui/badge'
-import { Button } from '@/shared/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/shared/components/ui/card'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/shared/components/ui/dialog'
+import { AnswerLine, Board, BoardRow, PanelChip, PanelNote } from '@/shared/components/Panel'
 import { useStepText } from '@/shared/i18n/useStepText'
 import { isWholeFlag } from '@/shared/lib/flag-paste'
 import { sha256Hex } from '@/shared/lib/hash'
-import { cn } from '@/shared/lib/utils'
 import { CODE_SALT, type CodeSpec } from './code'
 
 /**
@@ -46,13 +29,29 @@ function writeSolved(key: string, code: string) {
 type BoxState = 'idle' | 'checking' | 'wrong'
 
 /**
- * An answer box for one code. The same salted-hash check as step 2's flag board, shrunk to a single
- * code, so the student meets the mechanism twice in the intro before the real steps. Nothing here
- * talks to the service: it hashes what you type and compares, so it works with the backend down.
+ * An answer box for one code. The same salted-hash check as the workshop's flag board, shrunk to a
+ * single code, so the student meets the mechanism twice in the intro before the real steps. Nothing
+ * here talks to the service: it hashes what you type and compares, so it works with the backend
+ * down.
+ *
+ * **It is drawn as a one-row board**, `Board` and `BoardRow` from `shared/components/Panel.tsx`,
+ * which are the same two components `FlagBoard` composes a page later. So a student meets the
+ * drawing at the same time as the mechanism, and the intro's box and the board they hunt against
+ * are one thing wearing two labels rather than two shapes to learn. The numeral it inherits says
+ * nothing on a list of one, and that is the price: what it buys is that nothing about the board is
+ * new when the student reaches it. It replaced a `Card`, which was the last block in the course a
+ * student worked in that still had a box drawn round it; the flatness rule is in `front/CLAUDE.md`
+ * and in `Panel.tsx`, and this must not go back.
+ *
+ * Two consequences of that move worth knowing. **The hint sits in the answer line** rather than up
+ * in a header, which is where a board row keeps it, so it leaves with the field once the row is
+ * captured; `hint.panel.done` still tells the student the button is there whenever a box has them
+ * stuck, and it is now saying that about the boxes ahead rather than about the one it is on. And
+ * the ids moved down a level with the row: this box's field is `#code-check-item-0-input`.
  *
  * The `code` prop decides which code it grades and which block of locale keys it reads its wording
  * from, so the same component serves every intro box. When more than one box sits on the same page,
- * pass a distinct `idBase` so their ids and dialog stay unique; it defaults to `code-check`.
+ * pass a distinct `idBase` so their ids stay unique; it defaults to `code-check`.
  */
 export function CodeCheck({ code, idBase = 'code-check' }: { code: CodeSpec; idBase?: string }) {
   const { text } = useStepText('step0')
@@ -67,10 +66,8 @@ export function CodeCheck({ code, idBase = 'code-check' }: { code: CodeSpec; idB
     return `${code.keyBase}.${part}`
   }
 
-  /** This box's id for a part, e.g. `code-check-header`, so two boxes on a page do not collide. */
-  function eid(part = '') {
-    return part ? `${idBase}-${part}` : idBase
-  }
+  /** The row's id base, which everything inside the board's one row hangs off. */
+  const row = `${idBase}-item-0`
 
   async function verify(candidate: string) {
     setState('checking')
@@ -103,136 +100,65 @@ export function CodeCheck({ code, idBase = 'code-check' }: { code: CodeSpec; idB
   }
 
   return (
-    <Card
-      id={eid()}
-      data-component="CodeCheck"
-      data-state={solved ? 'solved' : 'locked'}
-      className="my-8"
+    // No eyebrow: a counter over one row would be counting to one. The rule then runs the full
+    // width, which is the same gesture with nothing on it.
+    <Board
+      block={idBase}
+      state={solved ? 'complete' : 'partial'}
+      title={text(key('title'))}
     >
-      <CardHeader id={eid('header')} data-component="CodeCheck">
-        <div
-          id={eid('heading')}
-          data-component="CodeCheck"
-          className="flex items-center justify-between gap-3"
-        >
-          <CardTitle id={eid('title')} data-component="CodeCheck">
-            {text(key('title'))}
-          </CardTitle>
-          <div id={eid('actions')} data-component="CodeCheck" className="flex items-center gap-2">
-            {solved && (
-              <Badge
-                id={eid('badge')}
-                data-component="CodeCheck"
-                variant="success"
-              >
-                {text(key('solved'))}
-              </Badge>
-            )}
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button
-                  id={eid('help')}
-                  data-component="CodeCheck"
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  className="text-muted-foreground"
-                >
-                  <LightbulbIcon
-                    id={eid('help-icon')}
-                    data-component="CodeCheck"
-                    aria-hidden
-                    className="text-yellow-500"
-                  />
-                  {text(key('hint-button'))}
-                </Button>
-              </DialogTrigger>
-              <DialogContent id={eid('help-dialog')} data-component="CodeCheck">
-                <DialogHeader id={eid('help-dialog-header')} data-component="CodeCheck">
-                  <DialogTitle id={eid('help-dialog-title')} data-component="CodeCheck">
-                    {text(key('label'))}
-                  </DialogTitle>
-                  <DialogDescription id={eid('help-dialog-body')} data-component="CodeCheck">
-                    {text(key('help'))}
-                  </DialogDescription>
-                </DialogHeader>
-              </DialogContent>
-            </Dialog>
-          </div>
-        </div>
-      </CardHeader>
-
-      <CardContent id={eid('content')} data-component="CodeCheck" className="flex flex-col gap-3">
-        <p
-          id={eid('hint')}
-          data-component="CodeCheck"
-          className={cn(
-            'text-sm',
-            solved ? 'text-success-foreground' : 'text-muted-foreground',
-          )}
-        >
-          {text(key(solved ? 'done' : 'hint'))}
-        </p>
-
+      <BoardRow
+        block={idBase}
+        index={0}
+        state={solved ? 'solved' : 'locked'}
+        solved={solved}
+        title={text(key('label'))}
+        chip={solved ? <PanelChip id={`${row}-badge`}>{text(key('solved'))}</PanelChip> : undefined}
+        body={text(key(solved ? 'done' : 'hint'))}
+      >
         {solved
           ? value && (
-              // Once cleared, keep the answer on screen read-only rather than dropping the field, so
-              // the box still shows what solved it.
+              // A captured board row drops its field. This one keeps the answer on screen read-only
+              // instead, because the intro's boxes are what a student looks back at to see what the
+              // shape of an answer was, and the row is tinted the way a solved row is either way.
               <input
-                id={eid('input')}
+                id={`${row}-input`}
                 data-component="CodeCheck"
                 value={value}
                 readOnly
                 spellCheck={false}
                 aria-label={text(key('label'))}
-                className="field h-9 w-full max-w-xs text-success-foreground"
+                className="field border-success/30 bg-success/8 text-success-foreground mt-3.5 h-9.5 w-full max-w-xs"
               />
             )
           : (
-            <form
-              id={eid('form')}
-              data-component="CodeCheck"
+            <AnswerLine
+              idBase={row}
+              value={value}
+              onValueChange={(next) => {
+                setValue(next)
+                if (state === 'wrong') {
+                  setState('idle')
+                }
+              }}
+              onPaste={onPaste}
               onSubmit={onSubmit}
-              className="flex items-center gap-2"
-            >
-              <input
-                id={eid('input')}
-                data-component="CodeCheck"
-                value={value}
-                onChange={(event) => {
-                  setValue(event.target.value)
-                  if (state === 'wrong') {
-                    setState('idle')
-                  }
-                }}
-                onPaste={onPaste}
-                spellCheck={false}
-                placeholder={text(key('placeholder'))}
-                aria-label={text(key('label'))}
-                className="field h-9 w-full max-w-xs"
-              />
-              <Button
-                id={eid('submit')}
-                data-component="CodeCheck"
-                type="submit"
-                disabled={state === 'checking' || value.trim() === ''}
-              >
-                {text(key('check'))}
-              </Button>
-            </form>
+              busy={state === 'checking'}
+              label={text(key('label'))}
+              placeholder={text(key('placeholder'))}
+              checkLabel={text(key('check'))}
+              hintLabel={text(key('hint-button'))}
+              helpTitle={text(key('label'))}
+              helpBody={text(key('help'))}
+            />
           )}
 
         {state === 'wrong' && (
-          <p
-            id={eid('error')}
-            data-component="CodeCheck"
-            role="status"
-            className="text-destructive text-sm"
-          >
+          <PanelNote id={`${row}-error`} tone="destructive">
             {text(key('wrong'))}
-          </p>
+          </PanelNote>
         )}
-      </CardContent>
-    </Card>
+      </BoardRow>
+    </Board>
   )
 }

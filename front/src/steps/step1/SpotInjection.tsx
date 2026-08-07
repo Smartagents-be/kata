@@ -1,15 +1,9 @@
 import { useState } from 'react'
+import { ChoiceKey, ChoiceMark, Panel, PanelNote } from '@/shared/components/Panel'
 import { Button } from '@/shared/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/shared/components/ui/card'
 import { useStepText } from '@/shared/i18n/useStepText'
+import { choiceRowClass } from '@/shared/lib/choice'
 import { shuffled } from '@/shared/lib/shuffle'
-import { cn } from '@/shared/lib/utils'
 
 /** The four results one turn brought back. Message keys are built from the id. */
 const RESULTS = ['tests', 'docs', 'ticket', 'grep'] as const
@@ -43,64 +37,53 @@ export function SpotInjection() {
   const right = picked === POISONED
 
   return (
-    <Card
-      id="spot-injection"
-      data-component="SpotInjection"
-      data-state={checked ? 'checked' : 'open'}
+    <Panel
+      block="spot-injection"
+      state={checked ? 'checked' : 'open'}
+      title={text('spot.title')}
+      description={text('spot.description')}
       className="my-8"
+      contentClassName="flex flex-col gap-5"
     >
-      <CardHeader id="spot-injection-header" data-component="SpotInjection">
-        <CardTitle id="spot-injection-title" data-component="SpotInjection">
-          {text('spot.title')}
-        </CardTitle>
-        <CardDescription id="spot-injection-description" data-component="SpotInjection">
-          {text('spot.description')}
-        </CardDescription>
-      </CardHeader>
-
-      <CardContent
-        id="spot-injection-content"
+      <ul
+        id="spot-injection-results"
         data-component="SpotInjection"
-        className="flex flex-col gap-5"
+        className="border-border/70 border-t"
       >
-        <ul
-          id="spot-injection-results"
-          data-component="SpotInjection"
-          className="flex flex-col gap-3"
-        >
-          {results.map((result, index) => {
-            const isPick = picked === result
-            const state = !checked
-              ? isPick
-                ? 'picked'
-                : 'open'
-              : isPick
-                ? right
-                  ? 'right'
-                  : 'wrong'
-                : result === POISONED
-                  ? 'answer'
-                  : 'clean'
-            return (
-              <li key={result} id={`spot-injection-result-${index}`} data-component="SpotInjection">
-                <button
-                  id={`spot-injection-result-${index}-pick`}
+        {results.map((result, index) => {
+          const isPick = picked === result
+          const state = !checked
+            ? isPick
+              ? 'picked'
+              : 'open'
+            : isPick
+              ? right
+                ? 'right'
+                : 'wrong'
+              : result === POISONED
+                ? 'answer'
+                : 'clean'
+          return (
+            <li key={result} id={`spot-injection-result-${index}`} data-component="SpotInjection">
+              <button
+                id={`spot-injection-result-${index}-pick`}
+                data-component="SpotInjection"
+                data-state={state}
+                type="button"
+                disabled={checked}
+                aria-pressed={isPick}
+                onClick={() => setPicked(result)}
+                className={choiceRowClass(state, checked, 'items-start')}
+              >
+                <ChoiceKey
+                  id={`spot-injection-result-${index}-key`}
+                  state={state}
+                  index={index}
+                />
+                <span
+                  id={`spot-injection-result-${index}-text`}
                   data-component="SpotInjection"
-                  data-state={state}
-                  type="button"
-                  disabled={checked}
-                  aria-pressed={isPick}
-                  onClick={() => setPicked(result)}
-                  className={cn(
-                    'w-full rounded-xl border px-4 py-3 text-left transition-colors',
-                    'focus-visible:ring-ring focus-visible:ring-[3px] focus-visible:outline-none',
-                    state === 'open' && 'border-border hover:border-primary hover:bg-primary/5',
-                    state === 'picked' && 'border-primary bg-primary/5',
-                    state === 'clean' && 'border-border opacity-60',
-                    state === 'right' && 'border-success/50 bg-success/10',
-                    state === 'wrong' && 'border-destructive/50',
-                    state === 'answer' && 'border-primary bg-primary/5',
-                  )}
+                  className="min-w-0 flex-1"
                 >
                   <span
                     id={`spot-injection-result-${index}-source`}
@@ -116,70 +99,62 @@ export function SpotInjection() {
                   >
                     {text(`spot.body.${result}`)}
                   </span>
-                </button>
-              </li>
-            )
-          })}
-        </ul>
+                </span>
+                <ChoiceMark idBase={`spot-injection-result-${index}`} state={state} />
+              </button>
+            </li>
+          )
+        })}
+      </ul>
 
-        {checked && (
-          <div
-            id="spot-injection-verdict"
-            data-component="SpotInjection"
-            data-state={right ? 'right' : 'wrong'}
-            role="status"
-            className={cn(
-              'rounded-xl border px-4 py-3 text-sm',
-              right ? 'border-success/40 bg-success/10 text-success-foreground' : 'border-border',
-            )}
-          >
-            <p id="spot-injection-verdict-line" data-component="SpotInjection">
-              {text(right ? 'spot.right' : 'spot.wrong')}
-            </p>
-            {/* The clean three are only worth a sentence when one of them was the pick. */}
-            {!right && picked && (
-              <p
-                id="spot-injection-verdict-pick"
-                data-component="SpotInjection"
-                className="text-muted-foreground mt-2"
-              >
-                {text(`spot.explanation.${picked}`)}
-              </p>
-            )}
-          </div>
-        )}
-
-        <div
-          id="spot-injection-actions"
-          data-component="SpotInjection"
-          className="flex justify-end"
-        >
-          {checked ? (
-            <Button
-              id="spot-injection-retry"
+      {checked && (
+        <PanelNote id="spot-injection-verdict" tone={right ? 'success' : 'destructive'}>
+          <span id="spot-injection-verdict-line" data-component="SpotInjection" className="block">
+            {text(right ? 'spot.right' : 'spot.wrong')}
+          </span>
+          {/* The clean three are only worth a sentence when one of them was the pick. */}
+          {!right && picked && (
+            <span
+              id="spot-injection-verdict-pick"
               data-component="SpotInjection"
-              type="button"
-              variant="outline"
-              onClick={() => {
-                setPicked(null)
-                setChecked(false)
-              }}
+              className="text-muted-foreground mt-2 block"
             >
-              {text('spot.retry')}
-            </Button>
-          ) : (
-            <Button
-              id="spot-injection-check"
-              data-component="SpotInjection"
-              type="button"
-              disabled={picked === null}
-              onClick={() => setChecked(true)}
-            >
-              {text('spot.check')}
-            </Button>
+              {text(`spot.explanation.${picked}`)}
+            </span>
           )}
-        </div>
-      </CardContent>
-    </Card>
+        </PanelNote>
+      )}
+
+      <div
+        id="spot-injection-actions"
+        data-component="SpotInjection"
+        className="flex justify-end"
+      >
+        {checked ? (
+          <Button
+            id="spot-injection-retry"
+            data-component="SpotInjection"
+            type="button"
+            variant="outline"
+            onClick={() => {
+              setPicked(null)
+              setChecked(false)
+            }}
+          >
+            {text('spot.retry')}
+          </Button>
+        ) : (
+          <Button
+            id="spot-injection-check"
+            data-component="SpotInjection"
+            type="button"
+            disabled={picked === null}
+            onClick={() => setChecked(true)}
+          >
+            {text('spot.check')}
+          </Button>
+        )}
+      </div>
+    </Panel>
   )
 }

@@ -16,7 +16,7 @@ import workshop from './units/workshop.html?raw'
 /**
  * Step 0, the intro: how the kata is used before it teaches anything. Three units. `welcome` names
  * the three ways to work through it, has the student set their assistant, and clears two printed
- * codes plus one question. `backend` teaches the other half: the kata has Java behind it, one
+ * codes plus two questions. `backend` teaches the other half: the kata has Java behind it, one
  * project per step, and a code block is something you hand to your agent rather than paste into a
  * terminal. `workshop` is the board those two pages have been pointing at.
  *

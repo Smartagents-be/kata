@@ -51,14 +51,13 @@ const deck: SlideSpec[] = [
     ns: 'step0',
     eyebrow: 'welcome.title',
     title: 'deck.welcome.rules.title',
-    // The five house rules, one line each. The prose arguing them lives in the unit; the board
+    // The four house rules, one line each. The prose arguing them lives in the unit; the board
     // carries the list because in class the tutor says the arguments out loud.
     points: [
       'deck.welcome.rules.1',
       'deck.welcome.rules.2',
       'deck.welcome.rules.3',
       'deck.welcome.rules.4',
-      'deck.welcome.rules.5',
     ],
   },
 

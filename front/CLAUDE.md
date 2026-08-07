@@ -168,12 +168,23 @@ The look comes from a design system authored outside this repo (a Claude Design 
 else holds a colour: components name tokens, so a change to the palette is a change to one file.
 
 - **One teal does the heavy lifting.** `--primary` marks the primary action, the active step, the
-  active unit, the current language and the focus ring. Neutrals carry a faint teal undertone, so
+  active unit, the current language, the focus ring and a prose list's bullets. That last one is
+  `--tw-prose-bullets`, which was `--border` and is now the brand colour, so it is one line in
+  `index.css` rather than a class on any `<ul>`: a marker in front of an item is structure, and
+  structure is what the teal already marks. It reaches every unordered list in the curriculum, and
+  ordered lists are untouched, since `--tw-prose-counters` stays muted and a numeral is read as
+  content rather than seen as a mark. Neutrals carry a faint teal undertone, so
   surfaces read warm rather than clinical grey. `--success` means passed and `--destructive` means
   failed; nothing else borrows them. `--success` tints a panel and `--success-foreground` is the
   darker ink that stays readable on that tint, which is why there are two. The one exception to the
-  light UI is the header: `--header` is the single dark surface, with `--header-foreground` white
-  ink. It is a band, not a bar, and the app rides in one white card that overlaps it. A finished
+  light UI is `--header`, the deep teal, with `--header-foreground` white ink. It is the header's own
+  colour first: a band, not a bar, with the app riding in one white card that overlaps it. **On a
+  unit page it is the band and nothing else**, and one dark surface per page is what makes the band
+  read as the band; the deck's four module cards take it on their own canvas, and `OneShotCompare`
+  takes it at 85% for a corner badge the size of a word. The unit pager's forward half took it for a
+  while, on the argument that a unit should be bookended by the surface it opened on, and it came
+  back off: a near-black cell at the foot of a white page reads as a hole rather than as the way on.
+  Anything else reaching for this token is asking for `--primary`. A finished
   unit's self-learning note is a teal left-rule callout (`aside[data-audience="self"]`); every other
   aside is a muted panel, whether it is a teacher note or carries no audience at all, so an aside
   meant for everybody needs no attribute and still reads as an aside. One aside is louder than that:
@@ -210,6 +221,73 @@ else holds a colour: components name tokens, so a change to the palette is a cha
   behind itself, which only works if there is an outline for it to sit on top of. Turning it into a
   border draws a seam across the base of the point. The reasoning is repeated in `ui/tooltip.tsx`,
   which is also where the component's Skiper UI provenance is recorded.
+- **Nothing a student works in is a card, and that is the decision rather than an omission.** The
+  boards, the tasks, the quizzes, the graded exercises, the connect boards and the catalogue page all
+  sit inside the app's one white card already, so a bordered panel around any of them is a card
+  inside a card, and the rows inside that a third. The old drawing had all three, which is what made
+  a five-flag board read as a stack of boxes and a unit read as a column of tiles. Structure comes
+  from a hairline that opens each block, a numeral gutter with a continuous rail running down it, and
+  type hierarchy. That is the flatness rule above taken one step further: on a surface that is
+  already white, even the border goes. **Do not wrap any of it back in `Card`.**
+  The vocabulary is `shared/components/Panel.tsx` (`Panel`, `PanelRow`, `PanelChip`, `PanelNote`,
+  `ChoiceMark`, `HintDialog`, `AnswerLine`, plus `Board` and `BoardRow` arranged the way a flag board
+  wants them) and `shared/lib/choice.ts` (`choiceRowClass` and its two companions, which are
+  functions rather than components because the element differs: the quiz needs a `<label>` around a
+  radio, `SpotInjection` a `<button>`). The split it enforces is **behaviour per step, appearance
+  shared**: a step keeps its own flags, salt, storage key and grading, because a step owns what
+  grades it, and takes the drawing from here so nothing in the course can drift apart visually. It is
+  the move `TaskCard`, `ConnectBoard` and `UnitShot` made before it.
+
+  Six things inside it are load bearing. **Every panel opens on a hairline**, which is what marks the
+  seam between reading and working now that no box does; a block with a counter puts the counter on
+  that rule as its eyebrow (a flag board's five-of-five, a quiz's question number, a connect board's
+  running count), and a block with nothing to say there lets the rule run the full width. That
+  eyebrow is also why there is no longer a separator between quiz questions: the labelled rule is
+  that seam. The **rail is drawn on the last row too**, because a spine that stops short reads as a
+  rendering fault rather than as an end. **A task's moves take the spine and no rail** (`dense`),
+  because on a row that short there is nothing for a rail to span. They *do* take rules, and that is
+  newer than it looks: `dense` forced them off while a move was a line to read, on the argument that
+  a hairline between four one-liners is heavier than what it separates, and a move is a target now,
+  so a column of them has to say where one ends and the next begins. `dense` and `rule` are two
+  questions in `PanelRow` for that reason, and a dense list that is only read still passes
+  `rule={false}`. A dense row also carries horizontal padding, since it is the one kind that tints
+  and a fill stopping where the words stop reads as a highlighter stroke; the caller pulls the
+  column back out by the same amount so the numerals stay on the title's edge. **Hint is a text
+  button** everywhere a student meets one, `CodeCheck` in the intro included, because two bordered
+  controls side by side read as two offers of equal weight and a graded box has exactly one action;
+  the lightbulb is what keeps it findable. **No pickable option has a border**: the hairlines carry
+  the structure, the quiz's A-D key is **decoration only** and `aria-hidden` (the radio is still
+  there, `sr-only`, and the row carries the focus ring on its behalf), and a `ChoiceMark` repeats the
+  verdict as a glyph so it never rests on green against red alone. **`ConnectBoard` is the one
+  exception and keeps its two columns bordered**, because a line is drawn between them and each end
+  has to be an edge the eye can see a line arrive at; what it takes from the shared vocabulary is the
+  tint and the radius, so a picked row there and a picked row in the quiz are the same colour.
+  `FlowDiagram`, `RunSheet`, `AuditExample` and `ExactAsk` keep theirs for the reasons their own step
+  files give: there a border means containment, and that is content rather than chrome.
+- **The pager at the foot of a unit is a footer strip.** `shared/components/UnitPager.tsx` draws it
+  and nothing else may: two halves butted against each other, back on the quiet ground behind a
+  hairline, forward filled with `--primary` and its own white ink. The shape comes from the design
+  system's own `Step Pager` file, and so does the hue. What differs is the strength: that file
+  *tints* forward with the accent, and a tint at the foot of the page reads as a weaker version of
+  the buttons inside the unit, so forward takes the teal at full. It spent a while on `--header`
+  instead, so that a unit opened and closed on the same surface, and that came back off for being
+  too heavy: at the foot of a white page a near-black cell reads as a hole rather than as the way
+  on. Do not put the dark fill back. The design's other move is kept, that **neither half carries a
+  "Previous"/"Next" label**, since the arrow says the direction, so the label is rendered `sr-only`
+  instead of above the title.
+
+  Two things follow from forward being a filled cell rather than a tinted one, and each replaced
+  something that was there first. **The border and the radius belong to the halves**, not to a box
+  around them: a border on the strip runs behind the filled half and traces it with a pale hairline,
+  and a square-cornered border clipped by a rounded parent frays at the arc, so the light half
+  carries the border and rounds its own outer end while the filled half carries neither. **There is
+  no divider**, because the edge of the filled cell is the seam. Its focus ring is the last thing
+  here naming white directly, which is the same licence the header's own control has and for the
+  same reason: `--ring` is the teal it would have
+  to be seen against. At either end of the curriculum the surviving half **stays a half** and is
+  pinned to the side it leads to, forward on the right and back on the left, so the arrow still
+  points off the edge it takes you to; stretched across the strip it stops reading as one of two.
+  Do not put an empty cell back to keep the halves even, which reads as a fault.
 - **Two utilities carry the repeated shapes.** `eyebrow` is the small mono uppercase label above a
   heading, colour left to the caller (teal for a section, muted for a sub-label). `field` is a
   typed answer box: mono, hairline border, and the same 3px teal focus ring on every field, so a
@@ -403,8 +481,8 @@ for a figure: it reads `useAssistant()` itself, and the `data-figure` marker nev
 
 Which units this is actually used in, and the places it deliberately is not, are in
 `front/src/steps/step0/CLAUDE.md` and `front/src/steps/step1/CLAUDE.md`, with the cross-step scope in
-`front/src/steps/CLAUDE.md`. The short version: step 0 tells the student to set it, and step 1
-varies eleven blocks. Everything else is shared on purpose.
+`front/src/steps/CLAUDE.md`. The short version: step 0 tells the student to set it and varies one
+block of its own, and step 1 varies eleven. Everything else is shared on purpose.
 
 ## Languages
 

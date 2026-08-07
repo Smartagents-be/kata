@@ -1,13 +1,8 @@
 import { useState } from 'react'
 import { Button } from '@/shared/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/shared/components/ui/card'
 import { useTranslation } from 'react-i18next'
+import { ChoiceKey, ChoiceMark, Panel, PanelNote } from '@/shared/components/Panel'
+import { choiceLabelClass, choiceRowClass } from '@/shared/lib/choice'
 import { cn } from '@/shared/lib/utils'
 
 /**
@@ -105,254 +100,238 @@ export function PickTheNext() {
   const right = picked === 'any'
 
   return (
-    <Card
-      id="pick-the-next"
-      data-component="PickTheNext"
-      data-state={checked ? 'checked' : 'open'}
+    <Panel
+      block="pick-the-next"
+      state={checked ? 'checked' : 'open'}
+      title={t('pick-next.title')}
+      description={t('pick-next.description')}
       className="my-8"
+      contentClassName="flex flex-col gap-5"
     >
-      <CardHeader id="pick-the-next-header" data-component="PickTheNext">
-        <CardTitle id="pick-the-next-title" data-component="PickTheNext">
-          {t('pick-next.title')}
-        </CardTitle>
-        <CardDescription id="pick-the-next-description" data-component="PickTheNext">
-          {t('pick-next.description')}
-        </CardDescription>
-      </CardHeader>
-
-      <CardContent
-        id="pick-the-next-content"
+      {/* What the model has read, with the chip it is about to write left open. */}
+      <div
+        id="pick-the-next-prompt"
         data-component="PickTheNext"
-        className="flex flex-col gap-5"
+        role="img"
+        aria-label={t('pick-next.prompt', { text: PROMPT.join(' ') })}
+        className="flex flex-wrap items-center gap-1"
       >
-        {/* What the model has read, with the chip it is about to write left open. */}
-        <div
-          id="pick-the-next-prompt"
-          data-component="PickTheNext"
-          role="img"
-          aria-label={t('pick-next.prompt', { text: PROMPT.join(' ') })}
-          className="flex flex-wrap items-center gap-1"
-        >
-          {PROMPT.map((token, index) => (
-            <span
-              key={`${token}-${index}`}
-              id={`pick-the-next-prompt-${index}`}
-              data-component="PickTheNext"
-              className="border-border bg-muted text-muted-foreground rounded border px-1.5 py-0.5 font-mono text-sm"
-            >
-              {token}
-            </span>
-          ))}
+        {PROMPT.map((token, index) => (
           <span
-            id="pick-the-next-prompt-pending"
+            key={`${token}-${index}`}
+            id={`pick-the-next-prompt-${index}`}
             data-component="PickTheNext"
-            className="border-primary/40 text-primary/60 rounded border border-dashed px-1.5 py-0.5 font-mono text-sm"
+            className="border-border bg-muted text-muted-foreground rounded border px-1.5 py-0.5 font-mono text-sm"
           >
-            ?
+            {token}
           </span>
-        </div>
-
-        <svg
-          id="pick-the-next-tree"
+        ))}
+        <span
+          id="pick-the-next-prompt-pending"
           data-component="PickTheNext"
-          data-state={checked ? 'answered' : 'open'}
-          viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-          role="img"
-          aria-label={t('pick-next.tree')}
-          className="h-auto w-full"
+          className="border-primary/40 text-primary/60 rounded border border-dashed px-1.5 py-0.5 font-mono text-sm"
         >
-          <g fill="none" strokeWidth="1.5">
-            {CANDIDATES.map((candidate, index) => (
-              <path
-                key={`limb-${candidate.token}`}
-                id={`pick-the-next-tree-limb-${index}`}
-                data-component="PickTheNext"
-                d={limb(COLUMN_X[0] + 22, HEIGHT / 2, COLUMN_X[1] - NODE_GAP, candidateY(index))}
-                className={checked ? 'stroke-primary' : 'stroke-border'}
-              />
-            ))}
-            {CANDIDATES.map((candidate, index) =>
-              candidate.then.map((child, childIndex) => (
-                <path
-                  key={`twig-${candidate.token}-${child}`}
-                  id={`pick-the-next-tree-twig-${index}-${childIndex}`}
-                  data-component="PickTheNext"
-                  d={limb(
-                    TWIG_START,
-                    candidateY(index),
-                    COLUMN_X[2] - NODE_GAP,
-                    rowY(index * 2 + childIndex),
-                  )}
-                  className="stroke-border"
-                />
-              )),
-            )}
-          </g>
+          ?
+        </span>
+      </div>
 
+      <svg
+        id="pick-the-next-tree"
+        data-component="PickTheNext"
+        data-state={checked ? 'answered' : 'open'}
+        viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+        role="img"
+        aria-label={t('pick-next.tree')}
+        className="h-auto w-full"
+      >
+        <g fill="none" strokeWidth="1.5">
+          {CANDIDATES.map((candidate, index) => (
+            <path
+              key={`limb-${candidate.token}`}
+              id={`pick-the-next-tree-limb-${index}`}
+              data-component="PickTheNext"
+              d={limb(COLUMN_X[0] + 22, HEIGHT / 2, COLUMN_X[1] - NODE_GAP, candidateY(index))}
+              className={checked ? 'stroke-primary' : 'stroke-border'}
+            />
+          ))}
+          {CANDIDATES.map((candidate, index) =>
+            candidate.then.map((child, childIndex) => (
+              <path
+                key={`twig-${candidate.token}-${child}`}
+                id={`pick-the-next-tree-twig-${index}-${childIndex}`}
+                data-component="PickTheNext"
+                d={limb(
+                  TWIG_START,
+                  candidateY(index),
+                  COLUMN_X[2] - NODE_GAP,
+                  rowY(index * 2 + childIndex),
+                )}
+                className="stroke-border"
+              />
+            )),
+          )}
+        </g>
+
+        <text
+          id="pick-the-next-tree-root"
+          data-component="PickTheNext"
+          x={COLUMN_X[0]}
+          y={HEIGHT / 2}
+          fontSize="13"
+          textAnchor="middle"
+          dominantBaseline="middle"
+          className="fill-foreground font-mono"
+        >
+          {PROMPT[PROMPT.length - 1]}
+        </text>
+
+        {CANDIDATES.map((candidate, index) => (
           <text
-            id="pick-the-next-tree-root"
+            key={`node-${candidate.token}`}
+            id={`pick-the-next-tree-node-${index}`}
             data-component="PickTheNext"
-            x={COLUMN_X[0]}
-            y={HEIGHT / 2}
+            x={COLUMN_X[1]}
+            y={candidateY(index)}
             fontSize="13"
             textAnchor="middle"
             dominantBaseline="middle"
-            className="fill-foreground font-mono"
+            className={cn('font-mono', checked ? 'fill-primary' : 'fill-muted-foreground')}
           >
-            {PROMPT[PROMPT.length - 1]}
+            {candidate.token}
           </text>
+        ))}
 
-          {CANDIDATES.map((candidate, index) => (
+        {/* Muted whether or not the fan is lit: the answer is the three words, not the numbers. */}
+        {CANDIDATES.map((candidate, index) => (
+          <text
+            key={`score-${candidate.token}`}
+            id={`pick-the-next-tree-score-${index}`}
+            data-component="PickTheNext"
+            x={SCORE_X}
+            y={candidateY(index)}
+            fontSize="12"
+            textAnchor="start"
+            dominantBaseline="middle"
+            className="fill-muted-foreground font-mono tabular-nums"
+          >
+            {Math.round(candidate.p * 100)}%
+          </text>
+        ))}
+
+        {CANDIDATES.map((candidate, index) =>
+          candidate.then.map((child, childIndex) => (
             <text
-              key={`node-${candidate.token}`}
-              id={`pick-the-next-tree-node-${index}`}
+              key={`leaf-${candidate.token}-${child}`}
+              id={`pick-the-next-tree-leaf-${index}-${childIndex}`}
               data-component="PickTheNext"
-              x={COLUMN_X[1]}
-              y={candidateY(index)}
+              x={COLUMN_X[2]}
+              y={rowY(index * 2 + childIndex)}
               fontSize="13"
               textAnchor="middle"
               dominantBaseline="middle"
-              className={cn('font-mono', checked ? 'fill-primary' : 'fill-muted-foreground')}
+              className="fill-muted-foreground/70 font-mono"
             >
-              {candidate.token}
+              {child}
             </text>
-          ))}
+          )),
+        )}
+      </svg>
 
-          {/* Muted whether or not the fan is lit: the answer is the three words, not the numbers. */}
-          {CANDIDATES.map((candidate, index) => (
-            <text
-              key={`score-${candidate.token}`}
-              id={`pick-the-next-tree-score-${index}`}
-              data-component="PickTheNext"
-              x={SCORE_X}
-              y={candidateY(index)}
-              fontSize="12"
-              textAnchor="start"
-              dominantBaseline="middle"
-              className="fill-muted-foreground font-mono tabular-nums"
-            >
-              {Math.round(candidate.p * 100)}%
-            </text>
-          ))}
-
-          {CANDIDATES.map((candidate, index) =>
-            candidate.then.map((child, childIndex) => (
-              <text
-                key={`leaf-${candidate.token}-${child}`}
-                id={`pick-the-next-tree-leaf-${index}-${childIndex}`}
+      <ul
+        id="pick-the-next-choices"
+        data-component="PickTheNext"
+        className="border-border/70 border-t"
+      >
+        {CHOICES.map((choice, index) => {
+          const isPick = picked === choice
+          const state = !checked
+            ? isPick
+              ? 'picked'
+              : 'open'
+            : isPick
+              ? right
+                ? 'right'
+                : 'wrong'
+              : choice === 'any'
+                ? 'answer'
+                : 'clean'
+          return (
+            <li key={choice} id={`pick-the-next-choice-${index}`} data-component="PickTheNext">
+              <button
+                id={`pick-the-next-choice-${index}-pick`}
                 data-component="PickTheNext"
-                x={COLUMN_X[2]}
-                y={rowY(index * 2 + childIndex)}
-                fontSize="13"
-                textAnchor="middle"
-                dominantBaseline="middle"
-                className="fill-muted-foreground/70 font-mono"
+                data-state={state}
+                type="button"
+                disabled={checked}
+                aria-pressed={isPick}
+                onClick={() => setPicked(choice)}
+                // The three words are what the machine would write, so they are set in mono. The
+                // catch-all is a sentence about them and stays in the reading face.
+                className={choiceRowClass(state, checked)}
               >
-                {child}
-              </text>
-            )),
-          )}
-        </svg>
-
-        <ul id="pick-the-next-choices" data-component="PickTheNext" className="flex flex-col gap-2">
-          {CHOICES.map((choice, index) => {
-            const isPick = picked === choice
-            const state = !checked
-              ? isPick
-                ? 'picked'
-                : 'open'
-              : isPick
-                ? right
-                  ? 'right'
-                  : 'wrong'
-                : choice === 'any'
-                  ? 'answer'
-                  : 'passed'
-            return (
-              <li key={choice} id={`pick-the-next-choice-${index}`} data-component="PickTheNext">
-                <button
-                  id={`pick-the-next-choice-${index}-pick`}
+                <ChoiceKey
+                  id={`pick-the-next-choice-${index}-key`}
+                  state={state}
+                  index={index}
+                />
+                <span
+                  id={`pick-the-next-choice-${index}-label`}
                   data-component="PickTheNext"
-                  data-state={state}
-                  type="button"
-                  disabled={checked}
-                  aria-pressed={isPick}
-                  onClick={() => setPicked(choice)}
-                  className={cn(
-                    'w-full rounded-xl border px-4 py-3 text-left transition-colors',
-                    'focus-visible:ring-ring focus-visible:ring-[3px] focus-visible:outline-none',
-                    // The three words are what the machine would write, so they are set in mono.
-                    // The catch-all is a sentence about them and stays in the reading face.
-                    choice === 'any' ? 'text-sm' : 'font-mono text-sm',
-                    state === 'open' && 'border-border hover:border-primary hover:bg-primary/5',
-                    state === 'picked' && 'border-primary bg-primary/5',
-                    state === 'passed' && 'border-border opacity-60',
-                    state === 'right' && 'border-success/50 bg-success/10',
-                    state === 'wrong' && 'border-destructive/50',
-                    state === 'answer' && 'border-primary bg-primary/5',
-                  )}
+                  className={cn(choiceLabelClass(state), choice !== 'any' && 'font-mono')}
                 >
                   {choice === 'any' ? t('pick-next.any') : choice}
-                </button>
-              </li>
-            )
-          })}
-        </ul>
+                </span>
+                <ChoiceMark idBase={`pick-the-next-choice-${index}`} state={state} />
+              </button>
+            </li>
+          )
+        })}
+      </ul>
 
-        {checked && (
-          <div
-            id="pick-the-next-verdict"
-            data-component="PickTheNext"
-            data-state={right ? 'right' : 'wrong'}
-            role="status"
-            className={cn(
-              'rounded-xl border px-4 py-3 text-sm',
-              right ? 'border-success/40 bg-success/10 text-success-foreground' : 'border-border',
-            )}
-          >
-            <p id="pick-the-next-verdict-line" data-component="PickTheNext">
-              {t(right ? 'pick-next.right' : 'pick-next.wrong')}
-            </p>
-            {/* One line for all three wrong picks, since it is the same mistake either way. */}
-            {!right && picked && (
-              <p
-                id="pick-the-next-verdict-pick"
-                data-component="PickTheNext"
-                className="text-muted-foreground mt-2"
-              >
-                {t('pick-next.explanation', { token: picked })}
-              </p>
-            )}
-          </div>
-        )}
-
-        <div id="pick-the-next-actions" data-component="PickTheNext" className="flex justify-end">
-          {checked ? (
-            <Button
-              id="pick-the-next-retry"
+      {checked && (
+        <PanelNote id="pick-the-next-verdict" tone={right ? 'success' : 'destructive'}>
+          <span id="pick-the-next-verdict-line" data-component="PickTheNext" className="block">
+            {t(right ? 'pick-next.right' : 'pick-next.wrong')}
+          </span>
+          {/* One line for all three wrong picks, since it is the same mistake either way. */}
+          {!right && picked && (
+            <span
+              id="pick-the-next-verdict-pick"
               data-component="PickTheNext"
-              type="button"
-              variant="outline"
-              onClick={() => {
-                setPicked(null)
-                setChecked(false)
-              }}
+              className="text-muted-foreground mt-2 block"
             >
-              {t('pick-next.retry')}
-            </Button>
-          ) : (
-            <Button
-              id="pick-the-next-check"
-              data-component="PickTheNext"
-              type="button"
-              disabled={picked === null}
-              onClick={() => setChecked(true)}
-            >
-              {t('pick-next.check')}
-            </Button>
+              {t('pick-next.explanation', { token: picked })}
+            </span>
           )}
-        </div>
-      </CardContent>
-    </Card>
+        </PanelNote>
+      )}
+
+      <div id="pick-the-next-actions" data-component="PickTheNext" className="flex justify-end">
+        {checked ? (
+          <Button
+            id="pick-the-next-retry"
+            data-component="PickTheNext"
+            type="button"
+            variant="outline"
+            onClick={() => {
+              setPicked(null)
+              setChecked(false)
+            }}
+          >
+            {t('pick-next.retry')}
+          </Button>
+        ) : (
+          <Button
+            id="pick-the-next-check"
+            data-component="PickTheNext"
+            type="button"
+            disabled={picked === null}
+            onClick={() => setChecked(true)}
+          >
+            {t('pick-next.check')}
+          </Button>
+        )}
+      </div>
+    </Panel>
   )
 }
