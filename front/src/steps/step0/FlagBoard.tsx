@@ -1,5 +1,5 @@
 import { LightbulbIcon } from 'lucide-react'
-import { useState, type FormEvent } from 'react'
+import { useState, type ClipboardEvent, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Badge } from '@/shared/components/ui/badge'
 import { Button } from '@/shared/components/ui/button'
@@ -19,6 +19,7 @@ import {
   DialogTrigger,
 } from '@/shared/components/ui/dialog'
 import { useStepText } from '@/shared/i18n/useStepText'
+import { isWholeFlag } from '@/shared/lib/flag-paste'
 import { sha256Hex } from '@/shared/lib/hash'
 import { cn } from '@/shared/lib/utils'
 import { FLAG_SALT, flags, type FlagSpec } from './flags'
@@ -131,14 +132,30 @@ function FlagRow({
   const [value, setValue] = useState('')
   const [state, setState] = useState<RowState>('idle')
 
-  async function onSubmit(event: FormEvent) {
-    event.preventDefault()
+  async function verify(raw: string) {
     setState('checking')
-    const digest = await sha256Hex(FLAG_SALT + value.trim())
+    const digest = await sha256Hex(FLAG_SALT + raw.trim())
     if (digest === flag.hash) {
       onSolved()
     } else {
       setState('wrong')
+    }
+  }
+
+  async function onSubmit(event: FormEvent) {
+    event.preventDefault()
+    await verify(value)
+  }
+
+  // A flag always looks like {…}. A paste in that shape is an answer being handed over, so grade it
+  // there and then rather than making the student reach for Check, which is what `CodeCheck` does
+  // two pages earlier. Anything else pastes normally.
+  function onPaste(event: ClipboardEvent<HTMLInputElement>) {
+    const pasted = event.clipboardData.getData('text').trim()
+    if (isWholeFlag(pasted)) {
+      event.preventDefault()
+      setValue(pasted)
+      void verify(pasted)
     }
   }
 
@@ -231,6 +248,7 @@ function FlagRow({
                 setState('idle')
               }
             }}
+            onPaste={onPaste}
             spellCheck={false}
             placeholder={text('flags.panel.placeholder')}
             aria-label={text(flag.labelKey)}

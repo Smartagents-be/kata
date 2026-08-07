@@ -3,6 +3,7 @@
 
   "welcome.title": "Hoe deze kata werkt",
   "backend.title": "De backend",
+  "workshop.title": "Workshop",
 
   "welcome.lead.1": "Deze kata leert je werken met een coding agent, stap voor stap. Ze begint eenvoudig en elke stap bouwt op de vorige.",
   "welcome.lead.2": "Drie dingen moeten op je machine staan voor dit werkt: deze repository gekloond, een JDK 25 of nieuwer met Maven op je pad, en een coding agent die je in een terminal kan draaien. De laatste pagina van deze stap controleert ze alle drie voor je.",
@@ -45,12 +46,29 @@
   "welcome.house-rules.4": "<strong>Laat hem de controle draaien.</strong> Uitgedacht in proza is een flag een geloofwaardige string met twee letters ernaast, even zeker gebracht. Laat de agent het ding draaien en het antwoord printen. En als er meerdere kandidaten terugkomen in precies de vorm van de flag, is de keuze aan jou. De agent kan het niet zien. Jij wel.",
   "welcome.house-rules.5": "<strong>Reken de jacht af als ze voorbij is.</strong> Een flag is een paar tekens lang. De weg ernaartoe niet, en je hebt elke beurt onderweg betaald. Stap 1 geeft je de cijfers om erop te zetten. De volgende pagina gaat over de code waar die flags in zitten, en de pagina daarna is het bord van deze stap.",
 
-
-  "backend.lead.1": "Er is ook een Java-backend, en dat is niet één project. Elke stap heeft er een eigen onder <code>kata/</code>, dus <code>kata/step0/java</code>, <code>kata/step1/java</code> enzovoort, elk met een eigen <code>pom.xml</code> en een eigen Maven-build. Open de map van de stap waar je mee bezig bent en draai Maven van daaruit. De projecten die een service draaien, doen dat op poort 8080, dus er draait er maar één tegelijk.",
-  "backend.lead.2": "Die code is waar de oefeningen op werken. Tijdens de modules kan er gerefereerd worden naar een opdracht die je moet doen in het project van die stap. Als je ze correct uitvoert zal er een flag beschikbaar zijn. Let vanaf stap 1 op red herrings: een string tussen accolades is niet altijd degene die je zoekt.",
+  "backend.lead.1": "Er zit Java achter deze kata, en dat is niet één project. Drie stappen hebben er een eigen onder <code>kata/</code>: <code>kata/step0/java</code>, <code>kata/step1/java</code> en <code>kata/step2/java</code>, elk met een eigen <code>pom.xml</code> en een eigen Maven-build. Open de map van de stap waar je mee bezig bent en draai Maven van daaruit. Twee ervan starten een service op poort 8080, dus er draait er maar één tegelijk. Start je de tweede terwijl de eerste nog loopt, dan faalt het opstarten op de poort en niet op iets wat jij deed.",
+  "backend.lead.2": "Op die code werken de oefeningen. Een unit wijst je naar een klus in het project van die stap, en die klus doen is wat de flag binnen bereik brengt: soms drukt de build hem af, soms moet je hem gaan zoeken. Let vanaf de laatste pagina van deze stap op red herrings: een string tussen accolades is niet altijd degene die je zoekt.",
   "backend.code-blocks.heading": "Codeblokken",
-  "backend.code-blocks.1": "Soms vind je codeblokken in de cursus, zoals die hieronder. Het is belangrijk dat je deze gebruikt en ze met je AI-agent instrumenteert, anders zal de flag niet tonen.",
-  "backend.code-blocks.2": "Stap 1 opent met <a href=\"/steps/step1/tokens\">tokens</a>, de eenheid waarin alles wat je naar een agent stuurt geteld wordt.",
+  "backend.code-blocks.1": "Sommige pagina's geven je een codeblok, zoals dat hieronder. Geef het aan je agent om uit te voeren in plaats van het zelf in een terminal te plakken. Niets in de build controleert wie van jullie het gedraaid heeft. Huisregel één is de reden, en dit is de goedkoopste plek in de cursus om ermee te beginnen.",
+  "backend.code-blocks.2": "De volgende pagina zet drie van die runs op een bord, en dit blok is de eerste ervan.",
+
+  "loop.title": "hoe een flag op het bord komt",
+  "loop.description": "Vier kaarten op een rij, van links naar rechts verbonden met pijlen. Je agent draait de build, de build drukt een regel af met een code tussen accolades erop, jij leest die regel, en je typt wat er staat in het veld op het bord. Een balk onder de eerste twee kaarten zegt dat de machine het werk vasthoudt; een balk onder de laatste twee zegt dat jij dat doet.",
+  "loop.band.machine": "dit doet je machine",
+  "loop.band.you": "dit doe jij",
+  "loop.agent.label": "je agent",
+  "loop.build.label": "de build",
+  "loop.you.label": "jij",
+  "loop.box.label": "het bord",
+  "loop.you.body": "lees de aangevinkte regel",
+  "loop.box.body": "plak hem erin",
+
+  "workshop.lead.1": "Drie runs, drie flags, één bord. Alles erop komt uit <code>kata/step0/java</code>, en elke flag wordt hier in je browser nagekeken, dus het bord werkt zonder dat er iets anders draait.",
+  "workshop.lead.2": "Elke rij hier is huisregel één. Geef de run aan je agent en lees de flag af van wat hij teruggeeft.",
+  "workshop.two-candidates.heading": "Twee kandidaten",
+  "workshop.two-candidates.1": "De build van de laatste rij drukt twee strings af in de vorm van een flag. Maar één regel is aangevinkt. Een agent die de run voor jou samenvat geeft ze allebei terug, of de verkeerde, en klinkt in beide gevallen even zeker. Lees de uitvoer.",
+  "workshop.two-candidates.2": "Stap 1 opent met <a href=\"/steps/step1/tokens\">tokens</a>, de eenheid waarin alles wat je naar een agent stuurt geteld wordt.",
+
   "code.panel.title": "Probeer het: los deze pagina op",
   "code.panel.label": "De flag van de pagina",
   "code.panel.hint": "Typ de flag uit de alinea hierboven, mét accolades.",
@@ -73,16 +91,24 @@
   "hint.panel.solved": "Opgelost",
   "hint.panel.done": "Dat is het. De Hint-knop staat er telkens als een veld je vastzet.",
 
-  "flag.panel.title": "Rond de intro af",
-  "flag.panel.label": "De intro-flag",
-  "flag.panel.hint": "Draai het blok hierboven via je agent.",
-  "flag.panel.help": "Open het project in kata/step0/java, start je agent en vraag om het blok hierboven uit te voeren. Er valt hier niets op te lossen: de build drukt de flag af op de regel die zegt dat de intro klaar is. Plak die code hier, mét accolades.",
-  "flag.panel.hint-button": "Hint",
-  "flag.panel.placeholder": "{...}",
-  "flag.panel.check": "Controleer",
-  "flag.panel.wrong": "Niet die. Lees de flag rechtstreeks uit de build-uitvoer.",
-  "flag.panel.solved": "Opgelost",
-  "flag.panel.done": "Klaar. Dat is een code verdiend uit een build, precies wat de workshop van stap 2 vraagt.",
+  "flags.panel.title": "Drie runs, drie flags",
+  "flags.panel.description": "Alles op dit bord komt uit een build in kata/step0/java. Start je agent daarin en werk de rijen van boven naar beneden af.",
+  "flags.panel.progress": "{{solved}} van {{total}} verzameld",
+  "flags.panel.hint": "Hint",
+  "flags.panel.placeholder": "{...}",
+  "flags.panel.check": "Controleer",
+  "flags.panel.solved": "Opgelost",
+  "flags.panel.wrong": "Niet die. Lees de flag rechtstreeks uit de build-uitvoer.",
+
+  "flag.run.label": "De run",
+  "flag.run.hint": "Het is het blok op de pagina hiervoor. Laat je agent het draaien.",
+  "flag.run.help": "Dit is het codeblok van de vorige pagina, nu echt gedraaid. Open kata/step0/java, start je agent daarin en vraag hem dat blok uit te voeren. Er valt niets uit te dokteren: de build drukt de flag af op de regel die zegt dat de intro klaar is. Plak die code hier, mét accolades.",
+  "flag.ready.label": "Klaar om te jagen",
+  "flag.ready.hint": "Laat je agent mvn verify -Pready draaien vanuit dezelfde map.",
+  "flag.ready.help": "Die controleert wat de rest van de cursus van je machine verwacht: de JDK waarmee Maven echt compileert, en of de projecten van de andere stappen op schijf staan. Slaag je voor allebei, dan drukt de laatste regel de flag af. Zakt er één, dan noemt de build welke controle faalde en wat je eraan doet, en drukt hij geen flag af. De regel over native-image is een waarschuwing voor de laatste flag van stap 2 en houdt je nooit tegen.",
+  "flag.pick.label": "Twee kandidaten",
+  "flag.pick.hint": "mvn verify -Ppick drukt twee strings af in de vorm van een flag. Maar één regel is aangevinkt.",
+  "flag.pick.help": "Laat je agent mvn verify -Ppick draaien en laat hem tonen wat eruit kwam in plaats van je te vertellen wat er stond. Er komen twee regels terug in precies de vorm van de flag en één ervan draagt een vinkje. Een agent die de run voor jou gelezen heeft geeft ze allebei terug, of de verkeerde, en klinkt even zeker. Het vinkje lezen is aan jou.",
 
   "quiz.what-the-code-is.question": "Je leest een pagina en stuit op een string tussen accolades, zoals {f1r5t-5t3p5}. Wat doet die daar?",
   "quiz.what-the-code-is.the-answer": "Het is het antwoord op een schriftelijke oefening. Je typt hem in het veld om de pagina op te lossen.",
@@ -96,6 +122,7 @@
   "quiz.agent-says-it-found-it.right-shape": "Een flag, zolang de vorm klopt. Op de vorm kijkt het bord je antwoord na.",
   "quiz.agent-says-it-found-it.only-builds": "Niets bruikbaars. Alleen een build kan een flag printen, dus een flag die je leest is nooit de juiste.",
   "quiz.agent-says-it-found-it.explanation": "Uitgedacht in proza is een flag een geloofwaardige string met twee letters ernaast, even zeker gebracht. Het bord hasht één exacte string, dus de goedkoopste controle is de agent het ding laten draaien en het antwoord uit de uitvoer lezen.",
+
   "deck.title": "Introductie",
   "deck.welcome.divider.1": "Lees het alleen, of in de les aan het bord",
   "deck.welcome.divider.2": "Kies je assistent achter het tandwiel",
@@ -110,5 +137,8 @@
   "deck.backend.divider.1": "Elke stap is een eigen Maven-project",
   "deck.backend.divider.2": "Maar één service houdt <hi>:8080</hi> vast",
   "deck.backend.divider.3": "Codeblokken lopen via <hi>je agent</hi>, niet via je klembord",
-  "deck.backend.herrings.title": "Niet elke string tussen accolades is <hi>de flag</hi>"
+  "deck.backend.herrings.title": "Niet elke string tussen accolades is <hi>de flag</hi>",
+  "deck.workshop.divider.1": "Drie runs, drie flags, één bord",
+  "deck.workshop.divider.2": "De machine schrijft het antwoord, <hi>jij leest het</hi>",
+  "deck.workshop.divider.3": "De laatste komt <hi>dubbel</hi> terug"
 }

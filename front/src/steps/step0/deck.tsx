@@ -82,6 +82,23 @@ const deck: SlideSpec[] = [
     eyebrow: 'backend.title',
     title: 'deck.backend.herrings.title',
   },
+
+  // ── workshop ──────────────────────────────────────────────────────────────────────────────
+  // A divider and nothing under it. The board writes to localStorage, so on a slide it would tick
+  // the tutor's machine, and the three runs behind it are the thing this deck may not name. What a
+  // room needs is the shape of the page, which is what the points carry.
+  {
+    id: 'deck-step0-workshop',
+    kind: 'divider',
+    ns: 'step0',
+    eyebrow: 'step.title',
+    title: 'workshop.title',
+    points: [
+      'deck.workshop.divider.1',
+      'deck.workshop.divider.2',
+      'deck.workshop.divider.3',
+    ],
+  },
 ]
 
 export default deck

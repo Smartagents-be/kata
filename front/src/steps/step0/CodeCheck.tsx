@@ -17,6 +17,7 @@ import {
   DialogTrigger,
 } from '@/shared/components/ui/dialog'
 import { useStepText } from '@/shared/i18n/useStepText'
+import { isWholeFlag } from '@/shared/lib/flag-paste'
 import { sha256Hex } from '@/shared/lib/hash'
 import { cn } from '@/shared/lib/utils'
 import { CODE_SALT, type CodeSpec } from './code'
@@ -90,10 +91,11 @@ export function CodeCheck({ code, idBase = 'code-check' }: { code: CodeSpec; idB
   }
 
   // A code always looks like {…}. When the student pastes something in that shape, grade it straight
-  // away rather than making them reach for Check; anything else pastes normally.
+  // away rather than making them reach for Check; anything else pastes normally. `isWholeFlag` is
+  // the shared test, so this box and the three flag boards agree on what counts as an answer.
   function onPaste(event: ClipboardEvent<HTMLInputElement>) {
     const pasted = event.clipboardData.getData('text').trim()
-    if (/^\{.+\}$/.test(pasted)) {
+    if (isWholeFlag(pasted)) {
       event.preventDefault()
       setValue(pasted)
       void verify(pasted)

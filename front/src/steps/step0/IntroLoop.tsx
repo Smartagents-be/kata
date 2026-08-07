@@ -8,9 +8,7 @@ import { useStepText } from '@/shared/i18n/useStepText'
  *
  * It sits under the `<pre>` in `backend`, which is the one run it draws. **The two nodes that act
  * are teal**, your agent and you, and the two that only produce or receive are muted; that is the
- * whole colour rule, and it is what the drawing adds to the paragraph above it. The note under the
- * `you` half carries the second claim, that nothing here crosses a network, which is why every board
- * in this course still grades with the service down.
+ * whole colour rule, and it is what the drawing adds to the paragraph above it.
  *
  * **Node 2's braces are empty and must stay empty.** The build prints the intro flag and this figure
  * prints no part of it: not the flag, not its shape past the braces, not a character of it. Naming
@@ -68,7 +66,7 @@ export function IntroLoop() {
       <svg
         id="intro-loop-svg"
         data-component="IntroLoop"
-        viewBox="0 0 640 192"
+        viewBox="0 0 640 160"
         role="img"
         aria-labelledby={titleId}
         className="h-auto w-full max-w-xl"
@@ -200,18 +198,6 @@ export function IntroLoop() {
             ) : null}
           </g>
         ))}
-
-        <text
-          id="intro-loop-note"
-          data-component="IntroLoop"
-          x={cardX(NODES.length - 1) + CARD_W}
-          y="176"
-          fontSize="12"
-          textAnchor="end"
-          className="fill-muted-foreground"
-        >
-          {text('loop.note')}
-        </text>
       </svg>
     </figure>
   )

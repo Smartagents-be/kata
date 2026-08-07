@@ -1,5 +1,5 @@
 import { LightbulbIcon } from 'lucide-react'
-import { useState, type FormEvent } from 'react'
+import { useState, type ClipboardEvent, type FormEvent } from 'react'
 import { Badge } from '@/shared/components/ui/badge'
 import { Button } from '@/shared/components/ui/button'
 import {
@@ -12,6 +12,7 @@ import {
 } from '@/shared/components/ui/dialog'
 import { useAssistant } from '@/shared/assistant/useAssistant'
 import { useStepText } from '@/shared/i18n/useStepText'
+import { isWholeFlag } from '@/shared/lib/flag-paste'
 import { sha256Hex } from '@/shared/lib/hash'
 import { cn } from '@/shared/lib/utils'
 import { FLAG_SALT, keyFor, type FlagSpec } from './flags'
@@ -117,16 +118,39 @@ export function FlagRow({
   const [value, setValue] = useState('')
   const [state, setState] = useState<RowState>('idle')
 
-  async function onSubmit(event: FormEvent) {
-    event.preventDefault()
+  async function verify(raw: string) {
     setState('checking')
-    for (const candidate of candidates(value)) {
+    for (const candidate of candidates(raw)) {
       if ((await sha256Hex(FLAG_SALT + candidate)) === flag.hash) {
         onSolved()
         return
       }
     }
     setState('wrong')
+  }
+
+  async function onSubmit(event: FormEvent) {
+    event.preventDefault()
+    await verify(value)
+  }
+
+  /**
+   * A flag always looks like `{…}`. A paste of exactly that shape is an answer being handed over
+   * rather than a field being edited, so the row grades it there and then instead of making the
+   * student reach for Check; `CodeCheck` does the same in the intro, so the interaction is met once
+   * and repeated. Anything else pastes the ordinary way.
+   *
+   * **It is the same constraint `candidates()` above is under**, and `isWholeFlag` is where that is
+   * written up: the test is on the whole trimmed paste, so a pasted trace dump holding the winning
+   * `{...}` among five is not one, and picking the winner stays the student's.
+   */
+  function onPaste(event: ClipboardEvent<HTMLInputElement>) {
+    const pasted = event.clipboardData.getData('text').trim()
+    if (isWholeFlag(pasted)) {
+      event.preventDefault()
+      setValue(pasted)
+      void verify(pasted)
+    }
   }
 
   return (
@@ -235,6 +259,7 @@ export function FlagRow({
                 setState('idle')
               }
             }}
+            onPaste={onPaste}
             spellCheck={false}
             placeholder={text('flags.panel.placeholder')}
             aria-label={text(flag.labelKey)}

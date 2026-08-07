@@ -36,9 +36,9 @@ export const hintCode: CodeSpec = {
   hash: '11ee5e99f1d2a36cf43e117dc6ca39f1a717e6a6e8c40e27707ef387730ae51f',
 }
 
-/** The `backend` page's box. Its code is earned by running `mvn verify -Pintro`, not printed. */
-export const finishCode: CodeSpec = {
-  id: 'finish-code',
-  keyBase: 'flag.panel',
-  hash: 'd3b3a9d22b836da4bb31a39db357802c94fd148f2ec875a9f3ac2bc00a2ff454',
-}
+/*
+ * There was a third box here, `finishCode`, on the `backend` page, and it went when `workshop`
+ * arrived: its code is the one the board's first row grades, so the digest lives in `flags.ts` now
+ * and a page that asked for the same paste one click before the board was asking twice. `CODE_SALT`
+ * stays shared with that file, which is why the digest came over unchanged.
+ */

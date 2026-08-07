@@ -1072,6 +1072,15 @@ that found the winning `{...}` inside that dump would make the pick for the stud
 the best moment in the step. The comment in `FlagRow` says so, and a substring match, a regex over
 the whole value or a split on newlines all break it.
 
+**A paste that is one whole flag is graded on arrival**, without the student reaching for Check, and
+it is the same interaction `CodeCheck` gives them in the intro. What counts as one is
+`isWholeFlag` in `shared/lib/flag-paste.ts`, a pair of braces with no brace between them, tested
+against the **whole trimmed paste**: that is the constraint above enforced a second time and for the
+same reason, so a dump carrying the winning `{...}` among five is not a flag being handed over and
+nothing fires. Loosening that test to look inside a paste ends the trace row, so it is the same edit
+the paragraph above forbids. Anything that is not one whole flag pastes the ordinary way and waits
+for the button, which is what leaves `candidates()`'s repairs their job.
+
 **The board says what the five proved once all five are in**, on `flags.panel.complete`. It ended
 on a bare count collected and nothing else, which is a counter rather than a close on the step's most
 important exercise, and the `data-state="complete"` the card already computed went unused. The line
