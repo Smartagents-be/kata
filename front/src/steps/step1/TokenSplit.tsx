@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useReducedMotion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/shared/lib/utils'
+import { DURATION, EASE_QUIET } from '@/shared/motion/motion'
 
 /**
  * What a tokeniser does to four strings. The student clicks between them and watches the same
@@ -23,6 +25,11 @@ import { cn } from '@/shared/lib/utils'
  * and only the emphasis follows the selection. It is a rate readout and **not a second sample**: a
  * Dutch row here would make the figure an argument about languages, which is the reason there is no
  * second sentence in the data.
+ *
+ * The panel restages when the selection changes, and the shape of that is the argument the figure
+ * makes: the source line and the count arrive together, and the chips arrive one after another from
+ * the left, which is the cut being made rather than a card being swapped. Hiding is instant and only
+ * the arrival is drawn, so the previous sample is never seen fading out under the new one.
  *
  * It draws no context frame. `ToolsInContext` in `tools` is the first teal frame a student meets,
  * so every figure above it stays out of that vocabulary rather than spending it early.
@@ -138,9 +145,64 @@ function rateOf(entry: Sample): number {
 const RATES = SAMPLES.map(rateOf)
 const WIDEST = Math.max(...RATES)
 
+const EASE = `cubic-bezier(${EASE_QUIET.join(', ')})`
+
+/**
+ * Milliseconds between one chip arriving and the next. Small, because the longest sample is 22
+ * tokens and a stagger tuned for a fan of five would run the identifier and the uuid past a second.
+ * Left uncapped: a sample that takes longer to enumerate is one with more tokens in it, which is
+ * what the figure is about.
+ */
+const CHIP_STEP = 12
+
+/**
+ * The transition for one part of the panel.
+ *
+ * A CSS transition takes its duration and delay from the style the element ends up in, so both have
+ * to be written on the *shown* state to have any effect. The hidden state is therefore instant: the
+ * text and the chips change in the same commit that hides them, so anything drawn on the way out
+ * would be the new sample fading away before it arrived.
+ */
+function arrival(entering: boolean, delay: number): string {
+  const duration = entering ? 0 : DURATION.state * 1000
+  return `opacity ${duration}ms ${EASE} ${entering ? 0 : delay}ms, transform ${duration}ms ${EASE} ${
+    entering ? 0 : delay
+  }ms`
+}
+
 export function TokenSplit() {
   const { t, i18n } = useTranslation('step1')
   const [selected, setSelected] = useState(0)
+  const still = useReducedMotion()
+  /** True for one frame after a pick, so the incoming sample has something to travel from. */
+  const [entering, setEntering] = useState(false)
+
+  // Two frames rather than one: React commits the hidden state synchronously, and a single rAF can
+  // still run before the browser has painted it, which would drop the transition entirely.
+  useEffect(() => {
+    if (!entering) {
+      return
+    }
+    let inner = 0
+    const outer = requestAnimationFrame(() => {
+      inner = requestAnimationFrame(() => {
+        setEntering(false)
+      })
+    })
+    return () => {
+      cancelAnimationFrame(outer)
+      cancelAnimationFrame(inner)
+    }
+  }, [entering])
+
+  const pick = (index: number) => {
+    setSelected(index)
+    // Under `prefers-reduced-motion` the panel simply holds the new sample, rather than playing the
+    // same move at zero duration and spending two frames on nothing.
+    if (!still && index !== selected) {
+      setEntering(true)
+    }
+  }
 
   const sample = SAMPLES[selected]
   const text = sample.pieces.join('')
@@ -171,7 +233,7 @@ export function TokenSplit() {
             type="button"
             aria-pressed={index === selected}
             onClick={() => {
-              setSelected(index)
+              pick(index)
             }}
             className={cn(
               'focus-visible:ring-ring rounded-full border px-3 py-1 text-sm transition-colors focus-visible:ring-[3px] focus-visible:outline-none',
@@ -267,6 +329,7 @@ export function TokenSplit() {
           id="token-split-source"
           data-component="TokenSplit"
           className="text-muted-foreground font-mono text-sm break-all"
+          style={{ opacity: entering ? 0 : 1, transition: arrival(entering, 0) }}
         >
           {text}
         </p>
@@ -296,6 +359,13 @@ export function TokenSplit() {
                 'border-primary/30 rounded border px-1.5 py-0.5 font-mono text-sm whitespace-pre',
                 index % 2 === 0 ? 'bg-primary/10' : 'bg-primary/20',
               )}
+              // A short rise rather than a slide from the left: the chips wrap, so a horizontal
+              // arrival would have the second row travelling out of the first one's end.
+              style={{
+                opacity: entering ? 0 : 1,
+                transform: entering ? 'translateY(3px)' : 'translateY(0)',
+                transition: arrival(entering, index * CHIP_STEP),
+              }}
             >
               {/* A leading space belongs to the token in front of it, and that is one of the
                   surprises here, so it is drawn rather than left invisible. */}
@@ -317,6 +387,7 @@ export function TokenSplit() {
           id="token-split-count"
           data-component="TokenSplit"
           className="text-muted-foreground font-mono text-xs tabular-nums"
+          style={{ opacity: entering ? 0 : 1, transition: arrival(entering, 0) }}
         >
           {t('token-split.count', {
             chars: text.length,

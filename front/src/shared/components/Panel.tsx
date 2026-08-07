@@ -312,7 +312,7 @@ export function ChoiceKey({
 /**
  * The fixed column at the end of a pickable row, so every option's words end on one edge whether or
  * not the row is marked. The glyph repeats what the tint already says, which is what keeps a verdict
- * readable without relying on green against red.
+ * readable without relying on one colour against another.
  */
 export function ChoiceMark({ idBase, state }: { idBase: string; state: ChoiceState }) {
   return (
@@ -323,14 +323,8 @@ export function ChoiceMark({ idBase, state }: { idBase: string; state: ChoiceSta
       aria-hidden
       className="flex w-3.5 shrink-0 justify-center"
     >
-      {state === 'right' && (
-        <CheckIcon
-          id={`${idBase}-mark-glyph`}
-          data-component="ChoiceMark"
-          className="text-success-foreground size-3.5"
-        />
-      )}
-      {state === 'answer' && (
+      {/* The one you took and the one you missed are both correct, so both take the brand tick. */}
+      {(state === 'right' || state === 'answer') && (
         <CheckIcon
           id={`${idBase}-mark-glyph`}
           data-component="ChoiceMark"

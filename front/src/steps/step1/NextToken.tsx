@@ -44,11 +44,11 @@ import { cn } from '@/shared/lib/utils'
  * of plausible runners-up, and a long tail that is not worth drawing. Nothing in a fan adds to 100
  * for that reason, which is the line between this figure and `PickTheNext` at the foot of the unit.
  *
- * The likelihood a candidate carries is drawn as ink as well as printed: an arm is thicker and less
- * transparent the likelier its token, the way `TokenAttention` draws its arcs. The colour stays a
- * token and the intensity is an attribute, so there is no arbitrary `stroke-primary/[0.37]` for the
- * design system to have an opinion about. No candidate is marked as the winner, which is deliberate:
- * the fan is a distribution, and the favourite is simply the heaviest arm in it.
+ * The likelihood a candidate carries is drawn as ink as well as printed: each one gets a bar, as long
+ * a share of the column as its score is of the strongest score in the fan. The colour stays a token
+ * and only the length varies, so there is no arbitrary `fill-primary/[0.37]` for the design system to
+ * have an opinion about. No candidate is marked as the winner, which is deliberate: the fan is a
+ * distribution, and the favourite is simply the longest bar in it.
  */
 
 /** Machine-shaped, so English in every language, like `TokenAttention`'s sentence. */
@@ -251,50 +251,64 @@ const TREE: Branch[] = [
 ]
 
 const ROW_HEIGHT = 30
-const PAD = 16
 const FONT = 13
 
 /**
- * The drawing is five verticals, and every one of them is straight.
+ * The drawing is a column of bars, and nothing in it is a line from one thing to another.
  *
- * It was a bouquet of beziers first, one curve per candidate running from the root to its own word,
- * and two things were wrong with it. The curves were all different lengths, so a thick short one and
- * a thin long one carried the same amount of ink and the weighting could not be read off them; and
- * the words were right-aligned against the ends of those curves, which left the drawing with no
- * straight edge anywhere. So it is a spine and a set of arms now: the arms are **parallel and the
- * same length**, which is what makes their weights comparable at a glance, and the word and the
- * score each get a column with a hard edge.
+ * It was a bouquet of beziers first, one curve per candidate running from the root token to its own
+ * word, and then a spine with a set of parallel arms hanging off it. Both drew the same relationship
+ * the same way, a rule reaching across the drawing to touch a word, and a leader line to a label is
+ * exactly what a table of contents does: it says *these two belong together* and nothing else. That
+ * is not worth a line here, because the row already says it by being a row. So the connectors are
+ * gone and the root has moved out of their way, into its own column on the left, which is also the
+ * slot a taken candidate now flies to.
+ *
+ * **It sits on the first candidate's line rather than above the fan**, which is what pays for the
+ * connector being gone: `after it` and the favourite read as one line, and the rest of the fan is
+ * indented under that first word. A root parked on a header line of its own was a second row of
+ * furniture doing the job the leader lines used to do badly. That in turn is why **the fan is
+ * top-aligned rather than centred**: the root has to keep one fixed y or it moves under the pointer
+ * between passes, and a fan of three then leaves its slack at the foot of the drawing. The drawing
+ * is still sized once to the widest fan, so nothing resizes either way.
+ *
+ * What the arms were carrying is carried by length instead of by weight of stroke. A bar is easier
+ * to compare against the bar under it than a thick line is against a thin one, and it leaves the
+ * score and the word two columns with hard left edges.
+ *
+ * **The word comes first and the bar last**, which is the reverse of the order the arms imposed, and
+ * it is what keeps the connector gone rather than merely undrawn. A bar is the one thing on the row
+ * whose right-hand end moves, so anything placed after it is a fixed column with a channel opening
+ * in front of it wherever the score is small: three hundred units of white between a short bar and
+ * its number is precisely the gap a leader line is invented to close. With the variable-length thing
+ * on the outside every row is dense from the left edge and nothing has to be tracked across. It also
+ * reads in the order the figure's own label promises: what could come next, how likely it is, and
+ * then that likelihood drawn.
  */
-/** Centre of the root token, which is whatever the sentence currently ends on. */
-const ROOT_X = 96
-/** The spine every arm leaves from. */
-const TRUNK_X = 216
-/** Where every arm stops. Same length for all of them, which is the point. */
-const ARM_END = 420
+/** The root column: the label right-aligned against the token, both on the first candidate's line. */
+const HEAD_LABEL_RIGHT = 44
+const HEAD_TOKEN_X = 52
+/** Padding above the first row, which is also what is left under the last one. */
+const TOP = 12
+/** The word column, wide of the longest token the root slot can hold. */
+const WORD_X = 150
+/** Right edge of the score column. Right-aligned, so the ones digits line up down the fan. */
+const SCORE_RIGHT = 258
+/** The bar column. */
+const BAR_X = 280
+const BAR_MAX = 330
+const BAR_HEIGHT = 12
 /**
- * Right edge of the score column, and the score sits **before** the word rather than after it. Both
- * columns are then tight against each other: putting the number last leaves a channel between a
- * three-character word and its score that is wider than either of them. It also reads in the order
- * the figure argues, weight then word: the arm is the score drawn, the number is the score written,
- * and the token is what you get for it.
+ * A row's hover and focus box, fixed rather than fitted, so the highlight does not jag row to row.
+ * It spans the whole row including the bar, because the whole row is the control; backing only the
+ * two text columns lit a box away from wherever the pointer actually was.
  */
-const SCORE_RIGHT = 464
-/** Left edge of the word column. */
-const WORD_X = 482
-/** A row's hover and focus box, fixed rather than fitted, so the highlight does not jag row to row. */
-const ROW_LEFT = 430
-const ROW_RIGHT = 552
-/** JetBrains Mono is a 0.6em advance, so this is exact rather than measured. */
-const CHAR = FONT * 0.6
-
-function widthOf(label: string): number {
-  return label.length * CHAR
-}
+const ROW_LEFT = 138
+const ROW_RIGHT = 622
 
 /**
- * The tallest fan anywhere in the tree, worked out once. The drawing is sized to it and every fan is
- * centred inside that, so a pass with four candidates does not resize the figure under the pointer
- * that is about to click it.
+ * The tallest fan anywhere in the tree, worked out once. The drawing is sized to it, so a pass with
+ * four candidates does not resize the figure under the pointer that is about to click it.
  */
 const WIDEST = (function widest(branches: Branch[]): number {
   return branches.reduce(
@@ -303,13 +317,15 @@ const WIDEST = (function widest(branches: Branch[]): number {
   )
 })(TREE)
 
-const HEIGHT = WIDEST * ROW_HEIGHT + PAD * 2
-const ROOT_Y = HEIGHT / 2
+const HEIGHT = TOP * 2 + WIDEST * ROW_HEIGHT
 
-/** Where a fan of `n` sits, centred in the fixed drawing. */
-function rowY(index: number, n: number): number {
-  return (HEIGHT - n * ROW_HEIGHT) / 2 + index * ROW_HEIGHT + ROW_HEIGHT / 2
+/** Centre of a row. Top-aligned, so row zero and the root beside it never move. */
+function rowY(index: number): number {
+  return TOP + index * ROW_HEIGHT + ROW_HEIGHT / 2
 }
+
+/** The root's line, which is row zero's. */
+const HEAD_Y = rowY(0)
 
 const EASE = `cubic-bezier(${EASE_QUIET.join(', ')})`
 
@@ -514,72 +530,32 @@ export function NextToken() {
                 {t('next-token.branches.description')}
               </title>
 
-              {/* The spine, which is structure rather than weighting, so it stays a hairline and
-                  neutral. It fades as a whole; only the arms are drawn on. */}
-              <g
-                id="next-token-fan-spine"
-                data-component="NextToken"
-                fill="none"
-                strokeWidth="1"
-                strokeLinecap="round"
-                className="stroke-border"
-                style={{
-                  opacity: entering || leaving !== null ? 0 : 1,
-                  transition: `opacity ${ms(DURATION.state)}ms ${EASE}`,
-                }}
-              >
-                <path d={`M ${ROOT_X + widthOf(head) / 2 + 12} ${ROOT_Y} H ${TRUNK_X}`} />
-                {fan.length > 1 ? (
-                  <path
-                    d={`M ${TRUNK_X} ${rowY(0, fan.length)} V ${rowY(fan.length - 1, fan.length)}`}
-                  />
-                ) : null}
-              </g>
-
-              {/* One arm per candidate, all the same length and all parallel, so the only thing that
-                  differs between them is how heavily they are drawn, which is the score. */}
-              {/* Butt caps rather than round: an arm meets the spine flush this way, and a rounded
-                  cap on a four-unit stroke turns the heavier arms into floating capsules. */}
-              <g fill="none" strokeLinecap="butt">
-                {fan.map((branch, index) => {
-                  const intensity = branch.p / strongest
-                  return (
-                    <path
-                      key={`arm-${branch.token}-${index}`}
-                      id={`next-token-fan-arm-${index}`}
-                      data-component="NextToken"
-                      d={`M ${TRUNK_X} ${rowY(index, fan.length)} H ${ARM_END}`}
-                      pathLength="1"
-                      strokeDasharray="1"
-                      strokeDashoffset={entering || leaving !== null ? 1 : 0}
-                      strokeWidth={1.5 + intensity * 3}
-                      strokeOpacity={0.3 + intensity * 0.6}
-                      className="stroke-primary"
-                      style={{
-                        // Drawn on over a panel's worth of time and staggered, because arriving is
-                        // the part worth watching; retracted over a state's worth and all together,
-                        // so the arms and the spine they hang off leave as one thing.
-                        transition: `stroke-dashoffset ${ms(
-                          entering ? DURATION.panel : DURATION.state,
-                        )}ms ${EASE} ${entering ? index * 35 : 0}ms`,
-                      }}
-                    />
-                  )
-                })}
-              </g>
-
               {/*
-                The token the fan hangs off. It fades as a candidate flies onto the same spot, and
-                faster than that candidate travels, so the two never sit on top of each other at full
-                strength. On the frame after the commit it is simply the token that arrived.
+                The token the fan hangs off, in its own column on the favourite's line rather than
+                wired to the rows. It fades as a candidate flies onto the same spot, and faster than
+                that candidate travels, so the two never sit on top of each other at full strength.
+                On the frame after the commit it is simply the token that arrived. The label beside it
+                stays put, since it names the slot rather than what is in it.
               */}
+              <text
+                id="next-token-fan-after"
+                data-component="NextToken"
+                x={HEAD_LABEL_RIGHT}
+                y={HEAD_Y}
+                fontSize="11"
+                textAnchor="end"
+                dominantBaseline="middle"
+                className="fill-muted-foreground"
+              >
+                {t('next-token.after')}
+              </text>
               <text
                 id="next-token-fan-root"
                 data-component="NextToken"
-                x={ROOT_X}
-                y={ROOT_Y}
+                x={HEAD_TOKEN_X}
+                y={HEAD_Y}
                 fontSize={FONT}
-                textAnchor="middle"
+                textAnchor="start"
                 dominantBaseline="middle"
                 className="fill-foreground font-mono"
                 style={{
@@ -594,6 +570,7 @@ export function NextToken() {
                 const gone = leaving !== null && leaving !== index
                 const flying = leaving === index
                 const score = percent(branch.p)
+                const intensity = branch.p / strongest
                 return (
                   <g
                     key={`node-${branch.token}-${index}`}
@@ -625,11 +602,12 @@ export function NextToken() {
                       leaving === null ? 'cursor-pointer' : 'pointer-events-none',
                     )}
                     style={{
-                      // The taken candidate lands with its word centred on the root, so the text that
-                      // replaces it on the next frame is already in the right place and nothing jumps.
+                      // The taken candidate lands on the header's token slot, so the text that
+                      // replaces it on the next frame is already in the right place and nothing
+                      // jumps. Both are left-anchored, so this is one subtraction and no measuring.
                       transform: flying
-                        ? `translate(${ROOT_X - (WORD_X + widthOf(branch.token) / 2)}px, ${ROOT_Y}px)`
-                        : `translate(0px, ${rowY(index, fan.length)}px)`,
+                        ? `translate(${HEAD_TOKEN_X - WORD_X}px, ${HEAD_Y}px)`
+                        : `translate(0px, ${rowY(index)}px)`,
                       opacity: entering || gone ? 0 : 1,
                       transition:
                         `transform ${ms(DURATION.state)}ms ${EASE}, ` +
@@ -648,6 +626,31 @@ export function NextToken() {
                       rx="6"
                       className="fill-muted opacity-0 transition-opacity group-hover:opacity-100"
                     />
+                    {/*
+                      The score drawn. Length is the only thing that varies between the bars, so a
+                      reader compares two of them the way they would compare two words in a list,
+                      by running an eye down one edge. It grows from nothing on the way in, over a
+                      panel's worth of time and staggered like the rows themselves; on the way out
+                      it fades with the row rather than shrinking back, since the fan leaves as one
+                      thing. Floored at two units, or the tail of a fan draws as no bar at all.
+                    */}
+                    <rect
+                      id={`next-token-fan-node-${index}-bar`}
+                      data-component="NextToken"
+                      x={BAR_X}
+                      y={-BAR_HEIGHT / 2}
+                      height={BAR_HEIGHT}
+                      rx="2"
+                      className="fill-primary pointer-events-none"
+                      style={{
+                        width: entering ? 0 : Math.max(2, intensity * BAR_MAX),
+                        opacity: flying ? 0 : 1,
+                        transition:
+                          `width ${ms(entering ? DURATION.panel : DURATION.state)}ms ${EASE} ${
+                            entering ? index * 35 : 0
+                          }ms, ` + `opacity ${ms(DURATION.tap)}ms ${EASE}`,
+                      }}
+                    />
                     {/* An SVG group takes no box shadow, so a keyboard user gets a drawn ring or none. */}
                     {focused === index ? (
                       <rect
@@ -663,8 +666,21 @@ export function NextToken() {
                         className="stroke-ring"
                       />
                     ) : null}
-                    {/* Written before the word, which is also where it sits, so the DOM order a
-                        screen reader walks is the order the row reads in. */}
+                    {/* Word then score, which is the order they sit in and the order
+                        `next-token.candidate` reads them out in, so the DOM a screen reader walks
+                        is the row. */}
+                    <text
+                      id={`next-token-fan-node-${index}-token`}
+                      data-component="NextToken"
+                      x={WORD_X}
+                      y={0}
+                      fontSize={FONT}
+                      textAnchor="start"
+                      dominantBaseline="middle"
+                      className="fill-foreground pointer-events-none font-mono"
+                    >
+                      {branch.token}
+                    </text>
                     <text
                       id={`next-token-fan-node-${index}-score`}
                       data-component="NextToken"
@@ -680,18 +696,6 @@ export function NextToken() {
                       }}
                     >
                       {score}
-                    </text>
-                    <text
-                      id={`next-token-fan-node-${index}-token`}
-                      data-component="NextToken"
-                      x={WORD_X}
-                      y={0}
-                      fontSize={FONT}
-                      textAnchor="start"
-                      dominantBaseline="middle"
-                      className="fill-foreground pointer-events-none font-mono"
-                    >
-                      {branch.token}
                     </text>
                   </g>
                 )
@@ -760,16 +764,18 @@ export function NextToken() {
             {t('next-token.restart')}
           </Button>
 
-          {/* The cost line. It counts what went in on this pass, not what came out of it. */}
+          {/*
+            The cost line. It counts what went in on this pass, not what came out of it, so it has
+            nothing to say once there is no pass left: the recap and the likelihood line under it
+            are what close the run, and a third line restating that it is over was one too many.
+          */}
           <p
             id="next-token-status"
             data-component="NextToken"
             role="status"
             className="text-muted-foreground text-xs"
           >
-            {done
-              ? t('next-token.done', { passes: PASSES })
-              : t('next-token.pass', { pass: path.length + 1, read: sofar.length })}
+            {done ? '' : t('next-token.pass', { pass: path.length + 1, read: sofar.length })}
           </p>
         </div>
 

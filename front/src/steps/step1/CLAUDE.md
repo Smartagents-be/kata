@@ -113,6 +113,14 @@ comparative and a panel showing one sample at a time left the reader to click, r
 subtract. The numbers are worked out from the same `SAMPLES` the chips are drawn from, so the strip
 cannot drift from the panel above it, and `lead.3`'s band was widened to roughly four to six
 characters per token to hold the 6.1 the text row prints.
+**Picking a sample restages the panel, and only the arrival is drawn.** The source line and the count
+come back together and the chips come back one after another from the left, on the shared
+`DURATION.state` and `EASE_QUIET`, which is the cut being made rather than a card being swapped;
+the rate strip is untouched, because all four rows are always up and only the emphasis follows. The
+outgoing sample is never animated, since the text changes in the same commit that hides it and a
+fade there would be the *new* sample fading away before it arrived. The stagger is deliberately
+uncapped, so the uuid takes longer to enumerate than the prose does, which is the figure's own
+argument rather than an accident of the timing.
 And **the figures are not equally trustworthy, which their captions no longer say.** `TokenSplit`'s
 splits are real output from `o200k_base`, stored as data with no `nl` entry, and `WordsIntoTokens`
 carries the same sentence and the same splits. `NextToken`'s scores are
@@ -193,29 +201,40 @@ every candidate is a control: take `was` instead of `timed` and a different sent
 same machine and the same numbers. Without that the figure teaches that a model is a lookup table
 with extra steps.
 
-Five things in it are decisions. **The fan is replaced on every pass rather than accumulated**, so
+Eight things in it are decisions. **The fan is replaced on every pass rather than accumulated**, so
 what is on screen is one pass of the model and not a picture of the reader's clicks; a road not taken
 is drawn for exactly as long as it is a road. **The favourite chain is pinned to
 `timed` -> `out` -> `.`**, which is what keeps the pair with `TokenAttention` intact: the first entry
 of every candidate list at every depth is the favourite, so a reader who only ever takes the top one
 lands on the sentence the next figure takes apart. That invariant replaces the old
 `then`-first-entry one and breaks the same way, by reordering one list and not the others.
-**Nothing marks a winner**: the arms carry their score as ink (thicker and less transparent the
-likelier, `TokenAttention`'s intensity move, so the colour stays a token) and the favourite is
-simply the heaviest arm rather than a highlighted row. **The drawing is a spine and a set of parallel
-arms, all the same length**, which it was not at first: a bouquet of beziers running from the root to
-each word gave every candidate a different run of ink, so a thick short curve and a thin long one
-read the same, and right-aligning the words against the curve ends left the figure with no straight
-edge anywhere. Equal arms are comparable and the two text columns get hard edges. And **the drawing
-is sized once to the widest fan in the tree** and every fan centred in it, so a pass with three
-candidates does not resize the figure under the pointer that is about to click it.
+**Nothing marks a winner**: each candidate's score is drawn as the length of its own bar, as long a
+share of the column as the score is of the strongest score in the fan, and the favourite is simply
+the longest bar rather than a highlighted row. **Nothing in the drawing is a line from one thing to
+another, and putting one back is the edit to refuse.** It was a bouquet of beziers from the root to
+each word first, then a spine with parallel arms hanging off it, and both were the same mistake: a
+leader line to a label says *these two belong together* and nothing else, which a row already says by
+being a row. What the arms carried as weight of stroke is carried as length now, which is the thing a
+reader can actually compare down a column. **The word comes first and the bar last**, and that
+ordering is what keeps the connector gone rather than merely undrawn: the bar is the one element
+whose right-hand end moves, so any fixed column placed after it opens a channel in front of itself
+wherever the score is small, which is precisely the gap a leader line is invented to close. It also
+reads in the order the figure's own label promises. **The root sits in its own column on the
+favourite's line**, not on a header line above the fan, so `after it` and the top candidate read as
+one line and the rest of the fan indents under that first word; a taken candidate flies into that
+slot. That is what forces **the fan to be top-aligned rather than centred**, since the root needs one
+fixed y or it moves under the pointer between passes, and a fan of three leaves its slack at the
+foot. **The drawing is still sized once to the widest fan in the tree**, so nothing resizes either
+way.
 
-Two smaller ones. The **advance button takes the favourite** rather than advancing blindly, which is
-what keeps the deck usable (a presenter reaches the paired sentence in three clicks) and gives a
-reader who does not want to choose a way through. And the **likelihood line is the second thing the
+Three smaller ones. The **advance button takes the favourite** rather than advancing blindly, which
+is what keeps the deck usable (a presenter reaches the paired sentence in three clicks) and gives a
+reader who does not want to choose a way through. The **likelihood line is the second thing the
 figure teaches**: three scores multiplied, so even the favourite three times over comes out at 19%.
 It is floored at `<1%`, because a road the reader just walked printed as `0%` says the thing on
-screen never happened.
+screen never happened. And **the status line says nothing once the run is over**: it counted what
+went into each pass, so it has no third state to report, and the recap and the likelihood line under
+it are what close the run. `next-token.done` is gone from both bundles rather than left unused.
 
 The unit carries two forward pointers and must not grow a third telling of either. Output being
 priced above input goes to `model`, and the prefix cache goes to `harness`, each in one paragraph
@@ -401,16 +420,27 @@ unit. **`Reasoning level` is a heading rather than a paragraph inside `Instructi
 heading that matches it; `Instruction` keeps one paragraph, on the cascade, and the term still
 arrives last. **`Bundling` and `Be exact` replaced `What you steer after that`**, whose "that"
 pointed at plan mode rather than at its own subject, and the split is what puts each figure under
-the sentence that earns it. The `/clear` paragraph sits under `Bundling` on purpose: both halves are
-about not letting one window carry two jobs.
+the sentence that earns it. **`Bundling` no longer opens on `/clear`**, and the removal is the
+decision: the paragraph told a student to clear when they change subject, which is `session`'s to
+teach (it owns the seam, the loss and `SurviveTheClear`), and a section that argued both bundling
+and clearing was carrying the two jobs it warns about. `bundling.2` opens it now, so the section
+argues one thing, that a window should hold one job, and the figure under it draws that. The key
+numbering keeps its gap rather than shifting `.2` down, the way `session.window-not-memory` and
+`change.environment-beats-project` do: a key is a location, and renumbering moves a paragraph that
+did not move.
 
-Three things in it are boundaries with other units. **The word *entropy* is not used here**:
+Four things in it are boundaries with other units. **The word *entropy* is not used here**:
 `context` owns it, with an anchor, a heading, a deck slide and a quiz question, so `bundling.2`
 states the mechanism and stops. **Tiers are `model`'s**, so `meta-prompting.2` names the expensive
 model and points at that unit rather than pricing it. And **the reasoning level's scale is Claude
 Code's**, named in a scoped clause (`low` up to `xhigh`, its `/effort` command, verified August
 2026); it is not a `data-assistant` pair, because the dial exists in both products and only one of
-them publishes a stable set of names.
+them publishes a stable set of names. And **fixing an inaccuracy after the fact is step 2's
+`steering`**, so `instruction.1` closes on a link to it in half a clause rather than describing the
+move: the cascade is what this unit argues, and a paragraph that also said how to catch one mid-run
+would answer the problem in the same breath as posing it. It links into a unit the student has not
+met, which the step does elsewhere (`PickTheTier`'s amber verdict, `recap`'s closing section) and
+which is only allowed where the target owns the answer outright.
 
 `ReasoningCost` is the figure under `reasoning-level.2`, and it draws the two quantities that
 paragraph asks the reader to weigh. **The answer segment is identical in all four rows and only the
@@ -1380,7 +1410,7 @@ path or a `/context` readout is untrue of the editor. Two places stay on the bar
 "Copilot in your terminal", which names the surface in words.
 
 **What is deliberately shared is the more useful half of this, so do not "fix" it later.**
-`/clear` and `/context` are the same command in both, so `prompt.bundling.1`,
+`/clear` and `/context` are the same command in both, so
 `session.compaction-picks-moment.2` and every move of `ReadYourWindow` after the first carry no
 variant: the readings run verbatim either way, and Copilot CLI's readout (system prompt, custom
 instructions, system tools, MCP tools, messages, free space, buffer) is this step's four layers

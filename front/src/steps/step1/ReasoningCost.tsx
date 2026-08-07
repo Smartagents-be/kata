@@ -31,8 +31,13 @@ const LEVELS = [
 
 const WIDEST = LEVELS[LEVELS.length - 1].thinking + ANSWER
 
-const X0 = 92
-const SPAN = 400
+/**
+ * The bars run the full width of the viewBox: `X0` leaves exactly the mono level label room on the
+ * left and `SPAN` stops where the longest token count still fits on the right. Both margins are a
+ * few pixels, so a longer level name or a fifth digit in a count means moving these two together.
+ */
+const X0 = 66
+const SPAN = 480
 
 const width = (tokens: number) => (tokens / WIDEST) * SPAN
 
@@ -57,7 +62,7 @@ export function ReasoningCost() {
         viewBox="0 0 640 232"
         role="img"
         aria-labelledby={titleId}
-        className="h-auto w-full max-w-2xl"
+        className="h-auto w-full max-w-3xl"
       >
         <title id={titleId} data-component="ReasoningCost">
           {t('reasoning-cost.description')}
@@ -165,7 +170,7 @@ export function ReasoningCost() {
       <figcaption
         id="reasoning-cost-caption"
         data-component="ReasoningCost"
-        className="text-muted-foreground w-full max-w-2xl text-xs"
+        className="text-muted-foreground w-full max-w-3xl text-xs"
       >
         {t('reasoning-cost.caption')}
       </figcaption>

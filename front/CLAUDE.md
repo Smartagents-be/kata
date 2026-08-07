@@ -258,7 +258,14 @@ else holds a colour: components name tokens, so a change to the palette is a cha
   the lightbulb is what keeps it findable. **No pickable option has a border**: the hairlines carry
   the structure, the quiz's A-D key is **decoration only** and `aria-hidden` (the radio is still
   there, `sr-only`, and the row carries the focus ring on its behalf), and a `ChoiceMark` repeats the
-  verdict as a glyph so it never rests on green against red alone. **`ConnectBoard` is the one
+  verdict as a glyph so it never rests on one colour against another. **A correct option is the brand
+  teal rather than `--success`**, and it is the whole row that takes it: the tint, the lettered key,
+  the words and the tick. `right` and `answer` are the same claim about the same option, the one you
+  took and the one you missed, so they are one colour and only the weight separates them; that leaves
+  red as the single verdict colour on a choice row. `--success` still means passed on the two boards,
+  where a solved row is a thing you finished rather than an option that was correct. A choice row also
+  carries the horizontal padding a dense row does and for the same reason, on the content only, so the
+  hairlines still run the panel's full width and still meet the rule above them. **`ConnectBoard` is the one
   exception and keeps its two columns bordered**, because a line is drawn between them and each end
   has to be an edge the eye can see a line arrive at; what it takes from the shared vocabulary is the
   tint and the radius, so a picked row there and a picked row in the quiz are the same colour.
