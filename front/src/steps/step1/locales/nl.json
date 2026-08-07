@@ -63,7 +63,7 @@
 
   "token-split.label": "vier soorten tekst, opgeknipt in tokens",
   "token-split.pick": "Kies een voorbeeld",
-  "token-split.sample.prose": "Proza",
+  "token-split.sample.prose": "Tekst",
   "token-split.sample.java": "Een regel Java",
   "token-split.sample.identifier": "Een klassenaam",
   "token-split.sample.uuid": "Een id",
@@ -427,13 +427,13 @@
   "quiz.read-it-and-said-so.after-cutoff": "Het testbestand is geschreven na de cutoff van het model, dus het kon het niet interpreteren.",
   "quiz.read-it-and-said-so.nothing-in-window": "Er stond niets van jouw project in het venster, dus antwoordde het vanuit de training.",
   "quiz.read-it-and-said-so.explanation": "Grounded is niet bewezen. Vraag om de controle en niet om de conclusie, en een test die rood wordt is een bewering die voor je ogen kan falen.",
-  "tokens.lead.1": "Het model leest je woorden niet. Nog voor er iets bij het model aankomt, wordt je tekst in stukken geknipt: gewone woorden blijven heel, zeldzame vallen uit elkaar, en elk stuk wordt vervangen door een getal. Die stukken zijn <strong>tokens</strong>.",
+  "tokens.lead.1": "Het model leest je woorden niet. Nog voor er iets bij het model aankomt, wordt je tekst in stukken geknipt. Gewone woorden blijven heel, zeldzame vallen uit elkaar, en elk stuk wordt vervangen door een getal. Die stukken zijn <strong>tokens</strong>.",
   "tokens.lead.2": "Een token is de eenheid waarmee een taalmodel werkt. Alles wat een agent weet op het moment dat hij antwoordt is tekst, en die tekst wordt begrensd, geprijsd en herlezen per token. Niet per woord, en niet per teken. Deze unit gaat dus niet over wat er in de agent belandt, maar over hoe je het afmeet.",
-  "tokens.lead.3": "Voor gewoon Engels gaan er ruwweg vier à zes tekens in één token, dus een bladzijde proza komt op een paar honderd uit.",
+  "tokens.lead.3": "Voor gewoon Engels gaan er ruwweg vier à zes tekens in één token, dus een bladzijde tekst komt op een paar honderd tokens uit.",
 
   "tokens.not-words.heading": "Tekst valt niet uiteen in woorden",
   "tokens.not-words.1": "Een tokenizer heeft een vaste woordenlijst, één keer opgebouwd uit een berg tekst en daarna bevroren. Hij knipt je invoer in de langste stukken die in die lijst staan, dus gewone Engelse woorden blijven heel, met de spatie ervoor erbij. Alles wat hij niet vaak genoeg gezien heeft, wordt uit elkaar gehaald tot wat overblijft wel past. Elke aanbieder heeft zijn eigen woordenlijst, dus de grenzen verschillen in detail. De vorm niet.",
-  "tokens.not-words.2": "Daarom kost een geplakte stacktrace, een log vol ids of een muur geminifieerde JSON een veelvoud van wat de lengte doet vermoeden. Proza is het goedkoopste wat je een model kunt voorzetten. Identifiers, hashes en ids zijn het duurste, en een codebase bestaat daaruit.",
+  "tokens.not-words.2": "Daarom kost een geplakte stacktrace, een log vol ids of een muur geminifieerde JSON een veelvoud van wat de lengte doet vermoeden. Tekst is het goedkoopste wat je een model kunt voorzetten. Identifiers, hashes en ids zijn het duurste, en een codebase bestaat daaruit.",
   "tokens.not-words.3": "De woordenlijst komt uit de berg tekst waarop het model getraind is, dus wat in fragmenten uiteenvalt, heeft het ook het minst gelezen. Gewoon Engels heeft het eindeloos gezien. Jouw klassennamen en een taal met weinig tekst online juist niet, en daarover antwoordt het navenant zwakker <svg data-icon=\"gem\"></svg> Stel je vraag in de taal die het model het meest gelezen heeft. Dezelfde vraag kost dan minder tokens en komt beter beantwoord terug <svg data-icon=\"coin\"></svg>.",
 
   "tokens.one-at-a-time.heading": "Het schrijft één token per keer",
@@ -683,7 +683,7 @@
 
   "recap.lead.1": "Alles wat de agent wist toen hij je antwoordde, was tekst in één venster. Daar ging elke unit vóór de jacht over: waarin die tekst gemeten wordt, wat het venster vult, wat het kost, wie het leest en waar de antwoorden vandaan kwamen.",
   "recap.what-costs-do.heading": "Wat het kost, en wat je eraan doet",
-  "recap.what-costs-do.1": "<strong>Alles wordt geteld in <a href=\"/steps/step1/tokens\">tokens</a>, en code is duurder dan proza.</strong> Vraag het in de taal waarvan het model het meest gelezen heeft: minder tokens voor dezelfde vraag, en een beter antwoord terug <svg data-icon=\"gem\"></svg> <svg data-icon=\"coin\"></svg>.",
+  "recap.what-costs-do.1": "<strong>Alles wordt geteld in <a href=\"/steps/step1/tokens\">tokens</a>, en code is duurder dan tekst.</strong> Vraag het in de taal waarvan het model het meest gelezen heeft: minder tokens voor dezelfde vraag, en een beter antwoord terug <svg data-icon=\"gem\"></svg> <svg data-icon=\"coin\"></svg>.",
   "recap.what-costs-do.2": "<strong>Elke vervolgvraag stuurt alles erboven opnieuw mee, en wat het model aan <a href=\"/steps/step1/prompt\">denkwerk</a> uitgaf blijft er ook in staan.</strong> Bundel wat bij elkaar hoort in plaats van drie keer te vragen <svg data-icon=\"gem\"></svg> <svg data-icon=\"coin\"></svg>.",
   "recap.what-costs-do.3": "<strong>Een <a href=\"/steps/step1/tools\">tool</a> kost je iets door te bestaan, aangeroepen of niet.</strong> Zet de tools uit die deze taak niet nodig heeft <svg data-icon=\"coin\"></svg>.",
   "recap.what-costs-do.4": "<strong>Niets in het <a href=\"/steps/step1/context\">venster</a> staat aangemerkt als verouderd, en de stapel groeit alleen maar.</strong> Clear als je van onderwerp wisselt, op een naad die jij kiest in plaats van de naad die compaction voor je kiest <svg data-icon=\"coin\"></svg>.",
@@ -696,7 +696,7 @@
   "recap.where-this-goes.1": "Dat is stap 1. <a href=\"/steps/step2/evolution\">Stap 2</a> draait de vraag om: niet wat de agent weet, maar hoe jij hem werk in handen geeft.",
 
   "deck.tokens.split.title": "Een model leest geen woorden",
-  "deck.tokens.split.note": "Proza is het goedkoopste dat je het kunt geven. Namen en hashes zijn het duurst, en een codebase bestaat daaruit.",
+  "deck.tokens.split.note": "Tekst is het goedkoopste dat je het kunt geven. Namen en hashes zijn het duurst, en een codebase bestaat daaruit.",
   "deck.tokens.language.title": "Vraag het in <hi>de taal die het model het meest gelezen heeft</hi>",
   "deck.tokens.language.note": "Het vocabulaire komt uit de trainingsstapel. Wat in fragmenten uiteenvalt, is wat het model het minst gelezen heeft, en de antwoorden zijn daar wankeler om.",
   "deck.tokens.next.title": "Het schrijft één token per keer",

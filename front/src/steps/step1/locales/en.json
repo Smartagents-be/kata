@@ -63,9 +63,9 @@
   "words-into-tokens.label": "one word through the model",
   "words-into-tokens.description": "One word, left to right: unscrambled, the two tokens it breaks into, the first of those as a column of numbers, the model as a field of numbers, the numbers that come back, and the token they stand for.",
 
-  "token-split.label": "four kinds of text, split into tokens",
+  "token-split.label": "different kinds of text, split into tokens",
   "token-split.pick": "Pick a sample",
-  "token-split.sample.prose": "Prose",
+  "token-split.sample.prose": "Text",
   "token-split.sample.java": "A line of Java",
   "token-split.sample.identifier": "A class name",
   "token-split.sample.uuid": "An id",
@@ -523,7 +523,7 @@
   "quiz.read-it-and-said-so.explanation": "Grounded is not proved. Ask for the check rather than the conclusion, and a test that goes red is a claim that can fail in front of you.",
 
   "deck.tokens.split.title": "A model does not read words",
-  "deck.tokens.split.note": "Prose is the cheapest thing you can hand it. Identifiers and hashes are the dearest, and a codebase is made of those.",
+  "deck.tokens.split.note": "Text is the cheapest thing you can hand it. Identifiers and hashes are the dearest, and a codebase is made of those.",
   "deck.tokens.language.title": "Ask in <hi>the language it has read most of</hi>",
   "deck.tokens.language.note": "The vocabulary came out of the training pile. What breaks into fragments is what the model read least of, and the answers are shakier for it.",
   "deck.tokens.next.title": "It writes one token at a time",

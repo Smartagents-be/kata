@@ -38,10 +38,10 @@ type Sample = {
 
 /**
  * Ordered by what they cost per character, most efficient first, because that is the order the prose
- * under it reads them in. Prose is the cheapest thing you can hand a model and an id is the dearest,
+ * under it reads them in. Text is the cheapest thing you can hand a model and an id is the dearest,
  * and they sit at opposite ends so the student walks the whole range.
  *
- * **The prose row has to contain a word that breaks**, and that is the reason this sentence and not a
+ * **The text row has to contain a word that breaks**, and that is the reason this sentence and not a
  * tidier one: six of its seven words are one token, and `unscrambled` comes apart at `unscr` and
  * `ambled`, which is neither a syllable nor a stem. A sentence where every word survives whole shows
  * the student nothing, and one that breaks somewhere defensible shows them the wrong thing. No prose

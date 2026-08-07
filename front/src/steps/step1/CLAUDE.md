@@ -95,7 +95,7 @@ build failed because it timed out`): the first shows it being written a token at
 takes the finished sentence apart, and the prose in between says so. Changing the sentence in one of
 them breaks the pair. Since the reader now picks the tokens in the first of them, what holds the pair
 together is its **favourite chain**, the top-scored token at each of the three passes, and the rule
-protecting that is written up under `NextToken` below. **`TokenSplit`'s prose row has to contain a word that breaks**, which is why it
+protecting that is written up under `NextToken` below. **`TokenSplit`'s text row has to contain a word that breaks**, which is why it
 is the sentence it is: `unscrambled` comes apart at `unscr` and `ambled`, at a point that is neither
 a syllable nor a stem. No prose says so any more, so the figure has to carry it alone and a tidier
 sentence quietly ends the exercise. There is deliberately no second sentence in another language: an
@@ -112,7 +112,7 @@ always up on one scale with only the emphasis following the selection: the secti
 comparative and a panel showing one sample at a time left the reader to click, remember and
 subtract. The numbers are worked out from the same `SAMPLES` the chips are drawn from, so the strip
 cannot drift from the panel above it, and `lead.3`'s band was widened to roughly four to six
-characters per token to hold the 6.1 the prose row prints.
+characters per token to hold the 6.1 the text row prints.
 And **the figures are not equally trustworthy, which their captions no longer say.** `TokenSplit`'s
 splits are real output from `o200k_base`, stored as data with no `nl` entry, and `WordsIntoTokens`
 carries the same sentence and the same splits. `NextToken`'s scores are
