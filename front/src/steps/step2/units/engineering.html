@@ -1,15 +1,12 @@
 <p data-i18n="engineering.lead.1">
   Good agentic projects start with good software engineering. That is the whole line between vibe
   coding and agentic engineering, and you are on one side of it or the other.
-  <a href="/steps/step2/evolution">Project evolution</a> put you on the other side for an hour, on a
-  version built to be thrown away, and that is the one place the line does not hold.
 </p>
 
 <p data-i18n="engineering.lead.2">
   Vibe coding is asking for a feature, skimming what comes back, and running it. When it breaks you
   paste the error and say "fix this". That works for about an hour. Then the fixes start breaking
-  each other, nobody has read the code in a while, and you are steering a system you no longer
-  understand. The loop feels productive right up to the moment you cannot answer a simple question
+  each other. The loop feels productive right up to the moment you cannot answer a simple question
   about your own repository.
 </p>
 
@@ -21,42 +18,64 @@
 
 <h2 data-i18n="engineering.domain-driven-design.heading">Domain-driven design</h2>
 
-<div data-figure="domain-tree"></div>
-
 <p data-i18n="engineering.domain-driven-design.1">
-  Folders and concepts carry the same names the business uses. Hexagonal architecture sorts the
-  rest: the domain in the middle, the machinery behind adapters, and the direction of a call as a
-  folder you can point at. Both give you the logical shape, and a logical shape is what you can
-  prompt against <svg data-icon="gem"></svg> <svg data-icon="coin"></svg> Ask for a feature on
-  articles and the agent knows where to look before it opens anything. No class outside
-  <code>adapter/</code> names Postgres or S3, so swapping the database out is one folder's work.
+  Folders and classes carry the names the business uses. <code>Headline</code> is a headline,
+  <code>article/</code> is where articles live, and the word you would say in a meeting is the word
+  in the tree. Ask for a feature on articles and your sentence has already named the files
+  <svg data-icon="gem"></svg>
 </p>
+
+<div data-figure="words-to-files"></div>
 
 <p data-i18n="engineering.domain-driven-design.2">
   That is a bigger lever with an agent than it ever was with a team. A model reads your repository
-  as tokens and predicts what comes next. Plain English is what it predicts best, which is what
-  <a href="/steps/step1/tokens">step 1's unit on tokens</a> showed.
+  as tokens and predicts what comes next, and plain English is what it predicts best, which is what
+  <a href="/steps/step1/tokens">step 1's unit on tokens</a> showed. The names in your tree are half
+  of every prompt you write against it.
 </p>
+
+<h2 data-i18n="engineering.hexagonal-architecture.heading">Hexagonal architecture</h2>
+
+<p data-i18n="engineering.hexagonal-architecture.1">
+  The domain sits in the middle, the machinery lives behind adapters, and the direction of a call is
+  a folder you can point at. No class outside <code>adapter/</code> names Postgres or S3, so
+  swapping the database out is one folder's work.
+</p>
+
+<div data-figure="domain-tree"></div>
+
+<p data-i18n="engineering.hexagonal-architecture.2">
+  What that buys you with an agent is the lookup. A shape it can navigate is a shape it does not
+  have to search, so it opens <code>application/</code> for a use case and
+  <code>adapter/outgoing/</code> for the thing that talks to S3, instead of reading half your
+  repository into the window to find out <svg data-icon="coin"></svg>.
+</p>
+
+<div data-figure="hexagon-ports"></div>
 
 <h2 data-i18n="engineering.right-words.heading">The right words</h2>
 
 <p data-i18n="engineering.right-words.1">
   Name the thing you want. "Put a repository in front of this JDBC call" lands somewhere specific.
   "Clean this up a bit" lands in the statistical middle of every cleanup ever written. Design
-  pattern names, layer names and the vocabulary of your domain are compression. They keep an agent
-  on the task instead of on its own reading of what you meant. That is also what separates an app
-  built in half a day from one you can put in production.
+  pattern names, layer names and the vocabulary of your domain are compression. They carry the
+  <strong>correct</strong> intent, so the agent works from yours instead of from its own reading of
+  what you meant <svg data-icon="gem"></svg> That is also what separates an app built in half a day
+  from one you can put in production.
 </p>
 
 <h2 data-i18n="engineering.quality-gates.heading">Quality gates</h2>
 
 <p data-i18n="engineering.quality-gates.1">
-  Line coverage and mutation coverage still tell you whether software is fit to ship. So does a
-  Sonar reliability rating. They also hand an agent an invariant, something fixed to hold itself to
-  while it works <svg data-icon="gem"></svg> Each of them is a proxy, though, and an agent will
-  satisfy a proxy rather than the thing behind it. The gate worth wiring in is the one that is
-  expensive to fake.
+  Static analysis in Sonar, a line coverage floor, a mutation score: that is how software has
+  always been given a quality label, and how drift and regression were caught before a release. The
+  same gates go around an agent's work, and investing in them is still investing in how fast you
+  ship. They also hand it an invariant, something fixed to hold itself to while it works
+  <svg data-icon="gem"></svg> Each of them is a proxy, though, and an agent will satisfy a proxy
+  rather than the thing behind it. The gate worth wiring in is the one that is expensive to fake.
 </p>
+
+<div data-figure="same-gate"></div>
 
 <p data-i18n="engineering.quality-gates.2">
   Wire that into the run rather than into your memory. A hook fires once the agent says it is

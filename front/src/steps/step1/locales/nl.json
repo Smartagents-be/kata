@@ -142,6 +142,7 @@
   "reasoning-cost.answer": "het antwoord",
   "reasoning-cost.tokens": "{{total}} tokens",
   "reasoning-cost.caption": "De tokenaantallen zijn verzonnen. De namen van de niveaus zijn die van Claude Code, gelezen in zijn documentatie over instellingen in augustus 2026.",
+  "entry-brief.description": "Het opdrachtblad: zes dingen die de balie vroeg, de ene regel die je beide keren typt, en het commando dat nakijkt wat eruit kwam.",
   "entry-brief.asked.label": "Wat de balie vroeg",
   "entry-brief.asked.1": "De Cataloguspagina nummert de titels, en die nummers lezen wij door de telefoon voor. Laat ons dus nummer drie vragen en de derde terugkrijgen.",
   "entry-brief.asked.2": "Zeg het nummer er ook bij, want we lezen ze allebei voor.",
@@ -154,7 +155,7 @@
   "entry-brief.check.note": "in je eigen terminal, vanuit de hoofdmap van de repository, met de service aan. De check zelf staat in het Engels.",
 
   "plan.title": "Dezelfde vraag, twee keer",
-  "plan.description": "Zes wensen hierboven, en één regel die er geen van zegt. Typ ze twee keer, één keer rechtstreeks en één keer via een plan, en tel wat er doorkomt.",
+  "plan.description": "Zes wensen hierboven, en één regel die er geen van zegt. Typ ze twee keer, één keer rechtstreeks en één keer via een plan, en tel wat er doorkomt. Kan je een model kiezen, dan zijn de twee runs ook het dure tegen het goedkope.",
   "plan.todo": "Vink deze opdracht af",
   "plan.done": "Gedaan",
   "plan.serve.label": "Start de service van stap 1, en open de Cataloguspagina in deze app zodat je de nummers ziet.",

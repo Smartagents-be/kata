@@ -47,6 +47,81 @@
   in your head.
 </p>
 
+<h2 data-i18n="parallel.builder-critic.heading">The builder and the critic</h2>
+
+<p data-i18n="parallel.builder-critic.1">
+  Two agents can also be pointed at each other. One builds, the other takes the work apart, and the
+  builder goes back in carrying the remarks. Nothing stops it after one pass: it builds again, gets
+  taken apart again, and keeps going until the critic has nothing left to say. That is the
+  reflection pattern <svg data-icon="pattern"></svg> from
+  <a href="/steps/step1/harness">step 1's unit on the harness</a>, run as a loop instead of once.
+  You are in none of the rounds.
+</p>
+
+<p data-i18n="parallel.builder-critic.2">
+  So the whole arrangement has to be in the prompt. Nobody is there to answer once it starts, and
+  the bar you give the critic is the last thing you get to say about what good looks like.
+</p>
+
+<pre><code>Build a link shortener, in a project of its own. POST /api/links takes
+a URL and answers with a code, GET /api/links/{code} hands the URL
+back, and a page lists what is in there. I want it as something I
+would hand a colleague: codes that do not collide, an expiry, and a
+URL that gets checked. Keep it as plain as TitleController in
+kata/step1/java, which is the house style for a controller here.
+
+You implement it. Fan out sub-agents for the parts that do not depend
+on each other. Then spawn one more as a harsh critic, hand it the diff
+and the running app, and tell it to attack the design, the naming and
+the cases nobody thought about. It reports back. It fixes nothing.
+
+/loop over this until the critic has no remarks left and is wowed by
+what it is looking at. Done is a green mvn verify and a critic that
+cannot fault it.</code></pre>
+
+<p data-i18n="parallel.builder-critic.3">
+  Under the wording, the same pieces are always in there.
+</p>
+
+<ul>
+  <li data-i18n="parallel.builder-critic.element-1">
+    <strong>Intent and a goal.</strong> What you want, and what would make it good. The second half
+    is the one that gets left out, and it is the half the critic works from.
+  </li>
+  <li data-i18n="parallel.builder-critic.element-2">
+    <strong>Sub-agents to fan out to.</strong> The parts that do not depend on each other go out in
+    parallel, and the critic is a fresh one of its own. An agent turning around to look at its own
+    afternoon agrees with itself.
+  </li>
+  <li data-i18n="parallel.builder-critic.element-3">
+    <strong>A critic that is harsh.</strong> Attack the design, the naming and the cases nobody
+    thought about, report back, repair nothing. An agent asked to help will happily help you finish
+    the wrong thing.
+  </li>
+  <li data-i18n="parallel.builder-critic.element-4">
+    <strong>A bar the builder has to clear.</strong> Done is not "it runs". Done is the critic
+    having no remarks left, and the loop is what closes that gap.
+  </li>
+  <li data-i18n="parallel.builder-critic.element-5">
+    <strong>A golden standard.</strong> Point at something that is already good, the way the prompt
+    above points at <code>TitleController</code>. "Better" is an opinion two agents can argue about
+    all afternoon. "As good as this file" is a comparison.
+  </li>
+</ul>
+
+<aside data-variant="warning" data-i18n="parallel.builder-critic.4">
+  Nothing else in this unit is this slow or this expensive. Two hours is an ordinary run, and every
+  round pays for the whole design being read and written again. Keep it for work that is walled off
+  from everything else and has to come back good.
+</aside>
+
+<p data-i18n="parallel.builder-critic.5">
+  What you buy for that is rounds. Many passes over one problem instead of one pass over five, and
+  none of them needs you, so the whole thing runs unattended while you are somewhere else. It
+  reports once, with the critic's last word beside the diff, which is a thing you can actually read.
+  What comes back is usually work you would have signed off yourself.
+</p>
+
 <h2 data-i18n="parallel.one-front-rest.heading">One in front, the rest behind</h2>
 
 <p data-i18n="parallel.one-front-rest.1">

@@ -14,7 +14,16 @@ import { useTranslation } from 'react-i18next'
  * FAIL lines against a block of prose has to find the sentence each one came from before they can
  * argue with it. Six lines is still a person talking rather than a specification, and the numerals
  * are the design system's `data-marker`, which exists for exactly this pairing of a numbered thing
- * with the numbered thing about it. **The wishes live in three places that have to stay in step**:
+ * with the numbered thing about it.
+ *
+ * **They are a real `<ol>`, and that is not tidiness.** A numeral here is the join between two
+ * surfaces, the wish on the page and the `3  …  FAIL` line in a terminal, so a reader who cannot see
+ * it needs the position announced or the traceability the numbers were added for is missing for them
+ * alone. That is where it departs from the quiz's A-to-D key, which really is decoration because the
+ * radio underneath carries the semantics. The marker span stays `aria-hidden`, since the list is
+ * already saying which one this is and hearing it twice is worse than not seeing it once.
+ *
+ * **The wishes live in three places that have to stay in step**:
  * `asked.1` to `asked.6` in both locale bundles, `WISHES` below, and the array in
  * `kata/step1/check-entry.mjs`. A seventh added to two of the three renders nowhere and is graded
  * anyway.
@@ -22,7 +31,10 @@ import { useTranslation } from 'react-i18next'
  * **Nothing here carries `aria-labelledby`** except the `blockquote`, which has a role to hang it
  * on. A `div` and a `pre` do not, so the attribute was inert on both, and it was not needed: every
  * box is preceded in reading order by the eyebrow that names it, which is what a screen reader
- * announces anyway.
+ * announces anyway. What the three of them add up to is not readable that way, though, and this is
+ * the only figure in the step that is an exercise's input rather than a drawing, so the `figure`
+ * carries an `aria-label` naming the sheet. It is not a `figcaption`, because a caption in this
+ * course states provenance and there is none to state.
  *
  * **The brief is read rather than drawn**, which is the one thing to keep it out of: `UnderSpecified`
  * in `harness` already draws the gap between an ask and what it leaves unsaid, in the step's own
@@ -46,7 +58,12 @@ export function EntryBrief() {
   const { t } = useTranslation('step1')
 
   return (
-    <figure id="entry-brief" data-component="EntryBrief" className="my-8 flex flex-col gap-4">
+    <figure
+      id="entry-brief"
+      data-component="EntryBrief"
+      aria-label={t('entry-brief.description')}
+      className="my-8 flex flex-col gap-4"
+    >
       <div id="entry-brief-asked" data-component="EntryBrief" className="flex flex-col gap-2">
         <span
           id="entry-brief-asked-label"
@@ -62,27 +79,37 @@ export function EntryBrief() {
           aria-labelledby="entry-brief-asked-label"
           className="border-border bg-card flex flex-col gap-2 rounded-lg border p-4 text-sm leading-relaxed"
         >
-          {WISHES.map((wish, index) => (
-            <p
-              key={wish}
-              id={`entry-brief-asked-wish-${index}`}
-              data-component="EntryBrief"
-              className="flex items-start gap-2"
-            >
-              <span
-                id={`entry-brief-asked-wish-${index}-marker`}
+          <ol
+            id="entry-brief-asked-wishes"
+            data-component="EntryBrief"
+            // `list-none` can cost a list its semantics in some screen readers, and the position of
+            // a wish is the whole reason this is a list rather than six paragraphs, so the role is
+            // written back on.
+            role="list"
+            className="flex list-none flex-col gap-2"
+          >
+            {WISHES.map((wish, index) => (
+              <li
+                key={wish}
+                id={`entry-brief-asked-wish-${index}`}
                 data-component="EntryBrief"
-                data-marker
-                aria-hidden="true"
-                className="mt-[0.2em] shrink-0"
+                className="flex items-start gap-2"
               >
-                {wish}
-              </span>
-              <span id={`entry-brief-asked-wish-${index}-text`} data-component="EntryBrief">
-                {t(`entry-brief.asked.${wish}`)}
-              </span>
-            </p>
-          ))}
+                <span
+                  id={`entry-brief-asked-wish-${index}-marker`}
+                  data-component="EntryBrief"
+                  data-marker
+                  aria-hidden="true"
+                  className="mt-[0.2em] shrink-0"
+                >
+                  {wish}
+                </span>
+                <span id={`entry-brief-asked-wish-${index}-text`} data-component="EntryBrief">
+                  {t(`entry-brief.asked.${wish}`)}
+                </span>
+              </li>
+            ))}
+          </ol>
         </blockquote>
       </div>
 

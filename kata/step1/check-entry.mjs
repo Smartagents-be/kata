@@ -26,17 +26,19 @@
  * the model for free, which is the one thing this task measures.
  *
  * Nothing in it names a title, and nothing is hard-coded to nine. The shelf comes off `/api/titles`
- * at run time, the position it probes is picked so the title sitting there cannot be mistaken for a
- * number the check is looking for, and everything is compared against that. So the checks hold if
- * the catalogue is ever rewritten, and the file carries no second copy of a list other things in
+ * at run time, the **pair of positions** wishes 2 and 3 are asked at is picked by `probePositions`
+ * so neither is the first or the last and neither title can be mistaken for a number the check is
+ * looking for, and everything is compared against that. So the checks hold if the catalogue is
+ * rewritten, down to four titles, and the file carries no second copy of a list other things in
  * step 1 depend on.
  *
  *   node kata/step1/check-entry.mjs                    against localhost:8080
  *   node kata/step1/check-entry.mjs http://host:port    against somewhere else
  *
- * Exit code is 0 whatever the score, and 1 only when there is nothing to check because the service
- * is down. A score is a reading rather than a build result, and a non-zero exit invites somebody to
- * chase it green, which for the first of the two runs is exactly the wrong thing to do.
+ * Exit code is 0 whatever the score, and 1 only when there is nothing to check: the service is down,
+ * or the shelf is too short to probe. A score is a reading rather than a build result, and a non-zero
+ * exit invites somebody to chase it green, which for the first of the two runs is exactly the wrong
+ * thing to do.
  */
 
 const BASE = (process.argv[2] ?? 'http://localhost:8080').replace(/\/+$/, '')
@@ -74,23 +76,27 @@ async function probe(path) {
 function showBody(text) {
     const flat = String(text).replace(/\s+/g, ' ').trim()
     if (flat === '') return 'an empty body'
-    return flat.length > 200 ? `${flat.slice(0, 197)}...` : flat
+    return flat.length > 400 ? `${flat.slice(0, 397)}...` : flat
 }
 
 /**
- * The values an answer is made of, nested objects included. The brief asks for a number, a title and
- * a count, and says nothing about the shape they arrive in, so every reading is accepted: a title on
- * its own, an object carrying them under any field names, an object with an error type wrapped
- * inside it, or a line with the lot written into it. Grading a shape nobody asked for would be this
- * check inventing a seventh wish.
+ * The leaf values an answer is made of, nested objects included. The brief asks for a number, a
+ * title and a count, and says nothing about the shape they arrive in, so every reading is accepted:
+ * a title on its own, an object carrying them under any field names, an object with an error type
+ * wrapped inside it, or a line with the lot written into it. Grading a shape nobody asked for would
+ * be this check inventing a seventh wish.
+ *
+ * It stops at four levels down and hands back the container it stopped on, which `saysTitle` and
+ * `saysNumber` then skip because it is neither a string nor a number. That is the intended
+ * behaviour rather than a limit worth raising: nothing an endpoint can reasonably answer with buries
+ * a title five objects deep, and an unbounded walk over a body this file did not write is a way to
+ * hang on a cycle.
  */
 function partsOf(body, depth = 0) {
-    if (body === null || body === undefined || depth > 4) return []
-    if (Array.isArray(body)) return body.flatMap((part) => [part, ...partsOf(part, depth + 1)])
-    if (typeof body === 'object') {
-        return Object.values(body).flatMap((part) => [part, ...partsOf(part, depth + 1)])
-    }
-    return [body]
+    if (body === null || body === undefined) return []
+    if (typeof body !== 'object' || depth > 4) return [body]
+    const values = Array.isArray(body) ? body : Object.values(body)
+    return values.flatMap((part) => partsOf(part, depth + 1))
 }
 
 function saysTitle(body, title) {
@@ -98,20 +104,36 @@ function saysTitle(body, title) {
 }
 
 /**
- * Whether an answer states a given number anywhere.
+ * Every number a piece of text actually states, with three kinds of digit that are not a statement
+ * taken out first. All three are load bearing and each of them was a way for a body to be credited
+ * with a number it never said.
  *
- * Two things in here are load bearing. **A hyphen is not a minus sign**, because `1-9` is how
- * everybody writes a range and a tokeniser that read the 9 as negative failed the one implementation
- * this exercise exists to reward. And **ISO timestamps are cut out of any string first**, since a
- * framework's default error page carries one and an hour or a millisecond in it is digits that could
- * be read as a count.
+ * **A hyphen is not a minus sign**, because `1-9` is how everybody writes a range and a tokeniser
+ * that read the 9 as negative failed the one implementation this exercise exists to reward.
+ * **Timestamps go**, since a framework's default error page carries one and an hour or a millisecond
+ * in it is digits. And **paths and URLs go**, which is the one that matters most: a body carrying
+ * `"self": "/api/titles/4"` and `"last": "/api/titles/9"` states neither the position nor the count,
+ * it states where to go and ask, and an endpoint answering in navigation links was measured passing
+ * two wishes on numbers that were only ever in its own hyperlinks.
  */
+function numbersIn(text) {
+    const runs = String(text)
+        // A date, hyphenated or slashed. Three components, so a range written `1-9` is untouched.
+        .replace(/\d{1,4}[/-]\d{1,2}[/-]\d{1,4}(?:[T ][\d:.+Z-]*)?/g, ' ')
+        .replace(/https?:\/\/\S+/g, ' ')
+        // A path: at least one named segment, optionally ending in a number. `/api/titles/9` goes,
+        // `3/9` stays, because nothing in it follows a slash with a letter.
+        .replace(/(?:\/[A-Za-z][\w.-]*)+(?:\/-?\d+)?/g, ' ')
+        .match(/\d+/g)
+    return (runs ?? []).map(Number)
+}
+
+/** Whether an answer states a given number anywhere it counts as having said it. */
 function saysNumber(body, wanted) {
     return partsOf(body).some((part) => {
         if (typeof part === 'number') return part === wanted
         if (typeof part !== 'string') return false
-        const runs = part.replace(/\d{4}-\d{2}-\d{2}[T ][\d:.+Z-]*/g, ' ').match(/\d+/g) ?? []
-        return runs.some((run) => Number(run) === wanted)
+        return numbersIn(part).includes(wanted)
     })
 }
 
@@ -122,12 +144,22 @@ function isPlainNo(status) {
 
 /**
  * A body that is really a stack trace is the thing the brief calls falling over, whatever status it
- * arrived with. It tests for a stack frame and nothing else: a refusal that happens to name an
- * exception type is a refusal, and a first cut of this that matched the bare word `Exception` had
- * two adjacent lines of the board disagreeing about the same body.
+ * arrived with. Two things about it are the fix for two separate bugs. It tests for a **stack frame**
+ * and nothing else, because a refusal that happens to name an exception type is still a refusal, and
+ * a cut of this that matched the bare word `Exception` had two adjacent lines of the board
+ * disagreeing about the same body. And it tests the **parsed values as well as the raw text**,
+ * because a trace inside a JSON string arrives over the wire with its newlines escaped, so the
+ * version that only read the raw text could never match anything this service emits: a run whose
+ * every refusal was a raw `IndexOutOfBoundsException` dump scored six of six, with the length in
+ * `out of bounds for length 9` read as the count the brief asked for.
  */
-function looksLikeACrash(text) {
-    return /\n\s+at [\w.$/]+\(/.test(String(text))
+const STACK_FRAME = /(?:^|\n|\\n)\s*(?:\t|\\t)?\s*at [\w.$/@]+\(/
+
+function looksLikeACrash(response) {
+    if (STACK_FRAME.test(String(response.text))) return true
+    return partsOf(response.body).some(
+        (part) => typeof part === 'string' && STACK_FRAME.test(part),
+    )
 }
 
 /**
@@ -135,9 +167,9 @@ function looksLikeACrash(text) {
  * down here. The label is the wish rather than the mechanism, because a failing line has to read as
  * something the student knew and did not pass on.
  *
- * Every check is handed the shelf as it comes off `/api/titles`, the position that is safe to probe,
- * and the three refusals the last two wishes read, so nothing is asked of the endpoint twice for one
- * line of output.
+ * Every check is handed the shelf as it comes off `/api/titles`, the two positions that are safe to
+ * probe, and the three refusals the last two wishes read, so nothing is asked of the endpoint twice
+ * for one line of output.
  */
 const WISHES = [
     {
@@ -150,9 +182,16 @@ const WISHES = [
                     return { ok: false, detail: `/api/titles/${position} answered ${got.status}` }
                 }
                 if (!saysTitle(got.body, shelf[index])) {
+                    // What came back is only worth naming beside what should have: an off-by-one is
+                    // read out of the pair. On the shipped stub there is no pair to read, so the
+                    // board does not open by printing a title nobody has earned yet.
+                    const gave = showBody(got.text)
                     return {
                         ok: false,
-                        detail: `/api/titles/${position} gave ${showBody(got.text)}`,
+                        detail:
+                            gave === 'an empty body'
+                                ? `/api/titles/${position} gave an empty body`
+                                : `/api/titles/${position} gave ${gave}, the page has ${shelf[index]}`,
                     }
                 }
             }
@@ -160,23 +199,49 @@ const WISHES = [
         },
     },
     {
+        /**
+         * Asked at **two** positions, each of which has to state its own number. One was enough until
+         * an endpoint answering in navigation links passed on the `/api/titles/…` strings in its own
+         * body, and what actually closed that is the path-stripping in `numbersIn`; asking twice is
+         * kept because it costs one request and catches an answer that states a constant.
+         *
+         * **What it does not do is object to a body saying anything else**, and that restraint is a
+         * bug fixed rather than a gap. A version of this also failed a body that mentioned the other
+         * probed position, which was aimed at the same counterexample and hit the wrong target: an
+         * endpoint honouring all six wishes and naming its neighbours (`"previous": 1, "next": 3`)
+         * was told its answer "is not saying which one you asked for" when it plainly was. The
+         * probed positions are adjacent on this catalogue, so it collided in both directions at
+         * once, and it failed the one run the whole exercise exists to reward. Grading what an
+         * answer carries beyond what was asked for is this check inventing a seventh wish.
+         */
         label: 'the answer says the number back, not just the title',
         async run({ at }) {
-            const got = await probe(`/api/titles/${at}`)
-            if (got.status !== 200) return { ok: false, detail: `/api/titles/${at} answered ${got.status}` }
-            return saysNumber(got.body, at)
-                ? { ok: true, detail: 'the number came back with the title' }
-                : { ok: false, detail: `${showBody(got.text)} does not say ${at}` }
+            for (const position of at) {
+                const got = await probe(`/api/titles/${position}`)
+                if (got.status !== 200) {
+                    return { ok: false, detail: `/api/titles/${position} answered ${got.status}` }
+                }
+                if (!saysNumber(got.body, position)) {
+                    return { ok: false, detail: `/api/titles/${position} said ${showBody(got.text)}` }
+                }
+            }
+            return { ok: true, detail: `${at[0]} and ${at[1]} each came back with their own number` }
         },
     },
     {
-        label: 'and how many there are, so it reads as three of nine',
+        // The brief's own example is "three of nine" and this line does not repeat it, because the
+        // position probed is picked rather than fixed and printing an example the check does not use
+        // reads as the board contradicting itself.
+        label: 'and how many there are, not only which one it is',
         async run({ shelf, at }) {
-            const got = await probe(`/api/titles/${at}`)
-            if (got.status !== 200) return { ok: false, detail: `/api/titles/${at} answered ${got.status}` }
+            const [position] = at
+            const got = await probe(`/api/titles/${position}`)
+            if (got.status !== 200) {
+                return { ok: false, detail: `/api/titles/${position} answered ${got.status}` }
+            }
             return saysNumber(got.body, shelf.length)
-                ? { ok: true, detail: `the answer carries ${shelf.length}` }
-                : { ok: false, detail: `${showBody(got.text)} does not say ${shelf.length}` }
+                ? { ok: true, detail: `/api/titles/${position} carries ${shelf.length}` }
+                : { ok: false, detail: `/api/titles/${position} said ${showBody(got.text)}` }
         },
     },
     {
@@ -203,11 +268,9 @@ const WISHES = [
                 if (!isPlainNo(got.status)) {
                     return { ok: false, detail: `${path} answered ${got.status}` }
                 }
-                if (looksLikeACrash(got.text)) {
+                if (looksLikeACrash(got)) {
                     return { ok: false, detail: `${path} answered with a stack trace` }
                 }
-            }
-            for (const { path, got } of refusals.filter((refusal) => refusal.counts)) {
                 if (!saysNumber(got.body, shelf.length)) {
                     return { ok: false, detail: `${path} said ${showBody(got.text)}` }
                 }
@@ -218,7 +281,12 @@ const WISHES = [
     {
         label: 'a word instead of a number gets that same answer',
         async run({ shelf, refusals }) {
-            const past = refusals[1].got
+            // Looked up by name rather than by index, and guarded: renaming the array without
+            // visiting this line would otherwise be a TypeError, which is not `Unreachable` and
+            // would escape the run loop's catch and kill the process rather than fail one wish.
+            const named = refusals.find((refusal) => refusal.name === 'past the end')
+            if (!named) return { ok: false, detail: 'no refusal is named "past the end" to compare against' }
+            const past = named.got
             const got = await probe('/api/titles/three')
             if (!isPlainNo(past.status)) {
                 return { ok: false, detail: 'there is no plain no for it to be the same as yet' }
@@ -229,28 +297,53 @@ const WISHES = [
                     detail: `/api/titles/three answered ${got.status}, a number nobody has answers ${past.status}`,
                 }
             }
+            if (looksLikeACrash(got)) {
+                return { ok: false, detail: '/api/titles/three answered with a stack trace' }
+            }
             return saysNumber(got.body, shelf.length)
                 ? { ok: true, detail: `the same ${got.status}, carrying the same ${shelf.length}` }
-                : { ok: false, detail: `${showBody(got.text)} does not say ${shelf.length}` }
+                : { ok: false, detail: `/api/titles/three said ${showBody(got.text)}` }
         },
     },
 ]
 
 /**
- * A position whose own title cannot be mistaken for either of the numbers wishes 2 and 3 look for.
- * Book titles open with a numeral often enough that this matters, and two of the nine the catalogue
- * publishes today do, so picking `3` and hoping is the kind of thing that holds until somebody
- * rewrites a title.
+ * Two positions whose own titles cannot be mistaken for any of the numbers wishes 2 and 3 look for,
+ * or `null` when the shelf is too short to have two safe ones.
+ *
+ * **Neither is ever the first or the last**, and that is the part with a bug behind it. Position 1
+ * turns up inside any path a body might carry, and the last position *is* the count wish 3 asks for,
+ * so probing either let a body be credited with a number it had not stated. Book titles opening with
+ * a numeral are the other hazard, and two of the nine the catalogue publishes today do, so the pair
+ * is picked rather than assumed: `3` and hoping holds until somebody rewrites a title.
+ *
+ * **It needs at least four titles**, which is worth knowing because the rest of this file is written
+ * to survive a catalogue rewrite and this is the one thing in it that cannot.
  */
-function safePosition(shelf) {
-    const clean = (index) => {
-        const runs = shelf[index].match(/\d+/g) ?? []
-        return !runs.some((run) => Number(run) === index + 1 || Number(run) === shelf.length)
+function probePositions(shelf) {
+    const size = shelf.length
+    const inside = []
+    for (let position = 2; position < size; position += 1) inside.push(position)
+    // Below four titles there is no inside to pick from, and every fallback is a lie of some kind:
+    // the pair would repeat a position, or be the first or the last, which is exactly what this
+    // function exists to avoid. Say so rather than return something that cannot pass.
+    if (inside.length < 2) return null
+
+    const digitsOf = (position) => (shelf[position - 1].match(/\d+/g) ?? []).map(Number)
+    const pairFits = (first, second) =>
+        [first, second].every((position) => {
+            const digits = digitsOf(position)
+            return ![first, second, size].some((number) => digits.includes(number))
+        })
+
+    for (const first of inside) {
+        for (const second of inside) {
+            if (second !== first && pairFits(first, second)) return [first, second]
+        }
     }
-    for (let index = 0; index < shelf.length; index += 1) {
-        if (clean(index)) return index + 1
-    }
-    return Math.min(3, shelf.length)
+    // Every title inside the shelf collides with something. Nothing is safe, so take the two least
+    // bad rather than a pair the loop above has already rejected.
+    return [inside[0], inside[1]]
 }
 
 async function shelfOrExit() {
@@ -271,15 +364,22 @@ async function shelfOrExit() {
 }
 
 const shelf = await shelfOrExit()
-const at = safePosition(shelf)
 
-// The three refusals the last two wishes read, asked once. Only the two that are numbers out of
-// range are asked to carry the count: zero is a number nobody has as well, and the brief lumps it in
-// with them, so it is held to the same answer.
+const at = probePositions(shelf)
+if (at === null) {
+    console.log(`${BASE}/api/titles returned ${shelf.length} titles, and this check needs at least four.`)
+    console.log('Wishes two and three are asked at positions that are neither the first nor the last.')
+    process.exit(1)
+}
+
+// The three refusals the last two wishes read, asked once. All three are held to the same answer,
+// because the brief lumps them together in one sentence. They are named rather than indexed: wish 6
+// compares against `past the end` in particular, and reordering this array must not quietly change
+// what it compares against.
 const refusals = [
-    { path: '/api/titles/0', counts: true },
-    { path: `/api/titles/${shelf.length + 1}`, counts: true },
-    { path: `/api/titles/-${shelf.length + 1}`, counts: true },
+    { name: 'zero', path: '/api/titles/0' },
+    { name: 'past the end', path: `/api/titles/${shelf.length + 1}` },
+    { name: 'past the start', path: `/api/titles/-${shelf.length + 1}` },
 ]
 for (const refusal of refusals) {
     refusal.got = await probe(refusal.path)
@@ -311,11 +411,19 @@ console.log(`  ${passed} of ${WISHES.length}.`)
 // student who has just watched an agent write the endpoint is still being served the old build, and
 // a score taken off that is a reading of nothing. Both ends are probed, so an endpoint that is
 // written but returns nothing at one position is not told to restart a service that is current.
-const ends = [await probe('/api/titles/1'), await probe(`/api/titles/${shelf.length}`)]
-if (ends.every((end) => end.status === 200 && end.text.trim() === '')) {
-    console.log('')
-    console.log('Every position answers with an empty body, which is what the stub does.')
-    console.log('If the endpoint is written, the service is still running the old build. Stop it and start it again.')
+//
+// Wrapped like everything else that talks to the service: a run that scored and then lost the
+// service was exiting 1 with a stack trace under a full board, which is the opposite of what the
+// note at the top of this file promises.
+try {
+    const ends = [await probe('/api/titles/1'), await probe(`/api/titles/${shelf.length}`)]
+    if (ends.every((end) => end.status === 200 && end.text.trim() === '')) {
+        console.log('')
+        console.log('Both ends of the shelf answer with an empty body, which is what the stub does.')
+        console.log('If the endpoint is written, the service is still running the old build. Stop it and start it again.')
+    }
+} catch (error) {
+    if (!(error instanceof Unreachable)) throw error
 }
 
 console.log('')

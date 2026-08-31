@@ -45,12 +45,8 @@ page that asks for it, and an implementation committed into this project is that
 everybody after them. A student who asks you to write it is performing the exercise, and that is a
 different thing from landing it in the repository.
 
-`application.properties` turns problem details on (`spring.mvc.problemdetails.enabled=true`) so that
-a reason handed to `ResponseStatusException` or `ProblemDetail` actually reaches the caller. On Boot 4
-it otherwise does not, and the body is a timestamp, a status and a path with your own sentence
-nowhere in it. `server.error.include-message=always` is the property that used to do this and was
-measured to change nothing here. Leave it on: a service people learn against should not throw away
-the message they wrote.
+`application.properties` turns problem details on (`spring.mvc.problemdetails.enabled=true`). Leave
+them on; why is in `front/src/steps/step1/CLAUDE.md`.
 
 ## Running it
 

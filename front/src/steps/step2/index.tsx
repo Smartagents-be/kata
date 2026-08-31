@@ -9,6 +9,7 @@ import { DomainTree } from './DomainTree'
 import { FifteenMinutes } from './FifteenMinutes'
 import { FlowDiagram } from './FlowDiagram'
 import { GoalGate } from './GoalGate'
+import { HexagonPorts } from './HexagonPorts'
 import { HookTree } from './HookTree'
 import { IterationPaths } from './IterationPaths'
 import { LoopInWindow } from './LoopInWindow'
@@ -19,6 +20,7 @@ import { ProjectTree } from './ProjectTree'
 import { ReadEachTime } from './ReadEachTime'
 import { RunSheet } from './RunSheet'
 import { SameEveryRun } from './SameEveryRun'
+import { SameGate } from './SameGate'
 import { ScriptRuns } from './ScriptRuns'
 import { SetupFlags } from './SetupFlags'
 import { SteerARun } from './SteerARun'
@@ -26,6 +28,7 @@ import { SkillShape } from './SkillShape'
 import { SkillTree } from './SkillTree'
 import { TwoWindows } from './TwoWindows'
 import { WhereWouldItGo } from './WhereWouldItGo'
+import { WordsToFiles } from './WordsToFiles'
 import { WindowSpend } from './WindowSpend'
 import { WorkflowTimeline } from './WorkflowTimeline'
 import { WorkflowWeights } from './WorkflowWeights'
@@ -102,8 +105,17 @@ const step2: Step = {
       id: 'engineering',
       title: 'engineering.title',
       html: engineering,
-      // Sits inside the prose, at the <div data-figure="domain-tree"> the unit's HTML leaves.
-      inlineFigures: { 'domain-tree': <DomainTree /> },
+      // Four slots inside the prose. The unit's two halves are split across the first three:
+      // `words-to-files` is what a thing is called, and `hexagon-ports` plus `domain-tree` are
+      // where it sits, the shape first and then the same shape on disk. Neither half may grow the
+      // other's argument. `same-gate` closes the third section, after the paragraph that names the
+      // three checks.
+      inlineFigures: {
+        'words-to-files': <WordsToFiles />,
+        'hexagon-ports': <HexagonPorts />,
+        'domain-tree': <DomainTree />,
+        'same-gate': <SameGate />,
+      },
       // And the task under the prose, which sorts kata/step2/java against that same drawing. It
       // grades nothing and posts nothing; the tick is a bookmark.
       figure: <WhereWouldItGo />,
@@ -232,11 +244,12 @@ const step2: Step = {
       title: 'parallel.title',
       html: parallel,
       // One slot, and it closes the unit rather than sitting under the first section: the drawing
-      // names all four arrangements, so under `One agent at a time` it would spend three of them
+      // names all five arrangements, so under `One agent at a time` it would spend four of them
       // early. Nothing below it reads it back, which is why its rows carry their own notes.
       inlineFigures: { 'agents-at-once': <AgentsAtOnce /> },
-      // Three questions, and they are situations rather than definitions: which arrangement a piece
-      // of work wants, what four unread diffs actually cost, and what an orchestrator moves. The
+      // Four questions, and they are situations rather than definitions: which arrangement a piece
+      // of work wants, what four unread diffs actually cost, what an orchestrator moves, and what a
+      // builder and a critic looping at each other are actually selling you. The
       // unit carries no task card, so the HTML writes no `ui:quiz.title` and `QuizPanel` prints its
       // own heading under the closing figure, the way `workflows` and `goals` do.
       quiz: parallelQuiz,

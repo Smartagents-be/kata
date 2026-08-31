@@ -568,7 +568,8 @@ const deck: SlideSpec[] = [
   // ── truth ─────────────────────────────────────────────────────────────────────────────────
   // The opening statement goes ahead of both figures, on the harness block's precedent. Both
   // drawings are the same claim measured, so the room needs the claim before either of them means
-  // anything, and the cutoff has no figure to arrive on. `Proof` closes the block as a second
+  // anything. The unit's third figure, `TheCutoff`, is deliberately not here: a slide of it ahead of
+  // these two would spend that opening statement on the setup. `Proof` closes the block as a second
   // statement, after the drawings, because it hands straight into the workshop divider.
   {
     id: 'deck-truth',

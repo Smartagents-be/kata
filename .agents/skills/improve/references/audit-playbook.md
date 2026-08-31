@@ -1,4 +1,4 @@
-# Audit Playbook
+l# Audit Playbook
 
 What to look for, per category. Each subagent (or direct audit pass) gets the relevant section plus the **Finding format** at the bottom. Adapt depth to repo size — a 2K-line CLI gets a lighter pass than a 500K-line monorepo.
 

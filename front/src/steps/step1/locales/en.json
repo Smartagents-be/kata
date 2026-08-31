@@ -146,6 +146,7 @@
   "reasoning-cost.answer": "the answer",
   "reasoning-cost.tokens": "{{total}} tokens",
   "reasoning-cost.caption": "The token counts are invented. The level names are Claude Code's, read off its settings documentation in August 2026.",
+  "entry-brief.description": "The task sheet: six things the counter asked for, the one line you type both times, and the command that scores what came back.",
   "entry-brief.asked.label": "What the counter asked for",
   "entry-brief.asked.1": "The Catalogue page numbers the titles, and we read those numbers out over the phone. So let us ask for number three and get the third one back.",
   "entry-brief.asked.2": "Say the number back to us with it, because we read out both.",
@@ -160,7 +161,7 @@
   "entry-brief.check.note": "in your own terminal, from the repository root, with the service running",
 
   "plan.title": "The same ask, twice",
-  "plan.description": "Six wishes above, and one line that says none of them. Type it twice, once straight and once through a plan, and count what got through.",
+  "plan.description": "Six wishes above, and one line that says none of them. Type it twice, once straight and once through a plan, and count what got through. If you can pick a model, the two runs are also the expensive one against the cheap one.",
   "plan.todo": "Mark this task done",
   "plan.done": "Done",
   "plan.serve.label": "Start step 1's service, and open the Catalogue page in this app so you can see the numbers.",

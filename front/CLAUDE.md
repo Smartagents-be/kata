@@ -189,8 +189,8 @@ else holds a colour: components name tokens, so a change to the palette is a cha
   aside is a muted panel, whether it is a teacher note or carries no audience at all, so an aside
   meant for everybody needs no attribute and still reads as an aside. One aside is louder than that:
   `aside[data-variant="warning"]` is the hazard shape, an amber panel with a triangle in the gutter,
-  and there are three: `step1/tools`'s prompt-injection note, `step2/setup`'s, and the one in
-  `step2/parallel` on running too many agents at once. Amber is the caution colour and it was
+  and there are four: `step1/tools`'s prompt-injection note, `step2/setup`'s, and two in
+  `step2/parallel`, on running too many agents at once and on what a builder-and-critic loop costs. Amber is the caution colour and it was
   already the coin's, so a warning panel and a cost tip share a hue on purpose; `--success` and
   `--destructive` stay reserved for passed and failed. The triangle is drawn by `index.css` from the
   `--warning-triangle` mask rather than written into the prose, because it is the callout's shape

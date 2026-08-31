@@ -527,16 +527,40 @@ Measured, and every row of this was run rather than reasoned:
 | the shipped stub | 0 of 6 |
 | one-shot, 0-based, bounds checked | 0 of 6 |
 | one-shot, 1-based, bounds checked, returns the title | 1 of 6 |
+| one-shot, 1-based, refusing with an informative reason | 2 of 6 |
 | one-shot, `int` path variable, record DTO, informative 404 | 3 of 6 |
+| one-shot answering in navigation links, one refusal helper | 3 of 6 |
+| one-shot whose every refusal is a stack trace | 3 of 6 |
 | one-shot, `String` path variable, one refusal helper, record DTO | 4 of 6 |
+| the same, volunteering a `total` field as well | 5 of 6 |
 | plan corrected, refusing with `ResponseEntity` | 6 of 6 |
 | plan corrected, refusing with `ResponseStatusException` | 6 of 6 |
 | plan corrected, refusing with `ProblemDetail` | 6 of 6 |
+| plan corrected, and naming its neighbours as well | 6 of 6 |
 
-**Four of 6 is the ceiling and it is the number to defend**, not the two ordinary rows above it: the
-claim the design rests on is that no unprompted implementation reaches five, and the way to falsify
-it is to write one. Re-measure the whole table if a wish changes. A stale row here is worse than
-none, because this table is the evidence for the design.
+**Wish 4 is what caps the table, and that is the guarantee worth stating: nothing that has not been
+told about counting backwards gets past five.** Nothing in `kata/step1/java` and nothing in ordinary
+REST practice suggests that minus one is the last one, so it is the floor under the whole exercise
+and the first thing to protect if a wish is ever rewritten. Above that floor the honest figure is a
+band rather than a number: an unprompted one-shot lands at 0 to 4, most often 0 to 3. The row at 5
+volunteers a `total` field on a single-entry lookup, which is a construction rather than what an
+agent writes, and it is in the table because the ceiling is the number worth arguing about. Falsify
+this by producing one without asking for it.
+
+Three rows in there are counterexamples kept as regression cases, and each of them broke a different
+part of the check. **Navigation links** scored 5 while stating neither the position nor the count,
+because the numbers were only ever inside its own `/api/titles/…` strings: `numbersIn` strips paths,
+URLs and dates for that reason, and stripping alone is what closed it. **A stack trace as every
+refusal** scored 6, because the crash guard tested the raw HTTP text where a trace inside JSON has
+its newlines escaped, and the `length 9` in `Index 9 out of bounds for length 9` read as the count.
+What that guard bounds is wishes 5 and 6, whatever the success path does, so the row's 3 is one
+construction of it rather than a ceiling. And **naming its neighbours** is the one that failed the
+other way: a plan-corrected endpoint answering `"previous": 1, "next": 3` was told its answer "is not
+saying which one you asked for" when it plainly was, because wish 2 had grown a clause objecting to a
+body that mentioned the *other* probed position. The two probed positions are adjacent here, so it
+collided in both directions at once, and it failed the one run this exercise exists to reward. The
+clause is gone. **Grading what an answer carries beyond what was asked for is this check inventing a
+seventh wish**, and that is the rule to hold it to.
 
 **All three ways of refusing had to reach six, and one line of configuration is what makes that
 true.** `kata/step1/java/src/main/resources/application.properties` sets
@@ -544,9 +568,13 @@ true.** `kata/step1/java/src/main/resources/application.properties` sets
 `ProblemDetail` never reaches the caller on Boot 4, the body is a timestamp and a status, and a
 student whose plan *did* carry "tell them how many we do have" came back 4 of 6, level with the
 tidiest one-shot. That is the exercise collapsing on a framework default. `server.error.include-message`
-is the property everybody reaches for and it was measured to change nothing here. The one-shot rows
-are unaffected, because what fails them is that their message has no count in it rather than that the
-message was eaten.
+is the property everybody reaches for and it was measured to change nothing here. It is not free: it
+also buys a one-shot that refuses with an informative reason its one point, which is the 2 of 6 row.
+That is the right trade, since the alternative penalises a correct answer rather than crediting an
+adequate one. **The reasoning stays here and not in that project.** `kata/step1/java/CLAUDE.md` says
+the property is on and points here, and `application.properties` says what the property does and
+stops: a paragraph in either about refusals carrying a message is a nudge toward the gradeable half
+of wish 5, planted in the one place the black-box argument needs to be empty.
 
 **The check is a black box and lives outside `kata/step1/java`, and that is the load-bearing part.**
 It talks HTTP to the running service, derives everything from `/api/titles`, and names no title, so
@@ -997,12 +1025,28 @@ at all, which is the half a cutoff date does not cover and which nothing else in
 one is where discovery is first named, that one is how the file gets in. Two anchors on one page is
 the decision, since a reader landing mid-unit meets whichever comes first.
 
-Two figures, `TrainedOrGrounded` under `Grounding` and `AnswerProvenance` under `Hallucinations`,
-and **they take different cuts of one argument rather than drawing it twice**. The first is two
-*whole* answers a window apart; the second is one answer whose parts did not all come from the same
-place. Collapse either into the other's shape and the unit makes its point twice.
-`The cutoff` and `Proof` are deliberately left undrawn: a date has no shape, and running a command is
-something the student does rather than something to look at.
+Three figures, `TheCutoff` under `The cutoff`, `TrainedOrGrounded` under `Grounding` and
+`AnswerProvenance` under `Hallucinations`, and **they take different cuts of one argument rather than
+drawing it three times**. The first is the time axis, the second is two *whole* answers a window
+apart, the third is one answer whose parts did not all come from the same place. Collapse any of them
+into another's shape and the unit makes its point twice. `Proof` is still deliberately undrawn:
+running a command is something the student does rather than something to look at.
+
+`The cutoff` was undrawn too, on the argument that a date has no shape, and it now has a figure at
+the foot of the section because **the thing worth drawing there is not the date**. It is the far
+side of it, and one line across a release line says in a glance what the paragraph needs two
+sentences for. Three things in `TheCutoff` are load bearing. The far side is **dashed rather than
+faded**: a gradient or a lighter fill would say the recent versions are known less well, which is the
+exact reading `truth.cutoff.1` exists to kill, and dashed is already this step's stroke for "nothing
+behind this" on `AnswerProvenance`'s invented row. It carries **no date**, because every model has a
+different one and any number printed there is wrong for somebody in the room. And its versions are
+`TrainedOrGrounded`'s, `3.5.0` on the near side and `4.1.0` on the far one, so the two figures are one
+story: this is where that trained answer comes from. That ties the pom to **two** files now, so a Boot
+upgrade in `kata/step1/java` means moving the number in both.
+
+It also changes what guided mode gets. `The cutoff` had no figure, so its heading was dropped with
+the prose and the section did not exist in class; the marker gives that heading something to sit
+above, and the classroom page is now three sections rather than two.
 
 **`TrainedOrGrounded`'s two answer chips are identical in size, fill and position**, and that is the
 figure. What differs is the window above them, which is the part an answer never tells you about, so
@@ -1024,14 +1068,18 @@ the same reason, since it belongs to a cost tip and a hazard aside. It is DOM ra
 machine-shaped, so they are data in the component with no key and no `nl` entry, the way
 `ModelPricing`'s numbers are.
 
-Both figures are read by the paragraph under them and neither carries a caption, on the rule that a
-caption states provenance and the prose does the explaining. `truth.grounding.2` opens on "Only the
-window changed" and `truth.hallucinations.2` on two of the three having been read, so **rewriting
-either figure means visiting that opening sentence**, in both languages.
+None of the three carries a caption, on the rule that a caption states provenance and the prose does
+the explaining. `TrainedOrGrounded` and `AnswerProvenance` are read by the paragraph under them:
+`truth.grounding.2` opens on "Only the window changed" and `truth.hallucinations.2` on two of the
+three having been read, so **rewriting either figure means visiting that opening sentence**, in both
+languages. `TheCutoff` is the one that closes its section rather than opening one, so it is read by
+the two paragraphs above it and there is no sentence under it to keep in step.
 
-Both are on the deck, and the block leads with **the statement slide rather than a figure**, on
-`harness`'s precedent: the two drawings are one claim measured, so the room needs the claim before
-either means anything, and `The cutoff` has nothing to arrive on. `AnswerProvenance` is laid out at
+`TrainedOrGrounded` and `AnswerProvenance` are on the deck and `TheCutoff` is not, which is a
+decision rather than a gap: the block leads with **the statement slide rather than a figure**, on
+`harness`'s precedent, because the two drawings are one claim measured and the room needs the claim
+before either means anything. A third slide before them would spend that opening on the setup.
+`AnswerProvenance` is laid out at
 1100 and magnified less than the drawing above it, because `SlideFigure` clips rather than shrinks:
 `width * scale` past the frame takes the left edge off the symbols, which is where the claims are.
 

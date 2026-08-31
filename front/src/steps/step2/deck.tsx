@@ -452,11 +452,13 @@ const deck: SlideSpec[] = [
     eyebrow: 'step.title',
     title: 'parallel.title',
     // The key number and the array position deliberately differ: `.3` is the unit's answer and
-    // keeps the last slot, and `.4` is the orchestrator, which the unit argues before it.
+    // keeps the last slot, and `.4` and `.5` are the orchestrator and the pair, which the unit
+    // argues before it.
     points: [
       'deck.parallel.divider.1',
       'deck.parallel.divider.2',
       'deck.parallel.divider.4',
+      'deck.parallel.divider.5',
       'deck.parallel.divider.3',
     ],
   },
@@ -466,10 +468,11 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'parallel.title',
     title: 'deck.parallel.arrangements.title',
-    // Four rows with their notes are nearly the whole frame on their own; this is the largest
-    // scale that keeps the last row's note off the footer.
+    // Five rows with their notes are nearly the whole frame on their own; this is the largest
+    // scale that keeps the last row's note off the footer, and the pair's row is what took it
+    // down from the 1.02 the four-row drawing carried.
     figure: <AgentsAtOnce />,
-    scale: 1.02,
+    scale: 0.78,
   },
   {
     id: 'deck-step2-parallel-attention',

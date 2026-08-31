@@ -49,7 +49,10 @@ The capstone's prose deliberately does not spell it out: `workshop.goal.2` says 
 three will not fall to more tests, because the whole reason the honest flag exists is that the
 student finds out why, and a page that explains the trap before the run springs it on nobody. The
 old `workshop.honest.1` and `.2` did explain it, and cutting them is the change to know about before
-writing prose about mutation anywhere in this unit.
+writing prose about mutation anywhere in this unit. **`SameGate` under that paragraph names the three
+checks and ranks none of them**, and it may never rank them: a teal ring around the mutation row is
+the honest-coverage discovery drawn on the page, which is the same reason `workshop` still carries no
+figure of its gates.
 Three references were repointed in the same change rather than left
 dangling: `workshop.lead.2` says "the kind of code a quality gate exists for" instead of naming the
 unit, `step3`'s `change.you-test-engineer.2` links to `engineering`, and the capstone's pointer at
@@ -62,10 +65,12 @@ student did not get to, so do not add a checker, and keep each example's second 
 is left out. That sentence is what makes it a skeleton rather than a small feature.
 Two things about it are decisions. It uses "vibecode" approvingly for a throwaway prototype while
 `engineering` argues flatly against vibe coding, and that is not a contradiction to tidy up: the
-first version you intend to delete is the one place the argument does not apply. **`engineering.lead.1`
-now says so in as many words**, naming this unit and calling it the one place the line does not hold,
-which is what turns the collision into a contrast a reader can use; do not cut that sentence as
-redundant, and do not answer it from this side. And its figure,
+first version you intend to delete is the one place the argument does not apply. **Neither unit says
+that out loud, and the collision is left standing on purpose.** `engineering.lead.1` used to close by
+naming this unit as the one place the line does not hold, and that sentence was cut: a lead that
+opens on a flat line and then licenses an exception to it in the same breath spends its own claim,
+and the reader who meets both units meets the tension where it actually is. So do not answer it from
+either side. And its figure,
 `IterationPaths`, splits the work between label and drawing on purpose. The labels carry the cause
 (weeks against an hour) and the picture carries the effect (three long moves stopping beside the
 target against twelve short ones landing in it), which is why neither reads as a caption of the
@@ -111,6 +116,43 @@ should not cost more than an hour, and the section argues both edges (pulling de
 for now, leaving it too long turns into a regression). It closes the argument the `evolution` unit
 opens, so keep the pair of edges if you rewrite it. Cutting one leaves a lesson that only says
 "later".
+
+**`engineering` runs four sections now, and the split of the first one is the decision.** Domain-driven
+design and hexagonal architecture shared a heading and a paragraph until they were pulled apart, and
+they are two arguments rather than one: naming is what a thing is **called**, hexagonal is where it
+**sits**. The payoff differs with them, which is what makes the split worth the extra heading, and
+the icons carry it. Naming pays out at the moment you type, so `Domain-driven design` holds the gem:
+the words in your sentence are already the names in the tree. Layout pays out in what the agent does
+not have to read, so `Hexagonal architecture` holds the coin. **Do not let either section reach for
+the other's icon or the other's claim.** Merged again, the unit says "structure is good" twice and
+never says what either kind of structure buys.
+
+Four figures sit in it and each is fenced off from the next. `WordsToFiles` is the vocabulary: one
+prompt, three candidate files, and a line to the one the sentence named, with the other two left
+muted so the drawing reads as narrowing rather than as finding. **It draws no folders**, because
+that is the next section's half. It also carries **no note under the frame**, and that is a cut: the
+paragraph above it already says a sentence about articles has named the files.
+
+**`Hexagonal architecture` carries two drawings and their order is the argument**: `DomainTree`
+after the first paragraph is the shape on disk, and `HexagonPorts` **closes the section** with what
+those folders are an arrangement of. The concrete comes first and the shape is the part the reader
+keeps, which is why the abstract one has the last word rather than the opening. **`HexagonPorts`
+carries no note**, and this is the record of what went with it: the calls on the right leave the
+domain while the dependencies still point back in, because the interfaces they leave through are
+ones the domain wrote. That is the one thing a folder listing cannot show, and the only place left
+in the unit that carries it is `hexagonal-architecture.1`'s second sentence, about no class outside
+`adapter/` naming Postgres. So a rewrite of that sentence is now a rewrite of the section's whole
+dependency argument. Its arrows are calls and never dependencies, and **do not draw a second arrow
+per side** to make up the difference: twelve arrows on one figure and neither set reads. It runs
+**three adapters a side**, where
+the tree ships one per direction, and that is where the pair deliberately parts company: a single
+box on each edge draws a pipeline, which is the picture this shape exists to correct. The leaf names
+are still the tree's own, which keeps them a pair without making them a copy. `DomainTree` itself is
+untouched by the split, so `WhereWouldItGo` below still sorts `kata/step2/java` against it and the
+disagreement that task needs is intact.
+
+`SameGate` closes `Quality gates`. Each figure's own docblock carries the rest, including why
+`WordsToFiles` draws no badly-named repository next to the good one.
 
 `engineering` closes on `WhereWouldItGo`, a `TaskCard` under the same `<hr>` and "Test yourself"
 heading, with no prose between the rule and the card: the card's description carries the setting, so
@@ -279,21 +321,35 @@ takes away one of them has the wrong picture.
 `setup` closes on the step's second flag board, and it is the only exercise outside `workshop` that
 a machine grades. Three flags, one per place `kata/step2/java` tells an agent how to work: the skill
 under that project's own `.claude`, the project briefing, and the briefing scoped to the `domain`
-package. **The prose names none of the three files, and no board hint names one either.** That is
+package. **The prose names none of the three files, and no row hint names one either.** That is
 the exercise: the unit says a project you have not opened was set up before you got there, go and
-find out how, and stops. A sentence listing the files, or a hint reading "look in
-`.claude/skills/`", ends it. What `check-yourself.1` may say is where the line sits: it gives the
-*shape* of a flag (plain text, in curly braces) and the *size* of the search (the small number of
-files a project uses to instruct an agent), which is what a student needs to know they are looking
-for the right kind of thing, and neither of those narrows the hunt to a path. **Do not collect the three flags anywhere in the tree**, including in
+find out how, and stops. A sentence in the prose listing the files, or a row hint reading "look in
+`.claude/skills/`", ends it. What `check-yourself.1` may say is where the line sits for prose: it
+gives the *shape* of a flag (plain text, in curly braces), the *size* of the search (the small
+number of files a project uses to instruct an agent), the fact that the kinds are the ones the unit
+has just named, and the fact that each flag sits in the file it is about. That is enough for a
+student to know they are looking for the right kind of thing, and none of it narrows the hunt to a
+path. **Do not collect the three flags anywhere in the tree**, including in
 a comment; `setup-flags.ts` holds salted hashes and its own salt, on the reasoning its own file
 gives.
 
 They are plaintext in the Java project rather than veiled the way the workshop's flags are, and
 that is deliberate rather than an oversight: reading the file *is* the task, so there is nothing
-left to hide behind once the student is looking at it. The three help dialogs describe a *symptom*
-instead (an agent that answers from nothing, a file never read from the top of the project), so a
-stuck student gets a way of looking rather than a filename.
+left to hide behind once the student is looking at it.
+
+**The three levels say different amounts, and that split is the decision.** The board's rows are
+what a student reads while still hunting, so a hint names the *kind of thing* and never the file:
+a procedure followed the same way every time, what the project says before you do, the same file
+one level down. The **help dialogs go much further**, because a student who has opened one is
+already stuck and the residue of the exercise (finding out that a project carries files like these
+at all) has been spent by then. So a help dialog may name the kind of file outright, say roughly
+where in the tree it sits, and give two ways of getting at it: read for it yourself, or ask the
+agent to list them. What a help dialog still may not do is print a path or a filename that turns
+the row into a copy out of one file. They were riddles describing a *symptom* before, on the
+argument that a stuck student wants a way of looking rather than a filename, and that went too far
+in one direction: "something in there is followed the same way every time" has no antecedent, and a
+student with no idea what "in there" means is stuck on the wrong problem. Keep a hint thin and let
+the help be generous.
 
 **`FlagBoard` is the mechanics with the data lifted out**, the same move `ConnectBoard` and
 `TaskCard` made when a second caller arrived. `Workshop` and `SetupFlags` are the two callers, each
@@ -639,18 +695,19 @@ named is what the shape adds.
 
 `parallel` follows `enablement` and took the slot the cut `quality` unit left, though it is not a
 rewrite of it: what it owns is **how many agents you have running, and what each arrangement costs
-you in control**. Four sections and the order is the argument: `One agent at a time` (the most
+you in control**. Five sections and the order is the argument: `One agent at a time` (the most
 control, and the shape for work that is deep rather than wide), `Many agents at once` (output up,
 control down, and all of the reading arriving at the end), `The orchestrator` (the same four agents
-with the coordination moved into one of them), then `One in front, the rest behind`
+with the coordination moved into one of them), `The builder and the critic` (two agents pointed at
+each other and you out of the loop entirely), then `One in front, the rest behind`
 (control back in the middle, which is what most days actually look like). Running most-to-least and
-then landing in the middle is what makes the last section read as the answer rather than as a fourth
+then landing in the middle is what makes the last section read as the answer rather than as a fifth
 option. It carries no exercise, on `workflows`'s reasoning: there is nothing a card could ask for
 that the student's own week would not answer better. **It does carry a quiz**, on the reasoning
 `workflows` arrived at: a card asks for work and there is none to ask for here, but a question can
-ask which arrangement a situation wants. The three in `quiz.ts` are situations, one per arrangement
+ask which arrangement a situation wants. The four in `quiz.ts` are situations, one per arrangement
 with something to get wrong. `One in front, the rest behind` has none, because it is the answer the
-other three are measured against and it turns up as a choice inside two of them. **No distractor may
+other four are measured against and it turns up as a choice inside two of them. **No distractor may
 claim an orchestrator stops two agents writing over each other**: that claim was cut from the unit
 while still half believed, and a distractor this file does not flatly reject is one a careful student
 can defend. **It opens
@@ -685,6 +742,33 @@ neighbour: it owns why the expensive tier is the one that writes the brief, and 
 longer mentions a brief at all, so do not let it grow a sentence about who writes one. And the paragraph carries
 the `pattern` icon, since this is one of the course's AI design patterns rather than a habit.
 
+**`The builder and the critic` sits after `The orchestrator` for the reason the orchestrator sits
+after `Many agents at once`**: it is the same move taken one step further, the checking handed over
+as well as the coordination. Put it after `One in front, the rest behind` and that section stops
+being the answer the unit lands on. It is also the one section in the step that prints a prompt,
+and the prompt is there because the arrangement lives in it: you are in none of the rounds, so
+anything you did not write down never gets asked. **`step1/harness` owns reflection**, so the first
+paragraph names the pattern and moves on the way `workflows.audit-driven.1` does. Why a critic on
+an empty context is worth reading is `harness.reflection.2` and must not be re-derived here.
+
+The `<pre>` and the list under it are the same thing twice on purpose, and what keeps the list from
+being a gloss is that it is general where the prompt is one job. Five elements, and the two easiest
+to lose are the fan-out (the independent parts in parallel, and the critic a fresh agent of its own)
+and the golden standard (a file already in the repository, because "better" is an argument two
+agents can run all afternoon and "as good as this file" is a comparison). The prompt names `/loop`
+and `TitleController`, and naming a harness command is allowed here only because **step 2 is the one
+step not written for two assistants**. The job it asks for is a link shortener in a project of its
+own, which is deliberate: anything aimed at `kata/step2/java` would be the capstone handed over in
+copy-pasteable form.
+
+**Its aside is this unit's second `data-variant="warning"`**, and the two carry different costs on
+purpose: `Many agents at once` has your attention degrading, this one has the clock and the bill.
+It may not grow into `steering`'s two-contexts-two-bills argument or into `goals`'s window ceiling.
+Long and expensive, kept for walled-off work that has to come back good, and it stops there. The
+paragraph under it is the other half of the trade and is the only place in the unit crediting an
+arrangement with the quality of what it hands back. Keep the pair: the warning alone reads as a
+reason not to use it.
+
 Four boundaries hold the unit up and every one of them is another unit a second time, so each is a
 link and a clause rather than a paragraph. **`steering` owns the mid-run window**,
 which is what `one-agent-time.1` points at instead of describing interrupting, and **`steering` owns
@@ -694,9 +778,10 @@ behind you are goals rather than instructions and hands off. The agents-are-two-
 `steering`'s too and must not turn up here.
 
 The warning aside closes `Many agents at once` and it is **step 2's second
-`data-variant="warning"`**, `setup`'s being the first. It carries the one cost no other unit states,
+`data-variant="warning"`**, `setup`'s being the first and `The builder and the critic`'s the third.
+It carries the one cost no other unit states,
 **your attention degrading rather than running short**. The collision cost is `steering`'s, and the
-paragraph directly above the aside already raises it, so the step's only amber callout is not spent
+paragraph directly above the aside already raises it, so this callout is not spent
 on a problem that has just been answered. The cost it does carry is easy to collapse into
 `steering`'s "your reading is the bottleneck rather than their speed", and it is not the same claim. `steering` says reading is slower
 than producing; this says the tenth diff of the afternoon gets a worse read than the first did. Keep
@@ -704,8 +789,8 @@ them apart, or the step loses the only place it says an agent can hand you more 
 sharp for.
 
 `AgentsAtOnce` is the figure and **closes the unit rather than opening it**, which is
-`WorkflowWeights`'s placement decision made again: it names all four arrangements, so under the
-first heading it would put three labels in front of a reader who has not been given them. Nothing
+`WorkflowWeights`'s placement decision made again: it names all five arrangements, so under the
+first heading it would put four labels in front of a reader who has not been given them. Nothing
 below it reads it back, so its row names and its right-hand notes carry the comparison, the way
 `ScriptRuns` puts what each row produces on the right instead of into prose. **Teal is the agent you
 are actually watching**, and that is the only colour rule in it. The dash carries the rest: solid
@@ -721,8 +806,23 @@ and the orchestrator's extra box sits at `LEAD_X` in the gap between `you` and t
 row shares, so the drawing says what an orchestrator is: a hop inserted between you and the work.
 Its sub-agents are **muted but solid** rather than dashed, which is the one place the colour rule
 needs reading carefully: dashed means nobody is watching, and here somebody is, just not you. That is
-what makes row four different from row three at a glance. Changing the sub-agent count, or dashing
-them, ends both arguments. `AgentsAtOnce`'s own docblock carries the geometry.
+what makes the last row different from row three at a glance. Changing the sub-agent count, or
+dashing them, ends both arguments.
+
+**Row four is the pair, and it is the one row where the grammar splits inside a row.** The wire from
+`you` is dashed because you walked away; the wire between the two agents is solid because they are
+holding each other. That is what `feedState` is for and its only caller. Its two boxes are the only
+ones in the figure that are not called `agent`, since a pair of boxes with one word on both of them
+says nothing about which end criticises, and its link is the only wire in the figure with an
+arrowhead: every other one runs left to right and needs no head to say so, while this one running
+both ways is what makes the pair a loop rather than two agents standing near each other. The two
+are stacked rather than set side by side because a third column of boxes pushes the longest Dutch
+note off the viewBox, and the notes have to stay in one column. `AgentsAtOnce`'s own docblock
+carries the geometry.
+
+The figure grew by about a quarter when that row landed, so **`deck-step2-parallel-arrangements`
+came down from `scale` 1.02 to 0.78**. That number is measured against the footer rather than
+chosen, so a sixth row moves it again.
 
 `goals` was **`Goal-oriented` and is now `Spending tokens`**, which is a widening rather than a
 rename. The unit used to argue one thing, handing over an outcome instead of an instruction, and it

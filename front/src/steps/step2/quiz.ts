@@ -357,12 +357,13 @@ export const spendingQuiz: QuizQuestion[] = [
 ]
 
 /**
- * The three questions under `parallel`, the step's third quiz. The unit surveys four arrangements of
+ * The four questions under `parallel`, the step's third quiz. The unit surveys five arrangements of
  * agents and argues that what separates them is how much of your attention each one gets, so every
  * question hands the student a situation and asks which arrangement it wants or what one of them
  * already cost: `deep-not-wide` is work that is deep rather than wide, `green-and-unread` is four
- * green builds and two diffs actually read, and `who-holds-the-wires` is what an orchestrator moves
- * and what it does not.
+ * green builds and two diffs actually read, `who-holds-the-wires` is what an orchestrator moves
+ * and what it does not, and `pair-buys-rounds` is what a builder and a critic looping at each other
+ * are actually selling you.
  *
  * `One in front, the rest behind` has no question of its own, on the same reasoning that leaves
  * spec-driven out of `workflowsQuiz`: it is the answer the other three are measured against, and it
@@ -447,5 +448,29 @@ export const parallelQuiz: QuizQuestion[] = [
       },
     ],
     explanation: 'quiz.who-holds-the-wires.explanation',
+  },
+  {
+    id: 'pair-buys-rounds',
+    question: 'quiz.pair-buys-rounds.question',
+    choices: [
+      {
+        id: 'rounds-you-skip',
+        label: 'quiz.pair-buys-rounds.rounds-you-skip',
+        correct: true,
+      },
+      {
+        id: 'two-are-faster',
+        label: 'quiz.pair-buys-rounds.two-are-faster',
+      },
+      {
+        id: 'signed-off',
+        label: 'quiz.pair-buys-rounds.signed-off',
+      },
+      {
+        id: 'steer-as-it-goes',
+        label: 'quiz.pair-buys-rounds.steer-as-it-goes',
+      },
+    ],
+    explanation: 'quiz.pair-buys-rounds.explanation',
   },
 ]

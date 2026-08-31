@@ -2,9 +2,9 @@ import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * Four ways of arranging agents, drawn as how much of your attention each one gets: one agent on a
- * live wire, four agents on four dashed ones, four behind an orchestrator you brief instead, and one
- * live wire with three running behind it.
+ * Five ways of arranging agents, drawn as how much of your attention each one gets: one agent on a
+ * live wire, four agents on four dashed ones, four behind an orchestrator you brief instead, a pair
+ * arguing with each other on a wire you let go of, and one live wire with three running behind it.
  *
  * It closes the `parallel` unit rather than opening it, on `WorkflowWeights`'s reasoning: the rows
  * are named, and a reader who met the drawing under the first section would be looking at three
@@ -24,6 +24,18 @@ import { useTranslation } from 'react-i18next'
  * between `you` and the agent column every row shares, so the drawing says what an orchestrator is:
  * a hop inserted between you and the work. Keep the sub-agent count equal to row two's, or the
  * comparison turns into one about volume.
+ *
+ * **Row four is the one place the grammar is split across a row**, and it has to be: the wire from
+ * you is dashed because you walked away, and the wire between the two agents is solid because they
+ * are holding each other. That is `feedState` on the row, and it is the only reason it exists. Both
+ * boxes stay muted for the same reason the orchestrator's sub-agents do, somebody is watching and
+ * it is not you. The two agents are stacked rather than set side by side so the notes stay in one
+ * column; a third column of boxes pushes the longest Dutch note off the viewBox.
+ *
+ * The arrowheads on that link are the only ones in the figure, and they are the row's content:
+ * every other wire runs one way from left to right and needs no head to say so, while this one
+ * running both ways is what makes the pair a loop rather than two agents standing near each other.
+ * `orient="auto-start-reverse"` is what lets one marker serve both ends.
  *
  * `you` and `agent` come from `flow.node.*`, which is `FlowDiagram`'s own vocabulary in `workflows`,
  * so the two figures name the same boxes the same way and a rewording moves both.
@@ -60,7 +72,23 @@ interface Row {
    * leaves it instead, which is the two-hop shape drawn rather than described.
    */
   lead?: { y: number; h: number }
-  agents: readonly { y: number; h: number; state: AgentState }[]
+  /**
+   * The state of the wires leaving `you` (or the lead), when it differs from the state of the agent
+   * they arrive at. Only the pair needs it: nobody is holding that wire, and the two agents on the
+   * end of it are holding each other.
+   */
+  feedState?: AgentState
+  /** Indices of two agents joined by a wire that runs both ways. */
+  link?: readonly [number, number]
+  agents: readonly {
+    y: number
+    h: number
+    state: AgentState
+    /** A key under `agents-at-once.<row>.`, for a box that is not just another `agent`. */
+    label?: string
+    /** False for an agent nothing feeds from the left, which is the critic hanging off the builder. */
+    fed?: boolean
+  }[]
 }
 
 const ROWS: readonly Row[] = [
@@ -94,8 +122,19 @@ const ROWS: readonly Row[] = [
     ],
   },
   {
-    key: 'mixed',
+    key: 'recursive',
     dy: 378,
+    youY: 24,
+    feedState: 'background',
+    link: [0, 1],
+    agents: [
+      { y: 24, h: 26, state: 'idle', label: 'build' },
+      { y: 84, h: 26, state: 'idle', label: 'check', fed: false },
+    ],
+  },
+  {
+    key: 'mixed',
+    dy: 510,
     youY: 68,
     agents: [
       { y: 24, h: 24, state: 'watched' },
@@ -121,13 +160,14 @@ const BOX: Record<AgentState, string> = {
 export function AgentsAtOnce() {
   const { t } = useTranslation('step2')
   const titleId = useId()
+  const markerId = `agents-at-once-head-${useId()}`
 
   return (
     <figure id="agents-at-once" data-component="AgentsAtOnce" className="my-8 flex justify-center">
       <svg
         id="agents-at-once-svg"
         data-component="AgentsAtOnce"
-        viewBox="0 0 640 518"
+        viewBox="0 0 640 650"
         role="img"
         aria-labelledby={titleId}
         className="h-auto w-full max-w-2xl"
@@ -135,6 +175,22 @@ export function AgentsAtOnce() {
         <title id={titleId} data-component="AgentsAtOnce">
           {t('agents-at-once.description')}
         </title>
+
+        {/* Per instance, because the figure is on a unit page and on a slide and two defs with one
+            id resolve to the first, the way `SmartAgentsMark`'s gradient does. */}
+        <defs>
+          <marker
+            id={markerId}
+            viewBox="0 0 8 8"
+            refX="7"
+            refY="4"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0 0 L8 4 L0 8 z" className="fill-muted-foreground/60" />
+          </marker>
+        </defs>
 
         {ROWS.map((row) => (
           <g
@@ -169,21 +225,41 @@ export function AgentsAtOnce() {
               />
             )}
 
-            {row.agents.map((agent, index) => (
+            {row.agents.map((agent, index) => {
+              if (agent.fed === false) return null
+              const state = row.feedState ?? agent.state
+              return (
+                <line
+                  key={`wire-${index}`}
+                  id={`agents-at-once-${row.key}-wire-${index}`}
+                  data-component="AgentsAtOnce"
+                  data-state={state}
+                  x1={row.lead ? LEAD_X + LEAD_W + STANDOFF : YOU_W + STANDOFF}
+                  y1={row.lead ? row.lead.y + row.lead.h / 2 : row.youY + YOU_H / 2}
+                  x2={AGENT_X - STANDOFF}
+                  y2={agent.y + agent.h / 2}
+                  strokeWidth={state === 'watched' ? 2.5 : 1.5}
+                  strokeDasharray={state === 'background' ? '4 4' : undefined}
+                  className={WIRE[state]}
+                />
+              )
+            })}
+
+            {/* The pair's own wire, and the only one in the figure with a head on each end. */}
+            {row.link && (
               <line
-                key={`wire-${index}`}
-                id={`agents-at-once-${row.key}-wire-${index}`}
+                id={`agents-at-once-${row.key}-link`}
                 data-component="AgentsAtOnce"
-                data-state={agent.state}
-                x1={row.lead ? LEAD_X + LEAD_W + STANDOFF : YOU_W + STANDOFF}
-                y1={row.lead ? row.lead.y + row.lead.h / 2 : row.youY + YOU_H / 2}
-                x2={AGENT_X - STANDOFF}
-                y2={agent.y + agent.h / 2}
-                strokeWidth={agent.state === 'watched' ? 2.5 : 1.5}
-                strokeDasharray={agent.state === 'background' ? '4 4' : undefined}
-                className={WIRE[agent.state]}
+                x1={AGENT_X + AGENT_W / 2}
+                y1={row.agents[row.link[0]].y + row.agents[row.link[0]].h + STANDOFF}
+                x2={AGENT_X + AGENT_W / 2}
+                y2={row.agents[row.link[1]].y - STANDOFF}
+                strokeWidth="1.5"
+                markerStart={`url(#${markerId})`}
+                markerEnd={`url(#${markerId})`}
+                className={WIRE.idle}
               />
-            ))}
+            )}
 
             {row.lead && (
               <g id={`agents-at-once-${row.key}-lead`} data-component="AgentsAtOnce">
@@ -258,7 +334,7 @@ export function AgentsAtOnce() {
                   className={agent.state === 'watched' ? 'fill-foreground' : 'fill-muted-foreground'}
                   data-component="AgentsAtOnce"
                 >
-                  {t('flow.node.agent')}
+                  {agent.label ? t(`agents-at-once.${row.key}.${agent.label}`) : t('flow.node.agent')}
                 </text>
               </g>
             ))}
