@@ -64,33 +64,6 @@
   from one you can put in production.
 </p>
 
-<h2 data-i18n="engineering.quality-gates.heading">Quality gates</h2>
-
-<p data-i18n="engineering.quality-gates.1">
-  Static analysis in Sonar, a line coverage floor, a mutation score: that is how software has
-  always been given a quality label, and how drift and regression were caught before a release. The
-  same gates go around an agent's work, and investing in them is still investing in how fast you
-  ship. They also hand it an invariant, something fixed to hold itself to while it works
-  <svg data-icon="gem"></svg> Each of them is a proxy, though, and an agent will satisfy a proxy
-  rather than the thing behind it. The gate worth wiring in is the one that is expensive to fake.
-</p>
-
-<div data-figure="same-gate"></div>
-
-<p data-i18n="engineering.quality-gates.2">
-  Wire that into the run rather than into your memory. A hook fires once the agent says it is
-  finished, which is the one moment a hook can afford to be slow. <code>mvn verify</code> runs
-  whatever analysis your build has wired in, and a number under the floor comes back as a failure it
-  has to answer for. The same rule written into <code>CLAUDE.md</code> is a request. This one runs
-  whether the agent remembers it or not.
-</p>
-
-<p data-i18n="engineering.quality-gates.3">
-  None of that is about the agent being careful. It is the side of the line you are standing on,
-  written down where the work happens. What is left is the part you cannot write down in advance,
-  which is what <a href="/steps/step2/steering">steering</a> is about.
-</p>
-
 <!-- The doing part of the unit, under the same rule and heading the rest of the course puts over
      its exercises. The card is the WhereWouldItGo element registered in steps/step2/index.tsx, and
      it goes straight under the heading: its description carries the setting, so a paragraph here

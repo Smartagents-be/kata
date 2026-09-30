@@ -397,8 +397,10 @@ const deck: SlideSpec[] = [
     title: 'deck.session.clear.title',
     note: 'deck.session.clear.note',
     figure: <WhereTheSeamFalls />,
-    // `SequentialSteps` is the same 640-wide viewBox under the same `max-w-xl` cap and sits at 1.77.
-    scale: 1.77,
+    // Fitted to the room under the heading rather than copied from a figure of the same width: its
+    // viewBox grew to 364 tall when the bracket and the carry moved out from under the frame, and
+    // the 1.77 this used to carry was already over the box `SlideFigure` clips at.
+    scale: 1.28,
   },
   {
     id: 'deck-session-memory',

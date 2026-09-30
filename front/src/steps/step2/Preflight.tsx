@@ -17,7 +17,7 @@ import { TaskCard } from '@/shared/components/TaskCard'
  * one, which is most of where the unit's word count went.
  *
  * **The `hook` move is `setup`'s strictest of the three, and it is the only place in the course a
- * student writes one.** `engineering.quality-gates.2` describes exactly this hook and nothing in the
+ * student writes one.** `gates.quality-gates.2` describes exactly this hook and nothing in the
  * step ever asks for it: a `CLAUDE.md` line asks, and a hook just happens. Having both on the card
  * is the pair that section argues, not a duplication.
  *

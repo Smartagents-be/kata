@@ -3,6 +3,7 @@ import type { SlideSpec } from '@/shared/deck/slide-spec'
 import { AgentsAtOnce } from './AgentsAtOnce'
 import { DomainTree } from './DomainTree'
 import { FlowDiagram } from './FlowDiagram'
+import { GateReach } from './GateReach'
 import { GoalGate } from './GoalGate'
 import { HookTree } from './HookTree'
 import { IterationPaths } from './IterationPaths'
@@ -12,6 +13,7 @@ import { ProjectTree } from './ProjectTree'
 import { ReadEachTime } from './ReadEachTime'
 import { RunSheet } from './RunSheet'
 import { ScriptRuns } from './ScriptRuns'
+import { SdlcStages } from './SdlcStages'
 import { SkillShape } from './SkillShape'
 import { SkillTree } from './SkillTree'
 import { TwoWindows } from './TwoWindows'
@@ -27,7 +29,7 @@ import { WorktreeEach } from './WorktreeEach'
  * owns the bare `deck-<unit>` names; `workshop` exists in both steps, so the prefix is what keeps
  * the blocks apart.
  *
- * Kept off on purpose: `SetupFlags`, `Workshop`, `WhereWouldItGo`, `Preflight` and `Debrief` write
+ * Kept off on purpose: `SetupFlags`, `Workshop`, `WhereWouldItGo`, `GateWalk`, `Preflight` and `Debrief` write
  * progress to localStorage, so on a slide they would tick the tutor's machine, and `AuditExample`
  * only earns its toggle beside the paragraph that reads it. The exercises those boards carry get a
  * statement naming what the student does, never what they find: the three setup files stay unnamed,
@@ -162,11 +164,7 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'step.title',
     title: 'engineering.title',
-    points: [
-      'deck.engineering.divider.1',
-      'deck.engineering.divider.2',
-      'deck.engineering.divider.3',
-    ],
+    points: ['deck.engineering.divider.1', 'deck.engineering.divider.2'],
   },
   {
     id: 'deck-step2-engineering-vibe',
@@ -187,20 +185,58 @@ const deck: SlideSpec[] = [
     scale: 0.9,
   },
   {
-    id: 'deck-step2-engineering-gates',
-    kind: 'statement',
-    ns: 'step2',
-    eyebrow: 'engineering.title',
-    title: 'deck.engineering.gates.title',
-    note: 'deck.engineering.gates.note',
-  },
-  {
     id: 'deck-step2-engineering-sort',
     kind: 'statement',
     ns: 'step2',
     eyebrow: 'engineering.title',
     title: 'deck.engineering.sort.title',
     note: 'deck.engineering.sort.note',
+  },
+
+  // ── gates ─────────────────────────────────────────────────────────────────────────────────
+  {
+    id: 'deck-step2-gates',
+    kind: 'divider',
+    ns: 'step2',
+    eyebrow: 'step.title',
+    title: 'gates.title',
+    points: ['deck.gates.divider.1', 'deck.gates.divider.2', 'deck.gates.divider.3'],
+  },
+  {
+    id: 'deck-step2-gates-sdlc',
+    kind: 'figure',
+    ns: 'step2',
+    eyebrow: 'gates.title',
+    title: 'deck.gates.sdlc.title',
+    figure: <SdlcStages />,
+    scale: 1.2,
+  },
+  // Came over from `engineering` with the `Quality gates` section, and still a statement: the
+  // proxy claim has no drawing, and `SameGate` deliberately ranks none of its three checks.
+  {
+    id: 'deck-step2-gates-proxy',
+    kind: 'statement',
+    ns: 'step2',
+    eyebrow: 'gates.title',
+    title: 'deck.gates.proxy.title',
+    note: 'deck.gates.proxy.note',
+  },
+  {
+    id: 'deck-step2-gates-reach',
+    kind: 'figure',
+    ns: 'step2',
+    eyebrow: 'gates.title',
+    title: 'deck.gates.reach.title',
+    figure: <GateReach />,
+    scale: 1.5,
+  },
+  {
+    id: 'deck-step2-gates-walk',
+    kind: 'statement',
+    ns: 'step2',
+    eyebrow: 'gates.title',
+    title: 'deck.gates.walk.title',
+    note: 'deck.gates.walk.note',
   },
 
   // ── steering ──────────────────────────────────────────────────────────────────────────────

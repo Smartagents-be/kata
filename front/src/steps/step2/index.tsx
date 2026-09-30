@@ -8,6 +8,8 @@ import { Debrief } from './Debrief'
 import { DomainTree } from './DomainTree'
 import { FifteenMinutes } from './FifteenMinutes'
 import { FlowDiagram } from './FlowDiagram'
+import { GateReach } from './GateReach'
+import { GateWalk } from './GateWalk'
 import { GoalGate } from './GoalGate'
 import { HexagonPorts } from './HexagonPorts'
 import { HookTree } from './HookTree'
@@ -21,6 +23,7 @@ import { ReadEachTime } from './ReadEachTime'
 import { RunSheet } from './RunSheet'
 import { SameEveryRun } from './SameEveryRun'
 import { SameGate } from './SameGate'
+import { SdlcStages } from './SdlcStages'
 import { ScriptRuns } from './ScriptRuns'
 import { SetupFlags } from './SetupFlags'
 import { SteerARun } from './SteerARun'
@@ -40,6 +43,7 @@ import { parallelQuiz, patternsQuiz, spendingQuiz, steeringQuiz, workflowsQuiz }
 import evolution from './units/evolution.html?raw'
 import setup from './units/setup.html?raw'
 import engineering from './units/engineering.html?raw'
+import gates from './units/gates.html?raw'
 import steering from './units/steering.html?raw'
 import patterns from './units/patterns.html?raw'
 import workflows from './units/workflows.html?raw'
@@ -53,9 +57,9 @@ import workshop from './units/workshop.html?raw'
  * the code yourself, one unit each. `evolution` opens the step by putting the rest of them in
  * order: small steps, taken often, on something that already runs.
  *
- * `evolution`, `setup`, `engineering`, `steering`, `patterns`, `workflows`, `enablement`,
- * `parallel` and `goals` each carry a drawing. `evolution`, `engineering`, `steering`, `patterns`
- * and `enablement` close on an ungraded task card; `steering`, `patterns`, `workflows` and `goals`
+ * `evolution`, `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`, `enablement`,
+ * `parallel` and `goals` each carry a drawing. `evolution`, `engineering`, `gates`, `steering`,
+ * `patterns` and `enablement` close on an ungraded task card; `steering`, `patterns`, `workflows` and `goals`
  * carry a quiz; and `setup` and the closing `workshop` unit each carry a flag board, which is why
  * this registry is .tsx. Both boards are browser-graded, so the step still talks to the service
  * only through the `mvn verify -Pgraded` run the student does outside the app.
@@ -105,20 +109,37 @@ const step2: Step = {
       id: 'engineering',
       title: 'engineering.title',
       html: engineering,
-      // Four slots inside the prose. The unit's two halves are split across the first three:
+      // Three slots inside the prose, and the unit's two halves are split across them:
       // `words-to-files` is what a thing is called, and `hexagon-ports` plus `domain-tree` are
       // where it sits, the shape first and then the same shape on disk. Neither half may grow the
-      // other's argument. `same-gate` closes the third section, after the paragraph that names the
-      // three checks.
+      // other's argument. Its `Quality gates` section and `same-gate` moved to `gates`, next.
       inlineFigures: {
         'words-to-files': <WordsToFiles />,
         'hexagon-ports': <HexagonPorts />,
         'domain-tree': <DomainTree />,
-        'same-gate': <SameGate />,
       },
       // And the task under the prose, which sorts kata/step2/java against that same drawing. It
       // grades nothing and posts nothing; the tick is a bookmark.
       figure: <WhereWouldItGo />,
+    },
+    {
+      id: 'gates',
+      title: 'gates.title',
+      html: gates,
+      // Three slots inside the prose. `sdlc-stages` sits under the lead and is read by the paragraph
+      // after it: where a person still decides. `same-gate` came over from `engineering` with the
+      // `Quality gates` section it closes. `gate-reach` closes `fast-enough` and nothing reads it
+      // back, because its note is the unit's last two sections in one line: the slower a gate
+      // answers, the further a miss has got.
+      inlineFigures: {
+        'sdlc-stages': <SdlcStages />,
+        'same-gate': <SameGate />,
+        'gate-reach': <GateReach />,
+      },
+      // The task under the prose, run against the student's own project rather than the kata,
+      // because the kata's gates are what the capstone's pre-flight runs. Ungraded; the tick is a
+      // bookmark.
+      figure: <GateWalk />,
     },
     {
       id: 'steering',
@@ -157,11 +178,11 @@ const step2: Step = {
       id: 'workflows',
       title: 'workflows.title',
       html: workflows,
-      // Seven slots inside the prose. Four of them close a section with who talks to what, and they
-      // are a set: teal is what that workflow adds, so a change to one is a change to all four.
+      // Eight slots inside the prose. Five of them close a section with who talks to what, and they
+      // are a set: teal is what that workflow adds, so a change to one is a change to all five.
       // Then the switchable audit, and the closing pair. None of them grades anything.
       inlineFigures: {
-        // The project is the same frame in all four, and what is inside it is what changes. Here it
+        // The project is the same frame in all five, and what is inside it is what changes. Here it
         // holds the code and nothing else: there is no artifact, which is the section's point.
         'flow-naive': (
           <FlowDiagram
@@ -184,6 +205,27 @@ const step2: Step = {
             id="flow-spec"
             nodes={['you', 'agent', { label: 'project', nodes: ['spec', 'code'], links: ['one'] }]}
             links={['both', 'both']}
+          />
+        ),
+        // Two sessions rather than one row. What the agent turns up mid-task drops out of the row
+        // into a file, and a later session starts from that file: the repeated `findings.md` is the
+        // only thing the two share, which is the section's point.
+        'flow-defer': (
+          <FlowDiagram
+            id="flow-defer"
+            nodes={['you', 'agent', { label: 'project', nodes: ['code'], links: [] }]}
+            links={['both', 'one']}
+            aside={{ from: 1, node: 'findings' }}
+            later={{
+              nodes: [
+                'findings',
+                'you',
+                'next',
+                'agent',
+                { label: 'project', nodes: ['code'], links: [] },
+              ],
+              links: ['one', 'one', 'one', 'one'],
+            }}
           />
         ),
         // The only one that closes, and the longest: the agent writes the audit, you read it, and

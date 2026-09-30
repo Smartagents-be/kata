@@ -10,17 +10,17 @@ The rules that span the whole curriculum are in the parent `front/src/steps/CLAU
 system and the audience and assistant mechanisms are in `front/CLAUDE.md`, and the repo-wide
 prohibitions are in the root `CLAUDE.md`. None of them is repeated here.
 
-`step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Nine
-units, `evolution`, `setup`, `engineering`, `steering`, `patterns`, `workflows`,
+`step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Ten
+units, `evolution`, `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`,
 `enablement`, `parallel` and `goals`, four of
-them carrying a quiz, and the unit HTML is the source for what each argues. Eight of the nine close
-on something the student does: `evolution`, `engineering`, `steering`, `patterns` and `enablement`
-on an ungraded `TaskCard`, `setup` on a graded flag board, and `steering`, `patterns`, `workflows`
+them carrying a quiz, and the unit HTML is the source for what each argues. Nine of the ten close
+on something the student does: `evolution`, `engineering`, `gates`, `steering`, `patterns` and
+`enablement` on an ungraded `TaskCard`, `setup` on a graded flag board, and `steering`, `patterns`, `workflows`
 and `goals` on a quiz, three of them under a card. `workflows` is the one that is framing prose and
-a quiz with no card. Five carry one
+a quiz with no card. Six carry one
 habit each; `evolution` opens the step and carries none, because its job is to put the rest in
 order: a version now costs an hour, so the step you hand over gets small and you take many of them.
-`workflows` is outside that count too, and deliberately so: it carries four ways of
+`workflows` is outside that count too, and deliberately so: it carries five ways of
 handing work over rather than one habit, and its argument is the choice between them. `parallel` is
 outside it on the same reasoning, four arrangements of agents rather than one habit. `enablement`
 is the fourth one outside it, for its own reason: it is about what has to be true around you rather
@@ -34,14 +34,14 @@ style as a skill, the new-step file list as a scaffolding skill, and having the 
 `CLAUDE.md` off the repository rather than writing it from memory), and picking metrics that carry
 weight (a coverage floor and a complexity ceiling wired into `mvn verify`, the proxy trap that a
 hundred percent coverage from tests asserting nothing is green and worthless, and an agent
-over-commenting and under-logging). Most of it was a third telling: `engineering`'s `Quality gates`
+over-commenting and under-logging). Most of it was a third telling: `gates`' `Quality gates`
 owns the bar in the build, `patterns` owns turning a repeated correction into a skill, `setup` owns
 `CLAUDE.md`, and `goals` owns the check that answers yes or no. **Over-commenting and under-logging
 is the one argument that had no second home**, and it survives nowhere in the course: neither term
 is in a unit, in a board hint or in a skill file, in either language. The proxy trap went the other
-way and has two homes now, `engineering.quality-gates.1` and `workshop.flag.honest.help`, so it
+way and has two homes now, `gates.quality-gates.1` and `workshop.flag.honest.help`, so it
 needs no third. That is the thing to notice before writing a section about metrics anywhere in the
-step. **`engineering.quality-gates.1` carries the claim**, two sentences saying a metric is a proxy
+step. **`gates.quality-gates.1` carries the claim**, two sentences saying a metric is a proxy
 an agent will satisfy and that the gate worth wiring in is the expensive one to fake, and it carries
 no example on purpose. **The example is now behind the board's Hint**, in
 `workshop.flag.honest.help`, which is the moment a student has a row that will not move and wants it.
@@ -55,7 +55,7 @@ the honest-coverage discovery drawn on the page, which is the same reason `works
 figure of its gates.
 Three references were repointed in the same change rather than left
 dangling: `workshop.lead.2` says "the kind of code a quality gate exists for" instead of naming the
-unit, `step3`'s `change.you-test-engineer.2` links to `engineering`, and the capstone's pointer at
+unit, `step3`'s `change.you-test-engineer.2` links to `gates` (it linked to `engineering` until the section moved), and the capstone's pointer at
 `engineering` and `goals` is now a chip in `RunSheet` rather than a link in `workshop.lead.1`.
 Its prose closes by handing off to `setup` by name, so a reordering there has to visit that
 paragraph. Below that prose sits the step's only *ungraded* exercise, under the same `<hr>`
@@ -117,7 +117,7 @@ for now, leaving it too long turns into a regression). It closes the argument th
 opens, so keep the pair of edges if you rewrite it. Cutting one leaves a lesson that only says
 "later".
 
-**`engineering` runs four sections now, and the split of the first one is the decision.** Domain-driven
+**`engineering` runs three sections now, and the split of the first one is the decision.** Domain-driven
 design and hexagonal architecture shared a heading and a paragraph until they were pulled apart, and
 they are two arguments rather than one: naming is what a thing is **called**, hexagonal is where it
 **sits**. The payoff differs with them, which is what makes the split worth the extra heading, and
@@ -127,7 +127,7 @@ not have to read, so `Hexagonal architecture` holds the coin. **Do not let eithe
 the other's icon or the other's claim.** Merged again, the unit says "structure is good" twice and
 never says what either kind of structure buys.
 
-Four figures sit in it and each is fenced off from the next. `WordsToFiles` is the vocabulary: one
+Three figures sit in it and each is fenced off from the next. `WordsToFiles` is the vocabulary: one
 prompt, three candidate files, and a line to the one the sentence named, with the other two left
 muted so the drawing reads as narrowing rather than as finding. **It draws no folders**, because
 that is the next section's half. It also carries **no note under the frame**, and that is a cut: the
@@ -151,8 +151,14 @@ are still the tree's own, which keeps them a pair without making them a copy. `D
 untouched by the split, so `WhereWouldItGo` below still sorts `kata/step2/java` against it and the
 disagreement that task needs is intact.
 
-`SameGate` closes `Quality gates`. Each figure's own docblock carries the rest, including why
-`WordsToFiles` draws no badly-named repository next to the good one.
+Each figure's own docblock carries the rest, including why `WordsToFiles` draws no badly-named
+repository next to the good one. **Its fourth section, `Quality gates`, moved to `gates`** with
+`SameGate` and both paragraphs, keys renamed from `engineering.quality-gates.*` to
+`gates.quality-gates.*` and the wording untouched. The closer that section carried
+(`quality-gates.3`, the line and the hand-off to `steering`) went with it and is now
+`gates.fast-enough.4`. So `engineering` closes on `The right words` and its last sentence, the half a
+day against production, and it hands off to nothing by name; `gates` is the next unit in the pager
+and its lead is what picks up.
 
 `engineering` closes on `WhereWouldItGo`, a `TaskCard` under the same `<hr>` and "Test yourself"
 heading, with no prose between the rule and the card: the card's description carries the setting, so
@@ -173,7 +179,47 @@ the plan would reach the capstone with a project that no longer builds. The desc
 warning in the words a student reads first, which is why both carry it. It is also the first
 `TaskCard` outside step 1, ticked to `kata.step2.where`.
 
-`steering` replaced `scoping` in slot four, and the replacement was deliberate rather than a rename:
+
+**`gates` sits between `engineering` and `steering`, and it took `engineering`'s last section with
+it.** It argues why gates exist at all, in the three reasons it was commissioned with, one section
+each: they make the output better (`Quality gates`, moved in unchanged), they bound how far a bad
+run gets (`Blast radius`), and they let an agent check itself fast enough to use the answer
+(`Fast enough to answer`). The lead sets the frame those three sit in, and its source is the
+AI-native SDLC page on smartagents.be, itself built on Anthropic's AI-native SDLC playbook: the
+bottleneck does not disappear when agents do the typing, it moves, and in the end it moves to the
+moment someone decides. **That page is the source for `SdlcStages` and for the Dutch of its labels**,
+taken word for word, so a change on the site is a reason to revisit the figure and nothing else is.
+Its caption names that source and argues nothing, on the course's caption rule.
+
+Three figures and each has one job. `SdlcStages` is where a person still decides (four human gates,
+and the only place in the unit a gate is a person); `SameGate` is who a machine gate is for;
+`GateReach` is speed and blast radius drawn as **one axis**, which is the claim that lets the last two
+sections share a figure: the further out a gate sits, the slower it answers and the more a miss has
+already touched. **Do not give `SdlcStages` machine gates or `GateReach` numbers.** The first would
+collapse the two kinds of gate the lead keeps apart, and the second would turn orders of magnitude
+into a benchmark that the card asks the student to take on their own build.
+
+**The speed of a gate is a gate of its own**, and that sentence is the author's, added while the
+unit was being written: a few minutes a loop compound, and bringing the time down is work you hand
+an agent as a goal against a number. The code block in `fast-enough` is that goal, in `goals`'
+`> Goal:` shape rather than as a slash command, because no unit names a goal command and `goals` is
+where the shape is argued; `fast-enough.3` points there rather than re-arguing it. Its edges (keep
+every check, keep every test, lower no threshold) are the point of the block and not decoration: a
+build gets faster by deleting its slow tests, and that is the proxy trap from `Quality gates` a
+second time. **It names `mvn verify` and never `-Pgraded`**, and `GateWalk` names no command at all,
+because the kata's gates are what `workshop`'s pre-flight runs and its board grades. The card runs on
+the student's own project for that reason, on `CountTheDay`'s precedent.
+
+There is a tension left standing: `quality-gates.2` calls the Stop hook "the one moment a hook can
+afford to be slow", and `fast-enough` then argues for fast gates. They agree, and `GateReach` is what
+shows it: the in-loop gate is the fast one, and the minute-long `mvn verify` sits one step out, at
+exactly the moment that paragraph names. Do not reword either to make them sound alike.
+
+`step3`'s `PipelineShift` is the drawing `SdlcStages` is easiest to confuse with. That one is time
+on one scale and the burden moving to verifying; this one is where the work queues and where a person
+stands. Keep them apart rather than making either reference the other.
+
+`steering` replaced `scoping` in slot four (five, since `gates` arrived), and the replacement was deliberate rather than a rename:
 task sizing, which folder you open the agent in, and the `.claude` symlink trap were dropped
 outright, so nothing in the tree teaches them any more. `DomainTree` drew the symlink until its row
 was removed, so the trap is now absent from the course in every form. The unit argues the
@@ -400,9 +446,9 @@ in words. The cards are the same size in both rows for the same reason. **Only t
 labelled.** The first is what you already have and a name over it says prose twice, so what each row
 produces sits on the right instead, and that pair is the drawing.
 
-`workflows` is four ways of handing work over, and **the order is the argument**: naive, plan-based,
-spec-driven, audit-driven, running from cheapest to most deliberate, with a closing section saying
-they are not exclusive. That close is the unit rather than a coda, so a rewrite that drops it leaves
+`workflows` is five ways of handing work over, and **the order is the argument**: naive, plan-based,
+spec-driven, defer, audit-driven, running from cheapest to most deliberate, with a closing section
+saying they are not exclusive. That close is the unit rather than a coda, so a rewrite that drops it leaves
 four techniques and no reason to pick one. It carries no exercise, and the reason stands: there is
 nothing a card could ask the student to *do* here that would not be a smaller version of the
 workshop.
@@ -418,9 +464,17 @@ makes an audit a file you can work. **Spec-driven has no question of its own**, 
 it is the baseline the other three are measured against and it turns up inside all of them. Do not
 add a fourth to even the set up.
 
+**`defer` sits directly above `audit-driven` on purpose.** It is the
+mid-flight half of the same idea: when the agent turns something up that is not the task, the
+finding goes into a markdown file instead of into the session, and a later session triages it into
+a spec or a one-shot prompt. Placed there, its file is the small version of the `audit.md` the next
+section makes a habit of. It has a `FlowDiagram` of its own, but `WorkflowWeights`,
+`WorkflowTimeline`, the deck and the quiz still name four workflows; giving it a bar, a stage or a
+slide is a separate decision, not an oversight to tidy.
+
 The quiz renders under the closing figure from the registry, so the unit's HTML gets no
 `<h2 data-i18n="ui:quiz.title">`: that heading belongs to a task card, and `QuizPanel` writes its
-own. `evolution`, `setup`, `engineering`, `steering`, `patterns` and `enablement` carry the heading
+own. `evolution`, `setup`, `engineering`, `gates`, `steering`, `patterns` and `enablement` carry the heading
 because they carry cards. `goals`
 follows this unit's shape rather than theirs, for the same reason.
 
@@ -441,12 +495,20 @@ turns on, so the two move together, and it belongs in that paragraph rather than
 own: the section is about where naive belongs, and a second paragraph making the same kind of claim
 read as an afterthought. Do not tidy any of it into agreement with `engineering`.
 
-It carries seven figures, and four of them are one set. `FlowDiagram` closes each section with who
+It carries eight figures, and five of them are one set. `FlowDiagram` closes each section with who
 talks to what: `you → agent → [project: code]`, then the same with a two-way link to the agent, then
-a spec joining the code inside the project, then `audit-driven`'s six-box chain closed into a cycle.
-**They are read down the unit rather than one at a time**, so a change to one is a change to all
-four, and the colour rule is what makes that work: a two-way link is teal, a one-way link is muted,
-a loop's return path is teal, so the teal is always the thing that section adds.
+a spec joining the code inside the project, then `defer`'s two sessions, then `audit-driven`'s
+six-box chain closed into a cycle. **They are read down the unit rather than one at a time**, so a
+change to one is a change to all five, and the colour rule is what makes that work: a two-way link is
+teal, a one-way link is muted, and a path added to the row (a loop's return, `defer`'s aside) is
+teal and dashed, so the teal is always the thing that section adds.
+
+`defer` is the only one drawn as **two rows with a rule between them**, labelled as this session and
+a later one. The first is `plan-based`'s row with `findings.md` hanging under the agent; the second
+starts from `findings.md`. **Nothing connects the two copies of that box**, on `WorkflowTimeline`'s
+precedent that a repeated name says it: the file is the only thing the sessions share, and an arrow
+across the rule would draw them as one run. The aside hangs inside its node's own box, so unlike the
+audit's branch it needs no measuring, only space reserved under the row.
 
 Three things inside it are decisions. **The project is always a frame**, never a box, and what sits
 inside it is what changes across the four; that is the argument that a spec is a file in the
@@ -542,7 +604,7 @@ and a card naming `mvn spring-boot:run` puts that straight back. Its `fit` move 
 back into `LoopsPerHour` with a number of their own, which is what turns that figure from a drawing
 into a measurement. **It has no quiz, and that half is no longer borrowed from `workflows`**, which
 now carries one. It stands on its own here: this unit is about what has to be true around you, and
-a condition has no wrong answer to offer a question the way a choice between four workflows does.
+a condition has no wrong answer to offer a question the way a choice between five workflows does.
 Run it locally front and back, grow the crossbar, and count where the day goes.
 
 **It was `Enablement` and is now `What it asks of you`**, on `goals`'s precedent: the unit id, the
@@ -623,10 +685,10 @@ lives.
 happy path unasked and leaves out the empty list, the expired tier and the amount that is exactly
 zero, that naming those yourself is what holds the shape while the agent rewrites everything
 underneath, and it pointed at this step's own `graded` and `challenge` profiles as two fitness tests
-that answer in one command. All of that survives elsewhere: `engineering`'s `Quality gates` owns the
+that answer in one command. All of that survives elsewhere: `gates`' `Quality gates` owns the
 written-down bar and `workshop` is where the two profiles are actually run, so what went was the
 third telling. Do not restore it as a section; if the edge cases are wanted in this unit, they belong
-to a paragraph that argues something `engineering` does not.
+to a paragraph that argues something `gates` does not.
 
 It points across two boundaries rather than re-arguing them, and each is easy to collapse.
 `steering` owns what you do mid-run, so `where-day-goes`
@@ -895,7 +957,7 @@ nobody restores half of either.
 
 **One rule carries the page, and it is `workshop.lead.1`: the student writes none of the code.** Not
 the tests, not the refactor, not the missing method, not the build wiring. What is left for them is
-the three things the step spent nine units on, setting the project up, saying what has to be true,
+the three things the step spent ten units on, setting the project up, saying what has to be true,
 and reading what came back. Nothing enforces it and nothing can, which is the point: it is a
 constraint the student holds themselves to, and every stage under it is written as work you hand
 over. A move that asks the student to type Java is the one kind of move this page may not grow.
@@ -945,7 +1007,7 @@ green; `FLAGS_CHANGED_EVENT` on `FlagBoard` carries it, the figure reads the boa
 nothing, and `live={false}` on the slide keeps a tutor's own collection off the projector.
 
 **Each stage names the units it draws on**, which is what makes the page a capstone rather than a
-sixth exercise: between them they name all nine, beside the stage where each is used. **Every chip
+sixth exercise: between them they name all ten, beside the stage where each is used. **Every chip
 has to be a unit the stage genuinely runs.** Three were cut for failing that: `evolution` on the
 native row, whose lesson that stage suspends; `enablement` on the endpoint row, which was one `curl`;
 and `evolution` again on the goal row, where it was crediting that unit for a sentence `goals` wrote.
@@ -965,7 +1027,7 @@ of those are `setup`'s and one is `steering`'s. `Debrief` runs three, and they a
 audit turned on the student's own diff, closing its worst row rather than filing it), `enablement`
 (count where the afternoon went) and `patterns`.
 
-**The hook is the move worth defending.** `engineering.quality-gates.2` describes exactly it, a hook
+**The hook is the move worth defending.** `gates.quality-gates.2` describes exactly it, a hook
 that fires once the agent says it is finished, and nothing in the step ever asked a student to write
 one, so this is the only place in the course where they do. Having the `CLAUDE.md` line *and* the
 hook on one card is the pair `setup.hooks.2` argues, a line that asks beside a script that happens,

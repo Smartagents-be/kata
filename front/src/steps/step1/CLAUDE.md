@@ -382,19 +382,43 @@ both languages.
 
 `WhereTheSeamFalls` is the unit's second figure and it draws one thing: **where the cut falls**. Two
 sessions of equal length, the same three tasks banded at the same widths in both rows, so the only
-difference on screen is the vertical rule. Compaction puts it wherever the window happened to fill,
-which is halfway through the middle task; a clear puts it on the boundary the student chose. Both
-rows lose about the same amount, and that is what makes position the whole argument, so **the spans
-and the totals must stay equal in both rows**: widen one and the figure starts arguing volume
-instead. It borrows `ContextFalloff`'s frame stroke and fill rather than inventing one, and it joins
-the step's diagram vocabulary (a teal frame is a context, a bar is something in it, dashes are what
-is not), with what survives drawn at the left of each frame because that is where the next session
-starts reading. The proportions and the axis are its own, so the top row carries `seam.window`: a
-reader met a *vertical* window in `ContextFalloff` one unit earlier and nothing else on this drawing
-says these frames run in time. **It carries no coin, no price and no re-send**: `harness.caching`
-prices a rebuilt window and `BundleCompare` draws the re-send, and cost in here would make the two
-rows a comparison of bills. On the deck it replaced the statement slide at `deck-session-clear`,
-which keeps its note, because the drawing shows where the two cuts fall and not what they are called.
+difference on screen is the cut. Compaction puts it wherever the window happened to fill, which is
+inside the middle task; a clear puts it on the boundary the student chose. Both rows lose about the
+same amount, and that is what makes position the whole argument, so **the spans and the totals must
+stay equal in both rows**: widen one and the figure starts arguing volume instead.
+
+The first cut of it said all of that in labels and left the picture to be taken on trust, and a
+reader who was shown it said the drawing did not carry the point. What it was missing was any sign
+that a cut *destroys* something: it drew only the turns that survived, banded both rows identically
+whatever the seam had done to them, and marked the difference between the two rows with a hairline
+in a slightly different place. Three things fixed that, and each is load bearing now.
+
+- **Every turn is drawn in both rows.** A turn behind the seam is an empty dashed outline and a turn
+  in front of it is filled, so there is a baseline to lose things from and the loss is countable,
+  nine against eleven. Drawing only the survivors reads as a session that started late.
+- **The seam through a task is torn and the seam between two is straight.** That is the difference
+  between the rows in one stroke, and it is derived from the geometry rather than declared per row,
+  so moving a rule cannot leave the drawing lying. The rules sit in the gap *between* two turns and
+  the jag is narrower than that gap, or the tear reads as a damaged bar rather than as a cut. A torn
+  task is painted whole in the gone fill and its surviving half painted over the top, square at the
+  tear and round at the task's end: two rounded pieces butted together leave a notch and read as two
+  tasks rather than one broken in half.
+- **A bracket under each window spans what is gone**, with an arrow off it to what crosses in its
+  place. The carry used to sit inside the frame at the left, where it landed on the first task and
+  was read as part of it. Under the bracket it is unambiguous, and the two bracket lengths are what
+  show the rows losing comparable amounts.
+
+It borrows `ContextFalloff`'s frame stroke and fill rather than inventing one, and it joins the
+step's diagram vocabulary (a teal frame is a context, a bar is something in it, dashes are what is
+not). The proportions and the axis are its own, so the drawing opens on `seam.window`: a reader met a
+*vertical* window in `ContextFalloff` one unit earlier and nothing else on this drawing says these
+frames run in time. That axis sits on its own line above both rows rather than beside a row label,
+because the Dutch of both is long enough to collide. **It carries no coin, no price and no re-send**:
+`harness.caching` prices a rebuilt window and `BundleCompare` draws the re-send, and cost in here
+would make the two rows a comparison of bills. On the deck it replaced the statement slide at
+`deck-session-clear`, which keeps its note, because the drawing shows where the two cuts fall and not
+what they are called; its `scale` there is fitted to the box `SlideFigure` clips at rather than
+copied from another figure of the same width, which is how the old one came to be over it.
 
 It closes on `SurviveTheClear`, under the same `<hr>` and "Test yourself" heading the other units
 use, with no prose between the rule and the card. Four moves: find a thing you would have to say

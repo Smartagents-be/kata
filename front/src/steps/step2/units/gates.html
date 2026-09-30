@@ -1,0 +1,97 @@
+<p data-i18n="gates.lead.1">
+  A gate is a place where the work stops until something answers yes. Take the typing away and the
+  queue in front of the slowest desk does not disappear. It moves. First to what you asked for and
+  to whoever reads what came back, and in the end to the moment someone decides.
+</p>
+
+<!-- Filled by the SdlcStages element registered under this name in steps/step2/index.tsx. The
+     paragraph after it reads the third row only, because the first two are the lead drawn. -->
+<div data-figure="sdlc-stages"></div>
+
+<p data-i18n="gates.lead.2">
+  The third row is one run with no handoffs, and a person still decides four times: the intent, the
+  spec, the change and the release. Everything between those four is machine work, and it only stays
+  that way if a machine checks it too. Nobody reviews by hand the volume an agent produces. The gates
+  take the volume. You judge the decisions.
+</p>
+
+<h2 data-i18n="gates.quality-gates.heading">Quality gates</h2>
+
+<p data-i18n="gates.quality-gates.1">
+  Static analysis in Sonar, a line coverage floor, a mutation score: that is how software has
+  always been given a quality label, and how drift and regression were caught before a release. The
+  same gates go around an agent's work, and investing in them is still investing in how fast you
+  ship. They also hand it an invariant, something fixed to hold itself to while it works
+  <svg data-icon="gem"></svg> Each of them is a proxy, though, and an agent will satisfy a proxy
+  rather than the thing behind it. The gate worth wiring in is the one that is expensive to fake.
+</p>
+
+<div data-figure="same-gate"></div>
+
+<p data-i18n="gates.quality-gates.2">
+  Wire that into the run rather than into your memory. A hook fires once the agent says it is
+  finished, which is the one moment a hook can afford to be slow. <code>mvn verify</code> runs
+  whatever analysis your build has wired in, and a number under the floor comes back as a failure it
+  has to answer for. The same rule written into <code>CLAUDE.md</code> is a request. This one runs
+  whether the agent remembers it or not.
+</p>
+
+<h2 data-i18n="gates.blast-radius.heading">Blast radius</h2>
+
+<p data-i18n="gates.blast-radius.1">
+  An agent that can run commands can run the wrong one. It drops a migration it decided was stale,
+  rewrites forty files to fix one line, and pushes the lot. How far that gets before something stops
+  it is the blast radius. A gate is where it stops.
+</p>
+
+<p data-i18n="gates.blast-radius.2">
+  So put gates between the agent and whatever you cannot take back. It works on its own branch, in
+  its own worktree, and nothing reaches <code>main</code> without the build and your review. Inside
+  that boundary it can try things, break them and throw them away <svg data-icon="gem"></svg> Outside
+  it, a bad run costs you a branch. Not a release.
+</p>
+
+<h2 data-i18n="gates.fast-enough.heading">Fast enough to answer</h2>
+
+<p data-i18n="gates.fast-enough.1">
+  An agent checks itself as often as your gates let it. Tests that answer in eight seconds get run
+  after every change, and a failure lands while the agent still knows what it just did. A pipeline
+  that takes twenty minutes gets run once, at the end, and what fails comes back to a context that
+  has moved on. Or to you. The gate that answers inside the loop is the one an agent does its best
+  work against.
+</p>
+
+<p data-i18n="gates.fast-enough.2">
+  That makes the speed of a gate a gate of its own. Four minutes a build sounds cheap until you count
+  the loops: ten of them in an hour and the agent spends forty minutes waiting on an answer. So put a
+  number on it, and hand the number over as a goal:
+</p>
+
+<pre><code>&gt; Goal: `mvn verify` finishes in under a minute on this machine.
+  Keep every check it runs today and every test it has, and do not
+  lower a threshold. Time the build after each change you make.</code></pre>
+
+<p data-i18n="gates.fast-enough.3">
+  The edges are what stop it winning the cheap way, because deleting the slow tests is faster too.
+  <a href="/steps/step2/goals">The unit on goals</a> is where that shape is argued.
+</p>
+
+<!-- Filled by the GateReach element registered under this name in steps/step2/index.tsx. It closes
+     the last section and nothing after it reads it back, so its own note carries the claim that
+     speed and blast radius are one axis. -->
+<div data-figure="gate-reach"></div>
+
+<p data-i18n="gates.fast-enough.4">
+  None of that is about the agent being careful. A gate is the side of the line from
+  <a href="/steps/step2/engineering">the craft unit</a> that you stand on, written down where the
+  work happens. What is left is the part you cannot write down in advance, which is what
+  <a href="/steps/step2/steering">steering</a> is about.
+</p>
+
+<!-- The doing part of the unit, under the same rule and heading the rest of the course puts over
+     its exercises. The card is the GateWalk element registered in steps/step2/index.tsx, and it goes
+     straight under the heading: its description carries the setting, so a paragraph here would say
+     it twice. -->
+<hr />
+
+<h2 data-i18n="ui:quiz.title">Test yourself</h2>

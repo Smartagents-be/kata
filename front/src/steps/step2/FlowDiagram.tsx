@@ -3,15 +3,17 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * Who talks to what, in one row. Each of the four sections closes on one of these, and read down
+ * Who talks to what, in one row. Each of the five sections closes on one of these, and read down
  * the unit they are the argument in miniature: `naive` has no way back from anywhere, `plan-based`
  * gives you one to the agent, `spec-driven` puts a file inside the project that both of you keep,
- * and `audit-driven` closes the row into a cycle.
+ * `defer` sends what the agent turned up into a file for another session, and `audit-driven`
+ * closes the row into a cycle.
  *
  * **Teal is always what that section adds**, and it is the only colour rule in here: a two-way link
  * is teal, a one-way link is muted, and the return path of a loop is teal too. That is what makes
- * the four readable as a sequence rather than as four unrelated rows, so a change to one is a
- * change to all four.
+ * the five readable as a sequence rather than as five unrelated rows, so a change to one is a
+ * change to all five. `defer`'s aside is a path added rather than a link, so it is teal and dashed
+ * like a loop's return.
  *
  * The labels are bare nouns rather than `the agent` and `the code`, which is a width decision as
  * much as a style one: `audit-driven` runs to six boxes and five arrows, and the definite articles
@@ -249,6 +251,38 @@ function BranchFeed({
   )
 }
 
+/** A box hanging under one node of the row: the `from`th top-level node. */
+export type FlowAside = { from: number; node: string }
+
+/**
+ * The box a run drops beside itself rather than into its own row. It hangs from the node it came out
+ * of, inside that node's own box, so it needs no measuring: the caller reserves the space under the
+ * row instead. The path is teal and dashed because it is the one thing its section adds.
+ */
+function Aside({ id, node }: { id: string; node: string }) {
+  return (
+    <div
+      id={id}
+      data-component="FlowDiagram"
+      className="absolute top-full left-1/2 flex -translate-x-1/2 flex-col items-center"
+    >
+      <div
+        id={`${id}-path`}
+        data-component="FlowDiagram"
+        style={{ height: BRANCH_DEPTH - STANDOFF / 2 }}
+        className="border-primary/40 border-l border-dashed"
+      />
+      <ChevronDown
+        id={`${id}-arrow`}
+        data-component="FlowDiagram"
+        aria-hidden="true"
+        className="text-primary -mt-2 mb-0.5 size-4"
+      />
+      <Node id={`${id}-label`} node={node} />
+    </div>
+  )
+}
+
 export function FlowDiagram({
   id,
   nodes,
@@ -256,6 +290,8 @@ export function FlowDiagram({
   loop = false,
   loopTo = 0,
   branch,
+  aside,
+  later,
 }: {
   id: string
   nodes: readonly FlowNode[]
@@ -266,65 +302,76 @@ export function FlowDiagram({
   loopTo?: number
   /** A box hanging under `loopTo`, fed by the last node and feeding back up into it. */
   branch?: string
+  /** A box hanging under one node of the row, reached by a teal path: what the run sets aside. */
+  aside?: FlowAside
+  /** A second row under the first, for a later session. Labels both `<id>.now` and `<id>.later`. */
+  later?: { nodes: readonly FlowNode[]; links: readonly FlowLink[] }
 }) {
   const { t } = useTranslation('step2')
   const { ref, inset } = useLoopInset(loop, loopTo)
 
-  const row = (
+  // One row of boxes. `later` draws a second one under the first, and the ids keep the first row's
+  // names so the four figures that have one row are unchanged.
+  const renderRow = (
+    rowId: string,
+    rowNodes: readonly FlowNode[],
+    rowLinks: readonly FlowLink[],
+    rowAside?: FlowAside,
+  ) => (
     <div
-      id={`${id}-row`}
+      id={`${rowId}-row`}
       data-flow-row=""
       data-component="FlowDiagram"
-      className="flex flex-wrap items-center justify-center gap-2"
+      className="flex flex-wrap items-center justify-center gap-x-2 gap-y-3"
     >
-      {nodes.map((node, index) => (
+      {rowNodes.map((node, index) => (
         <div
           key={index}
-          id={`${id}-node-${index}`}
+          id={`${rowId}-node-${index}`}
           data-component="FlowDiagram"
           className="flex items-center gap-2"
         >
-          {index > 0 && <Link id={`${id}-link-${index - 1}`} kind={links[index - 1]} />}
+          {index > 0 && <Link id={`${rowId}-link-${index - 1}`} kind={rowLinks[index - 1]} />}
 
           {/* The box on its own, so the loop can measure where its centre is. */}
           <div data-flow-box="" data-component="FlowDiagram" className="relative">
             {typeof node === 'string' ? (
-              <Node id={`${id}-node-${index}-label`} node={node} />
+              <Node id={`${rowId}-node-${index}-label`} node={node} />
             ) : (
               // The frame is neutral where the boxes are teal, so it reads as the thing they sit in
               // rather than as another one of them.
               <div
-                id={`${id}-node-${index}-group`}
+                id={`${rowId}-node-${index}-group`}
                 data-component="FlowDiagram"
                 className="border-border rounded-xl border px-3 pt-2 pb-3"
               >
                 <p
-                  id={`${id}-node-${index}-group-label`}
+                  id={`${rowId}-node-${index}-group-label`}
                   data-component="FlowDiagram"
                   className="eyebrow text-muted-foreground mb-2 text-center"
                 >
                   {t(`flow.node.${node.label}`)}
                 </p>
                 <div
-                  id={`${id}-node-${index}-group-row`}
+                  id={`${rowId}-node-${index}-group-row`}
                   data-component="FlowDiagram"
                   className="flex items-center gap-2"
                 >
                   {node.nodes.map((inner, innerIndex) => (
                     <div
                       key={inner}
-                      id={`${id}-node-${index}-inner-${innerIndex}`}
+                      id={`${rowId}-node-${index}-inner-${innerIndex}`}
                       data-component="FlowDiagram"
                       className="flex items-center gap-2"
                     >
                       {innerIndex > 0 && (
                         <Link
-                          id={`${id}-node-${index}-inner-link-${innerIndex - 1}`}
+                          id={`${rowId}-node-${index}-inner-link-${innerIndex - 1}`}
                           kind={node.links[innerIndex - 1]}
                         />
                       )}
                       <Node
-                        id={`${id}-node-${index}-inner-${innerIndex}-label`}
+                        id={`${rowId}-node-${index}-inner-${innerIndex}-label`}
                         node={inner}
                         faint={node.faint?.includes(inner)}
                       />
@@ -334,11 +381,52 @@ export function FlowDiagram({
               </div>
             )}
 
+            {rowAside?.from === index && <Aside id={`${rowId}-aside`} node={rowAside.node} />}
           </div>
         </div>
       ))}
     </div>
   )
+
+  const row = renderRow(id, nodes, links, aside)
+
+  if (later) {
+    return (
+      <figure
+        id={id}
+        data-component="FlowDiagram"
+        role="img"
+        aria-label={t(`${id}.description`)}
+        className="not-prose my-6 flex flex-col items-center gap-2"
+      >
+        <p id={`${id}-now`} data-component="FlowDiagram" className="eyebrow text-muted-foreground">
+          {t(`${id}.now`)}
+        </p>
+        {/* The aside hangs from a plain box, which ends above the row's bottom when a project frame
+            sets the row's height, so it needs a standoff less than its own depth reserved. */}
+        <div
+          id={`${id}-now-body`}
+          data-component="FlowDiagram"
+          style={{ paddingBottom: aside ? BRANCH_DEPTH + BOX_HEIGHT - STANDOFF : 0 }}
+        >
+          {row}
+        </div>
+
+        {/* The two sessions share nothing but the file, so the rule between them is the only thing
+            they both touch, and the repeated name is what carries the finding across it. */}
+        <div
+          id={`${id}-divider`}
+          data-component="FlowDiagram"
+          className="border-border my-2 w-full max-w-sm border-t border-dashed"
+        />
+
+        <p id={`${id}-later`} data-component="FlowDiagram" className="eyebrow text-muted-foreground">
+          {t(`${id}.later`)}
+        </p>
+        {renderRow(`${id}-later`, later.nodes, later.links)}
+      </figure>
+    )
+  }
 
   if (!loop) {
     return (

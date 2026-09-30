@@ -34,7 +34,7 @@
 
   "change.you-test-engineer.heading": "Jij bent de test engineer",
   "change.you-test-engineer.1": "Elke regel lezen houdt ergens in het tweede uur diff op te werken. Wat wel blijft werken, is het geval waar jij aan dacht en de agent niet. Een boek dat twee keer terugkomt. Een inlevering met een datum vóór de ontlening. Een lid dat verdwijnt terwijl zijn overzicht wordt opgebouwd.",
-  "change.you-test-engineer.2": "Schrijf die dus op voor de implementatie bestaat. De quality gates in <a href=\"/steps/step2/engineering\">de unit over vakmanschap</a> leggen een vloer onder wat de run oplevert, en de scenario's die jij erbovenop zet, haalt niemand uit het happy path. Ze bedenken gaat traag. Dat is het deel van de dag waar traag goed is.",
+  "change.you-test-engineer.2": "Schrijf die dus op voor de implementatie bestaat. De quality gates in <a href=\"/steps/step2/gates\">de unit over gates</a> leggen een vloer onder wat de run oplevert, en de scenario's die jij erbovenop zet, haalt niemand uit het happy path. Ze bedenken gaat traag. Dat is het deel van de dag waar traag goed is.",
 
   "change.business-moves-closer.heading": "Business schuift dichterbij",
   "change.business-moves-closer.1": "Iets waar vroeger drie weken over gingen, heeft nu tegen donderdag een werkende versie. Dat helpt alleen als iemand die weet waarvoor het diende er op donderdag naar kijkt. <a href=\"/steps/step2/evolution\">Een prototype start een gesprek</a>, en dat gesprek moet het prototype bijhouden.",

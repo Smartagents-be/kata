@@ -78,6 +78,30 @@
 
 <div data-figure="flow-spec"></div>
 
+<h2 data-i18n="workflows.defer.heading">Defer</h2>
+
+<p data-i18n="workflows.defer.1">
+  Mid-task, the agent reports something outside the task: a bug it walked past, a refactor it would
+  suggest. Chase it now and your session is about two problems instead of one. Your context gets
+  polluted, and your original task gets lost.
+</p>
+
+<p data-i18n="workflows.defer.2">
+  So defer it. Tell the agent to write what it found into a markdown file, one entry per finding,
+  with where it lives and why it matters, and carry on with the task you started. A report at the
+  end of a run goes the same way: its suggestions wait in the file instead of in your head.
+</p>
+
+<p data-i18n="workflows.defer.3">
+  Pick the file up in a separate session, or next week. Triage it like any other input: drop what
+  does not hold, turn what does into a spec or a one-shot prompt, and resolve it through whichever
+  workflow above fits. Nothing got lost, and nothing got in the way.
+</p>
+
+<!-- Filled by the FlowDiagram element registered under this name in steps/step2/index.tsx. The
+     only one of the set drawn as two sessions. -->
+<div data-figure="flow-defer"></div>
+
 <h2 data-i18n="workflows.audit-driven.heading">Audit-driven</h2>
 
 <p data-i18n="workflows.audit-driven.1">
@@ -110,7 +134,7 @@
 </p>
 
 <!-- Filled by the FlowDiagram element registered under this name in steps/step2/index.tsx. The
-     fourth of the set, and the only one that closes back on itself. -->
+     fifth of the set, and the only one that closes back on itself. -->
 <div data-figure="flow-audit"></div>
 
 <h2 data-i18n="workflows.pick-per-task.heading">Pick per task</h2>
