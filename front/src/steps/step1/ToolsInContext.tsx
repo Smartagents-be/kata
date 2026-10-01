@@ -30,7 +30,7 @@ export function ToolsInContext() {
       <svg
         id="tools-in-context-svg"
         data-component="ToolsInContext"
-        viewBox="0 0 640 350"
+        viewBox="0 0 640 342"
         role="img"
         aria-labelledby={titleId}
         className="h-auto w-full max-w-xl"
@@ -200,18 +200,6 @@ export function ToolsInContext() {
             />
           ))}
         </g>
-
-        <text
-          id="tools-in-context-caption"
-          data-component="ToolsInContext"
-          x="320"
-          y="338"
-          fontSize="15"
-          textAnchor="middle"
-          className="fill-muted-foreground"
-        >
-          {t('tools-in-context.caption')}
-        </text>
       </svg>
     </figure>
   )

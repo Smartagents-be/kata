@@ -21,11 +21,13 @@ and the `README.md` they both name is the same file either way.
 
 **`welcome`'s lead points at `install.txt`**, the second paragraph on the first page a student reads,
 because a student who opens the course in the browser never sees the README that says the same
-thing. It says to ask the agent to execute it, what it does, and that the file states its own changes
-at the top; it names no step, no board and nothing the script plants, and it must not start, because
-the disclosure and the undo command live in `install.txt` and naming what it writes ends step 1's
-first row. The lead runs long now: intro, install, prerequisites, then the last page's own check.
-Cutting it means merging the prerequisites into the install paragraph, not dropping the pointer.
+thing. It says to ask the agent to execute it and what it does, and nothing more: it no longer points
+at the disclosure at the top of the file, by the author's choice, so that disclosure is reached by
+opening `install.txt` and not from here. It names no step, no board and nothing the script plants,
+and it must not start, because the disclosure and the undo command live in `install.txt` and naming
+what it writes ends step 1's first row. The lead is intro, install, prerequisites; the paragraph that
+announced the last page's check is gone, and the `{ready}` row on that page still does the checking.
+Cutting further means merging the prerequisites into the install paragraph, not dropping the pointer.
 
 Step 0's `welcome` is where the student is told to set it, and **the telling is the
 `set-your-assistant` task card rather than a paragraph**. `assistant.pick.label` is the whole of it:

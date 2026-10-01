@@ -5,7 +5,7 @@
      checkable: the layer that dwarfs the prompt is five pages away otherwise. -->
 <p data-i18n="prompt.lead.1">
   Everything you send the agent is a prompt. Of everything a model is handed it is usually the
-  smallest, and <a href="/steps/step1/session">the session</a> is what dwarfs it. It is also the most
+  smallest, and <a href="/steps/step1/session">the session</a> dwarfs it. It is also the most
   valuable, because it is the one part carrying your <strong>intent</strong>.
 </p>
 
@@ -16,16 +16,15 @@
 
 <p data-i18n="prompt.lead.2">
   You rarely send just one. Some prompts are fresh queries you type. Others come back
-  after the agent interviews you <svg data-icon="pattern"></svg> about the task. Everything a user puts in can be
-  considered a prompt.
+  after the agent interviews you <svg data-icon="pattern"></svg> about the task.
 </p>
 
 <h2 data-i18n="prompt.instruction.heading">Instruction</h2>
 
 <p data-i18n="prompt.instruction.1">
-  A prompt is an instruction, and it cascades. So make sure your prompt actually says what you want
-  the model to do. Any inaccuracy in it only compounds from there, and putting one right once the
-  agent is already working is <a href="/steps/step2/steering">steering</a>, which comes later.
+  A prompt is an instruction, so say what you want the model to do. Every inaccuracy in it
+  compounds once the agent starts work. Putting one right while it is already working is
+  <a href="/steps/step2/steering">steering</a>, which comes later.
 </p>
 
 <!-- The reasoning level is a section of its own because `model.reasoning-level.1` links here by
@@ -36,7 +35,8 @@
 
 <p data-i18n="prompt.reasoning-level.1">
   A prompt is seldom enough on its own to carry everything you meant by it. Models work the question
-  over before they answer, and that working over is the <strong>reasoning level</strong>. In Claude
+  over before they answer, and how much of that they do is the
+  <strong>reasoning level</strong>. In Claude
   Code it runs from low up to xhigh. Turn it up and the model reflects on your question rather than
   answering it straight <svg data-icon="pattern"></svg> That absorbs some of the imprecision and the
   missing information, so what comes back is closer to what you actually meant.
@@ -45,8 +45,7 @@
 <p data-i18n="prompt.reasoning-level.2">
   The higher the reasoning, the more tokens the model spends thinking. Those tokens stay in the
   context and add to the cost <svg data-icon="coin"></svg> The dial is a command in your harness
-  rather than a line in your prompt, so you can move it per task. Weigh when you need more reasoning,
-  and when you need less.
+  rather than a line in your prompt, so you can move it per task. Turn it up for a vague ask, and down for one you have already made exact.
 </p>
 
 <!-- The two quantities the paragraph above asks the reader to weigh, drawn against each other. The
@@ -57,7 +56,7 @@
 <div data-figure="reasoning-cost"></div>
 
 <p data-i18n="prompt.reasoning-level.3">
-  That thinking is not only about your question. It also covers the agent's own moves, which file to
+  That thinking also covers the agent's own moves:, which file to
   open next and what to hand itself as input for the step after that.
 </p>
 
@@ -71,8 +70,7 @@
 <p data-i18n="prompt.meta-prompting.2">
   Spend an expensive model on this. Writing a prompt is a few hundred tokens next to executing one,
   so the top tier is cheap here <svg data-icon="gem"></svg> <svg data-icon="coin"></svg> Which tiers
-  there are, and what they cost, is <a href="/steps/step1/model">the unit on the model</a>. Running
-  the task is where the money goes.
+  there are, and what they cost, is <a href="/steps/step1/model">the unit on the model</a>.
 </p>
 
 <h2 data-i18n="prompt.plan-mode.heading">Plan mode</h2>
@@ -85,8 +83,8 @@
 
 <p data-i18n="prompt.plan-mode.2">
   A cheaper model driven through a plan routinely beats a one-shot on the expensive one. Most
-  people have that the other way round. The plan turned a vague ask into an exact instruction, and
-  precision was the missing ingredient all along, not model size.
+  people have that the other way round. The plan turned a vague ask into an exact instruction. What
+  was missing was precision, not a bigger model.
 </p>
 
 <!-- The boundary on the section, and it closes the prose rather than opening it: the payoff above has
@@ -98,18 +96,14 @@
   to approve. Ask for it straight instead <svg data-icon="coin"></svg>.
 </p>
 
-<p data-audience="guided" data-i18n="prompt.plan-mode.4">
-  Your teacher runs a task through plan mode at the board, so you see the interview and the plan
-  before anything is executed.
-</p>
 
-<h2 data-i18n="prompt.bundling.heading">Bundling</h2>
+<h2 data-i18n="prompt.one-ask.heading">One ask, not three</h2>
 
 <!-- The mechanism without the name: `context` owns the word *entropy*, with an anchor, a heading, a
      deck slide and a quiz question on it, and naming it here spends the term two units early. -->
-<p data-i18n="prompt.bundling.2">
-  Bundle what you want within one part of the application <svg data-icon="gem"></svg> <svg data-icon="coin"></svg> Every follow-up is another turn, and every turn adds noise the
-  next turn has to read past. It compounds. Three separate questions leave the window messier than
+<p data-i18n="prompt.one-ask.2">
+  Ask for everything you want from one part of the application at once <svg data-icon="gem"></svg> <svg data-icon="coin"></svg> Every follow-up is another turn, and every turn adds noise the
+  next turn has to read past. Three separate questions leave the window messier than
   one question covering all three.
 </p>
 
@@ -120,9 +114,9 @@
 <h2 data-i18n="prompt.be-exact.heading">Be exact</h2>
 
 <p data-i18n="prompt.be-exact.1">
-  Be exact about what changes. "Fix the login" and "make <code>TitleController</code> return a 404
-  when the catalogue comes back empty" go to the same model. One is specific and lets the model
-  focus. The other makes the model guess.
+  "Fix the login" and "make <code>TitleController</code> return a 404 when the catalogue comes back
+  empty" go to the same model. The second names the class and the case. The first leaves the model
+  to guess both.
 </p>
 
 <!-- One form with two fields both labelled Name, the source that tells them apart, and the same

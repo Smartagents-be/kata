@@ -311,7 +311,7 @@ a tick that vanished on the next navigation would read as broken progress. And *
 on purpose, since a file that names them does the analysis for the student. Do not add a worked cut,
 a `solve.md`, a `plan-solve.md`, or an implementation.
 
-`context.model-statistic.4` closes that unit's statistic section and is `OneShotCompare`'s payoff turned on the
+`context.without-context.4` closes that unit's section on the average and is `OneShotCompare`'s payoff turned on the
 student's own repository: the codebase is the reference image they hand over every turn, so a
 project that drifted is the drift being copied rather than worked around. It reads the figure from
 the other side, which is why it sits under it rather than opening a section of its own, and it is
@@ -442,19 +442,21 @@ prose above the card.
 unit. **`Reasoning level` is a heading rather than a paragraph inside `Instruction`** because
 `model.reasoning-level.1` links here by name, and a student following that link has to land on a
 heading that matches it; `Instruction` keeps one paragraph, on the cascade, and the term still
-arrives last. **`Bundling` and `Be exact` replaced `What you steer after that`**, whose "that"
-pointed at plan mode rather than at its own subject, and the split is what puts each figure under
-the sentence that earns it. **`Bundling` no longer opens on `/clear`**, and the removal is the
-decision: the paragraph told a student to clear when they change subject, which is `session`'s to
-teach (it owns the seam, the loss and `SurviveTheClear`), and a section that argued both bundling
-and clearing was carrying the two jobs it warns about. `bundling.2` opens it now, so the section
-argues one thing, that a window should hold one job, and the figure under it draws that. The key
-numbering keeps its gap rather than shifting `.2` down, the way `session.window-not-memory` and
-`change.environment-beats-project` do: a key is a location, and renumbering moves a paragraph that
-did not move.
+arrives last. **`One ask, not three` and `Be exact` replaced `What you steer after that`**, whose
+"that" pointed at plan mode rather than at its own subject, and the split is what puts each figure
+under the sentence that earns it. The first was headed `Bundling` until the gerund went, which moved
+its keys from `prompt.bundling.*` to `prompt.one-ask.*` in the HTML and in `nl.json`; the practice is
+still called bundling everywhere else, `recap` included. **That section no longer opens on
+`/clear`**, and the removal is the decision: the paragraph told a student to clear when they change
+subject, which is `session`'s to teach (it owns the seam, the loss and `SurviveTheClear`), and a
+section that argued both bundling and clearing was carrying the two jobs it warns about.
+`one-ask.2` opens it now, so the section argues one thing, that a window should hold one job, and
+the figure under it draws that. The key numbering keeps its gap rather than shifting `.2` down, the
+way `session.window-not-memory` and `change.environment-beats-project` do: a key is a location, and
+renumbering moves a paragraph that did not move.
 
 Four things in it are boundaries with other units. **The word *entropy* is not used here**:
-`context` owns it, with an anchor, a heading, a deck slide and a quiz question, so `bundling.2`
+`context` owns it, with an anchor, a heading, a deck slide and a quiz question, so `one-ask.2`
 states the mechanism and stops. **Tiers are `model`'s**, so `meta-prompting.2` names the expensive
 model and points at that unit rather than pricing it. And **the reasoning level's scale is Claude
 Code's**, named in a scoped clause (`low` up to `xhigh`, its `/effort` command, verified August
@@ -718,9 +720,9 @@ the decision.** Tiers
 outlive releases, so the unit teaches Opus, Sonnet and Haiku as dispositions; a card naming this
 quarter's release is wrong by the next one. **The lead no longer says that out loud**: the paragraph
 naming the three tiers and telling the student the names change and the shape does not was cut, so
-the figure now opens the unit and the only thing dating it is the small `(July 2026)` line moved
+the figure now opens the unit and the only thing dating it is the small `(October 2026)` line moved
 under it. What survives of the claim is `model.cost.3`, which says the ratios outlast the prices, and
-that is now the only place it is made. Price and speed follow from that: they are ratios (roughly one, three and five per token,
+that is now the only place it is made. Price and speed follow from that: they are ratios (roughly one, two and four per token,
 output about five times input, the small tier two to three times faster) rather than figures, and
 the prose says the ratios outlast the numbers. Do not put a price list or a version back in.
 Two boundaries with units either side of it hold the unit up. `prompt` owns the **reasoning level**
@@ -742,7 +744,7 @@ redefining it, the same rule `harness.coordinator.3` follows. It adds two things
 the tier choice is one of the things that pattern automates, and **why the expensive model is good
 at writing the brief, namely that providers fine-tune the smaller tiers on output from the larger
 ones**, so it is writing for something trained on its own answers. It closes by **naming the saving
-in this unit's own ratio** (the gap priced above, five against one) rather than in `harness`'s words:
+in this unit's own ratio** (the gap priced above, four against one) rather than in `harness`'s words:
 it carried "top rate for deciding, a fraction of it for doing" near-verbatim from
 `harness.coordinator.1`, and a back-pointer that repeats the sentence it points at is the pointer
 failing. Do not let that phrasing come back. The paragraph that used to sit
@@ -758,7 +760,7 @@ a currency**, which is why it exists: the cost goal was argued everywhere and de
 It is also the one thing in the unit that names versions, and that is a knowing exception rather than
 drift. `ModelTiers` beside it stays version-free on the reasoning its own component comment gives
 (tier names outlive releases), so the table is placed to be read as *evidence for a claim* and never
-as a reference: it sits under the paragraph stating the one-three-five ratio, and the paragraphs
+as a reference: it sits under the paragraph stating the one-two-four ratio, and the paragraphs
 after it sort the rows, say the ratios outlive the numbers, and close on `cost.4` putting the
 student's own count against them. Keep that order. Moved anywhere else it becomes a price list,
 which is exactly what the paragraph under it tells the student not to learn.
@@ -767,7 +769,7 @@ which is exactly what the paragraph under it tells the student not to learn.
 `ModelTiers`, this table and `PickTheTier`'s column. The cards ran most-expensive-first until they
 were flipped to match, which had the unit sorting one scale in two directions twelve lines apart
 while each component's comment defended its own. The direction is the table's because the prose reads
-in it: `model.cost.1` calls the small one a unit and counts up to three and five, and `model.speed.1`
+in it: `model.cost.1` calls the small one a unit and counts up to two and four, and `model.speed.1`
 opens on the small tier and closes on the top being slowest. So reordering any one of the three means
 reordering all three, and reversing them means rewriting both of those paragraphs first.
 
@@ -777,22 +779,29 @@ named rather than hidden. `model.cost.2` is that naming, and three things about 
 It sits **after** the figure, because the row is the surprise and a warning ahead of the table spends
 it early. It sorts and stops: what the frontier tier is good at is not taught here, since this step
 is about the window rather than about the family. And it calls the row a ceiling rather than a fourth
-tier, which is what keeps `ModelTiers` at three cards, `model.cost.1` at one-three-five, `model.speed.1`
+tier, which is what keeps `ModelTiers` at three cards, `model.cost.1` at one-two-four, `model.speed.1`
 at "the slowest of the three" and `PickTheTier` at three targets. Promoting it to a tier means
 visiting all four.
 Four claims the prose already makes can be checked against it by eye, and a row edited without them
-in mind breaks the unit: the small tier as one unit against three and five, output at five times
-input in every row, and a cache read at a tenth of input, which is the figure `harness`'s caching
-section gives. Prices and model names have no `nl` entry, like every other machine-shaped string
+in mind breaks the unit: the small tier as one unit against two and four, output at five times
+input in every row, and a cache read at a tenth of input or less, which is what `harness`'s caching
+section says (`harness.caching.1` read "roughly a tenth" until the top two tiers started reading
+their cache at a twentieth and a fortieth).
+
+**The ratio was one-three-five until October 2026, and it moved because the prices did.** Opus 5.5
+came in at $4 and Sonnet 5.5 at $2, so the table, `model.cost.1`, `model.let-it-pick.1`, `recap`'s
+tier bullet and the deck's two pricing slides were all rewritten together. The next re-read of the
+pricing page has to visit the same five, and `harness.caching.1`, in both languages. The speed claim
+("two to three times faster") could not be re-checked against anything published, since the docs
+rank latency without numbers, so it was left alone. Prices and model names have no `nl` entry, like every other machine-shaped string
 here; only the unit label, the column heads and the caption translate. The unit (`$ per million
 tokens`) sits **above** the table rather than only in the caption, and outside the scrolling box, so
 a reader who scans straight to the numbers knows what they count and the label does not slide away
 when the table is dragged sideways on a phone. It is said once: the caption underneath carries the
-month and nothing else. Sonnet is listed at its **standing** rate rather than the introductory one
-running until 1 September 2026, because the intro price breaks the ratio the prose teaches. The
-caption does not mention that, and the omission is the decision: the figure argues the shape of the
-pricing, and a footnote about one row's temporary rate is exactly the price-list reading the
-paragraph beneath it warns against. What the caption does carry is the month the prices were read,
+month and nothing else. A row is always the **standing** rate and never an introductory one, and the
+caption does not footnote a temporary price: the figure argues the shape of the pricing, and a
+footnote about one row's temporary rate is exactly the price-list reading the paragraph beneath it
+warns against. What the caption does carry is the month the prices were read,
 which is the thing that makes the table's staleness visible; a rewrite that drops it leaves the
 figure ageing silently.
 
@@ -1015,11 +1024,10 @@ a number the student adds up off the rows rather than one the panel hands back; 
 still prints what they spent against what it would have taken, because that comparison is the whole
 correction. Both mark a wrong pick in `--destructive` and the answer the student missed in teal, because
 red here would read as the result having failed rather than the answer. Both shuffle once per mount
-through `shared/lib/shuffle.ts`, which `PatternMatch` also uses now. **Both verdicts take
-`PanelNote`'s `rule={false}`**, which is where that option came from: the rows above have just been
-marked in the same two colours, so a coloured bar down the side of the sentence explaining them was
-the verdict said twice. A note that stands on its own keeps its rule, so `FlagRow`, the two boards
-and `ConnectBoard` are untouched.
+through `shared/lib/shuffle.ts`, which `PatternMatch` also uses now. Both verdicts are a plain
+`PanelNote`, and so is every other note in the course now: they took a `rule={false}` once, because a
+coloured bar down the side of a sentence explaining rows marked in the same two colours was the
+verdict said twice, and the bar has since gone from `PanelNote` altogether.
 
 Machine output inside an exercise stays English in every language: `SpotInjection`'s four result
 bodies and sources and `BudgetWindow`'s six commands have no `nl` entry, on purpose, the same way
@@ -1113,13 +1121,17 @@ there is more bad code on the internet than good. What `context` never says is t
 *date*, and the cutoff is that gap filled. `contextQuiz`'s `invented-userservice` question is the
 one place the two genuinely meet: it is this unit's scenario asked four units early, and it never
 names the term. Leave it where it is. A quiz sitting on the page that owns the word would be graded
-before the word had been given. `truth.hallucinations.1` closes by naming that quiz as the place the
-student already diagnosed the case, so the early ask is a paid-off callback rather than a silent
-duplicate, and rewording either side means visiting the other, in both languages. **`tools` owns how evidence gets into the window**, so
+before the word had been given. `truth.hallucinations.1` names that quiz early on as the place the
+student already met the case, so the early ask is a paid-off callback rather than a silent
+duplicate, and it sits ahead of the `Catalog` example rather than after the term, so the paragraph
+still closes on the word arriving, and rewording either side means visiting the other, in both languages. **`tools` owns how evidence gets into the window**, so
 `truth.lead.2` and `truth.grounding.2` each link to it in half a sentence rather than describing a
 fetch; `tools` also owns
 "a tool result is the least trustworthy layer", which is why grounding here stops at *reading rather
-than remembering* and does not grow a paragraph about the source being stale. And **step 0's `welcome.house-rules.4`, with
+than remembering* and does not grow a paragraph about the source being stale.
+`truth.grounding.3` is the one move it adds for facts outside the project: ask the agent to search for
+the vendor's own documentation and read it before answering. It was added at the author's asking, and
+it names the move and stops, since how the page gets fetched is `tools`'s to say. And **step 0's `welcome.house-rules.4`, with
 `flag.decode.help` behind the workshop board's Hint, is this unit's proof section applied**: both
 tell the student to make the agent run the decode rather than reason about it, in the words of that
 exercise. The general rule belongs
@@ -1635,7 +1647,7 @@ that used to list those seven groups is gone with the rest of the section's pros
 and `CutItUp` are untouched. Compaction is automatic in both, from about 80% in Copilot CLI, so
 `session`'s compaction argument holds as written. And `ModelTiers`, `ModelPricing` and
 `PickTheTier` stay exactly as they are: the tiers are taught as dispositions, Copilot's own picker
-offers Claude models among others, and the table is evidence for the one-three-five ratio rather
+offers Claude models among others, and the table is evidence for the one-two-four ratio rather
 than a price list. What a Copilot reader needs instead is in `model.api-vs-subscription.3`, and it
 **names no numbers and carries no currency**, for the same reason the rest of that section does not:
 the one table in the course with a currency is a few inches up the page, and a second set of figures

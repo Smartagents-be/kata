@@ -19,15 +19,13 @@
   wherever the agent is working. Write what the project is about, what it is not about,
   and the ideas behind it.
   Conventions for the frontend go in the folder that holds it <span data-marker>2</span>, and the
-  backend's in its own <span data-marker>3</span>, because each of these files is scoped. It only
-  joins the context once the agent goes in there.
+  backend's in its own <span data-marker>3</span>, because a nested one only joins the context once the agent goes into its folder.
 </p>
 
 <p data-i18n="setup.claude-md.2">
-  So keep each of them lean, and scoped to what it covers. Less entropy, less context fatigue, and a
-  smaller bill on every turn <svg data-icon="coin"></svg> A line earns its place when it changes
-  what the agent writes and cannot be read off the code in a moment. The file is a briefing, not
-  documentation.
+  So keep each of them lean, and scoped to what it covers. Less entropy and a smaller bill on every
+  turn <svg data-icon="coin"></svg> A line earns its place when it changes what the agent writes
+  and cannot be read off the code in a moment. The file is a briefing, not documentation.
 </p>
 
 <h2 data-i18n="setup.your-own-claude-md.heading">Your own CLAUDE.md</h2>
@@ -62,8 +60,7 @@
 
 <pre><code>---
 name: add-endpoint
-description: Add a REST endpoint to a step's Spring project the way the existing ones
-  are built - a controller under web/, a record for the response body, and the /api
+description: Add a REST endpoint to a step's Spring project the way the existing ones are built: a controller under web/, a record for the response body, and the /api
   prefix the Vite proxy expects. Use whenever you add a route, a response shape, or a
   controller to kata/stepN/java.
 ---</code></pre>
@@ -119,7 +116,7 @@ description: Add a REST endpoint to a step's Spring project the way the existing
 }</code></pre>
 
 <p data-i18n="setup.hooks.3">
-  So reach for one when the thing must happen every time and you would rather not find out that it
+  So reach for one when a step must happen every time and you would rather not find out that it
   did not. Then keep it fast and keep it narrow. That script runs on every Write and every Edit, and
   a broken one hands the agent an error it did not cause. The agent works around that instead of
   writing your code. When the thing that keeps coming back is a correction rather than a command,
@@ -134,6 +131,6 @@ description: Add a REST endpoint to a step's Spring project the way the existing
   Step 2 ships a Java project you have not opened, at <code>kata/step2/java</code>. Three flags are
   hidden in it, in plain text and wrapped in <code>{curly braces}</code>, in the small number of
   files a project uses to tell an agent how to work. They are the kinds of file this unit just
-  named, and each flag sits in the file it is about, so you collect them by opening that project and
+  named, and each flag sits in the file it is about. You collect them by opening that project and
   reading how somebody set it up before you got there.
 </p>

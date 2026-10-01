@@ -107,7 +107,7 @@ export function SpotInjection() {
       </ul>
 
       {checked && (
-        <PanelNote id="spot-injection-verdict" tone={right ? 'success' : 'destructive'} rule={false}>
+        <PanelNote id="spot-injection-verdict" tone={right ? 'success' : 'destructive'}>
           <span id="spot-injection-verdict-line" data-component="SpotInjection" className="block">
             {text(right ? 'spot.right' : 'spot.wrong')}
           </span>

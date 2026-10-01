@@ -1,6 +1,6 @@
 <p data-i18n="engineering.lead.1">
   Good agentic projects start with good software engineering. That is the whole line between vibe
-  coding and agentic engineering, and you are on one side of it or the other.
+  coding and agentic engineering.
 </p>
 
 <p data-i18n="engineering.lead.2">
@@ -19,19 +19,18 @@
 <h2 data-i18n="engineering.domain-driven-design.heading">Domain-driven design</h2>
 
 <p data-i18n="engineering.domain-driven-design.1">
-  Folders and classes carry the names the business uses. <code>Headline</code> is a headline,
-  <code>article/</code> is where articles live, and the word you would say in a meeting is the word
-  in the tree. Ask for a feature on articles and your sentence has already named the files
-  <svg data-icon="gem"></svg>
+  Folders and classes carry the names the business uses. <code>Headline</code> is a headline and
+  <code>article/</code> is where articles live. Ask for a feature on articles and your sentence has
+  already named the files <svg data-icon="gem"></svg>
 </p>
 
 <div data-figure="words-to-files"></div>
 
 <p data-i18n="engineering.domain-driven-design.2">
   That is a bigger lever with an agent than it ever was with a team. A model reads your repository
-  as tokens and predicts what comes next, and plain English is what it predicts best, which is what
-  <a href="/steps/step1/tokens">step 1's unit on tokens</a> showed. The names in your tree are half
-  of every prompt you write against it.
+  as tokens and predicts what comes next. <a href="/steps/step1/tokens">Step 1's unit on tokens</a>
+  showed it predicts plain English best. The names in your tree are half of every prompt you write
+  against it.
 </p>
 
 <h2 data-i18n="engineering.hexagonal-architecture.heading">Hexagonal architecture</h2>
@@ -45,10 +44,9 @@
 <div data-figure="domain-tree"></div>
 
 <p data-i18n="engineering.hexagonal-architecture.2">
-  What that buys you with an agent is the lookup. A shape it can navigate is a shape it does not
-  have to search, so it opens <code>application/</code> for a use case and
-  <code>adapter/outgoing/</code> for the thing that talks to S3, instead of reading half your
-  repository into the window to find out <svg data-icon="coin"></svg>.
+  What that saves with an agent is the search. It opens <code>application/</code> for a use case
+  and <code>adapter/outgoing/</code> for the thing that talks to S3, instead of reading half your
+  repository into the window first <svg data-icon="coin"></svg>.
 </p>
 
 <div data-figure="hexagon-ports"></div>
@@ -58,10 +56,8 @@
 <p data-i18n="engineering.right-words.1">
   Name the thing you want. "Put a repository in front of this JDBC call" lands somewhere specific.
   "Clean this up a bit" lands in the statistical middle of every cleanup ever written. Design
-  pattern names, layer names and the vocabulary of your domain are compression. They carry the
-  <strong>correct</strong> intent, so the agent works from yours instead of from its own reading of
-  what you meant <svg data-icon="gem"></svg> That is also what separates an app built in half a day
-  from one you can put in production.
+  pattern names, layer names and the vocabulary of your domain are compression. The agent has less to guess <svg data-icon="gem"></svg> That is
+  also what separates an app built in half a day from one you can put in production.
 </p>
 
 <!-- The doing part of the unit, under the same rule and heading the rest of the course puts over

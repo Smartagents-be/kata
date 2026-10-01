@@ -1,5 +1,5 @@
 <p data-i18n="workshop.lead.1">
-  You do not write the code on this page. Not the tests, not the refactor, not the missing method,
+  In this workshop you write none of the code. Not the tests, not the refactor, not the missing method,
   not the native build. You set the project up, you say what has to be true, and you read what came
   back. Everything else is the agent's.
 </p>
@@ -7,8 +7,8 @@
 <p data-i18n="workshop.lead.2">
   Point your agent at <code>kata/step2/java</code>: a library loans domain, ports and adapters, with a
   late-fee rule in the middle of it. It compiles, and the one test it ships with passes, so the
-  default build is green. It is also exactly the kind of code a quality gate exists for. One method
-  too branchy to read, and almost nothing behind it.
+  default build is green. That makes it exactly the kind of code a quality gate exists for: one method too branchy to read, and
+  almost no tests behind it.
 </p>
 
 <p data-i18n="workshop.lead.3">
@@ -47,8 +47,7 @@ mvn verify -Pgraded</code></pre>
 <h2 data-i18n="workshop.goal.heading">One goal, three flags</h2>
 
 <p data-i18n="workshop.goal.1">
-  Hand the module over as an outcome with the check in it: one sentence, no list of tests and no
-  refactor plan. Then leave it alone, the way <a href="/steps/step2/goals">the goals unit</a>
+  Hand the module over as an outcome with the check in it: one goal, no list of tests and no refactor plan. Then leave it alone, the way <a href="/steps/step2/goals">the goals unit</a>
   describes. This module is small, so the wait is minutes rather than the afternoon that unit priced.
   The sentence you hand over is the same sentence at any size.
 </p>
@@ -64,17 +63,16 @@ mvn verify -Pgraded</code></pre>
 
 <p data-i18n="workshop.goal.3">
   One of the three does not move when you add tests. When the other two are green and that number is
-  still short, stop writing tests and read what the row is measuring.
+  still short, stop asking for tests and read what the row is measuring.
 </p>
 
 <h2 data-i18n="workshop.two-jobs.heading">Two jobs, neither waits</h2>
 
 <p data-i18n="workshop.two-jobs.1">
-  The last two flags are independent, so run them at once. They cannot share a folder, because two
-  Maven builds in one <code>target/</code> fight over it, so give each its own worktree. The two
-  <code>git</code> lines are the exception to the rule above; they run from the repository root, and
-  each job gets its own terminal opened at that root. Both come back while you are still reading the
-  first one.
+  The last two flags are independent, so run them at once. Give each one its own worktree. Two
+  Maven builds in one <code>target/</code> fight over it. The two <code>git</code> lines are the
+  exception to the rule above: run them from the repository root, and open a terminal there for each
+  job. The second comes back while you are still reading the first.
 </p>
 
 <pre><code>cd ../../..
@@ -95,10 +93,9 @@ curl localhost:8080/api/loans/statement/STUDENT</code></pre>
 
 <p data-i18n="workshop.two-jobs.3">
   In the second, nothing is failing, because nothing has been built. Compile step 2 all the way down
-  to a native executable. That needs a GraalVM JDK on your <code>PATH</code>. Each attempt costs
-  minutes, which makes it the worst place in this kata to guess, so plan it first. It compiles, it
-  starts, and where the flag should be it prints a miss. Your plan was a piece short, and the image
-  is the thing that tells you which piece.
+  to a native executable. You need a GraalVM JDK on your <code>PATH</code> for it. Each attempt costs minutes, which makes this
+  the worst place in the kata to guess, so plan it first. It compiles, it
+  starts, and where the flag should be it prints a miss. Your plan was a piece short, and the image tells you which piece.
 </p>
 
 <pre><code>cd ../kata-native/kata/step2/java
@@ -136,6 +133,7 @@ SERVER_PORT=8081 ./target/kata-agentic-java-step2</code></pre>
 <div data-figure="debrief"></div>
 
 <p data-i18n="workshop.debrief.2">
-  That is the step. What is left is not about the agent at all: what changes around the work when
-  this is how the work gets done. <a href="/steps/step3/change">Step 3</a> is that.
+  That is the step. What is left has nothing to do with the agent.
+  <a href="/steps/step3/change">Step 3</a> is about what changes around the work when this is how the
+  work gets done.
 </p>

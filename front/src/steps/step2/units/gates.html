@@ -11,7 +11,7 @@
 <p data-i18n="gates.lead.2">
   The third row is one run with no handoffs, and a person still decides four times: the intent, the
   spec, the change and the release. Everything between those four is machine work, and it only stays
-  that way if a machine checks it too. Nobody reviews by hand the volume an agent produces. The gates
+  that way if a machine checks it too. Nobody reviews the volume an agent produces by hand. The gates
   take the volume. You judge the decisions.
 </p>
 
@@ -21,7 +21,7 @@
   Static analysis in Sonar, a line coverage floor, a mutation score: that is how software has
   always been given a quality label, and how drift and regression were caught before a release. The
   same gates go around an agent's work, and investing in them is still investing in how fast you
-  ship. They also hand it an invariant, something fixed to hold itself to while it works
+  ship. They also give it something fixed to hold itself to while it works, an invariant
   <svg data-icon="gem"></svg> Each of them is a proxy, though, and an agent will satisfy a proxy
   rather than the thing behind it. The gate worth wiring in is the one that is expensive to fake.
 </p>
@@ -47,8 +47,7 @@
 <p data-i18n="gates.blast-radius.2">
   So put gates between the agent and whatever you cannot take back. It works on its own branch, in
   its own worktree, and nothing reaches <code>main</code> without the build and your review. Inside
-  that boundary it can try things, break them and throw them away <svg data-icon="gem"></svg> Outside
-  it, a bad run costs you a branch. Not a release.
+  that boundary it can try things, break them and throw them away <svg data-icon="gem"></svg> At worst, a bad run costs you a branch. Not a release.
 </p>
 
 <h2 data-i18n="gates.fast-enough.heading">Fast enough to answer</h2>
@@ -72,7 +71,7 @@
   lower a threshold. Time the build after each change you make.</code></pre>
 
 <p data-i18n="gates.fast-enough.3">
-  The edges are what stop it winning the cheap way, because deleting the slow tests is faster too.
+  The constraints are what stop it winning the cheap way, because deleting the slow tests is faster too.
   <a href="/steps/step2/goals">The unit on goals</a> is where that shape is argued.
 </p>
 
@@ -82,9 +81,9 @@
 <div data-figure="gate-reach"></div>
 
 <p data-i18n="gates.fast-enough.4">
-  None of that is about the agent being careful. A gate is the side of the line from
-  <a href="/steps/step2/engineering">the craft unit</a> that you stand on, written down where the
-  work happens. What is left is the part you cannot write down in advance, which is what
+  None of that is about the agent being careful. A gate is your side of the line from
+  <a href="/steps/step2/engineering">the craft unit</a>, written down where the work happens. What
+  is left is the part you cannot write down in advance, which is what
   <a href="/steps/step2/steering">steering</a> is about.
 </p>
 

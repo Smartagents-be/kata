@@ -15,8 +15,8 @@ import { TaskCard } from '@/shared/components/TaskCard'
  * wrong thing. The `write` move is the one that carries the lesson: everything before it is setup.
  *
  * The `pick` move names the three options rather than repeating them, and no move touches what each
- * option's second sentence leaves out. That sentence is what makes each one a skeleton rather than
- * a small feature, so the card points back at it instead of copying it.
+ * option leaves out. Each option ends on that list, which is what makes it a skeleton rather than a
+ * small feature, so the card points back at it instead of copying it.
  */
 const MOVES = ['clock', 'pick', 'shape', 'loop', 'write'] as const
 

@@ -66,11 +66,11 @@ export function BudgetWindow() {
       className="my-8"
       contentClassName="flex flex-col gap-5"
     >
-      {/* The brief the six calls are weighed against, in the left-rule shape every note here takes. */}
+      {/* The brief the six calls are weighed against, in the tinted shape every note here takes. */}
       <p
         id="budget-window-task"
         data-component="BudgetWindow"
-        className="border-primary bg-primary/5 max-w-[56ch] rounded-r-lg border-l-2 py-1.5 pr-3 pl-3.5 text-sm leading-relaxed"
+        className="bg-primary/5 max-w-[56ch] rounded-lg px-3 py-1.5 text-sm leading-relaxed"
       >
         {text('budget.task')}
       </p>
@@ -132,7 +132,7 @@ export function BudgetWindow() {
       </p>
 
       {checked && (
-        <PanelNote id="budget-window-verdict" tone={right ? 'success' : 'destructive'} rule={false}>
+        <PanelNote id="budget-window-verdict" tone={right ? 'success' : 'destructive'}>
           <span id="budget-window-verdict-line" data-component="BudgetWindow" className="block">
             {t(right ? 'budget.right' : 'budget.wrong', { picked: total, ideal: IDEAL })}
           </span>

@@ -185,7 +185,7 @@ else holds a colour: components name tokens, so a change to the palette is a cha
   while, on the argument that a unit should be bookended by the surface it opened on, and it came
   back off: a near-black cell at the foot of a white page reads as a hole rather than as the way on.
   Anything else reaching for this token is asking for `--primary`. A finished
-  unit's self-learning note is a teal left-rule callout (`aside[data-audience="self"]`); every other
+  unit's self-learning note is a teal-tinted aside inside a teal hairline (`aside[data-audience="self"]`), with no stripe down its side, since a thick rule on a rounded box is the stock callout of generated UI; every other
   aside is a muted panel, whether it is a teacher note or carries no audience at all, so an aside
   meant for everybody needs no attribute and still reads as an aside. One aside is louder than that:
   `aside[data-variant="warning"]` is the hazard shape, an amber panel with a triangle in the gutter,

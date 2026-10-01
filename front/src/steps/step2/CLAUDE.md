@@ -61,8 +61,9 @@ Its prose closes by handing off to `setup` by name, so a reordering there has to
 paragraph. Below that prose sits the step's only *ungraded* exercise, under the same `<hr>`
 and "Test yourself" heading step 1's `tools` uses: fifteen minutes on the clock, one of three
 skeletons, and nothing graded. The constraint is the clock and the answer is the list of details the
-student did not get to, so do not add a checker, and keep each example's second sentence naming what
-is left out. That sentence is what makes it a skeleton rather than a small feature.
+student did not get to, so do not add a checker, and keep each example ending on what
+is left out, since `fifteen-minutes.2` tells the student to read it there. That ending is what makes
+it a skeleton rather than a small feature.
 Two things about it are decisions. It uses "vibecode" approvingly for a throwaway prototype while
 `engineering` argues flatly against vibe coding, and that is not a contradiction to tidy up: the
 first version you intend to delete is the one place the argument does not apply. **Neither unit says
@@ -99,7 +100,7 @@ Its other two figures are evidence rather than drawings, and they are a pair: th
 skeleton it started as (the FizzBuzz warm-up on system fonts, one step in the sidebar) and the same
 site with the details in (the header, the palette, the grouped steps, the settings). They replaced
 prose that claimed the same thing, first the origin story in `walking-skeleton` (`GET /api/titles`
-and a page listing titles) and then the whole of what is now `details`, and that swap is the
+and a page listing titles) and then the whole of what is now `detail-work`, and that swap is the
 decision: the unit argues you get the shape working before you polish it, and two shots of this
 repository doing exactly that carry it better than a sentence asserting it. The paragraphs beside
 them read the pictures, so a replacement image has to keep what they point at, namely the sidebar
@@ -111,7 +112,7 @@ the BEM block and the i18n prefix, plus the `namespace` its two keys live in, si
 imports a step. A third shot is a file in `front/public/`, a slot in the HTML, and two keys per
 language. The images are served flat the way step 1's comparison shots are.
 
-The `details` section is the one place in the step where a habit is stated as a number: a detail
+The `detail-work` section (headed "Detail work") is the one place in the step where a habit is stated as a number: a detail
 should not cost more than an hour, and the section argues both edges (pulling detail forward is paid
 for now, leaving it too long turns into a regression). It closes the argument the `evolution` unit
 opens, so keep the pair of edges if you rewrite it. Cutting one leaves a lesson that only says
@@ -203,7 +204,7 @@ into a benchmark that the card asks the student to take on their own build.
 unit was being written: a few minutes a loop compound, and bringing the time down is work you hand
 an agent as a goal against a number. The code block in `fast-enough` is that goal, in `goals`'
 `> Goal:` shape rather than as a slash command, because no unit names a goal command and `goals` is
-where the shape is argued; `fast-enough.3` points there rather than re-arguing it. Its edges (keep
+where the shape is argued; `fast-enough.3` points there rather than re-arguing it. Its constraints (keep
 every check, keep every test, lower no threshold) are the point of the block and not decoration: a
 build gets faster by deleting its slow tests, and that is the proxy trap from `Quality gates` a
 second time. **It names `mvn verify` and never `-Pgraded`**, and `GateWalk` names no command at all,
@@ -423,7 +424,7 @@ it was renamed, so its keys are `patterns.skill-iteration.*`, and its prose was 
 it: the triage of convention against skill against hook went, and so did the new-step file list the
 cut `quality` unit also carried. **The word "hook" now appears nowhere in the unit**, which
 is what `setup`'s Hooks section lost its forward pointer to. What the section argues now is the second
-pass. A skill feels like magic, the answers still come back slightly off, so you repair the output
+pass. A first skill works better than you expect, the answers still come back slightly off, so you repair the output
 and have the agent work out what the skill failed to say. **Its two `<pre>` blocks are one skill
 twice and differ by exactly one rule**, the announced count added to the em-dash rule, so the reader
 diffs them by eye; rewrite one and the other moves with it, or the section's claim is on the page
@@ -447,7 +448,7 @@ labelled.** The first is what you already have and a name over it says prose twi
 produces sits on the right instead, and that pair is the drawing.
 
 `workflows` is five ways of handing work over, and **the order is the argument**: naive, plan-based,
-spec-driven, defer, audit-driven, running from cheapest to most deliberate, with a closing section
+spec-driven, defer, audit-driven, running from the least settled up front to the most, with a closing section
 saying they are not exclusive. That close is the unit rather than a coda, so a rewrite that drops it leaves
 four techniques and no reason to pick one. It carries no exercise, and the reason stands: there is
 nothing a card could ask the student to *do* here that would not be a smaller version of the
@@ -718,7 +719,7 @@ moved up under `run-own-machine`, which is where it is documented.
 
 `t-shaped` argues the shape from the agent rather than from the market. Implementation gets faster
 with every release, so what is asked of you moves up a level: keep the specialism, know enough of
-the contexts around it to judge what comes back, and take the closing pair as the point, namely that
+what sits around it to judge what comes back, and take the closing pair as the point, namely that
 **the agent handles the detail for everyone alike, so knowing the detail is worth less than it was
 and knowing what good engineering looks like is not**. It said "the market moved first, which means
 the upskilling is on you" before, which put the cause outside the course and outside the agent. Keep
@@ -816,7 +817,7 @@ an empty context is worth reading is `harness.reflection.2` and must not be re-d
 The `<pre>` and the list under it are the same thing twice on purpose, and what keeps the list from
 being a gloss is that it is general where the prompt is one job. Five elements, and the two easiest
 to lose are the fan-out (the independent parts in parallel, and the critic a fresh agent of its own)
-and the golden standard (a file already in the repository, because "better" is an argument two
+and the gold standard (a file already in the repository, because "better" is an argument two
 agents can run all afternoon and "as good as this file" is a comparison). The prompt names `/loop`
 and `TitleController`, and naming a harness command is allowed here only because **step 2 is the one
 step not written for two assistants**. The job it asks for is a link shortener in a project of its
@@ -922,7 +923,7 @@ the two apart**: `TwoWindows` and `LoopInWindow` are one window in two states, a
 context copied. The three teal blocks are identical in all six boxes and only the left one labels
 them. Relabel a copy, resize it or reorder it and the figure stops arguing anything. `ModelRelay` draws **what you spend each tier on and in which order**, never what the
 tiers are like, because `ModelTiers` in `step1/model` owns the dispositions. Its two teal arrows are
-the figure: they are labelled with what you do, since the digestion between the tiers is the part
+the figure: they are labelled with what you do, since the reading between the tiers is the part
 that cannot be handed over.
 
 `ModelRelay` is also the one dated thing in the step. The prose says "the frontier model", "the top

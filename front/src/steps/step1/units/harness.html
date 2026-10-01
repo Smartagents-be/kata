@@ -11,8 +11,9 @@
 </p>
 
 <p data-i18n="harness.lead.3">
+  The harness reads your files, drives your terminal and holds the connection to your provider's API.
   Everything the model ever learns about your work, it learns because the harness put it in the
-  request: it reads your files, drives your terminal and holds the connection to your provider's API.
+  request.
 </p>
 
 <h2 data-i18n="harness.which-one-you-run.heading">Which harness you run</h2>
@@ -34,7 +35,7 @@
 <p data-i18n="harness.caching.1">
   Re-sending the whole window every turn would be ruinous at full price, and you do not pay full
   price <svg data-icon="coin"></svg> The harness marks the request, and on the next turn everything
-  up to that mark is recognised and billed at roughly a tenth. Writing that mark is not free. The
+  up to that mark is recognised and billed at a tenth or less. Writing that mark is not free. The
   first turn costs a quarter more than plain input, so a cache pays for itself on the second turn
   and not before.
 </p>
@@ -50,17 +51,16 @@
   An entry goes stale after about five minutes by default, and double the input rate holds it for an
   hour. It is worth real money to keep one alive <svg data-icon="gem"></svg>
   <svg data-icon="coin"></svg> Walk away for a meeting on the default five minutes and you come back
-  to a window priced from scratch, so picking up where you left off costs you the whole thing again.
-  You are paying to rebuild the window either way. Rebuild the one you need.
+  to a window priced from scratch. You are paying to rebuild the window either way. Rebuild the one
+  you need.
 </p>
 
 
 <h2 data-i18n="harness.splitting-work.heading">How a harness splits the work</h2>
 
 <p data-i18n="harness.splitting-work.1">
-  Your task does not have to go to one model in one conversation. Harnesses have a few ways of
-  cutting it up, and each one is a design pattern worth recognising, because it decides where your
-  context ends up.
+  Your task does not have to go to one model in one conversation. How a harness cuts it up
+  decides where your context ends up.
 </p>
 
 <h3 data-i18n="harness.decomposition.heading">Decomposition</h3>
@@ -68,8 +68,7 @@
 <p data-i18n="harness.decomposition.1">
   Whatever you ask for is thinner than what you want. "Add search to the catalogue" does not say what
   an empty query returns, whether it matches on title only, or what comes back when nothing matches.
-  That is not an agent problem. Requirements have arrived under-specified since long before any of
-  this, and most of traditional software engineering is spent closing that gap. A task has no depth
+  That is not an agent problem. Requirements arrived under-specified long before there were agents, and most of traditional software engineering is spent closing that gap. A task has no depth
   until somebody gives it some.
 </p>
 
@@ -109,9 +108,8 @@
 </p>
 
 <p data-i18n="harness.coordinator.3">
-  The coordinator decomposes first, for that reason. Every part it hands out is a prompt written into
-  an empty context, so cutting well is most of the work here. It is the same skill as writing a good
-  prompt yourself.
+  The coordinator decomposes first, for that reason, and cutting well is most of the work. It is the
+  same skill as writing a good prompt yourself.
 </p>
 
 <div data-figure="coordinator-fanout"></div>
@@ -120,13 +118,12 @@
 
 <p data-i18n="harness.sequential.1">
   Nothing is handed out here. The agent plans the steps first, then works through them one at a time,
-  and every step is validated before the next one starts. This gives you the option to stop, and
-  pick it back up later.
+  and every step is validated before the next one starts. You can stop between any two steps and
+  pick it up later.
 </p>
 
 <p data-i18n="harness.sequential.2">
-  Reach for this when the steps depend on each other. What it costs you is the window: one session
-  carries the whole run, so a long workflow is a full context by the end of it.
+  Reach for this when the steps depend on each other. It costs you the window: one session carries the whole run, so a long workflow ends on a full context.
 </p>
 
 <div data-figure="sequential-steps"></div>
@@ -134,13 +131,11 @@
 <h3 data-i18n="harness.reflection.heading">Reflection</h3>
 
 <p data-i18n="harness.reflection.1">
-  Reflection <svg data-icon="pattern"></svg> is the agent putting a critic on its own work. The
-  sub-agent is told to attack the result rather than help with it: find what is wrong, say so, report
-  back.
+  Reflection <svg data-icon="pattern"></svg> is the agent putting a critic on its own work. The critic is a sub-agent, told to attack the result rather than help with it rather than help with it: find what is wrong and report it.
 </p>
 
 <p data-i18n="harness.reflection.2">
-  The empty context is what makes it work. An agent reviewing its own transcript has spent the last
+  It works because the critic starts empty. An agent reviewing its own transcript has spent the last
   hour arguing for this design and will agree with itself. A critic that arrives with nothing but the
   code has no such stake, so what it hands back is worth reading.
 </p>

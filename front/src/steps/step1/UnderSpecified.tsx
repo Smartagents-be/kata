@@ -31,7 +31,7 @@ export function UnderSpecified() {
       <svg
         id="under-specified-svg"
         data-component="UnderSpecified"
-        viewBox="0 0 640 300"
+        viewBox="0 0 640 262"
         role="img"
         aria-labelledby={titleId}
         className="h-auto w-full max-w-xl"
@@ -180,18 +180,6 @@ export function UnderSpecified() {
             </text>
           </g>
         ))}
-
-        <text
-          id="under-specified-caption"
-          data-component="UnderSpecified"
-          x="320"
-          y="276"
-          fontSize="15"
-          textAnchor="middle"
-          className="fill-muted-foreground"
-        >
-          {t('under-specified.caption')}
-        </text>
       </svg>
     </figure>
   )

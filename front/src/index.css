@@ -212,11 +212,13 @@
     @apply bg-muted text-muted-foreground border-border my-6 rounded-xl border px-5 py-1;
   }
 
-  /* The self-learning note is the "why" behind a step, so it carries the teal accent: a left rule
-     and a faint tint, open on the right, marking it as the one colour the eye follows for guidance.
-     It only ever renders in self-learning mode, since prepareUnit drops it in class. */
+  /* The self-learning note is the "why" behind a step, so it carries the teal accent: a faint tint
+     inside a teal hairline, the same shape as every other aside, marking it as the one colour the eye
+     follows for guidance. There is deliberately no thick rule down one side: a stripe on a rounded
+     box is the stock callout of generated UI. It only ever renders in self-learning mode, since
+     prepareUnit drops it in class. */
   .prose aside[data-audience='self'] {
-    @apply border-primary bg-primary/5 text-foreground/85 my-6 rounded-r-xl border-l-[3px] px-4 py-1;
+    @apply border-primary/30 bg-primary/5 text-foreground/85 my-6 rounded-xl border px-5 py-1;
   }
 
   /* A hazard note. A plain aside holds material set beside the argument; this one holds material

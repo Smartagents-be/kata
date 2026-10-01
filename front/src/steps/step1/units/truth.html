@@ -1,14 +1,13 @@
 <p data-i18n="truth.lead.1">
   The same question can have more than one true answer, and which one you get depends on where the
   agent looked. Part of what it knows was fixed on the day its training stopped. None of it was ever
-  about your company. Not your repository, not your conventions, not the version you are actually
-  on.
+  about your company. Not your repository, and not the version you are on.
 </p>
 
 <p data-i18n="truth.lead.2">
   Everything else has to reach it somehow. You put it in the window yourself, or you send it to find
   out with <a href="/steps/step1/tools">a tool</a>. Ask which version of Spring Boot this project
-  builds on and you might get the version most projects were on when it was trained, because nothing
+  builds on and you probably get the version most projects were on when it was trained, because nothing
   sent it to look. Tell it to read <code>pom.xml</code> first and the number is in the window before
   the answer is.
 </p>
@@ -21,16 +20,16 @@
 <h2 data-i18n="truth.cutoff.heading">The cutoff</h2>
 
 <p data-i18n="truth.cutoff.1">
-  Training stopped on a date. Whatever was published after it is not something the model knows less
-  well, it is something the model has never seen. A framework released last spring, a library that
+  Training stopped on a date. Whatever was published after it is not something the model knows a
+  little less well. It has never seen it. A framework released last spring, a library that
   threw out its whole configuration format between one minor version and the next: none of that is
   in there.
 </p>
 
 <p data-i18n="truth.cutoff.2">
   The answer still arrives. It describes the version line before yours, in the same level tone as
-  everything else, and it is out of date rather than wrong, which is the harder thing to spot. This
-  is the half of the model that ages while you are not looking.
+  everything else. It is out of date rather than wrong, and that is harder to spot. This is the half
+  of the model that ages while you are not looking.
 </p>
 
 <!-- The release line with the cutoff across it. The far side is dashed rather than faded on
@@ -41,7 +40,7 @@
 <h2 data-i18n="truth.grounding.heading">Grounding</h2>
 
 <p data-i18n="truth.grounding.1">
-  Put the thing in the window and the answer changes source. The <code>pom.xml</code> on disk, the
+  Put the evidence in the window and the answer changes source. The <code>pom.xml</code> on disk, the
   release notes fetched off the web, the output of a command that ran a second ago: once any of it
   is in the context, the model is reading rather than remembering. That is a grounded answer, and it
   is the one you want for anything with a fact behind it.
@@ -53,10 +52,19 @@
 <div data-figure="trained-or-grounded"></div>
 
 <p data-i18n="truth.grounding.2">
-  Only the window changed. Getting the file in there is
-  <a href="/steps/step1/tools">the unit on tools</a>, and what is on you is asking for it. "Which
+  Only the window changed. How the file gets in there is
+  <a href="/steps/step1/tools">the unit on tools</a>. Your part is asking for it. "Which
   version does this project use" invites a guess. "Read <code>pom.xml</code> and tell me which
   version this project uses" does not.
+</p>
+
+<!-- Added at the author's asking: the same move for a fact that lives outside the project. It names
+     the move and stops; how a page gets fetched is `tools`'s to describe. -->
+<p data-i18n="truth.grounding.3">
+  For anything outside your project, the evidence is the official documentation. A library's current
+  API, an option that changed last month, a price: ask the agent to search for the vendor's own docs and
+  read them before it answers. Then the page is in the window and the answer comes from it, rather
+  than from whatever version the model was trained on.
 </p>
 
 <h2 data-i18n="truth.proof.heading">Proof</h2>
@@ -64,9 +72,9 @@
 <p data-i18n="truth.proof.1">
   Grounded is still not proved, and that is the answer to the question up top: the source is not
   the same thing as the check. The agent read a file and told you what it says, and you are taking
-  its word for the reading. Anything that can be run should be run: <code>mvn test</code>, a
+  its word for the reading. Run whatever can be run: <code>mvn test</code>, a
   <code>curl</code> at the endpoint, one line of <code>jshell</code>. An answer with a command
-  behind it is a different kind of answer.
+  behind it is one you can check yourself.
 </p>
 
 <p data-i18n="truth.proof.2">
@@ -78,14 +86,13 @@
 <h2 data-i18n="truth.hallucinations.heading">Hallucinations</h2>
 
 <p data-i18n="truth.hallucinations.1">
-  With nothing in the window to read, the model answers anyway. Answering is what it does. Ask which
-  method on <code>Catalog</code> filters titles by author and you get
-  <code>findAllByAuthorOrdered</code>, spelled exactly the way a Spring method is spelled, on a
-  class that has no such method. Nothing was looked up, and nothing was deliberately made up. The
-  next likely token landed where a fact should have been, and that is a hallucination. You have met
-  this one before: the quiz back in <a href="/steps/step1/context">the context unit</a> asked why a
-  confident answer about a UserService missed the class entirely, and you diagnosed it there
-  without the word.
+  With nothing in the window to read, the model answers anyway. Answering is what it does, and you
+  have met it once already: the quiz back in <a href="/steps/step1/context">the context unit</a>
+  asked why a confident answer about a UserService missed the class entirely. Ask which method on
+  <code>Catalog</code> filters titles by author and you get <code>findAllByAuthorOrdered</code>,
+  spelled exactly the way a Spring method is spelled, on a class that has no such method. Nothing was
+  looked up, and nothing was deliberately made up. The next likely token landed where a fact should
+  have been, and that is a hallucination.
 </p>
 
 <!-- One answer taken apart into its claims. The left column is uniform on purpose: nothing about
@@ -94,9 +101,7 @@
 <div data-figure="answer-provenance"></div>
 
 <p data-i18n="truth.hallucinations.2">
-  Two of those were read and one was not, and the answer says the same thing about all three. That
-  is what makes it expensive. No wobble in the tone, no hedge, because the model sounds the same
-  whether it read your file or filled the gap. Stop reading the tone and start asking where the
-  answer came from. <a href="/steps/step1/workshop">The workshop</a> is that question three times
-  over.
+  Two of those were read and one was not, and the answer says the same thing about all three. A hallucination is expensive because the model sounds the same whether it read your file or
+  filled the gap. Stop reading the tone and start asking where the
+  answer came from. <a href="/steps/step1/workshop">The workshop</a> is that question five times over.
 </p>

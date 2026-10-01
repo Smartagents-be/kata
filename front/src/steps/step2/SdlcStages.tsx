@@ -122,7 +122,7 @@ export function SdlcStages() {
             id={`sdlc-stages-${stage.key}-band`}
             data-component="SdlcStages"
             // A column of six under `sm`, where six labels side by side collide, and a row above it.
-            className="relative mx-auto h-64 w-40 sm:h-12 sm:w-auto"
+            className="relative mx-auto h-64 w-40 sm:h-12 sm:w-full"
           >
             <svg
               id={`sdlc-stages-${stage.key}-channel-tall`}

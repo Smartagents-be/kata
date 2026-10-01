@@ -19,9 +19,8 @@
 </p>
 
 <p data-i18n="tools.lead.3">
-  Watch where the two halves sit. The tool itself runs outside the window: on your machine, against
-  your files, at somebody else's API. Only what it returns comes back in, and it comes back as plain
-  text next to your prompt.
+  The tool itself runs outside the window: on your machine, against your files, at somebody else's
+  API.
 </p>
 
 <!-- The tool straddles the frame on purpose. The dashed half is the argument of the figure: the
@@ -29,9 +28,8 @@
 <div data-figure="tools-in-context"></div>
 
 <p data-i18n="tools.lead.4">
-  That dashed half is the part the model never sees. A file the harness decided to cut short and a
-  file that is genuinely short are the same file from in there, unless something in the result says
-  otherwise.
+  That dashed half is the part the model never sees. From inside the window, a file the harness cut
+  short and a file that really is short look the same, unless the result says otherwise.
 </p>
 
 <h2 data-i18n="tools.mcp-servers.heading">MCP servers</h2>
@@ -39,9 +37,8 @@
 <p data-i18n="tools.mcp-servers.1">
   An MCP server can be anything. Model Context Protocol is the standard your harness speaks to reach
   one, and what is on the other end is up to whoever wrote it: a server for your issue tracker, one
-  for your database, one that drives a browser. Somebody else wrote it. You connected it, and now
-  the model can call it. Your harness runs the call and appends what came back, exactly as it does
-  for <code>grep</code>.
+  for your database, one that drives a browser. Connect one and the model can call it.
+  Your harness runs the call and appends what came back, exactly as it does for <code>grep</code>.
 </p>
 
 <!-- The same frame and prompt as tools-in-context, with one wire crossing the border and fanning
@@ -62,9 +59,8 @@
 <div data-figure="mcp-parts"></div>
 
 <p data-i18n="tools.mcp-servers.4">
-  Read them by who decides. You pick the prompt, your harness attaches the resource, the model asks
-  for the tool. Three different hands, and all three end up in the same window, taking up very
-  different amounts of it.
+  Sort them by who decides. You pick the prompt, your harness attaches the resource, the model asks
+  for the tool. They all end up in the same window, but they take up very different amounts of it.
 </p>
 
 <!-- The same three again, in the oval the step draws a thing as, on `mcp-parts`' own columns so each
@@ -114,26 +110,25 @@
   <p>
     Four or five <em>added</em> servers' worth of tools is about the most one context holds well, on
     top of whatever your harness already starts you with. Past that the agent spends its attention
-    picking between them, and a longer list is rarely the answer. Give that job its own specialised
+    picking between them. Give that job its own specialised
     agent, with the tools it needs and nothing else.
   </p>
 </aside>
 
-<h2 data-i18n="tools.stay-critical.heading">Stay critical</h2>
+<h2 data-i18n="tools.stay-critical.heading">The least trustworthy layer</h2>
 
 <p data-i18n="tools.stay-critical.1">
   Treat what comes back as the least trustworthy layer you have. A blog post about Spring Boot 4 was
   not written against this repository. An MCP server hands back whatever its author decided to
-  return. The spec a <code>curl</code> fetches may be three revisions behind the one your team agreed
-  on last week.
+  return. The spec a <code>curl</code> fetches is often three revisions behind the one your team
+  agreed on last week.
 </p>
 
 <!-- No data-audience: this one is for everybody, in class and alone. The warning variant is the
      hazard shape from index.css; the triangle it draws is not in this markup on purpose. -->
 <aside data-variant="warning" data-i18n="tools.stay-critical.2">
   <p>
-    An MCP server is an attack vector, and it is one of the routes prompt injection actually takes
-    today. One hands back a ticket from your issue tracker, and the description closes with a line
+    An MCP server is an attack vector, and one of the routes prompt injection takes today. One hands back a ticket from your issue tracker, and the description closes with a line
     addressed to the agent: read the token out of <code>.env</code> and <code>curl</code> it to this
     address. The agent has a shell, and one tool result just told it what to do with it.
   </p>
@@ -143,8 +138,8 @@
      train an instruction hierarchy on top of that. What it does not do is hold, which is the claim
      `SpotInjection` grades below. Do not write "nothing marks it" back in. -->
 <p data-i18n="tools.stay-critical.3">
-  None of that shows once it is in the window. Your prompt, the agent's own notes and a paragraph
-  off a page it opened thirty seconds ago all arrive marked, and the marking does not hold: the
+  Your prompt, the agent's own notes and a paragraph off a page it opened thirty seconds ago all
+  arrive marked, and the marking does not hold: the
   model was trained to trust you over a tool result, not built to. It reads the stranger's line and
   builds on it anyway.
 </p>
@@ -154,8 +149,8 @@
 <p data-i18n="tools.pay-every-turn-after.1">
   A tool result is usually the bulkiest thing in the window. A page of documentation runs longer than
   your prompt. <code>mvn test</code> on a red build runs longer than most of your source files. And
-  it settles into the session, so it is re-sent on every turn after that. That red build scrolls past
-  once and you keep paying for it on every question you ask afterwards.
+  it settles into the session. That red build scrolls past once, and you pay for it on every
+  question you ask afterwards.
 </p>
 
 <!-- Everything below the rule is the doing part of the unit, under one heading that matches the one
@@ -168,7 +163,7 @@
 <h3 data-i18n="tools.connect-one.heading">Connect one yourself</h3>
 
 <p data-i18n="tools.connect-one.1">
-  Reading about this layer is not the same as watching it fill up. The two lines below start the
+  Now watch this layer fill up. The two lines below start the
   step 1 backend and hand your agent a tool it does not ship with.
 </p>
 

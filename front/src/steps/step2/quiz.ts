@@ -259,8 +259,8 @@ export const steeringQuiz: QuizQuestion[] = [
         label: 'quiz.logged-and-carried-on.wrong-place',
       },
       {
-        id: 'too-many',
-        label: 'quiz.logged-and-carried-on.too-many',
+        id: 'commit-message',
+        label: 'quiz.logged-and-carried-on.commit-message',
       },
     ],
     explanation: 'quiz.logged-and-carried-on.explanation',

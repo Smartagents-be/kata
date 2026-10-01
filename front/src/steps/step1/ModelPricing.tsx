@@ -3,7 +3,7 @@ import { useStepText } from '@/shared/i18n/useStepText'
 /**
  * Dollars per million tokens, as the provider lists them. Rows run cheapest first, because that is
  * the order the prose above reads them in: call the small one a single unit, the middle tier is
- * roughly three of those, the top tier roughly five.
+ * roughly two of those, the top tier roughly four.
  *
  * `ModelTiers` twelve lines up the page runs the same three in the same direction, and did not until
  * the cards were flipped to match this table. Neither figure may be reordered on its own.
@@ -11,15 +11,12 @@ import { useStepText } from '@/shared/i18n/useStepText'
  * The numbers are data rather than prose, so they carry no `data-i18n` and no `nl` entry, the same
  * way `BudgetWindow`'s line counts and `SpotInjection`'s result bodies do. Model names are proper
  * nouns and stay English for the same reason. Only the column headings and the caption translate.
- *
- * Sonnet is listed at its standing rate rather than the introductory $2 and $10 running until
- * 1 September 2026, because the ratio the prose teaches is the one it settles at.
  */
 const ROWS = [
   { id: 'haiku', name: 'Claude Haiku 4.5', input: '$1', write5m: '$1.25', write1h: '$2', read: '$0.10', output: '$5' },
-  { id: 'sonnet', name: 'Claude Sonnet 5', input: '$3', write5m: '$3.75', write1h: '$6', read: '$0.30', output: '$15' },
-  { id: 'opus', name: 'Claude Opus 5', input: '$5', write5m: '$6.25', write1h: '$10', read: '$0.50', output: '$25' },
-  { id: 'fable', name: 'Claude Fable 5', input: '$10', write5m: '$12.50', write1h: '$20', read: '$1', output: '$50' },
+  { id: 'sonnet', name: 'Claude Sonnet 5.5', input: '$2', write5m: '$2.50', write1h: '$4', read: '$0.20', output: '$10' },
+  { id: 'opus', name: 'Claude Opus 5.5', input: '$4', write5m: '$5', write1h: '$8', read: '$0.20', output: '$20' },
+  { id: 'fable', name: 'Claude Fable 5.1', input: '$10', write5m: '$12.50', write1h: '$20', read: '$0.25', output: '$50' },
 ] as const
 
 /** Keyed by the row field so a heading and the column under it cannot drift apart. */
@@ -36,9 +33,10 @@ const COLUMNS = [
  * it. It sits under the paragraph that states the ratios and above the one that says the ratios
  * outlive the numbers, so it is read as evidence for a claim rather than as a reference table.
  *
- * Four things the prose already argues can be checked against it by eye: the small tier as one unit
- * with the middle at three and the top at five, output at five times input in every row, and a cache
- * read at a tenth of input, which is the figure `harness` gives for what caching saves.
+ * Three things the prose already argues can be checked against it by eye: the small tier as one unit
+ * with the middle at two and the top at four, output at five times input in every row, and a cache
+ * read at a tenth of input or less, which is what `harness` says caching costs. The top two tiers
+ * read their cache cheaper than a tenth, which is why that sentence says "or less".
  *
  * It scrolls in its own box rather than wrapping. Six columns of machine output do not reflow into
  * a phone, and a table that reflows stops being one.

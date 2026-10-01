@@ -51,7 +51,7 @@ export function FlagBoard() {
           rather than a close. This line says what the five together proved, which is the provenance
           eyebrow on every row read as one sentence: the student has just answered `truth`'s question
           by doing it five times. It is the `--success` tint a solved row already wears, drawn as the
-          same left-rule note a wrong paste is drawn as, on the flatness rule: no shadow, no panel
+          same tinted note a wrong paste is drawn as, on the flatness rule: no shadow, no panel
           that floats, no second voice. And it **states what was proved and stops**. It carries no
           pointer at `recap` and none at step 2: the unit's closing section was deliberately deleted,
           the step no longer ends on this page, and a forward pointer here puts it back.

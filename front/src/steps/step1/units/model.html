@@ -4,9 +4,7 @@
 </p>
 
 <p data-i18n="model.lead.2">
-  A provider ships a family rather than a model. They differ in what they cost per token and how
-  fast they answer, and in the one the cards below are about: how well each holds a long task
-  together.
+  A provider ships a family rather than a model. They differ in what they cost per token, how fast they answer and how well each holds a long task together.
 </p>
 
 <div data-figure="model-tiers"></div>
@@ -15,13 +13,13 @@
      says when these were the family rather than pinning the prose to a release, the same job the
      month in `ModelPricing`'s caption does. It sits under the cards rather than over them, so it
      reads as their caption. -->
-<p data-i18n="model.lead.3"><small>The family as it stood in July 2026.</small></p>
+<p data-i18n="model.lead.3"><small>The family as it stood in October 2026.</small></p>
 
 <h2 data-i18n="model.cost.heading">Cost</h2>
 
 <p data-i18n="model.cost.1">
   Price is per token, and the tiers are further apart than most people expect. Call the small one
-  a single unit. The middle tier costs roughly three of those, the top tier roughly five
+  a single unit. The middle tier costs roughly two of those, the top tier roughly four
   <svg data-icon="coin"></svg> Output runs about five times the price of input in every tier, so a
   model that answers at length costs more than the same model answering briefly.
 </p>
@@ -54,7 +52,7 @@
      closed this section stays out. The sum itself is asked for by `PriceOneTurn` at the foot of the
      unit, so this paragraph states the method and the card collects the answer. -->
 <p data-i18n="model.cost.4">
-  Money on your own window is one sum. <code>/context</code> printed your count back in
+  What your own window costs is one sum. <code>/context</code> printed your count back in
   <a href="/steps/step1/context">the context unit</a>, and the table above prices a million of those.
   Multiply, and that is what sending the window up once costs, before the model has written a word.
 </p>
@@ -66,7 +64,7 @@
 <h2 data-i18n="model.api-vs-subscription.heading">API vs subscription</h2>
 
 <p data-i18n="model.api-vs-subscription.1">
-  Two arrangements, and the harness is where you pick one. Hand it an API key and the provider bills
+  The harness is where you choose how you pay. Hand it an API key and the provider bills
   you per token, at the rates above, for exactly what went up and what came back. Sign in with a
   subscription instead and the same usage comes off a plan you paid for before you started.
 </p>
@@ -74,7 +72,7 @@
 <p data-assistant="claude" data-i18n="model.api-vs-subscription.2.claude">
   That choice also decides which models you can reach. A subscription buys you into one provider's
   own program, so you get their family and nothing else. A key is looser. Most open-source harnesses
-  take one, and that is what lets you point the same tool at whichever tier you like.
+  take one, and that is what lets you point the same tool at whichever provider's models you like.
 </p>
 
 <p data-assistant="copilot" data-i18n="model.api-vs-subscription.2.copilot">
@@ -82,15 +80,14 @@
   picker behind it is not one provider's family: you choose the model per conversation, across
   vendors, and the three tiers in this unit turn up there under several names. A key is looser
   still. Most
-  open-source harnesses take one, and that is what lets you point the same tool at whichever tier
-  you like.
+  open-source harnesses take one, and that is what lets you point the same tool at whichever
+  provider's models you like.
 </p>
 
 <p data-assistant="claude" data-i18n="model.api-vs-subscription.3.claude">
   The tokens are the same either way. What differs is whether you can see them. On a key, a long
   window is a number growing on an invoice while you work, and you can go and look at it
-  <svg data-icon="coin"></svg> On a plan you wait for the limit to reset, in the middle of the thing
-  you were doing.
+  <svg data-icon="coin"></svg> On a plan you wait for the limit to reset, in the middle of your work.
 </p>
 
 <p data-assistant="copilot" data-i18n="model.api-vs-subscription.3.copilot">
@@ -125,15 +122,14 @@
 <h2 data-assistant="claude" data-i18n="model.five-hour-window.heading">The five-hour window</h2>
 
 <p data-assistant="claude" data-i18n="model.five-hour-window.1">
-  Some providers give you a session limit, and it is usually a sliding window of five hours.
+  Some providers give you a session limit, and it is usually a window of five hours.
   Your first message opens one. Everything you send lands inside it, and when the five hours are up
   the next thing you type opens the next window. This is a clock, not the pile of turns
   <a href="/steps/step1/session">the session unit</a> is about. The two share a word by accident.
 </p>
 
 <p data-assistant="claude" data-i18n="model.five-hour-window.2">
-  Over the top of it there is usually a weekly ceiling as well, so a heavy Monday is still a Monday
-  on Thursday. You do not have to guess where you stand on either. Ask the harness and it prints the
+  Over the top of it there is usually a weekly ceiling as well, so what you spend on Monday still counts on Thursday. You do not have to guess where you stand on either. Ask the harness and it prints the
   window you are in, when it resets, and how much of the week went with it.
 </p>
 
@@ -146,9 +142,7 @@
 </p>
 
 <p data-assistant="claude" data-i18n="model.five-hour-window.4">
-  Work out when you take your break and subtract five hours. Say hello at that hour, by typing the
-  word or from a repeating task you set up to send it for you, and the window you just opened runs
-  right up to the moment you stand up. Say hello again on your way out to the break, and the second
+  Work out when you take your break and subtract five hours. Say hello at that hour, by hand or from a repeating task. The window you just opened runs right up to the moment you stand up. Say hello again on your way out to the break, and the second
   one covers the break and every hour left in the day
   <svg data-icon="gem"></svg> <svg data-icon="coin"></svg>
 </p>
@@ -172,8 +166,7 @@
 <div data-figure="speed-at-scale"></div>
 
 <p data-i18n="model.speed.2">
-  Here is where quick stops being cheap. A fast wrong answer costs you the run it broke plus the
-  second run to fix it, and you paid for both. The small tier wins when the task is specified
+  Here is where quick stops being cheap. A fast wrong answer costs you the run it broke plus the second run to fix it. The small tier wins when the task is specified
   tightly enough that there is nothing left to get wrong.
 </p>
 
@@ -199,14 +192,14 @@
 <p data-i18n="model.let-it-pick.1">
   You do not have to make this call every time. The coordinator in the previous unit is this choice
   handed to the machine: the expensive model works out what has to happen, and the parts go to
-  cheaper ones. The saving is the gap you priced above, five against one
+  cheaper ones. The saving is the gap you priced above, four against one
   <svg data-icon="gem"></svg> <svg data-icon="coin"></svg>
 </p>
 
 <p data-i18n="model.let-it-pick.2">
-  There is a reason that split works as well as it does. Smaller tiers are commonly trained on
-  output from larger ones, so an expensive model writing the brief is writing for something shaped
-  by its own answers. Working out what the cheap model should do is the half it is best at.
+  Smaller tiers are commonly trained on output from larger ones, so an expensive model writing the
+  brief is writing for something shaped by its own answers. Working out what the cheap model should
+  do is the half it is best at.
 </p>
 
 <!-- The doing part, under the heading `QuizPanel` renders over a quiz, the same shape `tools` and

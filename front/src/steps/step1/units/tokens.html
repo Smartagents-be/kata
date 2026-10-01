@@ -24,7 +24,8 @@
   <p data-i18n="tokens.lead.2">
     A token is the unit a language model works in. Everything an agent knows when it answers you is
     text, and that text is limited, priced and re-read by the token. Not by the word, and not by the
-    character. So this unit is not about what goes into an agent, but about what you measure it in.
+    character. So a token is not something that goes into an agent. It is the measure of everything
+    that does.
   </p>
 
   <p data-i18n="tokens.lead.3">
@@ -48,8 +49,8 @@
 <div data-audience="self">
   <p data-i18n="tokens.not-words.2">
     This is why a pasted stack trace, a log full of ids, or a wall of minified JSON costs several times
-    what its length suggests. Text is the cheapest thing you can put in front of a model. Identifiers,
-    hashes and ids are the dearest, and a codebase is made of those.
+    what its length suggests. Plain prose is the cheapest thing you can put in front of a model.
+    Identifiers and hashes are the dearest, and a codebase is made of those.
   </p>
 
   <!-- The bill and the answer have one cause, and that is the whole paragraph: the vocabulary was
@@ -81,8 +82,8 @@
        the token before it. It is also the bridge into the attention section, which is that claim drawn.
        Do not shorten it to "the previous token". -->
   <p data-i18n="tokens.one-at-a-time.2">
-    On its own, <code>it</code> predicts nothing at all. <code>the build failed because it</code> is
-    what makes <code>timed</code> the favourite. Everything you leave in front of a model changes what
+    On its own, <code>it</code> predicts nothing at all. <code>the build failed because it</code>
+    makes <code>timed</code> the favourite. Everything you leave in front of a model changes what
     comes out of it, whether you meant it to or not.
   </p>
 
@@ -99,7 +100,7 @@
        follows for `harness`. One consequence, named, and then it stops. -->
   <p data-i18n="tokens.one-at-a-time.4">
     This is also why output is priced above input. A question arrives in one pass. An answer is built a
-    token at a time, and each one is paid for with a full read of everything before it. The
+    token at a time, and each token is a pass of its own, and the passes cannot run side by side. The
     <a href="/steps/step1/model">model unit</a> puts numbers on that gap.
   </p>
 
@@ -107,8 +108,7 @@
 
   <p data-i18n="tokens.reads-all.1">
     Inside every one of those passes, the model does not look anything up. Each token is weighed
-    against every token in front of it, and every one of those weighings is worked out rather than
-    fetched. There is no index, and nothing to search.
+    against every token in front of it. There is no index, and nothing to search.
   </p>
 </div>
 
@@ -117,9 +117,8 @@
 <div data-audience="self">
   <p data-i18n="tokens.reads-all.2">
     Take the favourite three times above and this is the sentence you get, with the full stop left
-    off. Hold <code>it</code> and the heaviest line runs back to <code>build</code>, which is the
-    answer you would have given. Hold the first token and nothing is drawn at all. A token only ever
-    looks backwards.
+    off. <code>it</code> leans hardest on <code>build</code>, which is the answer you would have
+    given. A token only ever looks backwards.
   </p>
 
   <p data-i18n="tokens.reads-all.3">
@@ -132,8 +131,8 @@
   <!-- Points at `harness`'s caching section rather than restating it, the same rule
        `harness.coordinator.3` follows for decomposition. One consequence, named, and then it stops. -->
   <p data-i18n="tokens.reads-all.4">
-    Looking only backwards has one useful consequence. Adding to the end leaves every earlier weighing
-    exactly as it was, so the front of the pile can be kept and charged at a fraction next turn. That
+    Because a token only looks backwards, adding to the end leaves every earlier weighing exactly as
+    it was, so the front of the window can be kept and charged at a fraction next turn. That
     is what a cache is here. The <a href="/steps/step1/harness">harness unit</a> prices it.
   </p>
 </div>

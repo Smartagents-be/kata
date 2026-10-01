@@ -17,9 +17,9 @@
 
 <p data-i18n="steering.mid-flight.3">
   The heaviest move is to stop it and throw the session away. You lose everything the run worked out,
-  which is why you reach for it last, and it is also why it works: whatever sent it wrong goes with
-  it. Keep it for the run that is not going the wrong way but going nowhere. There is a section on
-  that below.
+  which is why you reach for it last. It is also why it works: whatever sent it wrong goes with it.
+  Keep it for the run that is not going the wrong way but going nowhere. There is a section on that
+  below.
 </p>
 
 <h2 data-i18n="steering.interrupt-or-go-back.heading">Interrupt, or go back</h2>
@@ -33,9 +33,9 @@
 <p data-i18n="steering.interrupt-or-go-back.2">
   It also keeps everything. The file it should not have opened is still sitting in the window, in
   full. Your correction sits underneath it. From here on the agent carries the wrong turn and the
-  fix together, and re-sends both on every turn for the rest of the session
-  <svg data-icon="coin"></svg> The cache makes that cheap. It does not make it small: every turn you
-  have left is read against a file you did not want opened.
+  fix together, and re-sends both on every turn <svg data-icon="coin"></svg> The cache makes that
+  cheap. It does not make it small: every turn you have left is read against a file you did not want
+  opened.
 </p>
 
 <p data-i18n="steering.interrupt-or-go-back.3">
@@ -78,10 +78,13 @@
   Rewinding does not help here, because the message that started it was fine. Stop it and clear
   instead. Carry across the one thing the round produced, usually the error and the approach that
   does not work. That is the seam
-  <a href="/steps/step1/session">step 1's unit on the session</a> tells you to pick yourself. Then
-  change something before you ask again: paste the failing output in, name the thing it may not try,
-  or do the awkward step by hand and give it the rest. A second attempt from a clean window beats a
-  fifth from a dirty one.
+  <a href="/steps/step1/session">step 1's unit on the session</a> tells you to pick yourself.
+</p>
+
+<p data-i18n="steering.going-nowhere.4">
+  Change something before you ask again: paste the failing output in, name the approach it must not
+  try again, or do the awkward step by hand and give it the rest. A second attempt from a clean
+  window beats a fifth from a dirty one.
 </p>
 
 <div data-figure="loop-in-window"></div>
@@ -89,8 +92,7 @@
 <h2 data-i18n="steering.worktree-each.heading">A worktree each</h2>
 
 <p data-i18n="steering.worktree-each.1">
-  Steering one agent is a full-time job. Steering three is not three times the work, because most
-  of the waiting overlaps. A worktree is a second checkout of the same repository, on its own
+  Steering one agent is mostly waiting. Steering three is not three times the work, because the waiting overlaps. A worktree is a second checkout of the same repository, on its own
   branch, in its own folder, sharing the same history. Give every agent one.
 </p>
 
@@ -116,15 +118,15 @@ git worktree add -b feat/native ../kata-native</code></pre>
 <h2 data-i18n="steering.stop-at-the-gap.heading">Make it stop at the gap</h2>
 
 <p data-i18n="steering.stop-at-the-gap.1">
-  An agent will not tell you it guessed. It hits something nobody decided, a tier that has no grace
-  period written down anywhere, a currency the tests never name, and it does what it always does: it
-  picks the most likely continuation and keeps going. The code compiles. The tests you have still
+  An agent will not tell you it guessed. It hits something nobody decided: a tier with no grace period
+  written down anywhere, a currency the tests never name. Then it does what it always does: it picks
+  the most likely continuation and keeps going. The code compiles. The tests you have still
   pass. You find out at review, if you find out.
 </p>
 
 <p data-i18n="steering.stop-at-the-gap.2">
   You cannot fix that per request, because you do not know where the gaps are. If you did, they
-  would not be gaps. So make the rule standing, in the
+  would not be gaps. So make it a standing rule, in the
   <a href="/steps/step2/setup">CLAUDE.md the setup unit gave you</a>, where it arrives before your
   first message.
 </p>
@@ -142,8 +144,7 @@ Do not pick the most likely answer and carry on.</code></pre>
 </p>
 
 <p data-i18n="steering.stop-at-the-gap.4">
-  What you get back is a short list instead of a long argument. Four questions answered in one pass,
-  rather than four interruptions spread across an afternoon. The file is on disk too, so it outlives
+  What you get back is a short list instead of a long argument. Each question waits in one file, and the answers outlive the session. The file is on disk too, so it outlives
   the session that produced it. Clear the context, hand back <code>gaps.md</code>, and the decisions
   you already made are still made.
 </p>

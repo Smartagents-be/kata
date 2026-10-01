@@ -35,7 +35,7 @@ import { cn } from '@/shared/lib/utils'
  * - `Panel` is the surface: a hairline the eyebrow sits on, a title, an intro, the content.
  * - `PanelRow` is one row of a list, numeral gutter and rail included.
  * - `PanelChip` is the small mono badge a finished row or a tag wears.
- * - `PanelNote` is the left-rule callout a verdict, an error and a closing line are all drawn as.
+ * - `PanelNote` is the tinted line a verdict, an error and a closing line are all drawn as.
  * - `ChoiceKey` is the lettered key at the head of a pickable row, and `ChoiceMark` the tick or
  *   cross at the end of it; the row itself is drawn by
  *   `choiceRowClass` in `shared/lib/choice.ts`, which is a function because the element it lands on
@@ -343,31 +343,24 @@ export function ChoiceMark({ idBase, state }: { idBase: string; state: ChoiceSta
 }
 
 /**
- * A line set off by a 2px left rule and a faint tint, and nothing else: what a row says when a paste
+ * A line set off by a faint tint and its tone's ink, and nothing else: what a row says when a paste
  * was wrong, what a board says once every row is in, and what an exercise says when it has marked
- * an answer. It is the shape `.prose aside[data-audience="self"]` already uses for a note beside the
- * argument, so a verdict and an aside read as the same kind of thing, and it carries no panel that
- * floats, on the flatness rule.
+ * an answer. It carries no panel that floats, on the flatness rule, and **no rule down its left
+ * side**: it had a 2px one on a box rounded only on the right, and that stripe is the stock callout
+ * of generated UI. Do not put it back.
  *
  * Amber is the third tone because the design system already spends it that way: it is the caution
  * colour on a warning aside and on a cost tip, and `ConnectBoard`'s row with no wrong answer needs a
  * verdict that is neither `--success` nor `--destructive`.
- *
- * `rule={false}` drops the left rule and keeps the tint and the ink, which is what an exercise that
- * has just marked its own rows wants: the marks carry the verdict already, so a coloured bar beside
- * the sentence explaining them is the same claim said a second time and louder. A note that stands
- * on its own, beside prose or under a board, keeps the rule.
  */
 export function PanelNote({
   id,
   tone,
-  rule = true,
   children,
   className,
 }: {
   id: string
   tone: 'success' | 'destructive' | 'note'
-  rule?: boolean
   children: ReactNode
   className?: string
 }) {
@@ -378,11 +371,10 @@ export function PanelNote({
       data-state={tone}
       role="status"
       className={cn(
-        'max-w-[56ch] py-1.5 text-sm leading-relaxed',
-        rule ? 'rounded-r-lg border-l-2 pr-3 pl-3.5' : 'rounded-lg px-3',
-        tone === 'success' && 'border-success/60 bg-success/6 text-success-foreground',
-        tone === 'destructive' && 'border-destructive/50 bg-destructive/5 text-destructive',
-        tone === 'note' && 'border-amber-500/50 bg-amber-500/5 text-foreground/85',
+        'max-w-[56ch] rounded-lg px-3 py-1.5 text-sm leading-relaxed',
+        tone === 'success' && 'bg-success/6 text-success-foreground',
+        tone === 'destructive' && 'bg-destructive/5 text-destructive',
+        tone === 'note' && 'bg-amber-500/5 text-foreground/85',
         className,
       )}
     >

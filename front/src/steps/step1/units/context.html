@@ -9,8 +9,7 @@
   <p data-i18n="context.lead.1">
     Your prompt, the resources the agent read and the tools it can call come from different places
     and land in the same block of text. That block is the context, and it is all the model ever
-    sees. Once anything is in there, the model weighs all of it the same, whatever it arrived
-    marked as.
+    sees. Once anything is in there, the model has no reliable way to tell one part from another, whatever label it came in with.
   </p>
 </div>
 
@@ -29,53 +28,50 @@
   <p data-i18n="context.model-stateless.1">
     Between two messages an LLM keeps nothing. Not your last question, not the file it opened, not
     the decision the two of you reached. Every request starts from zero. What feels like a
-    conversation is the entire transcript being sent again, from the top, every single time.
+    conversation is the entire transcript being sent again, from the top, every time.
   </p>
 
   <p data-i18n="context.model-stateless.2">
-    Sending that whole transcript again has consequences beyond the bill. Clear the session
-    <svg data-icon="coin"></svg> often enough, especially when you switch to something unrelated. A
+    Sending that whole transcript again costs focus as well as money. Clear the session often,
+    and always when you switch to something unrelated <svg data-icon="coin"></svg> A
     fresh session keeps the model focused, even when it has to re-read a file to solve the problem
     in front of it.
   </p>
 
-  <h2 data-i18n="context.model-statistic.heading">And it is a statistic</h2>
+  <h2 data-i18n="context.without-context.heading">Without context, a model answers with the average</h2>
 
-  <p data-i18n="context.model-statistic.1">
-    It is also a statistical model rather than a reasoning database. It weighs what could come next
-    in the text it was given, using patterns from its training data. It holds no opinion about your
-    codebase. What it holds is an average.
+  <p data-i18n="context.without-context.1">
+    It weighs what could come next in the text it was given, using patterns from its training data.
+    It holds no opinion about your codebase. What it holds is an average.
   </p>
 
-  <p data-i18n="context.model-statistic.2">
-    That is why context is the only lever you have. The model gets better at your task at exactly
+  <p data-i18n="context.without-context.2">
+    That is why context is the biggest lever you have. The model gets better at your task at exactly
     the moment you or the harness put your task in front of it. Give it nothing and it answers from
     the average of everything it ever read.
   </p>
 </div>
 
-<!-- Still part of the "And it is a statistic" section, but self-learning only. The figure marker
+<!-- Still part of the "Without context, a model answers with the average" section, but self-learning only. The figure marker
      has to be a top-level element to render, so this block sits outside the wrapper above and each
      line carries its own data-audience. In guided mode all of it is removed before the figure is
      placed. -->
 <div data-figure="oneshot-compare" data-audience="self"></div>
 
-<p data-audience="self" data-i18n="context.model-statistic.3">
+<p data-audience="self" data-i18n="context.without-context.3">
   The one on the left is the prompt on its own. The one on the right got the same prompt with one
   reference image from Dribbble pinned to it. That single piece of context steered it somewhere less
-  generic straight away. It is not finished, but it is closer, and the distance left to cover is
-  shorter. The left one is correct too. Nobody would ship it.
+  generic straight away. It is not finished, but it is closer.
 </p>
 
 <!-- The figure's payoff turned on the student's own repository. It stays descriptive on purpose:
      arranging a repository so an agent works well in it is step 2's `setup`, and this paragraph is
      only why the codebase counts as context at all. -->
-<p data-audience="self" data-i18n="context.model-statistic.4">
-  Your codebase is that reference. Every file the agent opens on the way to yours is context too,
+<p data-audience="self" data-i18n="context.without-context.4">
+  Your codebase is that reference. Every file the agent opens on the way to your change is context too,
   and it steers the answer the same way that image did. Keep one way of doing things and the agent
   copies it. Work in a project that drifted years ago and it copies that instead, every turn and
-  every session. That is why an old codebase feels heavy: the agent is not looking past the old
-  habits, it is following them.
+  every session. That is why an old codebase feels heavy.
 </p>
 
 <div data-audience="self">
@@ -84,7 +80,7 @@
   <p data-i18n="context.bad-context-bad.1">
     Missing context produces generic output. You recognise it instantly: the tutorial answer, the
     <code>UserServiceImpl</code>, the try-catch that swallows the exception. It is not wrong
-    exactly. It is just answering a question nobody in your team asked.
+    exactly. It answers a question nobody in your team asked.
   </p>
 
   <p data-i18n="context.bad-context-bad.2">
@@ -125,13 +121,12 @@
   <h2 data-i18n="context.more-context-not.heading">More context is not free</h2>
 
   <p data-i18n="context.more-context-not.1">
-    Every token in the window goes back to the model on every turn. A long session does not cost
-    slightly more. It costs more per message, for the rest of the session.
+    Every token in the window goes back to the model on every turn. A long session does not cost more once. It costs more on every message, for the rest of the session.
   </p>
 
   <p data-i18n="context.more-context-not.2">
     So the goal is not maximum context. It is context that is small enough and good enough. The file
-    that matters instead of the whole directory. Every extra token you throw in raises the cost.
+    that matters instead of the whole directory.
   </p>
 
   <h2 id="entropy" style="scroll-margin-top: 5rem" data-i18n="context.entropy.heading">Entropy</h2>
@@ -145,17 +140,15 @@
 
   <p data-i18n="context.entropy.2">
     That is entropy: disorder in the window rises with every turn unless somebody spends energy
-    pushing it back down. The symptoms are easy to recognise once you know them. The agent starts
-    contradicting itself, re-proposes an idea you already rejected, or edits a file back to a
-    version you moved past an hour ago.
+    pushing it back down. You see it when the agent starts contradicting itself, re-proposes an idea
+    you already rejected, or edits a file back to a version you moved past an hour ago.
   </p>
 
   <p data-i18n="context.entropy.3">
-    A window with no leftovers in it has a failure of its own, and it has a name: lost in the
-    middle. Nothing was deleted. The line that decides the answer is still sitting in the window,
-    and where it sits is what went wrong. A model uses what is near the top of the window and what
-    is near the bottom. Put the deciding line halfway up a long context and it reads straight past
-    it.
+    A window with no leftovers in it fails too. Nothing was deleted. The line that decides the
+    answer is still sitting in the window, and where it sits is what went wrong. A model uses what is near the top of the window and what
+    is near the bottom. Put the deciding line halfway up a long context and the model reads straight
+    past it. That is lost in the middle.
   </p>
 
   <h2 data-i18n="context.amnesia-context-fatigue.heading">Amnesia and context fatigue</h2>
@@ -168,9 +161,8 @@
 
   <p data-i18n="context.amnesia-context-fatigue.2">
     Then the agent forgets a decision from earlier, asks a question you already answered, or
-    re-reads a file it read twenty minutes ago. This is context fatigue, and it is worth being
-    precise about what happened. The model did not get tired and it did not get dumber. The evidence
-    left the room.
+    re-reads a file it read twenty minutes ago. This is context fatigue. The model did not get
+    tired and it did not get dumber. The evidence left the room.
   </p>
 </div>
 
