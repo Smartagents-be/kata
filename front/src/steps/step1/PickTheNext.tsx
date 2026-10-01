@@ -7,10 +7,11 @@ import { cn } from '@/shared/lib/utils'
 
 /**
  * The unit's one exercise, and it asks the question `NextToken`'s fan of scores only shows: given
- * three roads out of the same prompt, which word comes next. The answer is all three, because the
+ * three roads out of the same prompt, which word could come next. The answer is any of the three, because the
  * scores are a distribution and the model draws from it, which is exactly what
  * `tokens.one-at-a-time.3` argues. A student who has read the figure as a lookup table picks a word
- * and finds out here.
+ * and finds out here. The description has to ask *could*, not *will*: one word does appear, so a
+ * card that only says "pick what comes next" makes the catch-all read as a trick.
  *
  * **A different sentence from `NextToken` and `TokenAttention` on purpose.** Those two are a pair on
  * `the build failed because it timed out`, and reusing it would have this exercise answered by the

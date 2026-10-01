@@ -167,13 +167,13 @@ the two a pair the way `NextToken` and `TokenAttention` are, so the "word that b
 protects both of them.
 
 `PickTheNext` closes the unit and is its one exercise: three roads out of `the pull request was`, and
-the answer is all three. It asks in an answerable form what `NextToken` above it lets the student do
+the answer is any of the three. It asks in an answerable form what `NextToken` above it lets the student do
 but never grades, which is that the top-scored token is not a rule, so a student who read that figure
 as a lookup table finds out here rather than four units later. **That overlap is closer than it used
 to be** and the exercise still earns its place: the figure now lets a reader take a runner-up, but
 taking one is not the same as being asked whether they could have, and nothing up there tells them
 whether they understood what they were doing. If either side is ever rewritten, this is the seam to
-check. Four things in it are decisions. **The sentence is not the pair's**
+check. Five things in it are decisions. **The question asks what *could* come next, not what *will***: the card once carried only the title "Pick what comes next" and no question, which reads as "which word will appear", and one word appears, so the catch-all looked like a trick. The description now states the question outright, and the wrong-pick verdict says "not only that one" rather than "not that one", since the picked word could come next. **The sentence is not the pair's**
 (`the build failed because it timed out`), because a question answered by the figure above it is not
 a question. **The fan is drawn flat until it is checked** and then lights whole: marking a road
 before the answer is in gives it away, and marking one after says the model has a right answer here.
@@ -1009,17 +1009,21 @@ put the giveaway back in the title, and note that **it has no description at all
 absent rather than empty the way `ReadYourWindow`'s is: the line under the title said four results
 had come back, which the four rows say by being there, and that the check happens in the browser,
 which is true of everything in the course. `BudgetWindow`'s description lost the same second
-sentence and keeps one instruction, that more than one call is wanted, since the exact set is what
-it grades. `BudgetWindow` is six calls against one small
+sentence. It now says that each row shows what it leaves in the window, because a reviewer read the
+card as asking which call costs most without seeing the counts, and it keeps the one instruction that
+more than one call is wanted, since the exact set is what it grades. The counts went from `text-xs`
+to `text-sm` for the same reason. `BudgetWindow` is six calls against one small
 change and grades the **exact set**, not the total, or filling the window and then adding the two
-right calls would pass; its line counts are data rather than prose and its two right calls come to 27
+right calls would pass; its line counts are data rather than prose and its two right calls come to 25
 lines. Those counts are **measured off `kata/step1/java`** rather than invented, because the task is
 framed against this repository and a student who checks will check them: the controller is 24 lines,
-everything under `services/` is 1250, and there are 50 concrete stage classes (52 `*Stage.java`
-files, two of which are the `CatalogStage` and `AuxiliaryStage` interfaces). Two message keys carry
+the grep for `"/titles"` returns its one `@GetMapping` line, a glob of `src/**` lists 71 files, and
+everything under `services/` is 1250 lines over 55 files, with 50 concrete stage classes (52 `*Stage.java`
+files, two of which are the `CatalogStage` and `AuxiliaryStage` interfaces). Three message keys carry
 numbers derived from them (`budget.explanation.services` says fifty, `budget.explanation.tree`
-says ten times the controller), so a re-measure has to visit both, in both languages, plus the
-comment above the figure in `tools.html`. **The right verdict no longer prints the count**, so 27 is
+says ten times the controller, `budget.explanation.listing` says seventy-one), and
+`budget.call.services` prints the file count, so a re-measure has to visit all four, in both languages, plus the
+comment above the figure in `tools.html`. **The right verdict no longer prints the count**, so 25 is
 a number the student adds up off the rows rather than one the panel hands back; the wrong verdict
 still prints what they spent against what it would have taken, because that comparison is the whole
 correction. Both mark a wrong pick in `--destructive` and the answer the student missed in teal, because
@@ -1031,7 +1035,12 @@ verdict said twice, and the bar has since gone from `PanelNote` altogether.
 
 Machine output inside an exercise stays English in every language: `SpotInjection`'s four result
 bodies and sources and `BudgetWindow`'s six commands have no `nl` entry, on purpose, the same way
-flags and grading messages do. Everything framing them is translated.
+flags and grading messages do. Everything framing them is translated. `BudgetWindow`'s rows each
+lead with the tool that makes the call (`Grep`, `Glob`, `Read`, `Bash`), held in the `CALLS` data
+rather than the locale since a tool name is not translated, so the card uses the same short list
+`tools.lead.2` names and a student can see why the grep is the cheap one. The grep is `"/titles"`
+and not `"api/titles"` on purpose: the controller splits its path over `@RequestMapping("/api")`
+and `@GetMapping("/titles")`, so the longer string misses it and finds a line in `Desk.java`.
 
 `truth` sits between `model` and `workshop` and owns **where an answer came from**. Four sections,
 in the order they have to be read: `The cutoff` (training stopped on a date), `Grounding` (put the

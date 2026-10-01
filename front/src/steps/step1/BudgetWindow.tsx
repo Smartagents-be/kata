@@ -9,6 +9,8 @@ import { cn } from '@/shared/lib/utils'
 
 interface Call {
   id: string
+  /** Which of the harness's built-in tools makes the call. A tool name, so it is not translated. */
+  tool: 'Grep' | 'Glob' | 'Read' | 'Bash'
   /** What this call appends to the window. Data, not prose, so it is not translated. */
   lines: number
   /** Whether the task needs it. The two that are needed are the whole answer. */
@@ -17,12 +19,12 @@ interface Call {
 
 /** Six ways to spend the window on one small change. Message keys are built from the id. */
 const CALLS: readonly Call[] = [
-  { id: 'grep', lines: 3, needed: true },
-  { id: 'controller', lines: 24, needed: true },
-  { id: 'services', lines: 1250, needed: false },
-  { id: 'reference', lines: 1380, needed: false },
-  { id: 'tree', lines: 260, needed: false },
-  { id: 'listing', lines: 190, needed: false },
+  { id: 'grep', tool: 'Grep', lines: 1, needed: true },
+  { id: 'controller', tool: 'Read', lines: 24, needed: true },
+  { id: 'services', tool: 'Read', lines: 1250, needed: false },
+  { id: 'reference', tool: 'Bash', lines: 1380, needed: false },
+  { id: 'tree', tool: 'Bash', lines: 260, needed: false },
+  { id: 'listing', tool: 'Glob', lines: 71, needed: false },
 ]
 
 const IDEAL = CALLS.filter((call) => call.needed).reduce((sum, call) => sum + call.lines, 0)
@@ -106,12 +108,20 @@ export function BudgetWindow() {
                   data-component="BudgetWindow"
                   className={cn(choiceLabelClass(state), 'font-mono')}
                 >
+                  {/* The tool first, so every row reads as the call a harness would make. */}
+                  <span
+                    id={`budget-window-call-${index}-tool`}
+                    data-component="BudgetWindow"
+                    className="text-primary mr-2 font-semibold"
+                  >
+                    {call.tool}
+                  </span>
                   {text(`budget.call.${call.id}`)}
                 </span>
                 <span
                   id={`budget-window-call-${index}-lines`}
                   data-component="BudgetWindow"
-                  className="text-muted-foreground font-mono text-xs tabular-nums"
+                  className="text-foreground font-mono text-sm tabular-nums"
                 >
                   {t('budget.lines', { lines: call.lines })}
                 </span>
