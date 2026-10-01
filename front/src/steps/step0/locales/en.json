@@ -60,7 +60,7 @@
   "flags.panel.wrong": "Not that one. Read the flag straight from the build output.",
 
   "flag.run.label": "The run",
-  "flag.run.hint": "Instruct your agent to run the application.",
+  "flag.run.hint": "Have your agent run the code block from the previous page, in kata/step0/java.",
   "flag.run.help": "This is the code block on the previous page, run for real. Open kata/step0/java, start your agent in there and ask it to run that block. There is nothing to work out: the build prints the flag on the line that says the intro is complete. Paste that code here, braces and all.",
   "flag.ready.label": "Ready to hunt",
   "flag.ready.hint": "Have your agent run mvn verify -Pready from the same folder. If you kept row one's session, your harness often suggests this run before you ask.",

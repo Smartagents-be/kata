@@ -77,7 +77,7 @@ plus one loose script that runs at install time and sets its workshop board's fi
 
 ```
 kata/
-  step0/java/    test sources only: the intro's one exercise, behind an opt-in profile
+  step0/java/    test sources only: the three runs step 0's board grades, each behind an opt-in profile
   step1/java/    the catalogue service and four of the five flags its board grades
   step1/front/   one standalone page, no build and no server: the browser task's target
   step1/machine-context.mjs   the board's first flag comes from here: `install.txt` runs it, it
@@ -267,8 +267,8 @@ cd kata/step2/java && mvn test -Pchallenge   # the challenge: red until they wri
 ```
 
 Both are **meant to be red**, and making them green is the student's exercise rather than a build to
-fix. Step 0 has one of its own and it is **deliberately not written down here**: naming the profile
-is naming the exercise, and the unit that sets it is the only place a student should meet it. Every
+fix. Step 0 has three of its own and they are **deliberately not written down here**: naming a profile
+is naming the exercise, and the board that sets them is the only place a student should meet them. Every
 one of these is opt-in, so the default `mvn verify` stays green in all four projects, and the whole
 of the kata's "leave every step green" rule still holds.
 

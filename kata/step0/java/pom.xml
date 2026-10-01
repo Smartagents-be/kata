@@ -26,8 +26,8 @@
 
   <dependencies>
     <!--
-      There is no production code in step 0. The intro's whole Java surface is one reveal test, so
-      the only dependency is the test starter (JUnit and AssertJ, versions managed by the parent).
+      There is no production code in step 0. The intro's whole Java surface is three reveal tests,
+      so the only dependency is the test starter (JUnit and AssertJ, versions managed by the parent).
     -->
     <dependency>
       <groupId>org.springframework.boot</groupId>

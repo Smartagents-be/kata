@@ -5,8 +5,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 
 /**
- * The intro's one flag, and the whole point of it. It runs only under {@code mvn verify -Pintro} (it
- * is an {@code *IT}, wired to failsafe inside that profile), prints the flag, and passes.
+ * The first row of step 0's board. It runs only under {@code mvn verify -Pintro} (it is an
+ * {@code *IT}, wired to failsafe inside that profile), prints the flag, and passes.
  *
  * <p>There is nothing to grade here: step 0 is the intro, so running this <em>is</em> the exercise.
  * It teaches the loop step 2 leans on for real, run Maven with a profile, read the flag it prints,
@@ -24,8 +24,8 @@ class IntroRevealIT {
         String flag = Veil.unveil(STORED, SHIFT);
 
         System.out.println();
-        System.out.println("  step 0 intro: run this to finish the page");
-        System.out.println("  -----------------------------------------");
+        System.out.println("  step 0 intro: the board's first row");
+        System.out.println("  -----------------------------------");
         System.out.printf("  [x] %-24s %s%n", "intro complete", flag);
         System.out.println();
 

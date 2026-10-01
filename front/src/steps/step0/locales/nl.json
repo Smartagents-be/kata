@@ -101,7 +101,7 @@
   "flags.panel.wrong": "Niet die. Lees de flag rechtstreeks uit de build-uitvoer.",
 
   "flag.run.label": "De run",
-  "flag.run.hint": "Vraag je agent om de applicatie te draaien.",
+  "flag.run.hint": "Laat je agent het codeblok van de vorige pagina draaien, in kata/step0/java.",
   "flag.run.help": "Dit is het codeblok van de vorige pagina, nu echt gedraaid. Open kata/step0/java, start je agent daarin en vraag hem dat blok uit te voeren. Er valt niets uit te dokteren: de build drukt de flag af op de regel die zegt dat de intro klaar is. Plak die code hier, mét accolades.",
   "flag.ready.label": "Klaar om te jagen",
   "flag.ready.hint": "Laat je agent mvn verify -Pready draaien vanuit dezelfde map. Als je de sessie van rij één hebt aangehouden, stelt je harness deze run vaak zelf al voor.",
