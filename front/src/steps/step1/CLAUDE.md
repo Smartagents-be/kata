@@ -1133,7 +1133,7 @@ the one small dark surface in it, on `--foreground` rather than `--header`, as t
 The Dutch node reads "Het harness voert uit", on the step's own article (`harness.title` is "Het
 harness"), where the mockup had *de*. It is on the deck as `deck-tools-loop`, animated, ahead of
 `deck-tools-in-context`.
-**`What it can call` names each product's own tools**, one `data-assistant` paragraph per product,
+**`What the agent can call` names each product's own tools**, one `data-assistant` paragraph per product,
 because the names genuinely differ and a list in the other product's names is untrue for that
 reader. Both were read off the vendors' references in October 2026: Claude Code's
 (code.claude.com/docs/en/tools-reference: `Read`, `Write`, `Edit`, `Bash`, `WebFetch`, `WebSearch`,

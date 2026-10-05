@@ -304,8 +304,8 @@
   "survive.clear.label": "Clear the session, or start a new one.",
   "survive.ask.label": "Ask for that work again without repeating the instruction, and watch whether it holds.",
 
-  "connect.title": "Three routes into one window",
-  "connect.description": "Only two of them end on the catalogue. What each one leaves behind in the window is the part to look at.",
+  "connect.title": "Three routes into the same context window",
+  "connect.description": "Only two of them end up at the catalogue. For each route, pay close attention to exactly what information stays behind in the context window.",
   "connect.todo": "Mark this task done",
   "connect.done": "Done",
   "connect.start.label": "Start the step 1 backend, then add a browser MCP server to your agent.",
@@ -317,7 +317,7 @@
   "connect.choose.label": "Ask yourself which of them you would want back on every turn for the rest of the session.",
 
   "shutter.panel.title": "The flag on the page",
-  "shutter.panel.description": "The page your agent just opened was carrying one. Paste it here.",
+  "shutter.panel.description": "The page the agent has just opened contained a flag. Paste it below.",
   "shutter.panel.wrong": "Not that one. Read it off the page again, or off the screenshot it left in your project.",
   "shutter.flag.label": "Drive a browser",
   "shutter.flag.hint": "It is put together while the page runs. Nothing gets it out of the file.",
@@ -358,7 +358,7 @@
   "price.sum.label": "Divide your count by a million, multiply by the rate, and write the number down.",
 
   "spot.title": "Pick the odd one out",
-  "spot.description": "One turn of the loop brought these four results back into the window. The model picks its next step from them.",
+  "spot.description": "One cycle of the agentic loop put four results into the context window. The model uses these results to decide its next step.",
   "spot.check": "Check",
   "spot.retry": "Try again",
   "spot.source.tests": "mvn test",
@@ -375,8 +375,8 @@
   "spot.explanation.docs": "This one gives instructions, which is what makes it tempting. They are written for whoever is reading the page, and they ask for nothing your repository does not already do.",
   "spot.explanation.grep": "The word token is in there twice, and both times it is your own code talking about itself. What a result mentions matters less than who it is addressing.",
 
-  "budget.title": "Budget the window",
-  "budget.description": "Every call below would work, and each row says what it leaves in the window. You need more than one.",
+  "budget.title": "Divide the context window",
+  "budget.description": "Every call below works correctly. Each row shows what information stays behind in the context window. To get the result you want, you need more than one call.",
   "budget.task": "You are adding a ?limit= parameter to GET /api/titles.",
   "budget.check": "Check",
   "budget.retry": "Try again",
