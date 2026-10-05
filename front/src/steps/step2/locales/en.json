@@ -103,14 +103,14 @@
   "where.plan.label": "Ask the agent to plan the same move in plan mode, read its plan against yours, and accept nothing.",
 
   "fifteen.title": "Fifteen minutes, shape only",
-  "fifteen.description": "Nothing is graded and nothing is submitted. The clock is the constraint, and the list of details you did not reach is the answer.",
+  "fifteen.description": "Nothing is graded and nothing is submitted. The clock is the only constraint, and the list of details you did not reach is the real answer.",
   "fifteen.todo": "Mark this task done",
   "fifteen.done": "Done",
-  "fifteen.clock.label": "Put fifteen minutes on a clock.",
-  "fifteen.pick.label": "Pick one: a search box over a list, a link shortener, or an export button.",
-  "fifteen.shape.label": "Ask for the shape only: no empty state, no validation, no progress bar.",
-  "fifteen.loop.label": "Run it, pick the single next thing, ask for that alone.",
-  "fifteen.write.label": "When the clock goes, write down the three details you did not reach.",
+  "fifteen.clock.label": "Set a timer: put fifteen minutes on the clock.",
+  "fifteen.pick.label": "Pick a subject: choose one feature from these options: a search box over a list, a link shortener or an export button.",
+  "fifteen.shape.label": "Focus on the basic shape: ask the agent for the bare visual shape only. Deliberately leave out an empty state, validation and progress bars.",
+  "fifteen.loop.label": "Iterate in small steps: run it, pick one next addition each time and ask for that specific part alone.",
+  "fifteen.write.label": "Record the unfinished details: when the clock goes off, write down the three details you did not manage to finish.",
   "steer.title": "Steer a run",
   "steer.description": "All of this runs against kata/step2/java. Nothing is graded and nothing is submitted; the tick is a bookmark.",
   "steer.todo": "Mark this task done",
@@ -209,7 +209,7 @@
 
   "iteration-paths.description": "Two routes from the same start to the same target. On the left, three long steps that stop beside it. On the right, twelve short ones that land in it, and four dropped versions branching off along the way, each aimed at the target and none of them arriving.",
   "iteration-paths.few": "Prototyping the old way took weeks",
-  "iteration-paths.many": "An agent vibe-codes it in an hour",
+  "iteration-paths.many": "With vibe coding, an agent has it done in an hour",
   "iteration-paths.start": "where you start",
   "iteration-paths.target": "intended result",
 
@@ -304,9 +304,9 @@
   "model-relay.hand-down": "you hand it down",
 
   "walking-skeleton.alt": "An early screenshot of this site: black text on white, one step called Warm-up: FizzBuzz in the sidebar, a notes panel, and a box to type an answer into.",
-  "walking-skeleton.caption": "The first thing this repository rendered, before any of the design system existed.",
+  "walking-skeleton.caption": "This is the very first page this repository rendered, before any part of the design system was in place.",
   "added-details.alt": "The course as it looks now: a dark teal header carrying the title, a white card holding a grouped sidebar with ticks against finished pages, and a unit set in the design system's typefaces.",
-  "added-details.caption": "The same course after the detail work: the header, the colours, the grouped steps, and the settings behind the cogwheel.",
+  "added-details.caption": "The same course after the details were refined: with the proper header, the final styling and colours, neatly grouped steps and the settings behind the cogwheel.",
 
   "tree.root.note": "the repository root",
   "tree.claude-md.note": "read at the start of every session",

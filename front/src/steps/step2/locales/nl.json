@@ -24,14 +24,14 @@
   "where.plan.label": "Laat de agent diezelfde verhuizing plannen in plan mode, lees zijn plan naast dat van jou, en keur niets goed.",
 
   "fifteen.title": "Vijftien minuten, alleen de vorm",
-  "fifteen.description": "Er wordt niets beoordeeld en niets verstuurd. De klok is de beperking, en de lijst details die je niet gehaald hebt is het antwoord.",
+  "fifteen.description": "Er wordt niets beoordeeld en niets verstuurd. De klok vormt de enige beperking, en de lijst met details die je niet hebt gehaald is het werkelijke antwoord.",
   "fifteen.todo": "Markeer deze taak als klaar",
   "fifteen.done": "Klaar",
-  "fifteen.clock.label": "Zet vijftien minuten op een klok.",
-  "fifteen.pick.label": "Kies er één: een zoekvak boven een lijst, een link shortener of een exportknop.",
-  "fifteen.shape.label": "Vraag alleen de vorm: geen lege staat, geen validatie, geen voortgangsbalk.",
-  "fifteen.loop.label": "Draai het, kies het ene volgende ding, vraag alleen dat.",
-  "fifteen.write.label": "Als de klok afgaat, schrijf de drie details op die je niet gehaald hebt.",
+  "fifteen.clock.label": "Timer instellen: zet vijftien minuten op de klok.",
+  "fifteen.pick.label": "Onderwerp kiezen: kies één functionaliteit uit de volgende opties: een zoekvak boven een lijst, een linkverkorter of een exportknop.",
+  "fifteen.shape.label": "Focus op de basisvorm: vraag de agent uitsluitend om de kale visuele vorm. Laat een lege staat, validaties en voortgangsbalken bewust weg.",
+  "fifteen.loop.label": "Itereren in kleine stappen: start de uitvoering, kies steeds één volgende toevoeging en vraag uitsluitend dat specifieke onderdeel.",
+  "fifteen.write.label": "Onafgeronde details vastleggen: schrijf op het moment dat de klok afgaat de drie details op die je niet meer hebt kunnen afronden.",
   "steer.title": "Stuur een run bij",
   "steer.description": "Dit draait allemaal tegen kata/step2/java. Er wordt niets beoordeeld en niets verstuurd; het vinkje is een bladwijzer.",
   "steer.todo": "Markeer deze taak als klaar",
@@ -130,7 +130,7 @@
 
   "iteration-paths.description": "Twee routes van hetzelfde vertrekpunt naar hetzelfde doel. Links drie lange stappen die ernaast stoppen. Rechts twaalf korte die binnenkomen, en onderweg vier versies die eraf takken, elk richting het doel en geen ervan komt aan.",
   "iteration-paths.few": "Traditioneel prototypen kostte weken",
-  "iteration-paths.many": "Een agent vibe-codet het in een uurtje",
+  "iteration-paths.many": "Met vibe coding heeft een agent het in een uurtje klaar",
   "iteration-paths.start": "waar je begint",
   "iteration-paths.target": "beoogd resultaat",
 
@@ -225,9 +225,9 @@
   "model-relay.hand-down": "jij geeft door",
 
   "walking-skeleton.alt": "Een vroege schermafbeelding van deze site: zwarte tekst op wit, één stap in de zijbalk met de naam Warm-up: FizzBuzz, een notitieblok, en een veld om een antwoord in te typen.",
-  "walking-skeleton.caption": "Het eerste wat deze repository rendeerde, voor er iets van het design system bestond.",
+  "walking-skeleton.caption": "Dit is de allereerste pagina die deze repository rendeerde, nog voordat er ook maar iets van het design system op zijn plek stond.",
   "added-details.alt": "Deze cursus zoals ze er nu uitziet: een donkergroene header met de titel, een witte kaart met een gegroepeerde zijbalk en vinkjes bij afgewerkte pagina's, en een unit in de letters van het design system.",
-  "added-details.caption": "Dezelfde cursus na het detailwerk: de header, de kleuren, de gegroepeerde stappen, en de opties achter het tandwiel.",
+  "added-details.caption": "Dezelfde cursus na het verfijnen van de details: voorzien van de juiste header, de definitieve stijldetails en kleuren, overzichtelijk gegroepeerde stappen en de instellingen achter het tandwiel.",
 
   "tree.root.note": "de root van de repo",
   "tree.claude-md.note": "gelezen bij het begin van elke sessie",
