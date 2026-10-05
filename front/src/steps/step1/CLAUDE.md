@@ -702,7 +702,7 @@ to the tenth?"), which is a good plant and an undeclared dependency: a change to
 count, or to what the pipeline does with the tenth entry, visits `session-makeup.block.1` and `.6` in
 both languages.
 
-`WindowFill` is the unit's second figure, under `compaction-picks-moment.1`, and it draws **how full
+`WindowFill` is the unit's second figure, under `automatic-manual-compaction.1`, and it draws **how full
 the window is over one session**, twice: once emptied by compaction and once by a `/clear`, over the
 same three tasks (`de pipeline lezen`, `de bug zoeken`, `de test schrijven`). Compaction fires on its
 own, just under full, in the middle of the second task, and drops to a summary rather than to empty;
@@ -715,7 +715,7 @@ kept cost out on purpose. Neither product works that way. Compaction is a separa
 sends the whole conversation with a summarisation instruction: with a warm cache it reads the prefix
 from cache, but it is still a large request, and the summary is output. A `/clear` costs nothing.
 So the cost is now drawn in, as the **shaded strip at compaction's drop** (`window-fill.reads` and
-`.writes`), and `compaction-picks-moment.2` says it in prose. **Do not put the "same loss, on your
+`.writes`), and `automatic-manual-compaction.2` says it in prose. **Do not put the "same loss, on your
 terms" claim back**, in the prose, in the figure or in `deck.session.clear.note`. The section's point
 survives the change: you choose the seam, and only a clear lets you say what stays.
 
@@ -731,7 +731,7 @@ carrying its column's name, rather than squeezing three columns into a phone. It
 diagram vocabulary (teal is the window's contents, muted is what is not), and it is not a context
 frame, so it does not compete with `ContextFalloff`'s.
 
-`compaction-picks-moment.1` opens on "before the pile stops fitting" rather than "when", because
+`automatic-manual-compaction.1` opens on "before the pile stops fitting" rather than "when", because
 neither product waits for 100% and Copilot CLI starts at about 80%. `.3` is a `data-assistant` pair:
 `.3.claude` names `/autocompact`, which lowers the threshold (100K to 1M tokens) so compaction comes
 earlier, and `.3.copilot` says Copilot CLI already starts at about 80%, in the background, and that
@@ -2061,7 +2061,7 @@ the `<pre>` under `tools.connect-one.1` and `tools.connect-one.2`
 (`claude mcp add` against `copilot mcp add`, which lands in `~/.copilot/mcp-config.json`),
 `tools.what-it-can-call.1` (each product's own built-in tools, under their own names),
 `tools.what-mcp-costs-you.1` and `.2`, `session.window-not-memory.1`,
-`session.compaction-picks-moment.3` (when compaction starts, and whether you can move it),
+`session.automatic-manual-compaction.3` (when compaction starts, and whether you can move it),
 `context.amnesia-context-fatigue.3`
 (nested inside the audience wrapper, never both attributes on one element),
 `model.api-vs-subscription.2` and `.3`, plus `survive.write.*.label` and `window.open.*.label` on
@@ -2081,7 +2081,7 @@ a difference. It is also the only ungated block that names `Copilot CLI` in full
 below asks of a variant block and which holds here too, since the built-in server is the CLI's.
 
 Three things in the step are not a filename or a command, so do not read that sentence as saying
-everything that varies is a word. The newest is `session.compaction-picks-moment.3`, a product fact
+everything that varies is a word. The newest is `session.automatic-manual-compaction.3`, a product fact
 about when compaction starts, and its reasoning is under `session`; the other two follow. `model`'s window section is the larger one and it is **not one of
 the fourteen at all**: it is Claude-only whole, with no Copilot half to pair with, and the reasoning is
 under `model`. `tools.what-mcp-costs-you.1` and `.2` are the smaller, they are two of the thirteen, and
@@ -2126,14 +2126,14 @@ path or a `/context` readout is untrue of the editor. Two places stay on the bar
 
 **What is deliberately shared is the more useful half of this, so do not "fix" it later.**
 `/clear` and `/context` are the same command in both, so
-`session.compaction-picks-moment.2` and every move of `ReadYourWindow` after the first carry no
+`session.automatic-manual-compaction.2` and every move of `ReadYourWindow` after the first carry no
 variant: the readings run verbatim either way, and Copilot CLI's readout (system prompt, custom
 instructions, system tools, MCP tools, messages, free space, buffer) is this step's four layers
 under other names, so a student on either product reads the same shape off the screen. The paragraph
 that used to list those seven groups is gone with the rest of the section's prose. Plan mode exists in both, so `prompt`'s plan-mode section
 and `CutItUp` are untouched. Compaction is automatic in both, so
 `session`'s compaction argument holds for both; only when it starts differs (at the context limit
-in Claude Code, from about 80% in Copilot CLI), and that is `compaction-picks-moment.3`'s pair plus
+in Claude Code, from about 80% in Copilot CLI), and that is `automatic-manual-compaction.3`'s pair plus
 the one string `WindowFill` swaps, not a reason to split anything else. And `ModelTiers`, `ModelPricing` and
 `PickTheTier` stay exactly as they are: the tiers are taught as dispositions, Copilot's own picker
 offers Claude models among others, and the table is evidence for the one-two-four ratio rather

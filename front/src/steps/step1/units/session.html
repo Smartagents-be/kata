@@ -16,7 +16,7 @@
   again with every message you send. The session is where everything settles.
 </p>
 
-<h2 data-i18n="session.wrote-almost-none.heading">You wrote almost none of it</h2>
+<h2 data-i18n="session.wrote-almost-none.heading">You hardly had to write any of it yourself</h2>
 
 <p data-i18n="session.wrote-almost-none.1">
   Count what is in there and your own words barely register. You type a sentence, and the agent opens
@@ -62,9 +62,24 @@
   cheap makes your fiftieth expensive and vague.
 </p>
 
-<h2 data-i18n="session.compaction-picks-moment.heading">Compaction picks the moment, or you do</h2>
+<h2 data-i18n="session.automatic-manual-compaction.heading">Automatic or manual compaction</h2>
 
-<p data-i18n="session.compaction-picks-moment.1">
+<p data-i18n="session.automatic-manual-compaction.4">
+  Compaction happens automatically, based on how full the context window is, or manually, when you
+  start it yourself.
+</p>
+
+<ul>
+  <li data-i18n="session.automatic-manual-compaction.5">
+    <strong>Automatic:</strong> the system steps in by itself as soon as the context window's limit
+    comes into view.
+  </li>
+  <li data-i18n="session.automatic-manual-compaction.6">
+    <strong>Manual:</strong> you decide the exact moment to summarise and clean up the history.
+  </li>
+</ul>
+
+<p data-i18n="session.automatic-manual-compaction.1">
   Before the pile stops fitting, the harness compacts it. A model reads the transcript, writes a
   summary, and the summary is what you carry on with. Detail goes first. And it fires exactly when
   the work has got long and complicated, so it lands in the middle of the hardest thing you did all
@@ -77,7 +92,7 @@
      product difference (when compaction starts) is swapped inside the figure, not here. -->
 <div data-figure="window-fill"></div>
 
-<p data-i18n="session.compaction-picks-moment.2">
+<p data-i18n="session.automatic-manual-compaction.2">
   Compaction is not free. It is an extra request that reads the whole window. <code>/clear</code>
   costs nothing. You choose the seam,
   between two tasks rather than in the middle of one, and the next session opens with what you hand
@@ -86,13 +101,13 @@
 
 <!-- Verified October 2026. Claude Code: code.claude.com/docs/en/model-config (default auto-compact
      thresholds). Copilot CLI: docs.github.com/en/copilot/concepts/agents/copilot-cli/context-management. -->
-<p data-assistant="claude" data-i18n="session.compaction-picks-moment.3.claude">
+<p data-assistant="claude" data-i18n="session.automatic-manual-compaction.3.claude">
   Claude Code compacts when the window is about full, and <code>/autocompact</code> sets that point lower,
   anywhere from 100K to 1M tokens, so compaction comes earlier. It still picks the moment. You only
   move it.
 </p>
 
-<p data-assistant="copilot" data-i18n="session.compaction-picks-moment.3.copilot">
+<p data-assistant="copilot" data-i18n="session.automatic-manual-compaction.3.copilot">
   Copilot CLI starts early on its own: from about 80% of the window it compacts in the background,
   while you keep working. You cannot change that threshold.
 </p>
