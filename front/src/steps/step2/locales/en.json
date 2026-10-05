@@ -102,7 +102,7 @@
   "where.sort.label": "Work out the restructuring: write down which packages have to move, where they go, and which parts the diagram has no place for.",
   "where.plan.label": "Test the agent's plan: have the agent work out exactly the same restructuring in plan mode. Put its proposed plan next to your own analysis, and explicitly do not approve the plan yet.",
 
-  "fifteen.title": "Fifteen minutes, shape only",
+  "fifteen.title": "Rapid modelling against the clock",
   "fifteen.description": "Nothing is graded and nothing is submitted. The clock is the only constraint, and the list of details you did not reach is the real answer.",
   "fifteen.todo": "Mark this task done",
   "fifteen.done": "Done",
