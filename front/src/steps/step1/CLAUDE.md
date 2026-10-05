@@ -1261,8 +1261,8 @@ argues none of that, so do not let it grow back into the argument.
 `PriceOneTurn` is that sum asked for, at the foot of the unit above `PickTheTier`. It exists because
 `cost.4` was an instruction delivered as prose with nothing collecting the result, and because
 `ReadYourWindow`'s `/context` count was a measurement the course took two units earlier and never
-spent. Three moves, ticked to `kata.step1.price`, and **no description line**, the way
-`ReadYourWindow` carries none: the paragraph above it is what says where the work happens. It grades
+spent. Three moves, ticked to `kata.step1.price`, and **a one-line description**, which the
+author added in a later wording pass (it used to carry none, the way `ReadYourWindow` does). It grades
 nothing, and it cannot: the window is the student's own. It carries **no assistant variant**, since
 `/context` is the same command in both, which is what the rest of the step already relies on. The
 card states the method and names no currency, so `ModelPricing` stays the only rate with one and
