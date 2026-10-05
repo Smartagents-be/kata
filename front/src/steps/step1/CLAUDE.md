@@ -83,7 +83,7 @@ the shared `ConnectBoard`, which `model`'s `PickTheTier` is too; the reasoning f
 anything is measured in it. It is prose, seven figures and one exercise. **It still carries no quiz**,
 and that half of the old decision holds: `contextQuiz` and `promptQuiz` are two pages away on either side, and the step's
 third quiz sits under `truth` near the end. What it does carry is
-`PickTheNext` under the usual "Test yourself" heading, and the reasoning for it is under that
+`PickTheNext` under the usual "Test your knowledge" heading, and the reasoning for it is under that
 component below. **Its prose is self-only**, the same wrapper shape `context` uses: in class the
 teacher talks it through at the board, so a guided student gets the seven figures and the exercise
 and nothing else. The figure markers stay top-level and carry no attribute, which is what keeps them on
@@ -666,7 +666,7 @@ So the card is the whole instruction now, and nothing above it may grow a descri
 back. What went with them is the "read what the tool descriptions cost you" move, since a reading
 taken before anything is asked is what move two already does.
 The unit is the one in the step carrying a task *and*
-a registry quiz, so the two share one "Test yourself", which is written up under the exercise
+a registry quiz, so the two share one "Test your knowledge", which is written up under the exercise
 shape below. Three things about the card. **The first move opens `kata/step1/java` with an agent in
 it**, which nothing did while the prose was there, and it is the only move that names a command, so
 it is the only one that splits by assistant (`window.open.claude.label` against
@@ -749,7 +749,7 @@ so when its own box is `@5xl` or wider the table moves beside the charts, and on
 stacking is `@md` on the same container for the same reason: the viewport says nothing about the
 column the figure is in. Its `scale` is fitted to the box `SlideFigure` clips at.
 
-It closes on `SurviveTheClear`, under the same `<hr>` and "Test yourself" heading the other units
+It closes on `SurviveTheClear`, under the same `<hr>` and "Test your knowledge" heading the other units
 use, with no prose between the rule and the card. Four moves: find a thing you would have to say
 again next time, write it into `CLAUDE.md` as one standing instruction, clear the session, ask for
 the work again without repeating yourself. The third move is the exercise. Writing the line down
@@ -833,7 +833,7 @@ and `.2` says to raise it for a hard or many-step task and that the thinking is 
 `deck.prompt.divider.2`, `deck.prompt.reasoning.note` and the `reasoning-level` quiz question's
 correct option and explanation moved with them. Do not put the absorbing claim back in any of them.
 
-`EntryBrief` and `PlanItTwice` close the unit under the usual `<hr>` and "Test yourself", with
+`EntryBrief` and `PlanItTwice` close the unit under the usual `<hr>` and "Test your knowledge", with
 `promptQuiz` arriving under the same heading. The card replaced the self-only aside that told the
 student to try plan mode once, which was a task card written as reading, and the pair replaced the
 version of the card that came after that. Ticked to `kata.step1.plan`, like the rest.
@@ -1060,7 +1060,7 @@ carried by the two figures and that sorting paragraph now, so a prompts paragrap
 has to answer what it adds to them.
 **The who-decides sorting is taught, drawn twice and never checked, and that is a knowing gap.** A
 one-question registry quiz was proposed for it and rejected: four graded or ticked things already
-sit under this unit's one "Test yourself", `promptQuiz` is one page back and `contextQuiz` one page
+sit under this unit's one "Test your knowledge", `promptQuiz` is one page back and `contextQuiz` one page
 forward, and a fifth thing to do makes the busiest page in the course busier. If the unit ever loses
 an exercise, this is the question to add.
 `what-mcp-costs-you.4` is the section's closing aside and **the only number the course puts on how
@@ -1155,7 +1155,7 @@ said why a poisoned result is worse than a wrong one. The card's description now
 from the other side, and the reasoning for how far it goes is beside the card below.
 
 `model` sits after `harness`: prose, five figures, and a card and a board under the same `<hr>` and
-"Test yourself" heading `tools` and `harness` use. **It carries no version numbers anywhere, and that is
+"Test your knowledge" heading `tools` and `harness` use. **It carries no version numbers anywhere, and that is
 the decision.** Tiers
 outlive releases, so the unit teaches Opus, Sonnet and Haiku as dispositions; a card naming this
 quarter's release is wrong by the next one. **The lead no longer says that out loud**: the paragraph
@@ -1362,13 +1362,13 @@ capture and unmounting it swallows the `pointerup` that ends the drag. While a s
 every other line dims, because five lines onto three targets is otherwise hard to read.
 
 Everything the student *does* sits below an `<hr>` at the foot of the unit, under one `<h2>` reading
-"Test yourself". **That heading is the one place in the course where unit prose carries a shared key
+"Test your knowledge". **That heading is the one place in the course where unit prose carries a shared key
 rather than its own**, and the exception is deliberate: every unit with something to do writes
 `data-i18n="ui:quiz.title"`, which is the same string `QuizPanel` puts over a quiz, so the wording
 above a task and the wording above a quiz cannot drift apart. The `ui:` prefix works because
 `nsSeparator` is left at its default while only `keySeparator` is disabled, so i18next reads the
 namespace off the key and `useStepText`'s pinned `ns` gives way to it. Two things follow. A unit's
-"Test yourself" section has **no `<unit>.<section>.heading` key** in either bundle, which is the one
+"Test your knowledge" section has **no `<unit>.<section>.heading` key** in either bundle, which is the one
 break in "a key is a location", and changing the wording is one edit in `shared/i18n/locales`
 rather than one per unit. Reach for a `ui:` key nowhere else: prose belongs to its step. That is the
 shape: prose first, then one rule, then the doing, in the order `connect-one`, `ShutterFlag`,
@@ -1388,7 +1388,7 @@ under the rule and `PatternMatch` arriving after it from the registry, and so do
 puts `PriceOneTurn` under its rule and `PickTheTier` after it. `workshop` was the last one outside the family
 and is in it now, with `OneWindow` and the board under the same `<hr>` and heading, and nothing after
 them. `recap` is outside all of this and always will be: it asks for nothing, so it has no rule, no
-`<hr>` and no "Test yourself".
+`<hr>` and no "Test your knowledge".
 
 `tools` carries one of the step's seven hands-on tasks and all three of its graded exercises, and between them they
 hold advice the prose used to state and no longer does. `ConnectOne` is that task and is a

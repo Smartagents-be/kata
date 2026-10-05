@@ -59,7 +59,7 @@ unit, `step3`'s `change.you-test-engineer.2` links to `gates` (it linked to `eng
 `engineering` and `goals` is now a chip in `RunSheet` rather than a link in `workshop.lead.1`.
 Its prose closes by handing off to `setup` by name, so a reordering there has to visit that
 paragraph. Below that prose sits the step's only *ungraded* exercise, under the same `<hr>`
-and "Test yourself" heading step 1's `tools` uses: fifteen minutes on the clock, one of three
+and "Test your knowledge" heading step 1's `tools` uses: fifteen minutes on the clock, one of three
 skeletons, and nothing graded. The constraint is the clock and the answer is the list of details the
 student did not get to, so do not add a checker, and keep each example ending on what
 is left out, since `fifteen-minutes.2` tells the student to read it there. That ending is what makes
@@ -161,7 +161,7 @@ repository next to the good one. **Its fourth section, `Quality gates`, moved to
 day against production, and it hands off to nothing by name; `gates` is the next unit in the pager
 and its lead is what picks up.
 
-`engineering` closes on `WhereWouldItGo`, a `TaskCard` under the same `<hr>` and "Test yourself"
+`engineering` closes on `WhereWouldItGo`, a `TaskCard` under the same `<hr>` and "Test your knowledge"
 heading, with no prose between the rule and the card: the card's description carries the setting, so
 a paragraph there would say it twice. Five moves, and the task exists because `DomainTree` and
 `kata/step2/java` genuinely disagree. The project keeps `port/` beside `domain/` rather than inside

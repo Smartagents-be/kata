@@ -72,7 +72,7 @@ function UnitView({ step, unit }: { step: Step; unit: Unit }) {
   const { markComplete } = useProgress()
   const markDone = () => markComplete(unitKey(step.id, unit.id))
 
-  // A unit carrying both a task and a quiz writes "Test yourself" above the task itself, so the
+  // A unit carrying both a task and a quiz writes "Test your knowledge" above the task itself, so the
   // quiz joins that section instead of opening a second one with the same name. It is asked of the
   // prepared page rather than of the registry, because the guided cut takes the heading with the
   // rest of the prose and the quiz owns it again in class.

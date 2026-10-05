@@ -156,7 +156,7 @@ const step2: Step = {
       },
       // Then the task under the prose, four moves against kata/step2/java, and the quiz under
       // that. The unit writes the `ui:quiz.title` heading itself, so `showsExerciseHeading` hands
-      // QuizPanel `heading={false}` and the page carries one "Test yourself".
+      // QuizPanel `heading={false}` and the page carries one "Test your knowledge".
       figure: <SteerARun />,
       quiz: steeringQuiz,
     },
@@ -167,7 +167,7 @@ const step2: Step = {
       // One slot, under the `Scripts` section, at the <div data-figure="script-runs"> the unit
       // leaves. Nothing after it reads the drawing, so its own labels carry what it argues.
       inlineFigures: { 'script-runs': <ScriptRuns /> },
-      // The card closes the unit, under the same <hr> and "Test yourself" heading the rest of the
+      // The card closes the unit, under the same <hr> and "Test your knowledge" heading the rest of the
       // course puts over its exercises, with the questions below it. Ungraded: the unit's two
       // claims are worth running rather than answering, so the card asks for the run and the quiz
       // asks for the choice.
