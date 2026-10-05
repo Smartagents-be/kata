@@ -2,11 +2,9 @@ import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * The coordinator pattern: one full context on top, three empty ones underneath. The bars inside the
- * coordinator are what it has been given (your prompt, the session, the files it read); each
- * sub-agent gets one bar, the instruction written for it, and nothing else. The dashed area is the
- * whole point of the drawing, and it is why the caption at the bottom is about re-reading files:
- * what a sub-agent is missing, it has to fetch again at its own cost.
+ * A fresh-worker example. Solid bars mark the coordinator context and delegated briefs;
+ * dashed space marks context still to gather, not absence of system or project instructions.
+ * Forked workers can inherit history. The caption carries that qualification for guided mode.
  *
  * Static on purpose, like the other diagrams in this step. The vocabulary is shared with
  * ReflectionLoop: a teal frame is a context, a bar is something in it, dashes are what is not.
@@ -23,12 +21,12 @@ export function CoordinatorFanout() {
     <figure
       id="coordinator-fanout"
       data-component="CoordinatorFanout"
-      className="my-8 flex justify-center"
+      className="my-8 flex flex-col items-center gap-3"
     >
       <svg
         id="coordinator-fanout-svg"
         data-component="CoordinatorFanout"
-        viewBox="0 0 640 400"
+        viewBox="0 0 640 355"
         role="img"
         aria-labelledby={titleId}
         className="h-auto w-full max-w-xl"
@@ -51,7 +49,7 @@ export function CoordinatorFanout() {
           </marker>
         </defs>
 
-        {/* the coordinator: the expensive model, and the only full context in the drawing */}
+        {/* the coordinator: the conversation and configured model in this example */}
         <rect
           id="coordinator-fanout-coordinator"
           data-component="CoordinatorFanout"
@@ -123,7 +121,7 @@ export function CoordinatorFanout() {
           />
         </g>
 
-        {/* the sub-agents: the instruction at the top, and below it the empty context it starts on */}
+        {/* Delegated briefs and task context to gather; configured instructions also apply. */}
         {subAgents.map((x, index) => (
           <g key={x}>
             <rect
@@ -200,18 +198,14 @@ export function CoordinatorFanout() {
           </g>
         ))}
 
-        <text
-          id="coordinator-fanout-caption"
-          data-component="CoordinatorFanout"
-          x="320"
-          y="384"
-          fontSize="15"
-          textAnchor="middle"
-          className="fill-muted-foreground"
-        >
-          {t('coordinator-fanout.refetch')}
-        </text>
       </svg>
+      <figcaption
+        id="coordinator-fanout-caption"
+        data-component="CoordinatorFanout"
+        className="text-muted-foreground w-full max-w-3xl text-xs"
+      >
+        {t('coordinator-fanout.refetch')}
+      </figcaption>
     </figure>
   )
 }

@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import be.smartagents.kata.java.step1.desk.MeterFilter;
 import be.smartagents.kata.java.step1.services.Catalog;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -19,7 +22,10 @@ import org.springframework.test.web.servlet.MockMvc;
  * the real stages publish is {@code CatalogTest}'s business, so this builds a catalogue from two
  * stub stages instead.
  */
-@WebMvcTest(TitleController.class)
+// The desk meter needs its own domain service; it is not part of this catalogue endpoint slice.
+@WebMvcTest(
+    controllers = TitleController.class,
+    excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = MeterFilter.class))
 @Import(TitleControllerTest.StubCatalog.class)
 class TitleControllerTest {
 

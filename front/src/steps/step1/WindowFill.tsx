@@ -4,13 +4,13 @@ import { useAssistant } from '@/shared/assistant/useAssistant'
 import { useStepText } from '@/shared/i18n/useStepText'
 
 /**
- * How full the window is over one session, drawn twice: once with compaction doing the emptying and
+ * How full the window is over one session, drawn twice: once with automatic compaction doing the emptying and
  * once with a `/clear`. The same three tasks run under both charts, so what differs is when the
  * window empties, how far, and what it took to empty it.
  *
  * It replaced `WhereTheSeamFalls`, which argued that both cuts lose roughly the same amount and kept
  * cost out on purpose. That was not true of the products: compaction is a request of its own that
- * reads the whole window and writes a summary as output, and a clear costs nothing. So this one
+ * reads the whole window and writes a summary as output, and a clear makes no summary request. So this one
  * draws the price in, as the shaded strip at the drop, and the table under the charts says it in
  * words. The two drops are deliberately not the same depth either. A summary is something, so the
  * compacted window lands well above empty; a clear lands on nearly nothing, because what crosses is

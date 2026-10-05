@@ -110,7 +110,7 @@ export function BudgetWindow() {
                 <span
                   id={`budget-window-call-${index}-label`}
                   data-component="BudgetWindow"
-                  className={cn(choiceLabelClass(state), 'font-mono')}
+                  className={cn(choiceLabelClass(state), 'font-mono [overflow-wrap:anywhere]')}
                 >
                   {/* What the call does first, so a student can see why the search is the cheap one. */}
                   <span

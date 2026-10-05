@@ -27,7 +27,9 @@
   <!-- States the unit first and says what is counted in it, then the negation. The word `context` is
        deliberately not used: no unit defines it before `context` itself takes the window apart. -->
   <p data-i18n="tokens.lead.2">
-  Text reaches a language model as tokens. They measure how much text fits and how much is processed. Models that accept images or audio also have representations for those inputs. A token count is not a word count or a character count.
+  Text reaches a language model as tokens. They measure how much text fits and how much is
+  processed. Models that accept images or audio also have representations for those inputs. A token
+  count is not a word count or a character count.
 </p>
 
   <p data-i18n="tokens.lead.3">
@@ -40,7 +42,10 @@
   <h3 data-i18n="tokens.not-words.heading">Models do not process text as separate words</h3>
 
   <p data-i18n="tokens.not-words.1">
-  A tokeniser uses a fixed vocabulary and segmentation rules learned from text. Common words often stay whole; other words split into smaller pieces. The BPE tokeniser in this example applies ranked merges, rather than always choosing the longest known piece. Different tokenisers draw different boundaries.
+  A tokeniser uses a fixed vocabulary and segmentation rules learned from text. Common words often
+  stay whole; other words split into smaller pieces. The BPE tokeniser in this example applies
+  ranked merges, rather than always choosing the longest known piece. Different tokenisers draw
+  different boundaries.
 </p>
 </div>
 
@@ -52,21 +57,17 @@
        id 61. So text and code are about level and ids and hashes are nearly 3 times either (61/22 is
        2.8). Nothing here may say text is the cheapest any more: in Dutch it is not. -->
   <p data-i18n="tokens.not-words.2">
-  In these examples, text and Java code use similar numbers of tokens per character. The id uses nearly 3 times as many. Those ratios depend on the text and the tokeniser. Long logs full of ids can fill the window quickly.
+  In these examples, text and Java code use similar numbers of tokens per character. The id uses
+  nearly 3 times as many. Those ratios depend on the text and the tokeniser. Long logs full of ids
+  can fill the window quickly.
 </p>
 
-  <!-- The bill and the answer have one cause, and the first sentence is it: the vocabulary was built
-       from the training pile, so what comes apart into fragments is what the model read least of. It
-       stays one clause, because `context` owns what a model being an average means and this unit
-       must not start arguing it a step early. This is also where the language claim lives, and it is
-       kept honest on purpose: for a big language the gap is small (the lead sentence is 11 tokens in
-       English and 14 in Dutch, and Anthropic's multilingual-support page puts German and French at
-       about 97% of English; Dutch is not in that table, so no Dutch percentage is stated). It grows
-       for a language with little text online and for a codebase's own names. `TokenSplit` shows
-       one sentence per reader, never an English row beside a Dutch one, since that turned the figure
-       into an argument about languages. Keep the comparison in the prose. -->
+  <!-- Counts follow the shared example: 13 English tokens and 17 Dutch tokens.
+       Fragmentation alone is not evidence of training exposure or language capability. -->
   <p data-i18n="tokens.not-words.3">
-  The sentence above uses 13 tokens in English and 17 in Dutch with this tokeniser. That measures the size of these particular inputs. More fragments do not by themselves prove less training data or worse answers in a language. Check answer quality separately from token counts.
+  The sentence above uses 13 tokens in English and 17 in Dutch with this tokeniser. That measures
+  the size of these particular inputs. More fragments do not by themselves prove less training data
+  or worse answers in a language. Check answer quality separately from token counts.
 </p>
 
   <!-- The heading is the name of the thing, and `.1` names it last, after saying what it is. -->
@@ -117,18 +118,18 @@
        The weights are illustrative. Counts exclude self-attention: n(n-1)/2 gives 21 pairs for
        7 tokens and 91 for 14. These are the figure's inter-token links, not the full attention matrix. -->
   <p data-i18n="tokens.attention.3">
-  The model performs several such weighings and repeats them through its layers. This drawing shows 1 weighing with invented weights and omits attention to the token itself. It has 21 pairs for 7 tokens and 91 for 14. These are connections in the drawing, not a count of billable token reads.
+  The model performs several such weighings and repeats them through its layers. This drawing shows
+  1 weighing with invented weights and omits attention to the token itself. It has 21 pairs for 7
+  tokens and 91 for 14. These are connections in the drawing, not a count of billable token reads.
 </p>
 
-  <!-- The cache, and what it does not do. It reuses what was worked out for the window already there,
-       so that part is billed at the cache-read rate, but that rate is paid every turn for the whole
-       window, and every new token is still weighed against all of it. That is why a long session gets
-       slower and dearer even with a cache; Claude 4.6 and later carry no long-context surcharge, so
-       "dearer" is the whole window paid every turn, not a higher rate. The facts and their dates are
-       in step1/CLAUDE.md. It points at `harness`'s caching section rather than teaching it, and
-       "a tenth of the input price or less" is that unit's phrase, kept word for word. -->
+  <!-- Keep inference KV reuse separate from prompt caching and API category rates. -->
   <p data-i18n="tokens.attention.4">
-  During generation, an inference cache usually reuses earlier attention states. Prompt caching across requests is a separate mechanism: a matching prefix can be billed at a lower rate, while new or uncached input uses its own rate. New tokens still depend on earlier context. Keep that context relevant <svg data-icon="coin"></svg> The <a href="/steps/step1/harness">harness unit</a> explains prompt caching.
+  During generation, an inference cache usually reuses earlier attention states. Prompt caching
+  across requests is a separate mechanism: a matching prefix can be billed at a lower rate, while
+  new or uncached input uses its own rate. New tokens still depend on earlier context. Keep that
+  context relevant <svg data-icon="coin"></svg> The <a href="/steps/step1/harness">harness unit</a>
+  explains prompt caching.
 </p>
 
   <h2 data-i18n="tokens.writing.heading">Writing</h2>
@@ -136,7 +137,9 @@
   <h3 data-i18n="tokens.one-at-a-time.heading">The model generates one token at a time</h3>
 
   <p data-i18n="tokens.one-at-a-time.1">
-  The model scores possible next tokens using the context so far, and a token is selected. It joins the sequence and the next prediction uses that longer sequence. Typical decoding reuses cached states for earlier tokens instead of calculating the whole prefix from scratch each time.
+  The model scores possible next tokens using the context so far, and a token is selected. It joins
+  the sequence and the next prediction uses that longer sequence. Typical decoding reuses cached
+  states for earlier tokens instead of calculating the whole prefix from scratch each time.
 </p>
 </div>
 
@@ -199,7 +202,10 @@
   <h3 data-i18n="tokens.expensive-part.heading">The real cost</h3>
 
   <p data-i18n="tokens.expensive-part.1">
-  Output is priced above input in the table in the <a href="/steps/step1/model">model unit</a>. The model processes the input before decoding an answer token by token. Each new token requires another decoding step and depends on what came before it, with earlier states usually reused from a cache.
+  Output is priced above input in the table in the <a href="/steps/step1/model">model unit</a>. The
+  model processes the input before decoding an answer token by token. Each new token requires
+  another decoding step and depends on what came before it, with earlier states usually reused from
+  a cache.
 </p>
 
   <p data-i18n="tokens.expensive-part.2">

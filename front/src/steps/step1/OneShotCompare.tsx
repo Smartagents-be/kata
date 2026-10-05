@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 /**
  * A before/after wipe over two screenshots, both the output of one one-shot prompt for a
- * book-rental page. The left one had the prompt only and lands on the statistical middle;
+ * book-rental page. The left one had the prompt only and produces a generic design;
  * the right one had the same prompt plus a single Dribbble reference and lands somewhere
  * less generic. Dragging the divider is the point, so the geometry lives here in the step
  * rather than in the unit HTML.

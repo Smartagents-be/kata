@@ -7,7 +7,10 @@
      same claim drawn. -->
 <div data-audience="self">
   <p data-i18n="context.lead.1">
-  The request contains your instructions, available tool definitions and relevant conversation material. Together they form the <strong>context</strong>. Message roles and tool-result provenance can remain marked. Those labels help distinguish authority, but do not guarantee the model interprets every source correctly.
+  The request contains your instructions, available tool definitions and relevant conversation
+  material. Together they form the <strong>context</strong>. Message roles and tool-result
+  provenance can remain marked. Those labels help distinguish authority, but do not guarantee the
+  model interprets every source correctly.
 </p>
 </div>
 
@@ -24,7 +27,9 @@
   <h2 data-i18n="context.model-stateless.heading">A model is stateless</h2>
 
   <p data-i18n="context.model-stateless.1">
-  A conversation does not update the model’s trained weights. The harness supplies the instructions and history needed for each request, sometimes after pruning or summarising them. A cache can reuse earlier processing; it is not durable memory of your decisions.
+  A conversation does not update the model’s trained weights. The harness supplies the instructions
+  and history needed for each request, sometimes after pruning or summarising them. A cache can
+  reuse earlier processing; it is not durable memory of your decisions.
 </p>
 
   <p data-i18n="context.model-stateless.2">
@@ -39,15 +44,18 @@
 </h2>
 
   <p data-i18n="context.task-specific.1">
-  The model predicts using learned patterns and the input it receives. Without the relevant files and requirements, it has little evidence about your particular project. A plausible answer can still be wrong for your code.
+  The model predicts using learned patterns and the input it receives. Without the relevant files
+  and requirements, it has little evidence about your particular project. A plausible answer can
+  still be wrong for your code.
 </p>
 
   <p data-i18n="context.task-specific.2">
-  Relevant context makes your task explicit: the current implementation, the failing case and the conventions to follow. Check that the agent has those before asking it to change the code.
+  Relevant context makes your task explicit: the current implementation, the failing case and the
+  conventions to follow. Check that the agent has those before asking it to change the code.
 </p>
 </div>
 
-<!-- Still part of the "Without context, a model answers with the average" section, but self-learning only. The figure marker
+<!-- Still part of the "Context makes the task specific" section, but self-learning only. The figure marker
      has to be a top-level element to render, so this block sits outside the wrapper above and each
      line carries its own data-audience. In guided mode all of it is removed before the figure is
      placed. -->
@@ -84,7 +92,9 @@
   </p>
 
   <p data-i18n="context.bad-context-bad.3">
-  Wrong context can mislead the model even when its source is labelled. Paste a file that is 3 versions old and the agent can build on a stale assumption. Have it inspect the current file and compare dates or versions when freshness matters.
+  Wrong context can mislead the model even when its source is labelled. Paste a file that is 3
+  versions old and the agent can build on a stale assumption. Have it inspect the current file and
+  compare dates or versions when freshness matters.
 </p>
 
   <p data-i18n="context.bad-context-bad.4">
@@ -99,17 +109,23 @@
   <h2 data-i18n="context.why-bites-hardest.heading">Why this bites hardest in code</h2>
 
   <p data-i18n="context.why-bites-hardest.1">
-  Training material includes code of uneven quality: tutorials, old answers and snippets never tested in your environment. A plausible function can compile while breaking your domain rules. Give the agent your current conventions and executable checks.
+  Training material includes code of uneven quality: tutorials, old answers and snippets never
+  tested in your environment. A plausible function can compile while breaking your domain rules.
+  Give the agent your current conventions and executable checks.
 </p>
 
   <p data-i18n="context.why-bites-hardest.2">
-  Training can teach useful coding practices, but it does not establish what your team chose in 2019. A vague request leaves those choices open. Point at a current implementation and state what must hold, then verify the result.
+  Training can teach useful coding practices, but it does not establish what your team chose in
+  2019. A vague request leaves those choices open. Point at a current implementation and state what
+  must hold, then verify the result.
 </p>
 
   <h2 data-i18n="context.more-context-not.heading">More context is not free</h2>
 
   <p data-i18n="context.more-context-not.1">
-  Content retained in the effective request counts as input again on later requests. Cache reads can lower its price, while pruning or compaction can remove or replace it. Window occupancy measures what is present now; consumption adds up across requests.
+  Content retained in the effective request counts as input again on later requests. Cache reads can
+  lower its price, while pruning or compaction can remove or replace it. Window occupancy measures
+  what is present now; consumption adds up across requests.
 </p>
 
   <p data-i18n="context.more-context-not.2">
@@ -125,17 +141,23 @@
   <h2 data-i18n="context.you-choose-most.heading">You choose most of it</h2>
 
   <p data-i18n="context.you-choose-most.1">
-  Name the class and the case, as the <a href="/steps/step1/prompt">prompt unit</a> asks. Paste the failing assertion and relevant stack trace lines <svg data-icon="coin"></svg> Point at a class that follows your conventions, so the agent has a concrete reference.
+  Name the class and the case, as the <a href="/steps/step1/prompt">prompt unit</a> asks. Paste the
+  failing assertion and relevant stack trace lines <svg data-icon="coin"></svg> Point at a class
+  that follows your conventions, so the agent has a concrete reference.
 </p>
 
   <p data-i18n="context.you-choose-most.2">
-  When you do not know where a change belongs, ask the agent to locate it and report before editing. Starting in <code>kata/step1/java</code> focuses discovery on that project. The working directory is not an access restriction; permissions and sandboxing set that boundary.
+  When you do not know where a change belongs, ask the agent to locate it and report before editing.
+  Starting in <code>kata/step1/java</code> focuses discovery on that project. The working directory
+  is not an access restriction; permissions and sandboxing set that boundary.
 </p>
 
   <h2 id="entropy" style="scroll-margin-top: 5rem" data-i18n="context.entropy.heading">Entropy</h2>
 
   <p data-i18n="context.entropy.1">
-  Between pruning and compaction, a session accumulates material: failed attempts, command errors and files read in several states. Some of that becomes stale while still present in the request. The harness can remove it, but you should not assume every obsolete detail disappears in time.
+  Between pruning and compaction, a session accumulates material: failed attempts, command errors
+  and files read in several states. Some of that becomes stale while still present in the request.
+  The harness can remove it, but you should not assume every obsolete detail disappears in time.
 </p>
 
   <p data-i18n="context.entropy.2">
@@ -145,7 +167,9 @@
   </p>
 
   <p data-i18n="context.entropy.3">
-  Even relevant material can be missed in a long context. Some models and tasks show weaker retrieval for information placed in the middle. That is called <strong>lost in the middle</strong>. Keep critical constraints easy to find and check whether the result follows them.
+  Even relevant material can be missed in a long context. Some models and tasks show weaker
+  retrieval for information placed in the middle. That is called <strong>lost in the
+  middle</strong>. Keep critical constraints easy to find and check whether the result follows them.
 </p>
 
   <h2 data-i18n="context.amnesia-context-fatigue.heading">Amnesia and context fatigue</h2>
@@ -177,7 +201,8 @@
        and nothing warns about the three it does not. -->
   <p data-assistant="claude" data-i18n="context.amnesia-context-fatigue.3.claude">
     When the window is compacted, detail is the first thing to go. For an instruction that has to
-    survive that, write it in <code>CLAUDE.md</code>, which is read at the start of every session. And keep the window from filling up in the first place: cut each task small enough that
+  survive that, write it in <code>CLAUDE.md</code>, which is read at the start of every session. And
+  keep the window from filling up in the first place: cut each task small enough that
     it finishes before the summarising begins.
   </p>
 

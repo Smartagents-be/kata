@@ -12,10 +12,8 @@ import { useStepText } from '@/shared/i18n/useStepText'
  * page. Flipping either of the two figures now means flipping the other, and `PickTheTier`'s column
  * with them.
  *
- * Deliberately version-free. A card naming this quarter's release is wrong by the next one, and the
- * dispositions are what survive. The paragraph that used to say so out loud is gone, so the only
- * thing dating these three is the small `(October 2026)` line under the figure, which dates the cards
- * rather than the unit.
+ * Use family names rather than release versions. The dated cards suggest candidates to evaluate
+ * for a task; their descriptions are heuristics, not permanent capabilities or guarantees.
  */
 const TIERS = ['haiku', 'sonnet', 'opus'] as const
 

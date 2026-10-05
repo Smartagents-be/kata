@@ -1,14 +1,17 @@
 {
   "step.title": "Begin hier",
+
   "welcome.title": "Hoe de kata werkt",
   "backend.title": "Het juiste project starten",
   "workshop.title": "Eerste oefening met bewijs",
+
   "welcome.lead.1": "In deze kata leer je werken met een coding agent. We beginnen eenvoudig, en elke stap voegt nieuwe technieken toe.",
   "welcome.lead.2": "Vraag je agent om <code>install.txt</code> uit te voeren vanuit de root van deze repository. Je agent controleert dan je machine en zet klaar wat de cursus nodig heeft.",
   "welcome.lead.3": "Voor je begint, heb je dit nodig:",
   "welcome.lead.4": "Een lokale clone van deze repository.",
   "welcome.lead.5": "JDK 25 of nieuwer, met Maven in je PATH.",
   "welcome.lead.6": "Een coding agent die je vanuit een terminal gebruikt.",
+
   "welcome.how-course-set-up.heading": "Hoe deze cursus is opgesteld",
   "welcome.how-course-set-up.1": "Je kiest zelf hoe je deze cursus volgt:",
   "welcome.how-course-set-up.2": "<strong>Zelfstandig.</strong> Werk de tekst en de oefeningen in volgorde door.",
@@ -19,11 +22,14 @@
   "assistant.todo": "Vink deze opdracht af",
   "assistant.done": "Klaar",
   "assistant.pick.label": "Klik rechtsboven op het tandwiel en kies de assistent die je zelf gebruikt. Kijk daar meteen of de taal goed staat.",
+
   "welcome.how-exercises-work.heading": "Hoe de oefeningen werken",
   "welcome.how-exercises-work.1": "In de oefeningen kom je strings tegen zoals <code>{f1r5t-5t3p5}</code>. Een string tussen accolades heet een flag. Je zoekt de flag op en vult hem in een veld in je browser in.",
+
   "welcome.hints.heading": "Hints",
   "welcome.hints.1": "Elk antwoordveld heeft een knop Hint. Kom je er niet uit, klik er dan op.",
   "welcome.hints.2": "In de klas vraag je het eerst aan je trainer, voor je op Hint klikt. Je trainer ziet waar de hele groep vastloopt en helpt je sneller verder dan een regel tekst.",
+
   "welcome.legend.heading": "Iconen in de tekst",
   "welcome.legend.1": "Onderweg kom je in de tekst een paar icoontjes tegen.",
   "welcome.legend.gem.title": "Verborgen parel",
@@ -32,18 +38,22 @@
   "welcome.legend.coin.body": "Hetzelfde resultaat, maar met minder tokens.",
   "welcome.legend.pattern.title": "AI-ontwerppatroon (design pattern)",
   "welcome.legend.pattern.body": "Een herbruikbare werkwijze voor een agent. Denk aan een agent die eerst verhelderende vragen stelt voordat hij aan een taak begint.",
+
   "welcome.how-workshops-work.heading": "Hoe de workshops werken",
   "welcome.how-workshops-work.1": "Een workshop is een reeks flags op het platform. Sommige zitten verstopt in de code, en die laat je je agent zoeken. Andere print de build zodra het project doet wat de stap vraagt. Wat je vindt, vul je in op het platform. Het platform controleert je antwoord meteen in de browser.",
+
   "welcome.house-rules.heading": "Huisregels",
   "welcome.house-rules.1": "<strong>Alleen je agent zoekt.</strong> Lees de code niet zelf. Vraag wat je wilt weten en laat de agent het opzoeken.",
   "welcome.house-rules.2": "<strong>Deel het werk op voor je prompt.</strong> \"Zoek de flags in deze repo\" levert een zelfzeker maar fout antwoord op. Elke flag vraagt zijn eigen aanpak.",
   "welcome.house-rules.3": "<strong>Eén flag, één sessie.</strong> Een zoektocht laat een spoor van doodlopende pogingen achter, en bij de volgende flag moet de agent daar allemaal doorheen lezen. Begin voor elke flag een nieuwe sessie, tenzij de stap iets anders zegt <svg data-icon=\"coin\"></svg>.",
   "welcome.house-rules.4": "<strong>Laat de agent de controle uitvoeren.</strong> Een flag die de agent zelf beredeneert, is vaak een geloofwaardige string met 2 letters fout, en hij brengt die met evenveel overtuiging. Laat de agent de build draaien en het antwoord printen. Komen er meerdere kandidaten terug die precies op een flag lijken, dan kies jij. De agent ziet het verschil niet. Jij wel.",
+
   "backend.lead.1": "Er zit Java achter deze kata, en dat is niet één project. Drie stappen hebben elk een eigen project onder <code>kata/</code>, en <code>kata/step3/java</code> ernaast is een lege sjabloon: <code>kata/step0/java</code>, <code>kata/step1/java</code> en <code>kata/step2/java</code>, elk met een eigen <code>pom.xml</code> en een eigen Maven-build. Open de map van de stap waar je mee bezig bent en draai Maven van daaruit. Twee ervan starten een service op poort 8080, dus er draait er maar één tegelijk. Start je de tweede terwijl de eerste nog loopt, dan loopt het opstarten stuk op de poort, niet op iets wat jij fout deed.",
   "backend.lead.2": "De oefeningen draaien om die code. Een unit wijst je een klus aan in het project van die stap, en pas als je die klus doet, komt de flag binnen bereik: soms drukt de build hem af, soms moet je agent hem gaan zoeken. Let vanaf de laatste pagina van deze stap op red herrings: een string tussen accolades is niet altijd degene die je zoekt.",
   "backend.code-blocks.heading": "Codeblokken",
   "backend.code-blocks.1": "Sommige pagina's geven je een codeblok, zoals dat hieronder. Geef het aan je agent om uit te voeren in plaats van het zelf in een terminal te plakken. Huisregel één is de reden, en dit is de goedkoopste plek in de cursus om ermee te beginnen. Niets in de build controleert wie van jullie het gedraaid heeft.",
   "backend.code-blocks.2": "De volgende pagina zet drie van die runs op het platform, en dit blok is de eerste ervan.",
+
   "loop.title": "Hoe een flag op het platform verschijnt",
   "loop.description": "Vier kaarten op een rij, van links naar rechts verbonden met pijlen. Je agent draait de build, de build drukt een regel af met een code tussen accolades erop, jij leest die regel, en je typt wat er staat in het veld op het platform. Een balk onder de eerste twee kaarten zegt dat je machine dat deel doet, en een balk onder de laatste twee dat jij het doet.",
   "loop.band.machine": "dit doet je machine",
@@ -54,8 +64,10 @@
   "loop.box.label": "het platform",
   "loop.you.body": "lees de aangevinkte regel",
   "loop.box.body": "plak hem erin",
+
   "workshop.lead.1.claude": "Staat er een <code>README.md</code> of een <code>CLAUDE.md</code> in een workshop, lees die dan eerst.",
   "workshop.lead.1.copilot": "Staat er een <code>README.md</code> of een <code>.github/copilot-instructions.md</code> in een workshop, lees die dan eerst.",
+
   "code.panel.title": "Probeer het: los deze pagina op",
   "code.panel.label": "De flag van de pagina",
   "code.panel.hint": "Typ of plak de flag uit de alinea hierboven, met de accolades erbij.",
@@ -66,6 +78,7 @@
   "code.panel.wrong": "Net niet. Kopieer de flag uit de alinea hierboven, met de accolades erbij.",
   "code.panel.solved": "Opgelost",
   "code.panel.done": "Juist. Elke flag in de kata vul je op dezelfde manier in.",
+
   "hint.panel.title": "Probeer het: vind de verborgen flag",
   "hint.panel.label": "De verborgen flag",
   "hint.panel.hint": "Klik op Hint",
@@ -76,6 +89,7 @@
   "hint.panel.wrong": "Net niet. Klik op Hint om de flag te zien en kopieer hem dan, met de accolades erbij.",
   "hint.panel.solved": "Opgelost",
   "hint.panel.done": "Juist. Zit je bij een veld vast, dan staat de knop Hint altijd klaar.",
+
   "flags.panel.title": "Eerste workshop",
   "flags.panel.description": "Zoek de flags voor deze workshop in de uitvoer van de gevraagde commando’s. Vul elke flag op de eigen rij in.",
   "flags.panel.progress": "{{solved}} van {{total}} gevonden",
@@ -84,6 +98,7 @@
   "flags.panel.check": "Controleer",
   "flags.panel.solved": "Opgelost",
   "flags.panel.wrong": "Niet die. Lees de flag rechtstreeks uit de build-uitvoer.",
+
   "flag.run.label": "De run",
   "flag.run.hint": "Laat je agent het codeblok van de vorige pagina uitvoeren in kata/step0/java.",
   "flag.run.help": "Dit is het codeblok van de vorige pagina, nu echt gedraaid. Open kata/step0/java, start je agent daarin en vraag hem dat blok uit te voeren. Er valt niets uit te dokteren: de build drukt de flag af op de regel die zegt dat de intro klaar is. Plak die code hier, mét accolades.",
@@ -93,6 +108,7 @@
   "flag.pick.label": "Twee kandidaten",
   "flag.pick.hint": "Het commando mvn verify -Ppick drukt twee strings af in het formaat van een flag, maar er is slechts één regel aangevinkt.",
   "flag.pick.help": "Laat je agent mvn verify -Ppick draaien en laat hem tonen wat eruit kwam in plaats van je te vertellen wat er stond. Er komen twee regels terug in precies de vorm van de flag en één ervan heeft een vinkje. Een agent die de run voor jou gelezen heeft, geeft ze allebei terug, of de verkeerde, en klinkt in beide gevallen even zeker. Het vinkje lezen is aan jou.",
+
   "quiz.what-the-code-is.question": "Wanneer je de pagina leest, zie je ineens een tekst tussen accolades staan, zoals {f1r5t-5t3p5}. Waar dient die voor?",
   "quiz.what-the-code-is.the-answer": "Dit is het antwoord op een schriftelijke opdracht. Je vult het in het veld in om de pagina af te ronden.",
   "quiz.what-the-code-is.run-it": "Het is een stukje code om in je terminal te draaien, en de uitvoer is het echte antwoord.",
@@ -105,6 +121,7 @@
   "quiz.agent-says-it-found-it.right-shape": "Een geldige flag, zolang het formaat klopt. Het platform controleert immers alleen de structuur van het antwoord.",
   "quiz.agent-says-it-found-it.only-builds": "Niets bruikbaars. Alleen een build kan een flag genereren, dus een los gelezen string is nooit correct.",
   "quiz.agent-says-it-found-it.explanation": "Een flag die de agent uit zijn hoofd bedenkt, is een geloofwaardige string met twee letters ernaast, en hij brengt hem met evenveel overtuiging. Het platform hasht één exacte string, en alleen de uitvoer van het programma bevat die zeker.",
+
   "deck.title": "Introductie",
   "deck.welcome.divider.1": "Lees het alleen, of in de les aan het bord",
   "deck.welcome.divider.2": "Kies je assistent achter het tandwiel",

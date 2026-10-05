@@ -45,11 +45,17 @@
      more carefully, but a decision you never made and context you never gave are not in the window
      to be reasoned about, and making the ask exact is this unit's own advice (`be-exact`). -->
 <p data-i18n="prompt.reasoning-level.1">
-  The <strong>reasoning level</strong> guides how thoroughly the model tackles a task. Claude Code’s <code>/effort</code> sets it from low to max on supported models. Higher effort can change reasoning, tool calls and the visible answer <svg data-icon="pattern"></svg> It does not select a fixed number of hidden tokens or supply requirements you never gave.
+  The <strong>reasoning level</strong> guides how thoroughly the model tackles a task. Claude Code’s
+  <code>/effort</code> sets it from low to max on supported models. Higher effort can change
+  reasoning, tool calls and the visible answer <svg data-icon="pattern"></svg> It does not select a
+  fixed number of hidden tokens or supply requirements you never gave.
 </p>
 
 <p data-i18n="prompt.reasoning-level.2">
-  Higher effort can spend more tokens and time. Reasoning tokens are billed as output <svg data-icon="coin"></svg> The chart holds answer length constant to show that cost; real answers and tool use can change too. Use higher effort when the task warrants it, and clarify a vague request first.
+  Higher effort can spend more tokens and time. Reasoning tokens are billed as output <svg
+  data-icon="coin"></svg> The chart holds answer length constant to show that cost; real answers and
+  tool use can change too. Use higher effort when the task warrants it, and clarify a vague request
+  first.
 </p>
 
 <!-- The two quantities the paragraph above asks the reader to weigh, drawn against each other. The
@@ -86,7 +92,10 @@
 </p>
 
 <p data-i18n="prompt.plan-mode.2">
-  A reviewed plan turns an underspecified request into clearer requirements. The exercise changes requirements, planning and model choice together. Its scores show which wishes reached the implementation; they do not isolate the effect of plan mode or model size. For that comparison, keep the model and requirements the same.
+  A reviewed plan turns an underspecified request into clearer requirements. The exercise changes
+  requirements, planning and model choice together. Its scores show which wishes reached the
+  implementation; they do not isolate the effect of plan mode or model size. For that comparison,
+  keep the model and requirements the same.
 </p>
 
 <!-- The boundary on the section, and it closes the prose rather than opening it: the payoff above has
@@ -130,7 +139,10 @@
      cases nobody listed, which is the whole argument for writing it. Same ask as `PromptParts`, so
      the figure's 3rd part and this paragraph are one example. -->
 <p data-i18n="prompt.be-exact.2">
-  Say where the job stops and explain why. “Do not throw an exception from <code>UserRepository</code>, because the nightly import expects null” supplies both a constraint and its purpose. The reason helps the agent spot related mistakes, such as changing that return value to an <code>Optional</code>. Verify that it followed the constraint.
+  Say where the job stops and explain why. “Do not throw an exception from
+  <code>UserRepository</code>, because the nightly import expects null” supplies both a constraint
+  and its purpose. The reason helps the agent spot related mistakes, such as changing that return
+  value to an <code>Optional</code>. Verify that it followed the constraint.
 </p>
 
 <!-- Few-shot and one-shot refer only to the number of examples, explained together in 1 paragraph.
@@ -154,7 +166,9 @@
 </p>
 
 <p data-i18n="prompt.output-format.2">
-  State the action boundary explicitly. “Review only; do not edit files. Give me 3 possible fixes” makes your intent clearer than “suggest a fix”. Then choose an approach and authorise the edit. Use permissions when the boundary must be enforced.
+  State the action boundary explicitly. “Review only; do not edit files. Give me 3 possible fixes”
+  makes your intent clearer than “suggest a fix”. Then choose an approach and authorise the edit.
+  Use permissions when the boundary must be enforced.
 </p>
 
 <h2 data-i18n="prompt.paste-error.heading">Paste the real error</h2>
@@ -172,7 +186,10 @@
 <h2 data-i18n="prompt.no-longer-works.heading">What no longer works</h2>
 
 <p data-i18n="prompt.no-longer-works.1">
-  Typing “think hard” is ordinary prompt text, not a substitute for Claude Code’s <code>/effort</code> setting. A role such as “senior Java engineer” can steer style and behaviour, but does not establish correctness. Concrete requirements, current evidence and checks give you something to verify.
+  Typing “think hard” is ordinary prompt text, not a substitute for Claude Code’s
+  <code>/effort</code> setting. A role such as “senior Java engineer” can steer style and behaviour,
+  but does not establish correctness. Concrete requirements, current evidence and checks give you
+  something to verify.
 </p>
 
 <p data-i18n="prompt.no-longer-works.2">

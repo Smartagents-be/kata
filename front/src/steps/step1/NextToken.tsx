@@ -33,10 +33,11 @@ import { cn } from '@/shared/lib/utils'
  * model: everything it is weighing right now, out of one token. The road not taken is on screen for
  * exactly as long as it is a road, which is the honest window.
  *
- * The counter under the fan is the part that carries the cost claim, and it is why the input is
- * redrawn in full on every pass rather than only the new chip: what the model reads on pass three is
- * not the token it just wrote, it is all seven again.
+ * The counter shows context available to each prediction. Redrawing the full sequence conveys
+ * conditioning on the prefix, not recomputing or billing every token at every decoding step.
+ * Earlier attention states are typically reused through the inference cache.
  *
+
  * **The likelihood line is the second thing this figure now teaches.** Take the favourite at every
  * turn and the sentence you get was still only about a fifth likely, because three near-certainties
  * multiplied are not a certainty. That number is the product of the scores on screen and nothing

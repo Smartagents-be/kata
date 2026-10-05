@@ -55,7 +55,7 @@ leaned on the Catalogue page, which a reader at the top of the unit has not met,
 could not follow it. A limit only reads when its reason does; `be-exact.2` and `few-shot.1` share
 the ask. Neither is to scale, and the share-by-volume figure is still `SessionMakeup` in `session`.
 One term is knowingly loose: `ContextDiagram`'s `resources` is the broad word for what the agent
-read, while `tools` defines `resource` narrowly as content an MCP server hands over uncalled.
+read, while `tools` defines `resource` narrowly as content a host retrieves from an MCP server.
 **Three of them are deliberately not in that
 list**: four layers fill the window, `tokens` is the unit it is counted in, `model` is the reader
 on the other end of it and `truth` is where that reader's answers come from. `tokens` and `model`
@@ -67,7 +67,7 @@ three units to a layer means visiting `context` and every "four layers" sentence
 is a larger change than it looks.
 Three editorial constraints the HTML does not state on its own: every layer unit goes past merely
 naming its layer, and none of the four is allowed to read as a stub (they sat within about a hundred
-words of each other until `tools` grew the MCP material, and that floor is the part that matters); the sub-agent starting blank is the point the three sub-agent `harness` patterns turn on; and
+words of each other until `tools` grew the MCP material, and that floor is the part that matters); fresh workers and forked workers must remain distinct in the three sub-agent `harness` patterns; and
 the pattern diagrams share one vocabulary (a teal frame is a context, a bar is something in it,
 dashes are what is not) that any new diagram should join. `prompt` and `truth` each carry a
 three-question registry quiz and `context` a four-question one, which is the one place the course
@@ -148,18 +148,12 @@ bank with a financial institution; Dutch contrasts a seat with a financial insti
 explains the different roles of query, key and value. `.5` explains the dot product (Dutch:
 inwendig product), `.6` distinguishes scoring keys from combining values, and `.7` distinguishes
 learning the calculations during training from using them during inference. There is no numerical
-example: the course owner found it distracting. `.3` is the count: every token against every token before it is
-n(n-1)/2 pairs, so 7 tokens make 21 and 14 make 91, and the model does it again every turn over the
-whole window. `.4` is what a cache changes. With prompt caching (and the KV cache under it) the work
-already done for the earlier tokens is reused rather than redone, so that part of the window is
-billed at the cache-read rate, a tenth of input on Sonnet 5.5, 0.05x on Opus 5.5 and 0.025x on Fable
-5.1, which is what "a tenth of the input price or less" covers. But that rate is paid on every turn
-for the whole cached prefix, and every new token is still attended against the whole context, so
-generation gets slower as the window grows. Claude 4.6 and later models carry **no long-context
-surcharge** (a 900K-token request is billed at the same per-token rate as a 9K one), so "dearer"
-comes from paying for the whole window every turn, never from a higher rate, and no sentence may say
-a long window costs more per token. The paragraph keeps the coin on "the cheapest token is the one
-that never goes in", which is where `recap.what-costs-do.1` lifts it from, and its link to `harness`.
+example: the course owner found it distracting. `.3` counts the drawing's inter-token links,
+not billable rereads. `.4` distinguishes inference KV reuse during decoding from provider prompt
+caching across requests. Keep those mechanisms separate: a cached prefix has its own billing rate,
+new input uses its own category, and output has another rate. Do not infer usage from context
+occupancy or from the number of attention links.
+
 **`attention.3` explains repeated attention without naming heads or layers**: the course owner
 found the unexplained term unhelpful. It stays with the weighing just explained, says several
 weighings run side by side and are repeated, and identifies the figure as 1 illustrative weighing.
@@ -197,30 +191,20 @@ locale's split, so a new example sentence moves the strip and has to be checked 
 `not-words.2`. There is still no second sentence beside it: a reader only ever sees their own
 language's row, and an English row against a Dutch one made the figure an argument about languages
 instead of about tokens.
-**The unit does make that argument, in `not-words.3`, and it is prose on purpose.** That paragraph
-draws the line from the tokeniser to the training pile, since a vocabulary built from what the model
-read makes rare-in-the-split and rare-in-training the same thing. It states the link **in one clause
-and stops**, because `context` owns what a model being an average means and this unit must not argue
-it four pages early. **The language claim is kept honest, and it no longer tells anyone to ask in
-English.** It used to close on asking in the language the model has read most of, with a gem and a
-coin, and that overstated the gap for a big language: the lead sentence is 11 tokens in English and
-14 in Dutch, and Anthropic's multilingual-support page puts German and French at about 97% of
-English. Dutch is not in that table, so **no Dutch percentage may be stated**; the paragraph names
-German and French and says the gap is small for a big language, wider for one with little text
-online, and wider again for a codebase's own names. Both icons went with the advice, since no move
-is left for them to mark, and `recap.what-costs-do.1` and `deck.recap.moves.note` dropped it too:
-the recap bullet's move is now pasting the part of the log that matters, under the coin it lifts from
-`attention.4`. That bullet still opens "code is dearer than text", which the rate strip no longer
-bears out now that text and code sit level; it belongs to `recap` and was left for its own pass.
-So the claim belongs there rather than in `TokenSplit`: a Dutch row added now would look like the
-figure catching up with the prose, and it would cost the figure the same way it did the first time. **The rate strip under the chips is
+**Token density is an input measurement, not a language-quality evaluation.** `not-words.3`
+uses the shared sentence's current 13 English / 17 Dutch counts. Fragmentation alone does not
+establish training exposure or prediction quality. Keep the density ratios scoped to the displayed
+samples, and update prose, locale and deck counts together when the example changes.
+
+
+**The rate strip under the chips is
 a rate readout rather than a second sample.** Four rows, tokens per hundred characters, all four
 always up on one scale with only the emphasis following the selection: the section's claim is
 comparative and a panel showing one sample at a time left the reader to click, remember and
 subtract. The numbers are worked out from the same pieces the chips are drawn from, the text row's
 from the active locale's split, so the strip cannot drift from the panel above it. `lead.3`'s band
 (roughly 4 to 6 characters per token) is about English and holds the 4.5 the English row prints;
-the Dutch row prints 3.9, which is the gap `not-words.3` is about rather than a contradiction.
+the Dutch row is calculated from its own sentence. These are sample densities, not language-quality rankings.
 **Picking a sample restages the panel, and only the arrival is drawn.** The source line and the count
 come back together and the chips come back one after another from the left, on the shared
 `DURATION.state` and `EASE_QUIET`, which is the cut being made rather than a card being swapped;
@@ -261,6 +245,7 @@ these were produced with tiktoken's `o200k_base` outside the repo and verified i
 `example-sentence.ts` carries them beside the split with a comment saying they must be regenerated
 if the sentence changes. Never hand-edit one. **The sentence is `The agent swears up and down that the
 tests passed locally.`, and in Dutch `De agent beweert bij hoog en bij laag dat de tests lokaal zijn geslaagd.`** It replaced
+
 `TokenSplit`'s old catalogue row, which the author found dull as the first thing the step shows: this one
 is the works-on-my-machine joke, and it still breaks mid-word where no reader would cut it,
 `sw|ears` and `bewe|ert`, which is what `not-words.1` claims happens to a word. English is 13 tokens over 59
@@ -484,19 +469,18 @@ were set in mono once, which said a machine had produced the name. That is the s
 what a cache runs on, so it is load-bearing rather than a simplification: the model works each
 token out only from what comes before it, so appending leaves every earlier calculation intact. That
 is why the cache is `attention`'s last paragraph, straight after the figure, and not part of the
-cost section. Since the review it also says what the cache does *not* save (the whole window paid
-every turn, every new token still weighed against all of it), and it no longer calls rereading the
-cheap part.
+cost section. The prose separates inference reuse from cross-request caching and rates. Retained
+input is processed again across requests, subject to cache rates and pruning.
 
 **`expensive-part` is the last prose section, and `TokenKinds` is its figure.** Its heading is
-`The expensive part` (`Het dure deel`), and it reads as a claim because it sits under the `Writing`
+`The real cost` (`De echte kosten`), and it reads as a claim because it sits under the `Writing`
 part heading: it was `Writing is the expensive part` while the parts were implicit, and the part
 heading now carries the first half. `.1` opens straight on `Output is priced above input`, which
 still reads well under `Writing`. Then reasoning billed as output even when only a summary reaches
 the screen, then the figure putting one turn's reading and writing side by side (`.2` ends on the
 sentence that says so), ahead of the exercise. The prose states the shape and sends prices to
 `model` rather than repeating them. "A tenth of the input price or less" in `attention.4` is the
-phrase this unit has always used for `harness.caching.1`'s rate, kept word for word.
+dated Anthropic rate example owned by `harness.caching.1`, not a universal cache price.
 **`expensive-part.3`'s last sentence leans on the figure's numbers**: reasoning has to stay above
 half the cost bar, so a count edited in `TokenKinds` means rereading that sentence in both
 languages. On the deck the slide title keeps the whole claim (`Writing is the expensive part`),
@@ -620,7 +604,7 @@ a tick that vanished on the next navigation would read as broken progress. And *
 on purpose, since a file that names them does the analysis for the student. Do not add a worked cut,
 a `solve.md`, a `plan-solve.md`, or an implementation.
 
-`context.task-specific.4` closes that unit's section on the average and is `OneShotCompare`'s payoff turned on the
+`context.task-specific.4` closes that unit's section on task-specific evidence and is `OneShotCompare`'s payoff turned on the
 student's own repository: the codebase is the reference image they hand over every turn, so a
 project that drifted is the drift being copied rather than worked around. It reads the figure from
 the other side, which is why it sits under it rather than opening a section of its own, and it is
@@ -713,11 +697,11 @@ under the charts says the same in words: when, what stays, what it costs.
 figure held that both cuts lose roughly the same amount, so position was the whole argument, and it
 kept cost out on purpose. Neither product works that way. Compaction is a separate request that
 sends the whole conversation with a summarisation instruction: with a warm cache it reads the prefix
-from cache, but it is still a large request, and the summary is output. A `/clear` costs nothing.
+from cache, but it is still a large request, and the summary is output. A `/clear` makes no summary request; rebuilding context later still uses tokens.
 So the cost is now drawn in, as the **shaded strip at compaction's drop** (`window-fill.reads` and
 `.writes`), and `automatic-manual-compaction.2` says it in prose. **Do not put the "same loss, on your
 terms" claim back**, in the prose, in the figure or in `deck.session.clear.note`. The section's point
-survives the change: you choose the seam, and only a clear lets you say what stays.
+survives the change: manual `/compact` lets you choose the seam and a focus; both forms of compaction spend tokens.
 
 Three more decisions in it. **The two drops are not the same depth**, because a summary is something
 and a clear hands over only what the student gives it plus what is on disk. **The chart is one drawing
@@ -742,7 +726,7 @@ docs.github.com/en/copilot/concepts/agents/copilot-cli/context-management. All t
 dated and are the first thing to check when this section is next touched.
 
 On the deck it sits on `deck-session-clear`, whose note now says the difference out loud (compaction
-picks the moment and costs a request, a clear costs nothing). **The figure is a container
+can trigger automatically or manually and costs a request; clearing makes no summary request). **The figure is a container
 (`@container`), and that is for the slide.** Under its charts the table made it too tall to magnify,
 so when its own box is `@5xl` or wider the table moves beside the charts, and only the deck's
 `figureWidth: 1400` gives it that much room; the page column and a phone never do. The table's
@@ -819,8 +803,8 @@ which is only allowed where the target owns the answer outright.
 
 `ReasoningCost` is the figure under `reasoning-level.2`, and it draws the two quantities that
 paragraph asks the reader to weigh. **The answer segment is identical in all 5 rows and only the
-dashed thinking segment grows**, which is the whole reading and the misconception `promptQuiz`'s
-`reasoning-level` question tests. Its counts are invented and the caption says so, the way
+dashed thinking segment grows**, which isolates reasoning cost in an illustrative drawing, not a guaranteed effect of effort.
+Real output length, reasoning and tool calls can all vary. Its counts are invented and the caption says so, the way
 `NextToken`'s does; the level names are mono and untranslated, like `ModelPricing`'s model names. It
 carries **no context frame**, on the rule that protects `ToolsInContext`, and no currency.
 
@@ -850,13 +834,10 @@ agent and correct the plan before approving it, restart and score it again. The 
 exercise, since a score settles which run was better and naming the wish you never said out loud is
 the part that is worth anything tomorrow.
 
-**The two tiers came back after they were dropped, and dropping them was the mistake.** The card
-these six moves replaced said "on the cheap tier" and the first draft of this one held the model
-constant, which quietly made the exercise a smaller experiment than the one it replaced:
-`plan-mode.2` is a claim about a cheaper model *with* a plan against an expensive one without, and a
-version that varies only the prompting cannot reach it. So the straight run takes the dearest model
-the student has and the planned run takes the cheapest. The tier runs *against* the plan, which is
-what makes a win unambiguous.
+**The model contrast is a demonstration, not a controlled experiment.** Requirements, planning
+and model choice change together. The scores measure which wishes reached the implementation;
+they cannot isolate whether model size or plan mode caused the improvement. Do not reintroduce
+that causal claim. A controlled comparison would hold model and requirements constant.
 
 **Three of the six moves exist only to keep the two runs independent**, and every one of them was a
 way to come back with a wrong number. There is no live reload in that project, so a score taken
@@ -1145,10 +1126,9 @@ outlive releases, so the unit teaches Opus, Sonnet and Haiku as dispositions; a 
 quarter's release is wrong by the next one. **The lead no longer says that out loud**: the paragraph
 naming the three tiers and telling the student the names change and the shape does not was cut, so
 the figure now opens the unit and the only thing dating it is the small `(October 2026)` line moved
-under it. What survives of the claim is `model.cost.3`, which says the ratios outlast the prices, and
-that is now the only place it is made. Price and speed follow from that: they are ratios (roughly one, two and four per token,
-output about five times input, the small tier two to three times faster) rather than figures, and
-the prose says the ratios outlast the numbers. Do not put a price list or a version back in.
+under it. What survives of the claim is `model.cost.3`, which marks ratios and prices as dated examples, and
+the prose must keep those claims dated and scoped. Do not infer a fixed latency ratio or guaranteed
+model disposition from the tier names. The cards offer candidates to evaluate, not behaviour promises.
 Two boundaries with units either side of it hold the unit up. `prompt` owns the **reasoning level**
 and `model` owns the **tier**, and the section titled "Reasoning level" exists only to keep them
 apart, because a `promptQuiz` distractor is precisely that confusion. So it **opens by pointing at
@@ -1186,7 +1166,7 @@ It is also the one thing in the unit that names versions, and that is a knowing 
 drift. `ModelTiers` beside it stays version-free on the reasoning its own component comment gives
 (tier names outlive releases), so the table is placed to be read as *evidence for a claim* and never
 as a reference: it sits under the paragraph stating the one-two-four ratio, and the paragraphs
-after it sort the rows, say the ratios outlive the numbers, and close on `cost.4` putting the
+after it sort the rows, date the ratios along with the numbers, and close on `cost.4` putting the
 student's own count against them. Keep that order. Moved anywhere else it becomes a price list,
 which is exactly what the paragraph under it tells the student not to learn.
 
@@ -1214,11 +1194,8 @@ section says (`harness.caching.1` read "roughly a tenth" until the top two tiers
 their cache at a twentieth and a fortieth).
 
 **The ratio was one-three-five until October 2026, and it moved because the prices did.** Opus 5.5
-came in at $4 and Sonnet 5.5 at $2, so the table, `model.cost.1`, `model.let-it-pick.1`, `recap`'s
-tier bullet and the deck's two pricing slides were all rewritten together. The next re-read of the
-pricing page has to visit the same five, and `harness.caching.1`, in both languages. The speed claim
-("two to three times faster") could not be re-checked against anything published, since the docs
-rank latency without numbers, so it was left alone. Prices and model names have no `nl` entry, like every other machine-shaped string
+came in at $4 and Sonnet 5.5 at $2, so the table, `model.cost.1` and the deck's two pricing slides were all rewritten together. The next re-read of the
+pricing page has to visit the same five, and `harness.caching.1`, in both languages. The unsupported fixed speed ratio was removed; latency is task-dependent and the chart is illustrative. Prices and model names have no `nl` entry, like every other machine-shaped string
 here; only the unit label, the column heads and the caption translate. The unit (`$ per million
 tokens`) sits **above** the table rather than only in the caption, and outside the scrolling box, so
 a reader who scans straight to the numbers knows what they count and the label does not slide away
@@ -1230,27 +1207,11 @@ warns against. What the caption does carry is the month the prices were read,
 which is the thing that makes the table's staleness visible; a rewrite that drops it leaves the
 figure ageing silently.
 
-The section closes on `model.cost.4`, the one place in the course that multiplies: the count
-`/context` printed in `tools` against the table's rate is one turn in money. It reaches back across
-the step on purpose, because the two halves of the multiplication live a unit apart, and it carries
-no currency of its own, so `ModelPricing` stays the only rate with one. Step 0's last house rule
-tells the student a hunt was not free and says step 1 hands them the numbers, which is a forward
-pointer with no command and no arithmetic in it, so this stays the only paragraph that multiplies. A different paragraph once
-closed the section and went: it argued that you pay the tier's rate on the whole window every turn
-and that the tier is therefore a multiplier on the four layer units. That removal stands, because
-the four layers already argue the re-send, `harness`'s caching section already prices it, and the
-tier is a choice about the reader rather than about what fills the window. `cost.4` measures and
-argues none of that, so do not let it grow back into the argument.
-
-`PriceOneTurn` is that sum asked for, at the foot of the unit above `PickTheTier`. It exists because
-`cost.4` was an instruction delivered as prose with nothing collecting the result, and because
-`ReadYourWindow`'s `/context` count was a measurement the course took two units earlier and never
-spent. Three moves, ticked to `kata.step1.price`, and **a one-line description**, which the
-author added in a later wording pass (it used to carry none, the way `ReadYourWindow` does). It grades
-nothing, and it cannot: the window is the student's own. It carries **no assistant variant**, since
-`/context` is the same command in both, which is what the rest of the step already relies on. The
-card states the method and names no currency, so `ModelPricing` stays the only rate with one and
-`cost.4` stays the one place the course multiplies.
+`model.cost.4` and `PriceOneTurn` read cumulative usage separately from `/context` occupancy.
+The task retains its component and storage identity so progress is not discarded. Both CLI
+products expose `/usage`; counters absent from a product/account are unknown, not zero. Estimate
+API costs from each model and category's rate across requests, and do not equate that estimate to
+subscription charges. `ReadYourWindow` remains a context measurement, not a usage meter.
 
 `SpeedAtScale` is the section's figure and it settles a **threshold**, not a ratio: three counts of
 calls on one axis, the small tier against the top tier, and a guide line at the couple of minutes
@@ -1260,15 +1221,15 @@ had a table for one and nothing for the other. The reading is the crossing rathe
 It takes the step's vocabulary (a bar is something you have, a guide line is what you measure
 against, the way `SessionWindows` draws the hour you go home) and it **carries no context frame**, on
 the rule the whole step follows. Its seconds are hand-authored and the caption says so, the way
-`NextToken`'s does; they are picked to sit inside the two-to-three-times gap the prose states, so
-rewriting `speed.1`'s ratio means re-picking them.
+`NextToken`'s does. They illustrate how repeated serial calls amplify latency; they do not
+establish a provider speed ratio. Measure representative tasks before estimating elapsed time.
 
 **`The five-hour window` is the step's only Claude-only section**, and the gating is on every element
 of it, both `data-figure` markers included. That is what the marker rule in `front/CLAUDE.md` is for:
 a wrapped marker is not cut into a segment, so the figure would silently vanish for everybody. There
 is no Copilot sibling anywhere in it, and the absence is the decision rather than an unwritten half.
-A seat meters premium requests over a calendar month, so there is no rolling window to place and
-none of it would be true for that reader, and the alternative was a paragraph telling them at length
+Copilot has different allowance and billing policies, so the Claude 5-hour window does not
+apply to that reader, and the alternative was a paragraph telling them at length
 about a product they do not have. Because there is no sibling, the keys carry no `.claude` suffix:
 the suffix exists so a missing Dutch half of a *pair* falls back to the right language, and a block
 with no pair cannot do that.
@@ -1492,7 +1453,7 @@ the problem, which the rejection did not cover: this unit has no `data-audience`
 no board, so guided mode filtered it down to two figures and nothing else. `truthQuiz` is the one
 thing on the page that survives into the classroom, and the unit writes no heading of its own, so
 `QuizPanel` prints it the way it does under `prompt`. Its three questions ask where an answer came
-from, and none of them re-argues the average: `contextQuiz`'s `invented-userservice` still owns the
+from, and none of them re-argues learned patterns versus current evidence: `contextQuiz`'s `invented-userservice` still owns the
 missing-context case.
 
 **The lead poses the question and does not answer it**, which is what the four sections are for. It
@@ -1564,7 +1525,7 @@ before either means anything. A third slide before them would spend that opening
 1100 and magnified less than the drawing above it, because `SlideFigure` clips rather than shrinks:
 `width * scale` past the frame takes the left edge off the symbols, which is where the claims are.
 
-Three boundaries hold it up, and each of them is a unit away. **`context` owns the average**, so
+Three boundaries hold it up, and each of them is a unit away. **`context` owns why relevant evidence matters**, so
 this unit must never re-argue that a model is a statistic, that frequency beats quality, or that
 there is more bad code on the internet than good. What `context` never says is that training has a
 *date*, and the cutoff is that gap filled. `contextQuiz`'s `invented-userservice` question is the
@@ -2122,3 +2083,15 @@ Keep text/image/error handling distinct: not every overflow is saved intact to a
 names the normal successful MCP text case and Copilot's byte threshold. `session` and the recap
 qualify their related repeat-cost claims by retained active context. Do not restore the claim that
 the full original result is charged on every later turn.
+
+
+## Accuracy constraints after PR #1 integration
+
+`/context` reports occupancy; `/usage` reports consumption. Keep task/component storage keys stable
+when rewording those exercises. Missing counters are unknown, not zero. Automatic and manual
+compaction both make a summary request with input/output tokens. `/clear` makes no summary request,
+but subsequent context rebuilding still consumes tokens. This distinction must survive guided mode.
+
+Transport tests for `check-entry.mjs` use synthetic dummy titles and partial/stub responses. They
+must not implement EntryController or expose any workshop flag. Setup transport failures affect
+only dependent wishes; an unavailable catalogue is still the startup-error exit path.

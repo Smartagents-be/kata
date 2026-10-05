@@ -1,12 +1,15 @@
 {
   "step.title": "Start here",
+
   "welcome.title": "How the kata works",
   "backend.title": "Run the right project",
   "workshop.title": "First evidence loop",
+
   "assistant.title": "Set your assistant",
   "assistant.todo": "Mark this task done",
   "assistant.done": "Done",
   "assistant.pick.label": "Click the cogwheel at the top right and pick the assistant you use. While you are there, check that the language is right.",
+
   "code.panel.title": "Try it: solve this page",
   "code.panel.label": "The page flag",
   "code.panel.hint": "Type or paste the flag from the paragraph above, braces and all.",
@@ -17,12 +20,14 @@
   "code.panel.wrong": "Not quite. Copy the flag from the paragraph above, braces and all.",
   "code.panel.solved": "Solved",
   "code.panel.done": "Correct. Every flag in the kata goes in the same way.",
+
   "welcome.legend.gem.title": "Hidden gem",
   "welcome.legend.gem.body": "Something that makes day-to-day work easier and is easy to miss.",
   "welcome.legend.coin.title": "Cost saver",
   "welcome.legend.coin.body": "The same result, but with fewer tokens.",
   "welcome.legend.pattern.title": "AI design pattern",
   "welcome.legend.pattern.body": "A reusable way of working for an agent. Think of an agent that asks clarifying questions before it starts on a task.",
+
   "hint.panel.title": "Try it: find the hidden flag",
   "hint.panel.label": "The hidden flag",
   "hint.panel.hint": "Click Hint",
@@ -33,6 +38,7 @@
   "hint.panel.wrong": "Not quite. Click Hint to see the flag, then copy it in, braces and all.",
   "hint.panel.solved": "Solved",
   "hint.panel.done": "Correct. Whenever a box has you stuck, the Hint button is there.",
+
   "loop.title": "How a flag appears on the platform",
   "loop.description": "Four cards in a row, joined left to right by arrows. Your agent runs the build, the build prints a line with a code in braces on it, you read that line, and you type what it says into the box on the platform. A band under the first two cards says your machine does that part, and a band under the last two says you do.",
   "loop.band.machine": "your machine does this",
@@ -43,6 +49,7 @@
   "loop.box.label": "the platform",
   "loop.you.body": "read the ticked line",
   "loop.box.body": "paste it in",
+
   "flags.panel.title": "First workshop",
   "flags.panel.description": "Find the flags for this workshop in the output of the requested commands. Submit each one on its own row.",
   "flags.panel.progress": "{{solved}} of {{total}} found",
@@ -51,6 +58,7 @@
   "flags.panel.check": "Check",
   "flags.panel.solved": "Solved",
   "flags.panel.wrong": "Not that one. Read the flag straight from the build output.",
+
   "flag.run.label": "The run",
   "flag.run.hint": "Have your agent run the code block from the previous page in kata/step0/java.",
   "flag.run.help": "This is the code block on the previous page, run for real. Open kata/step0/java, start your agent in there and ask it to run that block. There is nothing to work out: the build prints the flag on the line that says the intro is complete. Paste that code here, braces and all.",
@@ -60,6 +68,7 @@
   "flag.pick.label": "Two candidates",
   "flag.pick.hint": "The command mvn verify -Ppick prints two strings in the format of a flag, but only one line is ticked.",
   "flag.pick.help": "Have your agent run mvn verify -Ppick and show you what came back rather than telling you what it said. Two lines come back in the flag's exact shape and one of them carries a tick. An agent that read the run for you hands back both, or the wrong one, and sounds equally sure either way. Reading the tick is yours.",
+
   "quiz.what-the-code-is.question": "As you read the page, you suddenly see some text in braces, like {f1r5t-5t3p5}. What is it for?",
   "quiz.what-the-code-is.the-answer": "It is the answer to a written assignment. You enter it in the box to complete the page.",
   "quiz.what-the-code-is.run-it": "It is a snippet to run in your terminal, and its output is the real answer.",
@@ -72,6 +81,7 @@
   "quiz.agent-says-it-found-it.right-shape": "A valid flag, as long as the format is right. After all, the platform only checks the structure of the answer.",
   "quiz.agent-says-it-found-it.only-builds": "Nothing usable. Only a build can generate a flag, so a string read on its own is never correct.",
   "quiz.agent-says-it-found-it.explanation": "A flag the agent reasons out without running anything is a plausible string with two letters wrong, delivered with the same confidence. The platform hashes one exact string, and only the program's output is sure to hold it.",
+
   "deck.title": "Introduction",
   "deck.welcome.divider.1": "Read it alone, or in class at the board",
   "deck.welcome.divider.2": "Set your assistant behind the cogwheel",

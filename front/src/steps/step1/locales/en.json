@@ -1,5 +1,6 @@
 {
   "step.title": "Context, model, mechanisms",
+
   "tokens.title": "Tokens and generation",
   "context.title": "Build relevant context",
   "prompt.title": "Communicate intent",
@@ -10,6 +11,7 @@
   "truth.title": "Claims, evidence and verification",
   "workshop.title": "Investigate with an agent",
   "recap.title": "Connect the mechanisms",
+
   "flags.panel.title": "The flag board",
   "flags.panel.description": "Five flags and five different places the answers can come from. The tasks go from simple to complex, so work from top to bottom.",
   "flags.panel.progress": "{{solved}} of {{total}} found",
@@ -19,6 +21,7 @@
   "flags.panel.placeholder": "{...}",
   "flags.panel.wrong": "Not that one. Go back to where you found it and read it again.",
   "flags.panel.complete": "Five answers, and five places they came from. One of them was never in the service at all, and nothing about the answers themselves told you which was which.",
+
   "flag.machine.label": "Ask what your agent was told",
   "flag.machine.place": "From your machine",
   "flag.machine.hint": "Every new session contains default instructions that this particular project did not add. They apply to every project up front, before you type a single line yourself. Start a fresh agent, ask which initial instructions it received, and then restore your working environment to how it was.",
@@ -45,6 +48,7 @@
   "flag.trace.hint": "The tenth line the pipeline computes is thrown away straight after. Add instrumentation to the run and read the value out while it happens.",
   "flag.trace.help": "GET /api/titles returns nine titles but computes more. Put one log line in Scramble.unveil, the place every restored string passes through, then hit the endpoint. Logging CatalogRun.publish misses it, because the stage holding the flag never publishes. Five leetspoken lines come out of the trace and only one is about the thing you did to find it. Your agent cannot pick; you can.",
   "flag.trace.wrong": "Not that one. More than one line came back in this shape. Read them again.",
+
   "pick-next.title": "Which token could come next?",
   "pick-next.description": "The model has processed the first 4 tokens and is generating the fifth. Which of these could come next?",
   "pick-next.prompt": "What the model has read so far: {{text}}",
@@ -55,6 +59,7 @@
   "pick-next.right": "All 3 can. The model gives every candidate a probability and picks one according to them, and temperature, top-k and top-p set how widely it picks. The road it takes this time is not the road it has to take.",
   "pick-next.wrong": "Not only that one. Every word up there is a road the model can take, and the next time it can take another.",
   "pick-next.explanation": "{{token}} is one of the roads, and the scores say how often, not which one. Even the favourite comes out only most of the time, and most of the time is not a rule.",
+
   "tokenizer-view.label": "a sentence exactly as the model receives it",
   "tokenizer-view.tokens": "Tokens",
   "tokenizer-view.characters": "Characters",
@@ -64,6 +69,7 @@
   "tokenizer-view.text.description": "The sentence cut into {{tokens}} tokens, each on its own background: {{pieces}}",
   "tokenizer-view.ids.description": "The same {{tokens}} tokens as the numbers the model gets: {{ids}}.",
   "tokenizer-view.note": "Split with o200k_base, a public tokeniser. Each piece gets the number it has in the vocabulary.",
+
   "token-network.label": "1 token through the network",
   "token-network.description": "A small network, worked layer by layer. The token {{token}}, which follows {{preceding}}, goes in as 4 numbers: {{input}}. Then come 2 hidden layers of 5 nodes and an output layer of 4. Every node multiplies each input by a weight, adds them up, adds its own bias and, in the hidden layers, turns anything below 0 into 0. The 4 output scores become probabilities: {{output}}.",
   "token-network.next": "Next layer",
@@ -90,6 +96,7 @@
   "token-network.note.lead": "Heavily simplified.",
   "token-network.note.1": "A token id selects a learned embedding. Real embeddings can have thousands of numbers; this example uses {{inputs}}. The initial prompt is processed together with causal attention. During generation, the next token depends on earlier context while cached states usually avoid recomputing its full prefix.",
   "token-network.note.2": "Decoder-only transformers combine attention and feed-forward layers. Learned parameters include embeddings and weights; bias use depends on the architecture. This toy network has {{parameters}} parameters. Real models have many more, and conversation does not update those trained values.",
+
   "token-split.label": "4 kinds of text, split into tokens",
   "token-split.pick": "Pick a sample",
   "token-split.sample.prose": "Text",
@@ -101,6 +108,7 @@
   "token-split.rate.label": "What each one costs",
   "token-split.rate.unit": "tokens per 100 characters",
   "token-split.caption": "Split with o200k_base, a public tokeniser.",
+
   "next-token.label": "which options the model has and how likely each option is",
   "next-token.description": "The model's input so far: {{text}}",
   "next-token.favourite": "Let it pick the favourite",
@@ -112,6 +120,7 @@
   "next-token.likelihood": "The sentence so far was {{likelihood}} likely.",
   "next-token.likelihood-done": "That whole sentence was {{likelihood}} likely: the 3 scores above multiplied. Even when the model picks the favourite every time, it comes out under 20%.",
   "next-token.caption": "The scores are for illustration. A real probability distribution covers the whole vocabulary, and the sampling settings then adjust the odds further before the model makes a choice. The shape does hold: one clear favourite, a few plausible runners-up and an endless line of remaining candidates.",
+
   "sampling-knobs.label": "how widely the model picks",
   "sampling-knobs.description": "The same 4 words that could follow {{preceding}}, and how likely each one is under 5 settings. {{rows}}.",
   "sampling-knobs.name.standard": "standard",
@@ -123,6 +132,7 @@
   "sampling-knobs.hint.top-k": "only the {{k}} best stay",
   "sampling-knobs.hint.top-p": "the best until together they reach {{p}}",
   "sampling-knobs.gone": "gone",
+
   "token-attention.label": "attention: shows which tokens hold the focus and the connections",
   "token-attention.sentence": "He deposits his money at the bank",
   "token-attention.description": "7 tokens in a row, with an arc for every pair. Each token leans on the tokens before it, so every arc runs backwards. Pick a token and each token before it shows how much it is leaned on, adding up to 100%.",
@@ -149,11 +159,13 @@
   "token-kinds.what.reasoning": "the thinking before the answer, billed as output",
   "token-kinds.what.output": "the answer and the tool calls",
   "token-kinds.caption": "Priced at {{model}}'s standing rates, on the default 5-minute cache.",
+
   "diagram.description": "One oval labelled context with three regions inside it: a small one labelled prompt, and two larger ones labelled resources and tools. Everything the agent knows sits inside the oval.",
   "diagram.context": "context",
   "diagram.prompt": "prompt",
   "diagram.resources": "resources",
   "diagram.tools": "tools",
+
   "prompt-parts.description": "A prompt taken apart: the oval labelled prompt, and the 5 things it can carry, each with a clause from one real ask: the goal, an example to follow, a limit with its reason, the output format, and when it is done.",
   "prompt-parts.prompt": "prompt",
   "prompt-parts.goal.label": "Goal",
@@ -166,12 +178,14 @@
   "prompt-parts.format.text": "Finish with 2 sentences: what you changed and how you tested it.",
   "prompt-parts.done.label": "Done when",
   "prompt-parts.done.text": "mvn test is green, with a test for a user that does not exist.",
+
   "oneshot-compare.before": "Prompt only",
   "oneshot-compare.after": "Prompt + reference",
   "oneshot-compare.hint": "Drag the divider to compare.",
   "oneshot-compare.aria": "Drag to compare the prompt-only result with the reference-guided one",
   "oneshot-compare.before-alt": "A plain, generic book-rental landing page from a prompt with no reference",
   "oneshot-compare.after-alt": "A more distinctive book-rental landing page from the same prompt plus a Dribbble reference",
+
   "bundle-compare.drip.label": "Three follow-ups",
   "bundle-compare.bundle.label": "One bundled ask",
   "bundle-compare.you": "you",
@@ -197,6 +211,7 @@
   "bundle-compare.next": "Next",
   "bundle-compare.back": "Back",
   "bundle-compare.restart": "Restart",
+
   "exact-ask.form.label": "The form",
   "exact-ask.form.field": "Name",
   "exact-ask.code.label": "The code behind it",
@@ -224,6 +239,7 @@
   "entry-brief.check.label": "How the score is determined",
   "entry-brief.check.command": "node kata/step1/check-entry.mjs",
   "entry-brief.check.note": "Run this in a local terminal from the root folder of the project. Make sure the service is running before you start. Note: the check's own feedback is in English.",
+
   "plan.title": "The same question, two approaches",
   "plan.description": "Run the task directly, then review a plan against all 6 wishes before implementation. Compare the scores. Changing model, planning and requirements together demonstrates clarification, not which model or mode is better.",
   "plan.todo": "Mark this task done",
@@ -234,6 +250,7 @@
   "plan.undo.label": "Clean up: reset the attempt. Restore EntryController.java with git restore and delete any extra files the agent created.",
   "plan.interview.label": "Plan mode (cheaper model): start a fresh agent on the cheapest model, enter exactly the same prompt line through plan mode and add to the plan based on the 6 requirements before you approve it.",
   "plan.again.label": "Repeat the check and evaluate: restart the service, run the check again and identify which specific requirements would otherwise have been missed.",
+
   "under-specified.description": "The ask \"Add search to the catalogue\" over the large dashed space it leaves unsaid, cut into three pieces. For each piece the agent asks a question back and you make the decision.",
   "under-specified.ask": "the ask",
   "under-specified.request": "\"Add search to the catalogue\"",
@@ -251,28 +268,32 @@
   "under-specified.piece-2": "no match",
   "under-specified.question-2": "what comes back when nothing matches?",
   "under-specified.decision-2": "an empty list, not an error",
+
   "coordinator-fanout.description": "One coordinator delegates 3 tasks. This example shows fresh workers with their task briefs; configured instructions and tools also apply, and forks can inherit history.",
   "coordinator-fanout.coordinator": "coordinator",
-  "coordinator-fanout.full-rate": "full rate",
+  "coordinator-fanout.full-rate": "coordinator model",
   "coordinator-fanout.subagent": "sub-agent",
   "coordinator-fanout.instruction": "the instruction it got",
   "coordinator-fanout.empty": "context to gather",
-  "coordinator-fanout.refetch": "fresh workers fetch relevant files; configured context also applies",
+  "coordinator-fanout.refetch": "Fresh workers fetch relevant files and receive configured instructions and tools. Forks can inherit history; models can be inherited or configured.",
+
   "sequential-steps.description": "Three steps inside one session, each validated before the next one starts, with a marked place to stop between two of them. A fill along the bottom of the session rises with every step, until there is almost no free space left above it.",
   "sequential-steps.session": "one session, from the plan to the last step",
   "sequential-steps.filling": "no room left for step four",
   "sequential-steps.step": "step {{n}}",
   "sequential-steps.validated": "validated",
   "sequential-steps.stop": "stop here, pick it up later",
-  "reflection-loop.description": "An agent with a full context hands its result to a critic that starts empty, and the critic hands back what is wrong with it.",
+
+  "reflection-loop.description": "A critic reviews the result against requirements and checks. Fresh review can reduce anchoring; inherited context and mistakes remain possible.",
   "reflection-loop.agent": "agent",
   "reflection-loop.critic": "critic",
-  "reflection-loop.result": "the result, and nothing else",
-  "reflection-loop.empty": "empty",
+  "reflection-loop.result": "the result to review",
+  "reflection-loop.empty": "review context",
   "reflection-loop.hands-over": "the code",
   "reflection-loop.back": "what is wrong",
   "reflection-loop.stake": "an hour of its own arguments",
-  "reflection-loop.nostake": "no session, nothing to defend",
+  "reflection-loop.nostake": "fresh review, still needs checks",
+
   "survive.title": "One line that outlives the session",
   "survive.description": "Do this in your own project. Pick an instruction you have had to repeat to the agent more than once. Save it somewhere it will be read again tomorrow, throw the session away and check whether the rule stays active.",
   "survive.todo": "Mark this task done",
@@ -282,6 +303,7 @@
   "survive.write.copilot.label": "Record the rule: write the agreement as one lasting instruction in .github/copilot-instructions.md.",
   "survive.clear.label": "Reset the context: clear the current session or start a clean chat session.",
   "survive.ask.label": "Verify it works: ask for the same work again without repeating the instruction in your prompt, and check whether the agent sticks to it on its own.",
+
   "connect.title": "Three routes into the same context window",
   "connect.description": "Only two of them end up at the catalogue. For each route, pay close attention to exactly what information stays behind in the context window.",
   "connect.todo": "Mark this task done",
@@ -293,12 +315,14 @@
   "connect.shoot.label": "Ask it for a screenshot, then find the PNG it wrote into .playwright-mcp/ in your project.",
   "connect.compare.label": "Read the turns back and compare what each route left behind in the window.",
   "connect.choose.label": "Ask yourself which of them you would want back on every turn for the rest of the session.",
+
   "shutter.panel.title": "The flag on the page",
   "shutter.panel.description": "The page the agent has just opened contained a flag. Paste it below.",
   "shutter.panel.wrong": "Not that one. Read it off the page again, or off the screenshot it left in your project.",
   "shutter.flag.label": "Drive a browser",
   "shutter.flag.hint": "It is put together while the page runs. Nothing gets it out of the file.",
   "shutter.flag.help": "This is the tools layer from the other side: the result comes back because something went out and got it. The page is kata/step1/front/index.html and there is no service behind it, so your agent opens the file itself through the browser MCP server. The string is only built when the button is pressed. Reading the file, grepping it or asking the agent what it says all come back empty. The screenshot lands in .playwright-mcp/ in your project, so this tool leaves something on your disk as well as in the window.",
+
   "window.title": "Count what fills it",
   "window.todo": "Mark this task done",
   "window.done": "Done",
@@ -307,6 +331,7 @@
   "window.fresh.label": "Run /context before you type anything.",
   "window.ask.label": "Ask for a change that makes the agent open a few files, then run /context again.",
   "window.remove.label": "Remove the server you connected in the unit on the agentic loop, start over, and check whether the first number moved.",
+
   "hunt.title": "One session, five flags",
   "hunt.description": "Measure how much context the investigation adds to your session.",
   "hunt.todo": "Mark this task done",
@@ -315,6 +340,7 @@
   "hunt.work.label": "Step 2: get all five flags in one uninterrupted session.",
   "hunt.count.label": "Run /context again and record the change in window occupancy. This difference is not total token usage or a bill.",
   "hunt.judge.label": "Step 4: decide which flag was solved on its own and where human steering was needed.",
+
   "cut.title": "Decomposition in practice",
   "cut.description": "The problem statement is in the repository at kata/step1/java/problem.md. A library is asking for a feature that is briefly worded and full of ambiguities. Work through the problem in the order below.",
   "cut.todo": "Mark this task done",
@@ -331,6 +357,7 @@
   "price.read.label": "Run /usage and /context before the task. Record per-model token categories, any reported cost or credits, and window occupancy.",
   "price.rate.label": "Ask the agent to inspect a file and explain it. Run both commands again without clearing, and subtract the earlier usage totals.",
   "price.sum.label": "For an API estimate, multiply each reported category by its own rate and add the results. Include all requests and models; record unavailable counters as unknown. Compare with the reported estimate or credits, not the /context difference.",
+
   "spot.title": "Pick the odd one out",
   "spot.description": "One cycle of the agentic loop put four results into the context window. The model uses these results to decide its next step.",
   "spot.check": "Check",
@@ -348,6 +375,7 @@
   "spot.explanation.tests": "A failing test is telling you what happened, not what to do next. Nothing in it addresses the agent.",
   "spot.explanation.docs": "This one gives instructions, which is what makes it tempting. They are written for whoever is reading the page, and they ask for nothing your repository does not already do.",
   "spot.explanation.grep": "The word token is in there twice, and both times it is your own code talking about itself. What a result mentions matters less than who it is addressing.",
+
   "budget.title": "Divide the context window",
   "budget.description": "Every call below works correctly. Each row shows what information stays behind in the context window. To get the result you want, you need more than one call.",
   "budget.task": "You are adding a ?limit= parameter to GET /api/titles.",
@@ -376,6 +404,7 @@
   "budget.explanation.reference": "The whole reference page for one annotation you already use twice in the file you are editing.",
   "budget.explanation.tree": "Nothing about a query parameter is a dependency question, and the tree is ten times longer than the controller.",
   "budget.explanation.listing": "A glob tells you what files exist. The grep tells you which one matters, in one line instead of seventy-one.",
+
   "match.title": "Which pattern is this?",
   "match.description": "Draw a line from each situation to the pattern that goes with it. Your answers are checked straight away in the browser.",
   "match.progress": "{{linked}} of {{total}} connected",
@@ -394,11 +423,13 @@
   "match.explanation.critic": "A second agent is the coordinator's move too. The difference is what you ask it for: objections rather than code, from something that was not in the room while you decided. That is reflection.",
   "match.explanation.upgrade": "One controller is a chain: the endpoint first, then what it hands back, then the tests. Every step needs the one before it, so there is nothing to hand out in parallel. That is the sequential workflow.",
   "match.explanation.delegate": "Forty files is more than one window should carry, and the judgement each one needs is small. One model works out what has to happen and cheaper ones carry it out, which is the coordinator.",
+
   "falloff.window": "context window",
   "falloff.newest": "new turn in",
   "falloff.dropped": "the detail goes",
   "falloff.description": "A context window drawn as a fixed frame. A new turn enters at the bottom, the oldest turns have collapsed into one short summary bar at the top of the frame, and the detail that did not survive that summary drifts away above it, faded and tilted.",
   "falloff.summarised": "summarised",
+
   "session-makeup.label": "duration: half an hour on the catalogue",
   "session-makeup.description": "Eight blocks from one session, each drawn at its size in tokens. The two the student typed are barely visible next to the files the agent read and the test output it pasted back.",
   "session-makeup.you": "you",
@@ -435,6 +466,7 @@
   "window-fill.clear.when": "when you choose: between two tasks",
   "window-fill.clear.stays": "nothing, except what you hand over and what is on disk",
   "window-fill.clear.costs": "no summary request; rebuilding context later uses tokens",
+
   "agent-loop.description": "A ring that turns clockwise. Your goal and the tools the agent has come in at the top, into the first step, where the model decides. Along the top of the ring, labelled tool_use, the loop runs to the second step, where the harness runs the tool. Along the bottom, labelled tool_result, the result runs back to the model. When the model asks for no more tools, an arrow labelled end_turn leaves it for a card that reads done: the answer.",
   "agent-loop.entry": "your goal + the tools it has",
   "agent-loop.decide.name": "The model decides",
@@ -444,6 +476,7 @@
   "agent-loop.exit.tag": "no more tools asked for",
   "agent-loop.exit.text": "✓ done: the answer",
   "agent-loop.caption": "tool_use, tool_result and end_turn are what the Claude API calls these moments.",
+
   "tools-in-context.description": "A context window with your prompt in it and a tool drawn across its edge: the half the model can call sits inside the window, the half that runs sits outside it, and an arrow brings the result back in as three long bars.",
   "tools-in-context.context": "context",
   "tools-in-context.prompt": "prompt",
@@ -452,6 +485,7 @@
   "tools-in-context.commands.1": "grep · find",
   "tools-in-context.commands.2": "curl · read",
   "tools-in-context.result": "tool result",
+
   "mcp-server.description": "The same context window as the previous figure. A single line leaves a dashed box outside it labelled mcp server, crosses the window's edge, and fans out into four tool description bars sitting inside the window next to the prompt.",
   "mcp-server.context": "context",
   "mcp-server.prompt": "prompt",
@@ -461,32 +495,39 @@
   "mcp-server.tool.2": "list_issues",
   "mcp-server.tool.3": "open_pr",
   "mcp-server.tool.4": "run_query",
+
   "mcp-parts.description": "Three separate dashed cards: a prompt template, shown as a solid teal bar, a resource to retrieve, shown as a stack of faint bars, and a tool to call, shown as a rounded outline.",
   "mcp-parts.prompt.name": "prompt",
   "mcp-parts.prompt.who": "you choose a template",
   "mcp-parts.resource.name": "resource",
   "mcp-parts.resource.who": "your harness retrieves it",
+
   "mcp-parts.tool.name": "tool",
   "mcp-parts.tool.who": "model requests a tool",
+
   "mcp-ovals.description": "The same three offerings shown as equal-sized ovals: prompt, resource and tool. These are symbols, not measurements of context use.",
+
   "tiers.opus.name": "Opus",
   "tiers.opus.character": "For complex work",
   "tiers.opus.body": "A candidate for tasks with many dependencies or difficult decisions. A larger model can still misread ambiguity and make mistakes. State the constraints and compare its results with the other tiers on representative tasks.",
   "tiers.opus.tag.1": "high-stakes analysis",
   "tiers.opus.tag.2": "long-form reasoning",
   "tiers.opus.tag.3": "edge cases",
+
   "tiers.sonnet.name": "Sonnet",
   "tiers.sonnet.character": "A starting point to evaluate",
   "tiers.sonnet.body": "Try this tier for routine coding and analysis, then compare quality, latency and cost on your workload. Claims of certainty and uncertainty still need checking against evidence.",
   "tiers.sonnet.tag.1": "agentic coding",
   "tiers.sonnet.tag.2": "anything new",
   "tiers.sonnet.tag.3": "honesty matters",
+
   "tiers.haiku.name": "Haiku",
   "tiers.haiku.character": "For well-defined tasks",
   "tiers.haiku.body": "Try a smaller model for classification, extraction and tightly specified operations. It can reduce latency and price, but speed and correctness depend on the task. Validate outputs before relying on the saving.",
   "tiers.haiku.tag.1": "classification",
   "tiers.haiku.tag.2": "structured extraction",
   "tiers.haiku.tag.3": "routing layers",
+
   "pricing.unit": "$ per million tokens",
   "pricing.head.model": "Model",
   "pricing.head.input": "Input",
@@ -495,8 +536,10 @@
   "pricing.head.read": "Cache read",
   "pricing.head.output": "Output",
   "pricing.caption": "Standing rates, read in October 2026.",
+
   "usage-readout.alt": "A terminal readout with three labelled bars. The current session is 6% used and resets at 5:29pm, the current week across all models is 13% used and resets on 4 August, and the current week for one model is 2% used.",
   "usage-readout.caption": "The /usage readout in Claude Code, July 2026.",
+
   "session-windows.description": "One working day of eight hours at the desk, drawn twice, with the same two five-hour windows on it. In the first row the windows start whenever the day happened to start, so the seam between them falls in the middle of the afternoon and two and a half hours of window are left over after you have gone home. In the second row the first window opens five hours before the break, so it ends exactly at the break, the next one covers the break and the whole afternoon, and only an hour is left over.",
   "session-windows.day": "your day",
   "session-windows.break": "break",
@@ -513,6 +556,7 @@
   "speed-at-scale.calls.100": "a hundred calls",
   "speed-at-scale.guide": "you stop watching",
   "speed-at-scale.caption": "The seconds are illustrative.",
+
   "pick.title": "Which model do you pick for which situation?",
   "pick.description": "Draw a line from each situation to the most suitable model. There are three models and five situations, which means several situations end up on the same model. Your answers are checked straight away in the browser.",
   "pick.armed": "Now pick the tier you would give it.",
@@ -526,40 +570,46 @@
   "pick.scenario.limit": "Add a ?limit= parameter to GET /api/titles, with the tests that go with it.",
   "pick.scenario.plan": "The approved plan in plan-solve.md is ready to be carried out. The implementation touches eleven different files that have to fit together seamlessly.",
   "pick.scenario.flaky": "An automated test fails on average once in twenty runs, but passes straight away when it is rerun. So far nobody has managed to reproduce the problem on purpose.",
-  "pick.explanation.queues": "Nothing here is open to interpretation and there are thirty thousand of them. That is the small tier's whole case: fast and cheap, on work with nothing left to get wrong.",
+  "pick.explanation.queues": "A smaller model is a candidate for these tightly specified operations. Run the same checks and compare accuracy, latency and price before choosing.",
   "pick.explanation.redact": "Any of the three will do it, so there is no wrong line here. What changes is how much gets past the strip: the small tier applies the formats you wrote down and stops there, and the larger ones catch the account number nobody documented a format for. Pick by how much you can afford to miss. Work shaped like this comes back every week, and repeating work is a problem of its own. You take it apart in the next step.",
   "pick.explanation.limit": "Ordinary coding, spelled out, with the tests named. That is the middle tier, which is where most agentic coding sits and the place to start.",
   "pick.explanation.plan": "The plan already did the hard thinking, which is the argument the prompt unit made. What is left is carrying it out across files that interlock, and that is the middle tier rather than a job for the top one.",
   "pick.explanation.flaky": "No reproduction and no obvious cause, so this one runs long and wanders. Holding a hunt together across many steps is the thing you pay the top tier for.",
+
   "the-cutoff.description": "One release line with the training cutoff drawn across it. The versions to the left of the line sit in filled chips, the ones published after it in dashed outlines with nothing inside them, and the last of those is the version the project is on.",
   "the-cutoff.stop": "training stopped",
   "the-cutoff.before": "in the model",
   "the-cutoff.after": "published since",
   "the-cutoff.yours": "the version you are on",
+
   "trained-or-grounded.description": "The same question answered out of two context windows. The left one holds only the prompt, the right one holds the prompt and the file it was told to read. The two answers below them are drawn the same size and the same shade, and they say different versions.",
   "trained-or-grounded.trained": "from training",
   "trained-or-grounded.grounded": "grounded",
   "trained-or-grounded.prompt": "prompt",
   "trained-or-grounded.empty": "nothing else in here",
   "trained-or-grounded.answer": "answer",
+
   "answer-provenance.claim": "what the answer says",
   "answer-provenance.source": "what it was read from",
   "answer-provenance.missing": "read nowhere",
   "answer-provenance.titles": "returns the list the catalogue page shows",
   "answer-provenance.filter": "filters those titles by author",
   "answer-provenance.endpoint": "is the endpoint behind them",
+
   "quiz.forgets-this-morning.question": "You have been working on the same project all morning. At 14:00 you ask the agent something you already told it at 08:00, and it does not remember. What happened?",
   "quiz.forgets-this-morning.window": "The window filled up, and the morning was compacted into a summary or pushed out of it.",
   "quiz.forgets-this-morning.ignored": "Everything from 08:00 is still in the context, but the model decided it was no longer relevant.",
   "quiz.forgets-this-morning.lookup": "The model looks your history up in a database per session, and this morning is in a different partition.",
   "quiz.forgets-this-morning.learning": "The model learned during the day and overwrote the old instruction with something it liked better.",
   "quiz.forgets-this-morning.explanation": "The harness supplies history for each request. Pruning or compaction can remove a detail even though it remains in an earlier transcript.",
+
   "quiz.invented-userservice.question": "You ask the model to explain what UserService in this repository does. It answers confidently, and the answer has nothing to do with the UserService that is actually there. Why?",
   "quiz.invented-userservice.never-read": "It answered from learned patterns without inspecting this repository’s UserService.",
   "quiz.invented-userservice.too-complex": "It read the file, but the class is too long for the model to follow.",
   "quiz.invented-userservice.cached": "It read a cached copy of the file from an earlier session, and the cache is stale.",
   "quiz.invented-userservice.naming": "Your team uses a naming convention the model was never trained on, so it could not match the class.",
   "quiz.invented-userservice.explanation": "Without inspecting the current file, a plausible answer has no evidence about this implementation. Ask for source evidence and check it.",
+
   "quiz.quality-degrades.question": "A long session is running. The agent starts contradicting itself, proposes an approach you rejected an hour ago, and edits a file back to a version you moved past. What is going on?",
   "quiz.quality-degrades.entropy": "Entropy. The context filled with the session's leftovers, and the model weighs all of it.",
   "quiz.quality-degrades.degrades": "The model degrades the longer it runs, the way a machine drifts as it heats up.",
@@ -572,18 +622,21 @@
   "quiz.pasted-old-file.too-old": "The file was written after the model's training cutoff, so the format is unfamiliar to it.",
   "quiz.pasted-old-file.window-too-small": "The config did not fit in the window alongside everything else, so only part of it was read.",
   "quiz.pasted-old-file.explanation": "A source label does not establish freshness. Checking the current file can expose an outdated assumption before the edit.",
+
   "quiz.plan-beats-one-shot.question": "A colleague types a vague one-line question into the most expensive model and gets an unusable result. You have a cheaper model carry out the same task through plan mode, check and approve the plan, and the result is right straight away. Where does the difference lie?",
   "quiz.plan-beats-one-shot.precision": "The plan clarified the exact steps, so the agent got a much more precise instruction.",
   "quiz.plan-beats-one-shot.throttled": "The expensive model was temporarily capped, so it generated a lower-quality answer.",
   "quiz.plan-beats-one-shot.newer": "The cheaper model was trained more recently and has better code examples to draw on.",
   "quiz.plan-beats-one-shot.cache": "The agent used a cached answer that the provider had improved in the meantime.",
   "quiz.plan-beats-one-shot.explanation": "Reviewing the plan supplied clearer requirements. This comparison also changed planning and model choice, so it does not prove which of those caused the improvement.",
+
   "quiz.six-follow-ups.question": "You wanted to make one specific change, but spread it over six separate messages, each with a small correction. In the last message the agent contradicts itself and puts back a change you had it remove two messages earlier. What causes this?",
   "quiz.six-follow-ups.compounding": "All the earlier messages and rejected intermediate versions stay in the context window, so the model takes that wrong information into account again.",
   "quiz.six-follow-ups.last-message": "The model only processes your last message and ignores the five corrections before it when it generates the answer.",
   "quiz.six-follow-ups.auto-summary": "The harness summarised the six messages before sending them, so the details of your earlier corrections were lost.",
   "quiz.six-follow-ups.less-effort": "The model gives less weight to short messages, so a series of separate asks is processed less accurately than one bundled instruction.",
   "quiz.six-follow-ups.explanation": "Rejected versions can remain in the request and distract the model despite their labels. Keep the current requirements clear and remove irrelevant history when needed.",
+
   "quiz.reasoning-level.question": "You keep the same model and task, raise effort, and the usage report shows more reasoning tokens. What does that tell you?",
   "quiz.reasoning-level.thinking-tokens": "This run spent more on reasoning; effort guides thoroughness rather than fixing a hidden-token count.",
   "quiz.reasoning-level.bigger-model": "The environment switched to a larger model, which explains both the higher quality and the rise in cost.",
@@ -608,6 +661,7 @@
   "quiz.read-it-and-said-so.after-cutoff": "The file was too new for the model's knowledge cutoff.",
   "quiz.read-it-and-said-so.nothing-in-window": "The model relied on recognition from its training data instead of the specific code.",
   "quiz.read-it-and-said-so.explanation": "Grounded is not proved. A test that runs is a claim that can fail in front of you, and a reading never is.",
+
   "deck.tokens.split.title": "A model does not read words",
   "deck.tokens.split.note": "In these samples, text and code use similar counts; the id uses nearly 3 times as many.",
   "deck.tokens.language.title": "Token counts measure <hi>input size</hi>",
@@ -615,14 +669,16 @@
   "deck.tokens.next.title": "And it writes 1 token at a time",
   "deck.tokens.attention.title": "Each prediction depends on <hi>earlier context</hi>",
   "deck.tokens.attention.note": "7 tokens make 21 pairs. 14 make 91, not 42.",
+
   "deck.prompt.parts.title": "What <hi>1 prompt</hi> can carry",
   "deck.prompt.bundle.title": "Three questions, or one",
   "deck.prompt.exact.title": "Be exact about what changes",
   "deck.prompt.plan.title": "A reviewed plan makes <hi>requirements explicit</hi>",
+
   "deck.tools.loop.title": "An agent is a model <hi>in a loop</hi>",
   "deck.tools.loop.note": "It stops when the model asks for no more tools.",
   "deck.tools.in-context.title": "The tool runs outside the window",
-  "deck.tools.in-context.note": "Only the result crosses back in, and it crosses back in as ordinary text.",
+  "deck.tools.in-context.note": "The harness returns a marked tool result. Source labels do not guarantee correct interpretation.",
   "deck.tools.mcp.title": "One wire, and what it carries lands in your window",
   "deck.tools.parts.title": "Sort them by who decides",
   "deck.tools.list.title": "Loaded descriptions take <hi>context space</hi>",
@@ -631,6 +687,7 @@
   "deck.tools.injection.note": "A ticket or web page can try to give the agent a different task. Check the source and review sensitive actions before approving them.",
   "deck.tools.spot.title": "Pick the odd one out",
   "deck.tools.budget.title": "Which two calls answer the question?",
+
   "deck.context.diagram.title": "Different sources, <hi>structured context</hi>",
   "deck.context.stale.title": "A source label does not prove <hi>freshness</hi>",
   "deck.context.stale.note": "Old file contents can remain alongside corrections. Inspect the current version before building on an assumption.",
@@ -640,11 +697,13 @@
   "deck.context.falloff.title": "The model did not get tired. <hi>The evidence left the room.</hi>",
   "deck.context.entropy.title": "Disorder rises every turn unless someone <hi>spends energy</hi>",
   "deck.context.entropy.note": "Stale material can accumulate between pruning and compaction. Even relevant information can be missed in a long context.",
+
   "deck.session.makeup.title": "Two bars in that stack are <hi>yours</hi>",
   "deck.session.clear.title": "The one layer you can still <hi>throw away</hi>",
   "deck.session.clear.note": "Automatic and manual compaction spend input and output tokens. /clear makes no summary request; rebuilding context still costs tokens.",
   "deck.session.memory.title": "The window is <hi>not your memory</hi>",
   "deck.session.memory.note": "Knowing what is in it right now, and being willing to throw it away, is most of what separates people who get work out of an agent from people who fight it.",
+
   "deck.harness.decomposition.title": "What you ask for is always <mute>thinner</mute> than what you want",
   "deck.harness.decomposition.note": "Cuts go on the board before anyone opens an agent. Three people, three different cuts.",
   "deck.harness.coordinator.title": "The coordinator",
@@ -656,32 +715,36 @@
   "deck.harness.cache.title": "The cache is a <hi>prefix match</hi> from the first byte",
   "deck.harness.cache.note": "Changing an early prefix can invalidate what follows. TTL and rates depend on provider and configuration; inspect reported usage.",
   "deck.harness.patterns.title": "Which pattern fits?",
-  "deck.model.tiers.title": "One family, three dispositions",
+
+  "deck.model.tiers.title": "One family, <hi>different task candidates</hi>",
   "deck.model.pricing.title": "One, two and four",
-  "deck.model.pricing.note": "Learn the shape of it, not the numbers.",
-  "deck.model.money.title": "Your own window, <hi>in money</hi>",
-  "deck.model.money.note": "The count /context printed you, against the rate above. That is one turn, before it has written a word.",
+  "deck.model.pricing.note": "These ratios and prices are dated. Recheck them for the model and provider you use.",
+  "deck.model.money.title": "Cumulative usage, <hi>separate from capacity</hi>",
+  "deck.model.money.note": "Read /usage across requests. Input, cache reads, cache writes and output have their own rates; /context occupancy is not a bill.",
   "deck.model.speed.title": "Where <hi>quick</hi> stops being cheap",
-  "deck.model.speed.note": "The small tier answers two to three times faster. A fast wrong answer costs you the run it broke and the run that fixed it, and you paid for both.",
-  "deck.model.billing.title": "The tokens are the same. <hi>Whether you can see them</hi> is not.",
-  "deck.model.billing.note": "A key shows you the number growing while you work. A plan hides it until the limit, and then the cost arrives as waiting.",
+  "deck.model.speed.note": "Measure quality, latency and cost on representative work. The chart’s seconds are illustrative, not fixed speed ratios.",
+  "deck.model.billing.title": "API charges and <hi>subscription allowance</hi>",
+  "deck.model.billing.note": "Read reported usage in both cases. An API dollar estimate is not your subscription invoice.",
   "deck.model.reasoning.title": "Reasoning level is <hi>not</hi> the tier",
-  "deck.model.reasoning.note": "How long one model thinks, against which model is thinking. Turning reasoning up on the small tier does not hand you the top one.",
+  "deck.model.reasoning.note": "How thoroughly a model tackles a task, versus which model does the work. Raising effort does not change the model tier.",
   "deck.model.pick.title": "Which tier would you run?",
+
   "deck.truth.sounds-same.title": "It sounds <hi>the same</hi> either way",
   "deck.truth.sounds-same.note": "Trained or grounded, read off disk or filled in. Confidence is not the signal, so ask where the answer came from.",
   "deck.truth.grounded.title": "Same question, <mute>two windows</mute>",
   "deck.truth.provenance.title": "One answer, and only some of it was <hi>read</hi>",
   "deck.truth.proof.title": "A test that goes red is <hi>a claim that can fail</hi>",
   "deck.truth.proof.note": "\"Does this handle an empty list\" is the agent's reading. A test on an empty list is the machine's.",
+
   "deck.workshop.flags.title": "Five flags, five places an answer can come from",
   "deck.workshop.flags.note": "Ask what your machine told it, read the response, turn the log level up, read the source, trace the run.",
   "deck.workshop.debrief.title": "Which flag could you have <hi>handed over whole</hi>?",
-  "deck.recap.one-window.title": "Eight units, and every one of them <hi>filled the same window</hi>",
+
+  "deck.recap.one-window.title": "The mechanisms behind <hi>each request</hi>",
   "deck.recap.one-window.note": "What fills it, what it costs and who reads it.",
-  "deck.recap.moves.title": "Every move on that list <hi>sends less of it</hi>",
+  "deck.recap.moves.title": "Keep context relevant and <hi>verify the result</hi>",
   "deck.recap.moves.note": "Paste only what matters, bundle, clear at your own seam, turn off what you do not need.",
-  "deck.recap.next.title": "Step 2: Step 2: how you <hi>hand it work</hi>",
+  "deck.recap.next.title": "Step 2: how you <hi>hand it work</hi>",
   "deck.recap.next.note": "Keep the window in mind there.",
   "deck.tokens.tokenizer.title": "Text in, <hi>numbers</hi> out",
   "deck.tokens.network.title": "Numbers in, <hi>probabilities</hi> out",
@@ -714,7 +777,7 @@
   "deck.harness.divider.3": "Choose <hi>what each worker inherits</hi>",
   "deck.model.divider.1": "One family: <hi>one, two and four</hi> per token",
   "deck.model.divider.2": "Output costs about five times input",
-  "deck.model.divider.3": "The tier is a disposition, <mute>not a version</mute>",
+  "deck.model.divider.3": "Choose a model by <hi>measured task performance</hi>",
   "deck.truth.divider.1": "Trained, handed over, or <hi>discovered</hi>",
   "deck.truth.divider.2": "All three arrive in the same voice",
   "deck.truth.divider.3": "Ask for <hi>the check</hi>, not the conclusion",

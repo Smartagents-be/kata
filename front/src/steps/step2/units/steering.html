@@ -92,7 +92,8 @@
 <h2 data-i18n="steering.worktree-each.heading">A worktree each</h2>
 
 <p data-i18n="steering.worktree-each.1">
-  Steering one agent is mostly waiting. Steering three is not three times the work, because the waiting overlaps. A worktree is a second checkout of the same repository, on its own
+  Steering one agent is mostly waiting. Steering three is not three times the work, because the
+  waiting overlaps. A worktree is a second checkout of the same repository, on its own
   branch, in its own folder, sharing the same history. Give every agent one.
 </p>
 
@@ -100,13 +101,18 @@
 git worktree add -b feat/native ../kata-native</code></pre>
 
 <p data-i18n="steering.worktree-each.2">
-  Each worktree has its own checked-out files and branch, with Git history shared underneath. Ordinary edits and build output stay in separate folders. An agent with broader filesystem permissions can still access another worktree. Separate checkouts prevent interference; permissions and sandboxing restrict access.
+  Each worktree has its own checked-out files and branch, with Git history shared underneath.
+  Ordinary edits and build output stay in separate folders. An agent with broader filesystem
+  permissions can still access another worktree. Separate checkouts prevent interference;
+  permissions and sandboxing restrict access.
 </p>
 
 <div data-figure="worktree-each"></div>
 
 <p data-i18n="steering.worktree-each.3">
-  Start each agent in its own worktree and give it a scoped task. Review the branches and run the relevant checks before merging. Enforce any filesystem, network and delivery restrictions separately.
+  Start each agent in its own worktree and give it a scoped task. Review the branches and run the
+  relevant checks before merging. Enforce any filesystem, network and delivery restrictions
+  separately.
 </p>
 
 <h2 data-i18n="steering.stop-at-the-gap.heading">Make it stop at the gap</h2>
@@ -138,7 +144,8 @@ Do not pick the most likely answer and carry on.</code></pre>
 </p>
 
 <p data-i18n="steering.stop-at-the-gap.4">
-  What you get back is a short list instead of a long argument. Each question waits in one file, and the answers outlive the session. The file is on disk too, so it outlives
+  What you get back is a short list instead of a long argument. Each question waits in one file, and
+  the answers outlive the session. The file is on disk too, so it outlives
   the session that produced it. Clear the context, hand back <code>gaps.md</code>, and the decisions
   you already made are still made.
 </p>

@@ -2,10 +2,9 @@ import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * Reflection: the agent hands its result to a critic that starts on nothing. The two frames use the
- * same vocabulary as CoordinatorFanout, and the asymmetry is the argument. The agent is full of its
- * own session, which is exactly why it agrees with itself; the critic holds the result and a dashed
- * empty space, which is why what it hands back is worth reading.
+ * Reflection: a critic reviews the result against requirements and checks in its configured
+ * context. A fresh review can reduce anchoring on the builder's conversation. Forked reviewers
+ * can inherit that conversation, and a separate review does not guarantee correctness.
  */
 export function ReflectionLoop() {
   const { t } = useTranslation('step1')
@@ -88,7 +87,7 @@ export function ReflectionLoop() {
           {t('reflection-loop.stake')}
         </text>
 
-        {/* the critic: the result, and then nothing */}
+        {/* the critic: the result and the context needed to review it */}
         <rect
           id="reflection-loop-critic"
           data-component="ReflectionLoop"

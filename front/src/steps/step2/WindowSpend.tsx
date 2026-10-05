@@ -2,25 +2,10 @@ import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * One rolling window, drawn as what you spent inside it against what it held. Ten muted columns of
- * ordinary work, a ceiling the plan allows, and the last two columns filled to that ceiling by one
- * expensive move. What the figure argues is the empty space above the muted columns: it is capacity
- * that goes nowhere when the window turns over, which is why the costly moves have a natural slot at
- * the tail of one.
- *
- * It sits under the lead of `goals`, at the `data-figure="window-spend"` slot, and it is the one
- * drawing in that unit read **forwards**: `hidden-price-parallel-agents` (on ultracode) and `design-tools` both close on the end of a
- * window, and this is where that timing was drawn. Nothing under it reads it back, so its three
- * labels carry the argument.
- *
- * **Spend is height here, never a band cut into segments.** `LoopsPerHour` in `enablement` owns the
- * band-and-turns vocabulary and measures an hour of your attention; this measures money against a
- * ceiling and says nothing about turns. Drawn as a band, the two collapse into one picture arguing
- * two things.
- *
- * Teal is the step's rule, what the section adds: the ordinary columns are muted because they are
- * the day you already have, and the two that reach the ceiling are the move this unit is about. The
- * ceiling is dashed on the step-1 reading of a dash, since it is a limit rather than a thing.
+ * Illustrative use of a subscription allowance period, not context occupancy or a dollar bill.
+ * Heights are invented usage amounts. Prepared useful work can use remaining allowance when
+ * budget and other limits permit; filling the allowance is not a goal. Keep that caption visible
+ * in guided mode and in the deck. Spend is height, distinct from LoopsPerHour's time bands.
  */
 const BASE = 196
 const CEILING = 44
@@ -40,7 +25,7 @@ export function WindowSpend() {
   const width = columns * COL_W + (columns - 1) * COL_GAP
 
   return (
-    <figure id="window-spend" data-component="WindowSpend" className="my-8 flex justify-center">
+    <figure id="window-spend" data-component="WindowSpend" className="my-8 flex flex-col items-center gap-3">
       <svg
         id="window-spend-svg"
         data-component="WindowSpend"
@@ -149,6 +134,13 @@ export function WindowSpend() {
           {t('window-spend.spend')}
         </text>
       </svg>
+      <figcaption
+        id="window-spend-caption"
+        data-component="WindowSpend"
+        className="text-muted-foreground max-w-[62ch] text-center text-sm leading-relaxed"
+      >
+        {t('window-spend.caption')}
+      </figcaption>
     </figure>
   )
 }

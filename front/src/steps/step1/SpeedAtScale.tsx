@@ -17,10 +17,8 @@ import { useTranslation } from 'react-i18next'
  * go home. And there is **no context frame**: the first one in the step is `ToolsInContext`, and
  * nothing about a wall clock belongs inside a window.
  *
- * The seconds are hand-authored, and the caption says so the way `NextToken`'s does. What they are
- * picked to hold is the prose: the small tier is three times quicker per call here, which is inside
- * the two-to-three-times gap `speed.1` states against the middle tier and safely under it against
- * the top one. Round numbers on purpose, so nobody reads them as a measurement.
+ * The seconds are invented, as the caption states. Repeated serial calls amplify a latency
+ * difference. These values do not predict a provider's speed ratio or account for parallel calls.
  */
 const SMALL_PER_CALL = 1
 const TOP_PER_CALL = 3

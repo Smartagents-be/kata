@@ -62,7 +62,7 @@ that unit does not say, namely that judgement produces nothing visible at five o
 those into a second telling and the step turns into step 2 with feelings.
 
 **`expectations.tool-not-advantage` is the one section that leans outside step 2, twice**, and both
-are deliberate. The ceiling on what an agent hands back for free is `step1/context`'s average, which
+are deliberate. The need for relevant domain evidence is established in `step1/context`, which
 is the only place in step 3 that reaches back to step 1, because it is the only claim here that is
 about the model rather than about people. And the multiple that never arrives is `change`'s, one unit
 earlier in this same step, so the section links sideways rather than saying it again: this is the

@@ -29,7 +29,10 @@
 <div data-figure="same-gate"></div>
 
 <p data-i18n="gates.quality-gates.2">
-  Wire the check into the run. In Claude Code, a Stop hook can run <code>mvn verify</code> and report a failing check back to the agent. The wrapper must use the hook’s blocking response, such as exit code 2 with feedback on stderr; an ordinary build exit code 1 does not block stopping. Guard repeated continuations, and keep the build as a required delivery check too.
+  Wire the check into the run. In Claude Code, a Stop hook can run <code>mvn verify</code> and
+  report a failing check back to the agent. The wrapper must use the hook’s blocking response, such
+  as exit code 2 with feedback on stderr; an ordinary build exit code 1 does not block stopping.
+  Guard repeated continuations, and keep the build as a required delivery check too.
 </p>
 
 <h2 data-i18n="gates.blast-radius.heading">Blast radius</h2>
@@ -41,7 +44,10 @@
 </p>
 
 <p data-i18n="gates.blast-radius.2">
-  Give the agent a branch and worktree, then enforce delivery through protected branches, required checks and review. Restrict filesystem access, credentials and network access separately. A worktree alone cannot prevent a command from affecting another checkout or an external service <svg data-icon="gem"></svg>.
+  Give the agent a branch and worktree, then enforce delivery through protected branches, required
+  checks and review. Restrict filesystem access, credentials and network access separately. A
+  worktree alone cannot prevent a command from affecting another checkout or an external service
+  <svg data-icon="gem"></svg>.
 </p>
 
 <h2 data-i18n="gates.fast-enough.heading">Fast enough to answer</h2>

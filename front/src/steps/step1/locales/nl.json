@@ -10,6 +10,7 @@
   "truth.title": "Beweringen, bewijs en controle",
   "workshop.title": "Onderzoeken met een agent",
   "recap.title": "De mechanismen verbinden",
+
   "flags.panel.title": "Het flagbord",
   "flags.panel.description": "Vijf flags en vijf verschillende plekken waar de antwoorden vandaan kunnen komen. De opdrachten lopen op van eenvoudig naar complex, dus werk van boven naar beneden.",
   "flags.panel.progress": "{{solved}} van {{total}} gevonden",
@@ -19,6 +20,7 @@
   "flags.panel.placeholder": "{...}",
   "flags.panel.wrong": "Niet die. Ga terug naar waar je hem vond en lees hem opnieuw.",
   "flags.panel.complete": "Vijf antwoorden, en vijf plaatsen waar ze vandaan kwamen. Eén ervan zat helemaal niet in de service, en aan de antwoorden zelf zag je niet welke welke was.",
+
   "flag.machine.label": "Vraag wat je agent heeft meegekregen",
   "flag.machine.place": "Van je eigen machine",
   "flag.machine.hint": "Elke nieuwe sessie bevat standaard instructies die niet door dit specifieke project zijn toegevoegd. Deze gelden vooraf voor elk project, nog voordat je zelf een regel typt. Start een schone agent, vraag welke initiële instructies hij heeft ontvangen en herstel je werkomgeving daarna naar de beginstand.",
@@ -45,6 +47,7 @@
   "flag.trace.hint": "De tiende regel die door de pipeline wordt berekend, wordt direct daarna weer weggegooid. Voeg instrumentatie toe aan de uitvoering en lees de waarde uit tijdens het proces.",
   "flag.trace.help": "GET /api/titles geeft negen titels terug maar berekent er meer. Zet één logregel in Scramble.unveil, de plek waar elke herstelde string passeert, en roep dan het endpoint aan. CatalogRun.publish loggen mist hem, want de stage met de flag publiceert nooit. Er komen vijf leetspeak-regels uit die trace en maar één gaat over wat je net deed om hem te vinden. Je agent kan niet kiezen; jij wel.",
   "flag.trace.wrong": "Niet die. Er kwam meer dan één regel in deze vorm terug. Lees ze opnieuw.",
+
   "pick-next.title": "Welke token kan hierna komen?",
   "pick-next.description": "Het model heeft de eerste 4 tokens verwerkt en genereert de vijfde. Welke van deze opties kan hierna komen?",
   "pick-next.prompt": "Wat het model tot nu toe gelezen heeft: {{text}}",
@@ -90,6 +93,7 @@
   "token-network.note.lead": "Sterk vereenvoudigd.",
   "token-network.note.1": "Een token-id kiest een geleerde embedding. Echte embeddings kunnen duizenden getallen hebben; dit voorbeeld gebruikt er {{inputs}}. De eerste prompt wordt met causale attention verwerkt. Tijdens generatie hangt de volgende token af van eerdere context, terwijl gecachete toestanden doorgaans voorkomen dat de hele prefix opnieuw berekend wordt.",
   "token-network.note.2": "Decoder-only transformers combineren attention en feed-forwardlagen. Geleerde parameters omvatten embeddings en gewichten; het gebruik van biases hangt af van de architectuur. Dit voorbeeldnetwerk heeft {{parameters}} parameters. Echte modellen hebben er veel meer en een gesprek verandert die getrainde waarden niet.",
+
   "token-split.label": "4 soorten tekst, opgeknipt in tokens",
   "token-split.pick": "Kies een voorbeeld",
   "token-split.sample.prose": "Tekst",
@@ -101,6 +105,7 @@
   "token-split.rate.label": "Wat ze kosten",
   "token-split.rate.unit": "tokens per 100 tekens",
   "token-split.caption": "Opgeknipt met o200k_base, een publieke tokenizer.",
+
   "next-token.label": "welke opties het model heeft en hoe waarschijnlijk elke optie is",
   "next-token.description": "Wat het model tot nu toe binnenkrijgt: {{text}}",
   "next-token.favourite": "Laat het de favoriet kiezen",
@@ -112,6 +117,7 @@
   "next-token.likelihood": "De zin tot nu toe had {{likelihood}} kans.",
   "next-token.likelihood-done": "Die hele zin had {{likelihood}} kans: de 3 scores hierboven met elkaar vermenigvuldigd. Ook als het model telkens de favoriet kiest, kom je onder 20% uit.",
   "next-token.caption": "De scores dienen ter illustratie. Een echte waarschijnlijkheidsverdeling beslaat de gehele woordenlijst (het vocabulair), waarna samplinginstellingen de kansen nog verder aanpassen voordat het model een keuze maakt. Het verloop klopt echter wel: één duidelijke favoriet, een paar aannemelijke kanshebbers en een eindeloze reeks restkandidaten.",
+
   "sampling-knobs.label": "hoe breed het model kiest",
   "sampling-knobs.description": "Dezelfde 4 woorden die kunnen volgen op {{preceding}}, en hoe waarschijnlijk elk ervan is bij 5 instellingen. {{rows}}.",
   "sampling-knobs.name.standard": "standaard",
@@ -123,6 +129,7 @@
   "sampling-knobs.hint.top-k": "alleen de {{k}} beste blijven over",
   "sampling-knobs.hint.top-p": "de beste tot ze samen {{p}} halen",
   "sampling-knobs.gone": "weg",
+
   "token-attention.label": "attention: geeft aan op welke tokens de focus en de samenhang liggen",
   "token-attention.sentence": "Hij stort zijn geld op de bank",
   "token-attention.description": "7 tokens op een rij, met een boog voor elk paar. Elk token leunt op de tokens ervoor, dus alle bogen lopen achteruit. Kies een token, en onder elk token ervoor staat hoe zwaar het daarop leunt, samen 100%.",
@@ -149,6 +156,7 @@
   "token-kinds.what.reasoning": "het nadenken voor het antwoord, telt als output",
   "token-kinds.what.output": "het antwoord en de toolcalls",
   "token-kinds.caption": "Berekend aan de standaardtarieven van {{model}}, met de standaardcache van 5 minuten.",
+
   "diagram.description": "Eén ovaal met het label context en drie vlakken erin: een klein vlak met het label prompt, en twee grotere met resources en tools. Alles wat de agent weet, zit in het ovaal.",
   "diagram.context": "context",
   "diagram.prompt": "prompt",
@@ -172,6 +180,7 @@
   "oneshot-compare.aria": "Sleep om het resultaat met alleen de prompt te vergelijken met dat met referentie",
   "oneshot-compare.before-alt": "Een vlakke, generieke landingspagina voor boekenverhuur uit een prompt zonder referentie",
   "oneshot-compare.after-alt": "Een eigenzinnigere landingspagina voor boekenverhuur uit dezelfde prompt plus een Dribbble-referentie",
+
   "bundle-compare.drip.label": "Drie vervolgvragen",
   "bundle-compare.bundle.label": "Eén gebundelde vraag",
   "bundle-compare.you": "jij",
@@ -197,6 +206,7 @@
   "bundle-compare.next": "Volgende",
   "bundle-compare.back": "Terug",
   "bundle-compare.restart": "Opnieuw",
+
   "exact-ask.form.label": "Het formulier",
   "exact-ask.form.field": "Naam",
   "exact-ask.code.label": "De code erachter",
@@ -222,6 +232,7 @@
   "entry-brief.type.label": "De prompt voor beide methoden",
   "entry-brief.check.label": "Bepaling van de score",
   "entry-brief.check.note": "Voer dit uit in een lokale terminal vanuit de hoofdmap van het project. Zorg dat de service draait voordat je start. Let op: de feedback van de check zelf is Engelstalig.",
+
   "plan.title": "Dezelfde vraag, twee methoden",
   "plan.description": "Voer de taak eerst direct uit en toets daarna een plan aan alle 6 wensen voordat het geïmplementeerd wordt. Vergelijk de scores. Tegelijk model, planning en eisen veranderen toont het effect van verduidelijking, niet welk model of welke modus beter is.",
   "plan.todo": "Vink deze opdracht af",
@@ -232,6 +243,7 @@
   "plan.undo.label": "Omgeving opschonen: reset de poging. Herstel EntryController.java met git restore en verwijder alle losse bestanden die de agent heeft aangemaakt.",
   "plan.interview.label": "Plan mode (voordelig model): start een verse agent op het goedkoopste model, voer exact dezelfde opdrachtregel in via plan mode en vul het plan aan op basis van de 6 eisen voordat je akkoord geeft.",
   "plan.again.label": "Check herhalen en evalueren: herstart de service, draai de check opnieuw en identificeer welke specifieke eisen anders over het hoofd gezien zouden zijn.",
+
   "under-specified.description": "De vraag \"Voeg zoeken toe aan de catalogus\" boven het grote gestreepte vlak dat ze niet invult, opgeknipt in drie stukken. Bij elk stuk stelt de agent een vraag terug en neem jij de beslissing.",
   "under-specified.ask": "de vraag",
   "under-specified.request": "\"Voeg zoeken toe aan de catalogus\"",
@@ -249,28 +261,32 @@
   "under-specified.piece-2": "geen resultaat",
   "under-specified.question-2": "wat komt er als er niets gevonden wordt?",
   "under-specified.decision-2": "een lege lijst, geen fout",
+
   "coordinator-fanout.description": "1 coordinator delegeert 3 taken. Dit voorbeeld toont verse workers met hun briefing; ingestelde instructies en tools gelden ook en forks kunnen geschiedenis erven.",
   "coordinator-fanout.coordinator": "coördinator",
-  "coordinator-fanout.full-rate": "vol tarief",
+  "coordinator-fanout.full-rate": "coordinatormodel",
   "coordinator-fanout.subagent": "sub-agent",
   "coordinator-fanout.instruction": "de instructie die hij kreeg",
   "coordinator-fanout.empty": "context om op te halen",
-  "coordinator-fanout.refetch": "verse workers halen relevante bestanden op; ingestelde context geldt ook",
+  "coordinator-fanout.refetch": "Verse workers halen relevante bestanden op en krijgen ingestelde instructies en tools. Forks kunnen geschiedenis erven; modellen kunnen geërfd of apart ingesteld worden.",
+
   "sequential-steps.description": "Drie stappen binnen één sessie, elk gevalideerd voor de volgende begint, met een aangeduide plek om tussendoor te stoppen. Onderaan de sessie loopt een vulling die met elke stap stijgt, tot er bijna geen vrije ruimte meer boven zit.",
   "sequential-steps.session": "één sessie, van het plan tot de laatste stap",
   "sequential-steps.filling": "geen plaats meer voor stap vier",
   "sequential-steps.step": "stap {{n}}",
   "sequential-steps.validated": "gevalideerd",
   "sequential-steps.stop": "hier stoppen, later verder",
-  "reflection-loop.description": "Een agent met een volle context geeft zijn resultaat aan een criticus die leeg start, en die geeft terug wat eraan mis is.",
+
+  "reflection-loop.description": "Een criticus toetst het resultaat aan eisen en controles. Een frisse review kan tunnelvisie verminderen; overgenomen context en fouten blijven mogelijk.",
   "reflection-loop.agent": "agent",
   "reflection-loop.critic": "criticus",
-  "reflection-loop.result": "het resultaat, en niets anders",
-  "reflection-loop.empty": "leeg",
+  "reflection-loop.result": "het te beoordelen resultaat",
+  "reflection-loop.empty": "reviewcontext",
   "reflection-loop.hands-over": "de code",
   "reflection-loop.back": "wat er mis is",
   "reflection-loop.stake": "een uur eigen argumenten",
-  "reflection-loop.nostake": "geen sessie, niets te verdedigen",
+  "reflection-loop.nostake": "frisse review, blijf controleren",
+
   "survive.title": "Eén regel die de sessie overleeft",
   "survive.description": "Voer deze opdracht uit in je eigen project. Kies een instructie die je al meerdere keren aan de agent hebt moeten herhalen. Sla ze op op een plek waar ze morgen opnieuw gelezen wordt, gooi de sessie weg en controleer of de regel actief blijft.",
   "survive.todo": "Vink deze opdracht af",
@@ -297,6 +313,7 @@
   "shutter.flag.label": "Bestuur een browser",
   "shutter.flag.hint": "Hij wordt samengesteld terwijl de pagina draait. Uit het bestand komt hij niet.",
   "shutter.flag.help": "Dit is de tools-laag van de andere kant: het resultaat komt terug omdat er iets op pad ging om het te halen. De pagina is kata/step1/front/index.html en er staat geen service achter, dus je agent opent het bestand zelf via de browser-MCP-server. Pas als je de knop indrukt, wordt de string opgebouwd. Het bestand lezen, erin grepen of de agent vragen wat er staat, leveren allemaal niets op. De screenshot belandt in .playwright-mcp/ in je project, dus deze tool laat iets achter op je schijf én in het venster.",
+
   "window.title": "Tel wat erin zit",
   "window.todo": "Vink deze opdracht af",
   "window.done": "Gedaan",
@@ -305,6 +322,7 @@
   "window.fresh.label": "Draai /context voor je iets typt.",
   "window.ask.label": "Vraag om een wijziging waarvoor de agent een paar bestanden moet openen, en draai /context opnieuw.",
   "window.remove.label": "Haal de server die je in de unit over de agentic loop aansloot weer weg, begin opnieuw, en kijk of het eerste getal verschoven is.",
+
   "hunt.title": "Eén sessie, vijf flags",
   "hunt.description": "Meet hoeveel context het onderzoek aan je sessie toevoegt.",
   "hunt.todo": "Vink deze opdracht af",
@@ -313,6 +331,7 @@
   "hunt.work.label": "Stap 2: behaal alle vijf de flags in één ononderbroken sessie.",
   "hunt.count.label": "Voer opnieuw /context uit en noteer het verschil in contextgrootte. Dat verschil is niet het totale tokenverbruik of de factuur.",
   "hunt.judge.label": "Stap 4: bepaal welke flag autonoom werd opgelost en waar menselijke sturing nodig was.",
+
   "cut.title": "Decompositie in de praktijk",
   "cut.description": "De probleemstelling staat in de repository onder kata/step1/java/problem.md. Een bibliotheek vraagt een functionaliteit aan die kort is geformuleerd en vol onduidelijkheden zit. Werk het probleem in de onderstaande volgorde uit.",
   "cut.todo": "Vink deze opdracht af",
@@ -329,6 +348,7 @@
   "price.read.label": "Voer voor de taak /usage en /context uit. Noteer de tokencategorieën per model, de getoonde kosten of credits en de contextgrootte.",
   "price.rate.label": "Vraag het agent om een bestand te lezen en uit te leggen. Voer beide commando’s opnieuw uit zonder te clearen en trek de eerdere verbruikstotalen af.",
   "price.sum.label": "Vermenigvuldig voor een API-schatting elke getoonde categorie met het eigen tarief en tel de bedragen op. Neem alle requests en modellen mee; noteer ontbrekende tellers als onbekend. Vergelijk met de getoonde schatting of credits, niet met het verschil in /context.",
+
   "spot.title": "Zoek de vreemde eend in de bijt",
   "spot.description": "Eén cyclus van de agentic loop leverde vier resultaten op in het contextvenster. Het model gebruikt deze uitkomsten om de volgende stap te bepalen.",
   "spot.check": "Nakijken",
@@ -338,6 +358,7 @@
   "spot.explanation.tests": "Een falende test vertelt je wat er gebeurd is, niet wat je nu moet doen. Niets erin richt zich tot de agent.",
   "spot.explanation.docs": "Deze geeft instructies, en daarom is hij verleidelijk. Ze zijn geschreven voor wie de pagina leest, en ze vragen niets wat je repository niet allang doet.",
   "spot.explanation.grep": "Het woord token staat er twee keer in, en beide keren is het je eigen code die over zichzelf praat. Wat een resultaat vermeldt telt minder zwaar dan tegen wie het spreekt.",
+
   "budget.title": "Verdeel het contextvenster",
   "budget.description": "Elke onderstaande aanroep is functioneel correct. Elke regel geeft aan welke informatie er in het contextvenster achterblijft. Om het gewenste resultaat te bereiken, heb je meerdere aanroepen nodig.",
   "budget.task": "Je voegt een ?limit= parameter toe aan GET /api/titles.",
@@ -360,6 +381,7 @@
   "budget.explanation.reference": "De volledige referentiepagina voor één annotatie die je twee keer ziet staan in het bestand dat je aan het aanpassen bent.",
   "budget.explanation.tree": "Een query-parameter is geen dependency-vraag, en de tree is tien keer langer dan de controller.",
   "budget.explanation.listing": "Een glob vertelt je welke bestanden bestaan. De grep vertelt je welk bestand ertoe doet, in één regel in plaats van eenenzeventig.",
+
   "match.title": "Welk patroon is dit?",
   "match.description": "Trek een lijn van elke situatie naar het bijbehorende patroon. De antwoorden worden direct in de browser gecontroleerd.",
   "match.progress": "{{linked}} van {{total}} verbonden",
@@ -378,11 +400,13 @@
   "match.explanation.critic": "Een tweede agent inzetten is ook de zet van de coördinator. Het verschil zit in wat je hem vraagt: bezwaren in plaats van code, van iets dat er niet bij was toen jij besliste. Dat is reflectie.",
   "match.explanation.upgrade": "Eén controller is een ketting: eerst het endpoint, dan wat het teruggeeft, dan de tests. Elke stap heeft de vorige nodig, dus er valt niets parallel uit te delen. Dat is de sequentiële workflow.",
   "match.explanation.delegate": "Veertig bestanden zijn te veel voor één venster, en de afweging per bestand is klein. Eén model zoekt uit wat er moet gebeuren en goedkopere modellen voeren het uit, en dat is de coördinator.",
+
   "falloff.window": "context window",
   "falloff.newest": "nieuwe beurt erbij",
   "falloff.dropped": "het detail gaat weg",
   "falloff.description": "Een context window als een vast kader. Onderaan komt een nieuwe beurt erbij, bovenaan zijn de oudste beurten samengetrokken tot één korte balk met de samenvatting, en het detail dat die samenvatting niet gehaald heeft drijft daarboven weg, vervaagd en gekanteld.",
   "falloff.summarised": "samengevat",
+
   "session-makeup.label": "duur: een half uur op de catalogus",
   "session-makeup.description": "Acht blokken uit één sessie, elk getekend op zijn grootte in tokens. De twee die de student zelf getypt heeft, vallen amper op naast de bestanden die de agent gelezen heeft en de testoutput die hij teruggeplakt heeft.",
   "session-makeup.you": "jij",
@@ -419,6 +443,7 @@
   "window-fill.clear.when": "wanneer jij kiest: tussen twee taken",
   "window-fill.clear.stays": "niets, behalve wat jij meegeeft en wat op schijf staat",
   "window-fill.clear.costs": "geen samenvattingsrequest; context later opnieuw opbouwen kost tokens",
+
   "agent-loop.description": "Een ring die met de klok mee draait. Bovenaan komen je doel en de tools van de agent binnen, bij de eerste stap, waar het model beslist. Over de bovenkant van de ring, met het label tool_use, loopt de lus naar de tweede stap, waar het harness de tool uitvoert. Over de onderkant, met het label tool_result, gaat het resultaat terug naar het model. Vraagt het model geen tool meer, dan vertrekt er een pijl met het label end_turn naar een kaart met klaar: het antwoord.",
   "agent-loop.entry": "jouw doel + de tools die hij heeft",
   "agent-loop.decide.name": "Het model beslist",
@@ -428,6 +453,7 @@
   "agent-loop.exit.tag": "geen tool meer gevraagd",
   "agent-loop.exit.text": "✓ klaar: het antwoord",
   "agent-loop.caption": "tool_use, tool_result en end_turn zijn de namen die de Claude API daarvoor gebruikt.",
+
   "tools-in-context.description": "Een context window met je prompt erin en een tool die over de rand getekend staat: de helft die het model kan aanroepen zit binnen het venster, de helft die draait zit erbuiten, en een pijl brengt het resultaat als drie lange balken weer naar binnen.",
   "tools-in-context.context": "context",
   "tools-in-context.prompt": "prompt",
@@ -436,6 +462,7 @@
   "tools-in-context.commands.1": "grep · find",
   "tools-in-context.commands.2": "curl · read",
   "tools-in-context.result": "tool result",
+
   "mcp-server.description": "Hetzelfde context window als in de vorige figuur. Eén lijn vertrekt uit een gestreept vak buiten het venster met het label mcp server, kruist de rand van het venster en waaiert binnenin uit in vier balken met tool-beschrijvingen, naast de prompt.",
   "mcp-server.context": "context",
   "mcp-server.prompt": "prompt",
@@ -445,6 +472,7 @@
   "mcp-server.tool.2": "list_issues",
   "mcp-server.tool.3": "open_pr",
   "mcp-server.tool.4": "run_query",
+
   "mcp-parts.description": "Drie losse gestreepte kaarten: een promptsjabloon als een volle tealkleurige balk, een resource om op te halen als een stapeltje vage balken en een tool om aan te roepen als een afgeronde omtrek.",
   "mcp-parts.prompt.name": "prompt",
   "mcp-parts.prompt.who": "jij kiest een sjabloon",
@@ -452,7 +480,9 @@
   "mcp-parts.resource.who": "je harness haalt het op",
   "mcp-parts.tool.name": "tool",
   "mcp-parts.tool.who": "model wil tool gebruiken",
+
   "mcp-ovals.description": "Dezelfde 3 mogelijkheden als even grote ovalen: prompt, resource en tool. Dit zijn symbolen, geen maat voor hoeveel context ze innemen.",
+
   "tiers.opus.character": "Voor complex werk",
   "tiers.opus.body": "Een kandidaat voor taken met veel afhankelijkheden of moeilijke beslissingen. Ook een groter model kan ambiguïteit verkeerd lezen en fouten maken. Benoem de grenzen en vergelijk de resultaten met andere niveaus op representatieve taken.",
   "tiers.opus.tag.1": "analyse met veel op het spel",
@@ -531,11 +561,14 @@
   "tokens.lead.1": "Voor je tekst het model bereikt, wordt hij in stukken geknipt en wordt elk stuk vervangen door een nummer. Die stukken zijn <strong>tokens</strong>.",
   "tokens.lead.2": "Tekst bereikt een taalmodel als tokens. Daarmee meet je hoeveel tekst past en hoeveel er verwerkt wordt. Modellen die beelden of audio accepteren hebben ook representaties voor die input. Een tokentelling is geen woordtelling of aantal tekens.",
   "tokens.lead.3": "Voor gewoon Engels gaan er ruwweg 4 à 6 tekens in 1 token, dus een bladzijde tekst komt op een paar honderd tokens uit.",
+
   "tokens.reading.heading": "Lezen",
+
   "tokens.not-words.heading": "Modellen verwerken tekst niet als losse woorden",
   "tokens.not-words.1": "Een tokeniser gebruikt een vast vocabularium en splitsingsregels die uit tekst geleerd zijn. Veel voorkomende woorden blijven vaak heel; andere vallen uiteen. De BPE-tokeniser in dit voorbeeld past samenvoegingen volgens een rangorde toe, in plaats van altijd het langste bekende stuk te kiezen. Andere tokenisers leggen andere grenzen.",
   "tokens.not-words.2": "In deze voorbeelden gebruiken tekst en Java-code ongeveer evenveel tokens per teken. Het id gebruikt er bijna 3 keer zoveel. Die verhouding hangt af van de tekst en de tokeniser. Lange logs vol ids vullen het venster snel.",
   "tokens.not-words.3": "De zin hierboven gebruikt bij deze tokeniser 13 tokens in het Engels en 17 in het Nederlands. Dat meet de omvang van deze specifieke input. Meer fragmenten bewijzen op zichzelf niet dat een taal minder trainingsdata of slechtere antwoorden heeft. Beoordeel de kwaliteit van het antwoord apart van het aantal tokens.",
+
   "tokens.attention.heading": "Attention (aandachtsmagneten)",
   "tokens.attention.1": "In <code>Hij stort zijn geld op de bank</code> kan met <code>bank</code> iets bedoeld worden om op te zitten, of een instelling die met geld omgaat. De woorden <code>stort</code> en <code>geld</code> helpen om de juiste betekenis te herkennen. Het model weegt informatie uit andere tokens af om zulke verbanden te leggen. Dat afwegen heet <strong>attention</strong>.",
   "tokens.attention.2": "Elk token krijgt 3 vectoren: een <strong>query</strong>, een <strong>key</strong> en een <strong>value</strong>. Die horen bij verschillende rollen. Als een token informatie zoekt bij andere tokens, gebruikt het zijn query: wat heb ik nodig? Als andere tokens naar dit token kijken, gebruiken ze zijn key: wat heb ik te bieden? De value bevat de informatie die het daadwerkelijk doorgeeft.",
@@ -544,18 +577,23 @@
   "tokens.attention.7": "Tijdens de training leert het model hoe het deze vectoren moet berekenen om bruikbare verbanden te leggen. Bij het schrijven gebruikt het die geleerde berekeningen.",
   "tokens.attention.3": "Het model voert meerdere van zulke wegingen uit en herhaalt ze door zijn lagen. Deze tekening toont 1 weging met verzonnen gewichten en laat aandacht voor de token zelf weg. Er zijn 21 paren voor 7 tokens en 91 voor 14. Dat zijn verbindingen in de tekening, geen telling van factureerbare tokenlezingen.",
   "tokens.attention.4": "Tijdens het genereren hergebruikt een inference cache doorgaans eerdere attention-toestanden. Prompt caching tussen requests is een apart mechanisme: een passende prefix kan een lager tarief krijgen, terwijl nieuwe of niet-gecachete input een eigen tarief heeft. Nieuwe tokens hangen nog steeds af van eerdere context. Houd die context relevant <svg data-icon=\"coin\"></svg> De <a href=\"/steps/step1/harness\">harness-unit</a> legt prompt caching uit.",
+
   "tokens.writing.heading": "Schrijven",
+
   "tokens.one-at-a-time.heading": "Het model genereert één token per keer",
   "tokens.one-at-a-time.1": "Het model scoort mogelijke volgende tokens op basis van de context tot dan toe, waarna een token gekozen wordt. Die komt achteraan en de volgende voorspelling gebruikt de langere reeks. Tijdens het decoderen worden eerdere toestanden doorgaans uit de cache hergebruikt, in plaats van de hele prefix telkens opnieuw te berekenen.",
   "tokens.one-at-a-time.2": "Op zichzelf voorspelt <code>it</code> helemaal niets. Pas <code>the build failed because it</code> maakt van <code>timed</code> de favoriet. Alles wat je het model voorlegt, verandert wat eruit komt, of je dat nu wilde of niet.",
   "tokens.one-at-a-time.3": "De favoriet komt er niet altijd uit. Die scores zijn kansen, en het model kiest er één volgens die kansen. Stel dezelfde vraag 2 keer, en je kunt 2 verschillende antwoorden krijgen. Geen van de andere woorden hierboven was onmogelijk. Ze waren alleen minder waarschijnlijk.",
   "tokens.one-at-a-time.4": "Zelf stel je hier niets van in: Claude Code en Copilot kiezen het voor je, en de nieuwste Claude-modellen accepteren alleen nog de standaardwaarden.",
+
   "tokens.inside.heading": "Onder de motorkap: hoe het model getallen omzet in waarschijnlijkheden",
   "tokens.inside.1": "Hier komen de scores van hierboven vandaan.",
+
   "tokens.expensive-part.heading": "De echte kostenpost",
   "tokens.expensive-part.1": "Output is duurder dan input in de tabel van de <a href=\"/steps/step1/model\">model-unit</a>. Het model verwerkt de input en genereert daarna het antwoord token voor token. Elke nieuwe token vraagt een decodeerstap en hangt af van wat ervoor kwam, waarbij eerdere toestanden doorgaans uit een cache hergebruikt worden.",
   "tokens.expensive-part.2": "Nadenken is ook schrijven. Reasoning gaat als output op de rekening, ook de reasoning die je nooit te zien krijgt: op je scherm komt hooguit een samenvatting, en je betaalt voor het geheel. Hieronder staat 1 beurt diep in een sessie, met het lezen en het schrijven naast elkaar.",
   "tokens.expensive-part.3": "De aantallen in deze beurt zijn een voorbeeld. De prijsverhoudingen zijn echt. Het grootste deel van het venster komt uit de cache en kost bijna niets. De reasoning, die je niet eens te zien krijgt, is goed voor meer dan de helft van de rekening.",
+
   "context.lead.1": "Het request bevat je instructies, beschikbare tooldefinities en relevante gespreksinhoud. Samen vormen ze de <strong>context</strong>. Berichtrollen en de herkomst van toolresultaten kunnen gemarkeerd blijven. Die labels helpen om gezag te onderscheiden, maar garanderen niet dat het model elke bron juist interpreteert.",
   "context.model-stateless.heading": "Een model is stateless",
   "context.model-stateless.1": "Een gesprek verandert de getrainde modelgewichten niet. De harness levert voor elk request de nodige instructies en geschiedenis aan, soms nadat die ingekort of samengevat zijn. Een cache kan eerdere verwerking hergebruiken; het is geen blijvend geheugen van je beslissingen.",
@@ -583,6 +621,7 @@
   "context.amnesia-context-fatigue.2": "Dan vergeet de agent een beslissing van eerder, stelt hij een vraag die je al beantwoord hebt, of leest hij een bestand opnieuw dat hij twintig minuten geleden al gelezen had. Dat is context fatigue. Het model is niet moe geworden en ook niet dommer. Het bewijsmateriaal is de kamer uit.",
   "context.amnesia-context-fatigue.3.claude": "Bij het comprimeren van de context is detail het eerste wat sneuvelt. Een instructie die dat moet overleven, schrijf je in <code>CLAUDE.md</code>, dat aan het begin van elke sessie gelezen wordt. En laat het venster om te beginnen niet vollopen: knip elke taak zo klein dat ze af is voor het samenvatten begint.",
   "context.amnesia-context-fatigue.3.copilot": "Bij het comprimeren van de context is detail het eerste wat sneuvelt. Een instructie die dat moet overleven, schrijf je in <code>.github/copilot-instructions.md</code>, dat aan het begin van elke sessie gelezen wordt. En laat het venster om te beginnen niet vollopen: knip elke taak zo klein dat ze af is voor het samenvatten begint.",
+
   "context.read-your-window.heading": "Lees je eigen venster",
   "prompt.lead.1": "Alles wat je naar de agent stuurt is een prompt. Van alles wat een model binnenkrijgt is het meestal het kleinste, en naast <a href=\"/steps/step1/session\">de sessie</a> valt het helemaal in het niet. Toch is het het waardevolste, want alleen hierin zit jouw <strong>bedoeling</strong>.",
   "prompt.lead.2": "Je stuurt er zelden maar 1. Sommige zijn nieuwe vragen die je typt. Andere zijn je antwoorden als de agent je vragen stelt over de taak <svg data-icon=\"pattern\"></svg>.",
@@ -716,6 +755,7 @@
   "model.let-it-pick.heading": "Of laat het kiezen",
   "model.let-it-pick.1": "Een coordinator kan per gedelegeerde taak een workermodel kiezen. Een goedkopere worker voor een duidelijk afgebakend deel kan tokens tegen het hogere tarief besparen <svg data-icon=\"coin\"></svg> Stel die keuze in en controleer het resultaat; de harness kiest niet noodzakelijk automatisch een lager model.",
   "model.let-it-pick.2": "Een duidelijke briefing helpt elk workermodel: resultaat, input, grenzen en een controle. Gebruik een sterker model wanneer de betere briefing de extra kosten rechtvaardigt en meet of de worker de taak correct uitvoert.",
+
   "truth.lead.1": "Dezelfde vraag kan meer dan één waar antwoord hebben, en welk antwoord je krijgt hangt af van waar de agent gekeken heeft. Een deel van wat hij weet lag vast op de dag dat zijn training stopte. Niets ervan ging ooit over jouw bedrijf. Niet je repository, en niet de versie waar je op zit.",
   "truth.lead.2": "Al de rest moet er op een of andere manier geraken. Jij zet het in het venster, of je laat hem het zelf uitzoeken met <a href=\"/steps/step1/tools\">een tool</a>. Vraag op welke versie van Spring Boot dit project draait en je krijgt waarschijnlijk de versie waar de meeste projecten op zaten toen hij getraind werd, want niets liet hem gaan kijken. Zeg hem eerst <code>pom.xml</code> te lezen en het getal staat in het venster voor het antwoord er staat.",
   "truth.lead.3": "Welk van de drie is dan de waarheid? Dat wat hij ging uitzoeken, dat wat jij hem aanreikte, of dat wat hij al had. Alle drie klinken ze even stellig.",
@@ -740,8 +780,10 @@
   "pricing.head.read": "Cache lezen",
   "pricing.head.output": "Output",
   "pricing.caption": "Standaardtarieven, gelezen in oktober 2026.",
+
   "usage-readout.alt": "Een uitvoer in de terminal met drie balken. De huidige sessie staat op 6% verbruikt en reset om 17:29, de huidige week over alle modellen op 13% en reset op 4 augustus, en de huidige week voor één model op 2%.",
   "usage-readout.caption": "De /usage-uitvoer in Claude Code, juli 2026.",
+
   "session-windows.description": "Eén werkdag van acht uur aan je bureau, twee keer getekend, met dezelfde twee vensters van vijf uur erop. In de eerste rij starten de vensters wanneer de dag toevallig startte, dus de naad ertussen valt midden in de namiddag en er blijft tweeënhalf uur venster over nadat jij al naar huis bent. In de tweede rij opent het eerste venster vijf uur voor de pauze, dus het eindigt precies bij de pauze, het volgende dekt de pauze en de hele namiddag, en er blijft maar een uur over.",
   "session-windows.day": "je dag",
   "session-windows.break": "pauze",
@@ -758,6 +800,7 @@
   "speed-at-scale.calls.100": "honderd oproepen",
   "speed-at-scale.guide": "hier kijk je niet meer toe",
   "speed-at-scale.caption": "De seconden zijn illustratief.",
+
   "pick.title": "Welk model kies je voor welke situatie?",
   "pick.description": "Trek een lijn van elke situatie naar het meest geschikte model. Er zijn drie modellen en vijf situaties, wat betekent dat meerdere situaties op hetzelfde model uitkomen. De antwoorden worden direct in de browser gecontroleerd.",
   "pick.armed": "Kies nu de tier die je zou nemen.",
@@ -771,22 +814,25 @@
   "pick.scenario.limit": "Zet een ?limit=-parameter op GET /api/titles, met de tests die erbij horen.",
   "pick.scenario.plan": "Het goedgekeurde plan uit plan-solve.md staat klaar voor uitvoering. De implementatie raakt elf verschillende bestanden die naadloos op elkaar moeten aansluiten.",
   "pick.scenario.flaky": "Een geautomatiseerde test faalt bij gemiddeld één op de twintig uitvoeringen, maar slaagt direct bij een herhaling. Tot op heden is niemand erin geslaagd het probleem gericht te reproduceren.",
-  "pick.explanation.queues": "Er valt hier niets te interpreteren en er zijn er dertigduizend. Daar is het kleine model voor: snel en goedkoop, op werk waar niets meer mis kan gaan.",
+  "pick.explanation.queues": "Een kleiner model is een kandidaat voor deze nauwkeurig omschreven handelingen. Voer dezelfde controles uit en vergelijk nauwkeurigheid, wachttijd en prijs voordat je kiest.",
   "pick.explanation.redact": "Alle drie doen dit, dus er is hier geen foute lijn. Wat verschilt is hoeveel er door de zeef glipt: het kleine model past de formaten toe die je opgeschreven hebt en stopt daar, de grotere pikken ook het rekeningnummer op waar niemand een formaat voor genoteerd heeft. Kies op basis van hoeveel je mag missen. Werk met deze vorm komt elke week terug, en herhalend werk is een probleem op zich. Dat haal je in de volgende stap uit elkaar.",
   "pick.explanation.limit": "Gewoon programmeerwerk, helemaal uitgeschreven, met de tests erbij. Dat is het middenmodel, waar het meeste agentic coding zit en waar je begint.",
   "pick.explanation.plan": "Het plan heeft het moeilijke denkwerk al gedaan, precies het argument uit de prompt-unit. Wat overblijft is het uitvoeren over bestanden die in elkaar grijpen, en dat is het middenmodel, geen klus voor het topmodel.",
   "pick.explanation.flaky": "Geen reproductie en geen duidelijke oorzaak, dus deze loopt lang en dwaalt af. Een zoektocht over veel stappen bij elkaar houden is precies waarvoor je het topmodel betaalt.",
+
   "the-cutoff.description": "Eén releaselijn met de trainingscutoff er dwars overheen. De versies links van de lijn staan in gevulde chips, wat erna verscheen in gestreepte omtrekken met niets erin, en de laatste daarvan is de versie waarop het project zit.",
   "the-cutoff.stop": "training gestopt",
   "the-cutoff.before": "in het model",
   "the-cutoff.after": "sindsdien verschenen",
   "the-cutoff.yours": "de versie waarop jij zit",
+
   "trained-or-grounded.description": "Dezelfde vraag beantwoord vanuit twee contextvensters. Het linkse bevat alleen de prompt, het rechtse de prompt en het bestand dat het moest lezen. De twee antwoorden eronder zijn even groot en even donker getekend, en ze noemen een andere versie.",
   "trained-or-grounded.trained": "uit de training",
   "trained-or-grounded.grounded": "grounded",
   "trained-or-grounded.prompt": "prompt",
   "trained-or-grounded.empty": "hier staat verder niets",
   "trained-or-grounded.answer": "antwoord",
+
   "answer-provenance.claim": "wat het antwoord zegt",
   "answer-provenance.source": "waar het gelezen is",
   "answer-provenance.missing": "nergens gelezen",
@@ -797,19 +843,21 @@
   "workshop.lead.2": "Alle vijf op dat bord krijgen, dat is deze hele stap. Elke rij zegt langs waar je bij zijn flag komt, en de Hint erachter zegt waar je moet zoeken. Je agent doet het loopwerk, volgens <a href=\"/steps/step0/welcome\">de spelregels uit de intro</a>. Start hem in de backend en stel je vragen van daaruit: de service draaien en het endpoint aanroepen is zijn werk, niet het jouwe. Laat de service draaien terwijl je bezig bent, zodat de Catalogus-pagina in de zijbalk je de negen kan tonen die hij wél toegeeft.",
   "workshop.one-window.heading": "Eén venster",
   "workshop.one-window.1": "Werk alle vijf vanuit één sessie. Eén flag, één sessie is de spelregel, en hier wijk je daar bewust van af. Geen van deze flags heeft er een clear tussen nodig, en ze bij elkaar houden is precies de bedoeling. Bronbestanden, een heel antwoord dat je terugleest, een <a href=\"/steps/step1/tools\">trace en een consoledump</a> gaan één voor één datzelfde venster in. Je hebt acht units besteed aan wat dat kost.",
-  "recap.lead.1": "Alles wat de agent wist toen hij je antwoordde, was tekst in 1 venster. Daar ging elke unit vóór de jacht over: waarin die tekst gemeten wordt, wat het venster vult, wat het kost, wie het leest en waar de antwoorden vandaan kwamen.",
+
+  "recap.lead.1": "De harness stelde voor elk antwoord de context samen. Deze stap onderscheidde wat daarin past, hoeveel tokens over meerdere requests verwerkt worden en welk bewijs het antwoord ondersteunt. Die grootheden horen bij elkaar, maar zijn niet uitwisselbaar.",
   "recap.what-costs-do.heading": "Wat het kost, en wat je eraan doet",
-  "recap.what-costs-do.1": "<strong>Alles wordt geteld in <a href=\"/steps/step1/tokens\">tokens</a>, en ids en hashes kosten het meest.</strong> Plak het stuk van de log dat ertoe doet, niet de hele log: het goedkoopste token is het token dat je er nooit in stopt <svg data-icon=\"coin\"></svg>.",
-  "recap.what-costs-do.2": "<strong>Elke vervolgvraag stuurt alles erboven opnieuw mee, en wat het model aan <a href=\"/steps/step1/prompt\">denkwerk</a> uitgaf blijft er ook in staan.</strong> Bundel wat bij elkaar hoort in plaats van 3 keer te vragen <svg data-icon=\"gem\"></svg> <svg data-icon=\"coin\"></svg>.",
+  "recap.what-costs-do.1": "<strong>Tekst wordt in <a href=\"/steps/step1/tokens\">tokens</a> geteld; de dichtheid hangt af van input en tokeniser.</strong> Plak het relevante deel van een log <svg data-icon=\"coin\"></svg>.",
+  "recap.what-costs-do.2": "<strong>Vervolgvragen verwerken de behouden context opnieuw en <a href=\"/steps/step1/prompt\">reasoning</a> telt als output.</strong> Bundel verwante wijzigingen en controleer het werkelijke verbruik <svg data-icon=\"gem\"></svg> <svg data-icon=\"coin\"></svg>.",
   "recap.what-costs-do.3": "<strong>Ook een ongebruikte <a href=\"/steps/step1/tools\">tool</a> kan context innemen als zijn beschrijving is geladen.</strong> Zet de tools uit die deze taak niet nodig heeft <svg data-icon=\"coin\"></svg>.",
-  "recap.what-costs-do.4": "<strong>Niets in het <a href=\"/steps/step1/context\">venster</a> krijgt het stempel verouderd, en de stapel groeit alleen maar.</strong> Clear als je van onderwerp wisselt, op een moment dat jij kiest in plaats van het moment dat compaction voor je kiest <svg data-icon=\"coin\"></svg>.",
+  "recap.what-costs-do.4": "<strong>Oude aannames kunnen ondanks hun bronlabels in het <a href=\"/steps/step1/context\">venster</a> blijven.</strong> Controleer actuele bestanden. Clear tussen losse taken of gebruik gerichte <code>/compact</code>; automatisch en handmatig compacten kosten allebei tokens <svg data-icon=\"coin\"></svg>.",
   "recap.what-costs-do.5": "<strong>Ook eerdere antwoorden en opgehaalde inhoud in je <a href=\"/steps/step1/session\">sessie</a> tellen als invoer zolang ze in de actieve context blijven.</strong> Stel je vervolgvragen zolang de relevante code nog beschikbaar is <svg data-icon=\"coin\"></svg>.",
-  "recap.what-costs-do.6": "<strong>Het <a href=\"/steps/step1/harness\">harness</a> zit in de request voordat jouw zin erin staat, en het cachet het begin van de stapel.</strong> Houd die cache warm of begin bewust opnieuw, want een entry verloopt na ongeveer 5 minuten <svg data-icon=\"gem\"></svg> <svg data-icon=\"coin\"></svg>.",
-  "recap.what-costs-do.7": "<strong>De <a href=\"/steps/step1/model\">tier</a> vermenigvuldigt dat allemaal, met ruwweg een factor 1, 2 en 4.</strong> Laat het dure model de opdracht schrijven en een goedkoop model hem uitvoeren <svg data-icon=\"gem\"></svg> <svg data-icon=\"coin\"></svg>.",
+  "recap.what-costs-do.6": "<strong>De <a href=\"/steps/step1/harness\">harness</a> levert instructies en kan een passende prefix cachen.</strong> Controleer cache reads, writes en looptijd voordat je besparingen schat <svg data-icon=\"gem\"></svg> <svg data-icon=\"coin\"></svg>.",
+  "recap.what-costs-do.7": "<strong>De <a href=\"/steps/step1/model\">modelkeuze</a> verandert de beschikbare tarieven en mogelijkheden.</strong> Probeer een goedkopere worker voor een afgebakende taak en controleer het resultaat <svg data-icon=\"coin\"></svg>.",
   "recap.what-costs-do.8": "<strong>Een antwoord klinkt hetzelfde of het nu je bestand gelezen heeft of het <a href=\"/steps/step1/truth\">gat heeft opgevuld</a>.</strong> Vraag om de controle in plaats van om de conclusie: een test die rood wordt op een lege lijst is een antwoord dat je zelf kan controleren <svg data-icon=\"gem\"></svg>.",
-  "recap.what-costs-do.9": "<strong>Je venster van 5 uur opent bij je eerste bericht, niet bij je eerste echte vraag.</strong> Zeg 5 uur voor je pauze even hallo, en het loopt door tot het moment dat je opstaat <svg data-icon=\"gem\"></svg> <svg data-icon=\"coin\"></svg>.",
+  "recap.what-costs-do.9": "<strong>Claude’s limiet van 5 uur en weeklimieten staan los van contextcapaciteit.</strong> Controleer het getoonde resetmoment en de resterende limieten voordat je een lange run plant <svg data-icon=\"gem\"></svg>.",
   "recap.where-this-goes.heading": "Waar dit heen gaat",
   "recap.where-this-goes.1": "Dat is stap 1. <a href=\"/steps/step2/evolution\">Stap 2</a> gaat van wat de agent weet naar hoe jij hem werk geeft.",
+
   "deck.tokens.split.title": "Een model leest geen woorden",
   "deck.tokens.split.note": "In deze voorbeelden gebruiken tekst en code ongeveer evenveel tokens; het id bijna 3 keer zoveel.",
   "deck.tokens.language.title": "Tokentellingen meten <hi>inputgrootte</hi>",
@@ -817,14 +865,16 @@
   "deck.tokens.next.title": "En het schrijft 1 token per keer",
   "deck.tokens.attention.title": "Elke voorspelling hangt af van <hi>eerdere context</hi>",
   "deck.tokens.attention.note": "7 tokens zijn 21 paren. 14 zijn er 91, niet 42.",
+
   "deck.prompt.parts.title": "Wat <hi>1 prompt</hi> kan dragen",
   "deck.prompt.bundle.title": "Drie vragen, of één",
   "deck.prompt.exact.title": "Wees exact over wat er verandert",
   "deck.prompt.plan.title": "Een nagekeken plan maakt <hi>eisen expliciet</hi>",
+
   "deck.tools.loop.title": "Een agent is een model <hi>in een loop</hi>",
   "deck.tools.loop.note": "Hij stopt zodra het model geen tool meer vraagt.",
   "deck.tools.in-context.title": "De tool draait buiten het venster",
-  "deck.tools.in-context.note": "Alleen het resultaat komt terug, en het komt terug als gewone tekst.",
+  "deck.tools.in-context.note": "De harness geeft een gemarkeerd toolresultaat terug. Bronlabels garanderen geen juiste interpretatie.",
   "deck.tools.mcp.title": "Eén draad, en wat erover komt, landt in je venster",
   "deck.tools.parts.title": "Sorteer ze op wie beslist",
   "deck.tools.list.title": "Geladen beschrijvingen nemen <hi>context in</hi>",
@@ -833,6 +883,7 @@
   "deck.tools.injection.note": "Een ticket of webpagina kan de agent een andere opdracht proberen te geven. Controleer de bron en bekijk gevoelige acties voordat je ze goedkeurt.",
   "deck.tools.spot.title": "Zoek de vreemde eend in de bijt",
   "deck.tools.budget.title": "Welke twee calls beantwoorden de vraag?",
+
   "deck.context.diagram.title": "Verschillende bronnen, <hi>gestructureerde context</hi>",
   "deck.context.stale.title": "Een bronlabel bewijst geen <hi>actualiteit</hi>",
   "deck.context.stale.note": "Oude bestandsinhoud kan naast correcties blijven staan. Bekijk de actuele versie voordat je op een aanname voortbouwt.",
@@ -842,11 +893,13 @@
   "deck.context.falloff.title": "Het model werd niet moe. <hi>Het bewijs verliet de kamer.</hi>",
   "deck.context.entropy.title": "Wanorde neemt elke beurt toe, tenzij iemand er <hi>energie in steekt</hi>",
   "deck.context.entropy.note": "Verouderd materiaal kan zich tussen inkorten en compacten opstapelen. Zelfs relevante informatie kan in een lange context gemist worden.",
+
   "deck.session.makeup.title": "Twee balken in die stapel zijn <hi>van jou</hi>",
   "deck.session.clear.title": "De enige laag die je nog kan <hi>weggooien</hi>",
   "deck.session.clear.note": "Automatisch en handmatig compacten kosten input- en outputtokens. /clear doet geen samenvattingsrequest; context opnieuw opbouwen kost wel tokens.",
   "deck.session.memory.title": "Het venster is <hi>niet je geheugen</hi>",
   "deck.session.memory.note": "Weten wat er nu in staat, en bereid zijn het weg te gooien, is het grootste verschil tussen mensen die werk uit een agent krijgen en mensen die ertegen vechten.",
+
   "deck.harness.decomposition.title": "Wat je vraagt is altijd <mute>dunner</mute> dan wat je wilt",
   "deck.harness.decomposition.note": "Het opknippen gebeurt op het bord, voor iemand een agent opent. Drie mensen, drie verschillende versies.",
   "deck.harness.coordinator.title": "De coördinator",
@@ -858,32 +911,36 @@
   "deck.harness.cache.title": "De cache is een <hi>prefixmatch</hi> vanaf de eerste byte",
   "deck.harness.cache.note": "Een gewijzigde prefix kan het hergebruik erachter laten vervallen. TTL en tarieven hangen af van provider en configuratie; controleer het gemeten verbruik.",
   "deck.harness.patterns.title": "Welk patroon past?",
-  "deck.model.tiers.title": "Eén familie, drie karakters",
+
+  "deck.model.tiers.title": "1 familie, <hi>verschillende kandidaten per taak</hi>",
   "deck.model.pricing.title": "Eén, twee en vier",
-  "deck.model.pricing.note": "Leer de vorm ervan, niet de getallen.",
-  "deck.model.money.title": "Je eigen venster, <hi>in geld</hi>",
-  "deck.model.money.note": "Het getal dat /context je gaf, tegen het tarief hierboven. Dat is één beurt, voordat het model één woord geschreven heeft.",
+  "deck.model.pricing.note": "Deze verhoudingen en prijzen zijn gedateerd. Controleer ze voor het model en de provider die je gebruikt.",
+  "deck.model.money.title": "Opgeteld verbruik, <hi>los van capaciteit</hi>",
+  "deck.model.money.note": "Lees /usage over meerdere requests. Input, cache reads, cache writes en output hebben eigen tarieven; contextgrootte is geen factuur.",
   "deck.model.speed.title": "Waar <hi>snel</hi> ophoudt goedkoop te zijn",
-  "deck.model.speed.note": "De kleine tier antwoordt twee tot drie keer sneller. Een snel fout antwoord kost je de run die het brak en de run die het herstelde, en je betaalde voor allebei.",
-  "deck.model.billing.title": "De tokens zijn dezelfde. <hi>Of je ze kan zien</hi>, verschilt.",
-  "deck.model.billing.note": "Een key laat het getal groeien terwijl je werkt. Een abonnement verbergt het tot de limiet, en dan betaal je met wachten.",
+  "deck.model.speed.note": "Meet kwaliteit, wachttijd en kosten op representatief werk. De seconden in de grafiek zijn voorbeelden, geen vaste snelheidsverhoudingen.",
+  "deck.model.billing.title": "API-kosten en <hi>abonnementslimieten</hi>",
+  "deck.model.billing.note": "Lees in beide gevallen het gemeten verbruik. Een API-schatting in dollars is niet je abonnementsfactuur.",
   "deck.model.reasoning.title": "Het redeneerniveau is <hi>niet</hi> de tier",
-  "deck.model.reasoning.note": "Hoe lang één model nadenkt, tegenover welk model nadenkt. Reasoning hoger zetten op de kleine tier geeft je niet de bovenste.",
+  "deck.model.reasoning.note": "Hoe grondig een model een taak aanpakt, tegenover welk model het werk doet. Meer effort verandert het modelniveau niet.",
   "deck.model.pick.title": "Welke tier zou jij draaien?",
+
   "deck.truth.sounds-same.title": "Het klinkt in beide gevallen <hi>hetzelfde</hi>",
   "deck.truth.sounds-same.note": "Getraind of grounded, van schijf gelezen of ingevuld. Stelligheid is niet het signaal, dus vraag waar het antwoord vandaan komt.",
   "deck.truth.grounded.title": "Dezelfde vraag, <mute>twee vensters</mute>",
   "deck.truth.provenance.title": "Eén antwoord, en maar een deel ervan is <hi>gelezen</hi>",
   "deck.truth.proof.title": "Een test die rood wordt is <hi>een bewering die kan falen</hi>",
   "deck.truth.proof.note": "\"Gaat dit om met een lege lijst\" is de lezing van de agent. Een test op een lege lijst is die van de machine.",
+
   "deck.workshop.flags.title": "Vijf flags, vijf plaatsen waar een antwoord vandaan kan komen",
   "deck.workshop.flags.note": "Vraag wat je machine hem meegaf, lees het antwoord, zet het logniveau hoger, lees de broncode, traceer de run.",
   "deck.workshop.debrief.title": "Welke flag had je <hi>in zijn geheel kunnen doorgeven</hi>?",
-  "deck.recap.one-window.title": "Acht units, en ze <hi>vulden allemaal hetzelfde venster</hi>",
+
+  "deck.recap.one-window.title": "De mechanismen achter <hi>elk request</hi>",
   "deck.recap.one-window.note": "Wat het vult, wat het kost en wie het leest.",
-  "deck.recap.moves.title": "Elke zet op die lijst <hi>stuurt er minder van</hi>",
+  "deck.recap.moves.title": "Houd context relevant en <hi>controleer het resultaat</hi>",
   "deck.recap.moves.note": "Plak alleen wat ertoe doet, bundel, clear op een moment dat jij kiest, zet uit wat je niet nodig hebt.",
-  "deck.recap.next.title": "Stap 2: Stap 2: hoe je <hi>het werk aanreikt</hi>",
+  "deck.recap.next.title": "Stap 2: hoe je <hi>werk meegeeft</hi>",
   "deck.recap.next.note": "Hou het venster daar in je achterhoofd.",
   "deck.tokens.tokenizer.title": "Tekst erin, <hi>getallen</hi> eruit",
   "deck.tokens.network.title": "Getallen erin, <hi>kansen</hi> eruit",
@@ -916,7 +973,7 @@
   "deck.harness.divider.3": "Kies <hi>wat elke worker erft</hi>",
   "deck.model.divider.1": "Eén familie: <hi>één, twee en vier</hi> per token",
   "deck.model.divider.2": "Output kost ongeveer vijf keer input",
-  "deck.model.divider.3": "De tier is een karakter, <mute>geen versienummer</mute>",
+  "deck.model.divider.3": "Kies een model op basis van <hi>gemeten prestaties op je taak</hi>",
   "deck.truth.divider.1": "Getraind, aangereikt, of <hi>ontdekt</hi>",
   "deck.truth.divider.2": "Alle drie klinken ze hetzelfde",
   "deck.truth.divider.3": "Vraag om <hi>de check</hi>, niet om de conclusie",

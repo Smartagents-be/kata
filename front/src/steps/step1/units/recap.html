@@ -20,50 +20,39 @@
      eight rather than inside them. -->
 
 <p data-i18n="recap.lead.1">
-  Everything the agent knew when it answered you was text in 1 window. Every unit before the hunt was about that window: what the text is measured in, what fills it, what it costs, who reads it
-  and where its answers came from.
+  The harness assembled the context for each answer. This step separated what fits in that context,
+  the tokens processed across requests, and the evidence supporting the answer. Those quantities
+  belong together, but they are not interchangeable.
 </p>
 
 <h2 data-i18n="recap.what-costs-do.heading">What it costs, and what to do about it</h2>
 
 <ul>
   <li data-i18n="recap.what-costs-do.1">
-    <strong>Everything is counted in <a href="/steps/step1/tokens">tokens</a>, and ids and hashes
-    cost the most.</strong> Paste the part of the log that matters, not the whole log: the cheapest token
-    is the one you never put in <svg data-icon="coin"></svg>.
-  </li>
+  <strong>Text is counted in <a href="/steps/step1/tokens">tokens</a>; density depends on the input and tokeniser.</strong> Paste the relevant part of a log <svg data-icon="coin"></svg>.
+</li>
   <li data-i18n="recap.what-costs-do.2">
-    <strong>Every follow-up re-sends everything above it, and what the model spent on
-    <a href="/steps/step1/prompt">thinking</a> stays in there too.</strong> Bundle what belongs
-    together instead of asking 3 times <svg data-icon="gem"></svg>
-    <svg data-icon="coin"></svg>.
-  </li>
+  <strong>Follow-ups process the retained context again, and <a href="/steps/step1/prompt">reasoning</a> is billed as output.</strong> Bundle related changes and check actual usage <svg data-icon="gem"></svg> <svg data-icon="coin"></svg>.
+</li>
   <li data-i18n="recap.what-costs-do.3">
     <strong>Even an unused <a href="/steps/step1/tools">tool</a> can take up context if its
     description is loaded.</strong>
     Turn off the ones this task does not need <svg data-icon="coin"></svg>.
   </li>
   <li data-i18n="recap.what-costs-do.4">
-    <strong>Nothing in the <a href="/steps/step1/context">window</a> is marked stale, and the pile
-    only grows.</strong> Clear when you change subject, at a seam you pick rather than the one
-    compaction picks for you <svg data-icon="coin"></svg>.
-  </li>
+  <strong>Old assumptions can remain in the <a href="/steps/step1/context">window</a> despite their source labels.</strong> Check current files. Clear between unrelated tasks or use focused <code>/compact</code>; automatic and manual compaction both spend tokens <svg data-icon="coin"></svg>.
+</li>
   <li data-i18n="recap.what-costs-do.5">
     <strong>Earlier answers and retrieved content in your <a href="/steps/step1/session">session</a>
     count as input for as long as they remain in the active context.</strong> Ask your follow-up
     questions while the relevant code is still available <svg data-icon="coin"></svg>.
   </li>
   <li data-i18n="recap.what-costs-do.6">
-    <strong>The <a href="/steps/step1/harness">harness</a> is in the request before your sentence is,
-    and it caches the front of the pile.</strong> Keep that cache alive or start over on purpose,
-    because an entry goes stale after about 5 minutes <svg data-icon="gem"></svg>
-    <svg data-icon="coin"></svg>.
-  </li>
+  <strong>The <a href="/steps/step1/harness">harness</a> supplies instructions and can cache a matching prefix.</strong> Check cache reads, writes and lifetime before estimating savings <svg data-icon="gem"></svg> <svg data-icon="coin"></svg>.
+</li>
   <li data-i18n="recap.what-costs-do.7">
-    <strong>The <a href="/steps/step1/model">tier</a> multiplies all of it, at roughly 1, 2 and
-    4 times the cheapest rate.</strong> Let the expensive model write the brief and a cheap one
-    run it <svg data-icon="gem"></svg> <svg data-icon="coin"></svg>.
-  </li>
+  <strong><a href="/steps/step1/model">Model choice</a> changes the rates and capabilities available.</strong> Try a cheaper worker for a well-defined task and verify the result <svg data-icon="coin"></svg>.
+</li>
   <li data-i18n="recap.what-costs-do.8">
     <strong>An answer sounds the same whether it read your file or
     <a href="/steps/step1/truth">filled the gap</a>.</strong> Ask for the check rather than the
@@ -71,10 +60,8 @@
     <svg data-icon="gem"></svg>.
   </li>
   <li data-assistant="claude" data-i18n="recap.what-costs-do.9">
-    <strong>Your 5-hour window opens on your first message, not your first real
-    question.</strong> Say hello 5 hours before your break and it runs right up to the moment you
-    stand up <svg data-icon="gem"></svg> <svg data-icon="coin"></svg>.
-  </li>
+  <strong>Claude’s 5-hour allowance and weekly limits are separate from context capacity.</strong> Check the reported reset and remaining limits before scheduling a long run <svg data-icon="gem"></svg>.
+</li>
 </ul>
 
 <h2 data-i18n="recap.where-this-goes.heading">Where this goes</h2>

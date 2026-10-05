@@ -849,9 +849,10 @@ and the quiz's `coordination-moves` choice is the only other place it is made, s
 note leaves the claim standing only in an answer a student reads once.
 
 Its name is a knowing exception. **`step1/harness` calls this the coordinator**, and it owns the
-whole mechanism: the expensive model on top and cheap sub-agents below, a sub-agent starting on an
-empty context with nothing but the base instruction, and decomposing first because every part handed
-out is a prompt written into that empty context. None of it may be re-derived here. The heading says
+whole mechanism: model inheritance or configuration, fresh versus forked context, and the cost
+of context acquisition. Do not reintroduce blank-worker or automatically-cheaper-worker claims.
+The heading says
+
 `The orchestrator` because that is the name the pattern travels under, and `orchestrator.1` bridges to
 step 1's word **in its own second sentence** rather than leaving the course with two unconnected
 terms. If either name changes, the other has to move with it. `model`'s closing section is the second
@@ -865,16 +866,15 @@ as well as the coordination. Put it after `Working in parallel with agents` and 
 being the answer the unit lands on. It is also the one section in the step that prints a prompt,
 and the prompt is there because the arrangement lives in it: you are in none of the rounds, so
 anything you did not write down never gets asked. **`step1/harness` owns reflection**, so the first
-paragraph names the pattern and moves on the way `workflows.audit-driven.1` does. Why a critic on
-an empty context is worth reading is `harness.reflection.2` and must not be re-derived here.
+paragraph names the pattern and moves on the way `workflows.audit-driven.1` does. Why a separately briefed critic can reduce anchoring is `harness.reflection.2` and must not be re-derived here.
 
 The `<pre>` and the list under it are the same thing twice on purpose, and what keeps the list from
 being a gloss is that it is general where the prompt is one job. Five elements, and the two easiest
 to lose are the fan-out (the independent parts in parallel, and the critic a fresh agent of its own)
 and the gold standard (a file already in the repository, because "better" is an argument two
-agents can run all afternoon and "as good as this file" is a comparison). The prompt names `/loop`
-and `TitleController`, and naming a harness command is allowed here only because **step 2 is the one
-step not written for two assistants**. The job it asks for is a link shortener in a project of its
+agents can run all afternoon and "as good as this file" is a comparison). The prompt names `TitleController` and bounds review/repair to 3 rounds. `/loop` is interval
+scheduling, not a condition-driven repeat command. Keep objective completion checks and a human
+delivery boundary; do not replace them with the critic being impressed. The job it asks for is a link shortener in a project of its
 own, which is deliberate: anything aimed at `kata/step2/java` would be the capstone handed over in
 copy-pasteable form.
 
@@ -890,7 +890,7 @@ Four boundaries hold the unit up and every one of them is another unit a second 
 link and a clause rather than a paragraph. **`steering` owns the mid-run window**,
 which is what `one-agent-time.1` points at instead of describing interrupting, and **`steering` owns
 one worktree per agent**, which is why `many-agents-once.2` names the worktree in half a sentence and
-does not argue for it. **`goals` owns the long-running outcome**, so `working-parallel-agents.3` says the jobs
+does not argue for it. **`goals` owns the long-running outcome**, so `interactive-agent-background.3` says the jobs
 behind you are goals rather than instructions and hands off. The agents-are-two-bills argument is
 `steering`'s too and must not turn up here.
 
@@ -953,20 +953,20 @@ before lunch) and `lead.2`'s middle, since asking why a route was chosen was the
 was going to act on. Its last sentence survives as the close of `goal-oriented.1`, because
 `deck.goals.true.note` is that sentence on a slide.
 
-**The organising idea is the window, and it is stated once, in the lead.** Unspent window is not
-carried anywhere, so an expensive move belongs at the tail of one, with the weekly or monthly cap as
-the limit that actually binds. `hidden-price-parallel-agents` (on ultracode) and `design-tools` both close on that slot and neither
-re-argues it. The lead points at `step1/model` for the two billing arrangements rather than
-describing them, on the usual rule.
+**Context capacity and subscription allowance are distinct.** Goal-shaped work needs useful outcomes,
+checks, a budget and a stopping condition. Remaining allowance is an opportunity only when the work
+is valuable and the weekly/monthly limits permit it. Do not teach quota exhaustion as the objective.
 
-**The check is a section of its own now**, `Automated quality assurance`, and it still owns the sentence
+**The check is a section of its own now**, `An executable completion check`, and it still owns the sentence
 the capstone is built on: if you cannot name the command that answers yes or no, you do not have a
 goal. `enablement.where-day-goes` hands to it and must not restate it.
 
 Four figures, and each is drawn to stay out of another one's argument, which is the constraint to
-read before touching any of them. `WindowSpend` measures **money against a ceiling** and is drawn as
+read before touching any of them. `WindowSpend` illustrates **subscription usage against a period allowance** and is drawn as
 columns, never as a band cut into turns, because `LoopsPerHour` in `enablement` owns the band and
-owns the clock. `GoalGate` draws the loop with the command as its only exit, and the waiting is a
+owns the clock. Its caption distinguishes allowance from context capacity and requires checking
+other limits and budget. `GoalGate` draws the check/repair loop; the enclosing goal also needs a
+budget or stopping condition. The waiting is a
 line **inside the gate box** rather than a stretch of time, for the same reason. `ReadEachTime`
 draws **what each agent is holding**, one context against five identical copies of it, and never
 the arrangement, because `AgentsAtOnce` in `parallel` owns how many agents you have running and what
@@ -1240,3 +1240,15 @@ statement) and `deck-step2-workshop-sheet` (`RunSheet` at 1.03, height-fitted). 
 element that may go on a slide**, and the reason is the deck's own rule: the board and both cards
 write to localStorage, so on a projector they would tick the tutor's machine. The drawing stores
 nothing.
+
+
+## Accuracy constraints after PR #1 integration
+
+The setup permissions task uses a disposable folder and dummy files. It is registered as an inline
+figure so guided mode retains its instructions. Permissions on Read and OS restrictions on shell
+subprocesses are tested separately: use a Node file read for the shell probe rather than `cat`,
+which a Read permission can also intercept. Never run this practice task against student flags,
+credentials or real project files. A worktree is not an access boundary.
+
+The builder/critic prompt stops after 3 rounds or a blocking decision and returns evidence for human
+review. Do not substitute interval `/loop` scheduling for that condition-driven instruction.

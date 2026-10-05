@@ -52,12 +52,16 @@ class Unreachable extends Error {}
 /** One request. A transport failure is a result rather than a crash. */
 async function probe(path) {
     let response
+    let text
     try {
-        response = await fetch(`${BASE}${path}`, { headers: { Accept: '*/*' } })
+        response = await fetch(`${BASE}${path}`, {
+            headers: { Accept: '*/*' },
+            signal: AbortSignal.timeout(5000),
+        })
+        text = await response.text()
     } catch {
         throw new Unreachable(path)
     }
-    const text = await response.text()
     let body = text
     try {
         body = JSON.parse(text)
@@ -264,7 +268,8 @@ const WISHES = [
     {
         label: 'nothing we cannot serve falls over, and it says how many',
         async run({ shelf, refusals }) {
-            for (const { path, got } of refusals) {
+            for (const { path, got, error } of refusals) {
+                if (error) throw error
                 if (!isPlainNo(got.status)) {
                     return { ok: false, detail: `${path} answered ${got.status}` }
                 }
@@ -286,6 +291,7 @@ const WISHES = [
             // would escape the run loop's catch and kill the process rather than fail one wish.
             const named = refusals.find((refusal) => refusal.name === 'past the end')
             if (!named) return { ok: false, detail: 'no refusal is named "past the end" to compare against' }
+            if (named.error) throw named.error
             const past = named.got
             const got = await probe('/api/titles/three')
             if (!isPlainNo(past.status)) {
@@ -382,7 +388,12 @@ const refusals = [
     { name: 'past the start', path: `/api/titles/-${shelf.length + 1}` },
 ]
 for (const refusal of refusals) {
-    refusal.got = await probe(refusal.path)
+    try {
+        refusal.got = await probe(refusal.path)
+    } catch (error) {
+        if (!(error instanceof Unreachable)) throw error
+        refusal.error = error
+    }
 }
 
 labelWidth = Math.max(...WISHES.map((wish) => wish.label.length)) + 2

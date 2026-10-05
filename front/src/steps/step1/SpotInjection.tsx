@@ -100,7 +100,7 @@ export function SpotInjection() {
                   <span
                     id={`spot-injection-result-${index}-body`}
                     data-component="SpotInjection"
-                    className="mt-2 block font-mono text-sm whitespace-pre-wrap"
+                    className="mt-2 block font-mono text-sm whitespace-pre-wrap [overflow-wrap:anywhere]"
                   >
                     {text(`spot.body.${result}`)}
                   </span>
