@@ -24,6 +24,10 @@ pick one of these instead:
 The same goes for the en-dash used as punctuation. Hyphens inside words (`self-learning`,
 `walking-skeleton`) are fine.
 
+**Numbers are digits.** Write `1 token`, `4 getallen`, `21 pairs, 91`, never "one token", "vier",
+"eenennegentig", in prose, figure labels and deck text, in every language. The course owner asked for
+this explicitly: a digit is read at a glance, a spelled-out number has to be decoded.
+
 **Short sentences beat long ones.** If a sentence has more than one comma, look for the full stop
 you skipped. Aim for a mix: a couple of short sentences, then a longer one, then short again.
 

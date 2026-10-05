@@ -19,6 +19,11 @@ const POISONED: ResultId = 'ticket'
  * mistaken for it, since a naive reader looks for the word token or for a line that gives an order,
  * and both appear in output that is doing nothing wrong.
  *
+ * The description ties the card to the unit's loop (one turn brought these back, and the model picks
+ * its next step from them) and **still does not say what makes the odd one odd**: a line naming the
+ * instruction aimed at the agent, or one "trying to take the loop over", turns four results into a
+ * search for one sentence.
+ *
  * Graded here in the browser, like the quizzes and the flag boards: the answer is on screen already,
  * so a round trip to the service would add nothing and this keeps working with the backend down.
  *
@@ -41,6 +46,7 @@ export function SpotInjection() {
       block="spot-injection"
       state={checked ? 'checked' : 'open'}
       title={text('spot.title')}
+      description={text('spot.description')}
       className="my-8"
       contentClassName="flex flex-col gap-5"
     >

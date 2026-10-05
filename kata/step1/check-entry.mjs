@@ -229,7 +229,7 @@ const WISHES = [
         },
     },
     {
-        // The brief's own example is "three of nine" and this line does not repeat it, because the
+        // The brief's own example is "3 of 9" and this line does not repeat it, because the
         // position probed is picked rather than fixed and printing an example the check does not use
         // reads as the board contradicting itself.
         label: 'and how many there are, not only which one it is',
@@ -245,7 +245,7 @@ const WISHES = [
         },
     },
     {
-        label: 'minus one is the last one on the shelf',
+        label: 'minus 1 is the last one on the shelf',
         async run({ shelf }) {
             const ends = [
                 { path: '/api/titles/-1', want: shelf[shelf.length - 1] },

@@ -1,5 +1,6 @@
 import { UnitShot } from '@/shared/components/UnitShot'
 import type { Step } from '@/shared/step'
+import { AgentLoop } from './AgentLoop'
 import { AnswerProvenance } from './AnswerProvenance'
 import { BudgetWindow } from './BudgetWindow'
 import { BundleCompare } from './BundleCompare'
@@ -24,10 +25,11 @@ import { PickTheNext } from './PickTheNext'
 import { PickTheTier } from './PickTheTier'
 import { PlanItTwice } from './PlanItTwice'
 import { PriceOneTurn } from './PriceOneTurn'
-import { PromptInContext } from './PromptInContext'
+import { PromptParts } from './PromptParts'
 import { ReadYourWindow } from './ReadYourWindow'
 import { ReasoningCost } from './ReasoningCost'
 import { ReflectionLoop } from './ReflectionLoop'
+import { SamplingKnobs } from './SamplingKnobs'
 import { SequentialSteps } from './SequentialSteps'
 import { SessionMakeup } from './SessionMakeup'
 import { SessionWindows } from './SessionWindows'
@@ -37,12 +39,14 @@ import { SpotInjection } from './SpotInjection'
 import { SurviveTheClear } from './SurviveTheClear'
 import { TheCutoff } from './TheCutoff'
 import { TokenAttention } from './TokenAttention'
+import { TokenKinds } from './TokenKinds'
+import { TokenNetwork } from './TokenNetwork'
 import { TokenSplit } from './TokenSplit'
+import { TokenizerView } from './TokenizerView'
 import { ToolsInContext } from './ToolsInContext'
 import { TrainedOrGrounded } from './TrainedOrGrounded'
 import { UnderSpecified } from './UnderSpecified'
-import { WhereTheSeamFalls } from './WhereTheSeamFalls'
-import { WordsIntoTokens } from './WordsIntoTokens'
+import { WindowFill } from './WindowFill'
 import deck from './deck'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
@@ -100,10 +104,13 @@ const step1: Step = {
       title: 'tokens.title',
       html: tokens,
       inlineFigures: {
-        'words-into-tokens': <WordsIntoTokens />,
+        'tokenizer-view': <TokenizerView />,
+        'token-network': <TokenNetwork />,
         'token-split': <TokenSplit />,
         'next-token': <NextToken />,
+        'sampling-knobs': <SamplingKnobs />,
         'token-attention': <TokenAttention />,
+        'token-kinds': <TokenKinds />,
         'pick-the-next': <PickTheNext />,
       },
     },
@@ -112,7 +119,7 @@ const step1: Step = {
       title: 'prompt.title',
       html: prompt,
       inlineFigures: {
-        'prompt-in-context': <PromptInContext />,
+        'prompt-parts': <PromptParts />,
         'reasoning-cost': <ReasoningCost />,
         'bundle-compare': <BundleCompare />,
         'exact-ask': <ExactAsk />,
@@ -128,6 +135,9 @@ const step1: Step = {
       title: 'tools.title',
       html: tools,
       inlineFigures: {
+        // The loop first, then where a tool sits relative to the window. The ring draws no frame,
+        // so `ToolsInContext` is still the first context frame in the step.
+        'agent-loop': <AgentLoop />,
         'tools-in-context': <ToolsInContext />,
         'mcp-server': <McpServer />,
         'mcp-parts': <McpParts />,
@@ -158,9 +168,9 @@ const step1: Step = {
       html: session,
       inlineFigures: {
         'session-makeup': <SessionMakeup />,
-        // The same afternoon cut twice. The section's argument is where the seam falls, and
-        // position is the one thing the prose can only assert.
-        'where-the-seam-falls': <WhereTheSeamFalls />,
+        // How full the window is over one session, emptied by compaction and by a clear: when each
+        // happens, how far it drops, and that only one of them is a request of its own.
+        'window-fill': <WindowFill />,
         'survive-the-clear': <SurviveTheClear />,
       },
     },

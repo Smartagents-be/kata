@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
 
 /**
- * Everything `PlanItTwice` needs, on one sheet: what the counter asked for, the one line the student
- * types both times, and the command that scores what came out.
+ * Everything `PlanItTwice` needs, on one sheet: the situation, what the counter asked for, the one
+ * line the student types both times, and the command that scores what came out.
  *
  * **It is a figure rather than prose because guided mode drops every run of prose.** The task under
  * it is worked in class as well as alone, and a brief that vanished on the projector would leave the
@@ -38,7 +38,7 @@ import { useTranslation } from 'react-i18next'
  *
  * **The brief is read rather than drawn**, which is the one thing to keep it out of: `UnderSpecified`
  * in `harness` already draws the gap between an ask and what it leaves unsaid, in the step's own
- * bars-and-dashes vocabulary. A second drawing of that argument here would be that figure four units
+ * solid-and-dashed vocabulary. A second drawing of that argument here would be that figure four units
  * early and worse. So this one carries words the student has to work from, and the argument stays in
  * the task card's description.
  *
@@ -64,6 +64,26 @@ export function EntryBrief() {
       aria-label={t('entry-brief.description')}
       className="my-8 flex flex-col gap-4"
     >
+      {/* Who is asking, for what, and what the two runs measure. The sheet opened on the wishes
+          once, and a reader met "the counter" with nobody having said what it was or what the
+          wishes were for; the card underneath said it, a scroll too late. */}
+      <div id="entry-brief-situation" data-component="EntryBrief" className="flex flex-col gap-2">
+        <span
+          id="entry-brief-situation-label"
+          data-component="EntryBrief"
+          className="eyebrow text-primary"
+        >
+          {t('entry-brief.situation.label')}
+        </span>
+        <p
+          id="entry-brief-situation-text"
+          data-component="EntryBrief"
+          className="text-foreground text-sm leading-relaxed"
+        >
+          {t('entry-brief.situation.text')}
+        </p>
+      </div>
+
       <div id="entry-brief-asked" data-component="EntryBrief" className="flex flex-col gap-2">
         <span
           id="entry-brief-asked-label"

@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next'
  * itself) rather than the solid fill a bar in the window gets.
  *
  * The glyph on each card is the step's own vocabulary, so the cards say what they are before the
- * label does: the prompt is the solid teal bar PromptInContext and ToolsInContext both draw, the
+ * label does: the prompt is the solid teal bar ToolsInContext draws, the
  * resource is the stack of faint bars a tool result comes back as, and the tool is the rounded
  * outline ToolsInContext straddles the frame with.
  */

@@ -14,7 +14,7 @@ import { TaskCard } from '@/shared/components/TaskCard'
  * the six survived the trip.
  *
  * **The two tiers are the experiment and not decoration.** `plan-mode.2` claims a cheaper model
- * driven through a plan beats a one-shot on the expensive one, so the straight run takes the dearest
+ * driven through a plan beats an unplanned run on the expensive one, so the straight run takes the dearest
  * model available and the planned run takes the cheapest. The comparison runs against the plan, which
  * is what makes a win unambiguous: the weaker model is the one carrying the brief.
  *

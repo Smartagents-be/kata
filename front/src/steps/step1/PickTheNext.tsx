@@ -25,7 +25,7 @@ import { cn } from '@/shared/lib/utils'
  * with no weights on it can be answered by shrugging. With `merged` at 46% against `approved` at
  * 23%, picking the favourite is the reasonable thing to do and it is still not the answer, which is
  * the misreading this exercise is here to catch. They are hand-authored like `NextToken`'s, and the
- * admission is in that figure's caption two drawings up the same page rather than repeated in a
+ * admission is in that figure's caption further up the same page rather than repeated in a
  * caption here.
  *
  * **They add to 100, unlike `NextToken`'s**, and the difference is that this one has no caption. That

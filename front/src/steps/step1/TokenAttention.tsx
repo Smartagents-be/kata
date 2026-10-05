@@ -25,32 +25,34 @@ import { cn } from '@/shared/lib/utils'
  * at all: seven arcs of varying thickness say "some more than others", and seven shares that add up
  * say what is actually going on.
  *
- * **Arcs run backwards only, and that is not a simplification.** A token in a decoder weighs itself
- * against what came before it and never against what comes after. Two things fall out of that, and
+ * **Arcs run backwards only.** A token in a decoder attends to itself and what came before it,
+ * never what comes after. The figure omits self-attention to focus on the links between tokens.
+ * Two things fall out of that, and
  * the unit uses both: the first token has nothing to look back at, and appending to the end of a
  * window leaves every earlier weighing untouched, which is the reason a cached prefix is still good.
  * `harness` owns caching and this figure does not re-argue it.
  *
- * **The weights are illustrative, and nothing on the page says so any more.** Real attention is spread
+ * **The weights are illustrative, as the unit prose explains.** Real attention is spread
  * over many heads and many layers, and no single head reads as a clean "this word looks at that
- * word". The sentence was picked so the one link a student will look for is the one they expect (`it`
- * back to `build`), and what the figure is honest about is the shape rather than the numbers. It
- * carried a caption saying that and the caption was cut deliberately, so this comment is the only
- * remaining record: if a caption ever comes back here, that is what goes in it. Printing the shares
+ * word". The sentence was picked so `bank` leans hardest on `money` (`geld` in Dutch),
+ * with `deposits` (`stort`) also contributing. The figure shows the shape rather than real weights. It
+ * carried a caption saying that and the caption was cut deliberately; the unit prose now says it.
+ * If a caption ever comes back here, that is what goes in it. Printing the shares
  * raises the stakes on that rather than settling it: what the rows are honest about is that they add
  * to a hundred, which every real attention row does, and not the twenty-one numbers making them up,
  * which are picked so one sentence reads the way a reader expects.
+ *
+ * **Its strings say what a token leans on, in plain words and digits**: the eyebrow is `attention:
+ * what each token leans on`, which names the mechanism the prose section is headed with, and no
+ * string says a token looks at anything, because a token does nothing; the model weighs.
  *
  * Like `TokenSplit`, it draws no context frame: `ToolsInContext` in `tools` is the first teal frame
  * a student meets, and every figure above it stays out of that vocabulary.
  */
 
-/** Machine-shaped, so it stays English in every language, like `SpotInjection`'s result bodies. */
-const TOKENS = ['the', 'build', 'failed', 'because', 'it', 'timed', 'out']
-
 /**
  * `WEIGHTS[i][j]` is the share of token `i`'s weighing that lands on token `j`, in whole percent,
- * and every row is one shorter than its index because a token only looks back. Row 0 is empty on
+ * and every row has as many entries as its index because this figure only shows looking back. Row 0 is empty on
  * purpose: the first token has nothing behind it, which is worth a student noticing.
  *
  * **Every row adds to 100 and that is the shape of the real thing.** A row of attention is a softmax
@@ -64,11 +66,11 @@ const TOKENS = ['the', 'build', 'failed', 'because', 'it', 'timed', 'out']
 const WEIGHTS: number[][] = [
   [],
   [100],
-  [12, 88],
-  [10, 30, 60],
-  [6, 55, 24, 15],
-  [3, 29, 26, 11, 31],
-  [2, 17, 14, 7, 19, 41],
+  [75, 25],
+  [5, 65, 30],
+  [5, 45, 10, 40],
+  [3, 20, 7, 30, 40],
+  [3, 24, 4, 55, 6, 8],
 ]
 
 const BOX_Y = 286
@@ -84,31 +86,33 @@ function widthOf(label: string): number {
 }
 
 /** Left edge and centre of every box, laid out in one row and centred in the 640-wide viewBox. */
-const LAYOUT = (() => {
-  const widths = TOKENS.map(widthOf)
-  const span = widths.reduce((sum, width) => sum + width, 0) + GAP * (TOKENS.length - 1)
+function layoutOf(tokens: string[]) {
+  const widths = tokens.map(widthOf)
+  const span = widths.reduce((sum, width) => sum + width, 0) + GAP * (tokens.length - 1)
   let x = (640 - span) / 2
   return widths.map((width) => {
     const box = { x, width, cx: x + width / 2 }
     x += width + GAP
     return box
   })
-})()
+}
 
 /**
  * A quadratic bezier between two anchors, bulging upward. The control point is lifted by the span
  * rather than a constant, so a long reach draws a tall arc and a short one stays low: that is what
  * keeps twenty-one curves legible on top of each other instead of a solid teal block.
  */
-function arc(from: number, to: number): string {
-  const a = LAYOUT[from].cx
-  const b = LAYOUT[to].cx
+function arc(layout: ReturnType<typeof layoutOf>, from: number, to: number): string {
+  const a = layout[from].cx
+  const b = layout[to].cx
   const lift = Math.min(Math.abs(a - b) * 1.6, 450)
   return `M ${a} ${BOX_Y} Q ${(a + b) / 2} ${BOX_Y - lift} ${b} ${BOX_Y}`
 }
 
 export function TokenAttention() {
   const { t } = useTranslation('step1')
+  const TOKENS = t('token-attention.sentence').split(' ')
+  const LAYOUT = layoutOf(TOKENS)
   const titleId = useId()
   const [selected, setSelected] = useState<number | null>(null)
   const [focused, setFocused] = useState<number | null>(null)
@@ -126,7 +130,7 @@ export function TokenAttention() {
   /**
    * How hard a link is drawn, on 0 to 1, and it is **always measured against its own row's heaviest**
    * rather than against a hundred. Two reasons, and the second is the one that matters. A row's
-   * shares get smaller as the row gets longer (the last token's largest share is 41), so drawing the
+   * shares get smaller as the row gets longer (the last token's largest share is 55), so drawing the
    * absolute number fades the end of the sentence out and would fade a held row out just as it
    * became the only thing on screen. And drawing the absolute number puts the two thickest arcs in
    * the figure at the very start, where a token with one thing to look at spends everything on it,
@@ -183,7 +187,7 @@ export function TokenAttention() {
                 key={`${link.index}-${link.target}`}
                 id={`token-attention-link-${link.index}-${link.target}`}
                 data-component="TokenAttention"
-                d={arc(link.index, link.target)}
+                d={arc(LAYOUT, link.index, link.target)}
                 strokeWidth={
                   selected === null
                     ? 1 + intensity(link.weight, link.index)
@@ -332,8 +336,9 @@ export function TokenAttention() {
           ? t('token-attention.all', { pairs: links.length })
           : heaviest === null
             ? t('token-attention.first', { token: TOKENS[selected] })
-            : // Not `count`: i18next reserves that name for plural resolution.
-              t('token-attention.held', {
+            : // Not `count`: i18next reserves that name for plural resolution. A token with 1 token
+              // in front of it gets its own sentence, since "the 1 tokens before it" is not one.
+              t(WEIGHTS[selected].length === 1 ? 'token-attention.only' : 'token-attention.held', {
                 token: TOKENS[selected],
                 links: WEIGHTS[selected].length,
                 heaviest: TOKENS[heaviest],

@@ -65,19 +65,36 @@
 <h2 data-i18n="session.compaction-picks-moment.heading">Compaction picks the moment, or you do</h2>
 
 <p data-i18n="session.compaction-picks-moment.1">
-  When the pile stops fitting, the harness compacts it. A model reads the transcript, writes a
-  summary, and the summary is what you carry on with. Detail goes first. And it fires exactly when the work has got long and complicated, so it lands in the middle of the hardest thing you did all day.
+  Before the pile stops fitting, the harness compacts it. A model reads the transcript, writes a
+  summary, and the summary is what you carry on with. Detail goes first. And it fires exactly when
+  the work has got long and complicated, so it lands in the middle of the hardest thing you did all
+  day.
 </p>
 
-<!-- The same afternoon cut twice, so the only difference on screen is where the seam falls. The
-     spans are the same three tasks at the same widths in both rows: the section's argument is
-     position and nothing else, so no coin, no price and no re-send belong in here. -->
-<div data-figure="where-the-seam-falls"></div>
+<!-- How full the window is over one session, emptied twice: by compaction in the middle of a task,
+     and by a clear between two. The shaded strip at compaction's drop is the extra request it costs,
+     and the table under the charts says when, what stays and what it costs in words. The one
+     product difference (when compaction starts) is swapped inside the figure, not here. -->
+<div data-figure="window-fill"></div>
 
 <p data-i18n="session.compaction-picks-moment.2">
-  <code>/clear</code> is the same loss on your own terms. You choose the seam, you decide what is
-  worth carrying across, and you open the next session with it. Both throw work away. Only one lets
-  you say what stays.
+  Compaction is not free. It is an extra request that reads the whole window. <code>/clear</code>
+  costs nothing. You choose the seam,
+  between two tasks rather than in the middle of one, and the next session opens with what you hand
+  it. Only one of them lets you say what stays.
+</p>
+
+<!-- Verified October 2026. Claude Code: code.claude.com/docs/en/model-config (default auto-compact
+     thresholds). Copilot CLI: docs.github.com/en/copilot/concepts/agents/copilot-cli/context-management. -->
+<p data-assistant="claude" data-i18n="session.compaction-picks-moment.3.claude">
+  Claude Code compacts when the window is about full, and <code>/autocompact</code> sets that point lower,
+  anywhere from 100K to 1M tokens, so compaction comes earlier. It still picks the moment. You only
+  move it.
+</p>
+
+<p data-assistant="copilot" data-i18n="session.compaction-picks-moment.3.copilot">
+  Copilot CLI starts early on its own: from about 80% of the window it compacts in the background,
+  while you keep working. You cannot change that threshold.
 </p>
 
 <h2 data-i18n="session.window-not-memory.heading">The window is not your memory</h2>

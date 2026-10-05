@@ -2,9 +2,9 @@ import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * What turning the reasoning level up actually buys. Four bars, one per level, and each one is two
+ * What turning the reasoning level up actually buys. 5 bars, 1 per level, and each one is two
  * segments: the dashed part is the thinking and the solid part is the answer. The answer segment is
- * the same width in all four rows, so the only thing that grows is what sits in front of it.
+ * the same width in all 5 rows, so the only thing that grows is what sits in front of it.
  *
  * That is the whole reading, and it is the misconception `promptQuiz`'s `reasoning-level` question
  * tests: you are not buying a better answer, you are buying more thinking ahead of the same one, and
@@ -15,18 +15,24 @@ import { useTranslation } from 'react-i18next'
  * are what is not in your answer, and there is **no context frame**: the first one in the step is
  * `ToolsInContext` in `tools`, so nothing above it may spend that shape.
  *
- * The level names are Claude Code's (`/effort`, verified against its settings documentation in
- * August 2026), which is why they are mono and untranslated, the way `ModelPricing`'s model names
+ * The level names are Claude Code's (`/effort`, verified against
+ * platform.claude.com/docs/en/build-with-claude/effort in October 2026; the figure stopped at
+ * `xhigh` before that, which was wrong), which is why they are mono and untranslated, the way `ModelPricing`'s model names
  * are. The token counts are invented, and the caption says both.
  */
 const ANSWER = 400
 
-/** Thinking tokens per level, roughly 1x, 3x, 8x and 20x the cheapest one. */
+/**
+ * Thinking tokens per level, roughly 1x, 2.5x, 6x, 12x and 20x the cheapest one. The top stays at
+ * 4,000 on purpose: adding `max` squeezed the scale rather than stretching it, so the answer
+ * segment keeps the width that makes it readable as the same thing in every row.
+ */
 const LEVELS = [
   { id: 'low', thinking: 200 },
-  { id: 'medium', thinking: 600 },
-  { id: 'high', thinking: 1600 },
-  { id: 'xhigh', thinking: 4000 },
+  { id: 'medium', thinking: 500 },
+  { id: 'high', thinking: 1200 },
+  { id: 'xhigh', thinking: 2400 },
+  { id: 'max', thinking: 4000 },
 ] as const
 
 const WIDEST = LEVELS[LEVELS.length - 1].thinking + ANSWER
@@ -59,7 +65,7 @@ export function ReasoningCost() {
       <svg
         id="reasoning-cost-svg"
         data-component="ReasoningCost"
-        viewBox="0 0 640 232"
+        viewBox="0 0 640 278"
         role="img"
         aria-labelledby={titleId}
         className="h-auto w-full max-w-3xl"

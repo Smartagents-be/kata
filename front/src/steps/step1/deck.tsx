@@ -1,4 +1,5 @@
 import type { SlideSpec } from '@/shared/deck/slide-spec'
+import { AgentLoop } from './AgentLoop'
 import { AnswerProvenance } from './AnswerProvenance'
 import { BudgetWindow } from './BudgetWindow'
 import { BundleCompare } from './BundleCompare'
@@ -15,18 +16,21 @@ import { OneShotCompare } from './OneShotCompare'
 import { PatternMatch } from './PatternMatch'
 import { PickTheNext } from './PickTheNext'
 import { PickTheTier } from './PickTheTier'
-import { PromptInContext } from './PromptInContext'
+import { PromptParts } from './PromptParts'
 import { ReflectionLoop } from './ReflectionLoop'
+import { SamplingKnobs } from './SamplingKnobs'
 import { SequentialSteps } from './SequentialSteps'
 import { SessionMakeup } from './SessionMakeup'
 import { SpotInjection } from './SpotInjection'
 import { TokenAttention } from './TokenAttention'
+import { TokenKinds } from './TokenKinds'
+import { TokenNetwork } from './TokenNetwork'
 import { TokenSplit } from './TokenSplit'
-import { WordsIntoTokens } from './WordsIntoTokens'
+import { TokenizerView } from './TokenizerView'
 import { ToolsInContext } from './ToolsInContext'
 import { TrainedOrGrounded } from './TrainedOrGrounded'
 import { UnderSpecified } from './UnderSpecified'
-import { WhereTheSeamFalls } from './WhereTheSeamFalls'
+import { WindowFill } from './WindowFill'
 
 /**
  * Step 1 on the board.
@@ -52,9 +56,10 @@ import { WhereTheSeamFalls } from './WhereTheSeamFalls'
  * to the paragraph explaining why it is being restated. `SessionWindows` and `usage-readout` are
  * `model`'s five-hour section, which is Claude-only, and the deck has no assistant filter: either
  * of them on the board tells a Copilot room about an arrangement it does not have. Everything else
- * a step 1 unit draws is up there. `WordsIntoTokens` and `PickTheNext` were absent for no reason
- * for a while and are placed now: the first leads the tokens block the way it leads the unit, and
- * the exercise closes it, worked by the room the way `NextToken` is.
+ * a step 1 unit draws is up there. The tokens block runs in the unit's order, reading before
+ * writing: the sentence and its ids lead it, then the split, the attention arcs, the loop, the
+ * sampling settings and the network, stepped a layer at a time by the tutor, then the bill, and the
+ * exercise closes it, worked by the room the way `NextToken` is.
  *
  * Eyebrows and divider headings reuse the unit title keys the sidebar already uses, so the name on
  * the board and the name in the nav cannot disagree and neither needs translating twice.
@@ -90,15 +95,15 @@ const deck: SlideSpec[] = [
     points: ['deck.tokens.divider.1', 'deck.tokens.divider.2', 'deck.tokens.divider.3'],
   },
   {
-    id: 'deck-tokens-words',
+    id: 'deck-tokens-tokenizer',
     kind: 'figure',
     ns: 'step1',
     eyebrow: 'tokens.title',
-    // The unit's lead figure leads the block too: one word in, numbers in between, one token out,
-    // before anything is measured in tokens.
-    title: 'deck.tokens.words.title',
-    figure: <WordsIntoTokens />,
-    scale: 1.9,
+    // The unit's lead figure leads the block too: one sentence cut into tokens and each token
+    // swapped for its id, so the network further on starts from a number the room has seen made.
+    title: 'deck.tokens.tokenizer.title',
+    figure: <TokenizerView />,
+    scale: 1.7,
   },
   {
     id: 'deck-tokens-split',
@@ -118,10 +123,23 @@ const deck: SlideSpec[] = [
     kind: 'statement',
     ns: 'step1',
     eyebrow: 'tokens.title',
-    // The unit's one prose argument and the step's first actionable move. Without it a room meets
-    // `ask in the language it has read most of` for the first time in `recap`.
+    // The unit's one prose argument, which the unit keeps honest: for a big language the gap is
+    // small, and it widens for a language with little text online and for a codebase's own names.
+    // It does not tell the room which language to ask in.
     title: 'deck.tokens.language.title',
     note: 'deck.tokens.language.note',
+  },
+  {
+    id: 'deck-tokens-attention',
+    kind: 'figure',
+    ns: 'step1',
+    eyebrow: 'tokens.title',
+    // Reading comes before writing, the way the unit now runs: the room sees the finished sentence
+    // weighed first, and `NextToken` on the next slide writes it a token at a time.
+    title: 'deck.tokens.attention.title',
+    note: 'deck.tokens.attention.note',
+    figure: <TokenAttention />,
+    scale: 1.33,
   },
   {
     id: 'deck-tokens-next',
@@ -138,14 +156,42 @@ const deck: SlideSpec[] = [
     figureWidth: 1250,
   },
   {
-    id: 'deck-tokens-attention',
+    id: 'deck-tokens-sampling',
     kind: 'figure',
     ns: 'step1',
     eyebrow: 'tokens.title',
-    title: 'deck.tokens.attention.title',
-    note: 'deck.tokens.attention.note',
-    figure: <TokenAttention />,
-    scale: 1.33,
+    // Where the unit puts it, between the loop and the network: the same four scores the network is
+    // about to produce, reshaped by each setting. The note is the qualifier the room needs, that
+    // none of these is a setting they can turn.
+    title: 'deck.tokens.sampling.title',
+    note: 'deck.tokens.sampling.note',
+    figure: <SamplingKnobs />,
+    scale: 1.4,
+  },
+  {
+    id: 'deck-tokens-network',
+    kind: 'figure',
+    ns: 'step1',
+    eyebrow: 'tokens.title',
+    // Where the unit puts it, after the loop and the sampling settings: the scores the room just
+    // picked from come out of this, one token in as numbers and through the network a layer per click.
+    title: 'deck.tokens.network.title',
+    figure: <TokenNetwork />,
+    // Lowered from 1.1 when the footer became the review's 2-line simplification note: in Dutch, with
+    // a node's calculation open, 1.1 pushed the eyebrow under the heading and clipped the last line.
+    scale: 0.98,
+  },
+  {
+    id: 'deck-tokens-kinds',
+    kind: 'figure',
+    ns: 'step1',
+    eyebrow: 'tokens.title',
+    // Where the unit puts it: the last thing taught, ahead of the exercise. The note is the one
+    // qualifier the numbers cannot do without, since the turn is invented and the rates are not.
+    title: 'deck.tokens.kinds.title',
+    note: 'deck.tokens.kinds.note',
+    figure: <TokenKinds />,
+    scale: 1.4,
   },
   {
     id: 'deck-tokens-pick',
@@ -169,12 +215,12 @@ const deck: SlideSpec[] = [
     points: ['deck.prompt.divider.1', 'deck.prompt.divider.2', 'deck.prompt.divider.3'],
   },
   {
-    id: 'deck-prompt-in-context',
+    id: 'deck-prompt-parts',
     kind: 'figure',
     ns: 'step1',
     eyebrow: 'prompt.title',
-    title: 'deck.prompt.in-context.title',
-    figure: <PromptInContext />,
+    title: 'deck.prompt.parts.title',
+    figure: <PromptParts />,
     scale: 1.77,
   },
   {
@@ -232,6 +278,17 @@ const deck: SlideSpec[] = [
     eyebrow: 'step.title',
     title: 'tools.title',
     points: ['deck.tools.divider.1', 'deck.tools.divider.2', 'deck.tools.divider.3'],
+  },
+  // The unit's lead figure, animated on the board as on the page: the ring turning is the claim.
+  {
+    id: 'deck-tools-loop',
+    kind: 'figure',
+    ns: 'step1',
+    eyebrow: 'tools.title',
+    title: 'deck.tools.loop.title',
+    note: 'deck.tools.loop.note',
+    figure: <AgentLoop />,
+    scale: 1.2,
   },
   {
     id: 'deck-tools-in-context',
@@ -392,15 +449,17 @@ const deck: SlideSpec[] = [
     kind: 'figure',
     ns: 'step1',
     eyebrow: 'session.title',
-    // The title is the unit's claim and the note names the two cuts, because the drawing shows
-    // where they fall and not what they are called. Five figure slides in this deck carry a note.
+    // The title is the unit's claim and the note says the difference out loud: the drawing and its
+    // table carry when and what it costs, the note is the one line a tutor says over them. Five
+    // figure slides in this deck carry a note.
     title: 'deck.session.clear.title',
     note: 'deck.session.clear.note',
-    figure: <WhereTheSeamFalls />,
-    // Fitted to the room under the heading rather than copied from a figure of the same width: its
-    // viewBox grew to 364 tall when the bracket and the carry moved out from under the frame, and
-    // the 1.77 this used to carry was already over the box `SlideFigure` clips at.
-    scale: 1.28,
+    figure: <WindowFill />,
+    // Laid out wide enough that the figure's container query puts the table beside the charts
+    // rather than under them, which is the only way two charts and a table magnify at all; then
+    // fitted to the room under the heading, which the height decides.
+    scale: 1.15,
+    figureWidth: 1400,
   },
   {
     id: 'deck-session-memory',

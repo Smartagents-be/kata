@@ -8,8 +8,8 @@ import { useTranslation } from 'react-i18next'
  * payoff rather than the introduction. It was drawn empty when `context` opened the step and is not
  * any more.
  *
- * The prompt region keeps `PromptInContext`'s geometry (rx/ry, fills), which is the only reason that
- * figure reads as this one's small oval seen a unit earlier rather than as a separate drawing.
+ * The prompt region keeps the geometry of `PromptParts`' oval (rx/ry, fills), which is the only reason
+ * that figure reads as this one's small oval seen a unit earlier rather than as a separate drawing.
  * The `viewBox` is the coordinate system every other oval in the step is placed in. Keep it.
  *
  * Three decisions in here are load-bearing.
@@ -75,7 +75,7 @@ export function ContextDiagram() {
           {t('diagram.description')}
         </title>
 
-        {/* the context window: the same teal oval as PromptInContext */}
+        {/* the context window */}
         <ellipse
           id="context-diagram-window"
           data-component="ContextDiagram"

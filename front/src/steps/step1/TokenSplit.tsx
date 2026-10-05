@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { useReducedMotion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/shared/lib/utils'
+import { useLocale } from '@/shared/i18n/useLocale'
 import { DURATION, EASE_QUIET } from '@/shared/motion/motion'
+import { exampleSentence } from './example-sentence'
 
 /**
  * What a tokeniser does to four strings. The student clicks between them and watches the same
@@ -10,7 +12,7 @@ import { DURATION, EASE_QUIET } from '@/shared/motion/motion'
  * by eye.
  *
  * The splits are real. They were produced by `o200k_base`, a public BPE tokeniser, rather than
- * estimated, which is why they are stored as data here and carry no `nl` entry, the same way
+ * estimated, which is why they are stored as data and carry no locale key, the same way
  * `ModelPricing`'s numbers and `BudgetWindow`'s line counts do. Every provider ships its own
  * tokeniser and the boundaries differ in detail; what does not differ is the shape, and the shape is
  * what the caption tells the student to keep.
@@ -19,12 +21,11 @@ import { DURATION, EASE_QUIET } from '@/shared/motion/motion'
  * tokeniser in the bundle, and shipping a megabyte of BPE ranks to split five sentences is not a
  * trade this page should make.
  *
- * The rate strip under the chips is the comparison the panel cannot make. The prose claims prose is
- * the cheapest thing you can hand a model and an id the dearest, and a panel showing one sample at a
- * time leaves the reader to click, remember and subtract. All four rows are always up, on one scale,
- * and only the emphasis follows the selection. It is a rate readout and **not a second sample**: a
- * Dutch row here would make the figure an argument about languages, which is the reason there is no
- * second sentence in the data.
+ * The rate strip under the chips is the comparison the panel cannot make. The prose claims text and
+ * code cost about the same per character and an id nearly 3 times as much, and a panel showing one
+ * sample at a time leaves the reader to click, remember and subtract. All four rows are always up,
+ * on one scale, and only the emphasis follows the selection. It is a rate readout and **not a second
+ * sample**: an English row beside a Dutch one would make the figure an argument about languages.
  *
  * The panel restages when the selection changes, and the shape of that is the argument the figure
  * makes: the source line and the count arrive together, and the chips arrive one after another from
@@ -33,7 +34,7 @@ import { DURATION, EASE_QUIET } from '@/shared/motion/motion'
  *
  * It draws no context frame. `ToolsInContext` in `tools` is the first teal frame a student meets,
  * so every figure above it stays out of that vocabulary rather than spending it early.
- * `PromptInContext` gave its frame up for the same reason, and `ModelTiers` never had one.
+ * `PromptParts` draws its oval without one for the same reason, and `ModelTiers` never had one.
  */
 
 type Sample = {
@@ -44,34 +45,21 @@ type Sample = {
 }
 
 /**
- * Ordered by what they cost per character, most efficient first, because that is the order the prose
- * under it reads them in. Text is the cheapest thing you can hand a model and an id is the dearest,
- * and they sit at opposite ends so the student walks the whole range.
+ * The three code-shaped rows. The text row is not here: it is the unit's example sentence in the
+ * reader's own language, read from `example-sentence.ts` at render time, so the page shows one
+ * sentence everywhere. **The order is text, Java, class name, id, and it is no longer cheapest
+ * first.** The English sentence splits at 22 tokens per 100 characters and the Dutch one at 26,
+ * which ties text with the line of Java (22) or puts it above. So the prose says text and code are
+ * about level and an id costs nearly 3 times as much, and that is true in both languages.
  *
- * **The text row has to contain a word that breaks**, and that is the reason this sentence and not a
- * tidier one: six of its seven words are one token, and `unscrambled` comes apart at `unscr` and
- * `ambled`, which is neither a syllable nor a stem. A sentence where every word survives whole shows
- * the student nothing, and one that breaks somewhere defensible shows them the wrong thing. No prose
- * points any of this out, so the figure is on its own here.
+ * **The text row has to contain a word that breaks**, and the example sentence does: `swears` comes
+ * apart at `sw|ears` and `zweert` at `zwe|ert`, which is neither a syllable nor a stem. A sentence
+ * where every word survives whole shows the student nothing. A new example sentence has to keep that.
  *
- * There is deliberately no second sentence in another language. Comparing English against Dutch made
- * the figure an argument about languages, which is not what this unit is teaching.
+ * There is deliberately no second sentence in another language. A reader only ever sees their own
+ * language's row, never an English one beside a Dutch one.
  */
-const SAMPLES: Sample[] = [
-  {
-    id: 'prose',
-    pieces: [
-      'The',
-      ' catalogue',
-      ' endpoint',
-      ' returns',
-      ' nine',
-      ' unscr',
-      'ambled',
-      ' titles',
-      '.',
-    ],
-  },
+const CODE_SAMPLES: Sample[] = [
   {
     id: 'java',
     pieces: [
@@ -142,8 +130,6 @@ function rateOf(entry: Sample): number {
   return Math.round((entry.pieces.length / entry.pieces.join('').length) * 100)
 }
 
-const RATES = SAMPLES.map(rateOf)
-const WIDEST = Math.max(...RATES)
 
 const EASE = `cubic-bezier(${EASE_QUIET.join(', ')})`
 
@@ -172,7 +158,17 @@ function arrival(entering: boolean, delay: number): string {
 
 export function TokenSplit() {
   const { t, i18n } = useTranslation('step1')
+  const { locale } = useLocale()
   const [selected, setSelected] = useState(0)
+
+  // The text row is the unit's example sentence in the reader's language, the one `TokenizerView`
+  // opens on, so the rate strip is worked out per render rather than once at load.
+  const samples: Sample[] = [
+    { id: 'prose', pieces: exampleSentence(locale).tokens.map((token) => token.text) },
+    ...CODE_SAMPLES,
+  ]
+  const rates = samples.map(rateOf)
+  const widest = Math.max(...rates)
   const still = useReducedMotion()
   /** True for one frame after a pick, so the incoming sample has something to travel from. */
   const [entering, setEntering] = useState(false)
@@ -204,7 +200,7 @@ export function TokenSplit() {
     }
   }
 
-  const sample = SAMPLES[selected]
+  const sample = samples[selected]
   const text = sample.pieces.join('')
   const ratio = new Intl.NumberFormat(i18n.language, {
     minimumFractionDigits: 1,
@@ -224,7 +220,7 @@ export function TokenSplit() {
         role="group"
         aria-label={t('token-split.pick')}
       >
-        {SAMPLES.map((entry, index) => (
+        {samples.map((entry, index) => (
           <button
             key={entry.id}
             id={`token-split-sample-${index}`}
@@ -266,7 +262,7 @@ export function TokenSplit() {
           </span>
         </div>
 
-        {SAMPLES.map((entry, index) => (
+        {samples.map((entry, index) => (
           <div
             key={entry.id}
             id={`token-split-rate-row-${index}`}
@@ -294,7 +290,7 @@ export function TokenSplit() {
               <span
                 id={`token-split-rate-bar-${index}`}
                 data-component="TokenSplit"
-                style={{ width: `${(RATES[index] / WIDEST) * 100}%` }}
+                style={{ width: `${(rates[index] / widest) * 100}%` }}
                 className={cn(
                   'block h-2 rounded-sm border transition-[width,background-color]',
                   index === selected
@@ -312,7 +308,7 @@ export function TokenSplit() {
                 index === selected ? 'text-foreground' : 'text-muted-foreground',
               )}
             >
-              {RATES[index]}
+              {rates[index]}
             </span>
           </div>
         ))}

@@ -36,5 +36,5 @@ dated are in **`copilot-specific.md` at the repo root**. Read it before writing 
 Copilot's billing changed under this course once already.
 
 Where the student is told to set it is step 0's, which also varies one block of its own, and which
-ten blocks vary is step 1's; both are
+thirteen blocks vary is step 1's; both are
 written up in those steps' files.

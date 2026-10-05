@@ -230,9 +230,10 @@ const step2: Step = {
         ),
         // The only one that closes, and the longest: the agent writes the audit, you read it, and
         // it goes back to the agent as work. The return path lands on `audit.md` rather than on the
-        // start of the row, because what the run produces is a new version of that file, and the
-        // branch under it is the reading the rest of the row is not: you take the audit in before
-        // any of it becomes work. The spec inside the project is faint because an audit does not
+        // start of the row, because what the run produces is a new version of that file, and an
+        // agent sits on it because an agent is what runs the audit again. The branch under it is
+        // the other half of closing a row: the changed project comes back to you, you check the
+        // fix, and you close its row in `audit.md`. The spec inside the project is faint because an audit does not
         // need one, which is what makes this the workflow you can bolt onto anything.
         'flow-audit': (
           <FlowDiagram
@@ -249,6 +250,7 @@ const step2: Step = {
             branch="you"
             loop
             loopTo={2}
+            loopBy="agent"
           />
         ),
         'audit-example': <AuditExample />,

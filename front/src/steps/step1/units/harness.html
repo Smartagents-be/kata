@@ -40,11 +40,15 @@
   and not before.
 </p>
 
+<!-- The example here was an MCP server connected halfway through a session. In Claude Code, tool
+     search (`tools.what-mcp-costs-you`) means a server adds its names rather than its definitions,
+     so the paragraph states the rule with the two things that sit early rather than one harness's
+     case of it. -->
 <p data-i18n="harness.caching.2">
-  What gets matched is a prefix, read from the first byte, so anything that changes early makes
-  everything behind it new again. Connect an MCP server halfway through a session and the tool
-  definitions at the top shift, so the whole window is priced from scratch. Switch models and the
-  cache does not come with you. Let compaction rewrite the pile and there is nothing left to match.
+  What gets matched is a prefix, read from the first byte. So anything that changes early in the
+  window (the tool list, the instructions at the top) makes everything behind it new again. Switch
+  models and the cache does not come with you. Let compaction rewrite the pile and there is nothing
+  left to match.
 </p>
 
 <p data-i18n="harness.caching.3">
@@ -131,7 +135,7 @@
 <h3 data-i18n="harness.reflection.heading">Reflection</h3>
 
 <p data-i18n="harness.reflection.1">
-  Reflection <svg data-icon="pattern"></svg> is the agent putting a critic on its own work. The critic is a sub-agent, told to attack the result rather than help with it rather than help with it: find what is wrong and report it.
+  Reflection <svg data-icon="pattern"></svg> is the agent putting a critic on its own work. The critic is a sub-agent, told to attack the result rather than help with it: find what is wrong and report it.
 </p>
 
 <p data-i18n="harness.reflection.2">

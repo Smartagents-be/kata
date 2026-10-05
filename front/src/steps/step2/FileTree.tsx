@@ -19,6 +19,12 @@ export interface TreeNode {
   highlight?: boolean
   /** The numeral a paragraph points at with `<span data-marker>`. Same shape in both places. */
   marker?: number
+  /**
+   * One line of the file itself, shown under the name as typed and never translated, like the
+   * name: `ProjectTree` uses it for a rule's `paths` frontmatter, because that line is what makes
+   * the file a different thing from the CLAUDE.md files around it.
+   */
+  detail?: string
   children?: TreeNode[]
 }
 
@@ -153,6 +159,16 @@ function TreeItem({
           </span>
         )}
       </div>
+
+      {node.detail && (
+        <code
+          id={`${block}-item-${path}-detail`}
+          data-component="TreeItem"
+          className={`ml-6 font-mono text-xs break-words ${noteTone}`}
+        >
+          {node.detail}
+        </code>
+      )}
 
       {node.children && (
         <ul

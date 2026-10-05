@@ -9,14 +9,9 @@
   valuable, because it is the one part carrying your <strong>intent</strong>.
 </p>
 
-<!-- The prompt on its own, with no frame around it. The frame is not drawn until `tools`, and the
-     window with everything in it is `context`'s payoff, so nothing here is allowed to pre-empt
-     either. Do not put the context oval back around this one. -->
-<div data-figure="prompt-in-context"></div>
-
 <p data-i18n="prompt.lead.2">
-  You rarely send just one. Some prompts are fresh queries you type. Others come back
-  after the agent interviews you <svg data-icon="pattern"></svg> about the task.
+  You rarely send just one. Some prompts are fresh queries you type. Others are your answers
+  when the agent asks you about the task <svg data-icon="pattern"></svg>.
 </p>
 
 <h2 data-i18n="prompt.instruction.heading">Instruction</h2>
@@ -27,25 +22,42 @@
   <a href="/steps/step2/steering">steering</a>, which comes later.
 </p>
 
+<!-- What an instruction can carry, on one ask any developer reads without the repo: it sits at the
+     top of the unit, before a student has seen this step's code. It replaced
+     `PromptInContext`, the bare oval, and keeps that oval so the step still meets the prompt as one
+     shape before `tools` frames it. No context frame here either: the first one is `tools`'s. -->
+<div data-figure="prompt-parts"></div>
+
+<p data-i18n="prompt.instruction.2">
+  Not every prompt needs all 5. A one-line fix is a goal and nothing else. The more the agent has
+  to decide on its own, the more of them you fill in. The one people leave out is the last: a
+  check the agent can run itself, which <a href="/steps/step2/goals">step 2's unit on spending tokens</a> takes
+  further.
+</p>
+
 <!-- The reasoning level is a section of its own because `model.reasoning-level.1` links here by
      name, and a student following that link has to land on a heading that matches it. The term
      arrives last, after the thing it names. What this paragraph does not say is what the thinking
      costs: that is the one below it, and the two said it twice until this one stopped. -->
 <h2 data-i18n="prompt.reasoning-level.heading">Reasoning level</h2>
 
+<!-- Deliberately does not claim that more reasoning makes up for a vague ask. It works an ask over
+     more carefully, but a decision you never made and context you never gave are not in the window
+     to be reasoned about, and making the ask exact is this unit's own advice (`be-exact`). -->
 <p data-i18n="prompt.reasoning-level.1">
-  A prompt is seldom enough on its own to carry everything you meant by it. Models work the question
-  over before they answer, and how much of that they do is the
-  <strong>reasoning level</strong>. In Claude
-  Code it runs from low up to xhigh. Turn it up and the model reflects on your question rather than
-  answering it straight <svg data-icon="pattern"></svg> That absorbs some of the imprecision and the
-  missing information, so what comes back is closer to what you actually meant.
+  Models work a question over before they answer, and how much of that they do is the
+  <strong>reasoning level</strong>. In Claude Code it runs from low up to max, and
+  <code>/effort</code> sets it. Turn it up and the
+  model reflects on your question rather than answering it straight <svg data-icon="pattern"></svg>
+  It weighs more ways to read the ask and checks its own steps. It still cannot know what you
+  decided and never said.
 </p>
 
 <p data-i18n="prompt.reasoning-level.2">
-  The higher the reasoning, the more tokens the model spends thinking. Those tokens stay in the
-  context and add to the cost <svg data-icon="coin"></svg> The dial is a command in your harness
-  rather than a line in your prompt, so you can move it per task. Turn it up for a vague ask, and down for one you have already made exact.
+  The higher the reasoning, the more tokens the model spends thinking, and every one of them is
+  billed as output <svg data-icon="coin"></svg> The dial is a command in your harness rather than a
+  line in your prompt, so you can move it per task. Turn it up for a hard task or one with many
+  steps. A vague ask needs a better prompt, not more thinking.
 </p>
 
 <!-- The two quantities the paragraph above asks the reader to weigh, drawn against each other. The
@@ -56,7 +68,7 @@
 <div data-figure="reasoning-cost"></div>
 
 <p data-i18n="prompt.reasoning-level.3">
-  That thinking also covers the agent's own moves:, which file to
+  That thinking also covers the agent's own moves: which file to
   open next and what to hand itself as input for the step after that.
 </p>
 
@@ -76,13 +88,13 @@
 <h2 data-i18n="prompt.plan-mode.heading">Plan mode</h2>
 
 <p data-i18n="prompt.plan-mode.1">
-  Plan mode is meta-prompting the provider already built for you. The agent interviews you about
-  the task, hands back a plan, and waits. You edit it, ask for another pass, or approve it. No code
-  is written until you do.
+  Plan mode is meta-prompting the provider already built for you. The agent reads around without
+  changing anything, asks you about whatever is still open, hands back a plan, and waits. You edit it,
+  ask for another pass, or approve it. The agent waits for your approval before carrying out the plan.
 </p>
 
 <p data-i18n="prompt.plan-mode.2">
-  A cheaper model driven through a plan routinely beats a one-shot on the expensive one. Most
+  A cheaper model with a plan often produces a better result than an expensive model without one. Most
   people have that the other way round. The plan turned a vague ask into an exact instruction. What
   was missing was precision, not a bigger model.
 </p>
@@ -91,9 +103,9 @@
      to land before the exception to it is worth reading. The aside that used to follow it was a task
      card written as reading, and it is `plan-it-twice` at the foot of the page now. -->
 <p data-i18n="prompt.plan-mode.3">
-  It is not the move every time. A task you have already cut down to one file and one obvious change
-  is a task whose decisions are made, and an interview about it hands them back to you as a document
-  to approve. Ask for it straight instead <svg data-icon="coin"></svg>.
+  Plan mode is not always needed. If you already know exactly what needs to change in 1 file,
+  the decisions are made. A plan only puts those decisions in writing for you to approve.
+  Ask the agent to make the change directly <svg data-icon="coin"></svg>.
 </p>
 
 
@@ -102,9 +114,10 @@
 <!-- The mechanism without the name: `context` owns the word *entropy*, with an anchor, a heading, a
      deck slide and a quiz question on it, and naming it here spends the term two units early. -->
 <p data-i18n="prompt.one-ask.2">
-  Ask for everything you want from one part of the application at once <svg data-icon="gem"></svg> <svg data-icon="coin"></svg> Every follow-up is another turn, and every turn adds noise the
-  next turn has to read past. Three separate questions leave the window messier than
-  one question covering all three.
+  Group changes to the same part of the application into 1 request <svg data-icon="gem"></svg>
+  <svg data-icon="coin"></svg> Every follow-up sends the earlier questions and answers to the model
+  again. That uses extra tokens and increases the cost. Earlier answers and intermediate versions
+  also remain in the window, even when you no longer need them.
 </p>
 
 <!-- Two sessions clicked through side by side: three follow-ups each re-sending the stack above
@@ -122,6 +135,70 @@
 <!-- One form with two fields both labelled Name, the source that tells them apart, and the same
      fix asked for twice: once at the form, once at the id. -->
 <div data-figure="exact-ask"></div>
+
+<!-- Scope and the reason behind it are one paragraph: the reason is what carries a limit to the
+     cases nobody listed, which is the whole argument for writing it. Same ask as `PromptParts`, so
+     the figure's 3rd part and this paragraph are one example. -->
+<p data-i18n="prompt.be-exact.2">
+  Say where the job stops, and why. A current model takes an instruction literally and does not
+  stretch a rule to cases you did not name. "Do not throw an exception from
+  <code>UserRepository</code>" covers exactly that. Add "because the nightly import expects null
+  back" and the agent also knows not to turn the result into an <code>Optional</code>, which breaks
+  the import just the same. The reason is what carries a rule to the cases you never listed.
+</p>
+
+<!-- Few-shot and one-shot refer only to the number of examples, explained together in 1 paragraph.
+     Plan mode describes working with or without a plan without reusing the term one-shot. -->
+<h2 data-i18n="prompt.few-shot.heading">Few-shot prompting</h2>
+
+<p data-i18n="prompt.few-shot.1">
+  Point at code that already does it right. "Do it the way <code>OrderController</code> handles an
+  order that does not exist" hands the agent the structure, the names and the
+  libraries in one go <svg data-icon="gem"></svg> It copies an example more faithfully than any
+  description you could write of it. Giving several examples in the prompt is <strong>few-shot
+  prompting</strong>. With 1 example, it is called <strong>one-shot prompting</strong>.
+</p>
+
+<h2 data-i18n="prompt.output-format.heading">Output format</h2>
+
+<p data-i18n="prompt.output-format.1">
+  Specify how you want the answer presented. When you ask the agent to review code, add something
+  like: "List the problems you find. For each problem, include the file, line number and a short
+  explanation" <svg data-icon="gem"></svg> That lets you go straight to the relevant place in the code.
+</p>
+
+<p data-i18n="prompt.output-format.2">
+  The verb sets the format too. "Can you suggest a fix" gets you suggestions and no edit. "Fix it"
+  gets you the edit. When you want to choose first, ask for that: "give me 3 ways to fix this,
+  without code", then "do number 2". The agent does what you asked, not what you meant.
+</p>
+
+<h2 data-i18n="prompt.paste-error.heading">Paste the real error</h2>
+
+<p data-i18n="prompt.paste-error.1">
+  Share the error message, the command you ran and when the error occurs. Include only the relevant
+  stack trace lines, such as those pointing to your own code <svg data-icon="coin"></svg> If the
+  full output is in a log file, give its path so the agent can search it for the relevant details.
+  Ask the agent to investigate and fix the cause.
+</p>
+
+<!-- Three habits the early prompt guides taught, each now measured or documented as useless or
+     worse. "think hard" is scoped to Claude Code because that is where its handling is documented
+     (code.claude.com/docs/en/model-config, October 2026); the dial itself is the section above. -->
+<h2 data-i18n="prompt.no-longer-works.heading">What no longer works</h2>
+
+<p data-i18n="prompt.no-longer-works.1">
+  Typing "think hard" does not turn the reasoning level up. Claude Code passes it on as ordinary
+  text, and the dial is <code>/effort</code>. Opening with "you are a senior Java engineer" is the
+  same kind of leftover: measured, it changes the tone of the answer and not whether it is right.
+</p>
+
+<p data-i18n="prompt.no-longer-works.2">
+  Capital letters and exclamation marks are unnecessary too. Recent models already follow
+  instructions closely. Words like "MUST" and "NEVER" can make the agent apply a rule too rigidly,
+  including in situations you did not intend. State the instruction once, in a normal sentence
+  with a reason: "Use constructor injection so the class is easy to test."
+</p>
 
 <!-- The doing part of the unit, under the same rule and the same shared heading every other unit in
      the step uses. The registry quiz arrives under this heading too, so `showsExerciseHeading`

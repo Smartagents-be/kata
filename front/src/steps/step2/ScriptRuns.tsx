@@ -7,11 +7,14 @@ import { useTranslation } from 'react-i18next'
  * identical. That equality is the whole figure, and it is what the `Scripts` section of `patterns`
  * claims in words: same input, same output, no interpretation in between.
  *
- * It sits at the `data-figure="script-runs"` slot under that section, and **nothing after it reads
- * the drawing**, so its own labels carry the argument. Only the second row is named: the first is
- * what you already have, so a label over it says "prose" twice, once in the row above the paragraph
- * and once in the drawing. What each row produces is on the right of it, and that pair is the
- * figure: different every time against the same every time.
+ * It sits at the `data-figure="script-runs"` slot under that section, and one sentence after it
+ * (`patterns.scripts.3`) says what the shape proves; it does not walk the rows. **Both rows are
+ * named now, and that reverses a recorded decision** (FEEDBACK 12): with only the
+ * script row labelled, a reader arriving cold could not say what the first row was, what was being
+ * run, or what a bar measured. So the figure opens on the request itself (a database reset before
+ * a demo, the example in `patterns.scripts.1`), the rows read "asked in words, three times" against
+ * "one script, three times", and a legend line under them says what a bar's length is. What each row
+ * produces still sits on the right of it, and that pair is still the figure.
  *
  * **The three bars are the parts of one job**, named in the gutter beside the leftmost card of each
  * row: a database reset drops, seeds and checks, which is the example the `Scripts` section gives.
@@ -19,6 +22,10 @@ import { useTranslation } from 'react-i18next'
  * varies, so the naming is what turns the top row into "the same three steps came out a different
  * size every time". They are muted in both rows and worded identically, since the whole comparison
  * is that the job is the same one.
+ *
+ * **A bar's length is how much that step did on that run**, and the legend says so in those words:
+ * how many tables went, how many rows came back, how much got checked. It is not time and not tokens,
+ * for the reason below, so the legend must never grow a unit.
  *
  * **This figure is about variance across runs, and never about the clock or about step size.**
  * `LoopsPerHour` in `enablement` already owns how many turns fit in an hour and `IterationPaths` in
@@ -52,6 +59,10 @@ const PROSE: number[][] = [
 /** Three runs of one script. One set of widths, drawn three times, which is the argument. */
 const SCRIPT_RUN = [124, 92, 117]
 const SCRIPT: number[][] = [SCRIPT_RUN, SCRIPT_RUN, SCRIPT_RUN]
+
+/** The tops of the two rows of cards, and the line each row's label sits on above them. */
+const PROSE_Y = 58
+const SCRIPT_Y = 174
 
 /** Where a bar sits inside its card, so a name and the bar it names share one number. */
 function barY(rowY: number, index: number) {
@@ -135,7 +146,7 @@ export function ScriptRuns() {
       <svg
         id="script-runs-svg"
         data-component="ScriptRuns"
-        viewBox="0 0 640 220"
+        viewBox="0 0 640 274"
         role="img"
         aria-labelledby={titleId}
         className="h-auto w-full"
@@ -145,24 +156,45 @@ export function ScriptRuns() {
         </title>
 
         <text
+          id="script-runs-request"
+          data-component="ScriptRuns"
+          x={X0}
+          y="14"
+          fontSize="13"
+          className="fill-muted-foreground"
+        >
+          {t('script-runs.request')}
+        </text>
+
+        <text
+          id="script-runs-prose-label"
+          data-component="ScriptRuns"
+          x={X0}
+          y={PROSE_Y - 10}
+          fontSize="14"
+          className="fill-foreground font-medium"
+        >
+          {t('script-runs.prose')}
+        </text>
+        <text
           id="script-runs-prose-note"
           data-component="ScriptRuns"
           x={X0 + rowWidth}
-          y="20"
+          y={PROSE_Y - 10}
           fontSize="13"
           textAnchor="end"
           className="fill-muted-foreground"
         >
           {t('script-runs.prose-note')}
         </text>
-        <Parts block="prose" y={30} t={t} />
+        <Parts block="prose" y={PROSE_Y} t={t} />
         {PROSE.map((bars, index) => (
           <Run
             key={index}
             block="prose"
             index={index}
             bars={bars}
-            y={30}
+            y={PROSE_Y}
             fill="fill-muted-foreground/45"
           />
         ))}
@@ -171,7 +203,7 @@ export function ScriptRuns() {
           id="script-runs-script-label"
           data-component="ScriptRuns"
           x={X0}
-          y="134"
+          y={SCRIPT_Y - 10}
           fontSize="14"
           className="fill-foreground font-medium"
         >
@@ -181,17 +213,56 @@ export function ScriptRuns() {
           id="script-runs-script-note"
           data-component="ScriptRuns"
           x={X0 + rowWidth}
-          y="134"
+          y={SCRIPT_Y - 10}
           fontSize="13"
           textAnchor="end"
           className="fill-muted-foreground"
         >
           {t('script-runs.script-note')}
         </text>
-        <Parts block="script" y={144} t={t} />
+        <Parts block="script" y={SCRIPT_Y} t={t} />
         {SCRIPT.map((bars, index) => (
-          <Run key={index} block="script" index={index} bars={bars} y={144} fill="fill-primary" />
+          <Run
+            key={index}
+            block="script"
+            index={index}
+            bars={bars}
+            y={SCRIPT_Y}
+            fill="fill-primary"
+          />
         ))}
+
+        {/* The legend: one sample bar in each row's tone, then what its length means. */}
+        <g id="script-runs-legend" data-component="ScriptRuns">
+          <rect
+            id="script-runs-legend-prose"
+            data-component="ScriptRuns"
+            x={X0}
+            y={SCRIPT_Y + CARD_H + 18}
+            width={18}
+            height={10}
+            className="fill-muted-foreground/45"
+          />
+          <rect
+            id="script-runs-legend-script"
+            data-component="ScriptRuns"
+            x={X0 + 22}
+            y={SCRIPT_Y + CARD_H + 18}
+            width={18}
+            height={10}
+            className="fill-primary"
+          />
+          <text
+            id="script-runs-legend-text"
+            data-component="ScriptRuns"
+            x={X0 + 48}
+            y={SCRIPT_Y + CARD_H + 27}
+            fontSize="12"
+            className="fill-muted-foreground"
+          >
+            {t('script-runs.legend')}
+          </text>
+        </g>
       </svg>
     </figure>
   )

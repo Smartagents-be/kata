@@ -1,73 +1,158 @@
-<!-- In class the teacher talks through this at the board, so the page keeps only the four figures and
+<!-- In class the teacher talks through this at the board, so the page keeps only the seven figures and
      the exercise: every prose block is self-learning only, the same wrapper shape `context` uses.
      The figure markers stay top-level and carry no attribute so both audiences get them; a marker
      nested inside a data-audience wrapper is left as an empty div, which is why the wrapper closes
-     before each figure and reopens after it. -->
+     before each figure and reopens after it.
+     The unit is an intro and then two explicit parts, each an <h2> with <h3> sections under it:
+     Reading (where the cuts fall, then attention) and Writing (1 token at a time, the network behind
+     the scores, and what writing costs). A key's section is its <h3>'s slug, so the <h2>s own only
+     their `.heading` keys. The reasons for that order and that scheme are in step1/CLAUDE.md.
+     Every number in the prose is a digit, in both languages (lesson-writing, "Numbers are digits"). -->
 <div data-audience="self">
+  <!-- Kept to the two moves the figure under it shows, cut and numbered. Which words survive whole
+       and which break is `not-words.1`'s, so it is said once, there. -->
   <p data-i18n="tokens.lead.1">
-    The model does not read your words. Before anything reaches it your text is cut into chunks.
-    Common words survive whole, rare ones break into pieces, and every chunk is swapped for a number.
-    Those chunks are <strong>tokens</strong>.
+    Before anything reaches the model, your text is cut into chunks and every chunk is swapped for a
+    number. Those chunks are <strong>tokens</strong>.
   </p>
 </div>
 
-<!-- The lead figure, and the one figure in the unit with no heading above it, so a guided room opens
-     on the drawing rather than on a title. It follows one word all the way in and one token back
-     out, and the paragraph above it says none of that. -->
-<div data-figure="words-into-tokens"></div>
+<!-- The lead figure, and the only marker in the unit with no heading above it, so a guided room opens
+     on the drawing rather than on a title. It shows `lead.1` happening: one sentence cut into tokens
+     and each token swapped for its number, in the reader's own language. The ids are real o200k_base
+     output, and the reasoning is in step1/CLAUDE.md under `TokenizerView`. -->
+<div data-figure="tokenizer-view"></div>
 
 <div data-audience="self">
-  <!-- The not-a-layer move, mirrored from `model.lead.1`, but it states the unit first and lets the
-       negation fall out of it, because this comes first in the step and there is no layer vocabulary
-       to negate yet. The word `context` is deliberately not used either: no unit defines it before
-       `context` itself takes the window apart. -->
+  <!-- States the unit first and says what is counted in it, then the negation. The word `context` is
+       deliberately not used: no unit defines it before `context` itself takes the window apart. -->
   <p data-i18n="tokens.lead.2">
     A token is the unit a language model works in. Everything an agent knows when it answers you is
-    text, and that text is limited, priced and re-read by the token. Not by the word, and not by the
-    character. So a token is not something that goes into an agent. It is the measure of everything
-    that does.
+    text, and that text is counted in tokens: how much fits, what it costs, and what the model reads
+    again every time. Not in words, and not in characters.
   </p>
 
   <p data-i18n="tokens.lead.3">
-    For ordinary English, roughly four to six characters go into one token, so a page of text comes
-    to a few hundred tokens.
+    For ordinary English, roughly 4 to 6 characters go into 1 token, so a page of text comes to a few
+    hundred tokens.
   </p>
 
-  <h2 data-i18n="tokens.not-words.heading">Text does not split into words</h2>
+  <h2 data-i18n="tokens.reading.heading">Reading</h2>
+
+  <h3 data-i18n="tokens.not-words.heading">Text does not split into words</h3>
 
   <p data-i18n="tokens.not-words.1">
     A tokeniser has a fixed vocabulary, built once from a pile of text and then frozen. It cuts your
     input into the longest pieces that vocabulary already knows, so common English words come through
-    whole, the space in front of them included. Anything it has not seen often enough gets taken
-    apart until what is left does fit. Every provider ships its own vocabulary, so the boundaries
-    differ in detail. The shape does not.
+    whole. Anything it has not seen often enough gets taken apart until what is left does fit. Every
+    provider ships its own vocabulary, so the boundaries differ in detail. The shape does not.
   </p>
 </div>
 
 <div data-figure="token-split"></div>
 
 <div data-audience="self">
+  <!-- `TokenSplit`'s rate strip in words: the text row is the lead sentence in the reader's language
+       (22 tokens per 100 characters in English, 26 in Dutch), a line of Java 22, a class name 23, an
+       id 61. So text and code are about level and ids and hashes are nearly 3 times either (61/22 is
+       2.8). Nothing here may say text is the cheapest any more: in Dutch it is not. -->
   <p data-i18n="tokens.not-words.2">
-    This is why a pasted stack trace, a log full of ids, or a wall of minified JSON costs several times
-    what its length suggests. Plain prose is the cheapest thing you can put in front of a model.
-    Identifiers and hashes are the dearest, and a codebase is made of those.
+    Plain text and code cost about the same number of tokens per character. Ids and hashes cost nearly
+    3 times as much, because the tokeniser recognises nothing in them. So a pasted stack trace or a log
+    full of ids costs a lot more than you would think.
   </p>
 
-  <!-- The bill and the answer have one cause, and that is the whole paragraph: the vocabulary was
-       built from the training pile, so what comes apart into fragments is what the model read least
-       of. It stays one clause, because `context` owns what a model being an average means and this
-       unit must not start arguing it a step early. This is also where the language claim lives:
-       `TokenSplit` deliberately has no Dutch row, since an English sentence against a Dutch one
-       turned the figure into an argument about languages. Keep it in the prose. -->
+  <!-- The bill and the answer have one cause, and the first sentence is it: the vocabulary was built
+       from the training pile, so what comes apart into fragments is what the model read least of. It
+       stays one clause, because `context` owns what a model being an average means and this unit
+       must not start arguing it a step early. This is also where the language claim lives, and it is
+       kept honest on purpose: for a big language the gap is small (the lead sentence is 11 tokens in
+       English and 14 in Dutch, and Anthropic's multilingual-support page puts German and French at
+       about 97% of English; Dutch is not in that table, so no Dutch percentage is stated). It grows
+       for a language with little text online and for a codebase's own names. `TokenSplit` shows
+       one sentence per reader, never an English row beside a Dutch one, since that turned the figure
+       into an argument about languages. Keep the comparison in the prose. -->
   <p data-i18n="tokens.not-words.3">
     The vocabulary comes from the pile the model was trained on, so what breaks into fragments is also
-    what it has read least of. Plain English it has seen endlessly. Your class names and a language
-    with little text online it has not, and it answers worse on both
-    <svg data-icon="gem"></svg> Ask in the language the model has read most of. The same question
-    costs fewer tokens and comes back better answered <svg data-icon="coin"></svg>.
+    what it has read least of. For a big language like Dutch the difference is small. The sentence at
+    the top of this page is 14 tokens in Dutch against 11 in English, and Anthropic measures answers
+    in German or French at about 97% of the English. The gap is wider for a language with little text
+    online, and wider again for your own class names.
   </p>
 
-  <h2 data-i18n="tokens.one-at-a-time.heading">It writes one token at a time</h2>
+  <!-- The heading is the name of the thing, and `.1` names it last, after saying what it is. -->
+  <h3 data-i18n="tokens.attention.heading">Attention</h3>
+
+  <p data-i18n="tokens.attention.1">
+    In <code>He deposits his money at the bank</code>, <code>bank</code> could mean a river bank or
+    an institution that handles money. The words <code>deposits</code> and <code>money</code> help
+    identify the right meaning. The model weighs information from other tokens to make such
+    connections. That weighing is called <strong>attention</strong>.
+  </p>
+</div>
+
+<div data-figure="token-attention"></div>
+
+<div data-audience="self">
+  <!-- The bank example follows the reader's language. English uses the river-bank ambiguity;
+       Dutch uses a seat versus a financial institution. The diagram's weights are illustrative
+       and omit self-attention, while the explanation below includes it. Query/key comparison
+       and value aggregation are separate operations, both learned during training and used
+       during inference. No numerical example: the role of each vector is the point. -->
+  <p data-i18n="tokens.attention.2">
+    Every token gets 3 vectors: a <strong>query</strong>, a <strong>key</strong> and a
+    <strong>value</strong>. They serve different roles. When a token seeks information from other
+    tokens, its query expresses what it needs. When other tokens attend to this token, its key
+    expresses what it offers. Its value contains the information it actually contributes.
+  </p>
+
+  <p data-i18n="tokens.attention.5">
+    For <code>bank</code>, the model compares its query with the keys of every earlier token and
+    itself. It calculates their <strong>dot product</strong>: multiply the numbers at corresponding
+    positions in the 2 vectors, then add the results. Each comparison produces a score.
+  </p>
+
+  <p data-i18n="tokens.attention.6">
+    The scores are converted into weights that add up to 100%. The higher the score, the more the
+    corresponding value contributes. The model multiplies each value-vector by its weight and adds
+    the vectors together, position by position. That lets information from <code>deposits</code>
+    and <code>money</code> weigh heavily in understanding <code>bank</code>.
+  </p>
+
+  <p data-i18n="tokens.attention.7">
+    During training, the model learns how to calculate these vectors to make useful connections.
+    When it writes, it uses those learned calculations.
+  </p>
+
+  <!-- Explain what repeated attention contributes without introducing heads as unexplained jargon.
+       The weights are illustrative. Counts exclude self-attention: n(n-1)/2 gives 21 pairs for
+       7 tokens and 91 for 14. These are the figure's inter-token links, not the full attention matrix. -->
+  <p data-i18n="tokens.attention.3">
+    The model runs several such weighings side by side and repeats the process. The figure shows 1 such weighing,
+    with made-up weights and attention to the token itself left out. That gives 21 pairs for 7
+    tokens; 14 tokens would already give 91. The number of connections grows much faster than the text. Without a
+    cache, the model does it all again on every turn, over the whole window.
+  </p>
+
+  <!-- The cache, and what it does not do. It reuses what was worked out for the window already there,
+       so that part is billed at the cache-read rate, but that rate is paid every turn for the whole
+       window, and every new token is still weighed against all of it. That is why a long session gets
+       slower and dearer even with a cache; Claude 4.6 and later carry no long-context surcharge, so
+       "dearer" is the whole window paid every turn, not a higher rate. The facts and their dates are
+       in step1/CLAUDE.md. It points at `harness`'s caching section rather than teaching it, and
+       "a tenth of the input price or less" is that unit's phrase, kept word for word. -->
+  <p data-i18n="tokens.attention.4">
+    A cache makes that cheaper, not free. What was already in the window is not worked out again, and
+    you pay for it at a tenth of the input price or less. But you pay that every turn, for the whole
+    window, and every new token still has to be weighed against everything before it. So a long
+    session gets slower and dearer, cache or no cache. The cheapest token is the one that never goes in
+    <svg data-icon="coin"></svg> How the cache works is in the
+    <a href="/steps/step1/harness">harness unit</a>.
+  </p>
+
+  <h2 data-i18n="tokens.writing.heading">Writing</h2>
+
+  <h3 data-i18n="tokens.one-at-a-time.heading">It writes 1 token at a time</h3>
 
   <p data-i18n="tokens.one-at-a-time.1">
     Given everything it has been handed so far, the model scores the tokens that could come next, and
@@ -79,8 +164,8 @@
 
 <div data-audience="self">
   <!-- The correction that makes this section worth having: conditioned on everything before it, not on
-       the token before it. It is also the bridge into the attention section, which is that claim drawn.
-       Do not shorten it to "the previous token". -->
+       the token before it. It is also what the attention section above drew. Do not shorten it to
+       "the previous token". -->
   <p data-i18n="tokens.one-at-a-time.2">
     On its own, <code>it</code> predicts nothing at all. <code>the build failed because it</code>
     makes <code>timed</code> the favourite. Everything you leave in front of a model changes what
@@ -91,49 +176,69 @@
        from teaching that a model is a lookup table with extra steps, and it is what the fan of scores
        on the figure above is for. -->
   <p data-i18n="tokens.one-at-a-time.3">
-    The favourite is not always what comes out. Those scores are a distribution and the model samples
-    from it, so the same question can give you a different answer twice in a row. None of the branches
-    above were impossible. They were only less likely.
-  </p>
-
-  <!-- Points at `model`'s pricing rather than repeating it, the same rule the caching paragraph below
-       follows for `harness`. One consequence, named, and then it stops. -->
-  <p data-i18n="tokens.one-at-a-time.4">
-    This is also why output is priced above input. A question arrives in one pass. An answer is built a
-    token at a time, and each token is a pass of its own, and the passes cannot run side by side. The
-    <a href="/steps/step1/model">model unit</a> puts numbers on that gap.
-  </p>
-
-  <h2 data-i18n="tokens.reads-all.heading">It reads all of it, every turn</h2>
-
-  <p data-i18n="tokens.reads-all.1">
-    Inside every one of those passes, the model does not look anything up. Each token is weighed
-    against every token in front of it. There is no index, and nothing to search.
+    The favourite is not always what comes out. Those scores are probabilities, and the model picks
+    one according to them, so ask the same question 2 times and you can get 2 different answers. None
+    of the other words above was impossible. They were only less likely.
   </p>
 </div>
 
-<div data-figure="token-attention"></div>
+<!-- How widely it picks: temperature, top-k and top-p applied to `TokenNetwork`'s own 4 scores.
+     The figure carries what the knobs do, so the prose under it keeps only the fact the student
+     needs. The reasoning is in step1/CLAUDE.md under `SamplingKnobs`. -->
+<div data-figure="sampling-knobs"></div>
 
 <div data-audience="self">
-  <p data-i18n="tokens.reads-all.2">
-    Take the favourite three times above and this is the sentence you get, with the full stop left
-    off. <code>it</code> leans hardest on <code>build</code>, which is the answer you would have
-    given. A token only ever looks backwards.
+  <!-- One sentence, and it takes the knobs out of the student's hands: models released after Claude
+       Opus 4.6 reject any temperature, top_p or top_k but the default (Messages API reference), and
+       neither Claude Code nor Copilot exposes a setting for them. -->
+  <p data-i18n="tokens.one-at-a-time.4">
+    You do not set any of these yourself: Claude Code and Copilot choose them for you, and the newest
+    Claude models accept only the defaults.
   </p>
 
-  <p data-i18n="tokens.reads-all.3">
-    Seven tokens make twenty-one pairs. Double the tokens and it is ninety-one, not forty-two. The
-    reading grows faster than the thing being read. That is why a long session gets slower as well as
-    dearer, and why the cheapest token is the one you never put in
-    <svg data-icon="coin"></svg>.
+  <!-- Where `NextToken`'s scores come from, so it follows that figure rather than leading the unit:
+       the scores are on screen before the network that makes them is opened up. One sentence and the
+       figure, because the drawing carries the rest. Its footer points back at attention ("above"),
+       which `attention` keeps true. The reasons for every cut in it are in step1/CLAUDE.md under
+       `TokenNetwork`. -->
+  <h3 data-i18n="tokens.inside.heading">Inside: numbers in, probabilities out</h3>
+
+  <p data-i18n="tokens.inside.1">
+    This is where the scores above come from.
+  </p>
+</div>
+
+<div data-figure="token-network"></div>
+
+<div data-audience="self">
+  <!-- Writing's bill, and the last prose section: output priced above input, reasoning billed as
+       output, and the figure putting a turn's reading and writing side by side. `.1` sends the numbers
+       to `model`'s pricing, the same rule `harness.coordinator.3` follows for decomposition; the cache
+       pointer to `harness` sits with the cache in `attention.4`. `.3` names no price and no link of
+       its own: `TokenKinds` carries every number, computed from `ModelPricing`'s Sonnet row. -->
+  <h3 data-i18n="tokens.expensive-part.heading">The expensive part</h3>
+
+  <p data-i18n="tokens.expensive-part.1">
+    Output is priced above input. The model reads your question in 1 go. It writes the answer a token
+    at a time: every new token is another full pass through the network, and it cannot start until
+    the token before it is there. How much dearer that makes output is in the
+    <a href="/steps/step1/model">model unit</a>.
   </p>
 
-  <!-- Points at `harness`'s caching section rather than restating it, the same rule
-       `harness.coordinator.3` follows for decomposition. One consequence, named, and then it stops. -->
-  <p data-i18n="tokens.reads-all.4">
-    Because a token only looks backwards, adding to the end leaves every earlier weighing exactly as
-    it was, so the front of the window can be kept and charged at a fraction next turn. That
-    is what a cache is here. The <a href="/steps/step1/harness">harness unit</a> prices it.
+  <p data-i18n="tokens.expensive-part.2">
+    Thinking is writing too. Reasoning is billed as output, including the reasoning you never see:
+    what reaches your screen is at most a summary, and the bill is for the whole thing. Here is 1 turn
+    deep in a session, with the reading and the writing side by side.
+  </p>
+</div>
+
+<div data-figure="token-kinds"></div>
+
+<div data-audience="self">
+  <p data-i18n="tokens.expensive-part.3">
+    The token counts in this turn are an example. The price ratios are real. Most of the window comes
+    from the cache and costs next to nothing. The reasoning, which you never even see, is more than
+    half the bill.
   </p>
 </div>
 

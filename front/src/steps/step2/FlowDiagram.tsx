@@ -176,10 +176,13 @@ function useLoopInset(enabled: boolean, target: number) {
 function BranchFeed({
   id,
   label,
+  note,
   inset,
 }: {
   id: string
   label: string
+  /** What the box under the row does, set to its left where the row above leaves room. */
+  note: string
   inset: {
     left: number
     right: number
@@ -228,6 +231,20 @@ function BranchFeed({
       >
         <Node id={`${id}-branch-label`} node={label} />
       </div>
+      <span
+        id={`${id}-branch-note`}
+        data-component="FlowDiagram"
+        style={{
+          left: inset.left - inset.branch / 2 - STANDOFF,
+          top: BRANCH_DEPTH + inset.branchHeight / 2,
+        }}
+        // Anchored on its right edge by a `left` and a full translate rather than by `right`: the
+        // insets are measured after any transform, so under a scaled slide an offset taken from the
+        // far edge carries the whole row's error and lands the words on the box.
+        className="text-primary absolute -translate-x-full -translate-y-1/2 text-right text-xs whitespace-nowrap"
+      >
+        {note}
+      </span>
 
       {/* And on up into the box it hangs from. */}
       <div
@@ -289,6 +306,7 @@ export function FlowDiagram({
   links,
   loop = false,
   loopTo = 0,
+  loopBy,
   branch,
   aside,
   later,
@@ -300,7 +318,15 @@ export function FlowDiagram({
   loop?: boolean
   /** Which node the return path comes down into. Defaults to the start of the row. */
   loopTo?: number
-  /** A box hanging under `loopTo`, fed by the last node and feeding back up into it. */
+  /**
+   * A node sitting on the return path, for the case where somebody walks it: the path is then that
+   * node's work rather than a bare arrow, and `<id>.loop` names what it does beside the box.
+   */
+  loopBy?: string
+  /**
+   * A box hanging under `loopTo`, fed by the last node and feeding back up into it. Its caption,
+   * what that box does there, is `<id>.branch-note`.
+   */
   branch?: string
   /** A box hanging under one node of the row, reached by a teal path: what the run sets aside. */
   aside?: FlowAside
@@ -448,33 +474,82 @@ export function FlowDiagram({
       data-component="FlowDiagram"
       role="img"
       aria-label={t(`${id}.description`)}
-      className="not-prose my-6 flex justify-center"
+      className="not-prose my-6 flex overflow-x-auto pb-1"
     >
-      {/* Shrink-to-fit around the row, so the return path spans the row rather than the column. */}
-      <div id={`${id}-cycle`} data-component="FlowDiagram" ref={ref}>
-        <p
-          id={`${id}-return-label`}
-          data-component="FlowDiagram"
-          className="text-primary mb-1 text-center text-xs"
-        >
-          {t(`${id}.loop`)}
-        </p>
+      {/* Shrink-to-fit around the row, so the return path spans the row rather than the column.
+          It never shrinks below the row, so the row never wraps: a wrapped row puts the boxes the
+          cycle was measured against on two lines, and the paths stop landing on them. Under about
+          500px the figure scrolls sideways in its own box instead, and `mx-auto` still centres it
+          wherever it fits, since an auto margin gives way to zero when there is no room. */}
+      <div id={`${id}-cycle`} data-component="FlowDiagram" ref={ref} className="mx-auto shrink-0">
+        {loopBy === undefined && (
+          <p
+            id={`${id}-return-label`}
+            data-component="FlowDiagram"
+            className="text-primary mb-1 text-center text-xs"
+          >
+            {t(`${id}.loop`)}
+          </p>
+        )}
 
         {/* The return path runs over the top: up out of the last box, left, and down into the one
             it feeds. Above rather than below because a branch hangs under the row, and a path that
             had to dodge it would stop reading as a straight line back. Three borders are the whole
-            of it, and the chevron caps the riser it comes down. */}
+            of it, and the chevron caps the riser it comes down. With `loopBy` the top border is
+            two runs with the node and its label between them, so the line stops at the box rather
+            than being painted out behind it: the figure sits on a card on the page and on the
+            plain ground on a slide, and a mask would have to know which. */}
         <div
           id={`${id}-return`}
           data-component="FlowDiagram"
-          className="relative mb-2"
+          className={loopBy === undefined ? 'relative mb-2' : 'relative mt-6 mb-2'}
           style={{ marginLeft: inset.left, marginRight: inset.right }}
         >
-          <div
-            id={`${id}-return-path`}
-            data-component="FlowDiagram"
-            className="border-primary/40 h-5 border-t border-r border-l border-dashed"
-          />
+          {loopBy === undefined ? (
+            <div
+              id={`${id}-return-path`}
+              data-component="FlowDiagram"
+              className="border-primary/40 h-5 border-t border-r border-l border-dashed"
+            />
+          ) : (
+            <>
+              <div
+                id={`${id}-return-path`}
+                data-component="FlowDiagram"
+                className="border-primary/40 h-7 border-r border-l border-dashed"
+              />
+              <div
+                id={`${id}-return-top`}
+                data-component="FlowDiagram"
+                className="absolute inset-x-0 top-0 flex -translate-y-1/2 items-center"
+              >
+                <div
+                  id={`${id}-return-top-left`}
+                  data-component="FlowDiagram"
+                  className="border-primary/40 h-0 flex-1 border-t border-dashed"
+                />
+                <div
+                  id={`${id}-return-by`}
+                  data-component="FlowDiagram"
+                  className="flex items-center gap-2 px-2"
+                >
+                  <Node id={`${id}-return-by-label`} node={loopBy} />
+                  <span
+                    id={`${id}-return-label`}
+                    data-component="FlowDiagram"
+                    className="text-primary text-xs whitespace-nowrap"
+                  >
+                    {t(`${id}.loop`)}
+                  </span>
+                </div>
+                <div
+                  id={`${id}-return-top-right`}
+                  data-component="FlowDiagram"
+                  className="border-primary/40 h-0 flex-1 border-t border-dashed"
+                />
+              </div>
+            </>
+          )}
           {/* Carries the riser down past the row's top edge, stopping a standoff short of the box
               so the arrowhead reads as arriving at it rather than sitting on it. */}
           <div
@@ -494,7 +569,9 @@ export function FlowDiagram({
 
         {row}
 
-        {branch !== undefined && <BranchFeed id={id} label={branch} inset={inset} />}
+        {branch !== undefined && (
+          <BranchFeed id={id} label={branch} note={t(`${id}.branch-note`)} inset={inset} />
+        )}
       </div>
     </figure>
   )

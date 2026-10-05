@@ -54,10 +54,13 @@ untranslated, the way a name is.
 **The page's copy is pinned to the window**, bottom right, at the tutor's own asking: it is a
 watermark rather than a colophon, so it stays on screen wherever the student has scrolled to, and
 it is a sibling of `#app-body` rather than a child, since that body is a `z-10` stacking context a
-fixed element could not be layered out of. It is `pointer-events-none` and set back to 70%, which
-is what keeps it a mark and not a widget: on a narrow window it lands on top of a line of prose,
-and it must lose that argument rather than win it. Do not give it a panel or a border to fix that;
-the flatness rule below is the reason, and a chip in the corner reads as a control.
+fixed element could not be layered out of. **It is only pinned from 1600px**, where the gutter
+beside the card is wide enough to hold it. Pinned on anything narrower it sat on top of the card's
+text, and the tutor called that a bug, so below 1600px it sits at the foot of the page instead, in
+the bottom padding `#app-body` already leaves under the card. Do not pin it at every width again, and
+do not give it a panel or a border to cover the overlap either: the flatness rule below is the
+reason, and a chip in the corner reads as a control. It is `pointer-events-none` and set back to
+70%, which is what keeps it a mark and not a widget.
 
 **`points` is the third shape**, a short list under the heading, in the same `<hi>`/`<mute>`
 markup as the title, at three to five entries of a few words each: a longer list is the tutor's
@@ -489,7 +492,7 @@ for a figure: it reads `useAssistant()` itself, and the `data-figure` marker nev
 Which units this is actually used in, and the places it deliberately is not, are in
 `front/src/steps/step0/CLAUDE.md` and `front/src/steps/step1/CLAUDE.md`, with the cross-step scope in
 `front/src/steps/CLAUDE.md`. The short version: step 0 tells the student to set it and varies one
-block of its own, and step 1 varies ten. Everything else is shared on purpose.
+block of its own, and step 1 varies thirteen. Everything else is shared on purpose.
 
 ## Languages
 

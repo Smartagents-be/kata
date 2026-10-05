@@ -278,9 +278,24 @@ on purpose: the unit's vocabulary is the window, so they are one window in two s
 two drawings, and what keeps them apart is the stack, four different turns against five copies of
 one. Teal is what you typed or chose to carry (the correction, the rewritten request, the block
 that crosses the clear); what the window merely holds is muted bulk. **The rewound window's dropped
-turns are not drawn, not even dashed**: a dashed ghost inside the frame says they are still in
-there, so the emptiness is the drawing, on `LoopsPerHour`'s rule that the wait is drawn as nothing,
-and the note under the frame carries the words. `LoopInWindow`'s fifth fix is an outline, never
+turns are drawn now, struck through and dashed, and that reverses a recorded decision** (FEEDBACK
+11). They used to be left out, on the argument that a dashed ghost inside the frame says they are
+still in there and that the emptiness was the drawing. Read cold, the empty window said something
+worse: that the agent never went wrong at all, so the two columns looked like two different runs,
+and "Go back and edit" read as starting a new session. So the right window now opens on the same
+request and wrong file the left one keeps, dashed on the step 1 reading of a dash (built, then
+thrown away) with the words struck, a label under them saying the rewind dropped them, and then the
+rewritten request and the work on the same rows the left window's correction and next turn sit on.
+The note under the frame says the wrong turn is never re-sent, which is what the struck rows mean.
+The column is named **"Rewind, in the same session"** and names no keystroke, on the
+`Interrupt, or go back` rule below: the Claude Code binding (double Escape or `/rewind`, checked
+against code.claude.com/docs/en/checkpointing in October 2026) is a harness's, and the section
+names none. The slide title moved with it: `deck.steering.rewind.title` read "A rewind never
+happened", which the struck rows now contradict, and it is "A rewind takes the wrong turn out", the
+section's own closing line. The prose under it followed for the same reason:
+`interrupt-or-go-back.3` ends "As far as the model knows, it never happened" rather than a bare "It
+never happened", which is true of the window and not of any file the wrong turn already wrote
+(`mid-flight.1` says those are yours to revert). `LoopInWindow`'s fifth fix is an outline, never
 dashed and never teal: it is being written, it is just the same shape again, and its label says so.
 Neither window figure may borrow the other's argument, wrong direction against no direction, and
 neither is about the clock, which is `LoopsPerHour`'s.
@@ -334,7 +349,23 @@ that argues it. **Do not open a third site.**
 `setup` carries three drawings and they are one drawing three times: `ProjectTree` under the
 CLAUDE.md heading, `SkillTree` under Skills and `HookTree` under Hooks, each `FileTree` with `dim`
 set and that section's subject picked out in teal. One section, one heading, one tree, then the
-prose. Only `ProjectTree` numbers its rows, because only its section points back into them. The
+prose. Only `ProjectTree` numbers its rows, because only its section points back into them.
+
+**The CLAUDE.md section runs to three paragraphs, and the third is `.claude/rules/`** (FEEDBACK 10,
+where `.claude/rules` came up as an exam topic). `claude-md.3` is a comparison and not a second
+mechanism to learn: a nested CLAUDE.md follows the folder layout, a rule with a `paths` line follows
+a file pattern that cuts across it, and a rule without one loads at launch like the root file. Its
+payoff is stated as the always-loaded part staying short and **never as tokens or a bill**, because
+the cost argument already has its two sites in this unit (`claude-md.2` and `skills.5`) and the
+rule below forbids a third. It sits after `claude-md.2` rather than before it, so that paragraph's
+"So keep each of them lean" still follows the nesting claim it was written against. The tree gained
+a fourth numbered entry for it, `.claude/rules/api-design.md` with its `paths` line drawn under the
+name (`FileTree`'s `detail`, a literal like the name, since frontmatter is not translated). **That
+file is invented**, on `SkillTree`'s precedent: this repository has no rules folder, and the
+example is a controller pattern rather than a test one because the house test style is the
+capstone's skill. The tree and `claude-md.3` name the same file and the same pattern. What the
+paragraph deliberately leaves out: `~/.claude/rules/` (the section after it owns the personal file),
+`AGENTS.md`, and commands, each its own item. The
 frontmatter example beside `SkillTree` is **`add-endpoint`, and both it and the three skills in the
 drawing are invented**, which is the decision rather than a shortcut. This repository's own four are
 `adding-a-step`, `lesson-writing`, `quiz-writing` and `repo-setup`, and every one of them belongs to
@@ -409,7 +440,10 @@ the boards do not mark each other's rows solved, and both sit under `kata.step2.
 
 `patterns` is one short lead paragraph, `Skill iteration`, then `Scripts`, and **it closes on a card
 and a quiz** under an `<hr>` and the shared `ui:quiz.title`, with no prose between the rule and the
-card. The `script-runs` figure had the last word until they landed: a closing section called
+card. The `script-runs` figure is followed by one sentence, `patterns.scripts.3`, which says what
+the shape proves (asked in words every run is a new one to check, as a script you checked it once)
+and does not walk the rows; it went in with FEEDBACK 12, when the figure turned out not to read on
+its own. The figure had the last word until the card and quiz landed: a closing section called
 "Around the script" was cut, along with the lead's second paragraph. `SameEveryRun` **asks for no
 tests** (spending `workshop.flag.coverage.help`'s testing skill is the capstone's job) and **touches
 no package** (a rename breaks `mvn verify -Pgraded`, the `challenge` tests and the native-image
@@ -443,9 +477,15 @@ plus the tokens the agent stops spending working the steps out again.
 `evolution` owns few-long against many-short, so drawing a run here as time spent collapses this
 into one of those. The same request three times, drawn twice: three muted cards whose bars differ,
 then three teal cards that are one set of widths repeated, which is the equality the section claims
-in words. The cards are the same size in both rows for the same reason. **Only the second row is
-labelled.** The first is what you already have and a name over it says prose twice, so what each row
-produces sits on the right instead, and that pair is the drawing.
+in words. The cards are the same size in both rows for the same reason. **Both rows are labelled
+now, and that reverses a recorded decision** (FEEDBACK 12). The old record said only the script row
+was named, because a name over the first said prose twice; read cold, nobody could say what the
+first row was, what was being run, or what a bar measured. So the figure opens on the request (a
+database reset before a demo, `scripts.1`'s own example), the rows read "Asked in words, three
+times" against "One script, three times", and a legend line under them says **a bar's length is how
+much that step did on that run**. That wording is the constraint: it is neither time nor tokens, so
+the legend may never grow a unit, or the figure becomes `LoopsPerHour` or a bill. What each row
+produces still sits on the right, and that pair is still the drawing.
 
 `workflows` is five ways of handing work over, and **the order is the argument**: naive, plan-based,
 spec-driven, defer, audit-driven, running from the least settled up front to the most, with a closing section
@@ -522,10 +562,19 @@ wrapping. The row gap is `gap-2` for the same reason.
 
 `audit-driven` is the long one and the only one drawn on two levels. Its row is
 `you → agent → audit.md → you → agent → [project]`, and around it runs a cycle in two halves that
-meet on the same two columns. Above the row, the project goes back into `audit.md` on a path
-labelled `update`, because what a pass produces is a new version of that file. Below it, a `you`
-**hangs under `audit.md`**, the project feeds it, and it feeds back up into `audit.md`. Splitting
-the cycle across both sides is what keeps either half from having to dodge the other.
+meet on the same two columns. Above the row, the project goes back into `audit.md` through **an
+`agent` pill sitting on the path**, labelled "audits again", because what a pass produces is a new
+version of that file and an agent is what writes it. Below it, a `you` **hangs under `audit.md`**,
+the project feeds it, and it feeds back up into `audit.md`, captioned "check the fix, close the
+row". Splitting the cycle across both sides is what keeps either half from having to dodge the
+other, and the two halves are the two ways a row closes: the agent re-running the audit, and you
+checking the change. Both labels went in with FEEDBACK 13, which found the bare `update` arrow said
+nothing about who updates and the bottom `you` said nothing about what you do there; until then
+both answers lived only in the aria description. They are `FlowDiagram`'s `loopBy` prop and its
+`<id>.branch-note` key, and the pill is drawn **between two runs of the top line rather than
+painted over it**, because the figure sits on the card on a page and on the plain ground on a
+slide, and a mask would have to know which. `audits again` is a verb phrase rather than a bare
+noun, which is the one place the bare-noun rule above gives way: it labels a path, not a box.
 
 Four mechanical notes, and they are all one problem: a box's edges are not the row's edges. The
 paths are **measured** rather than inset by constants, since the boxes are words and the project
@@ -534,7 +583,12 @@ the branch box under a `ResizeObserver`, and returns `left`/`right` for the two 
 how far the target starts below the row's top, `rise` for how far it ends above the row's bottom,
 and the branch's width. Without `drop` and `rise` an arrowhead stops in mid-air, because the row is
 as tall as the project frame while the box being pointed at is not. Every arrowhead then keeps a
-`STANDOFF` from its box, so the two read as arriving rather than touching. And the arrows are
+`STANDOFF` from its box, so the two read as arriving rather than touching. The bottom caption is
+anchored by `left` and a full translate rather than by `right`: the insets are measured after
+transforms, and on the slide an offset taken from the far edge carried the whole row's scale error
+and put the words on the box. **The figure still breaks under about 500px**, where the row wraps and
+the measured cycle no longer lands on its boxes; that was true before the labels went in and is not
+fixed. And the arrows are
 `aria-hidden` with a per-figure `aria-label`, because direction is the whole content and the labels
 alone do not carry it.
 

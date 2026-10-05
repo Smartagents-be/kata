@@ -34,16 +34,26 @@ the wrong thing to open a page about the prompt with. The word is used as an ord
 `prompt.lead.1` onward and `context` is where the window is taken apart. Do not write a definition
 back into `prompt`, and if one is ever wanted again, `context` is the unit that owns it. The other is
 that the three oval figures run as a sequence rather than an empty frame followed by fillings of it.
-`PromptInContext` draws the prompt and nothing around it, `ToolsInContext` draws the frame with a
+`PromptParts` draws the prompt and what it can carry, with nothing around it, `ToolsInContext` draws the frame with a
 tool across its border, and `ContextDiagram` in `context` is the populated window at the end,
 holding `prompt`, `resources` and `tools`. **`ContextDiagram` was drawn empty when `context` opened
-the step and is not any more**, so nothing may describe it as the empty one. **`PromptInContext`
+the step and is not any more**, so nothing may describe it as the empty one. **The prompt's oval
 lost its frame on purpose and must not get it back**: a student meets that figure before they have
 met the window, so a frame there spent the vocabulary a unit early and left `ContextDiagram` re-showing
 a picture they had already seen. The first teal frame in the step is now `ToolsInContext` in `tools`,
-which is what the "draws no context frame" comments in `TokenSplit` and `TokenAttention` point at. Its
+which is what the "draws no context frame" comments in `TokenSplit` and `TokenAttention` point at.
+`AgentLoop` sits above it in the same unit and does not break that, because its ring is a path with
+nothing inside it rather than a frame; the reasoning is under `tools` below. Its
 oval instead carries `ContextDiagram`'s prompt region geometry and fills, so the two read as one
-shape seen twice; the component name still says `InContext` and no longer describes the drawing. Neither is to scale, and the share-by-volume figure is still `SessionMakeup` in `session`.
+shape seen twice. **`PromptParts` replaced `PromptInContext`, the oval on its own**, after the
+course owner read that figure as being about nothing: it said "this is a shape" and stopped. The
+oval stays, joined by a stem to the 5 things a prompt can carry (goal, example, limit and why, output
+format, done when), each a sentence of one ask, so the sequence above is intact and the first
+figure now teaches something. **The ask is deliberately not this repo's** (a 404 for a user that does
+not exist, `UserRepository`, `OrderController`): it was `TitleController`'s first, and its limit
+leaned on the Catalogue page, which a reader at the top of the unit has not met, so the course owner
+could not follow it. A limit only reads when its reason does; `be-exact.2` and `few-shot.1` share
+the ask. Neither is to scale, and the share-by-volume figure is still `SessionMakeup` in `session`.
 One term is knowingly loose: `ContextDiagram`'s `resources` is the broad word for what the agent
 read, while `tools` defines `resource` narrowly as content an MCP server hands over uncalled.
 **Three of them are deliberately not in that
@@ -70,49 +80,147 @@ the shared `ConnectBoard`, which `model`'s `PickTheTier` is too; the reasoning f
 `model` below.
 
 `tokens` opens the step, ahead of `context`, and gives the step's unit of measurement a page before
-anything is measured in it. It is prose, four figures and one exercise. **It still carries no quiz**,
+anything is measured in it. It is prose, seven figures and one exercise. **It still carries no quiz**,
 and that half of the old decision holds: `contextQuiz` and `promptQuiz` are two pages away on either side, and the step's
 third quiz sits under `truth` near the end. What it does carry is
 `PickTheNext` under the usual "Test yourself" heading, and the reasoning for it is under that
 component below. **Its prose is self-only**, the same wrapper shape `context` uses: in class the
-teacher talks it through at the board, so a guided student gets the four figures and the exercise and
-nothing else. The figure markers stay top-level and carry no attribute, which is what keeps them on
-both audiences' pages, and the wrapper closes before each one and reopens after it. `WordsIntoTokens`
-is the only marker in the step with no heading above it, so it is also the one figure a guided page
-opens on untitled.
-Nothing in it carries a currency; `ModelPricing` is still the only place in the course where a number
-has one. Its prose has been cut hard and deliberately: it opens cold, closes on the caching pointer
-with no summary or handoff, and the figures are left to be read rather than narrated. Sentences that
+teacher talks it through at the board, so a guided student gets the seven figures and the exercise
+and nothing else. The figure markers stay top-level and carry no attribute, which is what keeps them on
+both audiences' pages, and the wrapper closes before each one and reopens after it. `TokenizerView`
+is the only marker in the unit with no heading above it, under `lead.1`, so a guided page opens on it
+untitled; every other figure gets the heading of its own section.
+One number in it carries a currency, `TokenKinds`' dollar total, and it is the one exception to
+`ModelPricing` holding the only ones in the course; why it is allowed is under `TokenKinds` below. Its
+prose has been cut hard and deliberately: it opens cold, closes on `expensive-part` with no
+summary or handoff, and the figures are left to be read rather than narrated. Sentences that
 told the student to click something, or that recapped what the figure had just shown, were taken out
-one at a time. Do not write that layer back in.
+one at a time. Do not write that layer back in. **Every number in its prose, its figure labels and
+its deck text is a digit, in both languages** (`1 token door het netwerk`, `7 tokens`, `21 paren`,
+`3 keer`), the lesson-writing rule the course owner asked for in this unit's review; ordinal words
+(`eerste`, `the fifth`) and the pronoun *one* (`picks one according to them`, `kiest er één`) are
+not counts and stay words.
+
+**The unit is an intro and then two explicit parts, `Reading` and `Writing` (`Lezen`, `Schrijven`),
+each an `<h2>` with `<h3>` sections under it, and each section answers the one before it.** The
+intro has no heading: `lead.1`, `TokenizerView` (text in, numbers out), `lead.2` (what a token is
+the unit of: how much fits, what it costs, what the model reads again) and `lead.3`. Reading holds
+`not-words` with `TokenSplit` (where the cuts fall and what that costs) and `attention` with
+`TokenAttention` (how the model weighs every token against the ones before it, and what a cache
+does and does not save). Writing holds `one-at-a-time` with `NextToken` (the loop, the scores,
+picking by probability) and `SamplingKnobs` (how widely it picks), `inside` with `TokenNetwork`
+(where those scores come from) and `expensive-part` with `TokenKinds` (what writing costs against
+reading), and then the exercise. The parts were implicit once, a run of five `<h2>`s, and the review
+asked for them to be visible. **Keys take their section from the `<h3>`, not the `<h2>`**, the
+scheme `harness`'s pattern sections already use: `tokens.attention.3`, `tokens.expensive-part.1`.
+The two part headings own nothing but their own `tokens.reading.heading` and
+`tokens.writing.heading`, since no paragraph sits directly under either, and a key carrying both
+levels (`tokens.reading.attention.3`) would rename every key the day a section moves between parts.
+A reworded `<h3>` renames its section's keys as usual; `one-at-a-time` survived its heading turning
+into `It writes 1 token at a time` because a slug is an identifier rather than prose, so the digit
+rule does not reach it. **Guided mode still titles every figure**, because `prepareUnit` adopts the
+nearest `h2` or `h3` before a marker, which is now the `<h3>`; the two part headings are dropped in
+class with the rest of the prose. **Reading before writing is the approved order**:
+`TokenAttention` explains how context contributes before `NextToken` shows the writing loop.
+**`TokenNetwork` follows `NextToken` on purpose**: it opened the unit once, right after the tokenizer,
+and a reader met a network producing probabilities before anything had told them why a model would
+want any. Under its own heading after the loop it is the answer to a question the reader already
+has, and its footer points back at attention *above* (`hierboven`); moving either of them means
+rereading that footer in both languages. `inside.1` is one sentence and must stay one, because the
+drawing carries the rest. **The cost talk sits where its mechanism is.** The cache is the last
+paragraph of `attention` (`attention.4`), because what it saves and what it cannot save are both
+about the weighing `TokenAttention` has just drawn; output priced above input and reasoning billed
+as output are `expensive-part`, with `TokenKinds` putting a turn's reading and writing side by side.
+They were once gathered into one `costs-same` section, and splitting them by part is what the
+reading-then-writing order bought. **No sentence in the unit says a token "looks" at anything,
+backwards or otherwise**: a token does nothing, the model weighs each token against what precedes it,
+and the prose says it that way in both languages. `TokenAttention`'s figure strings follow the same
+rule (`attention: what each token leans on`, `attention: waar elk token op leunt`): they kept the
+looking image for a while as labels on a drawing of arcs, and a label is read as a claim all the
+same. **`lead.1` is deliberately short**: it says text is cut and each chunk becomes a number, and
+which words survive whole and which break is `not-words.1`'s alone, so the splitting rule is
+explained once. `not-words.1` no longer mentions the space in front of a word: the review cut it from
+the prose, and `TokenSplit`'s dot still shows it to anyone who looks.
+
+**The attention section, and the facts it rests on** (checked October 2026). The heading is the
+name of the thing, and `attention.1` names it last after the bank example. English contrasts a river
+bank with a financial institution; Dutch contrasts a seat with a financial institution. `.2`
+explains the different roles of query, key and value. `.5` explains the dot product (Dutch:
+inwendig product), `.6` distinguishes scoring keys from combining values, and `.7` distinguishes
+learning the calculations during training from using them during inference. There is no numerical
+example: the course owner found it distracting. `.3` is the count: every token against every token before it is
+n(n-1)/2 pairs, so 7 tokens make 21 and 14 make 91, and the model does it again every turn over the
+whole window. `.4` is what a cache changes. With prompt caching (and the KV cache under it) the work
+already done for the earlier tokens is reused rather than redone, so that part of the window is
+billed at the cache-read rate, a tenth of input on Sonnet 5.5, 0.05x on Opus 5.5 and 0.025x on Fable
+5.1, which is what "a tenth of the input price or less" covers. But that rate is paid on every turn
+for the whole cached prefix, and every new token is still attended against the whole context, so
+generation gets slower as the window grows. Claude 4.6 and later models carry **no long-context
+surcharge** (a 900K-token request is billed at the same per-token rate as a 9K one), so "dearer"
+comes from paying for the whole window every turn, never from a higher rate, and no sentence may say
+a long window costs more per token. The paragraph keeps the coin on "the cheapest token is the one
+that never goes in", which is where `recap.what-costs-do.1` lifts it from, and its link to `harness`.
+**`attention.3` explains repeated attention without naming heads or layers**: the course owner
+found the unexplained term unhelpful. It stays with the weighing just explained, says several
+weighings run side by side and are repeated, and identifies the figure as 1 illustrative weighing.
+It introduces no new categories of language relationships. The explanation includes
+self-attention; the figure omits it to focus on links between tokens, and `.3` says so.
 
 Four things about it are decisions. **Nothing in the unit draws the teal context frame**, not one of
-the four figures and not the exercise, and that is what protects `tools`: `ToolsInContext` is the first frame a student
+the seven figures and not the exercise, and that is what protects `tools`: `ToolsInContext` is the first frame a student
 meets, so every unit above it stays out of that vocabulary rather than spending it early, the way
-`ModelTiers` does and the way `PromptInContext` does since it gave its own frame up. The word *context* is likewise used as an ordinary one throughout, since no unit
-defines it before `context` does. **`NextToken` and `TokenAttention` are a pair on one sentence** (`the
-build failed because it timed out`): the first shows it being written a token at a time, the second
-takes the finished sentence apart, and the prose in between says so. Changing the sentence in one of
-them breaks the pair. Since the reader now picks the tokens in the first of them, what holds the pair
-together is its **favourite chain**, the top-scored token at each of the three passes, and the rule
-protecting that is written up under `NextToken` below. **`TokenSplit`'s text row has to contain a word that breaks**, which is why it
-is the sentence it is: `unscrambled` comes apart at `unscr` and `ambled`, at a point that is neither
-a syllable nor a stem. No prose says so any more, so the figure has to carry it alone and a tidier
-sentence quietly ends the exercise. There is deliberately no second sentence in another language: an
-English row against a Dutch one made the figure an argument about languages instead of about tokens.
+`ModelTiers` does and the way `PromptParts` does with its oval. The word *context* is likewise used as an ordinary one throughout, since no unit
+defines it before `context` does. **Attention and writing use different examples.** `TokenAttention`
+uses `He deposits his money at the bank` or `Hij stort zijn geld op de bank`, selected by the active
+language. Both have 7 word-sized illustrative tokens. Its invented weights make `bank` lean hardest
+on `money`/`geld`, with `deposits`/`stort` also contributing. These are explanatory splits, not
+claimed output from a particular tokenizer. `NextToken` keeps its build sentence and its
+`timed` -> `out` -> `.` favourite chain. **These are exceptions to the shared example sentence.**
+Every other place the unit shows a
+sentence uses `example-sentence.ts`'s, in the reader's language (`The agent swears the tests passed
+on its machine.`, `De agent zweert dat de tests op zijn machine slaagden.`): `TokenizerView` draws
+it, `TokenSplit` takes it as its text row, and `TokenNetwork` and `SamplingKnobs` take `swears`
+(`zweert`) out of it. The review asked for that so a reader meets one sentence rather than four;
+`PickTheNext`'s `the pull request was` is an exercise prompt rather than an example, and stays.
+**`TokenSplit`'s text row is the example sentence, and that reverses an older decision.** The row was
+`TokenSplit`'s own once (a sentence about the catalogue, 16 tokens per 100 characters), kept apart from the lead sentence because the figure's rows were ordered cheapest first
+and text cheapest was what the prose argued. With the example sentence the text row is 22 per 100
+in English (11 tokens over 49 characters) and 26 in Dutch (14 over 54), against the line of Java at
+22, the class name at 23 and the id at 61. So **the rows are no longer cheapest first in every
+locale**, the order stays text, Java, class name, id, and the claim moved to match: `not-words.2`
+says text and code cost about the same per character and ids and hashes nearly 3 times as much
+(61 over 22 is 2.8), which is true in both languages, and `deck.tokens.split.note` and
+`deck.tokens.divider.2` say the same. No sentence may call text the cheapest any more. The row still
+**contains a word that breaks**, which the figure needs and no prose points out: `sw|ears` and
+`zwe|ert` break where no reader would cut. Its rates are worked out per render from the active
+locale's split, so a new example sentence moves the strip and has to be checked against
+`not-words.2`. There is still no second sentence beside it: a reader only ever sees their own
+language's row, and an English row against a Dutch one made the figure an argument about languages
+instead of about tokens.
 **The unit does make that argument, in `not-words.3`, and it is prose on purpose.** That paragraph
 draws the line from the tokeniser to the training pile, since a vocabulary built from what the model
-read makes rare-in-the-split and rare-in-training the same thing, and it closes on asking in the
-language the model has read most of. It states the link **in one clause and stops**, because
-`context` owns what a model being an average means and this unit must not argue it four pages early.
+read makes rare-in-the-split and rare-in-training the same thing. It states the link **in one clause
+and stops**, because `context` owns what a model being an average means and this unit must not argue
+it four pages early. **The language claim is kept honest, and it no longer tells anyone to ask in
+English.** It used to close on asking in the language the model has read most of, with a gem and a
+coin, and that overstated the gap for a big language: the lead sentence is 11 tokens in English and
+14 in Dutch, and Anthropic's multilingual-support page puts German and French at about 97% of
+English. Dutch is not in that table, so **no Dutch percentage may be stated**; the paragraph names
+German and French and says the gap is small for a big language, wider for one with little text
+online, and wider again for a codebase's own names. Both icons went with the advice, since no move
+is left for them to mark, and `recap.what-costs-do.1` and `deck.recap.moves.note` dropped it too:
+the recap bullet's move is now pasting the part of the log that matters, under the coin it lifts from
+`attention.4`. That bullet still opens "code is dearer than text", which the rate strip no longer
+bears out now that text and code sit level; it belongs to `recap` and was left for its own pass.
 So the claim belongs there rather than in `TokenSplit`: a Dutch row added now would look like the
 figure catching up with the prose, and it would cost the figure the same way it did the first time. **The rate strip under the chips is
 a rate readout rather than a second sample.** Four rows, tokens per hundred characters, all four
 always up on one scale with only the emphasis following the selection: the section's claim is
 comparative and a panel showing one sample at a time left the reader to click, remember and
-subtract. The numbers are worked out from the same `SAMPLES` the chips are drawn from, so the strip
-cannot drift from the panel above it, and `lead.3`'s band was widened to roughly four to six
-characters per token to hold the 6.1 the text row prints.
+subtract. The numbers are worked out from the same pieces the chips are drawn from, the text row's
+from the active locale's split, so the strip cannot drift from the panel above it. `lead.3`'s band
+(roughly 4 to 6 characters per token) is about English and holds the 4.5 the English row prints;
+the Dutch row prints 3.9, which is the gap `not-words.3` is about rather than a contradiction.
 **Picking a sample restages the panel, and only the arrival is drawn.** The source line and the count
 come back together and the chips come back one after another from the left, on the shared
 `DURATION.state` and `EASE_QUIET`, which is the cut being made rather than a card being swapped;
@@ -122,49 +230,168 @@ fade there would be the *new* sample fading away before it arrived. The stagger 
 uncapped, so the uuid takes longer to enumerate than the prose does, which is the figure's own
 argument rather than an accident of the timing.
 And **the figures are not equally trustworthy, which their captions no longer say.** `TokenSplit`'s
-splits are real output from `o200k_base`, stored as data with no `nl` entry, and `WordsIntoTokens`
-carries the same sentence and the same splits. `NextToken`'s scores are
+splits are real output from `o200k_base`, stored as data with no `nl` entry, `TokenizerView`'s ids
+are real output from the same tokeniser, and `TokenNetwork`'s token, its context and its winning
+output are lifted from that sentence; its numbers are invented and its footer opens on
+`Simplified.` and says so, along with what a real model does instead (under `TokenNetwork`
+below). `NextToken`'s scores are
 hand-authored and its caption admits it. `TokenAttention`'s weights are hand-authored too and its
 caption was removed, so the only warning left is the comment in the component: if that figure ever
 grows a caption again, that is what belongs in it. **Holding a token now prints its weights under the
 boxes as shares, and every row adds to 100.** That is the row of a real attention head, which is a
 softmax over what came before, so the figure is honest about the thing that has a shape (a token
-spreads a fixed weighing backwards and cannot lean hard on everything) while the twenty-one numbers
+spreads a fixed weighing backwards and cannot lean hard on everything) while the 21 numbers
 making up those rows stay picked so one sentence reads the way a reader expects. They are whole
 percent rather than a fraction so a row edited to 99 is a bug rather than a rounding. The one thing
 the hundred leaves out is the token weighing itself, which a real row includes: this figure is about
-what a token looks *back* at, and the wording in every locale key says share of that.
+what a token leans on behind it, and every locale key says that in plain words and digits (`{{token}}
+leans on the {{links}} tokens before it, hardest on {{heaviest}} ({{weight}})`). A token with only 1
+token in front of it gets its own sentence, `token-attention.only`, since "the 1 tokens before it"
+is not a sentence in either language.
 
-`WordsIntoTokens` is the lead figure, and it follows **one word the whole way in and one token back
-out**: `unscrambled`, the two tokens it breaks into, the first of those as a column of numbers, the
-model as a field of numbers, the numbers that come back, and the token they stand for. Six stages,
-and the prose above says none of it. It is one word rather than the sentence because a sentence drawn
-this way is eight columns of the same move, and the move is the figure.
+**`TokenizerView` is the lead figure, and it exists so the word, token, number step is visible
+before the network.** `lead.1` says text is cut into chunks and every chunk is swapped for a number,
+and the network further down starts from numbers, so the step in between was told and never shown. The
+figure is the shape of a public tokenizer page, at the author's asking: a Tokens and a Characters
+counter, the sentence with each token on its own background, and a segmented Text / Token IDs toggle
+that swaps the text for the id list. Six things in it are decisions. **The ids are real, and that
+reverses an older decision.** `WordsIntoTokens` avoided ids because a token id is the one number in
+the unit a student can check and there was no tokeniser in this repository to make real ones with;
+these were produced with tiktoken's `o200k_base` outside the repo and verified id by id, and
+`example-sentence.ts` carries them beside the split with a comment saying they must be regenerated
+if the sentence changes. Never hand-edit one. **The sentence is `The agent swears the tests passed on
+its machine.`, and in Dutch `De agent zweert dat de tests op zijn machine slaagden.`** It replaced
+`TokenSplit`'s old catalogue row, which the author found dull as the first thing the step shows: this one
+is the works-on-my-machine joke, and it still breaks mid-word where no reader would cut it,
+`sw|ears` and `zwe|ert`, which is what `not-words.1` claims happens to a word. English is 11 tokens over 49
+characters, Dutch 14 over 54, and the counters work both out from the data. **There is one sentence
+per language, and that does not reopen the argument `TokenSplit` closed.** The objection there was
+an English row against a Dutch one, side by side, which turns a figure into a comparison of
+languages. Here a reader only ever sees the sentence of the language they read in, never the two
+together, so there is nothing to compare. A locale with no sentence of its own gets the English one,
+through `exampleSentence` in the same module. **It is also `TokenSplit`'s text row**, the same split
+drawn twice for two jobs: `TokenSplit` is where kinds of text are compared and where the leading
+space is pointed at with a dot, while this figure shows one sentence whole, its spaces inside the
+coloured token the way the reference page draws them. The two sentences parted once and came back
+together in review; why is under `TokenSplit` above. **The tints are one hue at three strengths**, `--primary` at 15, 28 and 40 percent and
+lifted in dark mode, cycled so neighbours never match: several hues would match the reference and
+would be the only rainbow in the course, and `--success` and `--destructive` are not ours to borrow.
+**No token is underlined any more.** The network's token (`ears`, `ert`) once carried a dotted
+underline to tie the two figures together, but since the Read/Write split the network sits several
+sections down, and the course owner read the lone underline as a mistake. The counters are mono and computed from the data, each view
+is one `role="img"` with a sentence interpolating the pieces or the ids, and the tokens are one
+flex item each so a phone wraps between tokens and never inside one. On the deck it is
+`deck-tokens-tokenizer`, leading the block the way it leads the unit.
 
-**Nothing in it is captioned, and the stages did carry a caption each before they were cut.** Six
-lines of prose under six boxes is a paragraph laid out sideways, and it turned a drawing that reads
-in one second into one to be worked through. What names the stages instead is the step's own
-vocabulary (given text in the muted fill, a token in teal, numbers in mono) plus the eyebrow, which
-**names the process rather than stating a claim about the drawing**: it read `text at both ends,
-numbers in between`, then `tokenization process`, and now reads `one word through the model`. The
-middle one named the first two stages and left the forward pass, which is the payoff, unnamed. A
-label that argues the picture is one more thing to read before the picture, so this one stays a
-name. The panel's screen-reader description
-still walks the whole chain, since none of that vocabulary reaches a reader who cannot see it, so a
-stage added later has to be added there too.
+`TokenNetwork` is the sixth figure, under the `inside` heading after `NextToken` and `SamplingKnobs`:
+one token through a network small enough to check by hand, 4 inputs, two hidden layers of 5, 4
+outputs. `TokenizerView` swaps each token for a number, and this is what happens to the numbers
+next, which is where the scores `NextToken` has just shown come from. On the deck it is
+`deck-tokens-network`, after `deck-tokens-next` and `deck-tokens-sampling` the way the unit places it. It replaced `WordsIntoTokens`, a six-stage chain from a
+word to a token, which said "numbers in between" and never showed a number doing anything.
 
-Four more things in it are decisions. **Every number is invented, and the kind of number is why that is
-fine**: a vector and a weight are not claims a student can check, a token id is, and there is no
-tokeniser in this repository to produce real ids with. Reach for ids and the figure acquires the one
-thing in it that can be caught out. **It follows one token**, with `ambled` dimmed rather than
-deleted, which is now the only thing carrying that, because `reads-all` argues four paragraphs
-later that everything in front of a token goes in with it; this is one token's path, not a claim
-about what the model is handed. **It is a column that becomes a row**, rather than a row that wraps,
-since a wrapped six-stage chain puts stage four under stage one. And **it carries no caption**,
-unlike `TokenSplit`, which states the provenance of the same word and the same splits further down
-the same page: two identical captions read as a copy rather than as a source. That shared data makes
-the two a pair the way `NextToken` and `TokenAttention` are, so the "word that breaks" rule above now
-protects both of them.
+**It is a deliberate simplification, and each cut has a reason.** A real language model is a
+transformer, and the mixing of a token with the ones before it is drawn by `TokenAttention` higher
+up the unit rather than here, so this figure is one token's feed-forward pass and nothing else.
+Real models use smoother activations (GELU, SwiGLU); the figure draws ReLU because "below zero
+becomes 0" is a sentence a student can check against the number on screen. Many modern models drop
+biases altogether; the figure keeps one per node because the bias is the concept being taught, and
+a network without one would leave the calculation panel a row short of the idea. **Only the last
+token goes in**, while a real model takes every token so far, and the footer admits that in words.
+
+**The footer is a fact-checked simplification note in 2 short lines, and the review wrote it.** The
+first line opens on `Simplified.` and says what is made up and what is cut: the token id points to a
+fixed row of numbers the model has learned (the embedding, looked up by the id), thousands of numbers
+long in a real model, 4 here and invented, and in reality every token so far goes in, not only the
+last. The second says what a real model is around this: language models like GPT and Llama are
+decoder-only transformers, dozens of layers each with attention (`hierboven`, pointing back at
+`TokenAttention`) and a network like this one, and it counts this network's parameters against a
+large model's hundreds of billions, which come out of training and are fixed after it. The facts,
+checked October 2026: the embedding row is learned and looked up by id (Llama 3 8B carries 4,096
+numbers per token, GPT-3 12,288, from their published configurations); GPT and Llama are
+decoder-only, while the original 2017 transformer (Vaswani et al., "Attention Is All You Need") had
+an encoder and a decoder, for translation, which is why the line says decoder-only; Llama 3 8B has 32
+layers and GPT-3 96, so "dozens" holds. **Claude is not named in that sentence on purpose**: Anthropic
+does not publish Claude's architecture, so the course does not claim one. The old line about one
+output node per known token went with the rewrite. It is 2 lines rather than 1 paragraph so it fits
+under the drawing on `deck-tokens-network`, whose scale went from 1.1 to 0.98 for it: the worst case
+is Dutch with a node's calculation open, which at 1.1 pushed the eyebrow under the heading and
+clipped the last line. If it outgrows the slide again, lower the scale rather than dropping a fact. Its 4 and its 79 are interpolated from `X_IN` and `PARAMETERS`.
+
+**The weights, biases and input numbers are invented, and the arithmetic is not.** `W`, `B` and
+`X_IN` are the approved mockup's matrices, and they and the forward pass live in `network-pass.ts`
+rather than in the component, so `SamplingKnobs` reads the very same output scores; the pass is
+computed once at load, so editing one weight moves every sum, line width and percentage with it. **Each
+layer's output is rounded to the two decimals it prints before it is passed on**, which is the one
+departure from the mockup's numbers: computed at full precision, two output rows printed a total
+their own printed terms do not add up to (2.45 for terms that make 2.44), and the calculation row is
+the one thing on the page a student will check with a calculator. The output scores are therefore
+2.54, 0.96, −0.15, −0.25, and the percentages (75, 15, 5, 5) are unchanged. The footer's parameter
+count is computed from the matrices as well (65 weights and 14 biases, 79), so it cannot go stale.
+
+**The token is the lead sentence's, in the reader's language, fed with its context.** It is `ears`
+with `The agent sw` muted in front of it, or `ert` after `De agent zwe`, with no ellipsis because the
+sentence starts there, and the four outputs are
+` the`, ` that`, ` it`, ` by` and ` dat`, ` de`, ` het`, ` op`, drawn without their leading space.
+**The first of the four is the token that really comes next in the sentence, and it has to stay
+first**: the weights are the same in every language, so the first output always wins at 75% and the
+percentages never move. Only the words change. Context, token and outputs are real tokens, mono, and
+sit in `example-sentence.ts` beside the split (`networkToken`, `outputs`) rather than in a locale
+file; the screen-reader title interpolates them. **The empty state names the token and its real
+id** (`ears (token id 36108) points to a row of 4 numbers`, `ert (token-id 805)`), both read off the
+same data, so the step from `TokenizerView`'s id to a row of numbers is said before the first click.
+A 14-character context reaches the vector's
+bracket at the old layout, so the columns sit 16 units further right than the mockup's; a longer
+context needs the same check.
+
+**The stepper is the reason it is interactive.** All four layers lit at once is a picture of a
+network; one layer per click is the signal visibly moving through it, with each edge as thick as the
+signal it carries, teal when it pushes the sum up and grey when it pulls it down. Each click selects
+the first node of the layer it lit, so the calculation under the drawing is already open on a sum
+that just happened. Any lit node can then be clicked or reached by keyboard. The calculation panel
+names the three things in one sum (weight, bias, activation function, or softmax on the output
+row), each tagged with the shape the drawing uses for it, which is what lets the drawing carry no
+caption of its own.
+
+**The footer names the parameters on purpose.** It counts this network's weights and biases and
+then puts a large model's hundreds of billions beside them, which is what a model size quoted in
+parameters actually counts. It is the one place the course says what that number is, so a later
+unit that quotes a model's size can lean on it rather than defining it again. That is why the
+review's wording gained 3 words, `samen de parameters` (`together the parameters`): the text as
+handed over counted the weights and biases without naming them, and this paragraph is the reason
+the name is there.
+
+The eyebrow names the process (`1 token through the network`, `1 token door het netwerk`) rather than arguing the picture,
+which is the rule the old figure's eyebrow settled after three rewordings. The SVG's title is the
+screen-reader description and walks the whole pass with the real numbers interpolated, since none
+of the drawing's vocabulary reaches a reader who cannot see it.
+
+`SamplingKnobs` is the fifth figure, under `one-at-a-time` after `NextToken` and `.3`: the four words
+that could follow `swears` (`zweert`), and how likely each one is under the standard setting,
+temperature 0.5 and 2, top-k 2 and top-p 0.9. It took over what `one-at-a-time.4` used to explain in
+a paragraph (what temperature, top-k and top-p each do), and that paragraph is now one sentence
+saying the student never sets them. On the deck it is `deck-tokens-sampling`, between the loop and
+the network, with that sentence as its note. Five things in it are decisions. **It shows the
+mechanism, not a setting the student can turn**: the Messages API rejects any temperature, top_p or
+top_k but the default on Claude models released after Opus 4.6, and neither Claude Code nor Copilot
+exposes them, which is why it is a still table and never a slider; a control would suggest a knob the
+student has. **Its scores are `TokenNetwork`'s own**, imported from `network-pass.ts`, and its words
+and context are `example-sentence.ts`'s (`networkToken` and `outputs`), so it is the same choice the
+network makes further down, seen from the other side, and the standard row is that figure's 75 / 15 /
+5 / 5. **Every percentage is computed**, softmax of score over temperature, with top-k and top-p
+renormalising what they keep (top-p keeps the smallest set of best words reaching p, which is two
+here at 0.903), so the rows come out 95 / 4 / 0 / 0, 51 / 23 / 13 / 13 and 83 / 17 twice; nothing is
+typed. **A removed word prints `gone`/`weg` rather than 0%**, because 0% at temperature 0.5 is a
+rounding and gone is a rule. And **the standard row is ruled off** from the four below it, since it is
+the one they are read against. The eyebrow is `how widely it picks`, the same verb `one-at-a-time.3`
+and `pick-next.right` use (`picks one according to them`, `kiest er één volgens die kansen`): the
+old Dutch said the model *trekt* from a *verdeling*, which reads translated. The grid is one
+`role="img"` whose description reads every cell, and on a phone each row's label stacks above its
+bars. The interpolation for the words in front is `preceding`, not `context`, because `context` is
+an i18next option of its own. **The words in front carry no ellipsis** (`The agent swears`, `De agent
+zweert`), because the sentence starts there and `… The agent swears` claimed text that is not, and the
+open slot after them is `PickTheNext`'s dashed `?` chip, so an open token looks the same wherever the
+unit leaves one.
 
 `PickTheNext` closes the unit and is its one exercise: three roads out of `the pull request was`, and
 the answer is any of the three. It asks in an answerable form what `NextToken` above it lets the student do
@@ -173,7 +400,7 @@ as a lookup table finds out here rather than four units later. **That overlap is
 to be** and the exercise still earns its place: the figure now lets a reader take a runner-up, but
 taking one is not the same as being asked whether they could have, and nothing up there tells them
 whether they understood what they were doing. If either side is ever rewritten, this is the seam to
-check. Five things in it are decisions. **The question asks what *could* come next, not what *will***: the card once carried only the title "Pick what comes next" and no question, which reads as "which word will appear", and one word appears, so the catch-all looked like a trick. The description now states the question outright, and the wrong-pick verdict says "not only that one" rather than "not that one", since the picked word could come next. **The sentence is not the pair's**
+check. Five things in it are decisions. **The question asks what *could* come next, not what *will***: the card once carried only the title "Pick what comes next" and no question, which reads as "which word will appear", and one word appears, so the catch-all looked like a trick. The description now states the question outright, and the wrong-pick verdict says "not only that one" rather than "not that one", since the picked word could come next. **The catch-all stays short ("All 3 are possible") and the sampling knobs live in the verdict**: an option that carries its own explanation is the longest one on the card, and the longest option being right gives the answer away. The verdict names temperature, top-k and top-p, `SamplingKnobs` above shows what each does, and `tokens.one-at-a-time.4` says in one sentence that the student never sets them: models released after Claude Opus 4.6 reject anything but the defaults, and neither harness exposes a setting. **The sentence is not the pair's**
 (`the build failed because it timed out`), because a question answered by the figure above it is not
 a question. **The fan is drawn flat until it is checked** and then lights whole: marking a road
 before the answer is in gives it away, and marking one after says the model has a right answer here.
@@ -181,7 +408,7 @@ before the answer is in gives it away, and marking one after says the model has 
 no weights on it can be answered by shrugging, while `merged` at 46% against `approved` at 23% makes
 picking the favourite the reasonable thing to do and still not the answer. That is the misreading the
 exercise exists to catch. They are hand-authored like `NextToken`'s, and the admission stays in that
-figure's caption two drawings up the same page rather than being repeated in a caption here. **They
+figure's caption further up the same page rather than being repeated in a caption here. **They
 add to 100, unlike `NextToken`'s**, and what separates the two is the caption: that figure draws five
 of a distribution whose tail is too long to draw and says so underneath, while three numbers on a
 card with nothing under them are three numbers a student adds up, and a missing seventeen points
@@ -192,21 +419,29 @@ the catch-all choice is **pinned last rather than shuffled**, unlike `SpotInject
 a catch-all that turns up second reads as a bug. It is graded in the browser like everything else
 here and writes no progress key, because one question is not a sitting.
 
-**`NextToken` is worked by the reader rather than watched, and that is the change that matters in
-it.** It took the favourite for them on every pass once, with a static tree underneath drawing what
-the other candidates would have led to. The claim both halves were there to hold up is the one the
-prose makes and the scores alone cannot, that **the top-scored token is not always the one taken**,
-and a figure that only ever walked the top row was making that claim on the reader's behalf. Now
-every candidate is a control: take `was` instead of `timed` and a different sentence comes out of the
-same machine and the same numbers. Without that the figure teaches that a model is a lookup table
-with extra steps.
+**`NextToken` is stepped by the reader rather than watched, and that is the change that matters in
+it.** It took the favourite on every pass once, with a static tree underneath drawing what the other
+candidates would have led to. The claim both halves were there to hold up is the one the prose makes
+and the scores alone cannot, that **the top-scored token is not always the one taken**, and a figure
+that only ever walked the top row was making that claim on the reader's behalf. Now every candidate
+is a control: have it pick `was` instead of `timed` and a different sentence comes out of the same
+machine and the same numbers. Without that the figure teaches that a model is a lookup table with
+extra steps. **The model picks, never the reader, and every string says so**, which the review asked
+for: the reader "took" a token once, which put them in the model's seat. The eyebrow is `what the
+model can pick, and how likely each one is` (`wat het model kan kiezen, en hoe waarschijnlijk elk
+is`), the button `Let it pick the favourite` (`Laat het de favoriet kiezen`), each candidate `Let it
+pick {{token}}` (`Laat het {{token}} kiezen`), the fan's description says to pick one *for the
+model*, and the likelihood line is about `the sentence so far` rather than the reader's road. The
+behaviour did not change. **The recap draws each token of the chain as a chip** in `TokenizerView`'s
+tint (`timed 34% × out 89% × . 62% = 19%`), because a bare `.` in that line read as punctuation in
+the arithmetic rather than as the full-stop token; the third pass stays.
 
 Eight things in it are decisions. **The fan is replaced on every pass rather than accumulated**, so
 what is on screen is one pass of the model and not a picture of the reader's clicks; a road not taken
 is drawn for exactly as long as it is a road. **The favourite chain is pinned to
-`timed` -> `out` -> `.`**, which is what keeps the pair with `TokenAttention` intact: the first entry
-of every candidate list at every depth is the favourite, so a reader who only ever takes the top one
-lands on the sentence the next figure takes apart. That invariant replaces the old
+`timed` -> `out` -> `.`**: the first entry of every candidate list at every depth is the favourite,
+so a reader who only ever lets it pick the top one lands on `the build failed because it timed out`.
+That invariant replaces the old
 `then`-first-entry one and breaks the same way, by reordering one list and not the others.
 **Nothing marks a winner**: each candidate's score is drawn as the length of its own bar, as long a
 share of the column as the score is of the strongest score in the fan, and the favourite is simply
@@ -227,21 +462,75 @@ fixed y or it moves under the pointer between passes, and a fan of three leaves 
 foot. **The drawing is still sized once to the widest fan in the tree**, so nothing resizes either
 way.
 
-Three smaller ones. The **advance button takes the favourite** rather than advancing blindly, which
-is what keeps the deck usable (a presenter reaches the paired sentence in three clicks) and gives a
-reader who does not want to choose a way through. The **likelihood line is the second thing the
-figure teaches**: three scores multiplied, so even the favourite three times over comes out at 19%.
+Three smaller ones. The **advance button has the model pick the favourite** rather than advancing
+blindly, which is what keeps the deck usable (a presenter reaches the paired sentence in 3 clicks)
+and gives a reader who does not want to choose for the model a way through. The **likelihood line is the second thing the
+figure teaches**: 3 scores multiplied, so even the favourite 3 times over comes out at 19%, which
+the closing line says as `under 20%` (it said `under a fifth` before the digit rule).
 It is floored at `<1%`, because a road the reader just walked printed as `0%` says the thing on
 screen never happened. And **the status line says nothing once the run is over**: it counted what
 went into each pass, so it has no third state to report, and the recap and the likelihood line under
 it are what close the run. `next-token.done` is gone from both bundles rather than left unused.
 
 The unit carries two forward pointers and must not grow a third telling of either. Output being
-priced above input goes to `model`, and the prefix cache goes to `harness`, each in one paragraph
-carrying an anchor to the unit that owns it. They were set in mono once, which said a machine had
-produced the name. That is the same rule `harness.coordinator.3` follows for
-decomposition. `TokenAttention`'s arcs running backwards only is what the caching pointer turns on,
-so it is load-bearing rather than a simplification: appending leaves every earlier weighing intact.
+priced above input goes to `model` (`expensive-part.1`), and the prefix cache goes to
+`harness` (`attention.4`), each in one paragraph carrying an anchor to the unit that owns it.
+`expensive-part.3` does not link them a second time (the user cut that repeat), and it names
+no rate and says nothing about how the cache matches, and it must stay that way. `TokenKinds` prints
+a cost column (tokens times rate, per row) so every share on the cost bar can be redone by hand: a
+reader asked how 3,000 reasoning tokens could be 56% of the bill, and the column is the answer. They
+were set in mono once, which said a machine had produced the name. That is the same rule
+`harness.coordinator.3` follows for decomposition. `TokenAttention`'s arcs running backwards only is
+what a cache runs on, so it is load-bearing rather than a simplification: the model works each
+token out only from what comes before it, so appending leaves every earlier calculation intact. That
+is why the cache is `attention`'s last paragraph, straight after the figure, and not part of the
+cost section. Since the review it also says what the cache does *not* save (the whole window paid
+every turn, every new token still weighed against all of it), and it no longer calls rereading the
+cheap part.
+
+**`expensive-part` is the last prose section, and `TokenKinds` is its figure.** Its heading is
+`The expensive part` (`Het dure deel`), and it reads as a claim because it sits under the `Writing`
+part heading: it was `Writing is the expensive part` while the parts were implicit, and the part
+heading now carries the first half. `.1` opens straight on `Output is priced above input`, which
+still reads well under `Writing`. Then reasoning billed as output even when only a summary reaches
+the screen, then the figure putting one turn's reading and writing side by side (`.2` ends on the
+sentence that says so), ahead of the exercise. The prose states the shape and sends prices to
+`model` rather than repeating them. "A tenth of the input price or less" in `attention.4` is the
+phrase this unit has always used for `harness.caching.1`'s rate, kept word for word.
+**`expensive-part.3`'s last sentence leans on the figure's numbers**: reasoning has to stay above
+half the cost bar, so a count edited in `TokenKinds` means rereading that sentence in both
+languages. On the deck the slide title keeps the whole claim (`Writing is the expensive part`),
+since a slide has no part heading above it.
+
+Five things in the figure are decisions. **The four kinds are the four a turn deep in a Claude Code
+session is actually billed for**, and there is **no uncached-input row** on purpose: in Claude Code
+almost all new input arrives as a cache write, so plain input in such a turn is a rounding error and
+a row for it would be empty in practice. Copilot also bills by token at each model's published rates
+(`copilot-specific.md`), so the figure carries no assistant variant; that Copilot's harness writes
+the cache the same way is not verified, which is one reason the caption names the rates it was
+priced at and nothing else. **It is priced at Claude Sonnet 5.5**, the middle tier, because its cache
+read is exactly a tenth of input and every multiplier comes out round; Opus 5.5 reads at 0.05x and
+Fable 5.1 at 0.025x, which is what "or less" covers. The facts behind the rows (output 5x input in
+every tier, 5-minute write 1.25x, 1-hour 2x, reasoning billed as output tokens whether or not they
+are returned) were checked against Anthropic's pricing and extended-thinking docs in October 2026.
+**Every number is computed, none typed**: the rates come off `pricing.ts`'s Sonnet row, the same data
+`ModelPricing` prints, and multiplier, cost, share and both totals are worked out on every render, so
+the figure cannot drift from the table. The counts (40,000 / 3,000 / 3,000 / 800) are the only
+authored numbers, and the prose says the turn is made up and its ratios are not. **The dollar total
+is the course's one currency outside `ModelPricing`** and it is allowed because it is a sum, not a
+rate: the table under the bars prints multipliers against input rather than prices, so it is not a
+second price list, and it must not become one. The total prints to four places, `$0.0535`, because
+three rounds to `$0.054` and a student redoing the sum by hand gets 0.0535. **Reading your own
+breakdown is deliberately not here**: `/usage` and what it prints against these four kinds is left to
+a later item, so do not add a task card or a move to this section for it.
+
+Shares of 7% or more print inside their segment and smaller ones stay bare, since the table carries
+every count as text. The fills are `chart-3`, `chart-2`, `chart-4`, `chart-5`, which run pale to dark
+in the light theme; the dark theme orders those tokens differently, so each segment names the ink
+that reads on its own fill in both. The bars are one `role="img"` with a sentence interpolating the
+shares that carry the claim, and on a phone the table drops its description column. On the deck it is
+`deck-tokens-kinds`, ahead of the exercise the way the unit places it, with the made-up turn as its
+note.
 
 Decomposition is the first of the four pattern sections, ahead of the coordinator. It argues the gap
 rather than the mechanism: a request arrives thinner than the thing it asks for, the same way a
@@ -250,18 +539,35 @@ decisions out where you can answer them. `harness.coordinator.3`
 used to introduce decomposition and now points back at that section instead, so do not let it grow
 back into a second definition.
 
-`UnderSpecified` is its figure, and three things in it are decisions. **It carries no context
+`UnderSpecified` is its figure, and four things in it are decisions. **It carries no context
 frame**, which is the one place it departs from the other three pattern diagrams: nothing has been
 handed to anybody yet, so this is the task being cut up rather than the windows it ends up in, and a
-frame here would draw the coordinator one section early. What it does share is the vocabulary, a bar
-is something you have and dashes are what you do not, so the dashed space under the ask on the left
-comes back as three solid prompt bars and three open questions on the right. **The three questions
-are `harness.decomposition.1`'s own three** (empty query, title only, nothing found), which is what
-keeps the drawing and the paragraph on one example; rewording the example means moving the figure
-with it, in both languages. And **the parts are stacked rather than laid out side by side**, so a
-question stays one left-aligned line: three columns would need the questions wrapped by hand, and
-the Dutch is longer than the English every time. On the deck it replaced a statement slide, and the
-note went with it, since the note said what the right-hand column now draws.
+frame here would draw the coordinator one section early. What it does share is the vocabulary,
+solid is what you have and dashes are what you do not, so the dashed space under the ask on the left
+comes back as three solid pieces on the right. **The three questions are `harness.decomposition.1`'s
+own three** (empty query, title only, nothing found), which is what keeps the drawing and the
+paragraph on one example; rewording the example means moving the figure with it, in both languages.
+And **the pieces are stacked rather than laid out side by side**, so each one has the width to read
+as a row: three columns would need the questions wrapped by hand, and the Dutch is longer than the
+English every time. On the deck it replaced a statement slide, and the note went with it, since the
+note said what the right-hand column now draws.
+
+**Each piece is a row of three parts, and the labels are what make it read** (FEEDBACK 9). It drew
+every piece as an abstract teal bar standing for its prompt, with the question under it and
+`één prompt per stuk` over the column, and a reader could not tell what was happening: nothing said
+the bar was a prompt, who was asking, or who answered. So the bars went and each row now says it in
+words: what the piece does (`lege zoekterm`, `waarop matchen`, `geen resultaat`), what *the agent
+asks* while writing that piece's prompt, and what *you decide*. The column header shrank to `drie
+stukken` / `three pieces`, because the who-asks and who-decides labels do the explaining that the
+long header was trying to. That is `decomposition.3` drawn, questions coming back before code, and
+the paragraph needed no change for it. **The decisions are illustrations, not a spec**: they only
+touch how search behaves (`geef alle titels terug`, `op titel, ongeacht hoofdletters`, `een lege
+lijst, geen fout`), and they must never name catalogue data the service does not have (nine titles,
+no authors, so "match on author" is not a decision to draw) or lean on any of step 1's exercises.
+The figure became DOM rather than SVG for this, so the rows can reflow: side by side from `md`, and
+on a phone the ask, the arrow (turned to point down) and the pieces stack, with each piece's two
+labelled lines stacking under `sm` too. The `figure` carries the description as its `aria-label`
+and every word inside is real text, read in order.
 
 **`harness.check-yourself.1` was deleted rather than gated differently**, on `workshop.the-board.1`'s
 reasoning: it was a `data-audience="guided"` aside, and guided mode drops every run of prose whatever
@@ -277,7 +583,10 @@ one reader could not take the measurement the card asks for. The section is draw
 related reason, since a prefix-match diagram would draw "read from the first byte" and stop; the
 deck's statement slide is the right shape for it. It also stays where it is. It reads at first pass
 like a third subject wedged between the harness-as-layer material and the patterns, and
-`tokens.reads-all.4` defers to it by name, so moving it costs that pointer its target.
+`tokens.attention.4` defers to it by name, so moving it costs that pointer its target.
+`caching.2` states the prefix rule with the tool list and the instructions at the top as what sits
+early, and no longer uses connecting an MCP server mid-session as its example; why is under the
+assistant variants at the end of this file.
 
 **`SequentialSteps` draws the cost of the run, not just its shape.** It was three step cards, three
 checks and a pause on a session band, which is `sequential.1` and `.2` transcribed. The band now
@@ -319,6 +628,19 @@ the section's fourth paragraph knowingly. **It stays descriptive and must not gr
 arranging a repository so an agent works well in it is step 2's `setup`, and this paragraph only
 says why what is already in the codebase counts as context. It is `data-audience="self"` like the
 figure and the paragraph above it, so in class it is walked at the board with the rest.
+
+`context.you-choose-most` is the unit's one practical section, and it answers FEEDBACK's "context
+actief sturen" on the focus side only. **Its four moves are the ones Anthropic's own material backs**
+(the Claude Code best practices, common workflows and large-codebases pages, and the explore-first
+lesson in Claude Code 101): the failing assertion and its stack trace rather than the whole run, an
+existing class to copy, have it find the place before it edits, and the folder you open it in as the
+first cut. Naming the class and the case is `prompt.be-exact`'s and is a link here, so do not
+restate it. **"Tell it where not to look" was left out on purpose**: Anthropic does that with
+settings (`permissions.deny`, `claudeMdExcludes`) rather than in the prompt, and settings are step
+2's guardrails, so the access half of the same FEEDBACK item lands there and not here. The folder
+claim is worded for both products (both start in the current folder and scope to it) and says
+nothing about which instruction files load, because that half differs between them and only
+narrows downward.
 
 `ContextFalloff` draws compaction rather than overflow, and the redraw is the decision. It showed
 the two oldest turns tilting off the top of a fixed frame once, which is a window neither harness
@@ -380,45 +702,52 @@ to the tenth?"), which is a good plant and an undeclared dependency: a change to
 count, or to what the pipeline does with the tenth entry, visits `session-makeup.block.1` and `.6` in
 both languages.
 
-`WhereTheSeamFalls` is the unit's second figure and it draws one thing: **where the cut falls**. Two
-sessions of equal length, the same three tasks banded at the same widths in both rows, so the only
-difference on screen is the cut. Compaction puts it wherever the window happened to fill, which is
-inside the middle task; a clear puts it on the boundary the student chose. Both rows lose about the
-same amount, and that is what makes position the whole argument, so **the spans and the totals must
-stay equal in both rows**: widen one and the figure starts arguing volume instead.
+`WindowFill` is the unit's second figure, under `compaction-picks-moment.1`, and it draws **how full
+the window is over one session**, twice: once emptied by compaction and once by a `/clear`, over the
+same three tasks (`de pipeline lezen`, `de bug zoeken`, `de test schrijven`). Compaction fires on its
+own, just under full, in the middle of the second task, and drops to a summary rather than to empty;
+the clear drops to nearly nothing on the boundary between the second and third task. A compact table
+under the charts says the same in words: when, what stays, what it costs.
 
-The first cut of it said all of that in labels and left the picture to be taken on trust, and a
-reader who was shown it said the drawing did not carry the point. What it was missing was any sign
-that a cut *destroys* something: it drew only the turns that survived, banded both rows identically
-whatever the seam had done to them, and marked the difference between the two rows with a hairline
-in a slightly different place. Three things fixed that, and each is load bearing now.
+**It replaced `WhereTheSeamFalls`, and the reason is that the old one argued something untrue.** That
+figure held that both cuts lose roughly the same amount, so position was the whole argument, and it
+kept cost out on purpose. Neither product works that way. Compaction is a separate request that
+sends the whole conversation with a summarisation instruction: with a warm cache it reads the prefix
+from cache, but it is still a large request, and the summary is output. A `/clear` costs nothing.
+So the cost is now drawn in, as the **shaded strip at compaction's drop** (`window-fill.reads` and
+`.writes`), and `compaction-picks-moment.2` says it in prose. **Do not put the "same loss, on your
+terms" claim back**, in the prose, in the figure or in `deck.session.clear.note`. The section's point
+survives the change: you choose the seam, and only a clear lets you say what stays.
 
-- **Every turn is drawn in both rows.** A turn behind the seam is an empty dashed outline and a turn
-  in front of it is filled, so there is a baseline to lose things from and the loss is countable,
-  nine against eleven. Drawing only the survivors reads as a session that started late.
-- **The seam through a task is torn and the seam between two is straight.** That is the difference
-  between the rows in one stroke, and it is derived from the geometry rather than declared per row,
-  so moving a rule cannot leave the drawing lying. The rules sit in the gap *between* two turns and
-  the jag is narrower than that gap, or the tear reads as a damaged bar rather than as a cut. A torn
-  task is painted whole in the gone fill and its surviving half painted over the top, square at the
-  tear and round at the task's end: two rounded pieces butted together leave a notch and read as two
-  tasks rather than one broken in half.
-- **A bracket under each window spans what is gone**, with an arrow off it to what crosses in its
-  place. The carry used to sit inside the frame at the left, where it landed on the first task and
-  was read as part of it. Under the bracket it is unambiguous, and the two bracket lengths are what
-  show the rows losing comparable amounts.
+Three more decisions in it. **The two drops are not the same depth**, because a summary is something
+and a clear hands over only what the student gives it plus what is on disk. **The chart is one drawing
+for both products and only the table's "when" cell splits**, typed `Record<Assistant, …>` the way
+`SurviveTheClear`'s moves are: Claude Code compacts when the conversation reaches the model's context
+limit (a native 1M window a little before, at about 967K), and Copilot CLI starts in the background
+at about 80% and pauses briefly if it reaches about 95% before it is done. A peak just under full is
+true of both, so the curves did not split. **`/clear` is mono everywhere in it and `compaction` is
+not**, since one is a command and the other a word. The table stacks under `sm`, each answer
+carrying its column's name, rather than squeezing three columns into a phone. It keeps the step's
+diagram vocabulary (teal is the window's contents, muted is what is not), and it is not a context
+frame, so it does not compete with `ContextFalloff`'s.
 
-It borrows `ContextFalloff`'s frame stroke and fill rather than inventing one, and it joins the
-step's diagram vocabulary (a teal frame is a context, a bar is something in it, dashes are what is
-not). The proportions and the axis are its own, so the drawing opens on `seam.window`: a reader met a
-*vertical* window in `ContextFalloff` one unit earlier and nothing else on this drawing says these
-frames run in time. That axis sits on its own line above both rows rather than beside a row label,
-because the Dutch of both is long enough to collide. **It carries no coin, no price and no re-send**:
-`harness.caching` prices a rebuilt window and `BundleCompare` draws the re-send, and cost in here
-would make the two rows a comparison of bills. On the deck it replaced the statement slide at
-`deck-session-clear`, which keeps its note, because the drawing shows where the two cuts fall and not
-what they are called; its `scale` there is fitted to the box `SlideFigure` clips at rather than
-copied from another figure of the same width, which is how the old one came to be over it.
+`compaction-picks-moment.1` opens on "before the pile stops fitting" rather than "when", because
+neither product waits for 100% and Copilot CLI starts at about 80%. `.3` is a `data-assistant` pair:
+`.3.claude` names `/autocompact`, which lowers the threshold (100K to 1M tokens) so compaction comes
+earlier, and `.3.copilot` says Copilot CLI already starts at about 80%, in the background, and that
+the threshold is not configurable. Sources, read October 2026:
+code.claude.com/docs/en/model-config#default-auto-compact-thresholds, code.claude.com/docs/en/costs,
+code.claude.com/docs/en/prompt-caching#compacting-the-conversation, and
+docs.github.com/en/copilot/concepts/agents/copilot-cli/context-management. All three numbers are
+dated and are the first thing to check when this section is next touched.
+
+On the deck it sits on `deck-session-clear`, whose note now says the difference out loud (compaction
+picks the moment and costs a request, a clear costs nothing). **The figure is a container
+(`@container`), and that is for the slide.** Under its charts the table made it too tall to magnify,
+so when its own box is `@5xl` or wider the table moves beside the charts, and only the deck's
+`figureWidth: 1400` gives it that much room; the page column and a phone never do. The table's
+stacking is `@md` on the same container for the same reason: the viewport says nothing about the
+column the figure is in. Its `scale` is fitted to the box `SlideFigure` clips at.
 
 It closes on `SurviveTheClear`, under the same `<hr>` and "Test yourself" heading the other units
 use, with no prose between the rule and the card. Four moves: find a thing you would have to say
@@ -438,8 +767,8 @@ never derived from the moves, since a run at a problem can be finished with a mo
 purpose. Every move stays one line, so whatever a second line would have explained belongs in the
 prose above the card.
 
-`prompt` runs six sections where it ran four, and both splits were forced by something outside the
-unit. **`Reasoning level` is a heading rather than a paragraph inside `Instruction`** because
+`prompt` ran six sections where it once ran four, and both of those splits were forced by something
+outside the unit. **`Reasoning level` is a heading rather than a paragraph inside `Instruction`** because
 `model.reasoning-level.1` links here by name, and a student following that link has to land on a
 heading that matches it; `Instruction` keeps one paragraph, on the cascade, and the term still
 arrives last. **`One ask, not three` and `Be exact` replaced `What you steer after that`**, whose
@@ -454,13 +783,33 @@ section that argued both bundling and clearing was carrying the two jobs it warn
 the figure under it draws that. The key numbering keeps its gap rather than shifting `.2` down, the
 way `session.window-not-memory` and `change.environment-beats-project` do: a key is a location, and
 renumbering moves a paragraph that did not move.
+`BundleCompare` describes completed results rather than ongoing tool actions. Messages inside
+resent bundles are labelled as earlier questions or earlier results, and the bundle says they
+are sent again as context. Reusing a result must not look like executing its tools again.
+
+**Four sections were added after `Be exact`, on a review asking for prompting tips a developer can
+use tomorrow**: `Few-shot prompting`, `Output format`, `Paste the real error` and `What no longer
+works`, plus `be-exact.2` on scope and its reason and `instruction.2` under `PromptParts`. They were
+picked from a sweep of Anthropic's, OpenAI's and GitHub's prompting guides (October 2026), and what
+the sweep turned up that another unit already owns was left out on purpose: a check the agent can
+run is step 2's `goals` (`instruction.2` names it as the 5th part and links there), asking for proof
+is `truth`'s, starting over when a session goes nowhere is step 2's `steering`, and being interviewed
+is plan mode, above. "Tests first, and the tests are the spec" was also left out, since step 2's
+`gates` is the more natural home and that was not decided. **Few-shot and one-shot share 1 paragraph**
+(`few-shot.1`), and the terms refer only to how many examples the prompt contains. The course owner
+removed the explanation of 2 meanings and the separate `few-shot.2` paragraph; `plan-mode.2` now
+describes a model with or without a plan directly. **`What no longer works` is not a myth list for its
+own sake**: each of its 3 habits (typing "think hard", role prompts, shouting in capitals) is either
+documented as ignored (Claude Code passes "think hard" through as ordinary text,
+code.claude.com/docs/en/model-config) or measured as not helping, and that is the bar for adding a 4th.
 
 Four things in it are boundaries with other units. **The word *entropy* is not used here**:
 `context` owns it, with an anchor, a heading, a deck slide and a quiz question, so `one-ask.2`
 states the mechanism and stops. **Tiers are `model`'s**, so `meta-prompting.2` names the expensive
 model and points at that unit rather than pricing it. And **the reasoning level's scale is Claude
-Code's**, named in a scoped clause (`low` up to `xhigh`, its `/effort` command, verified August
-2026); it is not a `data-assistant` pair, because the dial exists in both products and only one of
+Code's**, named in a scoped clause (`low` up to `max`, its `/effort` command, verified October 2026
+against `model-config`; the settings page lists only 4 because `max` is session-only, which is how an
+August check wrongly cut it to `xhigh`, and `copilot-specific.md` has the detail); it is not a `data-assistant` pair, because the dial exists in both products and only one of
 them publishes a stable set of names. And **fixing an inaccuracy after the fact is step 2's
 `steering`**, so `instruction.1` closes on a link to it in half a clause rather than describing the
 move: the cascade is what this unit argues, and a paragraph that also said how to catch one mid-run
@@ -469,11 +818,20 @@ met, which the step does elsewhere (`PickTheTier`'s amber verdict, `recap`'s clo
 which is only allowed where the target owns the answer outright.
 
 `ReasoningCost` is the figure under `reasoning-level.2`, and it draws the two quantities that
-paragraph asks the reader to weigh. **The answer segment is identical in all four rows and only the
+paragraph asks the reader to weigh. **The answer segment is identical in all 5 rows and only the
 dashed thinking segment grows**, which is the whole reading and the misconception `promptQuiz`'s
 `reasoning-level` question tests. Its counts are invented and the caption says so, the way
 `NextToken`'s does; the level names are mono and untranslated, like `ModelPricing`'s model names. It
 carries **no context frame**, on the rule that protects `ToolsInContext`, and no currency.
+
+**The reasoning level is never sold as a cure for a vague ask.** `reasoning-level.1` and `.2` used
+to say a higher level absorbs the imprecision and the missing information, and to advise turning it
+up for a vague ask. That overclaimed: more thinking works an ask over more carefully, but a decision
+the student never made and context they never gave are not in the window to reason about, and
+`be-exact` is this unit's own advice. So `.1` says what it buys and closes on what it cannot know,
+and `.2` says to raise it for a hard or many-step task and that the thinking is billed as output.
+`deck.prompt.divider.2`, `deck.prompt.reasoning.note` and the `reasoning-level` quiz question's
+correct option and explanation moved with them. Do not put the absorbing claim back in any of them.
 
 `EntryBrief` and `PlanItTwice` close the unit under the usual `<hr>` and "Test yourself", with
 `promptQuiz` arriving under the same heading. The card replaced the self-only aside that told the
@@ -516,10 +874,16 @@ than naming a command, and that sequencing is the reason rather than an oversigh
 run of prose.** The unit carries no `<h3>` and no setting paragraph over the card, unlike `tools` and
 `context`: a paragraph here would leave a classroom with a card whose ask nobody had been given, and
 that is the bug `workshop.the-board.1` and `harness.check-yourself.1` were both deleted for. So the
-figure carries the counter's six wishes, the one line the student types, and the command that scores
-it, and `plan.description` carries the sentence the prose would have said. Four things in it are
+figure carries the situation, the counter's 6 wishes, the one line the student types, and the
+command that scores it, and `plan.description` carries the sentence the prose would have said. **The
+situation block was added after a review**: the sheet used to open on "What the counter asked for"
+with nobody having said who the counter was, what endpoint the wishes were about, or that the agent
+never sees them, and the course owner could not tell what the exercise was. It names the endpoint
+and the empty `EntryController` and says the agent sees only the one line; it says nothing about how
+to implement any wish, which stays the rule. The wishes' numbers are digits now, and
+`check-entry.mjs`'s `minus 1` label moved with them. Four things in it are
 decisions. **The brief is read rather than drawn**: `UnderSpecified` in `harness` already draws the
-gap between an ask and what it leaves unsaid, in the step's bars-and-dashes vocabulary, so drawing it
+gap between an ask and what it leaves unsaid, in the step's solid-and-dashed vocabulary, so drawing it
 here would be that figure four units early and worse. **It is one wish per line**, which reads worse
 than the paragraph it was and is the fairer shape: a student holding six FAIL lines against a block
 of prose has to find the sentence each one came from before they can argue with it, and six lines
@@ -633,7 +997,7 @@ parts. Neither is the other's example.
 would tick the tutor's own machine, and a brief on its own is the card's input rather than a drawing
 the room reads, so the block would put an exercise sheet on the projector with nothing to do with it.
 
-`PromptInContext` is written up above and the prohibition on it holds here: no frame, no other
+`PromptParts` is written up above and the prohibition on it holds here: no frame, no other
 layers, no to-scale sliver.
 
 `tools` is the second of the four layer units, and it used to be `external` ("material from outside").
@@ -646,9 +1010,9 @@ that the marking is real (its own content block, its own role, an instruction hi
 top) and that it does not survive contact with the model, which is the claim `SpotInjection` grades.
 **Do not let it fall back to "nothing marks it"**, on the page, on the deck or here. The layer is named in two
 other places (`session`'s time-axis paragraph and the board's `flag.decode.help`, which opens on
-it), so a further rename has to visit them. Its figure, `ToolsInContext`, argues one thing only:
+it), so a further rename has to visit them. Its second figure (the first, `AgentLoop`, is written up at the end of these notes), `ToolsInContext`, argues one thing only:
 the tool straddles the frame, so the half that runs is outside the window and only the result crosses
-back in. `McpServer` is the second figure and is deliberately *not* independent: it is the same
+back in. `McpServer` is the third figure and is deliberately *not* independent: it is the same
 frame, the same prompt bar and the same fills, so read on its own it says nothing. What it adds is
 the wire, and the wire is its whole argument: one line leaves the named box outside, crosses the
 border exactly once, and fans out into four description bars that then sit in the window like
@@ -656,7 +1020,7 @@ anything else. It drew four straddling tools once instead, which said only "ther
 left a large empty box beside them with nothing pointing into it. The crossing is the load-bearing
 part: dashed while the line is outside, solid once it is in, so the border keeps meaning what it
 means in every other diagram here. Redrawing either figure on its own geometry breaks the pair.
-`McpParts` is the third figure: three cards naming what a server offers, and
+`McpParts` is the fourth figure: three cards naming what a server offers, and
 **nothing drawn between them**, which is the decision. None of the three has crossed into a context
 yet, so it carries no frame and no arrows, and the cards take `McpServer`'s dashed
 outside-the-window stroke while each glyph is borrowed from the step's own vocabulary (the solid
@@ -664,7 +1028,7 @@ prompt bar, the faint stack a tool result comes back as, the rounded tool outlin
 together ends the argument. It is also where the word *resource* is defined, and the definition is by
 **who decides** rather than by where the content came from: you pick a prompt, your harness attaches
 a resource, the model asks for a tool. That is the sorting the figure exists for, so a card gaining a
-second line about cost or trust belongs in the prose instead. `McpOvals` is the fourth figure and
+second line about cost or trust belongs in the prose instead. `McpOvals` is the fifth figure and
 the one that closes that section, and it is a pair with `McpParts` rather than a repetition of it:
 the cards sort the three by who decides, the ovals say the same three are one kind of thing, on the
 cards' own columns (110, 320, 530) so the eye tracks straight down. Its radii and fills are
@@ -672,10 +1036,10 @@ cards' own columns (110, 320, 530) so the eye tracks straight down. Its radii an
 these objects again inside the window rather than meeting a new set of shapes. Both alignments are
 easy to lose, so moving one figure's columns means moving the other's. The labels are shared
 `mcp-parts.*.name` keys, so a rewording moves both or neither. And **it carries no frame on
-purpose**, the same decision `PromptInContext` makes: the three have not crossed into a context yet,
+purpose**, the same decision `PromptParts` makes: the three have not crossed into a context yet,
 so a frame here would be the window told a third time before `context` tells it properly. Do not add
 one. The unit's order is
-the argument too, so keep it: what a tool is, where extra ones come from (MCP, and the three things
+the argument too, so keep it: the loop, what a tool is, what each product ships with, where extra ones come from (MCP, and the three things
 one offers), what holding many of them costs, why the results are the least trustworthy layer, what
 they cost by volume.
 **Three of its headings were argued with their own sections and renamed.** `Extra tools` became
@@ -713,6 +1077,82 @@ paragraph in a section that already runs three. And it stops at the tool list: *
 what a sub-agent costs** (an empty context, and refetching whatever it was not told), so a sentence
 about the coordinator, the fresh session or the refetch does not belong here. That is the same rule
 that took the sub-agent paragraph out of `model`.
+
+`tools` **is titled "The agentic loop"** (NL "De agentic loop") while its id, its URL and its key prefix
+stay `tools`, and that split is the decision: the page now opens on the loop that makes a model an
+agent, and a tool call is one turn of it, so the title names the larger idea and the id keeps every
+link and every `tools.*` key where it was. The layer is still tool results, so the layer names in
+`session` and on the board did not move. The link texts that named the unit moved with the title:
+`truth.grounding.2` ("the unit on the agentic loop") and step 2's `enablement.run-own-machine.2`
+("step 1's unit on the agentic loop"), in both languages; the other anchors pointing here hang on the
+word *tool* or on a phrase of their own, so they name no unit and stayed. A third rename means
+visiting those two again.
+**The lead is the loop first and the tool second.** `lead.1` says it in plain words (you give it a
+goal, the model picks the next step, a tool call is run by the harness and lands in the window, the
+model decides again, it stops when it asks for no more tools) and names *the agentic loop* last, and
+it carries the unit's `harness` link at its first use, which moved up from the old `lead.2`.
+`lead.2` is what the loop looks like on the wire, from Anthropic's tool-use docs (how tool use works,
+and handling stop reasons, read October 2026): `stop_reason: "tool_use"` with one `tool_use` block
+per call, several per turn possible, the outputs sent back as `tool_result`, round again, `end_turn`
+as the normal end, and a failed tool coming back as a result marked as an error so the model can try
+something else. **The other stop reasons (`max_tokens`, `refusal` and the rest) are left out on
+purpose**: they matter to someone building against the API and not to someone driving a harness, so
+a sentence listing them belongs in a different course. `lead.3` is the old first three paragraphs cut
+to one (a tool is a request, the model cannot open a file itself, `grep`, an edit tool and `curl` as
+examples, the harness puts tool results in the window, the tool runs outside the window).
+It names tool results directly rather than saying "this layer", since no layer has been introduced
+here. The same rule applies to `connect-one`: results enter the window, and adding a server makes
+extra tools available. `lead.4` under `ToolsInContext` explains shortened tool output with a concrete
+file example rather than an unexplained reference to the dashed half of the figure. The unit has no `data-audience` wrapper, so
+neither does the technical paragraph: in class it goes with the rest of the prose, and the figure's
+caption carries the three API names into the room on its own.
+`AgentLoop` is the unit's first figure, a port of the agents slide in the ontbijtsessie deck
+(`smartagents-website`, `secured/presentations/ontbijtsessie/slides/15-bouwsteen-agents.njk` and the
+`ag-*` rules in its `deck.css`) on this course's tokens and its one teal: a dashed ring that flows
+clockwise, a comet orbiting it on a 6.4s period, and the two nodes pulsing as it passes (the model
+deciding on the left, the harness running the tool on the right), with your goal coming in on a chip
+at the top and the answer leaving on a card at the bottom. Its keyframes live in `index.css` beside
+`rollout`, since that file holds every colour, and the pulse animates `scale` rather than
+`transform` so it never fights the translate that centres a node. Four things about it are
+decisions. **The ring is a path, not a frame**: nothing sits inside it and no window is drawn, so
+`ToolsInContext` is still the first context frame a student meets and the "first teal frame" rule
+above stands; the moving dashes are motion, not the step's dashed outside-the-window stroke. Do not
+put a window or a bar inside the ring. **The mono labels are the Claude API's names** (`tool_use` on
+the top arc, `tool_result` under the bottom one, `end_turn` beside the exit arrow), and the caption
+under the figure says so in both languages: they are the words a student meets the moment they read
+a transcript or the API docs, and naming them on the drawing is what lets `lead.2` be short. The
+approved mockup had `tool_result` on top of the bottom chevron and `end_turn` against the exit card,
+so each label now has clear space around it, `end_turn` sits on the far side of the exit arrow, and
+on a phone `tool_use` and `tool_result` move out past the right of the ring, because the label floor
+makes them big enough there to reach the entry chip and the exit card. **Under
+`prefers-reduced-motion` it is fully static**: no flow, no pulse, and no comet, since a dot frozen on
+the ring would point at a moment that is not happening. And **it scales as one drawing**: every
+length is in container units of the frame around it, the labels have a floor, and below 28rem the
+two lines under the node names go (they are `lead.1` again) and the nodes widen. The entry chip is
+the one small dark surface in it, on `--foreground` rather than `--header`, as the mockup drew it.
+The Dutch node reads "Het harness voert uit", on the step's own article (`harness.title` is "Het
+harness"), where the mockup had *de*. It is on the deck as `deck-tools-loop`, animated, ahead of
+`deck-tools-in-context`.
+**`What it can call` names each product's own tools**, one `data-assistant` paragraph per product,
+because the names genuinely differ and a list in the other product's names is untrue for that
+reader. Both were read off the vendors' references in October 2026: Claude Code's
+(code.claude.com/docs/en/tools-reference: `Read`, `Write`, `Edit`, `Bash`, `WebFetch`, `WebSearch`,
+`Agent`) and GitHub's Copilot CLI command reference (`view`, `create`, `edit` or `apply_patch`
+depending on the model, `bash` or `powershell`, `glob`, `grep`, `web_fetch`, `task`). **Claude Code
+has no `Glob` or `Grep` tool on macOS, Linux or WSL**: it searches with `find` and `grep` through
+`Bash`, and only the Windows default set carries the two as tools, which is why the Claude paragraph
+says so out loud. Re-read both references before naming another tool; the dated record is in
+`copilot-specific.md` for the Copilot half. The old `lead.2` carried a product-neutral version of
+this list ("find files by name, search their contents, read, write and edit a file, and a shell") and
+lost it to this section rather than say it twice. `MCP servers` now opens on "when those are not
+enough", so the section reads as the way past this list rather than as a fresh topic.
+**The least trustworthy layer is tied to the loop by one sentence** in `stay-critical.3`: every result
+feeds the model's next decision, so an injected line gets to steer the next step. It sits between
+"the marking does not hold" and the closing line, whose subject became "The model" so the pronoun
+cannot be read as the injected line. That sentence is what connects `SpotInjection` to the unit: a
+review (FEEDBACK point 5) found the exercise read as unconnected to tools, because nothing on the page
+said why a poisoned result is worse than a wrong one. The card's description now says the same thing
+from the other side, and the reasoning for how far it goes is beside the card below.
 
 `model` sits after `harness`: prose, five figures, and a card and a board under the same `<hr>` and
 "Test yourself" heading `tools` and `harness` use. **It carries no version numbers anywhere, and that is
@@ -755,8 +1195,9 @@ on a chip, and it is not an SVG, so it joins the step's diagram vocabulary by st
 rather than borrowing a frame that would mean nothing here. The three tier names have no `nl` entry
 on purpose, the way flags and machine output do.
 
-`ModelPricing` is the second figure and is the **one place in the whole course where a number carries
-a currency**, which is why it exists: the cost goal was argued everywhere and demonstrated nowhere.
+`ModelPricing` is the second figure and is the **one price list in the course, and the one place a
+rate carries a currency**, which is why it exists (the only other dollar figure is the single total
+`TokenKinds` in `tokens` works out from its Sonnet row, and it is a sum rather than a rate): the cost goal was argued everywhere and demonstrated nowhere.
 It is also the one thing in the unit that names versions, and that is a knowing exception rather than
 drift. `ModelTiers` beside it stays version-free on the reasoning its own component comment gives
 (tier names outlive releases), so the table is placed to be read as *evidence for a claim* and never
@@ -808,7 +1249,7 @@ figure ageing silently.
 The section closes on `model.cost.4`, the one place in the course that multiplies: the count
 `/context` printed in `tools` against the table's rate is one turn in money. It reaches back across
 the step on purpose, because the two halves of the multiplication live a unit apart, and it carries
-no currency of its own, so `ModelPricing` stays the only number with one. Step 0's last house rule
+no currency of its own, so `ModelPricing` stays the only rate with one. Step 0's last house rule
 tells the student a hunt was not free and says step 1 hands them the numbers, which is a forward
 pointer with no command and no arithmetic in it, so this stays the only paragraph that multiplies. A different paragraph once
 closed the section and went: it argued that you pay the tier's rate on the whole window every turn
@@ -824,7 +1265,7 @@ spent. Three moves, ticked to `kata.step1.price`, and **no description line**, t
 `ReadYourWindow` carries none: the paragraph above it is what says where the work happens. It grades
 nothing, and it cannot: the window is the student's own. It carries **no assistant variant**, since
 `/context` is the same command in both, which is what the rest of the step already relies on. The
-card states the method and names no currency, so `ModelPricing` stays the only number with one and
+card states the method and names no currency, so `ModelPricing` stays the only rate with one and
 `cost.4` stays the one place the course multiplies.
 
 `SpeedAtScale` is the section's figure and it settles a **threshold**, not a ratio: three counts of
@@ -1005,11 +1446,16 @@ mistaken for it (one gives orders to a human reader, one contains the word token
 that makes them look harmless removes the exercise. Its card asks for **the odd one out and does not
 say what makes it odd**: naming the instruction aimed at the agent turns four results into a search
 for one sentence, and the unit's warning aside is where a student who needs the term finds it. Do not
-put the giveaway back in the title, and note that **it has no description at all now**, the key
-absent rather than empty the way `ReadYourWindow`'s is: the line under the title said four results
-had come back, which the four rows say by being there, and that the check happens in the browser,
-which is true of everything in the course. `BudgetWindow`'s description lost the same second
-sentence. It now says that each row shows what it leaves in the window, because a reviewer read the
+put the giveaway back in the title. **It has a description again**, and the reason it changed is
+FEEDBACK point 5: with no line under the title, the exercise read as unconnected to tools. The
+description it lost said four results had come back, which the four rows say by being there, and
+that the check happens in the browser, which is true of everything in the course; the one it has now
+(`spot.description`) ties the card to the unit's loop instead: one turn brought these four back into
+the window, and the model picks its next step from them. **It stops there on purpose.** The wording
+proposed with it ended "One of them tries to take the loop over. Which?", and that is the giveaway in
+other words: a result taking the loop over is the instruction aimed at the agent, which turns four
+results into a search for one sentence. Do not extend the line to say what makes the odd one odd.
+`BudgetWindow`'s description lost the second sentence the old `spot` description lost. It now says that each row shows what it leaves in the window, because a reviewer read the
 card as asking which call costs most without seeing the counts, and it keeps the one instruction that
 more than one call is wanted, since the exact set is what it grades. The counts went from `text-xs`
 to `text-sm` for the same reason. `BudgetWindow` is six calls against one small
@@ -1035,10 +1481,20 @@ verdict said twice, and the bar has since gone from `PanelNote` altogether.
 
 Machine output inside an exercise stays English in every language: `SpotInjection`'s four result
 bodies and sources and `BudgetWindow`'s six commands have no `nl` entry, on purpose, the same way
-flags and grading messages do. Everything framing them is translated. `BudgetWindow`'s rows each
-lead with the tool that makes the call (`Grep`, `Glob`, `Read`, `Bash`), held in the `CALLS` data
-rather than the locale since a tool name is not translated, so the card uses the same short list
-`tools.lead.2` names and a student can see why the grep is the cheap one. The grep is `"/titles"`
+flags and grading messages do. Everything framing them is translated. **`BudgetWindow`'s rows each
+lead with what the call does, not with the tool that makes it** (`budget.kind.*`: files by name,
+search contents, read a file, shell), so a student can still see why the search is the cheap one. They
+led with tool names once (`Grep`, `Glob`, `Read`, `Bash`), and that was untrue for most readers:
+Claude Code has no `Glob` or `Grep` tool on macOS, Linux or WSL and searches with `find` and `grep`
+through `Bash` (code.claude.com/docs/en/tools-reference), and Copilot CLI spells its tools `glob`,
+`grep`, `view` and `bash` (docs.github.com/en/copilot/reference/cli-command-reference), both checked
+October 2026. A function label is true in both harnesses and on every platform, and it reuses
+`what-it-can-call`'s own words, so the card and the prose above it describe the same tools. **The
+labels are prose and translated**, unlike the call text after them, which stays English as machine
+output. Do not put a tool name back, and do not split the labels per assistant either: no single
+assistant's names are right on every platform. The three counted strings (`budget.lines`,
+`budget.running`, `budget.wrong`) are i18next plurals on `count`, `_one` and `_other`, because one
+grep is one line and the card printed "1 lines". The grep is `"/titles"`
 and not `"api/titles"` on purpose: the controller splits its path over `@RequestMapping("/api")`
 and `@GetMapping("/titles")`, so the longer string misses it and finds a line in `Desk.java`.
 
@@ -1474,7 +1930,7 @@ things on the page sat a screen apart. Merging them is what fixed it, and splitt
 it back.
 
 **Every icon is lifted rather than chosen.** The move half carries the marker the unit itself put on
-that advice (the language to ask in, bundling, clearing at your own seam, turning tools off, asking
+that advice (the token you never put in, bundling, clearing at your own seam, turning tools off, asking
 while the code is still in front of you, keeping a cache warm, the expensive model writing the brief,
 the five-hour window, asking for the check), so `welcome`'s legend still means what it says. An icon
 here that is not on the paragraph it came from is drift, in one direction or the other. **The session
@@ -1597,19 +2053,21 @@ in there, that is their build to unpick and the flags above are what they have d
 
 ## The assistant variants
 
-Ten blocks in step 1 vary and nearly all of them are the same kind of thing, a filename or a
+Thirteen blocks in step 1 vary and nearly all of them are the same kind of thing, a filename or a
 command: the launcher `<pre>` pair under `workshop`'s lead (`claude` against `copilot`, each after
 the same `cd`), which is the only pair left there now that the setup command has moved to
 `install.txt`,
 the `<pre>` under `tools.connect-one.1` and `tools.connect-one.2`
 (`claude mcp add` against `copilot mcp add`, which lands in `~/.copilot/mcp-config.json`),
-`tools.what-mcp-costs-you.2`, `session.window-not-memory.1`,
+`tools.what-it-can-call.1` (each product's own built-in tools, under their own names),
+`tools.what-mcp-costs-you.1` and `.2`, `session.window-not-memory.1`,
+`session.compaction-picks-moment.3` (when compaction starts, and whether you can move it),
 `context.amnesia-context-fatigue.3`
 (nested inside the audience wrapper, never both attributes on one element),
 `model.api-vs-subscription.2` and `.3`, plus `survive.write.*.label` and `window.open.*.label` on
 the task cards. The last of those replaced `context.read-your-window.1`, which was the Claude and
 Copilot descriptions of `/context`: the paragraphs went and the variant moved onto the move that
-starts the agent. `flag.machine.help.*` is the eleventh variant set and the only one on a flag
+starts the agent. `flag.machine.help.*` is the fourteenth variant set and the only one on a flag
 board; it is counted apart because it is not a block of prose in a unit file, and the mechanism it
 needed is written up under `workshop`.
 `harness.lead.1` names Copilot for **every** reader instead of splitting, because that sentence is a
@@ -1622,23 +2080,43 @@ halves have to reach both readers, and gating it would hand each of them one sid
 a difference. It is also the only ungated block that names `Copilot CLI` in full, which the paragraph
 below asks of a variant block and which holds here too, since the built-in server is the CLI's.
 
-Two things in the step are not a filename or a command, so do not read that sentence as saying
-everything that varies is a word. `model`'s window section is the larger one and it is **not one of
-the twelve at all**: it is Claude-only whole, with no Copilot half to pair with, and the reasoning is
-under `model`. `tools.what-mcp-costs-you.2` is the smaller, it is one of the ten, and it is a
-**product fact**. Copilot CLI holds the GitHub MCP server with no configuration,
+Three things in the step are not a filename or a command, so do not read that sentence as saying
+everything that varies is a word. The newest is `session.compaction-picks-moment.3`, a product fact
+about when compaction starts, and its reasoning is under `session`; the other two follow. `model`'s window section is the larger one and it is **not one of
+the fourteen at all**: it is Claude-only whole, with no Copilot half to pair with, and the reasoning is
+under `model`. `tools.what-mcp-costs-you.1` and `.2` are the smaller, they are two of the thirteen, and
+each is a **product fact**. Copilot CLI holds the GitHub MCP server with no configuration,
 so that reader is already paying for MCP tool descriptions when the section claims a tool costs you
-by existing, and the Claude half's "connect five MCP servers" would have them counting from zero.
-`what-mcp-costs-you.1` above it was made assistant-neutral in the same change ("every tool" rather
-than "every tool you connect") so the two paragraphs do not contradict each other, and
-`ReadYourWindow`'s readings need no variant either way: its second and last moves compare a window
-with and without the server the student added themselves, whatever the harness starts them with. **That product fact is now spent twice, and what
+by existing, and a Claude half that counted from the servers you connect would have them counting
+from zero. `what-mcp-costs-you.1` above it was made assistant-neutral in that change ("every tool"
+rather than "every tool you connect"), and `ReadYourWindow`'s readings need no variant either way:
+its second and last moves compare a window with and without the server the student added
+themselves, whatever the harness starts them with. **That product fact is now spent twice, and what
 keeps the two from being one duplicate is the argument each makes of it.** `tools` owns the cost
 (the coin, "you pay for them whether or not the agent touches one") and is gated to the reader it is
 true of; `harness.which-one-you-run.2` owns the difference, namely that two harnesses do not start
 you in the same place, and reaches everybody because a comparison has two halves. So a coin or a
 "you pay" line must not follow the fact into `harness`, which is also what keeps that section clear
 of the billing line `model` took off it, and `tools` must not grow the comparison.
+
+**`what-mcp-costs-you.1` was split later for the second product fact, Claude Code's MCP tool
+search.** It is on by default: only tool names and each server's instructions load at the start,
+and a tool's full definition is fetched when the model needs it
+(code.claude.com/docs/en/mcp#scale-with-mcp-tool-search, read October 2026). Everything loads up
+front again with `alwaysLoad: true` on a server, with `ENABLE_TOOL_SEARCH=false`, or when
+`ANTHROPIC_BASE_URL` points at a host that is not Anthropic's. So `.1.claude` says the names go in
+and the descriptions follow on demand, `.1.copilot` keeps the old "all of that goes into the window"
+sentence, and `.2.claude` prices what is left: every connected server's names and instructions on
+every turn, a fraction of the full descriptions, until `alwaysLoad` or tool search being off puts
+them all back. The prose names `alwaysLoad` and folds the other two into "tool search is off", and
+the HTML comment names all three. Tool search is Claude Code's, so the Copilot halves did not move.
+`.3` is shared and still stands for both: for a Claude Code reader the section's weight now falls on
+choice noise and the risk of picking the wrong tool, with the per-turn cost of the names behind it.
+`harness.caching.2` lost its MCP example for the same reason (a server connected mid-session now adds
+names rather than definitions) and states the rule instead: whatever changes early in the window,
+the tool list or the instructions at the top, makes everything behind it new. And
+`recap.what-costs-do.3` ("a tool costs you by existing, called or not") is left as written, since
+names and instructions still cost on every turn.
 
 **Where a variant block names the product, `tools` and `window.open.copilot.label` say `Copilot CLI`
 rather than `Copilot`**, because the CLI is the surface the course assumes and a command, a config
@@ -1653,8 +2131,10 @@ variant: the readings run verbatim either way, and Copilot CLI's readout (system
 instructions, system tools, MCP tools, messages, free space, buffer) is this step's four layers
 under other names, so a student on either product reads the same shape off the screen. The paragraph
 that used to list those seven groups is gone with the rest of the section's prose. Plan mode exists in both, so `prompt`'s plan-mode section
-and `CutItUp` are untouched. Compaction is automatic in both, from about 80% in Copilot CLI, so
-`session`'s compaction argument holds as written. And `ModelTiers`, `ModelPricing` and
+and `CutItUp` are untouched. Compaction is automatic in both, so
+`session`'s compaction argument holds for both; only when it starts differs (at the context limit
+in Claude Code, from about 80% in Copilot CLI), and that is `compaction-picks-moment.3`'s pair plus
+the one string `WindowFill` swaps, not a reason to split anything else. And `ModelTiers`, `ModelPricing` and
 `PickTheTier` stay exactly as they are: the tiers are taught as dispositions, Copilot's own picker
 offers Claude models among others, and the table is evidence for the one-two-four ratio rather
 than a price list. What a Copilot reader needs instead is in `model.api-vs-subscription.3`, and it

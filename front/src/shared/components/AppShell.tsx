@@ -48,7 +48,7 @@ export function AppShell() {
   useEffect(() => setNavOpen(false), [pathname])
 
   return (
-    <div id="app" data-component="AppShell" className="min-h-svh">
+    <div id="app" data-component="AppShell" className="relative min-h-svh">
       {/*
         A dark teal band across the top. The 60px bar stays pinned as the page scrolls, so the
         wordmark and cogwheel are always reachable; below it a run of the same colour is left in
@@ -244,23 +244,25 @@ export function AppShell() {
 
       {/*
         The same watermark the deck's slide footer carries, so the page and the projector are
-        signed the same way. Pinned to the bottom right of the window rather than set at the foot
-        of the page, so it is on screen wherever a student has scrolled to.
+        signed the same way. Pinned to the bottom right of the window, so it is on screen wherever a
+        student has scrolled to, but only from 1600px: that is where the gutter beside the 1116px
+        card is wide enough to hold it. Pinned any narrower, it was drawn over the card's own text.
+        Below that it sits at the foot of the page instead, in the `pb-18` `#app-body` leaves under
+        the card, which is why `#app` is `relative`.
 
         Three things keep it a watermark rather than a widget. It is `pointer-events-none`, so it
         never takes a click meant for what is underneath it; it carries no panel, no border and no
         shadow, only quiet ink, because depth here is reserved for things you actually work in (the
-        settings popover, a dialog); and it is set back, because on a narrow window it lands on top
-        of a line of prose and a mark at full strength would argue with the sentence. It is a
-        sibling of `#app-body` rather than a child: that body is a z-10 stacking context, and a
-        fixed element inside it could not be layered against the header at all.
+        settings popover, a dialog); and it is set back to 70%. It is a sibling of `#app-body`
+        rather than a child: that body is a z-10 stacking context, and a fixed element inside it
+        could not be layered against the header at all.
 
         Untranslated, like the slide footer: a wordmark is a name, not something a room reads.
       */}
       <footer
         id="app-watermark"
         data-component="AppShell"
-        className="text-muted-foreground pointer-events-none fixed right-4 bottom-4 z-40 flex items-center gap-2 text-xs opacity-70 sm:right-6 sm:gap-2.5 sm:text-sm lg:right-8"
+        className="text-muted-foreground pointer-events-none absolute right-4 bottom-6 z-40 flex items-center gap-2 text-xs opacity-70 sm:right-6 sm:gap-2.5 sm:text-sm lg:right-8 min-[1600px]:fixed min-[1600px]:bottom-4"
       >
         <SmartAgentsMark size={18} />
         <span

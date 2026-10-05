@@ -7,22 +7,26 @@ import { cn } from '@/shared/lib/utils'
 
 /**
  * The loop. Five tokens go in, the model scores what could come next, one of them is appended, and
- * the whole thing goes back round. Three passes, and **the reader picks the token on every one of
- * them**, which is the argument: there was never a plan for the sentence, only a next token, three
- * times over, and each time it could have gone somewhere else.
+ * the whole thing goes back round. Three passes, and **the reader steps the model through every one
+ * of them**, choosing for it which candidate it takes, which is the argument: there was never a plan
+ * for the sentence, only a next token, three times over, and each time it could have gone somewhere
+ * else.
  *
- * It took the favourite for you until it did not, and that is the decision. The unit's prose says
+ * **The model picks, never the reader**, and every string says so: the button is `Let it pick the
+ * favourite` (`Laat het de favoriet kiezen`), a candidate reads `Let it pick was`, the eyebrow is what
+ * *the model* can pick. An earlier wording had the reader "take" a token, which put the reader in the
+ * model's seat and made the figure about their choice rather than the model's.
+ *
+ * It took the favourite on its own until it did not, and that is the decision. The unit's prose says
  * the scores are a distribution and the favourite is not a rule (`tokens.one-at-a-time.3`), and a
  * figure that only ever walked the top row was making that claim on the reader's behalf. Now the
- * claim is a thing they do: take `was` instead of `timed` and a different sentence comes out, built
- * by the same machine out of the same numbers.
+ * claim is a thing they do: have it pick `was` instead of `timed` and a different sentence comes out,
+ * built by the same machine out of the same numbers.
  *
- * The sentence it writes **when you take the favourite three times** is the sentence
- * `TokenAttention` then takes apart, on purpose. The two are a pair the way `ToolsInContext` and
- * `McpServer` are: this one shows the sentence being written a token at a time, the next one shows
- * what each of those passes was reading. So the first child of every node is the favourite, and the
- * favourite chain is pinned to `timed` -> `out` -> `.`. Editing the head of `TREE`, or the head of
- * its first child, or the head of that one's first child, breaks the pair.
+ * The sentence it writes **when it picks the favourite three times** is
+ * `the build failed because it timed out`. The first child of every node is the favourite,
+ * and the favourite chain is pinned to `timed` -> `out` -> `.`. Attention uses a separate,
+ * localised bank example; this figure keeps the build sentence for its branching writing loop.
  *
  * **The fan is replaced on every pass rather than accumulated.** A tree that kept every road it had
  * ever drawn would be a picture of the reader's clicks, and the thing being drawn is one pass of the
@@ -51,10 +55,10 @@ import { cn } from '@/shared/lib/utils'
  * distribution, and the favourite is simply the longest bar in it.
  */
 
-/** Machine-shaped, so English in every language, like `TokenAttention`'s sentence. */
+/** Machine-shaped, so English in every language. */
 const PROMPT = ['the', 'build', 'failed', 'because', 'it']
 
-/** How many tokens the reader gets to take before the sentence is called finished. */
+/** How many tokens the model writes before the sentence is called finished. */
 const PASSES = 3
 
 type Branch = {
@@ -65,8 +69,8 @@ type Branch = {
    * nothing is drawn from it anyway.
    *
    * **The first entry is the favourite**, in every list at every depth, so a reader who only ever
-   * takes the top one walks `timed` -> `out` -> `.` and lands on the sentence `TokenAttention`
-   * takes apart. That is the pair, and it is easy to break by reordering one list.
+   * takes the top one walks `timed` -> `out` -> `.` and completes the build sentence.
+   * Reordering a list changes that chain.
    */
   next?: Branch[]
 }
@@ -704,8 +708,9 @@ export function NextToken() {
           </div>
         ) : (
           /*
-            What three choices were worth, multiplied out. Machine-shaped throughout, so the tokens,
-            the signs and the numbers are all inline: the line is arithmetic rather than a sentence.
+            What three choices were worth, multiplied out. Each token is drawn as a chip in the
+            tokenizer view's tint, so the full stop reads as the `.` token rather than as
+            punctuation in the arithmetic; the signs and the numbers stay inline as plain mono.
           */
           <div
             id="next-token-recap"
@@ -717,10 +722,17 @@ export function NextToken() {
                 key={`recap-${branch.token}-${index}`}
                 id={`next-token-recap-${index}`}
                 data-component="NextToken"
-                className="text-muted-foreground"
+                className="text-muted-foreground inline-flex items-center gap-1.5"
               >
-                {index > 0 ? <span aria-hidden="true">{'× '}</span> : null}
-                <span className="text-foreground">{branch.token}</span> {percent(branch.p)}
+                {index > 0 ? <span aria-hidden="true">×</span> : null}
+                <span
+                  id={`next-token-recap-${index}-token`}
+                  data-component="NextToken"
+                  className="bg-primary/15 dark:bg-primary/25 text-foreground rounded-[3px] px-1.5 py-0.5 whitespace-pre"
+                >
+                  {branch.token}
+                </span>
+                {percent(branch.p)}
               </span>
             ))}
             <span
@@ -738,8 +750,8 @@ export function NextToken() {
           data-component="NextToken"
           className="flex flex-wrap items-center gap-3"
         >
-          {/* Still here so a presenter can walk the paired sentence out in three clicks, and so a
-              reader who does not want to choose is not stuck. */}
+          {/* Still here so a presenter can walk the example sentence out in three clicks, and so a
+              reader who does not want to choose for the model is not stuck. */}
           <Button
             id="next-token-favourite"
             data-component="NextToken"

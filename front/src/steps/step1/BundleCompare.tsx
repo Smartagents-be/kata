@@ -11,6 +11,8 @@ import { cn } from '@/shared/lib/utils'
  * exchange goes with it, whole, as `R1`. So the left column reads `P1`, `A1`, `P2`, then `R1 + A2`,
  * then `P3`, then `R2 + A3`, and `P1` is on screen three times by the end. The right column asked
  * all three things in one prompt, so it sends one thing and nothing is ever sent twice.
+ * Agent blocks describe completed results. Inside a resent bundle, message labels identify
+ * earlier questions and earlier results: carrying their text forward does not execute tools again.
  *
  * It sits next to the bundling paragraph in the `prompt` unit, so it lives in `inlineFigures` and
  * the geometry stays here in the step rather than in the unit HTML.
@@ -429,7 +431,12 @@ function Side({ slug, entries, current, flash, label, note }: SideProps) {
  * A message, or a bundle drawn as a dashed box around the copies it carries. `R2` holds `R1` holds
  * `P1`, so the nesting is the duplication: the deeper a copy sits, the more times it has been sent.
  */
-function ItemView({ item, lit, id }: { item: Item; lit: boolean; id: string }) {
+function ItemView({ item, lit, id, copied = false }: {
+  item: Item
+  lit: boolean
+  id: string
+  copied?: boolean
+}) {
   const { t } = useTranslation('step1')
 
   if (item.kind === 'message') {
@@ -437,6 +444,7 @@ function ItemView({ item, lit, id }: { item: Item; lit: boolean; id: string }) {
       <div
         id={id}
         data-component="ItemView"
+        data-state={copied ? 'history' : undefined}
         className={cn(
           'flex flex-col gap-1 rounded-md border px-3 py-2 transition-all duration-300',
           TONE[item.message.role],
@@ -445,7 +453,11 @@ function ItemView({ item, lit, id }: { item: Item; lit: boolean; id: string }) {
         style={{ minHeight: `${item.message.weight}px` }}
       >
         <span className="eyebrow text-muted-foreground flex items-baseline gap-2">
-          {t(`bundle-compare.${item.message.role}`)}
+          {copied
+            ? t(item.message.role === 'you'
+                ? 'bundle-compare.previous-prompt'
+                : 'bundle-compare.previous-result')
+            : t(`bundle-compare.${item.message.role}`)}
           <span className="text-primary/70 normal-case">{item.message.name}</span>
         </span>
         <span
@@ -478,7 +490,7 @@ function ItemView({ item, lit, id }: { item: Item; lit: boolean; id: string }) {
         <span className="normal-case">{item.items.map((inner) => nameOf(inner)).join(' + ')}</span>
       </span>
       {item.items.map((inner, index) => (
-        <ItemView key={index} item={inner} lit={false} id={`${id}-${index}`} />
+        <ItemView key={index} item={inner} lit={false} id={`${id}-${index}`} copied />
       ))}
     </div>
   )

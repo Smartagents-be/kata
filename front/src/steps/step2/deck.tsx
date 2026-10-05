@@ -417,6 +417,7 @@ const deck: SlideSpec[] = [
         branch="you"
         loop
         loopTo={2}
+        loopBy="agent"
       />
     ),
     scale: 1.3,

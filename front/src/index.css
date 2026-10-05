@@ -83,6 +83,55 @@
             opacity: 1;
         }
     }
+    /* `AgentLoop` in step 1, ported from the ontbijtsessie deck's agents slide. Everything turns
+       clockwise on one 6.4s period: the dashes flow round the ring, the comet orbits it, and each
+       node pulses as the comet passes, which is why the node and its numeral share the period and
+       differ only by an inline delay. The pulse animates `scale` rather than `transform`, so the
+       translate that centres a node on its point is never overwritten. Every one of them is paired
+       with `motion-reduce:animate-none` where it is used, and the figure is fully static then. */
+    --animate-loop-flow: loop-flow 2s linear infinite;
+    --animate-loop-orbit: loop-orbit 6.4s linear infinite;
+    --animate-loop-node: loop-node 6.4s ease-in-out infinite;
+    --animate-loop-num: loop-num 6.4s ease-in-out infinite;
+    @keyframes loop-flow {
+        to {
+            stroke-dashoffset: -52;
+        }
+    }
+    @keyframes loop-orbit {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    @keyframes loop-node {
+        0%,
+        16%,
+        34%,
+        100% {
+            scale: 1;
+            border-color: var(--border);
+            box-shadow: none;
+        }
+        25% {
+            scale: 1.04;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px color-mix(in oklch, var(--primary) 16%, transparent);
+        }
+    }
+    @keyframes loop-num {
+        0%,
+        17%,
+        40%,
+        100% {
+            background-color: var(--muted);
+            color: var(--muted-foreground);
+        }
+        25%,
+        32% {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+        }
+    }
 }
 
 :root {

@@ -20,8 +20,8 @@ import type { ReactNode } from 'react'
  * nested scale is the idiom of this file's surroundings rather than a trick played on them. Both
  * are composited transforms over real layout, so text stays vector-crisp at any projector size.
  *
- * `scale` is per slide because the figures are not one size. `PromptInContext` is a single oval and
- * takes about 2.2; `BundleCompare` is two full sessions side by side and takes about 1.1.
+ * `scale` is per slide because the figures are not one size. `ExactAsk` is one narrow card and
+ * takes about 1.8; `BundleCompare` is two full sessions side by side and takes about 1.1.
  */
 export function SlideFigure({
   block,

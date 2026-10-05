@@ -122,9 +122,20 @@ Two facts the course could use and does not:
 - **The GitHub MCP server is built in** and available with no configuration. So a Copilot student's
   window already carries a set of MCP tool descriptions before they connect anything. This is now
   in the course: `tools.what-mcp-costs-you.2.copilot` is that reader's version of what MCP costs
-  you, since the Claude half tells them to connect five servers and count from zero.
+  you, since the Claude half counts from the servers the reader connects.
   The `ReadYourWindow` task still needs no variant, because its first and last moves compare a
   reading with and without the server *they* added.
+- **Tool search is Claude Code's, not Copilot's.** Claude Code's MCP tool search is on by default:
+  only tool names and each server's instructions load at the start, and a tool's full definition is
+  fetched when the model needs it. `alwaysLoad: true` on a server, `ENABLE_TOOL_SEARCH=false`, or an
+  `ANTHROPIC_BASE_URL` on a non-Anthropic host put everything back in up front
+  ([Scale with MCP Tool Search](https://code.claude.com/docs/en/mcp#scale-with-mcp-tool-search),
+  read October 2026). So `tools.what-mcp-costs-you.1` is a pair now: `.1.claude` says the names go
+  in and the descriptions follow, and `.1.copilot` keeps "all of that goes into the window before
+  you have typed anything", as does `.2.copilot`. Nothing here says Copilot CLI defers its tool
+  definitions, so the Copilot halves keep the upfront claim; re-check it before softening them.
+  `harness.caching.2` is shared and no longer uses an MCP server as its example, for the same
+  reason.
 - MCP prompts are documented as reachable under a slash as `/mcp.servername.promptname`, **for
   Copilot generally**. The Copilot CLI command reference lists 40-odd slash commands and none of
   them is a prompt (re-read 30 July 2026). The course used to carry that difference in
@@ -134,22 +145,46 @@ Two facts the course could use and does not:
   never worth one command reference's worth of hedging. Absent from a reference is not the same as
   absent from the product, so check here before writing that claim back.
 
-## Reasoning level (checked August 2026)
+## Built-in tools (checked October 2026)
+
+`tools.what-it-can-call.1.copilot` names Copilot CLI's own tools, read off the
+[Copilot CLI command reference](https://docs.github.com/en/copilot/reference/cli-command-reference)
+in October 2026: `view` (reads a file or a directory), `create`, `edit` (some models edit through
+`apply_patch` instead), `bash` (`powershell` on Windows), `glob`, `grep`, `web_fetch`, and `task`
+for sub-agents. Those are the names the course uses, and they are the only Copilot tool names it
+uses.
+
+The Claude half of the same pair is worth knowing beside it, because the two products differ where a
+reader would least expect: Copilot CLI lists `glob` and `grep` as tools of their own, while
+Claude Code has `Glob` and `Grep` only on Windows and searches with `find` and `grep` through `Bash`
+everywhere else (code.claude.com/docs/en/tools-reference, same month). So a sentence that says "the
+agent has a grep tool" is true of one reader's harness and not the other's, which is why that section
+is a variant pair rather than one list. It is also why `BudgetWindow`'s rows lead with a function
+(`files by name`, `search contents`, `read a file`, `shell`) rather than a tool name: no one set of
+names is right for both products on every platform.
+
+## Reasoning level (checked October 2026)
 
 Both products have the dial, and only one of them publishes a stable set of names for it.
 
-**Claude Code** calls it the effort level. It takes `low`, `medium`, `high` or `xhigh`, is set with
-`/effort` in a session, persists to `settings.json` as `effortLevel`, and is overridden for one
-session by `--effort` or `CLAUDE_CODE_EFFORT_LEVEL`. Read off `code.claude.com/docs/en/settings`.
+**Claude Code** calls it the effort level. `/effort`, `--effort` and `CLAUDE_CODE_EFFORT_LEVEL` take
+`low`, `medium`, `high`, `xhigh` or `max` on current models (Opus 4.6 and Sonnet 4.6 skip `xhigh`).
+**`max` applies to the current session only** unless it comes from the environment variable, and
+that is why the `effortLevel` key in `settings.json` lists only the first 4. Read off
+`code.claude.com/docs/en/model-config` and `code.claude.com/docs/en/settings`. The same page says
+"think", "think hard" and "think more" are passed through as ordinary prompt text; only `ultrathink`
+is recognised, and it adds an instruction without changing the level sent to the API.
 
 **Copilot CLI** exposes a Thinking Effort submenu on models that reason, so the levels on offer
 depend on which model is picked rather than on the CLI. There is no documented CLI-wide scale to
 name.
 
-So `prompt.reasoning-level.1` scopes its clause ("In Claude Code it runs from low up to xhigh")
-rather than splitting on `data-assistant`: a Copilot reader is told nothing untrue by a sentence that
-names the product it is about. The step said "low up to max" before this was checked, and that was
-wrong.
+So `prompt.reasoning-level.1` scopes its clause ("In Claude Code it runs from low up to max, and
+`/effort` sets it") rather than splitting on `data-assistant`: a Copilot reader is told nothing untrue
+by a sentence that names the product it is about. **The scale has flipped twice, and the second flip
+is the correct one.** The step said "low up to max", an August check read only the settings page,
+found 4 names and changed it to `xhigh`, and the October check found `max` in `model-config` with
+the session-only rule that explains why the settings page leaves it out. Check both pages next time.
 
 ## Plan mode
 
@@ -208,7 +243,9 @@ order, and the CLI's full slash-command list.
 
 Not verified: whether **Copilot CLI specifically** exposes MCP prompts under a slash (documented for
 Copilot, absent from the CLI's own command reference, which is why the unit stopped claiming it),
-and how long the flex allotments in the table hold, since GitHub says outright that they will move.
+how long the flex allotments in the table hold, since GitHub says outright that they will move, and
+whether Copilot CLI defers MCP tool definitions the way Claude Code's tool search does (the course
+assumes it does not, which is why only the Claude half of `tools.what-mcp-costs-you` moved).
 
 ## Sources
 

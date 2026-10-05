@@ -1,23 +1,5 @@
 import { useStepText } from '@/shared/i18n/useStepText'
-
-/**
- * Dollars per million tokens, as the provider lists them. Rows run cheapest first, because that is
- * the order the prose above reads them in: call the small one a single unit, the middle tier is
- * roughly two of those, the top tier roughly four.
- *
- * `ModelTiers` twelve lines up the page runs the same three in the same direction, and did not until
- * the cards were flipped to match this table. Neither figure may be reordered on its own.
- *
- * The numbers are data rather than prose, so they carry no `data-i18n` and no `nl` entry, the same
- * way `BudgetWindow`'s line counts and `SpotInjection`'s result bodies do. Model names are proper
- * nouns and stay English for the same reason. Only the column headings and the caption translate.
- */
-const ROWS = [
-  { id: 'haiku', name: 'Claude Haiku 4.5', input: '$1', write5m: '$1.25', write1h: '$2', read: '$0.10', output: '$5' },
-  { id: 'sonnet', name: 'Claude Sonnet 5.5', input: '$2', write5m: '$2.50', write1h: '$4', read: '$0.20', output: '$10' },
-  { id: 'opus', name: 'Claude Opus 5.5', input: '$4', write5m: '$5', write1h: '$8', read: '$0.20', output: '$20' },
-  { id: 'fable', name: 'Claude Fable 5.1', input: '$10', write5m: '$12.50', write1h: '$20', read: '$0.25', output: '$50' },
-] as const
+import { PRICES, dollars } from './pricing'
 
 /** Keyed by the row field so a heading and the column under it cannot drift apart. */
 const COLUMNS = [
@@ -29,9 +11,12 @@ const COLUMNS = [
 ] as const
 
 /**
- * The step's only price list, and the one place a number in this course has a currency in front of
- * it. It sits under the paragraph that states the ratios and above the one that says the ratios
- * outlive the numbers, so it is read as evidence for a claim rather than as a reference table.
+ * The step's only price list. The rows are `pricing.ts`'s, which is also where `TokenKinds` in
+ * `tokens` takes its Sonnet rates from, so the one turn priced up there cannot drift from this table.
+ * That figure's dollar total is the only other number in the course with a currency in front of it.
+ *
+ * It sits under the paragraph that states the ratios and above the one that says the ratios outlive
+ * the numbers, so it is read as evidence for a claim rather than as a reference table.
  *
  * Three things the prose already argues can be checked against it by eye: the small tier as one unit
  * with the middle at two and the top at four, output at five times input in every row, and a cache
@@ -103,7 +88,7 @@ export function ModelPricing() {
           </thead>
 
           <tbody id="model-pricing-body" data-component="ModelPricing">
-            {ROWS.map((row, index) => (
+            {PRICES.map((row, index) => (
               <tr
                 key={row.id}
                 id={`model-pricing-row-${index}`}
@@ -125,7 +110,7 @@ export function ModelPricing() {
                     data-component="ModelPricing"
                     className="px-4 py-3 text-right font-mono whitespace-nowrap tabular-nums"
                   >
-                    {row[column.key]}
+                    {dollars(row[column.key])}
                   </td>
                 ))}
               </tr>

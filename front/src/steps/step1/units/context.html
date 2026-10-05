@@ -129,6 +129,27 @@
     that matters instead of the whole directory.
   </p>
 
+  <!-- The four moves are the ones Anthropic's own guidance backs (best practices, common workflows,
+       large codebases, and Claude Code 101's explore-first lesson). Naming the class and the case is
+       `prompt.be-exact`'s, so it is a link here and not a second telling. "Tell it where not to look"
+       was left out on purpose: Anthropic does that with settings rather than in the prompt, and
+       settings are step 2's guardrails. -->
+  <h2 data-i18n="context.you-choose-most.heading">You choose most of it</h2>
+
+  <p data-i18n="context.you-choose-most.1">
+    Name the class and the case, which <a href="/steps/step1/prompt">the prompt unit</a> already
+    asked of you. Paste the failing assertion and its stack trace, not four hundred lines of
+    <code>mvn test</code> <svg data-icon="coin"></svg> Point at a class that already does it the way
+    you want. The agent copies that one instead of the average.
+  </p>
+
+  <p data-i18n="context.you-choose-most.2">
+    When you do not know where the change belongs, have it find the place and tell you what it found
+    before it edits anything. Where you open it is the first cut. Start it in
+    <code>kata/step1/java</code> and that project is what it searches and edits without asking. Start
+    it at the root and the frontend is in the running too.
+  </p>
+
   <h2 id="entropy" style="scroll-margin-top: 5rem" data-i18n="context.entropy.heading">Entropy</h2>
 
   <p data-i18n="context.entropy.1">
