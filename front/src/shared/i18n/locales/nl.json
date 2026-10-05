@@ -37,7 +37,7 @@
   "exercise.submitting": "Nakijken…",
   "exercise.offline": "Kan de backend niet bereiken. Draait die op poort 8080?",
 
-  "quiz.title": "Test jezelf",
+  "quiz.title": "Test je kennis",
   "quiz.question": "Vraag {{number}} van {{total}}",
   "quiz.submit": "Antwoorden nakijken",
 

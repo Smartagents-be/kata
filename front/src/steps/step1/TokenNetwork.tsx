@@ -18,9 +18,9 @@ import { B, LAST, PARAMETERS, PERCENTS, SUMS, VALUES, W, WEIGHTED, X_IN, relu } 
  * one sentence, and one bias per node because the bias is the concept being taught.
  *
  * **The token comes out of `TokenizerView`'s sentence, in the reader's language.** It is `ears` with
- * `The agent sw` in front of it, or `ert` after `De agent zwe`, both read off `example-sentence.ts`,
- * and the first of the four outputs is the token that really comes next in that sentence (`the`,
- * `dat`). The context carries no ellipsis, because the sentence starts there. The weights are the same
+ * `The agent sw` in front of it, or `ert` after `De agent bewe`, both read off `example-sentence.ts`,
+ * and the first of the four outputs is the token that really comes next in that sentence (`up`,
+ * `bij`). The context carries no ellipsis, because the sentence starts there. The weights are the same
  * in every language, so the first output is always the winner and the percentages never move; only
  * the words change. The empty state names the token and its real id (36108, 805), so the step from
  * `TokenizerView`'s id to a row of numbers is said in words before the first click.

@@ -48,12 +48,12 @@ type Sample = {
  * The three code-shaped rows. The text row is not here: it is the unit's example sentence in the
  * reader's own language, read from `example-sentence.ts` at render time, so the page shows one
  * sentence everywhere. **The order is text, Java, class name, id, and it is no longer cheapest
- * first.** The English sentence splits at 22 tokens per 100 characters and the Dutch one at 26,
- * which ties text with the line of Java (22) or puts it above. So the prose says text and code are
+ * first.** The English sentence splits at 22 tokens per 100 characters and the Dutch one at 24,
+ * which ties text with the line of Java (22) or puts it just above. So the prose says text and code are
  * about level and an id costs nearly 3 times as much, and that is true in both languages.
  *
  * **The text row has to contain a word that breaks**, and the example sentence does: `swears` comes
- * apart at `sw|ears` and `zweert` at `zwe|ert`, which is neither a syllable nor a stem. A sentence
+ * apart at `sw|ears` and `beweert` at `bewe|ert`, which is neither a syllable nor a stem. A sentence
  * where every word survives whole shows the student nothing. A new example sentence has to keep that.
  *
  * There is deliberately no second sentence in another language. A reader only ever sees their own

@@ -39,7 +39,7 @@
 
   <h2 data-i18n="tokens.reading.heading">Reading</h2>
 
-  <h3 data-i18n="tokens.not-words.heading">Text does not split into words</h3>
+  <h3 data-i18n="tokens.not-words.heading">Models do not process text as separate words</h3>
 
   <p data-i18n="tokens.not-words.1">
     A tokeniser has a fixed vocabulary, built once from a pile of text and then frozen. It cuts your
@@ -152,7 +152,7 @@
 
   <h2 data-i18n="tokens.writing.heading">Writing</h2>
 
-  <h3 data-i18n="tokens.one-at-a-time.heading">It writes 1 token at a time</h3>
+  <h3 data-i18n="tokens.one-at-a-time.heading">The model generates one token at a time</h3>
 
   <p data-i18n="tokens.one-at-a-time.1">
     Given everything it has been handed so far, the model scores the tokens that could come next, and
@@ -198,10 +198,10 @@
 
   <!-- Where `NextToken`'s scores come from, so it follows that figure rather than leading the unit:
        the scores are on screen before the network that makes them is opened up. One sentence and the
-       figure, because the drawing carries the rest. Its footer points back at attention ("above"),
-       which `attention` keeps true. The reasons for every cut in it are in step1/CLAUDE.md under
+       figure, because the drawing carries the rest. Its footer names attention but no longer points
+       back at the section ("above") since the author's rewording. The reasons for every cut in it are in step1/CLAUDE.md under
        `TokenNetwork`. -->
-  <h3 data-i18n="tokens.inside.heading">Inside: numbers in, probabilities out</h3>
+  <h3 data-i18n="tokens.inside.heading">Under the hood: how the model turns numbers into probabilities</h3>
 
   <p data-i18n="tokens.inside.1">
     This is where the scores above come from.
@@ -216,7 +216,7 @@
        to `model`'s pricing, the same rule `harness.coordinator.3` follows for decomposition; the cache
        pointer to `harness` sits with the cache in `attention.4`. `.3` names no price and no link of
        its own: `TokenKinds` carries every number, computed from `ModelPricing`'s Sonnet row. -->
-  <h3 data-i18n="tokens.expensive-part.heading">The expensive part</h3>
+  <h3 data-i18n="tokens.expensive-part.heading">The real cost</h3>
 
   <p data-i18n="tokens.expensive-part.1">
     Output is priced above input. The model reads your question in 1 go. It writes the answer a token
@@ -248,6 +248,6 @@
      like every other exercise in the step. -->
 <hr />
 
-<h2 data-i18n="ui:quiz.title">Test yourself</h2>
+<h2 data-i18n="ui:quiz.title">Test your knowledge</h2>
 
 <div data-figure="pick-the-next"></div>

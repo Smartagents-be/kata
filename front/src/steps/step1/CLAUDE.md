@@ -108,7 +108,7 @@ the unit of: how much fits, what it costs, what the model reads again) and `lead
 `not-words` with `TokenSplit` (where the cuts fall and what that costs) and `attention` with
 `TokenAttention` (how the model weighs every token against the ones before it, and what a cache
 does and does not save). Writing holds `one-at-a-time` with `NextToken` (the loop, the scores,
-picking by probability) and `SamplingKnobs` (how widely it picks), `inside` with `TokenNetwork`
+picking by probability) and `SamplingKnobs` (how widely the model picks), `inside` with `TokenNetwork`
 (where those scores come from) and `expensive-part` with `TokenKinds` (what writing costs against
 reading), and then the exercise. The parts were implicit once, a run of five `<h2>`s, and the review
 asked for them to be visible. **Keys take their section from the `<h3>`, not the `<h2>`**, the
@@ -125,8 +125,8 @@ class with the rest of the prose. **Reading before writing is the approved order
 **`TokenNetwork` follows `NextToken` on purpose**: it opened the unit once, right after the tokenizer,
 and a reader met a network producing probabilities before anything had told them why a model would
 want any. Under its own heading after the loop it is the answer to a question the reader already
-has, and its footer points back at attention *above* (`hierboven`); moving either of them means
-rereading that footer in both languages. `inside.1` is one sentence and must stay one, because the
+has, and its footer names attention (no longer as *above*, since the author's own rewording);
+moving either of them still means rereading that footer in both languages. `inside.1` is one sentence and must stay one, because the
 drawing carries the rest. **The cost talk sits where its mechanism is.** The cache is the last
 paragraph of `attention` (`attention.4`), because what it saves and what it cannot save are both
 about the weighing `TokenAttention` has just drawn; output priced above input and reasoning billed
@@ -177,22 +177,22 @@ on `money`/`geld`, with `deposits`/`stort` also contributing. These are explanat
 claimed output from a particular tokenizer. `NextToken` keeps its build sentence and its
 `timed` -> `out` -> `.` favourite chain. **These are exceptions to the shared example sentence.**
 Every other place the unit shows a
-sentence uses `example-sentence.ts`'s, in the reader's language (`The agent swears the tests passed
-on its machine.`, `De agent zweert dat de tests op zijn machine slaagden.`): `TokenizerView` draws
+sentence uses `example-sentence.ts`'s, in the reader's language (`The agent swears up and down that
+the tests passed locally.`, `De agent beweert bij hoog en bij laag dat de tests lokaal zijn geslaagd.`): `TokenizerView` draws
 it, `TokenSplit` takes it as its text row, and `TokenNetwork` and `SamplingKnobs` take `swears`
-(`zweert`) out of it. The review asked for that so a reader meets one sentence rather than four;
+(`beweert`) out of it. The review asked for that so a reader meets one sentence rather than four;
 `PickTheNext`'s `the pull request was` is an exercise prompt rather than an example, and stays.
 **`TokenSplit`'s text row is the example sentence, and that reverses an older decision.** The row was
 `TokenSplit`'s own once (a sentence about the catalogue, 16 tokens per 100 characters), kept apart from the lead sentence because the figure's rows were ordered cheapest first
 and text cheapest was what the prose argued. With the example sentence the text row is 22 per 100
-in English (11 tokens over 49 characters) and 26 in Dutch (14 over 54), against the line of Java at
+in English (13 tokens over 59 characters) and 24 in Dutch (17 over 72), against the line of Java at
 22, the class name at 23 and the id at 61. So **the rows are no longer cheapest first in every
 locale**, the order stays text, Java, class name, id, and the claim moved to match: `not-words.2`
 says text and code cost about the same per character and ids and hashes nearly 3 times as much
 (61 over 22 is 2.8), which is true in both languages, and `deck.tokens.split.note` and
 `deck.tokens.divider.2` say the same. No sentence may call text the cheapest any more. The row still
 **contains a word that breaks**, which the figure needs and no prose points out: `sw|ears` and
-`zwe|ert` break where no reader would cut. Its rates are worked out per render from the active
+`bewe|ert` break where no reader would cut. Its rates are worked out per render from the active
 locale's split, so a new example sentence moves the strip and has to be checked against
 `not-words.2`. There is still no second sentence beside it: a reader only ever sees their own
 language's row, and an English row against a Dutch one made the figure an argument about languages
@@ -259,12 +259,12 @@ reverses an older decision.** `WordsIntoTokens` avoided ids because a token id i
 the unit a student can check and there was no tokeniser in this repository to make real ones with;
 these were produced with tiktoken's `o200k_base` outside the repo and verified id by id, and
 `example-sentence.ts` carries them beside the split with a comment saying they must be regenerated
-if the sentence changes. Never hand-edit one. **The sentence is `The agent swears the tests passed on
-its machine.`, and in Dutch `De agent zweert dat de tests op zijn machine slaagden.`** It replaced
+if the sentence changes. Never hand-edit one. **The sentence is `The agent swears up and down that the
+tests passed locally.`, and in Dutch `De agent beweert bij hoog en bij laag dat de tests lokaal zijn geslaagd.`** It replaced
 `TokenSplit`'s old catalogue row, which the author found dull as the first thing the step shows: this one
 is the works-on-my-machine joke, and it still breaks mid-word where no reader would cut it,
-`sw|ears` and `zwe|ert`, which is what `not-words.1` claims happens to a word. English is 11 tokens over 49
-characters, Dutch 14 over 54, and the counters work both out from the data. **There is one sentence
+`sw|ears` and `bewe|ert`, which is what `not-words.1` claims happens to a word. English is 13 tokens over 59
+characters, Dutch 17 over 72, and the counters work both out from the data. **There is one sentence
 per language, and that does not reopen the argument `TokenSplit` closed.** The objection there was
 an English row against a Dutch one, side by side, which turns a figure into a comparison of
 languages. Here a reader only ever sees the sentence of the language they read in, never the two
@@ -330,9 +330,9 @@ the one thing on the page a student will check with a calculator. The output sco
 count is computed from the matrices as well (65 weights and 14 biases, 79), so it cannot go stale.
 
 **The token is the lead sentence's, in the reader's language, fed with its context.** It is `ears`
-with `The agent sw` muted in front of it, or `ert` after `De agent zwe`, with no ellipsis because the
+with `The agent sw` muted in front of it, or `ert` after `De agent bewe`, with no ellipsis because the
 sentence starts there, and the four outputs are
-` the`, ` that`, ` it`, ` by` and ` dat`, ` de`, ` het`, ` op`, drawn without their leading space.
+` up`, ` that`, ` the`, ` it` and ` bij`, ` dat`, ` het`, ` op`, drawn without their leading space.
 **The first of the four is the token that really comes next in the sentence, and it has to stay
 first**: the weights are the same in every language, so the first output always wins at 75% and the
 percentages never move. Only the words change. Context, token and outputs are real tokens, mono, and
@@ -357,7 +357,7 @@ caption of its own.
 then puts a large model's hundreds of billions beside them, which is what a model size quoted in
 parameters actually counts. It is the one place the course says what that number is, so a later
 unit that quotes a model's size can lean on it rather than defining it again. That is why the
-review's wording gained 3 words, `samen de parameters` (`together the parameters`): the text as
+review's wording gained 3 words, `Samen vormen deze de parameters` (`Together these form the parameters`): the text as
 handed over counted the weights and biases without naming them, and this paragraph is the reason
 the name is there.
 
@@ -367,7 +367,7 @@ screen-reader description and walks the whole pass with the real numbers interpo
 of the drawing's vocabulary reaches a reader who cannot see it.
 
 `SamplingKnobs` is the fifth figure, under `one-at-a-time` after `NextToken` and `.3`: the four words
-that could follow `swears` (`zweert`), and how likely each one is under the standard setting,
+that could follow `swears` (`beweert`), and how likely each one is under the standard setting,
 temperature 0.5 and 2, top-k 2 and top-p 0.9. It took over what `one-at-a-time.4` used to explain in
 a paragraph (what temperature, top-k and top-p each do), and that paragraph is now one sentence
 saying the student never sets them. On the deck it is `deck-tokens-sampling`, between the loop and
@@ -383,13 +383,13 @@ renormalising what they keep (top-p keeps the smallest set of best words reachin
 here at 0.903), so the rows come out 95 / 4 / 0 / 0, 51 / 23 / 13 / 13 and 83 / 17 twice; nothing is
 typed. **A removed word prints `gone`/`weg` rather than 0%**, because 0% at temperature 0.5 is a
 rounding and gone is a rule. And **the standard row is ruled off** from the four below it, since it is
-the one they are read against. The eyebrow is `how widely it picks`, the same verb `one-at-a-time.3`
+the one they are read against. The eyebrow is `how widely the model picks`, the same verb `one-at-a-time.3`
 and `pick-next.right` use (`picks one according to them`, `kiest er één volgens die kansen`): the
 old Dutch said the model *trekt* from a *verdeling*, which reads translated. The grid is one
 `role="img"` whose description reads every cell, and on a phone each row's label stacks above its
 bars. The interpolation for the words in front is `preceding`, not `context`, because `context` is
 an i18next option of its own. **The words in front carry no ellipsis** (`The agent swears`, `De agent
-zweert`), because the sentence starts there and `… The agent swears` claimed text that is not, and the
+beweert`), because the sentence starts there and `… The agent swears` claimed text that is not, and the
 open slot after them is `PickTheNext`'s dashed `?` chip, so an open token looks the same wherever the
 unit leaves one.
 
