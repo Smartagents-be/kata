@@ -59,7 +59,7 @@ unit, `step3`'s `change.you-test-engineer.2` links to `gates` (it linked to `eng
 `engineering` and `goals` is now a chip in `RunSheet` rather than a link in `workshop.lead.1`.
 Its prose closes by handing off to `setup` by name, so a reordering there has to visit that
 paragraph. Below that prose sits the step's only *ungraded* exercise, under the same `<hr>`
-and "Test yourself" heading step 1's `tools` uses: fifteen minutes on the clock, one of three
+and "Test your knowledge" heading step 1's `tools` uses: fifteen minutes on the clock, one of three
 skeletons, and nothing graded. The constraint is the clock and the answer is the list of details the
 student did not get to, so do not add a checker, and keep each example ending on what
 is left out, since `fifteen-minutes.2` tells the student to read it there. That ending is what makes
@@ -100,7 +100,7 @@ Its other two figures are evidence rather than drawings, and they are a pair: th
 skeleton it started as (the FizzBuzz warm-up on system fonts, one step in the sidebar) and the same
 site with the details in (the header, the palette, the grouped steps, the settings). They replaced
 prose that claimed the same thing, first the origin story in `walking-skeleton` (`GET /api/titles`
-and a page listing titles) and then the whole of what is now `detail-work`, and that swap is the
+and a page listing titles) and then the whole of what is now `final-design`, and that swap is the
 decision: the unit argues you get the shape working before you polish it, and two shots of this
 repository doing exactly that carry it better than a sentence asserting it. The paragraphs beside
 them read the pictures, so a replacement image has to keep what they point at, namely the sidebar
@@ -112,7 +112,7 @@ the BEM block and the i18n prefix, plus the `namespace` its two keys live in, si
 imports a step. A third shot is a file in `front/public/`, a slot in the HTML, and two keys per
 language. The images are served flat the way step 1's comparison shots are.
 
-The `detail-work` section (headed "Detail work") is the one place in the step where a habit is stated as a number: a detail
+The `final-design` section (headed "The final design") is the one place in the step where a habit is stated as a number: a detail
 should not cost more than an hour, and the section argues both edges (pulling detail forward is paid
 for now, leaving it too long turns into a regression). It closes the argument the `evolution` unit
 opens, so keep the pair of edges if you rewrite it. Cutting one leaves a lesson that only says
@@ -161,7 +161,7 @@ repository next to the good one. **Its fourth section, `Quality gates`, moved to
 day against production, and it hands off to nothing by name; `gates` is the next unit in the pager
 and its lead is what picks up.
 
-`engineering` closes on `WhereWouldItGo`, a `TaskCard` under the same `<hr>` and "Test yourself"
+`engineering` closes on `WhereWouldItGo`, a `TaskCard` under the same `<hr>` and "Test your knowledge"
 heading, with no prose between the rule and the card: the card's description carries the setting, so
 a paragraph there would say it twice. Five moves, and the task exists because `DomainTree` and
 `kata/step2/java` genuinely disagree. The project keeps `port/` beside `domain/` rather than inside
@@ -816,14 +816,14 @@ you in control**. Five sections and the order is the argument: `One agent at a t
 control, and the shape for work that is deep rather than wide), `Many agents at once` (output up,
 control down, and all of the reading arriving at the end), `The orchestrator` (the same four agents
 with the coordination moved into one of them), `The builder and the critic` (two agents pointed at
-each other and you out of the loop entirely), then `One in front, the rest behind`
+each other and you out of the loop entirely), then `Working in parallel with agents`
 (control back in the middle, which is what most days actually look like). Running most-to-least and
 then landing in the middle is what makes the last section read as the answer rather than as a fifth
 option. It carries no exercise, on `workflows`'s reasoning: there is nothing a card could ask for
 that the student's own week would not answer better. **It does carry a quiz**, on the reasoning
 `workflows` arrived at: a card asks for work and there is none to ask for here, but a question can
 ask which arrangement a situation wants. The four in `quiz.ts` are situations, one per arrangement
-with something to get wrong. `One in front, the rest behind` has none, because it is the answer the
+with something to get wrong. `Working in parallel with agents` has none, because it is the answer the
 other four are measured against and it turns up as a choice inside two of them. **No distractor may
 claim an orchestrator stops two agents writing over each other**: that claim was cut from the unit
 while still half believed, and a distractor this file does not flatly reject is one a careful student
@@ -861,7 +861,7 @@ the `pattern` icon, since this is one of the course's AI design patterns rather 
 
 **`The builder and the critic` sits after `The orchestrator` for the reason the orchestrator sits
 after `Many agents at once`**: it is the same move taken one step further, the checking handed over
-as well as the coordination. Put it after `One in front, the rest behind` and that section stops
+as well as the coordination. Put it after `Working in parallel with agents` and that section stops
 being the answer the unit lands on. It is also the one section in the step that prints a prompt,
 and the prompt is there because the arrangement lives in it: you are in none of the rounds, so
 anything you did not write down never gets asked. **`step1/harness` owns reflection**, so the first
@@ -890,7 +890,7 @@ Four boundaries hold the unit up and every one of them is another unit a second 
 link and a clause rather than a paragraph. **`steering` owns the mid-run window**,
 which is what `one-agent-time.1` points at instead of describing interrupting, and **`steering` owns
 one worktree per agent**, which is why `many-agents-once.2` names the worktree in half a sentence and
-does not argue for it. **`goals` owns the long-running outcome**, so `one-front-rest.2` says the jobs
+does not argue for it. **`goals` owns the long-running outcome**, so `working-parallel-agents.3` says the jobs
 behind you are goals rather than instructions and hands off. The agents-are-two-bills argument is
 `steering`'s too and must not turn up here.
 
@@ -941,7 +941,7 @@ The figure grew by about a quarter when that row landed, so **`deck-step2-parall
 came down from `scale` 1.02 to 0.78**. That number is measured against the footer rather than
 chosen, so a sixth row moves it again.
 
-`goals` was **`Goal-oriented` and is now `Spending tokens`**, which is a widening rather than a
+`goals` was **`Goal-oriented` and is now `Long-running goals and cost`**, which is a widening rather than a
 rename. The unit used to argue one thing, handing over an outcome instead of an instruction, and it
 now surveys four ways of spending a lot of tokens on purpose: a goal-shaped run, a fan-out under
 `ultracode`, research on the frontier model, and a design tool. **The unit id, the URL and the
@@ -955,11 +955,11 @@ was going to act on. Its last sentence survives as the close of `goal-oriented.1
 
 **The organising idea is the window, and it is stated once, in the lead.** Unspent window is not
 carried anywhere, so an expensive move belongs at the tail of one, with the weekly or monthly cap as
-the limit that actually binds. `ultracode` and `design-tools` both close on that slot and neither
+the limit that actually binds. `hidden-price-parallel-agents` (on ultracode) and `design-tools` both close on that slot and neither
 re-argues it. The lead points at `step1/model` for the two billing arrangements rather than
 describing them, on the usual rule.
 
-**The check is a section of its own now**, `The check is the exit`, and it still owns the sentence
+**The check is a section of its own now**, `Automated quality assurance`, and it still owns the sentence
 the capstone is built on: if you cannot name the command that answers yes or no, you do not have a
 goal. `enablement.where-day-goes` hands to it and must not restate it.
 

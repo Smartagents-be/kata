@@ -1,7 +1,5 @@
 <p data-i18n="setup.lead.1">
-  An agent starts every session knowing nothing about your project. Arrange the repository so you
-  do not have to tell it the same things twice. You get better answers, and you pay fewer tokens
-  for them <svg data-icon="coin"></svg>.
+  A session needs the relevant instructions about your project. Put durable conventions and reusable procedures in the repository so you do not have to explain them each time <svg data-icon="coin"></svg>.
 </p>
 
 <p data-i18n="setup.lead.2">
@@ -58,9 +56,7 @@
 <div data-figure="skill-tree"></div>
 
 <p data-i18n="setup.skills.1">
-  A skill is a reusable prompt, written once and written properly. It is a folder under
-  <code>.claude/skills/</code> with a <code>SKILL.md</code> in it, holding a procedure you want
-  followed the same way every time.
+  A skill is a reusable procedure in <code>.claude/skills/</code>, with its instructions in <code>SKILL.md</code>. Its description makes it available for matching tasks; the body loads when used. That differs from standing instructions read at session startup.
 </p>
 
 <p data-i18n="setup.skills.2">
@@ -69,7 +65,9 @@
 
 <pre><code>---
 name: add-endpoint
-description: Add a REST endpoint to a step's Spring project the way the existing ones are built: a controller under web/, a record for the response body, and the /api
+description: >-
+  Add a REST endpoint to a step's Spring project the way the existing ones are built:
+  a controller under web/, a record for the response body, and the /api
   prefix the Vite proxy expects. Use whenever you add a route, a response shape, or a
   controller to kata/stepN/java.
 ---</code></pre>
@@ -132,9 +130,15 @@ description: Add a REST endpoint to a step's Spring project the way the existing
   <a href="/steps/step2/patterns">the patterns unit</a> is where it goes.
 </p>
 
+<h2 data-i18n="setup.permissions-sandbox.heading">Permissions and sandboxing</h2>
+
+<p data-i18n="setup.permissions-sandbox.1">A starting directory focuses discovery; a worktree separates checkouts. Neither restricts capability. Claude Code permissions control tool actions, while its sandbox restricts filesystem and network access for sandboxed commands. Excluded commands and unsandboxed fallbacks need separate review. Use the harmless exercise below to verify a real restriction.</p>
+
+<div data-figure="check-permissions"></div>
+
 <hr />
 
-<h2 data-i18n="ui:quiz.title">Test yourself</h2>
+<h2 data-i18n="ui:quiz.title">Test your knowledge</h2>
 
 <p data-i18n="setup.check-yourself.1">
   Step 2 ships a Java project you have not opened, at <code>kata/step2/java</code>. Three flags are

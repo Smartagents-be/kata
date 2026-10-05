@@ -117,32 +117,26 @@ Flags include `--env`, `--header`, `--transport`, `--tools`, `--timeout`. Config
 `/mcp` with `list`, `show`, `add`, `edit`, `delete`, `disable`, `enable`, `auth`, `reload` and
 `search`; `/mcp search` browses the GitHub MCP Registry and installs from it.
 
-Two facts the course could use and does not:
+MCP facts used by the course (checked October 2026):
 
-- **The GitHub MCP server is built in** and available with no configuration. So a Copilot student's
-  window already carries a set of MCP tool descriptions before they connect anything. This is now
-  in the course: `tools.what-mcp-costs-you.2.copilot` is that reader's version of what MCP costs
-  you, since the Claude half counts from the servers the reader connects.
-  The `ReadYourWindow` task still needs no variant, because its first and last moves compare a
-  reading with and without the server *they* added.
-- **Tool search is Claude Code's, not Copilot's.** Claude Code's MCP tool search is on by default:
-  only tool names and each server's instructions load at the start, and a tool's full definition is
-  fetched when the model needs it. `alwaysLoad: true` on a server, `ENABLE_TOOL_SEARCH=false`, or an
-  `ANTHROPIC_BASE_URL` on a non-Anthropic host put everything back in up front
-  ([Scale with MCP Tool Search](https://code.claude.com/docs/en/mcp#scale-with-mcp-tool-search),
-  read October 2026). So `tools.what-mcp-costs-you.1` is a pair now: `.1.claude` says the names go
-  in and the descriptions follow, and `.1.copilot` keeps "all of that goes into the window before
-  you have typed anything", as does `.2.copilot`. Nothing here says Copilot CLI defers its tool
-  definitions, so the Copilot halves keep the upfront claim; re-check it before softening them.
-  `harness.caching.2` is shared and no longer uses an MCP server as its example, for the same
-  reason.
+- **The GitHub MCP server is built in** and available without configuration. This does not imply
+  that all its tool definitions are loaded into model context. `ReadYourWindow` still compares
+  readings with and without the server the student added.
+- **Copilot CLI supports tool search.** With a supported model it is enabled automatically when
+  enough tools are available (currently roughly 30). Smaller sets load up front. The default
+  server setting is `deferTools: "auto"`; `"never"` always loads that server's tools. The personal
+  setting `toolSearch: false` disables tool search. Loaded definitions remain available in the
+  session, and searching for them may itself add a model exchange. See
+  [Copilot CLI tool search](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/tool-search).
+  `tools.what-mcp-costs-you` describes these defaults separately from Claude Code's, which normally
+  defers MCP definitions and supports `alwaysLoad` per server. Neither variant treats server
+  availability as proof that all definitions are in the window.
 - MCP prompts are documented as reachable under a slash as `/mcp.servername.promptname`, **for
   Copilot generally**. The Copilot CLI command reference lists 40-odd slash commands and none of
   them is a prompt (re-read 30 July 2026). The course used to carry that difference in
   `tools.mcp-servers.3`, a Claude/Copilot pair on where each product surfaces a server's prompts,
-  and that paragraph is gone: the two MCP figures draw the prompt and `tools.mcp-servers.4` sorts
-  it, so nothing in the course names a surface for it any more. This entry is the reason it was
-  never worth one command reference's worth of hedging. Absent from a reference is not the same as
+  and it now defines the template generically, without claiming a CLI-specific command. This entry
+  is the reason it was never worth one command reference's worth of hedging. Absent from a reference is not the same as
   absent from the product, so check here before writing that claim back.
 
 ## Built-in tools (checked October 2026)
@@ -243,9 +237,11 @@ order, and the CLI's full slash-command list.
 
 Not verified: whether **Copilot CLI specifically** exposes MCP prompts under a slash (documented for
 Copilot, absent from the CLI's own command reference, which is why the unit stopped claiming it),
-how long the flex allotments in the table hold, since GitHub says outright that they will move, and
-whether Copilot CLI defers MCP tool definitions the way Claude Code's tool search does (the course
-assumes it does not, which is why only the Claude half of `tools.what-mcp-costs-you` moved).
+and how long the flex allotments in the table hold, since GitHub says outright that they will move.
+Copilot CLI tool search and its loading defaults were verified in October 2026. Large tool output
+was also checked: above 20 KiB by default, all tools (including MCP) save output to a temporary
+file and return a path plus preview. `COPILOT_LARGE_OUTPUT_THRESHOLD_BYTES` changes that threshold.
+See [Managing large tool output](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/context-management#managing-large-tool-output).
 
 ## Sources
 
@@ -256,6 +252,7 @@ assumes it does not, which is why only the Claude half of `tools.what-mcp-costs-
 - [Managing context in Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/context-management)
 - [Using Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/overview)
 - [Copilot CLI command reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference)
+- [Tool search in Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/tool-search)
 - [Adding MCP servers for Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-mcp-servers)
 - [Custom instructions for Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions)
 - [Plan before you build](https://github.blog/changelog/2026-01-21-github-copilot-cli-plan-before-you-build-steer-as-you-go/)

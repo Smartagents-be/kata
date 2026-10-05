@@ -6,7 +6,7 @@ import { OUTPUT_SCORES, softmax } from './network-pass'
 
 /**
  * How widely the model picks, drawn on one choice: the four words that could follow `swears` (or
- * `zweert`), and how likely each one is under the standard setting and four others. It sits under
+ * `beweert`), and how likely each one is under the standard setting and four others. It sits under
  * `tokens.one-at-a-time.3`, which says the scores are probabilities and the model picks one by them,
  * and it carries what that section's last paragraph no longer explains in words: temperature
  * sharpens or flattens the probabilities, top-k keeps the k best, top-p keeps the best until together

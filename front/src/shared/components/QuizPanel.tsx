@@ -34,7 +34,7 @@ function shuffled<T>(items: readonly T[]): T[] {
  * what the row's label is bound to; it is `sr-only`, so a keyboard user tabs the group the way they
  * always did and the row carries the focus ring on their behalf.
  *
- * The "Test yourself" heading is the same `ui` key a unit writes above its own tasks, and a unit
+ * The "Test your knowledge" heading is the same `ui` key a unit writes above its own tasks, and a unit
  * that already wrote it hands `heading={false}` so the two sit under one. The separator stays either
  * way: inside a shared section it is what divides the task from the questions. Between questions
  * there is no separator, because each one opens on its own labelled rule and a second line under the
@@ -61,7 +61,7 @@ export function QuizPanel({
   /** Fired once, on check, when every question was answered correctly. Marks the unit done. */
   onPass?: () => void
   /**
-   * False when the unit's own prose already put "Test yourself" on the page, above a task the quiz
+   * False when the unit's own prose already put "Test your knowledge" on the page, above a task the quiz
    * arrives after. The two then share one heading instead of printing it twice; the rule is
    * upstream, in `showsExerciseHeading`.
    */

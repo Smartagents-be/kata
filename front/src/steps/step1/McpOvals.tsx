@@ -2,10 +2,9 @@ import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * The three things an MCP server offers, drawn a second time as the shapes the rest of this step
+ * The three things an MCP server can offer, drawn again as the shapes the rest of this step
  * draws things in. McpParts states them as cards with a glyph and a who-decides line; this says the
- * same three are one kind of thing, and it is the bridge from that figure to `ContextDiagram`, where
- * they turn up inside the window.
+ * same three offerings can supply information for the model. The harness decides what to include.
  *
  * **Nothing is drawn around them, and that is the figure.** `tools` has not finished arguing that
  * they cross into a context yet, and a frame here would be the third telling of a window the student
@@ -16,9 +15,8 @@ import { useTranslation } from 'react-i18next'
  * The columns are McpParts' own (110, 320, 530), so each oval sits directly under the card it
  * restates and the eye tracks straight down. Moving one figure's columns means moving the other's.
  *
- * The radii and fills are ContextDiagram's, per thing: the prompt is the small heavy one, the
- * resource the large faint one, the tool the middling faint one. That is what makes these the same
- * objects a student later sees inside the oval rather than a new set of shapes.
+ * Equal radii avoid implying fixed token sizes or a cost ranking. A prompt here is a server
+ * template, not the user's ordinary message in ContextDiagram.
  *
  * The labels come from `mcp-parts.*.name` rather than keys of their own, on purpose. The two figures
  * name the same three things one screen apart, so a rewording has to move both or neither.
@@ -26,8 +24,8 @@ import { useTranslation } from 'react-i18next'
 
 /** Left to right, on McpParts' columns, so the two figures stack. */
 const PARTS = [
-  { id: 'prompt', cx: 110, rx: 74, ry: 42, className: 'fill-primary/20 stroke-primary/70' },
-  { id: 'resource', cx: 320, rx: 88, ry: 52, className: 'fill-primary/10 stroke-primary/35' },
+  { id: 'prompt', cx: 110, rx: 80, ry: 48, className: 'fill-primary/20 stroke-primary/70' },
+  { id: 'resource', cx: 320, rx: 80, ry: 48, className: 'fill-primary/10 stroke-primary/35' },
   { id: 'tool', cx: 530, rx: 80, ry: 48, className: 'fill-primary/10 stroke-primary/35' },
 ]
 

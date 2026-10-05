@@ -365,7 +365,7 @@ export const spendingQuiz: QuizQuestion[] = [
  * and what it does not, and `pair-buys-rounds` is what a builder and a critic looping at each other
  * are actually selling you.
  *
- * `One in front, the rest behind` has no question of its own, on the same reasoning that leaves
+ * `Working in parallel with agents` has no question of its own, on the same reasoning that leaves
  * spec-driven out of `workflowsQuiz`: it is the answer the other three are measured against, and it
  * turns up as a choice inside two of them.
  *

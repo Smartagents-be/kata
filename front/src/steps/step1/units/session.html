@@ -11,12 +11,10 @@
 </p>
 
 <p data-i18n="session.lead.3">
-  Which means the other layers end up here too. That documentation page the agent pulled off the web
-  was a tool result for exactly one turn. After that it is a paragraph in the transcript, going out
-  again with every message you send. The session is where everything settles.
+  A documentation page retrieved through a tool can remain a marked tool result in the conversation. Later requests can still include it until the harness removes or summarises it. Its age and source matter even when it stays in the window.
 </p>
 
-<h2 data-i18n="session.wrote-almost-none.heading">You wrote almost none of it</h2>
+<h2 data-i18n="session.wrote-almost-none.heading">You hardly had to write any of it yourself</h2>
 
 <p data-i18n="session.wrote-almost-none.1">
   Count what is in there and your own words barely register. You type a sentence, and the agent opens
@@ -36,24 +34,20 @@
 </p>
 
 <p data-i18n="session.wrote-almost-none.3">
-  It is also the only layer you can do anything about afterwards. You cannot shorten the harness's
-  system prompt and you cannot un-send a turn. You can throw the session away. That is the whole
-  lever.
+  You can change the session after the work: remove history with a rewind, summarise it with compaction, or clear it for a fresh task. Preserve any decisions you still need in a durable file first.
 </p>
 
 <h2 data-i18n="session.sessions-where-money.heading">The session sets your bill</h2>
 
 <p data-i18n="session.sessions-where-money.1">
-  The <a href="/steps/step1/context">context</a> unit already did this sum: the whole session goes
-  back every turn, so its size is your price per message. Read three large files early and you keep
-  paying for them on every question you ask afterwards, whether or not they still matter.
+  The <a href="/steps/step1/context">context</a> unit already showed why a long context costs more:
+  the content that remains in it is sent again on every turn. Read 3 large files early and their
+  content can keep counting as input even after it stops being relevant. That lasts until the
+  harness removes or summarises it.
 </p>
 
 <p data-i18n="session.sessions-where-money.2">
-  Once <code>Catalog</code> is in the window, a second and a third question about it cost almost
-  nothing extra. Harnesses cache the front of the pile, so what has not changed since the last turn is billed at a fraction. The
-  <a href="/steps/step1/harness">harness unit</a> prices that. Adding to a session is cheap.
-  Rebuilding one is not.
+  Follow-up questions can reuse a matching cached prefix at a lower input rate. They still add new input, output and any reasoning or tool requests. Staying on the same subject often saves rereading; a fresh task often benefits from a smaller, current context.
 </p>
 
 <p data-i18n="session.sessions-where-money.3">
@@ -62,13 +56,23 @@
   cheap makes your fiftieth expensive and vague.
 </p>
 
-<h2 data-i18n="session.compaction-picks-moment.heading">Compaction picks the moment, or you do</h2>
+<h2 data-i18n="session.automatic-manual-compaction.heading">Automatic or manual compaction</h2>
 
-<p data-i18n="session.compaction-picks-moment.1">
-  Before the pile stops fitting, the harness compacts it. A model reads the transcript, writes a
-  summary, and the summary is what you carry on with. Detail goes first. And it fires exactly when
-  the work has got long and complicated, so it lands in the middle of the hardest thing you did all
-  day.
+<p data-i18n="session.automatic-manual-compaction.4">
+  Compaction replaces conversation history with a summary. You can let the harness trigger it or start it yourself. Both forms spend tokens.
+</p>
+
+<ul>
+  <li data-i18n="session.automatic-manual-compaction.5">
+  <strong>Automatic:</strong> the harness triggers summarising near its configured context threshold, sometimes during a task.
+</li>
+  <li data-i18n="session.automatic-manual-compaction.6">
+  <strong>Manual:</strong> run <code>/compact</code> in Claude Code or Copilot CLI between tasks. Add focus instructions, such as <code>/compact keep the API decisions and failing tests</code>, to guide what the summary preserves.
+</li>
+</ul>
+
+<p data-i18n="session.automatic-manual-compaction.1">
+  A compaction request reads conversation material as input and writes a summary as output. Details can be lost. Claude Code also supports Compact Instructions in <code>CLAUDE.md</code>. A focus helps preserve decisions, but check the summary before relying on it.
 </p>
 
 <!-- How full the window is over one session, emptied twice: by compaction in the middle of a task,
@@ -77,22 +81,19 @@
      product difference (when compaction starts) is swapped inside the figure, not here. -->
 <div data-figure="window-fill"></div>
 
-<p data-i18n="session.compaction-picks-moment.2">
-  Compaction is not free. It is an extra request that reads the whole window. <code>/clear</code>
-  costs nothing. You choose the seam,
-  between two tasks rather than in the middle of one, and the next session opens with what you hand
-  it. Only one of them lets you say what stays.
+<p data-i18n="session.automatic-manual-compaction.2">
+  <strong>Automatic and manual compaction both cost tokens.</strong> The extra request consumes input and output, with any applicable cache rates. A smaller window afterwards does not undo that usage. <code>/clear</code> itself makes no model request to write a summary; reading instructions and files again in the next session still costs tokens.
 </p>
 
 <!-- Verified October 2026. Claude Code: code.claude.com/docs/en/model-config (default auto-compact
      thresholds). Copilot CLI: docs.github.com/en/copilot/concepts/agents/copilot-cli/context-management. -->
-<p data-assistant="claude" data-i18n="session.compaction-picks-moment.3.claude">
+<p data-assistant="claude" data-i18n="session.automatic-manual-compaction.3.claude">
   Claude Code compacts when the window is about full, and <code>/autocompact</code> sets that point lower,
   anywhere from 100K to 1M tokens, so compaction comes earlier. It still picks the moment. You only
   move it.
 </p>
 
-<p data-assistant="copilot" data-i18n="session.compaction-picks-moment.3.copilot">
+<p data-assistant="copilot" data-i18n="session.automatic-manual-compaction.3.copilot">
   Copilot CLI starts early on its own: from about 80% of the window it compacts in the background,
   while you keep working. You cannot change that threshold.
 </p>
@@ -137,6 +138,6 @@
      task, so there is no prose between the rule and the figure. -->
 <hr />
 
-<h2 data-i18n="ui:quiz.title">Test yourself</h2>
+<h2 data-i18n="ui:quiz.title">Test your knowledge</h2>
 
 <div data-figure="survive-the-clear"></div>

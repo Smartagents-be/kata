@@ -7,10 +7,8 @@
      same claim drawn. -->
 <div data-audience="self">
   <p data-i18n="context.lead.1">
-    Your prompt, the resources the agent read and the tools it can call come from different places
-    and land in the same block of text. That block is the context, and it is all the model ever
-    sees. Once anything is in there, the model has no reliable way to tell one part from another, whatever label it came in with.
-  </p>
+  The request contains your instructions, available tool definitions and relevant conversation material. Together they form the <strong>context</strong>. Message roles and tool-result provenance can remain marked. Those labels help distinguish authority, but do not guarantee the model interprets every source correctly.
+</p>
 </div>
 
 
@@ -26,10 +24,8 @@
   <h2 data-i18n="context.model-stateless.heading">A model is stateless</h2>
 
   <p data-i18n="context.model-stateless.1">
-    Between two messages an LLM keeps nothing. Not your last question, not the file it opened, not
-    the decision the two of you reached. Every request starts from zero. What feels like a
-    conversation is the entire transcript being sent again, from the top, every time.
-  </p>
+  A conversation does not update the model’s trained weights. The harness supplies the instructions and history needed for each request, sometimes after pruning or summarising them. A cache can reuse earlier processing; it is not durable memory of your decisions.
+</p>
 
   <p data-i18n="context.model-stateless.2">
     Sending that whole transcript again costs focus as well as money. Clear the session often,
@@ -38,18 +34,17 @@
     in front of it.
   </p>
 
-  <h2 data-i18n="context.without-context.heading">Without context, a model answers with the average</h2>
+  <h2 data-i18n="context.task-specific.heading">
+  Context makes the task specific
+</h2>
 
-  <p data-i18n="context.without-context.1">
-    It weighs what could come next in the text it was given, using patterns from its training data.
-    It holds no opinion about your codebase. What it holds is an average.
-  </p>
+  <p data-i18n="context.task-specific.1">
+  The model predicts using learned patterns and the input it receives. Without the relevant files and requirements, it has little evidence about your particular project. A plausible answer can still be wrong for your code.
+</p>
 
-  <p data-i18n="context.without-context.2">
-    That is why context is the biggest lever you have. The model gets better at your task at exactly
-    the moment you or the harness put your task in front of it. Give it nothing and it answers from
-    the average of everything it ever read.
-  </p>
+  <p data-i18n="context.task-specific.2">
+  Relevant context makes your task explicit: the current implementation, the failing case and the conventions to follow. Check that the agent has those before asking it to change the code.
+</p>
 </div>
 
 <!-- Still part of the "Without context, a model answers with the average" section, but self-learning only. The figure marker
@@ -58,7 +53,7 @@
      placed. -->
 <div data-figure="oneshot-compare" data-audience="self"></div>
 
-<p data-audience="self" data-i18n="context.without-context.3">
+<p data-audience="self" data-i18n="context.task-specific.3">
   The one on the left is the prompt on its own. The one on the right got the same prompt with one
   reference image from Dribbble pinned to it. That single piece of context steered it somewhere less
   generic straight away. It is not finished, but it is closer.
@@ -67,7 +62,7 @@
 <!-- The figure's payoff turned on the student's own repository. It stays descriptive on purpose:
      arranging a repository so an agent works well in it is step 2's `setup`, and this paragraph is
      only why the codebase counts as context at all. -->
-<p data-audience="self" data-i18n="context.without-context.4">
+<p data-audience="self" data-i18n="context.task-specific.4">
   Your codebase is that reference. Every file the agent opens on the way to your change is context too,
   and it steers the answer the same way that image did. Keep one way of doing things and the agent
   copies it. Work in a project that drifted years ago and it copies that instead, every turn and
@@ -89,10 +84,8 @@
   </p>
 
   <p data-i18n="context.bad-context-bad.3">
-    Wrong context is the dangerous kind, because the model cannot tell that it is wrong. Paste a
-    file that is three versions old and it builds on top of it without a second thought. Nothing in
-    the window says "stale". Everything in the window reads as true.
-  </p>
+  Wrong context can mislead the model even when its source is labelled. Paste a file that is 3 versions old and the agent can build on a stale assumption. Have it inspect the current file and compare dates or versions when freshness matters.
+</p>
 
   <p data-i18n="context.bad-context-bad.4">
     And it slips in by accident more than you would think. Chase a bug through a long session and
@@ -106,23 +99,18 @@
   <h2 data-i18n="context.why-bites-hardest.heading">Why this bites hardest in code</h2>
 
   <p data-i18n="context.why-bites-hardest.1">
-    There is far more bad code on the internet than good code. Abandoned tutorials, answers from
-    2011, snippets that never ran in production, homework. A model trained on all of it has seen the
-    thing you should not do thousands of times, and unlike a bad paragraph, a bad function compiles.
-  </p>
+  Training material includes code of uneven quality: tutorials, old answers and snippets never tested in your environment. A plausible function can compile while breaking your domain rules. Give the agent your current conventions and executable checks.
+</p>
 
   <p data-i18n="context.why-bites-hardest.2">
-    From the pile alone it cannot tell the two apart. "Good" and "bad" are not labels in what it
-    read. Later training teaches it manners and taste in general, not what your team settled on in
-    2019, so frequency is what is left. A vague question returns the statistical middle of
-    everything ever written about the topic. That middle is mediocre code that happens to compile.
-  </p>
+  Training can teach useful coding practices, but it does not establish what your team chose in 2019. A vague request leaves those choices open. Point at a current implementation and state what must hold, then verify the result.
+</p>
 
   <h2 data-i18n="context.more-context-not.heading">More context is not free</h2>
 
   <p data-i18n="context.more-context-not.1">
-    Every token in the window goes back to the model on every turn. A long session does not cost more once. It costs more on every message, for the rest of the session.
-  </p>
+  Content retained in the effective request counts as input again on later requests. Cache reads can lower its price, while pruning or compaction can remove or replace it. Window occupancy measures what is present now; consumption adds up across requests.
+</p>
 
   <p data-i18n="context.more-context-not.2">
     So the goal is not maximum context. It is context that is small enough and good enough. The file
@@ -137,27 +125,18 @@
   <h2 data-i18n="context.you-choose-most.heading">You choose most of it</h2>
 
   <p data-i18n="context.you-choose-most.1">
-    Name the class and the case, which <a href="/steps/step1/prompt">the prompt unit</a> already
-    asked of you. Paste the failing assertion and its stack trace, not four hundred lines of
-    <code>mvn test</code> <svg data-icon="coin"></svg> Point at a class that already does it the way
-    you want. The agent copies that one instead of the average.
-  </p>
+  Name the class and the case, as the <a href="/steps/step1/prompt">prompt unit</a> asks. Paste the failing assertion and relevant stack trace lines <svg data-icon="coin"></svg> Point at a class that follows your conventions, so the agent has a concrete reference.
+</p>
 
   <p data-i18n="context.you-choose-most.2">
-    When you do not know where the change belongs, have it find the place and tell you what it found
-    before it edits anything. Where you open it is the first cut. Start it in
-    <code>kata/step1/java</code> and that project is what it searches and edits without asking. Start
-    it at the root and the frontend is in the running too.
-  </p>
+  When you do not know where a change belongs, ask the agent to locate it and report before editing. Starting in <code>kata/step1/java</code> focuses discovery on that project. The working directory is not an access restriction; permissions and sandboxing set that boundary.
+</p>
 
   <h2 id="entropy" style="scroll-margin-top: 5rem" data-i18n="context.entropy.heading">Entropy</h2>
 
   <p data-i18n="context.entropy.1">
-    In an agentic session the context only grows, and a lot of what lands in it is noise. Failed
-    attempts. A command that errored. The same file read at three different moments, in three
-    different states. An approach you abandoned halfway. None of it is removed, and the model weighs
-    all of it.
-  </p>
+  Between pruning and compaction, a session accumulates material: failed attempts, command errors and files read in several states. Some of that becomes stale while still present in the request. The harness can remove it, but you should not assume every obsolete detail disappears in time.
+</p>
 
   <p data-i18n="context.entropy.2">
     That is entropy: disorder in the window rises with every turn unless somebody spends energy
@@ -166,11 +145,8 @@
   </p>
 
   <p data-i18n="context.entropy.3">
-    A window with no leftovers in it fails too. Nothing was deleted. The line that decides the
-    answer is still sitting in the window, and where it sits is what went wrong. A model uses what is near the top of the window and what
-    is near the bottom. Put the deciding line halfway up a long context and the model reads straight
-    past it. That is lost in the middle.
-  </p>
+  Even relevant material can be missed in a long context. Some models and tasks show weaker retrieval for information placed in the middle. That is called <strong>lost in the middle</strong>. Keep critical constraints easy to find and check whether the result follows them.
+</p>
 
   <h2 data-i18n="context.amnesia-context-fatigue.heading">Amnesia and context fatigue</h2>
 
@@ -221,7 +197,7 @@
      unit sits in: a task is worked by both audiences, and guided mode drops the run either way. -->
 <hr />
 
-<h2 data-i18n="ui:quiz.title">Test yourself</h2>
+<h2 data-i18n="ui:quiz.title">Test your knowledge</h2>
 
 <h3 data-i18n="context.read-your-window.heading">Read your own window</h3>
 

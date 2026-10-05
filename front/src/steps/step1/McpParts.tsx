@@ -2,7 +2,7 @@ import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * The three things an MCP server offers, drawn as three separate cards with nothing running between
+ * The three things an MCP server can offer, drawn as separate cards with nothing running between
  * them. The separation is the whole figure: a student who has just watched one wire cross the frame
  * in McpServer is otherwise ready to believe that a server is a bag of tools, and these three arrive
  * by different routes and on different say-so.
@@ -81,7 +81,7 @@ export function McpParts() {
           </g>
         ))}
 
-        {/* the prompt: the one bar you typed, solid teal wherever it is drawn in this step */}
+        {/* the prompt: a reusable template offered by the server */}
         <rect
           id="mcp-parts-prompt-glyph"
           data-component="McpParts"
@@ -93,7 +93,7 @@ export function McpParts() {
           className="fill-primary"
         />
 
-        {/* the resource: material somebody else collected, in the fill a tool result comes back in */}
+        {/* the resource: content the harness can retrieve */}
         <g className="fill-primary/35">
           {[100, 80, 90].map((width, index) => (
             <rect

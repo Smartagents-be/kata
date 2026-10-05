@@ -42,6 +42,24 @@ const ABANDONED = [
 const toPoints = (path: string) =>
   path.split(' ').map((pair) => pair.split(',').map(Number) as [number, number])
 
+/**
+ * A half's heading breaks onto a second line past this many characters, which is about what fits
+ * in the right half (280 units at 14px). The viewBox starts above zero to make room for that line,
+ * so the drawing itself never moves.
+ */
+const LABEL_CHARS = 36
+
+const wrap = (text: string) =>
+  text.split(' ').reduce<string[]>((lines, word) => {
+    const last = lines.at(-1)
+    if (last !== undefined && `${last} ${word}`.length <= LABEL_CHARS) {
+      lines[lines.length - 1] = `${last} ${word}`
+    } else {
+      lines.push(word)
+    }
+    return lines
+  }, [])
+
 export function IterationPaths() {
   const { t } = useTranslation('step2')
   const titleId = useId()
@@ -55,7 +73,7 @@ export function IterationPaths() {
       <svg
         id="iteration-paths-svg"
         data-component="IterationPaths"
-        viewBox="0 0 640 320"
+        viewBox="0 -22 640 342"
         role="img"
         aria-labelledby={titleId}
         className="h-auto w-full max-w-2xl"
@@ -70,11 +88,15 @@ export function IterationPaths() {
             id="iteration-paths-few-label"
             data-component="IterationPaths"
             x="20"
-            y="26"
+            y="0"
             fontSize="14"
             className="fill-foreground font-medium"
           >
-            {t('iteration-paths.few')}
+            {wrap(t('iteration-paths.few')).map((line, index) => (
+              <tspan key={line} x="20" dy={index === 0 ? 0 : 18}>
+                {line}
+              </tspan>
+            ))}
           </text>
 
           <circle cx="250" cy="70" r="20" strokeWidth="2" className="fill-none stroke-primary/35" />
@@ -144,11 +166,15 @@ export function IterationPaths() {
             id="iteration-paths-many-label"
             data-component="IterationPaths"
             x="20"
-            y="26"
+            y="0"
             fontSize="14"
             className="fill-foreground font-medium"
           >
-            {t('iteration-paths.many')}
+            {wrap(t('iteration-paths.many')).map((line, index) => (
+              <tspan key={line} x="20" dy={index === 0 ? 0 : 18}>
+                {line}
+              </tspan>
+            ))}
           </text>
 
           <circle cx="250" cy="70" r="20" strokeWidth="2" className="fill-none stroke-primary/35" />

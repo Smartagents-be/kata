@@ -1,16 +1,9 @@
 <p data-i18n="goals.lead.1">
-  Some ways of working burn a day of tokens in an afternoon. That is not automatically waste. A run
-  that costs ten ordinary sessions and hands back a module that had no tests this morning is a trade
-  worth making. It comes down to what you get for the spend, and when you spend it.
+  Long-running work consumes tokens across many requests. The context window limits what a request can carry; a subscription allowance limits usage over a period. Keep both in view before starting unattended work.
 </p>
 
 <p data-i18n="goals.lead.2">
-  When matters because of how you are billed.
-  <a href="/steps/step1/model">Step 1's unit on the model</a> set out the two arrangements: a key
-  bills you per token, a subscription comes off a plan you paid for before you started. Where a plan
-  meters you in a rolling window, usually about five hours, what you leave unused is not carried
-  anywhere. Forty minutes of window is not something you can save for tomorrow, so use it up. The limit that actually binds sits behind it, weekly or monthly
-  depending on the plan, and that is the one to keep an eye on.
+  Unused allowance is only useful when you have valuable work to do. Schedule a prepared goal when capacity is available, and check weekly or monthly limits too. Consuming the remainder of a window is not a goal by itself.
 </p>
 
 <!-- Filled by the WindowSpend element registered under this name in steps/step2/index.tsx. It sits
@@ -38,14 +31,14 @@
   change, keep it green, and do not change a public signature.</code></pre>
 
 <p data-i18n="goals.goal-oriented.3">
-  Hand one of those over and the agent stops asking you things. It does a pass, runs your check, and
-  goes back in on whatever failed. It comes back when the check passes or when it is properly stuck.
-  You are not in that loop, and that is both the point and the price.
+  Give the agent a measurable outcome, constraints and a budget or stopping condition. It can run a pass, check the result and repair confirmed failures. Require a report when the check passes, the limit is reached or a decision needs your input.
 </p>
 
-<h2 data-i18n="goals.check-exit.heading">The check is the exit</h2>
+<h2 data-i18n="goals.executable-completion-check.heading">
+  An executable completion check
+</h2>
 
-<p data-i18n="goals.check-exit.1">
+<p data-i18n="goals.executable-completion-check.1">
   So the check has to be something that answers on its own. "Ninety percent line coverage" is a
   number the build prints. "Cleaner code" is not. If you cannot name the command that answers yes or
   no, you do not have a goal yet, and four hours later you get a confident report on a wish.
@@ -111,14 +104,14 @@
   the damage too. A run that goes wrong in hour three has not taken the first two hours down with it.
 </p>
 
-<h2 data-i18n="goals.ultracode.heading">Ultracode</h2>
+<h2 data-i18n="goals.hidden-price-parallel-agents.heading">The hidden price of parallel agents</h2>
 
-<p data-i18n="goals.ultracode.1">
+<p data-i18n="goals.hidden-price-parallel-agents.1">
   Ask for ultracode and the harness stops working the task itself. It writes a script that fans
   agents out across the work, runs them, and gathers up what comes back.
 </p>
 
-<p data-i18n="goals.ultracode.2">
+<p data-i18n="goals.hidden-price-parallel-agents.2">
   It pays when you already know what you want built. Write the specs first, the way
   <a href="/steps/step2/workflows">the workflows unit</a> describes, one per piece of work, and let
   the fleet implement them at the same time. Five specs, five agents, an afternoon of work arriving
@@ -126,12 +119,8 @@
   answers instead of one.
 </p>
 
-<p data-i18n="goals.ultracode.3">
-  Count what that costs before you reach for it. Every agent starts on an empty context, so every one
-  of them reads its way into the project again: the same <code>CLAUDE.md</code>, the same files, the
-  same working out. You pay for that reading once per agent, and none of them learn anything from the
-  others. It is the least efficient way to spend tokens in this unit, and it is also the fastest way
-  to get five things done.
+<p data-i18n="goals.hidden-price-parallel-agents.3">
+  Count the extra context work before fanning out. Fresh workers often read the same instructions and files; forks can inherit history. Each request contributes usage, with any cache rates applied. Agents share findings only through the communication and shared files you arrange. Measure duplicated work against the time parallelism saves.
 </p>
 
 <!-- Filled by the ReadEachTime element registered under this name in steps/step2/index.tsx. It sits
@@ -174,10 +163,7 @@
 </p>
 
 <p data-i18n="goals.design-tools.2">
-  It uses a lot of window, and it uses it fast. Each pass renders the whole system again, and you
-  are not steering it sentence by sentence the way you steer a coding session. Half an hour of it empties a window
-  that a morning of careful work barely touched. So it belongs in the same slot as the fleet, near
-  the end of a window, on something you actually want redrawn.
+  Repeated design passes can consume allowance quickly. The amount depends on the model, rendering and number of revisions. Set a budget and a review point for a design you actually need, then inspect the reported usage.
 </p>
 
 <h2 data-i18n="goals.left-with.heading">What you are left with</h2>

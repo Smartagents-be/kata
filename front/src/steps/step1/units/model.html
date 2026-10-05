@@ -41,8 +41,7 @@
 </p>
 
 <p data-i18n="model.cost.3">
-  Those ratios hold up better than the numbers do. Providers cut prices and ship new versions, and
-  the top tier stays the top tier. Learn the shape rather than the price list.
+  These prices are a dated example of one provider’s family. Ratios and model positions can change too. Recheck current prices and test capability on your workload before choosing.
 </p>
 
 <!-- The one place the course multiplies: the `/context` count from `context` against the table's
@@ -52,9 +51,7 @@
      closed this section stays out. The sum itself is asked for by `PriceOneTurn` at the foot of the
      unit, so this paragraph states the method and the card collects the answer. -->
 <p data-i18n="model.cost.4">
-  What your own window costs is one sum. <code>/context</code> printed your count back in
-  <a href="/steps/step1/context">the context unit</a>, and the table above prices a million of those.
-  Multiply, and that is what sending the window up once costs, before the model has written a word.
+  <code>/context</code> measures the tokens currently occupying the window. It does not total the work done across requests. For an API estimate, add uncached input, cache writes, cache reads and output at their own rates, for every request and model. The exercise below reads <code>/usage</code>; the provider’s billing report settles the actual charge.
 </p>
 
 <!-- Sits under `Cost` because it is how the rates above reach you, and it is why the section carries
@@ -85,9 +82,7 @@
 </p>
 
 <p data-assistant="claude" data-i18n="model.api-vs-subscription.3.claude">
-  The tokens are the same either way. What differs is whether you can see them. On a key, a long
-  window is a number growing on an invoice while you work, and you can go and look at it
-  <svg data-icon="coin"></svg> On a plan you wait for the limit to reset, in the middle of your work.
+  On an API key, reported token usage estimates a variable bill. A subscription instead has plan limits, and some plans allow additional paid usage <svg data-icon="coin"></svg> Read the usage view before a long run; its API estimate is not your subscription invoice.
 </p>
 
 <p data-assistant="copilot" data-i18n="model.api-vs-subscription.3.copilot">
@@ -122,40 +117,33 @@
 <h2 data-assistant="claude" data-i18n="model.five-hour-window.heading">The five-hour window</h2>
 
 <p data-assistant="claude" data-i18n="model.five-hour-window.1">
-  Some providers give you a session limit, and it is usually a window of five hours.
-  Your first message opens one. Everything you send lands inside it, and when the five hours are up
-  the next thing you type opens the next window. This is a clock, not the pile of turns
-  <a href="/steps/step1/session">the session unit</a> is about. The two share a word by accident.
+  Claude subscriptions can have a 5-hour usage allowance, alongside other limits. Its reset time is an account policy, not the capacity of the context window. Check the time shown by your harness. Other providers and plans use different allowance rules.
 </p>
 
 <p data-assistant="claude" data-i18n="model.five-hour-window.2">
-  Over the top of it there is usually a weekly ceiling as well, so what you spend on Monday still counts on Thursday. You do not have to guess where you stand on either. Ask the harness and it prints the
-  window you are in, when it resets, and how much of the week went with it.
+  A weekly ceiling can remain exhausted after the 5-hour allowance resets. Read both limits in the usage view. The context count does not tell you how much allowance remains.
 </p>
 
 <div data-assistant="claude" data-figure="usage-readout"></div>
 
 <p data-assistant="claude" data-i18n="model.five-hour-window.3">
-  What starts the clock is your first message, not your first real question. Open a window at half
-  past nine while you are reading mail and it shuts at half past two, in the middle of the afternoon
-  you wanted it for. You did not spend those five hours. They went past you.
+  When a plan starts its allowance window on activity, the first message can start the clock before your real work begins. Check the reported reset before scheduling a long task.
 </p>
 
 <p data-assistant="claude" data-i18n="model.five-hour-window.4">
-  Work out when you take your break and subtract five hours. Say hello at that hour, by hand or from a repeating task. The window you just opened runs right up to the moment you stand up. Say hello again on your way out to the break, and the second
-  one covers the break and every hour left in the day
-  <svg data-icon="gem"></svg> <svg data-icon="coin"></svg>
+  Plan valuable work around the allowance you actually have <svg data-icon="gem"></svg> A reset does not refund the time already spent, and starting a window earlier does not remove the weekly ceiling.
 </p>
 
 <div data-assistant="claude" data-figure="session-windows"></div>
 
+<p data-assistant="claude" data-i18n="model.five-hour-window.5">
+  On Claude plans with a 5-hour allowance, that allowance resets at its stated time. Independent weekly and other limits still apply. If you reach a limit, wait for the relevant reset or use additional paid usage if your plan and organisation allow it.
+</p>
+
 <h2 data-i18n="model.speed.heading">Speed</h2>
 
 <p data-i18n="model.speed.1">
-  The small tier answers roughly two to three times faster than the middle one, and the top tier is
-  the slowest of the three. On one question that is a few seconds and you will not care. Inside a
-  loop that runs a hundred times, it is the difference between a job you watch and a job you leave
-  running.
+  Smaller models often answer faster, but the ratio depends on the model, provider load, effort and task. Inside a repeated workflow, measure latency on representative work rather than assuming a fixed speedup.
 </p>
 
 <!-- The paragraph above makes a threshold claim and prices neither side of it, so this draws where
@@ -166,8 +154,7 @@
 <div data-figure="speed-at-scale"></div>
 
 <p data-i18n="model.speed.2">
-  Here is where quick stops being cheap. A fast wrong answer costs you the run it broke plus the second run to fix it. The small tier wins when the task is specified
-  tightly enough that there is nothing left to get wrong.
+  A fast wrong answer costs another run to repair it. Use a smaller model where your checks establish that it meets the task’s requirements, rather than assuming tight instructions eliminate mistakes.
 </p>
 
 <h2 data-i18n="model.reasoning-level.heading">Reasoning level</h2>
@@ -177,10 +164,7 @@
      tier sentence and the closing claim are the section. Do not let the first sentence grow back
      into a second explanation of what a reasoning level is. -->
 <p data-i18n="model.reasoning-level.1">
-  You met the reasoning level in <a href="/steps/step1/prompt">the prompt unit</a>: how long a model
-  thinks before it answers. The tier is the other dial, and it decides which model does the
-  thinking. The two are easy to confuse. Turning reasoning up on the small tier costs you tokens and
-  time, and it does not hand you the top tier.
+  The <a href="/steps/step1/prompt">prompt unit</a> introduced effort: how thoroughly a model tackles a task. Model choice decides which model does that work. Raising effort on a smaller model does not turn it into a larger one. Compare quality, latency and reported usage on your own task.
 </p>
 
 <h2 data-i18n="model.let-it-pick.heading">Or let it pick for you</h2>
@@ -190,16 +174,11 @@
      naming the saving in this unit's own ratio rather than repeating `harness`'s wording of it, which
      is what the two paragraphs collided on; do not let "top rate for deciding" come back here. -->
 <p data-i18n="model.let-it-pick.1">
-  You do not have to make this call every time. The coordinator in the previous unit is this choice
-  handed to the machine: the expensive model works out what has to happen, and the parts go to
-  cheaper ones. The saving is the gap you priced above, four against one
-  <svg data-icon="gem"></svg> <svg data-icon="coin"></svg>
+  A coordinator can choose worker models for each delegated task. Using a cheaper worker for a well-defined part can save tokens at the higher rate <svg data-icon="coin"></svg> Configure that choice and verify the result; the harness does not necessarily downgrade workers automatically.
 </p>
 
 <p data-i18n="model.let-it-pick.2">
-  Smaller tiers are commonly trained on output from larger ones, so an expensive model writing the
-  brief is writing for something shaped by its own answers. Working out what the cheap model should
-  do is the half it is best at.
+  A clear brief helps any worker model: outcome, inputs, constraints and a check. Use a more capable model where it improves that brief enough to justify the extra cost, and measure whether the worker completes it correctly.
 </p>
 
 <!-- The doing part, under the heading `QuizPanel` renders over a quiz, the same shape `tools` and
@@ -208,7 +187,7 @@
      answers a different question. -->
 <hr />
 
-<h2 data-i18n="ui:quiz.title">Test yourself</h2>
+<h2 data-i18n="ui:quiz.title">Test your knowledge</h2>
 
 <!-- What `cost.4` describes, asked for. The count comes from `ReadYourWindow` two units back, which
      nothing else in the course ever spends, and the rate comes off the table above. Nothing grades

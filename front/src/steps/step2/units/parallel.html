@@ -49,12 +49,7 @@
 <h2 data-i18n="parallel.builder-critic.heading">The builder and the critic</h2>
 
 <p data-i18n="parallel.builder-critic.1">
-  Two agents can also be pointed at each other. One builds, the other takes the work apart, and the
-  builder goes back in carrying the remarks. Nothing stops it after one pass: it builds again, gets
-  taken apart again, and keeps going until the critic has nothing left to say. That is the
-  reflection pattern <svg data-icon="pattern"></svg> from
-  <a href="/steps/step1/harness">step 1's unit on the harness</a>, run as a loop instead of once.
-  You are in none of the rounds.
+  A builder implements the change and a separate critic reports concrete defects against the requirements and check results. The builder addresses confirmed findings and repeats the review within a fixed limit. This extends the reflection pattern <svg data-icon="pattern"></svg> from the <a href="/steps/step1/harness">harness unit</a>. You review the resulting diff and unresolved findings.
 </p>
 
 <p data-i18n="parallel.builder-critic.2">
@@ -74,9 +69,10 @@ on each other. Then spawn one more as a harsh critic, hand it the diff
 and the running app, and tell it to attack the design, the naming and
 the cases nobody thought about. It reports back. It fixes nothing.
 
-/loop over this until the critic has no remarks left and is wowed by
-what it is looking at. Done is a green mvn verify and a critic that
-cannot fault it.</code></pre>
+Repeat review and repair for at most 3 rounds. Done requires a green
+mvn verify and no confirmed blocking findings against the requirements.
+Stop at the limit or if blocked, and report unresolved findings.
+Return the diff and check results for my review; do not publish.</code></pre>
 
 <p data-i18n="parallel.builder-critic.3">
   Strip the wording off a prompt like that and the same pieces are left.
@@ -88,19 +84,16 @@ cannot fault it.</code></pre>
     is the one that gets left out, and it is the half the critic works from.
   </li>
   <li data-i18n="parallel.builder-critic.element-2">
-    <strong>Sub-agents to fan out to.</strong> The parts that do not depend on each other go out in
-    parallel, and the critic is a fresh one of its own. An agent turning around to look at its own
-    afternoon agrees with itself.
-  </li>
+  <strong>Separate briefs.</strong> Delegate independent parts and give the critic the requirements, current diff and check results. A separate review can reduce anchoring but still needs verification.
+</li>
   <li data-i18n="parallel.builder-critic.element-3">
     <strong>A critic that is harsh.</strong> Attack the design, the naming and the cases nobody
     thought about, report back, repair nothing. An agent asked to help will happily help you finish
     the wrong thing.
   </li>
   <li data-i18n="parallel.builder-critic.element-4">
-    <strong>A bar the builder has to clear.</strong> Done is the critic having no remarks left,
-    not "it runs". The loop is what gets you from one to the other.
-  </li>
+  <strong>A completion condition and a limit.</strong> Require passing checks and no confirmed blocking findings. Stop after 3 review rounds and report anything unresolved for human review.
+</li>
   <li data-i18n="parallel.builder-critic.element-5">
     <strong>A gold standard.</strong> Point at something that is already good, the way the prompt
     above points at <code>TitleController</code>. "Better" is an opinion two agents can argue about
@@ -115,27 +108,31 @@ cannot fault it.</code></pre>
 </aside>
 
 <p data-i18n="parallel.builder-critic.5">
-  You buy rounds with it. Many passes over one problem instead of one pass over five, and
-  none of them needs you. It reports once, with the critic's last word beside the diff, which is a
-  thing you can read.
-  It usually hands back work you would have signed off yourself.
+  Repeated reviews can expose missed cases, but they also spend tokens and can reinforce a shared mistake. Read the final diff, check results and unresolved findings before deciding whether to ship.
 </p>
 
-<h2 data-i18n="parallel.one-front-rest.heading">One in front, the rest behind</h2>
+<h2 data-i18n="parallel.interactive-agent-background.heading">
+  One interactive agent, background goals
+</h2>
 
-<p data-i18n="parallel.one-front-rest.1">
-  Keep one agent in front of you and hand the long jobs to agents behind it. The one in front you
+<p data-i18n="parallel.interactive-agent-background.1">
+  One active agent stays out in front on the build, while the other agents handle preparation,
+  analysis and verification in the background.
+</p>
+
+<p data-i18n="parallel.interactive-agent-background.2">
+  The one in front you
   work with the way you would if it were the only one, answering it and reading the diff it hands
   back. The ones behind are running goals that take an hour and need nothing from you until they
   report. Middling control, and most days look like this.
 </p>
 
-<p data-i18n="parallel.one-front-rest.2">
+<p data-i18n="parallel.interactive-agent-background.3">
   Scaffolding a new domain is the shape of it. Behind you, one agent is writing tests against the
   part you settled an hour ago while another brings the docs up to date. Up front you and the agent
   are still arguing the model out and writing the spec that comes of it. The agents behind you are
   running goals rather than instructions, so you can leave them alone.
-  <a href="/steps/step2/goals">The unit on spending tokens</a> is where that shape is argued.
+  <a href="/steps/step2/goals">The unit on long-running goals and cost</a> is where that shape is argued.
 </p>
 
 <!-- Filled by the AgentsAtOnce element registered under this name in steps/step2/index.tsx. It

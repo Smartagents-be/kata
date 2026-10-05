@@ -31,7 +31,7 @@
 <p data-i18n="prompt.instruction.2">
   Not every prompt needs all 5. A one-line fix is a goal and nothing else. The more the agent has
   to decide on its own, the more of them you fill in. The one people leave out is the last: a
-  check the agent can run itself, which <a href="/steps/step2/goals">step 2's unit on spending tokens</a> takes
+  check the agent can run itself, which <a href="/steps/step2/goals">step 2's unit on long-running goals and cost</a> takes
   further.
 </p>
 
@@ -45,19 +45,11 @@
      more carefully, but a decision you never made and context you never gave are not in the window
      to be reasoned about, and making the ask exact is this unit's own advice (`be-exact`). -->
 <p data-i18n="prompt.reasoning-level.1">
-  Models work a question over before they answer, and how much of that they do is the
-  <strong>reasoning level</strong>. In Claude Code it runs from low up to max, and
-  <code>/effort</code> sets it. Turn it up and the
-  model reflects on your question rather than answering it straight <svg data-icon="pattern"></svg>
-  It weighs more ways to read the ask and checks its own steps. It still cannot know what you
-  decided and never said.
+  The <strong>reasoning level</strong> guides how thoroughly the model tackles a task. Claude Code’s <code>/effort</code> sets it from low to max on supported models. Higher effort can change reasoning, tool calls and the visible answer <svg data-icon="pattern"></svg> It does not select a fixed number of hidden tokens or supply requirements you never gave.
 </p>
 
 <p data-i18n="prompt.reasoning-level.2">
-  The higher the reasoning, the more tokens the model spends thinking, and every one of them is
-  billed as output <svg data-icon="coin"></svg> The dial is a command in your harness rather than a
-  line in your prompt, so you can move it per task. Turn it up for a hard task or one with many
-  steps. A vague ask needs a better prompt, not more thinking.
+  Higher effort can spend more tokens and time. Reasoning tokens are billed as output <svg data-icon="coin"></svg> The chart holds answer length constant to show that cost; real answers and tool use can change too. Use higher effort when the task warrants it, and clarify a vague request first.
 </p>
 
 <!-- The two quantities the paragraph above asks the reader to weigh, drawn against each other. The
@@ -94,9 +86,7 @@
 </p>
 
 <p data-i18n="prompt.plan-mode.2">
-  A cheaper model with a plan often produces a better result than an expensive model without one. Most
-  people have that the other way round. The plan turned a vague ask into an exact instruction. What
-  was missing was precision, not a bigger model.
+  A reviewed plan turns an underspecified request into clearer requirements. The exercise changes requirements, planning and model choice together. Its scores show which wishes reached the implementation; they do not isolate the effect of plan mode or model size. For that comparison, keep the model and requirements the same.
 </p>
 
 <!-- The boundary on the section, and it closes the prose rather than opening it: the payoff above has
@@ -124,7 +114,7 @@
      them, against one bundled ask answered in a single turn. -->
 <div data-figure="bundle-compare"></div>
 
-<h2 data-i18n="prompt.be-exact.heading">Be exact</h2>
+<h2 data-i18n="prompt.be-exact.heading">State exactly what the model should do</h2>
 
 <p data-i18n="prompt.be-exact.1">
   "Fix the login" and "make <code>TitleController</code> return a 404 when the catalogue comes back
@@ -140,11 +130,7 @@
      cases nobody listed, which is the whole argument for writing it. Same ask as `PromptParts`, so
      the figure's 3rd part and this paragraph are one example. -->
 <p data-i18n="prompt.be-exact.2">
-  Say where the job stops, and why. A current model takes an instruction literally and does not
-  stretch a rule to cases you did not name. "Do not throw an exception from
-  <code>UserRepository</code>" covers exactly that. Add "because the nightly import expects null
-  back" and the agent also knows not to turn the result into an <code>Optional</code>, which breaks
-  the import just the same. The reason is what carries a rule to the cases you never listed.
+  Say where the job stops and explain why. “Do not throw an exception from <code>UserRepository</code>, because the nightly import expects null” supplies both a constraint and its purpose. The reason helps the agent spot related mistakes, such as changing that return value to an <code>Optional</code>. Verify that it followed the constraint.
 </p>
 
 <!-- Few-shot and one-shot refer only to the number of examples, explained together in 1 paragraph.
@@ -168,9 +154,7 @@
 </p>
 
 <p data-i18n="prompt.output-format.2">
-  The verb sets the format too. "Can you suggest a fix" gets you suggestions and no edit. "Fix it"
-  gets you the edit. When you want to choose first, ask for that: "give me 3 ways to fix this,
-  without code", then "do number 2". The agent does what you asked, not what you meant.
+  State the action boundary explicitly. “Review only; do not edit files. Give me 3 possible fixes” makes your intent clearer than “suggest a fix”. Then choose an approach and authorise the edit. Use permissions when the boundary must be enforced.
 </p>
 
 <h2 data-i18n="prompt.paste-error.heading">Paste the real error</h2>
@@ -188,9 +172,7 @@
 <h2 data-i18n="prompt.no-longer-works.heading">What no longer works</h2>
 
 <p data-i18n="prompt.no-longer-works.1">
-  Typing "think hard" does not turn the reasoning level up. Claude Code passes it on as ordinary
-  text, and the dial is <code>/effort</code>. Opening with "you are a senior Java engineer" is the
-  same kind of leftover: measured, it changes the tone of the answer and not whether it is right.
+  Typing “think hard” is ordinary prompt text, not a substitute for Claude Code’s <code>/effort</code> setting. A role such as “senior Java engineer” can steer style and behaviour, but does not establish correctness. Concrete requirements, current evidence and checks give you something to verify.
 </p>
 
 <p data-i18n="prompt.no-longer-works.2">
@@ -211,7 +193,7 @@
      in `plan-mode.2` is one the student watches on their own two runs rather than being told. -->
 <hr />
 
-<h2 data-i18n="ui:quiz.title">Test yourself</h2>
+<h2 data-i18n="ui:quiz.title">Test your knowledge</h2>
 
 <div data-figure="entry-brief"></div>
 

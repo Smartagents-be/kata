@@ -318,8 +318,8 @@ const deck: SlideSpec[] = [
     figure: <McpParts />,
     scale: 1.77,
   },
-  // `deck.tools.divider.2` promises that a tool costs you by existing and nothing in the block
-  // proved it. It stops at the tool list: `harness` owns what a sub-agent costs.
+  // Loaded definitions can consume context even for unused tools. Tool search changes what is
+  // loaded; server count is not a context budget. `harness` owns what a sub-agent costs.
   {
     id: 'deck-tools-list',
     kind: 'statement',

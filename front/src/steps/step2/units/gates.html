@@ -29,11 +29,7 @@
 <div data-figure="same-gate"></div>
 
 <p data-i18n="gates.quality-gates.2">
-  Wire that into the run rather than into your memory. A hook fires once the agent says it is
-  finished, which is the one moment a hook can afford to be slow. <code>mvn verify</code> runs
-  whatever analysis your build has wired in, and a number under the floor comes back as a failure it
-  has to answer for. The same rule written into <code>CLAUDE.md</code> is a request. This one runs
-  whether the agent remembers it or not.
+  Wire the check into the run. In Claude Code, a Stop hook can run <code>mvn verify</code> and report a failing check back to the agent. The wrapper must use the hook’s blocking response, such as exit code 2 with feedback on stderr; an ordinary build exit code 1 does not block stopping. Guard repeated continuations, and keep the build as a required delivery check too.
 </p>
 
 <h2 data-i18n="gates.blast-radius.heading">Blast radius</h2>
@@ -45,9 +41,7 @@
 </p>
 
 <p data-i18n="gates.blast-radius.2">
-  So put gates between the agent and whatever you cannot take back. It works on its own branch, in
-  its own worktree, and nothing reaches <code>main</code> without the build and your review. Inside
-  that boundary it can try things, break them and throw them away <svg data-icon="gem"></svg> At worst, a bad run costs you a branch. Not a release.
+  Give the agent a branch and worktree, then enforce delivery through protected branches, required checks and review. Restrict filesystem access, credentials and network access separately. A worktree alone cannot prevent a command from affecting another checkout or an external service <svg data-icon="gem"></svg>.
 </p>
 
 <h2 data-i18n="gates.fast-enough.heading">Fast enough to answer</h2>
@@ -72,7 +66,7 @@
 
 <p data-i18n="gates.fast-enough.3">
   The constraints are what stop it winning the cheap way, because deleting the slow tests is faster too.
-  <a href="/steps/step2/goals">The unit on spending tokens</a> is where that shape is argued.
+  <a href="/steps/step2/goals">The unit on long-running goals and cost</a> is where that shape is argued.
 </p>
 
 <!-- Filled by the GateReach element registered under this name in steps/step2/index.tsx. It closes
@@ -93,4 +87,4 @@
      it twice. -->
 <hr />
 
-<h2 data-i18n="ui:quiz.title">Test yourself</h2>
+<h2 data-i18n="ui:quiz.title">Test your knowledge</h2>

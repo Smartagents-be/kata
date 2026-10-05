@@ -1,9 +1,8 @@
 {
   "step.title": "Soft skills",
-
-  "change.title": "Change management",
-  "expectations.title": "Expectation management",
-  "impostor.title": "Impostor syndrome",
+  "change.title": "Team and process change",
+  "expectations.title": "Set defensible expectations",
+  "impostor.title": "Confidence and understanding",
   "take.title": "Take one of these back to your team",
   "take.description": "Nothing here is graded and nothing is checked. Four of the five are things to work out rather than things to build, so the tick is a bookmark.",
   "take.todo": "Mark this task done",
@@ -13,7 +12,6 @@
   "take.line.label": "Pick one correction you gave an agent more than once this week and write it into the repository's own instruction file.",
   "take.practice.label": "Pick one ritual your team keeps, write down the constraint it was built for, and say whether that constraint is still there.",
   "take.person.label": "Put one of the first four in front of one person on your team. A name and a date.",
-
   "pipeline-shift.description": "The same five stages twice, drawn on one scale. Above, the way it ran when a person typed the code: deciding, waiting, a wide block of writing, verifying, releasing. Below, the way it runs with agents: writing is a sliver run as three lanes at once, verifying is the widest solid block, and both waiting stages are wider than they were. Under that second row, a dashed strip shows the verifying three lanes need. It runs well past the block above it, and a mark on it shows where the checking actually stopped.",
   "pipeline-shift.traditional": "Traditional",
   "pipeline-shift.agentic": "With an agent",

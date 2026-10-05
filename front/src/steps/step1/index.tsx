@@ -220,7 +220,7 @@ const step1: Step = {
         'trained-or-grounded': <TrainedOrGrounded />,
         'answer-provenance': <AnswerProvenance />,
       },
-      // The unit writes no "Test yourself" heading of its own, so `QuizPanel` prints one, the way
+      // The unit writes no "Test your knowledge" heading of its own, so `QuizPanel` prints one, the way
       // it does under `prompt`. It is also the only thing on this page that survives guided mode,
       // where the prose goes and two figures would otherwise be the whole lesson.
       quiz: truthQuiz,
