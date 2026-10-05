@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
  * is why it is the only teal box: what the section adds is that the exit is a command rather than an
  * opinion, and a goal whose check is "cleaner code" has no box to draw here at all.
  *
- * It closes `The check is the exit` in `goals`, at the `data-figure="goal-gate"` slot. Nothing under
+ * It closes `Automated quality assurance` in `goals`, at the `data-figure="goal-gate"` slot. Nothing under
  * it reads it back, so the two arrow labels and the line inside the gate carry it.
  *
  * **The gate carries the waiting**, in its own second line rather than in a note beside the figure:

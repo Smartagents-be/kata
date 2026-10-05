@@ -955,11 +955,11 @@ was going to act on. Its last sentence survives as the close of `goal-oriented.1
 
 **The organising idea is the window, and it is stated once, in the lead.** Unspent window is not
 carried anywhere, so an expensive move belongs at the tail of one, with the weekly or monthly cap as
-the limit that actually binds. `ultracode` and `design-tools` both close on that slot and neither
+the limit that actually binds. `hidden-price-parallel-agents` (on ultracode) and `design-tools` both close on that slot and neither
 re-argues it. The lead points at `step1/model` for the two billing arrangements rather than
 describing them, on the usual rule.
 
-**The check is a section of its own now**, `The check is the exit`, and it still owns the sentence
+**The check is a section of its own now**, `Automated quality assurance`, and it still owns the sentence
 the capstone is built on: if you cannot name the command that answers yes or no, you do not have a
 goal. `enablement.where-day-goes` hands to it and must not restate it.
 

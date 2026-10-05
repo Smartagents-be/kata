@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next'
  * the tail of one.
  *
  * It sits under the lead of `goals`, at the `data-figure="window-spend"` slot, and it is the one
- * drawing in that unit read **forwards**: `ultracode` and `design-tools` both close on the end of a
+ * drawing in that unit read **forwards**: `hidden-price-parallel-agents` (on ultracode) and `design-tools` both close on the end of a
  * window, and this is where that timing was drawn. Nothing under it reads it back, so its three
  * labels carry the argument.
  *
