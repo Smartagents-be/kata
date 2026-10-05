@@ -100,7 +100,7 @@ Its other two figures are evidence rather than drawings, and they are a pair: th
 skeleton it started as (the FizzBuzz warm-up on system fonts, one step in the sidebar) and the same
 site with the details in (the header, the palette, the grouped steps, the settings). They replaced
 prose that claimed the same thing, first the origin story in `walking-skeleton` (`GET /api/titles`
-and a page listing titles) and then the whole of what is now `detail-work`, and that swap is the
+and a page listing titles) and then the whole of what is now `final-design`, and that swap is the
 decision: the unit argues you get the shape working before you polish it, and two shots of this
 repository doing exactly that carry it better than a sentence asserting it. The paragraphs beside
 them read the pictures, so a replacement image has to keep what they point at, namely the sidebar
@@ -112,7 +112,7 @@ the BEM block and the i18n prefix, plus the `namespace` its two keys live in, si
 imports a step. A third shot is a file in `front/public/`, a slot in the HTML, and two keys per
 language. The images are served flat the way step 1's comparison shots are.
 
-The `detail-work` section (headed "Detail work") is the one place in the step where a habit is stated as a number: a detail
+The `final-design` section (headed "The final design") is the one place in the step where a habit is stated as a number: a detail
 should not cost more than an hour, and the section argues both edges (pulling detail forward is paid
 for now, leaving it too long turns into a regression). It closes the argument the `evolution` unit
 opens, so keep the pair of edges if you rewrite it. Cutting one leaves a lesson that only says
