@@ -41,7 +41,7 @@
   "quiz.question": "Question {{number}} of {{total}}",
   "quiz.submit": "Check answers",
 
-  "task.progress": "{{done}} of {{total}} done",
+  "task.progress": "{{done}} of {{total}} completed",
   "task.moveDone": "Done",
 
   "catalog.nav": "Catalogue",
