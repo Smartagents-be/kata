@@ -816,14 +816,14 @@ you in control**. Five sections and the order is the argument: `One agent at a t
 control, and the shape for work that is deep rather than wide), `Many agents at once` (output up,
 control down, and all of the reading arriving at the end), `The orchestrator` (the same four agents
 with the coordination moved into one of them), `The builder and the critic` (two agents pointed at
-each other and you out of the loop entirely), then `One in front, the rest behind`
+each other and you out of the loop entirely), then `Working in parallel with agents`
 (control back in the middle, which is what most days actually look like). Running most-to-least and
 then landing in the middle is what makes the last section read as the answer rather than as a fifth
 option. It carries no exercise, on `workflows`'s reasoning: there is nothing a card could ask for
 that the student's own week would not answer better. **It does carry a quiz**, on the reasoning
 `workflows` arrived at: a card asks for work and there is none to ask for here, but a question can
 ask which arrangement a situation wants. The four in `quiz.ts` are situations, one per arrangement
-with something to get wrong. `One in front, the rest behind` has none, because it is the answer the
+with something to get wrong. `Working in parallel with agents` has none, because it is the answer the
 other four are measured against and it turns up as a choice inside two of them. **No distractor may
 claim an orchestrator stops two agents writing over each other**: that claim was cut from the unit
 while still half believed, and a distractor this file does not flatly reject is one a careful student
@@ -861,7 +861,7 @@ the `pattern` icon, since this is one of the course's AI design patterns rather 
 
 **`The builder and the critic` sits after `The orchestrator` for the reason the orchestrator sits
 after `Many agents at once`**: it is the same move taken one step further, the checking handed over
-as well as the coordination. Put it after `One in front, the rest behind` and that section stops
+as well as the coordination. Put it after `Working in parallel with agents` and that section stops
 being the answer the unit lands on. It is also the one section in the step that prints a prompt,
 and the prompt is there because the arrangement lives in it: you are in none of the rounds, so
 anything you did not write down never gets asked. **`step1/harness` owns reflection**, so the first
@@ -890,7 +890,7 @@ Four boundaries hold the unit up and every one of them is another unit a second 
 link and a clause rather than a paragraph. **`steering` owns the mid-run window**,
 which is what `one-agent-time.1` points at instead of describing interrupting, and **`steering` owns
 one worktree per agent**, which is why `many-agents-once.2` names the worktree in half a sentence and
-does not argue for it. **`goals` owns the long-running outcome**, so `one-front-rest.2` says the jobs
+does not argue for it. **`goals` owns the long-running outcome**, so `working-parallel-agents.3` says the jobs
 behind you are goals rather than instructions and hands off. The agents-are-two-bills argument is
 `steering`'s too and must not turn up here.
 
