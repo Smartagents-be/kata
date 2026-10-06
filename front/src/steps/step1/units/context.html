@@ -27,10 +27,12 @@
   <h2 data-i18n="context.model-stateless.heading">A model is stateless</h2>
 
   <p data-i18n="context.model-stateless.1">
-  A conversation does not update the model’s trained weights. The harness supplies the instructions
-  and history needed for each request, sometimes after pruning or summarising them. A cache can
-  reuse earlier processing; it is not durable memory of your decisions.
-</p>
+    A conversation does not update the model’s trained weights. The harness supplies the
+    instructions and history needed for each request, sometimes after pruning or summarising them. A
+    cache can reuse earlier processing; it is not durable memory of your decisions. What does last
+    is files the harness reads back in. Claude Code and Copilot can let the agent write such notes
+    itself and load them in later sessions.
+  </p>
 
   <p data-i18n="context.model-stateless.2">
     Sending that whole transcript again costs focus as well as money. Clear the session often,
@@ -147,10 +149,11 @@
 </p>
 
   <p data-i18n="context.you-choose-most.2">
-  When you do not know where a change belongs, ask the agent to locate it and report before editing.
-  Starting in <code>kata/step1/java</code> focuses discovery on that project. The working directory
-  is not an access restriction; permissions and sandboxing set that boundary.
-</p>
+    When you do not know where a change belongs, ask the agent to locate it and report before
+    editing. Starting in <code>kata/step1/java</code> focuses discovery on that project. The working
+    directory is also the default boundary: the agent asks before it reads or edits files outside
+    it. That is a permission prompt, not a sandbox.
+  </p>
 
   <h2 id="entropy" style="scroll-margin-top: 5rem" data-i18n="context.entropy.heading">Entropy</h2>
 
@@ -167,10 +170,12 @@
   </p>
 
   <p data-i18n="context.entropy.3">
-  Even relevant material can be missed in a long context. Some models and tasks show weaker
-  retrieval for information placed in the middle. That is called <strong>lost in the
-  middle</strong>. Keep critical constraints easy to find and check whether the result follows them.
-</p>
+    Even relevant material can be missed in a long context. Some models and tasks show weaker
+    retrieval for information placed in the middle. That is called <strong>lost in the
+    middle</strong>. More broadly, answers get less reliable as the input grows, even when the task
+    stays just as easy. Researchers call that <strong>context rot</strong>. Keep critical
+    constraints easy to find and check whether the result follows them.
+  </p>
 
   <h2 data-i18n="context.amnesia-context-fatigue.heading">Amnesia and context fatigue</h2>
 
@@ -201,9 +206,9 @@
        and nothing warns about the three it does not. -->
   <p data-assistant="claude" data-i18n="context.amnesia-context-fatigue.3.claude">
     When the window is compacted, detail is the first thing to go. For an instruction that has to
-  survive that, write it in <code>CLAUDE.md</code>, which is read at the start of every session. And
-  keep the window from filling up in the first place: cut each task small enough that
-    it finishes before the summarising begins.
+    survive that, write it in <code>CLAUDE.md</code>, which is read at the start of every session
+    and again after compaction. And keep the window from filling up in the first place: cut each
+    task small enough that it finishes before the summarising begins.
   </p>
 
   <p data-assistant="copilot" data-i18n="context.amnesia-context-fatigue.3.copilot">
