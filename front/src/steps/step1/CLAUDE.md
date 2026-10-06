@@ -155,8 +155,10 @@ new input uses its own category, and output has another rate. Do not infer usage
 occupancy or from the number of attention links.
 
 **`attention.3` explains repeated attention without naming heads or layers**: the course owner
-found the unexplained term unhelpful. It stays with the weighing just explained, says several
-weighings run side by side and are repeated, and identifies the figure as 1 illustrative weighing.
+found the unexplained term unhelpful. It says attention runs many times side by side and again in
+every layer, and calls the figure 1 illustrative run. It avoids "weighing" as a noun: the owner
+found it unclear. `.2` opens on "every time attention runs" so its 3 vectors are per run, not per
+token overall.
 It introduces no new categories of language relationships. The explanation includes
 self-attention; the figure omits it to focus on links between tokens, and `.3` says so.
 
@@ -203,7 +205,7 @@ always up on one scale with only the emphasis following the selection: the secti
 comparative and a panel showing one sample at a time left the reader to click, remember and
 subtract. The numbers are worked out from the same pieces the chips are drawn from, the text row's
 from the active locale's split, so the strip cannot drift from the panel above it. `lead.3`'s band
-(roughly 4 to 6 characters per token) is about English and holds the 4.5 the English row prints;
+(roughly 3.5 to 4.5 characters per token) is about English and holds the 4.5 the English row prints;
 the Dutch row is calculated from its own sentence. These are sample densities, not language-quality rankings.
 **Picking a sample restages the panel, and only the arrival is drawn.** The source line and the count
 come back together and the chips come back one after another from the left, on the shared

@@ -68,7 +68,7 @@
   "tokenizer-view.view.ids": "Token IDs",
   "tokenizer-view.text.description": "The sentence cut into {{tokens}} tokens, each on its own background: {{pieces}}",
   "tokenizer-view.ids.description": "The same {{tokens}} tokens as the numbers the model gets: {{ids}}.",
-  "tokenizer-view.note": "Split with o200k_base, a public tokeniser. Each piece gets the number it has in the vocabulary.",
+  "tokenizer-view.note": "Split with o200k_base, OpenAI's public tokeniser. Claude's own is not public and cuts differently. Each piece gets the number it has in the vocabulary.",
 
   "token-network.label": "1 token through the network",
   "token-network.description": "A small network, worked layer by layer. The token {{token}}, which follows {{preceding}}, goes in as 4 numbers: {{input}}. Then come 2 hidden layers of 5 nodes and an output layer of 4. Every node multiplies each input by a weight, adds them up, adds its own bias and, in the hidden layers, turns anything below 0 into 0. The 4 output scores become probabilities: {{output}}.",
@@ -107,7 +107,7 @@
   "token-split.count": "{{chars}} characters · {{tokens}} tokens · {{ratio}} characters per token",
   "token-split.rate.label": "What each one costs",
   "token-split.rate.unit": "tokens per 100 characters",
-  "token-split.caption": "Split with o200k_base, a public tokeniser.",
+  "token-split.caption": "Split with o200k_base, OpenAI's public tokeniser. Claude's cuts differently.",
 
   "next-token.label": "which options the model has and how likely each option is",
   "next-token.description": "The model's input so far: {{text}}",
@@ -158,7 +158,7 @@
   "token-kinds.what.write": "what this turn adds, written to the cache",
   "token-kinds.what.reasoning": "the thinking before the answer, billed as output",
   "token-kinds.what.output": "the answer and the tool calls",
-  "token-kinds.caption": "Priced at {{model}}'s standing rates, on the default 5-minute cache.",
+  "token-kinds.caption": "Priced at {{model}}'s standing rates, on the default 5-minute cache. Writing to the 1-hour cache costs more.",
 
   "diagram.description": "One oval labelled context with three regions inside it: a small one labelled prompt, and two larger ones labelled resources and tools. Everything the agent knows sits inside the oval.",
   "diagram.context": "context",

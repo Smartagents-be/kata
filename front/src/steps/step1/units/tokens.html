@@ -27,14 +27,14 @@
   <!-- States the unit first and says what is counted in it, then the negation. The word `context` is
        deliberately not used: no unit defines it before `context` itself takes the window apart. -->
   <p data-i18n="tokens.lead.2">
-  Text reaches a language model as tokens. They measure how much text fits and how much is
-  processed. Models that accept images or audio also have representations for those inputs. A token
-  count is not a word count or a character count.
-</p>
+    Text reaches a language model as tokens. They measure how much text fits and how much is
+    processed. Images become tokens too, and are counted and billed the same way. A token count is
+    not a word count or a character count.
+  </p>
 
   <p data-i18n="tokens.lead.3">
-    For ordinary English, roughly 4 to 6 characters go into 1 token, so a page of text comes to a few
-    hundred tokens.
+    For ordinary English, roughly 3.5 to 4.5 characters go into 1 token, so a page of text comes to
+    several hundred tokens.
   </p>
 
   <h2 data-i18n="tokens.reading.heading">Reading</h2>
@@ -42,18 +42,19 @@
   <h3 data-i18n="tokens.not-words.heading">Models do not process text as separate words</h3>
 
   <p data-i18n="tokens.not-words.1">
-  A tokeniser uses a fixed vocabulary and segmentation rules learned from text. Common words often
-  stay whole; other words split into smaller pieces. The BPE tokeniser in this example applies
-  ranked merges, rather than always choosing the longest known piece. Different tokenisers draw
-  different boundaries.
-</p>
+    A tokeniser uses a fixed vocabulary and segmentation rules learned from text. Common words often
+    stay whole; other words split into smaller pieces. The BPE tokeniser in this example applies
+    ranked merges, rather than always choosing the longest known piece. Different tokenisers draw
+    different boundaries, even between versions of the same model: Claude Opus 4.7 cuts the same text
+    into up to 35% more tokens than Opus 4.6.
+  </p>
 </div>
 
 <div data-figure="token-split"></div>
 
 <div data-audience="self">
   <!-- `TokenSplit`'s rate strip in words: the text row is the lead sentence in the reader's language
-       (22 tokens per 100 characters in English, 26 in Dutch), a line of Java 22, a class name 23, an
+       (22 tokens per 100 characters in English, 24 in Dutch), a line of Java 22, a class name 23, an
        id 61. So text and code are about level and ids and hashes are nearly 3 times either (61/22 is
        2.8). Nothing here may say text is the cheapest any more: in Dutch it is not. -->
   <p data-i18n="tokens.not-words.2">
@@ -65,10 +66,10 @@
   <!-- Counts follow the shared example: 13 English tokens and 17 Dutch tokens.
        Fragmentation alone is not evidence of training exposure or language capability. -->
   <p data-i18n="tokens.not-words.3">
-  The sentence above uses 13 tokens in English and 17 in Dutch with this tokeniser. That measures
-  the size of these particular inputs. More fragments do not by themselves prove less training data
-  or worse answers in a language. Check answer quality separately from token counts.
-</p>
+    The sentence above uses 13 tokens in English and 17 in Dutch with this tokeniser. Most languages
+    need more tokens than English for the same content, so they cost more and fill the window
+    sooner. That says nothing about the quality of the answers. Check that separately.
+  </p>
 
   <!-- The heading is the name of the thing, and `.1` names it last, after saying what it is. -->
   <h3 data-i18n="tokens.attention.heading">Attention</h3>
@@ -90,10 +91,11 @@
        and value aggregation are separate operations, both learned during training and used
        during inference. No numerical example: the role of each vector is the point. -->
   <p data-i18n="tokens.attention.2">
-    Every token gets 3 vectors: a <strong>query</strong>, a <strong>key</strong> and a
-    <strong>value</strong>. They serve different roles. When a token seeks information from other
-    tokens, its query expresses what it needs. When other tokens attend to this token, its key
-    expresses what it offers. Its value contains the information it actually contributes.
+    Every time attention runs, each token gets 3 vectors: a <strong>query</strong>, a
+    <strong>key</strong> and a <strong>value</strong>. They serve different roles. When a token
+    seeks information from other tokens, its query expresses what it needs. When other tokens attend
+    to this token, its key expresses what it offers. Its value contains the information it actually
+    contributes.
   </p>
 
   <p data-i18n="tokens.attention.5">
@@ -118,10 +120,11 @@
        The weights are illustrative. Counts exclude self-attention: n(n-1)/2 gives 21 pairs for
        7 tokens and 91 for 14. These are the figure's inter-token links, not the full attention matrix. -->
   <p data-i18n="tokens.attention.3">
-  The model performs several such weighings and repeats them through its layers. This drawing shows
-  1 weighing with invented weights and omits attention to the token itself. It has 21 pairs for 7
-  tokens and 91 for 14. These are connections in the drawing, not a count of billable token reads.
-</p>
+    Attention runs many times side by side, and again in every layer, each time with new vectors.
+    This drawing shows 1 run with invented weights and omits attention to the token itself. It has
+    21 pairs for 7 tokens and 91 for 14. These are connections in the drawing, not a count of
+    billable token reads.
+  </p>
 
   <!-- Keep inference KV reuse separate from prompt caching and API category rates. -->
   <p data-i18n="tokens.attention.4">
