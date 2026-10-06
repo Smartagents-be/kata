@@ -308,7 +308,7 @@
   "connect.description": "Only two of them end up at the catalogue. For each route, pay close attention to exactly what information stays behind in the context window.",
   "connect.todo": "Mark this task done",
   "connect.done": "Done",
-  "connect.start.label": "Start the step 1 backend, then add a browser MCP server to your agent.",
+  "connect.start.label": "Start the step 1 backend, then add a browser MCP server to your agent if it does not have one yet.",
   "connect.curl.label": "Ask your agent for the catalogue with curl against localhost:8080/api/titles.",
   "connect.browser.label": "Ask it for the same nine titles again through the server: open localhost:5173/catalog in the browser it drives, press the button, read them off the page.",
   "connect.reveal.label": "Point the same server at kata/step1/front/index.html and have it press the button on that page.",

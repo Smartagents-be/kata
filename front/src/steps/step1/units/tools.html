@@ -54,16 +54,16 @@
 
 <!-- One block per product, from each vendor's own reference, read in October 2026: Claude Code's
      tools reference (code.claude.com/docs/en/tools-reference) and GitHub's Copilot CLI command
-     reference. Claude Code has no Glob or Grep tool on macOS, Linux or WSL and searches through
-     Bash; only the Windows default set carries them. Re-read both before naming another tool. -->
+     reference. Claude Code leaves Glob and Grep out of its default set on macOS, Linux and WSL and
+     searches through Bash; only the Windows default set carries them. Re-read both before naming another tool. -->
 <p data-assistant="claude" data-i18n="tools.what-it-can-call.1.claude">
   Claude Code comes with a short list of built-in tools. <code>Read</code> opens a file,
   <code>Write</code> creates a new file and <code>Edit</code> changes an existing one.
   <code>WebFetch</code> reads a web page, <code>WebSearch</code> searches the web and
   <code>Agent</code> hands a task to a sub-agent. <code>Bash</code> is the shell. On macOS, Linux
   and WSL, Claude Code also searches through that shell, with <code>find</code> and
-  <code>grep</code>. Only on Windows are <code>Glob</code> and <code>Grep</code> tools of their
-  own.
+  <code>grep</code>. By default, only Windows has <code>Glob</code> and <code>Grep</code> as tools
+  of their own.
 </p>
 
 <p data-assistant="copilot" data-i18n="tools.what-it-can-call.1.copilot">
@@ -108,9 +108,11 @@
 <div data-figure="mcp-parts"></div>
 
 <p data-i18n="tools.mcp-servers.4">
-  These are 3 ways a server can help: a tool performs an action, a resource supplies content to read,
-  and a prompt supplies a template. A server does not have to offer all 3, and your harness may
-  not support all 3 either. What reaches the model depends on what your harness retrieves and uses.
+  These are 3 ways a server can help: a tool performs an action, a resource supplies content to
+  read, and a prompt supplies a template. A server does not have to offer all 3, and your harness
+  may not support all 3 either. What reaches the model depends on what your harness retrieves and
+  uses. Newer versions of MCP add optional extensions on top, such as interactive apps inside the
+  conversation and long-running tasks.
 </p>
 
 <!-- The same three again, in the oval the step draws a thing as, on `mcp-parts`' own columns so each
@@ -146,11 +148,11 @@
 </p>
 
 <p data-assistant="copilot" data-i18n="tools.what-mcp-costs-you.2.copilot">
-  Many connected servers can mean more input tokens: information about unused tools also takes
-  up context once it is loaded <svg data-icon="coin"></svg>. Copilot CLI includes the GitHub MCP
-  server by default, but that does
-  not mean all its tool definitions are always in the window. Disabling tool search loads them
-  up front; a server configured to never defer its tools also loads those definitions immediately.
+  Many connected servers can mean more input tokens: information about unused tools also takes up
+  context once it is loaded <svg data-icon="coin"></svg>. Copilot CLI comes with some MCP servers
+  built in, but that does not mean all their tool definitions are always in the window. Disabling
+  tool search loads them up front; a server configured to never defer its tools also loads those
+  definitions immediately.
 </p>
 
 <p data-i18n="tools.what-mcp-costs-you.3">
@@ -193,8 +195,10 @@
      a model will ignore injected instructions. Keep the risk conditional, not inevitable. -->
 <p data-i18n="tools.check-tool-results.3">
   Even though the model receives that text as a tool result, it can still treat it as an instruction
-  and take the wrong next step. Limit the agent's access to what the task needs. Configure your
-  harness to ask for permission before sensitive actions, such as sending data or deleting files.
+  and take the wrong next step. The risk is highest when the same agent can read your private data,
+  reads untrusted content and can send data out. Limit the agent's access to what the task needs.
+  Configure your harness to ask for permission before sensitive actions, such as sending data or
+  deleting files.
 </p>
 
 <h2 data-i18n="tools.large-tool-results.heading">Large tool results</h2>
@@ -234,7 +238,7 @@
 
 <p data-i18n="tools.connect-one.1">
   Now see for yourself how tool results end up in the window. The 2 lines below start the step 1
-  backend and give your agent a tool it does not have by default.
+  backend and give your agent a browser tool if it does not have one yet.
 </p>
 
 <!-- Each harness's own syntax, verified against `claude mcp add --help` and GitHub's `copilot mcp

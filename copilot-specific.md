@@ -119,7 +119,9 @@ Flags include `--env`, `--header`, `--transport`, `--tools`, `--timeout`. Config
 
 MCP facts used by the course (checked October 2026):
 
-- **The GitHub MCP server is built in** and available without configuration. This does not imply
+- **Built-in MCP servers.** The GitHub MCP server, `playwright`, `fetch` and `time` ship built in (October
+  2026) and are available without configuration. The prose names none of them, since the list changes,
+  and `connect-one` adds a browser server only "if it does not have one yet". This does not imply
   that all its tool definitions are loaded into model context. `ReadYourWindow` still compares
   readings with and without the server the student added.
 - **Copilot CLI supports tool search.** With a supported model it is enabled automatically when

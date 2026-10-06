@@ -2033,7 +2033,8 @@ another such pair: its storage thresholds differ between the products. There is 
 about when compaction starts, and its reasoning is under `session`; the other two follow. `model`'s window section is the larger one and it is **not one of
 the 15 at all**: it is Claude-only whole, with no Copilot half to pair with, and the reasoning is
 under `model`. `tools.what-mcp-costs-you.1` and `.2` are the smaller, they are 2 of the 14, and
-each is a **product fact**. Copilot CLI includes a GitHub MCP server, but availability does not
+each is a **product fact**. Copilot CLI ships some MCP servers built in (deliberately unnamed in the prose, since the list
+changes), but availability does not
 mean every definition is always in model context. `ReadYourWindow` still compares a window with
 and without the server the student added. `harness.which-one-you-run.2` owns the difference in
 built-in access; `tools` owns the context cost of loaded descriptions and results.
