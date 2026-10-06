@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next'
 
 /**
  * The same question answered twice, drawn as two windows side by side. The left one holds the prompt
- * and nothing else, so the answer comes out of training; the right one holds the file, so the answer
- * comes out of the file.
+ * and nothing else, so the answer comes out of training; the right one holds the documentation, so the answer
+ * comes out of the documentation.
  *
  * **The two answer chips are drawn identically on purpose**, same size, same fill, same distance
  * under their frame. That is the whole figure: what differs is the window, and the window is the
@@ -12,10 +12,13 @@ import { useTranslation } from 'react-i18next'
  * and the drawing starts claiming you can tell them apart by looking, which is what the unit says
  * you cannot.
  *
- * The strings on the chips are versions rather than shapes, and they differ (3.5.0 against 4.1.0),
- * because the trained answer is not a wrong-looking answer. It is the previous release, stated as
- * levelly as the current one. 4.1.0 is what `kata/step1/java/pom.xml` actually declares, so a
- * student who checks finds the figure honest. Machine-shaped strings, so no key and no `nl` entry,
+ * The question is which dependency `@WebMvcTest` needs, and the chips differ
+ * (`spring-boot-starter-test` against `spring-boot-webmvc-test`) because the trained answer is not a
+ * wrong-looking answer. It is what was true up to Boot 3, stated as levelly as the current one. Boot 4
+ * split the test slices out of the starter, and `kata/step1/java/pom.xml` declares
+ * `spring-boot-webmvc-test`, so a student who checks finds the figure honest. The example is a library
+ * fact rather than a project file on purpose: a current agent reads `pom.xml` on its own, but it does
+ * not look up what it thinks it already knows. Machine-shaped strings, so no key and no `nl` entry,
  * the same way `ModelPricing`'s numbers work.
  *
  * On the step's own vocabulary: a teal frame is a context, the solid bar is the prompt, the faint
@@ -28,8 +31,8 @@ export function TrainedOrGrounded() {
 
   /** Left panel then right, and the x is the frame's left edge. */
   const panels = [
-    { id: 'trained', x: 20, answer: '3.5.0' },
-    { id: 'grounded', x: 340, answer: '4.1.0' },
+    { id: 'trained', x: 20, answer: 'spring-boot-starter-test' },
+    { id: 'grounded', x: 340, answer: 'spring-boot-webmvc-test' },
   ]
 
   /** What the right window read, in the fill a tool result comes back in. */
@@ -117,7 +120,7 @@ export function TrainedOrGrounded() {
               data-component="TrainedOrGrounded"
               x={panel.x + 24}
               y="250"
-              width="150"
+              width="244"
               height="32"
               rx="16"
               strokeWidth="2"
@@ -126,7 +129,7 @@ export function TrainedOrGrounded() {
             <text
               id={`trained-or-grounded-answer-value-${index}`}
               data-component="TrainedOrGrounded"
-              x={panel.x + 99}
+              x={panel.x + 146}
               y="266"
               fontSize="15"
               textAnchor="middle"
@@ -160,7 +163,7 @@ export function TrainedOrGrounded() {
           fontSize="13"
           className="fill-muted-foreground font-mono"
         >
-          pom.xml
+          docs Spring Boot 4.1
         </text>
         <g className="fill-primary/35">
           {fileBars.map((width, index) => (

@@ -5,11 +5,11 @@
 </p>
 
 <p data-i18n="truth.lead.2">
-  Everything else has to reach it somehow. You put it in the window yourself, or you send it to find
-  out with <a href="/steps/step1/tools">a tool</a>. Ask which version of Spring Boot this project
-  builds on and you probably get the version most projects were on when it was trained, because nothing
-  sent it to look. Tell it to read <code>pom.xml</code> first and the number is in the window before
-  the answer is.
+  Everything else has to reach it somehow. You put it in the window yourself, or the agent goes and
+  finds it with <a href="/steps/step1/tools">a tool</a>. Ask which version of Spring Boot this
+  project builds on and a current agent opens <code>pom.xml</code> on its own. What it does not look
+  up is what it thinks it already knows: how an API works, which dependency a feature needs, what
+  changed in the latest release. That comes straight from training.
 </p>
 
 <p data-i18n="truth.lead.3">
@@ -20,10 +20,10 @@
 <h2 data-i18n="truth.cutoff.heading">The cutoff</h2>
 
 <p data-i18n="truth.cutoff.1">
-  Training stopped on a date. Whatever was published after it is not something the model knows a
-  little less well. It has never seen it. A framework released last spring, a library that
-  threw out its whole configuration format between one minor version and the next: none of that is
-  in there.
+  Training stopped on a date, and providers publish that date for every model. Whatever was
+  published after it is not something the model knows a little less well. It has never seen it. A
+  framework released last spring, a library that threw out its whole configuration format between
+  one minor version and the next: none of that is in there.
 </p>
 
 <p data-i18n="truth.cutoff.2">
@@ -52,19 +52,18 @@
 <div data-figure="trained-or-grounded"></div>
 
 <p data-i18n="truth.grounding.2">
-  Only the window changed. How the file gets in there is
-  <a href="/steps/step1/tools">the unit on the agentic loop</a>. Your part is asking for it.
-  "Which version does this project use" invites a guess. "Read <code>pom.xml</code> and tell me which
-  version this project uses" does not.
+  Only the window changed. How a page gets in there is <a href="/steps/step1/tools">the unit on the
+  agentic loop</a>. Your part is asking for it, because an agent that feels sure does not ask
+  itself. "Which dependency does <code>@WebMvcTest</code> need" gets the answer it remembers. "Read
+  the Spring Boot 4.1 docs on test slices, then tell me which dependency <code>@WebMvcTest</code>
+  needs" gets the one in the docs.
 </p>
 
 <!-- Added at the author's asking: the same move for a fact that lives outside the project. It names
      the move and stops; how a page gets fetched is `tools`'s to describe. -->
 <p data-i18n="truth.grounding.3">
-  For anything outside your project, the evidence is the official documentation. A library's current
-  API, an option that changed last month, a price: ask the agent to search for the vendor's own docs and
-  read them before it answers. Then the page is in the window and the answer comes from it, rather
-  than from whatever version the model was trained on.
+  The same goes for anything else outside your project: an option that changed last month, a price,
+  a limit. Send the agent to the vendor's own documentation before it answers.
 </p>
 
 <h2 data-i18n="truth.proof.heading">Proof</h2>
@@ -81,6 +80,12 @@
   Ask for the check rather than the conclusion, then. Not "does this handle an empty list" but a
   test that goes red on an empty list <svg data-icon="gem"></svg> Reasoning about what the code does
   and running it are 2 different claims, and only one of them can fail in front of you.
+</p>
+
+<p data-i18n="truth.proof.3">
+  Dependencies deserve the same check. Models invent package names that sound right, often the same
+  ones every time, so attackers register exactly those names with malware inside. Check that a
+  package exists, and that it is the one you meant, before you add it.
 </p>
 
 <h2 data-i18n="truth.hallucinations.heading">Hallucinations</h2>
@@ -102,7 +107,9 @@
 
 <p data-i18n="truth.hallucinations.2">
   2 of those were read and 1 was not, and the answer says the same thing about all 3. A
-  hallucination is expensive because the model sounds the same whether it read your file or
-  filled the gap. Stop reading the tone and start asking where the
-  answer came from. <a href="/steps/step1/workshop">The workshop</a> is that question 5 times over.
+  hallucination is expensive because the model sounds the same whether it read your file or filled
+  the gap. Training makes that worse: a confident guess scores better than "I do not know". So give
+  the agent that way out, and ask it to say when it has not checked something. Then stop reading the
+  tone and start asking where the answer came from. <a href="/steps/step1/workshop">The workshop</a>
+  is that question 5 times over.
 </p>

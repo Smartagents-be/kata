@@ -582,7 +582,7 @@
   "the-cutoff.after": "published since",
   "the-cutoff.yours": "the version you are on",
 
-  "trained-or-grounded.description": "The same question answered out of 2 context windows. The left one holds only the prompt, the right one holds the prompt and the file it was told to read. The 2 answers below them are drawn the same size and the same shade, and they say different versions.",
+  "trained-or-grounded.description": "The same question answered out of 2 context windows. The left one holds only the prompt, the right one holds the prompt and the documentation it was told to read. The 2 answers below them are drawn the same size and the same shade, and they name different dependencies.",
   "trained-or-grounded.trained": "from training",
   "trained-or-grounded.grounded": "grounded",
   "trained-or-grounded.prompt": "prompt",

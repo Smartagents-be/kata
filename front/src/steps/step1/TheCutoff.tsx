@@ -16,11 +16,10 @@ import { useTranslation } from 'react-i18next'
  * wrong for somebody in the room on the day it was drawn, so what is labelled is the event and not
  * the day. The axis is the only thing saying which way time runs, which is what the arrowhead is for.
  *
- * The versions are the ones `TrainedOrGrounded` already uses, `3.5.0` on the near side and `4.1.0` on
- * the far one, so the two figures are one story rather than two: this is where that answer of `3.5.0`
- * comes from, and the answer chips a screen later are what a student meets it as. **`4.1.0` is what
- * `kata/step1/java/pom.xml` declares**, so a Boot upgrade in that project means moving the number in
- * both files. Machine-shaped strings, so they are data here with no key and no `nl` entry, the way
+ * The versions are `3.5.0` on the near side and `4.1.0` on the far one. **`4.1.0` is what
+ * `kata/step1/java/pom.xml` declares**, so a Boot upgrade in that project means moving the number
+ * here. `TrainedOrGrounded` a screen later tells the same story with a dependency instead of a
+ * version: what the Boot 3 line taught (`spring-boot-starter-test`) against what Boot 4 needs. Machine-shaped strings, so they are data here with no key and no `nl` entry, the way
  * `ModelPricing`'s numbers are.
  */
 export function TheCutoff() {

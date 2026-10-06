@@ -1485,9 +1485,8 @@ faded**: a gradient or a lighter fill would say the recent versions are known le
 exact reading `truth.cutoff.1` exists to kill, and dashed is already this step's stroke for "nothing
 behind this" on `AnswerProvenance`'s invented row. It carries **no date**, because every model has a
 different one and any number printed there is wrong for somebody in the room. And its versions are
-`TrainedOrGrounded`'s, `3.5.0` on the near side and `4.1.0` on the far one, so the two figures are one
-story: this is where that trained answer comes from. That ties the pom to **two** files now, so a Boot
-upgrade in `kata/step1/java` means moving the number in both.
+`3.5.0` on the near side and `4.1.0` on the far one, `4.1.0` being what `kata/step1/java`'s pom
+declares, so a Boot upgrade there means moving the number here.
 
 It also changes what guided mode gets. `The cutoff` had no figure, so its heading was dropped with
 the prose and the section did not exist in class; the marker gives that heading something to sit
@@ -1496,10 +1495,14 @@ above, and the classroom page is now three sections rather than two.
 **`TrainedOrGrounded`'s two answer chips are identical in size, fill and position**, and that is the
 figure. What differs is the window above them, which is the part an answer never tells you about, so
 a tick, a cross, a colour or a heavier weight on either chip is the drawing contradicting the prose.
-Their strings differ (`3.5.0` against `4.1.0`) because the trained answer is not a wrong-*looking*
-answer, it is the previous version line stated as levelly as the current one. **`4.1.0` is what
-`kata/step1/java/pom.xml` actually declares**, so a student who checks finds the figure honest; a
-Boot upgrade in that project means moving the number here. Nothing else in it is new: the teal frame,
+Their strings differ (`spring-boot-starter-test` against `spring-boot-webmvc-test`, the dependency
+`@WebMvcTest` needs) because the trained answer is not a wrong-*looking* answer, it is what was true
+up to Boot 3, stated as levelly as the current one. **`spring-boot-webmvc-test` is what
+`kata/step1/java/pom.xml` actually declares**, so a student who checks finds the figure honest. The
+example used to be the project's own version number, and it was changed on the author's review
+(October 2026): a current agent reads `pom.xml` on its own, so the live risk is a library fact the
+agent thinks it knows and does not look up. `truth.lead.2` and `truth.grounding.2` say the same and
+must move with the figure. Nothing else in it is new: the teal frame,
 the solid prompt bar and the faint stack are the step's own vocabulary, which is what lets it be read
 without a legend.
 
@@ -1556,9 +1559,10 @@ checking an answer you already have. Keep them apart.
 Two smaller decisions. **`Hallucinations` comes last rather than first**, because the term is only
 worth having once the reader knows what grounding and proof would have caught, and the section
 names it in its closing clause on the step's name-the-term-last rule. And **every example in it is
-this repository**: the version number out of `kata/step1/java`'s `pom.xml` across the first three
-sections, then a method that does not exist on `Catalog` in the fourth. The version is deliberately
-one question asked three ways (guessed, grounded, proved), which is what lets those sections read as
+this repository**: the Boot version and the `@WebMvcTest` dependency out of `kata/step1/java`'s
+`pom.xml` across the first three sections, then a method that does not exist on `Catalog` in the fourth. `truth.proof.3` adds the one check that is specific to code: invented package names, which
+attackers register (slopsquatting), so the advice is to check that a dependency exists. The thread is
+deliberately one subject asked three ways (guessed, grounded, proved), which is what lets those sections read as
 one argument instead of three topics; `Catalog` is picked because the student has already called it
 from `/catalog`, so the invented method is measured against a class they have met.
 
