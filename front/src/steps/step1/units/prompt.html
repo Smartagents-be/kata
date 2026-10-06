@@ -46,9 +46,10 @@
      to be reasoned about, and making the ask exact is this unit's own advice (`be-exact`). -->
 <p data-i18n="prompt.reasoning-level.1">
   The <strong>reasoning level</strong> guides how thoroughly the model tackles a task. Claude Code’s
-  <code>/effort</code> sets it from low to max on supported models. Higher effort can change
-  reasoning, tool calls and the visible answer <svg data-icon="pattern"></svg> It does not select a
-  fixed number of hidden tokens or supply requirements you never gave.
+  <code>/effort</code> sets it from low to max on supported models, and Opus 5.5 and Sonnet 5.5
+  default to medium. In Copilot you set it in the model picker. Higher effort can change reasoning,
+  tool calls and the visible answer <svg data-icon="pattern"></svg> It does not select a fixed
+  number of hidden tokens or supply requirements you never gave.
 </p>
 
 <p data-i18n="prompt.reasoning-level.2">
@@ -86,9 +87,11 @@
 <h2 data-i18n="prompt.plan-mode.heading">Plan mode</h2>
 
 <p data-i18n="prompt.plan-mode.1">
-  Plan mode is meta-prompting the provider already built for you. The agent reads around without
-  changing anything, asks you about whatever is still open, hands back a plan, and waits. You edit it,
-  ask for another pass, or approve it. The agent waits for your approval before carrying out the plan.
+  Plan mode is meta-prompting the provider already built for you. Switch to it with
+  <kbd>Shift+Tab</kbd>, or start a prompt with <code>/plan</code>. The agent reads around without
+  changing anything, usually asks you about whatever is still open, hands back a plan, and waits.
+  You edit it (in Claude Code, <kbd>Ctrl+G</kbd> opens it in your editor), ask for another pass, or
+  approve it. The agent waits for your approval before carrying out the plan.
 </p>
 
 <p data-i18n="prompt.plan-mode.2">
@@ -187,9 +190,10 @@
 
 <p data-i18n="prompt.no-longer-works.1">
   Typing “think hard” is ordinary prompt text, not a substitute for Claude Code’s
-  <code>/effort</code> setting. A role such as “senior Java engineer” can steer style and behaviour,
-  but does not establish correctness. Concrete requirements, current evidence and checks give you
-  something to verify.
+  <code>/effort</code> setting. Claude Code recognises only <code>ultrathink</code>, which asks for
+  deeper reasoning on that turn. A role such as “senior Java engineer” can steer style and
+  behaviour, but does not establish correctness. Concrete requirements, current evidence and checks
+  give you something to verify.
 </p>
 
 <p data-i18n="prompt.no-longer-works.2">

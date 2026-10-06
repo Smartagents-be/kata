@@ -796,7 +796,8 @@ model and points at that unit rather than pricing it. And **the reasoning level'
 Code's**, named in a scoped clause (`low` up to `max`, its `/effort` command, verified October 2026
 against `model-config`; the settings page lists only 4 because `max` is session-only, which is how an
 August check wrongly cut it to `xhigh`, and `copilot-specific.md` has the detail); it is not a `data-assistant` pair, because the dial exists in both products and only one of
-them publishes a stable set of names. And **fixing an inaccuracy after the fact is step 2's
+them publishes a stable set of names. Copilot gets a scoped sentence of its own instead, pointing at the model
+picker where its Thinking Effort setting sits (VS Code, Visual Studio and the CLI, October 2026). And **fixing an inaccuracy after the fact is step 2's
 `steering`**, so `instruction.1` closes on a link to it in half a clause rather than describing the
 move: the cascade is what this unit argues, and a paragraph that also said how to catch one mid-run
 would answer the problem in the same breath as posing it. It links into a unit the student has not

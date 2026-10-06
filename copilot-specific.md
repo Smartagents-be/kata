@@ -171,7 +171,8 @@ is recognised, and it adds an instruction without changing the level sent to the
 
 **Copilot CLI** exposes a Thinking Effort submenu on models that reason, so the levels on offer
 depend on which model is picked rather than on the CLI. There is no documented CLI-wide scale to
-name.
+name. `prompt.reasoning-level.1` points a Copilot reader at the model picker, and that holds in
+VS Code and Visual Studio too.
 
 So `prompt.reasoning-level.1` scopes its clause ("In Claude Code it runs from low up to max, and
 `/effort` sets it") rather than splitting on `data-assistant`: a Copilot reader is told nothing untrue
