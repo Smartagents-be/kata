@@ -1017,7 +1017,7 @@ and reading what came back. Nothing enforces it and nothing can, which is the po
 constraint the student holds themselves to, and every stage under it is written as work you hand
 over. A move that asks the student to type Java is the one kind of move this page may not grow.
 
-The five stages are `Pre-flight`, `One goal, three flags`, the two inside `Two jobs, neither waits`,
+The five stages are `Pre-flight`, `1 goal, 3 flags`, the two inside `2 jobs, neither waits`,
 and `Debrief`, with `Collect the flags` and the board between the last two. Four `<h2>`s for five
 stages, because the pair shares a section: that is the point of the pair and not a mismatch to tidy.
 **The escalation is the argument**: nothing handed over, then one outcome you walk away from, then

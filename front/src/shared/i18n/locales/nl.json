@@ -47,7 +47,7 @@
   "catalog.nav": "Catalogus",
   "catalog.kicker": "De service",
   "catalog.title": "Titels uit de service",
-  "catalog.description": "Eén call naar /api/titles. Wat terugkomt staat hieronder, in dezelfde volgorde. De titels zijn Engels.",
+  "catalog.description": "1 call naar /api/titles. Wat terugkomt staat hieronder, in dezelfde volgorde. De titels zijn Engels.",
   "catalog.fetch": "Titels ophalen",
   "catalog.fetching": "Ophalen…",
   "catalog.count": "{{count}} teruggekregen",

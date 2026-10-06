@@ -5,7 +5,7 @@
 </p>
 
 <p data-i18n="session.lead.2">
-  Time sets this layer apart from the other three. A prompt is written for one turn, the
+  Time sets this layer apart from the other 3. A prompt is written for 1 turn, the
   harness loads the same material into every request, a tool result arrives the moment something
   runs. The session is the only layer with a history behind it, because it is the history.
 </p>
@@ -19,9 +19,8 @@
 <h2 data-i18n="session.wrote-almost-none.heading">You hardly had to write any of it yourself</h2>
 
 <p data-i18n="session.wrote-almost-none.1">
-  Count what is in there and your own words barely register. You type a sentence, and the agent opens
-  two files, runs the test suite and pastes the output back. Your sentence is fourteen tokens.
-  Everything around it is five thousand.
+  Count what is in there and your own words barely register. You type a sentence, and the agent opens 2 files, runs the test suite and pastes the output back. Your sentence is 14 tokens.
+  Everything around it is 5,000.
 </p>
 
 <!-- One short session weighed by where each block came from: the two teal ones are the only things
@@ -30,15 +29,15 @@
 <div data-figure="session-makeup"></div>
 
 <p data-i18n="session.wrote-almost-none.2">
-  Two bars in that stack are yours, and they are the short ones. Everything else landed there without
+  2 bars in that stack are yours, and they are the short ones. Everything else landed there without
   you typing a word. So this is the layer you author least and are still responsible for. It fills
   itself up, mostly with output nobody read, while you are busy thinking about something else.
 </p>
 
 <p data-i18n="session.wrote-almost-none.3">
-  You can change the session after the work: remove history with a rewind, summarise it with
-  compaction, or clear it for a fresh task. Preserve any decisions you still need in a durable file
-  first.
+  You can change the session after the work: remove history with a rewind (press <kbd>Esc</kbd>
+  2 times on an empty prompt), summarise it with compaction, or clear it for a fresh task. Preserve
+  any decisions you still need in a durable file first.
 </p>
 
 <h2 data-i18n="session.sessions-where-money.heading">The session sets your bill</h2>
@@ -59,7 +58,7 @@
 <p data-i18n="session.sessions-where-money.3">
   So ask everything you want to know about a piece of code while it is in front of you
   <svg data-icon="coin"></svg> But not forever: the same session that makes your second question
-  cheap makes your fiftieth expensive and vague.
+  cheap makes your 50th expensive and vague.
 </p>
 
 <h2 data-i18n="session.automatic-manual-compaction.heading">Automatic or manual compaction</h2>
@@ -73,7 +72,8 @@
   <strong>Automatic:</strong> the harness triggers summarising near its configured context threshold, sometimes during a task.
 </li>
   <li data-i18n="session.automatic-manual-compaction.6">
-  <strong>Manual:</strong> run <code>/compact</code> in Claude Code or Copilot CLI between tasks. Add focus instructions, such as <code>/compact keep the API decisions and failing tests</code>, to guide what the summary preserves.
+  <strong>Manual:</strong> run <code>/compact</code> in Claude Code or Copilot CLI between tasks. In Claude Code you can add focus
+  instructions, such as <code>/compact keep the API decisions and failing tests</code>, to guide what the summary preserves.
 </li>
 </ul>
 

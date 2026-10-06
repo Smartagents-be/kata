@@ -31,7 +31,7 @@
 <p data-i18n="setup.claude-md.3">
   A nested <code>CLAUDE.md</code> follows the folder layout, and some conventions cut across it: how
   a controller is built holds in every module that has one. Those go in <code>.claude/rules/</code>
-  <span data-marker>4</span>, one file per topic, with a <code>paths</code> line naming the files
+  <span data-marker>4</span>, 1 file per topic, with a <code>paths</code> line naming the files
   they cover. Without that line a rule loads at the start of every session, like the root file. With
   it, the rule joins the context only once the agent reads or edits a matching file, so what is
   always loaded stays short.
@@ -43,7 +43,7 @@
   There is one more, and it is not in the repository. <code>~/.claude/CLAUDE.md</code> in your home
   directory is read in every project you open on this machine. It holds how you work rather than
   what the project is: the language you want to be answered in, the tools you always reach for, the
-  thing you are tired of asking for twice a day.
+  thing you are tired of asking for 2 times a day.
 </p>
 
 <aside data-variant="warning" data-i18n="setup.your-own-claude-md.2">
@@ -91,9 +91,9 @@ description: >-
 </p>
 
 <p data-i18n="setup.skills.5">
-  Be sparing with them. You pay for a description on every turn whether or not it fires, so thirty
-  skills are a table of contents the agent reads before every answer. Two that sound alike are
-  worse than one: if either could match, neither reliably does. Write one when you are tired of
+  Be sparing with them. You pay for a description on every turn whether or not it fires, so 30
+  skills are a table of contents the agent reads before every answer. 2 that sound alike are
+  worse than 1: if either could match, neither reliably does. Write one when you are tired of
   correcting the same thing, not in anticipation of correcting it.
 </p>
 
@@ -108,7 +108,7 @@ description: >-
 </p>
 
 <p data-i18n="setup.hooks.2">
-  Which makes it the strictest of the three. A line in <code>CLAUDE.md</code> asks, a skill offers a
+  Which makes it the strictest of the 3. A line in <code>CLAUDE.md</code> asks, a skill offers a
   procedure, and both of them depend on the agent reading and following it. A hook just happens.
   This one runs the formatter after every write:
 </p>
@@ -145,7 +145,7 @@ description: >-
 <h2 data-i18n="ui:quiz.title">Test your knowledge</h2>
 
 <p data-i18n="setup.check-yourself.1">
-  Step 2 ships a Java project you have not opened, at <code>kata/step2/java</code>. Three flags are
+  Step 2 ships a Java project you have not opened, at <code>kata/step2/java</code>. 3 flags are
   hidden in it, in plain text and wrapped in <code>{curly braces}</code>, in the small number of
   files a project uses to tell an agent how to work. They are the kinds of file this unit just
   named, and each flag sits in the file it is about. You collect them by opening that project and
