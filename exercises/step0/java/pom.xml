@@ -17,7 +17,7 @@
   <packaging>jar</packaging>
 
   <name>kata-agentic-java-step0</name>
-  <description>Step 0: the intro. Test sources only - three reveals, each behind its own opt-in profile.</description>
+  <description>Step 0: the intro. Test sources only - two reveals, each behind its own opt-in profile.</description>
 
   <properties>
     <java.version>25</java.version>
@@ -26,7 +26,7 @@
 
   <dependencies>
     <!--
-      There is no production code in step 0. The intro's whole Java surface is three reveal tests,
+      There is no production code in step 0. The intro's whole Java surface is two reveal tests,
       so the only dependency is the test starter (JUnit and AssertJ, versions managed by the parent).
     -->
     <dependency>
@@ -38,10 +38,9 @@
 
   <profiles>
     <!--
-      Three reveals, three profiles, and every one of them opt-in, so `mvn verify` stays green and
-      silent on a clean checkout. Each profile names its own IT in <includes>: failsafe's default
-      patterns would pick up all three, and a student running one profile would be handed the other
-      two steps' flags without doing the work.
+      Two reveals, two profiles, and both opt-in, so `mvn verify` stays green and silent on a clean
+      checkout. Each profile names its own IT in <includes>: failsafe's default patterns would pick up
+      both, and a student running one profile would be handed the other flag without doing the work.
     -->
 
     <!--
@@ -75,37 +74,6 @@
       </build>
     </profile>
 
-    <!--
-      The readiness check. `mvn verify -Pready` runs ReadyRevealIT, which prints one row per thing
-      the rest of the course assumes and the flag when the ones that gate it pass. This is the one
-      profile in the step that can fail: a missing JDK or a half-downloaded repository stops it, by
-      name, on the page where fixing it costs five minutes.
-    -->
-    <profile>
-      <id>ready</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <configuration>
-              <includes>
-                <include>**/ReadyRevealIT.java</include>
-              </includes>
-            </configuration>
-            <executions>
-              <execution>
-                <id>reveal-ready-flag</id>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
 
     <!--
       The pick. `mvn verify -Ppick` runs PickRevealIT, which prints two strings in the flag's shape

@@ -59,15 +59,12 @@
   "flags.panel.solved": "Solved",
   "flags.panel.wrong": "Not that one. Read the flag straight from the build output.",
 
-  "flag.run.label": "The run",
-  "flag.run.hint": "Have your agent run the code block from the previous page in exercises/step0/java.",
-  "flag.run.help": "This is the code block on the previous page, run for real. Open exercises/step0/java, start your agent in there and ask it to run that block. There is nothing to work out: the build prints the flag on the line that says the intro is complete. Paste that code here, braces and all.",
-  "flag.ready.label": "Ready to hunt",
-  "flag.ready.hint": "Have your agent run mvn verify -Pready from the same folder. If the session from the first row is still open, your harness often suggests this command on its own.",
-  "flag.ready.help": "This run checks what the rest of the course assumes about your machine: the JDK Maven actually compiles with, and whether the other steps' projects are on disk. Pass both and the last row prints the flag. Fail 1 and the build names the check that failed and what to do about it, and prints no flag. The native-image row is a warning about step 2's last flag and never stops you.",
+  "flag.run.label": "First run",
+  "flag.run.hint": "A first run that proves your agent can run the build. Have it run `mvn verify -Pintro` in `exercises/step0/java` and show you the output.",
+  "flag.run.help": "Open `exercises/step0/java`, start your agent in there and ask it to run `mvn verify -Pintro` and show you the output. There is nothing to work out: the build prints the flag on the line that says the intro is complete. Paste that flag here, braces and all.",
   "flag.pick.label": "2 candidates",
-  "flag.pick.hint": "The command mvn verify -Ppick prints 2 strings in the format of a flag, but only 1 line is ticked.",
-  "flag.pick.help": "Have your agent run mvn verify -Ppick and show you what came back rather than telling you what it said. 2 lines come back in the flag's exact shape and 1 of them carries a tick. An agent that read the run for you hands back both, or the wrong one, and sounds equally sure either way. Reading the tick is yours.",
+  "flag.pick.hint": "This run prints 2 strings that look like a flag, but only 1 of them is ticked. Have your agent run `mvn verify -Ppick` and show you the output, then pick the right one yourself.",
+  "flag.pick.help": "Have your agent run `mvn verify -Ppick` and show you what came back rather than telling you what it said. 2 lines come back in the flag's exact shape and 1 of them carries a tick. An agent that read the run for you hands back both, or the wrong one, and sounds equally sure either way. Reading the tick is yours.",
 
   "quiz.what-the-code-is.question": "As you read the page, you suddenly see some text in braces, like {f1r5t-5t3p5}. What is it for?",
   "quiz.what-the-code-is.the-answer": "It is a flag. You track it down and type it into the box to complete the task.",
@@ -94,7 +91,7 @@
   "deck.backend.divider.1": "Each step is its own Maven project",
   "deck.backend.divider.2": "Code blocks run through <hi>your agent</hi>, not your clipboard",
   "deck.backend.herrings.title": "Not every braced string is <hi>the flag</hi>",
-  "deck.workshop.divider.1": "3 runs on the platform",
+  "deck.workshop.divider.1": "2 runs on the platform",
   "deck.workshop.divider.2": "The machine writes the answer, <hi>you read it</hi>",
   "deck.workshop.divider.3": "The last one comes back <hi>2 times</hi>"
 }

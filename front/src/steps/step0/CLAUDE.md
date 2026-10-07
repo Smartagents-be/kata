@@ -26,7 +26,7 @@ at the disclosure at the top of the file, by the author's choice, so that disclo
 opening `install.txt` and not from here. It names no step, no board and nothing the script plants,
 and it must not start, because the disclosure and the undo command live in `install.txt` and naming
 what it writes ends step 1's first row. The lead is intro, install, prerequisites; the paragraph that
-announced the last page's check is gone, and the `{ready}` row on that page still does the checking.
+announced the last page's check is gone, and so is that check: `install.txt`'s setup check does it.
 Cutting further means merging the prerequisites into the install paragraph, not dropping the pointer.
 
 Step 0's `welcome` is where the student is told to set it, and **the telling is the
@@ -96,7 +96,7 @@ say and this one cannot. **It names no command**, so `/clear` and `/context` sta
 they are used (`step1/session` and `ReadYourWindow` in `step1/tools`), and rule two gives the habit
 instead: start each flag on a fresh session. **It carries no numbers and does no arithmetic**, so
 `model.cost.4` stays the one paragraph in the course that multiplies. And **it counts nothing**,
-since it covers boards of one, three and five flags, which is what the step 1 wording
+since it covers boards of two, three and five flags, which is what the step 1 wording
 ("three flags, three routes in", "five lines come out of the trace") could not do.
 
 **There was a fifth rule, on pricing the hunt afterwards, and it is gone.** It sent the student to
@@ -112,12 +112,9 @@ the rules read a paragraph after the icon they use rather than a page before it.
 written as paragraphs, a bold lead-in plus two or three short sentences each; do not grow any of
 them into a section, and do not add a fourth without a board that needs it.
 
-**One line on `workshop`'s board argues with rule two, and it is meant to.** `flag.ready.hint`
-closes by telling a student who kept row one's session that their harness often offers this run
-before they ask, while rule two says start each flag on a fresh one. Both are true: the rule is
-what the course asks for, and the line is what a student who did not follow it is looking at. Do not
-resolve it by cutting either. It is the only place in step 0 that says the word harness, it is on the
-row's one-line hint rather than in its Hint dialog (the dialog is for a student who is stuck, not one
-who is ahead), and the whole of it is that sentence. There is no section in the unit behind it: a
-`The next move` section was written and taken back out, so do not add one.
+**There was a readiness row between the two, and it is gone.** `mvn verify -Pready` checked the JDK,
+the other steps' projects and `native-image`. The first run already fails on an old JDK, since the
+pom compiles for 25, and `install.txt` runs the setup check that covers the rest, so the row proved
+nothing a student had not already passed. Its hint was also the one place step 0 said "harness". Do
+not put it back.
 

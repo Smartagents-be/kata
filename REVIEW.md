@@ -17,7 +17,7 @@ Exact replacement texts (EN and NL), sources and dry-run evidence are in `review
 - **Step 2 for Copilot.** Copilot already reads `CLAUDE.md`, `.claude/rules`, `.claude/skills` and `.claude/settings.json` hooks, but reading a file does not mean identical behaviour in every IDE agent. Add short Copilot notes (a mapping table beats duplicated prose) where it breaks: stopping a run, the sandbox card, nested `CLAUDE.md` in IntelliJ. The Stop hook is solved (section 12).
 - **1 day does not hold the course** (*Design*). About 915 min of material against 405 teaching minutes; 915 is an author estimate, not a measured class. Pick a classroom subset and keep the rest as self-study. `review/run-sheet.md` is one proposal (27 units, 9 hands-on tasks, the step 2 capstone as a background goal of about 90 min).
 - **Must: IntelliJ project layout.** Today the pages assume the repo root and the step reference assumes the step folder (`step1/locales/en.json:240`). Pick one: open the step folder (`exercises/stepN/java`) and make code blocks folder-relative, or open the root and link each pom.
-- **JDK floor** (*Design*). Steps 0 to 2 built and passed on JDK 21 in a dry run. Lowering to 21 means changing all 4 poms, `ReadyRevealIT.java:37` (rejects below 25), the setup check, README and `.idea` together, then rerunning the profiles. Keep GraalVM 25 only for the native flag. Java 17 is a separate decision.
+- **JDK floor** (*Design*). Steps 0 to 2 built and passed on JDK 21 in a dry run. Lowering to 21 means changing all 4 poms, the setup check, README and `.idea` together, then rerunning the profiles. Keep GraalVM 25 only for the native flag. Java 17 is a separate decision.
 - **Must: auto-loaded files must be student-safe** (see section 3). A student branch without the maintainer notes, `audit.md`, this file, `plans/`, `video/` and the maintainer skills is one way; the minimum is that nothing an agent loads on its own leaks or forbids the exercises.
 
 ## 2. Before the day, with the client
@@ -66,7 +66,7 @@ All confirmed in the source. Keep the deliberate stubs and red profiles intact: 
   - Engineering card: it already says not to approve, and the slide says accept nothing. Optional: say how to decline in each tool.
   - `plan.undo` restores 1 file and asks to delete extra files. A broad `git restore exercises/step1/java` would discard earlier workshop work and still miss untracked files: use a known checkpoint instead.
 - **Step 0:**
-  - On JDK 17 or 21 students get a raw compiler error before row 2's JDK check can speak (`pom.xml:23` compiles for 25 first).
+  - On JDK 17 or 21 a student who skipped `install.txt` gets a raw compiler error from row 1 (`pom.xml:23` compiles for 25).
   - Guided mode hides the paragraph the first answer box points at: put the example string on the card.
   - The Copilot line says `.github/copilot-instructions.md` "when present"; none exists. Mention the shipped `CLAUDE.md` instead.
 - **Patterns card:** the fallback endpoint throws, so "run it twice" returns 2 different error bodies (timestamps). Pick a stable job or say what to compare. The card claims the step 2 service already ran, and `jq` is never checked.
@@ -184,7 +184,7 @@ All *Design*, depending on the run sheet; nothing here needs deleting from the k
 **Step 0**
 - welcome: guided mode hides install, prerequisites and house rules (a narrow guided-mode exception for welcome is one option). Mention a day's AI credits in the prerequisites.
 - backend: "House rule 1 is the reason" should point at rules 1 and 3. Say which folder IntelliJ users open.
-- workshop: row 2's hint says "your harness suggests"; say "your agent". The slide "comes back 2 times" is wrong (it prints 2 candidates; fix without revealing which). Row 3's hint should say "have your agent run".
+- workshop: the slide "comes back 2 times" is wrong (it prints 2 candidates; fix without revealing which).
 
 **Step 1**
 - tokens:

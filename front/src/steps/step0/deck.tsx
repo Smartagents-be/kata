@@ -82,7 +82,7 @@ const deck: SlideSpec[] = [
 
   // ── workshop ──────────────────────────────────────────────────────────────────────────────
   // A divider and nothing under it. The board writes to localStorage, so on a slide it would tick
-  // the tutor's machine, and the three runs behind it are the thing this deck may not name. What a
+  // the tutor's machine, and the two runs behind it are the thing this deck may not name. What a
   // room needs is the shape of the page, which is what the points carry.
   {
     id: 'deck-step0-workshop',

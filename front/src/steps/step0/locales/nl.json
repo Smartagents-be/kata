@@ -50,8 +50,8 @@
   "backend.lead.1": "Elke stap met Java heeft een eigen project: <code>exercises/step0/java</code>, <code>exercises/step1/java</code> en <code>exercises/step2/java</code>. Open de map van de stap waar je mee bezig bent en voer je Maven-commando's daar uit.",
   "backend.lead.2": "In de oefeningen werk je in het project van die stap. Soms drukt de build de flag af, soms laat je je agent hem zoeken. Vanaf de laatste pagina van deze stap is niet elke string tussen accolades de flag die je zoekt.",
   "backend.code-blocks.heading": "Codeblokken",
-  "backend.code-blocks.1": "Sommige pagina's geven je een codeblok, zoals hieronder. Laat je agent het uitvoeren in plaats van het zelf in een terminal te plakken. Huisregel 1 is de reden, en dit is de goedkoopste plek in de cursus om ermee te beginnen. Niets in de build controleert wie van jullie het gedraaid heeft.",
-  "backend.code-blocks.2": "Op de volgende pagina staan 3 van die runs. Dit codeblok is de eerste.",
+  "backend.code-blocks.1": "Sommige pagina's geven je een codeblok, zoals hieronder. Laat je agent het uitvoeren in plaats van het zelf in een terminal te plakken. Vraag hem ook de output te tonen, want vaak vat een agent die alleen samen. Huisregel 1 is de reden, en dit is de goedkoopste plek in de cursus om ermee te beginnen. Niets in de build controleert wie van jullie het gedraaid heeft.",
+  "backend.code-blocks.2": "Op de volgende pagina staan 2 van die runs. Dit codeblok is de eerste.",
 
   "loop.title": "Van build naar platform",
   "loop.description": "4 kaarten op een rij, van links naar rechts verbonden met pijlen. Je agent draait de build, de build drukt een regel af met een flag tussen accolades, jij leest de flag af, en je plakt hem in het veld op het platform. Een balk onder de eerste 2 kaarten zegt dat je machine dat deel doet, en een balk onder de laatste 2 dat jij het doet.",
@@ -98,15 +98,12 @@
   "flags.panel.solved": "Opgelost",
   "flags.panel.wrong": "Niet die. Lees de flag rechtstreeks uit de build-uitvoer.",
 
-  "flag.run.label": "De run",
-  "flag.run.hint": "Laat je agent het codeblok van de vorige pagina uitvoeren in exercises/step0/java.",
-  "flag.run.help": "Dit is het codeblok van de vorige pagina, nu echt gedraaid. Open exercises/step0/java, start je agent daarin en vraag hem dat blok uit te voeren. Er valt niets uit te dokteren: de build drukt de flag af op de regel die zegt dat de intro klaar is. Plak die code hier, mét accolades.",
-  "flag.ready.label": "Klaar om te jagen",
-  "flag.ready.hint": "Laat je agent mvn verify -Pready uitvoeren vanuit dezelfde map. Als je de sessie uit de eerste rij nog open hebt staan, stelt je harness dit commando vaak al automatisch voor.",
-  "flag.ready.help": "Deze run controleert wat de rest van de cursus van je machine verwacht: de JDK waarmee Maven echt compileert, en of de projecten van de andere stappen op schijf staan. Slaag je voor allebei, dan drukt de laatste regel de flag af. Faalt er 1, dan noemt de build welke controle het was en wat je eraan doet, en drukt hij geen flag af. De regel over native-image is een waarschuwing voor de laatste flag van stap 2 en houdt je nooit tegen.",
+  "flag.run.label": "Eerste run",
+  "flag.run.hint": "Een eerste run die bewijst dat je agent de build kan draaien. Laat hem `mvn verify -Pintro` uitvoeren in `exercises/step0/java` en de output tonen.",
+  "flag.run.help": "Open `exercises/step0/java`, start je agent daarin en vraag hem `mvn verify -Pintro` uit te voeren en de output te tonen. Er valt niets uit te dokteren: de build drukt de flag af op de regel die zegt dat de intro klaar is. Plak die flag hier, mét accolades.",
   "flag.pick.label": "2 kandidaten",
-  "flag.pick.hint": "Het commando mvn verify -Ppick drukt 2 strings af in het formaat van een flag, maar alleen bij 1 regel staat een vinkje.",
-  "flag.pick.help": "Laat je agent mvn verify -Ppick draaien en laat hem tonen wat eruit kwam in plaats van je te vertellen wat er stond. Er komen 2 regels terug in precies de vorm van de flag en 1 ervan heeft een vinkje. Een agent die de run voor jou gelezen heeft, geeft ze allebei terug, of de verkeerde, en klinkt in beide gevallen even zeker. Het vinkje lezen is aan jou.",
+  "flag.pick.hint": "Deze run drukt 2 strings af die op een flag lijken, maar alleen bij 1 staat een vinkje. Laat je agent `mvn verify -Ppick` uitvoeren en de output tonen, en kies zelf de juiste.",
+  "flag.pick.help": "Laat je agent `mvn verify -Ppick` draaien en laat hem tonen wat eruit kwam in plaats van je te vertellen wat er stond. Er komen 2 regels terug in precies de vorm van de flag en 1 ervan heeft een vinkje. Een agent die de run voor jou gelezen heeft, geeft ze allebei terug, of de verkeerde, en klinkt in beide gevallen even zeker. Het vinkje lezen is aan jou.",
 
   "quiz.what-the-code-is.question": "Terwijl je de pagina leest, zie je plots tekst tussen accolades staan, zoals {f1r5t-5t3p5}. Waarvoor dient die?",
   "quiz.what-the-code-is.the-answer": "Het is een flag. Je spoort hem op en vult hem in het veld in om de opdracht af te ronden.",
@@ -133,7 +130,7 @@
   "deck.backend.divider.1": "Elke stap is een eigen Maven-project",
   "deck.backend.divider.2": "Codeblokken lopen via <hi>je agent</hi>, niet via je klembord",
   "deck.backend.herrings.title": "Niet elke string tussen accolades is <hi>de flag</hi>",
-  "deck.workshop.divider.1": "3 runs op het platform",
+  "deck.workshop.divider.1": "2 runs op het platform",
   "deck.workshop.divider.2": "De machine schrijft het antwoord, <hi>jij leest het</hi>",
   "deck.workshop.divider.3": "De laatste komt <hi>2 keer</hi> terug"
 }

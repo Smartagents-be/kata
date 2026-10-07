@@ -1,9 +1,11 @@
 import { CODE_SALT } from './code'
 
 /**
- * The three flags step 0's board hands out, one per run against `exercises/step0/java`. The first is the
- * intro reveal the `backend` page's block prints, the second is the readiness profile's, and the
- * third is the one the student has to pick out of two candidates. Between them they grade the loop
+ * The two flags step 0's board hands out, one per run against `exercises/step0/java`. The first is the
+ * intro reveal the `backend` page's block prints, and the second is the one the student has to pick
+ * out of two candidates. A third row once ran a readiness check (JDK, the other steps' projects,
+ * `native-image`); it went because the first run already proves the JDK and `install.txt`'s setup
+ * check covers the rest. Between them they grade the loop
  * rather than any knowledge: run a command, read what the machine printed, paste it back.
  *
  * The plaintext is deliberately not here, only a salted SHA-256 of it, so the answer is not sitting
@@ -38,14 +40,6 @@ export const flags: FlagSpec[] = [
     hintKey: 'flag.run.hint',
     helpKey: 'flag.run.help',
     hash: 'd3b3a9d22b836da4bb31a39db357802c94fd148f2ec875a9f3ac2bc00a2ff454',
-  },
-  {
-    // `mvn verify -Pready`. Printed only when the JDK and the checkout both check out.
-    id: 'ready',
-    labelKey: 'flag.ready.label',
-    hintKey: 'flag.ready.hint',
-    helpKey: 'flag.ready.help',
-    hash: 'b2370eecb450a892186b85501bca078e6287ff826560a4db00312bd9eb3ad6cf',
   },
   {
     // `mvn verify -Ppick`. Two candidates come back and only the ticked line is this one.

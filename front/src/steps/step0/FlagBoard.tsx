@@ -1,5 +1,6 @@
 import { useState, type ClipboardEvent, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
+import { InlineCode } from '@/shared/components/InlineCode'
 import { Board, AnswerLine, PanelChip, PanelNote, BoardRow } from '@/shared/components/Panel'
 import { useStepText } from '@/shared/i18n/useStepText'
 import { isWholeFlag } from '@/shared/lib/flag-paste'
@@ -27,7 +28,7 @@ function writeSolved(solved: Set<string>) {
 }
 
 /**
- * Step 0's workshop board. Three rows, one per run against `exercises/step0/java`, checked here against a
+ * Step 0's workshop board. Two rows, one per run against `exercises/step0/java`, checked here against a
  * salted SHA-256, so the intro grades with nothing else running. Nothing on it talks to a service:
  * step 0 has none, and the work already happened in the student's terminal.
  *
@@ -136,7 +137,7 @@ function FlagRow({
           <PanelChip id={`flags-item-${index}-badge`}>{text('flags.panel.solved')}</PanelChip>
         ) : undefined
       }
-      body={text(flag.hintKey)}
+      body={<InlineCode id={`flags-item-${index}-hint`} text={text(flag.hintKey)} />}
     >
       {!solved && (
         <AnswerLine
@@ -156,7 +157,7 @@ function FlagRow({
           checkLabel={text('flags.panel.check')}
           hintLabel={text('flags.panel.hint')}
           helpTitle={text(flag.labelKey)}
-          helpBody={text(flag.helpKey)}
+          helpBody={<InlineCode id={`flags-item-${index}-help`} text={text(flag.helpKey)} />}
         />
       )}
 
