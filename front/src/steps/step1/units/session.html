@@ -11,9 +11,8 @@
 </p>
 
 <p data-i18n="session.lead.3">
-  A documentation page retrieved through a tool can remain a marked tool result in the conversation.
-  Later requests can still include it until the harness removes or summarises it. Its age and source
-  matter even when it stays in the window.
+  So the other layers end up here too. A page the agent fetched an hour ago can still go out with
+  every request, until the harness clears or summarises it.
 </p>
 
 <h2 data-i18n="session.wrote-almost-none.heading">You hardly had to write any of it yourself</h2>
@@ -43,16 +42,13 @@
 <h2 data-i18n="session.sessions-where-money.heading">The session sets your bill</h2>
 
 <p data-i18n="session.sessions-where-money.1">
-  The <a href="/steps/step1/context">context</a> unit already showed why a long context costs more:
-  the content that remains in it is sent again on every turn. Read 3 large files early and their
-  content can keep counting as input even after it stops being relevant. That lasts until the
-  harness removes or summarises it.
+  What stays in the window is paid for again on every turn. Read 3 large files early and you keep
+  paying for them until they are cleared or summarised.
 </p>
 
 <p data-i18n="session.sessions-where-money.2">
-  Follow-up questions can reuse a matching cached prefix at a lower input rate. They still add new
-  input, output and any reasoning or tool requests. Staying on the same subject often saves
-  rereading; a fresh task often benefits from a smaller, current context.
+  Quick follow-up questions are cheap, because most of the window then comes from the cache. A new
+  task belongs in a fresh window.
 </p>
 
 <p data-i18n="session.sessions-where-money.3">
@@ -64,23 +60,23 @@
 <h2 data-i18n="session.automatic-manual-compaction.heading">Automatic or manual compaction</h2>
 
 <p data-i18n="session.automatic-manual-compaction.4">
-  Compaction replaces conversation history with a summary. You can let the harness trigger it or start it yourself. Both forms spend tokens.
+  Compaction replaces the conversation so far with a summary. The harness does it on its own when
+  the window fills up, or you start it yourself.
 </p>
 
 <ul>
   <li data-i18n="session.automatic-manual-compaction.5">
-  <strong>Automatic:</strong> the harness triggers summarising near its configured context threshold, sometimes during a task.
+  <strong>Automatic:</strong> the harness summarises when the window nears its limit, sometimes in
+  the middle of a task.
 </li>
   <li data-i18n="session.automatic-manual-compaction.6">
-  <strong>Manual:</strong> run <code>/compact</code> in Claude Code or Copilot CLI between tasks. In Claude Code you can add focus
-  instructions, such as <code>/compact keep the API decisions and failing tests</code>, to guide what the summary preserves.
+  <strong>Manual:</strong> <code>/compact</code> with what to keep, such as <code>/compact keep the
+  failing tests</code>. Moving to something unrelated? Clear instead.
 </li>
 </ul>
 
 <p data-i18n="session.automatic-manual-compaction.1">
-  A compaction request reads conversation material as input and writes a summary as output. Details
-  can be lost. Claude Code also supports Compact Instructions in <code>CLAUDE.md</code>. A focus
-  helps preserve decisions, but check the summary before relying on it.
+  A summary loses detail. Ask the agent what it still knows before you build on it.
 </p>
 
 <!-- How full the window is over one session, emptied twice: by compaction in the middle of a task,
@@ -90,7 +86,8 @@
 <div data-figure="window-fill"></div>
 
 <p data-i18n="session.automatic-manual-compaction.2">
-  <strong>Automatic and manual compaction both cost tokens.</strong> The extra request consumes input and output, with any applicable cache rates. A smaller window afterwards does not undo that usage. <code>/clear</code> itself makes no model request to write a summary; reading instructions and files again in the next session still costs tokens.
+  <strong>Compaction costs tokens too:</strong> the model reads the conversation and writes the
+  summary. <code>/clear</code> is free, but the next session reads everything again.
 </p>
 
 <!-- Verified October 2026. Claude Code: code.claude.com/docs/en/model-config (default auto-compact

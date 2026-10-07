@@ -1211,10 +1211,18 @@ which is the thing that makes the table's staleness visible; a rewrite that drop
 figure ageing silently.
 
 `model.cost.4` and `PriceOneTurn` read cumulative usage separately from `/context` occupancy.
-The task retains its component and storage identity so progress is not discarded. Both CLI
-products expose `/usage`; counters absent from a product/account are unknown, not zero. Estimate
-API costs from each model and category's rate across requests, and do not equate that estimate to
-subscription charges. `ReadYourWindow` remains a context measurement, not a usage meter.
+The task retains its component and storage identity so progress is not discarded. Counters absent
+from a product/account are unknown, not zero. Estimate API costs from each model and category's rate
+across requests, and do not equate that estimate to subscription charges. `ReadYourWindow` remains a
+context measurement, not a usage meter. **`PriceOneTurn` splits its moves by assistant**, typed
+`Record<Assistant, …>` like `ReadYourWindow`: Claude keeps `read`, `rate` and `sum` (`/usage` before
+and after, then an API estimate), and Copilot gets `ask.copilot`, `count.copilot` and
+`convert.copilot`, which add up the AI credits IntelliJ's chat prints under each turn (plugin 1.11.1
+or later) and convert them at $0.01 a credit, with `/usage` named as the Copilot CLI route. That is
+**the first move in the step that names IntelliJ**, on the October 2026 class being IntelliJ users
+(`REVIEW.md` §1); the rest of the Copilot side still assumes Copilot CLI. `price.description` is
+shared, so it names neither command. `model.cost.4` says the exercise reads "what your harness
+reports" rather than `/usage` for the same reason.
 
 `SpeedAtScale` is the section's figure and it settles a **threshold**, not a ratio: three counts of
 calls on one axis, the small tier against the top tier, and a guide line at the couple of minutes
@@ -1890,11 +1898,16 @@ bullet carries a coin because `session.sessions-where-money.3` carries one**, wh
 working rather than the list being evened up. Never choose a marker here.
 
 Four more decisions. **`workshop` is not in the list**, because a capstone is not a claim and the
-student has just worked it. **The five-hour bullet is last, Claude-only, and has no Copilot
-sibling**, the same shape and the same reasoning as `model`'s section, so its key carries no
-`.claude` suffix: there is no pair for a missing translation to fall back to. It sits after the eight
-rather than inside them because it is an extra rather than a unit's line, which is also what keeps
-the one-bullet-per-unit rule readable when a Copilot reader is shown eight. **There is no figure,
+student has just worked it. **The allowance bullet is last and is a pair** (`what-costs-do.9.claude`
+and `.9.copilot`): Claude's 5-hour and weekly limits, and a Copilot company seat drawing AI credits
+from a shared monthly pool that an admin budget can stop mid-task (checked October 2026 against
+GitHub's usage-based billing docs for organisations; an individual plan has its own allowance, which
+is why the bullet says "company seat"). The Claude half lifts `model.five-hour-window`'s gem and the
+Copilot half `model.api-vs-subscription.3.copilot`'s coin. It sits after the eight rather than
+inside them because it is an extra rather than a unit's line. **A second `tools` bullet on prompt
+injection was added and taken out again** (October 2026): injection is a warning rather than a
+cost, its marker would have been chosen here rather than lifted, and it broke one bullet per unit.
+Do not put it back. **There is no figure,
 card or quiz**, which leaves
 the page **empty in guided mode**, since prose is dropped wholesale there. That is a supported state
 rather than an oversight (`StepContent` renders `null` and the article takes no gap): in class the
@@ -2005,7 +2018,7 @@ in there, that is their build to unpick and the flags above are what they have d
 
 ## The assistant variants
 
-14 blocks in step 1 vary and nearly all of them are the same kind of thing, a filename or a
+15 blocks in step 1 vary and nearly all of them are the same kind of thing, a filename or a
 command: the launcher `<pre>` pair under `workshop`'s lead (`claude` against `copilot`, each after
 the same `cd`), which is the only pair left there now that the setup command has moved to
 `install.txt`,
@@ -2016,10 +2029,11 @@ the `<pre>` under `tools.connect-one.1` and `tools.connect-one.2`
 `session.automatic-manual-compaction.3` (when compaction starts, and whether you can move it),
 `context.amnesia-context-fatigue.3`
 (nested inside the audience wrapper, never both attributes on one element),
-`model.api-vs-subscription.2` and `.3`, plus `survive.write.*.label` and `window.open.*.label` on
-the task cards. The last of those replaced `context.read-your-window.1`, which was the Claude and
+`model.api-vs-subscription.2` and `.3`, plus `survive.write.*.label`, `window.open.*.label` and
+`PriceOneTurn`'s move set (`read`/`rate`/`sum` against the three `price.*.copilot` moves) on the task
+cards. The last of those replaced `context.read-your-window.1`, which was the Claude and
 Copilot descriptions of `/context`: the paragraphs went and the variant moved onto the move that
-starts the agent. `flag.machine.help.*` is the 15th variant set and the only one on a flag
+starts the agent. `flag.machine.help.*` is the 16th variant set and the only one on a flag
 board; it is counted apart because it is not a block of prose in a unit file, and the mechanism it
 needed is written up under `workshop`.
 `harness.lead.1` names Copilot for **every** reader instead of splitting, because that sentence is a
@@ -2035,8 +2049,8 @@ below asks of a variant block and which holds here too, since the built-in serve
 Some differences are product behaviour rather than filenames or commands. Large tool output is
 another such pair: its storage thresholds differ between the products. There is also `session.automatic-manual-compaction.3`, a product fact
 about when compaction starts, and its reasoning is under `session`; the other two follow. `model`'s window section is the larger one and it is **not one of
-the 15 at all**: it is Claude-only whole, with no Copilot half to pair with, and the reasoning is
-under `model`. `tools.what-mcp-costs-you.1` and `.2` are the smaller, they are 2 of the 14, and
+the 16 at all**: it is Claude-only whole, with no Copilot half to pair with, and the reasoning is
+under `model`. `tools.what-mcp-costs-you.1` and `.2` are the smaller, they are 2 of the 15, and
 each is a **product fact**. Copilot CLI ships some MCP servers built in (deliberately unnamed in the prose, since the list
 changes), but availability does not
 mean every definition is always in model context. `ReadYourWindow` still compares a window with
@@ -2054,7 +2068,8 @@ below the threshold, definitions load up front. `toolSearch: false` disables it,
 The assistant variants explain these different defaults. The shared `.3` counts tool calls and
 returned content too; neither variant claims the cost is only in having a tool. The aside removes
 the unsupported 4-to-5-server limit. The recap and deck also qualify their old claim: an unused tool
-can consume context when its definition is loaded. MCP does not prescribe how a host builds model
+can consume context when its definition is loaded. The recap's bullet carries that as "can still take
+up context", which is enough of a hedge; do not let it become a flat "takes up context". MCP does not prescribe how a host builds model
 context; resources are retrieved, and server prompts are reusable templates. See the official
 [MCP architecture](https://modelcontextprotocol.io/docs/learn/architecture) and
 [server concepts](https://modelcontextprotocol.io/docs/learn/server-concepts).
@@ -2079,9 +2094,13 @@ the one string `WindowFill` swaps, not a reason to split anything else. And `Mod
 `PickTheTier` stay exactly as they are: the tiers are taught as dispositions, Copilot's own picker
 offers Claude models among others, and the table is evidence for the one-two-four ratio rather
 than a price list. What a Copilot reader needs instead is in `model.api-vs-subscription.3`, and it
-**names no numbers and carries no currency**, for the same reason the rest of that section does not:
-the one table in the course with a currency is a few inches up the page, and a second set of figures
-turns both into the price list `model.cost.3` tells the student not to learn.
+**names one number and no rates**: what 1 AI credit is worth ($0.01), added at the course owner's
+asking (October 2026) because a reader told they spend credits had no way to turn them into money.
+That is a unit, not a price, so it does not compete with `ModelPricing`. The paragraph still names no
+model's rate and no plan's allowance, since a second set of figures a few inches under the one table
+with a currency turns both into the price list `model.cost.3` tells the student not to learn. It also
+says where IntelliJ shows the credits each turn used, which is what `PriceOneTurn`'s Copilot moves
+count.
 
 **Tool output handling was verified in October 2026** against
 [Claude MCP output limits](https://code.claude.com/docs/en/mcp#mcp-output-limits-and-warnings),

@@ -41,8 +41,8 @@
 </p>
 
 <p data-i18n="model.cost.3">
-  These prices are a dated example of 1 provider’s family. Ratios and model positions can change
-  too. Recheck current prices and test capability on your workload before choosing.
+  These prices are a snapshot from October 2026, and they change. Check today’s prices and try a
+  model on your own work before you pick one.
 </p>
 
 <!-- The one place the course multiplies: the `/context` count from `context` against the table's
@@ -52,7 +52,7 @@
      closed this section stays out. The sum itself is asked for by `PriceOneTurn` at the foot of the
      unit, so this paragraph states the method and the card collects the answer. -->
 <p data-i18n="model.cost.4">
-  <code>/context</code> measures the tokens currently occupying the window. It does not total the work done across requests. For an API estimate, add uncached input, cache writes, cache reads and output at their own rates, for every request and model. The exercise below reads <code>/usage</code>; the provider’s billing report settles the actual charge.
+  <code>/context</code> measures the tokens currently occupying the window. It does not total the work done across requests. For an API estimate, add uncached input, cache writes, cache reads and output at their own rates, for every request and model. The exercise below reads what your harness reports; the provider’s billing report settles the actual charge.
 </p>
 
 <!-- Sits under `Cost` because it is how the rates above reach you, and it is why the section carries
@@ -82,18 +82,18 @@
 </p>
 
 <p data-assistant="claude" data-i18n="model.api-vs-subscription.3.claude">
-  On an API key, reported token usage estimates a variable bill. A subscription instead has plan
-  limits, shared by every Claude app you use, including the chat on claude.ai. Some plans let you
-  buy usage credits on top <svg data-icon="coin"></svg> Read the usage view before a long run; its
-  API estimate is not your subscription invoice.
+  On an API key, every request adds to a bill. A subscription has limits instead, shared by every
+  Claude app you use <svg data-icon="coin"></svg> Watch out: if <code>ANTHROPIC_API_KEY</code> is
+  set in your shell, Claude Code can bill that key instead of your plan.
 </p>
 
 <p data-assistant="copilot" data-i18n="model.api-vs-subscription.3.copilot">
   The tokens are the same either way. What differs is how the bill reaches you. On a key, a long
   window is a number growing on an invoice while you work, and you can go and look at it <svg
   data-icon="coin"></svg> A Copilot seat draws the same tokens out of a monthly allowance of AI
-  credits: input, output and the cached ones, each at the rate of the model you picked. That
-  allowance does not roll into next month. Autocomplete is the part of Copilot you are not charged
+  credits, and 1 credit is $0.01. Every model has its own rate for input, output and cached tokens,
+  so the same task costs a different number of credits on a different model. In IntelliJ, the chat
+  shows under each turn how many credits it used. The allowance does not roll into next month. Autocomplete is the part of Copilot you are not charged
   for. Everything the agent does is.
 </p>
 
@@ -117,46 +117,37 @@
      two paragraphs are for, and a heading in between made the mechanic read as background to a tip.
      The hedge in the first sentence is deliberate too. This is one vendor's arrangement rather than
      how models are billed, so a flat claim here dates faster than anything else in the unit. -->
-<h2 data-assistant="claude" data-i18n="model.five-hour-window.heading">The 5-hour window</h2>
+<h2 data-assistant="claude" data-i18n="model.five-hour-window.heading">The 5-hour limit</h2>
 
 <p data-assistant="claude" data-i18n="model.five-hour-window.1">
-  Claude subscriptions can have a 5-hour usage allowance, alongside other limits. Its reset time is
-  an account policy, not the capacity of the context window. Check the time shown by your harness.
-  Other providers and plans use different allowance rules.
+  Claude subscriptions have a usage allowance that resets every 5 hours. That is a plan rule, not
+  the size of the context window, and your harness shows when the next reset comes.
 </p>
 
 <p data-assistant="claude" data-i18n="model.five-hour-window.2">
-  A weekly ceiling can remain exhausted after the 5-hour allowance resets. Read both limits in the
-  usage view. The context count does not tell you how much allowance remains.
+  A weekly limit sits on top, and it can run out even when the 5-hour one has reset. Hit either and
+  you wait, or buy extra usage if your plan allows it.
 </p>
 
 <div data-assistant="claude" data-figure="usage-readout"></div>
 
 <p data-assistant="claude" data-i18n="model.five-hour-window.3">
-  When a plan starts its allowance window on activity, the first message can start the clock before
-  your real work begins. Check the reported reset before scheduling a long task.
+  If the clock starts at your first message, start early: the reset then lands on your lunch break
+  instead of in the middle of a task.
 </p>
 
 <p data-assistant="claude" data-i18n="model.five-hour-window.4">
-  Plan valuable work around the allowance you actually have <svg data-icon="gem"></svg> A reset does
-  not refund the time already spent, and starting a window earlier does not remove the weekly
-  ceiling.
+  Plan your important work around the allowance you actually have <svg data-icon="gem"></svg> A
+  reset does not give back what you used, and starting early does not lift the weekly limit.
 </p>
 
 <div data-assistant="claude" data-figure="session-windows"></div>
 
-<p data-assistant="claude" data-i18n="model.five-hour-window.5">
-  On Claude plans with a 5-hour allowance, that allowance resets at its stated time. Independent
-  weekly and other limits still apply. If you reach a limit, wait for the relevant reset or buy
-  usage credits if your plan and organisation allow it.
-</p>
-
 <h2 data-i18n="model.speed.heading">Speed</h2>
 
 <p data-i18n="model.speed.1">
-  Smaller models often answer faster, but the ratio depends on the model, provider load, effort and
-  task. Inside a repeated workflow, measure latency on representative work rather than assuming a
-  fixed speedup.
+  Smaller models usually answer faster, but how much faster varies. If a step runs 100 times a day,
+  time it on real work.
 </p>
 
 <!-- The paragraph above makes a threshold claim and prices neither side of it, so this draws where
@@ -167,9 +158,8 @@
 <div data-figure="speed-at-scale"></div>
 
 <p data-i18n="model.speed.2">
-  A fast wrong answer costs another run to repair it. Use a smaller model where your checks
-  establish that it meets the task’s requirements, rather than assuming tight instructions eliminate
-  mistakes.
+  A fast wrong answer costs another run to fix. Use the smaller model where your checks show it does
+  the job.
 </p>
 
 <h2 data-i18n="model.reasoning-level.heading">Reasoning level</h2>
@@ -179,9 +169,8 @@
      tier sentence and the closing claim are the section. Do not let the first sentence grow back
      into a second explanation of what a reasoning level is. -->
 <p data-i18n="model.reasoning-level.1">
-  The <a href="/steps/step1/prompt">prompt unit</a> introduced effort: how thoroughly a model
-  tackles a task. Model choice decides which model does that work. Raising effort on a smaller model
-  does not turn it into a larger one. Compare quality, latency and reported usage on your own task.
+  The <a href="/steps/step1/prompt">prompt unit</a> introduced effort: how hard a model works. The
+  model sets what it can handle, and more effort does not turn a small model into a big one.
 </p>
 
 <h2 data-i18n="model.let-it-pick.heading">Or let it pick for you</h2>
@@ -191,15 +180,14 @@
      naming the saving in this unit's own ratio rather than repeating `harness`'s wording of it, which
      is what the two paragraphs collided on; do not let "top rate for deciding" come back here. -->
 <p data-i18n="model.let-it-pick.1">
-  A coordinator can choose worker models for each delegated task. Using a cheaper worker for a
-  well-defined part can save tokens at the higher rate <svg data-icon="coin"></svg> Configure that
-  choice and verify the result; the harness does not necessarily downgrade workers automatically.
+  You can also let the tool choose. In Copilot, pick <strong>Auto</strong> in the model picker: it
+  chooses per prompt and gives 10% off your credits <svg data-icon="coin"></svg> In Claude Code,
+  <code>opusplan</code> lets Opus plan and Sonnet build.
 </p>
 
 <p data-i18n="model.let-it-pick.2">
-  A clear brief helps any worker model: outcome, inputs, constraints and a check. Use a more capable
-  model where it improves that brief enough to justify the extra cost, and measure whether the
-  worker completes it correctly.
+  A clear brief helps any model: the outcome, the inputs, the limits and a check. Let the bigger
+  model write it if that makes it clearly better.
 </p>
 
 <!-- The doing part, under the heading `QuizPanel` renders over a quiz, the same shape `tools` and

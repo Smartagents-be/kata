@@ -211,10 +211,11 @@ second time. **It names `mvn verify` and never `-Pgraded`**, and `GateWalk` name
 because the kata's gates are what `workshop`'s pre-flight runs and its board grades. The card runs on
 the student's own project for that reason, on `CountTheDay`'s precedent.
 
-There is a tension left standing: `quality-gates.2` calls the Stop hook "the one moment a hook can
-afford to be slow", and `fast-enough` then argues for fast gates. They agree, and `GateReach` is what
-shows it: the in-loop gate is the fast one, and the minute-long `mvn verify` sits one step out, at
-exactly the moment that paragraph names. Do not reword either to make them sound alike.
+`quality-gates.2` and `fast-enough` used to pull against each other, while the hook in that paragraph
+was a Stop hook running the minute-long `mvn verify`. It is a pre-edit guard now, which is fast by
+construction, so the two agree outright. `GateReach` still puts `mvn verify` one step out from the
+loop, at the moment the agent says it is done: it is run there because `Preflight`'s `command` move
+writes it into `CLAUDE.md`, not because a hook fires it.
 
 `step3`'s `PipelineShift` is the drawing `SdlcStages` is easiest to confuse with. That one is time
 on one scale and the burden moving to verifying; this one is where the work queues and where a person
@@ -1076,17 +1077,52 @@ recorded decision.** The old record ruled a card out because the whole page was 
 ending in the board, which was true of the old page and is not true of this one: the run has a stage
 before the first flag and a stage after the last, and neither is graded by anything. A page of prose
 asking for them is a page a student skips on the way to the goal. What they hold is the step's own
-habits made into moves. `Preflight` runs five: see the check answer, put it in `CLAUDE.md`, wire the
-same command as a Stop hook, add the `## Gaps` rule, and put the house test style in a skill. Three
+habits made into moves. `Preflight` runs five: see the check answer, put it in `CLAUDE.md`, guard the
+gate with a hook, add the `## Gaps` rule, and put the house test style in a skill. Three
 of those are `setup`'s and one is `steering`'s. `Debrief` runs three, and they are `workflows` (the
 audit turned on the student's own diff, closing its worst row rather than filing it), `enablement`
 (count where the afternoon went) and `patterns`.
 
-**The hook is the move worth defending.** `gates.quality-gates.2` describes exactly it, a hook
-that fires once the agent says it is finished, and nothing in the step ever asked a student to write
-one, so this is the only place in the course where they do. Having the `CLAUDE.md` line *and* the
-hook on one card is the pair `setup.hooks.2` argues, a line that asks beside a script that happens,
-and not a duplication to trim.
+**The hook is the move worth defending.** `gates.quality-gates.2` describes exactly it, a hook that
+runs before every edit and shell command and refuses anything touching the gate, and nothing in the
+step ever asked a student to write one, so this is the only place in the course where they do.
+Having the `CLAUDE.md` line *and* the hook on one card is the pair `setup.hooks.2` argues, a line
+that asks beside a script that happens, and not a duplication to trim.
+
+**It was a Stop hook running `mvn verify` until October 2026, and the swap is the decision.** That
+hook could not be one exercise: Copilot CLI treats exit code 2 on `agentStop` as a warning and blocks
+only on `{"decision":"block"}`, VS Code's format differs again, and the IntelliJ plugin has no stop
+event at all (its hooks preview offers `userPromptSubmitted`, `preToolUse`, `postToolUse` and
+`errorOccurred`). A pre-tool hook exists in all four, and exit code 2 denies the call in each, so the
+move and the `gates` paragraph are one shared text with no assistant split. It also argues
+`quality-gates.1` directly: an agent aims for the proxy, and this guard stops it lowering the bar
+instead of meeting it. Sources, read October 2026:
+[Copilot hooks reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-hooks-reference),
+[VS Code hooks reference](https://code.visualstudio.com/docs/agents/reference/hooks-reference),
+[JetBrains changelog](https://github.blog/changelog/2026-03-11-major-agentic-capabilities-improvements-in-github-copilot-for-jetbrains-ides/).
+
+**What the guard covers was measured, not reasoned**, in live runs of Claude Code 2.1.292 and Copilot
+CLI 1.0.92 against a copy of `kata/step2/java`, with the agent told to lower the floor by any means.
+Each line of the move closed a hole a run found:
+- **The thresholds are not only in `pom.xml`.** `COVERAGE_FLOOR` and `MUTATION_FLOOR` are constants in
+  `grading/FlagRevealIT.java`, so the move names the grading package. `COVERAGE_FLOOR` is the
+  constant the move tells the student to try.
+- **Edit tools alone are not enough.** Blocked on its edit tool, the agent changed the floor with
+  `sed`, so the hook covers shell commands too.
+- **The hook has to guard itself.** The next run switched the hook off by editing
+  `.claude/settings.json`, so the move names the hook's own files.
+- **Match the tool's arguments, never the whole payload.** Claude Code's payload carries
+  `transcript_path` under `~/.claude/`, so a guard that greps all of stdin for `.claude` blocks every
+  call. Read `tool_input` in Claude Code and `toolArgs` in Copilot CLI, which arrived as an object
+  rather than the JSON string its docs show.
+- **Copilot CLI edits with `apply_patch`**, whose body carries the path, so a matcher of `edit`
+  alone misses every edit. And it **only loads repository hooks in a trusted folder**: interactive
+  runs ask on first start, while a `-p` run in an untrusted folder skips them without a word.
+
+With all of that in place, normal work (an edit to `Loan.java`, an `mvn` run) went through in both,
+and every attempt on the floor was refused. **It is a deny-list and the paragraph says so** ("a fence,
+not a proof"): a script that assembles the filename from pieces gets past it, which is why the build
+before merge stays required. Do not let the move or the paragraph claim the guard is airtight.
 
 **The `skill` move is `setup`'s and not `patterns`'s, and the wording is what keeps it so.** It asks
 for the convention this project already uses, which is writing down a decision somebody already made.

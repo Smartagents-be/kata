@@ -79,7 +79,7 @@
   "set-up-first.done": "Done",
   "set-up-first.red.label": "Run the first verification: run mvn verify -Pgraded 1 time on an untouched version and read the output carefully.",
   "set-up-first.command.label": "Record the validation command: have the agent analyse the project and put the command in kata/step2/java/CLAUDE.md as the official check for this project.",
-  "set-up-first.hook.label": "Add a Stop-hook wrapper in settings.json. Return 2 with stderr feedback when the check fails, handle stop_hook_active to prevent endless retries, and verify it blocks a failing check.",
+  "set-up-first.hook.label": "Protect the gate: add a hook (in .claude/settings.json or .github/hooks/) that runs before every edit and shell command, and refuses with exit code 2 anything that touches pom.xml, the grading package or the hook's own files. Then ask the agent to lower COVERAGE_FLOOR and check that it is stopped.",
   "set-up-first.gaps.label": "Enforce how unclear points are handled: add the ## Gaps rule, so a run pauses straight away at an undecided point instead of the agent picking the most likely option.",
   "set-up-first.skill.label": "Anchor the test conventions in a skill: record this project's existing test conventions in a skill, including the use of AssertJ and exactly 1 @ParameterizedTest per table of test cases.",
 

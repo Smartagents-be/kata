@@ -1,7 +1,7 @@
 <p data-i18n="gates.lead.1">
-  A gate is a place where the work stops until something answers yes. Take the typing away and the
-  queue in front of the slowest desk does not disappear. It moves. First to what you asked for and
-  to whoever reads what came back, and in the end to the moment someone decides.
+  A gate is where the work stops until something says yes. Take the typing away and the queue at the
+  slowest desk does not disappear: it moves to the asking, the reading and, in the end, the
+  deciding.
 </p>
 
 <!-- Filled by the SdlcStages element registered under this name in steps/step2/index.tsx. The
@@ -9,61 +9,61 @@
 <div data-figure="sdlc-stages"></div>
 
 <p data-i18n="gates.lead.2">
-  The third row is 1 run with no handoffs, and a person still decides 4 times: the intent, the
-  spec, the change and the release. Everything between those 4 is machine work, and it only stays
-  that way if a machine checks it too. Nobody reviews the volume an agent produces by hand. The gates
-  take the volume. You judge the decisions.
+  The third row is 1 run with no handoffs, and a person still decides 4 times: the intent, the spec,
+  the change and the release. Everything in between is machine work, and it only stays that way if a
+  machine checks it too. Nobody reviews that volume by hand. The gates take the volume, you judge
+  the decisions.
 </p>
 
 <h2 data-i18n="gates.quality-gates.heading">Quality gates</h2>
 
 <p data-i18n="gates.quality-gates.1">
-  Static analysis in Sonar, a line coverage floor, a mutation score: that is how software has
-  always been given a quality label, and how drift and regression were caught before a release. The
-  same gates go around an agent's work, and investing in them is still investing in how fast you
-  ship. They also give it something fixed to hold itself to while it works, an invariant
-  <svg data-icon="gem"></svg> Each of them is a proxy, though, and an agent will satisfy a proxy
-  rather than the thing behind it. The gate worth wiring in is the one that is expensive to fake.
+  Sonar, a coverage floor and a mutation score have always caught drift and regression before a
+  release, and investing in them still speeds up shipping. They also give an agent a fixed bar to
+  hold itself to while it works <svg data-icon="gem"></svg> But an agent aims for the proxy, not
+  what is behind it, so wire in the gate that is expensive to fake.
 </p>
 
 <div data-figure="same-gate"></div>
 
+<!-- One paragraph for both assistants, on purpose. It was a Stop hook running `mvn verify` once,
+     split per assistant, and that could not be one exercise: Copilot treats exit code 2 on
+     `agentStop` as a warning, and the IntelliJ plugin has no stop event at all. A hook before a
+     tool runs exists in Claude Code, Copilot CLI, VS Code and IntelliJ, and exit code 2 blocks the
+     call in all of them. Why the guard covers the shell and its own files is in step 2's CLAUDE.md,
+     beside `Preflight`. -->
 <p data-i18n="gates.quality-gates.2">
-  Wire the check into the run. In Claude Code, a Stop hook can run <code>mvn verify</code> and
-  report a failing check back to the agent. The wrapper must use the hook’s blocking response, such
-  as exit code 2 with feedback on stderr; an ordinary build exit code 1 does not block stopping.
-  Guard repeated continuations, and keep the build as a required delivery check too.
+  Wire the gate in so the agent cannot move it. A hook that runs before every edit and shell
+  command can refuse anything that touches the thresholds or the hook itself: exit code 2 blocks the
+  call in Claude Code and Copilot alike. It is a fence, not a proof, so keep the build as a required
+  check before merge too.
 </p>
 
 <h2 data-i18n="gates.blast-radius.heading">Blast radius</h2>
 
 <p data-i18n="gates.blast-radius.1">
-  An agent that can run commands can run the wrong one. It drops a migration it decided was stale,
-  rewrites 40 files to fix 1 line, and pushes the lot. How far that gets before something stops
-  it is the blast radius. A gate is where it stops.
+  An agent that can run commands can run the wrong one: drop a migration it thinks is stale, rewrite
+  40 files for 1 line, push the lot. How far that gets before a gate stops it is the blast radius.
 </p>
 
 <p data-i18n="gates.blast-radius.2">
-  Give the agent a branch and worktree, then enforce delivery through protected branches, required
-  checks and review. Restrict filesystem access, credentials and network access separately. A
-  worktree alone cannot prevent a command from affecting another checkout or an external service
+  Give the agent its own branch, and let protected branches, required checks and review decide what
+  ships. A worktree keeps the files apart, but a command can still reach another checkout or an
+  external service, so limit file, credential and network access separately
   <svg data-icon="gem"></svg>.
 </p>
 
 <h2 data-i18n="gates.fast-enough.heading">Fast enough to answer</h2>
 
 <p data-i18n="gates.fast-enough.1">
-  An agent checks itself as often as your gates let it. Tests that answer in 8 seconds get run
-  after every change, and a failure lands while the agent still knows what it just did. A pipeline
-  that takes 20 minutes gets run 1 time, at the end, and what fails comes back to a context that
-  has moved on. Or to you. The gate that answers inside the loop is the one an agent does its best
-  work against.
+  An agent checks itself as often as your gates allow. 8-second tests run after every change, while
+  it still knows what it did. A 20-minute pipeline runs at the end, when it has moved on, or the
+  failure lands on you. It does its best work against the fast gate.
 </p>
 
 <p data-i18n="gates.fast-enough.2">
-  That makes the speed of a gate a gate of its own. 4 minutes a build sounds cheap until you count
-  the loops: 10 of them in an hour and the agent spends 40 minutes waiting on an answer. So put a
-  number on it, and hand the number over as a goal:
+  So the speed of a gate is a gate too. A 4-minute build sounds cheap, but 10 runs an hour is 40
+  minutes of waiting. Put a number on it and hand it over as a goal:
 </p>
 
 <pre><code>&gt; Goal: `mvn verify` finishes in under a minute on this machine.
@@ -71,8 +71,8 @@
   lower a threshold. Time the build after each change you make.</code></pre>
 
 <p data-i18n="gates.fast-enough.3">
-  The constraints are what stop it winning the cheap way, because deleting the slow tests is faster too.
-  <a href="/steps/step2/goals">The unit on long-running goals and cost</a> is where that shape is argued.
+  The constraints stop it from winning the cheap way, by deleting the slow tests.
+  <a href="/steps/step2/goals">The unit on long-running goals and cost</a> argues that shape.
 </p>
 
 <!-- Filled by the GateReach element registered under this name in steps/step2/index.tsx. It closes
@@ -81,10 +81,9 @@
 <div data-figure="gate-reach"></div>
 
 <p data-i18n="gates.fast-enough.4">
-  None of that is about the agent being careful. A gate is your side of the line from
-  <a href="/steps/step2/engineering">the unit on craft</a>, written down where the work happens. What
-  is left is the part you cannot write down in advance, which is what
-  <a href="/steps/step2/steering">steering</a> is about.
+  None of this is about the agent being careful. A gate is your
+  <a href="/steps/step2/engineering">engineering judgement</a>, written down where the work happens.
+  What you cannot write down in advance is what <a href="/steps/step2/steering">steering</a> is for.
 </p>
 
 <!-- The doing part of the unit, under the same rule and heading the rest of the course puts over

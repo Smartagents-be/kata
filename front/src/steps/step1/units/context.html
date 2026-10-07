@@ -7,10 +7,8 @@
      same claim drawn. -->
 <div data-audience="self">
   <p data-i18n="context.lead.1">
-  The request contains your instructions, available tool definitions and relevant conversation
-  material. Together they form the <strong>context</strong>. Message roles and tool-result
-  provenance can remain marked. Those labels help distinguish authority, but do not guarantee the
-  model interprets every source correctly.
+  Each turn, the model gets 1 request: instructions, tools and what is left of the conversation.
+  That is the <strong>context</strong>, and the model can mix its parts up.
 </p>
 </div>
 
@@ -27,11 +25,8 @@
   <h2 data-i18n="context.model-stateless.heading">A model is stateless</h2>
 
   <p data-i18n="context.model-stateless.1">
-    A conversation does not update the model’s trained weights. The harness supplies the
-    instructions and history needed for each request, sometimes after pruning or summarising them. A
-    cache can reuse earlier processing; it is not durable memory of your decisions. What does last
-    is files the harness reads back in. Claude Code and Copilot can let the agent write such notes
-    itself and load them in later sessions.
+    The model remembers nothing between requests: the harness resends everything each time. Only
+    files last, and the agent can write those itself.
   </p>
 
   <p data-i18n="context.model-stateless.2">
@@ -124,9 +119,7 @@
   <h2 data-i18n="context.more-context-not.heading">More context is not free</h2>
 
   <p data-i18n="context.more-context-not.1">
-  Content retained in the effective request counts as input again on later requests. Cache reads can
-  lower its price, while pruning or compaction can remove or replace it. Window occupancy measures
-  what is present now; consumption adds up across requests.
+  Everything in the window is sent again with every message. The cache makes that cheaper, not free.
 </p>
 
   <p data-i18n="context.more-context-not.2">
@@ -157,9 +150,8 @@
   <h2 id="entropy" style="scroll-margin-top: 5rem" data-i18n="context.entropy.heading">Entropy</h2>
 
   <p data-i18n="context.entropy.1">
-  Between pruning and compaction, a session accumulates material: failed attempts, command errors
-  and files read in several states. Some of that becomes stale while still present in the request.
-  The harness can remove it, but you should not assume every obsolete detail disappears in time.
+  A long session piles up failed attempts, errors and old versions of files. The harness does not
+  reliably clear them out.
 </p>
 
   <p data-i18n="context.entropy.2">
