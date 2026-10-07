@@ -585,7 +585,7 @@ content, and there is no fourth step card because the label says there is no roo
 Decomposition is answered by the task above that board rather than by a fourth situation, and that
 is the decision. `CutItUp` is that task, and it is one card and nothing else: no prose between the
 rule and the figure, because six paragraphs said this once and the card replaced all of them. The
-problem is `kata/step1/java/problem.md`, a deliberately under-specified library request, and the
+problem is `exercises/step1/java/problem.md`, a deliberately under-specified library request, and the
 five numbered moves are cut it up yourself, cut it up with the agent (which writes its own
 `solve.md`), compare the two, plan it in plan mode into `plan-solve.md`, build it. Each move is one
 line, so anything a second line would have explained belongs in the prose above the card rather than
@@ -653,7 +653,7 @@ back. What went with them is the "read what the tool descriptions cost you" move
 taken before anything is asked is what move two already does.
 The unit is the one in the step carrying a task *and*
 a registry quiz, so the two share one "Test your knowledge", which is written up under the exercise
-shape below. Three things about the card. **The first move opens `kata/step1/java` with an agent in
+shape below. Three things about the card. **The first move opens `exercises/step1/java` with an agent in
 it**, which nothing did while the prose was there, and it is the only move that names a command, so
 it is the only one that splits by assistant (`window.open.claude.label` against
 `window.open.copilot.label`). **The second and last moves are one reading with the MCP server
@@ -845,7 +845,7 @@ that causal claim. A controlled comparison would hold model and requirements con
 **Three of the six moves exist only to keep the two runs independent**, and every one of them was a
 way to come back with a wrong number. There is no live reload in that project, so a score taken
 without a restart is a reading of the previous build, and the check says so when every position
-answers empty. The undo names `git restore kata/step1/java` and tells the student to delete what
+answers empty. The undo names `git restore exercises/step1/java` and tells the student to delete what
 `git status` still shows, because an agent leaves untracked files that a restore does not touch and
 the second run would start pre-armed. And **the second run starts a fresh agent**, which is the
 subtlest of the three: the check's own output names all six wishes, so an agent that watched the
@@ -877,7 +877,7 @@ teal one is the exact one: this line is deliberately the vague one even though i
 student is told to type. And **the line and the command have no `nl` entry**, like every other string
 a student types or a machine printed.
 
-**The six wishes and the check are one design and have to move together.** `kata/step1/check-entry.mjs`
+**The six wishes and the check are one design and have to move together.** `exercises/step1/check-entry.mjs`
 scores exactly the six the brief says, in the brief's order and one line each, and its labels are the
 wishes rather than the mechanism, so a failing line reads as something the student knew and did not
 pass on. Rewording or renumbering a wish means visiting that file, in both languages.
@@ -913,7 +913,7 @@ Measured, and every row of this was run rather than reasoned:
 | plan corrected, and naming its neighbours as well | 6 of 6 |
 
 **Wish 4 is what caps the table, and that is the guarantee worth stating: nothing that has not been
-told about counting backwards gets past five.** Nothing in `kata/step1/java` and nothing in ordinary
+told about counting backwards gets past five.** Nothing in `exercises/step1/java` and nothing in ordinary
 REST practice suggests that minus one is the last one, so it is the floor under the whole exercise
 and the first thing to protect if a wish is ever rewritten. Above that floor the honest figure is a
 band rather than a number: an unprompted one-shot lands at 0 to 4, most often 0 to 3. The row at 5
@@ -937,7 +937,7 @@ clause is gone. **Grading what an answer carries beyond what was asked for is th
 seventh wish**, and that is the rule to hold it to.
 
 **All three ways of refusing had to reach six, and one line of configuration is what makes that
-true.** `kata/step1/java/src/main/resources/application.properties` sets
+true.** `exercises/step1/java/src/main/resources/application.properties` sets
 `spring.mvc.problemdetails.enabled=true`. Without it a reason handed to `ResponseStatusException` or
 `ProblemDetail` never reaches the caller on Boot 4, the body is a timestamp and a status, and a
 student whose plan *did* carry "tell them how many we do have" came back 4 of 6, level with the
@@ -945,12 +945,12 @@ tidiest one-shot. That is the exercise collapsing on a framework default. `serve
 is the property everybody reaches for and it was measured to change nothing here. It is not free: it
 also buys a one-shot that refuses with an informative reason its one point, which is the 2 of 6 row.
 That is the right trade, since the alternative penalises a correct answer rather than crediting an
-adequate one. **The reasoning stays here and not in that project.** `kata/step1/java/CLAUDE.md` says
+adequate one. **The reasoning stays here and not in that project.** `exercises/step1/java/CLAUDE.md` says
 the property is on and points here, and `application.properties` says what the property does and
 stops: a paragraph in either about refusals carrying a message is a nudge toward the gradeable half
 of wish 5, planted in the one place the black-box argument needs to be empty.
 
-**The check is a black box and lives outside `kata/step1/java`, and that is the load-bearing part.**
+**The check is a black box and lives outside `exercises/step1/java`, and that is the load-bearing part.**
 It talks HTTP to the running service, derives everything from `/api/titles`, and names no title, so
 it holds if the catalogue is ever rewritten and it carries no second copy of a list the acrostic
 depends on. It also takes no view on the shape of an answer beyond what the brief asks for: a title
@@ -958,7 +958,7 @@ on its own, an object carrying both under any field names, or a line with both w
 read the same, so nothing is graded that nobody asked for. Where it sits is the point: an agent asked
 to write the endpoint works inside that Maven project, and a file in there setting out what to build
 would hand the student's own knowledge to the model for free, which is the one thing this task
-measures. The same reasoning is why `kata/step1/java/CLAUDE.md` says the endpoint is a stub and says
+measures. The same reasoning is why `exercises/step1/java/CLAUDE.md` says the endpoint is a stub and says
 nothing about what it should do, and why `EntryController`'s own comment says the same and stops.
 **Do not move the check into that project, do not write the six wishes into any file under it, and do
 not implement `EntryController`**: an agent that writes it *because a student asked* is doing the
@@ -1363,7 +1363,7 @@ every turn and nothing answers it**: the comparison is the exercise, so do not a
 saying which route is bulkier, in the card, the description or the prose. Ticked to
 `kata.step1.connect`.
 
-**The third route is `kata/step1/front/index.html`, and the two moves that work it sit in the middle
+**The third route is `exercises/step1/front/index.html`, and the two moves that work it sit in the middle
 of the card rather than at the end**, so `choose` stays the closer. It is one standalone page with no
 build, no dependencies and no service behind it, which is what keeps a third server off a student who
 is already running two: the agent opens the file off disk through the same MCP server. What it hides
@@ -1371,7 +1371,7 @@ is **step 1's sixth flag**, the one that is not on the `workshop` board, and the
 the exercise. The string is XORed and base64'd
 in the source and assembled in the browser when a button is pressed, so reading the file, grepping it
 or asking the agent what it says all come back empty. `shutterFlag` in `flags.ts` holds the salted
-hash and nothing else, and `kata/step1/front/CLAUDE.md` carries the prohibitions beside the page:
+hash and nothing else, and `exercises/step1/front/CLAUDE.md` carries the prohibitions beside the page:
 **do not decode it, do not reveal it, and do not let the plaintext reach any file in this repo.**
 Two decisions in the page itself are load-bearing and are written up there rather than here: it
 addresses the agent nowhere, because the same unit teaches prompt injection two sections later, and
@@ -1417,7 +1417,7 @@ more than one call is wanted, since the exact set is what it grades. The counts 
 to `text-sm` for the same reason. `BudgetWindow` is six calls against one small
 change and grades the **exact set**, not the total, or filling the window and then adding the two
 right calls would pass; its line counts are data rather than prose and its two right calls come to 25
-lines. Those counts are **measured off `kata/step1/java`** rather than invented, because the task is
+lines. Those counts are **measured off `exercises/step1/java`** rather than invented, because the task is
 framed against this repository and a student who checks will check them: the controller is 24 lines,
 the grep for `"/titles"` returns its one `@GetMapping` line, a glob of `src/**` lists 71 files, and
 everything under `services/` is 1250 lines over 55 files, with 50 concrete stage classes (52 `*Stage.java`
@@ -1493,7 +1493,7 @@ faded**: a gradient or a lighter fill would say the recent versions are known le
 exact reading `truth.cutoff.1` exists to kill, and dashed is already this step's stroke for "nothing
 behind this" on `AnswerProvenance`'s invented row. It carries **no date**, because every model has a
 different one and any number printed there is wrong for somebody in the room. And its versions are
-`3.5.0` on the near side and `4.1.0` on the far one, `4.1.0` being what `kata/step1/java`'s pom
+`3.5.0` on the near side and `4.1.0` on the far one, `4.1.0` being what `exercises/step1/java`'s pom
 declares, so a Boot upgrade there means moving the number here.
 
 It also changes what guided mode gets. `The cutoff` had no figure, so its heading was dropped with
@@ -1506,7 +1506,7 @@ a tick, a cross, a colour or a heavier weight on either chip is the drawing cont
 Their strings differ (`spring-boot-starter-test` against `spring-boot-webmvc-test`, the dependency
 `@WebMvcTest` needs) because the trained answer is not a wrong-*looking* answer, it is what was true
 up to Boot 3, stated as levelly as the current one. **`spring-boot-webmvc-test` is what
-`kata/step1/java/pom.xml` actually declares**, so a student who checks finds the figure honest. The
+`exercises/step1/java/pom.xml` actually declares**, so a student who checks finds the figure honest. The
 example used to be the project's own version number, and it was changed on the author's review
 (October 2026): a current agent reads `pom.xml` on its own, so the live risk is a library fact the
 agent thinks it knows and does not look up. `truth.lead.2` and `truth.grounding.2` say the same and
@@ -1516,7 +1516,7 @@ without a legend.
 
 **`AnswerProvenance`'s left column is uniform on purpose** and the second column is where everything
 varies, because the second column is the one a student is never handed. The three claims are true of
-`kata/step1/java` apart from the middle one, which is a method `Catalog` does not have, so both
+`exercises/step1/java` apart from the middle one, which is a method `Catalog` does not have, so both
 sources can be opened and checked. The invented row is **the step's dashed stroke rather than
 `--destructive`**: nothing failed, and a red row would say the agent was caught. Amber is wrong for
 the same reason, since it belongs to a cost tip and a hazard aside. It is DOM rather than SVG on
@@ -1555,7 +1555,7 @@ checking tool results for relevance and injected instructions, which is why grou
 than remembering* and does not grow a paragraph about the source being stale.
 `truth.grounding.3` is the one move it adds for facts outside the project: ask the agent to search for
 the vendor's own documentation and read it before answering. It was added at the author's asking, and
-it names the move and stops, since how the page gets fetched is `tools`'s to say. And **step 0's `welcome.house-rules.4`, with
+it names the move and stops, since how the page gets fetched is `tools`'s to say. And **step 0's `welcome.house-rules.3`, with
 `flag.decode.help` behind the workshop board's Hint, is this unit's proof section applied**: both
 tell the student to make the agent run the decode rather than reason about it, in the words of that
 exercise. The general rule belongs
@@ -1567,7 +1567,7 @@ checking an answer you already have. Keep them apart.
 Two smaller decisions. **`Hallucinations` comes last rather than first**, because the term is only
 worth having once the reader knows what grounding and proof would have caught, and the section
 names it in its closing clause on the step's name-the-term-last rule. And **every example in it is
-this repository**: the Boot version and the `@WebMvcTest` dependency out of `kata/step1/java`'s
+this repository**: the Boot version and the `@WebMvcTest` dependency out of `exercises/step1/java`'s
 `pom.xml` across the first three sections, then a method that does not exist on `Catalog` in the fourth. `truth.proof.3` adds the one check that is specific to code: invented package names, which
 attackers register (slopsquatting), so the advice is to check that a dependency exists. The thread is
 deliberately one subject asked three ways (guessed, grounded, proved), which is what lets those sections read as
@@ -1582,11 +1582,11 @@ printed only at DEBUG), reads the source for the fourth (a literal in a branch t
 traces the running pipeline for the fifth (the hidden tenth entry it computes and drops). **Do not
 commit an implementation, a decode or a reveal of any of them.** How each one is carried is under
 `## How the five flags are carried` below, which is this file's job and deliberately not
-`kata/step1/java/CLAUDE.md`'s.
+`exercises/step1/java/CLAUDE.md`'s.
 
 **`machine` is the newest row and it is first, and it exists because everything else on the board
 comes out of a project.** The step teaches four layers, and `harness` is the one a student never
-meets as a thing they can open: the four older rows all sit inside `kata/step1/java`, so a capstone
+meets as a thing they can open: the four older rows all sit inside `exercises/step1/java`, so a capstone
 about provenance was silent on the level *above* any project. A user-level instructions file is that
 level. It is on their machine, it is merged into every session in every project they open, they
 never wrote it into a prompt, and until this row nothing in the course said so. What makes it a flag
@@ -1595,7 +1595,7 @@ rather than a paragraph is that the student watches it arrive in a window they d
 **The line is planted at install time, and by the student's agent rather than by the student.**
 `install.txt` at the repo root is what does it: the README tells a student to open the folder with
 their assistant and ask it to execute that file, and the file runs
-`.claude/skills/repo-setup/check.sh` and then `node kata/step1/machine-context.mjs setup <assistant>`.
+`.claude/skills/repo-setup/check.sh` and then `node exercises/step1/machine-context.mjs setup <assistant>`.
 **The indirection is the exercise, and it is the whole justification for the design.** A student who
 plants the line themselves on this page is not hunting for anything: they know what was written, they
 know where, and the row collapses into plant it, then read it back. Planted at install time it has
@@ -1643,7 +1643,7 @@ learns how to clean up. It prints the block with the flag masked, since the term
 the answer is meant to arrive.
 
 **The flag is not in the script as text.** `CIPHER` is the string XORed against a rolling key and
-base64'd, the same move `kata/step1/front/index.html` makes, so the repo-wide rule that no flag's
+base64'd, the same move `exercises/step1/front/index.html` makes, so the repo-wide rule that no flag's
 plaintext reaches any file here still holds. That is obfuscation and not secrecy: reading the script,
 or reading `install.txt` closely, is a spoiling route a student takes knowingly, and both are
 allowed. Nothing says so on the page any more, because the page no longer sends anybody to either
@@ -1685,7 +1685,7 @@ there are two honest routes to this flag, reading nine `@Order` annotations spre
 files and sorting them, or starting the thing and reading a page, and one of them is enormously
 cheaper. The course makes that claim in prose in `truth` and had never let a student feel it. The
 board still runs easiest first and **the trace still closes it**, because ending on the judgement is
-step 0's fourth house rule paid off.
+step 0's third house rule paid off.
 
 **The three older rows were labelled tools, session and harness once, and that mapping is gone.**
 Each of those three `flag.*.help` keys opened by naming a layer, and in all three cases the noun meant
@@ -1727,7 +1727,7 @@ needs a flag on the launcher, the source needs a read and a scratch decode, the 
 instrumenting, rebuilding, running, and then a judgement about which of the lines that came back is
 the flag. **Opening outside the project and ending on the judgement are both the point**: the first
 puts the layer nothing else on the board covers where it cannot be skipped, and the last is step 0's
-fourth house rule paid off. So a reorder that moves `machine` off
+third house rule paid off. So a reorder that moves `machine` off
 the front or the trace off the back costs the board one of its two ends. Reordering is otherwise
 cheap, because `solved` is keyed by `flag.id` rather than by
 index, but two things recite the order and go stale with it: `deck.workshop.flags.note`, in both
@@ -1847,7 +1847,7 @@ been cut as well (step 0's own file says why), so `hunt.count.label` is now the 
 near a board that points at what a hunt cost. It names no command and does no arithmetic, and it may
 not grow either. The old `house-rules.4` carried the five same-shape
 lines the trace prints, a measured fact of the backend; **`flag.trace.help` is now the only place
-that number appears**, so a change under `kata/step1/java` visits that key alone, in both languages.
+that number appears**, so a change under `exercises/step1/java` visits that key alone, in both languages.
 The `Stuck?` aside carried two deep hints and went because the Hint dialog is where a
 stuck student is meant to look: its second hint was already `flag.trace.help` almost verbatim, and
 its first is now folded into `flag.decode.help` as the shape of the impossible condition (a value
@@ -1869,7 +1869,7 @@ service, as the one that comes off the student's own machine, and it is not an e
 afterwards. And **the `<pre>` starts the agent and nothing else.** It ran
 `mvn spring-boot:run` and a `curl` at the endpoint, which is the student doing by hand the two things
 the first house rule hands over, so a page that opens on the rules of the hunt was demonstrating the
-one move the rules forbid. What is left is `cd kata/step1/java` and the launcher, so the working
+one move the rules forbid. What is left is `cd exercises/step1/java` and the launcher, so the working
 folder is still named and everything after it is asked for rather than typed; `lead.2` says so in a
 clause. It is the step's only assistant-varied block outside `tools`, `session`, `context` and
 `model`, and it varies for the ordinary reason: the launcher is a command.
@@ -1921,9 +1921,9 @@ from it worth keeping.
 ## How the five flags are carried
 
 **This file is the readable source for the step 1 puzzle**, and that is a move rather than an
-accident. The notes used to sit in `kata/step1/java/CLAUDE.md`, beside the code they describe, which
+accident. The notes used to sit in `exercises/step1/java/CLAUDE.md`, beside the code they describe, which
 is where a maintainer would look for them and exactly the wrong place for them to be.
-`workshop`'s launcher tells the student to `cd kata/step1/java` and start their agent there, and the
+`workshop`'s launcher tells the student to `cd exercises/step1/java` and start their agent there, and the
 agent loads that file before their first prompt. Design notes in it handed the answers over
 unasked. The prohibitions in it ("do not add tracing", "do not solve it for them") forbade the work
 the units ask the student to hand over, so the same agent could equally refuse the exercise. Neither
@@ -1934,21 +1934,21 @@ The repository is not pretending to hide any of this: anything with filesystem a
 `front/`. Not hiding it is a different thing from handing it over, and a student who sends their
 agent rummaging in the curriculum app is spending their own exercise the way reading `flags.ts` would
 be. Two rules keep that trade honest and both are absolute. **No flag's plaintext goes in any file in
-this repo**, which is what `kata/step1/front/CLAUDE.md` already says for the browser flag, so the five
+this repo**, which is what `exercises/step1/front/CLAUDE.md` already says for the browser flag, so the five
 below are named by their `flags.ts` id and never by their text. `machine` is the one whose plaintext
 lives anywhere at all, and where it lives is the student's own instructions file, outside this
-repository; in `kata/step1/machine-context.mjs` it is XORed and base64'd, on the browser page's
+repository; in `exercises/step1/machine-context.mjs` it is XORed and base64'd, on the browser page's
 precedent. And **the board's hashes never go
-anywhere under `kata/step1/java/`**: an agent sitting in that project can unveil all 41 stored
+anywhere under `exercises/step1/java/`**: an agent sitting in that project can unveil all 41 stored
 strings, and with the hashes beside them it matches three of the five in one pass.
 
 `machine` is the one flag this repository does not carry at all, which is the other half of why the
-heading says carried rather than hidden. `kata/step1/machine-context.mjs` writes it into the
+heading says carried rather than hidden. `exercises/step1/machine-context.mjs` writes it into the
 student's user-level instructions file (`$CLAUDE_CONFIG_DIR` or `~/.claude/CLAUDE.md`, `$COPILOT_HOME`
 or `~/.copilot/copilot-instructions.md`), between two sentinel lines, and `remove` takes it out and
 leaves the rest byte-identical. `install.txt` at the repo root is what runs it, at setup time and
 through the student's own agent, so the plant happens before the student has met step 1 at all.
-Nothing under `kata/step1/java/` knows about it, and nothing should:
+Nothing under `exercises/step1/java/` knows about it, and nothing should:
 that project is the subject of the four rows below and this one is deliberately outside every
 project. The safety rules the script keeps, and why the plant sits at install time rather than on the
 workshop page, are with the row, under `workshop` above.
@@ -1998,7 +1998,7 @@ groups, and four of the nine published titles carry one too, so grepping any of 
 *subsequence* and the size as `>= 9` rather than `== 9`, so a student who enables the tenth line does
 not land in a red build.
 
-Two things must not be committed into `kata/step1/java/src/`, and both are about the next student
+Two things must not be committed into `exercises/step1/java/src/`, and both are about the next student
 rather than this one. **No tracing seam**: no hook, no callback, no candidate-logging method. A
 `Tracer` that logged every restored string at INFO was committed once and removed for exactly this
 reason, since with it in place a plain run printed `trace-runtime` for free. And **no explanation of

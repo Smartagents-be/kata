@@ -120,7 +120,7 @@ const step2: Step = {
         'hexagon-ports': <HexagonPorts />,
         'domain-tree': <DomainTree />,
       },
-      // And the task under the prose, which sorts kata/step2/java against that same drawing. It
+      // And the task under the prose, which sorts exercises/step2/java against that same drawing. It
       // grades nothing and posts nothing; the tick is a bookmark.
       figure: <WhereWouldItGo />,
     },
@@ -156,7 +156,7 @@ const step2: Step = {
         'loop-in-window': <LoopInWindow />,
         'worktree-each': <WorktreeEach />,
       },
-      // Then the task under the prose, four moves against kata/step2/java, and the quiz under
+      // Then the task under the prose, four moves against exercises/step2/java, and the quiz under
       // that. The unit writes the `ui:quiz.title` heading itself, so `showsExerciseHeading` hands
       // QuizPanel `heading={false}` and the page carries one "Test your knowledge".
       figure: <SteerARun />,

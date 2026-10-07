@@ -8,7 +8,7 @@ import { readSolved, writeSolved } from './solved'
 const STORAGE_KEY = 'kata.step1.shutter'
 
 /**
- * One graded row under the browser task, for the flag hidden in `kata/step1/front/`. It is the only
+ * One graded row under the browser task, for the flag hidden in `exercises/step1/front/`. It is the only
  * thing in the step that grades work done through an MCP server, which is why it sits in `tools`
  * rather than on `workshop`'s board: the board is five places an answer about the backend can come
  * from, and this is none of them.

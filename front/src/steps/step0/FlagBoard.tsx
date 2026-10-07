@@ -27,7 +27,7 @@ function writeSolved(solved: Set<string>) {
 }
 
 /**
- * Step 0's workshop board. Three rows, one per run against `kata/step0/java`, checked here against a
+ * Step 0's workshop board. Three rows, one per run against `exercises/step0/java`, checked here against a
  * salted SHA-256, so the intro grades with nothing else running. Nothing on it talks to a service:
  * step 0 has none, and the work already happened in the student's terminal.
  *

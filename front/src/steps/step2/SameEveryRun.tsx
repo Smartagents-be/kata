@@ -12,7 +12,7 @@ import { TaskCard } from '@/shared/components/TaskCard'
  *
  * What it deliberately does not ask for. No tests, because `workshop.flag.coverage.help` asks the
  * student to write a testing skill and spending it here gives away part of the capstone. No package
- * touched, because `kata/step2/java` is the workshop's subject and a rename breaks
+ * touched, because `exercises/step2/java` is the workshop's subject and a rename breaks
  * `mvn verify -Pgraded`, the `challenge` tests and the native-image flag. The fallback job named in
  * the description is the start-and-check the root `CLAUDE.md` already gives, so a student with
  * nothing of their own to automate still has something to run.

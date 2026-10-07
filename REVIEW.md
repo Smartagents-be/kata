@@ -16,7 +16,7 @@ Exact replacement texts (EN and NL), sources and dry-run evidence are in `review
 - **Must: one tested IntelliJ route.** README and most Copilot text still assume Copilot CLI in a terminal; `model` and `PriceOneTurn` now name IntelliJ, so "no page names IntelliJ" is stale. Recommended: the IntelliJ chat with the agent picker on **Copilot** (plugin 1.18: the CLI harness inside the IDE), plus Copilot CLI in IntelliJ's terminal for `/context` and `/usage`. Rewrite the Copilot blocks IDE-first, no third variant. Plugin 1.18 behaviour is *unverified* until the rehearsal. Background: `review/copilot-intellij.md`.
 - **Step 2 for Copilot.** Copilot already reads `CLAUDE.md`, `.claude/rules`, `.claude/skills` and `.claude/settings.json` hooks, but reading a file does not mean identical behaviour in every IDE agent. Add short Copilot notes (a mapping table beats duplicated prose) where it breaks: stopping a run, the sandbox card, nested `CLAUDE.md` in IntelliJ. The Stop hook is solved (section 12).
 - **1 day does not hold the course** (*Design*). About 915 min of material against 405 teaching minutes; 915 is an author estimate, not a measured class. Pick a classroom subset and keep the rest as self-study. `review/run-sheet.md` is one proposal (27 units, 9 hands-on tasks, the step 2 capstone as a background goal of about 90 min).
-- **Must: IntelliJ project layout.** Today the pages assume the repo root and the step reference assumes the step folder (`step1/locales/en.json:240`). Pick one: open the step folder (`kata/stepN/java`) and make code blocks folder-relative, or open the root and link each pom.
+- **Must: IntelliJ project layout.** Today the pages assume the repo root and the step reference assumes the step folder (`step1/locales/en.json:240`). Pick one: open the step folder (`exercises/stepN/java`) and make code blocks folder-relative, or open the root and link each pom.
 - **JDK floor** (*Design*). Steps 0 to 2 built and passed on JDK 21 in a dry run. Lowering to 21 means changing all 4 poms, `ReadyRevealIT.java:37` (rejects below 25), the setup check, README and `.idea` together, then rerunning the profiles. Keep GraalVM 25 only for the native flag. Java 17 is a separate decision.
 - **Must: auto-loaded files must be student-safe** (see section 3). A student branch without the maintainer notes, `audit.md`, this file, `plans/`, `video/` and the maintainer skills is one way; the minimum is that nothing an agent loads on its own leaks or forbids the exercises.
 
@@ -46,9 +46,9 @@ Exact replacement texts (EN and NL), sources and dry-run evidence are in `review
 All confirmed in the source. Keep the deliberate stubs and red profiles intact: removing spoilers is not implementing the answers.
 
 - The root `CLAUDE.md` loads into every student's agent session (Claude Code reads parent folders; Copilot CLI and IntelliJ read the repo root). It names the step 1 scorer, the seams, step 2's setup flag locations, the planted tier gap and row 1's script. In a dry run a cheapest-tier agent read them and scored 6 of 6 on the prompt task. Fix: a short student-safe root `CLAUDE.md`, maintainer notes in a file nothing loads automatically.
-- `kata/step1/java/CLAUDE.md:81` tells the agent to read the flag notes before editing `services/`, which gives away board rows 2, 4 and 5.
+- `exercises/step1/java/CLAUDE.md:81` tells the agent to read the flag notes before editing `services/`, which gives away board rows 2, 4 and 5.
 - Step 2's project and package instruction files, plus `LateFeePolicyTest`'s Javadoc, forbid the exact work the capstone hands the agent ("do not harden", "do not implement forTier", "do not write the resource hint"). Step 1 already fixed this after agents refused. Move the prohibitions to `front/src/steps/step2/CLAUDE.md`.
-- `kata/step1/front/CLAUDE.md` says "do not decode" with no carve-out for students, so agents may refuse the browser task. Separate maintaining the exercise from doing it; never put the decoded flag in source.
+- `exercises/step1/front/CLAUDE.md` says "do not decode" with no carve-out for students, so agents may refuse the browser task. Separate maintaining the exercise from doing it; never put the decoded flag in source.
 - The maintainer skills in the root `.claude/skills` show up in student sessions. The `EntryController` Javadoc line "so leave it empty" contradicts the student exception in its project `CLAUDE.md`.
 
 ## 4. Broken exercises (Must)
@@ -60,11 +60,11 @@ All confirmed in the source. Keep the deliberate stubs and red profiles intact: 
   - "GraalVM JDK on your PATH" is wrong: the plugin needs `JAVA_HOME` or `GRAALVM_HOME` (reproduced; `check.sh` also only checks PATH). The C toolchain and memory (3.7 to 4.0 GB in the dry run) are not mentioned. Making the native row optional is a *Design* call.
   - Worktrees start from the last commit, so both jobs miss the pre-flight edits. Checkpoint the intended files first (not "commit everything").
   - Debrief comments say 3 moves, the card has 4 (comment cleanup only).
-- **Steering card:** from `kata/step2/java`, `../kata-scratch` lands inside the repo, and removal leaves the branch, so a rerun fails. State the working folder and the cleanup; use `--force` and `branch -D` only on disposable work after reviewing it.
+- **Steering card:** from `exercises/step2/java`, `../kata-scratch` lands inside the repo, and removal leaves the branch, so a rerun fails. State the working folder and the cleanup; use `--force` and `branch -D` only on disposable work after reviewing it.
 - **Plan-mode cards:**
   - `plan-solve.md`: plan mode cannot write arbitrary project files in Claude Code. Use the harness's plan output and save it after leaving plan mode (harness-dependent; do not claim every tool forbids it).
   - Engineering card: it already says not to approve, and the slide says accept nothing. Optional: say how to decline in each tool.
-  - `plan.undo` restores 1 file and asks to delete extra files. A broad `git restore kata/step1/java` would discard earlier workshop work and still miss untracked files: use a known checkpoint instead.
+  - `plan.undo` restores 1 file and asks to delete extra files. A broad `git restore exercises/step1/java` would discard earlier workshop work and still miss untracked files: use a known checkpoint instead.
 - **Step 0:**
   - On JDK 17 or 21 students get a raw compiler error before row 2's JDK check can speak (`pom.xml:23` compiles for 25 first).
   - Guided mode hides the paragraph the first answer box points at: put the example string on the card.
@@ -182,8 +182,8 @@ All *Design*, depending on the run sheet; nothing here needs deleting from the k
 ## 10. Per unit: other fixes
 
 **Step 0**
-- welcome: guided mode hides install, prerequisites and house rules (a narrow guided-mode exception for welcome is one option). Quiz question 2's stem is too broad: say which kind of flag. Mention a day's AI credits in the prerequisites.
-- backend: "House rule 1 is the reason" should point at rules 1 and 4. Say which folder IntelliJ users open.
+- welcome: guided mode hides install, prerequisites and house rules (a narrow guided-mode exception for welcome is one option). Mention a day's AI credits in the prerequisites.
+- backend: "House rule 1 is the reason" should point at rules 1 and 3. Say which folder IntelliJ users open.
 - workshop: row 2's hint says "your harness suggests"; say "your agent". The slide "comes back 2 times" is wrong (it prints 2 candidates; fix without revealing which). Row 3's hint should say "have your agent run".
 
 **Step 1**
@@ -325,7 +325,7 @@ What the validation passes turned down, so it does not come back.
 | "niet slecht" flips the meaning | Rejected; clarity only (section 7). |
 | "de token" is wrong | Unproven; pick one article consistently (section 7). |
 | Gate all exercise tests with annotations | Optional; risks silently skipping exercises (section 2). |
-| Restore all of `kata/step1/java` to undo the plan task | Rejected; discards earlier work (section 4). |
+| Restore all of `exercises/step1/java` to undo the plan task | Rejected; discards earlier work (section 4). |
 | Force-remove worktrees as routine cleanup | Qualified; only for disposable work (section 4). |
 | The engineering card lacks "do not approve" | Rejected; it already says so (section 4). |
 | Run `npm audit fix` | Rejected as a plan; review and update deliberately (section 2). |

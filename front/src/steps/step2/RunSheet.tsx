@@ -80,7 +80,7 @@ const STAGES: readonly Stage[] = [
     // came out, and aim from there rather than from the plan. Wiring `mvn verify` into the hook that
     // fires when the agent says it is done is `gates`' `Quality gates` section, run for real.
     units: ['setup', 'steering', 'evolution', 'gates'],
-    checks: ['cd kata/step2/java', 'mvn verify -Pgraded'],
+    checks: ['cd exercises/step2/java', 'mvn verify -Pgraded'],
     pays: [],
   },
   {
@@ -108,10 +108,10 @@ const STAGES: readonly Stage[] = [
         key: 'build',
         units: ['workflows'],
         checks: [
-          'cd ../kata-statement/kata/step2/java',
+          'cd ../kata-statement/exercises/step2/java',
           'mvn test -Pchallenge',
           'mvn spring-boot:run',
-          'curl localhost:8080/api/loans/statement/STUDENT',
+          'curl localhost:8082/api/loans/statement/STUDENT',
         ],
       },
       {
@@ -120,11 +120,11 @@ const STAGES: readonly Stage[] = [
         // purpose, is what `goals` is about from its title down.
         units: ['goals', 'workflows'],
         checks: [
-          'cd ../kata-native/kata/step2/java',
+          'cd ../kata-native/exercises/step2/java',
           'mvn -Pnative native:compile',
           // Not `--server.port=8081`: a browser takes a line break after a hyphen and split that
           // flag in two inside the drawing. The port itself is load bearing, since the job in the
-          // other worktree is holding 8080 while this one starts.
+          // other worktree is holding 8082 while this one starts.
           'SERVER_PORT=8081 ./target/kata-agentic-java-step2',
         ],
       },

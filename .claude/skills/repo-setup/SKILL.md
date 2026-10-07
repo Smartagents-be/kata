@@ -35,7 +35,7 @@ The script exits 0 when everything required passed, 1 when something required fa
   same as `java -version`. All four poms set `<java.version>25</java.version>`, and Maven compiles
   with whatever `JAVA_HOME` points at, which can differ from the `java` first on `PATH`. When they
   disagree, the fix is `JAVA_HOME`, not a reinstall.
-- **Four step projects present and buildable** - `kata/step0..step3/java`, each with its own
+- **Four step projects present and buildable** - `exercises/step0..step3/java`, each with its own
   `pom.xml`. There is no pom at the repo root and no aggregator; that is deliberate, so a missing
   root pom is never the diagnosis.
 
@@ -43,8 +43,8 @@ Optional, warn only:
 
 - **GraalVM `native-image`** - needed for exactly one thing, step 2's native-image flag, and that
   flag is the student's exercise. Absent is fine for everything else.
-- **Ports 8080 and 5173 free** - 8080 is whichever step's backend is running (only one at a time can
-  hold it) and 5173 is Vite. A busy port is usually the user's own server from an earlier session,
+- **Ports 8080, 8082 and 5173 free** - 8080 is step 1's backend, 8082 is step 2's and 5173 is
+  Vite. A busy port is usually the user's own server from an earlier session,
   so report what is holding it rather than killing it.
 
 ## After a green run
@@ -52,7 +52,7 @@ Optional, warn only:
 Two servers, two terminals:
 
 ```bash
-cd kata/step1/java && mvn spring-boot:run   # step 1's backend on :8080
+cd exercises/step1/java && mvn spring-boot:run   # step 1's backend on :8080
 cd front && npm run dev                     # frontend on :5173  <- open this one
 ```
 

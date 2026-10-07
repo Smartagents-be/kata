@@ -2,7 +2,7 @@ import { TaskCard } from '@/shared/components/TaskCard'
 
 /**
  * The unit's hands-on task, on the shared {@link TaskCard}: four of its moves run against
- * `kata/step2/java` with an agent open beside them.
+ * `exercises/step2/java` with an agent open beside them.
  *
  * The unit ran to eleven hundred words and every move in it is physical, so it was eleven hundred
  * words a student could only agree with. The card is the same moves in the order the sections
@@ -10,7 +10,7 @@ import { TaskCard } from '@/shared/components/TaskCard'
  * a worktree of its own.
  *
  * **The `gap` move is why the card exists.** `LateFeePolicy` computes in cents and names no
- * currency anywhere in `kata/step2/java`, so asking for the fee in euros walks an agent straight
+ * currency anywhere in `exercises/step2/java`, so asking for the fee in euros walks an agent straight
  * into an undecided thing. It is the only place in the course where a student watches an agent
  * decline to guess, which is what the `## Gaps` rule buys and what no amount of prose demonstrates.
  *

@@ -26,8 +26,8 @@ comments, nothing outside those markers is touched, and the file is copied besid
 first. One command takes it out again and leaves the rest byte for byte as it was. From
 the repository root:
 
-    node kata/step1/machine-context.mjs remove claude
-    node kata/step1/machine-context.mjs remove copilot
+    node exercises/step1/machine-context.mjs remove claude
+    node exercises/step1/machine-context.mjs remove copilot
 
 That is the undo. Say it back to the student when you are finished, and say it again if
 they ask you what this did.
@@ -63,8 +63,8 @@ STEP 2. WRITE THE LINE
 
 Run one of these from the repository root, whichever one names the assistant you are:
 
-    node kata/step1/machine-context.mjs setup claude
-    node kata/step1/machine-context.mjs setup copilot
+    node exercises/step1/machine-context.mjs setup claude
+    node exercises/step1/machine-context.mjs setup copilot
 
 If you are Claude Code, that is claude. If you are Copilot CLI, that is copilot. If you
 are neither, ask the student which of the two files above their assistant reads, and use

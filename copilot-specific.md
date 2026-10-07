@@ -10,9 +10,9 @@ things the course deliberately leaves out, and the facts most likely to rot.
 the foot. Copilot moves faster than this repository does, so treat any number here as dated and
 re-read the source before writing it into a unit.
 
-The course's Copilot side assumes **Copilot CLI**, the terminal one. That decision is recorded in
-`front/src/steps/CLAUDE.md`, and it is what makes step 1's exercises run unchanged for both
-assistants.
+The course's Copilot side was written for **Copilot CLI**, the terminal one, and is moving to
+Copilot in the IDE (IntelliJ) first. Where that stands is recorded in `front/src/steps/CLAUDE.md`;
+the open work is the "IntelliJ route" item in `REVIEW.md`.
 
 ## Billing, which is the part that moved
 

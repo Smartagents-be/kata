@@ -67,7 +67,7 @@ instruction rather than an illustration of a setting.
 ## The house rules
 
 `welcome` closes on two sections that arrived from step 1's `workshop`: `How workshops work`, one
-paragraph saying what a board is, and `House rules`, four of them. They were that unit's own rules
+paragraph saying what a board is, and `House rules`, three of them. They were that unit's own rules
 until it became clear they are the rules of **every** board in the course, so they are stated once
 here and pointed at from there. `step1/workshop`'s `lead.2` carries the link.
 
@@ -77,13 +77,23 @@ written as a flat instruction rather than as advice, because it is the one house
 broken without noticing you broke it. **The line justifying it is deliberately gone**: it told the
 student the flags are not the prize and the prize is finding out what their agent reaches on its
 own, which is the lesson the whole course is, and a rule that argues its own case reads weaker than
-one that just says the thing. Rule two lost its closing instruction in the same pass, for the same
-reason: it now names the failure ("find the flags in this repo" comes back confident and wrong) and
-leaves the fix to the student.
+one that just says the thing.
+
+**There was a rule on splitting the work, and it is gone.** It sat second and said "find the flags in
+this repo" comes back confident and wrong. Rewritten as "1 prompt per flag" it was common sense for
+the senior developers this is taught to, and "1 flag, 1 session" already makes a student take the
+flags 1 at a time. Do not write it back.
+
+**The last rule claims only what holds.** It once said the agent delivers a wrong flag "just as
+confidently" and "cannot tell the difference" between candidates. Current models do hedge, and an
+agent reading the raw output can see which line `pick` ticks, so both went. What is left is the part
+that is true: a flag worked out in the agent's head is often off by a few characters, so have it run
+the code and show the output rather than a summary, and pick when several candidates come back. The
+same claim sits in the explanation of step 0's second quiz question, so change both together.
 
 Three things about the section are decisions, and each of them is a thing the step 1 version could
 say and this one cannot. **It names no command**, so `/clear` and `/context` stay introduced where
-they are used (`step1/session` and `ReadYourWindow` in `step1/tools`), and rule three gives the habit
+they are used (`step1/session` and `ReadYourWindow` in `step1/tools`), and rule two gives the habit
 instead: start each flag on a fresh session. **It carries no numbers and does no arithmetic**, so
 `model.cost.4` stays the one paragraph in the course that multiplies. And **it counts nothing**,
 since it covers boards of one, three and five flags, which is what the step 1 wording
@@ -92,19 +102,19 @@ since it covers boards of one, three and five flags, which is what the step 1 wo
 **There was a fifth rule, on pricing the hunt afterwards, and it is gone.** It sent the student to
 step 1 for the numbers to put on a hunt they had just finished, which is a forward reference on a
 page nobody has the numbers on yet, and it closed by naming the next two pages, which the pager
-already does. So cost is now signalled in this section by rule three's coin icon and nothing else,
+already does. So cost is now signalled in this section by rule two's coin icon and nothing else,
 and the step that has the numbers is where the arithmetic stays. Its slide point went with it, and
-the section closes on rule four with no pointer at what follows: do not write either back.
+the section closes on rule three with no pointer at what follows: do not write either back.
 
 **It sits after the legend rather than after `How exercises work`**, which is the one placement worth
-defending. Rule three carries the coin icon, and the legend is where a coin is given a meaning, so
-the rules read a paragraph after the icon they use rather than a page before it. The four are a list
+defending. Rule two carries the coin icon, and the legend is where a coin is given a meaning, so
+the rules read a paragraph after the icon they use rather than a page before it. The three are a list
 written as paragraphs, a bold lead-in plus two or three short sentences each; do not grow any of
-them into a section, and do not add a fifth without a board that needs it.
+them into a section, and do not add a fourth without a board that needs it.
 
-**One line on `workshop`'s board argues with rule three, and it is meant to.** `flag.ready.hint`
+**One line on `workshop`'s board argues with rule two, and it is meant to.** `flag.ready.hint`
 closes by telling a student who kept row one's session that their harness often offers this run
-before they ask, while rule three says start each flag on a fresh one. Both are true: the rule is
+before they ask, while rule two says start each flag on a fresh one. Both are true: the rule is
 what the course asks for, and the line is what a student who did not follow it is looking at. Do not
 resolve it by cutting either. It is the only place in step 0 that says the word harness, it is on the
 row's one-line hint rather than in its Hint dialog (the dialog is for a student who is stuck, not one

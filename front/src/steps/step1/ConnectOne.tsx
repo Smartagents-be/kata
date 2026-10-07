@@ -14,7 +14,7 @@ import { TaskCard } from '@/shared/components/TaskCard'
  * The moves name no command, so the card reads the same in class, where the `<pre>` above it is cut
  * with the rest of the prose. The two lines a student copies stay in the unit HTML, per assistant,
  * because a command is machine output rather than a move. A file path is not a command, which is why
- * `kata/step1/front/index.html` is allowed to sit in a move.
+ * `exercises/step1/front/index.html` is allowed to sit in a move.
  */
 const MOVES = ['start', 'curl', 'browser', 'reveal', 'shoot', 'compare', 'choose'] as const
 

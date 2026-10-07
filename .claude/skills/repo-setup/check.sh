@@ -117,10 +117,10 @@ head_ "Step projects"
 
 STEPS="step0 step1 step2 step3"
 for s in $STEPS; do
-  if [ -f "kata/$s/java/pom.xml" ]; then
-    ok "kata/$s/java"
+  if [ -f "exercises/$s/java/pom.xml" ]; then
+    ok "exercises/$s/java"
   else
-    bad "kata/$s/java/pom.xml missing"
+    bad "exercises/$s/java/pom.xml missing"
   fi
 done
 [ -f pom.xml ] && warn "a pom.xml appeared at the repo root; this repo has no aggregator on purpose"
@@ -128,11 +128,11 @@ done
 if [ "$RUN_TESTS" = 1 ] && command -v mvn >/dev/null 2>&1; then
   head_ "Builds (mvn -q test, default profiles only)"
   for s in $STEPS; do
-    [ -f "kata/$s/java/pom.xml" ] || continue
-    if (cd "kata/$s/java" && mvn -q test) >/dev/null 2>&1; then
+    [ -f "exercises/$s/java/pom.xml" ] || continue
+    if (cd "exercises/$s/java" && mvn -q test) >/dev/null 2>&1; then
       ok "$s green"
     else
-      bad "$s failed - rerun with output: (cd kata/$s/java && mvn test)"
+      bad "$s failed - rerun with output: (cd exercises/$s/java && mvn test)"
     fi
   done
   if [ -d front/node_modules ]; then
@@ -150,7 +150,7 @@ head_ "Ports"
 port_holder() { lsof -nP -iTCP:"$1" -sTCP:LISTEN -F c 2>/dev/null | sed -n 's/^c//p' | sort -u | paste -sd, -; }
 
 if command -v lsof >/dev/null 2>&1; then
-  for p in 8080 5173; do
+  for p in 8080 8082 5173; do
     holder="$(port_holder "$p")"
     if [ -n "$holder" ]; then
       warn "port $p is held by $holder (probably your own server from earlier)"
@@ -175,6 +175,6 @@ fi
 cat <<'EOF'
 
   Two servers, two terminals:
-    cd kata/step1/java && mvn spring-boot:run   # backend on :8080
+    cd exercises/step1/java && mvn spring-boot:run   # backend on :8080
     cd front && npm run dev                     # frontend on :5173  <- open this one
 EOF

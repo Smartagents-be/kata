@@ -22,16 +22,15 @@ changes and how to undo it, so read it first if you would rather know before any
 Two terminals:
 
 ```bash
-cd kata/step1/java && mvn spring-boot:run   # the step's backend on :8080
+cd exercises/step1/java && mvn spring-boot:run   # the step's backend on :8080
 cd front && npm run dev                     # the course on :5173  <- open this one
 ```
 
-Then open <http://localhost:5173> and start at the intro. Only one step's backend can hold `:8080`
-at a time, which is fine, because you work one step at a time. Reading the course with no backend
-running works too.
+Then open <http://localhost:5173> and start at the intro. Step 2's backend runs on `:8082`, so it
+never collides with step 1's. Reading the course with no backend running works too.
 
 ## Where things are
 
 - `front/` is the curriculum: every step, every unit, every exercise.
-- `kata/stepN/java/` is that step's project, standalone, with its own `pom.xml`. Every Maven command
+- `exercises/stepN/java/` is that step's project, standalone, with its own `pom.xml`. Every Maven command
   runs from inside one of those folders, never from here.

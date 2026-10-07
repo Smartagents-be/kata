@@ -136,7 +136,7 @@ the edit and the ripple check, never on the strength of an answer alone.
 - **Do not renumber a block's `data-i18n` keys as a side effect.** Cutting `<unit>.<section>.2`
   leaves `.3` where it is. A renumber means visiting every later key in `nl.json` and it is almost
   never what the row asked for.
-- **The exercise prohibitions hold.** Root `CLAUDE.md` and each `kata/stepN/java/CLAUDE.md` carry
+- **The exercise prohibitions hold.** Root `CLAUDE.md` and each `exercises/stepN/java/CLAUDE.md` carry
   them: no flag decoded, implemented or revealed, no tracing added to step 1's catalogue pipeline, no
   hardening of step 2's loans module, no `MemberStatements.forTier`, no solution to `problem.md`, and
   the three plaintext setup flags are never gathered or named. A fix may correct a flag's help text

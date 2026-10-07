@@ -1,7 +1,7 @@
 # front
 
 The kata's curriculum: React + Vite + TypeScript on shadcn/ui, serving every lesson, figure, quiz
-and flag board in the course. It is the app a student opens; the Java projects under `kata/stepN/`
+and flag board in the course. It is the app a student opens; the Java projects under `exercises/stepN/`
 are what they point their agent at.
 
 ## Running it
@@ -15,12 +15,12 @@ That is the whole of it for reading the course. A few units also want a backend,
 its own:
 
 ```bash
-cd ../kata/step1/java && mvn spring-boot:run   # :8080
+cd ../exercises/step1/java && mvn spring-boot:run   # :8080
 ```
 
 Vite proxies `/api` to `localhost:8080`, so the browser stays on one origin and Spring needs no CORS
-configuration. Only one step's service can hold the port at a time, which is fine: a student works
-one step at a time. Opening the app with no backend running is a supported state, because every quiz
+configuration. Step 2's service runs on `:8082` and is called with `curl`, not through the proxy, so
+both can run at once. Opening the app with no backend running is a supported state, because every quiz
 and every flag board grades in the browser.
 
 ## Commands

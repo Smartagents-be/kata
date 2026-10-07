@@ -19,7 +19,7 @@ and there is nothing useful after it. Unit ids are single words on the tree's ow
 
 **Nothing in the step is graded by a machine**, and that is still the decision. Every unit here is a
 conversation with a colleague, a stakeholder or yourself, so there is no command a checker could run,
-and it is the first step with no Java at all: `kata/step3/java` stays the empty scaffold, on the
+and it is the first step with no Java at all: `exercises/step3/java` stays the empty scaffold, on the
 reasoning in the root `CLAUDE.md`. What the step does carry is one browser-graded quiz on
 `expectations` and one ungraded `TaskCard` at the foot of `impostor`. The conversation reasoning holds
 against an *exercise* and not against a multiple-choice question, which a room answers by show of

@@ -2,7 +2,7 @@ import type { FlagSpec } from './flags'
 
 /**
  * The three flags the `setup` unit hands out, one per place an agent picks instructions up from in
- * `kata/step2/java`: the skill under that project's own `.claude`, the project briefing, and the
+ * `exercises/step2/java`: the skill under that project's own `.claude`, the project briefing, and the
  * briefing scoped to one package inside it.
  *
  * They are not printed by any build. Each one sits in the file it is about, so collecting them is

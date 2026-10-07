@@ -17,7 +17,7 @@ import type { Assistant } from '@/shared/assistant/assistant'
  * instrumenting, rebuilding, running and then a judgement about which of the lines that come back is
  * the flag. Opening on `machine` is the point at the front, since it puts the outermost layer first
  * and everything after it comes out of the project; ending on the judgement is the point at the
- * back, since it is step 0's fourth house rule paid off. So a reorder that puts the trace anywhere
+ * back, since it is step 0's third house rule paid off. So a reorder that puts the trace anywhere
  * but last costs the board its close. The order before all this was hardest first and was a fossil
  * of the abandoned layer mapping.
  *
@@ -77,7 +77,7 @@ export const flags: FlagSpec[] = [
   {
     // The one flag that is in no project at all. It was planted at install time, hours before the
     // student reached this board: `install.txt` at the repo root asks their agent to run
-    // `kata/step1/machine-context.mjs`, which writes one line into their user-level instructions
+    // `exercises/step1/machine-context.mjs`, which writes one line into their user-level instructions
     // file, and that file has been merged into every session in every project they have opened
     // since. That is what makes this row a hunt rather than an errand: the student is looking for
     // something that has been in front of them all along and that they never looked at, and that is
@@ -141,7 +141,7 @@ export const flags: FlagSpec[] = [
 ]
 
 /**
- * The step's sixth flag, and **not one of the board's five**. It is hidden in `kata/step1/front/`, a
+ * The step's sixth flag, and **not one of the board's five**. It is hidden in `exercises/step1/front/`, a
  * standalone page with no server behind it, and the only way to it is to drive a browser: the page
  * assembles the string while it runs, so reading the file returns nothing. `ShutterFlag` grades it
  * under the browser task in `tools`, where the work happens.

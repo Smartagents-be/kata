@@ -27,7 +27,7 @@ import { FileTree, type TreeNode } from './FileTree'
  * package they cover is this repo's own rule, so the example keeps it.
  *
  * Nothing here exists in this repo. It is an example, and the caption says so: the `TaskCard` under
- * this figure asks the student to sort `kata/step2/java` against the shape above it, so a reader who
+ * this figure asks the student to sort `exercises/step2/java` against the shape above it, so a reader who
  * took the drawing for a folder in this repository would be sorting one repository against another.
  */
 const TREE: TreeNode = {

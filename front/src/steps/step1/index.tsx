@@ -77,7 +77,7 @@ import recap from './units/recap.html?raw'
  * told the agent, read the whole response, turn the log level up, read the source, trace the run, in
  * that order because it runs easiest first and outside in. Only the first comes from no project at
  * all, and it was planted at install time rather than here: `install.txt` at the repo root asks the
- * student's agent to run `kata/step1/machine-context.mjs`, so by the time they reach this board the
+ * student's agent to run `exercises/step1/machine-context.mjs`, so by the time they reach this board the
  * line has been in every session they have opened for hours. That is `truth`'s question asked five
  * times, which is why that unit sits directly above this one. The
  * board grades in the browser against salted hashes, so it needs no backend and there is no Java

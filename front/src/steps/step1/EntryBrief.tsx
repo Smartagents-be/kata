@@ -25,7 +25,7 @@ import { useTranslation } from 'react-i18next'
  *
  * **The wishes live in three places that have to stay in step**:
  * `asked.1` to `asked.6` in both locale bundles, `WISHES` below, and the array in
- * `kata/step1/check-entry.mjs`. A seventh added to two of the three renders nowhere and is graded
+ * `exercises/step1/check-entry.mjs`. A seventh added to two of the three renders nowhere and is graded
  * anyway.
  *
  * **Nothing here carries `aria-labelledby`** except the `blockquote`, which has a role to hang it

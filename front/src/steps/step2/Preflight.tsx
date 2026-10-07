@@ -2,7 +2,7 @@ import { TaskCard } from '@/shared/components/TaskCard'
 
 /**
  * The capstone's first stage on the shared {@link TaskCard}: five moves against
- * `kata/step2/java` before a single line of the module changes.
+ * `exercises/step2/java` before a single line of the module changes.
  *
  * **It is the one stage that earns no flag, and that is why it is a card rather than a paragraph.**
  * Everything under it is graded by a build, so a student reading a page of instructions skips

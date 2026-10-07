@@ -1,7 +1,7 @@
 import { CODE_SALT } from './code'
 
 /**
- * The three flags step 0's board hands out, one per run against `kata/step0/java`. The first is the
+ * The three flags step 0's board hands out, one per run against `exercises/step0/java`. The first is the
  * intro reveal the `backend` page's block prints, the second is the readiness profile's, and the
  * third is the one the student has to pick out of two candidates. Between them they grade the loop
  * rather than any knowledge: run a command, read what the machine printed, paste it back.

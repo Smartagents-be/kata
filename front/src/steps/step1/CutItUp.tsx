@@ -7,7 +7,7 @@ import { TaskCard } from '@/shared/components/TaskCard'
 const MOVES = ['alone', 'agent', 'compare', 'plan', 'build'] as const
 
 /**
- * The unit's hands-on task, on the shared {@link TaskCard}: `kata/step1/java/problem.md`, cut by
+ * The unit's hands-on task, on the shared {@link TaskCard}: `exercises/step1/java/problem.md`, cut by
  * hand, cut again with the agent, the two cuts compared, then a plan on disk and the build.
  *
  * Six paragraphs said this once, and the compression is the point: the student reads the moves at a

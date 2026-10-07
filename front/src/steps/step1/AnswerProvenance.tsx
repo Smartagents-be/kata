@@ -16,7 +16,7 @@ import { useStepText } from '@/shared/i18n/useStepText'
  * row would say the agent was caught. Amber is the caution colour and belongs to a cost tip and a
  * hazard aside, so it is wrong here too.
  *
- * The claims are true of `kata/step1/java` apart from the invented one, and that matters: a student
+ * The claims are true of `exercises/step1/java` apart from the invented one, and that matters: a student
  * can open `Catalog.java` and `TitleController.java` and check the two sources, which is the move
  * the unit is asking for. Symbols and filenames are machine-shaped, so they are data in this file
  * with no key and no `nl` entry, the same way `ModelPricing`'s numbers are. Only the predicate under

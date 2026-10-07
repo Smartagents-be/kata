@@ -37,7 +37,7 @@ interface LoopNode {
 }
 
 const NODES: readonly LoopNode[] = [
-  { key: 'agent', acts: true, mono: ['cd kata/step0/java', 'mvn verify -Pintro'] },
+  { key: 'agent', acts: true, mono: ['cd exercises/step0/java', 'mvn verify -Pintro'] },
   { key: 'build', acts: false, mono: ['[x] intro complete'], faint: '{……}' },
   { key: 'you', acts: true },
   { key: 'box', acts: false },

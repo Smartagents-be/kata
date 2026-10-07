@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next'
  * The question is which dependency `@WebMvcTest` needs, and the chips differ
  * (`spring-boot-starter-test` against `spring-boot-webmvc-test`) because the trained answer is not a
  * wrong-looking answer. It is what was true up to Boot 3, stated as levelly as the current one. Boot 4
- * split the test slices out of the starter, and `kata/step1/java/pom.xml` declares
+ * split the test slices out of the starter, and `exercises/step1/java/pom.xml` declares
  * `spring-boot-webmvc-test`, so a student who checks finds the figure honest. The example is a library
  * fact rather than a project file on purpose: a current agent reads `pom.xml` on its own, but it does
  * not look up what it thinks it already knows. Machine-shaped strings, so no key and no `nl` entry,

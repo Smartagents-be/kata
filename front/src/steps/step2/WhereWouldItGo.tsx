@@ -2,7 +2,7 @@ import { TaskCard } from '@/shared/components/TaskCard'
 
 /**
  * The unit's hands-on task, on the shared {@link TaskCard}: sort the loans project in
- * `kata/step2/java` against the shape `DomainTree` draws further up the page.
+ * `exercises/step2/java` against the shape `DomainTree` draws further up the page.
  *
  * It works because the two genuinely disagree. The project keeps `port/` beside `domain/` rather
  * than inside it, and its `adapter/` and `web/` packages split by technology with no `incoming/`

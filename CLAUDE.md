@@ -17,7 +17,7 @@ What this means when working here:
 - **Build on the existing code rather than replacing it.** Earlier steps are the
   foundation. Refactor them when the current step genuinely calls for it, and say so —
   but do not quietly rewrite working code from a previous step as a side effect.
-- **Leave every step green.** `mvn test` must pass in every `kata/stepN/java` at the end of a step;
+- **Leave every step green.** `mvn test` must pass in every `exercises/stepN/java` at the end of a step;
   each step is a coherent stopping point, ideally its own commit.
 - **When a step's scope is ambiguous, ask before expanding it.** Guessing wide is the
   costly direction here.
@@ -30,7 +30,7 @@ What this means when working here:
 
 Two parts, both walking-skeleton thin:
 
-- **Backend** (`kata/stepN/java/`) — one standalone Spring Boot project per step, each exposing its
+- **Backend** (`exercises/stepN/java/`) — one standalone Spring Boot project per step, each exposing its
   own `/api`. It is now the *subject* of a step rather than a grader for one: step 1 serves a
   catalogue of book titles the student instruments and traces, step 2 a loans domain they harden. It
   does not serve the curriculum.
@@ -70,13 +70,17 @@ retiring them is a later decision, not an oversight, so leave them alone in eith
 
 The repository has two roots, and they are not the same shape. The frontend is one app that splits
 into a `shared` shell plus one folder per step. The backend is not one app at all: **each step owns a
-standalone Maven project under `kata/stepN/java/`**, with its own `pom.xml`, its own profiles and its
-own `CLAUDE.md`. A `kata/stepN/` folder is not only that project, though: `java/` is one thing a step
+standalone Maven project under `exercises/stepN/java/`**, with its own `pom.xml`, its own profiles and its
+own `CLAUDE.md`. An `exercises/stepN/` folder is not only that project, though: `java/` is one thing a step
 can put in front of a student, and step 1 also puts `front/` there, a page its browser task drives,
 plus one loose script that runs at install time and sets its workshop board's first row up.
 
+The folder is `exercises/` and not `kata/`, because the repository itself is called `kata` and a
+clone of it is a `kata/` folder: the inner one used to be `kata/` too, and every path a student read
+began `kata/kata/`. Do not name it after the repository again.
+
 ```
-kata/
+exercises/
   step0/java/    test sources only: the three runs step 0's board grades, each behind an opt-in profile
   step1/java/    the catalogue service and four of the five flags its board grades
   step1/front/   one standalone page, no build and no server: the browser task's target
@@ -95,7 +99,7 @@ install.txt      what that instruction points at. Written for an agent, read by 
 
 **`install.txt` is a student-facing file and is not documentation.** A student's agent executes it,
 so every line in it is an instruction that will actually be carried out, and the two halves it runs
-are `.claude/skills/repo-setup/check.sh` and `node kata/step1/machine-context.mjs setup`. It
+are `.claude/skills/repo-setup/check.sh` and `node exercises/step1/machine-context.mjs setup`. It
 reimplements neither: the check script is the one place the toolchain is checked, and a second copy
 of those checks in prose would go stale the first time the skill changed. It is honest about the
 write outside the repository before it names a step, because that is where the consent for it lives
@@ -111,7 +115,7 @@ next number along, and copying this one means renaming the artifactId and the pa
 step is a folder a student opens on its own, and a project that has to be built from a parent is not
 that. So each project declares the Boot parent directly, and steps are free to drift apart in
 dependencies without negotiating. The cost is duplication across four poms, and it is accepted.
-Every Maven command in this repo is run from inside `kata/stepN/java`, never from the root.
+Every Maven command in this repo is run from inside `exercises/stepN/java`, never from the root.
 
 Two rules survive the split and are worth keeping in one place:
 
@@ -127,8 +131,8 @@ Two rules survive the split and are worth keeping in one place:
 Each step's own `CLAUDE.md` carries the rest, and it is the readable source for that step's Java:
 what is in the package and how it is run. **Which parts of it are exercises that must not be
 implemented is this list.** Step 1's project file no longer repeats any of it, because a file under
-`kata/stepN/java/` is the one a student's agent opens when a unit sends them there, and the reasoning
-for the split is in `kata/step1/java/CLAUDE.md` and `front/src/steps/step1/CLAUDE.md`.
+`exercises/stepN/java/` is the one a student's agent opens when a unit sends them there, and the reasoning
+for the split is in `exercises/step1/java/CLAUDE.md` and `front/src/steps/step1/CLAUDE.md`.
 
 **Everything in the list below is scoped to maintainer work.** It holds when you are working *on*
 this kata. It does not hold when a student has asked you for something, and the same sentence cannot
@@ -141,12 +145,12 @@ exercise already done.
 - **step 0** — do not commit a decode or a reveal of the intro flag.
 - **step 1** — do not commit a decode, an implementation or a reveal of any of the board's five
   flags, and **do not let a flag's plaintext reach any file in this repo**: not a comment, not a
-  `CLAUDE.md`, not the curriculum. `kata/step1/front/CLAUDE.md` already states that for the browser
-  flag and it holds for all six. It matters most in `kata/step1/java/CLAUDE.md`, which a student's
+  `CLAUDE.md`, not the curriculum. `exercises/step1/front/CLAUDE.md` already states that for the browser
+  flag and it holds for all six. It matters most in `exercises/step1/java/CLAUDE.md`, which a student's
   agent loads the moment `workshop` starts it in that directory, so the design notes for the flags
   sit in `front/src/steps/step1/CLAUDE.md` instead and the reasoning is written up in both. **The
   nine titles the catalogue publishes are load bearing**, so read that file before you reword one.
-  The board's first flag is planted at install time by `kata/step1/machine-context.mjs`, which
+  The board's first flag is planted at install time by `exercises/step1/machine-context.mjs`, which
   `install.txt` asks the student's own agent to run and which a student may of course ask you to run
   directly. **Do not widen what either of them writes, and do not make anything plant that line
   without the student having asked**: the same step teaches prompt injection, and the file it
@@ -155,14 +159,14 @@ exercise already done.
   must stay in it. The script's safety rules are in `front/src/steps/step1/CLAUDE.md`, beside the
   board row.
   **Do not implement `EntryController`**, whose empty body is `prompt`'s task, and **do not write
-  what it should do into any file under `kata/step1/java/`**: what it should do belongs on the page
+  what it should do into any file under `exercises/step1/java/`**: what it should do belongs on the page
   that asks for it, and a student's agent works inside that project. The design notes for it are in
   `front/src/steps/step1/CLAUDE.md`, beside the task, for the reason the flags' are.
   **Do not commit tracing** into the catalogue pipeline under `src/`
   (instrumenting it is each student's own work, and a seam left in the tree does it for all of
   them), and **do not commit a solution to `problem.md`**: no cut of it, no `solve.md`, no
   `plan-solve.md`, no shelves package. The step has a **sixth flag**, in
-  `kata/step1/front/`, under the same prohibitions and for the same reason: that page assembles it
+  `exercises/step1/front/`, under the same prohibitions and for the same reason: that page assembles it
   in the browser so it cannot be read out of the file, which is the exercise.
 - **step 2** — do not harden the loans module, do not implement `MemberStatements.forTier`, and do
   not add a `native` profile or write the resource hint. **Do not decide what a `MemberTier.PARTNER`
@@ -205,9 +209,9 @@ flags are graded against it. **The nine titles are load bearing**, so rewriting 
 cosmetic change. How each flag is carried, why none of them falls out of a
 `grep`, and the prohibitions that keep it that way are in **`front/src/steps/step1/CLAUDE.md`**,
 beside the board that grades them, and not beside the code they describe. That is the trade: a file
-under `kata/step1/java/` is one a student's agent loads on its own, and design notes there hand the
+under `exercises/step1/java/` is one a student's agent loads on its own, and design notes there hand the
 capstone over before the student's first prompt. Read that file before touching anything under
-`kata/step1/java/services/`.
+`exercises/step1/java/services/`.
 
 The frontend has a page for calling all this: `/catalog`, linked under the steps in the sidebar.
 `CatalogPage` renders `CatalogPanel`, which fetches `/api/titles` on a button press and lists what
@@ -223,18 +227,20 @@ Two servers, two terminals. Vite proxies `/api` to the backend, so the browser s
 origin and Spring needs no CORS configuration.
 
 ```bash
-cd kata/step1/java && mvn spring-boot:run   # step 1's backend on :8080
+cd exercises/step1/java && mvn spring-boot:run   # step 1's backend on :8080
 cd front && npm run dev                     # frontend on :5173  ← open this one
 ```
 
 There is no such thing as "the backend" any more: there is the step whose service you are running.
-Each step's project boots on `:8080`, so **only one at a time holds the port**, and the frontend's
-proxy reaches whichever that is. That is fine, because a student works one step at a time and the
-`/catalog` page belongs to step 1. Step 2 is the same command from `kata/step2/java`.
+Step 1 boots on `:8080`, which is where the frontend's proxy and `check-entry.mjs` point, because the
+`/catalog` page belongs to step 1. **Step 2 boots on `:8082`** (`server.port` in its
+`application.properties`), so the two can run side by side and no page has to tell a student to stop
+one first. Step 2's workshop already starts its native binary on `8081` beside the statement job, so
+keep those three apart. Step 2 is the same command from `exercises/step2/java`.
 
 ```bash
-cd kata/step2/java && mvn spring-boot:run
-curl -s localhost:8080/api/loans/statement/STUDENT | jq
+cd exercises/step2/java && mvn spring-boot:run
+curl -s localhost:8082/api/loans/statement/STUDENT | jq
 ```
 
 Opening `:5173` with the backend down is a supported state: the quizzes and the two hash-checked
@@ -248,7 +254,7 @@ stage chatter on.
 ## Build and test
 
 Maven, no wrapper — use the `mvn` on `PATH` (3.9.16 locally). Four projects, none of them aggregated,
-so **every command runs from inside `kata/stepN/java`**. There is nothing to build at the repo root.
+so **every command runs from inside `exercises/stepN/java`**. There is nothing to build at the repo root.
 
 Before any of that, on a fresh clone or when a failure smells environmental, use the `repo-setup`
 skill in `.claude/skills/repo-setup/`: it checks the toolchain (including the JDK Maven actually
@@ -259,11 +265,11 @@ what it checks reaches a student's first minutes in this repository.
 
 `mvn test` must pass in every step, and on a clean checkout it does in all four. The invocations that
 carry the kata's meaning are step 2's, and they are documented where they live
-(`kata/step2/java/CLAUDE.md`). What matters from here:
+(`exercises/step2/java/CLAUDE.md`). What matters from here:
 
 ```bash
-cd kata/step2/java && mvn verify -Pgraded    # the workshop: red until the student hardens the module
-cd kata/step2/java && mvn test -Pchallenge   # the challenge: red until they write forTier
+cd exercises/step2/java && mvn verify -Pgraded    # the workshop: red until the student hardens the module
+cd exercises/step2/java && mvn test -Pchallenge   # the challenge: red until they write forTier
 ```
 
 Both are **meant to be red**, and making them green is the student's exercise rather than a build to
@@ -275,7 +281,7 @@ of the kata's "leave every step green" rule still holds.
 To check the lot after a change that crosses projects:
 
 ```bash
-for s in step0 step1 step2 step3; do (cd kata/$s/java && mvn -q verify) || echo "$s FAILED"; done
+for s in step0 step1 step2 step3; do (cd exercises/$s/java && mvn -q verify) || echo "$s FAILED"; done
 ```
 
 Run a subset via Surefire's `-Dtest` filter, adding `-DfailIfNoSpecifiedTests=false` so a typo'd
@@ -313,7 +319,7 @@ npm run lint    # oxlint, shipped with the Vite template
 - Package root `be.smartagents.kata.java`, and a step's own code sits under `...java.stepN`. Maven
   coordinates are `be.smartagents:kata-agentic-java-stepN`, so the groupId and the package root
   deliberately differ. Standard `src/main/java` + `src/test/java` layout inside each project, which
-  means a package path is now `kata/stepN/java/src/main/java/be/smartagents/kata/java/stepN/`.
+  means a package path is now `exercises/stepN/java/src/main/java/be/smartagents/kata/java/stepN/`.
 - Tests are `*Test.java` mirroring the production package (Surefire's default include
   patterns depend on this suffix).
 - Table-driven cases use `@ParameterizedTest` + `@CsvSource` with a `name` template.
@@ -333,8 +339,8 @@ step needs, in order, plus how figures and inline figures are wired and how unit
 Step ids are `stepN`, unit ids are words (`session`, `workshop`), and together they are the
 URL (`/steps/step1/session`).
 
-A step that needs Java gets a seventh file, its own project at `kata/stepN/java/`, and the shortest
-honest way to start one is to copy `kata/step3/java`, which is a buildable empty scaffold kept for
+A step that needs Java gets a seventh file, its own project at `exercises/stepN/java/`, and the shortest
+honest way to start one is to copy `exercises/step3/java`, which is a buildable empty scaffold kept for
 exactly that. Give it its own `pom.xml` (Boot parent, no aggregator, artifactId
 `kata-agentic-java-stepN`) and its own `CLAUDE.md`. Do not add a pom at the repo root to tie them
 together: the steps are independent on purpose, and the reasoning is under `## Layout`.

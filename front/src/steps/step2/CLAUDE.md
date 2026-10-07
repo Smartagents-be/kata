@@ -149,7 +149,7 @@ per side** to make up the difference: twelve arrows on one figure and neither se
 the tree ships one per direction, and that is where the pair deliberately parts company: a single
 box on each edge draws a pipeline, which is the picture this shape exists to correct. The leaf names
 are still the tree's own, which keeps them a pair without making them a copy. `DomainTree` itself is
-untouched by the split, so `WhereWouldItGo` below still sorts `kata/step2/java` against it and the
+untouched by the split, so `WhereWouldItGo` below still sorts `exercises/step2/java` against it and the
 disagreement that task needs is intact.
 
 Each figure's own docblock carries the rest, including why `WordsToFiles` draws no badly-named
@@ -164,7 +164,7 @@ and its lead is what picks up.
 `engineering` closes on `WhereWouldItGo`, a `TaskCard` under the same `<hr>` and "Test your knowledge"
 heading, with no prose between the rule and the card: the card's description carries the setting, so
 a paragraph there would say it twice. Five moves, and the task exists because `DomainTree` and
-`kata/step2/java` genuinely disagree. The project keeps `port/` beside `domain/` rather than inside
+`exercises/step2/java` genuinely disagree. The project keeps `port/` beside `domain/` rather than inside
 it, and its `adapter/` and `web/` packages split by technology with no `incoming/` and `outgoing/`
 above them, so the controller and the in-memory repository both land somewhere else in the figure,
 while `config/` and `aot/` land nowhere in it at all. **The card names none of that and gives no
@@ -325,7 +325,7 @@ edit once.
 heading the rest of the step uses, with the quiz under it. **Four moves rather than five**, because
 the `data-audience="self"` aside owns the rewind experiment and a fifth move would say it twice to
 the one reader who gets both. **The `gap` move is why the card exists**: `LateFeePolicy` computes in
-cents and names no currency anywhere in `kata/step2/java`, so asking for the fee in euros is the only
+cents and names no currency anywhere in `exercises/step2/java`, so asking for the fee in euros is the only
 place in the course where a student watches an agent decline to guess. Nothing on the card is graded,
 and nothing it asks for touches a package, so `mvn verify -Pgraded` and the `challenge` tests are
 safe from it.
@@ -398,7 +398,7 @@ the other pointing at nothing. `HookTree` paints
 takes away one of them has the wrong picture.
 
 `setup` closes on the step's second flag board, and it is the only exercise outside `workshop` that
-a machine grades. Three flags, one per place `kata/step2/java` tells an agent how to work: the skill
+a machine grades. Three flags, one per place `exercises/step2/java` tells an agent how to work: the skill
 under that project's own `.claude`, the project briefing, and the briefing scoped to the `domain`
 package. **The prose names none of the three files, and no row hint names one either.** That is
 the exercise: the unit says a project you have not opened was set up before you got there, go and
@@ -876,7 +876,7 @@ and the gold standard (a file already in the repository, because "better" is an 
 agents can run all afternoon and "as good as this file" is a comparison). The prompt names `TitleController` and bounds review/repair to 3 rounds. `/loop` is interval
 scheduling, not a condition-driven repeat command. Keep objective completion checks and a human
 delivery boundary; do not replace them with the critic being impressed. The job it asks for is a link shortener in a project of its
-own, which is deliberate: anything aimed at `kata/step2/java` would be the capstone handed over in
+own, which is deliberate: anything aimed at `exercises/step2/java` would be the capstone handed over in
 copy-pasteable form.
 
 **Its aside is this unit's second `data-variant="warning"`**, and the two carry different costs on
@@ -1102,7 +1102,7 @@ instead of meeting it. Sources, read October 2026:
 [JetBrains changelog](https://github.blog/changelog/2026-03-11-major-agentic-capabilities-improvements-in-github-copilot-for-jetbrains-ides/).
 
 **What the guard covers was measured, not reasoned**, in live runs of Claude Code 2.1.292 and Copilot
-CLI 1.0.92 against a copy of `kata/step2/java`, with the agent told to lower the floor by any means.
+CLI 1.0.92 against a copy of `exercises/step2/java`, with the agent told to lower the floor by any means.
 Each line of the move closed a hole a run found:
 - **The thresholds are not only in `pom.xml`.** `COVERAGE_FLOOR` and `MUTATION_FLOOR` are constants in
   `grading/FlagRevealIT.java`, so the move names the grading package. `COVERAGE_FLOOR` is the
@@ -1143,9 +1143,9 @@ agent with the rule stops and asks. An agent without it asserts the accidental b
 on, which is the whole demonstration.
 
 **Do not resolve it, and do not name it anywhere a student's agent reads.** Not in
-`kata/step2/java/CLAUDE.md`, not in the `domain` package's briefing, not in a test, and not in the
+`exercises/step2/java/CLAUDE.md`, not in the `domain` package's briefing, not in a test, and not in the
 `workshop` prose or a board hint. It is documented here for the same reason step 1's flag design is
-documented on this side: a file under `kata/step2/java/` is one a student's agent opens on its own,
+documented on this side: a file under `exercises/step2/java/` is one a student's agent opens on its own,
 and a note there hands the exercise over before the first prompt. The page sets it up by asking for
 the rule and stops.
 
@@ -1191,7 +1191,7 @@ same native image. The revision was about how the work is handed over, which is 
 and re-cutting the Java would have thrown away the one part of the step a machine can grade to buy
 nothing.
 
-It ships a small loans domain in `kata/step2/java` that is green but un-hardened, and a `graded`
+It ships a small loans domain in `exercises/step2/java` that is green but un-hardened, and a `graded`
 Maven profile that measures it against three goals: a coverage floor, a complexity ceiling and
 honest (mutation-tested) coverage. `mvn verify -Pgraded` prints a leetspoken flag for each goal met
 and fails until all three are. The student hardens the module (that is the exercise, so do not ship
@@ -1230,13 +1230,13 @@ arriving together and your reading being the bottleneck, and it is deliberately 
 rather than an argument: `steering` owns it, and `parallel`'s aside owns the attention half.
 
 **Three things about the commands in that stage are load bearing, and each of them was a bug
-first.** The `git` lines are the one exception to "every command runs from `kata/step2/java`", and
-the page says so: left unqualified they resolve to `kata/step2/kata-statement`, which plants two full
+first.** The `git` lines are the one exception to "every command runs from `exercises/step2/java`", and
+the page says so: left unqualified they resolve to `exercises/step2/kata-statement`, which plants two full
 checkouts of this repository inside the working tree. So the worktree `<pre>` runs `cd ../../..` and
 stops there, and **each job's own `<pre>` opens with its own `cd` from the repository root**, because
 a single trailing `cd` put both jobs in the statement worktree and straight back into the one
 `target/` the paragraph above had just said they could not share. And the native binary starts with
-`SERVER_PORT=8081`, because it is a Boot web app and the statement job is holding 8080 while it runs;
+`SERVER_PORT=8081`, because it is a Boot web app and the statement job is holding 8082 while it runs;
 the page tells the student to run these two at once, so the collision is the page's to prevent. It is
 an environment prefix rather than `--server.port=8081` for a reason that is only visible on screen:
 a browser takes a line break after a hyphen, and the flag split across two lines in the middle of
@@ -1246,11 +1246,11 @@ says where the reader is standing.
 There used to be a third obstacle on the native flag, and it is worth knowing why it went. Step 1 and
 step 2 once shared one Maven module, so the Boot plugin pinned `<mainClass>` to `Step1Application`
 and a naive native build compiled the wrong step; aiming it at step 2 was an obstacle in its own
-right. Splitting the steps into their own projects removed it, since `kata/step2/java` holds one main
+right. Splitting the steps into their own projects removed it, since `exercises/step2/java` holds one main
 class and the build finds it. **If the exercise wants a third obstacle back, it needs a new one
 rather than that sentence.**
 
-**Do not add a `native` profile to `kata/step2/java/pom.xml`, and do not write the resource hint or a
+**Do not add a `native` profile to `exercises/step2/java/pom.xml`, and do not write the resource hint or a
 `RuntimeHintsRegistrar`**: wiring the build and planning the hint are the exercise. Do not spell out
 the fix here either; the runtime miss is what the student is meant to read.
 

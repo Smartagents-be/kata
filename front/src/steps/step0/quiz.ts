@@ -4,7 +4,7 @@ import type { QuizQuestion } from '@/shared/step'
  * Two questions under the `welcome` unit, one per half of what the intro teaches. The first is what
  * a `{}`-wrapped code in the prose is for, and it is the lightest question in the kata on purpose,
  * so a student who read the page gets the green tick and sees how a quiz works before step 1 asks
- * anything real. The second is house rule two, which is the one rule on that page a student can
+ * anything real. The second is house rule three, which is the one rule on that page a student can
  * break without noticing: an agent that hands back a plausible flag it never ran for is the failure
  * step 0's board is built to catch, and the `pick` row makes them live it a page later.
  *

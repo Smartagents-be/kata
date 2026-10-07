@@ -28,9 +28,14 @@ reasoning behind all three are in each step's own file.
 
 **Step 2 is the one step not written for two assistants**, and every other step is, on the
 `data-assistant` rule in `front/CLAUDE.md`. Steps 0 and 1 carry almost all of it; `step3`'s share is
-two filename pairs and is documented under that step. The Copilot side assumes **Copilot CLI**, the
-terminal one, because every exercise in step 1 already runs commands in a terminal against a Maven
-backend.
+two filename pairs and is documented under that step. The Copilot side was written for **Copilot
+CLI**, the terminal one, because every exercise in step 1 already runs commands in a terminal against
+a Maven backend. **That assumption is being retired, not kept**: the class this is taught to works in
+Copilot inside IntelliJ, so the requirement is now an agent that can run commands on the student's
+machine, IDE or terminal. Step 0's `welcome.lead.6` already says that and names both products in one
+shared line rather than a variant pair. Do not put "from a terminal" back into it. Most Copilot
+blocks still read CLI-first, and rewriting them IDE-first is the open "IntelliJ route" item in
+`REVIEW.md`, not something this line claims is done.
 The product detail behind those blocks, what the course leaves out on purpose, and which facts are
 dated are in **`copilot-specific.md` at the repo root**. Read it before writing a Copilot claim:
 Copilot's billing changed under this course once already.

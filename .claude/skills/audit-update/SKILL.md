@@ -59,8 +59,8 @@ split per step (1a, 1b, 1c and so on); "Table 1" below always means the changed 
 | `steps/stepN/*.tsx` (figures) | Table 2 `Fig`, the `Interactive` column, and rows about figure ordering or stale docblocks |
 | `steps/stepN/quiz.ts` | the `Interactive` column, the quiz rows, and the cadence summary's "every quiz is in the first six units" claim |
 | `steps/stepN/locales/*.json` | rows whose fix names a locale key, the Dutch completeness row, and locale file hygiene |
-| `kata/stepN/java/**` | Table 1 rows about the service, flags, profiles or a Javadoc; several `⚠` rows are about Java text disagreeing with prose |
-| `front/src/steps/CLAUDE.md`, `front/src/steps/*/CLAUDE.md`, `kata/*/CLAUDE.md` | rows that cite one of those files as the thing a student reads or as the repo disagreeing with itself |
+| `exercises/stepN/java/**` | Table 1 rows about the service, flags, profiles or a Javadoc; several `⚠` rows are about Java text disagreeing with prose |
+| `front/src/steps/CLAUDE.md`, `front/src/steps/*/CLAUDE.md`, `exercises/*/CLAUDE.md` | rows that cite one of those files as the thing a student reads or as the repo disagreeing with itself |
 | `shared/deck/deck.tsx` | the delivery-gap row about deck coverage |
 
 A change to a file listed by a row's **fix** is the strongest signal: if the fix said "change the
@@ -192,6 +192,6 @@ one, because it claims a pass that did not happen.
 - **Do not fix the defects.** This skill updates the audit. Editing a unit to close a row is a
   separate request, and doing both at once means the audit describes work the reader cannot see.
 - **Do not solve or reveal an exercise** in the course of citing one. The flag prohibitions in
-  `CLAUDE.md` and in each `kata/stepN/java/CLAUDE.md` apply to audit.md exactly as they do anywhere
+  `CLAUDE.md` and in each `exercises/stepN/java/CLAUDE.md` apply to audit.md exactly as they do anywhere
   else: a row may say a flag's help text is wrong without printing the flag.
 - **Do not add rows for things you did not check.** A row is a measurement.

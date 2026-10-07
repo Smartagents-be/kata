@@ -5,14 +5,14 @@
 </p>
 
 <p data-i18n="workshop.lead.2">
-  Point your agent at <code>kata/step2/java</code>: a library loans domain, ports and adapters, with a
+  Point your agent at <code>exercises/step2/java</code>: a library loans domain, ports and adapters, with a
   late-fee rule in the middle of it. It compiles, and the one test it ships with passes, so the
   default build is green. That makes it exactly the kind of code a quality gate exists for: one method too branchy to read, and
   almost no tests behind it.
 </p>
 
 <p data-i18n="workshop.lead.3">
-  Run the commands below from <code>kata/step2/java</code> unless the block says otherwise, because
+  Run the commands below from <code>exercises/step2/java</code> unless the block says otherwise, because
   each step of this kata is its own Maven project. Set an afternoon aside.
 </p>
 
@@ -30,7 +30,7 @@
   machine wrote your brief, so this page does not have to.
 </p>
 
-<pre><code>cd kata/step2/java
+<pre><code>cd exercises/step2/java
 mvn verify -Pgraded</code></pre>
 
 <p data-i18n="workshop.pre-flight.2">
@@ -54,7 +54,7 @@ mvn verify -Pgraded</code></pre>
   The sentence you hand over is the same sentence at any size.
 </p>
 
-<pre><code>&gt; Goal: `mvn verify -Pgraded` goes green in kata/step2/java.
+<pre><code>&gt; Goal: `mvn verify -Pgraded` goes green in exercises/step2/java.
   Run it after every class you change, keep the default build
   green, and do not change a public signature.</code></pre>
 
@@ -88,10 +88,10 @@ git worktree add -b feat/native ../kata-native</code></pre>
   the response.
 </p>
 
-<pre><code>cd ../kata-statement/kata/step2/java
+<pre><code>cd ../kata-statement/exercises/step2/java
 mvn test -Pchallenge
 mvn spring-boot:run
-curl localhost:8080/api/loans/statement/STUDENT</code></pre>
+curl localhost:8082/api/loans/statement/STUDENT</code></pre>
 
 <p data-i18n="workshop.two-jobs.3">
   In the second, nothing is failing, because nothing has been built. Compile step 2 all the way down
@@ -100,7 +100,7 @@ curl localhost:8080/api/loans/statement/STUDENT</code></pre>
   starts, and where the flag should be it prints a miss. Your plan was a piece short, and the image tells you which piece.
 </p>
 
-<pre><code>cd ../kata-native/kata/step2/java
+<pre><code>cd ../kata-native/exercises/step2/java
 mvn -Pnative native:compile
 SERVER_PORT=8081 ./target/kata-agentic-java-step2</code></pre>
 

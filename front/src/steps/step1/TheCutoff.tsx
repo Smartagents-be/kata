@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next'
  * the day. The axis is the only thing saying which way time runs, which is what the arrowhead is for.
  *
  * The versions are `3.5.0` on the near side and `4.1.0` on the far one. **`4.1.0` is what
- * `kata/step1/java/pom.xml` declares**, so a Boot upgrade in that project means moving the number
+ * `exercises/step1/java/pom.xml` declares**, so a Boot upgrade in that project means moving the number
  * here. `TrainedOrGrounded` a screen later tells the same story with a dependency instead of a
  * version: what the Boot 3 line taught (`spring-boot-starter-test`) against what Boot 4 needs. Machine-shaped strings, so they are data here with no key and no `nl` entry, the way
  * `ModelPricing`'s numbers are.

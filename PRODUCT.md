@@ -57,13 +57,12 @@ backend down).
 
 ## Operating Context
 
-- Runs as two servers in two terminals: a Spring Boot backend (`:8080`,
-  serving `/api`) and a React + Vite frontend (`:5173`, the one to open). Vite
+- Runs as two servers in two terminals: a Spring Boot backend (`:8080` for
+  step 1, `:8082` for step 2, serving `/api`) and a React + Vite frontend (`:5173`, the one to open). Vite
   proxies `/api` to the backend, so there is one origin and no CORS.
-- The backend is one standalone Maven project per step, under `kata/stepN/java`,
+- The backend is one standalone Maven project per step, under `exercises/stepN/java`,
   each with its own `pom.xml` and profiles. There is no aggregator and no pom at
-  the repo root, so every Maven command runs from inside a step's folder, and
-  only one step holds `:8080` at a time.
+  the repo root, so every Maven command runs from inside a step's folder.
 - Opening the frontend with the backend down is a supported state: quizzes and
   the two hash-checked flag boards still work; a free-text submission reports it
   could not reach the service, at the answer box.
@@ -89,7 +88,7 @@ backend down).
   `@SpringBootApplication`, scoped to its own package by the default component
   scan, so running one never drags in another. A project holds one main class,
   so the Boot plugin needs no `<mainClass>` pin and plain `mvn spring-boot:run`
-  from `kata/stepN/java` starts that step. `@SpringBootTest` in step 2 must
+  from `exercises/stepN/java` starts that step. `@SpringBootTest` in step 2 must
   name the config class explicitly, since `Step2Application` sits beside its
   tests rather than above them.
 - Frontend: a `shared` shell plus one folder per step; steps may import from
