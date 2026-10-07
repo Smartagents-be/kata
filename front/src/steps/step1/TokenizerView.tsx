@@ -5,7 +5,7 @@ import { cn } from '@/shared/lib/utils'
 import { exampleSentence } from './example-sentence'
 
 /**
- * The lead figure: one sentence the way a tokeniser hands it to the model. Two counters, the text
+ * The lead figure: one sentence the way a tokeniser hands it to the model. Three counters, the text
  * with every token on its own background, and a toggle that swaps the text for the ids. It is the
  * word, token, number step `tokens.lead.1` states, made visible before `TokenNetwork` feeds one of
  * those numbers through a network.
@@ -47,7 +47,9 @@ export function TokenizerView() {
   const { tokens } = exampleSentence(locale)
   const text = tokens.map((token) => token.text).join('')
 
+  // Words first, so the row reads as the step the figure is about: a word is not a token.
   const counters = [
+    { id: 'words', label: t('tokenizer-view.words'), value: text.trim().split(/\s+/).length },
     { id: 'tokens', label: t('tokenizer-view.tokens'), value: tokens.length },
     { id: 'characters', label: t('tokenizer-view.characters'), value: text.length },
   ]

@@ -45,12 +45,19 @@ type Sample = {
 }
 
 /**
- * The three code-shaped rows. The text row is not here: it is the unit's example sentence in the
- * reader's own language, read from `example-sentence.ts` at render time, so the page shows one
- * sentence everywhere. **The order is text, Java, class name, id, and it is no longer cheapest
- * first.** The English sentence splits at 22 tokens per 100 characters and the Dutch one at 24,
- * which ties text with the line of Java (22) or puts it just above. So the prose says text and code are
- * about level and an id costs nearly 3 times as much, and that is true in both languages.
+ * The three machine-shaped rows (a line of Java, a log line, an id). The text row is not here: it is
+ * the unit's example sentence in the reader's own language, read from `example-sentence.ts` at
+ * render time, so the page shows one sentence everywhere. **The order is text, Java, log line, id,
+ * and it is cheapest first only roughly.** The English sentence splits at 22 tokens per 100
+ * characters and the Dutch one at 24, which ties text with the line of Java (22) or puts it just
+ * above. So the prose says text and code are about level, a log line costs nearly 2 times as much
+ * and an id nearly 3 times, and that is true in both languages.
+ *
+ * **The log line replaced a class name** (`be.smartagents.kata.java.step1.CatalogController`, 23),
+ * which said nothing the line of Java did not. Measured over the kata's whole Java source, code runs
+ * at about 23 per 100 against prose at 21 to 22, so code is not the expensive kind of text; strings
+ * that look random are. A log line is what a student actually pastes into an agent, and its
+ * timestamp, thread name and path sit between the two.
  *
  * **The text row has to contain a word that breaks**, and the example sentence does: `swears` comes
  * apart at `sw|ears` and `beweert` at `bewe|ert`, which is neither a syllable nor a stem. A sentence
@@ -78,19 +85,46 @@ const CODE_SAMPLES: Sample[] = [
     ],
   },
   {
-    id: 'identifier',
+    id: 'log',
     pieces: [
-      'be',
-      '.smart',
-      'agents',
-      '.k',
-      'ata',
-      '.java',
-      '.step',
-      '1',
-      '.C',
-      'atalog',
+      '202',
+      '6',
+      '-',
+      '10',
+      '-',
+      '07',
+      ' ',
+      '09',
+      ':',
+      '14',
+      ':',
+      '22',
+      '.',
+      '381',
+      ' INFO',
+      ' [',
+      'nio',
+      '-',
+      '808',
+      '0',
+      '-ex',
+      'ec',
+      '-',
+      '3',
+      ']',
+      ' Title',
       'Controller',
+      ':',
+      ' GET',
+      ' /',
+      'api',
+      '/t',
+      'itles',
+      ' ',
+      '200',
+      ' ',
+      '37',
+      'ms',
     ],
   },
   {
@@ -135,7 +169,7 @@ const EASE = `cubic-bezier(${EASE_QUIET.join(', ')})`
 
 /**
  * Milliseconds between one chip arriving and the next. Small, because the longest sample is 22
- * tokens and a stagger tuned for a fan of five would run the identifier and the uuid past a second.
+ * tokens and a stagger tuned for a fan of five would run the log line and the uuid past a second.
  * Left uncapped: a sample that takes longer to enumerate is one with more tokens in it, which is
  * what the figure is about.
  */

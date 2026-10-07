@@ -28,8 +28,10 @@
        deliberately not used: no unit defines it before `context` itself takes the window apart. -->
   <p data-i18n="tokens.lead.2">
     Text reaches a language model as tokens. They measure how much text fits and how much is
-    processed. Images become tokens too, and are counted and billed the same way. A token count is
-    not a word count or a character count.
+    processed. A token count is not a word count or a character count. Images become tokens too,
+    and are billed the same way. Claude counts roughly (width ÷ 28) × (height ÷ 28): 1 token per
+    block of 28 by 28 pixels. A screenshot of 1000 by 1000 pixels is about 1,300 tokens. A larger
+    image is scaled down first, so on current models 1 image costs at most about 4,800 tokens.
   </p>
 
   <p data-i18n="tokens.lead.3">
@@ -43,8 +45,7 @@
 
   <p data-i18n="tokens.not-words.1">
     A tokeniser uses a fixed vocabulary and segmentation rules learned from text. Common words often
-    stay whole; other words split into smaller pieces. The BPE tokeniser in this example applies
-    ranked merges, rather than always choosing the longest known piece. Different tokenisers draw
+    stay whole; other words split into smaller pieces. Different tokenisers draw
     different boundaries, even between versions of the same model: Claude Opus 4.7 cuts the same text
     into up to 35% more tokens than Opus 4.6.
   </p>
@@ -54,12 +55,12 @@
 
 <div data-audience="self">
   <!-- `TokenSplit`'s rate strip in words: the text row is the lead sentence in the reader's language
-       (22 tokens per 100 characters in English, 24 in Dutch), a line of Java 22, a class name 23, an
+       (22 tokens per 100 characters in English, 24 in Dutch), a line of Java 22, a log line 43, an
        id 61. So text and code are about level and ids and hashes are nearly 3 times either (61/22 is
        2.8). Nothing here may say text is the cheapest any more: in Dutch it is not. -->
   <p data-i18n="tokens.not-words.2">
-  In these examples, text and Java code use similar numbers of tokens per character. The id uses
-  nearly 3 times as many. Those ratios depend on the text and the tokeniser. Long logs full of ids
+  In these examples, text and Java code use similar numbers of tokens per character. A log line
+  uses nearly 2 times as many, an id nearly 3 times. Those ratios depend on the text and the tokeniser. Long logs full of ids
   can fill the window quickly.
 </p>
 
@@ -67,8 +68,9 @@
        Fragmentation alone is not evidence of training exposure or language capability. -->
   <p data-i18n="tokens.not-words.3">
     The sentence above uses 13 tokens in English and 17 in Dutch with this tokeniser. Most languages
-    need more tokens than English for the same content, so they cost more and fill the window
-    sooner. That says nothing about the quality of the answers. Check that separately.
+    need more tokens than English for the same content. A tokeniser learns its pieces mostly from
+    English text, so English words stay whole more often. Other languages cost more and fill the
+    window sooner. That says nothing about the quality of the answers.
   </p>
 
   <!-- The heading is the name of the thing, and `.1` names it last, after saying what it is. -->
@@ -91,7 +93,7 @@
        and value aggregation are separate operations, both learned during training and used
        during inference. No numerical example: the role of each vector is the point. -->
   <p data-i18n="tokens.attention.2">
-    Every time attention runs, each token gets 3 vectors: a <strong>query</strong>, a
+    In every attention step, the model computes 3 vectors for each token: a <strong>query</strong>, a
     <strong>key</strong> and a <strong>value</strong>. They serve different roles. When a token
     seeks information from other tokens, its query expresses what it needs. When other tokens attend
     to this token, its key expresses what it offers. Its value contains the information it actually
@@ -120,7 +122,7 @@
        The weights are illustrative. Counts exclude self-attention: n(n-1)/2 gives 21 pairs for
        7 tokens and 91 for 14. These are the figure's inter-token links, not the full attention matrix. -->
   <p data-i18n="tokens.attention.3">
-    Attention runs many times side by side, and again in every layer, each time with new vectors.
+    That step happens many times side by side, and again in every layer, each time with new vectors.
     This drawing shows 1 run with invented weights and omits attention to the token itself. It has
     21 pairs for 7 tokens and 91 for 14. These are connections in the drawing, not a count of
     billable token reads.
@@ -140,9 +142,10 @@
   <h3 data-i18n="tokens.one-at-a-time.heading">The model generates 1 token at a time</h3>
 
   <p data-i18n="tokens.one-at-a-time.1">
-  The model scores possible next tokens using the context so far, and a token is selected. It joins
-  the sequence and the next prediction uses that longer sequence. Typical decoding reuses cached
-  states for earlier tokens instead of calculating the whole prefix from scratch each time.
+  The model gives every token in its vocabulary a score, based on the context so far, and 1 token is
+  picked. That token goes on the end of the text, and the next prediction starts from that longer
+  sequence. Earlier calculations are usually reused from a cache, so the model does not work through
+  the whole text again each time.
 </p>
 </div>
 
@@ -183,14 +186,22 @@
   </p>
 
   <!-- Where `NextToken`'s scores come from, so it follows that figure rather than leading the unit:
-       the scores are on screen before the network that makes them is opened up. One sentence and the
-       figure, because the drawing carries the rest. Its footer names attention but no longer points
+       the scores are on screen before the network that makes them is opened up. `.1` and the embedding
+       in `.2`, then the figure, because the drawing carries the rest. Its footer names attention but no longer points
        back at the section ("above") since the author's rewording. The reasons for every cut in it are in step1/CLAUDE.md under
        `TokenNetwork`. -->
   <h3 data-i18n="tokens.inside.heading">Under the hood: how the model turns numbers into probabilities</h3>
 
   <p data-i18n="tokens.inside.1">
     This is where the scores above come from.
+  </p>
+
+  <!-- The embedding, said once and here, where the network that uses it is drawn. The widths are
+       the ones `TokenNetwork`'s note uses; the reasoning is in step1/CLAUDE.md. -->
+  <p data-i18n="tokens.inside.2">
+    To calculate with a token at all, the model first turns it into a list of numbers: its
+    embedding. The length of that list is the model's width: 2,880 numbers in gpt-oss-120b, 4,096 in
+    Llama 3 8B, 12,288 in GPT-3. The network below uses 4, so you can check it by hand.
   </p>
 </div>
 

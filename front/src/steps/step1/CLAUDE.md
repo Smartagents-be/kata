@@ -104,7 +104,12 @@ not counts and stay words.
 **The unit is an intro and then two explicit parts, `Reading` and `Writing` (`Lezen`, `Schrijven`),
 each an `<h2>` with `<h3>` sections under it, and each section answers the one before it.** The
 intro has no heading: `lead.1`, `TokenizerView` (text in, numbers out), `lead.2` (what a token is
-the unit of: how much fits, what it costs, what the model reads again) and `lead.3`. Reading holds
+the unit of: how much fits, what it costs, what the model reads again) and `lead.3`. **`lead.2`'s
+image numbers are dated**: read from Anthropic's vision docs on 7 October 2026, an image costs
+⌈width/28⌉ × ⌈height/28⌉ tokens, and is downscaled to at most 4,784 tokens on Claude 4.7 and later
+(2,576 px long edge) or 1,568 on older models. The older `(width × height) / 750` rule is gone from
+those docs, so do not write it back. Other vendors' models count images differently, which is why
+the sentence names Claude. Reading holds
 `not-words` with `TokenSplit` (where the cuts fall and what that costs) and `attention` with
 `TokenAttention` (how the model weighs every token against the ones before it, and what a cache
 does and does not save). Writing holds `one-at-a-time` with `NextToken` (the loop, the scores,
@@ -140,7 +145,9 @@ looking image for a while as labels on a drawing of arcs, and a label is read as
 same. **`lead.1` is deliberately short**: it says text is cut and each chunk becomes a number, and
 which words survive whole and which break is `not-words.1`'s alone, so the splitting rule is
 explained once. `not-words.1` no longer mentions the space in front of a word: the review cut it from
-the prose, and `TokenSplit`'s dot still shows it to anyone who looks.
+the prose, and `TokenSplit`'s dot still shows it to anyone who looks. A sentence on how BPE picks
+its splits (ranked merges rather than the longest known piece) went the same way: true, and of no
+use to someone working with an agent. What a student needs is that the cuts differ per tokeniser.
 
 **The attention section, and the facts it rests on** (checked October 2026). The heading is the
 name of the thing, and `attention.1` names it last after the bank example. English contrasts a river
@@ -182,10 +189,11 @@ it, `TokenSplit` takes it as its text row, and `TokenNetwork` and `SamplingKnobs
 `TokenSplit`'s own once (a sentence about the catalogue, 16 tokens per 100 characters), kept apart from the lead sentence because the figure's rows were ordered cheapest first
 and text cheapest was what the prose argued. With the example sentence the text row is 22 per 100
 in English (13 tokens over 59 characters) and 24 in Dutch (17 over 72), against the line of Java at
-22, the class name at 23 and the id at 61. So **the rows are no longer cheapest first in every
-locale**, the order stays text, Java, class name, id, and the claim moved to match: `not-words.2`
-says text and code cost about the same per character and ids and hashes nearly 3 times as much
-(61 over 22 is 2.8), which is true in both languages, and `deck.tokens.split.note` and
+22, the log line at 43 and the id at 61 (the log line replaced a class name at 23, which only
+repeated the Java row; `TokenSplit.tsx` has the measurements). So **the rows are no longer cheapest first in every
+locale**, the order is text, Java, log line, id, and the claim moved to match: `not-words.2`
+says text and code cost about the same per character, a log line nearly 2 times as much and an id
+nearly 3 times (61 over 22 is 2.8), which is true in both languages, and `deck.tokens.split.note` and
 `deck.tokens.divider.2` say the same. No sentence may call text the cheapest any more. The row still
 **contains a word that breaks**, which the figure needs and no prose points out: `sw|ears` and
 `bewe|ert` break where no reader would cut. Its rates are worked out per render from the active
@@ -238,8 +246,9 @@ is not a sentence in either language.
 **`TokenizerView` is the lead figure, and it exists so the word, token, number step is visible
 before the network.** `lead.1` says text is cut into chunks and every chunk is swapped for a number,
 and the network further down starts from numbers, so the step in between was told and never shown. The
-figure is the shape of a public tokenizer page, at the author's asking: a Tokens and a Characters
-counter, the sentence with each token on its own background, and a segmented Text / Token IDs toggle
+figure is the shape of a public tokenizer page, at the author's asking: a Words, a Tokens and a
+Characters counter (Words added later, also at the author's asking, so the word-to-token gap is a
+number on screen), the sentence with each token on its own background, and a segmented Text / Token IDs toggle
 that swaps the text for the id list. Six things in it are decisions. **The ids are real, and that
 reverses an older decision.** `WordsIntoTokens` avoided ids because a token id is the one number in
 the unit a student can check and there was no tokeniser in this repository to make real ones with;
@@ -286,7 +295,13 @@ biases altogether; the figure keeps one per node because the bias is the concept
 a network without one would leave the calculation panel a row short of the idea. **Only the last
 token goes in**, while a real model takes every token so far, and the footer admits that in words.
 
-**The footer is a fact-checked simplification note in 2 short lines, and the review wrote it.** The
+**The footer was cut to plain words in October 2026, at the author's asking.** The lookup by id
+moved into `inside.2` and the empty state ("is hier een embedding van 4 getallen"), so the footer no
+longer says it, and the jargon (causal attention, cached states, prefix, decoder-only, feed-forward,
+bias use per architecture) went. It now says: real embeddings are thousands long, 4 here, and a real
+model works with every token in the context; then dozens of layers each with attention and a network
+like this, this network's parameter count against billions, and a conversation does not change the
+trained values. The history below is what it said before. **The footer is a fact-checked simplification note in 2 short lines, and the review wrote it.** The
 first line opens on `Simplified.` and says what is made up and what is cut: the token id points to a
 fixed row of numbers the model has learned (the embedding, looked up by the id), thousands of numbers
 long in a real model, 4 here and invented, and in reality every token so far goes in, not only the
@@ -325,7 +340,7 @@ first**: the weights are the same in every language, so the first output always 
 percentages never move. Only the words change. Context, token and outputs are real tokens, mono, and
 sit in `example-sentence.ts` beside the split (`networkToken`, `outputs`) rather than in a locale
 file; the screen-reader title interpolates them. **The empty state names the token and its real
-id** (`ears (token id 36108) points to a row of 4 numbers`, `ert (token-id 805)`), both read off the
+id** (`ears (token id 36108) is an embedding of 4 numbers here`, `ert (token-id 805)`), both read off the
 same data, so the step from `TokenizerView`'s id to a row of numbers is said before the first click.
 A 14-character context reaches the vector's
 bracket at the old layout, so the columns sit 16 units further right than the mockup's; a longer
@@ -405,6 +420,14 @@ the three words rather than the numbers beside them. And
 the catch-all choice is **pinned last rather than shuffled**, unlike `SpotInjection`'s four results:
 a catch-all that turns up second reads as a bug. It is graded in the browser like everything else
 here and writes no progress key, because one question is not a sitting.
+
+**No figure scales `TokenNetwork`'s last step up to a real model, and three tried.** A student asked
+how much calculation is behind `NextToken`'s percentages and how that can be fast, and the author
+tried to answer it with a drawing: `VocabScores` (the step at real size, 2,880 by 201,088, six drafts
+the author could not read), `TokenWork` (five cards counting a real model's work per token, too
+detailed) and `TokenMatrix` (the network's own last step as a table, which added nothing to the
+figure above it). All three went. What stayed is `inside.2`, which introduces the embedding and the
+model's width just before `TokenNetwork`. Do not add a fourth without the author asking for it.
 
 **`NextToken` is stepped by the reader rather than watched, and that is the change that matters in
 it.** It took the favourite on every pass once, with a static tree underneath drawing what the other

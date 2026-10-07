@@ -25,7 +25,8 @@ import { B, LAST, PARAMETERS, PERCENTS, SUMS, VALUES, W, WEIGHTED, X_IN, relu } 
  * the words change. The empty state names the token and its real id (36108, 805), so the step from
  * `TokenizerView`'s id to a row of numbers is said in words before the first click.
  *
- * **The footer is a fact-checked simplification note, in 2 short lines** so it fits under the drawing
+ * **The footer is a plain-words simplification note, in 2 short lines** (cut from a jargon-heavy
+ * version in October 2026; the id lookup now sits in the prose above) so it fits under the drawing
  * on the deck as well as on the page. The first says what is made up here and what is cut: the id
  * looks up a learned row of numbers, thousands long in a real model (Llama 3 8B: 4,096; GPT-3:
  * 12,288), 4 here and invented, and a real model takes every token so far, not only the last. The
