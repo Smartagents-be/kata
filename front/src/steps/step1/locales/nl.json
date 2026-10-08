@@ -901,8 +901,10 @@
   "deck.context.bad-code.note": "Training bevat code van wisselende kwaliteit. Actuele conventies en uitvoerbare controles bepalen wat bij je project past.",
   "deck.context.falloff.title": "Het model werd niet moe. <hi>Het bewijs verliet de kamer.</hi>",
   "deck.context.falloff.note": "Het resultaat ging niet mis door gebrek aan rekenkracht, maar omdat de cruciale context door lange conversaties buiten het venster is verdwenen.",
-  "deck.context.entropy.title": "Wanorde neemt elke beurt toe, tenzij iemand er <hi>energie in steekt</hi>",
-  "deck.context.entropy.note": "Verouderd materiaal kan zich tussen inkorten en compacten opstapelen. Zelfs relevante informatie kan in een lange context gemist worden.",
+  "deck.context.entropy.title": "Wanorde groeit elke beurt, tenzij je <hi>ingrijpt</hi>",
+  "deck.context.entropy.1": "<hi>Context-opstapeling:</hi> Verouderde data verzamelt zich snel tussen het inkorten en samenvatten door.",
+  "deck.context.entropy.2": "<hi>Lost in the middle:</hi> Zelfs cruciale informatie raakt makkelijk ondergesneeuwd in een lange context.",
+  "deck.context.entropy.3": "<hi>Actief beheer:</hi> Zonder continue opschoning vervuilt de werkruimte van je agent onherroepelijk.",
 
   "deck.session.makeup.title": "2 balken in die stapel zijn <hi>van jou</hi>",
   "deck.session.clear.title": "De enige laag die je nog kan <hi>weggooien</hi>",

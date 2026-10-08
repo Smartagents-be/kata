@@ -424,7 +424,7 @@ const deck: SlideSpec[] = [
     ns: 'step1',
     eyebrow: 'context.title',
     title: 'deck.context.entropy.title',
-    note: 'deck.context.entropy.note',
+    points: ['deck.context.entropy.1', 'deck.context.entropy.2', 'deck.context.entropy.3'],
   },
 
   // ── session ───────────────────────────────────────────────────────────────────────────────

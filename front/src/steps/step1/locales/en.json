@@ -702,8 +702,10 @@
   "deck.context.bad-code.note": "Training includes code of uneven quality. Current conventions and executable checks establish what fits your project.",
   "deck.context.falloff.title": "The model did not get tired. <hi>The evidence left the room.</hi>",
   "deck.context.falloff.note": "The result did not go wrong for lack of computing power, but because long conversations pushed the crucial context out of the window.",
-  "deck.context.entropy.title": "Disorder rises every turn unless someone <hi>spends energy</hi>",
-  "deck.context.entropy.note": "Stale material can accumulate between pruning and compaction. Even relevant information can be missed in a long context.",
+  "deck.context.entropy.title": "Disorder grows every turn, unless you <hi>step in</hi>",
+  "deck.context.entropy.1": "<hi>Context build-up:</hi> Stale data piles up quickly in between pruning and summarising.",
+  "deck.context.entropy.2": "<hi>Lost in the middle:</hi> Even crucial information easily gets buried in a long context.",
+  "deck.context.entropy.3": "<hi>Active management:</hi> Without continuous cleanup, your agent's workspace inevitably gets polluted.",
 
   "deck.session.makeup.title": "2 bars in that stack are <hi>yours</hi>",
   "deck.session.clear.title": "The one layer you can still <hi>throw away</hi>",
