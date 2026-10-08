@@ -89,31 +89,21 @@
      out. The figure only works read against that one, so do not redraw it on its own geometry. -->
 <div data-figure="mcp-server"></div>
 
+<!-- One paragraph for what a server offers besides tools. It replaced 3 (resources, prompts, and a
+     summary of all 3) that said what the cards below show again. A prompt here is a server's
+     template, not a message the user types, and the sentence keeps that distinction. -->
 <p data-i18n="tools.mcp-servers.2">
-  A server can also offer resources: content to read, such as a wiki page or a database schema.
-  Your harness retrieves that content and decides what to include in the window. A resource does
-  not appear in the context just because you connected the server.
-</p>
-
-<p data-i18n="tools.mcp-servers.3">
-  The third thing a server can offer is a prompt: a reusable template for a task. For example,
-  a code review template can ask for code and supply instructions for reviewing it. You choose
-  the template and provide the code; your harness retrieves the resulting messages for the model.
-  Here, a prompt means a template offered by the server, rather than any message you type.
+  A server can offer more than tools. A resource is content to read, such as a wiki page or a
+  database schema. A prompt is a reusable template from the server, such as a code review
+  checklist, and not a message you type. Not every server or harness supports all 3, and your
+  harness decides what reaches the model. Newer versions of MCP add optional extensions, such as
+  interactive apps and long-running tasks.
 </p>
 
 <!-- Three cards and nothing between them: none of it has crossed into a context yet. The dashed
      stroke is McpServer's outside-the-window shape. The prompt card represents a server's
      reusable template, not the user's ordinary message. -->
 <div data-figure="mcp-parts"></div>
-
-<p data-i18n="tools.mcp-servers.4">
-  These are 3 ways a server can help: a tool performs an action, a resource supplies content to
-  read, and a prompt supplies a template. A server does not have to offer all 3, and your harness
-  may not support all 3 either. What reaches the model depends on what your harness retrieves and
-  uses. Newer versions of MCP add optional extensions on top, such as interactive apps inside the
-  conversation and long-running tasks.
-</p>
 
 <!-- Copilot only, and deliberately without a Claude sibling: the `connect-one` card below already
      carries `claude mcp add` and `copilot mcp add`, which are terminal commands. What a class on Copilot in
@@ -133,32 +123,15 @@
      docs.github.com/en/copilot/concepts/agents/copilot-cli/tool-search. MCP itself does not
      require a host to place every definition in model context. -->
 <p data-assistant="claude" data-i18n="tools.what-mcp-costs-you.1.claude">
-  With a model that supports tool search, Claude Code normally puts only MCP tool names and server
-  instructions in the window first. Those instructions are guidance from the server's author about
-  what it offers and when to use its tools. A calendar server might say: "Use these tools to find
-  appointments and available times." The model uses <code>ToolSearch</code> to load a suitable
-  tool's full description and parameters when it needs them.
+  Claude Code uses tool search: at the start it puts only the names of MCP tools and each server's
+  instructions in the window, and loads a tool's full description when the model needs it. Even so,
+  every connected server takes some context before you use it <svg data-icon="coin"></svg>.
 </p>
 
 <p data-assistant="copilot" data-i18n="tools.what-mcp-costs-you.1.copilot">
-  The model needs a tool's name, description and parameters to use it. Copilot CLI can load those
-  definitions on demand through tool search. With a supported model, it does this automatically
-  once enough tools are available. Below that threshold, it loads the definitions up front.
-</p>
-
-<p data-assistant="claude" data-i18n="tools.what-mcp-costs-you.2.claude">
-  Even with tool search, tool names and server instructions take up context. More connected servers
-  can therefore mean more input tokens, even before a tool is used <svg data-icon="coin"></svg>.
-  If you disable tool search, all definitions load up front. Setting <code>alwaysLoad</code> on a
-  server does the same for that server's tools.
-</p>
-
-<p data-assistant="copilot" data-i18n="tools.what-mcp-costs-you.2.copilot">
-  Many connected servers can mean more input tokens: information about unused tools also takes up
-  context once it is loaded <svg data-icon="coin"></svg>. Copilot CLI comes with some MCP servers
-  built in, but that does not mean all their tool definitions are always in the window. Disabling
-  tool search loads them up front; a server configured to never defer its tools also loads those
-  definitions immediately.
+  Copilot CLI uses tool search once you have enough tools on a supported model: it loads a tool's
+  full description only when the model needs it. Below that point all descriptions load up front, so
+  every connected server takes context before you use it <svg data-icon="coin"></svg>.
 </p>
 
 <p data-i18n="tools.what-mcp-costs-you.3">
@@ -167,17 +140,6 @@
   need, and turn off tools that do not serve this task. That also gives the model fewer similar
   tools to choose between.
 </p>
-
-<!-- No fixed server limit: context use depends on the definitions loaded and the results returned.
-     Keep specialised tool sets here; `harness` owns the explanation of sub-agent costs. -->
-<aside data-i18n="tools.what-mcp-costs-you.4">
-  <p>
-    The number of servers tells you little on its own. 1 server can offer many tools and return
-    large results; several small ones can use less context. Choose what the task needs. If a
-    separate part of the work needs its own set of tools, a specialised agent can keep them out
-    of the main agent's context.
-  </p>
-</aside>
 
 <h2 data-i18n="tools.check-tool-results.heading">Check what tools return</h2>
 

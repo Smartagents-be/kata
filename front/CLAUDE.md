@@ -494,7 +494,7 @@ for a figure: it reads `useAssistant()` itself, and the `data-figure` marker nev
 Which units this is actually used in, and the places it deliberately is not, are in
 `front/src/steps/step0/CLAUDE.md` and `front/src/steps/step1/CLAUDE.md`, with the cross-step scope in
 `front/src/steps/CLAUDE.md`. The short version: step 0 tells the student to set it and varies no
-block of its own, step 1 varies 16 (12 in its unit HTML, 4 on task cards), and step 2 varies none: its one hook, in `gates`, is a pre-edit guard that
+block of its own, step 1 varies 15 (11 in its unit HTML, 4 on task cards), and step 2 varies none: its one hook, in `gates`, is a pre-edit guard that
 works the same in both. Everything else is shared on purpose.
 
 ## Languages

@@ -157,7 +157,7 @@ MCP facts used by the course (checked October 2026):
   Copilot generally**. The Copilot CLI command reference lists 40-odd slash commands and none of
   them is a prompt (re-read 30 July 2026). The course used to carry that difference in
   `tools.mcp-servers.3`, a Claude/Copilot pair on where each product surfaces a server's prompts,
-  and it now defines the template generically, without claiming a CLI-specific command. This entry
+  and `tools.mcp-servers.2` now defines the template generically in one clause, without claiming a CLI-specific command. This entry
   is the reason it was never worth one command reference's worth of hedging. Absent from a reference is not the same as
   absent from the product, so check here before writing that claim back.
 

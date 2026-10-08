@@ -1115,18 +1115,20 @@ old one named the mechanism the first paragraph states and left the section's ac
 you pay for a tool by holding it, to be found; the keys are `tools.what-mcp-costs-you.*` now, and
 `copilot-specific.md` quoted the old wording. All three renames moved every key in their sections,
 in the HTML and in `nl.json`.
-**Prompts have a definition paragraph.** `tools.mcp-servers.3` explains the reusable template and
-uses a code review example. A label alone did not explain the difference from an ordinary user
-message. Keep this paragraph generic; neither CLI's slash-command syntax belongs in this definition.
+**What a server offers besides tools is one paragraph**, `tools.mcp-servers.2`, after the owner
+found the section too long (October 2026): it replaced `.2` (resources), `.3` (prompts) and `.4` (a
+summary of all 3), which said again what the cards show. It still separates a server's prompt
+template from a message the user types, with the code review example, and names no CLI syntax.
 **The who-decides sorting is taught, drawn twice and never checked, and that is a knowing gap.** A
 one-question registry quiz was proposed for it and rejected: four graded or ticked things already
 sit under this unit's one "Test your knowledge", `promptQuiz` is one page back and `contextQuiz` one page
 forward, and a fifth thing to do makes the busiest page in the course busier. If the unit ever loses
 an exercise, this is the question to add.
-`what-mcp-costs-you.4` is the closing aside. It deliberately gives no numeric server limit:
-context use depends on which definitions load and how much content comes back. It moves from
-turning off irrelevant tools to putting a separate job's tool set with a specialised agent.
-**`harness` owns what a sub-agent costs**, so coordinator or refetch explanations stay there.
+`what-mcp-costs-you` is 2 paragraphs now: `.1` per product (tool search, and that every server
+still takes some context) and `.3` (calling a tool takes space). The per-product `.2`
+(`alwaysLoad`, `deferTools`, turning tool search off) and the closing aside `.4` (server count
+says little; a specialised agent for a separate tool set) were cut in the same trim: configuration
+detail and a repeat of `.3`. **`harness` owns what a sub-agent costs**, so it does not come back here.
 
 `tools` **is titled "The agentic loop"** (NL "De agentic loop") while its id, its URL and its key prefix
 stay `tools`, and that split is the decision: the page now opens on the loop that makes a model an
@@ -2104,12 +2106,12 @@ in there, that is their build to unpick and the flags above are what they have d
 
 ## The assistant variants
 
-16 blocks in step 1 vary, 12 of them in the unit HTML and 4 on task cards, and nearly all of them are the same kind of thing, a filename or a
+15 blocks in step 1 vary, 11 of them in the unit HTML and 4 on task cards, and nearly all of them are the same kind of thing, a filename or a
 command: the launcher `<pre>` pair under `workshop`'s lead (`claude` against `copilot`, each after
 the same `cd`), which is the only pair left there now that the setup command has moved to
 `install.txt`,
 `tools.what-it-can-call.1` (each product's own built-in tools, under their own names),
-`tools.what-mcp-costs-you.1` and `.2`, `tools.large-tool-results.1`, `tools.mcp-servers.5` (Copilot
+`tools.what-mcp-costs-you.1`, `tools.large-tool-results.1`, `tools.mcp-servers.5` (Copilot
 only: the IntelliJ route to adding a server, which has no Claude sibling because `connect-one`
 already shows `claude mcp add`), `session.window-not-memory.1`,
 `session.automatic-manual-compaction.3` (when compaction starts, and whether you can move it),
@@ -2136,8 +2138,7 @@ Some differences are product behaviour rather than filenames or commands. Large 
 another such pair: its storage thresholds differ between the products. There is also `session.automatic-manual-compaction.3`, a product fact
 about when compaction starts, and its reasoning is under `session`; the other two follow. `model`'s window section is the larger one and it is **not one of
 the 16 at all**: it is Claude-only whole, with no Copilot half to pair with, and the reasoning is
-under `model`. `tools.what-mcp-costs-you.1` and `.2` are the smaller, they are 2 of the 15, and
-each is a **product fact**. Copilot CLI ships some MCP servers built in (deliberately unnamed in the prose, since the list
+under `model`. `tools.what-mcp-costs-you.1` is the smaller, and it is a **product fact**. Copilot CLI ships some MCP servers built in (deliberately unnamed in the prose, since the list
 changes), but availability does not
 mean every definition is always in model context. `ReadYourWindow` still compares a window with
 and without the server the student added. `harness.which-one-you-run.2` owns the difference in
