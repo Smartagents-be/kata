@@ -239,7 +239,7 @@ const deck: SlideSpec[] = [
     ns: 'step1',
     eyebrow: 'prompt.title',
     title: 'deck.prompt.meta.title',
-    note: 'deck.prompt.meta.note',
+    points: ['deck.prompt.meta.1', 'deck.prompt.meta.2', 'deck.prompt.meta.3'],
   },
   // Plan mode comes before the steering moves in the unit, and `deck.prompt.divider` lists the
   // payoff in that order too, so it sits here rather than closing the block.
