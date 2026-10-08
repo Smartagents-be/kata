@@ -908,7 +908,7 @@
 
   "deck.session.makeup.title": "99,5% komt <hi>niet van jou</hi>",
   "deck.session.clear.title": "De enige laag die je nog kan <hi>weggooien</hi>",
-  "deck.session.clear.note": "Automatisch en handmatig compacten kosten input- en outputtokens. /clear doet geen samenvattingsrequest; context opnieuw opbouwen kost wel tokens.",
+  "deck.session.clear.note": "<hi>Kosten van compacten:</hi> Automatisch of handmatig samenvatten kost zowel input- als outputtokens. <hi>/clear is gratis (direct):</hi> Stopt de historie onmiddellijk zonder dat een samenvattingsverzoek nodig is. <hi>De verborgen kost:</hi> Na een /clear moet je de noodzakelijke context wél weer opnieuw opbouwen.",
   "deck.session.memory.title": "Het venster is <hi>niet je geheugen</hi>",
   "deck.session.memory.note": "Weten wat er nu in staat, en bereid zijn het weg te gooien, is het grootste verschil tussen mensen die werk uit een agent krijgen en mensen die ertegen vechten.",
 

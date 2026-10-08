@@ -709,7 +709,7 @@
 
   "deck.session.makeup.title": "99.5% does <hi>not come from you</hi>",
   "deck.session.clear.title": "The one layer you can still <hi>throw away</hi>",
-  "deck.session.clear.note": "Automatic and manual compaction spend input and output tokens. /clear makes no summary request; rebuilding context still costs tokens.",
+  "deck.session.clear.note": "<hi>The cost of compacting:</hi> Summarising, automatic or manual, costs both input and output tokens. <hi>/clear is free (immediately):</hi> It ends the history at once, without any summary request. <hi>The hidden cost:</hi> After a /clear you do have to build the context you need back up again.",
   "deck.session.memory.title": "The window is <hi>not your memory</hi>",
   "deck.session.memory.note": "Knowing what is in it right now, and being willing to throw it away, is most of what separates people who get work out of an agent from people who fight it.",
 
