@@ -93,9 +93,9 @@
   "token-network.calc.activation.relu": "This rule is called ReLU.",
   "token-network.calc.probabilities": "to probabilities",
   "token-network.calc.probabilities.hint": "The output gets no activation function. Softmax turns the scores into probabilities that add up to 100%.",
-  "token-network.note.lead": "Heavily simplified.",
-  "token-network.note.1": "A token id points to a fixed series of numbers the model learned during training. In a real model this vector is thousands of numbers long, but for illustration we use {{inputs}} here. And in practice the model processes all the preceding tokens at once, not only the last one.",
-  "token-network.note.2": "Language models like GPT and Llama are so-called decoder-only transformers. They consist of dozens of layers, each built from an attention mechanism and a neural network. Every connection has a weight and every node a bias. Together these form the parameters: this example network has {{parameters}}, while a large language model has hundreds of billions. These values are set during training and are fixed after that.",
+  "token-network.note.lead": "Heavily simplified:",
+  "token-network.note.1": "a token ID points to a fixed series of numbers the model learned during training. In practice such a vector is thousands of numbers long, but for illustration we use {{inputs}} here. A real model also processes all the preceding tokens at once, and not only the last one.",
+  "token-network.note.2": "Language models like GPT and Llama are so-called decoder-only transformers. They consist of dozens of layers, built from an attention mechanism and a neural network. Every node has a bias and every connection a weight. Together these form the parameters: this example network has {{parameters}}, while a large language model has hundreds of billions. These values are set during training and do not change after that.",
 
   "token-split.label": "4 kinds of text, split into tokens",
   "token-split.pick": "Pick a sample",

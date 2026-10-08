@@ -300,7 +300,7 @@ a network without one would leave the calculation panel a row short of the idea.
 token goes in**, while a real model takes every token so far, and the footer admits that in words.
 
 **The footer is a fact-checked simplification note in 2 short lines, and the review wrote it.** The
-first line opens on `Simplified.` and says what is made up and what is cut: the token id points to a
+first line opens on `Simplified:` and says what is made up and what is cut: the token id points to a
 fixed row of numbers the model has learned (the embedding, looked up by the id), thousands of numbers
 long in a real model, 4 here and invented, and in reality every token so far goes in, not only the
 last. The second says what a real model is around this: language models like GPT and Llama are

@@ -90,9 +90,9 @@
   "token-network.calc.activation.relu": "Deze regel heet ReLU.",
   "token-network.calc.probabilities": "naar kansen",
   "token-network.calc.probabilities.hint": "De uitvoer krijgt geen activatiefunctie. Softmax zet de scores om in kansen die samen 100% geven.",
-  "token-network.note.lead": "Sterk vereenvoudigd.",
-  "token-network.note.1": "Een token-id verwijst naar een vaste reeks getallen die het model tijdens de training heeft geleerd. In een echt model is deze vector duizenden getallen lang, maar ter illustratie gebruiken we er hier {{inputs}}. Bovendien verwerkt het model in de praktijk alle voorafgaande tokens tegelijk, niet alleen het laatste.",
-  "token-network.note.2": "Taalmodellen zoals GPT en Llama zijn zogenaamde decoder-only transformers. Ze bestaan uit tientallen lagen, die elk weer zijn opgebouwd uit een attention-mechanisme en een neuraal netwerk. Elke verbinding heeft een gewicht (weight) en elk knooppunt een bias. Samen vormen deze de parameters: dit voorbeeldnetwerk telt er {{parameters}}, terwijl een groot taalmodel er honderden miljarden heeft. Deze waarden worden tijdens het trainen bepaald en liggen daarna vast.",
+  "token-network.note.lead": "Sterk vereenvoudigd:",
+  "token-network.note.1": "een token-ID verwijst naar een vaste reeks getallen die het model tijdens de training heeft geleerd. In de praktijk is zo'n vector duizenden getallen lang, maar ter illustratie gebruiken we er hier {{inputs}}. Ook verwerkt een model in het echt alle voorafgaande tokens tegelijk, en niet alleen het laatste.",
+  "token-network.note.2": "Taalmodellen zoals GPT en Llama zijn zogenaamde decoder-only transformers. Ze bestaan uit tientallen lagen, opgebouwd uit een attention-mechanisme en een neuraal netwerk. Elk knooppunt heeft een bias en elke verbinding een gewicht (weight). Samen vormen dit de parameters: dit voorbeeldnetwerk telt er {{parameters}}, terwijl een groot taalmodel er honderden miljarden heeft. Deze waarden worden vastgelegd tijdens de training en veranderen daarna niet meer.",
 
   "token-split.label": "4 soorten tekst, opgeknipt in tokens",
   "token-split.pick": "Kies een voorbeeld",
