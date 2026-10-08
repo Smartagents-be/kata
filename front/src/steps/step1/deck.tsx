@@ -326,7 +326,7 @@ const deck: SlideSpec[] = [
     ns: 'step1',
     eyebrow: 'tools.title',
     title: 'deck.tools.list.title',
-    note: 'deck.tools.list.note',
+    points: ['deck.tools.list.1', 'deck.tools.list.2', 'deck.tools.list.3'],
   },
   {
     id: 'deck-tools-injection',
@@ -414,6 +414,7 @@ const deck: SlideSpec[] = [
     ns: 'step1',
     eyebrow: 'context.title',
     title: 'deck.context.falloff.title',
+    note: 'deck.context.falloff.note',
     figure: <ContextFalloff />,
     scale: 1.12,
   },
