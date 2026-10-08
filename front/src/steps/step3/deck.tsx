@@ -168,7 +168,11 @@ const deck: SlideSpec[] = [
     ns: 'step3',
     eyebrow: 'impostor.title',
     title: 'deck.impostor.engineer.title',
-    note: 'deck.impostor.engineer.note',
+    points: [
+      'deck.impostor.engineer.1',
+      'deck.impostor.engineer.2',
+      'deck.impostor.engineer.3',
+    ],
   },
   {
     id: 'deck-step3-impostor-signal',
