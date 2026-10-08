@@ -106,8 +106,16 @@ else
   warn "java not found on PATH (only matters for running things outside maven)"
 fi
 
-if command -v native-image >/dev/null 2>&1; then
-  ok "native-image present (step 2's native flag can be built)"
+# The native build finds native-image through GRAALVM_HOME or JAVA_HOME, not through PATH, so a
+# binary that is only on PATH still fails the build.
+NATIVE_HOME=""
+for home in "${GRAALVM_HOME:-}" "${JAVA_HOME:-}"; do
+  if [ -n "$home" ] && [ -x "$home/bin/native-image" ]; then NATIVE_HOME="$home"; break; fi
+done
+if [ -n "$NATIVE_HOME" ]; then
+  ok "native-image found in $NATIVE_HOME (step 2's native flag can be built)"
+elif command -v native-image >/dev/null 2>&1; then
+  warn "native-image is on PATH but not under GRAALVM_HOME or JAVA_HOME, which is where the native build looks - only needed for step 2's native-image flag"
 else
   warn "native-image not found - only needed for step 2's native-image flag, which is the student's exercise"
 fi

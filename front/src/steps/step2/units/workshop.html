@@ -95,7 +95,8 @@ curl localhost:8082/api/loans/statement/STUDENT</code></pre>
 
 <p data-i18n="workshop.two-jobs.3">
   In the second, nothing is failing, because nothing has been built. Compile step 2 all the way down
-  to a native executable. You need a GraalVM JDK on your <code>PATH</code> for it. Each attempt costs minutes, which makes this
+  to a native executable. You need a GraalVM JDK for it, set as <code>JAVA_HOME</code> or <code>GRAALVM_HOME</code>, plus a C
+  compiler toolchain and about 4 GB of free memory. Each attempt costs minutes, which makes this
   the worst place in the kata to guess, so plan it first. It compiles, it
   starts, and where the flag should be it prints a miss. Your plan was a piece short, and the image tells you which piece.
 </p>
@@ -130,8 +131,9 @@ SERVER_PORT=8081 ./target/kata-agentic-java-step2</code></pre>
   leaves no exit code. Go and look.
 </p>
 
-<!-- Filled by the Debrief element registered under this name in steps/step2/index.tsx. Three moves,
-     none of them worth a flag, and the last one writes back into the skill the pre-flight opened. -->
+<!-- Filled by the Debrief element registered under this name in steps/step2/index.tsx. Four moves,
+     none of them worth a flag: the third writes back into the skill the pre-flight opened, and the
+     fourth checks whether a run made a decision for you. -->
 <div data-figure="debrief"></div>
 
 <p data-i18n="workshop.debrief.2">

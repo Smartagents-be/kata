@@ -110,14 +110,17 @@ export function prepareUnit(
   // the self-audience wrapper the next pass is about to remove, so each top-level figure marker
   // adopts the nearest heading before it in reading order *now*: moved to sit directly above the
   // marker, where the audience pass cannot take it and the language pass still finds it. A heading
-  // serves at most one figure, so a section with two drawings titles the first.
+  // serves at most one figure, so a section with two drawings titles the first. A figure marked for
+  // the other audience is about to be removed, so it adopts nothing: taking the heading would leave
+  // it above an empty space.
   const keptHeadings = new Set<Node>()
   if (mode === 'guided') {
     let lastHeading: Element | null = null
     for (const element of doc.body.querySelectorAll('h2, h3, [data-figure]')) {
+      const audience = element.getAttribute('data-audience')
       if (!element.hasAttribute('data-figure')) {
         lastHeading = element
-      } else if (element.parentElement === doc.body && lastHeading) {
+      } else if (element.parentElement === doc.body && lastHeading && (!audience || audience === mode)) {
         doc.body.insertBefore(lastHeading, element)
         keptHeadings.add(lastHeading)
         lastHeading = null

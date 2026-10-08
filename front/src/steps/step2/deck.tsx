@@ -226,6 +226,14 @@ const deck: SlideSpec[] = [
     note: 'deck.gates.proxy.note',
   },
   {
+    id: 'deck-step2-gates-old-code',
+    kind: 'statement',
+    ns: 'step2',
+    eyebrow: 'gates.title',
+    title: 'deck.gates.old-code.title',
+    points: ['deck.gates.old-code.1', 'deck.gates.old-code.2', 'deck.gates.old-code.3'],
+  },
+  {
     id: 'deck-step2-gates-reach',
     kind: 'figure',
     ns: 'step2',
@@ -493,6 +501,19 @@ const deck: SlideSpec[] = [
     eyebrow: 'enablement.title',
     title: 'deck.enablement.day.title',
     note: 'deck.enablement.day.note',
+  },
+  {
+    id: 'deck-step2-enablement-review',
+    kind: 'statement',
+    ns: 'step2',
+    eyebrow: 'enablement.title',
+    title: 'deck.enablement.review.title',
+    points: [
+      'deck.enablement.review.1',
+      'deck.enablement.review.2',
+      'deck.enablement.review.3',
+      'deck.enablement.review.4',
+    ],
   },
 
   // ── parallel ──────────────────────────────────────────────────────────────────────────────

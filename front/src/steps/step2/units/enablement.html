@@ -28,7 +28,7 @@
   comes back with a database migration in it. Your specialism is the Java side. You do not have to
   be able to write that migration, but you do have to notice that it drops a column 2 other
   services still read. The agent handles the detail for everyone alike, so knowing the detail is worth less than it
-  was. Knowing what good software engineering looks like is not, and <a href="/steps/step2/engineering">the unit on craft</a> argues for exactly that.
+  was. Knowing what good software engineering looks like is not, and <a href="/steps/step2/engineering">the unit on domain language and structure</a> argues for exactly that.
 </p>
 
 <!-- Filled by the SkillShape element registered under this name in steps/step2/index.tsx. Its own
@@ -42,6 +42,22 @@
   system end to end and reading whether it did what you wanted.
   <a href="/steps/step2/steering">The steering unit</a> covers what you do while a run is in flight.
   This is the other half, the part after it comes back. It is most of your week.
+</p>
+
+<p data-i18n="enablement.where-day-goes.questions">
+  Read every plan and every diff against the same questions:
+</p>
+
+<ol>
+  <li data-i18n="enablement.where-day-goes.question-1">Which files did it touch, and did you expect each one?</li>
+  <li data-i18n="enablement.where-day-goes.question-2">What did it assume that nobody told it?</li>
+  <li data-i18n="enablement.where-day-goes.question-3">What proves it works: a test you watched fail and then pass, or its word?</li>
+  <li data-i18n="enablement.where-day-goes.question-4">Is it small enough to review in one sitting?</li>
+</ol>
+
+<p data-i18n="enablement.where-day-goes.tests">
+  Look hardest at changed tests. An agent that cannot make a test pass can weaken the assertion or
+  mock away the thing under test.
 </p>
 
 <p data-i18n="enablement.where-day-goes.2">

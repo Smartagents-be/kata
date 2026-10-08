@@ -12,12 +12,12 @@
 
   "code.panel.title": "Try it: solve this page",
   "code.panel.label": "The page flag",
-  "code.panel.hint": "Type or paste the flag from the paragraph above, braces and all.",
-  "code.panel.help": "Look at the string in braces in the paragraph just above this box.",
+  "code.panel.hint": "This page's flag is {f1r5t-5t3p5}. Type or paste it here, braces and all.",
+  "code.panel.help": "The flag is the string in braces on this card: {f1r5t-5t3p5}.",
   "code.panel.hint-button": "Hint",
   "code.panel.placeholder": "{...}",
   "code.panel.check": "Check",
-  "code.panel.wrong": "Not quite. Copy the flag from the paragraph above, braces and all.",
+  "code.panel.wrong": "Not quite. Copy {f1r5t-5t3p5} exactly, braces and all.",
   "code.panel.solved": "Solved",
   "code.panel.done": "Correct. Every flag in the kata goes in the same way.",
 
@@ -93,5 +93,5 @@
   "deck.backend.herrings.title": "Not every braced string is <hi>the flag</hi>",
   "deck.workshop.divider.1": "Do 2 runs on the platform.",
   "deck.workshop.divider.2": "The machine generates the answer, you read it off.",
-  "deck.workshop.divider.3": "The last result shows up 2 times."
+  "deck.workshop.divider.3": "The last run prints 2 candidates."
 }

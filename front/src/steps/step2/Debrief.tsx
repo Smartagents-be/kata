@@ -1,7 +1,7 @@
 import { TaskCard } from '@/shared/components/TaskCard'
 
 /**
- * The capstone's last stage on the shared {@link TaskCard}: three moves after the flags are in, and
+ * The capstone's last stage on the shared {@link TaskCard}: four moves after the flags are in, and
  * none of them earns one.
  *
  * **It exists because the board grades the code and nothing grades the run.** Five green rows say
@@ -9,7 +9,7 @@ import { TaskCard } from '@/shared/components/TaskCard'
  * about how the afternoon was spent, which is the half of step 2 a build cannot reach, so the
  * closing move of the capstone is to go and look.
  *
- * The three moves are the units with no other home in the run. `audit` is `workflows`'s
+ * The first three moves are the units with no other home in the run. `audit` is `workflows`'s
  * audit-driven pass turned on the student's own diff rather than on somebody else's repository,
  * which is the only version of it they can check, and it **ends on closing the worst row and running
  * the graded build again**, because an audit nobody works is the checkbox that unit warns about.

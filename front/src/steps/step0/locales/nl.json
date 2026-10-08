@@ -50,7 +50,7 @@
   "backend.lead.1": "Elke stap met Java heeft een eigen project: <code>exercises/step0/java</code>, <code>exercises/step1/java</code> en <code>exercises/step2/java</code>. Open de map van de stap waar je mee bezig bent en voer je Maven-commando's daar uit.",
   "backend.lead.2": "In de oefeningen werk je in het project van die stap. Soms drukt de build de flag af, soms laat je je agent hem zoeken. Vanaf de laatste pagina van deze stap is niet elke string tussen accolades de flag die je zoekt.",
   "backend.code-blocks.heading": "Codeblokken",
-  "backend.code-blocks.1": "Sommige pagina's geven je een codeblok, zoals hieronder. Laat je agent het uitvoeren in plaats van het zelf in een terminal te plakken. Vraag hem ook de output te tonen, want vaak vat een agent die alleen samen. Huisregel 1 is de reden, en dit is de goedkoopste plek in de cursus om ermee te beginnen. Niets in de build controleert wie van jullie het gedraaid heeft.",
+  "backend.code-blocks.1": "Sommige pagina's geven je een codeblok, zoals hieronder. Laat je agent het uitvoeren in plaats van het zelf in een terminal te plakken. Vraag hem ook de output te tonen, want vaak vat een agent die alleen samen. Huisregels 1 en 3 zijn de reden, en dit is de goedkoopste plek in de cursus om ermee te beginnen. Niets in de build controleert wie van jullie het gedraaid heeft.",
   "backend.code-blocks.2": "Op de volgende pagina staan 2 van die runs. Dit codeblok is de eerste.",
 
   "loop.title": "Van build naar platform",
@@ -64,17 +64,16 @@
   "loop.you.body": "lees de flag af",
   "loop.box.body": "plak de flag",
 
-  "workshop.lead.1.claude": "Staat er een <code>README.md</code> of een <code>CLAUDE.md</code> in een workshop, lees die dan eerst.",
-  "workshop.lead.1.copilot": "Staat er een <code>README.md</code> of een <code>.github/copilot-instructions.md</code> in een workshop, lees die dan eerst.",
+  "workshop.lead.1": "Staat er een <code>README.md</code> of een <code>CLAUDE.md</code> in een workshop, lees die dan eerst. Copilot leest die <code>CLAUDE.md</code> ook.",
 
   "code.panel.title": "Probeer het: los deze pagina op",
   "code.panel.label": "De flag van de pagina",
-  "code.panel.hint": "Typ of plak de flag uit de alinea hierboven, met de accolades erbij.",
-  "code.panel.help": "Kijk naar de string tussen accolades in de alinea net boven dit veld.",
+  "code.panel.hint": "De flag van deze pagina is {f1r5t-5t3p5}. Typ of plak hem hier, met de accolades erbij.",
+  "code.panel.help": "De flag is de string tussen accolades op deze kaart: {f1r5t-5t3p5}.",
   "code.panel.hint-button": "Hint",
   "code.panel.placeholder": "{...}",
   "code.panel.check": "Controleer",
-  "code.panel.wrong": "Net niet. Kopieer de flag uit de alinea hierboven, met de accolades erbij.",
+  "code.panel.wrong": "Net niet. Kopieer {f1r5t-5t3p5} exact, met de accolades erbij.",
   "code.panel.solved": "Opgelost",
   "code.panel.done": "Juist. Elke flag in de kata vul je op dezelfde manier in.",
 
@@ -132,5 +131,5 @@
   "deck.backend.herrings.title": "Niet elke string tussen accolades is <hi>de flag</hi>",
   "deck.workshop.divider.1": "Voer 2 runs uit op het platform.",
   "deck.workshop.divider.2": "De machine genereert het antwoord, jij leest het af.",
-  "deck.workshop.divider.3": "De laatste uitkomst verschijnt 2 keer."
+  "deck.workshop.divider.3": "De laatste run drukt 2 kandidaten af."
 }

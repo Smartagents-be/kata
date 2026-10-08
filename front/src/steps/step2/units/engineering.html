@@ -29,7 +29,7 @@
 <p data-i18n="engineering.domain-driven-design.2">
   Clear domain names make instructions and searches more precise. <code>Headline</code> in your
   request points towards <code>Headline</code> in the tree. That helps the agent locate relevant
-  code without relying on a claim that token counts predict language quality.
+  code.
 </p>
 
 <h2 data-i18n="engineering.hexagonal-architecture.heading">Hexagonal architecture</h2>
@@ -37,7 +37,7 @@
 <p data-i18n="engineering.hexagonal-architecture.1">
   The domain sits in the middle, the machinery lives behind adapters, and the direction of a call is
   a folder you can point at. No class outside <code>adapter/</code> names Postgres or S3, so
-  swapping the database out is 1 folder's work.
+  the code that talks to the database sits in 1 folder, and swapping it out starts there.
 </p>
 
 <div data-figure="domain-tree"></div>

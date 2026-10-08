@@ -217,6 +217,15 @@ construction, so the two agree outright. `GateReach` still puts `mvn verify` one
 loop, at the moment the agent says it is done: it is run there because `Preflight`'s `command` move
 writes it into `CLAUDE.md`, not because a hook fires it.
 
+**`quality-gates.3` and `.4` are the brownfield order, at the course owner's asking**: for old code
+with no documentation and no tests, regression tests to full line coverage come first, they are the
+source of truth from then on, and a change in behaviour is confirmed with the stakeholders before
+the tests or the code move. `deck-step2-gates-old-code` carries it in class. `.3` closes on mixing
+kinds of tests and letting mutation testing check the tests themselves, which **points at the tool
+and stops there**, by the course owner's choice. **It does not say that coverage can be faked with
+tests that assert nothing**, and that is the constraint to keep: it is the honest-coverage discovery
+the capstone's third flag exists for, and this unit comes first.
+
 `step3`'s `PipelineShift` is the drawing `SdlcStages` is easiest to confuse with. That one is time
 on one scale and the burden moving to verifying; this one is where the work queues and where a person
 stands. Keep them apart rather than making either reference the other.
@@ -239,9 +248,12 @@ time, which is what `Interrupt, or go back` argues at length. Do not write an in
 choice between them: interrupt while it is thinking and there is nothing on disk, queue a sentence
 while it works, or stop it and throw the session away. The two sections under it argue the choice, so
 this one sorts the moves by where the agent is when you catch it and stops. Three decisions in it.
-It **names Escape**, which is the only keystroke in the whole course; `Interrupt, or go back`
-deliberately names none for rewinding, because that binding differs per harness, while stopping a
-run is Escape in both assistants the course is written for. Its third paragraph is the destructive
+It **names the stop key per harness** in one parenthesis (`Esc` in Claude Code, `Ctrl+C` in Copilot
+CLI, the Stop button in IntelliJ), on `REVIEW.md`'s finding that Escape is Claude-only: in Copilot
+CLI a second Esc interrupts the turn and then runs queued prompts, while Ctrl+C cancels and clears
+the queue. The IntelliJ button is still to be rehearsed. The deck title, the `steer.escape` move and
+the quiz distractor say "stop" for the same reason. `Interrupt, or go back` deliberately names no
+key for rewinding, because that binding differs per harness. Its third paragraph is the destructive
 move and is deliberately thin, because `When it is going nowhere` owns when to reach for it and
 `step1/session` owns `/clear` itself, so it hands off with "there is a section on that below" rather
 than naming a position that an insertion would break. And it must not grow the window argument: what
@@ -757,6 +769,13 @@ you do not have a goal": that is about the instruction you hand over, while this
 harness on your own machine. Keep the two apart or the step tells a student twice to make things
 measurable and never says why the second one is different.
 
+**`where-day-goes` carries the review questions**, at the course owner's asking: 4 questions for
+every plan and diff (files touched, assumptions, proof, size) and a line on changed tests, between
+`.1` and `.2` under their own keys so `.2` keeps its number. It answers `audit.md`'s "reading is the
+bottleneck and no unit shows how". `deck-step2-enablement-review` puts the 4 on a slide, since
+guided mode drops the list. The tests line is about an agent *changing* existing tests to get green;
+it must not grow into tests that assert nothing, for the reason under `gates` above.
+
 **A section called `reachable-one-step` was cut from the unit**, heading, prose and Dutch keys, and
 this is the record of what went with it so nobody restores half of it. It argued the general rule
 that whatever you are working on should be one step away, with the twelve-minute deploy as its
@@ -957,6 +976,12 @@ was going to act on. Its last sentence survives as the close of `goal-oriented.1
 **Context capacity and subscription allowance are distinct.** Goal-shaped work needs useful outcomes,
 checks, a budget and a stopping condition. Remaining allowance is an opportunity only when the work
 is valuable and the weekly/monthly limits permit it. Do not teach quota exhaustion as the objective.
+**The `window-tail` question and `WindowSpend` must hold for a Copilot seat too**, since step 2 has
+no assistant variants and the October 2026 class is on Copilot: a seat draws on a monthly pool with
+no rolling window. So they say "period" and never "window", name no 5-hour reset and no minutes
+left, and the explanation names one limit from each product (a weekly limit, an admin budget). The
+question was rewritten in review (October 2026) because it listed every condition for the right
+answer, so it now gives only the symptom and `keep-busy` is the trap the unit warns about.
 
 **The check is a section of its own now**, `An executable completion check`, and it still owns the sentence
 the capstone is built on: if you cannot name the command that answers yes or no, you do not have a
@@ -1079,9 +1104,10 @@ before the first flag and a stage after the last, and neither is graded by anyth
 asking for them is a page a student skips on the way to the goal. What they hold is the step's own
 habits made into moves. `Preflight` runs five: see the check answer, put it in `CLAUDE.md`, guard the
 gate with a hook, add the `## Gaps` rule, and put the house test style in a skill. Three
-of those are `setup`'s and one is `steering`'s. `Debrief` runs three, and they are `workflows` (the
+of those are `setup`'s and one is `steering`'s. `Debrief` runs four. The first three are `workflows` (the
 audit turned on the student's own diff, closing its worst row rather than filing it), `enablement`
-(count where the afternoon went) and `patterns`.
+(count where the afternoon went) and `patterns`; the fourth, `asked`, is the planted gap's failure
+case and `Debrief.tsx` says why.
 
 **The hook is the move worth defending.** `gates.quality-gates.2` describes exactly it, a hook that
 runs before every edit and shell command and refuses anything touching the gate, and nothing in the

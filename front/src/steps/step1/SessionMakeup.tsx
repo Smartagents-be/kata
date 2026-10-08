@@ -59,6 +59,10 @@ const widest = Math.max(...BLOCKS.map((block) => block.tokens))
 export function SessionMakeup() {
   const { t, i18n } = useTranslation('step1')
   const number = new Intl.NumberFormat(i18n.language)
+  const share = new Intl.NumberFormat(i18n.language, {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  })
 
   return (
     <figure id="session-makeup" data-component="SessionMakeup" className="my-8 flex flex-col gap-3">
@@ -151,7 +155,7 @@ export function SessionMakeup() {
         {t('session-makeup.share', {
           typed: number.format(typed),
           total: number.format(total),
-          percent: ((typed / total) * 100).toFixed(1),
+          percent: share.format((typed / total) * 100),
         })}
       </figcaption>
     </figure>

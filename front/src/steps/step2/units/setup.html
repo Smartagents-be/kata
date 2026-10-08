@@ -136,7 +136,7 @@ description: >-
 
 <h2 data-i18n="setup.permissions-sandbox.heading">Permissions and sandboxing</h2>
 
-<p data-i18n="setup.permissions-sandbox.1">A starting directory focuses discovery; a worktree separates checkouts. Neither restricts capability. Claude Code permissions control tool actions, while its sandbox restricts filesystem and network access for sandboxed commands. Excluded commands and unsandboxed fallbacks need separate review. Use the harmless exercise below to verify a real restriction.</p>
+<p data-i18n="setup.permissions-sandbox.1">A starting directory focuses discovery; a worktree separates checkouts. Neither restricts capability. Claude Code permissions control tool actions, while its sandbox restricts filesystem and network access for sandboxed commands. By default, sandboxed commands can still read most of your machine, <code>~/.ssh</code> included, and file tools, hooks and local MCP servers run outside the sandbox. Excluded commands and unsandboxed fallbacks need separate review. Use the harmless exercise below to verify a real restriction.</p>
 
 <div data-figure="check-permissions"></div>
 

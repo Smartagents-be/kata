@@ -4,6 +4,9 @@ out/
 
 node_modules/
 
+# Per-developer agent settings: hooks in here point into one person's home folder
+.claude/settings.local.json
+
 # Playwright MCP scratch output
 .playwright-mcp/
 

@@ -39,6 +39,20 @@
   check before merge too.
 </p>
 
+<p data-i18n="gates.quality-gates.3">
+  Old code with no documentation and no tests needs a different order. Before anything changes,
+  have the agent write regression tests until every line is covered. Those tests become the source
+  of truth: they record what the code does today, odd parts included, and from then on they catch
+  every regression an agent introduces. Mix kinds of tests, not just unit tests, and let mutation
+  testing check the tests themselves.
+</p>
+
+<p data-i18n="gates.quality-gates.4">
+  They stay the truth until a change is actually needed. Then the tests do not decide what the new
+  behaviour should be. The stakeholders do. Confirm the change with them first, then update the
+  tests, and only then the code.
+</p>
+
 <h2 data-i18n="gates.blast-radius.heading">Blast radius</h2>
 
 <p data-i18n="gates.blast-radius.1">

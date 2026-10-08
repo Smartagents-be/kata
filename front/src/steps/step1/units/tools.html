@@ -243,22 +243,29 @@
 
 <!-- Each harness's own syntax, verified against `claude mcp add --help` and GitHub's `copilot mcp
      add` reference. The server is the one this repo already runs, so a student who copies the line
-     gets something that works. Machine output, so no i18n key on either block. -->
+     gets something that works. Machine output, so no i18n key on either block. `--allow-unrestricted-file-access` is
+     there for the page in `exercises/step1/front/`: since 0.0.55 the server blocks `file://` URLs
+     without it (checked against `--help` on 0.0.83), and the paragraph under each block says what
+     the flag also opens up. -->
 <pre data-assistant="claude"><code>cd exercises/step1/java &amp;&amp; mvn spring-boot:run
-claude mcp add playwright -- npx @playwright/mcp@latest</code></pre>
+claude mcp add playwright -- npx @playwright/mcp@latest --allow-unrestricted-file-access</code></pre>
 
 <pre data-assistant="copilot"><code>cd exercises/step1/java &amp;&amp; mvn spring-boot:run
-copilot mcp add playwright -- npx @playwright/mcp@latest</code></pre>
+copilot mcp add playwright -- npx @playwright/mcp@latest --allow-unrestricted-file-access</code></pre>
 
 <p data-assistant="claude" data-i18n="tools.connect-one.2.claude">
   The second line is specific to Claude Code. Every harness has its own way of adding a server,
-  and that is how it decides which extra tools your agent can call.
+  and that is how it decides which extra tools your agent can call. The option at the end lets the
+  browser open a page from disk, and with it any file outside your project, so leave it off on
+  your own work.
 </p>
 
 <p data-assistant="copilot" data-i18n="tools.connect-one.2.copilot">
   The second line is specific to Copilot CLI and ends up in
   <code>~/.copilot/mcp-config.json</code>. Every harness has its own way of adding a server, and
-  that is how it decides which extra tools your agent can call.
+  that is how it decides which extra tools your agent can call. The option at the end lets the
+  browser open a page from disk, and with it any file outside your project, so leave it off on
+  your own work.
 </p>
 
 <!-- The unit's first task. The three fetches and the comparison are the card's moves, so no paragraph

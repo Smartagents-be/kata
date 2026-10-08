@@ -18,7 +18,10 @@ export interface CodeSpec {
   hash: string
 }
 
-/** The `welcome` page's box. Its code is printed in the prose, so this one is a warm-up. */
+/**
+ * The `welcome` page's box. Its code is printed in the prose and on the card itself, since guided
+ * mode drops the prose, so this one is a warm-up.
+ */
 export const introCode: CodeSpec = {
   id: 'intro-code',
   keyBase: 'code.panel',

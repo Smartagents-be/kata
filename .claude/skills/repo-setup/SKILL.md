@@ -42,7 +42,9 @@ The script exits 0 when everything required passed, 1 when something required fa
 Optional, warn only:
 
 - **GraalVM `native-image`** - needed for exactly one thing, step 2's native-image flag, and that
-  flag is the student's exercise. Absent is fine for everything else.
+  flag is the student's exercise. Absent is fine for everything else. The check looks under
+  `GRAALVM_HOME` and `JAVA_HOME` rather than only on `PATH`, because that is where the native build
+  finds it.
 - **Ports 8080, 8082 and 5173 free** - 8080 is step 1's backend, 8082 is step 2's and 5173 is
   Vite. A busy port is usually the user's own server from an earlier session,
   so report what is holding it rather than killing it.

@@ -344,8 +344,8 @@ export const spendingQuiz: QuizQuestion[] = [
         label: 'quiz.window-tail.save-it',
       },
       {
-        id: 'stop-early',
-        label: 'quiz.window-tail.stop-early',
+        id: 'keep-busy',
+        label: 'quiz.window-tail.keep-busy',
       },
       {
         id: 'upgrade-small',

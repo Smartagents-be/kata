@@ -40,8 +40,28 @@ What holds now:
 | Pro+ | $39/mo | $39 | $31 | $70 | 7,000 |
 | Max | $100/mo | $100 | $100 | $200 | 20,000 |
 
-Run out and you upgrade, pay for more usage on the same plan, or wait for the reset. Organisations
-and enterprises can set per-user budgets.
+Run out and you upgrade, pay for more usage on the same plan, or wait for the reset.
+
+**A company seat does not get an allowance of its own.** Each Copilot Business seat adds 1,900
+credits a month ($19) and each Enterprise seat 3,900 ($39) to **one pool shared by the whole
+organisation or enterprise**, so 100 Business seats are one pool of 190,000 rather than 100 buckets.
+A seat added mid-month grows the pool at once; a removed one only shrinks it next month. What an
+admin controls is how much of that pool each person may draw:
+
+- **User-level budgets** come universal, per cost center or per individual, and the most specific
+  one applies, so one person can get more than another. They always stop usage when reached, even
+  with credits left in the pool.
+- **Cost centers** can cap a team's draw from the pool at what its own seats put in.
+- **Organisation and enterprise budgets** cap paid usage past the pool, and only stop it when "Stop
+  usage when budget limit is reached" is on, which it is not by default. A $0 budget stops usage
+  at once. Paid usage past the pool is on by default; turning the "AI credits paid usage" policy
+  off blocks everyone once the pool is empty.
+- Blocked work does not fall back to a cheaper model. Code completions keep working.
+
+This is what `model.api-vs-subscription.3.copilot` and recap's allowance bullet compress, and both
+were misread in review twice (October 2026): "a shared pool an admin budget can stop" read as one
+company budget, and "a limit per person or per team" as one limit for everybody. Whatever they say
+has to keep both halves, a shared pool and limits that can differ per person.
 
 **Why this matters to the course rather than just to the reader's wallet.** Under the old model a
 Copilot student was billed in requests, and the whole token argument in `tokens`, `context` and
@@ -198,17 +218,19 @@ the most recent local session, `/resume` picks an older one. Tool use is approve
 the rest of the session. Copilot CLI also has **skills** and **hooks**, which is step 2 territory
 rather than step 1's, and step 2 has not been adapted.
 
-**Esc and Ctrl+C are not the same key here, and step 2 assumes they are.** Read off
+**Esc and Ctrl+C are not the same key here.** Read off
 docs.github.com/en/copilot/concepts/agents/copilot-cli/cancel-and-roll-back, 6 August 2026: a single
 Esc gives "more gradual, staged control", the running operation "is canceled only if you press Esc
 again within half a second", and while prompts are queued "pressing Esc again removes the most
 recently queued prompt". Ctrl+C "acts immediately, without a confirming second press". So for a
 Copilot CLI reader with a prompt queued, which is exactly what `steering.mid-flight.2` has them do
 one paragraph earlier, Escape removes the queued sentence rather than stopping the run.
-`steering.mid-flight.1` and `steer.escape.label` are therefore step 2's first genuine
-`data-assistant` candidates. **No pair has been introduced**, because step 2 is the one step not
-written for two assistants (`front/src/steps/CLAUDE.md`) and splitting a block here is a step-wide
-decision rather than a unit's.
+`steering.mid-flight.1` therefore names the stop key per harness in one shared sentence (`Esc` in
+Claude Code, `Ctrl+C` in Copilot CLI, the Stop button in IntelliJ), and `steer.escape.label`, the
+deck title and the quiz distractor say "stop" instead of naming a key. That avoids a `data-assistant`
+pair, since step 2 is the one step not written for two assistants. The `REVIEW.md` validation pass
+read the Esc behaviour differently (a second Esc interrupts the turn and queued prompts then run),
+which is one of the points in this file still to recheck; `Ctrl+C` is correct under either reading.
 
 Three surfaces exist and they are not interchangeable: the **CLI** (what the course assumes), **VS
 Code agent mode** (MCP through `.vscode/mcp.json`, a new chat rather than `/clear`, no `/context` to
@@ -251,6 +273,7 @@ See [Managing large tool output](https://docs.github.com/en/copilot/concepts/age
 - [Usage-based billing for individuals](https://docs.github.com/en/copilot/how-tos/manage-and-track-spending/prepare-for-your-move-to-usage-based-billing)
 - [Flex allotments and the Max plan](https://github.blog/news-insights/company-news/github-copilot-individual-plans-introducing-flex-allotments-in-pro-and-pro-and-a-new-max-plan/)
 - [Updates to Copilot billing and plans, 1 June 2026](https://github.blog/changelog/2026-06-01-updates-to-github-copilot-billing-and-plans/)
+- [Billing for organizations and enterprises](https://docs.github.com/en/copilot/concepts/billing/organizations-and-enterprises)
 - [Request-based billing (legacy)](https://docs.github.com/en/billing/concepts/product-billing/github-copilot-premium-requests)
 - [Managing context in Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/context-management)
 - [Using Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/overview)

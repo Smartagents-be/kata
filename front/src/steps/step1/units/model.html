@@ -47,8 +47,8 @@
 
 <!-- The one place the course multiplies: the `/context` count from `context` against the table's
      rate. It reaches back across the step on purpose, because the two halves of the multiplication
-     live a unit apart, and it carries no currency of its own, so `ModelPricing` stays the only
-     number with one. It measures and argues nothing; the tier-as-multiplier paragraph that once
+     live a unit apart, and it carries no prices of its own, so `ModelPricing` stays the only
+     price list. It measures and argues nothing; the tier-as-multiplier paragraph that once
      closed this section stays out. The sum itself is asked for by `PriceOneTurn` at the foot of the
      unit, so this paragraph states the method and the card collects the answer. -->
 <p data-i18n="model.cost.4">
@@ -56,7 +56,7 @@
 </p>
 
 <!-- Sits under `Cost` because it is how the rates above reach you, and it is why the section carries
-     no prices, no plan names and no currency of its own: `ModelPricing` is a few inches up the page
+     no prices and no plan names (Copilot's $0.01 per credit is a unit conversion): `ModelPricing` is a few inches up the page
      and this must not read as a second one. It was one sentence in `harness` and was moved here
      whole rather than copied, so `harness` must not grow a billing line back. -->
 <h2 data-i18n="model.api-vs-subscription.heading">API vs subscription</h2>
@@ -93,8 +93,11 @@
   data-icon="coin"></svg> A Copilot seat draws the same tokens out of a monthly allowance of AI
   credits, and 1 credit is $0.01. Every model has its own rate for input, output and cached tokens,
   so the same task costs a different number of credits on a different model. In IntelliJ, the chat
-  shows under each turn how many credits it used. The allowance does not roll into next month. Autocomplete is the part of Copilot you are not charged
-  for. Everything the agent does is.
+  shows under each turn how many credits it used. The allowance does not roll into next month. On a
+  company seat, the credits of every seat go into one pool the whole company shares. Your admin
+  decides how much of it you may use and can give each person or team a different limit. When you
+  reach yours, the agent stops. Autocomplete is the part of Copilot you are not charged for.
+  Everything the agent does is.
 </p>
 
 <!-- The only place in step 1 the team question comes up. It stops at what the arrangement makes

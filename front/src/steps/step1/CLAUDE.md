@@ -212,9 +212,11 @@ a rate readout rather than a second sample.** Four rows, tokens per hundred char
 always up on one scale with only the emphasis following the selection: the section's claim is
 comparative and a panel showing one sample at a time left the reader to click, remember and
 subtract. The numbers are worked out from the same pieces the chips are drawn from, the text row's
-from the active locale's split, so the strip cannot drift from the panel above it. `lead.3`'s band
-(roughly 3.5 to 4.5 characters per token) is about English and holds the 4.5 the English row prints;
-the Dutch row is calculated from its own sentence. These are sample densities, not language-quality rankings.
+from the active locale's split, so the strip cannot drift from the panel above it. `lead.3` gives no
+band any more: it says a token is usually a few characters, that the split depends on model and
+language, and to use the count the tool reports (the wording agreed in `REVIEW.md`, which rejected a
+fixed ratio such as 2.5 for Claude). Do not put a characters-per-token range back in it; the strip
+already shows measured rates. The Dutch row is calculated from its own sentence. These are sample densities, not language-quality rankings.
 **Picking a sample restages the panel, and only the arrival is drawn.** The source line and the count
 come back together and the chips come back one after another from the left, on the shared
 `DURATION.state` and `EASE_QUIET`, which is the cut being made rather than a card being swapped;
@@ -1236,7 +1238,8 @@ figure ageing silently.
 `model.cost.4` and `PriceOneTurn` read cumulative usage separately from `/context` occupancy.
 The task retains its component and storage identity so progress is not discarded. Counters absent
 from a product/account are unknown, not zero. Estimate API costs from each model and category's rate
-across requests, and do not equate that estimate to subscription charges. `ReadYourWindow` remains a
+across requests. On a Claude subscription that estimate is not the charge; on Copilot the credits
+are the charge (1 credit is $0.01), which is what the Copilot moves add up. `ReadYourWindow` remains a
 context measurement, not a usage meter. **`PriceOneTurn` splits its moves by assistant**, typed
 `Record<Assistant, …>` like `ReadYourWindow`: Claude keeps `read`, `rate` and `sum` (`/usage` before
 and after, then an API estimate), and Copilot gets `ask.copilot`, `count.copilot` and
@@ -1275,15 +1278,12 @@ the mechanic read as background to a tip. So `five-hour-window.3` and `.4` sit u
 as `.1` and `.2`, and a rewrite that splits them again has to answer why the first half is worth
 knowing on its own.
 
-Three things in there are easy to break. The section **hedges on purpose**: *some* providers give
-you a session limit and it is *usually* five hours, because this is one vendor's arrangement rather
-than how models are billed, and a flat claim here dates faster than anything else in the unit. The
-hedge is a frequency rather than a modal, which is the `lesson-writing` rule and is why it does not
-read as the course being unsure. The
-word *session* is that arrangement's word and not this step's, so `.1` says so in a clause and links
-to `session`; drop it and the unit has two meanings for one word one page apart. And the five minutes
-in `harness`'s caching section are a different clock entirely, so neither may be rewritten in terms
-of the other.
+Two things in there are easy to break. The section is **Claude-only** (`data-assistant="claude"`
+on every block), so it can state the 5-hour reset flat: it describes one product's plan rule, not how
+models are billed, and a Copilot seat meters credits over a calendar month instead. It used to hedge
+("some providers", "usually five hours") while it was shared, and that hedge went when it was split.
+And the five minutes in `harness`'s caching section are a different clock entirely, so neither may
+be rewritten in terms of the other.
 
 `usage-readout` is the shot of what the harness prints, and it is `UnitShot` from `shared`, which
 moved out of step 2 when this became its second caller. Its caption names the tool and the month and
@@ -1305,8 +1305,9 @@ number in both rows moves with it.
 against a subscription drawn off a plan. It was one sentence in `harness` and was **moved here whole
 rather than copied**, so `harness`'s "Which harness you run" must not grow a billing line back. Where
 it sits is the decision. Directly under `ModelPricing` it reads as how the rates above reach you,
-which is also why it carries **no prices, no plan names and no currency of its own**: the one table
-in the course with a currency is a few inches up the page, and a second set of numbers here turns
+which is also why it carries **no prices and no plan names**, and no currency beyond Copilot's
+credit value ($0.01, a unit conversion rather than a price): the one table in the course with prices
+is a few inches up the page, and a second set of numbers here turns
 both into the price list `model.cost.3` tells the student not to learn. What it argues is the thing
 the table cannot: the tokens are the same either way, but a key shows you the number while a plan
 hides it until you hit the limit, and then the cost arrives as waiting. It closes on who holds the
@@ -1379,7 +1380,11 @@ closing section is a card, a card and a card had one instruction in the middle w
 and a student skims a paragraph they would have worked through as a list. What stayed in the prose is
 the pair of `<pre>` blocks, because a command is machine output rather than a move, and the sentence
 above them naming Claude Code's `claude mcp add <name> -- <command>` (verified against the CLI) and
-`npx @playwright/mcp@latest`, which is a server this repo already runs, so a copied line works. **The
+`npx @playwright/mcp@latest --allow-unrestricted-file-access`, which is a server this repo already runs, so a copied line works.
+**The option is required, not decoration**: since 0.0.55 the server blocks `file://` URLs without it,
+and the third route below is a `file://` page. It also lifts the workspace-root limit on file
+access, which is why `connect-one.2.*` says so and tells the student to leave it off on their own
+work. **The
 moves name no command for that reason**, which also keeps the card readable in class, where the
 `<pre>` is cut with the rest of the prose. **The last move asks which result you would want back on
 every turn and nothing answers it**: the comparison is the exercise, so do not add the sentence
@@ -1923,9 +1928,14 @@ working rather than the list being evened up. Never choose a marker here.
 Four more decisions. **`workshop` is not in the list**, because a capstone is not a claim and the
 student has just worked it. **The allowance bullet is last and is a pair** (`what-costs-do.9.claude`
 and `.9.copilot`): Claude's 5-hour and weekly limits, and a Copilot company seat drawing AI credits
-from a shared monthly pool that an admin budget can stop mid-task (checked October 2026 against
+from a shared monthly pool, where the admin can give each person a different limit and reaching
+yours stops the agent mid-task (checked October 2026 against
 GitHub's usage-based billing docs for organisations; an individual plan has its own allowance, which
-is why the bullet says "company seat"). The Claude half lifts `model.five-hour-window`'s gem and the
+is why the bullet says "company seat"). `model.api-vs-subscription.3.copilot` says the same in more
+detail, and **it must say that limits can differ per person**: "a shared pool an admin budget can
+stop" read as one company budget, and "a limit per person or per team" read as one limit for
+everybody. Both wrong readings were the author's, in review (October 2026). The pool is shared, and
+user-level and cost-center budgets cap each person's or team's draw from it. The Claude half lifts `model.five-hour-window`'s gem and the
 Copilot half `model.api-vs-subscription.3.copilot`'s coin. It sits after the eight rather than
 inside them because it is an extra rather than a unit's line. **A second `tools` bullet on prompt
 injection was added and taken out again** (October 2026): injection is a warning rather than a
@@ -2041,7 +2051,7 @@ in there, that is their build to unpick and the flags above are what they have d
 
 ## The assistant variants
 
-15 blocks in step 1 vary and nearly all of them are the same kind of thing, a filename or a
+16 blocks in step 1 vary, 13 of them in the unit HTML and 3 on task cards, and nearly all of them are the same kind of thing, a filename or a
 command: the launcher `<pre>` pair under `workshop`'s lead (`claude` against `copilot`, each after
 the same `cd`), which is the only pair left there now that the setup command has moved to
 `install.txt`,
@@ -2052,11 +2062,11 @@ the `<pre>` under `tools.connect-one.1` and `tools.connect-one.2`
 `session.automatic-manual-compaction.3` (when compaction starts, and whether you can move it),
 `context.amnesia-context-fatigue.3`
 (nested inside the audience wrapper, never both attributes on one element),
-`model.api-vs-subscription.2` and `.3`, plus `survive.write.*.label`, `window.open.*.label` and
+`model.api-vs-subscription.2` and `.3`, the recap's allowance pair `recap.what-costs-do.9`, plus `survive.write.*.label`, `window.open.*.label` and
 `PriceOneTurn`'s move set (`read`/`rate`/`sum` against the three `price.*.copilot` moves) on the task
 cards. The last of those replaced `context.read-your-window.1`, which was the Claude and
 Copilot descriptions of `/context`: the paragraphs went and the variant moved onto the move that
-starts the agent. `flag.machine.help.*` is the 16th variant set and the only one on a flag
+starts the agent. `flag.machine.help.*` is the 17th variant set and the only one on a flag
 board; it is counted apart because it is not a block of prose in a unit file, and the mechanism it
 needed is written up under `workshop`.
 `harness.lead.1` names Copilot for **every** reader instead of splitting, because that sentence is a
