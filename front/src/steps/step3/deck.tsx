@@ -108,7 +108,11 @@ const deck: SlideSpec[] = [
     ns: 'step3',
     eyebrow: 'expectations.title',
     title: 'deck.expectations.missing.title',
-    note: 'deck.expectations.missing.note',
+    points: [
+      'deck.expectations.missing.1',
+      'deck.expectations.missing.2',
+      'deck.expectations.missing.3',
+    ],
   },
   // The one of the three sections the manager has to hear, and it was on no slide. It names no
   // concrete edge case and must not grow one: `change` and `impostor` each enumerate three already.
@@ -118,7 +122,11 @@ const deck: SlideSpec[] = [
     ns: 'step3',
     eyebrow: 'expectations.title',
     title: 'deck.expectations.burden.title',
-    note: 'deck.expectations.burden.note',
+    points: [
+      'deck.expectations.burden.1',
+      'deck.expectations.burden.2',
+      'deck.expectations.burden.3',
+    ],
   },
   {
     id: 'deck-step3-expectations-estimate',
@@ -126,7 +134,11 @@ const deck: SlideSpec[] = [
     ns: 'step3',
     eyebrow: 'expectations.title',
     title: 'deck.expectations.estimate.title',
-    note: 'deck.expectations.estimate.note',
+    points: [
+      'deck.expectations.estimate.1',
+      'deck.expectations.estimate.2',
+      'deck.expectations.estimate.3',
+    ],
   },
   {
     id: 'deck-step3-expectations-velocity',
