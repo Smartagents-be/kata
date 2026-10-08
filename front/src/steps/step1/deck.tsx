@@ -606,7 +606,7 @@ const deck: SlideSpec[] = [
     ns: 'step1',
     eyebrow: 'model.title',
     title: 'deck.model.billing.title',
-    note: 'deck.model.billing.note',
+    points: ['deck.model.billing.1', 'deck.model.billing.2', 'deck.model.billing.3'],
   },
   {
     id: 'deck-model-reasoning',
@@ -614,7 +614,7 @@ const deck: SlideSpec[] = [
     ns: 'step1',
     eyebrow: 'model.title',
     title: 'deck.model.reasoning.title',
-    note: 'deck.model.reasoning.note',
+    points: ['deck.model.reasoning.1', 'deck.model.reasoning.2', 'deck.model.reasoning.3'],
   },
   {
     id: 'deck-model-pick',
@@ -647,7 +647,7 @@ const deck: SlideSpec[] = [
     ns: 'step1',
     eyebrow: 'truth.title',
     title: 'deck.truth.sounds-same.title',
-    note: 'deck.truth.sounds-same.note',
+    points: ['deck.truth.sounds-same.1', 'deck.truth.sounds-same.2', 'deck.truth.sounds-same.3'],
   },
   {
     id: 'deck-truth-grounded',
@@ -680,7 +680,7 @@ const deck: SlideSpec[] = [
     ns: 'step1',
     eyebrow: 'truth.title',
     title: 'deck.truth.proof.title',
-    note: 'deck.truth.proof.note',
+    points: ['deck.truth.proof.1', 'deck.truth.proof.2', 'deck.truth.proof.3'],
   },
 
   // ── workshop ──────────────────────────────────────────────────────────────────────────────
