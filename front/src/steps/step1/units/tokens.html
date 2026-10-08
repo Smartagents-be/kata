@@ -56,19 +56,19 @@
 
 <div data-audience="self">
   <!-- `TokenSplit`'s rate strip in words: the text row is the lead sentence in the reader's language
-       (22 tokens per 100 characters in English, 24 in Dutch), a line of Java 22, a log line 43, an
+       (21 tokens per 100 characters in English, 24 in Dutch), a line of Java 22, a log line 43, an
        id 61. So text and code are about level and ids and hashes are nearly 3 times either (61/22 is
-       2.8). Nothing here may say text is the cheapest any more: in Dutch it is not. -->
+       2.8, 61/21 is 2.9). Nothing here may say text is the cheapest any more: in Dutch it is not. -->
   <p data-i18n="tokens.not-words.2">
   In these examples, text and Java code use similar numbers of tokens per character. A log line
   uses nearly 2 times as many, an id nearly 3 times. Those ratios depend on the text and the tokeniser. Long logs full of ids
   can fill the window quickly.
 </p>
 
-  <!-- Counts follow the shared example: 13 English tokens and 17 Dutch tokens.
+  <!-- Counts follow the shared example: 10 English tokens and 12 Dutch tokens.
        Fragmentation alone is not evidence of training exposure or language capability. -->
   <p data-i18n="tokens.not-words.3">
-    The sentence above uses 13 tokens in English and 17 in Dutch with this tokeniser. Most languages
+    The sentence above uses 10 tokens in English and 12 in Dutch with this tokeniser. Most languages
     need more tokens than English for the same content. A tokeniser learns its pieces mostly from
     English text, so English words stay whole more often. Other languages cost more and fill the
     window sooner. That says nothing about the quality of the answers.
@@ -121,32 +121,29 @@
 
   <!-- Explain what repeated attention contributes without introducing heads as unexplained jargon.
        The weights are illustrative. Counts exclude self-attention: n(n-1)/2 gives 21 pairs for
-       7 tokens and 91 for 14. These are the figure's inter-token links, not the full attention matrix. -->
+       7 tokens and 91 for 14. These are the figure's inter-token links, not the full attention matrix.
+       A closing line saying the pairs are not what you are billed for was cut at the course
+       owner's asking: it read oddly and answered a question the paragraph does not raise. -->
   <p data-i18n="tokens.attention.3">
     That step happens many times side by side, and again in every layer, each time with new vectors.
     This drawing shows 1 run with invented weights and omits attention to the token itself. It has
-    21 pairs for 7 tokens and 91 for 14. These are connections in the drawing, not a count of
-    billable token reads.
+    21 pairs for 7 tokens and 91 for 14.
   </p>
-
-  <!-- Keep inference KV reuse separate from prompt caching and API category rates. -->
-  <p data-i18n="tokens.attention.4">
-  During generation, an inference cache usually reuses earlier attention states. Prompt caching
-  across requests is a separate mechanism: a matching prefix can be billed at a lower rate, while
-  new or uncached input uses its own rate. New tokens still depend on earlier context. Keep that
-  context relevant <svg data-icon="coin"></svg> The <a href="/steps/step1/harness">harness unit</a>
-  explains prompt caching.
-</p>
 
   <h2 data-i18n="tokens.writing.heading">Writing</h2>
 
   <h3 data-i18n="tokens.one-at-a-time.heading">The model generates 1 token at a time</h3>
 
+  <!-- Both caches in one paragraph, argued from the backward-only arcs in the attention figure:
+       first reuse within one answer, then across requests. Rates are harness.caching.1's. -->
   <p data-i18n="tokens.one-at-a-time.1">
   The model gives every token in its vocabulary a score, based on the context so far, and 1 token is
   picked. That token goes on the end of the text, and the next prediction starts from that longer
-  sequence. Earlier calculations are usually reused from a cache, so the model does not work through
-  the whole text again each time.
+  sequence. A token depends only on what comes before it, so adding one changes nothing that was
+  already calculated. The model reuses those calculations from a cache instead of working through
+  the whole text again. That also works across requests: when a request starts with the same text as
+  an earlier one, that start can be reused, at a lower rate <svg data-icon="coin"></svg> The
+  <a href="/steps/step1/harness">harness unit</a> explains how this prompt caching works.
 </p>
 </div>
 
@@ -157,8 +154,9 @@
        the token before it. It is also what the attention section above drew. Do not shorten it to
        "the previous token". -->
   <p data-i18n="tokens.one-at-a-time.2">
-    On its own, <code>it</code> predicts nothing at all. <code>the build failed because it</code>
-    makes <code>timed</code> the favourite. Everything you leave in front of a model changes what
+    After <code>it</code> alone, almost anything can follow, such as <code>is</code> or
+    <code>was</code>. After <code>the build failed because it</code>, <code>timed</code> becomes the
+    favourite. Everything you leave in front of a model changes what
     comes out of it, whether you meant it to or not.
   </p>
 
@@ -212,15 +210,14 @@
   <!-- Writing's bill, and the last prose section: output priced above input, reasoning billed as
        output, and the figure putting a turn's reading and writing side by side. `.1` sends the numbers
        to `model`'s pricing, the same rule `harness.coordinator.3` follows for decomposition; the cache
-       pointer to `harness` sits with the cache in `attention.4`. `.3` names no price and no link of
+       pointer to `harness` sits with the cache in `one-at-a-time.1`. `.3` names no price and no link of
        its own: `TokenKinds` carries every number, computed from `ModelPricing`'s Sonnet row. -->
   <h3 data-i18n="tokens.expensive-part.heading">The real cost</h3>
 
   <p data-i18n="tokens.expensive-part.1">
   Output is priced above input in the table in the <a href="/steps/step1/model">model unit</a>. The
-  model processes the input before decoding an answer token by token. Each new token requires
-  another decoding step and depends on what came before it, with earlier states usually reused from
-  a cache.
+  model reads the whole input at once, but writes the answer 1 token at a time, with a separate
+  pass for each token.
 </p>
 
   <p data-i18n="tokens.expensive-part.2">

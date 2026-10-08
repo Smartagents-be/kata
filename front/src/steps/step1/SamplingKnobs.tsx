@@ -5,8 +5,8 @@ import { exampleSentence } from './example-sentence'
 import { OUTPUT_SCORES, softmax } from './network-pass'
 
 /**
- * How widely the model picks, drawn on one choice: the four words that could follow `swears` (or
- * `beweert`), and how likely each one is under the standard setting and four others. It sits under
+ * How widely the model picks, drawn on one choice: the four words that could follow `swears that` (or
+ * `beweert dat`), and how likely each one is under the standard setting and four others. It sits under
  * `tokens.one-at-a-time.3`, which says the scores are probabilities and the model picks one by them,
  * and it carries what that section's last paragraph no longer explains in words: temperature
  * sharpens or flattens the probabilities, top-k keeps the k best, top-p keeps the best until together
@@ -17,7 +17,9 @@ import { OUTPUT_SCORES, softmax } from './network-pass'
  * the other side: the network produces four scores, and these settings reshape them before one is
  * taken. Every percentage is computed here from those scores (softmax of score over temperature), and
  * top-k and top-p renormalise what they keep, so the standard row is the network's 75 / 15 / 5 / 5 and
- * nothing on screen is typed. A word a setting removes prints as gone rather than as 0%, because 0%
+ * nothing on screen is typed. **p is 0.95 so top-p keeps 3 words where top-k 2 keeps 2**: at 0.9 it
+ * kept the same 2 (75 + 15 is 0.903) and the 2 rows printed the same numbers, which hid the
+ * difference. A word a setting removes prints as gone rather than as 0%, because 0%
  * at temperature 0.5 is a rounding and gone is a rule.
  *
  * **It shows the mechanism, not a setting the student can turn.** The Messages API rejects any
@@ -43,7 +45,7 @@ const KNOBS: readonly Knob[] = [
   { id: 'cold', temperature: 0.5 },
   { id: 'hot', temperature: 2 },
   { id: 'top-k', k: 2 },
-  { id: 'top-p', p: 0.9 },
+  { id: 'top-p', p: 0.95 },
 ]
 
 /** Shares per output, in `outputs` order, with `null` for a word the setting removes. */
@@ -79,7 +81,7 @@ export function SamplingKnobs() {
   const number = new Intl.NumberFormat(i18n.language)
 
   // Real tokens in the reader's language, the same ones `TokenNetwork` draws, and no locale key. No
-  // ellipsis in front: the sentence starts here, so `… The agent swears` claimed text that is not there.
+  // ellipsis in front: the sentence starts here, so `… The agent swears that` claimed text that is not there.
   const sentence = exampleSentence(locale)
   const context = sentence.tokens
     .slice(0, sentence.networkToken + 1)
@@ -154,7 +156,7 @@ export function SamplingKnobs() {
             data-component="SamplingKnobs"
             className="border-primary/40 text-primary/60 rounded border border-dashed px-1.5 py-0.5 font-mono text-sm"
           >
-            ?
+            …
           </span>
         </p>
 

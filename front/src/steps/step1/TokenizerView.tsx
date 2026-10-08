@@ -23,7 +23,7 @@ import { exampleSentence } from './example-sentence'
  * pointed at. Several hues would read better at a glance and would be the only rainbow in the
  * course, and `--success` and `--destructive` are not ours to borrow.
  *
- * No token is marked. The network figure takes `networkToken` (`ears`, `ert`), but it sits sections
+ * No token is marked. The network figure takes `networkToken` (`that`, `dat`), but it sits sections
  * further down now, and an underline with nothing near it to explain it read as a mistake.
  *
  * It draws no context frame, on the same reasoning as every other figure above `tools`.

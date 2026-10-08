@@ -17,12 +17,12 @@ import { B, LAST, PARAMETERS, PERCENTS, SUMS, VALUES, W, WEIGHTED, X_IN, relu } 
  * modern ones drop the biases. The figure keeps ReLU because "below zero becomes 0" can be said in
  * one sentence, and one bias per node because the bias is the concept being taught.
  *
- * **The token comes out of `TokenizerView`'s sentence, in the reader's language.** It is `ears` with
- * `The agent sw` in front of it, or `ert` after `De agent bewe`, both read off `example-sentence.ts`,
- * and the first of the four outputs is the token that really comes next in that sentence (`up`,
- * `bij`). The context carries no ellipsis, because the sentence starts there. The weights are the same
+ * **The token comes out of `TokenizerView`'s sentence, in the reader's language.** It is `that` with
+ * `The agent swears` in front of it, or `dat` after `De agent beweert`, both read off
+ * `example-sentence.ts`, and the first of the four outputs is the token that really comes next in
+ * that sentence (`the`, `de`). The context carries no ellipsis, because the sentence starts there. The weights are the same
  * in every language, so the first output is always the winner and the percentages never move; only
- * the words change. The empty state names the token and its real id (36108, 805), so the step from
+ * the words change. The empty state names the token and its real id (484, 1814), so the step from
  * `TokenizerView`'s id to a row of numbers is said in words before the first click.
  *
  * **The footer is a plain-words simplification note, in 2 short lines** (cut from a jargon-heavy
@@ -63,18 +63,19 @@ function paren(text: string) {
   return text.startsWith('−') ? `(${text})` : text
 }
 
-// Layout, in viewBox units. The drawing is 694 wide and scales with the column. The first column
-// sits far enough right that a 14-character context line ends before the vector's bracket.
-const VIEW_W = 694
+// Layout, in viewBox units. The drawing is 710 wide and scales with the column. The vector and the
+// columns sit far enough right that a 16-character context line (`The agent swears`, `De agent
+// beweert`) ends before the vector's bracket; a longer context needs the same check.
+const VIEW_W = 710
 const VIEW_H = 262
-const COLUMN_X = [196, 326, 456, 576]
+const COLUMN_X = [212, 342, 472, 592]
 const TOP = 46
 const BOTTOM = 246
 const MID = TOP + (BOTTOM - TOP) / 2
 const ys = (n: number) => Array.from({ length: n }, (_, i) => TOP + ((BOTTOM - TOP) * (i + 0.5)) / n)
 const COLUMN_Y = [ys(4), ys(5), ys(5), ys(4)]
-const VECTOR_X1 = 112
-const VECTOR_X2 = 162
+const VECTOR_X1 = 128
+const VECTOR_X2 = 178
 
 /** What each node is lit by: the input's size, a hidden node's value, an output's probability. */
 const SHOWN = [X_IN.map(Math.abs), VALUES[1], VALUES[2], PERCENTS]

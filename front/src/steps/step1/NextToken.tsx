@@ -506,7 +506,7 @@ export function NextToken() {
               data-component="NextToken"
               className="border-primary/40 text-primary/60 rounded border border-dashed px-1.5 py-0.5 font-mono text-sm"
             >
-              ?
+              …
             </span>
           ) : null}
         </div>

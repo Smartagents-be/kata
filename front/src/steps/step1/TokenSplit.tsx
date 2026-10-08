@@ -48,9 +48,9 @@ type Sample = {
  * The three machine-shaped rows (a line of Java, a log line, an id). The text row is not here: it is
  * the unit's example sentence in the reader's own language, read from `example-sentence.ts` at
  * render time, so the page shows one sentence everywhere. **The order is text, Java, log line, id,
- * and it is cheapest first only roughly.** The English sentence splits at 22 tokens per 100
- * characters and the Dutch one at 24, which ties text with the line of Java (22) or puts it just
- * above. So the prose says text and code are about level, a log line costs nearly 2 times as much
+ * and it is cheapest first only roughly.** The English sentence splits at 21 tokens per 100
+ * characters and the Dutch one at 24, which puts text just below the line of Java (22) or just
+ * above it. So the prose says text and code are about level, a log line costs nearly 2 times as much
  * and an id nearly 3 times, and that is true in both languages.
  *
  * **The log line replaced a class name** (`be.smartagents.kata.java.step1.CatalogController`, 23),

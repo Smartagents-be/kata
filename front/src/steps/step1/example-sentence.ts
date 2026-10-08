@@ -32,25 +32,30 @@ export type ExampleSentence = {
  * token, its context and the first of its outputs are lifted from the split as well, so a new
  * sentence means checking `networkToken` and `outputs` too.
  *
- * `TokenSplit` reads its rates off this split too (English 13 tokens over 59 characters, 22 per 100;
- * Dutch 17 over 72, 24 per 100), so a new sentence moves its rate strip and has to be checked against
+ * `TokenSplit` reads its rates off this split too (English 10 tokens over 47 characters, 21 per 100;
+ * Dutch 12 over 51, 24 per 100), so a new sentence moves its rate strip and has to be checked against
  * `tokens.not-words.2`, which says text and code cost about the same and ids nearly 3 times as much.
  * It also has to keep a word that breaks mid-word (`sw|ears`, `bewe|ert`), which that figure relies on.
+ *
+ * **No idiom straight after the network's token.** The sentence once read `swears up and down` and
+ * `beweert bij hoog en bij laag`, which made `up` and `bij` the favourites in `TokenNetwork` and
+ * `SamplingKnobs`: cut off from the rest of the idiom they read as mistakes, so the idiom went.
+ *
+ * **The network's token is a whole word, `that` (`dat`).** It was `ears` (`ert`), the second half
+ * of the broken word, and the course owner found that a strange token to feed through a network.
+ * The broken word still does its job in `TokenizerView` and `TokenSplit`.
  *
  * Plain data in its own module rather than an export from a figure, so the figure files stay
  * component-only and Fast Refresh keeps working on them.
  */
 export const EXAMPLE_SENTENCES: { en: ExampleSentence } & Partial<Record<Locale, ExampleSentence>> = {
-  // The agent swears up and down that the tests passed locally.
+  // The agent swears that the tests passed locally.
   en: {
     tokens: [
       { text: 'The', id: 976 },
       { text: ' agent', id: 11793 },
       { text: ' sw', id: 2766 },
       { text: 'ears', id: 36108 },
-      { text: ' up', id: 869 },
-      { text: ' and', id: 326 },
-      { text: ' down', id: 1917 },
       { text: ' that', id: 484 },
       { text: ' the', id: 290 },
       { text: ' tests', id: 10742 },
@@ -58,21 +63,16 @@ export const EXAMPLE_SENTENCES: { en: ExampleSentence } & Partial<Record<Locale,
       { text: ' locally', id: 33616 },
       { text: '.', id: 13 },
     ],
-    networkToken: 3,
-    outputs: ['up', 'that', 'the', 'it'],
+    networkToken: 4,
+    outputs: ['the', 'it', 'all', 'he'],
   },
-  // De agent beweert bij hoog en bij laag dat de tests lokaal zijn geslaagd.
+  // De agent beweert dat de tests lokaal zijn geslaagd.
   nl: {
     tokens: [
       { text: 'De', id: 1923 },
       { text: ' agent', id: 11793 },
       { text: ' bewe', id: 31951 },
       { text: 'ert', id: 805 },
-      { text: ' bij', id: 4080 },
-      { text: ' hoog', id: 21326 },
-      { text: ' en', id: 469 },
-      { text: ' bij', id: 4080 },
-      { text: ' laag', id: 58278 },
       { text: ' dat', id: 1814 },
       { text: ' de', id: 334 },
       { text: ' tests', id: 10742 },
@@ -82,8 +82,8 @@ export const EXAMPLE_SENTENCES: { en: ExampleSentence } & Partial<Record<Locale,
       { text: 'laagd', id: 146232 },
       { text: '.', id: 13 },
     ],
-    networkToken: 3,
-    outputs: ['bij', 'dat', 'het', 'op'],
+    networkToken: 4,
+    outputs: ['de', 'het', 'alle', 'hij'],
   },
 }
 

@@ -132,9 +132,10 @@ and a reader met a network producing probabilities before anything had told them
 want any. Under its own heading after the loop it is the answer to a question the reader already
 has, and its footer names attention (no longer as *above*, since the author's own rewording);
 moving either of them still means rereading that footer in both languages. `inside.1` is one sentence and must stay one, because the
-drawing carries the rest. **The cost talk sits where its mechanism is.** The cache is the last
-paragraph of `attention` (`attention.4`), because what it saves and what it cannot save are both
-about the weighing `TokenAttention` has just drawn; output priced above input and reasoning billed
+drawing carries the rest. **The cost talk sits where its mechanism is.** The cache closes
+`one-at-a-time.1`, the first paragraph of Writing, because appending a token is what that paragraph
+describes and the backward-only weighing `TokenAttention` has just drawn is why appending leaves
+earlier work intact; output priced above input and reasoning billed
 as output are `expensive-part`, with `TokenKinds` putting a turn's reading and writing side by side.
 They were once gathered into one `costs-same` section, and splitting them by part is what the
 reading-then-writing order bought. **No sentence in the unit says a token "looks" at anything,
@@ -155,11 +156,11 @@ bank with a financial institution; Dutch contrasts a seat with a financial insti
 explains the different roles of query, key and value. `.5` explains the dot product (Dutch:
 inwendig product), `.6` distinguishes scoring keys from combining values, and `.7` distinguishes
 learning the calculations during training from using them during inference. There is no numerical
-example: the course owner found it distracting. `.3` counts the drawing's inter-token links,
-not billable rereads. `.4` distinguishes inference KV reuse during decoding from provider prompt
-caching across requests. Keep those mechanisms separate: a cached prefix has its own billing rate,
-new input uses its own category, and output has another rate. Do not infer usage from context
-occupancy or from the number of attention links.
+example: the course owner found it distracting. `.3` counts the drawing's inter-token links
+and stops there: a closing line saying they are not billable rereads was cut at the owner's asking. There is no `.4`: the cache paragraph that closed this section (inference reuse, prompt caching,
+"keep that context relevant") read oddly to the owner and repeated `one-at-a-time.1` right below
+it, so the two were merged there. Do not infer usage from context occupancy or from the number of
+attention links.
 
 **`attention.3` explains repeated attention without naming heads or layers**: the course owner
 found the unexplained term unhelpful. It says attention runs many times side by side and again in
@@ -176,19 +177,21 @@ meets, so every unit above it stays out of that vocabulary rather than spending 
 defines it before `context` does. **Attention and writing use different examples.** `TokenAttention`
 uses `He deposits his money at the bank` or `Hij stort zijn geld op de bank`, selected by the active
 language. Both have 7 word-sized illustrative tokens. Its invented weights make `bank` lean hardest
-on `money`/`geld`, with `deposits`/`stort` also contributing. These are explanatory splits, not
+on `money`/`geld`, with `deposits`/`stort` also contributing. **The opening state draws `bank`'s
+row loud over the faint mass**, at the course owner's asking: with every row normalised to its own
+heaviest, the pair the prose names was no louder than any other row's top link. These are explanatory splits, not
 claimed output from a particular tokenizer. `NextToken` keeps its build sentence and its
 `timed` -> `out` -> `.` favourite chain. **These are exceptions to the shared example sentence.**
 Every other place the unit shows a
-sentence uses `example-sentence.ts`'s, in the reader's language (`The agent swears up and down that
-the tests passed locally.`, `De agent beweert bij hoog en bij laag dat de tests lokaal zijn geslaagd.`): `TokenizerView` draws
-it, `TokenSplit` takes it as its text row, and `TokenNetwork` and `SamplingKnobs` take `swears`
-(`beweert`) out of it. The review asked for that so a reader meets one sentence rather than four;
+sentence uses `example-sentence.ts`'s, in the reader's language (`The agent swears that
+the tests passed locally.`, `De agent beweert dat de tests lokaal zijn geslaagd.`): `TokenizerView` draws
+it, `TokenSplit` takes it as its text row, and `TokenNetwork` and `SamplingKnobs` take `that`
+(`dat`) out of it. The review asked for that so a reader meets one sentence rather than four;
 `PickTheNext`'s `the pull request was` is an exercise prompt rather than an example, and stays.
 **`TokenSplit`'s text row is the example sentence, and that reverses an older decision.** The row was
 `TokenSplit`'s own once (a sentence about the catalogue, 16 tokens per 100 characters), kept apart from the lead sentence because the figure's rows were ordered cheapest first
-and text cheapest was what the prose argued. With the example sentence the text row is 22 per 100
-in English (13 tokens over 59 characters) and 24 in Dutch (17 over 72), against the line of Java at
+and text cheapest was what the prose argued. With the example sentence the text row is 21 per 100
+in English (10 tokens over 47 characters) and 24 in Dutch (12 over 51), against the line of Java at
 22, the log line at 43 and the id at 61 (the log line replaced a class name at 23, which only
 repeated the Java row; `TokenSplit.tsx` has the measurements). So **the rows are no longer cheapest first in every
 locale**, the order is text, Java, log line, id, and the claim moved to match: `not-words.2`
@@ -256,13 +259,15 @@ reverses an older decision.** `WordsIntoTokens` avoided ids because a token id i
 the unit a student can check and there was no tokeniser in this repository to make real ones with;
 these were produced with tiktoken's `o200k_base` outside the repo and verified id by id, and
 `example-sentence.ts` carries them beside the split with a comment saying they must be regenerated
-if the sentence changes. Never hand-edit one. **The sentence is `The agent swears up and down that the
-tests passed locally.`, and in Dutch `De agent beweert bij hoog en bij laag dat de tests lokaal zijn geslaagd.`** It replaced
+if the sentence changes. Never hand-edit one. **The sentence is `The agent swears that the
+tests passed locally.`, and in Dutch `De agent beweert dat de tests lokaal zijn geslaagd.`** It replaced
 
 `TokenSplit`'s old catalogue row, which the author found dull as the first thing the step shows: this one
 is the works-on-my-machine joke, and it still breaks mid-word where no reader would cut it,
-`sw|ears` and `bewe|ert`, which is what `not-words.1` claims happens to a word. English is 13 tokens over 59
-characters, Dutch 17 over 72, and the counters work both out from the data. **There is one sentence
+`sw|ears` and `bewe|ert`, which is what `not-words.1` claims happens to a word. English is 10 tokens over 47
+characters, Dutch 12 over 51, and the counters work both out from the data. It carried an idiom
+once (`swears up and down`, `beweert bij hoog en bij laag`), and the course owner cut it: the
+network's token sits right before it, so `up` and `bij` were the favourites and read as mistakes. **There is one sentence
 per language, and that does not reopen the argument `TokenSplit` closed.** The objection there was
 an English row against a Dutch one, side by side, which turns a figure into a comparison of
 languages. Here a reader only ever sees the sentence of the language they read in, never the two
@@ -274,7 +279,7 @@ coloured token the way the reference page draws them. The two sentences parted o
 together in review; why is under `TokenSplit` above. **The tints are one hue at three strengths**, `--primary` at 15, 28 and 40 percent and
 lifted in dark mode, cycled so neighbours never match: several hues would match the reference and
 would be the only rainbow in the course, and `--success` and `--destructive` are not ours to borrow.
-**No token is underlined any more.** The network's token (`ears`, `ert`) once carried a dotted
+**No token is underlined any more.** The network's token (then `ears`, `ert`) once carried a dotted
 underline to tie the two figures together, but since the Read/Write split the network sits several
 sections down, and the course owner read the lone underline as a mistake. The counters are mono and computed from the data, each view
 is one `role="img"` with a sentence interpolating the pieces or the ids, and the tokens are one
@@ -333,20 +338,24 @@ the one thing on the page a student will check with a calculator. The output sco
 2.54, 0.96, −0.15, −0.25, and the percentages (75, 15, 5, 5) are unchanged. The footer's parameter
 count is computed from the matrices as well (65 weights and 14 biases, 79), so it cannot go stale.
 
-**The token is the lead sentence's, in the reader's language, fed with its context.** It is `ears`
-with `The agent sw` muted in front of it, or `ert` after `De agent bewe`, with no ellipsis because the
-sentence starts there, and the four outputs are
-` up`, ` that`, ` the`, ` it` and ` bij`, ` dat`, ` het`, ` op`, drawn without their leading space.
+**The token is the lead sentence's, in the reader's language, fed with its context.** It is `that`
+with `The agent swears` muted in front of it, or `dat` after `De agent beweert`, with no ellipsis
+because the sentence starts there, and the four outputs are
+` the`, ` it`, ` all`, ` he` and ` de`, ` het`, ` alle`, ` hij`, drawn without their leading space.
+It was `ears` (`ert`) once, the second half of a broken word, and the course owner found that a
+strange token to feed through a network; the broken word is still shown by `TokenizerView` and
+`TokenSplit`.
 **The first of the four is the token that really comes next in the sentence, and it has to stay
 first**: the weights are the same in every language, so the first output always wins at 75% and the
 percentages never move. Only the words change. Context, token and outputs are real tokens, mono, and
 sit in `example-sentence.ts` beside the split (`networkToken`, `outputs`) rather than in a locale
 file; the screen-reader title interpolates them. **The empty state names the token and its real
-id** (`ears (token id 36108) is an embedding of 4 numbers here`, `ert (token-id 805)`), both read off the
+id** (`that (token id 484) is an embedding of 4 numbers here`, `dat (token-id 1814)`), both read off the
 same data, so the step from `TokenizerView`'s id to a row of numbers is said before the first click.
-A 14-character context reaches the vector's
-bracket at the old layout, so the columns sit 16 units further right than the mockup's; a longer
-context needs the same check.
+A 16-character context (`The agent swears`, `De agent
+beweert`) reaches the vector's bracket at the old layout, so the vector and the columns sit 32 units
+further right than the mockup's and the viewBox is 710 wide rather than 694; a longer context needs
+the same check.
 
 **The stepper is the reason it is interactive.** All four layers lit at once is a picture of a
 network; one layer per click is the signal visibly moving through it, with each edge as thick as the
@@ -371,8 +380,8 @@ screen-reader description and walks the whole pass with the real numbers interpo
 of the drawing's vocabulary reaches a reader who cannot see it.
 
 `SamplingKnobs` is the fifth figure, under `one-at-a-time` after `NextToken` and `.3`: the four words
-that could follow `swears` (`beweert`), and how likely each one is under the standard setting,
-temperature 0.5 and 2, top-k 2 and top-p 0.9. It took over what `one-at-a-time.4` used to explain in
+that could follow `swears that` (`beweert dat`), and how likely each one is under the standard setting,
+temperature 0.5 and 2, top-k 2 and top-p 0.95. It took over what `one-at-a-time.4` used to explain in
 a paragraph (what temperature, top-k and top-p each do), and that paragraph is now one sentence
 saying the student never sets them. On the deck it is `deck-tokens-sampling`, between the loop and
 the network, with that sentence as its note. Five things in it are decisions. **It shows the
@@ -383,19 +392,21 @@ student has. **Its scores are `TokenNetwork`'s own**, imported from `network-pas
 and context are `example-sentence.ts`'s (`networkToken` and `outputs`), so it is the same choice the
 network makes further down, seen from the other side, and the standard row is that figure's 75 / 15 /
 5 / 5. **Every percentage is computed**, softmax of score over temperature, with top-k and top-p
-renormalising what they keep (top-p keeps the smallest set of best words reaching p, which is two
-here at 0.903), so the rows come out 95 / 4 / 0 / 0, 51 / 23 / 13 / 13 and 83 / 17 twice; nothing is
-typed. **A removed word prints `gone`/`weg` rather than 0%**, because 0% at temperature 0.5 is a
+renormalising what they keep (top-p keeps the smallest set of best words reaching p, which is three
+here), so the rows come out 95 / 4 / 0 / 0, 51 / 23 / 13 / 13, 83 / 17 and 79 / 16 / 5; nothing is
+typed. p was 0.9 once, which kept the same 2 words as top-k (75 + 15 is 0.903), so the 2 rows
+printed the same numbers; the course owner asked for them to differ. **A removed word prints `gone`/`weg` rather than 0%**, because 0% at temperature 0.5 is a
 rounding and gone is a rule. And **the standard row is ruled off** from the four below it, since it is
 the one they are read against. The eyebrow is `how widely the model picks`, the same verb `one-at-a-time.3`
 and `pick-next.right` use (`picks one according to them`, `kiest er één volgens die kansen`): the
 old Dutch said the model *trekt* from a *verdeling*, which reads translated. The grid is one
 `role="img"` whose description reads every cell, and on a phone each row's label stacks above its
 bars. The interpolation for the words in front is `preceding`, not `context`, because `context` is
-an i18next option of its own. **The words in front carry no ellipsis** (`The agent swears`, `De agent
-beweert`), because the sentence starts there and `… The agent swears` claimed text that is not, and the
-open slot after them is `PickTheNext`'s dashed `?` chip, so an open token looks the same wherever the
-unit leaves one.
+an i18next option of its own. **The words in front carry no ellipsis** (`The agent swears that`, `De agent
+beweert dat`), because the sentence starts there and `… The agent swears that` claimed text that is not, and the
+open slot after them is `PickTheNext`'s dashed `…` chip, so an open token looks the same wherever the
+unit leaves one. It was a `?` once, and the course owner found that unclear: a question mark reads as
+a question, an ellipsis as text that goes on.
 
 `PickTheNext` closes the unit and is its one exercise: three roads out of `the pull request was`, and
 the answer is any of the three. It asks in an answerable form what `NextToken` above it lets the student do
@@ -486,7 +497,7 @@ it are what close the run. `next-token.done` is gone from both bundles rather th
 
 The unit carries two forward pointers and must not grow a third telling of either. Output being
 priced above input goes to `model` (`expensive-part.1`), and the prefix cache goes to
-`harness` (`attention.4`), each in one paragraph carrying an anchor to the unit that owns it.
+`harness` (`one-at-a-time.1`), each in one paragraph carrying an anchor to the unit that owns it.
 `expensive-part.3` does not link them a second time (the user cut that repeat), and it names
 no rate and says nothing about how the cache matches, and it must stay that way. `TokenKinds` prints
 a cost column (tokens times rate, per row) so every share on the cost bar can be redone by hand: a
@@ -495,19 +506,23 @@ were set in mono once, which said a machine had produced the name. That is the s
 `harness.coordinator.3` follows for decomposition. `TokenAttention`'s arcs running backwards only is
 what a cache runs on, so it is load-bearing rather than a simplification: the model works each
 token out only from what comes before it, so appending leaves every earlier calculation intact. That
-is why the cache is `attention`'s last paragraph, straight after the figure, and not part of the
-cost section. The prose separates inference reuse from cross-request caching and rates. Retained
+is why the cache is explained in the loop that appends, straight after the figure, and not in the
+cost section. `one-at-a-time.1` names both caches in order, reuse within one answer and then across
+requests, which is the distinction `REVIEW.md` asks to keep. Retained
 input is processed again across requests, subject to cache rates and pruning.
 
 **`expensive-part` is the last prose section, and `TokenKinds` is its figure.** Its heading is
 `The real cost` (`De echte kosten`), and it reads as a claim because it sits under the `Writing`
 part heading: it was `Writing is the expensive part` while the parts were implicit, and the part
 heading now carries the first half. `.1` opens straight on `Output is priced above input`, which
-still reads well under `Writing`. Then reasoning billed as output even when only a summary reaches
+still reads well under `Writing`, and its second sentence gives the mechanism only: input is read at
+once, output 1 token at a time with a pass per token. It once also said each token depends on what
+came before and reused a cache, which repeated `one-at-a-time.1`, so the owner had it cut. It does
+not claim this is the whole reason for the price, since providers do not publish that. Then reasoning billed as output even when only a summary reaches
 the screen, then the figure putting one turn's reading and writing side by side (`.2` ends on the
 sentence that says so), ahead of the exercise. The prose states the shape and sends prices to
-`model` rather than repeating them. "A tenth of the input price or less" in `attention.4` is the
-dated Anthropic rate example owned by `harness.caching.1`, not a universal cache price.
+`model` rather than repeating them. `one-at-a-time.1` says only "a lower rate": the dated Anthropic
+rates are `harness.caching.1`'s.
 **`expensive-part.3`'s last sentence leans on the figure's numbers**: reasoning has to stay above
 half the cost bar, so a count edited in `TokenKinds` means rereading that sentence in both
 languages. On the deck the slide title keeps the whole claim (`Writing is the expensive part`),
@@ -594,7 +609,7 @@ one reader could not take the measurement the card asks for. The section is draw
 related reason, since a prefix-match diagram would draw "read from the first byte" and stop; the
 deck's statement slide is the right shape for it. It also stays where it is. It reads at first pass
 like a third subject wedged between the harness-as-layer material and the patterns, and
-`tokens.attention.4` defers to it by name, so moving it costs that pointer its target.
+`tokens.one-at-a-time.1` defers to it by name, so moving it costs that pointer its target.
 `caching.2` states the prefix rule with the tool list and the instructions at the top as what sits
 early, and no longer uses connecting an MCP server mid-session as its example; why is under the
 assistant variants at the end of this file.

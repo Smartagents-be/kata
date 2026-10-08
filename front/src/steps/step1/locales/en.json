@@ -669,7 +669,7 @@
   "deck.tokens.split.title": "A model does not read words",
   "deck.tokens.split.note": "In these samples, text and code use similar counts; a log line nearly 2 times as many, an id nearly 3 times.",
   "deck.tokens.language.title": "Token counts measure <hi>input size</hi>",
-  "deck.tokens.language.note": "13 tokens in English, 17 in Dutch for this sentence. Fragmentation alone does not establish answer quality.",
+  "deck.tokens.language.note": "10 tokens in English, 12 in Dutch for this sentence. Fragmentation alone does not establish answer quality.",
   "deck.tokens.next.title": "And it writes 1 token at a time",
   "deck.tokens.attention.title": "Each prediction depends on <hi>earlier context</hi>",
   "deck.tokens.attention.note": "7 tokens make 21 pairs. 14 make 91, not 42.",

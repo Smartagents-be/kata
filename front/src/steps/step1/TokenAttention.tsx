@@ -25,6 +25,13 @@ import { cn } from '@/shared/lib/utils'
  * at all: seven arcs of varying thickness say "some more than others", and seven shares that add up
  * say what is actually going on.
  *
+ * **One row is drawn loud before anything is held: the last token's.** The mass alone draws every
+ * row's heaviest link equally hard, so `bank` leaning on `money` (`geld`) looked no stronger than
+ * `his` leaning on `He`, and the pair the unit prose names was the hardest thing to find. The
+ * opening state now draws `bank`'s row with a held row's ink, over the other twenty arcs, which
+ * stay as faint as before: the mass is still the first thing seen, and the example is readable
+ * without a click. Holding any token, `bank` included, still shows that row alone.
+ *
  * **Arcs run backwards only.** A token in a decoder attends to itself and what came before it,
  * never what comes after. The figure omits self-attention to focus on the links between tokens.
  * Two things fall out of that, and
@@ -72,6 +79,9 @@ const WEIGHTS: number[][] = [
   [3, 20, 7, 30, 40],
   [3, 24, 4, 55, 6, 8],
 ]
+
+/** The row the opening state draws loud: the last token, the one the unit prose works through. */
+const FOCUS = WEIGHTS.length - 1
 
 const BOX_Y = 286
 const BOX_HEIGHT = 30
@@ -189,12 +199,12 @@ export function TokenAttention() {
                 data-component="TokenAttention"
                 d={arc(LAYOUT, link.index, link.target)}
                 strokeWidth={
-                  selected === null
+                  selected === null && link.index !== FOCUS
                     ? 1 + intensity(link.weight, link.index)
                     : 1 + intensity(link.weight, link.index) * 3
                 }
                 strokeOpacity={
-                  selected === null
+                  selected === null && link.index !== FOCUS
                     ? 0.06 + intensity(link.weight, link.index) * 0.18
                     : 0.2 + intensity(link.weight, link.index) * 0.7
                 }

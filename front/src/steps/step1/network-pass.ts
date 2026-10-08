@@ -1,7 +1,7 @@
 /**
  * `TokenNetwork`'s numbers and its forward pass, in a module of their own so `SamplingKnobs` can
  * read the very same output scores rather than a copy of them. The two figures are one example:
- * the network turns `ears` (or `ert`) into four scores, and the knobs reshape those four scores
+ * the network turns `that` (or `dat`) into four scores, and the knobs reshape those four scores
  * before one is picked. A second copy of the scores would be the first thing to drift.
  *
  * **Every weight, bias and input number is invented, and the arithmetic is not.** The pass is
