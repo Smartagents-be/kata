@@ -45,7 +45,7 @@ export interface SlideSpec {
    * Message keys, one per line, for the rare slide that is a short list rather than one claim:
    * an exercise's moves, a recap's costs. Lean on purpose - three or four entries, each a few
    * words, or the slide becomes the tutor's script. Takes the same `<hi>`/`<mute>` markup as the
-   * title. A slide carries `note` or `points`, not both.
+   * title. With `note` beside it, the note renders first and reads as a subtitle above the list.
    */
   points?: string[]
   /**

@@ -64,7 +64,9 @@ reason, and a chip in the corner reads as a control. It is `pointer-events-none`
 
 **`points` is the third shape**, a short list under the heading, in the same `<hi>`/`<mute>`
 markup as the title, at three to five entries of a few words each: a longer list is the tutor's
-script, which is what `note`'s rule already forbids. A slide carries `note` or `points`, not both.
+script, which is what `note`'s rule already forbids. A slide may carry both, at the tutor's asking:
+the note then sits between heading and list as a subtitle, which `SlideTemplate` already renders
+in that order.
 **Every unit divider carries the unit's essence as points**, deck-wide and at the tutor's own
 asking: a bare title on a slide gave a room nothing to hold on to, so the divider states the
 unit's two or three claims and the slides after it are the proof. Only the four module `title`

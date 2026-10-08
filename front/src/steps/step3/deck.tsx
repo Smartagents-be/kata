@@ -181,6 +181,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'impostor.title',
     title: 'deck.impostor.signal.title',
     note: 'deck.impostor.signal.note',
+    points: ['deck.impostor.signal.1', 'deck.impostor.signal.2', 'deck.impostor.signal.3'],
   },
   // The last slide of step 3 and therefore of the whole deck. The deck ended on the unit's middle
   // section, a diagnostic, while `deck.impostor.divider.3` promised this claim and never delivered
