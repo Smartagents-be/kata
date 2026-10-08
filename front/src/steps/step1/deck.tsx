@@ -596,7 +596,7 @@ const deck: SlideSpec[] = [
     ns: 'step1',
     eyebrow: 'model.title',
     title: 'deck.model.speed.title',
-    note: 'deck.model.speed.note',
+    points: ['deck.model.speed.1', 'deck.model.speed.2', 'deck.model.speed.3'],
   },
   // True for both assistants, unlike the five-hour window, so it needs no filter the deck does not
   // have. No prices, no plan names, no currency, for the same reason the section carries none.
