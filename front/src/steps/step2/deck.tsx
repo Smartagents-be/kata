@@ -250,7 +250,12 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'step.title',
     title: 'steering.title',
-    points: ['deck.steering.divider.1', 'deck.steering.divider.2', 'deck.steering.divider.3'],
+    points: [
+      'deck.steering.divider.1',
+      'deck.steering.divider.2',
+      'deck.steering.divider.3',
+      'deck.steering.divider.4',
+    ],
   },
   // The unit opened on its second section until this landed.
   {
