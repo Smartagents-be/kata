@@ -146,7 +146,11 @@ const deck: SlideSpec[] = [
     ns: 'step3',
     eyebrow: 'expectations.title',
     title: 'deck.expectations.velocity.title',
-    note: 'deck.expectations.velocity.note',
+    points: [
+      'deck.expectations.velocity.1',
+      'deck.expectations.velocity.2',
+      'deck.expectations.velocity.3',
+    ],
   },
 
   // ── impostor ──────────────────────────────────────────────────────────────────────────────
