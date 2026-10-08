@@ -88,7 +88,7 @@
   "deck.expectations.divider.1": "<hi>The first-impression trap:</hi> Demonstrating one fast afternoon creates the illusion that everything can be done in an afternoon from now on.",
   "deck.expectations.divider.2": "<hi>Review is part of the estimate:</hi> A realistic time estimate always includes thoroughly checking, testing and verifying the output.",
   "deck.expectations.divider.3": "<hi>A shift in effort:</hi> The total workload has not gone away, it has moved from typing by hand to critical checking.",
-  "deck.impostor.divider.1": "It lands when the agent is <hi>good</hi>",
-  "deck.impostor.divider.2": "Judgement shows nothing at 5 o'clock",
-  "deck.impostor.divider.3": "What adds up is <hi>what you wrote down</hi>"
+  "deck.impostor.divider.1": "<hi>The danger of ease:</hi> Blind acceptance strikes precisely when the agent seems to perform too well.",
+  "deck.impostor.divider.2": "Good judgement produces no extra lines of code by 5 p.m., but it does give you control.",
+  "deck.impostor.divider.3": "Only what you explicitly document and automate builds lasting value."
 }

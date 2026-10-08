@@ -159,7 +159,7 @@
   "deck.expectations.divider.1": "<hi>De valkuil van de eerste indruk:</hi> Eén snelle middag demonstreren schept de illusie dat alles voortaan in een middag kan.",
   "deck.expectations.divider.2": "<hi>Review is onderdeel van de schatting:</hi> In een reële tijdsinschatting zit altijd het grondig nakijken, testen en verifiëren van de output.",
   "deck.expectations.divider.3": "<hi>Verschuiving van inspanning:</hi> De totale werklast is niet verdwenen, maar verplaatst van handmatig typen naar kritische controle.",
-  "deck.impostor.divider.1": "Het slaat toe wanneer de agent <hi>goed</hi> is",
-  "deck.impostor.divider.2": "Oordeel levert niets zichtbaars op om 5 uur",
-  "deck.impostor.divider.3": "Wat optelt is <hi>wat je opschreef</hi>"
+  "deck.impostor.divider.1": "<hi>Het gevaar van gemak:</hi> Blinde acceptatie slaat juist toe wanneer de agent te goed lijkt te presteren.",
+  "deck.impostor.divider.2": "Goed oordelen levert om 17:00 uur geen extra regels code op, wel controle.",
+  "deck.impostor.divider.3": "Alleen wat je expliciet documenteert en automatiseert, bouwt blijvende waarde op."
 }
