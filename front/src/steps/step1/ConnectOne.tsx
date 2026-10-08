@@ -1,39 +1,36 @@
+import type { Assistant } from '@/shared/assistant/assistant'
+import { useAssistant } from '@/shared/assistant/useAssistant'
 import { TaskCard } from '@/shared/components/TaskCard'
 
 /**
- * Seven moves, and the last two are the exercise. The five before them only fill the window by three
- * routes; what the student is here to do is read what each one left behind and decide which they
- * would want re-sent on every turn.
+ * Two lessons, in this order. First: the same 9 titles cost very different amounts of context
+ * depending on the tool that fetched them, and the student measures that with `/context` (or the
+ * credits under a turn in IntelliJ) rather than being told. Second: why you would ever pay for the
+ * browser, a page whose flag only exists once it runs, which `ShutterFlag` grades under the card.
  *
- * **`reveal` and `shoot` sit in the middle rather than at the end**, so `choose` stays the closer.
- * They are the third route: a page with no service behind it, driven through the same server, and a
- * screenshot that leaves the window entirely and lands in the student's own project. That third
- * route is what `ShutterFlag` grades underneath this card, and it is the only thing on the page that
- * proves a browser was actually driven.
+ * **Each move carries what to type**, as a `<prefix>.<move>.command` shown copyable under the line,
+ * so the card works in class, where the prose and its `<pre>` are cut. Only `mcp` splits by
+ * assistant, because the command that adds a server is each harness's own; the wrapper picks the
+ * slug, on `SurviveTheClear`'s pattern.
  *
- * The moves name no command, so the card reads the same in class, where the `<pre>` above it is cut
- * with the rest of the prose. The two lines a student copies stay in the unit HTML, per assistant,
- * because a command is machine output rather than a move. A file path is not a command, which is why
- * `exercises/step1/front/index.html` is allowed to sit in a move.
+ * **Nothing says which route is bulkier**, in the card or the prose: the measurement is the exercise.
  */
-const MOVES = ['start', 'curl', 'browser', 'reveal', 'shoot', 'compare', 'choose'] as const
+const MOVES: Record<Assistant, readonly string[]> = {
+  claude: ['start', 'mcp.claude', 'curl', 'browser', 'compare', 'reveal', 'shoot'],
+  copilot: ['start', 'mcp.copilot', 'curl', 'browser', 'compare', 'reveal', 'shoot'],
+}
 
-/**
- * The unit's first hands-on task, on the shared {@link TaskCard}: connect an MCP server, then fill
- * the window three ways and weigh what each route cost.
- *
- * **The question in the last move is not answered anywhere**, in the card or in the prose above it.
- * Which route comes back bulkier is the thing the student is measuring, so a sentence naming it ends
- * the exercise. Nothing is graded; the tick is a bookmark, and `TaskCard` says why.
- */
+/** The unit's hands-on task, on the shared {@link TaskCard}. Nothing is graded on the card itself. */
 export function ConnectOne() {
+  const { assistant } = useAssistant()
+
   return (
     <TaskCard
       block="connect-one"
       namespace="step1"
       prefix="connect"
       storageKey="kata.step1.connect"
-      moves={MOVES}
+      moves={MOVES[assistant]}
       className="my-8"
     />
   )

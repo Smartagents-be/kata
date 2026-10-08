@@ -649,8 +649,7 @@ each card are taken out. Change the parent's gap or a stage cell's lead-in and b
 `WorkflowWeights` closes the unit and is the comparison. Four bars of **the same length**, each cut
 into what you settle first, what the agent runs, and what you read afterwards, so the drawing says
 the work moves rather than shrinks. That equal total is the argument, which is why the bars are one
-figure and not four: four separate drawings say nothing, the way `McpParts` and `McpOvals` only work
-as a pair. `naive` and `audit-driven` come out close on that axis deliberately, because they are
+figure and not four: four separate drawings say nothing on their own. `naive` and `audit-driven` come out close on that axis deliberately, because they are
 close, and what separates them is the second thing the figure carries: the artifact. A kept artifact
 is a solid pill (`spec.md`, `audit.md`), the plan is a dashed outline on the step-1 reading of a
 dash, since it goes when the session does, and `naive` has no tag at all, which has to read as

@@ -4,14 +4,20 @@
      definition back in. The forward pointer to `session` is what makes the lead's comparison
      checkable: the layer that dwarfs the prompt is five pages away otherwise. -->
 <p data-i18n="prompt.lead.1">
-  Everything you send the agent is a prompt. Of everything a model is handed it is usually the
-  smallest, and <a href="/steps/step1/session">the session</a> dwarfs it. It is also the most
-  valuable, because it is the one part carrying your <strong>intent</strong>.
+  Everything you send the agent is a prompt. It is usually the smallest part of what the model
+  receives, much smaller than <a href="/steps/step1/session">the session</a>. But it is the most
+  valuable part, because only the prompt carries your <strong>intent</strong>.
 </p>
 
+<!-- "grill me" names the pattern the icon marks. Matt Pocock publishes it as a skill (MIT), and the
+     sentence says only that: it does not claim he invented it. The prompt works in both products
+     without installing anything, so no assistant variant. This is the first external link in the
+     unit prose and opens in a new tab. -->
 <p data-i18n="prompt.lead.2">
-  You rarely send just 1. Some prompts are fresh queries you type. Others are your answers
-  when the agent asks you about the task <svg data-icon="pattern"></svg>.
+  You rarely send just 1. Some are new questions you type, others are answers to questions the agent
+  asks you about the task <svg data-icon="pattern"></svg>. Write "grill me" and the agent does that on
+  purpose: it questions you about your plan, 1 question at a time, until you agree on it. Matt Pocock
+  also publishes this as a <a href="https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me" target="_blank" rel="noreferrer">skill</a>.
 </p>
 
 <h2 data-i18n="prompt.instruction.heading">Instruction</h2>
@@ -29,8 +35,8 @@
 <div data-figure="prompt-parts"></div>
 
 <p data-i18n="prompt.instruction.2">
-  Not every prompt needs all 5. A 1-line fix is a goal and nothing else. The less you fill in, the
-  more the agent decides on its own. The one people leave out is the last: a check the agent can run
+  Not every prompt needs all 6. <code>fix it</code> is a goal and nothing else, and for small,
+  well-scoped work that can be enough. The less you fill in, the more the agent decides on its own. The one people leave out is the last: a check the agent can run
   itself, which <a href="/steps/step2/goals">step 2's unit on long-running goals and cost</a> takes
   further.
 </p>
@@ -45,14 +51,27 @@
      more carefully, but a decision you never made and context you never gave are not in the window
      to be reasoned about, and making the ask exact is this unit's own advice (`be-exact`). -->
 <p data-i18n="prompt.reasoning-level.1">
-  The <strong>reasoning level</strong> guides how thoroughly the model tackles a task. Claude Code’s
-  <code>/effort</code> sets it from low to max on supported models, and Opus 5.5 and Sonnet 5.5
-  default to medium. In Copilot you set it in the model picker. Higher effort can change reasoning,
-  tool calls and the visible answer <svg data-icon="pattern"></svg> It does not select a fixed
-  number of hidden tokens or supply requirements you never gave.
+  The <strong>reasoning level</strong> (effort, in Claude Code) sets how much work the model puts into
+  a task: how long it thinks, how many files it reads and how much it checks before it comes back to
+  you. Claude Code’s <code>/effort</code> sets it from low to max on supported models, and Opus 5.5
+  and Sonnet 5.5 default to medium. In Copilot you set it in the model picker. It does not supply
+  requirements you never gave.
 </p>
 
+<!-- Model against effort, from Anthropic's "Choosing a Claude model and effort level in Claude Code"
+     (July 2026): a model is a fixed set of weights set in training, effort is how much work the same
+     weights do. "A larger model can do more" is as far as it goes: Anthropic publishes no layer or
+     parameter counts. The rule of thumb at the end is that post's own. -->
 <p data-i18n="prompt.reasoning-level.2">
+  That is not the same as picking another model. A model is a fixed set of weights, set during
+  training. What it knows and what it can do live there, and a larger model can do more. Your prompt
+  and context steer those weights but never change them. Effort makes the same model work harder; it
+  does not make it smarter. A rule of thumb from Anthropic: if the agent had all the context, clearly
+  tried and was still wrong, pick a more capable model. If it skipped a file or did not run the tests,
+  raise the effort.
+</p>
+
+<p data-i18n="prompt.reasoning-level.3">
   Higher effort can spend more tokens and time. Reasoning tokens are billed as output <svg
   data-icon="coin"></svg> The chart holds answer length constant to show that cost; real answers and
   tool use can change too. Use higher effort when the task warrants it, and clarify a vague request
@@ -66,7 +85,7 @@
      and the caption says that too. -->
 <div data-figure="reasoning-cost"></div>
 
-<p data-i18n="prompt.reasoning-level.3">
+<p data-i18n="prompt.reasoning-level.4">
   That thinking also covers the agent's own moves: which file to
   open next and what to hand itself as input for the step after that.
 </p>
@@ -92,20 +111,15 @@
   IntelliJ, pick Plan in the agent picker. The agent reads around without
   changing anything, usually asks you about whatever is still open, hands back a plan, and waits.
   You edit it (in Claude Code, <kbd>Ctrl+G</kbd> opens it in your editor), ask for another pass, or
-  approve it. The agent waits for your approval before carrying out the plan.
+  approve it. The agent waits for your approval before carrying out the plan. That makes it a
+  built-in checkpoint: you review the solution before anything is carried out.
 </p>
 
-<p data-i18n="prompt.plan-mode.2">
-  A reviewed plan turns an underspecified request into clearer requirements. The exercise changes
-  requirements, planning and model choice together. Its scores show which wishes reached the
-  implementation; they do not isolate the effect of plan mode or model size. For that comparison,
-  keep the model and requirements the same.
-</p>
-
-<!-- The boundary on the section, and it closes the prose rather than opening it: the payoff above has
-     to land before the exception to it is worth reading. The aside that used to follow it was a task
+<!-- The boundary on the section, and it closes the prose rather than opening it: the payoff in .1 has
+     to land before the exception to it is worth reading. A .2 under .1 was cut: it repeated .1's
+     payoff and the exercise card's caveat about changing model and planning together. The aside that used to follow it was a task
      card written as reading, and it is `plan-it-twice` at the foot of the page now. -->
-<p data-i18n="prompt.plan-mode.3">
+<p data-i18n="prompt.plan-mode.2">
   Plan mode is not always needed. If you already know exactly what needs to change in 1 file,
   the decisions are made. A plan only puts those decisions in writing for you to approve.
   Ask the agent to make the change directly <svg data-icon="coin"></svg>.
@@ -129,10 +143,17 @@
 
 <h2 data-i18n="prompt.be-exact.heading">State exactly what the model should do</h2>
 
+<!-- The vague ask against a full one, using 4 of PromptParts' 6 parts on this repo's own classes.
+     No example part: the only other controller is EntryController, which is this unit's exercise. -->
 <p data-i18n="prompt.be-exact.1">
-  "Fix the login" and "make <code>TitleController</code> return a 404 when the catalogue comes back
-  empty" go to the same model. The second names the class and the case. The first leaves the model
-  to guess both.
+  The less you say, the more the model has to fill in itself. Compare "fix the login" with this ask
+  to the same model: "Make <code>TitleController</code> return a 404 when the catalogue comes back
+  empty. Look at <code>@TitleController.java</code> and <code>@Catalog.java</code>. Do not change
+  <code>Catalog</code>: the problem is how the controller handles an empty result. Done when
+  <code>mvn test</code> is green, with a test for an empty catalogue." That ask names the goal, the
+  files, a limit with its reason and when it is done. With "fix the login" the agent may get there
+  too, but it first has to work out what is wrong and where. That costs more tokens and time, and it
+  can guess wrong.
 </p>
 
 <!-- One form with two fields both labelled Name, the source that tells them apart, and the same
@@ -141,12 +162,12 @@
 
 <!-- Scope and the reason behind it are one paragraph: the reason is what carries a limit to the
      cases nobody listed, which is the whole argument for writing it. Same ask as `PromptParts`, so
-     the figure's 3rd part and this paragraph are one example. -->
+     the figure's 4th part and this paragraph are one example. -->
 <p data-i18n="prompt.be-exact.2">
-  Say where the job stops and explain why. “Do not throw an exception from
-  <code>UserRepository</code>, because the nightly import expects null” supplies both a constraint
-  and its purpose. The reason helps the agent spot related mistakes, such as changing that return
-  value to an <code>Optional</code>. Verify that it followed the constraint.
+  Say where the job stops and explain why. “Do not throw an exception, because a user that does not
+  exist is a normal outcome” supplies both a constraint and its purpose. The reason helps the agent
+  spot related mistakes, such as returning <code>null</code>. Verify that it followed the
+  constraint.
 </p>
 
 <!-- Few-shot and one-shot refer only to the number of examples, explained together in 1 paragraph.
@@ -167,12 +188,19 @@
   Specify how you want the answer presented. When you ask the agent to review code, add something
   like: "List the problems you find. For each problem, include the file, line number and a short
   explanation" <svg data-icon="gem"></svg> That lets you go straight to the relevant place in the code.
+  If you want the result as a file, say so: "Write it to <code>review.md</code>." And if you have a
+  fixed shape, pass the template along, for example the headings <code>## Problem</code>,
+  <code>## Cause</code> and <code>## Fix</code>. The agent then fills it in rather than choosing a
+  shape of its own.
 </p>
 
+<!-- Options as a format, and nothing about permissions: what the agent may touch is plan mode's
+     (read without changing) and step 2's `setup`. An earlier version stated an "action boundary"
+     and pointed at permissions this unit never explains. -->
 <p data-i18n="prompt.output-format.2">
-  State the action boundary explicitly. “Review only; do not edit files. Give me 3 possible fixes”
-  makes your intent clearer than “suggest a fix”. Then choose an approach and authorise the edit.
-  Use permissions when the boundary must be enforced.
+  If you want to choose first, ask for options rather than 1 fix: “Give me 3 possible fixes, each
+  with its pros and cons. Do not change anything yet.” Then pick one and have the agent apply it. In
+  plan mode the agent changes nothing until you approve.
 </p>
 
 <h2 data-i18n="prompt.paste-error.heading">Paste the real error</h2>
@@ -189,12 +217,17 @@
      (code.claude.com/docs/en/model-config, October 2026); the dial itself is the section above. -->
 <h2 data-i18n="prompt.no-longer-works.heading">What no longer works</h2>
 
+<!-- Each habit is documented as ignored or not helping (October 2026): "think hard" passes through
+     Claude Code as plain text (code.claude.com/docs/en/model-config), "think step by step" is
+     unnecessary on reasoning models (OpenAI's reasoning best practices; Anthropic: prefer general
+     instructions over prescriptive steps). A role is still recommended by Anthropic for tone and
+     behaviour, so the sentence says what it does not buy rather than that it fails. -->
 <p data-i18n="prompt.no-longer-works.1">
-  Typing “think hard” is ordinary prompt text, not a substitute for Claude Code’s
-  <code>/effort</code> setting. Claude Code recognises only <code>ultrathink</code>, which asks for
-  deeper reasoning on that turn. A role such as “senior Java engineer” can steer style and
-  behaviour, but does not establish correctness. Concrete requirements, current evidence and checks
-  give you something to verify.
+  Typing “think hard” or “think step by step” is ordinary prompt text. Recent models reason on their
+  own, and how thoroughly is what the reasoning level sets. Claude Code recognises only
+  <code>ultrathink</code>, which asks for deeper reasoning on that one turn. A role such as “senior
+  Java engineer” steers tone and style, but does not make the answer more correct. Concrete
+  requirements, current information and a check give you something to verify.
 </p>
 
 <p data-i18n="prompt.no-longer-works.2">
@@ -211,8 +244,8 @@
      Two markers and no prose between them, which is forced rather than chosen: guided mode drops
      every run of prose, so anything written here as a paragraph would leave the classroom with a
      card whose ask nobody had been given. `entry-brief` carries the whole input instead (the six
-     wishes, the line to type, the command that scores it) and the card carries the moves. The claim
-     in `plan-mode.2` is one the student watches on their own two runs rather than being told. -->
+     wishes, the line to type, the command that scores it) and the card carries the moves. What a
+     reviewed plan buys is something the student watches on their own two runs rather than being told. -->
 <hr />
 
 <h2 data-i18n="ui:quiz.title">Test your knowledge</h2>

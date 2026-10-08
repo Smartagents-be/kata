@@ -1,6 +1,7 @@
 import { motion } from 'motion/react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { CopyCommand } from '@/shared/components/CopyCommand'
 import { Panel, PanelChip, PanelRow } from '@/shared/components/Panel'
 import { useStepText } from '@/shared/i18n/useStepText'
 import { cn } from '@/shared/lib/utils'
@@ -104,7 +105,10 @@ function writeMoves(storageKey: string, moves: ReadonlySet<string>) {
  * already said it.
  *
  * Every move is one line and nothing else. Whatever a second line would have explained belongs in
- * the prose above the card rather than back in here.
+ * the prose above the card rather than back in here. The one exception is the literal thing to type:
+ * a move with a `<prefix>.<move>.command` key shows it under the line as a `CopyCommand`, in mono and
+ * copyable, because a command inside plain label text can be neither. It sits outside the move's
+ * toggle button, since a button cannot hold another one.
  */
 export function TaskCard({
   block,
@@ -125,7 +129,8 @@ export function TaskCard({
   /**
    * The prefix the card's own keys sit under: `<prefix>.title`, `<prefix>.todo`, `<prefix>.done`,
    * and `<prefix>.<move>.label` for each move. `<prefix>.description` is optional; with no entry the
-   * card is a title and its moves.
+   * card is a title and its moves. `<prefix>.<move>.command` is optional too, and puts a copyable
+   * command under that move.
    */
   prefix: string
   /**
@@ -245,6 +250,11 @@ export function TaskCard({
                 <span id={`${id}-label`} data-component="TaskCard" className="text-sm">
                   {text(`${prefix}.${move}.label`)}
                 </span>
+              )}
+              {has(`${prefix}.${move}.command`) && (
+                <div id={`${id}-command-row`} data-component="TaskCard" className="pb-2">
+                  <CopyCommand id={`${id}-command`} text={text(`${prefix}.${move}.command`)} />
+                </div>
               )}
             </PanelRow>
           )

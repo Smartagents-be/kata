@@ -43,6 +43,8 @@
 
   "task.progress": "{{done}} van {{total}} voltooid",
   "task.moveDone": "Klaar",
+  "copy.label": "Kopiëren",
+  "copy.done": "Gekopieerd",
 
   "catalog.nav": "Catalogus",
   "catalog.kicker": "De service",

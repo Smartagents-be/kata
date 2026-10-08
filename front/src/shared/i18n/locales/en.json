@@ -43,6 +43,8 @@
 
   "task.progress": "{{done}} of {{total}} completed",
   "task.moveDone": "Done",
+  "copy.label": "Copy",
+  "copy.done": "Copied",
 
   "catalog.nav": "Catalogue",
   "catalog.kicker": "The service",

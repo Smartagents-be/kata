@@ -12,7 +12,6 @@ import { CutItUp } from './CutItUp'
 import { EntryBrief } from './EntryBrief'
 import { ExactAsk } from './ExactAsk'
 import { FlagBoard } from './FlagBoard'
-import { McpOvals } from './McpOvals'
 import { McpParts } from './McpParts'
 import { McpServer } from './McpServer'
 import { ModelPricing } from './ModelPricing'
@@ -141,7 +140,6 @@ const step1: Step = {
         'tools-in-context': <ToolsInContext />,
         'mcp-server': <McpServer />,
         'mcp-parts': <McpParts />,
-        'mcp-ovals': <McpOvals />,
         'connect-one': <ConnectOne />,
         'shutter-flag': <ShutterFlag />,
         'spot-injection': <SpotInjection />,

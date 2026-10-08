@@ -2,27 +2,35 @@ import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * One prompt taken apart: the oval the step draws a prompt as, and the 5 things it can carry.
+ * One prompt taken apart: the oval the step draws a prompt as, and the 6 things it can carry.
  *
  * **It replaced `PromptInContext`, which drew the oval and nothing else.** That figure said "this
  * is a shape, and it is small", and the course owner read it as a figure about nothing. The oval is
  * kept, with `ContextDiagram`'s prompt geometry and fills, so the step still meets the prompt as one
  * shape before `ToolsInContext` puts a frame round it. What is new is what hangs off it.
  *
- * **The 5 parts are one ask any developer reads without knowing this repo**: a 404 for a user that
+ * **The 6 parts are one ask any developer reads without knowing this repo**: a 404 for a user that
  * does not exist. It was an ask against step 1's own `TitleController` first, and the course owner
  * could not follow it: the figure sits at the top of the unit, before a student has seen that code,
  * and a limit is only clear when its reason speaks for itself. So the names are invented and
- * ordinary, and each part is about the same task: the limit names the shortcut an agent takes for a
- * 404 (throwing from the repository) and the reason it would break something else. `be-exact.2` and
+ * ordinary, and each part is about the same task: the limit rules out throwing an exception for a
+ * 404 and asks for a Result monad instead, with the design reason (a missing user is a normal
+ * outcome, not an error). It once named the nightly import as the reason, which the course owner
+ * found strange, and a catch-all alternative was rejected as poor design. `be-exact.2` and
  * `few-shot.1` use the same ask, so the figure and the prose are one example.
  *
  * The parts are a numbered list with the design system's `data-marker`, because the prose under the
  * figure and the sections further down point at them by name. The labels are the step's words and
  * translate; the clauses are a prompt, written as whole sentences, and translate with them.
  * The window is teal rather than muted, which is `ExactAsk`'s vocabulary: teal is the exact ask.
+ *
+ * **Context is a reference, not a sentence.** It was added as part 2 because OpenAI's, Claude Code's
+ * and GitHub's prompting guides all name it, and the course owner pointed out that you do not
+ * describe a file, you point at it: `@` attaches it in Claude Code, Copilot CLI and Copilot in
+ * IntelliJ alike, so the row is one shared string with no assistant variant. The 6 parts and their
+ * sources (October 2026) are listed in `step1/CLAUDE.md`.
  */
-const PARTS = ['goal', 'example', 'limit', 'format', 'done'] as const
+const PARTS = ['goal', 'context', 'example', 'limit', 'format', 'done'] as const
 
 export function PromptParts() {
   const { t } = useTranslation('step1')

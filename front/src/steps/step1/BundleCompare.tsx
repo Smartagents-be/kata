@@ -14,6 +14,13 @@ import { cn } from '@/shared/lib/utils'
  * Agent blocks describe completed results. Inside a resent bundle, message labels identify
  * earlier questions and earlier results: carrying their text forward does not execute tools again.
  *
+ * The tally adds an estimated token count, at the course owner's asking, because "12 messages" says
+ * nothing about size. **The counts are invented and only roughly plausible**: a prompt is its own
+ * short sentence, an agent turn that reads `Catalog.java`, edits it and runs the tests is put at 1,500
+ * to 2,500, and the bundled ask's thinking at 800. Copies count again, which is the point. The system
+ * prompt and tool definitions that go with every request are left out, so a real session is larger
+ * on both sides; the "≈" says it is an estimate. `weight` stays the drawn height, separate from this.
+ *
  * It sits next to the bundling paragraph in the `prompt` unit, so it lives in `inlineFigures` and
  * the geometry stays here in the step rather than in the unit HTML.
  */
@@ -28,6 +35,8 @@ type Message = {
   key: string
   /** Its size, in the same unit on both sides, and the height it is drawn at. */
   weight: number
+  /** An estimated token count for the tally. Invented, see the docblock. */
+  tokens: number
 }
 
 /**
@@ -66,12 +75,12 @@ function sameArrows(a: Arrow[], b: Arrow[]) {
 const message = (message: Message): Item => ({ kind: 'message', message })
 const bundle = (name: string, items: Item[]): Item => ({ kind: 'bundle', name, items })
 
-const P1: Message = { name: 'P1', role: 'you', key: 'bundle-compare.drip.1', weight: 44 }
-const A1: Message = { name: 'A1', role: 'agent', key: 'bundle-compare.drip.2', weight: 62 }
-const P2: Message = { name: 'P2', role: 'you', key: 'bundle-compare.drip.3', weight: 44 }
-const A2: Message = { name: 'A2', role: 'agent', key: 'bundle-compare.drip.4', weight: 78 }
-const P3: Message = { name: 'P3', role: 'you', key: 'bundle-compare.drip.5', weight: 44 }
-const A3: Message = { name: 'A3', role: 'agent', key: 'bundle-compare.drip.6', weight: 86 }
+const P1: Message = { name: 'P1', role: 'you', key: 'bundle-compare.drip.1', weight: 44, tokens: 10 }
+const A1: Message = { name: 'A1', role: 'agent', key: 'bundle-compare.drip.2', weight: 62, tokens: 1500 }
+const P2: Message = { name: 'P2', role: 'you', key: 'bundle-compare.drip.3', weight: 44, tokens: 10 }
+const A2: Message = { name: 'A2', role: 'agent', key: 'bundle-compare.drip.4', weight: 78, tokens: 1800 }
+const P3: Message = { name: 'P3', role: 'you', key: 'bundle-compare.drip.5', weight: 44, tokens: 10 }
+const A3: Message = { name: 'A3', role: 'agent', key: 'bundle-compare.drip.6', weight: 86, tokens: 2000 }
 
 /** The first exchange, which is what prompt two has to drag along. */
 const R1 = bundle('R1', [message(P1), message(A1)])
@@ -94,9 +103,9 @@ const DRIP: Entry[] = [
   { id: 'a3', step: 6, item: message(A3) },
 ]
 
-const B1: Message = { name: 'P1', role: 'you', key: 'bundle-compare.bundle.1', weight: 58 }
-const BT: Message = { name: 'T1', role: 'think', key: 'bundle-compare.bundle.2', weight: 50 }
-const BA: Message = { name: 'A1', role: 'agent', key: 'bundle-compare.bundle.3', weight: 100 }
+const B1: Message = { name: 'P1', role: 'you', key: 'bundle-compare.bundle.1', weight: 58, tokens: 20 }
+const BT: Message = { name: 'T1', role: 'think', key: 'bundle-compare.bundle.2', weight: 50, tokens: 800 }
+const BA: Message = { name: 'A1', role: 'agent', key: 'bundle-compare.bundle.3', weight: 100, tokens: 2500 }
 
 /** One prompt carrying all three asks, one turn answering it, and nothing sent twice. */
 const BUNDLE: Entry[] = [
@@ -116,6 +125,17 @@ function sizeOf(item: Item): number {
     ? item.message.weight
     : item.items.reduce((sum, inner) => sum + sizeOf(inner), 0)
 }
+
+/** The estimated tokens in an item, copies included, for the tally. */
+function tokensOf(item: Item): number {
+  return item.kind === 'message'
+    ? item.message.tokens
+    : item.items.reduce((sum, inner) => sum + tokensOf(inner), 0)
+}
+
+/** Rounded so the tally reads as the estimate it is: to tens under 1,000, to hundreds above. */
+const roughly = (tokens: number) =>
+  tokens < 1000 ? Math.round(tokens / 10) * 10 : Math.round(tokens / 100) * 100
 
 function countOf(item: Item): number {
   return item.kind === 'message' ? 1 : item.items.reduce((sum, inner) => sum + countOf(inner), 0)
@@ -241,7 +261,7 @@ type SideProps = {
  * the same size and only one of them fills up.
  */
 function Side({ slug, entries, current, flash, label, note }: SideProps) {
-  const { t } = useTranslation('step1')
+  const { t, i18n } = useTranslation('step1')
   const view = useRef<HTMLDivElement>(null)
   const stack = useRef<HTMLDivElement>(null)
   const rows = useRef<Record<string, HTMLDivElement | null>>({})
@@ -250,6 +270,9 @@ function Side({ slug, entries, current, flash, label, note }: SideProps) {
   const here = entries.filter((entry) => entry.step <= current)
   const sent = here.reduce((sum, entry) => sum + sizeOf(entry.item), 0)
   const messages = here.reduce((count, entry) => count + countOf(entry.item), 0)
+  const tokens = new Intl.NumberFormat(i18n.language).format(
+    roughly(here.reduce((sum, entry) => sum + tokensOf(entry.item), 0)),
+  )
   const requests = here.filter(
     (entry) => entry.item.kind === 'message' && entry.item.message.role === 'you',
   ).length
@@ -412,7 +435,7 @@ function Side({ slug, entries, current, flash, label, note }: SideProps) {
           data-component="Side"
           className="text-muted-foreground font-mono text-xs"
         >
-          {t('bundle-compare.tally', { requests, messages })}
+          {t('bundle-compare.tally', { requests, messages, tokens })}
         </span>
 
         <span

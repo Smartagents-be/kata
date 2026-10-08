@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /**
- * Scores `The same ask, twice`, the task at the foot of step 1's `prompt` unit.
+ * Scores `Steer after the code, or before it`, the task at the foot of step 1's `prompt` unit.
  *
- * The student is handed six wishes in a counter clerk's words and one vague line to type. They type
- * the line on the dearest model they have, let the agent build `EntryController`, restart the
- * service and run this. Then they throw the attempt away, start a fresh agent, type the same line in
- * plan mode on the cheapest model they have, correct the plan before approving it, and run this
- * again. The two scores are the exercise: the wishes were in their head both times, and only one of
- * the two runs got them into the model.
+ * The student is handed six wishes in a counter clerk's words and one vague line to type. Run 1: they
+ * type the line without a plan, let the agent build `EntryController`, restart the service, run this,
+ * and correct the code in their own words for at most 3 rounds. Then they throw the attempt away,
+ * start a fresh agent on the same model, type the same line in plan mode, correct the plan before
+ * approving it, and run this again the same way. Score and cost per run are the exercise: the wishes
+ * were in their head both times, and what differs is whether they went in before the code or after.
  *
  * **The wishes sit on five independent decisions, and that is what the design turns on.** An
  * ordinary agent writes a bounds check and an informative 404 without being asked, so wishes built
@@ -399,7 +399,7 @@ for (const refusal of refusals) {
 labelWidth = Math.max(...WISHES.map((wish) => wish.label.length)) + 2
 
 console.log('')
-console.log(`The same ask, twice. Six wishes, checked against ${BASE}`)
+console.log(`Steer after the code, or before it. Six wishes, checked against ${BASE}`)
 console.log('')
 
 let passed = 0

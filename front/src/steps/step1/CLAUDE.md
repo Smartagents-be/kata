@@ -32,7 +32,11 @@ than after it. Two things follow from that and are load-bearing. **No unit defin
 the word is needed before `context` arrives, and it was cut because a definition of the window is
 the wrong thing to open a page about the prompt with. The word is used as an ordinary one from
 `prompt.lead.1` onward and `context` is where the window is taken apart. Do not write a definition
-back into `prompt`, and if one is ever wanted again, `context` is the unit that owns it. The other is
+back into `prompt`, and if one is ever wanted again, `context` is the unit that owns it.
+**`prompt.lead.2` names "grill me"** for the agent asking you about the task, at the owner's asking,
+and links Matt Pocock's `grill-me` skill in `mattpocock/skills` as the course's first external link
+(new tab). It says he publishes it, not that he invented it, and it stays one shared block because
+typing the phrase works in both products without installing anything. The other is
 that the three oval figures run as a sequence rather than an empty frame followed by fillings of it.
 `PromptParts` draws the prompt and what it can carry, with nothing around it, `ToolsInContext` draws the frame with a
 tool across its border, and `ContextDiagram` in `context` is the populated window at the end,
@@ -47,13 +51,26 @@ nothing inside it rather than a frame; the reasoning is under `tools` below. Its
 oval instead carries `ContextDiagram`'s prompt region geometry and fills, so the two read as one
 shape seen twice. **`PromptParts` replaced `PromptInContext`, the oval on its own**, after the
 course owner read that figure as being about nothing: it said "this is a shape" and stopped. The
-oval stays, joined by a stem to the 5 things a prompt can carry (goal, example, limit and why, output
-format, done when), each a sentence of one ask, so the sequence above is intact and the first
+oval stays, joined by a stem to the 6 things a prompt can carry (goal, context, example, limit and why,
+output format, done when), each a sentence of one ask, so the sequence above is intact and the first
 figure now teaches something. **The ask is deliberately not this repo's** (a 404 for a user that does
-not exist, `UserRepository`, `OrderController`): it was `TitleController`'s first, and its limit
+not exist, `UserService` returning a Result monad, `OrderController`): it was `TitleController`'s first, and its limit
 leaned on the Catalogue page, which a reader at the top of the unit has not met, so the course owner
-could not follow it. A limit only reads when its reason does; `be-exact.2` and `few-shot.1` share
-the ask. Neither is to scale, and the share-by-volume figure is still `SessionMakeup` in `session`.
+could not follow it. A limit only reads when its reason does, so the limit is a design rule with its reason (no
+exception: a missing user is a normal outcome) rather than a dependency the reader has to take on
+trust, like the nightly import it once named; `be-exact.2` quotes it and its related mistake is
+returning `null`. `be-exact.2` and `few-shot.1` share the ask. Neither is to scale, and the share-by-volume figure is still `SessionMakeup` in `session`.
+**The 6 parts are a synthesis, checked against 4 guides (October 2026)**, and none of them lists
+exactly these: goal (Anthropic "be clear and direct", OpenAI Goal, GitHub "start general, then get
+specific"), context (OpenAI Context, Claude Code "reference files with @", GitHub "indicate relevant
+code"), example (Anthropic examples, Claude Code "reference existing patterns", GitHub "give
+examples"), limit and its reason (Anthropic constraints and "add context ... why", OpenAI
+Boundaries), output format (Anthropic, OpenAI Output) and done when (Claude Code "give Claude a way
+to verify its work"). **Context was added last, as part 2, and it is a reference rather than a
+sentence** (`@UserController.java @UserService.java`): the course owner pointed out that you attach
+a file rather than describe it. `@` was checked in Claude Code's docs and Copilot CLI 1.0.92's help
+(its file mention picker, interactive mode only), and the owner confirmed it in Copilot in IntelliJ,
+so the row is shared rather than an assistant variant.
 One term is knowingly loose: `ContextDiagram`'s `resources` is the broad word for what the agent
 read, while `tools` defines `resource` narrowly as content a host retrieves from an MCP server.
 **Three of them are deliberately not in that
@@ -812,22 +829,29 @@ renumbering moves a paragraph that did not move.
 `BundleCompare` describes completed results rather than ongoing tool actions. Messages inside
 resent bundles are labelled as earlier questions or earlier results, and the bundle says they
 are sent again as context. Reusing a result must not look like executing its tools again.
+**Its tally carries an estimated token count** (≈ 10,200 against ≈ 3,300 at the end), at the
+owner's asking. The per-message counts are invented and the docblock says what each assumes; the
+system prompt and tool definitions are left out of both sides. `weight` stays the drawn height and
+is not the token count.
 
 **Four sections were added after `Be exact`, on a review asking for prompting tips a developer can
 use tomorrow**: `Few-shot prompting`, `Output format`, `Paste the real error` and `What no longer
 works`, plus `be-exact.2` on scope and its reason and `instruction.2` under `PromptParts`. They were
 picked from a sweep of Anthropic's, OpenAI's and GitHub's prompting guides (October 2026), and what
 the sweep turned up that another unit already owns was left out on purpose: a check the agent can
-run is step 2's `goals` (`instruction.2` names it as the 5th part and links there), asking for proof
+run is step 2's `goals` (`instruction.2` names it as the last part and links there), asking for proof
 is `truth`'s, starting over when a session goes nowhere is step 2's `steering`, and being interviewed
 is plan mode, above. "Tests first, and the tests are the spec" was also left out, since step 2's
 `gates` is the more natural home and that was not decided. **Few-shot and one-shot share 1 paragraph**
 (`few-shot.1`), and the terms refer only to how many examples the prompt contains. The course owner
-removed the explanation of 2 meanings and the separate `few-shot.2` paragraph; `plan-mode.2` now
-describes a model with or without a plan directly. **`What no longer works` is not a myth list for its
-own sake**: each of its 3 habits (typing "think hard", role prompts, shouting in capitals) is either
-documented as ignored (Claude Code passes "think hard" through as ordinary text,
-code.claude.com/docs/en/model-config) or measured as not helping, and that is the bar for adding a 4th.
+removed the explanation of 2 meanings and the separate `few-shot.2` paragraph. `plan-mode` has 2
+paragraphs: the old `.2` (a reviewed plan clarifies an underspecified ask, plus a caveat about the
+exercise) was cut, since `.1` already carries the payoff and the `plan` card's description carries
+the caveat; the old `.3` is now `.2`. **`What no longer works` is not a myth list for its
+own sake**: each of its 4 habits (typing "think hard", "think step by step", role prompts, shouting in
+capitals) is either documented as ignored (Claude Code passes "think hard" through as ordinary text,
+code.claude.com/docs/en/model-config) or measured as not helping, and that is the bar for adding a 5th. "Think step by step" met it in October 2026 (OpenAI's
+reasoning best practices; Anthropic's "prefer general instructions over prescriptive steps").
 
 Four things in it are boundaries with other units. **The word *entropy* is not used here**:
 `context` owns it, with an anchor, a heading, a deck slide and a quiz question, so `one-ask.2`
@@ -844,7 +868,7 @@ would answer the problem in the same breath as posing it. It links into a unit t
 met, which the step does elsewhere (`PickTheTier`'s amber verdict, `recap`'s closing section) and
 which is only allowed where the target owns the answer outright.
 
-`ReasoningCost` is the figure under `reasoning-level.2`, and it draws the two quantities that
+`ReasoningCost` is the figure under `reasoning-level.3`, and it draws the two quantities that
 paragraph asks the reader to weigh. **The answer segment is identical in all 5 rows and only the
 dashed thinking segment grows**, which isolates reasoning cost in an illustrative drawing, not a guaranteed effect of effort.
 Real output length, reasoning and tool calls can all vary. Its counts are invented and the caption says so, the way
@@ -856,9 +880,20 @@ to say a higher level absorbs the imprecision and the missing information, and t
 up for a vague ask. That overclaimed: more thinking works an ask over more carefully, but a decision
 the student never made and context they never gave are not in the window to reason about, and
 `be-exact` is this unit's own advice. So `.1` says what it buys and closes on what it cannot know,
-and `.2` says to raise it for a hard or many-step task and that the thinking is billed as output.
-`deck.prompt.divider.2`, the `deck.prompt.reasoning` points and the `reasoning-level` quiz question's
-correct option and explanation moved with them. Do not put the absorbing claim back in any of them.
+and `.3` says to raise it for a hard or many-step task and that the thinking is billed as output.
+**`.2` separates effort from the choice of model**, at the owner's asking, since most students do
+not know the difference: a model is a fixed set of weights from training (what it knows and can
+do), effort is how much work those same weights do. It follows Anthropic's "Choosing a Claude model
+and effort level in Claude Code" (July 2026), including its rule of thumb (all the context and still
+wrong: a more capable model; skipped a file or the tests: more effort). It says "a larger model can
+do more" and no more, because Anthropic publishes no layer or parameter counts. `.1` no longer says
+effort is not a fixed number of hidden tokens: the owner found it odd. `deck.prompt.divider.2` and
+the `deck.prompt.reasoning` points moved with the earlier cut. Do not put the absorbing claim back in
+any of them. **The `reasoning-level` quiz question is that rule of thumb as a situation**: the agent
+skipped a file and the tests with all the context there, and the answer is more effort. Its
+distractors are a larger model, "think hard" in the prompt and a larger window, each a misconception
+this unit addresses. It replaced a question about reading reasoning tokens off a usage report, which
+the owner could not follow.
 
 `EntryBrief` and `PlanItTwice` close the unit under the usual `<hr>` and "Test your knowledge", with
 `promptQuiz` arriving under the same heading. The card replaced the self-only aside that told the
@@ -867,20 +902,26 @@ version of the card that came after that. Ticked to `kata.step1.plan`, like the 
 
 **The task was worked in the student's own project once, and moving it into this repository is the
 decision.** Four moves, a task of their own choosing, and a last move asking which of the two runs
-they would ship. That left `plan-mode.2` a claim a student was invited to agree with rather than one
+they would ship. That left the plan-mode section's payoff a claim a student was invited to agree with rather than one
 they watched land: no two students did the same thing, nothing in the course held the task, and the
 verdict was an opinion about work nobody else could see. The exercise is now one ask against step 1's
 own service, the same for everybody, scored by a check that is not anybody's judgement. Six moves:
-start the service with the Catalogue page open, type the one line on the dearest model, restart and
-score it, throw the attempt away, type the same line in plan mode on the cheapest model in a fresh
-agent and correct the plan before approving it, restart and score it again. The sixth is still the
-exercise, since a score settles which run was better and naming the wish you never said out loud is
-the part that is worth anything tomorrow.
+start the service, run 1 without a plan and correct the code afterwards in at most 3 rounds, note
+score and cost, clean up (yourself or with a separate agent), run 2 in plan mode on a cheaper model
+and correct the plan before approving, then correct the code
+the same way and note score and cost again. The sixth move's comparison is the exercise.
 
-**The model contrast is a demonstration, not a controlled experiment.** Requirements, planning
-and model choice change together. The scores measure which wishes reached the implementation;
-they cannot isolate whether model size or plan mode caused the improvement. Do not reintroduce
-that causal claim. A controlled comparison would hold model and requirements constant.
+**Both runs use the same rules, and that reverses a recorded decision.** Run 1
+was the dearest model and run 2 the cheapest, with the wishes added to the plan. The course owner
+pointed out that this only proved the agent lacked context in run 1, not what plan mode does: plan
+mode adds no knowledge, it moves the moment you give it to before the code exists, as a checkpoint.
+So a wish reaches the agent only as a reaction in both runs (never pasted up front), run 1 steers
+after the code and run 2 before it, and score and cost (`/usage` in Claude Code, credits per turn in
+Copilot) compare the two moments. Run 2 runs on a cheaper model, at the owner's asking, so
+the plan run also costs less per token. It is one student's comparison and not an experiment: the
+model differs, and in run 2 the student already knows which wishes run 1 missed. Do not claim more
+than that. The first move no longer sends the student to the Catalogue page: wish 1 already says
+what the numbering is, and the check reads `/api/titles` itself.
 
 **Three of the six moves exist only to keep the two runs independent**, and every one of them was a
 way to come back with a wrong number. There is no live reload in that project, so a score taken
@@ -1058,12 +1099,10 @@ together ends the argument. The prose defines each capability separately: tools 
 resources expose content the harness retrieves, and prompts are reusable server templates rather
 than ordinary user messages. The cards show their usual control roles: you choose a template, the
 harness retrieves a resource, and the model requests a tool call. These are not mandatory UI rules,
-and a server or harness need not support all 3 capabilities. `McpOvals` is the fifth figure, paired
-with `McpParts` on the same columns (110, 320, 530). Its equal radii are schematic, not token sizes
-or a cost ranking. A server template is not the same object as the user's prompt in
-`ContextDiagram`. The labels share `mcp-parts.*.name` keys, so rewording moves both figures. It
-carries no frame: the harness decides what crosses into context. Do not add
-one. The unit's order is
+and a server or harness need not support all 3 capabilities. A server template is not the same object as the user's prompt in
+`ContextDiagram`. **A fifth figure, `McpOvals`, was cut** at the course owner's asking: it drew the
+same 3 as ovals on `McpParts`' columns, which restated the cards one screen down and added nothing.
+Do not bring a second drawing of the 3 back. The unit's order is
 the argument too, so keep it: the loop, what a tool is, what each product ships with, where extra ones come from (MCP, and the three things
 one offers), what loaded tool information costs, why returned content needs checking, and how
 large results are handled.
@@ -1386,30 +1425,26 @@ them. `recap` is outside all of this and always will be: it asks for nothing, so
 `<hr>` and no "Test your knowledge".
 
 `tools` carries one of the step's seven hands-on tasks and all three of its graded exercises, and between them they
-hold advice the prose used to state and no longer does. `ConnectOne` is that task and is a
-`TaskCard` like the other six, on seven moves: add an MCP server to your own agent, fetch the
-catalogue twice, once with `curl` and once by driving `/catalog` through the server, drive the
-browser once more at a page with no service behind it and screenshot what it finds, then compare and
-choose. It was two paragraphs of prose before that, and the change is the decision: a unit whose
-closing section is a card, a card and a card had one instruction in the middle written as reading,
-and a student skims a paragraph they would have worked through as a list. What stayed in the prose is
-the pair of `<pre>` blocks, because a command is machine output rather than a move, and the sentence
-above them naming Claude Code's `claude mcp add <name> -- <command>` (verified against the CLI) and
-`npx @playwright/mcp@latest --allow-unrestricted-file-access`, which is a server this repo already runs, so a copied line works.
-**The option is required, not decoration**: since 0.0.55 the server blocks `file://` URLs without it,
-and the third route below is a `file://` page. It also lifts the workspace-root limit on file
-access, which is why `connect-one.2.*` says so and tells the student to leave it off on their own
-work. **The
-moves name no command for that reason**, which also keeps the card readable in class, where the
-`<pre>` is cut with the rest of the prose. **The last move asks which result you would want back on
-every turn and nothing answers it**: the comparison is the exercise, so do not add the sentence
-saying which route is bulkier, in the card, the description or the prose. Ticked to
-`kata.step1.connect`.
+hold advice the prose used to state and no longer does. `ConnectOne` is that task, a `TaskCard` on
+seven moves, and **it was rewritten around 2 named lessons** at the course owner's asking (October
+2026), who could not tell what the old card was for. Lesson 1: the same 9 titles cost very
+different amounts of context depending on the tool, and the student **measures** it (`/context`
+before and after each route, or the credits under the turn in IntelliJ) rather than reading turns
+back. Lesson 2: why you would ever pay for the browser, a page whose flag only exists once it runs.
+The moves are start, `mcp` (per assistant), curl, browser, compare, then `reveal` and `shoot` for the
+flag, which now sit last, directly above `ShutterFlag`. **Every move carries what to type** as a
+copyable `connect.<move>.command`, which reverses "the moves name no command": that rule existed
+only because the `<pre>` above the card was cut in class, and the card now carries the commands
+itself. The `<pre>` pair and the per-assistant `connect-one.2` paragraphs went; `connect-one.2` is now
+one shared warning that `--allow-unrestricted-file-access` (required: since 0.0.55 the server blocks
+`file://` URLs without it, and the flag page is one) also opens files outside the project. **Nothing
+says which route is bulkier**, in the card, the description or the prose: the measurement is the
+exercise. The `shoot` move says the PNG *also* lands in `.playwright-mcp/`, and no longer claims the
+screenshot stays out of the window, which was not verified. Ticked to `kata.step1.connect`.
 
-**The third route is `exercises/step1/front/index.html`, and the two moves that work it sit in the middle
-of the card rather than at the end**, so `choose` stays the closer. It is one standalone page with no
-build, no dependencies and no service behind it, which is what keeps a third server off a student who
-is already running two: the agent opens the file off disk through the same MCP server. What it hides
+**The flag page is `exercises/step1/front/index.html`.** It is one standalone page with no build, no
+dependencies and no service behind it, which is what keeps a third server off a student who is
+already running two: the agent opens the file off disk through the same MCP server. What it hides
 is **step 1's sixth flag**, the one that is not on the `workshop` board, and the way it hides it is
 the exercise. The string is XORed and base64'd
 in the source and assembled in the browser when a button is pressed, so reading the file, grepping it
@@ -1454,7 +1489,10 @@ the window, and the model picks its next step from them. **It stops there on pur
 proposed with it ended "One of them tries to take the loop over. Which?", and that is the giveaway in
 other words: a result taking the loop over is the instruction aimed at the agent, which turns four
 results into a search for one sentence. Do not extend the line to say what makes the odd one odd.
-`BudgetWindow`'s description lost the second sentence the old `spot` description lost. It now says that each row shows what it leaves in the window, because a reviewer read the
+**`BudgetWindow` is titled "Which calls are enough?"** (it was "Divide the context window", which
+the course owner found incomprehensible: nothing is divided, the student picks). Its description now
+states the change, that each row shows its lines and why they matter (re-sent every turn), and
+`budget.task` is the instruction. Earlier, `BudgetWindow`'s description lost the second sentence the old `spot` description lost. It now says that each row shows what it leaves in the window, because a reviewer read the
 card as asking which call costs most without seeing the counts, and it keeps the one instruction that
 more than one call is wanted, since the exact set is what it grades. The counts went from `text-xs`
 to `text-sm` for the same reason. `BudgetWindow` is six calls against one small
@@ -2066,18 +2104,18 @@ in there, that is their build to unpick and the flags above are what they have d
 
 ## The assistant variants
 
-16 blocks in step 1 vary, 13 of them in the unit HTML and 3 on task cards, and nearly all of them are the same kind of thing, a filename or a
+16 blocks in step 1 vary, 12 of them in the unit HTML and 4 on task cards, and nearly all of them are the same kind of thing, a filename or a
 command: the launcher `<pre>` pair under `workshop`'s lead (`claude` against `copilot`, each after
 the same `cd`), which is the only pair left there now that the setup command has moved to
 `install.txt`,
-the `<pre>` under `tools.connect-one.1` and `tools.connect-one.2`
-(`claude mcp add` against `copilot mcp add`, which lands in `~/.copilot/mcp-config.json`),
 `tools.what-it-can-call.1` (each product's own built-in tools, under their own names),
-`tools.what-mcp-costs-you.1` and `.2`, `tools.large-tool-results.1`, `session.window-not-memory.1`,
+`tools.what-mcp-costs-you.1` and `.2`, `tools.large-tool-results.1`, `tools.mcp-servers.5` (Copilot
+only: the IntelliJ route to adding a server, which has no Claude sibling because `connect-one`
+already shows `claude mcp add`), `session.window-not-memory.1`,
 `session.automatic-manual-compaction.3` (when compaction starts, and whether you can move it),
 `context.amnesia-context-fatigue.3`
 (nested inside the audience wrapper, never both attributes on one element),
-`model.api-vs-subscription.2` and `.3`, the recap's allowance pair `recap.what-costs-do.9`, plus `survive.write.*.label`, `window.open.*.label` and
+`model.api-vs-subscription.2` and `.3`, the recap's allowance pair `recap.what-costs-do.9`, plus `survive.write.*.label`, `connect.mcp.*` (`claude mcp add` against `copilot mcp add`), `window.open.*.label` and
 `PriceOneTurn`'s move set (`read`/`rate`/`sum` against the three `price.*.copilot` moves) on the task
 cards. The last of those replaced `context.read-your-window.1`, which was the Claude and
 Copilot descriptions of `/context`: the paragraphs went and the variant moved onto the move that

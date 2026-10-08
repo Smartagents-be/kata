@@ -180,8 +180,8 @@ export const promptQuiz: QuizQuestion[] = [
     question: 'quiz.reasoning-level.question',
     choices: [
       {
-        id: 'thinking-tokens',
-        label: 'quiz.reasoning-level.thinking-tokens',
+        id: 'effort',
+        label: 'quiz.reasoning-level.effort',
         correct: true,
       },
       {
@@ -189,8 +189,8 @@ export const promptQuiz: QuizQuestion[] = [
         label: 'quiz.reasoning-level.bigger-model',
       },
       {
-        id: 'read-more',
-        label: 'quiz.reasoning-level.read-more',
+        id: 'think-hard',
+        label: 'quiz.reasoning-level.think-hard',
       },
       {
         id: 'bigger-window',

@@ -115,10 +115,16 @@
   conversation and long-running tasks.
 </p>
 
-<!-- The same three again, in the oval the step draws a thing as, on `mcp-parts`' own columns so each
-     one sits under the card it restates. Still nothing drawn around them: the window they land in is
-     `ContextDiagram`'s payoff in `context`, so do not put a frame on this one. -->
-<div data-figure="mcp-ovals"></div>
+<!-- Copilot only, and deliberately without a Claude sibling: the `connect-one` card below already
+     carries `claude mcp add` and `copilot mcp add`, which are terminal commands. What a class on Copilot in
+     IntelliJ was missing is the IDE route. Checked October 2026 against docs.github.com/en/copilot/
+     how-tos/provide-context/use-mcp/extend-copilot-chat-with-mcp (JetBrains: Agent mode, tools icon,
+     Add MCP Tools, mcp.json, MCP Registry). -->
+<p data-assistant="copilot" data-i18n="tools.mcp-servers.5.copilot">
+  In IntelliJ, switch the chat to Agent mode, click the tools icon and choose Add MCP Tools. That
+  opens <code>mcp.json</code>, where you define the server. You can also pick one from the MCP
+  Registry. In Copilot CLI, use <code>/mcp</code>.
+</p>
 
 <h2 data-i18n="tools.what-mcp-costs-you.heading">What MCP costs you</h2>
 
@@ -237,39 +243,23 @@
 <h3 data-i18n="tools.connect-one.heading">Try it yourself</h3>
 
 <p data-i18n="tools.connect-one.1">
-  Now see for yourself how tool results end up in the window. The 2 lines below start the step 1
-  backend and give your agent a browser tool if it does not have one yet.
+  You fetch the same 9 titles in 2 ways and measure how much each result leaves in your context.
+  Then you see why you would sometimes still want the more expensive tool. Every command and prompt
+  is on the card.
 </p>
 
-<!-- Each harness's own syntax, verified against `claude mcp add --help` and GitHub's `copilot mcp
-     add` reference. The server is the one this repo already runs, so a student who copies the line
-     gets something that works. Machine output, so no i18n key on either block. `--allow-unrestricted-file-access` is
-     there for the page in `exercises/step1/front/`: since 0.0.55 the server blocks `file://` URLs
-     without it (checked against `--help` on 0.0.83), and the paragraph under each block says what
-     the flag also opens up. -->
-<pre data-assistant="claude"><code>cd exercises/step1/java &amp;&amp; mvn spring-boot:run
-claude mcp add playwright -- npx @playwright/mcp@latest --allow-unrestricted-file-access</code></pre>
-
-<pre data-assistant="copilot"><code>cd exercises/step1/java &amp;&amp; mvn spring-boot:run
-copilot mcp add playwright -- npx @playwright/mcp@latest --allow-unrestricted-file-access</code></pre>
-
-<p data-assistant="claude" data-i18n="tools.connect-one.2.claude">
-  The second line is specific to Claude Code. Every harness has its own way of adding a server,
-  and that is how it decides which extra tools your agent can call. The option at the end lets the
-  browser open a page from disk, and with it any file outside your project, so leave it off on
-  your own work.
+<!-- The warning `--allow-unrestricted-file-access` needs, now shared rather than per assistant: the
+     commands moved onto the card (`connect.*.command`), and the flag is the same in both. Since
+     0.0.55 the server blocks `file://` URLs without it (checked against `--help` on 0.0.83), and the
+     flag page is a `file://` page. -->
+<p data-i18n="tools.connect-one.2">
+  The browser server starts with <code>--allow-unrestricted-file-access</code>, so it can open a page
+  from disk. That also lets it open any file outside your project, so leave the option off on your
+  own work.
 </p>
 
-<p data-assistant="copilot" data-i18n="tools.connect-one.2.copilot">
-  The second line is specific to Copilot CLI and ends up in
-  <code>~/.copilot/mcp-config.json</code>. Every harness has its own way of adding a server, and
-  that is how it decides which extra tools your agent can call. The option at the end lets the
-  browser open a page from disk, and with it any file outside your project, so leave it off on
-  your own work.
-</p>
-
-<!-- The unit's first task. The three fetches and the comparison are the card's moves, so no paragraph
-     here narrates them, and nothing anywhere says which of the routes comes back bulkier. -->
+<!-- The unit's first task. The two fetches, the measurement and the flag are the card's moves, so no
+     paragraph here narrates them, and nothing anywhere says which of the routes comes back bulkier. -->
 <div data-figure="connect-one"></div>
 
 <!-- The one graded thing in the step that is not on `workshop`'s board. It sits directly under the

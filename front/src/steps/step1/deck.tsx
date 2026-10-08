@@ -51,9 +51,8 @@ import { WindowFill } from './WindowFill'
  * the one place a stray flag or a half-done task is most confusing. Their units keep a divider and
  * a statement instead.
  *
- * Three more are absent for reasons of their own, and they are named here so the next editor can
- * tell a judgement from an oversight. `McpOvals` restates `McpParts`, and it only earns that next
- * to the paragraph explaining why it is being restated. `SessionWindows` and `usage-readout` are
+ * Two more are absent for reasons of their own, and they are named here so the next editor can
+ * tell a judgement from an oversight. `SessionWindows` and `usage-readout` are
  * `model`'s five-hour section, which is Claude-only, and the deck has no assistant filter: either
  * of them on the board tells a Copilot room about an arrangement it does not have. Everything else
  * a step 1 unit draws is up there. The tokens block runs in the unit's order, reading before
