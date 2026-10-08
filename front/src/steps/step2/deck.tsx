@@ -527,7 +527,11 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'parallel.title',
     title: 'deck.parallel.attention.title',
-    note: 'deck.parallel.attention.note',
+    points: [
+      'deck.parallel.attention.1',
+      'deck.parallel.attention.2',
+      'deck.parallel.attention.3',
+    ],
   },
 
   // ── goals ─────────────────────────────────────────────────────────────────────────────────
