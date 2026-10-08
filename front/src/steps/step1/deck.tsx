@@ -588,7 +588,7 @@ const deck: SlideSpec[] = [
     ns: 'step1',
     eyebrow: 'model.title',
     title: 'deck.model.money.title',
-    note: 'deck.model.money.note',
+    points: ['deck.model.money.1', 'deck.model.money.2', 'deck.model.money.3'],
   },
   {
     id: 'deck-model-speed',
