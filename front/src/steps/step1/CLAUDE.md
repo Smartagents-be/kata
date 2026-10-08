@@ -840,7 +840,7 @@ up for a vague ask. That overclaimed: more thinking works an ask over more caref
 the student never made and context they never gave are not in the window to reason about, and
 `be-exact` is this unit's own advice. So `.1` says what it buys and closes on what it cannot know,
 and `.2` says to raise it for a hard or many-step task and that the thinking is billed as output.
-`deck.prompt.divider.2`, `deck.prompt.reasoning.note` and the `reasoning-level` quiz question's
+`deck.prompt.divider.2`, the `deck.prompt.reasoning` points and the `reasoning-level` quiz question's
 correct option and explanation moved with them. Do not put the absorbing claim back in any of them.
 
 `EntryBrief` and `PlanItTwice` close the unit under the usual `<hr>` and "Test your knowledge", with

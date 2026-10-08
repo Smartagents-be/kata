@@ -231,7 +231,7 @@ const deck: SlideSpec[] = [
     // `deck.prompt.divider.2` promises the reasoning level and the block never delivered it. The
     // only other reasoning slide is four units later and exists to keep the two dials apart.
     title: 'deck.prompt.reasoning.title',
-    note: 'deck.prompt.reasoning.note',
+    points: ['deck.prompt.reasoning.1', 'deck.prompt.reasoning.2', 'deck.prompt.reasoning.3'],
   },
   {
     id: 'deck-prompt-meta',
