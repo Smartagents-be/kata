@@ -502,15 +502,11 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'step.title',
     title: 'parallel.title',
-    // The key number and the array position deliberately differ: `.3` is the unit's answer and
-    // keeps the last slot, and `.4` and `.5` are the orchestrator and the pair, which the unit
-    // argues before it.
     points: [
       'deck.parallel.divider.1',
       'deck.parallel.divider.2',
-      'deck.parallel.divider.4',
-      'deck.parallel.divider.5',
       'deck.parallel.divider.3',
+      'deck.parallel.divider.4',
     ],
   },
   {
