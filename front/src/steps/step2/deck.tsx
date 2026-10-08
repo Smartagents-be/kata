@@ -314,7 +314,12 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'steering.title',
     title: 'deck.steering.gaps.title',
-    points: ['deck.steering.gaps.1', 'deck.steering.gaps.2', 'deck.steering.gaps.3'],
+    points: [
+      'deck.steering.gaps.1',
+      'deck.steering.gaps.2',
+      'deck.steering.gaps.3',
+      'deck.steering.gaps.4',
+    ],
   },
 
   // ── patterns ──────────────────────────────────────────────────────────────────────────────
