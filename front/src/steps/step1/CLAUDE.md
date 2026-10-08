@@ -48,7 +48,7 @@ oval instead carries `ContextDiagram`'s prompt region geometry and fills, so the
 shape seen twice. **`PromptParts` replaced `PromptInContext`, the oval on its own**, after the
 course owner read that figure as being about nothing: it said "this is a shape" and stopped. The
 oval stays, joined by a stem to the 5 things a prompt can carry (goal, example, limit and why, output
-format, done when), each a sentence of one ask, so the sequence above is intact and the first
+format, acceptance criteria), each a sentence of one ask, so the sequence above is intact and the first
 figure now teaches something. **The ask is deliberately not this repo's** (a 404 for a user that does
 not exist, `UserRepository`, `OrderController`): it was `TitleController`'s first, and its limit
 leaned on the Catalogue page, which a reader at the top of the unit has not met, so the course owner
