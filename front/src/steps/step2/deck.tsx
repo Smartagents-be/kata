@@ -154,7 +154,7 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'setup.title',
     title: 'deck.setup.flags.title',
-    note: 'deck.setup.flags.note',
+    points: ['deck.setup.flags.1', 'deck.setup.flags.2'],
   },
 
   // ── engineering ───────────────────────────────────────────────────────────────────────────
@@ -164,7 +164,11 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'step.title',
     title: 'engineering.title',
-    points: ['deck.engineering.divider.1', 'deck.engineering.divider.2'],
+    points: [
+      'deck.engineering.divider.1',
+      'deck.engineering.divider.2',
+      'deck.engineering.divider.3',
+    ],
   },
   {
     id: 'deck-step2-engineering-vibe',
@@ -236,7 +240,7 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'gates.title',
     title: 'deck.gates.walk.title',
-    note: 'deck.gates.walk.note',
+    points: ['deck.gates.walk.1', 'deck.gates.walk.2', 'deck.gates.walk.3'],
   },
 
   // ── steering ──────────────────────────────────────────────────────────────────────────────
