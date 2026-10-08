@@ -1,7 +1,7 @@
 {
   "step.title": "Begin hier",
 
-  "welcome.title": "Hoe de kata werkt",
+  "welcome.title": "Hoe deze kata werkt",
   "backend.title": "Het juiste project starten",
   "workshop.title": "Eerste oefening met bewijs",
 
@@ -119,18 +119,18 @@
   "quiz.agent-says-it-found-it.explanation": "Een flag die de agent zelf uitrekent, zit er vaak een paar tekens naast. Het platform controleert 1 exacte string, en alleen de output van het programma bevat die zeker.",
 
   "deck.title": "Introductie",
-  "deck.welcome.divider.1": "Lees het alleen, of in de les aan het bord",
-  "deck.welcome.divider.2": "Kies je assistent achter het tandwiel",
-  "deck.welcome.divider.3": "Een antwoord tussen <hi>accolades</hi> is een flag",
-  "deck.welcome.divider.4": "Jouw agent jaagt erop, <mute>je browser kijkt na</mute>",
+  "deck.welcome.divider.1": "<hi>Volg het op jouw manier:</hi> Lees de stof zelfstandig door of doe mee op het bord tijdens de les.",
+  "deck.welcome.divider.2": "<hi>Kies je AI-assistent:</hi> Selecteer je gewenste assistent via het tandwielpictogram.",
+  "deck.welcome.divider.3": "<hi>Herken de flag:</hi> Elk antwoord dat tussen accolades staat {zoals_dit}, is een flag.",
+  "deck.welcome.divider.4": "<hi>Speel het spel:</hi> Jouw agent gaat op zoek naar de flag, terwijl je browser de antwoorden controleert.",
   "deck.welcome.rules.title": "Huisregels, voor elke workshop",
-  "deck.welcome.rules.1": "Alleen <hi>je agent</hi> jaagt",
-  "deck.welcome.rules.2": "1 flag per sessie",
-  "deck.welcome.rules.3": "Laat hem <hi>uitvoeren</hi>, niet gokken",
-  "deck.backend.divider.1": "Elke stap is een eigen Maven-project",
-  "deck.backend.divider.2": "Codeblokken lopen via <hi>je agent</hi>, niet via je klembord",
+  "deck.welcome.rules.1": "<hi>Laat de agent het werk doen:</hi> Alleen jouw agent jaagt op de flag.",
+  "deck.welcome.rules.2": "<hi>Eén flag per sessie:</hi> Focus op één doel tegelijk.",
+  "deck.welcome.rules.3": "<hi>Geen gokwerk:</hi> Laat de agent code of tools daadwerkelijk uitvoeren; vertrouw niet op aannames.",
+  "deck.backend.divider.1": "<hi>Eigen project per stap:</hi> Elke stap vormt een afzonderlijk Maven-project.",
+  "deck.backend.divider.2": "<hi>Geen copy-paste:</hi> Codeblokken laat je uitvoeren door je agent, niet via je klembord.",
   "deck.backend.herrings.title": "Niet elke string tussen accolades is <hi>de flag</hi>",
-  "deck.workshop.divider.1": "2 runs op het platform",
-  "deck.workshop.divider.2": "De machine schrijft het antwoord, <hi>jij leest het</hi>",
-  "deck.workshop.divider.3": "De laatste komt <hi>2 keer</hi> terug"
+  "deck.workshop.divider.1": "Voer 2 runs uit op het platform.",
+  "deck.workshop.divider.2": "De machine genereert het antwoord, jij leest het af.",
+  "deck.workshop.divider.3": "De laatste uitkomst verschijnt twee keer."
 }
