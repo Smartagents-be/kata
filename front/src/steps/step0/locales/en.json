@@ -80,18 +80,18 @@
   "quiz.agent-says-it-found-it.explanation": "A flag the agent works out in its head is often a few characters off. The platform checks 1 exact string, and only the program's output is sure to hold it.",
 
   "deck.title": "Introduction",
-  "deck.welcome.divider.1": "<hi>Follow it your way:</hi> Read the material on your own or join in at the board during class.",
+  "deck.welcome.divider.1": "<hi>Follow it your way:</hi> Read the material on your own or join in during class.",
   "deck.welcome.divider.2": "<hi>Choose your AI assistant:</hi> Select the assistant you want through the cogwheel icon.",
   "deck.welcome.divider.3": "<hi>Recognise the flag:</hi> Every answer between curly braces {like_this} is a flag.",
   "deck.welcome.divider.4": "<hi>Play the game:</hi> Your agent goes looking for the flag, while your browser checks the answers.",
   "deck.welcome.rules.title": "House rules, for every workshop",
   "deck.welcome.rules.1": "<hi>Let the agent do the work:</hi> Only your agent hunts for the flag.",
-  "deck.welcome.rules.2": "<hi>One flag per session:</hi> Focus on one goal at a time.",
+  "deck.welcome.rules.2": "<hi>1 flag per session:</hi> Start a fresh session for each flag.",
   "deck.welcome.rules.3": "<hi>No guesswork:</hi> Have the agent actually run code or tools; do not rely on assumptions.",
   "deck.backend.divider.1": "<hi>Own project per step:</hi> Every step is a separate Maven project.",
   "deck.backend.divider.2": "<hi>No copy-paste:</hi> Have your agent run code blocks, not your clipboard.",
   "deck.backend.herrings.title": "Not every braced string is <hi>the flag</hi>",
   "deck.workshop.divider.1": "Do 2 runs on the platform.",
   "deck.workshop.divider.2": "The machine generates the answer, you read it off.",
-  "deck.workshop.divider.3": "The last result shows up twice."
+  "deck.workshop.divider.3": "The last result shows up 2 times."
 }
