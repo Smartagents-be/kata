@@ -570,7 +570,7 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'goals.title',
     title: 'deck.goals.true.title',
-    note: 'deck.goals.true.note',
+    points: ['deck.goals.true.1', 'deck.goals.true.2', 'deck.goals.true.3'],
   },
   {
     id: 'deck-step2-goals-shape',
@@ -637,7 +637,7 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'workshop.title',
     title: 'deck.workshop.rule.title',
-    note: 'deck.workshop.rule.note',
+    points: ['deck.workshop.rule.1', 'deck.workshop.rule.2', 'deck.workshop.rule.3'],
   },
   // The one workshop element that is safe on a slide: `RunSheet` writes no progress, unlike the
   // board and the two cards around it, so a room can look at the whole capstone at once.
@@ -680,6 +680,7 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'workshop.title',
     title: 'deck.workshop.goal.title',
+    note: 'deck.workshop.goal.note',
   },
 ]
 

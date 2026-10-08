@@ -952,7 +952,7 @@ referenced by id rather than by title. The old argument is intact and is the fir
 what went is `whole-job.3` (the skill sweep, which now closes `most-waiting` as the thing you start
 before lunch) and `lead.2`'s middle, since asking why a route was chosen was the paragraph nobody
 was going to act on. Its last sentence survives as the close of `goal-oriented.1`, because
-`deck.goals.true.note` is that sentence on a slide.
+`deck.goals.true.2` says the same thing on a slide.
 
 **Context capacity and subscription allowance are distinct.** Goal-shaped work needs useful outcomes,
 checks, a budget and a stopping condition. Remaining allowance is an opportunity only when the work
