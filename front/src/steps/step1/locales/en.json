@@ -806,10 +806,10 @@
   "deck.truth.divider.1": "<hi>Three sources of knowledge:</hi> Information is trained (memory), handed over (context) or discovered (tools).",
   "deck.truth.divider.2": "<hi>The pitfall:</hi> The model sounds just as convincing and sure of itself with all three sources.",
   "deck.truth.divider.3": "<hi>The solution:</hi> Ask the model for the reasoning and the check, not just for the conclusion.",
-  "deck.workshop.divider.1": "5 flags, <hi>4 from one service</hi>",
-  "deck.workshop.divider.2": "1 session, measured <hi>at both ends</hi>",
-  "deck.workshop.divider.3": "Only your agent searches",
-  "deck.recap.divider.1": "Every unit was <hi>a cost and a move</hi>",
-  "deck.recap.divider.2": "All of it shared 1 window",
+  "deck.workshop.divider.1": "<hi>Focused scope:</hi> 5 flags to track down, 4 of them from one specific service.",
+  "deck.workshop.divider.2": "<hi>End-to-end measurement:</hi> 1 single session, monitored and measured at both the start and the finish line.",
+  "deck.workshop.divider.3": "<hi>Full autonomy:</hi> Only the agent does the searching; no human intervention during the run.",
+  "deck.recap.divider.1": "<hi>Cost & dynamics:</hi> Every unit (action/tool) is both a direct cost and a strategic move.",
+  "deck.recap.divider.2": "<hi>Shared space:</hi> All interactions, history and tool outputs share one and the same context window.",
   "deck.recap.divider.3": "What you learned here <hi>still holds</hi> in step 2"
 }
