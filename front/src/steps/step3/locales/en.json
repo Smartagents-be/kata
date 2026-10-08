@@ -86,7 +86,7 @@
   "deck.impostor.signal.2": "<hi>The diff trap:</hi> A code change (diff) you cannot follow yourself is not a solved problem: it is a gap in your knowledge filled with generated code.",
   "deck.impostor.signal.3": "<hi>Critical checking:</hi> Keep understanding the steps taken before you approve, or you lose control of the codebase.",
   "deck.impostor.written.title": "Nobody has been doing this <hi>long</hi>",
-  "deck.impostor.written.note": "The tools changed 2 times while this course was written. A file that stopped needing the same correction is the only record of that.",
+  "deck.impostor.written.note": "The tools evolved twice already while we were making these slides. The only trace? A prompt that became unnecessary.",
   "deck.change.divider.1": "<hi>Value over code:</hi> Producing code was never the real goal; delivering the right business value is.",
   "deck.change.divider.2": "<hi>Continuous alignment:</hi> Involve the business in the process every week, instead of a one-off reveal at the demo.",
   "deck.change.divider.3": "<hi>The real delay:</hi> Typing code by hand was never the real bottleneck in the planning calendar.",

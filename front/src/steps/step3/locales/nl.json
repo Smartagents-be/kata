@@ -157,7 +157,7 @@
   "deck.impostor.signal.2": "<hi>De valkuil van de diff:</hi> Een code-wijziging (diff) die je niet zelf kunt volgen, is geen opgelost probleem: het is een gat in je kennis opgevuld met gegenereerde code.",
   "deck.impostor.signal.3": "<hi>Kritische controle:</hi> Blijf de gemaakte stappen doorgronden voordat je goedkeurt, anders verlies je de regie over de codebase.",
   "deck.impostor.written.title": "Niemand doet dit <hi>al lang</hi>",
-  "deck.impostor.written.note": "De tools veranderden 2 keer terwijl deze cursus geschreven werd. Een bestand dat dezelfde correctie niet meer nodig heeft, is het enige spoor daarvan.",
+  "deck.impostor.written.note": "De tools evolueerden al twee keer terwijl we deze slides maakten. Het enige spoor? Een prompt die overbodig werd.",
   "deck.change.divider.1": "<hi>Waarde boven code:</hi> Code produceren was nooit het werkelijke doel; het leveren van de juiste businesswaarde is dat wel.",
   "deck.change.divider.2": "<hi>Continue afstemming:</hi> Betrek de business wekelijks bij het proces, in plaats van een eenmalige onthulling tijdens de demo.",
   "deck.change.divider.3": "<hi>De echte vertraging:</hi> Het handmatige typen van code is nooit de echte bottleneck in de planningskalender geweest.",
