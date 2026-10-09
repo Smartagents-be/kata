@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
  * Decomposition: the ask on the left, one short line over the dashed space it does not fill, and on
  * the right the three pieces it cuts into. Each piece is one row read in order: what the piece does,
  * the question the agent sends back while writing that piece's prompt, and the decision you give it.
- * The three questions are `harness.decomposition.1`'s own three, so the figure and the paragraph name
+ * The three questions are `agent-patterns.decomposition.1`'s own three, so the figure and the paragraph name
  * the same gaps; changing one means changing the other, in both languages.
  *
  * It used to draw each piece as an abstract teal bar standing for its prompt, with the question

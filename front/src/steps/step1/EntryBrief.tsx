@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { CopyCommand } from '@/shared/components/CopyCommand'
 
 /**
  * Everything `PlanItTwice` needs, on one sheet: the situation, what the counter asked for, the one
@@ -37,7 +38,7 @@ import { useTranslation } from 'react-i18next'
  * course states provenance and there is none to state.
  *
  * **The brief is read rather than drawn**, which is the one thing to keep it out of: `UnderSpecified`
- * in `harness` already draws the gap between an ask and what it leaves unsaid, in the step's own
+ * in `agent-patterns` already draws the gap between an ask and what it leaves unsaid, in the step's own
  * solid-and-dashed vocabulary. A second drawing of that argument here would be that figure four units
  * early and worse. So this one carries words the student has to work from, and the argument stays in
  * the task card's description.
@@ -179,13 +180,7 @@ export function EntryBrief() {
             {t('entry-brief.check.label')}
           </span>
 
-          <pre
-            id="entry-brief-check-command"
-            data-component="EntryBrief"
-            className="border-border bg-muted/40 text-foreground overflow-x-auto rounded-lg border px-3 py-2.5 font-mono text-sm"
-          >
-            <code>{t('entry-brief.check.command')}</code>
-          </pre>
+          <CopyCommand id="entry-brief-check-command" text={t('entry-brief.check.command')} />
 
           <span
             id="entry-brief-check-note"

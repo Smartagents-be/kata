@@ -14,7 +14,7 @@
   "workshop.title": "Apply the engineering workflow",
 
   "setup.panel.title": "3 flags",
-  "setup.panel.description": "3 files are waiting in the exercises/step2/java folder, each of them a kind of instruction file this unit covered. No script prints them and no build generates them. You find them simply by opening the project and reading the files.",
+  "setup.panel.description": "3 files are waiting in the exercises/step2/java folder, each of them a kind of file your agent reads that this unit covered. No script prints them and no build generates them. You find them simply by opening the project and reading the files.",
   "setup.panel.progress": "{{solved}} of {{total}} found",
   "setup.panel.solved": "Solved",
   "setup.panel.check": "Check",
@@ -28,7 +28,7 @@
   "setup.flag.module.hint": "The context the project gives the agent before you type a question or command yourself, at the very top of the project.",
   "setup.flag.module.help": "It is the file this unit spends most of its words on, and there is one at the top of exercises/step2/java. That is what an agent reads first when a session starts in that folder, so open it yourself and read it the way the agent would, top to bottom. Somewhere in there is a line that hands the flag over.",
   "setup.flag.package.label": "The specific instruction",
-  "setup.flag.package.hint": "The same kind of instruction file as above, but placed deeper in the folder structure so that it applies only to one specific package instead of the whole project.",
+  "setup.flag.package.hint": "The same kind of file as above, but placed deeper in the folder structure so that it applies only to one specific package instead of the whole project.",
   "setup.flag.package.help": "This kind of file is scoped: it joins the context only once the agent goes into the folder that holds it, so this one is never read while you work at the top of the project. Go down into the source tree until you reach a package whose rules would need saying, and look for a second copy of the same file there. Failing that, ask your agent to list every one of them under exercises/step2/java and compare the list against what you already have.",
   "workshop.panel.title": "Where they land",
   "workshop.panel.description": "Paste each flag as a build, an endpoint or a native image hands it over. Each one is leetspeak between curly braces, and the browser checks it here.",

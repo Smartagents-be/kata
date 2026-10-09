@@ -6,7 +6,7 @@
  * - `copilot`  — GitHub Copilot, for a student whose employer already put that on their machine.
  *
  * This is not a language and not an audience: it is which product the instructions on the page
- * should name, so a Copilot student reads about `.github/copilot-instructions.md` where a Claude
+ * should name, so a Copilot student reads about `AGENTS.md` where a Claude
  * Code student reads about `CLAUDE.md`. Prose is marked for one or the other with `data-assistant`,
  * handled in `lib/content.ts` beside the audience rule it copies.
  *

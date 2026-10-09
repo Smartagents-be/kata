@@ -33,7 +33,7 @@ open the cogwheel, set the assistant, check the language while you are in there.
 used to sit under the card said what the setting buys, that the pages then name the commands that
 apply to you, and it is gone, so a student is asked to set the thing and never told why. That is
 what the card is carrying now: a task is a thing to do, and the reason turns up on its own the first
-time a page names `CLAUDE.md` on one machine and `.github/copilot-instructions.md` on another.
+time a page names `CLAUDE.md` on one machine and `AGENTS.md` on another.
 
 The paragraph above the card **no longer lists what is in the panel, and no longer names a row at
 all**: it named four rows while the panel rendered five, so the list went, and the reset row

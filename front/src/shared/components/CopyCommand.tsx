@@ -1,6 +1,7 @@
 import { CheckIcon, CopyIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { cn } from '@/shared/lib/utils'
 
 /**
  * One command or prompt a student types, in mono, with a button that puts it on the clipboard.
@@ -10,6 +11,11 @@ import { useTranslation } from 'react-i18next'
  * by hand is a typo waiting to happen. The text is the literal thing to type and is never
  * translated, so it reads the same in both languages.
  *
+ * It also renders every top-level `<pre>` in unit prose, through `StepContent`, so a block a page
+ * asks the student to run or paste is copyable the same way. A text with more than one line keeps
+ * its line breaks and indentation and scrolls sideways in its own box, the rule a prose `<pre>`
+ * followed; a single line still breaks anywhere, since a long path has nothing to wrap at.
+ *
  * The button says "Copied" for a moment and then goes back. A clipboard the browser refuses (an
  * insecure origin, a denied permission) leaves the button as it was rather than throwing: the text
  * is still on screen to select by hand.
@@ -17,6 +23,7 @@ import { useTranslation } from 'react-i18next'
 export function CopyCommand({ id, text }: { id: string; text: string }) {
   const { t } = useTranslation()
   const [copied, setCopied] = useState(false)
+  const multiline = text.includes('\n')
 
   useEffect(() => {
     if (!copied) return
@@ -37,12 +44,15 @@ export function CopyCommand({ id, text }: { id: string; text: string }) {
     <div
       id={id}
       data-component="CopyCommand"
-      className="border-border bg-muted/50 flex items-center gap-2 rounded-md border py-1 pr-1 pl-3"
+      className="border-border bg-muted/50 flex items-start gap-2 rounded-md border py-1 pr-1 pl-3"
     >
       <code
         id={`${id}-text`}
         data-component="CopyCommand"
-        className="text-foreground min-w-0 flex-1 font-mono text-xs break-all"
+        className={cn(
+          'text-foreground min-w-0 flex-1 self-center font-mono text-xs',
+          multiline ? 'overflow-x-auto py-1.5 leading-relaxed whitespace-pre' : 'break-all',
+        )}
       >
         {text}
       </code>

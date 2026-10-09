@@ -29,7 +29,7 @@ interface Point {
 /**
  * A drag-to-connect exercise: situations down the left, choices down the right, a line drawn
  * between them, graded here in the browser. Both of step 1's boards are this component with
- * different data (`PatternMatch` in `harness`, `PickTheTier` in `model`), which is the point: a
+ * different data (`PatternMatch` in `agent-patterns`, `PickTheTier` in `model`), which is the point: a
  * student who learned the interaction once should not meet a second one that behaves differently.
  * They drifted apart when they were two copies, so keep additions here rather than in a caller.
  *

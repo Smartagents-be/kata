@@ -1,4 +1,5 @@
 import { Fragment, useMemo, type ReactNode } from 'react'
+import { CopyCommand } from '@/shared/components/CopyCommand'
 import { useAssistant } from '@/shared/assistant/useAssistant'
 import { useStepText } from '@/shared/i18n/useStepText'
 import { prepareUnit } from '@/shared/lib/content'
@@ -41,6 +42,22 @@ export function StepContent({
       {segments.map((segment, index) =>
         segment.kind === 'figure' ? (
           <Fragment key={`figure-${index}`}>{inlineFigures?.[segment.name]}</Fragment>
+        ) : segment.kind === 'code' ? (
+          // my-6 stands in for the margin Typography gave the <pre> while it sat inside an article.
+          <div
+            key={`code-${index}`}
+            id={`step-content-code-${index}`}
+            data-component="StepContent"
+            className="my-6 flex flex-col gap-2"
+          >
+            {segment.blocks.map((text, block) => (
+              <CopyCommand
+                key={block}
+                id={`step-content-code-${index}-command-${block}`}
+                text={text}
+              />
+            ))}
+          </div>
         ) : (
           <article
             key={`html-${index}`}

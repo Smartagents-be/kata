@@ -135,15 +135,16 @@
   <h3 data-i18n="tokens.one-at-a-time.heading">The model generates 1 token at a time</h3>
 
   <!-- Both caches in one paragraph, argued from the backward-only arcs in the attention figure:
-       first reuse within one answer, then across requests. Rates are harness.caching.1's. -->
+       first reuse within one answer, then across requests. Rates are `prompt-caching.1`'s, at the
+       foot of the unit. -->
   <p data-i18n="tokens.one-at-a-time.1">
   The model gives every token in its vocabulary a score, based on the context so far, and 1 token is
   picked. That token goes on the end of the text, and the next prediction starts from that longer
   sequence. A token depends only on what comes before it, so adding one changes nothing that was
   already calculated. The model reuses those calculations from a cache instead of working through
   the whole text again. That also works across requests: when a request starts with the same text as
-  an earlier one, that start can be reused, at a lower rate <svg data-icon="coin"></svg> The
-  <a href="/steps/step1/harness">harness unit</a> explains how this prompt caching works.
+  an earlier one, that start can be reused, at a lower rate <svg data-icon="coin"></svg> That is
+  prompt caching, and its rates close this unit.
 </p>
 </div>
 
@@ -209,9 +210,9 @@
 <div data-audience="self">
   <!-- Writing's bill, and the last prose section: output priced above input, reasoning billed as
        output, and the figure putting a turn's reading and writing side by side. `.1` sends the numbers
-       to `model`'s pricing, the same rule `harness.coordinator.3` follows for decomposition; the cache
-       pointer to `harness` sits with the cache in `one-at-a-time.1`. `.3` names no price and no link of
-       its own: `TokenKinds` carries every number, computed from `ModelPricing`'s Sonnet row. -->
+       to `model`'s pricing, the same rule `agent-patterns.coordinator.3` follows for decomposition.
+       `.3` names no price and no link of its own: `TokenKinds` carries every number, computed from
+       `ModelPricing`'s Sonnet row. -->
   <h3 data-i18n="tokens.expensive-part.heading">The real cost</h3>
 
   <p data-i18n="tokens.expensive-part.1">
@@ -234,6 +235,24 @@
     The token counts in this turn are an example. The price ratios are real. Most of the context comes
     from the cache and costs next to nothing. The reasoning, which you never even see, is more than
     half the bill.
+  </p>
+
+  <!-- Moved here whole from the old `harness` unit, which repeated what the step had already said
+       about the harness and kept caching as its only material of its own. It sits after the cost
+       because it is a rate: `one-at-a-time.1` already says what the cache reuses, so this section
+       opens on the numbers rather than defining it twice. `ModelPricing`'s cache-read column and
+       `recap.lead.2` both lean on these lines. -->
+  <h3 data-i18n="tokens.prompt-caching.heading">Prompt caching</h3>
+
+  <p data-i18n="tokens.prompt-caching.1">
+    On Anthropic’s API, a cache write costs 1.25 times input for a 5-minute cache or 2 times for a
+    1-hour one. A cache read costs 0.1 times input or less, depending on the model. Copilot bills it
+    too. Your harness and account decide which lifetime you get, and the usage report shows it.
+  </p>
+
+  <p data-i18n="tokens.prompt-caching.2">
+    The cache only matches from the start, and each model has its own. So pick your model, effort and
+    tools before you begin.
   </p>
 </div>
 

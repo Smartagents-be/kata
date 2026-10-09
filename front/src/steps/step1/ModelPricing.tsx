@@ -20,7 +20,7 @@ const COLUMNS = [
  *
  * Three things the prose already argues can be checked against it by eye: the small tier as one unit
  * with the middle at two and the top at four, output at five times input in every row, and a cache
- * read at a tenth of input or less, which is what `harness` says caching costs. The top two tiers
+ * read at a tenth of input or less, which is what `tokens.prompt-caching.1` says caching costs. The top two tiers
  * read their cache cheaper than a tenth, which is why that sentence says "or less".
  *
  * It scrolls in its own box rather than wrapping. Six columns of machine output do not reflow into

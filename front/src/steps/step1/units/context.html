@@ -34,16 +34,9 @@
   </p>
 
   <p data-assistant="copilot" data-i18n="context.model-stateless.2.copilot">
-    Copilot works the same way. You write <code>.github/copilot-instructions.md</code>. With Copilot Memory, still in preview,
+    Copilot works the same way. You write <code>AGENTS.md</code>. With Copilot Memory, still in preview,
     Copilot also stores facts about a repository itself, and deletes a fact it has not used for 28
     days. So memory is not something the model remembers: it is text that is handed to it again.
-  </p>
-
-  <p data-i18n="context.model-stateless.3">
-    Sending the whole transcript again costs focus as well as money. Clear the session often,
-    and always when you switch to something unrelated <svg data-icon="coin"></svg> A
-    fresh session keeps the model focused, even when it has to re-read a file to solve the problem
-    in front of it.
   </p>
 
   <h2 data-i18n="context.task-specific.heading">
@@ -51,15 +44,16 @@
 </h2>
 
   <p data-i18n="context.task-specific.1">
-    The model predicts from what it learned and what is in the context. Without the current code, the
-    failing case and your conventions, it has little to go on. You get an answer that could fit any
-    project, but not necessarily yours.
+    The model predicts from what it learned and what is in the context. It was trained on code from a
+    great many projects. Without the current code, the failing case and your conventions, it falls
+    back on what is common across them: an answer that could fit any project, but not necessarily
+    yours.
   </p>
 
   <p data-i18n="context.task-specific.2">
     Below you can see how much 1 piece of context changes. Both pages come from the same prompt: a
     landing page for a book rental. On the left the model got only that prompt, on the right also 1
-    reference image from Dribbble.
+    screenshot of an existing design as an example.
   </p>
 </div>
 
@@ -70,62 +64,47 @@
 <div data-figure="oneshot-compare" data-audience="self"></div>
 
 <p data-audience="self" data-i18n="context.task-specific.3">
-  That 1 image steered the design away from the generic straight away. It is not finished, but it is
-  closer to what you want.
+  On the left you see the default choices that keep coming back in AI-made designs: everything
+  centred, a large serif headline, a little pill with a dot above it and the same rounded corners
+  everywhere. That 1 example on the right steered the design somewhere else straight away. It is not
+  finished, but it is closer to what you want.
 </p>
 
 <!-- The figure's payoff turned on the student's own repository. It stays descriptive on purpose:
      arranging a repository so an agent works well in it is step 2's `setup`, and this paragraph is
      only why the codebase counts as context at all. -->
 <p data-audience="self" data-i18n="context.task-specific.4">
-  Your codebase is that reference. Every file the agent opens on the way to your change is context too,
-  and it steers the answer the same way that image did. Keep one way of doing things and the agent
-  copies it. Work in a project that drifted years ago and it copies that instead, every turn and
-  every session. That is why an old codebase feels heavy.
+  Your codebase is that example. Every file the agent reads steers the answer the way that image did.
+  Claude Code's system prompt even tells it, in so many words, to write code that reads like the
+  surrounding code. Do things one way consistently and the agent copies that. Let a project drift for
+  years and it copies the drift.
 </p>
 
 <div data-audience="self">
   <h2 data-i18n="context.bad-context-bad.heading">Bad context, bad answers</h2>
 
   <p data-i18n="context.bad-context-bad.1">
-    Missing context produces generic output. You recognise it instantly: the tutorial answer, the
-    <code>UserServiceImpl</code>, the try-catch that swallows the exception. It is not wrong
-    exactly. It answers a question nobody in your team asked.
+    Missing context produces generic output: code that could sit in any project. A
+    <code>UserService</code> interface with a <code>UserServiceImpl</code> beside it, because that is
+    what the tutorials do. A try-catch that logs the exception and carries on. It compiles, but it
+    can break your domain rules. It answers a question nobody in your team asked.
   </p>
 
   <p data-i18n="context.bad-context-bad.2">
-    Often that gap is recoverable, because the harness can go and get what it lacks. When reading is
-    not enough, it interviews you <svg data-icon="pattern"></svg> instead.
+    Often that gap can be closed, because the agent can use its <a href="/steps/step1/tools">tools</a>
+    to fetch what it lacks: read files, search your codebase, run the tests or <code>git log</code>, or
+    pull documentation from the web. When that is not enough, it interviews you
+    <svg data-icon="pattern"></svg> It is not guaranteed to do either.
   </p>
 
   <p data-i18n="context.bad-context-bad.3">
-  Wrong context can mislead the model even when its source is labelled. Paste a file that is 3
-  versions old and the agent can build on a stale assumption. Have it inspect the current file and
-  compare dates or versions when freshness matters.
+  Wrong context can mislead the model. A realistic case: your <code>CLAUDE.md</code> or <code>AGENTS.md</code> still says new
+  endpoints go in a <code>web</code> package, while the team has long given every feature its own
+  package. The agent follows the file, and nothing in the code stops it. So put a line in that file
+  that has the agent propose an edit to it whenever you say something that contradicts it. You approve, and the file stays current
+  <svg data-icon="gem"></svg> When in doubt, also have the agent read the existing code.
 </p>
 
-  <p data-i18n="context.bad-context-bad.4">
-    And it slips in by accident more than you would think. Chase a bug through a long session and
-    finally kill it. The fix lands in your code, but the whole hunt stays in the context. The broken
-    version, the wrong turns, the diff you reverted, all still sitting there. Ask for the next thing
-    without clearing and the model reads that dead code as live. It can decide your fix was the
-    mistake, put the bug back, and the first you hear of it is the test going red again
-    <svg data-icon="gem"></svg> That pile-up in the context is <a href="#entropy">entropy</a>.
-  </p>
-
-  <h2 data-i18n="context.why-bites-hardest.heading">Why this bites hardest in code</h2>
-
-  <p data-i18n="context.why-bites-hardest.1">
-  Training material includes code of uneven quality: tutorials, old answers and snippets never
-  tested in your environment. A plausible function can compile while breaking your domain rules.
-  Give the agent your current conventions and executable checks.
-</p>
-
-  <p data-i18n="context.why-bites-hardest.2">
-  Training can teach useful coding practices, but it does not establish what your team chose in
-  2019. A vague request leaves those choices open. Point at a current implementation and state what
-  must hold, then verify the result.
-</p>
 
   <h2 data-i18n="context.more-context-not.heading">More context is not free</h2>
 
@@ -138,17 +117,29 @@
     that matters instead of the whole directory.
   </p>
 
+  <!-- Moved here from the old `Entropy` section when that went to `session`: entropy is the pile-up
+       over time, which is `session`'s, while this is about the size of one request. It is last
+       rather than second so `.2` keeps its key. -->
+  <p data-i18n="context.more-context-not.3">
+    Even relevant material can be missed in a long context. Some models and tasks show weaker
+    retrieval for information placed in the middle. That is called <strong>lost in the
+    middle</strong>. More broadly, answers get less reliable as the input grows, even when the task
+    stays just as easy. Researchers call that <strong>context rot</strong>. Keep critical
+    constraints easy to find and check whether the result follows them.
+  </p>
+
   <!-- The four moves are the ones Anthropic's own guidance backs (best practices, common workflows,
        large codebases, and Claude Code 101's explore-first lesson). Naming the class and the case is
        `prompt.be-exact`'s, so it is a link here and not a second telling. "Tell it where not to look"
        was left out on purpose: Anthropic does that with settings rather than in the prompt, and
        settings are step 2's guardrails. -->
-  <h2 data-i18n="context.you-choose-most.heading">You choose most of it</h2>
+  <h2 data-i18n="context.you-choose-most.heading">What you give the agent</h2>
 
   <p data-i18n="context.you-choose-most.1">
-  Name the class and the case, as the <a href="/steps/step1/prompt">prompt unit</a> asks. Paste the
-  failing assertion and relevant stack trace lines <svg data-icon="coin"></svg> Point at a class
-  that follows your conventions, so the agent has a concrete reference.
+  Per task, give what holds for that task only: the class and the scenario, as in the
+  <a href="/steps/step1/prompt">prompt unit</a>, and the failing assertion with the relevant stack
+  trace lines <svg data-icon="coin"></svg> Also point at a class that follows your conventions, so
+  the agent has a concrete reference.
 </p>
 
   <p data-i18n="context.you-choose-most.2">
@@ -158,84 +149,57 @@
     it. That is a permission prompt, not a sandbox.
   </p>
 
-  <h2 id="entropy" style="scroll-margin-top: 5rem" data-i18n="context.entropy.heading">Entropy</h2>
-
-  <p data-i18n="context.entropy.1">
-  A long session piles up failed attempts, errors and old versions of files. The harness does not
-  reliably clear them out.
-</p>
-
-  <p data-i18n="context.entropy.2">
-    That is entropy: disorder in the context rises with every turn unless somebody spends energy
-    pushing it back down. You see it when the agent starts contradicting itself, re-proposes an idea
-    you already rejected, or edits a file back to a version you moved past an hour ago.
+  <p data-i18n="context.you-choose-most.3">
+    What holds for every task does not belong in your prompt but in the project: in your
+    <code>CLAUDE.md</code> or <code>AGENTS.md</code>, in rules per part of the codebase, and in gates that fail when it goes wrong. Only a gate is
+    certain. Whether the agent keeps to your DDD rules you otherwise only find out by reading the code
+    yourself. So write rules like that down as architecture tests that fail when a class breaks them.
+    How to set that up is in <a href="/steps/step2/setup">step 2</a>.
   </p>
 
-  <p data-i18n="context.entropy.3">
-    Even relevant material can be missed in a long context. Some models and tasks show weaker
-    retrieval for information placed in the middle. That is called <strong>lost in the
-    middle</strong>. More broadly, answers get less reliable as the input grows, even when the task
-    stays just as easy. Researchers call that <strong>context rot</strong>. Keep critical
-    constraints easy to find and check whether the result follows them.
+  <!-- What the context costs in trust rather than tokens. The plan facts are dated and were read on
+       9 October 2026: Anthropic's Claude Code data-usage page (code.claude.com/docs/en/data-usage)
+       and GitHub's blog post of 25 March 2026 on Copilot interaction data. How to block a file is
+       step 2's `setup`, on the same reasoning that keeps "where not to look" out of `.2` above. -->
+  <h2 data-i18n="context.leaves-your-machine.heading">What leaves your machine</h2>
+
+  <p data-i18n="context.leaves-your-machine.1">
+    Everything in the context goes to the provider: your prompt, the files the agent reads, the
+    output of every command it runs. A log you paste with an API key in it. A stack trace with a
+    customer's email address. A <code>.env</code> the agent opens on its own. Strip secrets and
+    personal data before you paste <svg data-icon="gem"></svg> How to keep a file like
+    <code>.env</code> away from the agent is in <a href="/steps/step2/setup">step 2</a>.
   </p>
 
-  <h2 data-i18n="context.amnesia-context-fatigue.heading">Amnesia and context fatigue</h2>
-
-  <p data-i18n="context.amnesia-context-fatigue.1">
-    Because the context is finite, something eventually has to give. Older material is summarised,
-    and the summary is what stays. The constraint you gave at the start is now 1 line in it, or it
-    did not make the cut at all.
+  <p data-assistant="claude" data-i18n="context.leaves-your-machine.2.claude">
+    What happens to it next depends on your account. On a Team or Enterprise plan or the API,
+    Anthropic does not train on it and keeps it 30 days. On a personal Free, Pro or Max account it
+    trains on your sessions while that setting is on in
+    <code>claude.ai/settings/data-privacy-controls</code>, and then keeps them 5 years. Check which
+    account your company expects you to use.
   </p>
 
-  <p data-i18n="context.amnesia-context-fatigue.2">
-    Then the agent forgets a decision from earlier, asks a question you already answered, or
-    re-reads a file it read 20 minutes ago. This is context fatigue. The model did not get
-    tired and it did not get dumber. The evidence left the room.
+  <p data-assistant="copilot" data-i18n="context.leaves-your-machine.2.copilot">
+    What happens to it next depends on your plan. GitHub does not train on Copilot Business or
+    Enterprise data. On a personal Free, Pro or Pro+ plan it has trained on your sessions since
+    24 April 2026, unless you turn that off under Privacy in <code>github.com/settings/copilot</code>.
+    Check which seat your company expects you to use.
   </p>
-</div>
-
-<!-- The window's oldest turns collapsing into a summary that stays inside the frame, with the detail
-     leaving it. It draws the paragraph above it rather than the branch that paragraph no longer
-     claims: nothing drops out of a window either of this course's harnesses runs, and the two
-     tilted ghosts used to say it did. Top-level on purpose: a data-figure marker nested inside a
-     data-audience wrapper is left as an empty div, so the wrapper is closed above and reopened
-     below, each line still self-learning only. -->
-<div data-figure="context-falloff" data-audience="self"></div>
-
-<div data-audience="self">
-  <!-- The assistant variants nest inside the audience wrapper rather than carrying both attributes:
-       an element with `data-audience` and `data-assistant` on it renders for one reader in four,
-       and nothing warns about the three it does not. -->
-  <p data-assistant="claude" data-i18n="context.amnesia-context-fatigue.3.claude">
-    When the context is compacted, detail is the first thing to go. For an instruction that has to
-    survive that, write it in <code>CLAUDE.md</code>, which is read at the start of every session
-    and again after compaction. And keep the context from filling up in the first place: cut each
-    task small enough that it finishes before the summarising begins.
-  </p>
-
-  <p data-assistant="copilot" data-i18n="context.amnesia-context-fatigue.3.copilot">
-    When the context is compacted, detail is the first thing to go. For an instruction that has to
-    survive that, write it in <code>.github/copilot-instructions.md</code>, which is read at the
-    start of every session. And keep the context from filling up in the first place: cut each task
-    small enough that it finishes before the summarising begins.
-  </p>
-
 </div>
 
 <!-- The doing part of the unit, under the same rule and the same shared heading every other unit in
-     the step uses. This is the one unit carrying both a task and a registry quiz, so QuizPanel puts
-     that heading on the page a second time under its own separator; the shape is worth more than the
-     repetition. The prose here is deliberately outside the self-audience wrapper the rest of the
-     unit sits in: a task is worked by both audiences, and guided mode drops the run either way. -->
+     the step uses. This unit carries both a task and a registry quiz, as `session` does, and
+     `showsExerciseHeading` keeps QuizPanel from printing that heading a second time. The prose here
+     is deliberately outside the self-audience wrapper the rest of the unit sits in: a task is worked
+     by both audiences, and guided mode drops the run either way. -->
 <hr />
 
 <h2 data-i18n="ui:quiz.title">Test your knowledge</h2>
 
-<h3 data-i18n="context.read-your-window.heading">Read your own context</h3>
+<h3 data-i18n="context.read-your-window.heading">A rule that is out of date</h3>
 
-<!-- The unit's one task, and the only place in the course `/context` is used rather than described:
-     the prose that described it was removed and nothing above may grow a replacement. The card
-     carries the whole instruction, opening the project itself in the first move. The second and
-     last moves are a reading with the MCP server from `tools` connected and one with it gone, so
-     neither can be dropped without leaving a number with nothing to compare it to. -->
+<!-- The unit's one task: `bad-context-bad.3` worked. The student plants an out-of-date rule and the
+     rule from that paragraph, watches the agent follow the stale one, contradicts it, and approves
+     the edit the agent proposes. Measured before it was written; the reasoning is in step 1's
+     CLAUDE.md beside `ReadYourWindow`. -->
 <div data-figure="read-your-window"></div>

@@ -1,0 +1,126 @@
+<!-- This unit was "Harness and orchestration" once, and opened on 3 paragraphs saying what a harness
+     is, a sentence on which harness defers tool definitions, and a caching section. All of it went
+     (October 2026, at the owner's asking): the step uses the word from `tokens` onward, `tools.lead.1`
+     now defines it, `WindowGrid` in `context` already shows what a harness loads into a request,
+     `tools` owns tool search per product, and caching moved whole to `tokens.prompt-caching`. What
+     is left is the patterns, which nothing else in the step teaches. Do not grow a harness intro
+     back. -->
+<p data-i18n="agent-patterns.lead.1">
+  Your task does not have to go to 1 model in 1 conversation. How it is cut up decides where your
+  context ends up.
+</p>
+
+<h2 data-i18n="agent-patterns.decomposition.heading">Decomposition</h2>
+
+<p data-i18n="agent-patterns.decomposition.1">
+  Whatever you ask for is thinner than what you want. "Add search to the catalogue" does not say what
+  an empty query returns, whether it matches on title only, or what comes back when nothing matches.
+  That is not an agent problem. Requirements arrived under-specified long before there were agents,
+  and most of traditional software engineering is spent closing that gap. A task has no depth
+  until somebody gives it some.
+</p>
+
+<p data-i18n="agent-patterns.decomposition.2">
+  Decomposition cuts a task into parts that can be checked separately. Each brief names the
+  outcome, relevant context and dependencies. Writing “handle the empty case” forces you to decide
+  what that means before delegating it.
+</p>
+
+<p data-i18n="agent-patterns.decomposition.3">
+  So the questions come back at you before the code does. The case nobody thought about, the endpoint 2 parts both want to own, the decision that was never made. An agent that starts typing
+  instead would have guessed at every one of them, and you find guesses in the diff.
+</p>
+
+<!-- The figure carries this section's own three gaps, out of `agent-patterns.decomposition.1`. Reword the
+     example there and the drawing has to follow, in both languages. -->
+<div data-figure="under-specified"></div>
+
+<h2 data-i18n="agent-patterns.coordinator.heading">The coordinator</h2>
+
+<p data-i18n="agent-patterns.coordinator.1">
+  A coordinator hands parts of a task to sub-agents, ideally on a cheaper model
+  <svg data-icon="coin"></svg> Splitting multiplies tokens though: Anthropic measured its
+  multi-agent research system at about 15 times the tokens of a chat. Some built-in sub-agents
+  already run on a small model, such as Claude Code's Explore and Copilot CLI's explore and task
+  agents, while sub-agents in IntelliJ use your main model. Check which model a worker runs on.
+</p>
+
+<p data-i18n="agent-patterns.coordinator.2">
+  A sub-agent does not see your conversation, so put the decisions that matter in its brief. Some
+  also skip your <code>CLAUDE.md</code> or <code>AGENTS.md</code>, such as Claude Code's Explore and
+  Plan. A fork starts from a copy of your conversation.
+</p>
+
+<p data-i18n="agent-patterns.coordinator.3">
+  The coordinator decomposes first, for that reason, and cutting well is most of the work. It is the
+  same skill as writing a good prompt yourself.
+</p>
+
+<div data-figure="coordinator-fanout"></div>
+
+<h2 data-i18n="agent-patterns.sequential.heading">The sequential workflow</h2>
+
+<p data-i18n="agent-patterns.sequential.1">
+  Nothing is handed out here. The agent plans the steps first, then works through them one at a time,
+  and every step is validated before the next one starts. You can stop between any 2 steps and
+  pick it up later.
+</p>
+
+<p data-i18n="agent-patterns.sequential.2">
+  Reach for this when the steps depend on each other. It costs you context: 1 session carries
+  the whole run, so a long workflow ends on a full context.
+</p>
+
+<div data-figure="sequential-steps"></div>
+
+<h2 data-i18n="agent-patterns.reflection.heading">Reflection</h2>
+
+<p data-i18n="agent-patterns.reflection.1">
+  Reflection <svg data-icon="pattern"></svg> is the agent putting a critic on its own work. The
+  critic is a sub-agent, told to attack the result rather than help with it: find what is wrong and
+  report it.
+</p>
+
+<p data-i18n="agent-patterns.reflection.2">
+  A critic with its own brief is less tied to the builder’s choices. Still check each finding before
+  you act on it.
+</p>
+
+<div data-figure="reflection-loop"></div>
+
+<!-- Routing is the one pattern from Anthropic's "Building effective agents" the unit did not have
+     (checked October 2026; prompt chaining is `sequential`, orchestrator-workers is `coordinator`,
+     evaluator-optimizer is `reflection`, and parallelization was left out at the owner's asking).
+     Jev is named at the owner's asking. The facts, read 9 October 2026: TypeSafe AI's launch post
+     (typesafe.ai/blog/introducing-system-one-models-and-jev) calls it a model that returns typed
+     decisions with probabilities rather than text, in early access; jev-model-router
+     (github.com/himanshu231204/jev_model_routers, a community project, not TypeSafe's) picks the
+     Claude model per turn in Claude Code and keeps the current model when Jev's answer is missing,
+     invalid or under-confident. TypeSafe's speed, price and "can't hallucinate" claims are its own
+     and are deliberately not repeated. The router supports no Copilot surface, which is why the
+     sentence names Claude Code rather than "your harness". -->
+<h2 data-i18n="agent-patterns.routing.heading">Routing</h2>
+
+<p data-i18n="agent-patterns.routing.1">
+  Routing <svg data-icon="pattern"></svg> sorts a request first and then sends it to the handler
+  that fits: a model, a skill or a sub-agent. Your harness already does it. It picks a skill or a
+  custom agent by its description, so that description decides whether it ever gets used.
+</p>
+
+<p data-i18n="agent-patterns.routing.2">
+  The sorting needs no large model. Jev, from TypeSafe AI, is built for decisions like this: it
+  answers with a choice and a probability, not with text. A community project, jev-model-router,
+  uses it to pick the Claude model for each turn in Claude Code. Plain code checks each answer
+  before the model is switched.
+</p>
+
+<!-- Everything below the rule is the doing part of the unit, under the heading QuizPanel renders
+     over a quiz, the same shape `tools` uses. The hands-on task comes first and `PatternMatch`
+     arrives after it from the registry, which is what closes the unit. -->
+<hr />
+
+<h2 data-i18n="ui:quiz.title">Test your knowledge</h2>
+
+<!-- Six paragraphs once said this, and the card replaced all of them. It carries the whole task, so
+     nothing is left to introduce it: no prose between the rule and the figure. -->
+<div data-figure="cut-it-up"></div>

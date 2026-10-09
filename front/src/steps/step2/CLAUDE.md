@@ -539,10 +539,10 @@ because they carry cards. `goals`
 follows this unit's shape rather than theirs, for the same reason.
 
 Two of the four are already taught elsewhere, and the unit **points rather than repeats**, the same
-rule `harness.coordinator.3` follows in step 1. Plan mode belongs to `step1/prompt`, which defines it
+rule `agent-patterns.coordinator.3` follows in step 1. Plan mode belongs to `step1/prompt`, which defines it
 as meta-prompting the provider built for you, so the section here adds only what turns it into a
 workflow: doing it by default, and the interview making the engineer decide things they had skipped.
-Reflection belongs to `step1/harness`, so the audit section names it and moves on to what is new,
+Reflection belongs to `step1/agent-patterns`, so the audit section names it and moves on to what is new,
 namely that it is aimed at a project instead of at one answer. Neither may grow into a second
 definition.
 
@@ -873,7 +873,7 @@ arguing with the strongest claim in the unit while leaving the other half standi
 and the quiz's `coordination-moves` choice is the only other place it is made, so a rewrite of the
 note leaves the claim standing only in an answer a student reads once.
 
-Its name is a knowing exception. **`step1/harness` calls this the coordinator**, and it owns the
+Its name is a knowing exception. **`step1/agent-patterns` calls this the coordinator**, and it owns the
 whole mechanism: model inheritance or configuration, fresh versus forked context, and the cost
 of context acquisition. Do not reintroduce blank-worker or automatically-cheaper-worker claims.
 The heading says
@@ -890,8 +890,8 @@ after `Many agents at once`**: it is the same move taken one step further, the c
 as well as the coordination. Put it after `Working in parallel with agents` and that section stops
 being the answer the unit lands on. It is also the one section in the step that prints a prompt,
 and the prompt is there because the arrangement lives in it: you are in none of the rounds, so
-anything you did not write down never gets asked. **`step1/harness` owns reflection**, so the first
-paragraph names the pattern and moves on the way `workflows.audit-driven.1` does. Why a separately briefed critic can reduce anchoring is `harness.reflection.2` and must not be re-derived here.
+anything you did not write down never gets asked. **`step1/agent-patterns` owns reflection**, so the first
+paragraph names the pattern and moves on the way `workflows.audit-driven.1` does. Why a separately briefed critic can reduce anchoring is `agent-patterns.reflection.2` and must not be re-derived here.
 
 The `<pre>` and the list under it are the same thing twice on purpose, and what keeps the list from
 being a gloss is that it is general where the prompt is one job. Five elements, and the two easiest

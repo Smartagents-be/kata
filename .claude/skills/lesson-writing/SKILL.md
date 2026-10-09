@@ -69,11 +69,11 @@ setting, so this is the leak that matters most.
 ## Voice
 
 The rules above keep the text clean. This section is what makes it sound like the units already in
-the tree. `step1/context.html` and `step1/harness.html` are the reference: when in doubt, read a
+the tree. `step1/context.html` and `step1/agent-patterns.html` are the reference: when in doubt, read a
 section of one out loud and match its rhythm.
 
-**Open cold on the claim.** "An agent has no memory of its own." "The harness is the software you
-use to work with a model." No announcing what the paragraph is about.
+**Open cold on the claim.** "An agent has no memory of its own." "Whatever you ask for is thinner
+than what you want." No announcing what the paragraph is about.
 
 **Do not announce the count.** "That pays twice:", "Two things matter here", "There are three
 reasons". The tally tells the reader nothing they cannot see for themselves one comma later, and it
@@ -190,7 +190,7 @@ argument), so grep it for the unit you just cut and fix what you invalidated in 
   day-to-day work that is easy to miss, `pattern` for an AI design pattern, and step 0's legend
   (`welcome.legend.*`) is the definition of each. `prepareUnit` fills them in from
   `shared/lib/icons.ts`. Step 0's legend is where the student learns what each one means, so use
-  them for that and nothing else. Placement is a convention worth copying from `step1/harness.html`:
+  them for that and nothing else. Placement is a convention worth copying from `step1/agent-patterns.html`:
   the icon stands where the full stop would go and the next sentence starts straight after it, and
   it takes a trailing period only when it ends the paragraph. In `nl.json` the quotes are escaped,
   `<svg data-icon=\"coin\"></svg>`.

@@ -35,20 +35,21 @@
 
 <p data-i18n="session.wrote-almost-none.3">
   You can change the session after the work: remove history with a rewind (press <kbd>Esc</kbd>
-  2 times on an empty prompt), summarise it with compaction, or clear it for a fresh task. Preserve
-  any decisions you still need in a durable file first.
+  2 times on an empty prompt), summarise it with compaction, or clear it for a fresh task.
 </p>
 
 <h2 data-i18n="session.sessions-where-money.heading">The session sets your bill</h2>
 
+<!-- `.1` points at `context`, which already argued the re-send, and spends itself on what that
+     means over a session. -->
 <p data-i18n="session.sessions-where-money.1">
-  What stays in the context is paid for again on every turn. Read 3 large files early and you keep
-  paying for them until they are cleared or summarised.
+  The <a href="/steps/step1/context">context unit</a> showed that everything in the context is sent
+  again with every message. Read 3 large files early and you keep paying for them until they are
+  cleared or summarised.
 </p>
 
 <p data-i18n="session.sessions-where-money.2">
-  Quick follow-up questions are cheap, because most of the context then comes from the cache. A new
-  task belongs in a fresh context.
+  Quick follow-up questions are cheap, because most of the context then comes from the cache.
 </p>
 
 <p data-i18n="session.sessions-where-money.3">
@@ -57,26 +58,47 @@
   cheap makes your 50th expensive and vague.
 </p>
 
-<h2 data-i18n="session.automatic-manual-compaction.heading">Automatic or manual compaction</h2>
+<!-- Moved here from `context` with its anchor: the pile-up happens over time, and time is this
+     unit's. `.3` absorbed the old `window-not-memory.2`, which listed the same leftovers again. -->
+<h2 id="entropy" style="scroll-margin-top: 5rem" data-i18n="session.entropy.heading">Entropy</h2>
 
-<p data-i18n="session.automatic-manual-compaction.4">
-  Compaction replaces the conversation so far with a summary. The harness does it on its own when
-  the context fills up, or you start it yourself.
+<p data-i18n="session.entropy.1">
+  A long session piles up failed attempts, errors and old versions of files. The harness does not
+  reliably clear them out.
+</p>
+
+<p data-i18n="session.entropy.2">
+  That is entropy: disorder in the context rises with every turn unless somebody spends energy
+  pushing it back down. You see it when the agent starts contradicting itself, re-proposes an idea
+  you already rejected, or edits a file back to a version you moved past an hour ago.
+</p>
+
+<p data-i18n="session.entropy.3">
+  Clear when a problem is closed <svg data-icon="coin"></svg> Start the next session with what
+  survived: the code on disk, which is now correct, plus 1 sentence about where you are.
+</p>
+
+<h2 data-i18n="session.compaction-clear.heading">Compaction and <code>/clear</code></h2>
+
+<p data-i18n="session.compaction-clear.1">
+  Compaction replaces the conversation so far with a summary, and you go on in the same session.
+  <code>/clear</code> starts a new session: the conversation is gone, and nothing is summarised.
 </p>
 
 <ul>
-  <li data-i18n="session.automatic-manual-compaction.5">
+  <li data-i18n="session.compaction-clear.2">
   <strong>Automatic:</strong> the harness summarises when the context nears its limit, sometimes in
   the middle of a task.
 </li>
-  <li data-i18n="session.automatic-manual-compaction.6">
+  <li data-i18n="session.compaction-clear.3">
   <strong>Manual:</strong> <code>/compact</code> with what to keep, such as <code>/compact keep the
-  failing tests</code>. Moving to something unrelated? Clear instead.
+  failing tests</code>.
 </li>
 </ul>
 
-<p data-i18n="session.automatic-manual-compaction.1">
-  A summary loses detail. Ask the agent what it still knows before you build on it.
+<p data-i18n="session.compaction-clear.4">
+  Compact when you are in the middle of a task and want to go on. Clear when you start on something
+  else.
 </p>
 
 <!-- How full the window is over one session, emptied twice: by compaction in the middle of a task,
@@ -85,22 +107,48 @@
      product difference (when compaction starts) is swapped inside the figure, not here. -->
 <div data-figure="window-fill"></div>
 
-<p data-i18n="session.automatic-manual-compaction.2">
-  <strong>Compaction costs tokens too:</strong> the model reads the conversation and writes the
-  summary. <code>/clear</code> is free, but the next session reads everything again.
+<p data-i18n="session.compaction-clear.5">
+  <strong>Compaction costs tokens:</strong> the model reads the conversation and writes the summary.
+  <code>/clear</code> costs nothing, but whatever the next task needs has to be read in again.
 </p>
 
 <!-- Verified October 2026. Claude Code: code.claude.com/docs/en/model-config (default auto-compact
      thresholds). Copilot CLI: docs.github.com/en/copilot/concepts/agents/copilot-cli/context-management. -->
-<p data-assistant="claude" data-i18n="session.automatic-manual-compaction.3.claude">
+<p data-assistant="claude" data-i18n="session.compaction-clear.6.claude">
   Claude Code compacts when the context is about full, and <code>/autocompact</code> sets that point lower,
   anywhere from 100K to 1M tokens, so compaction comes earlier. It still picks the moment. You only
   move it.
 </p>
 
-<p data-assistant="copilot" data-i18n="session.automatic-manual-compaction.3.copilot">
+<p data-assistant="copilot" data-i18n="session.compaction-clear.6.copilot">
   Copilot CLI starts early on its own: from about 80% of the context it compacts in the background,
   while you keep working. You cannot change that threshold.
+</p>
+
+<!-- Moved here from `context`. Compaction above is the mechanism, this is what it does to the
+     work, and the memory section below is what survives it. `.1` no longer says older material is
+     summarised, since `compaction-clear.1` just did. -->
+<h2 data-i18n="session.amnesia-context-fatigue.heading">Amnesia and context fatigue</h2>
+
+<p data-i18n="session.amnesia-context-fatigue.1">
+  After compaction, the summary is what stays. The constraint you gave at the start is now 1 line in
+  it, or it did not make the cut at all.
+</p>
+
+<p data-i18n="session.amnesia-context-fatigue.2">
+  Then the agent forgets a decision from earlier, asks a question you already answered, or re-reads
+  a file it read 20 minutes ago. This is context fatigue. The model did not get tired and it did not
+  get dumber. The evidence left the room.
+</p>
+
+<!-- The window's oldest turns collapsing into a summary that stays inside the frame, with the detail
+     leaving it. It draws the paragraph above it: nothing drops out of a window either of this
+     course's harnesses runs, which is why the summary bar stays inside the frame. -->
+<div data-figure="context-falloff"></div>
+
+<p data-i18n="session.amnesia-context-fatigue.3">
+  Ask the agent what it still knows before you build on a summary. Better still, cut each task small
+  enough that it finishes before the summarising begins.
 </p>
 
 <h2 data-i18n="session.window-not-memory.heading">The context is not your memory</h2>
@@ -108,22 +156,16 @@
 <p data-assistant="claude" data-i18n="session.window-not-memory.1.claude">
   Anything that has to survive a clear belongs somewhere other than the transcript. The code on disk
   survives. A plan written to a file survives. <code>CLAUDE.md</code> is read again at the start of
-  every session, which is why a standing instruction goes there and not in a message you sent an hour
-  ago.
+  every session and after compaction, which is why a standing instruction goes there and not in a
+  message you sent an hour ago. Keep that file short: Anthropic advises under 200 lines, because a
+  longer file costs more context and is followed less well.
 </p>
 
 <p data-assistant="copilot" data-i18n="session.window-not-memory.1.copilot">
   Anything that has to survive a clear belongs somewhere other than the transcript. The code on disk
-  survives. A plan written to a file survives. <code>.github/copilot-instructions.md</code> is read
-  again at the start of every session, which is why a standing instruction goes there and not in a
-  message you sent an hour ago.
-</p>
-
-<p data-i18n="session.window-not-memory.2">
-  An afternoon of work leaves the context full of things that are no longer true. A file read in a
-  state it has moved past. An approach you dropped. A fix that did not hold. When a problem is
-  closed, clear, and start the next session with what survived: the code on disk, which is now
-  correct, plus a sentence about where you are.
+  survives. A plan written to a file survives. <code>AGENTS.md</code> is read again at the start of every session, which is why a standing instruction goes there and not in a
+  message you sent an hour ago. Keep that file short and concrete: a long file costs more context,
+  and GitHub warns that instructions in it can then be overlooked.
 </p>
 
 <p data-i18n="session.window-not-memory.3">
@@ -139,8 +181,9 @@
 </aside>
 
 <!-- Everything below the rule is the doing part of the unit, under the heading QuizPanel renders
-     over a quiz, the same shape `tools`, `harness` and `model` use. The card carries the whole
-     task, so there is no prose between the rule and the figure. -->
+     over a quiz, the same shape `tools`, `agent-patterns` and `model` use. The card carries the whole
+     task, so there is no prose between the rule and the figure. The registry's `sessionQuiz` follows
+     the card under its own separator. -->
 <hr />
 
 <h2 data-i18n="ui:quiz.title">Test your knowledge</h2>

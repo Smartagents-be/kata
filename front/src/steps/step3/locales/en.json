@@ -10,7 +10,7 @@
   "take.done": "Done",
   "take.queue.label": "Write down what still stands between your finished work and production, and cross off everything that is just typing.",
   "take.sentence.label": "Write down the sentence you are going to say at the next demo about what the rough version does not do yet.",
-  "take.line.label": "Pick 1 correction you gave an agent more than 1 time this week, and write it into the repository's own instruction file.",
+  "take.line.label": "Pick 1 correction you gave an agent more than 1 time this week, and write it into the repository's own CLAUDE.md or AGENTS.md.",
   "take.practice.label": "Pick 1 ritual your team holds on to, write down which constraint it was once invented for, and say whether that constraint is still there.",
   "take.person.label": "Put one of the first 4 points to 1 person on your team. Write down a name and a date.",
 

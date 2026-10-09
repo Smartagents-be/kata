@@ -33,7 +33,7 @@ const SCENARIOS: readonly ConnectItem[] = [
 
 /**
  * The unit's closing exercise, on the shared {@link ConnectBoard}: it is the same drag-to-connect
- * board a student already met in `harness` as `PatternMatch`, so the interaction costs them nothing
+ * board a student already met in `agent-patterns` as `PatternMatch`, so the interaction costs them nothing
  * to learn twice. Anything about how the board behaves belongs there rather than here.
  *
  * The tier names are mono because they are names the machine answers to, like every other

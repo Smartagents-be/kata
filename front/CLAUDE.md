@@ -203,8 +203,8 @@ else holds a colour: components name tokens, so a change to the palette is a cha
 - **Every route change starts at the top.** The window keeps its scroll position across a
   navigation, so `AppShell` sends it back to 0 whenever the pathname changes; without it the pager
   at the foot of a long unit drops you into the middle of the next one. A location carrying a hash
-  is exempt, or the browser's anchor jump would be undone the moment it landed (`context` links to
-  `#entropy`).
+  is exempt, or the browser's anchor jump would be undone the moment it landed (`session`'s Entropy
+  heading carries `#entropy`).
 - **The two-column shell is an `lg` thing, and below that the sidebar is not a sidebar.** The card's
   `248px` nav column, its wide gap and its wide padding all start at `lg`; under it the card is one
   column, the nav stacks above the article, and it collapses behind a chevron because the whole
@@ -213,7 +213,12 @@ else holds a colour: components name tokens, so a change to the palette is a cha
   stacked it would pin itself over what you navigated to; and the column is `grid-cols-1` by
   default rather than a fixed track, or `#app-main` collapses to zero width and every unit
   disappears. Long inline `<code>` breaks anywhere and a `<pre>` scrolls in its own box (both in
-  `index.css`), since a fully qualified property name has nothing to wrap at.
+  `index.css`), since a fully qualified property name has nothing to wrap at. A top-level `<pre>`
+  in unit prose never reaches that rule any more: `prepareUnit` cuts it out and `StepContent`
+  renders it as a `CopyCommand`, the same copyable block a task card's command uses, and it keeps
+  the scrolling for a block of more than one line. Shell commands carry `data-commands` on the
+  `<pre>` and become one block per line, so a student copies and runs them one at a time; a prompt,
+  a file or a config has no attribute and is copied whole. A new command `<pre>` needs the attribute.
 - **Two typefaces, and the switch between them is the signal.** Figtree for everything a
   student reads, JetBrains Mono for anything the machine produced: code, counts, flags, catalogue
   titles, step numbers. Both are variable fonts imported in `index.css`; nothing loads from a CDN.
@@ -354,7 +359,7 @@ a shadcn primitive from `ui/` is used, the attribute names the caller, since tha
 component whose behaviour you are looking for.
 
 **A shared component that a step renders more than once takes its block from the caller.**
-`TaskCard`, `ConnectBoard` and step 2's `FlagBoard` all have a `block` prop, so `harness`'s task is
+`TaskCard`, `ConnectBoard` and step 2's `FlagBoard` all have a `block` prop, so `agent-patterns`'s task is
 `#cut-it-up-*`, `model`'s board is `#pick-the-tier-*` and `setup`'s is `#setup-flags-*` while each
 carries the shared component's name in `data-component`. That is the two attributes doing what they are for: the id says which thing on
 which page, and `data-component` says whose code to open when it misbehaves. The step-side wrapper
@@ -435,7 +440,7 @@ differs between the two products a student might be sitting in front of:
 
 ```html
 <p data-assistant="claude">Put it in <code>CLAUDE.md</code>.</p>
-<p data-assistant="copilot">Put it in <code>.github/copilot-instructions.md</code>.</p>
+<p data-assistant="copilot">Put it in <code>AGENTS.md</code>.</p>
 ```
 
 `"claude"` is Claude Code, `"copilot"` is GitHub Copilot, and **no attribute means both**, which is
@@ -452,7 +457,7 @@ later renumbers nothing after it:
 
 ```html
 <p data-assistant="claude" data-i18n="session.window-not-memory.1.claude">…<code>CLAUDE.md</code>…</p>
-<p data-assistant="copilot" data-i18n="session.window-not-memory.1.copilot">…<code>.github/copilot-instructions.md</code>…</p>
+<p data-assistant="copilot" data-i18n="session.window-not-memory.1.copilot">…<code>AGENTS.md</code>…</p>
 ```
 
 That is greppable, and more importantly it fails safe. A missing Dutch translation of a Copilot
@@ -496,7 +501,7 @@ for a figure: it reads `useAssistant()` itself, and the `data-figure` marker nev
 Which units this is actually used in, and the places it deliberately is not, are in
 `front/src/steps/step0/CLAUDE.md` and `front/src/steps/step1/CLAUDE.md`, with the cross-step scope in
 `front/src/steps/CLAUDE.md`. The short version: step 0 tells the student to set it and varies no
-block of its own, step 1 varies 17 (12 in its unit HTML, 5 on task cards), and step 2 varies none: its one hook, in `gates`, is a pre-edit guard that
+block of its own, step 1 varies 19 (12 in its unit HTML, 7 on task cards), and step 2 varies none: its one hook, in `gates`, is a pre-edit guard that
 works the same in both. Everything else is shared on purpose.
 
 ## Languages

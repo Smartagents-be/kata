@@ -17,10 +17,10 @@ import { TaskCard } from '@/shared/components/TaskCard'
  * **Each move carries what to type**, as a `<prefix>.<move>.command` shown copyable under the line,
  * so the card works in class, where the prose and its `<pre>` are cut. `mcp` and `reset` split by
  * assistant, because the command that adds a server is each harness's own; the wrapper picks the
- * slug, on `SurviveTheClear`'s pattern. **`reset` re-adds the server without
- * `--allow-unrestricted-file-access`** once the flag is in: the option opens every file on disk and
- * `copilot mcp add` writes to the user-wide config. It re-adds rather than removes because
- * `ReadYourWindow` in `context` still needs the server, and removing it is that card's last move.
+ * slug, on `SurviveTheClear`'s pattern. **`reset` removes the server** once the flag is in:
+ * `--allow-unrestricted-file-access` opens every file on disk and `copilot mcp add` writes to the
+ * user-wide config. It re-added the server without the option while `ReadYourWindow` in `context`
+ * measured it; that card no longer does, so nothing needs the server after this one.
  *
  * **Nothing says which route is bulkier**, in the card or the prose: the measurement is the exercise.
  */

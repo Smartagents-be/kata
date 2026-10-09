@@ -30,7 +30,7 @@
   machine wrote your brief, so this page does not have to.
 </p>
 
-<pre><code>cd exercises/step2/java
+<pre data-commands><code>cd exercises/step2/java
 mvn verify -Pgraded</code></pre>
 
 <p data-i18n="workshop.pre-flight.2">
@@ -77,7 +77,7 @@ mvn verify -Pgraded</code></pre>
   job. The second comes back while you are still reading the first.
 </p>
 
-<pre><code>cd ../../..
+<pre data-commands><code>cd ../../..
 git worktree add -b feat/statement ../kata-statement
 git worktree add -b feat/native ../kata-native</code></pre>
 
@@ -88,7 +88,7 @@ git worktree add -b feat/native ../kata-native</code></pre>
   the response.
 </p>
 
-<pre><code>cd ../kata-statement/exercises/step2/java
+<pre data-commands><code>cd ../kata-statement/exercises/step2/java
 mvn test -Pchallenge
 mvn spring-boot:run
 curl localhost:8082/api/loans/statement/STUDENT</code></pre>
@@ -101,7 +101,7 @@ curl localhost:8082/api/loans/statement/STUDENT</code></pre>
   starts, and where the flag should be it prints a miss. Your plan was a piece short, and the image tells you which piece.
 </p>
 
-<pre><code>cd ../kata-native/exercises/step2/java
+<pre data-commands><code>cd ../kata-native/exercises/step2/java
 mvn -Pnative native:compile
 SERVER_PORT=8081 ./target/kata-agentic-java-step2</code></pre>
 

@@ -1,46 +1,20 @@
 import type { QuizQuestion } from '@/shared/step'
 
 /**
- * The four questions under the `context` unit. Each one is a symptom a student will have already
- * met at work, and each maps onto a section of `units/context.html`: amnesia, missing context,
- * entropy, and context that is simply wrong. Array order is not display order, because `QuizPanel`
+ * The 2 questions under the `context` unit, both about what is in one request: context that is
+ * missing and context that is wrong. Array order is not display order, because `QuizPanel`
  * shuffles the questions and the choices on every mount, so a question has to stand on its own
  * rather than lean on the one above.
  *
- * Four rather than the course's three, knowingly. The first three all answer with something absent
- * from the window or too much in it, and `bad-context-bad.3` is the unit's least intuitive and most
- * expensive claim, that nothing in the window says stale. Swapping a question out instead was
- * rejected: amnesia and entropy are opposite failure modes and both earn one.
+ * `pasted-old-file` is `bad-context-bad.3`, the unit's least intuitive and most expensive claim, that
+ * nothing in the window says stale. The other 2 questions this quiz once had, amnesia and entropy,
+ * moved to `sessionQuiz` with the sections they test, and kept their ids.
  *
  * These are graded in the browser, so nothing here has a counterpart in the Java service. The
  * explanations are only read by a student who got the question wrong, which is why they are two
  * sentences rather than a lecture.
  */
 export const contextQuiz: QuizQuestion[] = [
-  {
-    id: 'forgets-this-morning',
-    question: 'quiz.forgets-this-morning.question',
-    choices: [
-      {
-        id: 'window',
-        label: 'quiz.forgets-this-morning.window',
-        correct: true,
-      },
-      {
-        id: 'ignored',
-        label: 'quiz.forgets-this-morning.ignored',
-      },
-      {
-        id: 'lookup',
-        label: 'quiz.forgets-this-morning.lookup',
-      },
-      {
-        id: 'learning',
-        label: 'quiz.forgets-this-morning.learning',
-      },
-    ],
-    explanation: 'quiz.forgets-this-morning.explanation',
-  },
   {
     id: 'invented-userservice',
     question: 'quiz.invented-userservice.question',
@@ -66,6 +40,38 @@ export const contextQuiz: QuizQuestion[] = [
     explanation: 'quiz.invented-userservice.explanation',
   },
   {
+    id: 'pasted-old-file',
+    question: 'quiz.pasted-old-file.question',
+    choices: [
+      {
+        id: 'reads-as-true',
+        label: 'quiz.pasted-old-file.reads-as-true',
+        correct: true,
+      },
+      {
+        id: 'should-have-checked',
+        label: 'quiz.pasted-old-file.should-have-checked',
+      },
+      {
+        id: 'too-old',
+        label: 'quiz.pasted-old-file.too-old',
+      },
+      {
+        id: 'window-too-small',
+        label: 'quiz.pasted-old-file.window-too-small',
+      },
+    ],
+    explanation: 'quiz.pasted-old-file.explanation',
+  },
+]
+
+/**
+ * The 2 questions under the `session` unit, one per section they test: entropy and amnesia. They are
+ * opposite failure modes, too much left in the context against too little, and both earn a question.
+ * Both came from `contextQuiz` with their ids and choice ids unchanged.
+ */
+export const sessionQuiz: QuizQuestion[] = [
+  {
     id: 'quality-degrades',
     question: 'quiz.quality-degrades.question',
     choices: [
@@ -90,28 +96,28 @@ export const contextQuiz: QuizQuestion[] = [
     explanation: 'quiz.quality-degrades.explanation',
   },
   {
-    id: 'pasted-old-file',
-    question: 'quiz.pasted-old-file.question',
+    id: 'forgets-this-morning',
+    question: 'quiz.forgets-this-morning.question',
     choices: [
       {
-        id: 'reads-as-true',
-        label: 'quiz.pasted-old-file.reads-as-true',
+        id: 'window',
+        label: 'quiz.forgets-this-morning.window',
         correct: true,
       },
       {
-        id: 'should-have-checked',
-        label: 'quiz.pasted-old-file.should-have-checked',
+        id: 'ignored',
+        label: 'quiz.forgets-this-morning.ignored',
       },
       {
-        id: 'too-old',
-        label: 'quiz.pasted-old-file.too-old',
+        id: 'lookup',
+        label: 'quiz.forgets-this-morning.lookup',
       },
       {
-        id: 'window-too-small',
-        label: 'quiz.pasted-old-file.window-too-small',
+        id: 'learning',
+        label: 'quiz.forgets-this-morning.learning',
       },
     ],
-    explanation: 'quiz.pasted-old-file.explanation',
+    explanation: 'quiz.forgets-this-morning.explanation',
   },
 ]
 

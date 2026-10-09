@@ -37,7 +37,7 @@ import { cn } from '@/shared/lib/utils'
  * Two things fall out of that, and
  * the unit uses both: the first token has nothing to look back at, and appending to the end of a
  * window leaves every earlier weighing untouched, which is the reason a cached prefix is still good.
- * `harness` owns caching and this figure does not re-argue it.
+ * `tokens.prompt-caching` owns caching and this figure does not re-argue it.
  *
  * **The weights are illustrative, as the unit prose explains.** Real attention is spread
  * over many heads and many layers, and no single head reads as a clean "this word looks at that

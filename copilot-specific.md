@@ -100,10 +100,16 @@ resume (`copilot --continue`) or start a new one. That second one is a genuine g
 `SurviveTheClear`, whose third move is to clear the session anyway, so the exercise happens to
 survive it.
 
-The course names `.github/copilot-instructions.md` and nothing else, on purpose. It is the
-repository-wide file, it is the closest counterpart to `CLAUDE.md`, and a student who is shown seven
-paths learns none of them. Note the irony worth not putting on a page: Copilot CLI reads `CLAUDE.md`
-too.
+The course names `AGENTS.md` and nothing else, on purpose, since October 2026: a student who is
+shown seven paths learns none of them. It was `.github/copilot-instructions.md` until then, and the
+owner switched because every Copilot surface the course touches reads `AGENTS.md` (Copilot in
+JetBrains since March 2026, github.blog/changelog/2026-03-11, plus VS Code, Copilot CLI and the coding
+agent), because step 1's `ReadYourWindow` already plants an `AGENTS.md` for Copilot CLI, and because
+ungated prose can then say "`CLAUDE.md` or `AGENTS.md`" and be right for both rooms. A JetBrains plugin
+older than March 2026 does not read it; that is the first thing to check if a Copilot student's rule
+is ignored. The user-level `~/.copilot/copilot-instructions.md` that `install.txt` and
+`machine-context.mjs` write is a different file and stays as it is. Note the irony worth not putting
+on a page: Copilot reads `CLAUDE.md` too.
 
 ## Context
 
@@ -124,6 +130,13 @@ technical details, important files and next steps. `session`'s compaction argume
 for both assistants, which is why it carries no variant.
 
 `/clear` exists and does what the course says.
+
+**Training on interaction data** (checked 9 October 2026). From 24 April 2026 GitHub trains on the
+inputs, outputs, code snippets and context of **Copilot Free, Pro and Pro+** users unless they opt
+out under Privacy at `github.com/settings/copilot`; an earlier opt-out carries over. **Copilot
+Business and Enterprise are not affected**. `context.leaves-your-machine.2.copilot` says exactly
+that and no more. Content exclusion is deliberately not taught: GitHub's own pages contradict each
+other on whether agent mode and the CLI honour it.
 
 ## MCP
 
@@ -281,4 +294,5 @@ See [Managing large tool output](https://docs.github.com/en/copilot/concepts/age
 - [Tool search in Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/tool-search)
 - [Adding MCP servers for Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-mcp-servers)
 - [Custom instructions for Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions)
+- [Updates to Copilot interaction data usage policy, 25 March 2026](https://github.blog/news-insights/company-news/updates-to-github-copilot-interaction-data-usage-policy/)
 - [Plan before you build](https://github.blog/changelog/2026-01-21-github-copilot-cli-plan-before-you-build-steer-as-you-go/)

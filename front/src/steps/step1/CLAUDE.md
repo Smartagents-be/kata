@@ -18,7 +18,7 @@ is in there rather than naming one of the three. The topic is still context, whi
 sentence above still opens that way. `FLAG_SALT` in `flags.ts` still reads `kata-step1-context-v1`
 and must not follow the title: it is a hash input, so renaming it invalidates every flag on the
 board. Ten units — `tokens`, `prompt`, `tools`, `context`, `session`,
-`harness`, `model`, `truth`, `workshop`, `recap` — and the unit HTML is the source for what each one teaches. The
+`agent-patterns`, `model`, `truth`, `workshop`, `recap` — and the unit HTML is the source for what each one teaches. The
 fourth was called `intro` until it was renamed, id and all, so its URL is `/steps/step1/context` and
 its prose keys read `context.<section>.<n>`. Old links to `/steps/step1/intro` are dead and there is
 no redirect, which is the decision: the app has no route aliases anywhere and one unit is not the
@@ -114,14 +114,26 @@ three units to a layer means visiting `context` and every "four layers" sentence
 is a larger change than it looks.
 Three editorial constraints the HTML does not state on its own: every layer unit goes past merely
 naming its layer, and none of the four is allowed to read as a stub (they sat within about a hundred
-words of each other until `tools` grew the MCP material, and that floor is the part that matters); fresh workers and forked workers must remain distinct in the three sub-agent `harness` patterns; and
+words of each other until `tools` grew the MCP material, and that floor is the part that matters); fresh workers and forked workers must remain distinct in the three sub-agent `agent-patterns` patterns; and
 the pattern diagrams share one vocabulary (a teal frame is a context, a bar is something in it,
 dashes are what is not) that any new diagram should join. `prompt` and `truth` each carry a
-three-question registry quiz and `context` a four-question one, which is the one place the course
-goes past three. `context`'s first three questions all answer with something absent from the window
-or too much in it; `pasted-old-file` is the only one about something *wrong* in it, which is
-`bad-context-bad.3`, that unit's least intuitive and most expensive claim. Swapping a question out
-instead was rejected, because amnesia and entropy are opposite failure modes and both earn one. `harness` closes on `PatternMatch`, a drag-to-connect exercise whose three
+three-question registry quiz, and `context` and `session` 2 each. `context` had 4 until its amnesia and
+entropy sections moved to `session` (October 2026), and each question went with the section it tests,
+id and choice ids unchanged. `invented-userservice` answers with something absent from the window;
+`pasted-old-file` is the one about something *wrong* in it, which is
+`bad-context-bad.3`, that unit's least intuitive and most expensive claim. **Its example is a stale
+instruction file** that sends new endpoints to a `web` package while the team gives every feature
+its own, at the owner's asking (October 2026): it was a pasted file 3 versions old, which the owner
+found unrealistic, then a JUnit 4 rule, which a measured agent did not follow because the code
+showed JUnit 5. The `web` rule is the one the code does not contradict, and the card under the unit
+measures it (see `ReadYourWindow`). The quiz question kept
+its id and choice ids so no progress is lost, and asks the same case. The paragraph's advice is a
+gem rather than "keep them up to date": a line in the instruction file that has the agent propose an
+edit to it whenever the student contradicts it, which the student approves. It says *propose*
+because both products ask before an edit by default but a student may have turned that off. The
+quiz explanation names the same tip; its cutoff distractor is false on purpose. Neither `session`
+question may be dropped to get back to 3 in one place: amnesia and entropy are opposite failure
+modes and both earn one. `agent-patterns` closes on `PatternMatch`, a drag-to-connect exercise whose three
 situations against four patterns leave decomposition on the board with nothing pointing at it. It is
 the shared `ConnectBoard`, which `model`'s `PickTheTier` is too; the reasoning for that is under
 `model` below.
@@ -164,7 +176,7 @@ picking by probability) and `SamplingKnobs` (how widely the model picks), `insid
 (where those scores come from) and `expensive-part` with `TokenKinds` (what writing costs against
 reading), and then the exercise. The parts were implicit once, a run of five `<h2>`s, and the review
 asked for them to be visible. **Keys take their section from the `<h3>`, not the `<h2>`**, the
-scheme `harness`'s pattern sections already use: `tokens.attention.3`, `tokens.expensive-part.1`.
+scheme `agent-patterns`'s pattern sections already use: `tokens.attention.3`, `tokens.expensive-part.1`.
 The two part headings own nothing but their own `tokens.reading.heading` and
 `tokens.writing.heading`, since no paragraph sits directly under either, and a key carrying both
 levels (`tokens.reading.attention.3`) would rename every key the day a section moves between parts.
@@ -542,15 +554,20 @@ screen never happened. And **the status line says nothing once the run is over**
 went into each pass, so it has no third state to report, and the recap and the likelihood line under
 it are what close the run. `next-token.done` is gone from both bundles rather than left unused.
 
-The unit carries two forward pointers and must not grow a third telling of either. Output being
-priced above input goes to `model` (`expensive-part.1`), and the prefix cache goes to
-`harness` (`one-at-a-time.1`), each in one paragraph carrying an anchor to the unit that owns it.
+The unit carries one forward pointer and must not grow a second telling of it. Output being
+priced above input goes to `model` (`expensive-part.1`), in one paragraph carrying an anchor to the
+unit that owns it. **Prompt caching is this unit's own now**: it was a section of the old `harness`
+unit and moved here whole (October 2026, at the owner's asking) when that unit was cut down to
+`agent-patterns`. `one-at-a-time.1` names the mechanism and the term and points down the page, and
+`prompt-caching` closes the prose after `expensive-part` with the rates, the prefix rule and the
+lifetime, in 2 paragraphs where the old section had 3 (its opening sentence would have repeated
+`one-at-a-time.1`, so `.1` opens on the rates).
 `expensive-part.3` does not link them a second time (the user cut that repeat), and it names
 no rate and says nothing about how the cache matches, and it must stay that way. `TokenKinds` prints
 a cost column (tokens times rate, per row) so every share on the cost bar can be redone by hand: a
 reader asked how 3,000 reasoning tokens could be 56% of the bill, and the column is the answer. They
 were set in mono once, which said a machine had produced the name. That is the same rule
-`harness.coordinator.3` follows for decomposition. `TokenAttention`'s arcs running backwards only is
+`agent-patterns.coordinator.3` follows for decomposition. `TokenAttention`'s arcs running backwards only is
 what a cache runs on, so it is load-bearing rather than a simplification: the model works each
 token out only from what comes before it, so appending leaves every earlier calculation intact. That
 is why the cache is explained in the loop that appends, straight after the figure, and not in the
@@ -569,7 +586,7 @@ not claim this is the whole reason for the price, since providers do not publish
 the screen, then the figure putting one turn's reading and writing side by side (`.2` ends on the
 sentence that says so), ahead of the exercise. The prose states the shape and sends prices to
 `model` rather than repeating them. `one-at-a-time.1` says only "a lower rate": the dated Anthropic
-rates are `harness.caching.1`'s.
+rates are `tokens.prompt-caching.1`'s.
 **`expensive-part.3`'s last sentence leans on the figure's numbers**: reasoning has to stay above
 half the cost bar, so a count edited in `TokenKinds` means rereading that sentence in both
 languages. On the deck the slide title keeps the whole claim (`Writing is the expensive part`),
@@ -605,10 +622,42 @@ shares that carry the claim, and on a phone the table drops its description colu
 `deck-tokens-kinds`, ahead of the exercise the way the unit places it, with the made-up turn as its
 note.
 
-Decomposition is the first of the four pattern sections, ahead of the coordinator. It argues the gap
+**`agent-patterns` was `harness` ("Harness and orchestration") until October 2026**, and the rename
+is the decision. The owner found its opening a repeat: 3 paragraphs saying what a harness is (which
+`tokens`, `tools`, `context` and `session` had already used and shown), a sentence on tool-definition
+loading that `tools` owns per product, and a caching section. Those went, caching moved whole to
+`tokens.prompt-caching`, the definition to `tools.lead.1`, and what was left is the patterns, so the
+unit is titled "Agent patterns" (NL "Agentpatronen") and its id, URL, keys and deck ids moved to
+`agent-patterns`. The id is not `patterns` because step 2 already has a `patterns` unit. Old links to
+`/steps/step1/harness` are dead with no redirect, on the same decision as `intro`. The pattern
+sections are `<h2>`s now, since the `How a harness splits the work` heading above them went with the
+intro; their keys did not move, because a key takes its section from its own heading.
+**Five sections, checked against Anthropic's "Building effective agents"** (October 2026): the
+coordinator is orchestrator-workers, the sequential workflow is prompt chaining, reflection is
+evaluator-optimizer, and **routing was added** as the one the unit lacked. Parallelization was left
+out at the owner's asking. Decomposition is not in Anthropic's list, so it lost its `pattern` icon
+and stays as the skill under the coordinator and the sequential workflow. **Routing names Jev, at the
+owner's asking**, with the facts and what was deliberately not repeated in the comment above the
+section; it has no figure and `PatternMatch` does not test it, both knowingly. Do not let the unit
+grow a harness intro back.
+
+**`agent-patterns.coordinator.2` says a sub-agent does not see your conversation, and not that it
+skips your instruction file** (October 2026, at the owner's asking). It said "often starts without
+your `CLAUDE.md` or `AGENTS.md`", which is wrong for Claude Code: read on 9 October 2026,
+code.claude.com/docs/en/sub-agents says only Explore and Plan skip `CLAUDE.md` ("Every other
+built-in and custom subagent loads both, unless its definition sets the `omitClaudeMd` field").
+Copilot CLI runs a custom agent as a sub-agent without the repository's custom instructions unless
+it sets `include-custom-instructions: true` (docs.github.com, "Creating custom agents for Copilot
+CLI"). What holds in both products is that a sub-agent starts without the conversation, a fork
+being the exception, so that is the claim, and the move is to put the decisions in the briefing.
+The sentence naming Explore and Plan is the only product example, and it names no Copilot agent:
+the command reference's list of built-ins that skip instructions was not read verbatim, so do not
+add one without reading it first. `recap.lead.7` says the same in its own line.
+
+Decomposition is the first of the five pattern sections, ahead of the coordinator. It argues the gap
 rather than the mechanism: a request arrives thinner than the thing it asks for, the same way a
 requirement always has, and cutting it into parts that each need a prompt is what forces the unstated
-decisions out where you can answer them. `harness.coordinator.3`
+decisions out where you can answer them. `agent-patterns.coordinator.3`
 used to introduce decomposition and now points back at that section instead, so do not let it grow
 back into a second definition.
 
@@ -617,7 +666,7 @@ frame**, which is the one place it departs from the other three pattern diagrams
 handed to anybody yet, so this is the task being cut up rather than the windows it ends up in, and a
 frame here would draw the coordinator one section early. What it does share is the vocabulary,
 solid is what you have and dashes are what you do not, so the dashed space under the ask on the left
-comes back as three solid pieces on the right. **The three questions are `harness.decomposition.1`'s
+comes back as three solid pieces on the right. **The three questions are `agent-patterns.decomposition.1`'s
 own three** (empty query, title only, nothing found), which is what keeps the drawing and the
 paragraph on one example; rewording the example means moving the figure with it, in both languages.
 And **the pieces are stacked rather than laid out side by side**, so each one has the width to read
@@ -646,27 +695,24 @@ and every word inside is real text, read in order.
 reasoning: it was a `data-audience="guided"` aside, and guided mode drops every run of prose whatever
 its attribute says, so it rendered for nobody in either language. Its key slug was stale on its own
 terms too, since the `<h2>` above it is the shared `ui:quiz.title`. The line is on the deck now, as
-`deck-harness-decomposition`'s note, which is where a line a teacher says out loud belongs. Its old
+`deck-agent-patterns-decomposition`'s note, which is where a line a teacher says out loud belongs. Its old
 Dutch called a cut a `knipbeurt`, which is a haircut appointment; the deck note does not.
 
-**`Caching` is told and never worked, and that is a decision rather than a gap.** A task card was
-written for it, three moves reading the per-turn cost with and without a second MCP server, and it
-cannot ship honestly: which command prints a per-turn cost differs by assistant and is unverified, so
-one reader could not take the measurement the card asks for. The section is drawn nowhere for a
-related reason, since a prefix-match diagram would draw "read from the first byte" and stop; the
-deck's statement slide is the right shape for it. It also stays where it is. It reads at first pass
-like a third subject wedged between the harness-as-layer material and the patterns, and
-`tokens.one-at-a-time.1` defers to it by name, so moving it costs that pointer its target.
-`caching.2` states the prefix rule with the tool list and the instructions at the top as what sits
-early, and no longer uses connecting an MCP server mid-session as its example; why is under the
-assistant variants at the end of this file.
+**Prompt caching is told and never worked, and that is a decision rather than a gap.** It lives in
+`tokens.prompt-caching` now (see `tokens` above). A task card was written for it, three moves reading
+the per-turn cost with and without a second MCP server, and it cannot ship honestly: which command
+prints a per-turn cost differs by assistant and is unverified, so one reader could not take the
+measurement the card asks for. It is drawn nowhere for a related reason, since a prefix-match diagram
+would draw "read from the first byte" and stop; the deck's statement slide (`deck-tokens-cache`) is
+the right shape for it. `prompt-caching.2` states the prefix rule with model, effort and tools as
+what to settle early, and does not use connecting an MCP server mid-session as its example.
 
 **`SequentialSteps` draws the cost of the run, not just its shape.** It was three step cards, three
 checks and a pause on a session band, which is `sequential.1` and `.2` transcribed. The band now
 carries a fill that rises a tread per step, from thin under step one to nearly full under step three,
 with `sequential-steps.filling` on the free space that is left. That gives the pause glyph a second
 job: it hangs on the seam where the fill jumps, so stopping there is visibly what you pay to rebuild,
-which is `caching.3` met in a picture. The fill stays in the primary tints the other diagrams use for
+which is `tokens.prompt-caching.1`'s cache lifetime met in a picture. The fill stays in the primary tints the other diagrams use for
 content, and there is no fourth step card because the label says there is no room for one.
 
 Decomposition is answered by the task above that board rather than by a fourth situation, and that
@@ -696,41 +742,118 @@ a `solve.md`, a `plan-solve.md`, or an implementation.
 **`context.task-specific.2` announces `OneShotCompare` before it is shown** (October 2026): the
 section ran 2 paragraphs about code and then a figure of 2 landing pages that only `.3`, under it,
 explained, and the owner found the figure without context. So the old `.1` and `.2` were merged
-into `.1` (what the model has to go on), `.2` now says what the 2 pages are (1 prompt, one with a
-Dribbble reference), and `.3` is only the conclusion. The old "check that the agent has those
+into `.1` (what the model has to go on; it now also says the model was trained on code from many
+projects and falls back on what is common across them, at the owner's asking, worded without
+"generalise", which in machine learning means doing well on unseen data, the opposite reading), `.2` now says what the 2 pages are (1 prompt, one with a
+Dribbble reference), and `.3` is the conclusion. `.2` names no Dribbble (October 2026): the owner did not know
+the site and the source does not matter, so it says "a screenshot of an existing design", and the
+alt text says "an example design". `.3` now names what is generic on the left, at the owner's
+asking: centred, a large serif headline, a pill with a dot above it, the same rounded corners
+everywhere. Two of those are in Anthropic's own list of traits AI-generated design "clusters
+around" (`anthropics/skills`, `frontend-design/SKILL.md`, read October 2026: "a high-contrast serif
+display", "one border-radius on everything"); the other two are only visible in the image, so the
+sentence says "keep coming back" and does not cite Anthropic, and it says AI rather than Claude,
+since that list does. Re-shooting the image means re-reading `.3` against it. The old "check that the agent has those
 before it changes code" went, since `you-choose-most` already carries that move.
+**`session.window-not-memory.1` says to keep the instruction file short** (October 2026, at the
+owner's asking), so "write it in `CLAUDE.md`" does not read as "write a lot in it". It came from
+`context.amnesia-context-fatigue.3` when that section moved to `session`, and lost the line sending
+part-of-the-codebase rules to a rule per folder, which `context.you-choose-most.3` already says. Claude's half
+cites Anthropic's under-200-lines advice (code.claude.com/docs/en/memory: longer files cost more
+context and reduce adherence); the re-read after compaction is also from that page. Copilot's half names no number: GitHub's
+"about 1,000 lines" is from its code-review tutorial, and its docs do not say the file is re-read
+after compaction, so that half does not claim it.
+**`bad-context-bad.4` was cut** (October 2026, at the owner's asking): the dead bug hunt that
+comes back after a fix is what `session.entropy.1` and `.2` already say (a file put back to a version you
+left an hour ago), and clearing once a problem is closed is `session.entropy.3`'s. The deck's `deck-context-stale` and
+`deck-context-bad-code` were rewritten in the same pass, to the stale instruction file and to
+`you-choose-most`'s per-task-against-project split, since both still quoted text the unit no
+longer had.
+**`context.bad-context-bad.2` names what the agent can fetch and where that stops** (October 2026,
+at the owner's asking): it said "the harness can go and get what it lacks", which named nothing and
+gave the harness the model's decision. It now lists reading files, searching the codebase, running
+the tests or `git log` and pulling documentation, links `tools`, and says none of it is guaranteed.
+What can be enforced (gates) moved to `you-choose-most.3` when the section was de-duplicated.
 `context.task-specific.4` closes that unit's section on task-specific evidence and is `OneShotCompare`'s payoff turned on the
 student's own repository: the codebase is the reference image they hand over every turn, so a
 project that drifted is the drift being copied rather than worked around. It reads the figure from
 the other side, which is why it sits under it rather than opening a section of its own, and it is
-the section's fourth paragraph knowingly. **It stays descriptive and must not grow an instruction**:
+the section's fourth paragraph knowingly. **It names Claude Code's own instruction** (October 2026, at the owner's
+asking): Claude Code's system prompt says "Write code that reads like the surrounding code: match its
+comment density, naming, and idiom" (read off the live system prompt of a Claude Code session,
+October 2026; Anthropic's docs only say the prompt carries code style guidelines). No such line was
+found for Copilot: the open-source VS Code agent prompts (`microsoft/vscode-copilot-chat`) say to
+read a file before editing it, and only the GPT-5.x prompts say to preserve an existing design
+system's patterns; the IntelliJ and CLI prompts are not public. So the sentence names Claude Code
+and claims nothing for other agents, and it is ungated because it is true for every reader. It was
+also cut shorter, losing "that is why an old codebase feels heavy". **It stays descriptive and must not grow an instruction**:
 arranging a repository so an agent works well in it is step 2's `setup`, and this paragraph only
 says why what is already in the codebase counts as context. It is `data-audience="self"` like the
 figure and the paragraph above it, so in class it is walked at the board with the rest.
 
-`context.you-choose-most` is the unit's one practical section, and it answers FEEDBACK's "context
+`context.you-choose-most` is the unit's main practical section, headed "What you give the agent"
+("Wat je de agent meegeeft") since October 2026: "You choose most of it" said nothing about the
+section, so the owner had it renamed, and the slug stayed as an identifier. `.1` opens on "per task"
+so it pairs with `.3`'s "what holds for every task". and it answers FEEDBACK's "context
 actief sturen" on the focus side only. **Its four moves are the ones Anthropic's own material backs**
 (the Claude Code best practices, common workflows and large-codebases pages, and the explore-first
 lesson in Claude Code 101): the failing assertion and its stack trace rather than the whole run, an
 existing class to copy, have it find the place before it edits, and the folder you open it in as the
 first cut. Naming the class and the case is `prompt.be-exact`'s and is a link here, so do not
-restate it. **"Tell it where not to look" was left out on purpose**: Anthropic does that with
+restate it. **`.1` closes on what does not belong in a prompt** (October 2026, at the owner's asking): what
+holds for every task goes into the project (the instruction file, rules per part of the codebase,
+gates), with one link to step 2's `setup`, which owns how. It says "rules per part of the codebase"
+rather than `.claude/rules/` so it holds for Copilot (`.github/instructions/`) without a variant
+pair. **`Why this bites hardest in code` was cut** (October 2026, at the owner's asking) because
+the stretch up to here said the same 2 things 3 or 4 times: that the model falls back on the common
+pattern it was trained on (`task-specific.1` owns that now) and that you steer with an example,
+the instruction file and gates (`you-choose-most` owns that now). Its one unique claim, a generic
+answer compiles and can still break your domain rules, went into `bad-context-bad.1`, and its DDD
+example went into `you-choose-most.3`: what holds for every task goes into the project, only a
+gate is certain, and a rule like DDD is checked by reading or by architecture tests (the tool is
+deliberately not named). `.1` is now what you give per task, `.2` locate first, `.3` what is fixed
+in the project. A gate catches the result of missing context; it does not make the agent fetch any,
+so do not reword `.3` as if it did. Do not bring the cut section back. **"Tell it where not to look" was left out on purpose**: Anthropic does that with
 settings (`permissions.deny`, `claudeMdExcludes`) rather than in the prompt, and settings are step
 2's guardrails, so the access half of the same FEEDBACK item lands there and not here. The folder
 claim is worded for both products (both start in the current folder and scope to it) and says
 nothing about which instruction files load, because that half differs between them and only
 narrows downward.
 
-`ContextFalloff` draws compaction rather than overflow, and the redraw is the decision. It showed
+**`context.leaves-your-machine` closes the prose, and it is the only place the course says where the
+context goes** (October 2026, at the owner's asking, after a sweep of all 4 steps found no unit
+mentioning secrets, privacy or training on user data). `.1` is shared: everything in the context goes
+to the provider, with 3 concrete leaks (a pasted log with a key, a stack trace with a customer's
+address, a `.env` the agent opens itself), the move to strip them, which carries a gem, and a link to
+step 2's `setup` for blocking a file, on the same reasoning that keeps "where not to look" out of
+`.2`: blocking is a setting, and settings are step 2's. `.2` is a `data-assistant` pair because the
+facts differ per vendor, and **both halves are dated**, read 9 October 2026. Claude
+(code.claude.com/docs/en/data-usage): Free, Pro and Max train when the user's setting at
+`claude.ai/settings/data-privacy-controls` is on, retention 5 years with it on and 30 days without;
+Team, Enterprise and API are not trained on and keep 30 days. The page does not say which way the
+setting defaults, so the prose does not either. Copilot (GitHub blog, 25 March 2026, "Updates to
+GitHub Copilot interaction data usage policy"): from 24 April 2026 Free, Pro and Pro+ are trained on
+unless the user opts out under Privacy at `github.com/settings/copilot`; Business and Enterprise are
+excluded. **Content exclusion is left out on purpose**: GitHub's own pages contradict each other on
+whether agent mode and the CLI honour it, so a sentence about it would be wrong for some reader.
+Both halves close on asking which account or seat the company expects, rather than telling the
+student what their company allows, which the course cannot know. The `context` bullet in `recap`
+and `deck-context-data` lean on this section.
+
+`ContextFalloff` sits in `session` now, under `amnesia-context-fatigue.2` (it moved with that section
+from `context`, October 2026), and the deck slide moved with it. It draws compaction rather than
+overflow, and the redraw is the decision. It showed
 the two oldest turns tilting off the top of a fixed frame once, which is a window neither harness
 this course targets actually has: both compact automatically, so `amnesia-context-fatigue.1` says
-older material is summarised and the summary is what stays. Those two bars now collapse into **one
+the summary is what stays. Those two bars now collapse into **one
 short bar that stays inside the frame**, in the step's faint fill, and the tilted ghosts rise off
 that bar rather than off the window, so what leaves is the detail and not the turn. Two labels carry
 it, `falloff.summarised` on the short bar and `falloff.dropped` on the ghosts, where there was one
 before. The figure and that paragraph were changed as one thing and have to move as one thing.
 
-**Lost in the middle is stated in prose and deliberately not drawn.** `entropy.3` names the term and
+**Lost in the middle is stated in prose and deliberately not drawn.** `context.more-context-not.3`
+names the term (it was `entropy.3` until entropy moved to `session`: a long input is about the size
+of one request, and that stayed) and
 says where the line sits, because a gloss that leaves out the position leaves a reader unable to say
 why it is called *middle*. A small U-shaped position curve with a Liu et al. caption was proposed
 for it and rejected: this is the heaviest unit in the step, the step's diagram vocabulary is frames,
@@ -751,32 +874,51 @@ owner first got plain-word kinds and asked for the readout's terms instead. So t
 `useAssistant()` and types its categories `Record<Assistant, …>`, the labels are mono with no `nl`
 entry like any machine output, and only the eyebrow, caption and description translate. It is a
 redraw and not a screenshot (also the owner's choice): a shot shows one product and one machine's
-setup. The owner accepted that the card's first reading is then recognition rather than discovery.
-What the card still measures is the difference the MCP server `connect-one` makes, so **the MCP row is
-one plain reading and the figure must never draw a with-and-without comparison**. Its counts are
+setup. The MCP row is one plain reading, as in the readout. Its counts are
 invented (1 square is 1,000 tokens of a 200,000-token window) and its caption says so; the
 share-by-volume figure for a real session stays `SessionMakeup` in `session`. Whether Copilot in
 IntelliJ has a comparable readout is not verified; the Copilot labels are the CLI's. It is not on the
 deck yet. Nothing in the prose may grow a description of the command
 back. What went with them is the "read what the tool descriptions cost you" move, since a reading
 taken before anything is asked is what move two already does.
-The unit is the one in the step carrying a task *and*
-a registry quiz, so the two share one "Test your knowledge", which is written up under the exercise
-shape below. Three things about the card. **The first move opens `exercises/step1/java` with an agent in
-it**, which nothing did while the prose was there, and it is the only move that names a command, so
-it is the only one that splits by assistant (`window.open.claude.label` against
-`window.open.copilot.label`). **The second and last moves are one reading with the MCP server
-`connect-one` connected and one with it gone**, which is the
-only place the course measures what connecting an MCP server adds to context, so dropping either leaves a
-count with nothing to compare it to; the server is a unit back rather than up the page now, and
-`window.remove.label` names `tools` rather than saying "above", in both languages. And it is the one
-task card with **no description line**, the key absent rather than empty: with the prose gone the
-moves are what says where the work happens, and a description would be the cut paragraphs coming
-back one sentence at a time. `TaskCard`
+The unit carries a task *and*
+a registry quiz, as `session` does, so the two share one "Test your knowledge", which is written up under the exercise
+shape below. **The card is `bad-context-bad.3` worked**, headed "A rule that is out of date" ("Een regel die
+niet meer klopt") and titled "Put your CLAUDE.md or AGENTS.md right", since October 2026. It measured
+`/context` twice before (with and without the Playwright server), which the owner found the same
+exercise as `ConnectOne`; and with tool search, Claude Code holds MCP tool definitions at 0 tokens
+until used, so the with-and-without reading barely moved. Five moves, each with something to copy:
+plant 2 lines in the project's instruction file (a rule that is out of date, and `bad-context-bad.3`'s
+"propose an edit when I contradict this file"), start the agent, give a fixed task, contradict the
+rule, put everything back. **The stale rule is chosen so it misleads, and that was measured**
+(October 2026, fresh copies of `exercises/step1/java`): a JUnit 4 rule did not, because the existing
+test shows JUnit 5 and the agent followed the code and said the file looked out of date. A rule
+naming a package nothing in the code contradicts did, every time: "New REST endpoints go in the
+package `…step1.api`" put `GET /api/health` in `api/` in 3 Claude Code runs (Sonnet) and 1 Copilot CLI
+run, tests green, nothing reported. The card uses `web` instead of `api`, at the owner's asking, so
+the corrected end state is a package per feature (`health/`) rather than controllers in the root; that
+variant was measured once too, with the same result. Contradicting it ("we give every feature its
+own package now…") made the agent move the code and propose the `CLAUDE.md` edit, then ask before
+applying it, in every run. **Planting and cleanup split by assistant**: Claude Code appends to the
+project's `CLAUDE.md`; Copilot CLI only reads `CLAUDE.md` at the repository root, so it gets a new
+`AGENTS.md` in `exercises/step1/java`, which the Copilot run showed it reads from the current folder.
+Cleanup removes only `web/` and `health/` and the planted lines, never `git restore .`, which would
+also wipe a student's own work in that folder (a started `EntryController`). The task keeps the agent
+away from `EntryController`, `services/` and `desk/`; do not widen it to any of those. The shell
+commands assume bash or zsh (Git Bash on Windows). It is still the one task card with **no
+description line**, the key absent rather than empty. `TaskCard`
 looks that key up instead of assuming it, which is what any card may leave out.
 
-`context` and `session` overlap by design, and how the overlap is handled is the decision. `context`
-already argues the re-send, the cost per message and the dead bug hunt, so `session` does not
+`context` and `session` overlap by design, and how the overlap is handled is the decision. **The line
+is one request against time** (October 2026, at the owner's asking, after a read-through found the 2
+units saying the same 5 things): `context` is what is in one request and how good it is (stateless,
+memory defined, task-specific, bad or wrong, more is not free, what you give), and `session` is how
+that grows and what you do about it. So entropy, amnesia and context fatigue, with `ContextFalloff`,
+their deck slides and their 2 quiz questions, moved from `context` to `session`, and
+`context.model-stateless.3` ("clear often") went. Inside `session` the duplicates were then merged:
+clearing for a new task is said once (`entropy.3`, which absorbed `window-not-memory.2`), "a summary
+loses detail" once (`amnesia-context-fatigue`), and the instruction file once (`window-not-memory.1`).
+`context` still argues the re-send and the cost per message, so `session` does not
 re-argue them: it owns what `context` cannot, namely that this is the only layer with a time axis (the
 other three are one turn's worth, and they *settle* here, so a fetched page is a tool result for one
 turn and session content forever), that the student authored almost none of it by volume, and that it is
@@ -797,7 +939,7 @@ to the tenth?"), which is a good plant and an undeclared dependency: a change to
 count, or to what the pipeline does with the tenth entry, visits `session-makeup.block.1` and `.6` in
 both languages.
 
-`WindowFill` is the unit's second figure, under `automatic-manual-compaction.1`, and it draws **how full
+`WindowFill` is the unit's second figure, under the compaction bullets, and it draws **how full
 the window is over one session**, twice: once emptied by compaction and once by a `/clear`, over the
 same three tasks (`de pipeline lezen`, `de bug zoeken`, `de test schrijven`). Compaction fires on its
 own, just under full, in the middle of the second task, and drops to a summary rather than to empty;
@@ -810,7 +952,7 @@ kept cost out on purpose. Neither product works that way. Compaction is a separa
 sends the whole conversation with a summarisation instruction: with a warm cache it reads the prefix
 from cache, but it is still a large request, and the summary is output. A `/clear` makes no summary request; rebuilding context later still uses tokens.
 So the cost is now drawn in, as the **shaded strip at compaction's drop** (`window-fill.reads` and
-`.writes`), and `automatic-manual-compaction.2` says it in prose. **Do not put the "same loss, on your
+`.writes`), and `compaction-clear.5` says it in prose. **Do not put the "same loss, on your
 terms" claim back**, in the prose, in the figure or in `deck.session.clear.note`. The section's point
 survives the change: manual `/compact` lets you choose the seam and a focus; both forms of compaction spend tokens.
 
@@ -826,10 +968,18 @@ carrying its column's name, rather than squeezing three columns into a phone. It
 diagram vocabulary (teal is the window's contents, muted is what is not), and it is not a context
 frame, so it does not compete with `ContextFalloff`'s.
 
-`automatic-manual-compaction.1` opens on "before the pile stops fitting" rather than "when", because
-neither product waits for 100% and Copilot CLI starts at about 80%. `.3` is a `data-assistant` pair:
-`.3.claude` names `/autocompact`, which lowers the threshold (100K to 1M tokens) so compaction comes
-earlier, and `.3.copilot` says Copilot CLI already starts at about 80%, in the background, and that
+**The section is headed "Compaction and `/clear`"** (October 2026, at the owner's asking, after a
+read-through found the unit made the two look the same: `/clear` only appeared in the cost sentence,
+and that sentence said the next session "reads everything again", which it does not). So `.1` sets
+them side by side, compaction a summary in the same session and `/clear` a new session with nothing
+summarised, and `.4` says when to pick which. `/clear` is described as a new session on purpose: what
+the model sees afterwards is what a new session sees, and what differs (the process keeps running, so
+a `/model` choice and MCP connections stay) changes nothing in the context. The keys moved from
+`automatic-manual-compaction.*` to `compaction-clear.*` and were renumbered in the same pass.
+`compaction-clear.2` says "when the context nears its limit" rather than "when it is full",
+because neither product waits for 100% and Copilot CLI starts at about 80%. `.6` is a `data-assistant` pair:
+`.6.claude` names `/autocompact`, which lowers the threshold (100K to 1M tokens) so compaction comes
+earlier, and `.6.copilot` says Copilot CLI already starts at about 80%, in the background, and that
 the threshold is not configurable. Sources, read October 2026:
 code.claude.com/docs/en/model-config#default-auto-compact-thresholds, code.claude.com/docs/en/costs,
 code.claude.com/docs/en/prompt-caching#compacting-the-conversation, and
@@ -844,8 +994,8 @@ so when its own box is `@5xl` or wider the table moves beside the charts, and on
 stacking is `@md` on the same container for the same reason: the viewport says nothing about the
 column the figure is in. Its `scale` is fitted to the box `SlideFigure` clips at.
 
-It closes on `SurviveTheClear`, under the same `<hr>` and "Test your knowledge" heading the other units
-use, with no prose between the rule and the card. Four moves: find a thing you would have to say
+It closes on `SurviveTheClear` and then `sessionQuiz`, under the same `<hr>` and "Test your knowledge"
+heading the other units use, with no prose between the rule and the card. Four moves: find a thing you would have to say
 again next time, write it into `CLAUDE.md` as one standing instruction, clear the session, ask for
 the work again without repeating yourself. The third move is the exercise. Writing the line down
 proves nothing, and a card that stopped there would be a note rather than a task, so do not drop the
@@ -999,7 +1149,7 @@ never sees them, and the course owner could not tell what the exercise was. It n
 and the empty `EntryController` and says the agent sees only the one line; it says nothing about how
 to implement any wish, which stays the rule. The wishes' numbers are digits now, and
 `check-entry.mjs`'s `minus 1` label moved with them. Four things in it are
-decisions. **The brief is read rather than drawn**: `UnderSpecified` in `harness` already draws the
+decisions. **The brief is read rather than drawn**: `UnderSpecified` in `agent-patterns` already draws the
 gap between an ask and what it leaves unsaid, in the step's solid-and-dashed vocabulary, so drawing it
 here would be that figure four units early and worse. **It is one wish per line**, which reads worse
 than the paragraph it was and is the fairer shape: a student holding six FAIL lines against a block
@@ -1103,11 +1253,11 @@ same trade the repository already takes for `flags.ts` and for `front/` as a who
 loads for any agent started at the repository root and a prohibition that advertises the answer key
 is the leak it was written to prevent. Keep it that way if the prohibition is ever reworded.
 
-**The feature is a position lookup rather than search on purpose.** `UnderSpecified` in `harness`
+**The feature is a position lookup rather than search on purpose.** `UnderSpecified` in `agent-patterns`
 owns "Add search to the catalogue" as the course's canonical under-specified ask, with three open
-questions pinned to `harness.decomposition.1`, and building search here would spend that figure four
+questions pinned to `agent-patterns.decomposition.1`, and building search here would spend that figure four
 units before it is drawn. The two units also answer under-specification differently and must be
-allowed to: `prompt` says be exact and let the plan carry what you know, `harness` says cut it into
+allowed to: `prompt` says be exact and let the plan carry what you know, `agent-patterns` says cut it into
 parts. Neither is the other's example.
 
 `EntryBrief` is deliberately **not on the deck**. Every `TaskCard` is kept off it because a slide
@@ -1180,7 +1330,7 @@ an exercise, this is the question to add.
 still takes some context) and `.3` (calling a tool takes space). The per-product `.2`
 (`alwaysLoad`, `deferTools`, turning tool search off) and the closing aside `.4` (server count
 says little; a specialised agent for a separate tool set) were cut in the same trim: configuration
-detail and a repeat of `.3`. **`harness` owns what a sub-agent costs**, so it does not come back here.
+detail and a repeat of `.3`. **`agent-patterns` owns what a sub-agent costs**, so it does not come back here.
 
 `tools` **is titled "The agentic loop"** (NL "De agentic loop") while its id, its URL and its key prefix
 stay `tools`, and that split is the decision: the page now opens on the loop that makes a model an
@@ -1194,7 +1344,9 @@ visiting those two again.
 **The lead is the loop first and the tool second.** `lead.1` says it in plain words (you give it a
 goal, the model picks the next step, a tool call is run by the harness and lands in the window, the
 model decides again, it stops when it asks for no more tools) and names *the agentic loop* last, and
-it carries the unit's `harness` link at its first use, which moved up from the old `lead.2`.
+it carries the step's one definition of the harness (October 2026): the software you work in runs
+the tool, Claude Code, Copilot or Cursor, and that software is the harness. It was a link to the old
+`harness` unit until that unit's own definition went as a repeat.
 `lead.2` is what the loop looks like on the wire, from Anthropic's tool-use docs (how tool use works,
 and handling stop reasons, read October 2026): `stop_reason: "tool_use"` with one `tool_use` block
 per call, several per turn possible, the outputs sent back as `tool_result`, round again, `end_turn`
@@ -1234,8 +1386,8 @@ the ring would point at a moment that is not happening. And **it scales as one d
 length is in container units of the frame around it, the labels have a floor, and below 28rem the
 two lines under the node names go (they are `lead.1` again) and the nodes widen. The entry chip is
 the one small dark surface in it, on `--foreground` rather than `--header`, as the mockup drew it.
-The Dutch node reads "Het harness voert uit", on the step's own article (`harness.title` is "Het
-harness"), where the mockup had *de*. It is on the deck as `deck-tools-loop`, animated, ahead of
+The Dutch node reads "Het harness voert uit", on the step's own article (`tools.lead.1` says "Die
+software heet het harness"), where the mockup had *de*. It is on the deck as `deck-tools-loop`, animated, ahead of
 `deck-tools-in-context`.
 **`What the agent can call` names each product's own tools**, one `data-assistant` paragraph per product,
 because the names genuinely differ and a list in the other product's names is untrue for that
@@ -1255,8 +1407,8 @@ instruction can cause a wrong next action. Keep the concrete example and the dis
 content and instructions, so `SpotInjection` remains connected to the lesson. The deck no longer
 claims that tool results are always the least trustworthy layer or that injection always succeeds.
 
-`model` sits after `harness`: prose, five figures, and a card and a board under the same `<hr>` and
-"Test your knowledge" heading `tools` and `harness` use. **It carries no version numbers anywhere, and that is
+`model` sits after `agent-patterns`: prose, five figures, and a card and a board under the same `<hr>` and
+"Test your knowledge" heading `tools` and `agent-patterns` use. **It carries no version numbers anywhere, and that is
 the decision.** Tiers
 outlive releases, so the unit teaches Opus, Sonnet and Haiku as dispositions; a card naming this
 quarter's release is wrong by the next one. **The lead no longer says that out loud**: the paragraph
@@ -1279,16 +1431,16 @@ them is left to `PickTheTier` at the foot of the unit** rather than argued first
 exercised. What went with it is worth knowing before writing any of it back. It carried the
 sentence deferring to `prompt` on precision beating model size, and the one pricing a mid-task
 switch (the cache does not travel, so the window is billed again on the tier you moved to).
-Its closing section points back at `harness`'s coordinator instead of
-redefining it, the same rule `harness.coordinator.3` follows. It adds two things and no more: that
+Its closing section points back at `agent-patterns`'s coordinator instead of
+redefining it, the same rule `agent-patterns.coordinator.3` follows. It adds two things and no more: that
 the tier choice is one of the things that pattern automates, and **why the expensive model is good
 at writing the brief, namely that providers fine-tune the smaller tiers on output from the larger
 ones**, so it is writing for something trained on its own answers. It closes by **naming the saving
-in this unit's own ratio** (the gap priced above, four against one) rather than in `harness`'s words:
+in this unit's own ratio** (the gap priced above, four against one) rather than in `agent-patterns`'s words:
 it carried "top rate for deciding, a fraction of it for doing" near-verbatim from
-`harness.coordinator.1`, and a back-pointer that repeats the sentence it points at is the pointer
+`agent-patterns.coordinator.1`, and a back-pointer that repeats the sentence it points at is the pointer
 failing. Do not let that phrasing come back. The paragraph that used to sit
-there re-argued `harness`'s sub-agent refetch cost and was cut for that reason; do not put it back.
+there re-argued `agent-patterns`'s sub-agent refetch cost and was cut for that reason; do not put it back.
 `ModelTiers` is the figure and argues one thing only: three tiers, three dispositions, three kinds
 of task. Cost and speed stay in the prose because each needs a qualifying sentence that will not fit
 on a chip, and it is not an SVG, so it joins the step's diagram vocabulary by staying out of it
@@ -1325,13 +1477,13 @@ at "the slowest of the three" and `PickTheTier` at three targets. Promoting it t
 visiting all four.
 Four claims the prose already makes can be checked against it by eye, and a row edited without them
 in mind breaks the unit: the small tier as one unit against two and four, output at five times
-input in every row, and a cache read at a tenth of input or less, which is what `harness`'s caching
-section says (`harness.caching.1` read "roughly a tenth" until the top two tiers started reading
-their cache at a twentieth and a fortieth).
+input in every row, and a cache read at a tenth of input or less, which is what `tokens`'s caching
+section says (`tokens.prompt-caching.1`, which read "roughly a tenth" until the top two tiers started
+reading their cache at a twentieth and a fortieth).
 
 **The ratio was one-three-five until October 2026, and it moved because the prices did.** Opus 5.5
 came in at $4 and Sonnet 5.5 at $2, so the table, `model.cost.1` and the deck's two pricing slides were all rewritten together. The next re-read of the
-pricing page has to visit the same five, and `harness.caching.1`, in both languages. The unsupported fixed speed ratio was removed; latency is task-dependent and the chart is illustrative. Prices and model names have no `nl` entry, like every other machine-shaped string
+pricing page has to visit the same five, and `tokens.prompt-caching.1`, in both languages. The unsupported fixed speed ratio was removed; latency is task-dependent and the chart is illustrative. Prices and model names have no `nl` entry, like every other machine-shaped string
 here; only the unit label, the column heads and the caption translate. The unit (`$ per million
 tokens`) sits **above** the table rather than only in the caption, and outside the scrolling box, so
 a reader who scans straight to the numbers knows what they count and the label does not slide away
@@ -1347,8 +1499,8 @@ figure ageing silently.
 The task retains its component and storage identity so progress is not discarded. Counters absent
 from a product/account are unknown, not zero. Estimate API costs from each model and category's rate
 across requests. On a Claude subscription that estimate is not the charge; on Copilot the credits
-are the charge (1 credit is $0.01), which is what the Copilot moves add up. `ReadYourWindow` remains a
-context measurement, not a usage meter. **`PriceOneTurn` splits its moves by assistant**, typed
+are the charge (1 credit is $0.01), which is what the Copilot moves add up. `ReadYourWindow` is not a
+usage meter. **`PriceOneTurn` splits its moves by assistant**, typed
 `Record<Assistant, …>` like `ReadYourWindow`: Claude keeps `read`, `rate` and `sum` (`/usage` before
 and after, then an API estimate), and Copilot gets `ask.copilot`, `count.copilot` and
 `convert.copilot`, which add up the AI credits IntelliJ's chat prints under each turn (plugin 1.11.1
@@ -1390,7 +1542,7 @@ Two things in there are easy to break. The section is **Claude-only** (`data-ass
 on every block), so it can state the 5-hour reset flat: it describes one product's plan rule, not how
 models are billed, and a Copilot seat meters credits over a calendar month instead. It used to hedge
 ("some providers", "usually five hours") while it was shared, and that hedge went when it was split.
-And the five minutes in `harness`'s caching section are a different clock entirely, so neither may
+And the five minutes in `tokens`'s caching section are a different clock entirely, so neither may
 be rewritten in terms of the other.
 
 `usage-readout` is the shot of what the harness prints, and it is `UnitShot` from `shared`, which
@@ -1410,8 +1562,9 @@ a word the student types. Move the worked day (08:00, the break at 13:00, home a
 number in both rows moves with it.
 
 "API vs subscription" is the section under `Cost`, and it is the billing model: an API key billed per token
-against a subscription drawn off a plan. It was one sentence in `harness` and was **moved here whole
-rather than copied**, so `harness`'s "Which harness you run" must not grow a billing line back. Where
+against a subscription drawn off a plan. It was one sentence in the old `harness` unit's "Which
+harness you run" and was **moved here whole rather than copied**; that section is gone, so no unit
+may grow a billing line about harnesses back. Where
 it sits is the decision. Directly under `ModelPricing` it reads as how the rates above reach you,
 which is also why it carries **no prices and no plan names**, and no currency beyond Copilot's
 credit value ($0.01, a unit conversion rather than a price): the one table in the course with prices
@@ -1427,7 +1580,7 @@ merely resembles it: both are `shared/components/ConnectBoard.tsx`, and a caller
 situations, a list of choices and a key prefix. That is the decision, and it was made after the two
 copies drifted, with an arrowhead you could re-aim on one board and not on the other. **Anything
 about how the board behaves goes in `ConnectBoard`**, so a student who learned the interaction in
-`harness` meets the same one in `model`. What a caller may still choose is small and each choice has
+`agent-patterns` meets the same one in `model`. What a caller may still choose is small and each choice has
 a reason: whether the right-hand column shuffles, whether its labels are mono, and the block the ids
 are built from. Five situations against three tiers here, so more than one lands on the same tier and
 nothing falls out by elimination. Three decisions in it are worth keeping. **The tier column does not
@@ -1471,7 +1624,7 @@ under the task with the separator between them. It printed the heading twice bef
 a knowing price and is not one any more; the fix went into the shared components rather than into
 this unit, so do not give the task a heading of its own or lift the rule off it. In guided mode the
 prose goes and the authored heading with it, and the quiz prints its own again, which is why the
-question is asked of the prepared page and not of the registry. `harness` follows the same shape now, with the `CutItUp` card
+question is asked of the prepared page and not of the registry. `agent-patterns` follows the same shape now, with the `CutItUp` card
 under the rule and `PatternMatch` arriving after it from the registry, and so does `model`, which
 puts `PriceOneTurn` under its rule and `PickTheTier` after it. `workshop` was the last one outside the family
 and is in it now, with `OneWindow` and the board under the same `<hr>` and heading, and nothing after
@@ -1504,10 +1657,10 @@ dumb single listing the workshop board relies on, and the shelf is not in the si
 The moves are start, `mcp` (per assistant), curl, browser, compare, `reveal` for the flag (open
 the page, press the button and print the flag, in one prompt; it was 2 moves until the owner
 merged them, and it asked for a screenshot until the owner pointed out that a screenshot does not
-hand over the flag: the page builds it as DOM text, so the agent can read it and print it), and `reset` (per assistant), which re-adds the server **without** the file option: the option
+hand over the flag: the page builds it as DOM text, so the agent can read it and print it), and `reset` (per assistant), which removes the server again because the file option
 opens every file on disk and `copilot mcp add` writes to the user-wide `~/.copilot/mcp-config.json`.
-It re-adds rather than removes because `ReadYourWindow` in `context` still needs the server and
-removing it is that card's last move. **Every move carries what to type** as a
+It now removes the server: it re-added it once, without the option, only because `ReadYourWindow`
+measured a session with and without it, and that card no longer does. **Every move carries what to type** as a
 copyable `connect.<move>.command`, which reverses "the moves name no command": that rule existed
 only because the `<pre>` above the card was cut in class, and the card now carries the commands
 itself. The `<pre>` pair and the per-assistant `connect-one.2` paragraphs went; `connect-one.2` is now
@@ -1690,7 +1843,7 @@ the two paragraphs above it and there is no sentence under it to keep in step.
 
 `TrainedOrGrounded` and `AnswerProvenance` are on the deck and `TheCutoff` is not, which is a
 decision rather than a gap: the block leads with **the statement slide rather than a figure**, on
-`harness`'s precedent, because the two drawings are one claim measured and the room needs the claim
+`agent-patterns`'s precedent, because the two drawings are one claim measured and the room needs the claim
 before either means anything. A third slide before them would spend that opening on the setup.
 `AnswerProvenance` is laid out at
 1100 and magnified less than the drawing above it, because `SlideFigure` clips rather than shrinks:
@@ -1700,8 +1853,10 @@ Three boundaries hold it up, and each of them is a unit away. **`context` owns w
 this unit must never re-argue that a model is a statistic, that frequency beats quality, or that
 there is more bad code on the internet than good. What `context` never says is that training has a
 *date*, and the cutoff is that gap filled. `contextQuiz`'s `invented-userservice` question is the
-one place the two genuinely meet: it is this unit's scenario asked four units early, and it never
-names the term. Leave it where it is. A quiz sitting on the page that owns the word would be graded
+one place the two genuinely meet: an agent answers confidently about a mail that a setting it never
+read switched off (it was a UserService the model never opened until October 2026, when the owner
+pointed out that an agent with tools simply reads the file it is asked about; what it still misses
+is the file that decides), and it never names the term. Leave it where it is. A quiz sitting on the page that owns the word would be graded
 before the word had been given. `truth.hallucinations.1` names that quiz early on as the place the
 student already met the case, so the early ask is a paid-off callback rather than a silent
 duplicate, and it sits ahead of the `Catalog` example rather than after the term, so the paragraph
@@ -1944,8 +2099,7 @@ looking at a window, counting a token or asking what a turn cost, which left a s
 ending on a page that never mentions one. The card frames the whole hunt as **one session with a
 `/context` reading at either end**: read the number, work all five flags without clearing, read it
 again, then say which flag you could hand over whole. It is `TaskCard` like the step's other six,
-ticked to `kata.step1.hunt`, and it grades nothing. The first and third moves are a pair on
-`ReadYourWindow`'s reasoning, so dropping either leaves a number with nothing to compare it to, and
+ticked to `kata.step1.hunt`, and it grades nothing. The first and third moves are a pair, so dropping either leaves a number with nothing to compare it to, and
 the fourth move is the debrief that used to sit over the board as prose: it belongs after the work,
 because which flag you could hand over whole is something you find out by handing it over. It also
 means this page is where the student watches the window fill with the bulkiest thing in the course,
@@ -2033,30 +2187,39 @@ clause. It is the step's only assistant-varied block outside `tools`, `session`,
 
 `recap` closes the step, and it is **the one unit allowed to say what another unit already said**.
 Everything else in the course points at the page that owns a claim rather than restating it. This one
-is **a single list and nothing else**: one bullet per unit ahead of `workshop`, in the order the
-student met them, and **every bullet is a cost and the move that answers it**, on one line. The bold
-half states what it costs you and carries the link back to the unit that argued it; the half after it
-is what to do about it. What keeps the page from being a second course is that line. **A claim
-needing a third sentence belongs in the unit it came from**, and nothing here re-argues anything,
-which cuts both ways: rewriting a unit's argument means visiting its bullet, in both languages.
+is **a single list and nothing else**: one bullet per unit ahead of `workshop`, in the registry's
+order, and **every bullet is what to take away from that unit**, on one line. The bold half states
+what you now know and carries the link back to the unit that argued it; the half after it is the move
+it asks of you. What keeps the page from being a second course is that line. **A claim needing a
+third sentence belongs in the unit it came from**, and nothing here re-argues anything, which cuts
+both ways: rewriting a unit's argument means visiting its bullet, in both languages.
 
-**It ran as two lists first, the costs and then the advice, and that is the shape to keep it out
-of.** The halves did not line up. Eight units do not have one money-saver each, so the reader was
-left pairing a bullet in one list against a bullet in the other by eye, and the two most useful
-things on the page sat a screen apart. Merging them is what fixed it, and splitting them again puts
-it back.
+**It was a list of costs until October 2026, and the owner had it widened.** It was titled "Connect
+the mechanisms" ("De mechanismen verbinden") and every bullet had to be a cost and the move that
+answers it. That framing had drifted out of its own rule: `context` and `agent-patterns` had no
+bullet, `tokens` and `session` had two each, the cache bullet sat out of order after the `harness`
+rename, and `prompt` was reduced to bundling while its real lesson (goal, files, a limit with its
+reason, a check) was missing. So it is titled "What to take away" ("Wat je meeneemt") and the eight
+are one per unit again. **The list has no heading**, at the owner's asking: "What you know, and what
+you do" was tried and rejected as a bad title, since the page title already says what the list is.
+So the bullets sit in the `lead` section and their keys are `recap.lead.2` to `.9`, with the
+allowance pair at `.10` (they were `recap.what-costs-do.*` and briefly `recap.what-know-do.*`). **It ran as two lists before that**, the
+facts and then the advice, and the halves did not line up, so the reader paired them by eye. Keep
+them on one line.
 
 **Every icon is lifted rather than chosen.** The move half carries the marker the unit itself put on
-that advice (the token you never put in, bundling, clearing at your own seam, turning tools off, asking
-while the code is still in front of you, keeping a cache warm, the expensive model writing the brief,
-the five-hour window, asking for the check), so `welcome`'s legend still means what it says. An icon
-here that is not on the paragraph it came from is drift, in one direction or the other. **The session
-bullet carries a coin because `session.sessions-where-money.3` carries one**, which is the rule
-working rather than the list being evened up. Never choose a marker here.
+that advice, so `welcome`'s legend still means what it says, and **a move with no marker in its own
+unit gets none here**: `agent-patterns`'s bullet (cut the task up, put the rules in the brief) has
+none for that reason, since the unit's only coin is on running workers on a cheaper model. The
+`context` bullet's gem is `context.bad-context-bad.3`'s (the line that keeps the file current) and
+`leaves-your-machine.1`'s (strip secrets). Never choose a marker here.
 
 Four more decisions. **`workshop` is not in the list**, because a capstone is not a claim and the
-student has just worked it. **The allowance bullet is last and is a pair** (`what-costs-do.9.claude`
-and `.9.copilot`): Claude's 5-hour and weekly limits, and a Copilot company seat drawing AI credits
+student has just worked it. **Prompt injection is in the `tools` bullet**, in its bold half rather
+than as a bullet of its own: it was taken out once (October 2026) for being a warning rather than a
+cost, and the widened framing removed that reason. It still may not become a second `tools` bullet.
+**The allowance bullet is last and is a pair** (`recap.lead.10.claude`
+and `.10.copilot`): Claude's 5-hour and weekly limits, and a Copilot company seat drawing AI credits
 from a shared monthly pool, where the admin can give each person a different limit and reaching
 yours stops the agent mid-task (checked October 2026 against
 GitHub's usage-based billing docs for organisations; an individual plan has its own allowance, which
@@ -2066,16 +2229,13 @@ stop" read as one company budget, and "a limit per person or per team" read as o
 everybody. Both wrong readings were the author's, in review (October 2026). The pool is shared, and
 user-level and cost-center budgets cap each person's or team's draw from it. The Claude half lifts `model.five-hour-window`'s gem and the
 Copilot half `model.api-vs-subscription.3.copilot`'s coin. It sits after the eight rather than
-inside them because it is an extra rather than a unit's line. **A second `tools` bullet on prompt
-injection was added and taken out again** (October 2026): injection is a warning rather than a
-cost, its marker would have been chosen here rather than lifted, and it broke one bullet per unit.
-Do not put it back. **There is no figure,
+inside them because it is an extra rather than a unit's line. **There is no figure,
 card or quiz**, which leaves
 the page **empty in guided mode**, since prose is dropped wholesale there. That is a supported state
 rather than an oversight (`StepContent` renders `null` and the article takes no gap): in class the
 recap happens out loud off the deck, where the step's last block is a divider and three statements,
-the window, the one move all eight bullets are, and step 2. The empty page and that block are one
-decision, so a room that loses the block loses the recap altogether. And **`Where this goes` is the step's only forward pointer and
+the window, the moves the eight bullets ask for, and step 2. The empty page and that block are one
+decision, so a room that loses the block loses the recap altogether. And **`Next: step 2` ("Volgende: stap 2") is the step's only forward pointer and
 the only place the course says a step has ended**, which came over from `workshop`'s deleted
 `Looking back`; the sentence naming step 2 is that paragraph's, near enough, and it is the one thing
 from it worth keeping.
@@ -2180,7 +2340,7 @@ in there, that is their build to unpick and the flags above are what they have d
 
 ## The assistant variants
 
-17 blocks in step 1 vary, 12 of them in the unit HTML and 5 on task cards, and nearly all of them are the same kind of thing, a filename or a
+19 blocks in step 1 vary, 12 of them in the unit HTML and 7 on task cards, and nearly all of them are the same kind of thing, a filename or a
 command: the launcher `<pre>` pair under `workshop`'s lead (`claude` against `copilot`, each after
 the same `cd`), which is the only pair left there now that the setup command has moved to
 `install.txt`,
@@ -2188,36 +2348,33 @@ the same `cd`), which is the only pair left there now that the setup command has
 `tools.what-mcp-costs-you.1`, `tools.large-tool-results.1`, `tools.mcp-servers.5` (Copilot
 only: the IntelliJ route to adding a server, which has no Claude sibling because `connect-one`
 already shows `claude mcp add`), `session.window-not-memory.1`,
-`session.automatic-manual-compaction.3` (when compaction starts, and whether you can move it),
-`context.amnesia-context-fatigue.3`
-(nested inside the audience wrapper, never both attributes on one element), `context.model-stateless.2`
-(what each product calls memory, nested the same way),
-`model.api-vs-subscription.2` and `.3`, the recap's allowance pair `recap.what-costs-do.9`, plus `survive.write.*.label`, `connect.mcp.*` and `connect.reset.*` (`claude mcp add` against `copilot mcp add`), `window.open.*.label` and
+`session.compaction-clear.6` (when compaction starts, and whether you can move it),
+`context.model-stateless.2`
+(what each product calls memory, nested inside the audience wrapper, never both attributes on one
+element), `context.leaves-your-machine.2` (which plan trains on your sessions, nested the same way),
+`model.api-vs-subscription.2` and `.3`, the recap's allowance pair `recap.lead.10`, plus `survive.write.*.label`, `connect.mcp.*` and `connect.reset.*` (`claude mcp add` against `copilot mcp add`), `window.plant.*`, `window.start.*` and `window.undo.*` and
 `PriceOneTurn`'s move set (`read`/`rate`/`sum` against the three `price.*.copilot` moves) on the task
-cards. The last of those replaced `context.read-your-window.1`, which was the Claude and
+cards. The `window` moves replaced `context.read-your-window.1`, which was the Claude and
 Copilot descriptions of `/context`: the paragraphs went and the variant moved onto the move that
-starts the agent. `flag.machine.help.*` is the 18th variant set and the only one on a flag
+starts the agent. `flag.machine.help.*` is the 20th variant set and the only one on a flag
 board; it is counted apart because it is not a block of prose in a unit file, and the mechanism it
 needed is written up under `workshop`.
-`harness.lead.1` names Copilot for **every** reader instead of splitting, because that sentence is a
-list of example harnesses and a list is where a second product belongs. **Both languages carry the
-list, and the Dutch had dropped Copilot out of it**, which is what an ungated block looks like when
-it drifts: nothing filters it, nothing warns, and the second product is simply missing for one
-language. So a rewording of either half visits `nl.json`. `harness.which-one-you-run.2`
-is the second ungated naming and it is there on the same reasoning: it is a **comparison**, so both
-halves have to reach both readers, and gating it would hand each of them one side of a sentence about
-a difference. It is also the only ungated block that names `Copilot CLI` in full, which the paragraph
-below asks of a variant block and which holds here too, since the built-in server is the CLI's.
+`tools.lead.1` names Copilot for **every** reader instead of splitting, because that sentence is a
+list of example harnesses (Claude Code, Copilot, Cursor) and a list is where a second product
+belongs. It carries the step's one definition of the harness, which `harness.lead.1` carried until
+that unit became `agent-patterns` (October 2026). **Both languages carry the list, and the Dutch had
+dropped Copilot out of the old one**, which is what an ungated block looks like when it drifts:
+nothing filters it, nothing warns, and the second product is simply missing for one language. So a
+rewording of either half visits `nl.json`.
 
 Some differences are product behaviour rather than filenames or commands. Large tool output is
-another such pair: its storage thresholds differ between the products. There is also `session.automatic-manual-compaction.3`, a product fact
+another such pair: its storage thresholds differ between the products. There is also `session.compaction-clear.6`, a product fact
 about when compaction starts, and its reasoning is under `session`; the other two follow. `model`'s window section is the larger one and it is **not one of
-the 17 at all**: it is Claude-only whole, with no Copilot half to pair with, and the reasoning is
+the 19 at all**: it is Claude-only whole, with no Copilot half to pair with, and the reasoning is
 under `model`. `tools.what-mcp-costs-you.1` is the smaller, and it is a **product fact**. Copilot CLI ships some MCP servers built in (deliberately unnamed in the prose, since the list
 changes), but availability does not
-mean every definition is always in model context. `ReadYourWindow` still compares a window with
-and without the server the student added. `harness.which-one-you-run.2` owns the difference in
-built-in access; `tools` owns the context cost of loaded descriptions and results.
+mean every definition is always in model context. `tools` owns both the difference in built-in
+access and the context cost of loaded descriptions and results.
 
 **Both products now support tool search** (verified October 2026). Claude Code normally defers
 MCP definitions with a supported model, keeping tool names and server instructions initially.
@@ -2236,22 +2393,22 @@ context; resources are retrieved, and server prompts are reusable templates. See
 [MCP architecture](https://modelcontextprotocol.io/docs/learn/architecture) and
 [server concepts](https://modelcontextprotocol.io/docs/learn/server-concepts).
 
-**Where a variant block names the product, `tools` and `window.open.copilot.label` say `Copilot CLI`
+**Where a variant block names the product, `tools` says `Copilot CLI` (and `window.open.copilot.command` starts `copilot`)
 rather than `Copilot`**, because the CLI is the surface the course assumes and a command, a config
 path or a `/context` readout is untrue of the editor. Two places stay on the bare name and both are right to:
-`model.api-vs-subscription` is about a seat rather than about a client, and `harness.lead.1` says
-"Copilot in your terminal", which names the surface in words.
+`model.api-vs-subscription` is about a seat rather than about a client, and `tools.lead.1`, which
+names Copilot as one example in a list of harnesses.
 
 **What is deliberately shared is the more useful half of this, so do not "fix" it later.**
 `/clear` and `/context` are the same command in both, so
-`session.automatic-manual-compaction.2` and every move of `ReadYourWindow` after the first carry no
+`session.compaction-clear.5` and `OneWindow`'s readings carry no
 variant: the readings run verbatim either way, and Copilot CLI's readout (system prompt, custom
 instructions, system tools, MCP tools, messages, free space, buffer) is this step's four layers
 under other names, so a student on either product reads the same shape off the screen. The paragraph
 that used to list those seven groups is gone with the rest of the section's prose. Plan mode exists in both, so `prompt`'s plan-mode section
 and `CutItUp` are untouched. Compaction is automatic in both, so
 `session`'s compaction argument holds for both; only when it starts differs (at the context limit
-in Claude Code, from about 80% in Copilot CLI), and that is `automatic-manual-compaction.3`'s pair plus
+in Claude Code, from about 80% in Copilot CLI), and that is `compaction-clear.6`'s pair plus
 the one string `WindowFill` swaps, not a reason to split anything else. And `ModelTiers`, `ModelPricing` and
 `PickTheTier` stay exactly as they are: the tiers are taught as dispositions, Copilot's own picker
 offers Claude models among others, and the table is evidence for the one-two-four ratio rather

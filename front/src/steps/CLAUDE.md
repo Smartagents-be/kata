@@ -36,10 +36,16 @@ machine, IDE or terminal. Step 0's `welcome.lead.6` already says that and names 
 shared line rather than a variant pair. Do not put "from a terminal" back into it. Most Copilot
 blocks still read CLI-first, and rewriting them IDE-first is the open "IntelliJ route" item in
 `REVIEW.md`, not something this line claims is done.
+**The course does not say "instruction file" or "instructiebestand"** (October 2026, at the owner's
+asking): ungated prose names the 2 files, "`CLAUDE.md` or `AGENTS.md`" on first mention and "that
+file" after it, and a variant pair names its own (`CLAUDE.md` for Claude Code, `AGENTS.md` for
+Copilot). Two places keep a generic word on purpose: step 1's `flag.machine.*`, which is about the
+user-level file and not the project's, and step 2's `setup` board, which may not name the files its
+flags sit in.
 The product detail behind those blocks, what the course leaves out on purpose, and which facts are
 dated are in **`copilot-specific.md` at the repo root**. Read it before writing a Copilot claim:
 Copilot's billing changed under this course once already.
 
 Where the student is told to set it is step 0's, which varies no block of its own any more, and which
-17 blocks vary (12 in the unit HTML, 5 on task cards) is step 1's; both are
+19 blocks vary (12 in the unit HTML, 7 on task cards) is step 1's; both are
 written up in those steps' files.

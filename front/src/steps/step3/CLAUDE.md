@@ -44,7 +44,7 @@ quiz and `impostor` its card, but it is the only unit here a tutor can put a dra
 from.
 
 **Every section leans on a unit that already argued its engineering claim and none of them may
-re-argue it**, which is the same rule `harness.coordinator.3` follows in step 1 and the constraint
+re-argue it**, which is the same rule `agent-patterns.coordinator.3` follows in step 1 and the constraint
 most easily lost in a rewrite here. The soft skill is the new part; the claim underneath it gets a
 link and one clause. Almost every lean points at step 2. `change` takes six of them, one per section
 and no unit twice: `you-test-engineer` at `engineering` for the floor,
@@ -162,10 +162,11 @@ landing on a repository nobody set up for them. No encouragement, and no third m
 `WhatYouTakeBack`, the course's closing exercise: five moves, one each on
 `change.process-was-bottleneck`, `expectations.say-what-missing`, `change.environment-beats-project`,
 `change.way-working-decision` and the adoption half the step has no unit for. Its `line` move says
-"the repository's own instruction file" and **must not name one**: a task-card move is a locale string
-with no assistant mechanism, so a filename there is wrong for half the room with nothing filtering it,
-and typing the moves per assistant the way step 1's `SurviveTheClear` does is not worth building for
-one word.
+"the repository's own `CLAUDE.md` or `AGENTS.md`" and **must name both or neither**: a task-card move
+is a locale string with no assistant mechanism, so 1 filename there is wrong for half the room with
+nothing filtering it, and typing the moves per assistant the way step 1's `SurviveTheClear` does is
+not worth building for one word. It said "instruction file" until October 2026, when the owner
+dropped that term course-wide (see `front/src/steps/CLAUDE.md`).
 
 Three smaller things. **Both of the step's `CLAUDE.md` mentions carry a `data-assistant` pair**,
 `impostor.nobody-doing-long.2` and `change.environment-beats-project.1`, and they did not until

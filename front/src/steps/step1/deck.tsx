@@ -192,6 +192,16 @@ const deck: SlideSpec[] = [
     figure: <TokenKinds />,
     scale: 1.4,
   },
+  // Prompt caching closes the unit's prose since it moved here from the old harness unit, so its
+  // statement slide follows the cost figure and comes ahead of the exercise, where the unit has it.
+  {
+    id: 'deck-tokens-cache',
+    kind: 'statement',
+    ns: 'step1',
+    eyebrow: 'tokens.title',
+    title: 'deck.tokens.cache.title',
+    note: 'deck.tokens.cache.note',
+  },
   {
     id: 'deck-tokens-pick',
     kind: 'figure',
@@ -318,7 +328,7 @@ const deck: SlideSpec[] = [
     scale: 1.77,
   },
   // Loaded definitions can consume context even for unused tools. Tool search changes what is
-  // loaded; server count is not a context budget. `harness` owns what a sub-agent costs.
+  // loaded; server count is not a context budget. `agent-patterns` owns what a sub-agent costs.
   {
     id: 'deck-tools-list',
     kind: 'statement',
@@ -378,8 +388,8 @@ const deck: SlideSpec[] = [
     figure: <WindowGrid />,
     scale: 1.8,
   },
-  // `deck.context.divider.2` promises that wrong context is worse than missing context, and nothing
-  // in the block proved it.
+  // `deck.context.divider.2` promises that wrong context is worse than missing context; this is
+  // `bad-context-bad.3`'s stale instruction file.
   {
     id: 'deck-context-stale',
     kind: 'statement',
@@ -398,7 +408,7 @@ const deck: SlideSpec[] = [
     scale: 1.36,
     figureWidth: 1000,
   },
-  // The claim the rest of the step rests on, and it was on no slide.
+  // `you-choose-most`'s split, per task against fixed in the project, and why only a gate is certain.
   {
     id: 'deck-context-bad-code',
     kind: 'statement',
@@ -407,23 +417,15 @@ const deck: SlideSpec[] = [
     title: 'deck.context.bad-code.title',
     note: 'deck.context.bad-code.note',
   },
+  // `leaves-your-machine`: what the context costs in trust rather than tokens. The note names no plan,
+  // since which plan trains on what is a dated, per-assistant fact the unit's variant pair carries.
   {
-    id: 'deck-context-falloff',
-    kind: 'figure',
-    ns: 'step1',
-    eyebrow: 'context.title',
-    title: 'deck.context.falloff.title',
-    note: 'deck.context.falloff.note',
-    figure: <ContextFalloff />,
-    scale: 1.12,
-  },
-  {
-    id: 'deck-context-entropy',
+    id: 'deck-context-data',
     kind: 'statement',
     ns: 'step1',
     eyebrow: 'context.title',
-    title: 'deck.context.entropy.title',
-    points: ['deck.context.entropy.1', 'deck.context.entropy.2', 'deck.context.entropy.3'],
+    title: 'deck.context.data.title',
+    note: 'deck.context.data.note',
   },
 
   // ── session ───────────────────────────────────────────────────────────────────────────────
@@ -445,6 +447,14 @@ const deck: SlideSpec[] = [
     scale: 1.59,
   },
   {
+    id: 'deck-session-entropy',
+    kind: 'statement',
+    ns: 'step1',
+    eyebrow: 'session.title',
+    title: 'deck.session.entropy.title',
+    points: ['deck.session.entropy.1', 'deck.session.entropy.2', 'deck.session.entropy.3'],
+  },
+  {
     id: 'deck-session-clear',
     kind: 'figure',
     ns: 'step1',
@@ -462,6 +472,16 @@ const deck: SlideSpec[] = [
     figureWidth: 1400,
   },
   {
+    id: 'deck-session-falloff',
+    kind: 'figure',
+    ns: 'step1',
+    eyebrow: 'session.title',
+    title: 'deck.session.falloff.title',
+    note: 'deck.session.falloff.note',
+    figure: <ContextFalloff />,
+    scale: 1.12,
+  },
+  {
     id: 'deck-session-memory',
     kind: 'statement',
     ns: 'step1',
@@ -472,55 +492,45 @@ const deck: SlideSpec[] = [
     note: 'deck.session.memory.note',
   },
 
-  // ── harness ───────────────────────────────────────────────────────────────────────────────
+  // ── agent-patterns ──────────────────────────────────────────────────────────────────────────
   {
-    id: 'deck-harness',
+    id: 'deck-agent-patterns',
     kind: 'divider',
     ns: 'step1',
     eyebrow: 'step.title',
-    title: 'harness.title',
-    points: ['deck.harness.divider.1', 'deck.harness.divider.2', 'deck.harness.divider.3'],
-  },
-  // Caching comes before the patterns in the unit, and it sat between the fourth pattern figure and
-  // the exercise that tests all four, so a tutor broke stride for prefix caching on the way in.
-  {
-    id: 'deck-harness-cache',
-    kind: 'statement',
-    ns: 'step1',
-    eyebrow: 'harness.title',
-    title: 'deck.harness.cache.title',
-    note: 'deck.harness.cache.note',
+    title: 'agent-patterns.title',
+    points: ['deck.agent-patterns.divider.1', 'deck.agent-patterns.divider.2', 'deck.agent-patterns.divider.3'],
   },
   {
-    id: 'deck-harness-decomposition',
+    id: 'deck-agent-patterns-decomposition',
     kind: 'figure',
     ns: 'step1',
-    eyebrow: 'harness.title',
+    eyebrow: 'agent-patterns.title',
     // The note is not the old one. That one said what the right-hand column now draws; this one is
     // the line the unit's guided aside used to carry, and it is the only place in the deck a room
     // is told to cut before anybody opens an agent.
-    title: 'deck.harness.decomposition.title',
-    note: 'deck.harness.decomposition.note',
+    title: 'deck.agent-patterns.decomposition.title',
+    note: 'deck.agent-patterns.decomposition.note',
     figure: <UnderSpecified />,
     scale: 1.55,
   },
   {
-    id: 'deck-harness-coordinator',
+    id: 'deck-agent-patterns-coordinator',
     kind: 'figure',
     ns: 'step1',
-    eyebrow: 'harness.title',
-    title: 'deck.harness.coordinator.title',
-    note: 'deck.harness.coordinator.note',
+    eyebrow: 'agent-patterns.title',
+    title: 'deck.agent-patterns.coordinator.title',
+    note: 'deck.agent-patterns.coordinator.note',
     figure: <CoordinatorFanout />,
     scale: 1.27,
   },
   {
-    id: 'deck-harness-sequential',
+    id: 'deck-agent-patterns-sequential',
     kind: 'figure',
     ns: 'step1',
-    eyebrow: 'harness.title',
-    title: 'deck.harness.sequential.title',
-    note: 'deck.harness.sequential.note',
+    eyebrow: 'agent-patterns.title',
+    title: 'deck.agent-patterns.sequential.title',
+    note: 'deck.agent-patterns.sequential.note',
     figure: <SequentialSteps />,
     // `SequentialSteps` grew a session fill and a label under the cards, so its viewBox went from
     // 640x284 to 640x340. 1.77 painted about 846px into a frame with roughly 740 under a `top`
@@ -528,21 +538,31 @@ const deck: SlideSpec[] = [
     scale: 1.48,
   },
   {
-    id: 'deck-harness-reflection',
+    id: 'deck-agent-patterns-reflection',
     kind: 'figure',
     ns: 'step1',
-    eyebrow: 'harness.title',
-    title: 'deck.harness.reflection.title',
-    note: 'deck.harness.reflection.note',
+    eyebrow: 'agent-patterns.title',
+    title: 'deck.agent-patterns.reflection.title',
+    note: 'deck.agent-patterns.reflection.note',
     figure: <ReflectionLoop />,
     scale: 1.55,
   },
+  // Routing has no figure in the unit, so it is a statement: the claim and the Jev example, said
+  // out loud, ahead of the board that tests the other patterns.
   {
-    id: 'deck-harness-patterns',
+    id: 'deck-agent-patterns-routing',
+    kind: 'statement',
+    ns: 'step1',
+    eyebrow: 'agent-patterns.title',
+    title: 'deck.agent-patterns.routing.title',
+    note: 'deck.agent-patterns.routing.note',
+  },
+  {
+    id: 'deck-agent-patterns-patterns',
     kind: 'figure',
     ns: 'step1',
-    eyebrow: 'harness.title',
-    title: 'deck.harness.patterns.title',
+    eyebrow: 'agent-patterns.title',
+    title: 'deck.agent-patterns.patterns.title',
     figure: <PatternMatch />,
     // Both `PatternMatch` scenarios were rewritten longer, so the board is taller than 1.28 was
     // fitted for and the Check button along its bottom edge is what a clip takes first.
@@ -627,7 +647,7 @@ const deck: SlideSpec[] = [
   },
 
   // ── truth ─────────────────────────────────────────────────────────────────────────────────
-  // The opening statement goes ahead of both figures, on the harness block's precedent. Both
+  // The opening statement goes ahead of both figures, on the agent-patterns block's precedent. Both
   // drawings are the same claim measured, so the room needs the claim before either of them means
   // anything. The unit's third figure, `TheCutoff`, is deliberately not here: a slide of it ahead of
   // these two would spend that opening statement on the setup. `Proof` closes the block as a second
@@ -714,8 +734,8 @@ const deck: SlideSpec[] = [
   // The unit is prose and nothing else, so guided mode leaves its page empty and this block is the
   // whole of the recap in a room. Three statements rather than the unit's nine bullets: the room has
   // just worked the board, and reading a list back to it is what the page is for. The middle slide
-  // keeps the cost and the move on one line, the way the unit does, because splitting them into a
-  // list of prices and a list of advice is the shape that unit was written out of.
+  // keeps what you know and the move on one line, the way the unit does, because splitting them into
+  // a list of facts and a list of advice is the shape that unit was written out of.
   {
     id: 'deck-recap',
     kind: 'divider',

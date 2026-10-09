@@ -2,8 +2,14 @@ import type { Assistant } from '@/shared/assistant/assistant'
 import { iconSvg } from '@/shared/lib/icons'
 import type { Mode } from '@/shared/mode/mode'
 
-/** One piece of a unit: a run of prose, or the name of a figure the unit registered for that spot. */
-export type Segment = { kind: 'html'; html: string } | { kind: 'figure'; name: string }
+/**
+ * One piece of a unit: a run of prose, the name of a figure the unit registered for that spot, or
+ * the copyable blocks a `<pre>` turned into.
+ */
+export type Segment =
+  | { kind: 'html'; html: string }
+  | { kind: 'figure'; name: string }
+  | { kind: 'code'; blocks: string[] }
 
 export interface PrepareOptions {
   /** Which audience is reading; see `data-audience` below. */
@@ -39,7 +45,7 @@ export interface PrepareOptions {
  *
  * ```html
  * <p data-assistant="claude">Put it in <code>CLAUDE.md</code>.</p>
- * <p data-assistant="copilot">Put it in <code>.github/copilot-instructions.md</code>.</p>
+ * <p data-assistant="copilot">Put it in <code>AGENTS.md</code>.</p>
  * ```
  *
  * No attribute means every assistant, which is the common case: reach for it only where a student
@@ -73,6 +79,15 @@ export interface PrepareOptions {
  * `data-assistant` div**: the figure would vanish for one assistant only, silently, and the author
  * is on the other one. Put the attribute on the marker itself if a figure ever has to differ. A run that is only whitespace is dropped rather
  * than emitted as an empty article.
+ *
+ * **The code blocks.** A top-level `<pre>` is cut out the same way and comes back as plain text,
+ * which `StepContent` renders as `CopyCommand`s: everything a unit sets in a block is something a
+ * student types or pastes, and retyping it by hand is a typo waiting to happen. A prompt, a file or
+ * a config is one block, copied whole. A `<pre data-commands>` is shell commands, one per line, and
+ * becomes one block per line, because a student runs them one at a time and a paste of two lines
+ * runs the second before they have seen what the first did. Like a figure marker, only a direct
+ * child of the body counts; a nested one stays a plain `<pre>`. In guided mode it goes with the
+ * prose, as it always did.
  *
  * The HTML here is first-party content committed to this repo, so it is not sanitised, and neither
  * are the translations, which come from the same place. If a later step ever renders HTML from an
@@ -186,6 +201,16 @@ export function prepareUnit(
       // `data-audience="guided"` blocks included. A unit's quiz or board comes from the registry
       // rather than this HTML, so it is untouched.
       if (mode === 'guided' && !keptHeadings.has(node)) {
+        continue
+      }
+      if (node.nodeName === 'PRE') {
+        flush()
+        // The authored block ends on `</code></pre>`, so a trailing newline is only the source's.
+        const text = (node.textContent ?? '').replace(/\n+$/, '')
+        const blocks = (node as Element).hasAttribute('data-commands')
+          ? text.split('\n').filter((line) => line.trim())
+          : [text]
+        segments.push({ kind: 'code', blocks })
         continue
       }
       run.append(node)

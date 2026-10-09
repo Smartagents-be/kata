@@ -1,11 +1,14 @@
 <!-- The loop is the unit's frame, and the term is named last, after the plain-words version.
-     `harness` is defined in unit 6 and used throughout this one, so the word is anchored at its
-     first use here with a link rather than a second definition. -->
+     This is also where the step defines the harness: `tools` is the first unit that leans on the
+     word, and every unit after it uses it bare. It was defined in a unit of its own once, which came
+     after four units had already used it and then repeated what `context` and this unit say about
+     it, so do not grow a second definition anywhere else. -->
 <p data-i18n="tools.lead.1">
   An agent is a model that works in a loop. You give it a goal, and the model picks the next step.
-  When that step is a tool call, your <a href="/steps/step1/harness">harness</a> runs it and the
-  result goes into the context. Then the model decides again, with that result added. It stops as
-  soon as it needs no more tools and gives you an answer. That is called the agentic loop.
+  When that step is a tool call, the software you work in runs it, such as Claude Code, Copilot or
+  Cursor. That software is the <strong>harness</strong>. It puts the result into the context, and
+  the model decides again with that result added. The loop stops as soon as the model needs no more
+  tools and gives you an answer. That is called the agentic loop.
 </p>
 
 <!-- What the loop looks like on the wire, from Anthropic's tool-use docs (how tool use works, and
@@ -26,7 +29,7 @@
 <div data-figure="agent-loop"></div>
 
 <!-- No agent in this course changes a file with `sed`: both products edit through a dedicated edit
-     tool, which `/context` shows a unit later, and `tools-in-context.commands.1` names `find`
+     tool, and `tools-in-context.commands.1` names `find`
      beside `grep` for the same reason. Every line in that figure's outside column is a command
      your system actually runs, which is why `mcp` is not one of them: a server is where a tool
      comes from rather than a thing that runs, and `McpServer` two figures down owns it. Which tools
@@ -238,7 +241,6 @@
 <!-- The two right calls are worth 25 lines, and every wrong one would also have worked. -->
 <div data-figure="budget-window"></div>
 
-<!-- `/context` and the `ReadYourWindow` task closed this unit until they moved to `context`, which is
-     where the window they read is taken apart. The server `connect-one` connects is what its last
-     move removes, so the two tasks are still a pair one unit apart. Do not bring the command back
-     down here. -->
+<!-- `/context` and a `ReadYourWindow` reading closed this unit once, then moved to `context`. That
+     reading is gone: the card in `context` is `bad-context-bad.3` worked now, and `/context` is used
+     on `model`'s and `workshop`'s cards. Do not bring the command back down here. -->

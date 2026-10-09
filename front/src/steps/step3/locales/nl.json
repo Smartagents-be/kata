@@ -10,7 +10,7 @@
   "take.done": "Gedaan",
   "take.queue.label": "Schrijf op wat er nog staat tussen jouw afgeronde werk en productie, en streep alles weg wat puur typewerk is.",
   "take.sentence.label": "Schrijf de zin op die je bij de volgende demo gaat zeggen over wat de ruwe versie nog niet doet.",
-  "take.line.label": "Kies 1 correctie die je deze week meer dan 1 keer aan een agent hebt gegeven, en schrijf deze in het instructiebestand van de repository zelf.",
+  "take.line.label": "Kies 1 correctie die je deze week meer dan 1 keer aan een agent hebt gegeven, en schrijf deze in de CLAUDE.md of AGENTS.md van de repository zelf.",
   "take.practice.label": "Kies 1 ritueel dat je team in ere houdt, schrijf op voor welke beperking het ooit is bedacht, en geef aan of die beperking er nog steeds is.",
   "take.person.label": "Leg één van de eerste 4 punten voor aan 1 persoon in je team. Noteer een naam en een datum.",
 
@@ -58,7 +58,7 @@
 
   "change.environment-beats-project.heading": "De omgeving weegt zwaarder dan het project",
   "change.environment-beats-project.1.claude": "Wat dit kwartaal opgeleverd wordt, weegt minder dan wat de volgende 4 mensen maandag kunnen. Een omgeving waarin mensen en agents allebei goed werken is het echte resultaat: een <code>CLAUDE.md</code> die zegt hoe deze repository werkt, een skill voor de klus die iedereen met de hand slecht doet, een build die groen is op een verse clone. Elk daarvan bouw je in <a href=\"/steps/step2/setup\">de unit over blijvende instructies</a>.",
-  "change.environment-beats-project.1.copilot": "Wat dit kwartaal opgeleverd wordt, weegt minder dan wat de volgende 4 mensen maandag kunnen. Een omgeving waarin mensen en agents allebei goed werken is het echte resultaat: een <code>.github/copilot-instructions.md</code> die zegt hoe deze repository werkt, een skill voor de klus die iedereen met de hand slecht doet, een build die groen is op een verse clone. Elk daarvan bouw je in <a href=\"/steps/step2/setup\">de unit over blijvende instructies</a>.",
+  "change.environment-beats-project.1.copilot": "Wat dit kwartaal opgeleverd wordt, weegt minder dan wat de volgende 4 mensen maandag kunnen. Een omgeving waarin mensen en agents allebei goed werken is het echte resultaat: een <code>AGENTS.md</code> die zegt hoe deze repository werkt, een skill voor de klus die iedereen met de hand slecht doet, een build die groen is op een verse clone. Elk daarvan bouw je in <a href=\"/steps/step2/setup\">de unit over blijvende instructies</a>.",
   "change.environment-beats-project.2": "Het is ook het werk dat niemand inplant. Tel deze week hoe vaak je een agent iets vertelde dat je al eens verteld had <svg data-icon=\"gem\"></svg> Elke keer is een regel die in een bestand ontbreekt, en die regel is het verschil tussen een truc van jou en een team dat anders werkt.",
 
   "expectations.lead.1": "De mensen rond jou zagen hetzelfde als jij. Een werkende versie van iets, op het scherm, 1 namiddag nadat iemand het gevraagd had. Sommigen vroegen het niet eens: dezelfde tools staan op hun laptop, en een manager zet over de middag zelf een prototype in elkaar. Wat iedereen eruit meenam, is dat alles nu een namiddag duurt.",
@@ -98,7 +98,7 @@
   "impostor.nobody-doing-long.heading": "Niemand doet dit al lang",
   "impostor.nobody-doing-long.1": "Deze tools veranderden 2 keer terwijl deze cursus geschreven werd. Wie er zeker over klinkt, las vorige week iets, net als jij. Niemand heeft hier 10 jaar voorsprong op jou.",
   "impostor.nobody-doing-long.2.claude": "Wat wél optelt, is wat je opgeschreven hebt. Een <code>CLAUDE.md</code> die scherper werd, een skill die dezelfde correctie niet meer nodig heeft, een <code>audit.md</code> die je tegen vorige maand kan diffen. Dat is de ervaring, en ze staat in de repository in plaats van in hoe je je op een donderdag voelt.",
-  "impostor.nobody-doing-long.2.copilot": "Wat wél optelt, is wat je opgeschreven hebt. Een <code>.github/copilot-instructions.md</code> die scherper werd, een skill die dezelfde correctie niet meer nodig heeft, een <code>audit.md</code> die je tegen vorige maand kan diffen. Dat is de ervaring, en ze staat in de repository in plaats van in hoe je je op een donderdag voelt.",
+  "impostor.nobody-doing-long.2.copilot": "Wat wél optelt, is wat je opgeschreven hebt. Een <code>AGENTS.md</code> die scherper werd, een skill die dezelfde correctie niet meer nodig heeft, een <code>audit.md</code> die je tegen vorige maand kan diffen. Dat is de ervaring, en ze staat in de repository in plaats van in hoe je je op een donderdag voelt.",
   "impostor.nobody-doing-long.3": "Stap 1 vertelde je dat een LLM tussen 2 berichten niets bijhoudt. De cursus eindigt met de bestanden die vasthouden wat het anders vergeet. Alles daarna gebeurt in een repository die niemand voor jou heeft klaargezet.",
   "quiz.three-weeks-after-thursday.question": "Op donderdag demonstreer je een werkende feature en iedereen beschouwt deze als 'klaar'. 3 weken later ben je er echter nog steeds aan het coderen, zonder dat er iets wacht op een review of release window. Waar zijn die 3 weken naartoe gegaan?",
   "quiz.three-weeks-after-thursday.cases": "Naar niet-voorziene situaties; randgevallen waar niemand aan dacht bij het schrijven van de vraag, of pas ontstonden toen de feature al half af was.",

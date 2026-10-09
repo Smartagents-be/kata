@@ -49,13 +49,13 @@ import { WindowFill } from './WindowFill'
 import deck from './deck'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
-import { contextQuiz, promptQuiz, truthQuiz } from './quiz'
+import { contextQuiz, promptQuiz, sessionQuiz, truthQuiz } from './quiz'
 import tokens from './units/tokens.html?raw'
 import prompt from './units/prompt.html?raw'
 import tools from './units/tools.html?raw'
 import context from './units/context.html?raw'
 import session from './units/session.html?raw'
-import harness from './units/harness.html?raw'
+import agentPatterns from './units/agent-patterns.html?raw'
 import model from './units/model.html?raw'
 import truth from './units/truth.html?raw'
 import workshop from './units/workshop.html?raw'
@@ -85,8 +85,8 @@ import recap from './units/recap.html?raw'
  * game and nothing else: the per-flag technique lives on the board's own rows, and the house rules
  * the hunt is played under live in step 0's `welcome`.
  *
- * `recap` closes the step behind that: one bullet per unit ahead of `workshop`, each a cost and the
- * move that answers it, plus the pointer at step 2 that used to sit under the board. It is prose and
+ * `recap` closes the step behind that: one bullet per unit ahead of `workshop`, each what to take
+ * away from it and the move it asks of you, plus the pointer at step 2 that used to sit under the board. It is prose and
  * nothing else, so in class the page filters down to nothing and the recap happens at the board off
  * the deck.
  *
@@ -153,9 +153,7 @@ const step1: Step = {
       inlineFigures: {
         'window-grid': <WindowGrid />,
         'oneshot-compare': <OneShotCompare />,
-        'context-falloff': <ContextFalloff />,
-        // The step's only task under a unit that also carries a quiz. It reads the window this unit
-        // takes apart, with the server `tools` connected still in it.
+        // The unit's task: `bad-context-bad.3` worked, a stale rule followed and then corrected.
         'read-your-window': <ReadYourWindow />,
       },
       quiz: contextQuiz,
@@ -169,13 +167,16 @@ const step1: Step = {
         // How full the window is over one session, emptied by compaction and by a clear: when each
         // happens, how far it drops, and that only one of them is a request of its own.
         'window-fill': <WindowFill />,
+        // What compaction does to the work: the summary stays in the frame, the detail leaves it.
+        'context-falloff': <ContextFalloff />,
         'survive-the-clear': <SurviveTheClear />,
       },
+      quiz: sessionQuiz,
     },
     {
-      id: 'harness',
-      title: 'harness.title',
-      html: harness,
+      id: 'agent-patterns',
+      title: 'agent-patterns.title',
+      html: agentPatterns,
       inlineFigures: {
         'under-specified': <UnderSpecified />,
         'coordinator-fanout': <CoordinatorFanout />,

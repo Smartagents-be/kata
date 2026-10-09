@@ -79,7 +79,7 @@ function writeMoves(storageKey: string, moves: ReadonlySet<string>) {
  * submitted.
  * Every task in the course is this component with different data (`PlanItTwice` in step 1's
  * `prompt`, `ConnectOne` in `tools`, `ReadYourWindow` in `context`, `SurviveTheClear` in `session`,
- * `CutItUp` in `harness`, `PriceOneTurn` in `model`, `OneWindow` in `workshop`, `SetYourAssistant`
+ * `CutItUp` in `agent-patterns`, `PriceOneTurn` in `model`, `OneWindow` in `workshop`, `SetYourAssistant`
  * in step 0's `welcome`, `WhereWouldItGo` in step 2's `engineering`, `WhatYouTakeBack` in step 3),
  * so keep additions here rather than in a caller.
  *
