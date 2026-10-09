@@ -42,13 +42,13 @@
 <h2 data-i18n="session.sessions-where-money.heading">The session sets your bill</h2>
 
 <p data-i18n="session.sessions-where-money.1">
-  What stays in the window is paid for again on every turn. Read 3 large files early and you keep
+  What stays in the context is paid for again on every turn. Read 3 large files early and you keep
   paying for them until they are cleared or summarised.
 </p>
 
 <p data-i18n="session.sessions-where-money.2">
-  Quick follow-up questions are cheap, because most of the window then comes from the cache. A new
-  task belongs in a fresh window.
+  Quick follow-up questions are cheap, because most of the context then comes from the cache. A new
+  task belongs in a fresh context.
 </p>
 
 <p data-i18n="session.sessions-where-money.3">
@@ -61,12 +61,12 @@
 
 <p data-i18n="session.automatic-manual-compaction.4">
   Compaction replaces the conversation so far with a summary. The harness does it on its own when
-  the window fills up, or you start it yourself.
+  the context fills up, or you start it yourself.
 </p>
 
 <ul>
   <li data-i18n="session.automatic-manual-compaction.5">
-  <strong>Automatic:</strong> the harness summarises when the window nears its limit, sometimes in
+  <strong>Automatic:</strong> the harness summarises when the context nears its limit, sometimes in
   the middle of a task.
 </li>
   <li data-i18n="session.automatic-manual-compaction.6">
@@ -93,17 +93,17 @@
 <!-- Verified October 2026. Claude Code: code.claude.com/docs/en/model-config (default auto-compact
      thresholds). Copilot CLI: docs.github.com/en/copilot/concepts/agents/copilot-cli/context-management. -->
 <p data-assistant="claude" data-i18n="session.automatic-manual-compaction.3.claude">
-  Claude Code compacts when the window is about full, and <code>/autocompact</code> sets that point lower,
+  Claude Code compacts when the context is about full, and <code>/autocompact</code> sets that point lower,
   anywhere from 100K to 1M tokens, so compaction comes earlier. It still picks the moment. You only
   move it.
 </p>
 
 <p data-assistant="copilot" data-i18n="session.automatic-manual-compaction.3.copilot">
-  Copilot CLI starts early on its own: from about 80% of the window it compacts in the background,
+  Copilot CLI starts early on its own: from about 80% of the context it compacts in the background,
   while you keep working. You cannot change that threshold.
 </p>
 
-<h2 data-i18n="session.window-not-memory.heading">The window is not your memory</h2>
+<h2 data-i18n="session.window-not-memory.heading">The context is not your memory</h2>
 
 <p data-assistant="claude" data-i18n="session.window-not-memory.1.claude">
   Anything that has to survive a clear belongs somewhere other than the transcript. The code on disk
@@ -120,7 +120,7 @@
 </p>
 
 <p data-i18n="session.window-not-memory.2">
-  An afternoon of work leaves the window full of things that are no longer true. A file read in a
+  An afternoon of work leaves the context full of things that are no longer true. A file read in a
   state it has moved past. An approach you dropped. A fix that did not hold. When a problem is
   closed, clear, and start the next session with what survived: the code on disk, which is now
   correct, plus a sentence about where you are.
@@ -128,7 +128,7 @@
 
 <p data-i18n="session.window-not-memory.3">
   What separates people who get good work out of an agent from people who fight it is mostly this:
-  knowing what is in the window right now, and being willing to throw it away.
+  knowing what is in the context right now, and being willing to throw it away.
 </p>
 
 <aside data-audience="self" data-i18n="session.window-not-memory.4">

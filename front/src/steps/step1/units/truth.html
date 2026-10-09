@@ -5,7 +5,7 @@
 </p>
 
 <p data-i18n="truth.lead.2">
-  Everything else has to reach it somehow. You put it in the window yourself, or the agent goes and
+  Everything else has to reach it somehow. You put it in the context yourself, or the agent goes and
   finds it with <a href="/steps/step1/tools">a tool</a>. Ask which version of Spring Boot this
   project builds on and a current agent opens <code>pom.xml</code> on its own. What it does not look
   up is what it thinks it already knows: how an API works, which dependency a feature needs, what
@@ -40,7 +40,7 @@
 <h2 data-i18n="truth.grounding.heading">Grounding</h2>
 
 <p data-i18n="truth.grounding.1">
-  Put the evidence in the window and the answer changes source. The <code>pom.xml</code> on disk, the
+  Put the evidence in the context and the answer changes source. The <code>pom.xml</code> on disk, the
   release notes fetched off the web, the output of a command that ran a second ago: once any of it
   is in the context, the model is reading rather than remembering. That is a grounded answer, and it
   is the one you want for anything with a fact behind it.
@@ -52,7 +52,7 @@
 <div data-figure="trained-or-grounded"></div>
 
 <p data-i18n="truth.grounding.2">
-  Only the window changed. How a page gets in there is <a href="/steps/step1/tools">the unit on the
+  Only the context changed. How a page gets in there is <a href="/steps/step1/tools">the unit on the
   agentic loop</a>. Your part is asking for it, because an agent that feels sure does not ask
   itself. "Which dependency does <code>@WebMvcTest</code> need" gets the answer it remembers. "Read
   the Spring Boot 4.1 docs on test slices, then tell me which dependency <code>@WebMvcTest</code>
@@ -91,7 +91,7 @@
 <h2 data-i18n="truth.hallucinations.heading">Hallucinations</h2>
 
 <p data-i18n="truth.hallucinations.1">
-  With nothing in the window to read, the model answers anyway. Answering is what it does, and you
+  With nothing in the context to read, the model answers anyway. Answering is what it does, and you
   have met it once already: the quiz back in <a href="/steps/step1/context">the context unit</a>
   asked why a confident answer about a UserService missed the class entirely. Ask which method on
   <code>Catalog</code> filters titles by author and you get <code>findAllByAuthorOrdered</code>,

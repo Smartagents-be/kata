@@ -10,6 +10,12 @@ The rules that span the whole curriculum are in the parent `front/src/steps/CLAU
 system and the audience and assistant mechanisms are in `front/CLAUDE.md`, and the repo-wide
 prohibitions are in the root `CLAUDE.md`. None of them is repeated here.
 
+**The course says "context", not "window" or "venster".** At the owner's asking (October 2026)
+every student-facing string in steps 2 and 3 calls what the agent holds "the context" ("de context"
+in Dutch). There is no exception for size or capacity either: "context window" and
+"contextvenster" are gone from student text, as step 1's file records. Usage and billing windows, time windows and
+component names such as `TwoWindows`, `LoopInWindow` and `WindowSpend` are untouched.
+
 `step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Ten
 units, `evolution`, `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`,
 `enablement`, `parallel` and `goals`, four of
@@ -1012,7 +1018,7 @@ and `Sonnet`, and `research-frontier-model.3` under it is a `<small>` line sayin
 unit. The tags are literals rather than locale keys, like every model name in the course.
 
 The frontier tier is the seam worth knowing about: **`step1/model` names it and deliberately stops**,
-on the grounds that what it is good at is a question about work rather than about windows. This
+on the grounds that what it is good at is a question about work rather than about context. This
 section is the answer to that, so the two are a pair and the step-1 half must not grow one of its
 own.
 

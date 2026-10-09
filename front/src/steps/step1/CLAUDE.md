@@ -79,6 +79,30 @@ readout's own terms. The lead once
 listed instructions, tools and "what is left of the conversation" and closed on the model mixing the
 parts up; the owner found it odd, the list missed the student's own instruction files and what the
 agent read, and nothing in the unit develops the mixing up, so the clause went (October 2026).
+**The step calls it "context", not "window" or "venster"**, everywhere a student reads it, at the
+owner's asking (October 2026). **There is no exception for size or capacity**: a first
+pass kept "context window" and "contextvenster" there (how full it is, when compaction starts, a
+larger model), and the owner asked for "context" always, so "the context is full" and "a larger
+context" it is. `deck.model.money.3` became "Room for a large context costs nothing by itself", since
+"a large context costs nothing" would say the opposite of the slide. Dutch "de context" is common gender, so a sentence that said "het
+venster" changes its articles and pronouns too. The Claude 5-hour usage window is a billing window,
+a different thing, and keeps its name. Keys, ids and component names (`window.*`, `WindowGrid`,
+`ReadYourWindow`, `OneWindow`) were not renamed: a key is an identifier, not a word on the page.
+**`context.model-stateless.2` says what memory is**, a `data-assistant` pair added at the owner's
+asking (October 2026) once `WindowGrid` put `Memory files` on the page with nothing defining it. Its
+point is that memory is not something the model remembers but text the harness hands back every
+session, which is why it sits under "A model is stateless", straight after `.1`'s "only files last".
+The facts are dated and were read on 9 October 2026: Claude Code's memory page
+(code.claude.com/docs/en/memory) calls `CLAUDE.md` and auto memory "two complementary memory
+systems", both loaded every session, and loads the first 200 lines (or 25KB) of `MEMORY.md`; GitHub's
+Copilot Memory page says it is in public preview, Copilot stores the facts itself, and unused ones are
+deleted after 28 days. That page does not mention IntelliJ, so the Copilot half names no surface. How
+to write an instruction file stays step 2's `setup`; this paragraph only says what the word means.
+`.1` used to close on "Only files last, and the agent can write those itself", which said neither
+between what nor how; it now says a new session starts without the conversation but with the files the harness
+reads in at the start (a session is never empty, which an earlier "what stays is in files" hid), and
+`.2` opens on "those files", so neither half says the loading twice. The old `.2` (resending costs focus) became `.3`, and its "that whole transcript" became "the whole
+transcript", since `.1` is no longer directly above it.
 **Three of them are deliberately not in that
 list**: four layers fill the window, `tokens` is the unit it is counted in, `model` is the reader
 on the other end of it and `truth` is where that reader's answers come from. `tokens` and `model`
@@ -669,6 +693,12 @@ a tick that vanished on the next navigation would read as broken progress. And *
 on purpose, since a file that names them does the analysis for the student. Do not add a worked cut,
 a `solve.md`, a `plan-solve.md`, or an implementation.
 
+**`context.task-specific.2` announces `OneShotCompare` before it is shown** (October 2026): the
+section ran 2 paragraphs about code and then a figure of 2 landing pages that only `.3`, under it,
+explained, and the owner found the figure without context. So the old `.1` and `.2` were merged
+into `.1` (what the model has to go on), `.2` now says what the 2 pages are (1 prompt, one with a
+Dribbble reference), and `.3` is only the conclusion. The old "check that the agent has those
+before it changes code" went, since `you-choose-most` already carries that move.
 `context.task-specific.4` closes that unit's section on task-specific evidence and is `OneShotCompare`'s payoff turned on the
 student's own repository: the codebase is the reference image they hand over every turn, so a
 project that drifted is the drift being copied rather than worked around. It reads the figure from
@@ -1653,7 +1683,7 @@ machine-shaped, so they are data in the component with no key and no `nl` entry,
 
 None of the three carries a caption, on the rule that a caption states provenance and the prose does
 the explaining. `TrainedOrGrounded` and `AnswerProvenance` are read by the paragraph under them:
-`truth.grounding.2` opens on "Only the window changed" and `truth.hallucinations.2` on two of the
+`truth.grounding.2` opens on "Only the context changed" and `truth.hallucinations.2` on two of the
 three having been read, so **rewriting either figure means visiting that opening sentence**, in both
 languages. `TheCutoff` is the one that closes its section rather than opening one, so it is read by
 the two paragraphs above it and there is no sentence under it to keep in step.
@@ -2150,7 +2180,7 @@ in there, that is their build to unpick and the flags above are what they have d
 
 ## The assistant variants
 
-16 blocks in step 1 vary, 11 of them in the unit HTML and 5 on task cards, and nearly all of them are the same kind of thing, a filename or a
+17 blocks in step 1 vary, 12 of them in the unit HTML and 5 on task cards, and nearly all of them are the same kind of thing, a filename or a
 command: the launcher `<pre>` pair under `workshop`'s lead (`claude` against `copilot`, each after
 the same `cd`), which is the only pair left there now that the setup command has moved to
 `install.txt`,
@@ -2160,12 +2190,13 @@ only: the IntelliJ route to adding a server, which has no Claude sibling because
 already shows `claude mcp add`), `session.window-not-memory.1`,
 `session.automatic-manual-compaction.3` (when compaction starts, and whether you can move it),
 `context.amnesia-context-fatigue.3`
-(nested inside the audience wrapper, never both attributes on one element),
+(nested inside the audience wrapper, never both attributes on one element), `context.model-stateless.2`
+(what each product calls memory, nested the same way),
 `model.api-vs-subscription.2` and `.3`, the recap's allowance pair `recap.what-costs-do.9`, plus `survive.write.*.label`, `connect.mcp.*` and `connect.reset.*` (`claude mcp add` against `copilot mcp add`), `window.open.*.label` and
 `PriceOneTurn`'s move set (`read`/`rate`/`sum` against the three `price.*.copilot` moves) on the task
 cards. The last of those replaced `context.read-your-window.1`, which was the Claude and
 Copilot descriptions of `/context`: the paragraphs went and the variant moved onto the move that
-starts the agent. `flag.machine.help.*` is the 17th variant set and the only one on a flag
+starts the agent. `flag.machine.help.*` is the 18th variant set and the only one on a flag
 board; it is counted apart because it is not a block of prose in a unit file, and the mechanism it
 needed is written up under `workshop`.
 `harness.lead.1` names Copilot for **every** reader instead of splitting, because that sentence is a
@@ -2181,7 +2212,7 @@ below asks of a variant block and which holds here too, since the built-in serve
 Some differences are product behaviour rather than filenames or commands. Large tool output is
 another such pair: its storage thresholds differ between the products. There is also `session.automatic-manual-compaction.3`, a product fact
 about when compaction starts, and its reasoning is under `session`; the other two follow. `model`'s window section is the larger one and it is **not one of
-the 16 at all**: it is Claude-only whole, with no Copilot half to pair with, and the reasoning is
+the 17 at all**: it is Claude-only whole, with no Copilot half to pair with, and the reasoning is
 under `model`. `tools.what-mcp-costs-you.1` is the smaller, and it is a **product fact**. Copilot CLI ships some MCP servers built in (deliberately unnamed in the prose, since the list
 changes), but availability does not
 mean every definition is always in model context. `ReadYourWindow` still compares a window with

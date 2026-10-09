@@ -22,12 +22,25 @@
   <h2 data-i18n="context.model-stateless.heading">A model is stateless</h2>
 
   <p data-i18n="context.model-stateless.1">
-    The model remembers nothing between requests: the harness resends everything each time. Only
-    files last, and the agent can write those itself.
+    The model remembers nothing between requests: each time, the harness sends the whole conversation
+    again. A new session starts without that conversation, but with the files the harness reads in at
+    the start.
   </p>
 
-  <p data-i18n="context.model-stateless.2">
-    Sending that whole transcript again costs focus as well as money. Clear the session often,
+  <p data-assistant="claude" data-i18n="context.model-stateless.2.claude">
+    Claude Code calls those files memory. You write <code>CLAUDE.md</code>. Claude also keeps its own notes per project and loads
+    the first 200 lines of them. Type <code>/memory</code> to see both. So memory is not something the
+    model remembers: it is text that comes back into the context every session.
+  </p>
+
+  <p data-assistant="copilot" data-i18n="context.model-stateless.2.copilot">
+    Copilot works the same way. You write <code>.github/copilot-instructions.md</code>. With Copilot Memory, still in preview,
+    Copilot also stores facts about a repository itself, and deletes a fact it has not used for 28
+    days. So memory is not something the model remembers: it is text that is handed to it again.
+  </p>
+
+  <p data-i18n="context.model-stateless.3">
+    Sending the whole transcript again costs focus as well as money. Clear the session often,
     and always when you switch to something unrelated <svg data-icon="coin"></svg> A
     fresh session keeps the model focused, even when it has to re-read a file to solve the problem
     in front of it.
@@ -38,15 +51,16 @@
 </h2>
 
   <p data-i18n="context.task-specific.1">
-  The model predicts using learned patterns and the input it receives. Without the relevant files
-  and requirements, it has little evidence about your particular project. A plausible answer can
-  still be wrong for your code.
-</p>
+    The model predicts from what it learned and what is in the context. Without the current code, the
+    failing case and your conventions, it has little to go on. You get an answer that could fit any
+    project, but not necessarily yours.
+  </p>
 
   <p data-i18n="context.task-specific.2">
-  Relevant context makes your task explicit: the current implementation, the failing case and the
-  conventions to follow. Check that the agent has those before asking it to change the code.
-</p>
+    Below you can see how much 1 piece of context changes. Both pages come from the same prompt: a
+    landing page for a book rental. On the left the model got only that prompt, on the right also 1
+    reference image from Dribbble.
+  </p>
 </div>
 
 <!-- Still part of the "Context makes the task specific" section, but self-learning only. The figure marker
@@ -56,8 +70,8 @@
 <div data-figure="oneshot-compare" data-audience="self"></div>
 
 <p data-audience="self" data-i18n="context.task-specific.3">
-  The one on the left is the prompt on its own. The one on the right got the same prompt with 1 reference image from Dribbble pinned to it. That single piece of context steered it somewhere less
-  generic straight away. It is not finished, but it is closer.
+  That 1 image steered the design away from the generic straight away. It is not finished, but it is
+  closer to what you want.
 </p>
 
 <!-- The figure's payoff turned on the student's own repository. It stays descriptive on purpose:
@@ -92,7 +106,7 @@
 
   <p data-i18n="context.bad-context-bad.4">
     And it slips in by accident more than you would think. Chase a bug through a long session and
-    finally kill it. The fix lands in your code, but the whole hunt stays in the window. The broken
+    finally kill it. The fix lands in your code, but the whole hunt stays in the context. The broken
     version, the wrong turns, the diff you reverted, all still sitting there. Ask for the next thing
     without clearing and the model reads that dead code as live. It can decide your fix was the
     mistake, put the bug back, and the first you hear of it is the test going red again
@@ -116,7 +130,7 @@
   <h2 data-i18n="context.more-context-not.heading">More context is not free</h2>
 
   <p data-i18n="context.more-context-not.1">
-  Everything in the window is sent again with every message. The cache makes that cheaper, not free.
+  Everything in the context is sent again with every message. The cache makes that cheaper, not free.
 </p>
 
   <p data-i18n="context.more-context-not.2">
@@ -152,7 +166,7 @@
 </p>
 
   <p data-i18n="context.entropy.2">
-    That is entropy: disorder in the window rises with every turn unless somebody spends energy
+    That is entropy: disorder in the context rises with every turn unless somebody spends energy
     pushing it back down. You see it when the agent starts contradicting itself, re-proposes an idea
     you already rejected, or edits a file back to a version you moved past an hour ago.
   </p>
@@ -168,7 +182,7 @@
   <h2 data-i18n="context.amnesia-context-fatigue.heading">Amnesia and context fatigue</h2>
 
   <p data-i18n="context.amnesia-context-fatigue.1">
-    Because the window is finite, something eventually has to give. Older material is summarised,
+    Because the context is finite, something eventually has to give. Older material is summarised,
     and the summary is what stays. The constraint you gave at the start is now 1 line in it, or it
     did not make the cut at all.
   </p>
@@ -193,16 +207,16 @@
        an element with `data-audience` and `data-assistant` on it renders for one reader in four,
        and nothing warns about the three it does not. -->
   <p data-assistant="claude" data-i18n="context.amnesia-context-fatigue.3.claude">
-    When the window is compacted, detail is the first thing to go. For an instruction that has to
+    When the context is compacted, detail is the first thing to go. For an instruction that has to
     survive that, write it in <code>CLAUDE.md</code>, which is read at the start of every session
-    and again after compaction. And keep the window from filling up in the first place: cut each
+    and again after compaction. And keep the context from filling up in the first place: cut each
     task small enough that it finishes before the summarising begins.
   </p>
 
   <p data-assistant="copilot" data-i18n="context.amnesia-context-fatigue.3.copilot">
-    When the window is compacted, detail is the first thing to go. For an instruction that has to
+    When the context is compacted, detail is the first thing to go. For an instruction that has to
     survive that, write it in <code>.github/copilot-instructions.md</code>, which is read at the
-    start of every session. And keep the window from filling up in the first place: cut each task
+    start of every session. And keep the context from filling up in the first place: cut each task
     small enough that it finishes before the summarising begins.
   </p>
 
@@ -217,7 +231,7 @@
 
 <h2 data-i18n="ui:quiz.title">Test your knowledge</h2>
 
-<h3 data-i18n="context.read-your-window.heading">Read your own window</h3>
+<h3 data-i18n="context.read-your-window.heading">Read your own context</h3>
 
 <!-- The unit's one task, and the only place in the course `/context` is used rather than described:
      the prose that described it was removed and nothing above may grow a replacement. The card
