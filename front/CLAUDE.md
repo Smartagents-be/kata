@@ -365,9 +365,11 @@ hold its data: the registry passes the block, the image path and the namespace s
 
 Every component in `front/src/` follows this, `QuizPanel.tsx` included. Only three things are
 exempt: the generated primitives in `shared/components/ui/`, which are styled wrappers rather than
-components in their own right; `App.tsx`, which renders routes and no elements; and an id that has
+components in their own right (`.oxlintrc.json` also turns `only-export-components` off for that
+folder, since shadcn exports a variants helper beside the component and later generated pieces
+import it); `App.tsx`, which renders routes and no elements; and an id that has
 to be unique per *instance* rather than per component, such as the `aria-labelledby` target in
-`ContextDiagram` that comes from `useId()`.
+`PromptParts` that comes from `useId()`.
 
 A component that renders one of several variants keeps one id and puts the variant on
 `data-state`: a `FlagRow` is always `#flags-item-N` with `data-state="solved" | "locked"`, and
@@ -494,7 +496,7 @@ for a figure: it reads `useAssistant()` itself, and the `data-figure` marker nev
 Which units this is actually used in, and the places it deliberately is not, are in
 `front/src/steps/step0/CLAUDE.md` and `front/src/steps/step1/CLAUDE.md`, with the cross-step scope in
 `front/src/steps/CLAUDE.md`. The short version: step 0 tells the student to set it and varies no
-block of its own, step 1 varies 15 (11 in its unit HTML, 4 on task cards), and step 2 varies none: its one hook, in `gates`, is a pre-edit guard that
+block of its own, step 1 varies 16 (11 in its unit HTML, 5 on task cards), and step 2 varies none: its one hook, in `gates`, is a pre-edit guard that
 works the same in both. Everything else is shared on purpose.
 
 ## Languages

@@ -5,7 +5,7 @@ import { AnswerProvenance } from './AnswerProvenance'
 import { BudgetWindow } from './BudgetWindow'
 import { BundleCompare } from './BundleCompare'
 import { ConnectOne } from './ConnectOne'
-import { ContextDiagram } from './ContextDiagram'
+import { WindowGrid } from './WindowGrid'
 import { ContextFalloff } from './ContextFalloff'
 import { CoordinatorFanout } from './CoordinatorFanout'
 import { CutItUp } from './CutItUp'
@@ -151,7 +151,7 @@ const step1: Step = {
       title: 'context.title',
       html: context,
       inlineFigures: {
-        'context-diagram': <ContextDiagram />,
+        'window-grid': <WindowGrid />,
         'oneshot-compare': <OneShotCompare />,
         'context-falloff': <ContextFalloff />,
         // The step's only task under a unit that also carries a quiz. It reads the window this unit

@@ -220,6 +220,10 @@ filtering, so what is on screen is what the service returned. It is not a unit a
 but step 1's `workshop` unit now points the student at it to work the flags. **Neither that
 dumbness nor the "in the same order" promise in `catalog.description` may be softened**: they are
 what makes the page trustworthy as an instrument, which is what the board now leans on.
+`/catalog/shelf` is its paged twin (3 titles a page behind fetch and next, each with a long
+bookseller's note so a browser's snapshots weigh something), unlisted in the sidebar,
+and exists only for the browser route of step 1's `ConnectOne` card: a browser needs several steps
+there, which is what that card measures. It does not replace `/catalog` and must not be merged into it.
 
 ## Running it
 

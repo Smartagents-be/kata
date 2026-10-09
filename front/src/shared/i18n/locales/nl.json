@@ -54,6 +54,12 @@
   "catalog.fetching": "Ophalen…",
   "catalog.count": "{{count}} teruggekregen",
   "catalog.empty": "De service gaf helemaal niets terug.",
+  "shelf.nav": "De plank",
+  "shelf.title": "Titels uit de service, 3 per keer",
+  "shelf.description": "Dezelfde call naar /api/titles, per pagina getoond.",
+  "shelf.previous": "Vorige",
+  "shelf.next": "Volgende",
+  "shelf.page": "pagina {{page}} van {{pages}}",
   "catalog.error": "Kan de service niet bereiken. Draait die op poort 8080?",
 
   "step.notFound.title": "Stap niet gevonden",

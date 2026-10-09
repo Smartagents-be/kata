@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ChoiceMark, Panel, PanelNote } from '@/shared/components/Panel'
+import { WithCode } from '@/shared/components/WithCode'
 import { Button } from '@/shared/components/ui/button'
 import { useStepText } from '@/shared/i18n/useStepText'
 import { shuffled } from '@/shared/lib/shuffle'
@@ -68,7 +69,7 @@ export function BudgetWindow() {
       block="budget-window"
       state={checked ? 'checked' : 'open'}
       title={text('budget.title')}
-      description={text('budget.description')}
+      description={<WithCode id="budget-window-description" text={text('budget.description')} />}
       className="my-8"
       contentClassName="flex flex-col gap-5"
     >

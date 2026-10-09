@@ -3,7 +3,6 @@ import { AgentLoop } from './AgentLoop'
 import { AnswerProvenance } from './AnswerProvenance'
 import { BudgetWindow } from './BudgetWindow'
 import { BundleCompare } from './BundleCompare'
-import { ContextDiagram } from './ContextDiagram'
 import { ContextFalloff } from './ContextFalloff'
 import { CoordinatorFanout } from './CoordinatorFanout'
 import { ExactAsk } from './ExactAsk'
@@ -31,6 +30,7 @@ import { ToolsInContext } from './ToolsInContext'
 import { TrainedOrGrounded } from './TrainedOrGrounded'
 import { UnderSpecified } from './UnderSpecified'
 import { WindowFill } from './WindowFill'
+import { WindowGrid } from './WindowGrid'
 
 /**
  * Step 1 on the board.
@@ -370,13 +370,13 @@ const deck: SlideSpec[] = [
     points: ['deck.context.divider.1', 'deck.context.divider.2', 'deck.context.divider.3'],
   },
   {
-    id: 'deck-context-diagram',
+    id: 'deck-context-window-grid',
     kind: 'figure',
     ns: 'step1',
     eyebrow: 'context.title',
     title: 'deck.context.diagram.title',
-    figure: <ContextDiagram />,
-    scale: 1.59,
+    figure: <WindowGrid />,
+    scale: 1.8,
   },
   // `deck.context.divider.2` promises that wrong context is worse than missing context, and nothing
   // in the block proved it.

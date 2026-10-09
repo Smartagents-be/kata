@@ -41,5 +41,5 @@ dated are in **`copilot-specific.md` at the repo root**. Read it before writing 
 Copilot's billing changed under this course once already.
 
 Where the student is told to set it is step 0's, which varies no block of its own any more, and which
-15 blocks vary (11 in the unit HTML, 4 on task cards) is step 1's; both are
+16 blocks vary (11 in the unit HTML, 5 on task cards) is step 1's; both are
 written up in those steps' files.

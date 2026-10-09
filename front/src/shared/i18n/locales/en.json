@@ -54,6 +54,12 @@
   "catalog.fetching": "Fetching…",
   "catalog.count": "{{count}} returned",
   "catalog.empty": "The service returned nothing at all.",
+  "shelf.nav": "The shelf",
+  "shelf.title": "Titles from the service, 3 at a time",
+  "shelf.description": "The same call to /api/titles, shown a page at a time.",
+  "shelf.previous": "Previous",
+  "shelf.next": "Next",
+  "shelf.page": "page {{page}} of {{pages}}",
   "catalog.error": "Could not reach the service. Is it running on port 8080?",
 
   "step.notFound.title": "Step not found",

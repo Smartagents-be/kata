@@ -6,8 +6,8 @@ import { useTranslation } from 'react-i18next'
  *
  * **It replaced `PromptInContext`, which drew the oval and nothing else.** That figure said "this
  * is a shape, and it is small", and the course owner read it as a figure about nothing. The oval is
- * kept, with `ContextDiagram`'s prompt geometry and fills, so the step still meets the prompt as one
- * shape before `ToolsInContext` puts a frame round it. What is new is what hangs off it.
+ * kept, with the prompt geometry and fills the removed `ContextDiagram` shared, so the step still meets
+ * the prompt as one shape before `ToolsInContext` puts a frame round it. What is new is what hangs off it.
  *
  * **The 6 parts are one ask any developer reads without knowing this repo**: a 404 for a user that
  * does not exist. It was an ask against step 1's own `TitleController` first, and the course owner

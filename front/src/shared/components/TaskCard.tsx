@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { CopyCommand } from '@/shared/components/CopyCommand'
 import { Panel, PanelChip, PanelRow } from '@/shared/components/Panel'
+import { WithCode } from '@/shared/components/WithCode'
 import { useStepText } from '@/shared/i18n/useStepText'
 import { cn } from '@/shared/lib/utils'
 import { CheckTick } from '@/shared/motion/CheckTick'
@@ -130,7 +131,8 @@ export function TaskCard({
    * The prefix the card's own keys sit under: `<prefix>.title`, `<prefix>.todo`, `<prefix>.done`,
    * and `<prefix>.<move>.label` for each move. `<prefix>.description` is optional; with no entry the
    * card is a title and its moves. `<prefix>.<move>.command` is optional too, and puts a copyable
-   * command under that move.
+   * command under that move. A label or the description may wrap a command name or a path in
+   * `<code>…</code>`, which `WithCode` sets as inline code; no other markup is read.
    */
   prefix: string
   /**
@@ -182,7 +184,11 @@ export function TaskCard({
         perMove ? t('task.progress', { done: workedCount, total: moves.length }) : undefined
       }
       title={text(`${prefix}.title`)}
-      description={has(`${prefix}.description`) ? text(`${prefix}.description`) : undefined}
+      description={
+        has(`${prefix}.description`) ? (
+          <WithCode id={`${block}-description`} text={text(`${prefix}.description`)} />
+        ) : undefined
+      }
       className={className}
     >
       {/*
@@ -233,7 +239,7 @@ export function TaskCard({
                       workedMove && 'text-muted-foreground',
                     )}
                   >
-                    {text(`${prefix}.${move}.label`)}
+                    <WithCode id={`${id}-label`} text={text(`${prefix}.${move}.label`)} />
                   </span>
                   {workedMove && (
                     <span
@@ -248,7 +254,7 @@ export function TaskCard({
                 </button>
               ) : (
                 <span id={`${id}-label`} data-component="TaskCard" className="text-sm">
-                  {text(`${prefix}.${move}.label`)}
+                  <WithCode id={`${id}-label`} text={text(`${prefix}.${move}.label`)} />
                 </span>
               )}
               {has(`${prefix}.${move}.command`) && (

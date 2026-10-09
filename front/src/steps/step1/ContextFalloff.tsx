@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next'
  * That distinction is the figure. It drew the oldest turns spilling out of the frame once, which is
  * the branch `amnesia-context-fatigue.1` no longer claims: both harnesses this course targets
  * compact automatically, so the summary is what a student actually meets and the detail is what
- * they lose. Static on purpose, like the ContextDiagram it sits below, so it reads at a glance.
+ * they lose. Static on purpose, so it reads at a glance.
  */
 export function ContextFalloff() {
   const { t } = useTranslation('step1')
@@ -38,7 +38,7 @@ export function ContextFalloff() {
           {t('falloff.description')}
         </title>
 
-        {/* the window: one fixed frame, the same teal outline as the ContextDiagram */}
+        {/* the window: one fixed frame, the same teal outline as the step's other context frames */}
         <rect
           id="context-falloff-window"
           data-component="ContextFalloff"

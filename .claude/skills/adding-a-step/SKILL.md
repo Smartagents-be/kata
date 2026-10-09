@@ -20,7 +20,7 @@ unit.
    `exercisePlaceholder`), or both. Everything the student reads is a **key** into this step's
    namespace, except `html`, which is the imported file itself.
    A unit may also carry a `figure`: a React element rendered under the prose. Drawings live in
-   the step folder (`steps/step1/ContextDiagram.tsx`), because their geometry and how they grow
+   the step folder (`steps/step1/ContextFalloff.tsx`), because their geometry and how they grow
    from unit to unit is the step's business. `shared` only gives the element a place to sit,
    which is why the registry is `.tsx` rather than `.ts`.
    A drawing that only reads correctly *next to* the paragraph explaining it goes in

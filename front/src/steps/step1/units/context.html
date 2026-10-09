@@ -1,25 +1,22 @@
 <!-- In class the teacher walks through this at the board, so the page keeps only the
-     diagram and the quiz. Self-learners read the whole thing. -->
+     figures and the quiz. Self-learners read the whole thing. -->
 <!-- `prompt` and `tools` both use the word before this unit arrives, and `prompt` used to open on a
      definition of it. That definition lives here now, in one clause inside the sentence that already
      describes the block, because this is the unit named after the word and the unit that takes the
-     window apart. `recap` and step 3 both link back here for it. The populated oval below is the
+     window apart. `recap` and step 3 both link back here for it. `WindowGrid` below is the
      same claim drawn. -->
 <div data-audience="self">
   <p data-i18n="context.lead.1">
-  Each turn, the model gets 1 request: instructions, tools and what is left of the conversation.
-  That is the <strong>context</strong>, and the model can mix its parts up.
+  Each turn, the harness sends the model 1 request. Everything in it is the <strong>context</strong>.
 </p>
 </div>
 
 
-<!-- The window with what fills it in it, and the payoff of the two frames before it: `prompt` drew one
-     region against this oval and `tools` drew a tool across its border, so this is the first time a
-     student sees the lot sharing one frame. It was drawn empty when this unit opened the step and is
-     not any more. Not to scale; the share-by-volume figure is `SessionMakeup` in `session`. Shown to
-     both audiences, because in class the page keeps only the diagram and the quiz. The marker is
-     top-level so it renders. -->
-<div data-figure="context-diagram"></div>
+<!-- What the request holds, named, in the shape of the `/context` readout. It carries the list the lead
+     sentence used to, and it replaced `ContextDiagram`, the oval with prompt, resources and tools in
+     it. A redraw rather than a screenshot, so it holds for both assistants. Top-level so it renders
+     for both audiences. -->
+<div data-figure="window-grid"></div>
 
 <div data-audience="self">
   <h2 data-i18n="context.model-stateless.heading">A model is stateless</h2>

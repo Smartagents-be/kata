@@ -21,8 +21,8 @@ const STORAGE_KEY = 'kata.step1.shutter'
  * nothing sitting on it.
  *
  * The row is graded the same way everything else here is, a salted SHA-256 in the browser, so it
- * works with the service down. Nothing about the screenshot is checked: the PNG in the student's own
- * project is the proof that they drove the browser, and the flag is the proof they looked at it.
+ * works with the service down. The agent reads the flag off the page and prints it: a screenshot
+ * alone left the student reading it off a PNG, and the move asks for the flag itself.
  */
 export function ShutterFlag() {
   const { text } = useStepText('step1')

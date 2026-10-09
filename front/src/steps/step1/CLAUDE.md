@@ -37,19 +37,18 @@ back into `prompt`, and if one is ever wanted again, `context` is the unit that 
 and links Matt Pocock's `grill-me` skill in `mattpocock/skills` as the course's first external link
 (new tab). It says he publishes it, not that he invented it, and it stays one shared block because
 typing the phrase works in both products without installing anything. The other is
-that the three oval figures run as a sequence rather than an empty frame followed by fillings of it.
-`PromptParts` draws the prompt and what it can carry, with nothing around it, `ToolsInContext` draws the frame with a
-tool across its border, and `ContextDiagram` in `context` is the populated window at the end,
-holding `prompt`, `resources` and `tools`. **`ContextDiagram` was drawn empty when `context` opened
-the step and is not any more**, so nothing may describe it as the empty one. **The prompt's oval
+that the oval figures run as a sequence rather than an empty frame followed by fillings of it.
+`PromptParts` draws the prompt and what it can carry, with nothing around it, and `ToolsInContext`
+draws the frame with a tool across its border. **`ContextDiagram`, the populated oval that closed the
+sequence in `context` (`prompt`, `resources` and `tools` inside one frame), was removed** at the
+course owner's asking (October 2026): `WindowGrid` names what the window holds in the readout's own
+terms, and the oval said less. Do not bring it back beside `WindowGrid`. **The prompt's oval
 lost its frame on purpose and must not get it back**: a student meets that figure before they have
-met the window, so a frame there spent the vocabulary a unit early and left `ContextDiagram` re-showing
-a picture they had already seen. The first teal frame in the step is now `ToolsInContext` in `tools`,
+met the window, so a frame there spent the vocabulary a unit early. The first teal frame in the step is now `ToolsInContext` in `tools`,
 which is what the "draws no context frame" comments in `TokenSplit` and `TokenAttention` point at.
 `AgentLoop` sits above it in the same unit and does not break that, because its ring is a path with
 nothing inside it rather than a frame; the reasoning is under `tools` below. Its
-oval instead carries `ContextDiagram`'s prompt region geometry and fills, so the two read as one
-shape seen twice. **`PromptParts` replaced `PromptInContext`, the oval on its own**, after the
+oval keeps the prompt geometry and fills it shared with the removed `ContextDiagram`. **`PromptParts` replaced `PromptInContext`, the oval on its own**, after the
 course owner read that figure as being about nothing: it said "this is a shape" and stopped. The
 oval stays, joined by a stem to the 6 things a prompt can carry (goal, context, example, limit and why,
 output format, done when), each a sentence of one ask, so the sequence above is intact and the first
@@ -71,8 +70,15 @@ sentence** (`@UserController.java @UserService.java`): the course owner pointed 
 a file rather than describe it. `@` was checked in Claude Code's docs and Copilot CLI 1.0.92's help
 (its file mention picker, interactive mode only), and the owner confirmed it in Copilot in IntelliJ,
 so the row is shared rather than an assistant variant.
-One term is knowingly loose: `ContextDiagram`'s `resources` is the broad word for what the agent
-read, while `tools` defines `resource` narrowly as content a host retrieves from an MCP server.
+**The unit is titled `Context` in both languages** (it was "Build relevant context" and
+"Relevante context samenstellen"), at the owner's asking: the unit takes the window apart rather
+than teaching how to assemble one, and its id and keys were already `context`.
+**`context.lead.1` names no parts any more**: it says the harness sends 1 request each turn and that
+everything in it is the context, and `WindowGrid` right below it carries the list, in the
+readout's own terms. The lead once
+listed instructions, tools and "what is left of the conversation" and closed on the model mixing the
+parts up; the owner found it odd, the list missed the student's own instruction files and what the
+agent read, and nothing in the unit develops the mixing up, so the clause went (October 2026).
 **Three of them are deliberately not in that
 list**: four layers fill the window, `tokens` is the unit it is counted in, `model` is the reader
 on the other end of it and `truth` is where that reader's answers come from. `tokens` and `model`
@@ -701,11 +707,27 @@ for it and rejected: this is the heaviest unit in the step, the step's diagram v
 bars and dashes, and a plotted curve with axes would be the only one of its kind in the course.
 Revisit only if the unit is ever split.
 
-`context` closes on `ReadYourWindow`, ticked to `kata.step1.window`, and **`/context` is used
-here and described nowhere**. The command had two paragraphs above the card, one per assistant, plus
-a third on the count starting above zero, and all three were cut: a page that explains what the
-readout carries has answered the question the card exists to make the student answer for themselves.
-So the card is the whole instruction now, and nothing above it may grow a description of the command
+`context` closes on `ReadYourWindow`, ticked to `kata.step1.window`, and **`/context` is named
+nowhere in the prose**. The command had two paragraphs above the card, one per assistant, plus
+a third on the count starting above zero, and all three were cut. **What the readout carries is now
+drawn, and that reverses half of the old rule** at the course owner's asking (October 2026):
+`WindowGrid`, the unit's first figure, is a redraw of the readout (a grid of squares filled by
+category, then free space dashed, then the reserved buffer in grey) **under each product's own
+labels, verbatim**: Claude Code's `System prompt`, `System tools`, `MCP server instructions`,
+`Memory files`, `Skills`, `Messages`, `Free space`, `Autocompact buffer`, read off its readout, and
+Copilot CLI's `System Prompt`, `Custom Instructions`, `System Tools`, `MCP Tools`, `Messages`,
+`Free Space`, `Buffer`, from GitHub's context-management page (capitalisation as published). The
+owner first got plain-word kinds and asked for the readout's terms instead. So the figure reads
+`useAssistant()` and types its categories `Record<Assistant, …>`, the labels are mono with no `nl`
+entry like any machine output, and only the eyebrow, caption and description translate. It is a
+redraw and not a screenshot (also the owner's choice): a shot shows one product and one machine's
+setup. The owner accepted that the card's first reading is then recognition rather than discovery.
+What the card still measures is the difference the MCP server `connect-one` makes, so **the MCP row is
+one plain reading and the figure must never draw a with-and-without comparison**. Its counts are
+invented (1 square is 1,000 tokens of a 200,000-token window) and its caption says so; the
+share-by-volume figure for a real session stays `SessionMakeup` in `session`. Whether Copilot in
+IntelliJ has a comparable readout is not verified; the Copilot labels are the CLI's. It is not on the
+deck yet. Nothing in the prose may grow a description of the command
 back. What went with them is the "read what the tool descriptions cost you" move, since a reading
 taken before anything is asked is what move two already does.
 The unit is the one in the step carrying a task *and*
@@ -1099,8 +1121,8 @@ together ends the argument. The prose defines each capability separately: tools 
 resources expose content the harness retrieves, and prompts are reusable server templates rather
 than ordinary user messages. The cards show their usual control roles: you choose a template, the
 harness retrieves a resource, and the model requests a tool call. These are not mandatory UI rules,
-and a server or harness need not support all 3 capabilities. A server template is not the same object as the user's prompt in
-`ContextDiagram`. **A fifth figure, `McpOvals`, was cut** at the course owner's asking: it drew the
+and a server or harness need not support all 3 capabilities. A server template is not the same object as the user's own
+prompt. **A fifth figure, `McpOvals`, was cut** at the course owner's asking: it drew the
 same 3 as ovals on `McpParts`' columns, which restated the cards one screen down and added nothing.
 Do not bring a second drawing of the 3 back. The unit's order is
 the argument too, so keep it: the loop, what a tool is, what each product ships with, where extra ones come from (MCP, and the three things
@@ -1429,20 +1451,42 @@ them. `recap` is outside all of this and always will be: it asks for nothing, so
 `tools` carries one of the step's seven hands-on tasks and all three of its graded exercises, and between them they
 hold advice the prose used to state and no longer does. `ConnectOne` is that task, a `TaskCard` on
 seven moves, and **it was rewritten around 2 named lessons** at the course owner's asking (October
-2026), who could not tell what the old card was for. Lesson 1: the same 9 titles cost very
-different amounts of context depending on the tool, and the student **measures** it (`/context`
-before and after each route, or the credits under the turn in IntelliJ) rather than reading turns
-back. Lesson 2: why you would ever pay for the browser, a page whose flag only exists once it runs.
-The moves are start, `mcp` (per assistant), curl, browser, compare, then `reveal` and `shoot` for the
-flag, which now sit last, directly above `ShutterFlag`. **Every move carries what to type** as a
+2026), who could not tell what the old card was for. Lesson 1: the same 9 titles leave about the same
+in the window but cost very different amounts, and the student **measures both** (the Messages line of
+`/context` and the cost in `/usage`, in a fresh session per route, or the credits under the turn in
+IntelliJ). A first version
+measured `/context` alone and the owner's own run killed it: Playwright MCP returns compact
+snapshots, so the window barely grows. What grows is the bill, because every browser step is a new
+request that sends the whole window again. Route 2
+therefore points at **`/catalog/shelf`**, a paged twin of `/catalog` (`ShelfPage`, `ShelfPanel`,
+3 titles a page behind fetch and next), so a browser needs several steps. The owner then found the
+`/context` totals still close, so two more changes followed: the card reads **the Messages line**
+rather than the total (a fresh session starts at ~24k of system prompt and tools, which drowns the
+difference), and every title on the shelf carries **a long bookseller's note**
+(`shared/lib/shelf-notes.ts`), visible on screen, because a page made for people carries far more
+than the data. The notes are keyed by position and never name a title, since a file holding all 9
+titles would be a second copy of what the workshop board grades. Playwright MCP limits the gain on
+its own: after a click it returns a link to a snapshot file and the agent fetches only the part it
+needs, so making the notes longer adds little. Measured October 2026 (Claude Code, Sonnet,
+Playwright MCP 0.0.83, fresh session): curl 2 requests, ~0.3k in Messages, $0.065; the shelf 16
+requests, ~8.7k, $0.143 (~5k and $0.130 before the notes); `/catalog` itself stays the
+dumb single listing the workshop board relies on, and the shelf is not in the sidebar. Lesson 2: why you would ever pay for the browser, a page whose flag only exists once it runs.
+The moves are start, `mcp` (per assistant), curl, browser, compare, `reveal` for the flag (open
+the page, press the button and print the flag, in one prompt; it was 2 moves until the owner
+merged them, and it asked for a screenshot until the owner pointed out that a screenshot does not
+hand over the flag: the page builds it as DOM text, so the agent can read it and print it), and `reset` (per assistant), which re-adds the server **without** the file option: the option
+opens every file on disk and `copilot mcp add` writes to the user-wide `~/.copilot/mcp-config.json`.
+It re-adds rather than removes because `ReadYourWindow` in `context` still needs the server and
+removing it is that card's last move. **Every move carries what to type** as a
 copyable `connect.<move>.command`, which reverses "the moves name no command": that rule existed
 only because the `<pre>` above the card was cut in class, and the card now carries the commands
 itself. The `<pre>` pair and the per-assistant `connect-one.2` paragraphs went; `connect-one.2` is now
-one shared warning that `--allow-unrestricted-file-access` (required: since 0.0.55 the server blocks
-`file://` URLs without it, and the flag page is one) also opens files outside the project. **Nothing
+one shared warning that `--allow-unrestricted-file-access` (required: the server blocks `file://`
+URLs without it, rechecked on 0.0.83, and the flag page is one) also opens files outside the
+project, and that the card's last step takes it off again. **Nothing
 says which route is bulkier**, in the card, the description or the prose: the measurement is the
-exercise. The `shoot` move says the PNG *also* lands in `.playwright-mcp/`, and no longer claims the
-screenshot stays out of the window, which was not verified. Ticked to `kata.step1.connect`.
+exercise. Nothing in the card, `shutter.flag.help` or `shutter.panel.wrong` mentions a screenshot or
+`.playwright-mcp/` any more. Ticked to `kata.step1.connect`.
 
 **The flag page is `exercises/step1/front/index.html`.** It is one standalone page with no build, no
 dependencies and no service behind it, which is what keeps a third server off a student who is
@@ -1473,10 +1517,9 @@ place to choose it from beat two. `shutterFlag` carries **no `placeKey`** for th
 stays out of `flags`, so its row renders no provenance eyebrow at all. **Anything about how a row behaves goes in
 `FlagRow`.** The flag stays **out of the `flags` array** on purpose: that array is what `workshop`
 closes the step with, one row per place an answer can come from, and a browser is
-none of the five. It shares `FLAG_SALT`, which the file already says is not a secret. Nothing checks
-the screenshot, and that is deliberate: the PNG in `.playwright-mcp/` is proof for the student rather
-than for the app, and a grader that reached into their working copy would be the one thing on this
-page that needs a backend. `SpotInjection`
+none of the five. It shares `FLAG_SALT`, which the file already says is not a secret. Only the
+pasted flag is checked: a grader that reached into the student's working copy would be the one thing
+on this page that needs a backend. `SpotInjection`
 is four tool results with one instruction aimed at the agent, and two of the clean three exist to be
 mistaken for it (one gives orders to a human reader, one contains the word token twice), so a rewrite
 that makes them look harmless removes the exercise. Its card asks for **the odd one out and does not
@@ -1490,9 +1533,10 @@ that the check happens in the browser, which is true of everything in the course
 the window, and the model picks its next step from them. **It stops there on purpose.** The wording
 proposed with it ended "One of them tries to take the loop over. Which?", and that is the giveaway in
 other words: a result taking the loop over is the instruction aimed at the agent, which turns four
-results into a search for one sentence. Do not extend the line to say what makes the odd one odd.
-**`BudgetWindow` is titled "Which calls are enough?"** (it was "Divide the context window", which
-the course owner found incomprehensible: nothing is divided, the student picks). Its description now
+results into a search for one sentence. Do not extend the line to say what makes the odd one odd. **The description now tells the student what to do** ("One of them does not belong. Which one?"), after the owner found the old one ("1 cycle of the agentic loop produced 4 results") odd and without an instruction; it still does not say what makes the odd one odd. Its description sets `?limit=` and `GET /api/titles` as inline code through the shared `WithCode`, which
+reads only `<code>` tags out of the locale string, since a panel description is not prose.
+**`BudgetWindow` is titled "Which calls does your agent really need?"** (it was "Divide the context window", and briefly "Which calls are enough?", both of which
+the course owner found unclear: nothing is divided, the student picks what the agent needs). Its description now
 states the change, that each row shows its lines and why they matter (re-sent every turn), and
 `budget.task` is the instruction. Earlier, `BudgetWindow`'s description lost the second sentence the old `spot` description lost. It now says that each row shows what it leaves in the window, because a reviewer read the
 card as asking which call costs most without seeing the counts, and it keeps the one instruction that
@@ -2106,7 +2150,7 @@ in there, that is their build to unpick and the flags above are what they have d
 
 ## The assistant variants
 
-15 blocks in step 1 vary, 11 of them in the unit HTML and 4 on task cards, and nearly all of them are the same kind of thing, a filename or a
+16 blocks in step 1 vary, 11 of them in the unit HTML and 5 on task cards, and nearly all of them are the same kind of thing, a filename or a
 command: the launcher `<pre>` pair under `workshop`'s lead (`claude` against `copilot`, each after
 the same `cd`), which is the only pair left there now that the setup command has moved to
 `install.txt`,
@@ -2117,7 +2161,7 @@ already shows `claude mcp add`), `session.window-not-memory.1`,
 `session.automatic-manual-compaction.3` (when compaction starts, and whether you can move it),
 `context.amnesia-context-fatigue.3`
 (nested inside the audience wrapper, never both attributes on one element),
-`model.api-vs-subscription.2` and `.3`, the recap's allowance pair `recap.what-costs-do.9`, plus `survive.write.*.label`, `connect.mcp.*` (`claude mcp add` against `copilot mcp add`), `window.open.*.label` and
+`model.api-vs-subscription.2` and `.3`, the recap's allowance pair `recap.what-costs-do.9`, plus `survive.write.*.label`, `connect.mcp.*` and `connect.reset.*` (`claude mcp add` against `copilot mcp add`), `window.open.*.label` and
 `PriceOneTurn`'s move set (`read`/`rate`/`sum` against the three `price.*.copilot` moves) on the task
 cards. The last of those replaced `context.read-your-window.1`, which was the Claude and
 Copilot descriptions of `/context`: the paragraphs went and the variant moved onto the move that
