@@ -151,6 +151,24 @@ Flags include `--env`, `--header`, `--transport`, `--tools`, `--timeout`. Config
 `/mcp` with `list`, `show`, `add`, `edit`, `delete`, `disable`, `enable`, `auth`, `reload` and
 `search`; `/mcp search` browses the GitHub MCP Registry and installs from it.
 
+**A repository can carry its own servers** (run on Copilot CLI 1.0.95, 10 October 2026, for
+`tools.mcp-servers.6.copilot`). `copilot mcp --help` names three sources: user
+(`~/.copilot/mcp-config.json`), workspace (`.mcp.json` or `.github/mcp.json`) and plugins. A root
+`.mcp.json` with the `mcpServers` key, the same file and shape Claude Code commits, listed under
+"Workspace servers" in `copilot mcp list`, and so did `.github/mcp.json` on its own, **but only in a
+trusted folder**: in an untrusted one neither was listed and nothing said why, which is the same
+trust gate repository hooks sit behind. `copilot mcp add` has no scope flag and always writes the
+user file. Not checked: whether `${VAR}` expands in the workspace file, so the course does not say.
+**Copilot in IntelliJ reads the root `.mcp.json` too** (the owner's run, October 2026): opened as a
+project, the server appeared in Configure Tools (the sliders icon beside the model picker) and
+started **without asking anything**, and a `.github/mcp.json` beside it was ignored. That is why
+`tools.mcp-servers.6.copilot` closes on reading the file in a repository you did not write. So the root file is the one that holds for
+all three, and it is the only one the course names.
+
+**Prompt files run in IntelliJ** (the owner's run, the same project): `.github/prompts/hello.prompt.md`
+with a `description` line ran when `/hello` was typed in Agent mode. `setup.skills.1.copilot` leans on
+that. Whether Copilot CLI runs prompt files was not checked, so that sentence names IntelliJ only.
+
 MCP facts used by the course (checked October 2026):
 
 - **Built-in MCP servers.** The GitHub MCP server, `playwright`, `fetch` and `time` ship built in (October
@@ -282,6 +300,12 @@ was run rather than read. Copilot CLI 1.0.95 in a scratch repository, with its d
   has no matcher in Copilot's own format, so it fired after every tool, 9 times for one small edit,
   which is why the unit's script checks the tool name. A Claude-format `PostToolUse` in
   `.claude/settings.json` is also read and keeps Claude's matcher, per the hooks reference.
+- The unit's hook is now a test-output filter, and its Copilot half uses `postToolUse` returning
+  `{"modifiedResult": {"resultType": "success", "textResultForLlm": …}}`. That replaced what the
+  agent saw: a failing `mvn test` came back as 18 lines instead of 72, and the agent still reported
+  exit code 1. A failing shell command arrives with `resultType: "success"`, so `postToolUse` fires
+  rather than `postToolUseFailure`. `preToolUse`'s `modifiedArgs` was not used: the reference does
+  not say config-file hooks honour it, while it does say so for `modifiedResult`.
 - `trustedFolders` lives in `~/.copilot/config.json`, not `settings.json` (which logs it as an
   unknown key).
 - The sandbox (`sandbox.enabled`, off by default, user-level and never repository-overridable) with
@@ -297,6 +321,15 @@ Settings > Tools > GitHub Copilot > Customizations has "Use AGENTS.md file" and 
 nested `AGENTS.md` and a `.github/instructions/` file with `applyTo` both shaped the edit. Whether
 the root `AGENTS.md` was followed was not settled: that small model ignored its instruction in the
 first run.
+
+**`.github/instructions/` is read recursively in IntelliJ too** (October 2026, the owner's IntelliJ,
+agent mode, model on Auto). A test project held `top.instructions.md` at the top of the folder and
+`frontend/components.instructions.md` and `backend/api-design.instructions.md` in subfolders, each
+asking for a codeword in any comment. An edit to a `*Controller.java` carried both the top file's
+word and the `backend/` file's, and the agent listed exactly those 2 as attached, leaving out
+`frontend/`, whose `applyTo` did not match. As with the CLI, it read the files with a tool call
+rather than having them injected. The first run of the same prompt carried neither word, so a
+missing codeword says little on its own: ask the agent to list the attached files, and repeat.
 
 **The user-level file is not where GitHub's IDE docs put it.** In the owner's IntelliJ, after a
 restart, a test line in `~/.config/github-copilot/intellij/global-copilot-instructions.md` (the

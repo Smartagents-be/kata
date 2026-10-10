@@ -24,10 +24,14 @@ import { FileTree, type TreeNode } from './FileTree'
  * **The fourth entry is the comparison, and it is invented** (FEEDBACK 10). `claude-md.3` sets
  * `.claude/rules/` against the nested files: those follow the folders, a rule with `paths` follows
  * a file pattern that cuts across them. This repository has no rules folder, and its own `.claude`
- * holds the author's skills, so the file is made up on `SkillTree`'s precedent and the drawing and
- * the paragraph name the same one. It is one path node rather than `.claude/` opened up, because
- * opening that folder is what the trim above took out. Its `paths` line is drawn because without it
- * the file reads as one more CLAUDE.md under another name, which is exactly what it is not. Do not
+ * holds the author's skills, so the files are made up on `SkillTree`'s precedent and the drawing and
+ * the paragraph name the same ones. It is one path node rather than `.claude/` opened up, because
+ * opening that folder is what the trim above took out. **The rules sit in `frontend/` and `backend/`
+ * subfolders** at the owner's asking (October 2026), so the marker is on the rules folder and not on
+ * a file, and each subfolder's note says it is order only: both products read the folder
+ * recursively and the folder name scopes nothing. Each file's `paths` line is drawn because without
+ * it the file reads as one more CLAUDE.md under another name, which is exactly what it is not, and
+ * both patterns cut across folders (`**` in front) so neither is a nested file in disguise. Do not
  * add anything else from `exercises/step2/java` to make the example real; the reason is in this step's
  * CLAUDE.md, beside `setup`'s board.
  */
@@ -72,13 +76,33 @@ const CLAUDE_TREE: TreeNode = {
       name: '.claude/rules',
       directory: true,
       note: 'tree.rules.note',
+      marker: 4,
       children: [
         {
-          name: 'api-design.md',
-          note: 'tree.rule.note',
-          detail: 'paths: ["**/*Controller.java"]',
-          highlight: true,
-          marker: 4,
+          name: 'frontend',
+          directory: true,
+          note: 'tree.rules-subfolder.note',
+          children: [
+            {
+              name: 'components.md',
+              note: 'tree.rule.note',
+              detail: 'paths: ["**/components/**/*.tsx"]',
+              highlight: true,
+            },
+          ],
+        },
+        {
+          name: 'backend',
+          directory: true,
+          note: 'tree.rules-subfolder.note',
+          children: [
+            {
+              name: 'api-design.md',
+              note: 'tree.rule.note',
+              detail: 'paths: ["**/*Controller.java"]',
+              highlight: true,
+            },
+          ],
         },
       ],
     },
@@ -88,7 +112,7 @@ const CLAUDE_TREE: TreeNode = {
 /**
  * The same four entries under Copilot's names (October 2026, when `setup` stopped being Claude Code
  * only): `AGENTS.md` where the three briefings were, and `.github/instructions/` with an `applyTo`
- * line where the rule was. The numbers stay on the same rows, because `claude-md.1` and `.3` point
+ * line where the rules were, in the same 2 subfolders. The numbers stay on the same rows, because `claude-md.1` and `.3` point
  * at them in both variants. Unlike the Claude tree, these files are not this repository's: it carries
  * no `AGENTS.md`. The nested note says IntelliJ reads them only with the setting ticked, which is what
  * `claude-md.1.copilot` says in words.
@@ -119,13 +143,33 @@ const COPILOT_TREE: TreeNode = {
       name: '.github/instructions',
       directory: true,
       note: 'tree.rules.note',
+      marker: 4,
       children: [
         {
-          name: 'api-design.instructions.md',
-          note: 'tree.rule.note',
-          detail: 'applyTo: "**/*Controller.java"',
-          highlight: true,
-          marker: 4,
+          name: 'frontend',
+          directory: true,
+          note: 'tree.rules-subfolder.note',
+          children: [
+            {
+              name: 'components.instructions.md',
+              note: 'tree.rule.note',
+              detail: 'applyTo: "**/components/**/*.tsx"',
+              highlight: true,
+            },
+          ],
+        },
+        {
+          name: 'backend',
+          directory: true,
+          note: 'tree.rules-subfolder.note',
+          children: [
+            {
+              name: 'api-design.instructions.md',
+              note: 'tree.rule.note',
+              detail: 'applyTo: "**/*Controller.java"',
+              highlight: true,
+            },
+          ],
         },
       ],
     },

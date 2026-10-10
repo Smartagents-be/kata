@@ -189,6 +189,10 @@
        is the shape, and whatever uses it paints itself. Lucide's triangle-alert, the same line
        weight and round joins as the icons in shared/lib/icons.ts. */
     --warning-triangle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3'/%3E%3Cpath d='M12 9v4'/%3E%3Cpath d='M12 17h.01'/%3E%3C/svg%3E");
+
+    /* The chevron a folded block opens on, held as a mask for the same reason: Lucide's
+       chevron-right, painted by whatever uses it. */
+    --chevron-right: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
 }
 
 /* The design system is drawn light. Dark keeps the same hues so the `dark:` variants scattered
@@ -382,6 +386,45 @@
 /* A block of code keeps its line breaks, so it scrolls inside its own box instead. */
 .prose pre {
   @apply overflow-x-auto;
+}
+
+/* A folded block: material a reader may open but does not need, such as the script behind a hook
+   on `setup`. Closed, it is one row in the same hairline box a `CopyCommand` draws, so it sits beside
+   the code block above it as one more block of the same kind; the label is muted like the Hint
+   button, with a chevron that turns when it opens. Open, the code inside drops Typography's own
+   panel and takes `CopyCommand`'s face (mono, extra small, relaxed), under a hairline. Unlayered,
+   because Typography styles `pre` from its own layer. */
+.prose details {
+  @apply border-border bg-muted/50 my-6 rounded-md border;
+}
+
+.prose summary {
+  @apply text-muted-foreground hover:text-foreground flex cursor-pointer list-none items-center gap-2 rounded-md px-3 py-2 text-sm font-medium outline-none select-none focus-visible:ring-ring/50 focus-visible:ring-3;
+}
+
+.prose summary::-webkit-details-marker {
+  display: none;
+}
+
+.prose summary::before {
+  content: '';
+  @apply size-4 shrink-0 bg-current transition-transform duration-150;
+  -webkit-mask: var(--chevron-right) no-repeat center / contain;
+  mask: var(--chevron-right) no-repeat center / contain;
+}
+
+.prose details[open] > summary::before {
+  @apply rotate-90;
+}
+
+.prose details > pre {
+  @apply border-border m-0 rounded-none rounded-b-md border-t bg-transparent px-3 py-2.5 font-mono text-xs leading-relaxed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prose summary::before {
+    transition: none;
+  }
 }
 
 /* The numeral that ties a drawing to the sentence about it: `<span data-marker>1</span>` in a

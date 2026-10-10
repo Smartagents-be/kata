@@ -441,7 +441,11 @@ Two Claude additions arrived in the same change, each one sentence: `CLAUDE.loca
 `your-own-claude-md.1.claude` and the `@path` import in `claude-md.3.claude`, the latter worded as
 not shortening the context, because an import loads at launch. Claude Code reads `AGENTS.md` only when
 there is no `CLAUDE.md` (tested on 2.1.296), which is why the unit never tells a Claude student to
-add one. **The section keys kept their `claude-md` and `your-own-claude-md` slugs** although the
+add one. **A nested file loads on a file in its folder, not on the folder**: Claude Code's docs say
+once the agent reads, writes or edits a file there, and Copilot CLI was seen loading one on an edit.
+"Once the agent goes into its folder" was the old wording and was wrong, since an agent does not go
+anywhere; `claude-md.1` and `flag.package.help` say a file now, and the help line, being shared,
+says "works on a file" to cover both products. **The section keys kept their `claude-md` and `your-own-claude-md` slugs** although the
 Copilot headings read `AGENTS.md` and "Your own instructions": renaming them would have moved every
 key for a slug nobody sees. The flag hunt was left alone and still names no file: the Java project
 is set up with Claude Code's names, Copilot reads them, and `check-yourself.2.copilot` says exactly
@@ -455,13 +459,30 @@ payoff is stated as the always-loaded part staying short and **never as tokens o
 the cost argument already has its two sites in this unit (`claude-md.2` and `skills.5`) and the
 rule below forbids a third. It sits after `claude-md.2` rather than before it, so that paragraph's
 "So keep each of them lean" still follows the nesting claim it was written against. The tree gained
-a fourth numbered entry for it, `.claude/rules/api-design.md` with its `paths` line drawn under the
-name (`FileTree`'s `detail`, a literal like the name, since frontmatter is not translated). **That
-file is invented**, on `SkillTree`'s precedent: this repository has no rules folder, and the
-example is a controller pattern rather than a test one because the house test style is the
-capstone's skill. The tree and `claude-md.3` name the same file and the same pattern. What the
-paragraph deliberately leaves out: `~/.claude/rules/` (the section after it owns the personal file),
-`AGENTS.md`, and commands, each its own item. The
+a fourth numbered entry for it, `.claude/rules/` with a `frontend/` and a `backend/` subfolder,
+each holding 1 rule with its `paths` line drawn under the name (`FileTree`'s `detail`, a literal like
+the name, since frontmatter is not translated). **Those files are invented**, on `SkillTree`'s
+precedent: this repository has no rules folder, and the backend example is a controller pattern
+rather than a test one because the house test style is the capstone's skill. **The subfolders are
+the owner's choice** (October 2026), and `claude-md.3` says in 2 short sentences that they only keep
+the files in order and that `paths` alone scopes a rule, because a student who sees `frontend/`
+under `rules/` will otherwise assume the folder name does what a nested `CLAUDE.md` does. Both
+products read the folder recursively: the Claude Code docs say so, `copilot-specific.md` lists
+`.github/instructions/**/*.instructions.md` for Copilot CLI, and a `backend/` subfolder was run in
+the owner's IntelliJ and shaped the edit (written up there). What the
+paragraph deliberately leaves out: `~/.claude/rules/` and commands, which went in elsewhere in the
+unit (October 2026, at the owner's asking, after a read against code.claude.com/docs/en/claude-directory):
+`your-own-claude-md.1.claude` names the personal rules folder in one sentence, because that section
+owns the personal files, and `skills.1.claude` says `.claude/commands/` is the older form of a skill,
+with the docs' precedence (both give `/name`, old ones keep working). `skills.5` gained
+`disable-model-invocation: true` inside the cost argument it already makes, so it is not a third
+cost site; the claim that the description leaves the context is the docs' for Claude Code and was
+run on Copilot CLI 1.0.95 (a skill with the field set was missing from the skills the agent listed,
+its sibling without it was there), which is why the sentence is shared. `skills.1.copilot` names a
+prompt file in `.github/prompts/` as the nearest Copilot form and says **IntelliJ**, because that is
+where it was run (the owner's project, October 2026: `/hello` ran `hello.prompt.md`); Copilot CLI was
+not tested, so the sentence does not claim it. It calls a prompt file close to a skill rather than
+an older form of one, and its one difference is that it runs only when you type its name. The
 frontmatter example beside `SkillTree` is **`add-endpoint`, and both it and the three skills in the
 drawing are invented**, which is the decision rather than a shortcut. This repository's own four are
 `adding-a-step`, `lesson-writing`, `quiz-writing` and `repo-setup`, and every one of them belongs to
@@ -475,22 +496,70 @@ the same set for the same reason, and `HookTree` follows the rule too: the scrip
 one the hooks `<pre>` declares.
 
 The Hooks section exists because the paragraph that used to introduce them was cut from the Skills
-section, and `patterns` used the word twice while defining it nowhere. It is deliberately the
-shortest of the three: what a hook is, why it is stricter than the other two (a `CLAUDE.md` line
-asks and a skill offers, both of which need the agent to read them, while a hook just happens), and
-one `settings.json` block. **What it costs when it is wrong lives in the closing paragraph rather
-than in a fourth one**, which is what keeps the section the shortest while still answering the
-strictness it has just sold: keep it fast and keep it narrow, because the script runs on every write
-and a broken one hands the agent an error it works around instead of writing the code. That argument
-is latency and blast radius and **never tokens**, on the two-site rule above, so a coin icon in this
-section is the third site. **It is now the only place in the step that teaches hooks**, and the
-closing forward pointer to `patterns` is back on new grounds: the old one handed off hooks and went
-when that unit stopped mentioning them, while this one hands off the case a hook does not cover, a
-correction that keeps coming back rather than a command that has to run. `patterns.skill-iteration.1`
-names `setup` from the other side, so the two sentences are one seam and a cut to either end leaves
-the other pointing at nothing. `HookTree` paints
-`settings.json`, `hooks/` and the script all teal on purpose: a hook is two files and a reader who
-takes away one of them has the wrong picture.
+section, and `patterns` used the word twice while defining it nowhere. It says what a hook is, why it
+is stricter than the other two (a `CLAUDE.md` line asks and a skill offers, both of which need the
+agent to read them, while a hook just happens), and then shows one hook whole: the declaration and
+the script, per assistant. **What it costs when it is wrong lives in the closing paragraph rather
+than in a fourth one**: keep it fast and narrow, because the script runs on every shell command and
+a broken one hands the agent an error it works around instead of writing the code. That argument is
+latency and blast radius. **It is now the only place in the step that teaches hooks**, and the
+closing forward pointer to `patterns` hands off the case a hook does not cover, a correction that
+keeps coming back rather than a command that has to run. `patterns.skill-iteration.1` names `setup`
+from the other side, so the two sentences are one seam and a cut to either end leaves the other
+pointing at nothing. `HookTree` paints `settings.json`, `hooks/` and the script all teal on purpose:
+a hook is two files and a reader who takes away one of them has the wrong picture.
+
+**The example is a test-output filter, at the owner's asking (October 2026)**, replacing a formatter
+that ran after every write. It is Anthropic's own example from code.claude.com/docs/en/costs ("Custom
+hooks can preprocess data before Claude sees it"), adapted to Maven, and it is the one place the
+section has a payoff a student can count: `hooks.3` opens on 72 lines against 18. **That payoff is
+framed as what the agent reads, never as tokens or a bill**, and it carries no coin: the cost
+argument has its two sites in this unit (`claude-md.2` and `skills.5`) and a third is still
+forbidden. **The script is folded away and the prose says what it does**, at the owner's asking
+(October 2026), who could not follow the script even with comments: `hooks.2.claude` says it rewrites
+`mvn test` to `mvn test 2>&1 | grep …` with the whole pattern, `hooks.2.copilot` says it puts the
+output through that grep, and the script sits under a `<details>` labelled "The script behind it"
+(`setup.hooks.script.claude` and `.copilot`, the course's first `<details>`). The rewrite is the
+idea; the `jq` around it only reads and answers the hook's JSON, which is why it may stay folded. A
+`<pre>` inside the `<details>` is not a top-level block, so `prepareUnit` leaves it a plain `<pre>`
+with no copy button, and guided mode drops the fold with the rest of the prose.
+
+What was measured and what follows from it, on Claude Code 2.1.296 and Copilot CLI 1.0.95 against a
+copy of `exercises/step2/java` with one assertion in `LateFeePolicyTest` broken (10 October 2026):
+- **72 lines against 18.** A failing `mvn test` prints 72; through the filter the agent got 18 in
+  both CLIs (the two failure blocks with `expected`/`but was`, the summary, `BUILD FAILURE`). A
+  compile error prints 55 and the filter keeps the `.java:[` lines and the verdict. Re-measure
+  `hooks.3`'s numbers if the project's tests or Maven's output change.
+- **The pattern keeps `BUILD`**, so a green run comes back as `BUILD SUCCESS` rather than as nothing.
+  The docs' version greps only for failures, which hands the agent an empty result on success. On
+  Claude Code the pipe also hides Maven's exit code, so that line is the only sign of the verdict
+  there; do not drop it from the pattern.
+- **The Claude script sets no `permissionDecision`**, unlike the docs' `"allow"`: `updatedInput`
+  alone was applied (the debug log shows `modified tool input keys: [command, description]`), and a
+  `Bash(mvn:*)` allow rule still let the piped command through. Adding `"allow"` would auto-approve
+  any command the regex matches, `mvn test; rm …` included, so do not put it back.
+- **Copilot filters after the tool ran, with `postToolUse` and `modifiedResult`**, rather than
+  rewriting the command with `preToolUse`'s `modifiedArgs`: GitHub's reference does not say
+  config-file hooks honour `modifiedArgs`, and it does say they honour `modifiedResult`. A failing
+  `mvn test` still arrives with `resultType: "success"`, so `postToolUse` fires (not
+  `postToolUseFailure`), and the agent still sees exit code 1, which the Claude route loses.
+  `toolArgs` arrived as an object, as the guard notes under `workshop` already record.
+- **The Claude declaration names `"$CLAUDE_PROJECT_DIR"/.claude/hooks/…`, never a relative path**
+  (`review/units/step2-setup.md` flagged it on the old formatter). The hook's working directory
+  follows the agent's shell, so after a `cd src` a relative path failed on every shell command with
+  status 127 and "No such file or directory"; with the variable it fired and rewrote. Copilot CLI's
+  shell does not keep a `cd` between calls, so its relative `bash` path held.
+- **The Claude script only rewrites a plain `mvn` command**, `^mvn [^;&|<>]*(test|verify)[^;&|<>]*$`.
+  A run with a looser `^mvn.*(test|verify)` got `mvn … > file; echo; wc -l < file` from the agent and
+  appended the grep to the tail, which broke the command. A compound command, a redirect or
+  `mvn --version` is left alone. The Copilot script keeps the loose match, because filtering the
+  output of a compound command breaks nothing.
+
+The scripts and declarations on the page are the ones that ran, byte for byte. **The scripts carry a
+comment above every step, at the owner's asking** (October 2026: without them the owner could not
+follow the script), and the comments were added after the live runs and checked with `bash -n` and
+recorded stdin rather than run again. They are English in both languages, like every code sample.
+Change a line and run it again.
 
 `setup` closes on the step's second flag board, and it is the only exercise outside `workshop` that
 a machine grades. Three flags, one per place `exercises/step2/java` tells an agent how to work: the skill

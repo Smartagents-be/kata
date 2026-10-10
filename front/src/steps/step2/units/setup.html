@@ -20,7 +20,7 @@
   wherever the agent is working. Write what the project is about, what it is not about,
   and the ideas behind it.
   Conventions for the frontend go in the folder that holds it <span data-marker>2</span>, and the
-  backend's in its own <span data-marker>3</span>, because a nested one only joins the context once the agent goes into its folder.
+  backend's in its own <span data-marker>3</span>, because a nested one only joins the context once the agent reads or edits a file in its folder.
 </p>
 
 <p data-assistant="copilot" data-i18n="setup.claude-md.1.copilot">
@@ -31,7 +31,7 @@
   and the ideas behind it.
   Conventions for the frontend go in the folder that holds it <span data-marker>2</span>, and the
   backend's in its own <span data-marker>3</span>. Copilot CLI reads a nested one once the agent
-  works in its folder. IntelliJ reads them only after you tick <em>Use nested AGENTS.md files</em>
+  edits a file in its folder. IntelliJ reads them only after you tick <em>Use nested AGENTS.md files</em>
   under Settings, Tools, GitHub Copilot, Customizations.
 </p>
 
@@ -47,7 +47,8 @@
   A nested <code>CLAUDE.md</code> follows the folder layout, and some conventions cut across it: how
   a controller is built holds in every module that has one. Those go in <code>.claude/rules/</code>
   <span data-marker>4</span>, 1 file per topic, with a <code>paths</code> line naming the files
-  they cover. Without that line a rule loads at the start of every session, like the root file. With
+  they cover. Subfolders such as <code>frontend/</code> and <code>backend/</code> keep them in order.
+  Only the <code>paths</code> line decides where a rule applies. Without that line a rule loads at the start of every session, like the root file. With
   it, the rule joins the context only once the agent reads or edits a matching file, so what is
   always loaded stays short. An <code>@docs/api.md</code> line in a <code>CLAUDE.md</code> is not
   that: it pulls the file in at the start, which shortens the file and not the context.
@@ -57,7 +58,9 @@
   A nested <code>AGENTS.md</code> follows the folder layout, and some conventions cut across it: how
   a controller is built holds in every module that has one. Those go in
   <code>.github/instructions/</code> <span data-marker>4</span>, 1 file per topic ending in
-  <code>.instructions.md</code>, with an <code>applyTo</code> line naming the files they cover. The
+  <code>.instructions.md</code>, with an <code>applyTo</code> line naming the files they cover.
+  Subfolders such as <code>frontend/</code> and <code>backend/</code> keep them in order. Only the
+  <code>applyTo</code> line decides where a file applies. The
   agent reads such a file only when it works on a file that matches, so what is always loaded stays
   short.
 </p>
@@ -69,7 +72,8 @@
   There is one more, and it is not in the repository. <code>~/.claude/CLAUDE.md</code> in your home
   directory is read in every project you open on this machine. It holds how you work rather than
   what the project is: the language you want to be answered in, the tools you always reach for, the
-  thing you are tired of asking for 2 times a day. For 1 project only, write it in
+  thing you are tired of asking for 2 times a day. A rule works the same way: a file in
+  <code>~/.claude/rules/</code> applies in every project. For 1 project only, write it in
   <code>CLAUDE.local.md</code> beside the root file, and keep that file out of git.
 </p>
 
@@ -95,14 +99,20 @@
 <p data-assistant="claude" data-i18n="setup.skills.1.claude">
   A skill is a reusable procedure in <code>.claude/skills/</code>, with its instructions in
   <code>SKILL.md</code>. Its description makes it available for matching tasks; the body loads when
-  used. That differs from standing instructions read at session startup.
+  used. That differs from standing instructions read at session startup. A file in
+  <code>.claude/commands/</code> is the older form of the same thing:
+  <code>commands/add-endpoint.md</code> and <code>skills/add-endpoint/SKILL.md</code> both give you
+  <code>/add-endpoint</code>. Old ones keep working. Write new ones as a skill, which can hold more
+  files than 1.
 </p>
 
 <p data-assistant="copilot" data-i18n="setup.skills.1.copilot">
   A skill is a reusable procedure in <code>.github/skills/</code>, with its instructions in
   <code>SKILL.md</code>. Copilot reads <code>.claude/skills/</code> as well. Its description makes it
   available for matching tasks; the body loads when used. That differs from standing instructions
-  read at session startup.
+  read at session startup. A prompt file in <code>.github/prompts/</code> comes close:
+  <code>add-endpoint.prompt.md</code> runs in IntelliJ when you type <code>/add-endpoint</code>.
+  Unlike a skill, it never runs unless you type its name.
 </p>
 
 <p data-i18n="setup.skills.2">
@@ -134,7 +144,9 @@ description: >-
 
 <p data-i18n="setup.skills.5">
   Be sparing with them. You pay for a description on every turn whether or not it fires, so 30
-  skills are a table of contents the agent reads before every answer. 2 that sound alike are
+  skills are a table of contents the agent reads before every answer. A skill only you start gets
+  <code>disable-model-invocation: true</code>, and its description stays out of the context until you
+  call it with a slash. 2 that sound alike are
   worse than 1: if either could match, neither reliably does. Write one when you are tired of
   correcting the same thing, not in anticipation of correcting it.
 </p>
@@ -159,44 +171,95 @@ description: >-
 <p data-assistant="claude" data-i18n="setup.hooks.2.claude">
   Which makes it the strictest of the 3. A line in <code>CLAUDE.md</code> asks, a skill offers a
   procedure, and both of them depend on the agent reading and following it. A hook just happens.
-  This one runs the formatter after every write:
+  This one runs before every shell command and rewrites <code>mvn test</code> to
+  <code>mvn test 2&gt;&amp;1 | grep -E -A 3 '&lt;&lt;&lt; FAIL|ERROR\] (Tests run|Failures|Errors)|\.java:\[|BUILD'</code>. You declare it like this:
 </p>
 
 <p data-assistant="copilot" data-i18n="setup.hooks.2.copilot">
   Which makes it the strictest of the 3. A line in <code>AGENTS.md</code> asks, a skill offers a
   procedure, and both of them depend on the agent reading and following it. A hook just happens.
-  This one runs the formatter. It fires after every tool, reads included, so the script checks the
-  tool name and only formats after a write:
+  This one runs after every tool, so its script checks the tool name first. When the agent ran
+  <code>mvn test</code>, it puts the output through <code>grep -E -A 3 '&lt;&lt;&lt; FAIL|ERROR\] (Tests run|Failures|Errors)|\.java:\[|BUILD'</code> and the agent only sees what comes out.
+  You declare it like this:
 </p>
 
 <pre data-assistant="claude"><code>{
   "hooks": {
-    "PostToolUse": [
+    "PreToolUse": [
       {
-        "matcher": "Write|Edit",
+        "matcher": "Bash",
         "hooks": [
-          { "type": "command", "command": ".claude/hooks/format-on-write.sh" }
+          { "type": "command", "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/filter-test-output.sh" }
         ]
       }
     ]
   }
 }</code></pre>
 
+<details data-assistant="claude">
+  <summary data-i18n="setup.hooks.script.claude">The script behind it</summary>
+  <pre><code>#!/bin/bash
+# Claude Code runs this before every Bash command and hands it that call as JSON.
+input=$(cat)
+
+# The command the agent wants to run, for example "mvn test".
+cmd=$(echo "$input" | jq -r '.tool_input.command')
+
+# Only a plain mvn test or mvn verify: nothing chained on with ; &amp; | &lt; or &gt;.
+plain='^mvn [^;&amp;|&lt;&gt;]*(test|verify)[^;&amp;|&lt;&gt;]*$'
+
+if [[ "$cmd" =~ $plain ]]; then
+  # The same command, piped through grep. It keeps the failures, the summary and
+  # BUILD SUCCESS or BUILD FAILURE, plus the 3 lines after each (-A 3).
+  filtered="$cmd 2&gt;&amp;1 | grep -E -A 3 '&lt;&lt;&lt; FAIL|ERROR\] (Tests run|Failures|Errors)|\.java:\[|BUILD'"
+
+  # Answer Claude Code: run this command instead of the original.
+  echo "$input" | jq --arg cmd "$filtered" \
+    '{hookSpecificOutput: {hookEventName: "PreToolUse", updatedInput: (.tool_input + {command: $cmd})}}'
+else
+  # Any other command: an empty answer changes nothing.
+  echo '{}'
+fi</code></pre>
+</details>
+
 <pre data-assistant="copilot"><code>{
   "version": 1,
   "hooks": {
     "postToolUse": [
-      { "type": "command", "bash": ".github/hooks/format-on-write.sh" }
+      { "type": "command", "bash": ".github/hooks/filter-test-output.sh" }
     ]
   }
 }</code></pre>
 
+<details data-assistant="copilot">
+  <summary data-i18n="setup.hooks.script.copilot">The script behind it</summary>
+  <pre><code>#!/bin/bash
+# Copilot runs this after every tool and hands it the call and its result as JSON.
+input=$(cat)
+
+# Which tool ran, and with which command.
+tool=$(echo "$input" | jq -r '.toolName')
+cmd=$(echo "$input" | jq -r '.toolArgs.command // empty')
+
+# Only a shell call that ran mvn test or mvn verify.
+if [[ "$tool" == "bash" &amp;&amp; "$cmd" =~ ^mvn.*(test|verify) ]]; then
+  # Take the output the agent is about to see and keep the failures, the summary
+  # and BUILD SUCCESS or BUILD FAILURE, plus the 3 lines after each (-A 3).
+  # Then answer Copilot: show the agent this instead.
+  echo "$input" | jq -r '.toolResult.textResultForLlm' \
+    | grep -E -A 3 '&lt;&lt;&lt; FAIL|ERROR\] (Tests run|Failures|Errors)|\.java:\[|BUILD' \
+    | jq -Rs '{modifiedResult: {resultType: "success", textResultForLlm: .}}'
+fi
+# For any other tool the script prints nothing, and the result stays as it was.</code></pre>
+</details>
+
 <p data-i18n="setup.hooks.3">
-  So reach for one when a step must happen every time and you would rather not find out that it
-  did not. Then keep it fast and keep it narrow. That script runs on every write, and
-  a broken one hands the agent an error it did not cause. The agent works around that instead of
-  writing your code. When the thing that keeps coming back is a correction rather than a command,
-  <a href="/steps/step2/patterns">the patterns unit</a> is where it goes.
+  A failing <code>mvn test</code> in <code>exercises/step2/java</code> prints 72 lines, and the agent now reads 18:
+  the failing assertion, the summary and the verdict. Reach for a hook when a step must happen every
+  time and you would rather not find out that it did not. Keep it fast and narrow. It runs on every
+  shell command, and a broken one hands the agent an error it did not cause. The agent works around
+  that instead of writing your code. When the thing that keeps coming back is a correction rather
+  than a command, <a href="/steps/step2/patterns">the patterns unit</a> is where it goes.
 </p>
 
 <p data-i18n="setup.hooks.4">

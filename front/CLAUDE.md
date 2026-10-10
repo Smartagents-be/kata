@@ -219,6 +219,11 @@ else holds a colour: components name tokens, so a change to the palette is a cha
   the scrolling for a block of more than one line. Shell commands carry `data-commands` on the
   `<pre>` and become one block per line, so a student copies and runs them one at a time; a prompt,
   a file or a config has no attribute and is copied whole. A new command `<pre>` needs the attribute.
+- **A folded block is a `<details>` in unit prose, styled once in `index.css`.** Closed it is one row
+  in `CopyCommand`'s hairline box, a muted label with a masked chevron (`--chevron-right`) that turns
+  when it opens; open, its `<pre>` takes `CopyCommand`'s face under a hairline. It is for material a
+  reader may open and does not need, the first being the hook script in step 2's `setup`. A `<pre>`
+  inside it is not top level, so it gets no copy button.
 - **Two typefaces, and the switch between them is the signal.** Figtree for everything a
   student reads, JetBrains Mono for anything the machine produced: code, counts, flags, catalogue
   titles, step numbers. Both are variable fonts imported in `index.css`; nothing loads from a CDN.
@@ -501,8 +506,8 @@ for a figure: it reads `useAssistant()` itself, and the `data-figure` marker nev
 Which units this is actually used in, and the places it deliberately is not, are in
 `front/src/steps/step0/CLAUDE.md` and `front/src/steps/step1/CLAUDE.md`, with the cross-step scope in
 `front/src/steps/CLAUDE.md`. The short version: step 0 tells the student to set it and varies no
-block of its own, step 1 varies 19 (12 in its unit HTML, 7 on task cards), and step 2 varies none: its one hook, in `gates`, is a pre-edit guard that
-works the same in both. Everything else is shared on purpose.
+block of its own, step 1 varies 20 (13 in its unit HTML, 7 on task cards), and step 2 varies only `setup`, the unit whose subject is the files themselves (its own file says
+why); its one hook, in `gates`, is a pre-edit guard that works the same in both. Everything else is shared on purpose.
 
 ## Languages
 
