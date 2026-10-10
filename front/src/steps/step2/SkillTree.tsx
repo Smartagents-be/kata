@@ -1,3 +1,5 @@
+import type { Assistant } from '@/shared/assistant/assistant'
+import { useAssistant } from '@/shared/assistant/useAssistant'
 import { FileTree, type TreeNode } from './FileTree'
 
 /**
@@ -23,39 +25,46 @@ import { FileTree, type TreeNode } from './FileTree'
  * No markers here. `ProjectTree` numbers its rows because paragraphs point back into it; nothing in
  * the Skills section points at a row, so a number would be a label with no reader.
  */
-const TREE: TreeNode = {
-  name: '.',
+/** The skills folder itself, the same in both products; only the folder above it differs. */
+const SKILLS: TreeNode = {
+  name: 'skills',
   directory: true,
-  note: 'tree.root.note',
+  note: 'tree.skills.note',
   children: [
     {
-      name: '.claude',
+      name: 'add-endpoint',
       directory: true,
-      note: 'tree.dot-claude.note',
+      highlight: true,
       children: [
-        {
-          name: 'skills',
-          directory: true,
-          note: 'tree.skills.note',
-          children: [
-            {
-              name: 'add-endpoint',
-              directory: true,
-              highlight: true,
-              children: [
-                { name: 'SKILL.md', note: 'tree.skill-md.note' },
-                { name: 'references', directory: true, note: 'tree.references.note' },
-              ],
-            },
-            { name: 'probe-the-api', directory: true, highlight: true },
-            { name: 'commit-message', directory: true, highlight: true },
-          ],
-        },
+        { name: 'SKILL.md', note: 'tree.skill-md.note' },
+        { name: 'references', directory: true, note: 'tree.references.note' },
       ],
     },
+    { name: 'probe-the-api', directory: true, highlight: true },
+    { name: 'commit-message', directory: true, highlight: true },
   ],
 }
 
+/**
+ * Copilot's copy puts the same three skills under `.github/`, since a `SKILL.md` has the same shape
+ * in both products. `skills.1.copilot` adds that Copilot reads `.claude/skills/` too, which the
+ * drawing leaves out so it keeps one subject.
+ */
+function tree(folder: string, note: string): TreeNode {
+  return {
+    name: '.',
+    directory: true,
+    note: 'tree.root.note',
+    children: [{ name: folder, directory: true, note, children: [SKILLS] }],
+  }
+}
+
+const TREES: Record<Assistant, TreeNode> = {
+  claude: tree('.claude', 'tree.dot-claude.note'),
+  copilot: tree('.github', 'tree.dot-github.note'),
+}
+
 export function SkillTree() {
-  return <FileTree id="skill-tree" root={TREE} dim />
+  const { assistant } = useAssistant()
+  return <FileTree id="skill-tree" root={TREES[assistant]} dim />
 }

@@ -8,11 +8,12 @@
   A few specialised files do that, and each one sits where it applies.
 </p>
 
-<h2 data-i18n="setup.claude-md.heading">CLAUDE.md</h2>
+<h2 data-assistant="claude" data-i18n="setup.claude-md.heading.claude">CLAUDE.md</h2>
+<h2 data-assistant="copilot" data-i18n="setup.claude-md.heading.copilot">AGENTS.md</h2>
 
 <div data-figure="project-tree"></div>
 
-<p data-i18n="setup.claude-md.1">
+<p data-assistant="claude" data-i18n="setup.claude-md.1.claude">
   <a href="/steps/step1/session">Step 1's unit on the session</a> said a standing instruction belongs
   in the file that is read again at the start of every session. The root
   <code>CLAUDE.md</code> <span data-marker>1</span> then stays in the context for the rest of it,
@@ -22,28 +23,62 @@
   backend's in its own <span data-marker>3</span>, because a nested one only joins the context once the agent goes into its folder.
 </p>
 
+<p data-assistant="copilot" data-i18n="setup.claude-md.1.copilot">
+  <a href="/steps/step1/session">Step 1's unit on the session</a> said a standing instruction belongs
+  in the file that is read again at the start of every session. The root
+  <code>AGENTS.md</code> <span data-marker>1</span> then stays in the context for the rest of it,
+  wherever the agent is working. Write what the project is about, what it is not about,
+  and the ideas behind it.
+  Conventions for the frontend go in the folder that holds it <span data-marker>2</span>, and the
+  backend's in its own <span data-marker>3</span>. Copilot CLI reads a nested one once the agent
+  works in its folder. IntelliJ reads them only after you tick <em>Use nested AGENTS.md files</em>
+  under Settings, Tools, GitHub Copilot, Customizations.
+</p>
+
 <p data-i18n="setup.claude-md.2">
   So keep each of them lean, and scoped to what it covers. Less entropy and a smaller bill on every
   turn <svg data-icon="coin"></svg> A line earns its place when it changes what the agent writes
   and cannot be read off the code in a moment. The file is a briefing, not documentation.
+  <code>/init</code> writes a first draft, in Claude Code and in Copilot CLI. Hold every line of it
+  to that test.
 </p>
 
-<p data-i18n="setup.claude-md.3">
+<p data-assistant="claude" data-i18n="setup.claude-md.3.claude">
   A nested <code>CLAUDE.md</code> follows the folder layout, and some conventions cut across it: how
   a controller is built holds in every module that has one. Those go in <code>.claude/rules/</code>
   <span data-marker>4</span>, 1 file per topic, with a <code>paths</code> line naming the files
   they cover. Without that line a rule loads at the start of every session, like the root file. With
   it, the rule joins the context only once the agent reads or edits a matching file, so what is
-  always loaded stays short.
+  always loaded stays short. An <code>@docs/api.md</code> line in a <code>CLAUDE.md</code> is not
+  that: it pulls the file in at the start, which shortens the file and not the context.
 </p>
 
-<h2 data-i18n="setup.your-own-claude-md.heading">Your own CLAUDE.md</h2>
+<p data-assistant="copilot" data-i18n="setup.claude-md.3.copilot">
+  A nested <code>AGENTS.md</code> follows the folder layout, and some conventions cut across it: how
+  a controller is built holds in every module that has one. Those go in
+  <code>.github/instructions/</code> <span data-marker>4</span>, 1 file per topic ending in
+  <code>.instructions.md</code>, with an <code>applyTo</code> line naming the files they cover. The
+  agent reads such a file only when it works on a file that matches, so what is always loaded stays
+  short.
+</p>
 
-<p data-i18n="setup.your-own-claude-md.1">
+<h2 data-assistant="claude" data-i18n="setup.your-own-claude-md.heading.claude">Your own CLAUDE.md</h2>
+<h2 data-assistant="copilot" data-i18n="setup.your-own-claude-md.heading.copilot">Your own instructions</h2>
+
+<p data-assistant="claude" data-i18n="setup.your-own-claude-md.1.claude">
   There is one more, and it is not in the repository. <code>~/.claude/CLAUDE.md</code> in your home
   directory is read in every project you open on this machine. It holds how you work rather than
   what the project is: the language you want to be answered in, the tools you always reach for, the
-  thing you are tired of asking for 2 times a day.
+  thing you are tired of asking for 2 times a day. For 1 project only, write it in
+  <code>CLAUDE.local.md</code> beside the root file, and keep that file out of git.
+</p>
+
+<p data-assistant="copilot" data-i18n="setup.your-own-claude-md.1.copilot">
+  There is one more, and it is not in the repository. A file ending in <code>.instructions.md</code>
+  in <code>~/.copilot/instructions/</code>, with <code>applyTo: "**"</code> at the top, is read in
+  every project you open on this machine, by Copilot in IntelliJ and by Copilot CLI. It holds how you work rather than what the project is: the
+  language you want to be answered in, the tools you always reach for, the thing you are tired of
+  asking for 2 times a day.
 </p>
 
 <aside data-variant="warning" data-i18n="setup.your-own-claude-md.2">
@@ -57,10 +92,17 @@
 
 <div data-figure="skill-tree"></div>
 
-<p data-i18n="setup.skills.1">
+<p data-assistant="claude" data-i18n="setup.skills.1.claude">
   A skill is a reusable procedure in <code>.claude/skills/</code>, with its instructions in
   <code>SKILL.md</code>. Its description makes it available for matching tasks; the body loads when
   used. That differs from standing instructions read at session startup.
+</p>
+
+<p data-assistant="copilot" data-i18n="setup.skills.1.copilot">
+  A skill is a reusable procedure in <code>.github/skills/</code>, with its instructions in
+  <code>SKILL.md</code>. Copilot reads <code>.claude/skills/</code> as well. Its description makes it
+  available for matching tasks; the body loads when used. That differs from standing instructions
+  read at session startup.
 </p>
 
 <p data-i18n="setup.skills.2">
@@ -101,19 +143,33 @@ description: >-
 
 <div data-figure="hook-tree"></div>
 
-<p data-i18n="setup.hooks.1">
+<p data-assistant="claude" data-i18n="setup.hooks.1.claude">
   A hook is a script your harness runs at a fixed moment, whether or not anybody remembered to ask
   for it. You declare it in <code>settings.json</code> against an event: before a tool runs, after a
   file is written, when the session ends.
 </p>
 
-<p data-i18n="setup.hooks.2">
+<p data-assistant="copilot" data-i18n="setup.hooks.1.copilot">
+  A hook is a script your harness runs at a fixed moment, whether or not anybody remembered to ask
+  for it. You declare it in a JSON file in <code>.github/hooks/</code> against an event: before a
+  tool runs, after it ran, when you send a prompt. Copilot CLI only runs them in a folder you
+  trusted.
+</p>
+
+<p data-assistant="claude" data-i18n="setup.hooks.2.claude">
   Which makes it the strictest of the 3. A line in <code>CLAUDE.md</code> asks, a skill offers a
   procedure, and both of them depend on the agent reading and following it. A hook just happens.
   This one runs the formatter after every write:
 </p>
 
-<pre><code>{
+<p data-assistant="copilot" data-i18n="setup.hooks.2.copilot">
+  Which makes it the strictest of the 3. A line in <code>AGENTS.md</code> asks, a skill offers a
+  procedure, and both of them depend on the agent reading and following it. A hook just happens.
+  This one runs the formatter. It fires after every tool, reads included, so the script checks the
+  tool name and only formats after a write:
+</p>
+
+<pre data-assistant="claude"><code>{
   "hooks": {
     "PostToolUse": [
       {
@@ -126,17 +182,54 @@ description: >-
   }
 }</code></pre>
 
+<pre data-assistant="copilot"><code>{
+  "version": 1,
+  "hooks": {
+    "postToolUse": [
+      { "type": "command", "bash": ".github/hooks/format-on-write.sh" }
+    ]
+  }
+}</code></pre>
+
 <p data-i18n="setup.hooks.3">
   So reach for one when a step must happen every time and you would rather not find out that it
-  did not. Then keep it fast and keep it narrow. That script runs on every Write and every Edit, and
+  did not. Then keep it fast and keep it narrow. That script runs on every write, and
   a broken one hands the agent an error it did not cause. The agent works around that instead of
   writing your code. When the thing that keeps coming back is a correction rather than a command,
   <a href="/steps/step2/patterns">the patterns unit</a> is where it goes.
 </p>
 
+<p data-i18n="setup.hooks.4">
+  Skills, hooks, agents and MCP servers also come bundled as plugins, installed in 1 step:
+  <code>/plugin</code> in Claude Code, <code>copilot plugin</code> in Copilot CLI. For Java, install a
+  language server as well. The agent then finds code by symbol and sees compiler errors without
+  running the build (the <code>jdtls-lsp</code> plugin in Claude Code, <code>.github/lsp.json</code>
+  in Copilot CLI).
+</p>
+
 <h2 data-i18n="setup.permissions-sandbox.heading">Permissions and sandboxing</h2>
 
-<p data-i18n="setup.permissions-sandbox.1">A starting directory focuses discovery; a worktree separates checkouts. Neither restricts capability. Claude Code permissions control tool actions, while its sandbox restricts filesystem and network access for sandboxed commands. By default, sandboxed commands can still read most of your machine, <code>~/.ssh</code> included, and file tools, hooks and local MCP servers run outside the sandbox. Excluded commands and unsandboxed fallbacks need separate review. Use the harmless exercise below to verify a real restriction.</p>
+<p data-assistant="claude" data-i18n="setup.permissions-sandbox.1.claude">
+  A starting directory focuses discovery; a worktree separates checkouts. Neither restricts
+  capability. Claude Code permissions control tool actions: allow and deny rules under
+  <code>permissions</code> in <code>.claude/settings.json</code> for the team, or in
+  <code>.claude/settings.local.json</code> for you alone. Its sandbox restricts filesystem and
+  network access for sandboxed commands. By default, sandboxed commands can still read most of your
+  machine, <code>~/.ssh</code> included, and file tools, hooks and local MCP servers run outside the
+  sandbox. Excluded commands and unsandboxed fallbacks need separate review. Use the harmless
+  exercise below to verify a real restriction.
+</p>
+
+<p data-assistant="copilot" data-i18n="setup.permissions-sandbox.1.copilot">
+  A starting directory focuses discovery; a worktree separates checkouts. Neither restricts
+  capability. Copilot asks before a tool runs. In Copilot CLI, <code>--allow-tool</code> and
+  <code>--deny-tool</code> set that for a session, and a deny always wins. Approvals you save land in
+  <code>~/.copilot/permissions-config.json</code>, on your machine only. Its sandbox is off by
+  default: <code>/sandbox enable</code> turns it on for shell commands, the agent's own file tools
+  follow the same policy on a best-effort basis, and the paths it blocks live in your user settings,
+  never in the repository. Use the harmless exercise below to verify a real restriction. It runs in
+  Copilot CLI, which also works in IntelliJ's terminal.
+</p>
 
 <div data-figure="check-permissions"></div>
 
@@ -150,4 +243,9 @@ description: >-
   files a project uses to tell an agent how to work. They are the kinds of file this unit just
   named, and each flag sits in the file it is about. You collect them by opening that project and
   reading how somebody set it up before you got there.
+</p>
+
+<p data-assistant="copilot" data-i18n="setup.check-yourself.2.copilot">
+  That project was set up for Claude Code, so its files carry Claude Code's names. Copilot can read
+  them too.
 </p>

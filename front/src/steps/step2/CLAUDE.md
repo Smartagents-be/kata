@@ -221,9 +221,12 @@ regions the course owner could not read; the reasoning is in its docblock.
 **The speed of a gate is a gate of its own**, and that sentence is the author's, added while the
 unit was being written: a few minutes a loop compound, and bringing the time down is work you hand
 an agent as a goal against a number. The code block in `short-feedback-loops` is that goal, in
-`goals`' `> Goal:` shape rather than as a slash command, because no unit names a goal command and
-`goals` is where the shape is argued; `short-feedback-loops.3` points there rather than re-arguing
-it. Its constraints (keep every check, keep every test, lower no threshold) are the point of the
+`goals`' `> Goal:` shape rather than as a slash command, because `goals` is where the shape is
+argued and the only place that names the commands (`executable-completion-check.2`: Claude Code's
+`/goal`, whose separate evaluator reads only the transcript, and Copilot CLI's autopilot, where the
+agent itself decides it is done; read on code.claude.com/docs/en/goal and GitHub's autopilot page,
+10 October 2026, and IntelliJ's Autopilot left out as unverified); `short-feedback-loops.3` points
+there rather than re-arguing it. Its constraints (keep every check, keep every test, lower no threshold) are the point of the
 block and not decoration: a build gets faster by deleting its slow tests, and that is the proxy trap
 from `Quality gates` a second time. **It names `mvn verify` and never `-Pgraded`**, and `GateWalk`
 names no command at all, because the kata's gates are what `workshop`'s pre-flight runs and its
@@ -419,6 +422,30 @@ that argues it. **Do not open a third site.**
 CLAUDE.md heading, `SkillTree` under Skills and `HookTree` under Hooks, each `FileTree` with `dim`
 set and that section's subject picked out in teal. One section, one heading, one tree, then the
 prose. Only `ProjectTree` numbers its rows, because only its section points back into them.
+
+**`setup` is written for both assistants, and it is the only unit in step 2 that is** (October
+2026, at the owner's asking: the unit was Claude Code only and a Copilot student was taught files
+their tool does not use). Every paragraph that names a path is a `data-assistant` pair, the three
+trees and `CheckPermissions` pick their data with `useAssistant()`, and everything else stays one
+shared paragraph. **Every Copilot claim in it was run, not read**: Copilot CLI 1.0.95 in a scratch
+repository and IntelliJ in the owner's own test project, written up under "Setup files" in
+`copilot-specific.md`. Read that before changing a Copilot sentence here, because four of them
+are where the products differ in ways a student would otherwise find out the hard way. IntelliJ
+reads a nested `AGENTS.md` only with an Experimental setting ticked (`claude-md.1.copilot` names the
+menu path). Copilot CLI runs repo hooks only in a trusted folder. A Copilot `postToolUse` hook has
+no matcher, so the script filters on the tool name (`hooks.2.copilot`). And the personal file is a
+`*.instructions.md` with `applyTo: "**"` in `~/.copilot/instructions/`, because the owner's
+IntelliJ ignored the global file GitHub's IDE docs name and read that folder, and the CLI reads it
+too. The course names `AGENTS.md` and not `.github/copilot-instructions.md`, on `copilot-specific.md`'s standing decision.
+Two Claude additions arrived in the same change, each one sentence: `CLAUDE.local.md` in
+`your-own-claude-md.1.claude` and the `@path` import in `claude-md.3.claude`, the latter worded as
+not shortening the context, because an import loads at launch. Claude Code reads `AGENTS.md` only when
+there is no `CLAUDE.md` (tested on 2.1.296), which is why the unit never tells a Claude student to
+add one. **The section keys kept their `claude-md` and `your-own-claude-md` slugs** although the
+Copilot headings read `AGENTS.md` and "Your own instructions": renaming them would have moved every
+key for a slug nobody sees. The flag hunt was left alone and still names no file: the Java project
+is set up with Claude Code's names, Copilot reads them, and `check-yourself.2.copilot` says exactly
+that much so a Copilot student is not hunting for an `AGENTS.md` that is not there.
 
 **The CLAUDE.md section runs to three paragraphs, and the third is `.claude/rules/`** (FEEDBACK 10,
 where `.claude/rules` came up as an exam topic). `claude-md.3` is a comparison and not a second

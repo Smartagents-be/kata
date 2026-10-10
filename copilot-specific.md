@@ -107,8 +107,9 @@ JetBrains since March 2026, github.blog/changelog/2026-03-11, plus VS Code, Copi
 agent), because step 1's `ReadYourWindow` already plants an `AGENTS.md` for Copilot CLI, and because
 ungated prose can then say "`CLAUDE.md` or `AGENTS.md`" and be right for both rooms. A JetBrains plugin
 older than March 2026 does not read it; that is the first thing to check if a Copilot student's rule
-is ignored. The user-level `~/.copilot/copilot-instructions.md` that `install.txt` and
-`machine-context.mjs` write is a different file and stays as it is. Note the irony worth not putting
+is ignored. The user-level file that `install.txt` and `machine-context.mjs` write is a different
+thing: `~/.copilot/instructions/kata-agentic-java.instructions.md`, since October 2026 (see "Setup
+files" below for why it left `~/.copilot/copilot-instructions.md`). Note the irony worth not putting
 on a page: Copilot reads `CLAUDE.md` too.
 
 ## Context
@@ -229,7 +230,7 @@ therefore hold for both assistants without a variant. `CutItUp` asks for the pla
 `copilot` starts in the current folder and asks whether to trust it. `copilot --continue` resumes
 the most recent local session, `/resume` picks an older one. Tool use is approved per call, or for
 the rest of the session. Copilot CLI also has **skills** and **hooks**, which is step 2 territory
-rather than step 1's, and step 2 has not been adapted.
+rather than step 1's; step 2's `setup` unit carries them (see "Setup files" below).
 
 **Esc and Ctrl+C are not the same key here.** Read off
 docs.github.com/en/copilot/concepts/agents/copilot-cli/cancel-and-roll-back, 6 August 2026: a single
@@ -241,7 +242,7 @@ one paragraph earlier, Escape removes the queued sentence rather than stopping t
 `steering.mid-flight.1` therefore names the stop key per harness in one shared sentence (`Esc` in
 Claude Code, `Ctrl+C` in Copilot CLI, the Stop button in IntelliJ), and `steer.escape.label`, the
 deck title and the quiz distractor say "stop" instead of naming a key. That avoids a `data-assistant`
-pair, since step 2 is the one step not written for two assistants. The `REVIEW.md` validation pass
+pair, since step 2 is not written for two assistants outside `setup`. The `REVIEW.md` validation pass
 read the Esc behaviour differently (a second Esc interrupts the turn and queued prompts then run),
 which is one of the points in this file still to recheck; `Ctrl+C` is correct under either reading.
 
@@ -263,6 +264,48 @@ Ranked by how much they would add against how much prose they cost:
 
 None of these are errors. They are things a Copilot student would benefit from and can currently
 only learn elsewhere.
+
+## Setup files (tested 10 October 2026)
+
+Step 2's `setup` unit names Copilot's own files beside Claude Code's, and every Copilot claim in it
+was run rather than read. Copilot CLI 1.0.95 in a scratch repository, with its debug log
+(`--log-dir --log-level all`) showing what reached the prompt:
+
+- At session start the root `AGENTS.md`, a file it imports with an `@path` line, and `CLAUDE.md` are
+  all injected. Both `.github/skills/` and `.claude/skills/` skills are listed by description only.
+- `.github/instructions/*.instructions.md` with `applyTo`, and `.claude/rules/*.md` with `paths`, are
+  **not** injected: the prompt carries a table of pattern and path and tells the agent to read the
+  file before changing a matching one. It did.
+- A nested `AGENTS.md` arrives as a system reminder once the agent edits a file in its folder.
+- Repo hooks in `.github/hooks/*.json` **load only in a trusted folder** (the log says "Loading repo
+  hooks in prompt mode (folder is trusted…)"); untrusted, they are silently skipped. `postToolUse`
+  has no matcher in Copilot's own format, so it fired after every tool, 9 times for one small edit,
+  which is why the unit's script checks the tool name. A Claude-format `PostToolUse` in
+  `.claude/settings.json` is also read and keeps Claude's matcher, per the hooks reference.
+- `trustedFolders` lives in `~/.copilot/config.json`, not `settings.json` (which logs it as an
+  unknown key).
+- The sandbox (`sandbox.enabled`, off by default, user-level and never repository-overridable) with
+  `blocked.txt` in `sandbox.userPolicy.filesystem.deniedPaths` refused both the view tool and Node
+  through the shell, while `allowed.txt` read on both routes. That is the unit's Copilot task card.
+  There is no `read(...)` permission kind: `--allow-tool`/`--deny-tool` cover `shell`, `write`, MCP
+  servers and `url`, and `permissions-config.json` holds no deny rules.
+
+Copilot in IntelliJ, checked by the course owner in a test project (agent mode, mai-code-1.1-flash):
+Settings > Tools > GitHub Copilot > Customizations has "Use AGENTS.md file" and "Use CLAUDE.md file"
+(which also covers `CLAUDE.local.md`) ticked by default, and **"Use nested AGENTS.md files"** and
+"Use nested CLAUDE.md files" **unticked and marked Experimental**. With the nested option ticked, a
+nested `AGENTS.md` and a `.github/instructions/` file with `applyTo` both shaped the edit. Whether
+the root `AGENTS.md` was followed was not settled: that small model ignored its instruction in the
+first run.
+
+**The user-level file is not where GitHub's IDE docs put it.** In the owner's IntelliJ, after a
+restart, a test line in `~/.config/github-copilot/intellij/global-copilot-instructions.md` (the
+documented file) and one in `global-agents-instructions.md` beside it were both ignored, and so was
+`~/.copilot/copilot-instructions.md`. A `*.instructions.md` with `applyTo: "**"` in
+`~/.copilot/instructions/` was followed, which matches the Customizations page listing that folder
+under "Instruction File Locations". Copilot CLI 1.0.95 injects the same file at session start. So
+that folder is the one user-level place both surfaces read: `setup`'s `your-own-claude-md.1.copilot`
+names it, and step 1's `machine-context.mjs` plants its flag there for Copilot.
 
 ## What is verified, and what is not
 

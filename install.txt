@@ -19,7 +19,9 @@ of this course needs one line in their user-level instructions file, the one the
 assistant merges into every session it starts. That file is:
 
     Claude Code    ~/.claude/CLAUDE.md                 (or $CLAUDE_CONFIG_DIR/CLAUDE.md)
-    Copilot CLI    ~/.copilot/copilot-instructions.md  (or $COPILOT_HOME/copilot-instructions.md)
+    Copilot        ~/.copilot/instructions/kata-agentic-java.instructions.md
+                   (or $COPILOT_HOME/instructions/...), a new file of its own, which
+                   Copilot CLI and Copilot in IntelliJ both read
 
 The line asks the agent reading it to do nothing at all. It goes between two marker
 comments, nothing outside those markers is touched, and the file is copied beside itself
@@ -66,9 +68,9 @@ Run one of these from the repository root, whichever one names the assistant you
     node exercises/step1/machine-context.mjs setup claude
     node exercises/step1/machine-context.mjs setup copilot
 
-If you are Claude Code, that is claude. If you are Copilot CLI, that is copilot. If you
-are neither, ask the student which of the two files above their assistant reads, and use
-the matching argument.
+If you are Claude Code, that is claude. If you are GitHub Copilot, in the CLI or in
+IntelliJ, that is copilot. If you are neither, ask the student which of the two files above
+their assistant reads, and use the matching argument.
 
 
 STEP 3. REPORT BACK
@@ -83,5 +85,6 @@ IF NOBODY IS DRIVING
 --------------------
 
 The commands above are the whole of it, and they work typed by hand. Run the check, read
-its verdict, then run the setup line for the assistant you use. Copilot CLI reads its
-instructions file when a session starts, so exit and start a fresh one afterwards.
+its verdict, then run the setup line for the assistant you use. Copilot reads its
+instructions when a session starts, so exit Copilot CLI and start a fresh one afterwards,
+or restart IntelliJ.

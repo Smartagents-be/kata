@@ -2266,8 +2266,9 @@ strings, and with the hashes beside them it matches three of the five in one pas
 
 `machine` is the one flag this repository does not carry at all, which is the other half of why the
 heading says carried rather than hidden. `exercises/step1/machine-context.mjs` writes it into the
-student's user-level instructions file (`$CLAUDE_CONFIG_DIR` or `~/.claude/CLAUDE.md`, `$COPILOT_HOME`
-or `~/.copilot/copilot-instructions.md`), between two sentinel lines, and `remove` takes it out and
+student's user-level instructions file (`$CLAUDE_CONFIG_DIR` or `~/.claude/CLAUDE.md`, and for Copilot
+a file of its own, `kata-agentic-java.instructions.md` with `applyTo: "**"` in `$COPILOT_HOME` or
+`~/.copilot/instructions/`, which Copilot CLI and Copilot in IntelliJ both read), between two sentinel lines, and `remove` takes it out and
 leaves the rest byte-identical. `install.txt` at the repo root is what runs it, at setup time and
 through the student's own agent, so the plant happens before the student has met step 1 at all.
 Nothing under `exercises/step1/java/` knows about it, and nothing should:

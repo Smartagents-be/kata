@@ -50,6 +50,13 @@
   no, you do not have a goal yet, and 4 hours later you get a confident report on a wish.
 </p>
 
+<p data-i18n="goals.executable-completion-check.2">
+  Claude Code makes that check a command. <code>/goal mvn verify exits 0</code> keeps the agent
+  working, and after every turn a separate model decides whether the condition holds. That model
+  only reads what the run printed, so name the command in the condition. Autopilot in Copilot CLI
+  also keeps going without you, but there the agent decides on its own when it is done.
+</p>
+
 <!-- Filled by the GoalGate element registered under this name in steps/step2/index.tsx. It closes
      the section that argues the command, and the box it turns on is where the wall clock goes, which
      is what the next section picks up. -->

@@ -39,8 +39,8 @@
  * - **`remove` leaves the rest byte-identical**, trailing newline included. `setup` appends exactly
  *   one newline before the block and one after it, so `remove` takes exactly those away again.
  * - **Back up first.** The file is copied beside itself before the first change, and the copy is
- *   only made once, so a second `setup` cannot overwrite the backup with a file that already holds
- *   the block.
+ *   only made once and only of a file that holds no block, so a second `setup` can neither overwrite
+ *   the backup nor leave a copy of the flag behind once `remove` has run.
  * - **Write through a temporary file and rename**, so a failure never leaves the file half written.
  * - **A missing file and a missing directory are the normal case**, not an error.
  * - Never print the flag. `setup` prints the block with it masked, the absolute path it wrote to,
@@ -68,19 +68,36 @@ function flag() {
  * that moves the whole directory, which is also what makes this script safe to exercise against a
  * throwaway home in a test.
  *
+ * **Copilot's target is a file of its own in `~/.copilot/instructions/`**, and not
+ * `~/.copilot/copilot-instructions.md`, which is where it went until October 2026. Copilot in IntelliJ
+ * does not read that file: tested in the course owner's IDE, it ignored it and both of its own global
+ * files under `~/.config/github-copilot/intellij/`, and it did read a `*.instructions.md` with
+ * `applyTo: "**"` in `~/.copilot/instructions/`, which its Customizations page lists as an instruction
+ * location. Copilot CLI 1.0.95 injects that same file into the prompt at session start. So one file
+ * reaches both, and `header` is its frontmatter: the block cannot carry it, because frontmatter has to
+ * open the file and the markers have to stay around the block.
+ *
+ * `legacy` is the old path. `remove` still cleans it, because a student who ran an earlier `setup`
+ * was told the removal command, and that command has to keep undoing what it was printed for.
+ *
  * Typed as a lookup keyed by the assistant name, so a third assistant is a missing entry here and a
  * readable error rather than a silent write to the wrong file.
  */
+const COPILOT_HOME = () => process.env.COPILOT_HOME || join(homedir(), '.copilot')
+
 const TARGETS = {
   claude: {
     name: 'Claude Code',
     dir: () => process.env.CLAUDE_CONFIG_DIR || join(homedir(), '.claude'),
     file: 'CLAUDE.md',
+    header: '',
   },
   copilot: {
-    name: 'Copilot CLI',
-    dir: () => process.env.COPILOT_HOME || join(homedir(), '.copilot'),
-    file: 'copilot-instructions.md',
+    name: 'Copilot',
+    dir: () => join(COPILOT_HOME(), 'instructions'),
+    file: 'kata-agentic-java.instructions.md',
+    header: '---\napplyTo: "**"\n---\n',
+    legacy: { dir: COPILOT_HOME, file: 'copilot-instructions.md' },
   },
 }
 
@@ -134,7 +151,8 @@ function target(assistant) {
     fail(`Unknown assistant "${assistant}". Use one of: ${Object.keys(TARGETS).join(', ')}.`)
   }
   const dir = resolve(entry.dir())
-  return { ...entry, dir, path: join(dir, entry.file) }
+  const legacy = entry.legacy ? join(resolve(entry.legacy.dir()), entry.legacy.file) : null
+  return { ...entry, dir, path: join(dir, entry.file), legacy }
 }
 
 function read(path) {
@@ -194,9 +212,13 @@ function cut(content) {
   return { found: true, rest: content.slice(0, from) + content.slice(to) }
 }
 
-/** Appends the block, having first taken out any block already there, so a second run replaces it. */
-function plant(content, assistant) {
-  const base = content === null ? '' : cut(content).rest
+/**
+ * Appends the block, having first taken out any block already there, so a second run replaces it. A
+ * file this script creates starts with the target's `header`, which is all that is left of it once
+ * `remove` cuts the block out again.
+ */
+function plant(content, assistant, header) {
+  const base = content === null ? header : cut(content).rest
   const body = block(assistant)
   return base === '' ? `${body}\n` : `${base}\n${body}\n`
 }
@@ -206,11 +228,13 @@ function backupPath(path) {
 }
 
 function setup(assistant) {
-  const { name, path } = target(assistant)
+  const { name, path, header } = target(assistant)
   const before = read(path)
 
   let backedUpTo = null
-  if (before !== null && !existsSync(backupPath(path))) {
+  // Only a file that holds none of this script's text is worth keeping a copy of: a backup taken on
+  // a second run would be the block itself, flag included, and it would outlive `remove`.
+  if (before !== null && !before.includes(BEGIN) && !existsSync(backupPath(path))) {
     try {
       copyFileSync(path, backupPath(path))
     } catch (error) {
@@ -219,7 +243,7 @@ function setup(assistant) {
     backedUpTo = backupPath(path)
   }
 
-  writeAtomically(path, plant(before, assistant))
+  writeAtomically(path, plant(before, assistant, header))
 
   const removal = `node ${SCRIPT} remove ${assistant}`
   console.log(`Wrote one block into ${name}'s user-level instructions file.`)
@@ -241,7 +265,14 @@ function setup(assistant) {
 }
 
 function remove(assistant) {
-  const { name, path } = target(assistant)
+  const { name, path, header, legacy } = target(assistant)
+  removeFrom(name, path, header)
+  if (legacy && existsSync(legacy) && read(legacy).includes(BEGIN)) {
+    removeFrom(name, legacy, '')
+  }
+}
+
+function removeFrom(name, path, header) {
   const before = read(path)
   if (before === null) {
     console.log(`Nothing to remove: ${path} does not exist.`)
@@ -254,7 +285,7 @@ function remove(assistant) {
     return
   }
 
-  if (rest === '') {
+  if (rest === '' || rest === header) {
     // The file held the block and nothing else, so this script created it. Take it with us.
     rmSync(path, { force: true })
     console.log(`Removed the block from ${name}'s instructions file, which held nothing else.`)
@@ -281,7 +312,8 @@ const USAGE = `Usage: node ${SCRIPT} <setup|remove> <claude|copilot>
   setup   writes one block into your user-level instructions file, between two markers
   remove  takes that block out again and leaves the rest of the file exactly as it was
 
-Both honour CLAUDE_CONFIG_DIR and COPILOT_HOME if you have moved those directories.`
+Both honour CLAUDE_CONFIG_DIR and COPILOT_HOME if you have moved those directories.
+copilot covers Copilot CLI and Copilot in IntelliJ, which read the same file.`
 
 function main(argv) {
   const [command, assistant] = argv

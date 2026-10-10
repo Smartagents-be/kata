@@ -1,3 +1,5 @@
+import type { Assistant } from '@/shared/assistant/assistant'
+import { useAssistant } from '@/shared/assistant/useAssistant'
 import { FileTree, type TreeNode } from './FileTree'
 
 /**
@@ -15,7 +17,7 @@ import { FileTree, type TreeNode } from './FileTree'
  *
  * No markers, for the same reason the skills tree has none: no paragraph points back at a row.
  */
-const TREE: TreeNode = {
+const CLAUDE_TREE: TreeNode = {
   name: '.',
   directory: true,
   note: 'tree.root.note',
@@ -42,6 +44,39 @@ const TREE: TreeNode = {
   ],
 }
 
+/**
+ * Copilot keeps both halves in one folder: the JSON that declares the hook and the script it names
+ * both sit in `.github/hooks/`, so the folder and both files are teal and `.github/` stays muted.
+ * `format.json` is the file the Copilot `<pre>` shows, and the script is the same invented one.
+ */
+const COPILOT_TREE: TreeNode = {
+  name: '.',
+  directory: true,
+  note: 'tree.root.note',
+  children: [
+    {
+      name: '.github',
+      directory: true,
+      note: 'tree.dot-github.note',
+      children: [
+        {
+          name: 'hooks',
+          directory: true,
+          note: 'tree.github-hooks.note',
+          highlight: true,
+          children: [
+            { name: 'format.json', note: 'tree.hook-json.note', highlight: true },
+            { name: 'format-on-write.sh', highlight: true },
+          ],
+        },
+      ],
+    },
+  ],
+}
+
+const TREES: Record<Assistant, TreeNode> = { claude: CLAUDE_TREE, copilot: COPILOT_TREE }
+
 export function HookTree() {
-  return <FileTree id="hook-tree" root={TREE} dim />
+  const { assistant } = useAssistant()
+  return <FileTree id="hook-tree" root={TREES[assistant]} dim />
 }

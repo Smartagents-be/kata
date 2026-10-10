@@ -1,3 +1,5 @@
+import type { Assistant } from '@/shared/assistant/assistant'
+import { useAssistant } from '@/shared/assistant/useAssistant'
 import { FileTree, type TreeNode } from './FileTree'
 
 /**
@@ -29,7 +31,7 @@ import { FileTree, type TreeNode } from './FileTree'
  * add anything else from `exercises/step2/java` to make the example real; the reason is in this step's
  * CLAUDE.md, beside `setup`'s board.
  */
-const TREE: TreeNode = {
+const CLAUDE_TREE: TreeNode = {
   name: '.',
   directory: true,
   note: 'tree.root.note',
@@ -83,6 +85,56 @@ const TREE: TreeNode = {
   ],
 }
 
+/**
+ * The same four entries under Copilot's names (October 2026, when `setup` stopped being Claude Code
+ * only): `AGENTS.md` where the three briefings were, and `.github/instructions/` with an `applyTo`
+ * line where the rule was. The numbers stay on the same rows, because `claude-md.1` and `.3` point
+ * at them in both variants. Unlike the Claude tree, these files are not this repository's: it carries
+ * no `AGENTS.md`. The nested note says IntelliJ reads them only with the setting ticked, which is what
+ * `claude-md.1.copilot` says in words.
+ */
+const COPILOT_TREE: TreeNode = {
+  name: '.',
+  directory: true,
+  note: 'tree.root.note',
+  children: [
+    { name: 'AGENTS.md', note: 'tree.claude-md.note', highlight: true, marker: 1 },
+    {
+      name: 'front',
+      directory: true,
+      note: 'tree.subfolder.note',
+      children: [
+        { name: 'AGENTS.md', note: 'tree.nested-agents-md.note', highlight: true, marker: 2 },
+      ],
+    },
+    {
+      name: 'exercises/step2/java',
+      directory: true,
+      note: 'tree.module.note',
+      children: [
+        { name: 'AGENTS.md', note: 'tree.module-claude-md.note', highlight: true, marker: 3 },
+      ],
+    },
+    {
+      name: '.github/instructions',
+      directory: true,
+      note: 'tree.rules.note',
+      children: [
+        {
+          name: 'api-design.instructions.md',
+          note: 'tree.rule.note',
+          detail: 'applyTo: "**/*Controller.java"',
+          highlight: true,
+          marker: 4,
+        },
+      ],
+    },
+  ],
+}
+
+const TREES: Record<Assistant, TreeNode> = { claude: CLAUDE_TREE, copilot: COPILOT_TREE }
+
 export function ProjectTree() {
-  return <FileTree id="project-tree" root={TREE} dim />
+  const { assistant } = useAssistant()
+  return <FileTree id="project-tree" root={TREES[assistant]} dim />
 }

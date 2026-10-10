@@ -103,8 +103,11 @@
 
 <p data-i18n="agent-patterns.routing.1">
   Routing <svg data-icon="pattern"></svg> sorts a request first and then sends it to the handler
-  that fits: a model, a skill or a sub-agent. Your harness already does it. It picks a skill or a
-  custom agent by its description, so that description decides whether it ever gets used.
+  that fits: a model, a skill or a sub-agent. Your harness already does it. A custom agent is 1
+  Markdown file with a description, the tools it may use and its instructions, in
+  <code>.claude/agents/</code> for Claude Code or <code>.github/agents/</code> for Copilot. The
+  harness picks a skill or a custom agent by its description, so that description decides whether
+  it ever gets used.
 </p>
 
 <p data-i18n="agent-patterns.routing.2">

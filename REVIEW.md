@@ -121,9 +121,9 @@ Characterisation tests (`gates.legacy-code.1`/`.2`) and a review checklist (`ena
   - the client's actual data policy for its configured service (training vs retention), and which code or data never goes into a context (audit 13)
 - **Copilot cloud agent and Copilot code review** (optional): issue to PR on a `copilot/` branch, human approval, required checks you configure yourself. Keep the two apart; fit them into gates, parallel and goals only if time allows.
 - **Review, what is still missing:** an AI reviewer gets a fresh context plus the acceptance criteria, and the test-first loop (the agent writes the tests, you read them and watch them fail, then the implementation follows). The 4 review questions and the changed-tests warning are in `enablement`.
-- **Long-running goals per tool:** `/goal` in Claude Code, `/autopilot` in Copilot CLI, the Autopilot agent mode in IntelliJ, the cloud agent. The goals unit names none.
+- **Long-running goals per tool:** `goals.executable-completion-check.2` now names `/goal` (Claude Code) and autopilot (Copilot CLI). Still missing: the Autopilot agent mode in IntelliJ (*Unverified*: not found in GitHub's JetBrains changelogs) and the cloud agent.
 - **Team ownership:** which agent files are shared and reviewed (instructions, rules, skills, hooks, a project MCP config) and which stay personal. Each tool has its own syntax.
-- **Resuming a session:** `/resume` and `--continue`, and IntelliJ's sessions view.
+- **Resuming a session:** `session.wrote-almost-none.3` now names `--continue` and `/resume`. Still missing: IntelliJ's sessions view.
 - **Cost governance on Copilot:** pooled credits, user budgets (hard stops), the Auto model; a long builder-critic run can consume substantial credits (measure; duration alone does not predict it). On Claude: `opusplan`, and an exported `ANTHROPIC_API_KEY` taking precedence over the subscription.
 - **When the whole app can't run locally** (other teams' services, SSO, partner APIs): teach a feasible unit, component or contract-test boundary and say what stays unverified.
 - **Determinism for CI and compliance:** temperature 0 is not fully deterministic, and newer Claude models reject non-default temperature, so do not present it as a setting.
