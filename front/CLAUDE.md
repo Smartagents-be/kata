@@ -366,7 +366,7 @@ which page, and `data-component` says whose code to open when it misbehaves. The
 holds the data and the reasons for it, so it renders no elements of its own and never appears in the
 DOM. `UnitShot` is the same shape with the prop called `id`, since a screenshot has no wrapper to
 hold its data: the registry passes the block, the image path and the namespace straight in, so
-`evolution`'s shots are `#walking-skeleton-*` and `model`'s is `#usage-readout-*`.
+`model`'s shot is `#usage-readout-*`.
 
 Every component in `front/src/` follows this, `QuizPanel.tsx` included. Only three things are
 exempt: the generated primitives in `shared/components/ui/`, which are styled wrappers rather than

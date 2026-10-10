@@ -113,6 +113,13 @@ const deck: SlideSpec[] = [
     title: 'deck.expectations.floor.title',
   },
   {
+    id: 'deck-step3-expectations-prototypes',
+    kind: 'statement',
+    ns: 'step3',
+    eyebrow: 'expectations.title',
+    title: 'deck.expectations.prototypes.title',
+  },
+  {
     id: 'deck-step3-expectations-missing',
     kind: 'statement',
     ns: 'step3',

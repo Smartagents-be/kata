@@ -60,15 +60,17 @@ decides 4 times, the machines check the rest) and links here.
 **Every section leans on a unit that already argued its engineering claim and none of them may
 re-argue it**, which is the same rule `agent-patterns.coordinator.3` follows in step 1 and the constraint
 most easily lost in a rewrite here. The soft skill is the new part; the claim underneath it gets a
-link and one clause. Almost every lean points at step 2. `change` takes seven of them, one per section
+link and one clause. Almost every lean points at step 2. `change` takes six of them, one per section
 and no unit twice: `you-test-engineer` at `gates` for the floor,
-`business-moves-closer` at `evolution` for a prototype starting a conversation,
 `process-was-bottleneck` at `enablement` for one person carrying more of the stack,
 `person-still-decides` at `goals` for the work running without you between decisions,
 `way-working-decision` at `patterns` for something done by hand turning into a script, `code-got-cheap`
 at `workflows` for spec-driven work keeping the description, `environment-beats-project` at `setup`
-for the environment being files. `expectations.lead` is `evolution`'s skeleton with the details left
-out, `expectations.detail-nobody-specified` borrows `engineering`'s naming-the-thing-you-want,
+for the environment being files. The seventh, `business-moves-closer`, links forward to
+`expectations.prototype-starts-conversation` instead: it leaned on step 2's `evolution` until that unit
+was cut and the section came here (see below). `expectations.prototype-starts-conversation` borrows
+`engineering`'s vibe coding working for about an hour, `expectations.detail-nobody-specified`
+borrows `engineering`'s naming-the-thing-you-want,
 `expectations.estimate-still-matters` borrows `enablement`'s count of where the day goes and
 `steering`'s line about the agents getting faster while your reading does not, and
 `expectations.one-good-run` is `ScriptRuns`'s spread named in prose.
@@ -80,8 +82,9 @@ those into a second telling and the step turns into step 2 with feelings.
 are deliberate. The need for relevant domain evidence is established in `step1/context`, which
 is the only place in step 3 that reaches back to step 1, because it is the only claim here that is
 about the model rather than about people. And the multiple that never arrives is `change`'s, one unit
-earlier in this same step, so the section links sideways rather than saying it again: this is the
-step's only intra-step link and it exists because the reader met that argument twenty minutes ago.
+earlier in this same step, so the section links sideways rather than saying it again, because the
+reader met that argument twenty minutes ago. The step's other intra-step link runs the opposite way,
+from `change.business-moves-closer` forward to the prototype section in `expectations`.
 What the section adds on top of both is the part neither of them makes, that a gain everybody's
 competitor also gets is a floor rather than a lead. Let it start explaining the factor and it is
 `process-was-bottleneck` a second time.
@@ -105,7 +108,7 @@ lists apart: `change` and `impostor` each name three concrete cases, so
 `detail-nobody-specified` deliberately names none and stays on returns alone. A third enumeration of
 empty lists and zero amounts turns the step into one paragraph told three times.
 
-`change` and `expectations` are the long units of the step, seven sections and five of them against
+`change` and `expectations` are the long units of the step, seven sections and six of them against
 `impostor`'s three, and in both cases that is the argument rather than a draft nobody trimmed. `change`
 carries the whole claim that the job moved off
 production: what your day becomes (`you-test-engineer`), who else has to move with you
@@ -142,18 +145,35 @@ the one most worth having on the board, and it is **the step's only `statement` 
 three examples a tutor takes one at a time is the case that shape exists for, and a `note` there
 would compress them back into the single claim the unit spent a list avoiding.
 
-`expectations` earns its five the same way, and it went from three to five in one revision: what
-management believes the tool bought them (`tool-not-advantage`), what to say at the demo
-(`say-what-missing`), why the work after the demo is real (`detail-nobody-specified`), what goes into
-the number you give them (`estimate-still-matters`), and how much that number is worth now
-(`one-good-run`). **It stopped at five on purpose.** The sixth candidate was a section of its own for
-nobody being calibrated any more, and it went into `one-good-run.2` instead, where the run-to-run
+`expectations` earns its six the same way, and it went from three to five in one revision: what
+management believes the tool bought them (`tool-not-advantage`), what to put in front of them
+(`prototype-starts-conversation`), what to say at the demo (`say-what-missing`), why the work after
+the demo is real (`detail-nobody-specified`), what goes into the number you give them
+(`estimate-still-matters`), and how much that number is worth now (`one-good-run`). **It stopped at
+five on purpose, and the sixth section came from outside (below).** The candidate it turned down was
+a section of its own for nobody being calibrated any more, and it went into `one-good-run.2` instead, where the run-to-run
 spread it corrects for is already on the page: your estimate came from years of repetition, your
 manager read quality off knowing the team, and both readings are of a job that changed shape. Split
 it back out and the unit is longer than `change` while saying the same thing in two places. The
 casualty of that merge was the old opening of `one-good-run.2`, so note that the section now argues
 before it advises, and the checkpoint instruction is the last thing in the unit rather than the first
 thing in its closing paragraph.
+
+**`prototype-starts-conversation` came over from step 2 in October 2026**, when the owner cut that
+step's `evolution` unit and kept this one section of it: a prototype is something you put in front of
+people, which makes it this step's subject. It is **the one place the course licenses vibe coding,
+and it says so out loud**. Step 2's `engineering` argues flatly against it, and the old unit left that
+collision unspoken on purpose; the owner overturned that, so the section names vibe coding, leans on
+`engineering.lead.2`'s hour for why it fits, and says before the demo that none of the 3 is the
+product and the code is thrown away. Do not soften either half: without the licence the section is
+`say-what-missing` early, and without the bin it is the vibe coding `engineering` warns about. It sits
+after `tool-not-advantage` because that section's "that" reads back to the lead, and before
+`say-what-missing`, which is the sentence you say at the demo this section sets up. **The course no
+longer says "skeleton" or "walking skeleton"**: the owner found the term unexplained, so
+`expectations.lead.2`, `one-good-run.2` and `change.way-working-decision.4` say prototype, first version
+and working version. It has a statement slide of its own (`deck-step3-expectations-prototypes`) and no
+figure; the drawing it had in step 2, `IterationPaths`, went with the unit because it did not explain
+itself.
 
 `change.code-got-cheap` is the section that reads as a licence to stop caring, and it is written
 against that on purpose. Quality drifts where drift is survivable, taste relaxes, and the last two

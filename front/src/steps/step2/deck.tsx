@@ -1,4 +1,3 @@
-import { UnitShot } from '@/shared/components/UnitShot'
 import type { SlideSpec } from '@/shared/deck/slide-spec'
 import { AgentsAtOnce } from './AgentsAtOnce'
 import { DomainTree } from './DomainTree'
@@ -6,7 +5,6 @@ import { FlowDiagram } from './FlowDiagram'
 import { GateReach } from './GateReach'
 import { GoalGate } from './GoalGate'
 import { HookTree } from './HookTree'
-import { IterationPaths } from './IterationPaths'
 import { LoopsPerHour } from './LoopsPerHour'
 import { ModelRelay } from './ModelRelay'
 import { ProjectTree } from './ProjectTree'
@@ -42,9 +40,7 @@ import { WorktreeEach } from './WorktreeEach'
  *
  * The four `FlowDiagram` instances repeat the registry's props exactly, so the board and the unit
  * page draw one set of diagrams; a change there is a change here.
- *
- * The two screenshots ride `UnitShot` at `scale` 1: they are raster, so magnifying them past
- * `figureWidth` only softens them on a projector.
+
  */
 const deck: SlideSpec[] = [
   // The module's own card, the one dark slide this step gets. No eyebrow: there is nothing above
@@ -54,61 +50,6 @@ const deck: SlideSpec[] = [
     kind: 'title',
     ns: 'step2',
     title: 'step.title',
-  },
-
-  // ── evolution ─────────────────────────────────────────────────────────────────────────────
-  {
-    id: 'deck-step2-evolution',
-    kind: 'divider',
-    ns: 'step2',
-    eyebrow: 'step.title',
-    title: 'evolution.title',
-    points: [
-      'deck.evolution.divider.1',
-      'deck.evolution.divider.2',
-      'deck.evolution.divider.3',
-      'deck.evolution.divider.4',
-    ],
-  },
-  {
-    id: 'deck-step2-evolution-paths',
-    kind: 'figure',
-    ns: 'step2',
-    eyebrow: 'evolution.title',
-    title: 'deck.evolution.paths.title',
-    figure: <IterationPaths />,
-    scale: 1.5,
-  },
-  {
-    id: 'deck-step2-evolution-skeleton',
-    kind: 'figure',
-    ns: 'step2',
-    eyebrow: 'evolution.title',
-    title: 'deck.evolution.skeleton.title',
-    figure: <UnitShot id="walking-skeleton" src="/walking-skeleton.png" namespace="step2" />,
-    scale: 1,
-    figureWidth: 1250,
-  },
-  {
-    id: 'deck-step2-evolution-details',
-    kind: 'figure',
-    ns: 'step2',
-    eyebrow: 'evolution.title',
-    title: 'deck.evolution.details.title',
-    note: 'deck.evolution.details.note',
-    figure: <UnitShot id="added-details" src="/added-details.png" namespace="step2" />,
-    // Narrower than its sibling: this slide carries a note, and the image's height follows its
-    // width, so the wider layout ran the shot into the footer's 88px.
-    scale: 1,
-    figureWidth: 1050,
-  },
-  {
-    id: 'deck-step2-evolution-fifteen',
-    kind: 'statement',
-    ns: 'step2',
-    eyebrow: 'evolution.title',
-    title: 'deck.evolution.fifteen.title',
-    note: 'deck.evolution.fifteen.note',
   },
 
   // ── setup ─────────────────────────────────────────────────────────────────────────────────

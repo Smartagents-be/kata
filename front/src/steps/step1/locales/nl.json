@@ -880,7 +880,7 @@
   "recap.lead.10.claude": "<strong>De limiet van 5 uur en de weeklimiet van Claude staan los van de context.</strong> Kijk ze allebei na voor je een lange run start <svg data-icon=\"gem\"></svg>.",
   "recap.lead.10.copilot": "<strong>Met een bedrijfslicentie haalt Copilot AI credits uit een gedeelde maandelijkse pot.</strong> Je beheerder kan elke persoon een andere limiet geven. Bereik je jouw limiet, dan stopt de agent midden in een taak, dus kijk je verbruik na voor een lange run <svg data-icon=\"coin\"></svg>.",
   "recap.next-step-2.heading": "Volgende: stap 2",
-  "recap.next-step-2.1": "Dat is stap 1. <a href=\"/steps/step2/evolution\">Stap 2</a> gaat van wat de agent weet naar hoe jij hem werk geeft.",
+  "recap.next-step-2.1": "Dat is stap 1. <a href=\"/steps/step2/setup\">Stap 2</a> gaat van wat de agent weet naar hoe jij hem werk geeft.",
 
   "deck.tokens.split.title": "Een model leest geen woorden",
   "deck.tokens.split.note": "In deze voorbeelden gebruiken tekst en code ongeveer evenveel tokens; een logregel bijna 2 keer zoveel, een id bijna 3 keer.",

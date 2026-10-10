@@ -75,11 +75,10 @@ interface Stage extends Job {
 const STAGES: readonly Stage[] = [
   {
     key: 'preflight',
-    // The briefing, the skill and the hook are `setup`, the `## Gaps` rule is `steering`, and
-    // running the check once before anything depends on it is `evolution`: take the step, read what
-    // came out, and aim from there rather than from the plan. Wiring `mvn verify` into the hook that
-    // fires when the agent says it is done is `gates`' `Quality gates` section, run for real.
-    units: ['setup', 'steering', 'evolution', 'gates'],
+    // The briefing, the skill and the hook are `setup`, and the `## Gaps` rule is `steering`.
+    // Wiring `mvn verify` into the hook that fires when the agent says it is done is `gates`'
+    // `Quality gates` section, run for real.
+    units: ['setup', 'steering', 'gates'],
     checks: ['cd exercises/step2/java', 'mvn verify -Pgraded'],
     pays: [],
   },

@@ -60,7 +60,7 @@
   "change.you-test-engineer.2": "Schrijf die dus op voor de implementatie bestaat. De quality gates in <a href=\"/steps/step2/gates\">de unit over gates</a> leggen een vloer onder wat de run oplevert, en de scenario's die jij erbovenop zet, komt niemand op vanuit het happy path. Ze bedenken gaat traag. Dat is het deel van de dag waar traag goed is.",
 
   "change.business-moves-closer.heading": "Business schuift dichterbij",
-  "change.business-moves-closer.1": "Iets waar vroeger 3 weken over gingen, heeft nu tegen donderdag een werkende versie. Dat helpt alleen als iemand die weet waarvoor het diende er op donderdag naar kijkt. <a href=\"/steps/step2/evolution\">Een prototype start een gesprek</a>, en dat gesprek moet het prototype bijhouden.",
+  "change.business-moves-closer.1": "Iets waar vroeger 3 weken over gingen, heeft nu tegen donderdag een werkende versie. Dat helpt alleen als iemand die weet waarvoor het diende er op donderdag naar kijkt. <a href=\"/steps/step3/expectations\">Een prototype start een gesprek</a>, en dat gesprek moet het prototype bijhouden.",
   "change.business-moves-closer.2": "Dat zet business wekelijks mee aan tafel in plaats van pas bij de demo, en het trekt jou een stuk in hun helft van het werk. Je gaat weten waarom personeel 7 dagen respijt krijgt en een gewoon lid geen enkele. Dat is geen scope creep. Het is de enige manier om te weten of wat gebouwd is ook is wat iemand wou.",
 
   "change.person-still-decides.heading": "Waar een mens nog beslist",
@@ -74,7 +74,7 @@
   "change.way-working-decision.1": "Elke gewoonte die je hebt, is ontstaan uit een beperking, en sommige van die beperkingen zijn weg. <a href=\"/steps/step2/patterns\">De unit over skills en scripts</a> ruimt aan je eigen bureau één van die gewoontes op, waar iets wat je met de hand deed een script wordt. In de manier waarop je team werkt zitten dezelfde overblijfsels, en niemand gaat ze voor jou aanwijzen.",
   "change.way-working-decision.2": "<strong>Er zit geen PowerPoint in deze cursus.</strong> De slides staan in de repository en hun figuren komen uit dezelfde componenten als in de units, zodat het beeld op de beamer niet kan verschillen van dat op jouw scherm. Niemand vond PowerPoint slecht. De reden waarom het de logische keuze was, is weg.",
   "change.way-working-decision.3": "<strong>Code review is er gekomen om eruit te halen wat iemand moe op vrijdag typte.</strong> Vraag je af wat ze er nog uithaalt als een agent de diff schrijft en een andere agent hem nakijkt. Niet óf er iemand leest, maar waarop die let.",
-  "change.way-working-decision.4": "<strong>Een sprint van 2 weken was een eerlijke portie werk toen een increment 2 weken duurde.</strong> Het skelet staat er nu op donderdag. Of Scrum daar nog de juiste vorm omheen is, mag je team opnieuw bekijken.",
+  "change.way-working-decision.4": "<strong>Een sprint van 2 weken was een eerlijke portie werk toen een increment 2 weken duurde.</strong> Een werkende versie staat er nu op donderdag. Of Scrum daar nog de juiste vorm omheen is, mag je team opnieuw bekijken.",
   "change.way-working-decision.5": "Niemand heeft opgeschreven wat daarvoor in de plaats komt. De vraag stellen is voor je organisatie meer waard dan wat je deze week oplevert.",
 
   "change.code-got-cheap.heading": "Code is goedkoop geworden",
@@ -87,11 +87,14 @@
   "change.environment-beats-project.2": "Het is ook het werk dat niemand inplant. Tel deze week hoe vaak je een agent iets vertelde dat je al eens verteld had <svg data-icon=\"gem\"></svg> Elke keer is een regel die in een bestand ontbreekt, en die regel is het verschil tussen een truc van jou en een team dat anders werkt.",
 
   "expectations.lead.1": "De mensen rond jou zagen hetzelfde als jij. Een werkende versie van iets, op het scherm, 1 namiddag nadat iemand het gevraagd had. Sommigen vroegen het niet eens: dezelfde tools staan op hun laptop, en een manager zet over de middag zelf een prototype in elkaar. Wat iedereen eruit meenam, is dat alles nu een namiddag duurt.",
-  "expectations.lead.2": "<a href=\"/steps/step2/evolution\">De unit over incrementen</a> zei al wat die versie is: een skelet met de details eruit. De afstand tussen dat skelet en iets dat je aan een klant durft te tonen, is waar de beloftes stuklopen.",
+  "expectations.lead.2": "Wat ze zagen was een prototype, zonder de details. De afstand tussen dat prototype en iets dat je aan een klant durft te tonen, is waar de beloftes stuklopen.",
 
   "expectations.tool-not-advantage.heading": "De tool is de voorsprong niet",
   "expectations.tool-not-advantage.1": "Bij het management leeft daar een grotere versie van: de tool heeft het team een voorsprong opgeleverd. Je concurrent zit op dezelfde modellen, in dezelfde week, en leest hetzelfde artikel erover. Wat de tooling jou geeft, geeft ze hen ook. <a href=\"/steps/step3/change\">De unit over veranderingen in team en proces</a> liet al zien dat de beloofde versnelling uitblijft. Winst die iedereen krijgt, is de nieuwe bodem en geen voorsprong.",
   "expectations.tool-not-advantage.2": "Een tool kent op zichzelf je domein, actuele codebase en gebruikers niet. De <a href=\"/steps/step1/context\">context-unit</a> liet zien waarom die details tellen. Je meerwaarde is weten welk bewijs en welke eisen het werk nodig heeft en controleren wat de tool oplevert.",
+  "expectations.prototype-starts-conversation.heading": "Een prototype start een gesprek",
+  "expectations.prototype-starts-conversation.1": "Hier heeft vibe coding zijn plek. Het <a href=\"/steps/step2/engineering\">werkt ongeveer een uur</a>, en meer heeft een prototype niet nodig. Bouw 3 varianten van hetzelfde scherm in de tijd die 1 vergadering erover kost, en leg ze voor aan wie erom vroeg. Kijk over welke ze beginnen te praten.",
+  "expectations.prototype-starts-conversation.2": "Zeg voor de demo dat geen van de 3 het product is. Niemand las de code en niets test ze. Wat je bijhoudt is de reactie, meestal stukken van 2 varianten in plaats van 1 van de 3, en daarop bouw je het product. De code gaat de vuilbak in.",
 
   "expectations.say-what-missing.heading": "Zeg wat er nog niet in zit",
   "expectations.say-what-missing.1": "Toon de ruwe versie, en benoem daarna wat ze nog niet doet. Geen validatie, 1 hard-coded lid, niets dat een refresh overleeft. 1 zin, en die levert het enige op wat je uit dat overleg nodig had: dat iedereen weet wat er net op het scherm stond. Is het prototype van hen in plaats van van jou, dan is het dezelfde zin en moet jij ze nog altijd zeggen.",
@@ -107,7 +110,7 @@
 
   "expectations.one-good-run.heading": "1 goede run is geen velocity",
   "expectations.one-good-run.1": "Geef dezelfde vraag 2 keer door en er komt geen 2 keer hetzelfde terug. <a href=\"/steps/step2/patterns\">De unit over skills en scripts</a> tekent die spreiding en zet daarna een script rond het deel dat helemaal niet hoort te variëren. Zolang je dat niet gedaan hebt, is de namiddag die goed liep 1 meting.",
-  "expectations.one-good-run.2": "Vroeger corrigeerde je zo'n getal op gevoel, en die correctie is weg. Jij schatte op basis van jaren ervaring met dat werk, en je manager las de kwaliteit af aan wie er in het team zat; allebei zijn dat metingen van een job die intussen van vorm veranderd is. Iedereen is tegelijk aan het herijken, dus de eerlijke belofte is het volgende checkpoint in plaats van het einde. Een skelet op donderdag, een groene build op maandag. Een datum die ervan uitging dat elke run landt, valt om zodra er één niet landt.",
+  "expectations.one-good-run.2": "Vroeger corrigeerde je zo'n getal op gevoel, en die correctie is weg. Jij schatte op basis van jaren ervaring met dat werk, en je manager las de kwaliteit af aan wie er in het team zat; allebei zijn dat metingen van een job die intussen van vorm veranderd is. Iedereen is tegelijk aan het herijken, dus de eerlijke belofte is het volgende checkpoint in plaats van het einde. Een eerste versie op donderdag, een groene build op maandag. Een datum die ervan uitging dat elke run landt, valt om zodra er één niet landt.",
 
   "impostor.lead.1": "Het komt binnen de eerste keer dat een agent in 10 minuten doet waar jij een dag voor had vrijgehouden. En het werk is goed. Daar zit de pijn.",
   "impostor.lead.2": "De route was van de agent. De beslissing om ze te nemen was van jou. Jij benoemde het doel, zette de check die ja zei, en las na wat er terugkwam voor het verder ging. Niets in die reeks gebeurde vanzelf.",
@@ -157,6 +160,7 @@
   "deck.change.environment.title": "De deliverable is <hi>de omgeving</hi>, <mute>niet dit kwartaal</mute>",
   "deck.change.environment.note": "Tel deze week hoe vaak je een agent iets vertelde dat je al eens verteld had. Elke keer is een regel die in een bestand ontbreekt.",
   "deck.expectations.floor.title": "Productiviteitswinst door AI is voor iedereen beschikbaar: het is <hi>de nieuwe ondergrens</hi>, <mute>geen unieke voorsprong</mute>",
+  "deck.expectations.prototypes.title": "Vibe code <hi>3 prototypes</hi>, <mute>lever er geen enkele op</mute>",
   "deck.expectations.missing.title": "Neem de regie over <hi>wat er nog ontbreekt</hi>",
   "deck.expectations.missing.1": "<hi>Benoem de leemte direct:</hi> Zeg uit jezelf wat er nog ontbreekt zodra je een eerste versie of prototype laat zien.",
   "deck.expectations.missing.2": "<hi>De onvermijdelijke feedback:</hi> Die opmerking komt er sowieso; de vraag is alleen óf jij de regie pakt, óf dat de ander er achteraf naar moet vragen.",

@@ -83,6 +83,7 @@
   "deck.change.environment.title": "The deliverable is <hi>the environment</hi>, <mute>not this quarter</mute>",
   "deck.change.environment.note": "Count the times this week you told an agent something you had told it before. Each one is a line missing from a file.",
   "deck.expectations.floor.title": "Productivity gains from AI are available to everyone: they are <hi>the new floor</hi>, <mute>not a unique advantage</mute>",
+  "deck.expectations.prototypes.title": "Vibe code <hi>3 prototypes</hi>, <mute>ship none of them</mute>",
   "deck.expectations.missing.title": "Take charge of <hi>what is still missing</hi>",
   "deck.expectations.missing.1": "<hi>Name the gap straight away:</hi> Say of your own accord what is still missing as soon as you show a first version or prototype.",
   "deck.expectations.missing.2": "<hi>The inevitable feedback:</hi> That remark is coming anyway; the only question is whether you take charge, or someone else has to ask about it afterwards.",

@@ -14,8 +14,8 @@ import { useTranslation } from 'react-i18next'
  * **Two slices are done and the third is still being built**, and that is the argument. A finished
  * slice carries a check and "runs end to end", which is the feedback the section is about: it
  * arrives per use case, not after the last layer. The third is a lighter fill with no check and the
- * label "being built", rather than dashed, because a dash in this step already means a version that
- * was built and dropped (`IterationPaths`), and this one is on its way in.
+ * label "being built", rather than dashed, because on step 1's reading a dash means a version that
+ * was built and dropped, and this one is on its way in.
  *
  * **There is no layer-by-layer panel beside it.** The paragraph above carries that contrast in one
  * sentence, and a second drawing of the wrong way would split the reader's attention over two

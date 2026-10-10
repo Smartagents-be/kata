@@ -28,10 +28,9 @@ import { useTranslation } from 'react-i18next'
  * for the reason below, so the legend must never grow a unit.
  *
  * **This figure is about variance across runs, and never about the clock or about step size.**
- * `LoopsPerHour` in `enablement` already owns how many turns fit in an hour and `IterationPaths` in
- * `evolution` owns few-long against many-short. Draw a run here as time spent and this becomes one
- * of those a second time. The three cards are the same width in both rows for exactly that reason:
- * what changes between the rows is the content, not the size.
+ * `LoopsPerHour` in `enablement` already owns how many turns fit in an hour. Draw a run here as time
+ * spent and this becomes that figure a second time. The three cards are the same width in both rows
+ * for exactly that reason: what changes between the rows is the content, not the size.
  *
  * The teal is the step's rule, what the shape adds. A prose run is muted because it is what you
  * already have, a script run is teal because it is what the section is arguing for.

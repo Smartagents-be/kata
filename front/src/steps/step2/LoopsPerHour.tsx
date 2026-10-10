@@ -16,10 +16,10 @@ import { useTranslation } from 'react-i18next'
  * figure sat under the deploy argument, and were rewritten with the move, because a band labelled
  * for prose that is no longer in the unit is the failure to watch for here.
  *
- * **This figure is on the clock, and never on step size.** `IterationPaths` in `evolution` already
- * owns few-long against many-short, measured as distance to a target. This one measures an hour and
- * counts turns. Redrawing either in the other's vocabulary collapses two arguments into one, and the
- * step then says the same thing twice in different units.
+ * **This figure is on the clock, and never on step size.** It measures an hour and counts turns.
+ * Few long steps against many short ones, measured as distance to a target, was `IterationPaths` in
+ * the `evolution` unit, and both went in October 2026 at the owner's asking because the drawing did
+ * not explain itself. Do not redraw this one in that vocabulary to bring the argument back.
  *
  * Three things about how it is drawn are decisions rather than styling.
  *

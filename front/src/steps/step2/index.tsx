@@ -1,4 +1,3 @@
-import { UnitShot } from '@/shared/components/UnitShot'
 import type { Step } from '@/shared/step'
 import deck from './deck'
 import { AgentsAtOnce } from './AgentsAtOnce'
@@ -7,14 +6,12 @@ import { CountTheDay } from './CountTheDay'
 import { CheckPermissions } from './CheckPermissions'
 import { Debrief } from './Debrief'
 import { DomainTree } from './DomainTree'
-import { FifteenMinutes } from './FifteenMinutes'
 import { FlowDiagram } from './FlowDiagram'
 import { GateReach } from './GateReach'
 import { GateWalk } from './GateWalk'
 import { GoalGate } from './GoalGate'
 import { HexagonPorts } from './HexagonPorts'
 import { HookTree } from './HookTree'
-import { IterationPaths } from './IterationPaths'
 import { LoopInWindow } from './LoopInWindow'
 import { LoopsPerHour } from './LoopsPerHour'
 import { ModelRelay } from './ModelRelay'
@@ -41,7 +38,6 @@ import { Workshop } from './Workshop'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
 import { parallelQuiz, patternsQuiz, spendingQuiz, steeringQuiz, workflowsQuiz } from './quiz'
-import evolution from './units/evolution.html?raw'
 import setup from './units/setup.html?raw'
 import engineering from './units/engineering.html?raw'
 import gates from './units/gates.html?raw'
@@ -55,11 +51,11 @@ import workshop from './units/workshop.html?raw'
 
 /**
  * Step 2, agentic engineering: the habits that decide whether working with an agent beats writing
- * the code yourself, one unit each. `evolution` opens the step by putting the rest of them in
- * order: small steps, taken often, on something that already runs.
+ * the code yourself, one unit each. `setup` opens the step, since every session starts from what the
+ * repository tells the agent before your first message.
  *
- * `evolution`, `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`, `enablement`,
- * `parallel` and `goals` each carry a drawing. `evolution`, `engineering`, `gates`, `steering`,
+ * `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`, `enablement`, `parallel` and
+ * `goals` each carry a drawing. `engineering`, `gates`, `steering`,
  * `patterns` and `enablement` close on an ungraded task card; `steering`, `patterns`, `workflows` and `goals`
  * carry a quiz; and `setup` and the closing `workshop` unit each carry a flag board, which is why
  * this registry is .tsx. Both boards are browser-graded, so the step still talks to the service
@@ -73,24 +69,6 @@ const step2: Step = {
   title: 'step.title',
   locales: { en, nl },
   units: [
-    {
-      id: 'evolution',
-      title: 'evolution.title',
-      html: evolution,
-      // Three slots inside the prose: the drawing under the lead, then this site as the skeleton
-      // it started as and as it looks with the details in.
-      inlineFigures: {
-        'iteration-paths': <IterationPaths />,
-        'walking-skeleton': (
-          <UnitShot id="walking-skeleton" src="/walking-skeleton.png" namespace="step2" />
-        ),
-        'added-details': <UnitShot id="added-details" src="/added-details.png" namespace="step2" />,
-      },
-      // And the exercise under the prose. It is prose in the HTML too, and guided mode drops
-      // that, so this is what a class is left with. It grades nothing: the clock is the
-      // constraint and the answer is the list of details the student did not reach.
-      figure: <FifteenMinutes />,
-    },
     {
       id: 'setup',
       title: 'setup.title',

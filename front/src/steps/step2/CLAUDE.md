@@ -16,25 +16,23 @@ in Dutch). There is no exception for size or capacity either: "context window" a
 "contextvenster" are gone from student text, as step 1's file records. Usage and billing windows, time windows and
 component names such as `TwoWindows`, `LoopInWindow` and `WindowSpend` are untouched.
 
-`step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Ten
-units, `evolution`, `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`,
+`step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Nine
+units, `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`,
 `enablement`, `parallel` and `goals`, four of
-them carrying a quiz, and the unit HTML is the source for what each argues. Nine of the ten close
-on something the student does: `evolution`, `engineering`, `gates`, `steering`, `patterns` and
+them carrying a quiz, and the unit HTML is the source for what each argues. Eight of the nine close
+on something the student does: `engineering`, `gates`, `steering`, `patterns` and
 `enablement` on an ungraded `TaskCard`, `setup` on a graded flag board, and `steering`, `patterns`, `workflows`
 and `goals` on a quiz, three of them under a card. `workflows` is the one that is framing prose and
 a quiz with no card. Six carry one
-habit each; `evolution` opens the step and carries none, because its job is to put the rest in
-order: a version now costs an hour, so the step you hand over gets small and you take many of them.
-`workflows` is outside that count too, and deliberately so: it carries five ways of
+habit each. `workflows` is outside that count, and deliberately so: it carries five ways of
 handing work over rather than one habit, and its argument is the choice between them. `parallel` is
 outside it on the same reasoning, four arrangements of agents rather than one habit. `enablement`
 is the fourth one outside it, for its own reason: it is about what has to be true around you rather
 than about a habit you practise.
 
 **Unit titles are 1 word or a few, at the owner's asking (October 2026).** The sidebar reads
-Increments, Setup, Domain language, Quality gates, Steering, Skills and scripts, Workflows, Feedback
-loop, Parallel work, Long runs and Workshop (Incrementen, Setup, Domeintaal, Quality gates, Bijsturen,
+Setup, Domain language, Quality gates, Steering, Skills and scripts, Workflows, Feedback
+loop, Parallel work, Long runs and Workshop (Setup, Domeintaal, Quality gates, Bijsturen,
 Skills en scripts, Werkwijzen, Feedbacklus, Parallel werk, Lange runs, Workshop). The longer titles
 they replaced each carried a claim or a verb, and the owner found them too long to scan. Only the
 `*.title` strings moved: unit ids, URLs and keys stayed. A link that named a unit by its title was
@@ -73,66 +71,20 @@ Three references were repointed in the same change rather than left
 dangling: `workshop.lead.2` says "the kind of code a quality gate exists for" instead of naming the
 unit, `step3`'s `change.you-test-engineer.2` links to `gates` (it linked to `engineering` until the section moved), and the capstone's pointer at
 `engineering` and `goals` is now a chip in `RunSheet` rather than a link in `workshop.lead.1`.
-Its prose closes by handing off to `setup` by name, so a reordering there has to visit that
-paragraph. Below that prose sits the step's only *ungraded* exercise, under the same `<hr>`
-and "Test your knowledge" heading step 1's `tools` uses: fifteen minutes on the clock, one of three
-skeletons, and nothing graded. The constraint is the clock and the answer is the list of details the
-student did not get to, so do not add a checker, and keep each example ending on what
-is left out, since `fifteen-minutes.2` tells the student to read it there. That ending is what makes
-it a skeleton rather than a small feature.
-Two things about it are decisions. It uses "vibecode" approvingly for a throwaway prototype while
-`engineering` argues flatly against vibe coding, and that is not a contradiction to tidy up: the
-first version you intend to delete is the one place the argument does not apply. **Neither unit says
-that out loud, and the collision is left standing on purpose.** `engineering.lead.1` used to close by
-naming this unit as the one place the line does not hold, and that sentence was cut: a lead that
-opens on a flat line and then licenses an exception to it in the same breath spends its own claim,
-and the reader who meets both units meets the tension where it actually is. So do not answer it from
-either side. And its figure,
-`IterationPaths`, splits the work between label and drawing on purpose. The labels carry the cause
-(weeks against an hour) and the picture carries the effect (three long moves stopping beside the
-target against twelve short ones landing in it), which is why neither reads as a caption of the
-other. No prose reads the drawing, and that is a decision rather than an omission: the two labels
-already say what the halves are, so a paragraph pointing at them would only say it twice. Both
-halves live in one SVG so they stay side by side at any width; as two elements they would stack on a
-narrow screen and the comparison would turn into a sequence.
 
-**Only the right half branches**, and that asymmetry is the second thing the figure argues: three of
-its nodes throw off versions that were built and dropped, dashed on the step 1 reading of a dash,
-each **aimed at the same target and none of them arriving** and **most of them a single step**, while the
-surviving path carries on into the ring. They start **early as well as late**, so branching does not
-read as something that only happens near the finish. Aiming them at the target is what makes them
-versions of the work rather than detours, and the geometry that keeps them from crossing is recorded
-in the component. A step you can take again
-is a step you can afford to take twice, which the left half at weeks a version cannot, so the left
-half must never grow a branch. `evolution.lead.3` is the claim in prose (the same step more than once,
-and the best one survives) and it is a **third lead paragraph rather than a line under the figure**,
-because nothing below this drawing reads it and that rule still holds. It also states the practice
-and not the picture, which is what keeps it from being a caption. Do not confuse it with
-`prototype-conversation`: that section is several takes put in front of *people* to get a reaction,
-this is several attempts at one step of your own work. And it is not `ScriptRuns` either, which is
-variance across runs of one request rather than alternatives you choose between.
-
-Its other two figures are evidence rather than drawings, and they are a pair: this site as the
-skeleton it started as (the FizzBuzz warm-up on system fonts, one step in the sidebar) and the same
-site with the details in (the header, the palette, the grouped steps, the settings). They replaced
-prose that claimed the same thing, first the origin story in `walking-skeleton` (`GET /api/titles`
-and a page listing titles) and then the whole of what is now `final-design`, and that swap is the
-decision: the unit argues you get the shape working before you polish it, and two shots of this
-repository doing exactly that carry it better than a sentence asserting it. The paragraphs beside
-them read the pictures, so a replacement image has to keep what they point at, namely the sidebar
-and the question and answer section that were there from the start against the branding, colours,
-settings and navigation that were not. Both render through one component, `UnitShot`, which lives in
-`shared/components/` rather than in this step: step 1's `usage-readout` became its second caller, and
-that is the move `TaskCard` and `FlagBoard` made for the same reason. It takes an `id` used as both
-the BEM block and the i18n prefix, plus the `namespace` its two keys live in, since `shared` never
-imports a step. A third shot is a file in `front/public/`, a slot in the HTML, and two keys per
-language. The images are served flat the way step 1's comparison shots are.
-
-The `final-design` section (headed "The final design") is the one place in the step where a habit is stated as a number: a detail
-should not cost more than an hour, and the section argues both edges (pulling detail forward is paid
-for now, leaving it too long turns into a regression). It closes the argument the `evolution` unit
-opens, so keep the pair of edges if you rewrite it. Cutting one leaves a lesson that only says
-"later".
+**An `evolution` unit opened the step until October 2026, titled Increments, and the owner cut it.**
+It argued that a version now costs an hour, so you take small steps on something that already runs,
+with a walking skeleton, a rule that a detail costs at most an hour, 2 screenshots of this site
+before and after its details, the `IterationPaths` drawing and a fifteen-minute exercise. The owner
+found most of it common sense, the drawing not self-explanatory, the exercise vibe coding with a
+clock on it, and "walking skeleton" a term the page never explained. **Do not bring any of it back
+as a unit, and do not reintroduce the term**: the vertical slice in `engineering` already carries
+running end to end first. The one section the owner kept, a prototype starting a conversation, is
+about the people you show it to, so it moved to step 3's `expectations` as
+`prototype-starts-conversation`, and it is now where the course says out loud that vibe coding has
+its place (3 throwaway prototypes, and none of them the product). That replaced the old decision to
+leave the collision with `engineering`'s case against vibe coding unspoken. `setup` opens the step
+now, and step 1's `recap` links there.
 
 **`engineering` runs four sections now**: `Domain-driven design`, `Vertical slices`, `Hexagonal
 architecture` and `The right words`. The second one is the newest, and the split of the first and
@@ -188,8 +140,7 @@ are a pair and a rename in one is a rename in the other. The second capability w
 inside publishing (which `HexagonPorts` and `hexagonal-architecture.2` lean on), so it became
 scheduling rather than moving S3. **The ArchUnit and unit-test items in `gates` say "module", not
 "slice"**, because 2 slices in 1 module share its domain; the module is the boundary a rule
-enforces. `evolution.walking-skeleton.1` calls the skeleton "your first vertical slice" and links
-this unit; that is the only place `evolution` touches it.
+enforces.
 
 **`DomainTree` is now 1 module per capability with the hexagon inside each one**, which reverses
 the recorded rejection of a multi-module skeleton. The owner pointed at a production repository cut
@@ -591,9 +542,8 @@ skill that calls the script is what makes the agent aware of it, and what you bu
 plus the tokens the agent stops spending working the steps out again.
 
 `ScriptRuns` is its figure and it is **variance across runs and never the clock or step size**.
-`LoopsPerHour` in `enablement` owns how many turns fit in an hour and `IterationPaths` in
-`evolution` owns few-long against many-short, so drawing a run here as time spent collapses this
-into one of those. The same request three times, drawn twice: three muted cards whose bars differ,
+`LoopsPerHour` in `enablement` owns how many turns fit in an hour, so drawing a run here as time
+spent collapses this into that. The same request three times, drawn twice: three muted cards whose bars differ,
 then three teal cards that are one set of widths repeated, which is the equality the section claims
 in words. The cards are the same size in both rows for the same reason. **Both rows are labelled
 now, and that reverses a recorded decision** (FEEDBACK 12). The old record said only the script row
@@ -633,7 +583,7 @@ slide is a separate decision, not an oversight to tidy.
 
 The quiz renders under the closing figure from the registry, so the unit's HTML gets no
 `<h2 data-i18n="ui:quiz.title">`: that heading belongs to a task card, and `QuizPanel` writes its
-own. `evolution`, `setup`, `engineering`, `gates`, `steering`, `patterns` and `enablement` carry the heading
+own. `setup`, `engineering`, `gates`, `steering`, `patterns` and `enablement` carry the heading
 because they carry cards. `goals`
 follows this unit's shape rather than theirs, for the same reason.
 
@@ -646,8 +596,9 @@ namely that it is aimed at a project instead of at one answer. Neither may grow 
 definition.
 
 The naive section uses "vibe coding" disapprovingly and links to `engineering`, then defends it in
-one paragraph that lists three places. Two are throwaway code, which is the same tension `evolution`
-carries: what you intend to delete is where the argument does not apply. The third is the one that
+one paragraph that lists three places. Two are throwaway code, which is the same licence step 3's
+`expectations.prototype-starts-conversation` gives: what you intend to delete is where the argument
+does not apply. The third is the one that
 survives everything else in the step, namely that **nudging is not restructuring**, so a padding or
 a log line does not earn a workflow. That one is what `Plan/naive` at the end of `WorkflowTimeline`
 turns on, so the two move together, and it belongs in that paragraph rather than in a closer of its
@@ -837,9 +788,9 @@ agent writing a change in seconds and your check having to keep up is stated, an
 that claim measured. Its two labels were rewritten in the same pass, from "Deploying to
 find out" against "With the shortcuts in" to **"Not running it locally" against "Running it
 locally"**, because the first pair named the cut section's example and would have left a figure
-labelled for prose that is no longer in the unit. **It is on the clock and never on step size.** `IterationPaths` in `evolution` already owns few-long against
-many-short, measured as distance to a target, and the two collapse into one argument the moment
-either borrows the other's vocabulary. The bands are the same width because the hour is the same
+labelled for prose that is no longer in the unit. **It is on the clock and never on step size.** Few long steps against many short ones, drawn as
+distance to a target, was `IterationPaths` in the cut `evolution` unit, and redrawing this figure in
+that vocabulary brings back an argument the owner removed. The bands are the same width because the hour is the same
 hour, which is the whole drawing. Two things in it were fixed after they were first drawn and should
 not come back. The **wait is drawn as nothing**, an empty part of the turn's box rather than a pale
 fill, so the figure costs three tones instead of six and the slow band reads as two mostly empty
@@ -850,8 +801,7 @@ column it is in.
 A third paragraph was cut and should not come back. It said that some of what you build has no
 frontend, so ask the agent for a single page that calls the endpoint and prints what comes back. The
 section is about running what you already have, and a detour into building a throwaway UI is a
-different task; `evolution`'s fifteen-minute skeleton is where building a rough thing to look at
-lives.
+different task. It had a home in `evolution`'s fifteen-minute exercise, and that went with the unit.
 
 **A `fitness-tests` section was cut**, and this is the record of it. It said an agent writes the
 happy path unasked and leaves out the empty list, the expired tier and the amount that is exactly
@@ -1177,7 +1127,7 @@ from `workflows`, where the project is always a frame and what changes is what s
 versions failed here and neither may come back. The first indented the pair under a teal hairline,
 which reads as subordination and rests the argument on a 1.7:1 rule. The second put them in a bare
 two-column grid whose gap matched the column gap, so nothing said they shared a slot, and under `sm`
-they stacked into exactly the list `IterationPaths` was drawn as one SVG to avoid. The frame survives
+they stacked into a list, which is why a side-by-side comparison in this step is one SVG or one frame. The frame survives
 stacking, which is the whole reason it is a frame.
 
 **The stage numbers are the page's `<h2>`s and stop at four**, with the two jobs named and unnumbered
@@ -1192,10 +1142,11 @@ green; `FLAGS_CHANGED_EVENT` on `FlagBoard` carries it, the figure reads the boa
 nothing, and `live={false}` on the slide keeps a tutor's own collection off the projector.
 
 **Each stage names the units it draws on**, which is what makes the page a capstone rather than a
-sixth exercise: between them they name all ten, beside the stage where each is used. **Every chip
+sixth exercise: between them they name all nine, beside the stage where each is used. **Every chip
 has to be a unit the stage genuinely runs.** Three were cut for failing that: `evolution` on the
 native row, whose lesson that stage suspends; `enablement` on the endpoint row, which was one `curl`;
 and `evolution` again on the goal row, where it was crediting that unit for a sentence `goals` wrote.
+The last `evolution` chip, on the pre-flight row, went with the unit in October 2026.
 A chip that only looks apt is the next one to go. They are plain text and **not links**: a dozen
 router links inside one figure took the first dozen tab stops on the page and would have been a way
 out of the deck, so the prose keeps the two links that matter (`goals` in `workshop.goal.1`, `setup`
@@ -1292,8 +1243,8 @@ untouched module prints three locked rows with the numbers the student is short 
 verified: `39.0% >= 90.0%`, `worst method 21 <= 10`, `42.4% >= 80.0%`. (The first of those was 38.2%
 before `MemberTier.PARTNER` landed: a new enum constant is a covered line in `<clinit>`. The gate is
 untouched, the printed number is not, so re-measure it here rather than trusting this sentence.) That output is a better brief
-than the page could write, and having the machine give it is `evolution`'s walking skeleton applied
-to the exercise: the check runs end to end before any work exists. It is also what lets the prose
+than the page could write, and having the machine give it means the check runs end to end before
+any work exists. It is also what lets the prose
 stop describing the gates one by one, which is most of where the page's word count went.
 
 The prose is 1170 words down to about 640, and **the per-flag detail moved onto the board rather

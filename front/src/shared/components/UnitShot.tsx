@@ -2,12 +2,12 @@ import { useStepText } from '@/shared/i18n/useStepText'
 
 /**
  * A screenshot with a caption under it, for the places where a picture of a real thing carries the
- * claim better than a sentence asserting it: step 2's `evolution` shows this site as the skeleton it
- * started as and the same site with the details in, and step 1's `model` shows what the harness
- * prints when you ask where you stand in the current window.
+ * claim better than a sentence asserting it: step 1's `model` shows what the harness prints when you
+ * ask where you stand in the current window.
  *
  * The mechanics with the data lifted out, the same move `TaskCard` and `FlagBoard` made when a
- * second caller arrived. `id` is the block's own name and is also the i18n prefix, and `namespace`
+ * second caller arrived. `model` was that second caller. The first, step 2's `evolution` unit, was cut
+ * in October 2026 with its 2 screenshots, and the component stays in `shared` for the next one. `id` is the block's own name and is also the i18n prefix, and `namespace`
  * is the step whose bundle carries the two keys, since `shared` never imports a step. A new shot is
  * a file in `front/public/`, a slot in the unit HTML, and two keys per language.
  *
