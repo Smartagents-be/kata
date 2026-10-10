@@ -32,6 +32,15 @@ outside it on the same reasoning, four arrangements of agents rather than one ha
 is the fourth one outside it, for its own reason: it is about what has to be true around you rather
 than about a habit you practise.
 
+**Unit titles are 1 word or a few, at the owner's asking (October 2026).** The sidebar reads
+Increments, Setup, Domain language, Quality gates, Steering, Skills and scripts, Workflows, Feedback
+loop, Parallel work, Long runs and Workshop (Incrementen, Setup, Domeintaal, Quality gates, Bijsturen,
+Skills en scripts, Werkwijzen, Feedbacklus, Parallel werk, Lange runs, Workshop). The longer titles
+they replaced each carried a claim or a verb, and the owner found them too long to scan. Only the
+`*.title` strings moved: unit ids, URLs and keys stayed. A link that named a unit by its title was
+repointed to the new one in steps 1, 2 and 3 and in both languages, so grep the old title before
+reintroducing one. Do not grow a title back into a sentence.
+
 **A `quality` unit sat in slot six and was replaced by `parallel`**, and this is the record of what
 went with it so nobody restores half of it. It ran three sections: the build rather than the agent
 deciding when work is finished (`mvn test` and `npm run build`, both cheap, both on demand), writing
@@ -680,11 +689,11 @@ now carries one. It stands on its own here: this unit is about what has to be tr
 a condition has no wrong answer to offer a question the way a choice between five workflows does.
 Run it locally front and back, grow the crossbar, and count where the day goes.
 
-**It was `Enablement` and is now `What it asks of you`**, on `goals`'s precedent: the unit id, the
+**It was `Enablement`, then `What it asks of you`, and is now `Feedback loop`**, on `goals`'s precedent: the unit id, the
 URL, the namespace prefix, the deck eyebrow key and every `/steps/step2/enablement` link stay where
 they are, so nothing that pointed at it moved. The old title was the one abstract noun in a step of
 plain ones, it appeared in neither language's prose, and it was all that bound three sections that
-do not build on one another. The new one reads back onto all three: your check has to keep up, what
+do not build on one another. The middle one read back onto all three: your check has to keep up, what
 is asked of you moves up a level, and the week is what it asks of your time. Three step 3 blocks
 called the unit by its old title and were repointed with it, in both languages.
 
@@ -966,8 +975,8 @@ The figure grew by about a quarter when that row landed, so **`deck-step2-parall
 came down from `scale` 1.02 to 0.78**. That number is measured against the footer rather than
 chosen, so a sixth row moves it again.
 
-`goals` was **`Goal-oriented` and is now `Long-running goals and cost`**, which is a widening rather than a
-rename. The unit used to argue one thing, handing over an outcome instead of an instruction, and it
+`goals` was **`Goal-oriented`, then `Long-running goals and cost`, and is now `Long runs`**. The first
+change was a widening rather than a rename. The unit used to argue one thing, handing over an outcome instead of an instruction, and it
 now surveys four ways of spending a lot of tokens on purpose: a goal-shaped run, a fan-out under
 `ultracode`, research on the frontier model, and a design tool. **The unit id, the URL and the
 namespace prefix all stay `goals`**, so nothing that pointed at it moved, and the references from
