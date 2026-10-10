@@ -112,11 +112,38 @@
      carries `claude mcp add` and `copilot mcp add`, which are terminal commands. What a class on Copilot in
      IntelliJ was missing is the IDE route. Checked October 2026 against docs.github.com/en/copilot/
      how-tos/provide-context/use-mcp/extend-copilot-chat-with-mcp (JetBrains: Agent mode, tools icon,
-     Add MCP Tools, mcp.json, MCP Registry). -->
+     Add MCP Tools, mcp.json, MCP Registry). The owner's IntelliJ (October 2026) draws the tools icon as
+     sliders beside the model picker, opening Configure Tools, whose link reads "Add More Tools…". -->
 <p data-assistant="copilot" data-i18n="tools.mcp-servers.5.copilot">
-  In IntelliJ, switch the chat to Agent mode, click the tools icon and choose Add MCP Tools. That
+  In IntelliJ, switch the chat to Agent mode, click the sliders icon beside the model picker and
+  choose Add More Tools. That
   opens <code>mcp.json</code>, where you define the server. You can also pick one from the MCP
   Registry. In Copilot CLI, use <code>/mcp</code>.
+</p>
+
+<!-- Where a server is saved, and the one file a team shares. Claude Code checked against
+     code.claude.com/docs/en/mcp (scopes, approval, ${VAR} expansion) and run on 2.1.296: a root
+     .mcp.json lists as "Pending approval". Copilot CLI run on 1.0.95: `copilot mcp list` shows a
+     root .mcp.json or .github/mcp.json as a workspace server in a trusted folder and neither in an
+     untrusted one, and `copilot mcp add` writes only the user file. IntelliJ (owner's run, October 2026)
+     listed and started the root .mcp.json server in Configure Tools and ignored .github/mcp.json, so
+     the sentence names only the root file. It started that server without asking anything, which
+     is what the closing warning rests on. Whether Copilot expands ${VAR}
+     in that file was not checked, so the Copilot half does not say. -->
+<p data-assistant="claude" data-i18n="tools.mcp-servers.6.claude">
+  <code>claude mcp add</code> saves a server for you alone, in this project. Add
+  <code>--scope project</code> and it goes into <code>.mcp.json</code> in the root of the
+  repository. Commit that file and your team gets the same servers. Claude Code asks you before it
+  starts a server from it. Leave secrets out: write <code>${API_KEY}</code> and Claude Code reads the
+  value from your environment.
+</p>
+
+<p data-assistant="copilot" data-i18n="tools.mcp-servers.6.copilot">
+  <code>copilot mcp add</code> saves a server for you alone, in
+  <code>~/.copilot/mcp-config.json</code>. Both IntelliJ and Copilot CLI also read
+  <code>.mcp.json</code> in the root of the repository, Copilot CLI only once you trust the folder.
+  Commit that file and your team gets the same servers. IntelliJ starts them without asking, so read
+  that file first in a repository you did not write.
 </p>
 
 <h2 data-i18n="tools.what-mcp-costs-you.heading">What MCP costs you</h2>

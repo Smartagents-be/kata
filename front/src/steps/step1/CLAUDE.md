@@ -2341,14 +2341,16 @@ in there, that is their build to unpick and the flags above are what they have d
 
 ## The assistant variants
 
-19 blocks in step 1 vary, 12 of them in the unit HTML and 7 on task cards, and nearly all of them are the same kind of thing, a filename or a
+20 blocks in step 1 vary, 13 of them in the unit HTML and 7 on task cards, and nearly all of them are the same kind of thing, a filename or a
 command: the launcher `<pre>` pair under `workshop`'s lead (`claude` against `copilot`, each after
 the same `cd`), which is the only pair left there now that the setup command has moved to
 `install.txt`,
 `tools.what-it-can-call.1` (each product's own built-in tools, under their own names),
 `tools.what-mcp-costs-you.1`, `tools.large-tool-results.1`, `tools.mcp-servers.5` (Copilot
 only: the IntelliJ route to adding a server, which has no Claude sibling because `connect-one`
-already shows `claude mcp add`), `session.window-not-memory.1`,
+already shows `claude mcp add`), `tools.mcp-servers.6` (where `mcp add` saves a server and the
+`.mcp.json` a team commits; the Copilot half is Copilot CLI's, and the run behind both halves is in
+the comment above the pair), `session.window-not-memory.1`,
 `session.compaction-clear.6` (when compaction starts, and whether you can move it),
 `context.model-stateless.2`
 (what each product calls memory, nested inside the audience wrapper, never both attributes on one
@@ -2357,7 +2359,7 @@ element), `context.leaves-your-machine.2` (which plan trains on your sessions, n
 `PriceOneTurn`'s move set (`read`/`rate`/`sum` against the three `price.*.copilot` moves) on the task
 cards. The `window` moves replaced `context.read-your-window.1`, which was the Claude and
 Copilot descriptions of `/context`: the paragraphs went and the variant moved onto the move that
-starts the agent. `flag.machine.help.*` is the 20th variant set and the only one on a flag
+starts the agent. `flag.machine.help.*` is the 21st variant set and the only one on a flag
 board; it is counted apart because it is not a block of prose in a unit file, and the mechanism it
 needed is written up under `workshop`.
 `tools.lead.1` names Copilot for **every** reader instead of splitting, because that sentence is a
