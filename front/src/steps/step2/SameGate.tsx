@@ -2,15 +2,17 @@ import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * Two authors, one gate. Your work and an agent's work arrive on the same line, pass the same three
- * checks, and only then ship. That merge is the whole drawing, and it is what the `Quality gates`
- * section of `engineering` claims in words: the gates that put a quality label on software before
- * are the ones that go around an agent's work now, unchanged.
+ * Two authors, one gate. Your work and an agent's work arrive on the same line, pass the same four
+ * groups of checks, and only then ship. That merge is the whole drawing, and it is what the
+ * `Quality gates` section of `gates` claims in words: the gates that put a quality label on
+ * software before are the ones that go around an agent's work now, unchanged.
  *
- * It sits at the `data-figure="same-gate"` slot after `engineering.quality-gates.1`, and **nothing
+ * It sits at the `data-figure="same-gate"` slot after `gates.quality-gates.1`, and **nothing
  * after it reads the drawing**, so the two author labels and the note under the frame carry it.
- * The paragraph above earns it rather than captioning it: the prose names the three checks and then
- * turns to the proxy claim, which is an argument this figure deliberately does not make.
+ * The paragraph above earns it rather than captioning it: the prose names three checks and then
+ * turns to the proxy claim, which is an argument this figure deliberately does not make. The groups
+ * in the box are the ones `Deterministic checks` lists further down, so the figure previews that
+ * list rather than repeating the paragraph.
  *
  * **The two arrows merge before the gate rather than each getting one.** Two gates side by side
  * would say the checks are comparable; one gate with two ways in says they are the same gate, which
@@ -23,10 +25,11 @@ import { useTranslation } from 'react-i18next'
  * return path, and it argues that a goal's only exit is a command answering yes. This one has no
  * loop and no command in it, and argues who the gate is for.
  *
- * **It names the three checks and ranks none of them.** Which metric is cheap to fake and which is
- * not is the discovery `workshop`'s honest flag is built on, kept behind that board's Hint, so a
- * teal ring around one of these three rows would spend the capstone here. The three sit in the box
- * as equals for exactly that reason.
+ * **It names four groups and ranks none of them.** Which metric is cheap to fake and which is not
+ * is the discovery the `workshop` honest flag is built on, kept behind that board's Hint, so a teal
+ * ring around one row, or coverage and mutation on two rows where one sits above the other, would
+ * spend the capstone here. Coverage and mutation share a row, and the rows are equals, for exactly
+ * that reason.
  */
 
 /** Right edge of the author labels, so both end on one column whatever the language does to them. */
@@ -47,8 +50,14 @@ const AGENT_Y = 122
 /** So an arrowhead reads as arriving at a box rather than touching it. */
 const STANDOFF = 7
 
-/** The three checks, top to bottom, in the order the paragraph above names them. */
-const CHECKS = ['static', 'coverage', 'mutation'] as const
+/**
+ * The four groups of checks, top to bottom, in the order `Deterministic checks` lists them: tests,
+ * the numbers about the tests, the code, and what you ship. Coverage and mutation share a row so
+ * neither sits above the other.
+ */
+const CHECKS = ['tests', 'test-quality', 'code', 'supply'] as const
+/** Row spacing inside the gate, chosen so four rows sit centred on `MID_Y`. */
+const ROW = 26
 
 export function SameGate() {
   const { t } = useTranslation('step2')
@@ -158,8 +167,8 @@ export function SameGate() {
             id={`same-gate-check-${index}`}
             data-component="SameGate"
             x={GATE_X + GATE_W / 2}
-            y={MID_Y - 30 + index * 30 + 5}
-            fontSize="14"
+            y={MID_Y - (ROW * (CHECKS.length - 1)) / 2 + index * ROW + 5}
+            fontSize="13"
             textAnchor="middle"
             className="fill-foreground"
           >

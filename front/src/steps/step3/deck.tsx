@@ -1,11 +1,12 @@
 import type { SlideSpec } from '@/shared/deck/slide-spec'
 import { PipelineShift } from './PipelineShift'
+import { SdlcStages } from './SdlcStages'
 
 /**
- * Step 3 on the board. This step is argued out loud by design: three units of conversation, one
- * drawing, nothing graded. So the deck is mostly statements, one per argument a room has to hear,
- * and `PipelineShift` is the one figure because it is the one claim no sentence can make without
- * the reader taking it on trust.
+ * Step 3 on the board. This step is argued out loud by design: three units of conversation, two
+ * drawings, nothing graded. So the deck is mostly statements, one per argument a room has to hear,
+ * and the figures are `PipelineShift`, the one claim no sentence can make without the reader taking
+ * it on trust, and `SdlcStages`, where a person still decides.
  *
  * Ids carry the step (`deck-step3-…`) because the deck at `/present` is one list across all steps
  * and step 1 owns the bare `deck-<unit>` names.
@@ -44,6 +45,15 @@ const deck: SlideSpec[] = [
     eyebrow: 'change.title',
     title: 'deck.change.business.title',
     note: 'deck.change.business.note',
+  },
+  {
+    id: 'deck-step3-change-decides',
+    kind: 'figure',
+    ns: 'step3',
+    eyebrow: 'change.title',
+    title: 'deck.change.decides.title',
+    figure: <SdlcStages />,
+    scale: 1.2,
   },
   {
     id: 'deck-step3-change-pipelines',

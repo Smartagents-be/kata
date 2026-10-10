@@ -254,7 +254,7 @@ hexagonal layout. Target shape (rows must not exceed today's ~30, the deck slide
 
 Target section order:
 
-1. lead (unchanged), `SdlcStages`
+1. lead (unchanged), `SdlcStages` (after this plan landed, the figure moved to step 3's `change` at the owner's asking, and `GateReach` became a ladder)
 2. `Quality gates`: `.1` (unchanged), `SameGate` (updated), `.2` hook (unchanged)
 3. **`Deterministic checks`** (new)
 4. **`Legacy code`** (moved from `quality-gates.3` and `.4`)

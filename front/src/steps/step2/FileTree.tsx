@@ -140,8 +140,11 @@ function TreeItem({
         <span
           id={`${block}-item-${path}-name`}
           data-component="TreeItem"
-          className={`font-mono text-sm ${nameTone}`}
+          className={`min-w-0 font-mono text-sm [overflow-wrap:anywhere] ${nameTone}`}
         >
+          {/* `anywhere` rather than `break-word`, so a long compound path (`DomainTree`'s
+              `persistence/postgres/…`) lowers the row's min-content and wraps on a phone instead of
+              pushing the page sideways. */}
           {node.directory && node.name !== '.' ? `${node.name}/` : node.name}
         </span>
         {node.marker !== undefined && (

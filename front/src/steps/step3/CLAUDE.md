@@ -28,28 +28,43 @@ because it and `impostor` both rendered empty in guided mode. The card is the sh
 pre-authorised: ungraded, and four of its five moves happening away from the keyboard. **It must never grow a checker, a hash, a text box or a sixth move.** The moment one of them
 is graded, the step is lying about what it is.
 
-**The step has exactly one drawing, `PipelineShift` in `change`, and the bar for a second one is
-where it has always been.** The rule that held for a long time was that no figure carries anything
+**The step has two drawings, both in `change`, and the bar for a third one is where it has always
+been.** The rule that held for a long time was that no figure carries anything
 the sentences do not, and it is still the right test: a picture of a claim the paragraph already
-makes is the thing to cut. This one passes because it is a measurement rather than an illustration.
+makes is the thing to cut. `PipelineShift` passes because it is a measurement rather than an illustration.
 Two pipelines drawn on one scale, and the second one carries a strip under it comparing the
 verifying three parallel lanes need against the verifying they get. That gap is the one claim in the
 step no sentence can make without a reader taking it on trust, and it is the reason the figure is
 here rather than in `expectations`, which is about a date rather than about what got read. Its own
 file carries the proportions that have to keep holding, and they are load bearing in both
 directions: make the second row look like a win and the drawing argues the opposite of the section
-above it. Note what it does to guided mode: `change` renders a heading and a drawing in class where the step
-used to render nothing at all. It is no longer the only one that does, since `expectations` keeps its
-quiz and `impostor` its card, but it is the only unit here a tutor can put a drawing on the board
-from.
+above it. Note what it does to guided mode: `change` renders its headings and 2 drawings in class where the
+step used to render nothing at all. It is no longer the only one that does, since `expectations`
+keeps its quiz and `impostor` its card, but it is the only unit here a tutor can put a drawing on the
+board from.
+
+**`SdlcStages` is the second, and it came over from step 2's `gates` in October 2026**, at the
+course owner's asking: what it draws is the organisation's lifecycle and where a person still
+decides, which is this step's subject and not a gate a student wires up. It has its own section,
+`person-still-decides`, straight **before** `process-was-bottleneck`, so `way-working-decision` still
+follows that section directly (see below), and **neither section's prose mentions the other's
+figure**: `PipelineShift` is time on one scale, `SdlcStages` is where the work
+queues and where a person stands, and a sentence linking them would merge two claims the reader has
+to hold apart. The section has **no paragraph above the figure**: each row carries its own sentence,
+and a paragraph saying the queue moves would be `gates.lead.1` and `change.lead.2` a third time. The
+one after it reads the third row only. **Its Dutch labels are the smartagents.be page's own words,
+taken verbatim**, so a change on the site is a reason to revisit them and a style pass is not; the
+docblock says the same. `gates.lead.2` in step 2 keeps the one sentence the gates need from it (a person
+decides 4 times, the machines check the rest) and links here.
 
 **Every section leans on a unit that already argued its engineering claim and none of them may
 re-argue it**, which is the same rule `agent-patterns.coordinator.3` follows in step 1 and the constraint
 most easily lost in a rewrite here. The soft skill is the new part; the claim underneath it gets a
-link and one clause. Almost every lean points at step 2. `change` takes six of them, one per section
-and no unit twice: `you-test-engineer` at `engineering` for the floor,
+link and one clause. Almost every lean points at step 2. `change` takes seven of them, one per section
+and no unit twice: `you-test-engineer` at `gates` for the floor,
 `business-moves-closer` at `evolution` for a prototype starting a conversation,
 `process-was-bottleneck` at `enablement` for one person carrying more of the stack,
+`person-still-decides` at `goals` for the work running without you between decisions,
 `way-working-decision` at `patterns` for something done by hand turning into a script, `code-got-cheap`
 at `workflows` for spec-driven work keeping the description, `environment-beats-project` at `setup`
 for the environment being files. `expectations.lead` is `evolution`'s skeleton with the details left
@@ -90,11 +105,11 @@ lists apart: `change` and `impostor` each name three concrete cases, so
 `detail-nobody-specified` deliberately names none and stays on returns alone. A third enumeration of
 empty lists and zero amounts turns the step into one paragraph told three times.
 
-`change` and `expectations` are the long units of the step, six sections and five of them against
+`change` and `expectations` are the long units of the step, seven sections and five of them against
 `impostor`'s three, and in both cases that is the argument rather than a draft nobody trimmed. `change`
 carries the whole claim that the job moved off
 production: what your day becomes (`you-test-engineer`), who else has to move with you
-(`business-moves-closer`, `process-was-bottleneck`), what the team is still doing out of habit
+(`business-moves-closer`, `process-was-bottleneck`, `person-still-decides`), what the team is still doing out of habit
 (`way-working-decision`), what stops being worth paying for
 (`code-got-cheap`), and what is worth more than the project (`environment-beats-project`). Every one
 of those is somebody different, so merging two of them merges two audiences. If it has to lose
@@ -121,7 +136,7 @@ read at all, and its closing sentence says so in as many words, because `you-tes
 sections above and `code-got-cheap` directly below both say the check stays. Let it drift into "so
 drop the review" and the unit argues against itself twice on one page.
 
-That section is also why `change` has a fourth slide (`deck-step3-change-rethink`), between the
+That section is also why `change` has a slide of its own (`deck-step3-change-rethink`), between the
 pipelines figure and the gates. It is the one argument in the step a room will push back on, so it is
 the one most worth having on the board, and it is **the step's only `statement` carrying `points`**:
 three examples a tutor takes one at a time is the case that shape exists for, and a `note` there

@@ -105,7 +105,7 @@ Guided mode drops every run of prose (`front/src/shared/lib/content.ts:185`).
 
 ## 8. Gaps for seniors on brownfield code (add)
 
-Characterisation tests (`gates.quality-gates.3`/`.4`) and a review checklist (`enablement.where-day-goes`) are in. Still a strong candidate: old-version grounding (section 10, truth). The rest is optional; adding everything breaks the 1-day limit.
+Characterisation tests (`gates.legacy-code.1`/`.2`) and a review checklist (`enablement.where-day-goes`) are in. Still a strong candidate: old-version grounding (section 10, truth). The rest is optional; adding everything breaks the 1-day limit.
 
 - **Onboarding an agent to an existing repo:** `/init` in both tools (Copilot's writes `.github/copilot-instructions.md`), IntelliJ's "Generate Agent Instructions" (writes `AGENTS.md`), and what a legacy repo's instructions need (build and test commands, module map, glossary, no-go zones). On `AGENTS.md`, agreed wording: "Keep shared project instructions in AGENTS.md. Configure each tool to load it (for Claude, import it from CLAUDE.md) and verify that the instructions reach the session." Claude skips `AGENTS.md` by default when a `CLAUDE.md` exists. Also: how an agent explores an unknown codebase before it changes anything, and how to split a big migration into steps you can each review and revert ([common workflows](https://code.claude.com/docs/en/common-workflows)). Review generated instructions; they are not authoritative.
 - **Legacy safety net:**

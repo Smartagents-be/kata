@@ -64,8 +64,9 @@ The capstone's prose deliberately does not spell it out: `workshop.goal.2` says 
 three will not fall to more tests, because the whole reason the honest flag exists is that the
 student finds out why, and a page that explains the trap before the run springs it on nobody. The
 old `workshop.honest.1` and `.2` did explain it, and cutting them is the change to know about before
-writing prose about mutation anywhere in this unit. **`SameGate` under that paragraph names the three
-checks and ranks none of them**, and it may never rank them: a teal ring around the mutation row is
+writing prose about mutation anywhere in this unit. **`SameGate` under that paragraph names four
+groups of checks, coverage and mutation on one row, and ranks none of them**, and it may never rank
+them: a teal ring around a mutation row is
 the honest-coverage discovery drawn on the page, which is the same reason `workshop` still carries no
 figure of its gates.
 Three references were repointed in the same change rather than left
@@ -133,21 +134,24 @@ for now, leaving it too long turns into a regression). It closes the argument th
 opens, so keep the pair of edges if you rewrite it. Cutting one leaves a lesson that only says
 "later".
 
-**`engineering` runs three sections now, and the split of the first one is the decision.** Domain-driven
-design and hexagonal architecture shared a heading and a paragraph until they were pulled apart, and
-they are two arguments rather than one: naming is what a thing is **called**, hexagonal is where it
-**sits**. The payoff differs with them, which is what makes the split worth the extra heading, and
-the icons carry it. Naming pays out at the moment you type, so `Domain-driven design` holds the gem:
-the words in your sentence are already the names in the tree. Layout pays out in what the agent does
-not have to read, so `Hexagonal architecture` holds the coin. **Do not let either section reach for
-the other's icon or the other's claim.** Merged again, the unit says "structure is good" twice and
-never says what either kind of structure buys.
+**`engineering` runs four sections now**: `Domain-driven design`, `Vertical slices`, `Hexagonal
+architecture` and `The right words`. The second one is the newest, and the split of the first and
+the third is the older decision. Domain-driven design and hexagonal architecture shared a heading
+and a paragraph until they were pulled apart, and they are two arguments rather than one: naming is
+what a thing is **called**, hexagonal is where it **sits**. The payoff differs with them, which is
+what makes the split worth the extra heading, and the icons carry it. Naming pays out at the moment
+you type, so `Domain-driven design` holds the gem: the words in your sentence are already the names
+in the tree. Layout pays out in what the agent does not have to read, so `Hexagonal architecture`
+holds the coin. **Do not let either section reach for the other's icon or the other's claim.**
+Merged again, the unit says "structure is good" twice and never says what either kind of structure
+buys.
 
-Three figures sit in it and each is fenced off from the next. `WordsToFiles` is the vocabulary: one
-prompt, three candidate files, and a line to the one the sentence named, with the other two left
-muted so the drawing reads as narrowing rather than as finding. **It draws no folders**, because
-that is the next section's half. It also carries **no note under the frame**, and that is a cut: the
-paragraph above it already says a sentence about articles has named the files.
+Four figures sit in it and each is fenced off from the next (`VerticalSlices` is written up below).
+`WordsToFiles` is the vocabulary: one prompt, three candidate files, and a line to the one the
+sentence named, with the other two left muted so the drawing reads as narrowing rather than as
+finding. **It draws no folders**, because that is the next section's half. It also carries **no note
+under the frame**, and that is a cut: the paragraph above it already says a sentence about articles
+has named the files.
 
 **`Hexagonal architecture` carries two drawings and their order is the argument**: `DomainTree`
 after the first paragraph is the shape on disk, and `HexagonPorts` **closes the section** with what
@@ -163,32 +167,77 @@ per side** to make up the difference: twelve arrows on one figure and neither se
 **three adapters a side**, where
 the tree ships one per direction, and that is where the pair deliberately parts company: a single
 box on each edge draws a pipeline, which is the picture this shape exists to correct. The leaf names
-are still the tree's own, which keeps them a pair without making them a copy. `DomainTree` itself is
-untouched by the split, so `WhereWouldItGo` below still sorts `exercises/step2/java` against it and the
-disagreement that task needs is intact.
+are still the tree's own, which keeps them a pair without making them a copy. `DomainTree` still
+sits in `Hexagonal architecture` after `.1`, and `.1` now opens "Inside each module", because the
+tree's top level is modules (see below). Its second sentence, the dependency argument, is
+unchanged. `WordsToFiles` draws `publishing/` and `scheduling/`, the package names of the tree's 2
+modules, and `domain-driven-design.1` names `publishing/` with it, so the vocabulary and the tree
+agree.
+
+**`Vertical slices` was added at the course owner's asking (October 2026)**, between naming and
+layout, because a slice is both: what the business does (the module is named after a capability) and
+where it sits (1 use case through every layer, built and tested on its own). It argues **short
+feedback loops**: a layer-at-a-time build only runs end to end after the last layer, and a slice
+runs as soon as it is built. It hands the loop to `gates` and `enablement` by link rather than
+arguing it again. **It takes no icon**, on the rule above that `Domain-driven design` holds the gem
+and `Hexagonal architecture` the coin: a third section reaching for either would blur which payoff
+is whose. `VerticalSlices` draws 3 grey layers with 3 teal slices over them, and its brackets name
+the 2 modules `DomainTree` draws, `article-publishing` and `article-scheduling`, so the two figures
+are a pair and a rename in one is a rename in the other. The second capability was
+`article-archiving` until a review noticed the tree keeps the `Archive` port and its S3 adapter
+inside publishing (which `HexagonPorts` and `hexagonal-architecture.2` lean on), so it became
+scheduling rather than moving S3. **The ArchUnit and unit-test items in `gates` say "module", not
+"slice"**, because 2 slices in 1 module share its domain; the module is the boundary a rule
+enforces. `evolution.walking-skeleton.1` calls the skeleton "your first vertical slice" and links
+this unit; that is the only place `evolution` touches it.
+
+**`DomainTree` is now 1 module per capability with the hexagon inside each one**, which reverses
+the recorded rejection of a multi-module skeleton. The owner pointed at a production repository cut
+by capability (modules named after business verbs, each with its own frontend, built and tested on
+its own, assembled by a host). What the old rejection was about still holds and the new tree keeps
+it: no BOM, no starter or autoconfigure modules, no per-domain configuration module, so the figure
+spends its rows on the packaging and not on scaffolding. `incoming/` and `outgoing/` stay as their
+own rows, because `HexagonPorts` takes its column labels from their notes and `WhereWouldItGo` sorts
+against them. Its height is held at or under the old tree's, because `deck-step2-engineering-domain`
+was already at `scale: 0.9` for the footer.
+
+**`exercises/step2/java` deliberately stays layered by technology**, and that was decided with the
+change above. The `graded` profile's JaCoCo excludes and PIT targets name its packages, a setup flag
+sits in the `domain` package, `where.description` promises the student that nothing moves, and the
+project has effectively 1 capability, so slicing it would show nothing. The gap between it and the
+figure is what `WhereWouldItGo` is for, and it is now wider: technology packages against capability
+modules, not only `port/` against `domain/`. Do not restructure the project to match the figure.
 
 Each figure's own docblock carries the rest, including why `WordsToFiles` draws no badly-named
 repository next to the good one. **Its fourth section, `Quality gates`, moved to `gates`** with
 `SameGate` and both paragraphs, keys renamed from `engineering.quality-gates.*` to
 `gates.quality-gates.*` and the wording untouched. The closer that section carried
 (`quality-gates.3`, the line and the hand-off to `steering`) went with it and is now
-`gates.fast-enough.4`. So `engineering` closes on `The right words` and its last sentence, the half a
-day against production, and it hands off to nothing by name; `gates` is the next unit in the pager
-and its lead is what picks up.
+`gates.short-feedback-loops.4`. So `engineering` closes on `The right words` and its last sentence,
+the half a day against production, and it hands off to nothing by name; `gates` is the next unit in
+the pager and its lead is what picks up.
 
 `engineering` closes on `WhereWouldItGo`, a `TaskCard` under the same `<hr>` and "Test your knowledge"
 heading, with no prose between the rule and the card: the card's description carries the setting, so
-a paragraph there would say it twice. Five moves, and the task exists because `DomainTree` and
+a paragraph there would say it twice. Six moves, and the task exists because `DomainTree` and
 `exercises/step2/java` genuinely disagree. The project keeps `port/` beside `domain/` rather than inside
 it, and its `adapter/` and `web/` packages split by technology with no `incoming/` and `outgoing/`
 above them, so the controller and the in-memory repository both land somewhere else in the figure,
 while `config/` and `aot/` land nowhere in it at all. **The card names none of that and gives no
 count.** Which packages disagree is the exercise, the same way `problem.md` has no answer key, and a
 move reading "three of them move" turns the sort into arithmetic. The unclassifiable two are the
-judgement the fourth move is after: the figure is a shape rather than a law, and framework wiring
+judgement the `sort` move is after: the figure is a shape rather than a law, and framework wiring
 was never a domain concern.
 
-**Nothing is moved, and the fifth move says so twice** (plan mode, then accept nothing). That is not
+The `trace` move (fourth) was added with `Vertical slices`: follow 1 use case and list the
+packages it passes through, then picture a second capability beside it and note which of those
+packages the 2 would share. In the tree they share none. The second capability is pictured rather
+than found because the loans project has effectively 1, and a first draft that only asked for the
+list had nothing to disagree with. It names no use case and no endpoint, for the same reason the
+card gives no count. `where.compare.label` and the trace label say "the folder tree above", since
+the unit now carries 4 figures.
+
+**Nothing is moved, and the last move says so twice** (plan mode, then accept nothing). That is not
 politeness about the agent. This project is `workshop`'s subject, so a package rename breaks
 `mvn verify -Pgraded`, the `challenge` tests and the native-image flag, and a student who accepted
 the plan would reach the capstone with a project that no longer builds. The description repeats the
@@ -197,53 +246,94 @@ warning in the words a student reads first, which is why both carry it. It is al
 
 
 **`gates` sits between `engineering` and `steering`, and it took `engineering`'s last section with
-it.** It argues why gates exist at all, in the three reasons it was commissioned with, one section
-each: they make the output better (`Quality gates`, moved in unchanged), they bound how far a bad
-run gets (`Blast radius`), and they let an agent check itself fast enough to use the answer
-(`Fast enough to answer`). The lead sets the frame those three sit in, and its source is the
-AI-native SDLC page on smartagents.be, itself built on Anthropic's AI-native SDLC playbook: the
-bottleneck does not disappear when agents do the typing, it moves, and in the end it moves to the
-moment someone decides. **That page is the source for `SdlcStages` and for the Dutch of its labels**,
-taken word for word, so a change on the site is a reason to revisit the figure and nothing else is.
-Its caption names that source and argues nothing, on the course's caption rule.
+it.** It argues why gates exist at all, in the three reasons it was commissioned with: they make the
+output better (`Quality gates`, moved in unchanged), they bound how far a bad run gets (`Blast
+radius`), and they let an agent check itself fast enough to use the answer (`Short feedback loops`,
+which was `Fast enough to answer` until October 2026, keys renamed from `gates.fast-enough.*` to
+`gates.short-feedback-loops.*`). Two sections sit between the first and the second since then, at
+the course owner's asking: `Deterministic checks` and `Legacy code`, both below. The lead sets the
+frame those three sit in: the bottleneck does not disappear when agents do the typing, it moves, and
+in the end it moves to the moment someone decides. **`SdlcStages`, the drawing of that, moved to
+step 3's `change` in October 2026** at the course owner's asking, because it is the AI-native
+lifecycle rather than a quality gate; its notes are in `step3/CLAUDE.md`. `gates.lead.2` keeps the
+one sentence the unit needs from it, that a person still decides 4 times and the machines check the
+rest, and links there. Do not bring the drawing back as the unit's opener.
 
-Three figures and each has one job. `SdlcStages` is where a person still decides (four human gates,
-and the only place in the unit a gate is a person); `SameGate` is who a machine gate is for;
-`GateReach` is speed and blast radius drawn as **one axis**, which is the claim that lets the last two
-sections share a figure: the further out a gate sits, the slower it answers and the more a miss has
-already touched. **Do not give `SdlcStages` machine gates or `GateReach` numbers.** The first would
-collapse the two kinds of gate the lead keeps apart, and the second would turn orders of magnitude
-into a benchmark that the card asks the student to take on their own build.
+Two figures and each has one job. `SameGate` is who a machine gate is for; `GateReach` is speed and
+blast radius drawn as **one axis**, which is the claim that lets the last two sections share a
+figure: the further out a gate sits, the slower it answers and the more a miss has already touched.
+**Do not give `GateReach` numbers**: that would turn orders of magnitude into a benchmark that the
+card asks the student to take on their own build. **`GateReach` is a ladder with labelled rows**
+(how fast, what runs, where a miss already is) since October 2026, replacing a band of widening
+regions the course owner could not read; the reasoning is in its docblock.
 
 **The speed of a gate is a gate of its own**, and that sentence is the author's, added while the
 unit was being written: a few minutes a loop compound, and bringing the time down is work you hand
-an agent as a goal against a number. The code block in `fast-enough` is that goal, in `goals`'
-`> Goal:` shape rather than as a slash command, because no unit names a goal command and `goals` is
-where the shape is argued; `fast-enough.3` points there rather than re-arguing it. Its constraints (keep
-every check, keep every test, lower no threshold) are the point of the block and not decoration: a
-build gets faster by deleting its slow tests, and that is the proxy trap from `Quality gates` a
-second time. **It names `mvn verify` and never `-Pgraded`**, and `GateWalk` names no command at all,
-because the kata's gates are what `workshop`'s pre-flight runs and its board grades. The card runs on
-the student's own project for that reason, on `CountTheDay`'s precedent.
+an agent as a goal against a number. The code block in `short-feedback-loops` is that goal, in
+`goals`' `> Goal:` shape rather than as a slash command, because no unit names a goal command and
+`goals` is where the shape is argued; `short-feedback-loops.3` points there rather than re-arguing
+it. Its constraints (keep every check, keep every test, lower no threshold) are the point of the
+block and not decoration: a build gets faster by deleting its slow tests, and that is the proxy trap
+from `Quality gates` a second time. **It names `mvn verify` and never `-Pgraded`**, and `GateWalk`
+names no command at all, because the kata's gates are what `workshop`'s pre-flight runs and its
+board grades. The card runs on the student's own project for that reason, on `CountTheDay`'s
+precedent.
 
-`quality-gates.2` and `fast-enough` used to pull against each other, while the hook in that paragraph
-was a Stop hook running the minute-long `mvn verify`. It is a pre-edit guard now, which is fast by
-construction, so the two agree outright. `GateReach` still puts `mvn verify` one step out from the
-loop, at the moment the agent says it is done: it is run there because `Preflight`'s `command` move
-writes it into `CLAUDE.md`, not because a hook fires it.
+`quality-gates.2` and `short-feedback-loops` used to pull against each other, while the hook in that
+paragraph was a Stop hook running the minute-long `mvn verify`. It is a pre-edit guard now, which is
+fast by construction, so the two agree outright. `GateReach` still puts `mvn verify` one step out
+from the loop, at the moment the agent says it is done: it is run there because `Preflight`'s
+`command` move writes it into `CLAUDE.md`, not because a hook fires it.
 
-**`quality-gates.3` and `.4` are the brownfield order, at the course owner's asking**: for old code
-with no documentation and no tests, regression tests to full line coverage come first, they are the
-source of truth from then on, and a change in behaviour is confirmed with the stakeholders before
-the tests or the code move. `deck-step2-gates-old-code` carries it in class. `.3` closes on mixing
-kinds of tests and letting mutation testing check the tests themselves, which **points at the tool
-and stops there**, by the course owner's choice. **It does not say that coverage can be faked with
-tests that assert nothing**, and that is the constraint to keep: it is the honest-coverage discovery
-the capstone's third flag exists for, and this unit comes first.
+**`Legacy code` is the brownfield order, at the course owner's asking, and the order is the point.**
+On old code with no documentation and no tests, the gates go in before the agent changes anything:
+regression tests until every line is covered, and the checks from `Deterministic checks` **set at
+today's level**, so they fail on whatever gets worse. That baseline is the review's correction: a
+complexity ceiling or a CVE scan at its usual threshold fails untested legacy code on day 1, before
+anything changed. From then on the gates, the coverage among them (the owner's wording, kept), check
+every change for regression, and they are the source of truth. When a test fails after behaviour has
+to change, **the product owner** decides whether the new behaviour is wanted, not the test and not
+the agent. It was `quality-gates.3` and `.4` until October 2026 and moved into a section of its own
+(keys `gates.legacy-code.1` and `.2`), and the owner sharpened it on the way: it used to say a
+change is confirmed with "the stakeholders" before the tests or the code move, and it now says a
+failing test goes to the product owner, and if the behaviour is not wanted it is a regression and
+the code gets fixed. Keep both the order and the role. `deck-step2-gates-old-code` carries the same
+three steps in class.
 
-`step3`'s `PipelineShift` is the drawing `SdlcStages` is easiest to confuse with. That one is time
-on one scale and the burden moving to verifying; this one is where the work queues and where a person
-stands. Keep them apart rather than making either reference the other.
+The old `.3` closed on "mix kinds of tests, and let mutation testing check the tests themselves".
+That sentence went, because `Deterministic checks` now carries the kinds. **Neither section says
+that coverage can be faked with tests that assert nothing**, and that is the constraint to keep: it
+is the honest-coverage discovery the capstone's third flag exists for, and this unit comes first.
+"Until every line is covered" is a target and not a contrast, which is why it may stay.
+
+**`Deterministic checks` is the catalogue, added at the course owner's asking (October 2026).** Its
+first paragraph is the argument (the same answer on the same code, every run, and the agent runs it
+without you, so it is a loop and not a queue; review is for the decisions, and those stay with you,
+as `gates.lead.2` says), then a list, then where Sonar answers. The list is a `<ul>` because the
+nine kinds are parallel and a reader scans them, and each item says what the check catches in one
+sentence and names the usual tools. **Item 6 is deliberately flat**: coverage and mutation score are
+"2 numbers about the tests themselves, from JaCoCo and PIT", and nothing more. Saying what mutation
+finds that coverage misses is the honest flag's discovery, so do not sharpen that item, and do not
+split it into two items one above the other. A draft closed on the workshop grading 3 of the checks,
+and that sentence was cut: it was an aside, and the paragraph should end on bringing the rules into
+`mvn verify`. Item 9 says a CVE scan's answer moves without the code moving, which is the one honest
+exception to the section's "same answer every run", stated rather than hidden. Item 10 says "before
+it leaves your machine", because push protection blocks the push, after the commit. Facts behind the
+list, checked 10 October 2026: Pact's consumer and provider halves (docs.pact.io), PIT's bytecode
+mutation and `withHistory` (pitest.org), and **`scmMutationCoverage` was removed in PIT 1.18.0**, so
+do not name an "only the changed code" PIT goal; ArchUnit's `slices()` rule (archunit.org); McCabe's
+limit of 10 as NIST SP 500-235 restates it; Sonar's cyclomatic rule S1541 defaults to 10, but
+whether "Sonar way" enables it is unverified, so the unit does not say. Sonar answering in CI, and
+SpotBugs or PMD bringing the same kind of rule into `mvn verify`, came from
+`review/units/step2-gates.md`.
+
+`SameGate` now holds **four groups rather than three checks** (tests; coverage and mutation; static
+analysis and complexity; vulnerabilities and secrets), in the order the list gives them, and
+coverage and mutation share a row so neither sits above the other. `GateReach` lists under each gate
+the checks that usually run there, plus your review at the merge and a person deciding at the
+release, and its first gate is named "agent loop". Coverage and mutation share 1 entry there too, so that figure ranks nothing either.
+`GateWalk` gained a `mix` move between `list` and `reach`: hold your own gates against the kinds in
+this unit.
 
 `steering` replaced `scoping` in slot four (five, since `gates` arrived), and the replacement was deliberate rather than a rename:
 task sizing, which folder you open the agent in, and the `.claude` symlink trap were dropped

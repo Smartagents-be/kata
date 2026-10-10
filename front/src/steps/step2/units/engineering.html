@@ -20,8 +20,8 @@
 
 <p data-i18n="engineering.domain-driven-design.1">
   Folders and classes carry the names the business uses. <code>Headline</code> is a headline and
-  <code>article/</code> is where articles live. Ask for a feature on articles and your sentence has
-  already named the files <svg data-icon="gem"></svg>
+  <code>publishing/</code> is where publishing lives. Ask to change a headline and your sentence has
+  already named the file <svg data-icon="gem"></svg>
 </p>
 
 <div data-figure="words-to-files"></div>
@@ -32,12 +32,36 @@
   code.
 </p>
 
+<h2 data-i18n="engineering.vertical-slices.heading">Vertical slices</h2>
+
+<p data-i18n="engineering.vertical-slices.1">
+  A layered application invites you to build it a layer at a time: all of the data access, then all
+  of the business logic, then the screens. Nothing runs end to end until the last layer is in, and
+  that is the first time you learn whether the layers fit. Cut it the other way: 1 use case with
+  everything it needs, from the screen down to the table, running before you start the next one.
+  That is a vertical slice.
+</p>
+
+<!-- Filled by the VerticalSlices element registered under this name in steps/step2/index.tsx. Its
+     brackets name the 2 modules DomainTree draws in the next section, so the two figures are a
+     pair. -->
+<div data-figure="vertical-slices"></div>
+
+<p data-i18n="engineering.vertical-slices.2">
+  Put the slices that belong together in 1 module, and name it after what the business does.
+  <code>article-publishing/</code> holds the form, the endpoint, the rules and the table for
+  publishing. Every slice is 1 turn of <a href="/steps/step2/enablement">the feedback loop</a>, and
+  the module keeps that turn short, the way <a href="/steps/step2/gates">the unit on quality
+  gates</a> asks: <code>mvn -pl article-publishing verify</code> answers about the part you changed
+  and nothing else.
+</p>
+
 <h2 data-i18n="engineering.hexagonal-architecture.heading">Hexagonal architecture</h2>
 
 <p data-i18n="engineering.hexagonal-architecture.1">
-  The domain sits in the middle, the machinery lives behind adapters, and the direction of a call is
-  a folder you can point at. No class outside <code>adapter/</code> names Postgres or S3, so
-  the code that talks to the database sits in 1 folder, and swapping it out starts there.
+  Inside each module, the domain sits in the middle, the machinery lives behind adapters, and the
+  direction of a call is a folder you can point at. No class outside <code>adapter/</code> names
+  Postgres or S3, so the code that talks to the database sits in 1 folder, and swapping it out starts there.
 </p>
 
 <div data-figure="domain-tree"></div>

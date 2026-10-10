@@ -4,9 +4,12 @@ import { useTranslation } from 'react-i18next'
 
 /**
  * The software lifecycle three times: the way it runs today, with agents bolted on, and AI-native.
- * It opens the `gates` unit, under the lead, and it is redrawn from the AI-native SDLC page on
- * smartagents.be, which builds on Anthropic's AI-native SDLC playbook. The caption names that and
- * nothing else.
+ * It sits in `change`, in the section `person-still-decides`, and it is redrawn from the AI-native
+ * SDLC page on smartagents.be, which builds on Anthropic's AI-native SDLC playbook. The caption names
+ * that and nothing else. **Its Dutch labels are that page's own words, taken verbatim**, so a change
+ * on the site is a reason to revisit them and a style pass is not. It opened step 2's `gates` until October 2026 and moved here because what it
+ * argues is the organisation's lifecycle rather than a gate a student wires up; `gates.lead.2` keeps
+ * the one sentence the gates need from it and links here.
  *
  * **The band narrows where the work waits, and that is the whole first argument.** Today it pinches
  * at `build`; with agents it pinches twice, at `analysis` and `review`, because what you asked for
@@ -14,12 +17,11 @@ import { useTranslation } from 'react-i18next'
  * That is the claim the site makes and the one the unit builds on: the bottleneck does not
  * disappear, it moves, and in the end it moves to the moment someone decides.
  *
- * **Teal is a gate and nothing else is teal**, on the step's rule that teal is what the shape adds.
+ * **Teal is a gate and nothing else is teal**, on step 2's rule that teal is what the shape adds.
  * Only the third row has gates, four of them, each on the seam between two phases where a person
  * says yes: intent after `product`, spec after `analysis`, the change after `review`, the release
  * after `test`. The list under the row names them in order. Do not add machine gates to this
- * drawing: those are `GateReach`'s, further down the unit, and this figure is about where a person
- * still decides.
+ * drawing: those are step 2's `GateReach`, and this figure is about where a person still decides.
  *
  * **The return path under the third row is dashed**, on the step 1 reading of a dash, and it is the
  * only path in the drawing: production feeding the next piece of work is what makes it one run rather
@@ -28,9 +30,10 @@ import { useTranslation } from 'react-i18next'
  *
  * The band is an SVG stretched under a DOM grid rather than one SVG, on the site's own precedent:
  * the six phase names have to stay legible at phone width in both languages, and text inside a
- * stretched viewBox would stretch with it. `PipelineShift` in step 3 is the drawing this one is
- * easiest to confuse with, and they argue different things: that one is time on one scale, this one
- * is where the work queues and where a person stands.
+ * stretched viewBox would stretch with it. `PipelineShift`, one section down in the same unit, is the
+ * drawing this one is easiest to confuse with, and they argue different things: that one is time on
+ * one scale, this one is where the work queues and where a person stands. Neither section's prose
+ * mentions the other figure.
  */
 const PHASES = ['product', 'analysis', 'build', 'review', 'test', 'release'] as const
 type Phase = (typeof PHASES)[number]
@@ -86,7 +89,7 @@ function channel(waits: Partial<Record<Phase, number>>, tall = false): string {
 }
 
 export function SdlcStages() {
-  const { t } = useTranslation('step2')
+  const { t } = useTranslation('step3')
 
   return (
     <figure id="sdlc-stages" data-component="SdlcStages" className="not-prose my-8 grid gap-6">

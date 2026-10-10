@@ -1,6 +1,7 @@
 import type { Step } from '@/shared/step'
 import deck from './deck'
 import { PipelineShift } from './PipelineShift'
+import { SdlcStages } from './SdlcStages'
 import { WhatYouTakeBack } from './WhatYouTakeBack'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
@@ -18,8 +19,9 @@ import impostor from './units/impostor.html?raw'
  *
  * Nothing here is graded against a service and the step needs no Java. What it carries instead is
  * one browser-graded quiz, on `expectations`, and one ungraded card at the foot of `impostor` whose
- * tick is a bookmark. One drawing, in `change`, and it earns the exception by being a measurement of
- * two pipelines against each other rather than a picture of a sentence.
+ * tick is a bookmark. Two drawings, both in `change`: `PipelineShift` earns its place by being a
+ * measurement of two pipelines against each other rather than a picture of a sentence, and
+ * `SdlcStages` came over from step 2's `gates` as the one picture of where a person still decides.
  */
 const step3: Step = {
   id: 'step3',
@@ -30,10 +32,10 @@ const step3: Step = {
       id: 'change',
       title: 'change.title',
       html: change,
-      // The step's one drawing, at the <div data-figure="pipeline-shift"> the unit leaves inside
-      // the section on the process. It is the only thing here a room can look at together, which is
-      // also what `change` renders in guided mode when the prose is dropped.
-      inlineFigures: { 'pipeline-shift': <PipelineShift /> },
+      // The step's two drawings, each in its own section: `pipeline-shift` in the one on the process,
+      // `sdlc-stages` in the one on where a person still decides. They are what a room can look at
+      // together, which is also what `change` renders in guided mode when the prose is dropped.
+      inlineFigures: { 'pipeline-shift': <PipelineShift />, 'sdlc-stages': <SdlcStages /> },
     },
     {
       id: 'expectations',

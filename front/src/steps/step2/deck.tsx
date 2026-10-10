@@ -13,10 +13,10 @@ import { ProjectTree } from './ProjectTree'
 import { ReadEachTime } from './ReadEachTime'
 import { RunSheet } from './RunSheet'
 import { ScriptRuns } from './ScriptRuns'
-import { SdlcStages } from './SdlcStages'
 import { SkillShape } from './SkillShape'
 import { SkillTree } from './SkillTree'
 import { TwoWindows } from './TwoWindows'
+import { VerticalSlices } from './VerticalSlices'
 import { WindowSpend } from './WindowSpend'
 import { WorkflowTimeline } from './WorkflowTimeline'
 import { WorkflowWeights } from './WorkflowWeights'
@@ -179,6 +179,15 @@ const deck: SlideSpec[] = [
     note: 'deck.engineering.vibe.note',
   },
   {
+    id: 'deck-step2-engineering-slices',
+    kind: 'figure',
+    ns: 'step2',
+    eyebrow: 'engineering.title',
+    title: 'deck.engineering.slices.title',
+    figure: <VerticalSlices />,
+    scale: 1.3,
+  },
+  {
     id: 'deck-step2-engineering-domain',
     kind: 'figure',
     ns: 'step2',
@@ -206,17 +215,8 @@ const deck: SlideSpec[] = [
     title: 'gates.title',
     points: ['deck.gates.divider.1', 'deck.gates.divider.2', 'deck.gates.divider.3'],
   },
-  {
-    id: 'deck-step2-gates-sdlc',
-    kind: 'figure',
-    ns: 'step2',
-    eyebrow: 'gates.title',
-    title: 'deck.gates.sdlc.title',
-    figure: <SdlcStages />,
-    scale: 1.2,
-  },
   // Came over from `engineering` with the `Quality gates` section, and still a statement: the
-  // proxy claim has no drawing, and `SameGate` deliberately ranks none of its three checks.
+  // proxy claim has no drawing, and `SameGate` deliberately ranks none of its four groups.
   {
     id: 'deck-step2-gates-proxy',
     kind: 'statement',
@@ -224,6 +224,21 @@ const deck: SlideSpec[] = [
     eyebrow: 'gates.title',
     title: 'deck.gates.proxy.title',
     note: 'deck.gates.proxy.note',
+  },
+  // The checks a gate is made of, grouped by what they look at. The groups are equals, and coverage
+  // and mutation share 1 line on purpose: the slide may not rank them (see `SameGate`).
+  {
+    id: 'deck-step2-gates-checks',
+    kind: 'statement',
+    ns: 'step2',
+    eyebrow: 'gates.title',
+    title: 'deck.gates.checks.title',
+    points: [
+      'deck.gates.checks.1',
+      'deck.gates.checks.2',
+      'deck.gates.checks.3',
+      'deck.gates.checks.4',
+    ],
   },
   {
     id: 'deck-step2-gates-old-code',

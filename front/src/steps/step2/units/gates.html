@@ -4,15 +4,11 @@
   deciding.
 </p>
 
-<!-- Filled by the SdlcStages element registered under this name in steps/step2/index.tsx. The
-     paragraph after it reads the third row only, because the first two are the lead drawn. -->
-<div data-figure="sdlc-stages"></div>
-
 <p data-i18n="gates.lead.2">
-  The third row is 1 run with no handoffs, and a person still decides 4 times: the intent, the spec,
-  the change and the release. Everything in between is machine work, and it only stays that way if a
-  machine checks it too. Nobody reviews that volume by hand. The gates take the volume, you judge
-  the decisions.
+  From idea to production a person still decides 4 times: the intent, the spec, the change and the
+  release (<a href="/steps/step3/change">step 3's unit on team and process change</a> draws where).
+  Everything in between is machine work, and it only stays that way if a machine checks it too.
+  Nobody reviews that volume by hand. The gates take the volume, you judge the decisions.
 </p>
 
 <h2 data-i18n="gates.quality-gates.heading">Quality gates</h2>
@@ -39,18 +35,76 @@
   check before merge too.
 </p>
 
-<p data-i18n="gates.quality-gates.3">
-  Old code with no documentation and no tests needs a different order. Before anything changes,
-  have the agent write regression tests until every line is covered. Those tests become the source
-  of truth: they record what the code does today, odd parts included, and from then on they catch
-  every regression an agent introduces. Mix kinds of tests, not just unit tests, and let mutation
-  testing check the tests themselves.
+<!-- The checks a gate is made of, as a list because they are parallel and the reader scans them.
+     Item 6 names coverage and mutation as 2 numbers about the tests and nothing more: what one
+     can tell you that the other cannot is the discovery the workshop's third flag exists for, so
+     neither this list nor SameGate may contrast or rank the two. step2/CLAUDE.md has the reasoning. -->
+<h2 data-i18n="gates.deterministic-checks.heading">Deterministic checks</h2>
+
+<p data-i18n="gates.deterministic-checks.1">
+  A gate worth handing the volume to gives the same answer on the same code, every run, and the
+  agent can run it without you. That is what makes it a loop rather than a queue. Review is for the
+  decisions, and those stay with you.
 </p>
 
-<p data-i18n="gates.quality-gates.4">
-  They stay the truth until a change is actually needed. Then the tests do not decide what the new
-  behaviour should be. The stakeholders do. Confirm the change with them first, then update the
-  tests, and only then the code.
+<ul>
+  <li data-i18n="gates.deterministic-checks.2">
+    <strong>Unit tests</strong> check the rules inside 1 module, in seconds.
+  </li>
+  <li data-i18n="gates.deterministic-checks.3">
+    <strong>Integration tests</strong> run an adapter against the real database: a Postgres in
+    Testcontainers, not a mock.
+  </li>
+  <li data-i18n="gates.deterministic-checks.4">
+    <strong>Contract tests</strong> keep a screen and its endpoint, or 2 services, in agreement
+    without starting both. Pact records what the consumer expects, and the provider replays it
+    against its own code.
+  </li>
+  <li data-i18n="gates.deterministic-checks.5">
+    <strong>Architecture tests</strong> fail the build when 1 module reaches into the internals of
+    another. ArchUnit writes that rule as an ordinary test.
+  </li>
+  <li data-i18n="gates.deterministic-checks.6">
+    <strong>Coverage and mutation score</strong> are 2 numbers about the tests themselves, from
+    JaCoCo and PIT.
+  </li>
+  <li data-i18n="gates.deterministic-checks.7">
+    <strong>Static analysis</strong> finds known bug patterns and code smells: SpotBugs, PMD, Sonar.
+  </li>
+  <li data-i18n="gates.deterministic-checks.8">
+    <strong>Cyclomatic complexity</strong> caps the number of independent paths through 1 method.
+    McCabe's limit of 10 keeps a method small enough to read and to test.
+  </li>
+  <li data-i18n="gates.deterministic-checks.9">
+    <strong>Vulnerability scans</strong> check every dependency against known CVEs: OWASP
+    Dependency-Check, Trivy, Dependabot. Its answer moves without your code moving, because a new
+    CVE turns yesterday's green build red, so it runs on every build.
+  </li>
+  <li data-i18n="gates.deterministic-checks.10">
+    <strong>Secret scanning</strong> stops a key before it leaves your machine: gitleaks as a
+    pre-commit hook, or push protection on GitHub.
+  </li>
+</ul>
+
+<p data-i18n="gates.deterministic-checks.11">
+  Sonar answers in CI. Run the same kind of rules inside <code>mvn verify</code> with SpotBugs or
+  PMD, and the agent hears them while it still knows what it changed.
+</p>
+
+<h2 data-i18n="gates.legacy-code.heading">Legacy code</h2>
+
+<p data-i18n="gates.legacy-code.1">
+  Old code with no documentation and no tests needs a different order. Before the agent changes
+  anything, put the gates in place: regression tests until every line is covered, and the checks
+  above set at today's level, so they fail on whatever gets worse. Those tests record what the code
+  does today, odd parts included. From then on the gates, the coverage among them, check every
+  change for regression. They are the source of truth.
+</p>
+
+<p data-i18n="gates.legacy-code.2">
+  They stay the truth until behaviour has to change. When a test fails after that, the test does not
+  decide and neither does the agent. Ask the product owner whether the new behaviour is what they
+  want. If it is, update the test. If it is not, it is a regression: fix the code.
 </p>
 
 <h2 data-i18n="gates.blast-radius.heading">Blast radius</h2>
@@ -67,15 +121,15 @@
   <svg data-icon="gem"></svg>.
 </p>
 
-<h2 data-i18n="gates.fast-enough.heading">Fast enough to answer</h2>
+<h2 data-i18n="gates.short-feedback-loops.heading">Short feedback loops</h2>
 
-<p data-i18n="gates.fast-enough.1">
+<p data-i18n="gates.short-feedback-loops.1">
   An agent checks itself as often as your gates allow. 8-second tests run after every change, while
   it still knows what it did. A 20-minute pipeline runs at the end, when it has moved on, or the
   failure lands on you. It does its best work against the fast gate.
 </p>
 
-<p data-i18n="gates.fast-enough.2">
+<p data-i18n="gates.short-feedback-loops.2">
   So the speed of a gate is a gate too. A 4-minute build sounds cheap, but 10 runs an hour is 40
   minutes of waiting. Put a number on it and hand it over as a goal:
 </p>
@@ -84,7 +138,7 @@
   Keep every check it runs today and every test it has, and do not
   lower a threshold. Time the build after each change you make.</code></pre>
 
-<p data-i18n="gates.fast-enough.3">
+<p data-i18n="gates.short-feedback-loops.3">
   The constraints stop it from winning the cheap way, by deleting the slow tests.
   <a href="/steps/step2/goals">The unit on long runs</a> argues that shape.
 </p>
@@ -94,7 +148,7 @@
      speed and blast radius are one axis. -->
 <div data-figure="gate-reach"></div>
 
-<p data-i18n="gates.fast-enough.4">
+<p data-i18n="gates.short-feedback-loops.4">
   None of this is about the agent being careful. A gate is your
   <a href="/steps/step2/engineering">engineering judgement</a>, written down where the work happens.
   What you cannot write down in advance is what <a href="/steps/step2/steering">steering</a> is for.

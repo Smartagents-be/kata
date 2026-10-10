@@ -31,7 +31,7 @@ Two repo-wide rules every executor inherits, whatever the plan:
 | 012 | Storage writes out of state updaters | P3 | S | 006 (soft: its tests guard this) | TODO |
 | 013 | Copilot step 2 parity scoping (spike, report only) | P2 | M | — | TODO |
 | 014 | Deck assistant filter + step 2 deck scope | P3 | S+M | — | TODO |
-| 015 | Vertical slices in `engineering`, deterministic checks in `gates` | P1 | M | — | TODO |
+| 015 | Vertical slices in `engineering`, deterministic checks in `gates` | P1 | M | — | DONE (implemented and reviewed 2026-10-10, left uncommitted for the owner's review) |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) |
 REJECTED (with one-line rationale).

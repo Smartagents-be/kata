@@ -14,10 +14,12 @@ import { useTranslation } from 'react-i18next'
  * twice within an inch of itself.
  *
  * **The three files are the argument, not decoration.** `Headline.java` is what the sentence names,
- * `Article.java` is the same domain and is not what it named, and `Author.java` is a different
- * domain entirely. Read down, they narrow, which is what makes the drawing say "precise" rather
- * than "found something". Cut either of the muted two and the teal one is a hit with nothing to be
- * a hit against.
+ * `Article.java` is the same capability and is not what it named, and `Slot.java` sits in a
+ * different capability entirely. The folders are the package names of the two modules `DomainTree`
+ * and `VerticalSlices` draw (`article-publishing`, `article-scheduling`), shortened to the package
+ * because this figure is about the word and not about the layout. Read down, they narrow, which is
+ * what makes the drawing say "precise" rather than "found something". Cut either of the muted two
+ * and the teal one is a hit with nothing to be a hit against.
  *
  * **No bad repository is drawn**, and that is deliberate rather than a missed contrast. The obvious
  * version of this figure puts generic names down the other side, and an invented bad artifact is a
@@ -39,9 +41,9 @@ const WORD = 'headline'
 
 /** The three candidates, narrowing down the column. Paths, so they are literals and they are mono. */
 const FILES = [
-  { name: 'article/Headline.java', hit: true },
-  { name: 'article/Article.java', hit: false },
-  { name: 'author/Author.java', hit: false },
+  { name: 'publishing/Headline.java', hit: true },
+  { name: 'publishing/Article.java', hit: false },
+  { name: 'scheduling/Slot.java', hit: false },
 ] as const
 
 const BOX_W = 310

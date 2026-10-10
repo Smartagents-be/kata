@@ -24,13 +24,13 @@ import { ReadEachTime } from './ReadEachTime'
 import { RunSheet } from './RunSheet'
 import { SameEveryRun } from './SameEveryRun'
 import { SameGate } from './SameGate'
-import { SdlcStages } from './SdlcStages'
 import { ScriptRuns } from './ScriptRuns'
 import { SetupFlags } from './SetupFlags'
 import { SteerARun } from './SteerARun'
 import { SkillShape } from './SkillShape'
 import { SkillTree } from './SkillTree'
 import { TwoWindows } from './TwoWindows'
+import { VerticalSlices } from './VerticalSlices'
 import { WhereWouldItGo } from './WhereWouldItGo'
 import { WordsToFiles } from './WordsToFiles'
 import { WindowSpend } from './WindowSpend'
@@ -111,12 +111,14 @@ const step2: Step = {
       id: 'engineering',
       title: 'engineering.title',
       html: engineering,
-      // Three slots inside the prose, and the unit's two halves are split across them:
-      // `words-to-files` is what a thing is called, and `hexagon-ports` plus `domain-tree` are
-      // where it sits, the shape first and then the same shape on disk. Neither half may grow the
-      // other's argument. Its `Quality gates` section and `same-gate` moved to `gates`, next.
+      // Four slots inside the prose. `words-to-files` is what a thing is called, `vertical-slices`
+      // is how the work is cut (1 use case through every layer), and `domain-tree` plus
+      // `hexagon-ports` are where it sits: the modules on disk with the hexagon inside each one,
+      // then the hexagon as a shape. `vertical-slices` brackets the 2 modules `domain-tree` draws,
+      // so the two are a pair. Its `Quality gates` section and `same-gate` moved to `gates`, next.
       inlineFigures: {
         'words-to-files': <WordsToFiles />,
+        'vertical-slices': <VerticalSlices />,
         'hexagon-ports': <HexagonPorts />,
         'domain-tree': <DomainTree />,
       },
@@ -128,13 +130,11 @@ const step2: Step = {
       id: 'gates',
       title: 'gates.title',
       html: gates,
-      // Three slots inside the prose. `sdlc-stages` sits under the lead and is read by the paragraph
-      // after it: where a person still decides. `same-gate` came over from `engineering` with the
-      // `Quality gates` section it closes. `gate-reach` closes `fast-enough` and nothing reads it
-      // back, because its note is the unit's last two sections in one line: the slower a gate
-      // answers, the further a miss has got.
+      // Two slots inside the prose. `same-gate` came over from `engineering`
+      // with the `Quality gates` section it closes. `gate-reach` closes `short-feedback-loops` and
+      // nothing reads it back, because its note is the unit's last two sections in one line: the
+      // slower a gate answers, the further a miss has got.
       inlineFigures: {
-        'sdlc-stages': <SdlcStages />,
         'same-gate': <SameGate />,
         'gate-reach': <GateReach />,
       },
