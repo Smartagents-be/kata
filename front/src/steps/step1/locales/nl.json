@@ -774,7 +774,7 @@
   "model.five-hour-window.4": "Plan je belangrijke werk rond de verbruiksruimte die je echt hebt <svg data-icon=\"gem\"></svg> Een reset geeft niet terug wat je verbruikte, en vroeg beginnen heft de weeklimiet niet op.",
   "model.speed.heading": "Snelheid",
   "model.speed.1": "Kleinere modellen antwoorden meestal sneller, maar hoeveel sneller verschilt. Loopt een stap 100 keer per dag, meet hem dan op echt werk.",
-  "model.speed.2": "Een snel fout antwoord kost een extra run om het recht te zetten. Gebruik het kleinere model waar je controles tonen dat het de klus aankan.",
+  "model.speed.2": "Een snel fout antwoord kost een extra run om het recht te zetten. Gebruik het kleinere model waar je controles tonen dat het die taak aankan.",
   "model.reasoning-level.heading": "Redeneerniveau",
   "model.reasoning-level.1": "De <a href=\"/steps/step1/prompt\">prompt-unit</a> introduceerde effort: hoe hard een model werkt. Het model bepaalt wat het aankan, en meer effort maakt van een klein model geen groot.",
   "model.let-it-pick.heading": "Of laat het kiezen",
@@ -843,7 +843,7 @@
   "pick.explanation.queues": "Een kleiner model is een kandidaat voor deze nauwkeurig omschreven handelingen. Voer dezelfde controles uit en vergelijk nauwkeurigheid, wachttijd en prijs voordat je kiest.",
   "pick.explanation.redact": "Alle 3 doen dit, dus er is hier geen foute lijn. Wat verschilt is hoeveel er door de zeef glipt: het kleine model past de formaten toe die je opgeschreven hebt en stopt daar, de grotere pikken ook het rekeningnummer op waar niemand een formaat voor genoteerd heeft. Kies op basis van hoeveel je mag missen. Werk met deze vorm komt elke week terug, en herhalend werk is een probleem op zich. Dat haal je in de volgende stap uit elkaar.",
   "pick.explanation.limit": "Gewoon programmeerwerk, helemaal uitgeschreven, met de tests erbij. Dat is het middenmodel, waar het meeste agentic coding zit en waar je begint.",
-  "pick.explanation.plan": "Het plan heeft het moeilijke denkwerk al gedaan, precies het argument uit de prompt-unit. Wat overblijft is het uitvoeren over bestanden die in elkaar grijpen, en dat is het middenmodel, geen klus voor het topmodel.",
+  "pick.explanation.plan": "Het plan heeft het moeilijke denkwerk al gedaan, precies het argument uit de prompt-unit. Wat overblijft is het uitvoeren over bestanden die in elkaar grijpen, en dat is het middenmodel, geen taak voor het topmodel.",
   "pick.explanation.flaky": "Geen reproductie en geen duidelijke oorzaak, dus deze loopt lang en dwaalt af. Een zoektocht over veel stappen bij elkaar houden is precies waarvoor je het topmodel betaalt.",
 
   "the-cutoff.description": "1 releaselijn met de trainingscutoff erdoor getrokken. De versies links van de lijn zijn gevulde chips, de versies die daarna verschenen lege, gestreepte omtrekken, en de laatste daarvan is de versie van het project.",

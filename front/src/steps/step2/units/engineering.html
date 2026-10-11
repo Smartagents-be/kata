@@ -5,9 +5,10 @@
 
 <p data-i18n="engineering.lead.2">
   Vibe coding is asking for a feature, skimming what comes back, and running it. When it breaks you
-  paste the error and say "fix this". That works for about an hour. Then the fixes start breaking
-  each other. The loop feels productive right up to the moment you cannot answer a simple question
-  about your own repository.
+  paste the error and say "fix this". For a small project with little domain logic, that works fine.
+  For complex business processes it works poorly and gets expensive fast, because there are no clear
+  rules or because the agent picked the architecture and the tools itself. The fixes start breaking
+  each other, and eventually you cannot answer a simple question about your own repository.
 </p>
 
 <p data-i18n="engineering.lead.3">
@@ -19,16 +20,16 @@
 <h2 data-i18n="engineering.domain-driven-design.heading">Domain-driven design</h2>
 
 <p data-i18n="engineering.domain-driven-design.1">
-  Folders and classes carry the names the business uses. <code>Headline</code> is a headline and
-  <code>publishing/</code> is where publishing lives. Ask to change a headline and your sentence has
-  already named the file <svg data-icon="gem"></svg>
+  Folders and classes carry the names the business uses. <code>Iban</code> is an IBAN and
+  <code>payments/</code> is where payments live. Ask for the IBAN to be validated on every
+  payment and your sentence has already named the file <svg data-icon="gem"></svg>
 </p>
 
 <div data-figure="words-to-files"></div>
 
 <p data-i18n="engineering.domain-driven-design.2">
-  Clear domain names make instructions and searches more precise. <code>Headline</code> in your
-  request points towards <code>Headline</code> in the tree. That helps the agent locate relevant
+  Clear domain names make instructions and searches more precise. The IBAN in your request points
+  towards <code>Iban</code> in the tree. That helps the agent locate relevant
   code.
 </p>
 
@@ -48,20 +49,35 @@
 <div data-figure="vertical-slices"></div>
 
 <p data-i18n="engineering.vertical-slices.2">
-  Put the slices that belong together in 1 module, and name it after what the business does.
-  <code>article-publishing/</code> holds the form, the endpoint, the rules and the table for
-  publishing. Every slice is 1 turn of <a href="/steps/step2/enablement">the feedback loop</a>, and
+  Put the slices that belong together in 1 module: a business capability, named after what the
+  business does.
+  <code>payments/</code> holds the form, the endpoint, the rules and the table for
+  payments. Every slice is 1 turn of <a href="/steps/step2/enablement">the feedback loop</a>, and
   the module keeps that turn short, the way <a href="/steps/step2/gates">the unit on quality
-  gates</a> asks: <code>mvn -pl article-publishing verify</code> answers about the part you changed
+  gates</a> asks: <code>mvn -pl payments verify</code> answers about the part you changed
   and nothing else.
 </p>
+
+<p data-i18n="engineering.vertical-slices.3">
+  A slice runs from the screen to the table, and through the pipeline to production. Build one with
+  an agent and you have to judge every layer it touches: the form, the endpoint, the build, the
+  deployment, the access rules. You do not have to write all of that yourself, but you do have to
+  see when it is wrong. That asks for a T-shaped profile: deep in 1 field, and enough of the rest to
+  judge it.
+</p>
+
+<!-- Filled by the SliceSkills element registered under this name in steps/step2/index.tsx. Its
+     own labels carry the fields, so nothing after it reads the drawing back. -->
+<div data-figure="slice-skills"></div>
 
 <h2 data-i18n="engineering.hexagonal-architecture.heading">Hexagonal architecture</h2>
 
 <p data-i18n="engineering.hexagonal-architecture.1">
-  Inside each module, the domain sits in the middle, the machinery lives behind adapters, and the
-  direction of a call is a folder you can point at. No class outside <code>adapter/</code> names
-  Postgres or S3, so the code that talks to the database sits in 1 folder, and swapping it out starts there.
+  Inside each module the domain sits in the middle. Everything that talks to the outside world lives
+  in adapters around it: what calls in under <code>adapter/incoming/</code>, what the use cases call
+  out to under <code>adapter/outgoing/</code>. No class outside <code>adapter/</code> names Postgres
+  or S3. So the code that talks to the database sits in 1 folder, and swapping the database starts
+  there.
 </p>
 
 <div data-figure="domain-tree"></div>
@@ -73,19 +89,3 @@
 </p>
 
 <div data-figure="hexagon-ports"></div>
-
-<h2 data-i18n="engineering.right-words.heading">The right words</h2>
-
-<p data-i18n="engineering.right-words.1">
-  Name the concept you want. “Put a repository in front of this JDBC call” specifies a design
-  choice; “clean this up” leaves it open. Pattern names, layers and domain terms reduce guessing
-  <svg data-icon="gem"></svg> Review whether the chosen structure fits the actual problem.
-</p>
-
-<!-- The doing part of the unit, under the same rule and heading the rest of the course puts over
-     its exercises. The card is the WhereWouldItGo element registered in steps/step2/index.tsx, and
-     it goes straight under the heading: its description carries the setting, so a paragraph here
-     would say it twice. -->
-<hr />
-
-<h2 data-i18n="ui:quiz.title">Test your knowledge</h2>

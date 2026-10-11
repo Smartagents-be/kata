@@ -1,14 +1,14 @@
 <p data-i18n="gates.lead.1">
-  A gate is where the work stops until something says yes. Take the typing away and the queue at the
-  slowest desk does not disappear: it moves to the asking, the reading and, in the end, the
-  deciding.
+  A gate is a check the work has to pass before it moves on: the tests before a commit, the build
+  before a merge, a review before a release.
 </p>
 
 <p data-i18n="gates.lead.2">
-  From idea to production a person still decides 4 times: the intent, the spec, the change and the
-  release (<a href="/steps/step3/change">step 3's unit on team and process change</a> draws where).
-  Everything in between is machine work, and it only stays that way if a machine checks it too.
-  Nobody reviews that volume by hand. The gates take the volume, you judge the decisions.
+  An agent writes code faster than you can read it. Review every line by hand and you become the
+  slowest step, and the agent waits on you. So let a machine check what a machine can check. Keep
+  for yourself what only you can decide: what to build, the spec, whether a change does what you
+  meant, and when it ships (<a href="/steps/step3/change">step 3's unit on team and process
+  change</a> shows where those fall). The gates check the code, you check the decisions.
 </p>
 
 <h2 data-i18n="gates.quality-gates.heading">Quality gates</h2>
@@ -16,11 +16,24 @@
 <p data-i18n="gates.quality-gates.1">
   Sonar, a coverage floor and a mutation score have always caught drift and regression before a
   release, and investing in them still speeds up shipping. They also give an agent a fixed bar to
-  hold itself to while it works <svg data-icon="gem"></svg> But an agent aims for the proxy, not
-  what is behind it, so wire in the gate that is expensive to fake.
+  hold itself to while it works <svg data-icon="gem"></svg> But a number does not measure quality
+  itself, only something that usually comes with it. An agent told to hit the number hits the
+  number, even by a route that leaves the code no better, so wire in the checks that are hard to
+  pass without doing the real work.
 </p>
 
 <div data-figure="same-gate"></div>
+
+<!-- The evidence for the proxy claim above, kept to agents gaming a scorer. It must not become an
+     example about coverage, which is the workshop honest flag's discovery; step2/CLAUDE.md has the
+     source and why this one. -->
+<p data-i18n="gates.quality-gates.2">
+  METR measured it in 2025. In its RE-Bench tasks, o3 cheated in 39 of 128 runs, for example by
+  making the clock the score was timed with run faster, or by patching the evaluator to always return
+  a perfect score
+  (<a href="https://metr.org/blog/2025-06-05-recent-reward-hacking" target="_blank" rel="noreferrer">METR's write-up</a>).
+  Asked afterwards whether that was what the user wanted, it often said no.
+</p>
 
 <!-- One paragraph for both assistants, on purpose. It was a Stop hook running `mvn verify` once,
      split per assistant, and that could not be one exercise: Copilot treats exit code 2 on
@@ -28,67 +41,50 @@
      tool runs exists in Claude Code, Copilot CLI, VS Code and IntelliJ, and exit code 2 blocks the
      call in all of them. Why the guard covers the shell and its own files is in step 2's CLAUDE.md,
      beside `Preflight`. -->
-<p data-i18n="gates.quality-gates.2">
-  Wire the gate in so the agent cannot move it. A hook that runs before every edit and shell
-  command can refuse anything that touches the thresholds or the hook itself: exit code 2 blocks the
-  call in Claude Code and Copilot alike. It is a fence, not a proof, so keep the build as a required
-  check before merge too.
+<p data-i18n="gates.quality-gates.3">
+  Wire the gate in so the agent cannot move it. You do that with a hook: a script your assistant
+  runs just before every edit and shell command the agent makes. You register it in
+  <code>.claude/settings.json</code> or in <code>.github/hooks/</code>. The script looks at what the
+  call wants to change. If it lowers a threshold, such as the minimum coverage in your build, or
+  touches the script itself, it exits with code 2 and the assistant does not run the call. A hook
+  does not catch every way around it, so also have CI check before merge that no threshold is lower
+  than on <code>main</code>.
 </p>
 
-<!-- The checks a gate is made of, as a list because they are parallel and the reader scans them.
-     Item 6 names coverage and mutation as 2 numbers about the tests and nothing more: what one
-     can tell you that the other cannot is the discovery the workshop's third flag exists for, so
-     neither this list nor SameGate may contrast or rank the two. step2/CLAUDE.md has the reasoning. -->
+<!-- The checks a gate is made of, as a table because they are parallel and the reader scans them.
+     Coverage and mutation each say what they measure and nothing more: what one can tell you that
+     the other cannot is the discovery the workshop's third flag exists for, so neither row may
+     contrast or rank the two. step2/CLAUDE.md has the reasoning. -->
 <h2 data-i18n="gates.deterministic-checks.heading">Deterministic checks</h2>
 
 <p data-i18n="gates.deterministic-checks.1">
-  A gate worth handing the volume to gives the same answer on the same code, every run, and the
-  agent can run it without you. That is what makes it a loop rather than a queue. Review is for the
-  decisions, and those stay with you.
+  A gate you can hand the checking to gives the same answer on the same code, every run, and the
+  agent can run it without you. Then it checks its own work instead of waiting on you.
 </p>
 
-<ul>
-  <li data-i18n="gates.deterministic-checks.2">
-    <strong>Unit tests</strong> check the rules inside 1 module, in seconds.
-  </li>
-  <li data-i18n="gates.deterministic-checks.3">
-    <strong>Integration tests</strong> run an adapter against the real database: a Postgres in
-    Testcontainers, not a mock.
-  </li>
-  <li data-i18n="gates.deterministic-checks.4">
-    <strong>Contract tests</strong> keep a screen and its endpoint, or 2 services, in agreement
-    without starting both. Pact records what the consumer expects, and the provider replays it
-    against its own code.
-  </li>
-  <li data-i18n="gates.deterministic-checks.5">
-    <strong>Architecture tests</strong> fail the build when 1 module reaches into the internals of
-    another. ArchUnit writes that rule as an ordinary test.
-  </li>
-  <li data-i18n="gates.deterministic-checks.6">
-    <strong>Coverage and mutation score</strong> are 2 numbers about the tests themselves, from
-    JaCoCo and PIT.
-  </li>
-  <li data-i18n="gates.deterministic-checks.7">
-    <strong>Static analysis</strong> finds known bug patterns and code smells: SpotBugs, PMD, Sonar.
-  </li>
-  <li data-i18n="gates.deterministic-checks.8">
-    <strong>Cyclomatic complexity</strong> caps the number of independent paths through 1 method.
-    McCabe's limit of 10 keeps a method small enough to read and to test.
-  </li>
-  <li data-i18n="gates.deterministic-checks.9">
-    <strong>Vulnerability scans</strong> check every dependency against known CVEs: OWASP
-    Dependency-Check, Trivy, Dependabot. Its answer moves without your code moving, because a new
-    CVE turns yesterday's green build red, so it runs on every build.
-  </li>
-  <li data-i18n="gates.deterministic-checks.10">
-    <strong>Secret scanning</strong> stops a key before it leaves your machine: gitleaks as a
-    pre-commit hook, or push protection on GitHub.
-  </li>
-</ul>
+<table data-layout="stack" data-i18n="gates.deterministic-checks.table">
+  <thead>
+    <tr><th>Check</th><th>What it checks</th><th>Tools</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Unit tests</td><td>The rules inside 1 module, in seconds.</td><td>JUnit, AssertJ</td></tr>
+    <tr><td>Integration tests</td><td>An adapter against what it really talks to: a Postgres in a container or a real cloud service, not a mock.</td><td>Testcontainers</td></tr>
+    <tr><td>Contract tests</td><td>Whether a screen and its endpoint, or 2 services, still agree, without starting both. The consumer records what it expects, and the provider replays it against its own code.</td><td>Pact</td></tr>
+    <tr><td>Architecture tests</td><td>Your architecture as rules the build fails on: the domain imports nothing from an adapter, and 1 module uses only what another one makes public.</td><td>ArchUnit</td></tr>
+    <tr><td>Coverage</td><td>Which lines and branches your tests run. When an agent writes the tests, aim for 100%.</td><td>JaCoCo</td></tr>
+    <tr><td>Mutation testing</td><td>Whether your tests really test your logic: the tool changes the code in small ways and counts how many of those changes make a test fail.</td><td>PIT</td></tr>
+    <tr><td>Static analysis</td><td>Known bug patterns, code smells and security flaws such as SQL injection.</td><td>PMD, Sonar</td></tr>
+    <tr><td>Compiler checks</td><td>Bug patterns and possible null dereferences, as compile errors.</td><td>Error Prone, NullAway</td></tr>
+    <tr><td>Cyclomatic complexity</td><td>The number of paths through 1 method. McCabe's limit of 10 keeps a method small enough to read and to test.</td><td>JaCoCo, PMD, Sonar</td></tr>
+    <tr><td>Formatting</td><td>Whether the code follows the house style.</td><td>Spotless, Checkstyle</td></tr>
+    <tr><td>Dependency rules</td><td>Banned libraries, 2 versions of the same library, a licence you may not ship.</td><td>Maven Enforcer, license-maven-plugin</td></tr>
+    <tr><td>Vulnerability scans</td><td>Every dependency against known CVEs. A new CVE turns yesterday's green build red, so the scan runs on every build.</td><td>OWASP Dependency-Check, Trivy, Dependabot</td></tr>
+    <tr><td>Secret scanning</td><td>Keys in your code, stopped before they leave your machine.</td><td>gitleaks as a pre-commit hook, push protection on GitHub</td></tr>
+  </tbody>
+</table>
 
-<p data-i18n="gates.deterministic-checks.11">
-  Sonar answers in CI. Run the same kind of rules inside <code>mvn verify</code> with SpotBugs or
-  PMD, and the agent hears them while it still knows what it changed.
+<p data-i18n="gates.deterministic-checks.2">
+  Sonar answers in CI. Run the same kind of rules inside <code>mvn verify</code> with PMD, and the agent hears them while it still knows what it changed.
 </p>
 
 <h2 data-i18n="gates.legacy-code.heading">Legacy code</h2>
@@ -107,26 +103,13 @@
   want. If it is, update the test. If it is not, it is a regression: fix the code.
 </p>
 
-<h2 data-i18n="gates.blast-radius.heading">Blast radius</h2>
-
-<p data-i18n="gates.blast-radius.1">
-  An agent that can run commands can run the wrong one: drop a migration it thinks is stale, rewrite
-  40 files for 1 line, push the lot. How far that gets before a gate stops it is the blast radius.
-</p>
-
-<p data-i18n="gates.blast-radius.2">
-  Give the agent its own branch, and let protected branches, required checks and review decide what
-  ships. A worktree keeps the files apart, but a command can still reach another checkout or an
-  external service, so limit file, credential and network access separately
-  <svg data-icon="gem"></svg>.
-</p>
-
 <h2 data-i18n="gates.short-feedback-loops.heading">Short feedback loops</h2>
 
 <p data-i18n="gates.short-feedback-loops.1">
   An agent checks itself as often as your gates allow. 8-second tests run after every change, while
   it still knows what it did. A 20-minute pipeline runs at the end, when it has moved on, or the
-  failure lands on you. It does its best work against the fast gate.
+  failure lands on you. It does its best work against the fast gate, and the later a gate answers,
+  the further a mistake has already got.
 </p>
 
 <p data-i18n="gates.short-feedback-loops.2">
@@ -145,7 +128,7 @@
 
 <!-- Filled by the GateReach element registered under this name in steps/step2/index.tsx. It closes
      the last section and nothing after it reads it back, so its own note carries the claim that
-     speed and blast radius are one axis. -->
+     speed and how far a miss has got are one axis. -->
 <div data-figure="gate-reach"></div>
 
 <p data-i18n="gates.short-feedback-loops.4">

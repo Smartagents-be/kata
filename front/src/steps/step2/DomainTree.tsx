@@ -5,10 +5,10 @@ import { FileTree, type TreeNode } from './FileTree'
  * module. It sits in the `engineering` unit, at the `data-figure="domain-tree"` slot after
  * `engineering.hexagonal-architecture.1`, a section below `VerticalSlices`.
  *
- * **The top level is capabilities, named after what the business does.** `article-publishing` is
- * everything publishing needs, its screen included, and `article-scheduling` is the next one in the
- * same shape. Archiving the previous version of an article is part of publishing here, which is why
- * the `Archive` port and its S3 adapter sit in `article-publishing`: `HexagonPorts` and
+ * **The top level is capabilities, named after what the business does.** `payments` is
+ * everything payments need, its screen included, and `invoicing` is the next one in the same shape.
+ * Keeping the proof of every payment is part of payments here, which is why the `Archive` port and
+ * its S3 adapter sit in `payments`: `HexagonPorts` and
  * `hexagonal-architecture.2` both lean on that S3 adapter. They are the two module names
  * `VerticalSlices` puts its brackets under, so the drawing of the slices and this tree of the
  * folders are one argument in two figures: a rename in one is a rename in the other. `host` is the
@@ -20,28 +20,32 @@ import { FileTree, type TreeNode } from './FileTree'
  * (a BOM plus a domain, configuration, bootstrap and context module for every domain) spent the
  * figure on scaffolding a student would have to be handed. This is not that skeleton. A capability
  * is 1 module with its own `pom.xml`, so it builds and tests on its own (`mvn -pl
- * article-publishing verify`, which `engineering.vertical-slices.2` names), and there is no BOM, no
+ * payments verify`, which `engineering.vertical-slices.2` names), and there is no BOM, no
  * starter and no per-domain configuration module. The shape follows a production repository the
  * owner pointed at, without its Spring Boot starter plumbing. `host` draws no `pom.xml` and no
  * `src/main/java` above its one class, on purpose: both are what every module has, and the rows are
  * worth more to the deck slide's height than to completeness.
  *
- * **Inside a module the layout is the hexagon, unchanged**: `domain/` names what it needs and owns
- * the interfaces, `application/` is one class per use case, `adapter/` implements those interfaces,
- * and nothing under `adapter/` is mentioned anywhere above it. `adapter/` splits by direction
+ * **Inside a module the layout is the hexagon**: `domain/` is the rules and depends on nothing,
+ * `application/` is one class per use case plus the ports those use cases own, `adapter/` implements
+ * those ports, and nothing under `adapter/` is mentioned anywhere above it. **The ports sit in
+ * `application/` and not in `domain/`** (October 2026, at the owner's asking): that is the functional
+ * core and imperative shell split the owner's own course teaches, where the core takes no
+ * dependency at all, not even on an interface, and the shell owns the ports it loads and writes
+ * through. `HexagonPorts` draws the same thing, with the ports on the outer hexagon. `adapter/` splits by direction
  * before it splits by technology, `incoming/` is what calls the domain and `outgoing/` is what the
- * domain calls out to through a port it wrote itself. Keep those two rows: `HexagonPorts` takes its
- * column labels from their notes, and `WhereWouldItGo` sorts `exercises/step2/java` against them.
+ * use cases call out to through a port they wrote themselves. Keep those two rows: `HexagonPorts` takes its
+ * column labels from their notes, and `exercises/step2/java` uses the same two folders.
  * Below that the folders are written compound (`web/rest/…`, `persistence/postgres/…`) so the tree
  * stays as tall as the deck slide allows.
  *
  * `src/test/java` is drawn, and as two files rather than an empty folder. Tests mirroring the
  * package they cover is this repo's own rule, so the example keeps it.
  *
- * Nothing here exists in this repo. It is an example, and the caption says so: the `TaskCard` under
- * this unit asks the student to sort `exercises/step2/java` against the shape above it, so a reader
- * who took the drawing for a folder in this repository would be sorting one repository against
- * another.
+ * Nothing here exists in this repo. It is an example, and the caption says so. `exercises/step2/java`
+ * has the same layout inside its one module since October 2026 (`domain/`, the port in
+ * `application/`, `adapter/incoming/` and `adapter/outgoing/`), but it is 1 Maven module with 1
+ * capability, not this multi-module repository.
  */
 const TREE: TreeNode = {
   name: '.',
@@ -50,14 +54,14 @@ const TREE: TreeNode = {
   children: [
     { name: 'pom.xml', note: 'domain-tree.root-pom.note' },
     {
-      name: 'article-publishing',
+      name: 'payments',
       directory: true,
       note: 'domain-tree.module.note',
       children: [
         { name: 'pom.xml', note: 'domain-tree.module-pom.note' },
-        { name: 'frontend/publish-form.ts', note: 'domain-tree.frontend.note' },
+        { name: 'frontend/payment-form.ts', note: 'domain-tree.frontend.note' },
         {
-          name: 'src/main/java/be/smartagents/publishing',
+          name: 'src/main/java/be/smartagents/payments',
           directory: true,
           children: [
             {
@@ -65,10 +69,8 @@ const TREE: TreeNode = {
               directory: true,
               note: 'domain-tree.domain.note',
               children: [
-                { name: 'Article.java', note: 'domain-tree.article-java.note' },
-                { name: 'Headline.java', note: 'domain-tree.headline.note' },
-                { name: 'ArticleRepository.java', note: 'domain-tree.repository-port.note' },
-                { name: 'Archive.java', note: 'domain-tree.archive-port.note' },
+                { name: 'Payment.java', note: 'domain-tree.payment-java.note' },
+                { name: 'Iban.java', note: 'domain-tree.iban.note' },
               ],
             },
             {
@@ -76,8 +78,10 @@ const TREE: TreeNode = {
               directory: true,
               note: 'domain-tree.application.note',
               children: [
-                { name: 'PublishArticle.java' },
-                { name: 'RewriteHeadline.java' },
+                { name: 'RecordPayment.java' },
+                { name: 'RefundPayment.java' },
+                { name: 'PaymentRepository.java', note: 'domain-tree.repository-port.note' },
+                { name: 'Archive.java', note: 'domain-tree.archive-port.note' },
               ],
             },
             {
@@ -91,7 +95,7 @@ const TREE: TreeNode = {
                   note: 'domain-tree.incoming.note',
                   children: [
                     {
-                      name: 'web/rest/ArticleController.java',
+                      name: 'web/rest/PaymentController.java',
                       note: 'domain-tree.controller.note',
                     },
                   ],
@@ -102,7 +106,7 @@ const TREE: TreeNode = {
                   note: 'domain-tree.outgoing.note',
                   children: [
                     {
-                      name: 'persistence/postgres/JpaArticleRepository.java',
+                      name: 'persistence/postgres/JpaPaymentRepository.java',
                       note: 'domain-tree.jpa-repository.note',
                     },
                     { name: 'archive/s3/S3Archive.java', note: 'domain-tree.s3-archive.note' },
@@ -113,22 +117,22 @@ const TREE: TreeNode = {
           ],
         },
         {
-          name: 'src/main/resources/db/changelog/publishing.xml',
+          name: 'src/main/resources/db/changelog/payments.xml',
           note: 'domain-tree.changelog.note',
         },
         {
-          name: 'src/test/java/be/smartagents/publishing',
+          name: 'src/test/java/be/smartagents/payments',
           directory: true,
           note: 'domain-tree.test.note',
           children: [
-            { name: 'domain/ArticleTest.java' },
-            { name: 'application/PublishArticleTest.java' },
+            { name: 'domain/PaymentTest.java' },
+            { name: 'application/RecordPaymentTest.java' },
           ],
         },
       ],
     },
     {
-      name: 'article-scheduling',
+      name: 'invoicing',
       directory: true,
       note: 'domain-tree.next-module.note',
     },
@@ -138,7 +142,7 @@ const TREE: TreeNode = {
       note: 'domain-tree.host.note',
       children: [
         {
-          name: 'ArticleApplication.java',
+          name: 'BillingApplication.java',
           note: 'domain-tree.application-class.note',
         },
       ],

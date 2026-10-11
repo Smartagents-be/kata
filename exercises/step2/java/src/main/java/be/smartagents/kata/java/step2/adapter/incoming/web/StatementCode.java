@@ -1,4 +1,4 @@
-package be.smartagents.kata.java.step2.web;
+package be.smartagents.kata.java.step2.adapter.incoming.web;
 
 /**
  * The code the statement endpoint hands back once it works. Kept in shifted form so it is not a

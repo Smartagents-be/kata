@@ -310,6 +310,11 @@ else holds a colour: components name tokens, so a change to the palette is a cha
   pinned to the side it leads to, forward on the right and back on the left, so the arrow still
   points off the edge it takes you to; stretched across the strip it stops reading as one of two.
   Do not put an empty cell back to keep the halves even, which reads as a fault.
+- **A table of records stacks on a phone.** `data-layout="stack"` on a unit's `<table>` turns
+  each row into a block below `sm`: the first cell bold, the last set back under it, the header
+  kept for screen readers only. It is opt-in because a comparison table such as `setup`'s
+  Include/Leave out needs its header to say which column is which. A global `overflow-wrap:
+  anywhere` on cells was tried first and broke every first-column word in the middle.
 - **Two utilities carry the repeated shapes.** `eyebrow` is the small mono uppercase label above a
   heading, colour left to the caller (teal for a section, muted for a sub-label). `field` is a
   typed answer box: mono, hairline border, and the same 3px teal focus ring on every field, so a

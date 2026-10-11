@@ -3,11 +3,10 @@ package be.smartagents.kata.java.step2.application;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
-import be.smartagents.kata.java.step2.adapter.InMemoryLoanRepository;
+import be.smartagents.kata.java.step2.adapter.outgoing.persistence.InMemoryLoanRepository;
 import be.smartagents.kata.java.step2.domain.Loan;
 import be.smartagents.kata.java.step2.domain.MediaType;
 import be.smartagents.kata.java.step2.domain.MemberTier;
-import be.smartagents.kata.java.step2.port.LoanRepository;
 import java.util.List;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

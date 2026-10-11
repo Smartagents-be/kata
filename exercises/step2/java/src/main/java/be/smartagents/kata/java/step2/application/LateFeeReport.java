@@ -2,7 +2,6 @@ package be.smartagents.kata.java.step2.application;
 
 import be.smartagents.kata.java.step2.domain.LateFeePolicy;
 import be.smartagents.kata.java.step2.domain.Loan;
-import be.smartagents.kata.java.step2.port.LoanRepository;
 
 /**
  * The one use case of the step 2 module: total up what the overdue loans owe. It walks the

@@ -1,4 +1,4 @@
-package be.smartagents.kata.java.step2.web;
+package be.smartagents.kata.java.step2.adapter.incoming.web;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;

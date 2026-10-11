@@ -383,6 +383,33 @@
   overflow-wrap: anywhere;
 }
 
+/* A table whose rows are records (a name, then what it is, then the tools) rather than a grid to
+   compare across: three columns on a phone break words in the middle, so below `sm` each row stacks,
+   the name in bold, the tools set back under it, and the header goes to screen readers only. The
+   attribute opts a table in, because a two-column comparison such as `setup`'s needs its header to
+   say which column is which. */
+@media (width < 40rem) {
+  .prose table[data-layout='stack'],
+  .prose table[data-layout='stack'] :is(tbody, tr, td) {
+    display: block;
+  }
+  .prose table[data-layout='stack'] thead {
+    @apply sr-only;
+  }
+  .prose table[data-layout='stack'] tr {
+    @apply py-3;
+  }
+  .prose table[data-layout='stack'] td {
+    @apply p-0;
+  }
+  .prose table[data-layout='stack'] td:first-child {
+    @apply font-semibold;
+  }
+  .prose table[data-layout='stack'] td:last-child {
+    @apply text-muted-foreground mt-1;
+  }
+}
+
 /* A block of code keeps its line breaks, so it scrolls inside its own box instead. */
 .prose pre {
   @apply overflow-x-auto;

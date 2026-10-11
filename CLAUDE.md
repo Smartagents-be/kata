@@ -354,3 +354,10 @@ mechanism live in `front/CLAUDE.md`, which loads when you work under `front/`. T
 are worth carrying everywhere: **no em-dashes anywhere in student-facing prose** (the
 `lesson-writing` skill in `.claude/skills/lesson-writing/` has the rest), and grading messages plus
 the words a student types as an answer stay English in every language.
+
+**The Dutch is Flemish, not Netherlands Dutch.** The students are Belgian, and Dutch from the
+Netherlands reads as foreign to them. It slips in often, so check every `nl.json` string for it before
+calling it done: "klus" and "vluchtig lezen" have both been rejected, and "taak" and "overlopen" are
+what replaced them. "Briefing" is out too: write "opdracht" or "instructies". The existing "draaien"
+(a service that "draait", tests you "draaien") stays as it is: the owner chose not to sweep it, so do
+not replace it without being asked.

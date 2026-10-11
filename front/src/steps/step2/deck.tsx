@@ -12,6 +12,7 @@ import { ReadEachTime } from './ReadEachTime'
 import { RunSheet } from './RunSheet'
 import { ScriptRuns } from './ScriptRuns'
 import { SkillShape } from './SkillShape'
+import { SliceSkills } from './SliceSkills'
 import { SkillTree } from './SkillTree'
 import { TwoWindows } from './TwoWindows'
 import { VerticalSlices } from './VerticalSlices'
@@ -27,7 +28,7 @@ import { WorktreeEach } from './WorktreeEach'
  * owns the bare `deck-<unit>` names; `workshop` exists in both steps, so the prefix is what keeps
  * the blocks apart.
  *
- * Kept off on purpose: `SetupFlags`, `Workshop`, `WhereWouldItGo`, `GateWalk`, `Preflight` and `Debrief` write
+ * Kept off on purpose: `SetupFlags`, `Workshop`, `GateWalk`, `Preflight` and `Debrief` write
  * progress to localStorage, so on a slide they would tick the tutor's machine, and `AuditExample`
  * only earns its toggle beside the paragraph that reads it. The exercises those boards carry get a
  * statement naming what the student does, never what they find: the three setup files stay unnamed,
@@ -129,6 +130,15 @@ const deck: SlideSpec[] = [
     scale: 1.3,
   },
   {
+    id: 'deck-step2-engineering-skills',
+    kind: 'figure',
+    ns: 'step2',
+    eyebrow: 'engineering.title',
+    title: 'deck.engineering.skills.title',
+    figure: <SliceSkills />,
+    scale: 1.3,
+  },
+  {
     id: 'deck-step2-engineering-domain',
     kind: 'figure',
     ns: 'step2',
@@ -137,14 +147,6 @@ const deck: SlideSpec[] = [
     // The tallest tree in the step: at anything past this the last rows land on the footer.
     figure: <DomainTree />,
     scale: 0.9,
-  },
-  {
-    id: 'deck-step2-engineering-sort',
-    kind: 'statement',
-    ns: 'step2',
-    eyebrow: 'engineering.title',
-    title: 'deck.engineering.sort.title',
-    note: 'deck.engineering.sort.note',
   },
 
   // ── gates ─────────────────────────────────────────────────────────────────────────────────

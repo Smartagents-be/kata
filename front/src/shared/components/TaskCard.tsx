@@ -80,7 +80,7 @@ function writeMoves(storageKey: string, moves: ReadonlySet<string>) {
  * Every task in the course is this component with different data (`PlanItTwice` in step 1's
  * `prompt`, `ConnectOne` in `tools`, `ReadYourWindow` in `context`, `SurviveTheClear` in `session`,
  * `CutItUp` in `agent-patterns`, `PriceOneTurn` in `model`, `OneWindow` in `workshop`, `SetYourAssistant`
- * in step 0's `welcome`, `WhereWouldItGo` in step 2's `engineering`, `WhatYouTakeBack` in step 3),
+ * in step 0's `welcome`, `WhatYouTakeBack` in step 3),
  * so keep additions here rather than in a caller.
  *
  * **Every move is its own tick, and the card keeps one of its own underneath.** The two say
@@ -92,7 +92,10 @@ function writeMoves(storageKey: string, moves: ReadonlySet<string>) {
  *
  * The card's own tick is deliberately **not** derived from the moves. It stays the student's to
  * set: a run at a problem can be finished with a move skipped on purpose, and a card that ticked
- * itself would be grading the sitting, which nothing here does.
+ * itself would be grading the sitting, which nothing here does. **The other direction does hold**:
+ * ticking the card ticks every move, because a finished card above a count reading "0 of 6" was
+ * reported as wrong. A move skipped on purpose can be unticked after; unticking the card leaves the
+ * moves as they are.
  *
  * **A one-move card gets neither the count nor a per-move tick**, and the reasoning is
  * `ShutterFlag`'s beside a five-row board: "0 of 1 done" is arithmetic nobody asked for, and a move
@@ -159,10 +162,16 @@ export function TaskCard({
   const workedCount = moves.filter((move) => worked.has(move)).length
 
   function toggle() {
-    setDone((current) => {
-      writeDone(storageKey, !current)
-      return !current
-    })
+    const next = !done
+    setDone(next)
+    writeDone(storageKey, next)
+    // Ticking the card ticks every move with it, or the count above it would go on reading
+    // "0 of 6" under a card that says it is finished. Unticking leaves the moves alone.
+    if (next && perMove) {
+      const all = new Set([...worked, ...moves])
+      setWorked(all)
+      writeMoves(storageKey, all)
+    }
   }
 
   function toggleMove(move: string) {

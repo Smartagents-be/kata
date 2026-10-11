@@ -1018,7 +1018,8 @@ rather than in a caller. **Two kinds of tick, and what each is for is `TaskCard`
 tick is where you are in the sitting and the card's is whether the sitting is behind you, so a caller
 choosing between them is a caller with a decision that does not belong to it. The card's tick is
 never derived from the moves, since a run at a problem can be finished with a move skipped on
-purpose. Every move stays one line, so whatever a second line would have explained belongs in the
+purpose, but ticking the card ticks every move, so the count never reads "0 of 6" under a finished
+card. Every move stays one line, so whatever a second line would have explained belongs in the
 prose above the card.
 
 `prompt` ran six sections where it once ran four, and both of those splits were forced by something

@@ -21,8 +21,8 @@ import { useTranslation } from 'react-i18next'
  * sentence, and a second drawing of the wrong way would split the reader's attention over two
  * figures for a point the prose already made.
  *
- * **The brackets name the modules `DomainTree` draws** further down the page: `article-publishing`
- * holds the first 2 slices and `article-scheduling` the third. That is what makes the two figures a
+ * **The brackets name the modules `DomainTree` draws** further down the page: `payments`
+ * holds the first 2 slices and `invoicing` the third. That is what makes the two figures a
  * pair, slices as the way the work is cut and modules as where it lands on disk, so a rename in one
  * is a rename in the other. Module names are literals, like every path in the course.
  */
@@ -37,7 +37,7 @@ const LAYERS = ['presentation', 'logic', 'data'] as const
 const SLICE_W = 120
 const SLICE_XS = [176, 320, 464] as const
 const SLICE_OVERHANG = 10
-const SLICES = ['publish', 'rewrite', 'schedule'] as const
+const SLICES = ['record', 'refund', 'invoice'] as const
 /** Which slices are finished. The last one is still being built. */
 const DONE = [true, true, false] as const
 
@@ -48,8 +48,8 @@ const SLICE_BOTTOM = BANDS_BOTTOM + SLICE_OVERHANG
 const BRACKET_Y = 50
 const BRACKET_TICK = 8
 const MODULES = [
-  { name: 'article-publishing', from: 0, to: 1 },
-  { name: 'article-scheduling', from: 2, to: 2 },
+  { name: 'payments', from: 0, to: 1 },
+  { name: 'invoicing', from: 2, to: 2 },
 ] as const
 
 export function VerticalSlices() {

@@ -2,7 +2,6 @@ package be.smartagents.kata.java.step2.application;
 
 import be.smartagents.kata.java.step2.domain.MediaType;
 import be.smartagents.kata.java.step2.domain.MemberTier;
-import be.smartagents.kata.java.step2.port.LoanRepository;
 import java.util.Map;
 import org.springframework.stereotype.Component;
 

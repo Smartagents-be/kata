@@ -296,9 +296,10 @@ was run rather than read. Copilot CLI 1.0.95 in a scratch repository, with its d
   file before changing a matching one. It did.
 - A nested `AGENTS.md` arrives as a system reminder once the agent edits a file in its folder.
 - Repo hooks in `.github/hooks/*.json` **load only in a trusted folder** (the log says "Loading repo
-  hooks in prompt mode (folder is trusted…)"); untrusted, they are silently skipped. `postToolUse`
-  has no matcher in Copilot's own format, so it fired after every tool, 9 times for one small edit,
-  which is why the unit's script checks the tool name. A Claude-format `PostToolUse` in
+  hooks in prompt mode (folder is trusted…)"); untrusted, they are silently skipped. Declared
+  without a `matcher`, `postToolUse` fired after every tool, 9 times for one small edit, which is
+  why the unit's script checks the tool name. The hooks reference does document an optional
+  `matcher` (a regex on `toolName`); the unit does not use it, and it was not run. A Claude-format `PostToolUse` in
   `.claude/settings.json` is also read and keeps Claude's matcher, per the hooks reference.
 - The unit's hook is now a test-output filter, and its Copilot half uses `postToolUse` returning
   `{"modifiedResult": {"resultType": "success", "textResultForLlm": …}}`. That replaced what the
@@ -310,9 +311,44 @@ was run rather than read. Copilot CLI 1.0.95 in a scratch repository, with its d
   unknown key).
 - The sandbox (`sandbox.enabled`, off by default, user-level and never repository-overridable) with
   `blocked.txt` in `sandbox.userPolicy.filesystem.deniedPaths` refused both the view tool and Node
-  through the shell, while `allowed.txt` read on both routes. That is the unit's Copilot task card.
-  There is no `read(...)` permission kind: `--allow-tool`/`--deny-tool` cover `shell`, `write`, MCP
-  servers and `url`, and `permissions-config.json` holds no deny rules.
+  through the shell, while `allowed.txt` read on both routes. That was the unit's Copilot task card
+  until 11 October 2026, when the section became one about permissions (below).
+- **Permissions, re-checked 11 October 2026** (Copilot CLI 1.0.95, 5 `copilot -p` runs in a
+  scratch folder, plus docs.github.com's CLI config-dir reference, command reference and "Allowing
+  tools" page, all read that day). **There is a `read(...)` permission kind**, and the line this
+  replaced said there was not: the web reference lists `memory`, `read`, `shell`, `url`, `write` and
+  `MCP-SERVER(tool)`, and `--deny-tool='read(blocked.txt)'` refused the view tool on that file
+  ("denied due to the following rules: `read(blocked.txt)`"). The local `copilot help permissions`
+  text still leaves `read` out. What the runs showed:
+  - `--deny-tool='shell(cat)' --allow-tool='shell(touch)'`: `cat` refused, `touch` ran unasked, and an
+    unlisted `cp` came back "no interactive user response was available", which is the ask path.
+  - `read(blocked.txt)` does **not** stop `head blocked.txt` in the shell: the rule covers the tool.
+  - `shell(git:*)` allowed with `shell(git commit)` denied: `git add` ran, `git commit` refused, so
+    deny wins over a broader allow, as the reference says.
+  - A committed `.github/hooks/*.json` `preToolUse` returning `permissionDecision: "deny"` refused
+    both the shell and the view tool, in a trusted folder (or with
+    `GITHUB_COPILOT_PROMPT_MODE_REPO_HOOKS=true` under `-p`).
+- **Tool permissions cannot be committed.** `.github/copilot/settings.json` and
+  `.github/copilot/settings.local.json` accept only `autoTier, companyAnnouncements, contextTier,
+  deniedUrls, disableAllHooks, disabledMcpServers, disabledSkills, effortLevel, enabledPlugins,
+  extraKnownMarketplaces, hooks, includeCoAuthoredBy, mergeStrategy, model, modelProviderId,
+  respectGitignore` (the CLI's own error); `copilot config --repo permissions.deny …` is rejected,
+  and so is `allowedUrls`. `deniedUrls` is the one committable permission-like key (union, can only
+  add). There is **no `env` key** (`Unknown settings key segment "env"`), and `.claude/settings.json`
+  `permissions` and `env` are not read. `--allow-tool`/`--deny-tool` last one session and are not
+  saved; saved approvals go to `~/.copilot/permissions-config.json`, which holds no deny or ask
+  rules. Claude-style `allow`/`ask`/`deny` lists exist only in admin-managed settings (MDM). A repo
+  `model` is documented but did not take effect in two `-p` runs (Auto mode stayed on); interactive
+  was not tested, so the unit names the key and claims no behaviour for it.
+- **IntelliJ approvals** are documented in GitHub changelogs rather than the docs: "Settings >
+  GitHub Copilot > Chat > Auto Approve" with Global Auto Approve (2026-04-24) and a tool
+  auto-approve page (2026-03-11). The installed plugin 1.19.0's own strings describe the Terminal
+  Auto-approve list: entries match the start of a command, `true` auto-approves and `false` always
+  asks, and there is no deny. It is stored in the IDE's application-level `github-copilot.xml`, so it
+  holds for every project and cannot be committed. No sign it reads `.github/copilot/settings.json`
+  or VS Code's `chat.tools.terminal.autoApprove`. Seen in the owner's IntelliJ on 11 October 2026
+  (below): Always or Never per command, Never meaning ask, and no deny. Plugin 1.19.0 also carries
+  a "Sandbox" settings page, now in the unit (below).
 
 Copilot in IntelliJ, checked by the course owner in a test project (agent mode, mai-code-1.1-flash):
 Settings > Tools > GitHub Copilot > Customizations has "Use AGENTS.md file" and "Use CLAUDE.md file"
@@ -339,6 +375,29 @@ documented file) and one in `global-agents-instructions.md` beside it were both 
 under "Instruction File Locations". Copilot CLI 1.0.95 injects the same file at session start. So
 that folder is the one user-level place both surfaces read: `setup`'s `your-own-claude-md.1.copilot`
 names it, and step 1's `machine-context.mjs` plants its flag there for Copilot.
+
+**IntelliJ, run by the owner on 11 October 2026** (Free plan, agent mode, mai-code-1.1-flash), in a
+scratch project in `~` holding two hook files, three skills and a nested `CLAUDE.md`, deleted
+afterwards:
+- **Hooks run.** Every `*.json` in `.github/hooks/` loaded (`check.json` and `check.hooks.json`
+  both fired), with `userPromptSubmitted`, `preToolUse` and `postToolUse`. The shell tool is
+  `bash`, the read tool `view`. **`toolArgs` arrived as a JSON string**, where Copilot CLI sent an
+  object, so the unit's Copilot script now accepts both (checked against both payloads).
+- **A `preToolUse` deny works**: the view tool on `blocked.txt` was refused and the agent named
+  the hook. **`modifiedResult` did not take**: `postToolUse` returned it and the agent still got
+  the raw output. Whether that is the plugin or the Free plan is not settled, so
+  `hooks.2.copilot` says only that it is not certain the agent gets the filtered output.
+- **`.github/copilot/settings.json` is not read**: `disableAllHooks: true` there left the hooks
+  firing in new chats. `settings.1.copilot` already names it as the CLI's file.
+- **`/init` exists in IntelliJ too** and, like the CLI's, writes `.github/copilot-instructions.md`.
+  `claude-md.2` therefore names that file once, as what `/init` writes instead, and tells a Copilot
+  student to ask for an `AGENTS.md` in a prompt.
+- **Sandbox**: Settings > Tools > GitHub Copilot > Sandbox, "Enable Sandbox by default for new
+  Copilot sessions (Preview)", off, with `/sandbox` per session. `settings.3` names that path.
+- **A nested `CLAUDE.md` is followed** with the nested option ticked, so
+  `check-yourself.2.copilot` tells an IntelliJ student to tick it.
+- **Skills are not available on the Free plan** ("Enable Skills" is greyed out with that message),
+  so they were not run. The owner asked to assume they work.
 
 ## What is verified, and what is not
 

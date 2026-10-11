@@ -27,10 +27,19 @@ import { useTranslation } from 'react-i18next'
  * Postgres. The ports are still teal because they still belong to the inside, and a reader who
  * knows the shape reads that off them; a reader who does not gets the shape and the fan.
  *
- * **The arrows are calls, never dependencies.** Drawing the dependency arrows as well puts twelve
- * arrows on one figure and neither set reads. Only the two ports on the vertices are labelled,
- * because six labels is the noise the ports were meant to replace, and naming the marker once names
- * all six.
+ * **The arrows are dependencies, so every one of them points inward** (October 2026, at the owner's
+ * asking, reversing the old rule that they were calls). Drawn as calls, the right-hand arrows
+ * pointed out, and the figure said the domain depends on Postgres, which is the one thing the shape
+ * exists to deny. Now each side says what its arrow does in one word: on the left an adapter calls a
+ * port (call and dependency point the same way), on the right an adapter implements a port the
+ * application wrote (the call goes out, the dependency still comes in). Still six arrows, never
+ * twelve. Only the two ports on the vertices are labelled, because six labels is the noise the
+ * ports were meant to replace, and naming the marker once names all six.
+ *
+ * **The two hexagons carry the names the owner's own course uses**: `application/` is the imperative
+ * shell (the use cases, and the ports they own) and `domain/` the functional core, which depends on
+ * nothing. That is why the ports sit on the outer edge and not on the inner one, and why
+ * `DomainTree` lists them under `application/`.
  *
  * The two column labels are `DomainTree`'s own `incoming` and `outgoing` notes rather than strings
  * of this figure's own, so a rewording of that tree's vocabulary moves this drawing with it. The
@@ -131,15 +140,37 @@ export function HexagonPorts() {
           className="fill-primary/10 stroke-primary"
         />
         <text
+          id="hexagon-ports-application-role"
+          data-component="HexagonPorts"
+          x={CX}
+          y={CY - R + 44}
+          fontSize="10.5"
+          textAnchor="middle"
+          className="fill-muted-foreground"
+        >
+          {t('hexagon-ports.shell')}
+        </text>
+        <text
           id="hexagon-ports-domain-label"
           data-component="HexagonPorts"
           x={CX}
-          y={CY + 5}
+          y={CY + 1}
           fontSize="14"
           textAnchor="middle"
           className="fill-foreground font-mono"
         >
           domain/
+        </text>
+        <text
+          id="hexagon-ports-domain-role"
+          data-component="HexagonPorts"
+          x={CX}
+          y={CY + 17}
+          fontSize="10.5"
+          textAnchor="middle"
+          className="fill-muted-foreground"
+        >
+          {t('hexagon-ports.core')}
         </text>
 
         <text
@@ -225,15 +256,44 @@ export function HexagonPorts() {
               >
                 {OUTGOING[index]}
               </text>
+              {/* Points from the adapter to the port, the way the dependency runs, although the
+                  call itself goes out to the database. */}
               <path
-                id={`hexagon-ports-call-out-${index}`}
+                id={`hexagon-ports-implements-${index}`}
                 data-component="HexagonPorts"
-                d={`M ${portRight + STANDOFF} ${y} H ${RIGHT_X - STANDOFF}`}
+                d={`M ${RIGHT_X - STANDOFF} ${y} H ${portRight + STANDOFF + 4}`}
                 fill="none"
                 strokeWidth="1.5"
                 markerEnd={`url(#${arrowId})`}
                 className="stroke-muted-foreground/70"
               />
+
+              {dy === -ROW_DY && (
+                <>
+                  <text
+                    id="hexagon-ports-calls-label"
+                    data-component="HexagonPorts"
+                    x={(LEFT_X + BOX_W + portLeft) / 2}
+                    y={y - 7}
+                    fontSize="10.5"
+                    textAnchor="middle"
+                    className="fill-muted-foreground"
+                  >
+                    {t('hexagon-ports.calls')}
+                  </text>
+                  <text
+                    id="hexagon-ports-implements-label"
+                    data-component="HexagonPorts"
+                    x={(portRight + RIGHT_X) / 2}
+                    y={y - 7}
+                    fontSize="10.5"
+                    textAnchor="middle"
+                    className="fill-muted-foreground"
+                  >
+                    {t('hexagon-ports.implements')}
+                  </text>
+                </>
+              )}
 
               {/* One port per crossing, sitting on the boundary because the interface is the
                   inside's. Only the middle pair is named: six labels is the clutter the marker

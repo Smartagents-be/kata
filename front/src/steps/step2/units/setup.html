@@ -14,55 +14,63 @@
 <div data-figure="project-tree"></div>
 
 <p data-assistant="claude" data-i18n="setup.claude-md.1.claude">
-  <a href="/steps/step1/session">Step 1's unit on the session</a> said a standing instruction belongs
-  in the file that is read again at the start of every session. The root
-  <code>CLAUDE.md</code> <span data-marker>1</span> then stays in the context for the rest of it,
-  wherever the agent is working. Write what the project is about, what it is not about,
-  and the ideas behind it.
-  Conventions for the frontend go in the folder that holds it <span data-marker>2</span>, and the
-  backend's in its own <span data-marker>3</span>, because a nested one only joins the context once the agent reads or edits a file in its folder.
+  The root <code>CLAUDE.md</code> <span data-marker>1</span> is read at the start of every session
+  and stays in the context for all of it (<a href="/steps/step1/session">step 1's unit on the
+  session</a>). Write what the project is about, what it is not about, and the ideas behind it.
+  Frontend conventions go in the frontend's folder <span data-marker>2</span> and backend ones in
+  the backend's <span data-marker>3</span>. A nested file only joins the context once the agent
+  reads or writes a file in its folder.
 </p>
 
 <p data-assistant="copilot" data-i18n="setup.claude-md.1.copilot">
-  <a href="/steps/step1/session">Step 1's unit on the session</a> said a standing instruction belongs
-  in the file that is read again at the start of every session. The root
-  <code>AGENTS.md</code> <span data-marker>1</span> then stays in the context for the rest of it,
-  wherever the agent is working. Write what the project is about, what it is not about,
-  and the ideas behind it.
-  Conventions for the frontend go in the folder that holds it <span data-marker>2</span>, and the
-  backend's in its own <span data-marker>3</span>. Copilot CLI reads a nested one once the agent
-  edits a file in its folder. IntelliJ reads them only after you tick <em>Use nested AGENTS.md files</em>
+  The root <code>AGENTS.md</code> <span data-marker>1</span> is read at the start of every session
+  and stays in the context for all of it (<a href="/steps/step1/session">step 1's unit on the
+  session</a>). Write what the project is about, what it is not about, and the ideas behind it.
+  Frontend conventions go in the frontend's folder <span data-marker>2</span> and backend ones in
+  the backend's <span data-marker>3</span>. Copilot CLI reads a nested one once the agent works on
+  a file in its folder. IntelliJ reads them only after you tick <em>Use nested AGENTS.md files</em>
   under Settings, Tools, GitHub Copilot, Customizations.
 </p>
 
 <p data-i18n="setup.claude-md.2">
-  So keep each of them lean, and scoped to what it covers. Less entropy and a smaller bill on every
-  turn <svg data-icon="coin"></svg> A line earns its place when it changes what the agent writes
-  and cannot be read off the code in a moment. The file is a briefing, not documentation.
-  <code>/init</code> writes a first draft, in Claude Code and in Copilot CLI. Hold every line of it
-  to that test.
+  Keep each one lean. Every line adds entropy and costs tokens on every turn <svg
+  data-icon="coin"></svg> A bloated file buries the instructions that matter. For each line, ask:
+  would the agent make mistakes without it? If not, cut it. <code>/init</code> writes a first
+  draft in Claude Code. In Copilot it writes <code>.github/copilot-instructions.md</code> instead, so ask
+  for an <code>AGENTS.md</code> in a prompt. Hold every line of it to that test.
 </p>
 
+<table data-i18n="setup.claude-md.table">
+  <thead>
+    <tr><th>Include</th><th>Leave out</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Commands it cannot guess, such as how to run the tests</td><td>Anything it can read from the code, such as a description of every file</td></tr>
+    <tr><td>Style rules that differ from the defaults</td><td>Conventions the language already has, and "write clean code"</td></tr>
+    <tr><td>Architecture decisions specific to this project</td><td>Long explanations and tutorials</td></tr>
+    <tr><td>Branch and PR conventions</td><td>API documentation (link to it instead)</td></tr>
+    <tr><td>Environment quirks and gotchas, such as required env vars</td><td>Anything that changes often</td></tr>
+  </tbody>
+</table>
+
 <p data-assistant="claude" data-i18n="setup.claude-md.3.claude">
-  A nested <code>CLAUDE.md</code> follows the folder layout, and some conventions cut across it: how
-  a controller is built holds in every module that has one. Those go in <code>.claude/rules/</code>
-  <span data-marker>4</span>, 1 file per topic, with a <code>paths</code> line naming the files
-  they cover. Subfolders such as <code>frontend/</code> and <code>backend/</code> keep them in order.
-  Only the <code>paths</code> line decides where a rule applies. Without that line a rule loads at the start of every session, like the root file. With
-  it, the rule joins the context only once the agent reads or edits a matching file, so what is
-  always loaded stays short. An <code>@docs/api.md</code> line in a <code>CLAUDE.md</code> is not
-  that: it pulls the file in at the start, which shortens the file and not the context.
+  A nested <code>CLAUDE.md</code> follows the folders, and some conventions cut across them: how a
+  controller is built holds in every module that has one. Those go in <code>.claude/rules/</code>
+  <span data-marker>4</span>, 1 file per topic. Subfolders such as <code>frontend/</code> and
+  <code>backend/</code> keep them in order, but only a <code>paths</code> line decides where a rule
+  applies. With that line, the rule joins the context once the agent reads or writes a matching file.
+  Without it, the rule loads at every session start, like the root file. An
+  <code>@docs/api.md</code> line in a <code>CLAUDE.md</code> pulls that file in at the start, which
+  shortens the <code>CLAUDE.md</code> but not the context.
 </p>
 
 <p data-assistant="copilot" data-i18n="setup.claude-md.3.copilot">
-  A nested <code>AGENTS.md</code> follows the folder layout, and some conventions cut across it: how
-  a controller is built holds in every module that has one. Those go in
+  A nested <code>AGENTS.md</code> follows the folders, and some conventions cut across them: how a
+  controller is built holds in every module that has one. Those go in
   <code>.github/instructions/</code> <span data-marker>4</span>, 1 file per topic ending in
-  <code>.instructions.md</code>, with an <code>applyTo</code> line naming the files they cover.
-  Subfolders such as <code>frontend/</code> and <code>backend/</code> keep them in order. Only the
-  <code>applyTo</code> line decides where a file applies. The
-  agent reads such a file only when it works on a file that matches, so what is always loaded stays
-  short.
+  <code>.instructions.md</code>. Subfolders such as <code>frontend/</code> and <code>backend/</code>
+  keep them in order, but only an <code>applyTo</code> line decides where a file applies. The agent
+  reads it only when it works on a matching file.
 </p>
 
 <h2 data-assistant="claude" data-i18n="setup.your-own-claude-md.heading.claude">Your own CLAUDE.md</h2>
@@ -73,8 +81,9 @@
   directory is read in every project you open on this machine. It holds how you work rather than
   what the project is: the language you want to be answered in, the tools you always reach for, the
   thing you are tired of asking for 2 times a day. A rule works the same way: a file in
-  <code>~/.claude/rules/</code> applies in every project. For 1 project only, write it in
-  <code>CLAUDE.local.md</code> beside the root file, and keep that file out of git.
+  <code>~/.claude/rules/</code> applies in every project. For you and 1 project only, write it in
+  a <code>CLAUDE.local.md</code> in that project's root folder, next to its <code>CLAUDE.md</code>, and add it
+  to <code>.gitignore</code>.
 </p>
 
 <p data-assistant="copilot" data-i18n="setup.your-own-claude-md.1.copilot">
@@ -101,8 +110,8 @@
   <code>SKILL.md</code>. Its description makes it available for matching tasks; the body loads when
   used. That differs from standing instructions read at session startup. A file in
   <code>.claude/commands/</code> is the older form of the same thing:
-  <code>commands/add-endpoint.md</code> and <code>skills/add-endpoint/SKILL.md</code> both give you
-  <code>/add-endpoint</code>. Old ones keep working. Write new ones as a skill, which can hold more
+  <code>commands/diagnosing-bugs.md</code> and <code>skills/diagnosing-bugs/SKILL.md</code> both give
+  you <code>/diagnosing-bugs</code>. Old ones keep working. Write new ones as a skill, which can hold more
   files than 1.
 </p>
 
@@ -111,35 +120,35 @@
   <code>SKILL.md</code>. Copilot reads <code>.claude/skills/</code> as well. Its description makes it
   available for matching tasks; the body loads when used. That differs from standing instructions
   read at session startup. A prompt file in <code>.github/prompts/</code> comes close:
-  <code>add-endpoint.prompt.md</code> runs in IntelliJ when you type <code>/add-endpoint</code>.
+  <code>diagnosing-bugs.prompt.md</code> runs in IntelliJ when you type <code>/diagnosing-bugs</code>.
   Unlike a skill, it never runs unless you type its name.
 </p>
 
 <p data-i18n="setup.skills.2">
-  Take a job that comes back, adding an endpoint to a step's service:
+  Take a skill many people use, <code>diagnosing-bugs</code> from
+  <a href="https://github.com/mattpocock/skills" target="_blank" rel="noreferrer">Matt Pocock's collection</a>:
 </p>
 
 <pre><code>---
-name: add-endpoint
+name: diagnosing-bugs
 description: >-
-  Add a REST endpoint to a step's Spring project the way the existing ones are built:
-  a controller under web/, a record for the response body, and the /api
-  prefix the Vite proxy expects. Use whenever you add a route, a response shape, or a
-  controller to exercises/stepN/java.
+  Diagnosis loop for hard bugs and performance regressions. Use when the user
+  says "diagnose"/"debug this", or reports something broken/throwing/failing/slow.
 ---</code></pre>
 
 <p data-i18n="setup.skills.3">
-  The <code>name</code> matches the folder, and it is what you type after the slash. The
-  <code>description</code> says what the skill does and when to reach for it, in the words somebody
-  would actually type ("add a route", "add a controller"), because that is what the match is made
-  against. A description reading "helps with the backend" never fires.
+  The <code>name</code> is how you call the skill: <code>/diagnosing-bugs</code>. The
+  <code>description</code> is the text the agent matches against when it looks for a skill, so it
+  decides whether your skill is ever used. Write it in the words somebody would actually type. A
+  description reading "helps with the backend" never fires.
 </p>
 
 <p data-i18n="setup.skills.4">
-  Keep them small. A skill may point at another rather than repeat it: a skill that ends by asking
-  for a commit names <code>commit-message</code> instead of restating the rules for one. Detail that
-  will not fit goes in a <code>references/</code> folder beside the body, read only when it is
-  wanted.
+  Keep them small. A skill may point at what already exists rather than repeat it:
+  <code>code-review</code> reviews against the coding standards the repository already documents,
+  such as <code>CONTRIBUTING.md</code>, instead of restating them. Detail that will not fit goes in a
+  file beside the body, read only when it is wanted: <code>diagnosing-bugs</code> keeps a script in
+  <code>scripts/</code>.
 </p>
 
 <p data-i18n="setup.skills.5">
@@ -169,17 +178,20 @@ description: >-
 </p>
 
 <p data-assistant="claude" data-i18n="setup.hooks.2.claude">
-  Which makes it the strictest of the 3. A line in <code>CLAUDE.md</code> asks, a skill offers a
-  procedure, and both of them depend on the agent reading and following it. A hook just happens.
+  A line in <code>CLAUDE.md</code> asks and a skill offers a procedure, but whether the agent
+  follows them stays probabilistic. A hook is deterministic: it runs every time
+  its event matches.
   This one runs before every shell command and rewrites <code>mvn test</code> to
   <code>mvn test 2&gt;&amp;1 | grep -E -A 3 '&lt;&lt;&lt; FAIL|ERROR\] (Tests run|Failures|Errors)|\.java:\[|BUILD'</code>. You declare it like this:
 </p>
 
 <p data-assistant="copilot" data-i18n="setup.hooks.2.copilot">
-  Which makes it the strictest of the 3. A line in <code>AGENTS.md</code> asks, a skill offers a
-  procedure, and both of them depend on the agent reading and following it. A hook just happens.
+  A line in <code>AGENTS.md</code> asks and a skill offers a procedure, but whether the agent
+  follows them stays probabilistic. A hook is deterministic: it runs every time
+  its event matches.
   This one runs after every tool, so its script checks the tool name first. When the agent ran
   <code>mvn test</code>, it puts the output through <code>grep -E -A 3 '&lt;&lt;&lt; FAIL|ERROR\] (Tests run|Failures|Errors)|\.java:\[|BUILD'</code> and the agent only sees what comes out.
+  IntelliJ runs the same file too, but it is not certain that the agent there gets the filtered output.
   You declare it like this:
 </p>
 
@@ -199,6 +211,7 @@ description: >-
 <details data-assistant="claude">
   <summary data-i18n="setup.hooks.script.claude">The script behind it</summary>
   <pre><code>#!/bin/bash
+# Needs jq. Make it executable once: chmod +x .claude/hooks/filter-test-output.sh
 # Claude Code runs this before every Bash command and hands it that call as JSON.
 input=$(cat)
 
@@ -211,6 +224,7 @@ plain='^mvn [^;&amp;|&lt;&gt;]*(test|verify)[^;&amp;|&lt;&gt;]*$'
 if [[ "$cmd" =~ $plain ]]; then
   # The same command, piped through grep. It keeps the failures, the summary and
   # BUILD SUCCESS or BUILD FAILURE, plus the 3 lines after each (-A 3).
+  # The pipe hides Maven's exit code, so the BUILD line is the verdict.
   filtered="$cmd 2&gt;&amp;1 | grep -E -A 3 '&lt;&lt;&lt; FAIL|ERROR\] (Tests run|Failures|Errors)|\.java:\[|BUILD'"
 
   # Answer Claude Code: run this command instead of the original.
@@ -234,12 +248,14 @@ fi</code></pre>
 <details data-assistant="copilot">
   <summary data-i18n="setup.hooks.script.copilot">The script behind it</summary>
   <pre><code>#!/bin/bash
+# Needs jq. Make it executable once: chmod +x .github/hooks/filter-test-output.sh
 # Copilot runs this after every tool and hands it the call and its result as JSON.
 input=$(cat)
 
 # Which tool ran, and with which command.
 tool=$(echo "$input" | jq -r '.toolName')
-cmd=$(echo "$input" | jq -r '.toolArgs.command // empty')
+# toolArgs is an object in Copilot CLI and a JSON string in IntelliJ.
+cmd=$(echo "$input" | jq -r '(.toolArgs | if type == "string" then fromjson else . end).command // empty')
 
 # Only a shell call that ran mvn test or mvn verify.
 if [[ "$tool" == "bash" &amp;&amp; "$cmd" =~ ^mvn.*(test|verify) ]]; then
@@ -255,43 +271,54 @@ fi
 
 <p data-i18n="setup.hooks.3">
   A failing <code>mvn test</code> in <code>exercises/step2/java</code> prints 72 lines, and the agent now reads 18:
-  the failing assertion, the summary and the verdict. Reach for a hook when a step must happen every
-  time and you would rather not find out that it did not. Keep it fast and narrow. It runs on every
-  shell command, and a broken one hands the agent an error it did not cause. The agent works around
-  that instead of writing your code. When the thing that keeps coming back is a correction rather
-  than a command, <a href="/steps/step2/patterns">the patterns unit</a> is where it goes.
+  the failing assertion, the summary and the verdict. Keep a hook fast and narrow: a broken one hands
+  the agent an error it did not cause, and it works around that instead of writing your code.
 </p>
 
 <p data-i18n="setup.hooks.4">
   Skills, hooks, agents and MCP servers also come bundled as plugins, installed in 1 step:
-  <code>/plugin</code> in Claude Code, <code>copilot plugin</code> in Copilot CLI. For Java, install a
-  language server as well. The agent then finds code by symbol and sees compiler errors without
-  running the build (the <code>jdtls-lsp</code> plugin in Claude Code, <code>.github/lsp.json</code>
-  in Copilot CLI).
+  <code>/plugin</code> in Claude Code, <code>copilot plugin</code> in Copilot CLI. For Java, give the
+  agent a language server as well: the part of your IDE behind the red underlines and go to
+  definition. Install <code>jdtls</code> and add the <code>jdtls-lsp</code> plugin in Claude Code, or
+  an entry in <code>.github/lsp.json</code> in Copilot CLI. The agent then looks code up by symbol
+  instead of with grep, and in Claude Code it also sees the compiler errors after every edit <svg
+  data-icon="gem"></svg>.
 </p>
 
-<h2 data-i18n="setup.permissions-sandbox.heading">Permissions and sandboxing</h2>
+<h2 data-assistant="claude" data-i18n="setup.settings.heading.claude">settings.json</h2>
+<h2 data-assistant="copilot" data-i18n="setup.settings.heading.copilot">Permissions</h2>
 
-<p data-assistant="claude" data-i18n="setup.permissions-sandbox.1.claude">
-  A starting directory focuses discovery; a worktree separates checkouts. Neither restricts
-  capability. Claude Code permissions control tool actions: allow and deny rules under
-  <code>permissions</code> in <code>.claude/settings.json</code> for the team, or in
-  <code>.claude/settings.local.json</code> for you alone. Its sandbox restricts filesystem and
-  network access for sandboxed commands. By default, sandboxed commands can still read most of your
-  machine, <code>~/.ssh</code> included, and file tools, hooks and local MCP servers run outside the
-  sandbox. Excluded commands and unsandboxed fallbacks need separate review. Use the harmless
-  exercise below to verify a real restriction.
+<p data-assistant="claude" data-i18n="setup.settings.1.claude">
+  <code>.claude/settings.json</code> sets up the harness itself rather than what the agent knows. You commit it, so the whole team works with the same settings, and <code>.claude/settings.local.json</code> beside it is for you alone. The hook above is declared in it too.
 </p>
 
-<p data-assistant="copilot" data-i18n="setup.permissions-sandbox.1.copilot">
-  A starting directory focuses discovery; a worktree separates checkouts. Neither restricts
-  capability. Copilot asks before a tool runs. In Copilot CLI, <code>--allow-tool</code> and
-  <code>--deny-tool</code> set that for a session, and a deny always wins. Approvals you save land in
-  <code>~/.copilot/permissions-config.json</code>, on your machine only. Its sandbox is off by
-  default: <code>/sandbox enable</code> turns it on for shell commands, the agent's own file tools
-  follow the same policy on a best-effort basis, and the paths it blocks live in your user settings,
-  never in the repository. Use the harmless exercise below to verify a real restriction. It runs in
-  Copilot CLI, which also works in IntelliJ's terminal.
+<p data-assistant="copilot" data-i18n="setup.settings.1.copilot">
+  Copilot CLI reads <code>.github/copilot/settings.json</code>, which you commit, and <code>.github/copilot/settings.local.json</code> for you alone. That file holds hooks, plugins and a default <code>model</code>, but no tool permissions: a repository cannot commit those.
+</p>
+
+<p data-assistant="claude" data-i18n="setup.settings.2.claude">
+  The key that matters most is <code>permissions</code>: tool calls the agent may make without asking (<code>allow</code>), must ask about first (<code>ask</code>), or may never make (<code>deny</code>). A deny always wins. Allow what is safe and comes back all day, such as <code>Bash(mvn test *)</code>, and deny what it must never read, such as <code>Read(./.env)</code>. <code>model</code> picks the default model, and <code>env</code> sets environment variables for Claude Code itself, such as turning off automatic compaction or sending its requests through your company's LLM gateway.
+</p>
+
+<pre data-assistant="claude"><code>{
+  "permissions": {
+    "allow": ["Bash(mvn test *)"],
+    "ask": ["Bash(git push *)"],
+    "deny": ["Read(./.env)"]
+  },
+  "model": "sonnet",
+  "env": {
+    "DISABLE_AUTO_COMPACT": "1",
+    "ANTHROPIC_BASE_URL": "https://llm-gateway.example.com"
+  }
+}</code></pre>
+
+<p data-assistant="copilot" data-i18n="setup.settings.2.copilot">
+  In Copilot CLI you set them per session: <code>--allow-tool</code> lets a call through without asking and <code>--deny-tool</code> refuses it, with patterns such as <code>shell(git:*)</code> or <code>read(.env)</code>. A deny always wins. Approvals you save go to <code>~/.copilot/permissions-config.json</code>, on your machine only. In IntelliJ, the GitHub Copilot settings under Chat, Auto Approve list the commands that run without asking, for every project. A rule there lets a command through or makes it ask, but never refuses it. To refuse a tool call in the repository, commit a <code>preToolUse</code> hook that denies it: it runs for everyone who trusts the folder.
+</p>
+
+<p data-i18n="setup.settings.3">
+  Permissions cover the agent's tools, not everything a shell command does. A rule that keeps the agent from reading a file does not stop a script that opens the file itself. That takes a sandbox: a fence at the level of the operating system around what shell commands may read, write and reach on the network. It is off by default: turn it on with <code>/sandbox</code> in Claude Code, or under Settings, Tools, GitHub Copilot, Sandbox in IntelliJ.
 </p>
 
 <div data-figure="check-permissions"></div>
@@ -301,14 +328,10 @@ fi
 <h2 data-i18n="ui:quiz.title">Test your knowledge</h2>
 
 <p data-i18n="setup.check-yourself.1">
-  Step 2 ships a Java project you have not opened, at <code>exercises/step2/java</code>. 3 flags are
-  hidden in it, in plain text and wrapped in <code>{curly braces}</code>, in the small number of
-  files a project uses to tell an agent how to work. They are the kinds of file this unit just
-  named, and each flag sits in the file it is about. You collect them by opening that project and
-  reading how somebody set it up before you got there.
+  Look in <code>exercises/step2/java</code> for the files that tell an agent how to work, and read them yourself. 3 of them hold a flag, in plain text between <code>{curly braces}</code>. Paste each one into the board below.
 </p>
 
 <p data-assistant="copilot" data-i18n="setup.check-yourself.2.copilot">
   That project was set up for Claude Code, so its files carry Claude Code's names. Copilot can read
-  them too.
+  them too. In IntelliJ, also tick <em>Use nested CLAUDE.md files</em>, next to the <code>AGENTS.md</code> option above.
 </p>

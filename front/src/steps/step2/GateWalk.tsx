@@ -11,7 +11,8 @@ import { TaskCard } from '@/shared/components/TaskCard'
  * against whatever the student is actually working on.
  *
  * The moves follow the unit's sections: list the gates (quality), hold them against the list of
- * kinds (deterministic checks), say what a miss reaches (blast radius), time them (speed), and then
+ * kinds (deterministic checks), say what a miss reaches and time them (both speed, the one axis
+ * `GateReach` draws), and then
  * the one that pays for the card, handing the slowest one over as a goal with its edges. That last
  * move is `short-feedback-loops`' code block made the student's own, which is why it asks for the
  * edges and not only the number. `Legacy code` has no move of its own: the student's project either

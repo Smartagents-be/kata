@@ -25,10 +25,10 @@ import { ScriptRuns } from './ScriptRuns'
 import { SetupFlags } from './SetupFlags'
 import { SteerARun } from './SteerARun'
 import { SkillShape } from './SkillShape'
+import { SliceSkills } from './SliceSkills'
 import { SkillTree } from './SkillTree'
 import { TwoWindows } from './TwoWindows'
 import { VerticalSlices } from './VerticalSlices'
-import { WhereWouldItGo } from './WhereWouldItGo'
 import { WordsToFiles } from './WordsToFiles'
 import { WindowSpend } from './WindowSpend'
 import { WorkflowTimeline } from './WorkflowTimeline'
@@ -89,20 +89,19 @@ const step2: Step = {
       id: 'engineering',
       title: 'engineering.title',
       html: engineering,
-      // Four slots inside the prose. `words-to-files` is what a thing is called, `vertical-slices`
-      // is how the work is cut (1 use case through every layer), and `domain-tree` plus
+      // Five slots inside the prose. `words-to-files` is what a thing is called, `vertical-slices`
+      // is how the work is cut (1 use case through every layer), `slice-skills` is the T-shaped
+      // profile a slice asks of whoever builds it, and `domain-tree` plus
       // `hexagon-ports` are where it sits: the modules on disk with the hexagon inside each one,
       // then the hexagon as a shape. `vertical-slices` brackets the 2 modules `domain-tree` draws,
       // so the two are a pair. Its `Quality gates` section and `same-gate` moved to `gates`, next.
       inlineFigures: {
         'words-to-files': <WordsToFiles />,
         'vertical-slices': <VerticalSlices />,
+        'slice-skills': <SliceSkills />,
         'hexagon-ports': <HexagonPorts />,
         'domain-tree': <DomainTree />,
       },
-      // And the task under the prose, which sorts exercises/step2/java against that same drawing. It
-      // grades nothing and posts nothing; the tick is a bookmark.
-      figure: <WhereWouldItGo />,
     },
     {
       id: 'gates',

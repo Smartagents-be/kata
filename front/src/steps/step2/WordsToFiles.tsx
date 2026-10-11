@@ -10,13 +10,13 @@ import { useTranslation } from 'react-i18next'
  * It sits at the `data-figure="words-to-files"` slot under the paragraph that earns it, and nothing
  * after it reads the drawing back, so the two column labels carry it. **It has no note under the
  * frame**, and that is a cut rather than an omission: the paragraph above already says a sentence
- * about articles has named the files, and a line under the drawing saying it again was the claim
+ * about an IBAN has named the files, and a line under the drawing saying it again was the claim
  * twice within an inch of itself.
  *
- * **The three files are the argument, not decoration.** `Headline.java` is what the sentence names,
- * `Article.java` is the same capability and is not what it named, and `Slot.java` sits in a
- * different capability entirely. The folders are the package names of the two modules `DomainTree`
- * and `VerticalSlices` draw (`article-publishing`, `article-scheduling`), shortened to the package
+ * **The three files are the argument, not decoration.** `Iban.java` is what the sentence names,
+ * `Payment.java` is the same capability and is not what it named, and `Invoice.java` sits in a
+ * different capability entirely. The folders are the two modules `DomainTree` and `VerticalSlices`
+ * draw (`payments`, `invoicing`), shortened to the package
  * because this figure is about the word and not about the layout. Read down, they narrow, which is
  * what makes the drawing say "precise" rather than "found something". Cut either of the muted two
  * and the teal one is a hit with nothing to be a hit against.
@@ -32,18 +32,20 @@ import { useTranslation } from 'react-i18next'
  *
  * The word is a literal in every language, like a path or a model name elsewhere in the course: a
  * figure whose point is that one word is on both sides stops arguing anything the moment a
- * translator changes it on one of them. The sentence around it is split either side of the word,
+ * translator changes it on one of them. **That is why the word is IBAN**: it is the same word in
+ * English and in Dutch, so the Dutch sentence names the English class too. A word the two languages
+ * say differently (a payment term against a betalingstermijn) breaks the drawing in one of them. The sentence around it is split either side of the word,
  * which is why the prompt carries a `before` and an `after` rather than one string.
  */
 
 /** The domain word, untranslated on purpose. Prose casing in the prompt, code casing in the file. */
-const WORD = 'headline'
+const WORD = 'IBAN'
 
 /** The three candidates, narrowing down the column. Paths, so they are literals and they are mono. */
 const FILES = [
-  { name: 'publishing/Headline.java', hit: true },
-  { name: 'publishing/Article.java', hit: false },
-  { name: 'scheduling/Slot.java', hit: false },
+  { name: 'payments/Iban.java', hit: true },
+  { name: 'payments/Payment.java', hit: false },
+  { name: 'invoicing/Invoice.java', hit: false },
 ] as const
 
 const BOX_W = 310

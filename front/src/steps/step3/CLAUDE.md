@@ -51,11 +51,11 @@ follows that section directly (see below), and **neither section's prose mention
 figure**: `PipelineShift` is time on one scale, `SdlcStages` is where the work
 queues and where a person stands, and a sentence linking them would merge two claims the reader has
 to hold apart. The section has **no paragraph above the figure**: each row carries its own sentence,
-and a paragraph saying the queue moves would be `gates.lead.1` and `change.lead.2` a third time. The
+and a paragraph saying the queue moves would be `gates.lead.2` and `change.lead.2` a third time. The
 one after it reads the third row only. **Its Dutch labels are the smartagents.be page's own words,
 taken verbatim**, so a change on the site is a reason to revisit them and a style pass is not; the
-docblock says the same. `gates.lead.2` in step 2 keeps the one sentence the gates need from it (a person
-decides 4 times, the machines check the rest) and links here.
+docblock says the same. `gates.lead.2` in step 2 keeps the one thing the gates need from it (what a person
+still decides, against what a machine checks) and links here.
 
 **Every section leans on a unit that already argued its engineering claim and none of them may
 re-argue it**, which is the same rule `agent-patterns.coordinator.3` follows in step 1 and the constraint
@@ -69,7 +69,7 @@ at `workflows` for spec-driven work keeping the description, `environment-beats-
 for the environment being files. The seventh, `business-moves-closer`, links forward to
 `expectations.prototype-starts-conversation` instead: it leaned on step 2's `evolution` until that unit
 was cut and the section came here (see below). `expectations.prototype-starts-conversation` borrows
-`engineering`'s vibe coding working for about an hour, `expectations.detail-nobody-specified`
+`engineering`'s vibe coding working for a small project with little domain logic, `expectations.detail-nobody-specified`
 borrows `engineering`'s naming-the-thing-you-want,
 `expectations.estimate-still-matters` borrows `enablement`'s count of where the day goes and
 `steering`'s line about the agents getting faster while your reading does not, and
@@ -164,7 +164,7 @@ step's `evolution` unit and kept this one section of it: a prototype is somethin
 people, which makes it this step's subject. It is **the one place the course licenses vibe coding,
 and it says so out loud**. Step 2's `engineering` argues flatly against it, and the old unit left that
 collision unspoken on purpose; the owner overturned that, so the section names vibe coding, leans on
-`engineering.lead.2`'s hour for why it fits, and says before the demo that none of the 3 is the
+`engineering.lead.2`'s small-project licence for why it fits (it said vibe coding works for about an hour until the owner reframed it as small projects against complex business processes, October 2026), and says before the demo that none of the 3 is the
 product and the code is thrown away. Do not soften either half: without the licence the section is
 `say-what-missing` early, and without the bin it is the vibe coding `engineering` warns about. It sits
 after `tool-not-advantage` because that section's "that" reads back to the lead, and before

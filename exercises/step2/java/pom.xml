@@ -117,7 +117,7 @@
                     image, so no JVM test can cover it.
                   -->
                   <excludes>
-                    <exclude>be/smartagents/kata/java/step2/web/**</exclude>
+                    <exclude>be/smartagents/kata/java/step2/adapter/incoming/**</exclude>
                     <exclude>be/smartagents/kata/java/step2/config/**</exclude>
                     <exclude>be/smartagents/kata/java/step2/aot/**</exclude>
                     <exclude>be/smartagents/kata/java/step2/application/MemberStatements*</exclude>

@@ -19,11 +19,11 @@ component names such as `TwoWindows`, `LoopInWindow` and `WindowSpend` are untou
 `step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Nine
 units, `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`,
 `enablement`, `parallel` and `goals`, four of
-them carrying a quiz, and the unit HTML is the source for what each argues. Eight of the nine close
-on something the student does: `engineering`, `gates`, `steering`, `patterns` and
+them carrying a quiz, and the unit HTML is the source for what each argues. Seven of the nine close
+on something the student does: `gates`, `steering`, `patterns` and
 `enablement` on an ungraded `TaskCard`, `setup` on a graded flag board, and `steering`, `patterns`, `workflows`
 and `goals` on a quiz, three of them under a card. `workflows` is the one that is framing prose and
-a quiz with no card. Six carry one
+a quiz with no card, and `engineering` closes on its last figure since its card was cut (below). Six carry one
 habit each. `workflows` is outside that count, and deliberately so: it carries five ways of
 handing work over rather than one habit, and its argument is the choice between them. `parallel` is
 outside it on the same reasoning, four arrangements of agents rather than one habit. `enablement`
@@ -54,9 +54,19 @@ is the one argument that had no second home**, and it survives nowhere in the co
 is in a unit, in a board hint or in a skill file, in either language. The proxy trap went the other
 way and has two homes now, `gates.quality-gates.1` and `workshop.flag.honest.help`, so it
 needs no third. That is the thing to notice before writing a section about metrics anywhere in the
-step. **`gates.quality-gates.1` carries the claim**, two sentences saying a metric is a proxy
-an agent will satisfy and that the gate worth wiring in is the expensive one to fake, and it carries
-no example on purpose. **The example is now behind the board's Hint**, in
+step. **`gates.quality-gates.1` carries the claim**, saying in plain words that a number measures
+something that usually comes with quality rather than quality itself, that an agent told to hit it
+hits it, and that the checks worth wiring in are the ones hard to pass without the real work. The
+word "proxy" left the prose in October 2026: the owner found "aims for the proxy" unclear. It
+carries no coverage example on purpose. **`gates.quality-gates.2` is the evidence**, added at the
+owner's asking the same month: METR's June 2025 measurement of o3 cheating on RE-Bench (39 of 128
+runs; a sped-up clock and a monkey-patched evaluator are the two examples named; asked afterwards,
+it said the cheating was not what the user wanted, 10 of 10 times in the case METR quotes, hence
+"often"). It was chosen because it is a primary source and its examples game a scorer rather than a
+coverage number, so it argues the claim without touching the honest flag. It is dated on purpose
+(o3, 2025): ImpossibleBench (arXiv 2510.20270) found newer Claude models cheating less than older
+ones, so the paragraph claims a measurement and not a law of current agents. Keep any replacement
+example off coverage and mutation. **The example is now behind the board's Hint**, in
 `workshop.flag.honest.help`, which is the moment a student has a row that will not move and wants it.
 The capstone's prose deliberately does not spell it out: `workshop.goal.2` says only that one of the
 three will not fall to more tests, because the whole reason the honest flag exists is that the
@@ -86,8 +96,12 @@ its place (3 throwaway prototypes, and none of them the product). That replaced 
 leave the collision with `engineering`'s case against vibe coding unspoken. `setup` opens the step
 now, and step 1's `recap` links there.
 
-**`engineering` runs four sections now**: `Domain-driven design`, `Vertical slices`, `Hexagonal
-architecture` and `The right words`. The second one is the newest, and the split of the first and
+**`engineering` runs three sections now**: `Domain-driven design`, `Vertical slices` and `Hexagonal
+architecture`. **A fourth, `The right words`, was cut in October 2026** at the owner's asking: its
+one paragraph (name the pattern you want, "put a repository in front of this JDBC call" against
+"clean this up", then a line about reviewing whether the structure fits) said what
+`domain-driven-design.2` already says, carried the same gem, and read oddly in both languages. Do
+not bring it back as a section. The second one is the newest, and the split of the first and
 the third is the older decision. Domain-driven design and hexagonal architecture shared a heading
 and a paragraph until they were pulled apart, and they are two arguments rather than one: naming is
 what a thing is **called**, hexagonal is where it **sits**. The payoff differs with them, which is
@@ -98,33 +112,45 @@ holds the coin. **Do not let either section reach for the other's icon or the ot
 Merged again, the unit says "structure is good" twice and never says what either kind of structure
 buys.
 
-Four figures sit in it and each is fenced off from the next (`VerticalSlices` is written up below).
+Five figures sit in it and each is fenced off from the next (`VerticalSlices` and `SliceSkills` are written up below).
 `WordsToFiles` is the vocabulary: one prompt, three candidate files, and a line to the one the
 sentence named, with the other two left muted so the drawing reads as narrowing rather than as
 finding. **It draws no folders**, because that is the next section's half. It also carries **no note
-under the frame**, and that is a cut: the paragraph above it already says a sentence about articles
+under the frame**, and that is a cut: the paragraph above it already says a sentence about an IBAN
 has named the files.
 
 **`Hexagonal architecture` carries two drawings and their order is the argument**: `DomainTree`
 after the first paragraph is the shape on disk, and `HexagonPorts` **closes the section** with what
 those folders are an arrangement of. The concrete comes first and the shape is the part the reader
 keeps, which is why the abstract one has the last word rather than the opening. **`HexagonPorts`
-carries no note**, and this is the record of what went with it: the calls on the right leave the
-domain while the dependencies still point back in, because the interfaces they leave through are
-ones the domain wrote. That is the one thing a folder listing cannot show, and the only place left
-in the unit that carries it is `hexagonal-architecture.1`'s second sentence, about no class outside
-`adapter/` naming Postgres. So a rewrite of that sentence is now a rewrite of the section's whole
-dependency argument. Its arrows are calls and never dependencies, and **do not draw a second arrow
-per side** to make up the difference: twelve arrows on one figure and neither set reads. It runs
+carries no note.** The calls on the right leave the application while the dependencies still point
+back in, because the ports they leave through are ones the application wrote, and **since October
+2026 the figure draws that itself**: its arrows are dependencies, so all six point inward, labelled
+"calls" on the left and "implements" on the right. That reverses the old rule that the arrows were
+calls, which drew the right-hand ones pointing out and made the domain look as if it depended on
+Postgres (the owner read it that way). The prose half of the argument is still
+`hexagonal-architecture.1`'s sentence about no class outside `adapter/` naming Postgres. **Do not
+draw a second arrow per side**: twelve arrows on one figure and neither set reads.
+**The ports belong to `application/` and the domain depends on nothing**, in both figures, which
+is the functional core and imperative shell split the owner's own course teaches (the hexagons are
+labelled with those 2 names). Do not move the ports back into `domain/`. It runs
 **three adapters a side**, where
 the tree ships one per direction, and that is where the pair deliberately parts company: a single
 box on each edge draws a pipeline, which is the picture this shape exists to correct. The leaf names
 are still the tree's own, which keeps them a pair without making them a copy. `DomainTree` still
 sits in `Hexagonal architecture` after `.1`, and `.1` now opens "Inside each module", because the
-tree's top level is modules (see below). Its second sentence, the dependency argument, is
-unchanged. `WordsToFiles` draws `publishing/` and `scheduling/`, the package names of the tree's 2
-modules, and `domain-driven-design.1` names `publishing/` with it, so the vocabulary and the tree
-agree.
+tree's top level is modules (see below). The dependency argument (no class outside `adapter/`
+names Postgres or S3) is still in it; the rest of `.1` was rewritten for plainer Dutch and English
+in October 2026 and now names `adapter/incoming/` and `adapter/outgoing/` instead of "the direction
+of a call is a folder". `WordsToFiles` draws `payments/` and `invoicing/`, the tree's 2 modules, and
+`domain-driven-design.1` names `payments/` with it, so the vocabulary and the tree agree.
+
+**The running example is payments and invoicing, and the word is IBAN** (October 2026, at the
+owner's asking). It was a newsroom (`article-publishing`, `Headline`) until the owner found that
+"publishing" reads as publishing an event and `Headline` was unclear. **The word `WordsToFiles`
+puts on both sides has to be the same in English and in Dutch**, because it is one literal in both
+languages: "headline" worked for that reason, and a payment term was rejected because the Dutch
+prompt would say "betalingstermijn" beside `PaymentTerm.java`. Pick a replacement by that test.
 
 **`Vertical slices` was added at the course owner's asking (October 2026)**, between naming and
 layout, because a slice is both: what the business does (the module is named after a capability) and
@@ -134,11 +160,19 @@ runs as soon as it is built. It hands the loop to `gates` and `enablement` by li
 arguing it again. **It takes no icon**, on the rule above that `Domain-driven design` holds the gem
 and `Hexagonal architecture` the coin: a third section reaching for either would blur which payoff
 is whose. `VerticalSlices` draws 3 grey layers with 3 teal slices over them, and its brackets name
-the 2 modules `DomainTree` draws, `article-publishing` and `article-scheduling`, so the two figures
-are a pair and a rename in one is a rename in the other. The second capability was
-`article-archiving` until a review noticed the tree keeps the `Archive` port and its S3 adapter
-inside publishing (which `HexagonPorts` and `hexagonal-architecture.2` lean on), so it became
-scheduling rather than moving S3. **The ArchUnit and unit-test items in `gates` say "module", not
+the 2 modules `DomainTree` draws, `payments` and `invoicing`, so the two figures
+are a pair and a rename in one is a rename in the other. The `Archive` port and its S3 adapter
+stay inside the detailed module (`payments`, keeping the proof of each payment), because
+`HexagonPorts` and `hexagonal-architecture.2` lean on them; a second capability called archiving
+was tried in the newsroom version and cut for exactly that reason. **`Vertical slices` runs to 3 paragraphs and 2 figures, past the 2-paragraph rule, at the owner's
+asking (October 2026)**: `vertical-slices.3` and `SliceSkills` argue the T-shaped profile from the
+slice (it runs from the screen to production, so you judge every layer it touches), with the
+fields named on the crossbar and the backend specialism as the stem. **`enablement`'s `t-shaped`
+section and `SkillShape` stay as they are, on purpose**: the owner chose 2 figures for the shape
+over moving or merging, because the 2 sections give 2 different reasons (the slice here, the agent
+implementing faster there). Do not label `SkillShape`, do not give `SliceSkills` an I beside it, and
+do not merge the two sections. `deck-step2-engineering-skills` puts `SliceSkills` on a slide at
+`scale` 1.3, the same as the slices slide before it. **The ArchUnit and unit-test items in `gates` say "module", not
 "slice"**, because 2 slices in 1 module share its domain; the module is the boundary a rule
 enforces.
 
@@ -148,75 +182,75 @@ by capability (modules named after business verbs, each with its own frontend, b
 its own, assembled by a host). What the old rejection was about still holds and the new tree keeps
 it: no BOM, no starter or autoconfigure modules, no per-domain configuration module, so the figure
 spends its rows on the packaging and not on scaffolding. `incoming/` and `outgoing/` stay as their
-own rows, because `HexagonPorts` takes its column labels from their notes and `WhereWouldItGo` sorts
-against them. Its height is held at or under the old tree's, because `deck-step2-engineering-domain`
+own rows, because `HexagonPorts` takes its column labels from their notes and `exercises/step2/java`
+uses the same two folders. Its height is held at or under the old tree's, because `deck-step2-engineering-domain`
 was already at `scale: 0.9` for the footer.
 
-**`exercises/step2/java` deliberately stays layered by technology**, and that was decided with the
-change above. The `graded` profile's JaCoCo excludes and PIT targets name its packages, a setup flag
-sits in the `domain` package, `where.description` promises the student that nothing moves, and the
-project has effectively 1 capability, so slicing it would show nothing. The gap between it and the
-figure is what `WhereWouldItGo` is for, and it is now wider: technology packages against capability
-modules, not only `port/` against `domain/`. Do not restructure the project to match the figure.
+**`exercises/step2/java` has the hexagon's layout inside its one module** since October 2026, at
+the owner's asking (plan 016), reversing the old decision that it stayed layered by technology:
+`domain/` (unchanged, its `CLAUDE.md` and setup flag included), `application/` with the
+`LoanRepository` port, `adapter/incoming/web/` and `adapter/outgoing/persistence/`. `config/`, `aot/`
+and `Step2Application` stay outside the hexagon, as framework wiring the figure has no place for.
+**It stays 1 Maven module with no capability package**: the project has effectively 1 capability,
+so slicing it would show nothing. The move was a pure move, and it was verified to change nothing a
+grader reads: `mvn verify -Pgraded` printed the same 39.0, 21 and 42.4, the same 8 `challenge` tests
+failed, the endpoint answered the same 500 and the native image printed the same miss. The one build
+edit was the JaCoCo exclude, `web/**` to `adapter/incoming/**`. A future move needs the same before
+and after check.
 
 Each figure's own docblock carries the rest, including why `WordsToFiles` draws no badly-named
 repository next to the good one. **Its fourth section, `Quality gates`, moved to `gates`** with
 `SameGate` and both paragraphs, keys renamed from `engineering.quality-gates.*` to
 `gates.quality-gates.*` and the wording untouched. The closer that section carried
 (`quality-gates.3`, the line and the hand-off to `steering`) went with it and is now
-`gates.short-feedback-loops.4`. So `engineering` closes on `The right words` and its last sentence,
-the half a day against production, and it hands off to nothing by name; `gates` is the next unit in
+`gates.short-feedback-loops.4`. So `engineering` closes on `HexagonPorts`, and it hands off to nothing by name; `gates` is the next unit in
 the pager and its lead is what picks up.
 
-`engineering` closes on `WhereWouldItGo`, a `TaskCard` under the same `<hr>` and "Test your knowledge"
-heading, with no prose between the rule and the card: the card's description carries the setting, so
-a paragraph there would say it twice. Six moves, and the task exists because `DomainTree` and
-`exercises/step2/java` genuinely disagree. The project keeps `port/` beside `domain/` rather than inside
-it, and its `adapter/` and `web/` packages split by technology with no `incoming/` and `outgoing/`
-above them, so the controller and the in-memory repository both land somewhere else in the figure,
-while `config/` and `aot/` land nowhere in it at all. **The card names none of that and gives no
-count.** Which packages disagree is the exercise, the same way `problem.md` has no answer key, and a
-move reading "three of them move" turns the sort into arithmetic. The unclassifiable two are the
-judgement the `sort` move is after: the figure is a shape rather than a law, and framework wiring
-was never a domain concern.
-
-The `trace` move (fourth) was added with `Vertical slices`: follow 1 use case and list the
-packages it passes through, then picture a second capability beside it and note which of those
-packages the 2 would share. In the tree they share none. The second capability is pictured rather
-than found because the loans project has effectively 1, and a first draft that only asked for the
-list had nothing to disagree with. It names no use case and no endpoint, for the same reason the
-card gives no count. `where.compare.label` and the trace label say "the folder tree above", since
-the unit now carries 4 figures.
-
-**Nothing is moved, and the last move says so twice** (plan mode, then accept nothing). That is not
-politeness about the agent. This project is `workshop`'s subject, so a package rename breaks
-`mvn verify -Pgraded`, the `challenge` tests and the native-image flag, and a student who accepted
-the plan would reach the capstone with a project that no longer builds. The description repeats the
-warning in the words a student reads first, which is why both carry it. It is also the first
-`TaskCard` outside step 1, ticked to `kata.step2.where`.
+**`engineering` carries no exercise any more.** It closed on `WhereWouldItGo`, a `TaskCard` that
+had the student sort `exercises/step2/java`'s packages against `DomainTree` and then have an agent
+plan the restructuring without accepting it. The card existed because the project was layered by
+technology and the figure was not. **In October 2026 the owner had the project moved to the
+figure's layout and cut the card**, because once the two agree there is nothing left to find (plan
+016). Its keys (`where.*`, `deck.engineering.sort.*`), its component and the
+`deck-step2-engineering-sort` slide went with it; `kata.step2.where` may linger in a browser and
+`reset.ts` clears it with the rest of the prefix. Do not bring back a sorting exercise without a
+real disagreement for it to find.
 
 
 **`gates` sits between `engineering` and `steering`, and it took `engineering`'s last section with
-it.** It argues why gates exist at all, in the three reasons it was commissioned with: they make the
+it.** It argues why gates exist at all. It was commissioned with three reasons: they make the
 output better (`Quality gates`, moved in unchanged), they bound how far a bad run gets (`Blast
 radius`), and they let an agent check itself fast enough to use the answer (`Short feedback loops`,
 which was `Fast enough to answer` until October 2026, keys renamed from `gates.fast-enough.*` to
-`gates.short-feedback-loops.*`). Two sections sit between the first and the second since then, at
-the course owner's asking: `Deterministic checks` and `Legacy code`, both below. The lead sets the
-frame those three sit in: the bottleneck does not disappear when agents do the typing, it moves, and
-in the end it moves to the moment someone decides. **`SdlcStages`, the drawing of that, moved to
+`gates.short-feedback-loops.*`). **`Blast radius` was cut in October 2026** at the owner's asking:
+its first paragraph only defined a term, and its second repeated `steering`'s worktree paragraph,
+`setup.settings.3`'s sandbox and the required check now in `quality-gates.3`. Its one argument, the
+later a gate answers the further a mistake has got, is the last clause of
+`short-feedback-loops.1`, and `GateReach` draws it. Do not bring the section back. Two sections sit
+between `Quality gates` and `Short feedback loops`, at the course owner's asking: `Deterministic
+checks` and `Legacy code`, both below. The lead sets the
+frame those three sit in, and since October 2026 it does so in plain words, at the course owner's
+asking: `gates.lead.1` says what a gate is with 3 gates a developer already knows (tests, build,
+review), and `gates.lead.2` says why it matters now, that an agent writes faster than you read, so
+reading every line makes you the slowest step. It replaced a queue metaphor ("the queue at the
+slowest desk") the owner found strange and a version of the 4 decisions with too little context for
+a student. Do not bring either back. **`SdlcStages`, the drawing of that, moved to
 step 3's `change` in October 2026** at the course owner's asking, because it is the AI-native
 lifecycle rather than a quality gate; its notes are in `step3/CLAUDE.md`. `gates.lead.2` keeps the
-one sentence the unit needs from it, that a person still decides 4 times and the machines check the
-rest, and links there. Do not bring the drawing back as the unit's opener.
+one thing the unit needs from it, the decisions that stay with a person (what to build, the spec,
+whether a change does what you meant, when it ships) against the checking a machine takes, and links
+there. It lists them without counting them. Do not bring the drawing back as the unit's opener.
 
 Two figures and each has one job. `SameGate` is who a machine gate is for; `GateReach` is speed and
-blast radius drawn as **one axis**, which is the claim that lets the last two sections share a
-figure: the further out a gate sits, the slower it answers and the more a miss has already touched.
+how far a miss has got drawn as **one axis**, which is the claim `short-feedback-loops.1` closes on:
+the further out a gate sits, the slower it answers and the more a miss has already touched.
 **Do not give `GateReach` numbers**: that would turn orders of magnitude into a benchmark that the
 card asks the student to take on their own build. **`GateReach` is a ladder with labelled rows**
-(how fast, what runs, where a miss already is) since October 2026, replacing a band of widening
-regions the course owner could not read; the reasoning is in its docblock.
+(what runs, how long the answer takes, where a mistake already is) since October 2026, replacing a
+band of widening regions the course owner could not read. Later the same month its gates were
+renamed for their moment (after every change, when the agent is done, before the merge, before the
+release) with chevrons between them, because the ladder still did not explain itself; the
+reasoning is in its docblock.
 
 **The speed of a gate is a gate of its own**, and that sentence is the author's, added while the
 unit was being written: a few minutes a loop compound, and bringing the time down is work you hand
@@ -233,7 +267,7 @@ names no command at all, because the kata's gates are what `workshop`'s pre-flig
 board grades. The card runs on the student's own project for that reason, on `CountTheDay`'s
 precedent.
 
-`quality-gates.2` and `short-feedback-loops` used to pull against each other, while the hook in that
+`quality-gates.3` and `short-feedback-loops` used to pull against each other, while the hook in that
 paragraph was a Stop hook running the minute-long `mvn verify`. It is a pre-edit guard now, which is
 fast by construction, so the two agree outright. `GateReach` still puts `mvn verify` one step out
 from the loop, at the moment the agent says it is done: it is run there because `Preflight`'s
@@ -262,30 +296,45 @@ is the honest-coverage discovery the capstone's third flag exists for, and this 
 
 **`Deterministic checks` is the catalogue, added at the course owner's asking (October 2026).** Its
 first paragraph is the argument (the same answer on the same code, every run, and the agent runs it
-without you, so it is a loop and not a queue; review is for the decisions, and those stay with you,
-as `gates.lead.2` says), then a list, then where Sonar answers. The list is a `<ul>` because the
-nine kinds are parallel and a reader scans them, and each item says what the check catches in one
-sentence and names the usual tools. **Item 6 is deliberately flat**: coverage and mutation score are
-"2 numbers about the tests themselves, from JaCoCo and PIT", and nothing more. Saying what mutation
-finds that coverage misses is the honest flag's discovery, so do not sharpen that item, and do not
-split it into two items one above the other. A draft closed on the workshop grading 3 of the checks,
-and that sentence was cut: it was an aside, and the paragraph should end on bringing the rules into
-`mvn verify`. Item 9 says a CVE scan's answer moves without the code moving, which is the one honest
-exception to the section's "same answer every run", stated rather than hidden. Item 10 says "before
-it leaves your machine", because push protection blocks the push, after the commit. Facts behind the
+without you, so it checks its own work instead of waiting on you; the decisions are `gates.lead.2`'s
+and are not said a second time here), then a table, then where Sonar answers. **It was a `<ul>` of
+nine until October 2026, and became a table of thirteen at the owner's asking**: check, what it
+checks, tools, one row per kind, translated as one key (`deterministic-checks.table`) on
+`setup.claude-md.table`'s precedent, which is why the paragraph after it is now
+`deterministic-checks.2`. Formatting (Spotless, Checkstyle), compiler checks (Error Prone, NullAway)
+and dependency rules (Maven Enforcer, license-maven-plugin) were the three added, the owner's pick
+from four offered (API compatibility was the one left out). The rows run in `SameGate`'s four groups
+without labelling them: tests, the numbers about the tests, the code, what you ship. It carries
+`data-layout="stack"`, so on a phone each row stacks instead of breaking words across 3 narrow
+columns (`front/CLAUDE.md` has the rule). Two rows were reworded at the owner's asking: the
+integration row names a real cloud service beside the Postgres container, and the architecture row
+says what an ArchUnit test is (your architecture as rules the build fails on, with 2 examples) where
+it used to say only that a module "reaches into" another. **Coverage and mutation are 2 rows since October 2026**, at the owner's
+asking: the single row ("2 numbers about the tests themselves") read as meaningless. Each row says
+what its check is for, in the owner's words: coverage is which lines and branches the tests run,
+with 100% as the target when an agent writes the tests; mutation testing checks whether the tests
+really test the logic, by changing the code in small ways and counting the failures. **Neither row may say what one catches that the
+other misses**, nor rank them: that contrast is the honest flag's discovery, kept behind its Hint.
+`SameGate` still puts both on one row, for the reason in its docblock.
+A draft closed on the workshop grading 3 of the checks, and that sentence was cut: it was an aside,
+and the paragraph should end on bringing the rules into `mvn verify`. The vulnerability row says a
+CVE scan's answer moves without the code moving, which is the one honest exception to the section's
+"same answer every run", stated rather than hidden. The secrets row says "before they leave your
+machine", because push protection blocks the push, after the commit. Facts behind the
 list, checked 10 October 2026: Pact's consumer and provider halves (docs.pact.io), PIT's bytecode
 mutation and `withHistory` (pitest.org), and **`scmMutationCoverage` was removed in PIT 1.18.0**, so
 do not name an "only the changed code" PIT goal; ArchUnit's `slices()` rule (archunit.org); McCabe's
 limit of 10 as NIST SP 500-235 restates it; Sonar's cyclomatic rule S1541 defaults to 10, but
 whether "Sonar way" enables it is unverified, so the unit does not say. Sonar answering in CI, and
-SpotBugs or PMD bringing the same kind of rule into `mvn verify`, came from
-`review/units/step2-gates.md`.
+PMD bringing the same kind of rule into `mvn verify`, came from `review/units/step2-gates.md`;
+SpotBugs was named beside PMD until October 2026, when the owner cut the static-analysis tools to
+PMD and Sonar.
 
 `SameGate` now holds **four groups rather than three checks** (tests; coverage and mutation; static
 analysis and complexity; vulnerabilities and secrets), in the order the list gives them, and
 coverage and mutation share a row so neither sits above the other. `GateReach` lists under each gate
 the checks that usually run there, plus your review at the merge and a person deciding at the
-release, and its first gate is named "agent loop". Coverage and mutation share 1 entry there too, so that figure ranks nothing either.
+release, and its first gate is named "after every change" (it was "agent loop"). Coverage and mutation share 1 entry there too, so that figure ranks nothing either.
 `GateWalk` gained a `mix` move between `list` and `reach`: hold your own gates against the kinds in
 this unit.
 
@@ -432,11 +481,12 @@ repository and IntelliJ in the owner's own test project, written up under "Setup
 `copilot-specific.md`. Read that before changing a Copilot sentence here, because four of them
 are where the products differ in ways a student would otherwise find out the hard way. IntelliJ
 reads a nested `AGENTS.md` only with an Experimental setting ticked (`claude-md.1.copilot` names the
-menu path). Copilot CLI runs repo hooks only in a trusted folder. A Copilot `postToolUse` hook has
-no matcher, so the script filters on the tool name (`hooks.2.copilot`). And the personal file is a
+menu path). Copilot CLI runs repo hooks only in a trusted folder. The Copilot `postToolUse` hook is
+declared without a `matcher`, so the script filters on the tool name (`hooks.2.copilot`); the
+reference documents an optional one, which was not run. And the personal file is a
 `*.instructions.md` with `applyTo: "**"` in `~/.copilot/instructions/`, because the owner's
 IntelliJ ignored the global file GitHub's IDE docs name and read that folder, and the CLI reads it
-too. The course names `AGENTS.md` and not `.github/copilot-instructions.md`, on `copilot-specific.md`'s standing decision.
+too. The course names `AGENTS.md` and not `.github/copilot-instructions.md`, on `copilot-specific.md`'s standing decision; `claude-md.2` names the second file once, only as what Copilot's `/init` writes instead, so a student who runs it knows why no `AGENTS.md` appeared.
 Two Claude additions arrived in the same change, each one sentence: `CLAUDE.local.md` in
 `your-own-claude-md.1.claude` and the `@path` import in `claude-md.3.claude`, the latter worded as
 not shortening the context, because an import loads at launch. Claude Code reads `AGENTS.md` only when
@@ -458,11 +508,11 @@ a file pattern that cuts across it, and a rule without one loads at launch like 
 payoff is stated as the always-loaded part staying short and **never as tokens or a bill**, because
 the cost argument already has its two sites in this unit (`claude-md.2` and `skills.5`) and the
 rule below forbids a third. It sits after `claude-md.2` rather than before it, so that paragraph's
-"So keep each of them lean" still follows the nesting claim it was written against. The tree gained
+"Keep each one lean" still follows the nesting claim it was written against. The tree gained
 a fourth numbered entry for it, `.claude/rules/` with a `frontend/` and a `backend/` subfolder,
 each holding 1 rule with its `paths` line drawn under the name (`FileTree`'s `detail`, a literal like
-the name, since frontmatter is not translated). **Those files are invented**, on `SkillTree`'s
-precedent: this repository has no rules folder, and the backend example is a controller pattern
+the name, since frontmatter is not translated). **Those files are invented**, on the
+old `SkillTree` precedent: this repository has no rules folder, and the backend example is a controller pattern
 rather than a test one because the house test style is the capstone's skill. **The subfolders are
 the owner's choice** (October 2026), and `claude-md.3` says in 2 short sentences that they only keep
 the files in order and that `paths` alone scopes a rule, because a student who sees `frontend/`
@@ -483,30 +533,47 @@ prompt file in `.github/prompts/` as the nearest Copilot form and says **Intelli
 where it was run (the owner's project, October 2026: `/hello` ran `hello.prompt.md`); Copilot CLI was
 not tested, so the sentence does not claim it. It calls a prompt file close to a skill rather than
 an older form of one, and its one difference is that it runs only when you type its name. The
-frontmatter example beside `SkillTree` is **`add-endpoint`, and both it and the three skills in the
-drawing are invented**, which is the decision rather than a shortcut. This repository's own four are
-`adding-a-step`, `lesson-writing`, `quiz-writing` and `repo-setup`, and every one of them belongs to
-the person writing the course rather than the person taking it, so drawing them showed a student the
-author's toolbox. A testing skill was the obvious student-owned alternative and is ruled out for a
-different reason: `workshop.flag.coverage.help` asks the student to write one themselves, so
-spending it here gives away part of the capstone. What is left is a plausible
-skill for the work the exercises actually involve, and the rule that survives all of it is that
-**the tree and the `<pre>` name the same skill**. `skills.4`'s cross-reference example is drawn from
-the same set for the same reason, and `HookTree` follows the rule too: the script it draws is the
+frontmatter example beside `SkillTree` is **`diagnosing-bugs`, and it and `code-review` in the
+drawing are real skills from Matt Pocock's public collection** (github.com/mattpocock/skills, MIT),
+at the owner's asking (October 2026). That reverses the old decision, which drew an invented
+`add-endpoint` beside two other invented skills. Two of its reasons still hold and limit which real
+skills may go here. This repository's own four are `adding-a-step`, `lesson-writing`, `quiz-writing`
+and `repo-setup`, and every one of them belongs to the person writing the course rather than the
+person taking it, so drawing them showed a student the author's toolbox. A testing skill (Pocock's
+`tdd` included) is ruled out because `workshop.flag.coverage.help` asks the student to write one
+themselves, so spending it here gives away part of the capstone. The owner rejected `grill-me` as
+the example: its body is one line handing off to `grilling`, a second folder that reads as a
+duplicate. **Two skills, not three**, at the owner's asking. The rule that survives all of it is
+that **the tree and the `<pre>` name the same skill**. `skills.4`'s examples are drawn from the same
+2: `code-review` reviewing against the standards the repository already documents (its own
+`SKILL.md` names `CODING_STANDARDS.md` and `CONTRIBUTING.md`), and `diagnosing-bugs` keeping
+`scripts/hitl-loop.template.sh` beside its body. `skills.1`'s slash-command example is
+`/diagnosing-bugs` and not `/code-review`, because Claude Code ships a built-in `/code-review`. And
+`HookTree` follows the rule too: the script it draws is the
 one the hooks `<pre>` declares.
+
+**`claude-md.2` is followed by the course's first `<table>`** (October 2026, at the owner's asking):
+an Include and Leave out list adapted from Anthropic's CLAUDE.md guidance, 5 rows where the source
+has 7, merged in pairs rather than cut. It replaced the old "cannot be read off the code" and
+"a briefing, not documentation" sentences, which the table now carries, and the whole table is one
+key, `claude-md.table`, translated as its inner HTML the way the warning aside is. It names no tool,
+so it needs no `data-assistant` pair.
 
 The Hooks section exists because the paragraph that used to introduce them was cut from the Skills
 section, and `patterns` used the word twice while defining it nowhere. It says what a hook is, why it
-is stricter than the other two (a `CLAUDE.md` line asks and a skill offers, both of which need the
-agent to read them, while a hook just happens), and then shows one hook whole: the declaration and
+is stricter than the other two (a `CLAUDE.md` line asks and a skill offers, and whether the agent
+follows them stays probabilistic, while a hook is deterministic and runs every time its event matches), and then shows one hook whole: the declaration and
 the script, per assistant. **What it costs when it is wrong lives in the closing paragraph rather
-than in a fourth one**: keep it fast and narrow, because the script runs on every shell command and
-a broken one hands the agent an error it works around instead of writing the code. That argument is
-latency and blast radius. **It is now the only place in the step that teaches hooks**, and the
-closing forward pointer to `patterns` hands off the case a hook does not cover, a correction that
-keeps coming back rather than a command that has to run. `patterns.skill-iteration.1` names `setup`
-from the other side, so the two sentences are one seam and a cut to either end leaves the other
-pointing at nothing. `HookTree` paints `settings.json`, `hooks/` and the script all teal on purpose:
+than in a fourth one**: keep it fast and narrow, because a broken one hands the agent an error it works around instead of
+writing the code. That argument is latency and blast radius. **It is now the only place in the step
+that teaches hooks.** `hooks.3` was cut to 2 sentences at the owner's asking (October 2026), because
+the rest repeated the section: "reach for a hook when a step must happen every time" is `hooks.2`'s
+deterministic claim again, and "it runs on every shell command" is said in `hooks.2` too. **Its
+closing forward pointer to `patterns` went with them**, the hand-off of a correction that keeps
+coming back rather than a command that has to run: the Skills section sits directly above, so it
+pointed away from a page that had just made the point. `patterns.skill-iteration.1` still names
+`setup` from the other side, for the file shape `SkillTree` draws, and that end does not depend on
+the cut one. `HookTree` paints `settings.json`, `hooks/` and the script all teal on purpose:
 a hook is two files and a reader who takes away one of them has the wrong picture.
 
 **The example is a test-output filter, at the owner's asking (October 2026)**, replacing a formatter
@@ -543,7 +610,10 @@ copy of `exercises/step2/java` with one assertion in `LateFeePolicyTest` broken 
   config-file hooks honour `modifiedArgs`, and it does say they honour `modifiedResult`. A failing
   `mvn test` still arrives with `resultType: "success"`, so `postToolUse` fires (not
   `postToolUseFailure`), and the agent still sees exit code 1, which the Claude route loses.
-  `toolArgs` arrived as an object, as the guard notes under `workshop` already record.
+  `toolArgs` arrived as an object, as the guard notes under `workshop` already record. **In IntelliJ
+  it arrives as a JSON string** and `modifiedResult` did not take (11 October 2026, Free plan), so
+  the script parses either form and `hooks.2.copilot` stays vague about IntelliJ on purpose, at
+  the owner's asking. Do not claim the filter works there, or that it does not.
 - **The Claude declaration names `"$CLAUDE_PROJECT_DIR"/.claude/hooks/…`, never a relative path**
   (`review/units/step2-setup.md` flagged it on the old formatter). The hook's working directory
   follows the agent's shell, so after a `cd src` a relative path failed on every shell command with
@@ -555,10 +625,23 @@ copy of `exercises/step2/java` with one assertion in `LateFeePolicyTest` broken 
   `mvn --version` is left alone. The Copilot script keeps the loose match, because filtering the
   output of a compound command breaks nothing.
 
+**`hooks.4` carries the language-server tip**, rewritten at the owner's asking (October 2026)
+after the owner had never heard of one: it now says what a language server is (the part of the IDE
+behind the red underlines and go to definition), that `jdtls` itself has to be installed beside the
+plugin, and carries the gem. The two products get different claims on purpose. Claude Code's
+code-intelligence docs (code.claude.com/docs/en/plugins/code-intelligence, read 11 October 2026)
+promise diagnostics after every edit plus an `LSP` tool for navigation, and Anthropic maintains
+`jdtls-lsp` in the official marketplace. GitHub's page for Copilot CLI (`.github/lsp.json` or
+`~/.copilot/lsp-config.json`) promises definitions, references and renames and says nothing about
+diagnostics, so the sentence gives the errors to Claude Code only. Neither was run, and no token
+figure is claimed: the docs frame it as fewer file reads, which is not measured here.
+
 The scripts and declarations on the page are the ones that ran, byte for byte. **The scripts carry a
 comment above every step, at the owner's asking** (October 2026: without them the owner could not
 follow the script), and the comments were added after the live runs and checked with `bash -n` and
-recorded stdin rather than run again. They are English in both languages, like every code sample.
+recorded stdin rather than run again. The same holds for the jq and `chmod +x` comment, the
+exit-code comment and the Copilot `toolArgs` line (11 October 2026, run against the payloads
+IntelliJ and Copilot CLI sent). They are English in both languages, like every code sample.
 Change a line and run it again.
 
 `setup` closes on the step's second flag board, and it is the only exercise outside `workshop` that
@@ -568,9 +651,16 @@ package. **The prose names none of the three files, and no row hint names one ei
 the exercise: the unit says a project you have not opened was set up before you got there, go and
 find out how, and stops. A sentence in the prose listing the files, or a row hint reading "look in
 `.claude/skills/`", ends it. What `check-yourself.1` may say is where the line sits for prose: it
-gives the *shape* of a flag (plain text, in curly braces), the *size* of the search (the small
-number of files a project uses to instruct an agent), the fact that the kinds are the ones the unit
-has just named, and the fact that each flag sits in the file it is about. That is enough for a
+gives the *shape* of a flag (plain text, in curly braces) and the fact that each sits in a kind of
+file the unit has just named, and it says what to do in 3 short sentences (look for the files
+that tell an agent how to work, read them yourself, paste the flags). The row labels and hints were
+cut to one plain line each at the same time (The skill, The project instructions, The package
+instructions): they name the kind of thing and still no file or path. The help dialogs went to 3 plain sentences each in the
+same pass: what the file is, roughly where (the skills folder the unit names, the top of the
+project, a package under `src/main/java`), and the agent as the second route. They still print no
+path to a flag's file. The owner found the longer version unreadable (October
+2026), so the size of the search and "each flag sits in the file it is about" went, and the board's
+description now says only that no script or build prints them. That is enough for a
 student to know they are looking for the right kind of thing, and none of it narrows the hunt to a
 path. **Do not collect the three flags anywhere in the tree**, including in
 a comment; `setup-flags.ts` holds salted hashes and its own salt, on the reasoning its own file
@@ -1260,7 +1350,7 @@ audit turned on the student's own diff, closing its worst row rather than filing
 (count where the afternoon went) and `patterns`; the fourth, `asked`, is the planted gap's failure
 case and `Debrief.tsx` says why.
 
-**The hook is the move worth defending.** `gates.quality-gates.2` describes exactly it, a hook that
+**The hook is the move worth defending.** `gates.quality-gates.3` describes exactly it, a hook that
 runs before every edit and shell command and refuses anything touching the gate, and nothing in the
 step ever asked a student to write one, so this is the only place in the course where they do.
 Having the `CLAUDE.md` line *and* the hook on one card is the pair `setup.hooks.2` argues, a line
@@ -1272,7 +1362,7 @@ only on `{"decision":"block"}`, VS Code's format differs again, and the IntelliJ
 event at all (its hooks preview offers `userPromptSubmitted`, `preToolUse`, `postToolUse` and
 `errorOccurred`). A pre-tool hook exists in all four, and exit code 2 denies the call in each, so the
 move and the `gates` paragraph are one shared text with no assistant split. It also argues
-`quality-gates.1` directly: an agent aims for the proxy, and this guard stops it lowering the bar
+`quality-gates.1` directly: an agent hits the number it is given, and this guard stops it lowering the bar
 instead of meeting it. Sources, read October 2026:
 [Copilot hooks reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-hooks-reference),
 [VS Code hooks reference](https://code.visualstudio.com/docs/agents/reference/hooks-reference),
@@ -1281,6 +1371,13 @@ instead of meeting it. Sources, read October 2026:
 **What the guard covers was measured, not reasoned**, in live runs of Claude Code 2.1.292 and Copilot
 CLI 1.0.92 against a copy of `exercises/step2/java`, with the agent told to lower the floor by any means.
 Each line of the move closed a hole a run found:
+- **The card and `gates.quality-gates.3` guard different things, on purpose.** The unit's hook
+  refuses a call that *lowers a threshold*, because in a real project `pom.xml` also carries
+  dependencies and a hook on the whole file blocks adding one (the owner's objection, October 2026).
+  The card keeps refusing anything that touches `pom.xml`: in this project the thresholds are not in
+  it at all, and what it holds is what gets measured (JaCoCo's excludes, PIT's target classes), so a
+  "lowers a threshold" rule would let an extra exclude through. The workshop needs no new
+  dependency. Do not narrow the card to match the unit.
 - **The thresholds are not only in `pom.xml`.** `COVERAGE_FLOOR` and `MUTATION_FLOOR` are constants in
   `grading/FlagRevealIT.java`, so the move names the grading package. `COVERAGE_FLOOR` is the
   constant the move tells the student to try.
@@ -1297,8 +1394,9 @@ Each line of the move closed a hole a run found:
   runs ask on first start, while a `-p` run in an untrusted folder skips them without a word.
 
 With all of that in place, normal work (an edit to `Loan.java`, an `mvn` run) went through in both,
-and every attempt on the floor was refused. **It is a deny-list and the paragraph says so** ("a fence,
-not a proof"): a script that assembles the filename from pieces gets past it, which is why the build
+and every attempt on the floor was refused. **It is a deny-list and the paragraph says so** ("a hook does
+not catch every way around it", reworded from "a fence, not a proof" in October 2026, and since then
+pointing at a CI check that no threshold is lower than on `main` as what holds before merge): a script that assembles the filename from pieces gets past it, which is why the build
 before merge stays required. Do not let the move or the paragraph claim the guard is airtight.
 
 **The `skill` move is `setup`'s and not `patterns`'s, and the wording is what keeps it so.** It asks
@@ -1397,7 +1495,7 @@ carries that whole argument in one paragraph now, and it is where the correction
 `workshop.native.1` and `.2` (which claimed the wiring was the student's) survives.
 
 **Those two flags are the pair the `two-jobs` stage exists for**, and the reason they may be run at
-once is genuine rather than staged: the challenge lives in `application/` and `web/`, the image lives
+once is genuine rather than staged: the challenge lives in `application/` and `adapter/incoming/web/`, the image lives
 in the build and `aot/`, and neither job touches the other's files. What they cannot share is a
 folder, because two Maven builds in one `target/` fight over it, and **that is the one concrete
 reason the worktrees are needed here**, so the paragraph states it rather than asserting isolation in
@@ -1458,10 +1556,32 @@ nothing.
 ## Accuracy constraints after PR #1 integration
 
 The setup permissions task uses a disposable folder and dummy files. It is registered as an inline
-figure so guided mode retains its instructions. Permissions on Read and OS restrictions on shell
-subprocesses are tested separately: use a Node file read for the shell probe rather than `cat`,
-which a Read permission can also intercept. Never run this practice task against student flags,
-credentials or real project files. A worktree is not an access boundary.
+figure so guided mode retains its instructions. Never run this practice task against student flags,
+credentials or real project files.
+
+**The section was `Permissions and sandboxing` and is now `settings.json` (Claude) and `Permissions`
+(Copilot)**, rewritten at the owner's asking (11 October 2026), who could not tell from the old
+text what a sandbox was. Keys moved from `setup.permissions-sandbox.*` to `setup.settings.*`. It
+now teaches the settings file and its `permissions` key, plus `model` and `env` for Claude, and the
+sandbox gets one shared paragraph (`settings.3`) saying what it is: permissions cover the agent's
+tools, and only an OS-level fence stops a script that opens a file itself. The old opener about a
+starting directory and a worktree not restricting capability went with it. **The card tests
+permissions, not the sandbox**, and its shell probe is still the part that teaches the limit:
+Claude's uses a Node script, because a `Read` deny also catches `cat`, while Copilot's uses `head`,
+because a `read(...)` rule does not cover the shell at all. Both were run (Claude Code in default
+mode: the `Read` deny refused Read and `cat`, Node and an unlisted `cp` came back "This command
+requires approval"; an `allow` entry is ignored until the folder is trusted, hence the trust step). In the owner's own interactive run the agent refused the Node read by itself, naming the deny
+rule, so `explain.claude` says the agent often refuses and otherwise you are asked, and that either
+way a judgement stopped it rather than the rule. That is `hooks.2`'s probabilistic-against-
+deterministic point met in practice; do not word the move as if the rule blocked it.
+**Copilot cannot commit tool permissions**, and the paragraph says so rather than inventing a
+counterpart: `.github/copilot/settings.json` rejects `permissions.*`, the CLI flags last one
+session, and IntelliJ's Auto Approve list is global and can only allow or ask. The committed
+refusal is a `preToolUse` hook. A Claude-only `<pre>` under `settings.2.claude` shows the file whole
+(owner's asking): one rule each for `allow`, `ask` and `deny`, plus `model` and `env`, all keys from
+the settings reference. Copilot gets no counterpart, because its committed file cannot hold the one
+key the section is about; the card's start command is its example. The research behind every Copilot sentence is under "Setup files" in
+`copilot-specific.md`; read it before changing one.
 
 The builder/critic prompt stops after 3 rounds or a blocking decision and returns evidence for human
 review. Do not substitute interval `/loop` scheduling for that condition-driven instruction.

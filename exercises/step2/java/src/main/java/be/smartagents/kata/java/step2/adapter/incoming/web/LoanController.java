@@ -1,4 +1,4 @@
-package be.smartagents.kata.java.step2.web;
+package be.smartagents.kata.java.step2.adapter.incoming.web;
 
 import be.smartagents.kata.java.step2.application.MemberStatements;
 import be.smartagents.kata.java.step2.domain.MemberTier;
