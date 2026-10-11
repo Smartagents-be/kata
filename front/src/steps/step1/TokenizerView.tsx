@@ -91,54 +91,53 @@ export function TokenizerView() {
           ))}
         </dl>
 
-        {/* A floor on the height, so the toggle under the box moves as little as it can between views. */}
+        {/* Both views are always laid out, in the same grid cell, and the idle one is only hidden: the
+            box is as tall as the taller of the two at any width, so nothing under it moves on a switch. */}
         <div
           id="tokenizer-view-box"
           data-component="TokenizerView"
           data-state={view}
-          aria-live="polite"
-          className="bg-muted border-border flex min-h-20 items-start rounded-md border p-4 font-mono text-[15px] leading-relaxed"
+          className="bg-muted border-border grid items-start rounded-md border p-4 font-mono text-[15px] leading-relaxed"
         >
-          {view === 'text' ? (
-            // One flex item per token, so a narrow column wraps between tokens and never inside one.
-            <p
-              id="tokenizer-view-text"
-              data-component="TokenizerView"
-              role="img"
-              aria-label={t('tokenizer-view.text.description', {
-                tokens: tokens.length,
-                pieces: tokens.map((token) => token.text.trim()).join(', '),
-              })}
-              className="flex flex-wrap gap-y-1"
-            >
-              {tokens.map((token, index) => (
-                <span
-                  key={index}
-                  id={`tokenizer-view-token-${index}`}
-                  data-component="TokenizerView"
-                  className={cn(
-                    'rounded-[3px] py-0.5 whitespace-pre',
-                    TINTS[index % TINTS.length],
-                  )}
-                >
-                  {token.text}
-                </span>
-              ))}
-            </p>
-          ) : (
-            <p
-              id="tokenizer-view-ids"
-              data-component="TokenizerView"
-              aria-label={t('tokenizer-view.ids.description', {
-                tokens: tokens.length,
-                ids: tokens.map((token) => token.id).join(', '),
-              })}
-              role="img"
-              className="break-words"
-            >
-              {`[${tokens.map((token) => token.id).join(', ')}]`}
-            </p>
-          )}
+          {/* One flex item per token, so a narrow column wraps between tokens and never inside one. */}
+          <p
+            id="tokenizer-view-text"
+            data-component="TokenizerView"
+            role="img"
+            aria-hidden={view !== 'text'}
+            aria-label={t('tokenizer-view.text.description', {
+              tokens: tokens.length,
+              pieces: tokens.map((token) => token.text.trim()).join(', '),
+            })}
+            className={cn(
+              'col-start-1 row-start-1 flex min-w-0 flex-wrap gap-y-1',
+              view !== 'text' && 'invisible',
+            )}
+          >
+            {tokens.map((token, index) => (
+              <span
+                key={index}
+                id={`tokenizer-view-token-${index}`}
+                data-component="TokenizerView"
+                className={cn('rounded-[3px] py-0.5 whitespace-pre', TINTS[index % TINTS.length])}
+              >
+                {token.text}
+              </span>
+            ))}
+          </p>
+          <p
+            id="tokenizer-view-ids"
+            data-component="TokenizerView"
+            role="img"
+            aria-hidden={view !== 'ids'}
+            aria-label={t('tokenizer-view.ids.description', {
+              tokens: tokens.length,
+              ids: tokens.map((token) => token.id).join(', '),
+            })}
+            className={cn('col-start-1 row-start-1 min-w-0 break-words', view !== 'ids' && 'invisible')}
+          >
+            {`[${tokens.map((token) => token.id).join(', ')}]`}
+          </p>
         </div>
 
         <div

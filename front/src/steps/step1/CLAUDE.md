@@ -33,7 +33,7 @@ the word is needed before `context` arrives, and it was cut because a definition
 the wrong thing to open a page about the prompt with. The word is used as an ordinary one from
 `prompt.lead.1` onward and `context` is where the window is taken apart. Do not write a definition
 back into `prompt`, and if one is ever wanted again, `context` is the unit that owns it.
-**`prompt.lead.2` names "grill me"** for the agent asking you about the task, at the owner's asking,
+**`prompt.lead.2` names "grill me" or "interview me"** for the agent asking you about the task, at the owner's asking,
 and links Matt Pocock's `grill-me` skill in `mattpocock/skills` as the course's first external link
 (new tab). It says he publishes it, not that he invented it, and it stays one shared block because
 typing the phrase works in both products without installing anything. The other is
@@ -263,6 +263,15 @@ locale's split, so a new example sentence moves the strip and has to be checked 
 `not-words.2`. There is still no second sentence beside it: a reader only ever sees their own
 language's row, and an English row against a Dutch one made the figure an argument about languages
 instead of about tokens.
+**`not-words.1`'s tokeniser comparison is dated**: read from Anthropic's token counting docs on
+11 October 2026, Claude Opus 4.7 and every model after it share one newer tokeniser, which makes
+about 30% more tokens of the same text than the models before it. The sentence names Opus 5.5
+against Opus 4.6 because 5.5 is the current Opus and 4.6 the last one on the old tokeniser, so
+keep 4.6 as the baseline when the current model moves on: two models on the same side of 4.7 count
+the same. It said "up to 35%" for 4.7 against 4.6 once, which is not the figure the docs give now.
+**The sentence says 5.5 cuts finer, and that the tokens are shorter, on purpose**: "makes 30% more
+tokens of the same text" on its own read to the course owner as the newer model being less
+efficient, and the claim here is only where the boundaries fall.
 **Token density is an input measurement, not a language-quality evaluation.** `not-words.3`
 uses the shared sentence's current 13 English / 17 Dutch counts. Fragmentation alone does not
 establish training exposure or prediction quality. Keep the density ratios scoped to the displayed
