@@ -5,6 +5,7 @@ import { BudgetWindow } from './BudgetWindow'
 import { BundleCompare } from './BundleCompare'
 import { ContextFalloff } from './ContextFalloff'
 import { CoordinatorFanout } from './CoordinatorFanout'
+import { DecompositionTree } from './DecompositionTree'
 import { ExactAsk } from './ExactAsk'
 import { McpParts } from './McpParts'
 import { McpServer } from './McpServer'
@@ -29,7 +30,6 @@ import { TokenSplit } from './TokenSplit'
 import { TokenizerView } from './TokenizerView'
 import { ToolsInContext } from './ToolsInContext'
 import { TrainedOrGrounded } from './TrainedOrGrounded'
-import { UnderSpecified } from './UnderSpecified'
 import { WindowFill } from './WindowFill'
 import { WindowGrid } from './WindowGrid'
 
@@ -517,12 +517,10 @@ const deck: SlideSpec[] = [
     kind: 'figure',
     ns: 'step1',
     eyebrow: 'agent-patterns.title',
-    // The note is not the old one. That one said what the right-hand column now draws; this one is
-    // the line the unit's guided aside used to carry, and it is the only place in the deck a room
-    // is told to cut before anybody opens an agent.
+    // Title and note say what the tree says: cut until a piece is small enough, at a cost per level.
     title: 'deck.agent-patterns.decomposition.title',
     note: 'deck.agent-patterns.decomposition.note',
-    figure: <UnderSpecified />,
+    figure: <DecompositionTree />,
     scale: 1.55,
   },
   {

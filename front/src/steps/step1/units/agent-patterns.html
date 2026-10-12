@@ -21,19 +21,20 @@
 </p>
 
 <p data-i18n="agent-patterns.decomposition.2">
-  Decomposition cuts a task into parts that can be checked separately. Each brief names the
-  outcome, relevant context and dependencies. Writing “handle the empty case” forces you to decide
-  what that means before delegating it.
+  Decomposition cuts a task into subtasks, and those again where needed, until every piece is small
+  enough to carry out in a single pass. An agent can do that itself. It is the coordinator of the
+  next section, over more than 1 level.
 </p>
 
 <p data-i18n="agent-patterns.decomposition.3">
-  So the questions come back at you before the code does. The case nobody thought about, the endpoint 2 parts both want to own, the decision that was never made. An agent that starts typing
-  instead would have guessed at every one of them, and you find guesses in the diff.
+  That has a cost: every level is more model calls, so more time and more tokens. Use it for a
+  large, vague task, not for a change you can describe in 1 sentence.
 </p>
 
-<!-- The figure carries this section's own three gaps, out of `agent-patterns.decomposition.1`. Reword the
-     example there and the drawing has to follow, in both languages. -->
-<div data-figure="under-specified"></div>
+<!-- Filled by the DecompositionTree element registered under this name in steps/step1/index.tsx: the
+     tree `.2` and `.3` describe, on `.1`'s example. Reword that example and the drawing has to follow,
+     in both languages. -->
+<div data-figure="decomposition-tree"></div>
 
 <h2 data-i18n="agent-patterns.coordinator.heading">The coordinator</h2>
 

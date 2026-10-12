@@ -9,6 +9,7 @@ import { WindowGrid } from './WindowGrid'
 import { ContextFalloff } from './ContextFalloff'
 import { CoordinatorFanout } from './CoordinatorFanout'
 import { CutItUp } from './CutItUp'
+import { DecompositionTree } from './DecompositionTree'
 import { EntryBrief } from './EntryBrief'
 import { ExactAsk } from './ExactAsk'
 import { FlagBoard } from './FlagBoard'
@@ -45,7 +46,6 @@ import { TokenSplit } from './TokenSplit'
 import { TokenizerView } from './TokenizerView'
 import { ToolsInContext } from './ToolsInContext'
 import { TrainedOrGrounded } from './TrainedOrGrounded'
-import { UnderSpecified } from './UnderSpecified'
 import { WindowFill } from './WindowFill'
 import deck from './deck'
 import en from './locales/en.json'
@@ -180,7 +180,7 @@ const step1: Step = {
       title: 'agent-patterns.title',
       html: agentPatterns,
       inlineFigures: {
-        'under-specified': <UnderSpecified />,
+        'decomposition-tree': <DecompositionTree />,
         'coordinator-fanout': <CoordinatorFanout />,
         'sequential-steps': <SequentialSteps />,
         'reflection-loop': <ReflectionLoop />,

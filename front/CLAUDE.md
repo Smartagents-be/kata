@@ -116,8 +116,9 @@ simply its last frame. `AgentLoop` is pure CSS and needs none of this, since a l
 **Every animated figure carries a pause button**, `shared/motion/StoryToggle.tsx`, `AgentLoop`
 included (where it sets `animation-play-state`), at the owner's asking. On a slide it lets go of
 focus after a click, because the deck advances on Space and a focused button would take that Space
-too. **Every animated figure is also on a slide**, at the owner's asking; `PromptCache` got
-`deck-tokens-cache-turns` for that.
+too. **Every animated figure is also on a slide**, at the owner's asking. A comparison that reads best
+side by side stays still even when it has an order to it: `PromptCache` was animated and is not any
+more, at the owner's asking.
 
 One bug that transform exposed, fixed in `shared/components/ConnectBoard.tsx` rather than in the
 deck: the board measures anchors with `getBoundingClientRect` (post-transform) and draws them into

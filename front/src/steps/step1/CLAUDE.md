@@ -676,35 +676,25 @@ decisions out where you can answer them. `agent-patterns.coordinator.3`
 used to introduce decomposition and now points back at that section instead, so do not let it grow
 back into a second definition.
 
-`UnderSpecified` is its figure, and four things in it are decisions. **It carries no context
-frame**, which is the one place it departs from the other three pattern diagrams: nothing has been
-handed to anybody yet, so this is the task being cut up rather than the windows it ends up in, and a
-frame here would draw the coordinator one section early. What it does share is the vocabulary,
-solid is what you have and dashes are what you do not, so the dashed space under the ask on the left
-comes back as three solid pieces on the right. **The three questions are `agent-patterns.decomposition.1`'s
-own three** (empty query, title only, nothing found), which is what keeps the drawing and the
-paragraph on one example; rewording the example means moving the figure with it, in both languages.
-And **the pieces are stacked rather than laid out side by side**, so each one has the width to read
-as a row: three columns would need the questions wrapped by hand, and the Dutch is longer than the
-English every time. On the deck it replaced a statement slide, and the note went with it, since the
-note said what the right-hand column now draws.
+`DecompositionTree` is its figure (October 2026, at the owner's asking): the task at the top, two
+parts, and four leaves small enough to carry out in a single pass, with only the leaves filled.
+It is **Google Cloud's hierarchical task decomposition pattern**: a root agent cuts the task "through
+multiple layers" until a worker can execute a piece "directly", and it is "an implementation of the
+coordinator pattern". `decomposition.2` and `.3` say exactly that, and `.3` names the cost, more
+model calls per level, and when not to bother (a change you can describe in 1 sentence, which is
+Claude Code's own "skip the plan" line). **Two drawings came before it and both were wrong**: the
+first, `UnderSpecified`, drew "the agent asks / you decide", which is the interview pattern from
+`prompt`; the second drew the agent's plan, your edits and a check per piece, which was far too much
+on one figure. Do not put either back. Who reviews the cut is human-in-the-loop, a different pattern,
+and it is not this section's.
 
-**Each piece is a row of three parts, and the labels are what make it read** (FEEDBACK 9). It drew
-every piece as an abstract teal bar standing for its prompt, with the question under it and
-`één prompt per stuk` over the column, and a reader could not tell what was happening: nothing said
-the bar was a prompt, who was asking, or who answered. So the bars went and each row now says it in
-words: what the piece does (`lege zoekterm`, `waarop matchen`, `geen resultaat`), what *the agent
-asks* while writing that piece's prompt, and what *you decide*. The column header shrank to `drie
-stukken` / `three pieces`, because the who-asks and who-decides labels do the explaining that the
-long header was trying to. That is `decomposition.3` drawn, questions coming back before code, and
-the paragraph needed no change for it. **The decisions are illustrations, not a spec**: they only
-touch how search behaves (`geef alle titels terug`, `op titel, ongeacht hoofdletters`, `een lege
-lijst, geen fout`), and they must never name catalogue data the service does not have (nine titles,
-no authors, so "match on author" is not a decision to draw) or lean on any of step 1's exercises.
-The figure became DOM rather than SVG for this, so the rows can reflow: side by side from `md`, and
-on a phone the ask, the arrow (turned to point down) and the pieces stack, with each piece's two
-labelled lines stacking under `sm` too. The `figure` carries the description as its `aria-label`
-and every word inside is real text, read in order.
+**It carries no context frame**, which is the one place it departs from the other three pattern
+diagrams: the tree is the task, not the agents that carry it, and who carries the leaves is the
+coordinator's figure one section down. The example stays `decomposition.1`'s "Add search to the
+catalogue"; rewording it means moving the figure with it, in both languages. The leaves must never
+name catalogue data the service does not have (nine titles, no authors) or lean on any of step 1's
+exercises. The deck slide's title and note were rewritten with it, since the old note said the cut
+happens before anybody opens an agent, which this section no longer claims.
 
 **`harness.check-yourself.1` was deleted rather than gated differently**, on `workshop.the-board.1`'s
 reasoning: it was a `data-audience="guided"` aside, and guided mode drops every run of prose whatever
@@ -718,13 +708,14 @@ Dutch called a cut a `knipbeurt`, which is a haircut appointment; the deck note 
 the per-turn cost with and without a second MCP server, and it cannot ship honestly: which command
 prints a per-turn cost differs by assistant and is unverified, so one reader could not take the
 measurement the card asks for. It was drawn nowhere for a while, since a still prefix-match diagram would draw "read from the
-first byte" and stop. **`PromptCache` now plays it, and that reverses the decision** (October 2026,
-at the owner's asking): five turns on `useStory`'s clock, so it shows four cases a still cannot,
-the first write, two reads of what was sent before, a model switch that reads nothing, and a long
-pause that finds the cache expired. The fourth row is a model switch rather than a new MCP server on
+first byte" and stop. **`PromptCache` now draws it, and that reverses the decision** (October 2026,
+at the owner's asking): not one prefix but five questions in a row, so it shows four cases a single
+prefix cannot, the first write, two reads of what was sent before, a model switch that reads
+nothing, and a long pause that finds the cache expired. It was animated row by row first and is
+**still on purpose** now, at the owner's asking: the five rows are a comparison and read best side
+by side. Its Dutch says "vraag" rather than "beurt", which the owner found odd here. The fourth row is a model switch rather than a new MCP server on
 purpose, for the reason in the next sentence; its docblock has the rest. The deck's statement slide
-(`deck-tokens-cache`) still states the rule, and `deck-tokens-cache-turns` after it plays the figure,
-because every animated figure is on a slide. `prompt-caching.2` states the prefix rule with model, effort and tools as
+(`deck-tokens-cache`) still states the rule, and `deck-tokens-cache-turns` after it shows the figure. `prompt-caching.2` states the prefix rule with model, effort and tools as
 what to settle early, and does not use connecting an MCP server mid-session as its example.
 
 **`SequentialSteps` draws the cost of the run, not just its shape.** It was three step cards, three
@@ -1175,9 +1166,8 @@ never sees them, and the course owner could not tell what the exercise was. It n
 and the empty `EntryController` and says the agent sees only the one line; it says nothing about how
 to implement any wish, which stays the rule. The wishes' numbers are digits now, and
 `check-entry.mjs`'s `minus 1` label moved with them. Four things in it are
-decisions. **The brief is read rather than drawn**: `UnderSpecified` in `agent-patterns` already draws the
-gap between an ask and what it leaves unsaid, in the step's solid-and-dashed vocabulary, so drawing it
-here would be that figure four units early and worse. **It is one wish per line**, which reads worse
+decisions. **The brief is read rather than drawn**: the student works from the words, and the argument
+stays in the task card's description. **It is one wish per line**, which reads worse
 than the paragraph it was and is the fairer shape: a student holding six FAIL lines against a block
 of prose has to find the sentence each one came from before they can argue with it, and six lines
 keeps every failure traceable to something they were told. **The prompt window is muted rather than
@@ -1279,10 +1269,10 @@ same trade the repository already takes for `flags.ts` and for `front/` as a who
 loads for any agent started at the repository root and a prohibition that advertises the answer key
 is the leak it was written to prevent. Keep it that way if the prohibition is ever reworded.
 
-**The feature is a position lookup rather than search on purpose.** `UnderSpecified` in `agent-patterns`
-owns "Add search to the catalogue" as the course's canonical under-specified ask, with three open
-questions pinned to `agent-patterns.decomposition.1`, and building search here would spend that figure four
-units before it is drawn. The two units also answer under-specification differently and must be
+**The feature is a position lookup rather than search on purpose.** `agent-patterns` owns "Add search
+to the catalogue" as the course's canonical under-specified ask, in `decomposition.1` and as the task
+at the top of `DecompositionTree`, and building search here would spend that example four units
+before it is drawn. The two units also answer under-specification differently and must be
 allowed to: `prompt` says be exact and let the plan carry what you know, `agent-patterns` says cut it into
 parts. Neither is the other's example.
 

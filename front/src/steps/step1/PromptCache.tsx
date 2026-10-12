@@ -1,8 +1,6 @@
 import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
-import { StoryToggle } from '@/shared/motion/StoryToggle'
 import { useAssistant } from '@/shared/assistant/useAssistant'
-import { useStory } from '@/shared/motion/useStory'
 
 /**
  * What each turn sends to the model, and which part of it comes out of the cache. Five turns, one
@@ -14,8 +12,8 @@ import { useStory } from '@/shared/motion/useStory'
  * start, and each model has its own. So pick your model, effort and tools before you begin.") and
  * this is that rule played out. **It reverses a recorded decision** (October 2026, at the owner's
  * asking): the section was drawn nowhere because a prefix diagram "would draw 'read from the first
- * byte' and stop". A still one would. Played row by row it shows four cases a still cannot: the
- * first turn writes everything, the next two read what was sent before and write only the new turn,
+ * byte' and stop". A single prefix would. Five rows of it show four cases one cannot: the
+ * first question writes everything, the next two read what was sent before and write only the new turn,
  * a model switch reads nothing because "Each model has its own cache", and a long pause finds it
  * expired. **The fourth row is a model switch and not a new MCP server**, on purpose: in Claude Code
  * a server that connects mid-session does not break the cache while tool search defers its tools
@@ -25,8 +23,12 @@ import { useStory } from '@/shared/motion/useStory'
  *
  * The rates are the paragraph's: a read at 0.1 times input, a write at 1.25 times for a 5-minute
  * cache. Token counts per block are illustrative and the caption says so. The instruction file is
- * named per assistant, since the figure sits in a step written for two. On `useStory`'s clock each
- * row paints in, a read fast and a write slow, and reduced motion shows all five.
+ * named per assistant, since the figure sits in a step written for two.
+ *
+ * **It is still, on purpose** (October 2026, at the owner's asking): it was animated row by row at
+ * first, and the owner judged that the comparison reads better with all five rows in view at once.
+ * The rows are "vraag" in Dutch rather than "beurt", which the owner found an odd word here: each
+ * row is one question you send, and the conversation it carries is the earlier questions.
  */
 const W = 640
 const X0 = 56
@@ -45,14 +47,9 @@ const ROWS = [
   { note: 'pause', turns: 5, reads: 0 },
 ] as const
 
-const FIRST = 300
-const EVERY = 2600
-const LENGTH = FIRST + ROWS.length * EVERY
-
 export function PromptCache() {
   const { t, i18n } = useTranslation('step1')
   const { assistant } = useAssistant()
-  const [ref, now, story] = useStory<SVGSVGElement>(LENGTH, 3000)
   const titleId = useId()
 
   const prefix = [
@@ -67,7 +64,6 @@ export function PromptCache() {
       <svg
         id="prompt-cache-svg"
         data-component="PromptCache"
-        ref={ref}
         viewBox={`0 0 ${W} 302`}
         role="img"
         aria-labelledby={titleId}
@@ -101,7 +97,6 @@ export function PromptCache() {
 
         {ROWS.map((row, index) => {
           const y = 26 + index * ROW
-          const start = FIRST + index * EVERY
           const cells = [
             ...prefix,
             ...Array.from({ length: row.turns }, (_, n) => ({
@@ -110,22 +105,17 @@ export function PromptCache() {
             })),
           ]
           let x = X0
-          let at = start + 400
           let cost = 0
           const placed = cells.map((cell, n) => {
             const read = n < row.reads
-            const painted = now >= at
-            at += read ? 110 : 260
             cost += cell.tokens * (read ? READ : WRITE)
-            const placedCell = { ...cell, x, w: cell.tokens * K - 3, read, painted }
+            const placedCell = { ...cell, x, w: cell.tokens * K - 3, read }
             x += cell.tokens * K
             return placedCell
           })
-          const shown = now >= start
-          const costed = now >= at
           const block = `prompt-cache-row-${index}`
           return (
-            <g key={index} id={block} data-component="PromptCache" style={{ opacity: shown ? 1 : 0 }}>
+            <g key={index} id={block} data-component="PromptCache">
               <text
                 id={`${block}-label`}
                 data-component="PromptCache"
@@ -146,7 +136,7 @@ export function PromptCache() {
                     width={cell.w}
                     height="20"
                     rx="4"
-                    className={!cell.painted ? 'fill-muted' : cell.read ? 'fill-primary' : 'fill-primary/35'}
+                    className={cell.read ? 'fill-primary' : 'fill-primary/35'}
                   />
                   <text
                     id={`${block}-cell-${n}-name`}
@@ -156,7 +146,7 @@ export function PromptCache() {
                     fontSize="9.5"
                     textAnchor="middle"
                     className={
-                      cell.painted && cell.read ? 'fill-primary-foreground font-mono' : 'fill-foreground font-mono'
+                      cell.read ? 'fill-primary-foreground font-mono' : 'fill-foreground font-mono'
                     }
                   >
                     {cell.name}
@@ -178,7 +168,7 @@ export function PromptCache() {
                 data-component="PromptCache"
                 x="490"
                 y={y + 8}
-                width={costed ? (110 * cost) / most : 0}
+                width={(110 * cost) / most}
                 height="16"
                 rx="3"
                 className="fill-primary"
@@ -192,7 +182,7 @@ export function PromptCache() {
                 textAnchor="end"
                 className="fill-foreground font-mono"
               >
-                {costed ? cost.toLocaleString(i18n.language, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : ''}
+                {cost.toLocaleString(i18n.language, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}
               </text>
             </g>
           )
@@ -239,7 +229,6 @@ export function PromptCache() {
           {t('prompt-cache.write')}
         </text>
       </svg>
-      <StoryToggle id="prompt-cache" component="PromptCache" story={story} />
       <figcaption
         id="prompt-cache-caption"
         data-component="PromptCache"

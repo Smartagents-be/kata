@@ -37,11 +37,8 @@ import { CopyCommand } from '@/shared/components/CopyCommand'
  * carries an `aria-label` naming the sheet. It is not a `figcaption`, because a caption in this
  * course states provenance and there is none to state.
  *
- * **The brief is read rather than drawn**, which is the one thing to keep it out of: `UnderSpecified`
- * in `agent-patterns` already draws the gap between an ask and what it leaves unsaid, in the step's own
- * solid-and-dashed vocabulary. A second drawing of that argument here would be that figure four units
- * early and worse. So this one carries words the student has to work from, and the argument stays in
- * the task card's description.
+ * **The brief is read rather than drawn**: this one carries words the student has to work from, and
+ * the argument stays in the task card's description.
  *
  * The prompt window is **muted rather than teal**, which is `ExactAsk`'s vocabulary one section up
  * held to: on this page a muted window is the vague ask and a teal one is the exact one. This ask is
