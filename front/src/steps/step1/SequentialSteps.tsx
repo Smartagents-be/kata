@@ -1,44 +1,78 @@
 import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
+import { StoryToggle } from '@/shared/motion/StoryToggle'
+import { beat, useStory } from '@/shared/motion/useStory'
 
 /**
- * The sequential workflow: three steps inside one session, each one validated before the next
- * starts. The band is the session, which is why it runs behind all three steps rather than around
- * each of them: one context carries the whole run. The dashed seam between the second and third
- * step is the thing the prose promises, a place to stop and pick the work up later, so the arrow
- * crossing it is interrupted by a pause rather than running straight through.
+ * The sequential workflow as it is run: the agent writes a plan with three tasks into `plan.md`,
+ * then works through them one at a time in one session, each task ending on a test. The session's
+ * context fills with every task, and after the second one it is full. A fresh session starts empty,
+ * reads the plan, and does the third task. It sits under `agent-patterns.sequential.1` and `.2`.
  *
- * What the band does that the paragraph cannot is measure what the run costs. The fill along the
- * bottom rises in three treads, thin under step one and close to the cards under step three, so the
- * free space above it visibly runs out and the label on the right says what that means. Without it
- * this figure transcribed its own prose: three cards, three checks and a pause.
+ * **It was redrawn in October 2026, at the owner's asking**, because "stop here, pick it up later"
+ * and "no room for step 4" said nothing without context. What makes stopping possible is the plan
+ * being a file, which neither the old drawing nor the old text said: it is plan-and-execute
+ * ("devising a plan to divide the entire task into smaller subtasks, and then carrying out the
+ * subtasks according to the plan", Plan-and-Solve, arXiv 2305.04091) with the plan kept as an
+ * artifact, which is Claude Code's own advice: "start a fresh session to execute it ... you have a
+ * written spec to reference" (code.claude.com/docs/en/best-practices). So the fresh session's first
+ * bar is the plan, drawn coming from the file along the line over the top.
  *
- * The middle riser sits on the seam's x, so the pause glyph hangs exactly where the fill jumps.
- * That is the second thing it teaches: stop here and the fill is what you pay to rebuild. Do not
- * colour any of it outside the primary tints the other diagrams use for content, and do not add a
- * fourth step card. The point is that there is no room for one.
- *
- * The label is a point smaller than the check labels because the only clear band it has is the
- * 32px between the cards and the top tread, and the pause box sits in the middle of it: the Dutch
- * runs a third longer than the English and reaches the glyph at 13px.
+ * On the step's vocabulary: a teal frame is a context, a bar is something in it; the solid bars are
+ * the plan and each task's test. It plays on `useStory`'s clock with a pause button, and reduced
+ * motion shows the last frame: all three tasks ticked, session 1 full, session 2 holding the plan
+ * and the third task. `plan.md` is a file name and is not translated.
  */
+const TASK_BARS = [120, 90, 136, 70]
+const BAR = 260
+const TASK = TASK_BARS.length * BAR + 300 + 500
+
+const PLAN_AT = 500
+const ROWS_AT = [800, 1050, 1300]
+const T1 = 1800
+const T2 = T1 + TASK
+const FULL = T2 + TASK
+const SECOND = FULL + 900
+const READ = SECOND + 500
+const SECOND_PLAN = READ + 500
+const T3 = SECOND_PLAN + 700
+const LENGTH = T3 + TASK + 400
+
+/** The bars one session has taken in by `now`: the plan, then each of its tasks' reads and test. */
+function sessionBars(now: number, planAt: number, tasks: number[]) {
+  const bars: { w: number; solid: boolean }[] = []
+  if (now >= planAt) bars.push({ w: 110, solid: true })
+  for (const start of tasks) {
+    TASK_BARS.forEach((w, k) => {
+      if (now >= start + k * BAR) bars.push({ w, solid: false })
+    })
+    if (now >= start + TASK_BARS.length * BAR) bars.push({ w: 50, solid: true })
+  }
+  return bars
+}
+
 export function SequentialSteps() {
   const { t } = useTranslation('step1')
+  const [ref, now, story] = useStory<SVGSVGElement>(LENGTH, 3000)
   const titleId = useId()
-  const arrowId = `sequential-steps-arrow-${useId().replace(/:/g, '')}`
 
-  const steps = [34, 240, 446]
+  const taskStarts = [T1, T2, T3]
+  const ticked = (i: number) => now >= taskStarts[i] + TASK_BARS.length * BAR + 300
+  const active = (i: number) => now >= taskStarts[i] && !ticked(i)
+  const sessions = [
+    { x: 230, label: t('sequential-steps.session', { n: 1 }), shown: 1, bars: sessionBars(now, PLAN_AT, [T1, T2]) },
+    { x: 420, label: t('sequential-steps.session', { n: 2 }), shown: beat(now, SECOND, 400), bars: sessionBars(now, SECOND_PLAN, [T3]) },
+  ]
+  const full = beat(now, FULL, 400)
+  const read = beat(now, READ, 400)
 
   return (
-    <figure
-      id="sequential-steps"
-      data-component="SequentialSteps"
-      className="my-8 flex justify-center"
-    >
+    <figure id="sequential-steps" data-component="SequentialSteps" className="my-8 flex flex-col items-center gap-2">
       <svg
         id="sequential-steps-svg"
         data-component="SequentialSteps"
-        viewBox="0 0 640 340"
+        ref={ref}
+        viewBox="0 0 600 252"
         role="img"
         aria-labelledby={titleId}
         className="h-auto w-full max-w-xl"
@@ -47,187 +81,119 @@ export function SequentialSteps() {
           {t('sequential-steps.description')}
         </title>
 
-        <defs>
-          <marker
-            id={arrowId}
-            viewBox="0 0 10 10"
-            refX="8"
-            refY="5"
-            markerWidth="6"
-            markerHeight="6"
-            orient="auto-start-reverse"
-          >
-            <path d="M 0 0 L 10 5 L 0 10 z" className="fill-primary/50" />
-          </marker>
-        </defs>
-
-        {/* the session: one context behind the whole run */}
+        {/* the plan, as a file: what lets a later session carry on */}
         <rect
-          id="sequential-steps-session"
+          id="sequential-steps-plan"
           data-component="SequentialSteps"
-          x="12"
-          y="16"
-          width="616"
-          height="284"
-          rx="20"
-          strokeWidth="2"
-          className="fill-primary/5 stroke-primary/40"
-        />
-        {/* what the run has put in the window, one tread per step, inset 2 off the frame so the
-            bottom corners follow its radius. The middle riser is on the seam's x. */}
-        <path
-          id="sequential-steps-fill"
-          data-component="SequentialSteps"
-          d="M 14 272 H 217 V 244 H 423 V 214 H 626 V 280 A 18 18 0 0 1 608 298 H 32 A 18 18 0 0 1 14 280 Z"
-          className="fill-primary/25"
-        />
-        <text
-          id="sequential-steps-filling"
-          data-component="SequentialSteps"
-          x="620"
-          y="205"
-          fontSize="12"
-          textAnchor="end"
-          className="fill-muted-foreground"
-        >
-          {t('sequential-steps.filling')}
-        </text>
-        <text
-          id="sequential-steps-session-label"
-          data-component="SequentialSteps"
-          x="34"
-          y="48"
-          fontSize="15"
-          className="fill-muted-foreground"
-        >
-          {t('sequential-steps.session')}
-        </text>
-
-        {/* the seam: a step boundary, not a wall, so the arrow crosses it and the pause hangs off
-            the bottom where the caption below picks it up */}
-        <line
-          id="sequential-steps-seam"
-          data-component="SequentialSteps"
-          x1="423"
-          y1="58"
-          x2="423"
-          y2="190"
+          x="10"
+          y="34"
+          width="170"
+          height="150"
+          rx="10"
           strokeWidth="1.5"
-          strokeDasharray="4 6"
-          className="stroke-primary/40"
+          className="fill-background stroke-border"
         />
-        <rect
-          id="sequential-steps-pause"
-          data-component="SequentialSteps"
-          x="409"
-          y="190"
-          width="28"
-          height="22"
-          rx="7"
-          strokeWidth="1.5"
-          className="fill-card stroke-primary/40"
-        />
-        <g
-          id="sequential-steps-pause-bars"
-          data-component="SequentialSteps"
-          className="fill-primary/70"
-        >
-          <rect x="417" y="195" width="3.5" height="12" rx="1.5" />
-          <rect x="423.5" y="195" width="3.5" height="12" rx="1.5" />
-        </g>
-
-        {/* the flow: two arrows of the same length, one of them across the seam */}
-        <g
-          fill="none"
-          strokeWidth="2"
-          markerEnd={`url(#${arrowId})`}
-          className="stroke-primary/50"
-        >
-          <path
-            id="sequential-steps-flow-0"
-            data-component="SequentialSteps"
-            d="M 200 126 L 232 126"
-          />
-          <path
-            id="sequential-steps-flow-1"
-            data-component="SequentialSteps"
-            d="M 406 126 L 438 126"
-          />
-        </g>
-
-        {/* the steps themselves, each closing on a check */}
-        {steps.map((x, index) => (
-          <g key={x}>
+        <text id="sequential-steps-plan-name" data-component="SequentialSteps" x="26" y="60" fontSize="14" className="fill-foreground font-mono font-semibold">
+          plan.md
+        </text>
+        {ROWS_AT.map((at, i) => (
+          <g key={i} id={`sequential-steps-task-${i}`} data-component="SequentialSteps" style={{ opacity: now >= at ? 1 : 0 }}>
             <rect
-              id={`sequential-steps-step-${index}`}
+              id={`sequential-steps-task-${i}-row`}
               data-component="SequentialSteps"
-              x={x}
-              y="70"
-              width="160"
-              height="112"
-              rx="12"
-              strokeWidth="1.5"
-              className="fill-card stroke-primary/30"
-            />
-            <text
-              id={`sequential-steps-step-${index}-label`}
-              data-component="SequentialSteps"
-              x={x + 20}
-              y="106"
-              fontSize="17"
-              className="fill-foreground font-medium"
-            >
-              {t('sequential-steps.step', { n: index + 1 })}
-            </text>
-            {/* the work inside the step, in the same bars the other diagrams use for content */}
-            <g className="fill-primary/25">
-              <rect x={x + 20} y="118" width="112" height="8" rx="4" />
-              <rect x={x + 20} y="132" width="84" height="8" rx="4" />
-            </g>
-            <circle
-              id={`sequential-steps-step-${index}-check`}
-              data-component="SequentialSteps"
-              cx={x + 31}
-              cy="160"
-              r="11"
-              strokeWidth="1.5"
-              className="fill-success/15 stroke-success"
-            />
-            <path
-              id={`sequential-steps-step-${index}-check-mark`}
-              data-component="SequentialSteps"
-              d={`M ${x + 25} 160 l 4 4 l 8 -8`}
-              fill="none"
+              x="22"
+              y={76 + i * 32}
+              width="146"
+              height="24"
+              rx="5"
               strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="stroke-success"
+              className={active(i) ? 'fill-none stroke-primary' : 'fill-none stroke-transparent'}
             />
             <text
-              id={`sequential-steps-step-${index}-check-label`}
+              id={`sequential-steps-task-${i}-mark`}
               data-component="SequentialSteps"
-              x={x + 50}
-              y="165"
-              fontSize="13"
-              className="fill-success-foreground"
+              x="32"
+              y={93 + i * 32}
+              fontSize="14"
+              className={ticked(i) ? 'fill-primary font-mono' : 'fill-muted-foreground font-mono'}
             >
-              {t('sequential-steps.validated')}
+              {ticked(i) ? '✓' : '☐'}
+            </text>
+            <text id={`sequential-steps-task-${i}-name`} data-component="SequentialSteps" x="52" y={93 + i * 32} fontSize="13" className="fill-foreground">
+              {t('sequential-steps.task', { n: i + 1 })}
             </text>
           </g>
         ))}
 
+        {sessions.map((session, s) => (
+          <g key={s} id={`sequential-steps-session-${s}`} data-component="SequentialSteps" style={{ opacity: session.shown }}>
+            <rect
+              id={`sequential-steps-session-${s}-frame`}
+              data-component="SequentialSteps"
+              x={session.x}
+              y="34"
+              width="170"
+              height="196"
+              rx="12"
+              strokeWidth="1.5"
+              className="fill-primary/10 stroke-primary"
+            />
+            <text id={`sequential-steps-session-${s}-name`} data-component="SequentialSteps" x={session.x + 16} y="58" fontSize="14" className="fill-foreground font-semibold">
+              {session.label}
+            </text>
+            {session.bars.map((bar, k) => (
+              <rect
+                key={k}
+                id={`sequential-steps-session-${s}-bar-${k}`}
+                data-component="SequentialSteps"
+                x={session.x + 14}
+                y={70 + k * 13}
+                width={bar.w}
+                height="8"
+                rx="4"
+                className={bar.solid ? 'fill-primary' : 'fill-primary/40'}
+              />
+            ))}
+          </g>
+        ))}
+
         <text
-          id="sequential-steps-caption"
+          id="sequential-steps-full"
           data-component="SequentialSteps"
-          x="423"
-          y="324"
-          fontSize="15"
+          x="315"
+          y="246"
+          fontSize="12"
           textAnchor="middle"
           className="fill-muted-foreground"
+          style={{ opacity: full }}
         >
-          {t('sequential-steps.stop')}
+          {t('sequential-steps.full')}
+        </text>
+        {/* the fresh session's first read is the plan file */}
+        <path
+          id="sequential-steps-read"
+          data-component="SequentialSteps"
+          d="M 95 34 V 18 H 505 V 30"
+          fill="none"
+          strokeWidth="1.5"
+          strokeDasharray="5 4"
+          className="stroke-primary"
+          style={{ opacity: read }}
+        />
+        <text
+          id="sequential-steps-read-label"
+          data-component="SequentialSteps"
+          x="300"
+          y="13"
+          fontSize="11"
+          textAnchor="middle"
+          className="fill-primary"
+          style={{ opacity: read }}
+        >
+          {t('sequential-steps.reads-plan')}
         </text>
       </svg>
+      <StoryToggle id="sequential-steps" component="SequentialSteps" story={story} className="max-w-xl" />
     </figure>
   )
 }

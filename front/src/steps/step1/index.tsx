@@ -20,6 +20,7 @@ import { ModelTiers } from './ModelTiers'
 import { NextToken } from './NextToken'
 import { OneShotCompare } from './OneShotCompare'
 import { OneWindow } from './OneWindow'
+import { PatternMap } from './PatternMap'
 import { PatternMatch } from './PatternMatch'
 import { PickTheNext } from './PickTheNext'
 import { PickTheTier } from './PickTheTier'
@@ -180,6 +181,7 @@ const step1: Step = {
       title: 'agent-patterns.title',
       html: agentPatterns,
       inlineFigures: {
+        'pattern-map': <PatternMap />,
         'decomposition-tree': <DecompositionTree />,
         'coordinator-fanout': <CoordinatorFanout />,
         'sequential-steps': <SequentialSteps />,

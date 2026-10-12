@@ -13,6 +13,7 @@ import { ModelPricing } from './ModelPricing'
 import { ModelTiers } from './ModelTiers'
 import { NextToken } from './NextToken'
 import { OneShotCompare } from './OneShotCompare'
+import { PatternMap } from './PatternMap'
 import { PatternMatch } from './PatternMatch'
 import { PickTheNext } from './PickTheNext'
 import { PickTheTier } from './PickTheTier'
@@ -512,6 +513,16 @@ const deck: SlideSpec[] = [
     title: 'agent-patterns.title',
     points: ['deck.agent-patterns.divider.1', 'deck.agent-patterns.divider.2', 'deck.agent-patterns.divider.3'],
   },
+  // The unit's map, before the five patterns it places.
+  {
+    id: 'deck-agent-patterns-map',
+    kind: 'figure',
+    ns: 'step1',
+    eyebrow: 'agent-patterns.title',
+    title: 'deck.agent-patterns.map.title',
+    figure: <PatternMap />,
+    scale: 1.45,
+  },
   {
     id: 'deck-agent-patterns-decomposition',
     kind: 'figure',
@@ -541,10 +552,8 @@ const deck: SlideSpec[] = [
     title: 'deck.agent-patterns.sequential.title',
     note: 'deck.agent-patterns.sequential.note',
     figure: <SequentialSteps />,
-    // `SequentialSteps` grew a session fill and a label under the cards, so its viewBox went from
-    // 640x284 to 640x340. 1.77 painted about 846px into a frame with roughly 740 under a `top`
-    // heading, and `overflow-hidden` would clip the label that is the whole point of the change.
-    scale: 1.48,
+    // `SequentialSteps` is a 600x252 viewBox since its redraw, with a pause button under it.
+    scale: 1.55,
   },
   {
     id: 'deck-agent-patterns-reflection',

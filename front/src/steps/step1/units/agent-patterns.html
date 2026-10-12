@@ -10,6 +10,10 @@
   context ends up.
 </p>
 
+<!-- Filled by the PatternMap element registered under this name in steps/step1/index.tsx: the five
+     patterns below on one question, who decides what runs next. -->
+<div data-figure="pattern-map"></div>
+
 <h2 data-i18n="agent-patterns.decomposition.heading">Decomposition</h2>
 
 <p data-i18n="agent-patterns.decomposition.1">
@@ -22,8 +26,12 @@
 
 <p data-i18n="agent-patterns.decomposition.2">
   Decomposition cuts a task into subtasks, and those again where needed, until every piece is small
-  enough to carry out in a single pass. An agent can do that itself. It is the coordinator of the
-  next section, over more than 1 level.
+  enough to carry out in a single pass. It takes 2 common forms. An agent can write a plan and work
+  through its tasks one after another itself: that is the sequential workflow further down. Or it
+  solves it with sub-agents, like the coordinator below but over more than 1 level, as in the
+  figure: every piece goes to a sub-agent, and every result goes back to whoever handed the piece
+  out. In Claude Code a sub-agent can cut its piece again for sub-agents of its own. In Copilot in
+  IntelliJ a sub-agent cannot start sub-agents, so the main agent does all the cutting itself.
 </p>
 
 <p data-i18n="agent-patterns.decomposition.3">
@@ -62,14 +70,14 @@
 <h2 data-i18n="agent-patterns.sequential.heading">The sequential workflow</h2>
 
 <p data-i18n="agent-patterns.sequential.1">
-  Nothing is handed out here. The agent plans the steps first, then works through them one at a time,
-  and every step is validated before the next one starts. You can stop between any 2 steps and
-  pick it up later.
+  Nothing is handed out here. The agent first writes a plan with tasks into a file, then works
+  through them one at a time. After every task it tests before it starts the next.
 </p>
 
 <p data-i18n="agent-patterns.sequential.2">
-  Reach for this when the steps depend on each other. It costs you context: 1 session carries
-  the whole run, so a long workflow ends on a full context.
+  Reach for this when the tasks depend on each other. It costs context: 1 session carries everything
+  the agent did, so a long run fills up. Because the plan is a file, you can stop between 2 tasks
+  and carry on in a fresh session that reads the plan.
 </p>
 
 <div data-figure="sequential-steps"></div>

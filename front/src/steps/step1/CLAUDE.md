@@ -676,8 +676,23 @@ decisions out where you can answer them. `agent-patterns.coordinator.3`
 used to introduce decomposition and now points back at that section instead, so do not let it grow
 back into a second definition.
 
+**The unit opens on `PatternMap`** (October 2026, at the owner's asking), a simpler version of
+Google Cloud's overview: one question, who decides what runs next, with the code deciding on the
+left (sequential, reflection) and a model on the right (routing, coordinator, decomposition). Only
+the unit's five patterns, still, and its slide `deck-agent-patterns-map` titles itself differently
+so the question is not on the board twice. Of Google's twelve, ReAct is this step's agentic loop (`tools.lead.1` names it, from Google's "iteratively reasons, acts, and observes"),
+loop is step 2's `GoalGate`, human-in-the-loop is what permission prompts, plan mode and step 2's
+gates do (`gates.lead.2` names it, from Google's "At a predefined checkpoint, the agent pauses"), parallel stays out at the owner's asking, and swarm is left out as rarely worth it for code.
+
 `DecompositionTree` is its figure (October 2026, at the owner's asking): the task at the top, two
-parts, and four leaves small enough to carry out in a single pass, with only the leaves filled.
+parts, and four leaves small enough to carry out in a single pass. **It plays the cut and the
+sub-agents**, because the owner wanted it plain that decomposition is solved with sub-agents the way
+the coordinator is: the agent cuts, the parts are cut again, the leaves work at their own speed, and
+every result climbs back to whoever handed the piece out. **Who cuts the middle differs per
+assistant and the tags follow it**: Claude Code sub-agents can spawn their own, "up to three layers
+below the main conversation", so the middle boxes are sub-agents; Copilot in the IDE sub-agents
+"cannot create other subagents", so the middle boxes say "no sub-agent" and `decomposition.2` says
+the same in one ungated sentence per product.
 It is **Google Cloud's hierarchical task decomposition pattern**: a root agent cuts the task "through
 multiple layers" until a worker can execute a piece "directly", and it is "an implementation of the
 coordinator pattern". `decomposition.2` and `.3` say exactly that, and `.3` names the cost, more
@@ -689,7 +704,7 @@ on one figure. Do not put either back. Who reviews the cut is human-in-the-loop,
 and it is not this section's.
 
 **It carries no context frame**, which is the one place it departs from the other three pattern
-diagrams: the tree is the task, not the agents that carry it, and who carries the leaves is the
+diagrams: each box is tagged with who holds it, but what is inside a sub-agent's window is the
 coordinator's figure one section down. The example stays `decomposition.1`'s "Add search to the
 catalogue"; rewording it means moving the figure with it, in both languages. The leaves must never
 name catalogue data the service does not have (nine titles, no authors) or lean on any of step 1's
@@ -718,13 +733,15 @@ purpose, for the reason in the next sentence; its docblock has the rest. The dec
 (`deck-tokens-cache`) still states the rule, and `deck-tokens-cache-turns` after it shows the figure. `prompt-caching.2` states the prefix rule with model, effort and tools as
 what to settle early, and does not use connecting an MCP server mid-session as its example.
 
-**`SequentialSteps` draws the cost of the run, not just its shape.** It was three step cards, three
-checks and a pause on a session band, which is `sequential.1` and `.2` transcribed. The band now
-carries a fill that rises a tread per step, from thin under step one to nearly full under step three,
-with `sequential-steps.filling` on the free space that is left. That gives the pause glyph a second
-job: it hangs on the seam where the fill jumps, so stopping there is visibly what you pay to rebuild,
-which is `tokens.prompt-caching.1`'s cache lifetime met in a picture. The fill stays in the primary tints the other diagrams use for
-content, and there is no fourth step card because the label says there is no room for one.
+**`SequentialSteps` draws the run as it is done, plan file included** (redrawn October 2026, at the
+owner's asking, because "stop here, pick it up later" and "no room for step 4" said nothing without
+context). The agent writes `plan.md` with three tasks, session 1 works through two of them, each
+ending on a test, and fills up; session 2 starts empty, reads the plan along the line over the top,
+and does the third. That makes the pattern what the sources call plan-and-execute with the plan kept
+as an artifact, and it is why stopping between tasks works, which `sequential.1` and `.2` now say in
+words. The cost of the run is still the point of the session frame filling; the old session band,
+pause glyph and missing fourth card are gone and should not come back. Step 2's `workflows` works the
+plan form out (plan-based, spec-driven); this section stays the pattern.
 
 Decomposition is answered by the task above that board rather than by a fourth situation, and that
 is the decision. `CutItUp` is that task, and it is one card and nothing else: no prose between the
