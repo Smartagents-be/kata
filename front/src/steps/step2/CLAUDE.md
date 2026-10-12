@@ -392,7 +392,9 @@ of the same repository, on its own branch, in its own folder, sharing the same h
 sentence and links here, which is what `parallel.many-agents-once.2` already did. Two arguments, one
 definition. Do not let a third site explain what a worktree is.
 
-**The unit is drawn now, three figures, and the two windows are a pair.** `TwoWindows` sits under
+**The unit is drawn now, three figures, and the two windows are a pair.** `TwoWindows` plays the two
+moves since October 2026 (pasting on against taking out, with a playhead running back up the right
+window), and its last frame is the drawing this paragraph describes. `TwoWindows` sits under
 `Interrupt, or go back`, after the choosing paragraph and above the self aside, so the aside stays
 the section's exit; `LoopInWindow` closes `When it is going nowhere`. They share one frame geometry
 on purpose: the unit's vocabulary is the window, so they are one window in two states rather than
@@ -911,7 +913,7 @@ no command**, and that is a condition of it existing: `run-own-machine` was stri
 repository's own two-terminal setup so a reader on their own stack would not have to translate it,
 and a card naming `mvn spring-boot:run` puts that straight back. Its `fit` move sends the reader
 back into `LoopsPerHour` with a number of their own, which is what turns that figure from a drawing
-into a measurement. **It has no quiz, and that half is no longer borrowed from `workflows`**, which
+into a measurement; that number is 10 since the redraw, and the bracket's minutes are where theirs goes. **It has no quiz, and that half is no longer borrowed from `workflows`**, which
 now carries one. It stands on its own here: this unit is about what has to be true around you, and
 a condition has no wrong answer to offer a question the way a choice between five workflows does.
 Run it locally front and back, grow the crossbar, and count where the day goes.
@@ -967,22 +969,25 @@ one sentence each and stops on the fix. Two closers went in turn, "That is a who
 reached you" and then the bare fragment "A whole loop that never reached you", so the paragraph ends
 on the gem with no line reading the scene back. Do not write a third one: the scene is the payoff.
 
-`LoopsPerHour` closes the section, under the agentic paragraph: one hour drawn twice, two turns
-against eleven, each turn cut into change, wait and look. **It was moved here when
-`reachable-one-step` was cut**, and the opening paragraph is what holds it here: that is where the
-agent writing a change in seconds and your check having to keep up is stated, and this figure is
-that claim measured. Its two labels were rewritten in the same pass, from "Deploying to
-find out" against "With the shortcuts in" to **"Not running it locally" against "Running it
-locally"**, because the first pair named the cut section's example and would have left a figure
-labelled for prose that is no longer in the unit. **It is on the clock and never on step size.** Few long steps against many short ones, drawn as
+`LoopsPerHour` closes the section, under the paragraph where the agent opens the page, sees the wrong
+column and fixes it in the same pass. **It was moved here when `reachable-one-step` was cut**, and
+**redrawn in October 2026 at the owner's asking because the band it was did not explain itself**:
+one hour cut into turns of change, wait and look, two against eleven, and a reader could tell
+neither what a turn was nor what the wait was for. It now asks the question the owner put to it,
+"how often can the agent prove in an hour that its change works?", as a fixed title, and answers it
+with two rows of boxes from the change to the proof: not local, a push, a pipeline and a deploy to a
+test environment sit in between under an "18 min" bracket; local, one restart and "1 min". A dot
+plays the hour at the speed of the minutes and the count says how many tries reached proof, 2
+against 10 with these minutes (the band said 11, and `count.fit.label` was moved to 10 with it).
+**The point is proof, wherever the app runs**, which is the owner's framing: the slow row still
+proves, against a test environment, with more in between. **Little text**: per-box minutes, a legend
+and a clock label came out at the owner's asking once the bracket carried the point. The row labels
+are "Not local" and "Local" now, which retires the "names running it locally and nothing else" rule
+the band had: the in-between boxes name the pipeline because that is what the owner wanted seen.
+**It is on the clock and never on step size.** Few long steps against many short ones, drawn as
 distance to a target, was `IterationPaths` in the cut `evolution` unit, and redrawing this figure in
-that vocabulary brings back an argument the owner removed. The bands are the same width because the hour is the same
-hour, which is the whole drawing. Two things in it were fixed after they were first drawn and should
-not come back. The **wait is drawn as nothing**, an empty part of the turn's box rather than a pale
-fill, so the figure costs three tones instead of six and the slow band reads as two mostly empty
-rooms. And the **band spans the full viewBox**, so its edges land on the prose column's edges; inset
-by a margin it read as a smaller picture sitting inside the text rather than as a measure of the
-column it is in.
+that vocabulary brings back an argument the owner removed. Both rows are the same hour, and what it
+counts is tries.
 
 A third paragraph was cut and should not come back. It said that some of what you build has no
 frontend, so ask the agent for a single page that calls the endpoint and prints what comes back. The
@@ -1232,7 +1237,10 @@ read before touching any of them. `WindowSpend` illustrates **subscription usage
 columns, never as a band cut into turns, because `LoopsPerHour` in `enablement` owns the band and
 owns the clock. Its caption distinguishes allowance from context capacity and requires checking
 other limits and budget. `GoalGate` draws the check/repair loop; the enclosing goal also needs a
-budget or stopping condition. The waiting is a
+budget or stopping condition. It plays the loop (October 2026, at the owner's asking): two red
+attempts back along the return path and a third that goes green, because the repetition is the
+argument, and its first box says what the agent does ("the agent changes the code") since "the
+agent's pass" read as nothing in Dutch. The waiting is a
 line **inside the gate box** rather than a stretch of time, for the same reason. `ReadEachTime`
 draws **what each agent is holding**, one context against five identical copies of it, and never
 the arrangement, because `AgentsAtOnce` in `parallel` owns how many agents you have running and what

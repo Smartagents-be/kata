@@ -649,6 +649,12 @@ and stays as the skill under the coordinator and the sequential workflow. **Rout
 owner's asking**, with the facts and what was deliberately not repeated in the comment above the
 section; it has no figure and `PatternMatch` does not test it, both knowingly. Do not let the unit
 grow a harness intro back.
+**`CoordinatorFanout` and `ReflectionLoop` play on `useStory`'s clock** (October 2026, at the owner's
+asking), and the corrections made while drawing them are load bearing, so read their docblocks before
+changing either. In the fan-out the sub-agents finish at different times and the answers stack in the
+coordinator in arrival order. In reflection the critic does get context (its brief and the newest
+code), the builder's context keeps every version and every review, every round is a new critic, and
+the approval goes back to the builder too.
 
 **`agent-patterns.coordinator.2` says a sub-agent does not see your conversation, and not that it
 skips your instruction file** (October 2026, at the owner's asking). It said "often starts without
@@ -711,9 +717,14 @@ Dutch called a cut a `knipbeurt`, which is a haircut appointment; the deck note 
 `tokens.prompt-caching` now (see `tokens` above). A task card was written for it, three moves reading
 the per-turn cost with and without a second MCP server, and it cannot ship honestly: which command
 prints a per-turn cost differs by assistant and is unverified, so one reader could not take the
-measurement the card asks for. It is drawn nowhere for a related reason, since a prefix-match diagram
-would draw "read from the first byte" and stop; the deck's statement slide (`deck-tokens-cache`) is
-the right shape for it. `prompt-caching.2` states the prefix rule with model, effort and tools as
+measurement the card asks for. It was drawn nowhere for a while, since a still prefix-match diagram would draw "read from the
+first byte" and stop. **`PromptCache` now plays it, and that reverses the decision** (October 2026,
+at the owner's asking): five turns on `useStory`'s clock, so it shows four cases a still cannot,
+the first write, two reads of what was sent before, a model switch that reads nothing, and a long
+pause that finds the cache expired. The fourth row is a model switch rather than a new MCP server on
+purpose, for the reason in the next sentence; its docblock has the rest. The deck's statement slide
+(`deck-tokens-cache`) still states the rule, and `deck-tokens-cache-turns` after it plays the figure,
+because every animated figure is on a slide. `prompt-caching.2` states the prefix rule with model, effort and tools as
 what to settle early, and does not use connecting an MCP server mid-session as its example.
 
 **`SequentialSteps` draws the cost of the run, not just its shape.** It was three step cards, three
@@ -859,6 +870,11 @@ short bar that stays inside the frame**, in the step's faint fill, and the tilte
 that bar rather than off the window, so what leaves is the detail and not the turn. Two labels carry
 it, `falloff.summarised` on the short bar and `falloff.dropped` on the ghosts, where there was one
 before. The figure and that paragraph were changed as one thing and have to move as one thing.
+**It plays compaction as it happens** (October 2026, at the owner's asking): turns fill the frame
+from the top, the dashed `falloff.limit.*` line near the bottom is where it starts, every turn goes,
+and **only the summary is left**, with the next turn landing under it. The first animated draft kept
+the newest turns under the summary and put the trigger line at the top; both were wrong and were
+corrected at the owner's asking, and the docblock carries the doc quotes.
 
 **Lost in the middle is stated in prose and deliberately not drawn.** `context.more-context-not.3`
 names the term (it was `entropy.3` until entropy moved to `session`: a long input is about the size
@@ -1302,6 +1318,10 @@ anything else. It drew four straddling tools once instead, which said only "ther
 left a large empty box beside them with nothing pointing into it. The crossing is the load-bearing
 part: dashed while the line is outside, solid once it is in, so the border keeps meaning what it
 means in every other diagram here. Redrawing either figure on its own geometry breaks the pair.
+**`ToolsInContext` plays one loop of `AgentLoop` up close** (October 2026, at the owner's asking):
+three rounds of a `tool_use` chip going out and a result bar coming back, then `end_turn` and the
+answer, which is a bar in the window and also goes out to a "you" box. It was animated on the
+geometry above unchanged, which is what keeps the pair with `McpServer` intact.
 `McpParts` is the fourth figure: three cards naming what a server offers, and
 **nothing drawn between them**, which is the decision. None of the three has crossed into a context
 yet, so it carries no frame and no arrows, and the cards take `McpServer`'s dashed

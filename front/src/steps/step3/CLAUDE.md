@@ -32,13 +32,17 @@ is graded, the step is lying about what it is.
 been.** The rule that held for a long time was that no figure carries anything
 the sentences do not, and it is still the right test: a picture of a claim the paragraph already
 makes is the thing to cut. `PipelineShift` passes because it is a measurement rather than an illustration.
-Two pipelines drawn on one scale, and the second one carries a strip under it comparing the
-verifying three parallel lanes need against the verifying they get. That gap is the one claim in the
-step no sentence can make without a reader taking it on trust, and it is the reason the figure is
-here rather than in `expectations`, which is about a date rather than about what got read. Its own
-file carries the proportions that have to keep holding, and they are load bearing in both
-directions: make the second row look like a win and the drawing argues the opposite of the section
-above it. Note what it does to guided mode: `change` renders its headings and 2 drawings in class where the
+**It was redrawn in October 2026 at the owner's asking, because the old one did not explain
+itself**: five abstract stages, three lanes of writing and a strip of unread code under the second
+row were two arguments in one picture. It now makes one, the paragraph's own: 1 change on one
+calendar, without an agent and with one, with the paragraph's three waits (review 3 days, an
+environment 10, a wait for the release 5) and only the writing differing. The question is the title,
+the dots play the calendar, and the measurement is read off the drawing: writing goes 10 times
+faster, the change ships 20% sooner. **The strip was the old reason for the figure and it is gone on
+purpose**: more code than attention can read is already `change.you-test-engineer.1`'s sentence, so
+it does not need a drawing as well. The release is a wait rather than a fixed window, since a fixed
+date would ship both rows on the same Thursday. The second row must still not read as a win, which
+is why the takeaway line under it leads with how little the calendar moved. Note what it does to guided mode: `change` renders its headings and 2 drawings in class where the
 step used to render nothing at all. It is no longer the only one that does, since `expectations`
 keeps its quiz and `impostor` its card, but it is the only unit here a tutor can put a drawing on the
 board from.

@@ -20,7 +20,7 @@ import impostor from './units/impostor.html?raw'
  * Nothing here is graded against a service and the step needs no Java. What it carries instead is
  * one browser-graded quiz, on `expectations`, and one ungraded card at the foot of `impostor` whose
  * tick is a bookmark. Two drawings, both in `change`: `PipelineShift` earns its place by being a
- * measurement of two pipelines against each other rather than a picture of a sentence, and
+ * measurement of one change on one calendar, with and without an agent, rather than a picture of a sentence, and
  * `SdlcStages` came over from step 2's `gates` as the one picture of where a person still decides.
  */
 const step3: Step = {

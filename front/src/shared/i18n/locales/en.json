@@ -37,6 +37,8 @@
   "exercise.submitting": "Checking…",
   "exercise.offline": "Could not reach the backend. Is it running on port 8080?",
 
+  "story.pause": "Pause",
+  "story.play": "Play",
   "quiz.title": "Test your knowledge",
   "quiz.question": "Question {{number}} of {{total}}",
   "quiz.submit": "Check answers",

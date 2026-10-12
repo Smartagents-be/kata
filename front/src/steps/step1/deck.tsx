@@ -15,6 +15,7 @@ import { OneShotCompare } from './OneShotCompare'
 import { PatternMatch } from './PatternMatch'
 import { PickTheNext } from './PickTheNext'
 import { PickTheTier } from './PickTheTier'
+import { PromptCache } from './PromptCache'
 import { PromptParts } from './PromptParts'
 import { ReflectionLoop } from './ReflectionLoop'
 import { SamplingKnobs } from './SamplingKnobs'
@@ -202,6 +203,16 @@ const deck: SlideSpec[] = [
     title: 'deck.tokens.cache.title',
     note: 'deck.tokens.cache.note',
   },
+  // The statement says the rule; this plays it, turn by turn, the way the unit does under it.
+  {
+    id: 'deck-tokens-cache-turns',
+    kind: 'figure',
+    ns: 'step1',
+    eyebrow: 'tokens.title',
+    title: 'deck.tokens.cache-turns.title',
+    figure: <PromptCache />,
+    scale: 1.3,
+  },
   {
     id: 'deck-tokens-pick',
     kind: 'figure',
@@ -307,7 +318,7 @@ const deck: SlideSpec[] = [
     title: 'deck.tools.in-context.title',
     note: 'deck.tools.in-context.note',
     figure: <ToolsInContext />,
-    scale: 1.33,
+    scale: 1.24,
   },
   {
     id: 'deck-tools-mcp',
@@ -522,7 +533,7 @@ const deck: SlideSpec[] = [
     title: 'deck.agent-patterns.coordinator.title',
     note: 'deck.agent-patterns.coordinator.note',
     figure: <CoordinatorFanout />,
-    scale: 1.27,
+    scale: 1.14,
   },
   {
     id: 'deck-agent-patterns-sequential',

@@ -1,99 +1,71 @@
 import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
+import { StoryToggle } from '@/shared/motion/StoryToggle'
+import { beat, useStory } from '@/shared/motion/useStory'
 
 /**
- * The same five-stage pipeline twice, drawn on one scale: the way it ran when a person typed the
- * code, and the way it runs when agents do. It sits inside the prose of `change`, at the
- * `data-figure="pipeline-shift"` slot in the section that argues the process was the bottleneck all
- * along.
+ * One change, from writing to production, drawn twice on one calendar: without an agent and with
+ * one. It sits inside the prose of `change`, at the `data-figure="pipeline-shift"` slot in the
+ * section that argues the process was the bottleneck all along, and it draws the paragraph under it:
+ * "Take the typing out and the calendar barely moves. 3 days for a review, a fortnight for an
+ * environment, a release window".
  *
- * **One scale across both rows is the whole figure.** Both bars start at the same x and a unit of
- * time is the same number of pixels in each, so where the second row ends is a measurement rather
- * than a layout. The dashed guide at the first row's end is what makes that readable: take the
- * typing out and the calendar moves a little. Draw the rows to equal width, as `WorkflowWeights`
- * does for its own reasons, and the argument is gone.
+ * **One message, and the question is the title.** It was redrawn in October 2026 at the owner's
+ * asking, because the drawing it replaced did not explain itself: five abstract stages, three lanes
+ * of writing and a strip of unread code under the second row made two arguments in one picture,
+ * and a reader could find neither. This one makes the first: an agent writes ten times faster and
+ * the change ships barely sooner, because the waits did not move. **The second argument left the
+ * figure on purpose**: that parallel writing produces more code than attention can read is already
+ * the prose's, in `change.you-test-engineer.1` ("Reading every line stops scaling somewhere in the
+ * second hour of diff"), so it does not need a drawing as well.
  *
- * Four things the proportions have to keep saying, and every one of them is easy to lose while
- * nudging a number.
+ * **One scale across both rows is still the whole figure**, which is why it passes the step's bar of
+ * being a measurement rather than an illustration: a day is the same width in both rows, so where the
+ * second row ends is read off the drawing, and the dashed guide at the first row's end is what makes
+ * the gap readable. The waits are named and sized from the paragraph (review 3 days, environment 10,
+ * the 2 weeks), and the release is drawn as **a wait for the release**, not as "the release window":
+ * a window on a fixed date would ship both changes on the same Thursday, which is not what the
+ * paragraph is about. The writing time (5 days against half a day) is the one illustrative number,
+ * and the caption says so.
  *
- * `write` collapses to a sliver and `verify` becomes the widest solid block anywhere in the
- * drawing. That is the burden moving from authoring to verifying, and it is the unit's spine.
- *
- * The second row's `write` is **three lanes in the same span**, because the stage that got cheap is
- * also the stage you can run three of at once. Same elapsed time, three times the code. The lanes
- * are stacked rather than laid end to end for exactly that reason: a reader who sees three blocks in
- * a row reads three steps.
- *
- * The strip under the second row is the verifying those three lanes actually need, three times what
- * one lane needed. **It is longer than the block above it, and the divider is where the checking
- * stopped.** That gap is the figure's second argument: parallel writing multiplies what has to be
- * read, attention does not multiply with it, and the part nobody opened is the part that ships. Keep
- * the strip dashed and keep it longer than `verify`, or the drawing says the opposite.
- *
- * `wait` and `ship` **grow** from one row to the next, because the gates did not change and there is
- * more going through them. They stay slim in both rows: the queues are the point of the section, not
- * the mass of the picture.
- *
- * The process stages are dashed outlines rather than a second fill. At the alphas this palette
- * uses, a teal tint and a grey tint are hard to tell apart, and a dash already reads in this course
- * as the place where nothing is happening. That is exactly what a queue is.
- *
- * A segment names itself inside its own block unless it is too narrow to hold the word, which today
- * is only `write` on the second row. That one takes a tick and a label above the bar, and the
- * exception is the point: the stage everybody thinks of as the work no longer has room for its own
- * name. Both bottleneck marks sit above their bars so the strip has the space under the second one.
+ * It plays on `useStory`'s clock: both dots leave on day 0, the agent's is through the writing in
+ * half a day and then waits in the same queue, and each row says when it reached production. Writing
+ * is solid teal and the waits are dashed, the course's mark for where nothing is happening. Reduced
+ * motion shows the last frame, with the line that sums it up.
  */
-const BAR_X = 118
-const BAR_H = 34
-/** 506px of drawing for 100 units of time, in a 640 viewBox with a left column for the row names. */
-const SCALE = 5.06
-const ROW_Y = [56, 140] as const
-const OLD_END = BAR_X + 100 * SCALE
-/** Under this a segment cannot hold its own label in either language, so the name goes above it. */
-const NARROW = 52
-const LANE_GAP = 3
-/** The strip of verifying that the parallel lanes need, drawn under the row it belongs to. */
-const STRIP_H = 9
-const STRIP_GAP = 8
-
-const STAGES = [
-  { id: 'decide', kind: 'work' },
-  { id: 'wait', kind: 'process' },
-  { id: 'write', kind: 'work' },
-  { id: 'check', kind: 'work' },
-  { id: 'ship', kind: 'process' },
-] as const
-
-const ROWS = [
-  {
-    id: 'traditional',
-    // `wait` is 11 rather than 10 for a reason that is not about time: below about 52px a block
-    // cannot hold its own name in either language, and a queue whose label floats above the bar
-    // reads as an exception when it is the ordinary case.
-    units: [12, 11, 41, 21, 15],
-    bottleneck: 'write',
-    lanes: 1,
-  },
-  {
-    id: 'agentic',
-    units: [12, 14, 8, 30, 18],
-    bottleneck: 'check',
-    lanes: 3,
-    /** Three lanes of output at what one lane cost to read: 3 x 21. */
-    needed: 63,
-  },
-] as const
+const W = 640
+const X0 = 1
+const DAYS = 23
+const DAY = (W - 2) / DAYS
+const H = 44
+const START = 1500
+const PLAY = 12000
+const LENGTH = START + PLAY + 600
 
 export function PipelineShift() {
-  const { t } = useTranslation('step3')
+  const { t, i18n } = useTranslation('step3')
+  const [ref, now, story] = useStory<SVGSVGElement>(LENGTH, 4500)
   const titleId = useId()
+  const day = beat(now, START, PLAY) * DAYS
+
+  // The three waits are the paragraph's own; only the writing differs between the rows.
+  const waits = [
+    { id: 'review', days: 3 },
+    { id: 'environment', days: 10 },
+    { id: 'release', days: 5 },
+  ]
+  const rows = [
+    { id: 'traditional', y: 66, write: 5 },
+    { id: 'agentic', y: 158, write: 0.5 },
+  ]
 
   return (
-    <figure id="pipeline-shift" data-component="PipelineShift" className="my-8">
+    <figure id="pipeline-shift" data-component="PipelineShift" className="my-8 flex flex-col gap-2">
       <svg
         id="pipeline-shift-svg"
         data-component="PipelineShift"
-        viewBox="0 0 640 214"
+        ref={ref}
+        viewBox={`0 0 ${W} 272`}
         role="img"
         aria-labelledby={titleId}
         className="h-auto w-full"
@@ -102,239 +74,163 @@ export function PipelineShift() {
           {t('pipeline-shift.description')}
         </title>
 
-        {/* Two kinds of block, named once. Every stage is one or the other in both rows. */}
-        <g id="pipeline-shift-legend" data-component="PipelineShift">
-          <rect x={BAR_X} y="4" width="12" height="12" rx="2" className="fill-primary/25" />
-          <text
-            x={BAR_X + 19}
-            y="14"
-            fontSize="12"
-            className="fill-muted-foreground"
-            data-component="PipelineShift"
-          >
-            {t('pipeline-shift.work')}
-          </text>
-
-          <rect
-            x={BAR_X + 190}
-            y="4"
-            width="12"
-            height="12"
-            rx="2"
-            strokeWidth="1.5"
-            strokeDasharray="3 3"
-            className="fill-muted-foreground/10 stroke-muted-foreground/50"
-          />
-          <text
-            x={BAR_X + 209}
-            y="14"
-            fontSize="12"
-            className="fill-muted-foreground"
-            data-component="PipelineShift"
-          >
-            {t('pipeline-shift.process')}
-          </text>
-        </g>
-
-        {/* Where the old pipeline ended, carried down through both rows so the second one's short
-            end is read against something rather than guessed at. */}
-        <line
-          id="pipeline-shift-old-end"
+        <text
+          id="pipeline-shift-question"
           data-component="PipelineShift"
-          x1={OLD_END}
-          y1={ROW_Y[0]}
-          x2={OLD_END}
-          y2={ROW_Y[1] + BAR_H}
+          x={X0}
+          y="20"
+          fontSize="15"
+          className="fill-foreground font-medium"
+        >
+          {t('pipeline-shift.question')}
+        </text>
+        <text
+          id="pipeline-shift-day"
+          data-component="PipelineShift"
+          x={W - 1}
+          y="20"
+          fontSize="12"
+          textAnchor="end"
+          className="fill-muted-foreground font-mono"
+        >
+          {t('pipeline-shift.day', { n: Math.floor(day) })}
+        </text>
+        <path
+          id="pipeline-shift-guide"
+          data-component="PipelineShift"
+          d={`M ${X0 + DAYS * DAY} 66 V 210`}
           strokeWidth="1"
-          strokeDasharray="4 4"
-          className="stroke-muted-foreground/40"
+          strokeDasharray="3 3"
+          className="stroke-muted-foreground"
+          style={{ opacity: day >= DAYS ? 1 : 0 }}
         />
 
-        {ROWS.map((row, rowIndex) => {
-          const y = ROW_Y[rowIndex]
+        {rows.map((row) => {
           const block = `pipeline-shift-${row.id}`
-          const laneH = (BAR_H - (row.lanes - 1) * LANE_GAP) / row.lanes
-          let x = BAR_X
-          let checkX = BAR_X
-
+          const segments = [{ id: 'write', days: row.write, work: true }, ...waits.map((w) => ({ ...w, work: false }))]
+          const total = segments.reduce((sum, s) => sum + s.days, 0)
+          let from = 0
           return (
             <g key={row.id} id={block} data-component="PipelineShift">
               <text
                 id={`${block}-label`}
                 data-component="PipelineShift"
-                x="0"
-                y={y + 21}
-                fontSize="13"
+                x={X0}
+                y={row.y - 10}
+                fontSize="14"
                 className="fill-foreground font-medium"
               >
                 {t(`pipeline-shift.${row.id}`)}
               </text>
-
-              {STAGES.map((stage, index) => {
-                const width = row.units[index] * SCALE
-                const left = x
-                x += width
-                if (stage.id === 'check') checkX = left
-
-                const isBottleneck = stage.id === row.bottleneck
-                const inside = width >= NARROW
-                const parallel = stage.id === 'write' && row.lanes > 1
-                const name = parallel ? 'write-many' : stage.id
-
+              <text
+                id={`${block}-done`}
+                data-component="PipelineShift"
+                x={W - 16}
+                y={row.y - 10}
+                fontSize="14"
+                textAnchor="end"
+                className="fill-foreground font-mono font-medium"
+              >
+                {day >= total ? t('pipeline-shift.done', { n: total.toLocaleString(i18n.language) }) : ''}
+              </text>
+              {segments.map((segment) => {
+                const x = X0 + from * DAY
+                const w = segment.days * DAY
+                from += segment.days
+                const days =
+                  segment.days === 0.5 ? t('pipeline-shift.half-day') : t('pipeline-shift.days', { n: segment.days })
+                const name = t(`pipeline-shift.${segment.id}`)
                 return (
-                  <g
-                    key={stage.id}
-                    id={`${block}-${stage.id}`}
-                    data-component="PipelineShift"
-                    data-state={isBottleneck ? 'bottleneck' : stage.kind}
-                  >
-                    {/* One block, or one per lane when the stage runs several agents at once. */}
-                    {Array.from({ length: parallel ? row.lanes : 1 }, (_, lane) => (
-                      <rect
-                        key={lane}
-                        id={parallel ? `${block}-${stage.id}-lane-${lane}` : undefined}
-                        x={left}
-                        y={parallel ? y + lane * (laneH + LANE_GAP) : y}
-                        width={width}
-                        height={parallel ? laneH : BAR_H}
-                        strokeWidth={stage.kind === 'process' || parallel ? 1.5 : 0}
-                        strokeDasharray={stage.kind === 'process' ? '5 4' : undefined}
-                        className={
-                          stage.kind === 'process'
-                            ? 'fill-muted-foreground/10 stroke-muted-foreground/50'
-                            : isBottleneck
-                              ? 'fill-primary'
-                              : // A lane is a tenth of the height of an ordinary block and a
-                                // twentieth of the width, so the tint alone does not hold it. The
-                                // edge is what makes three of them count as three.
-                                `fill-primary/25 ${parallel ? 'stroke-primary/50' : ''}`
-                        }
-                        data-component="PipelineShift"
-                      />
-                    ))}
-
-                    {inside ? (
-                      <text
-                        x={left + width / 2}
-                        y={y + 22}
-                        fontSize="11"
-                        textAnchor="middle"
-                        className={isBottleneck ? 'fill-primary-foreground' : 'fill-foreground'}
-                        data-component="PipelineShift"
-                      >
-                        {t(`pipeline-shift.${name}`)}
-                      </text>
-                    ) : (
+                  <g key={segment.id} id={`${block}-${segment.id}`} data-component="PipelineShift">
+                    <rect
+                      id={`${block}-${segment.id}-block`}
+                      data-component="PipelineShift"
+                      x={x + 1.5}
+                      y={row.y}
+                      width={Math.max(4, w - 3)}
+                      height={H}
+                      rx="6"
+                      strokeWidth="1.5"
+                      strokeDasharray={segment.work ? undefined : '5 4'}
+                      className={segment.work ? 'fill-primary stroke-primary' : 'fill-background stroke-primary/50'}
+                    />
+                    {w > 60 ? (
                       <>
-                        <line
-                          x1={left + width / 2}
-                          y1={y - 7}
-                          x2={left + width / 2}
-                          y2={y}
-                          strokeWidth="1"
-                          className="stroke-muted-foreground/60"
-                          data-component="PipelineShift"
-                        />
                         <text
-                          x={left + width / 2}
-                          y={y - 12}
-                          fontSize="11"
-                          textAnchor="middle"
-                          className="fill-foreground"
+                          id={`${block}-${segment.id}-name`}
                           data-component="PipelineShift"
+                          x={x + w / 2}
+                          y={row.y + 19}
+                          fontSize="12"
+                          textAnchor="middle"
+                          className={segment.work ? 'fill-primary-foreground' : 'fill-foreground'}
                         >
-                          {t(`pipeline-shift.${name}`)}
+                          {name}
+                        </text>
+                        <text
+                          id={`${block}-${segment.id}-days`}
+                          data-component="PipelineShift"
+                          x={x + w / 2}
+                          y={row.y + 34}
+                          fontSize="12"
+                          textAnchor="middle"
+                          className={
+                            segment.work ? 'fill-primary-foreground font-semibold' : 'fill-foreground font-semibold'
+                          }
+                        >
+                          {days}
                         </text>
                       </>
-                    )}
-
-                    {/* Above the bar in both rows, because the second row's underside carries the
-                        strip. A caret pointing down at the block it names. */}
-                    {isBottleneck && (
-                      <g id={`${block}-${stage.id}-mark`} data-component="PipelineShift">
+                    ) : (
+                      /* too narrow to hold its own name, which is the point: it is the agent's writing */
+                      <>
                         <path
-                          d={`M${left + width / 2 - 6} ${y - 8} L${left + width / 2} ${y - 1} L${left + width / 2 + 6} ${y - 8} Z`}
-                          className="fill-primary"
+                          id={`${block}-${segment.id}-tick`}
                           data-component="PipelineShift"
+                          d={`M ${x + w / 2} ${row.y + H + 2} V ${row.y + H + 8}`}
+                          strokeWidth="1.5"
+                          className="stroke-primary/50"
                         />
                         <text
-                          x={left + width / 2}
-                          y={y - 13}
-                          fontSize="11"
-                          textAnchor="middle"
-                          className="fill-primary font-medium"
+                          id={`${block}-${segment.id}-name`}
                           data-component="PipelineShift"
+                          x={x}
+                          y={row.y + H + 22}
+                          fontSize="12"
+                          className="fill-foreground font-semibold"
                         >
-                          {t('pipeline-shift.bottleneck')}
+                          {`${name}: ${days}`}
                         </text>
-                      </g>
+                      </>
                     )}
                   </g>
                 )
               })}
-
-              {/* What three lanes of output actually need read, against what got read. The divider
-                  is where the checking stopped, and everything right of it ships unopened. */}
-              {'needed' in row && (
-                <g id={`${block}-needed`} data-component="PipelineShift">
-                  {/* The part of the strip that got read, filled so the rest reads as empty rather
-                      than as more of the same. It is the width of the block above it by
-                      construction: what you checked is what you had time to check. */}
-                  <rect
-                    id={`${block}-needed-done`}
-                    data-component="PipelineShift"
-                    x={checkX}
-                    y={y + BAR_H + STRIP_GAP}
-                    width={x - row.units[4] * SCALE - checkX}
-                    height={STRIP_H}
-                    className="fill-primary/25"
-                  />
-                  <rect
-                    x={checkX}
-                    y={y + BAR_H + STRIP_GAP}
-                    width={row.needed * SCALE}
-                    height={STRIP_H}
-                    strokeWidth="1.5"
-                    strokeDasharray="5 4"
-                    className="fill-none stroke-muted-foreground/60"
-                    data-component="PipelineShift"
-                  />
-                  <line
-                    id={`${block}-needed-divider`}
-                    data-component="PipelineShift"
-                    x1={x - row.units[4] * SCALE}
-                    y1={y + BAR_H + STRIP_GAP}
-                    x2={x - row.units[4] * SCALE}
-                    y2={y + BAR_H + STRIP_GAP + STRIP_H}
-                    strokeWidth="2"
-                    className="stroke-primary"
-                  />
-                  <text
-                    x={x - row.units[4] * SCALE - 5}
-                    y={y + BAR_H + STRIP_GAP + STRIP_H + 15}
-                    fontSize="11"
-                    textAnchor="end"
-                    className="fill-primary"
-                    data-component="PipelineShift"
-                  >
-                    {t('pipeline-shift.checked')}
-                  </text>
-                  <text
-                    x={checkX + row.needed * SCALE}
-                    y={y + BAR_H + STRIP_GAP + STRIP_H + 15}
-                    fontSize="11"
-                    textAnchor="end"
-                    className="fill-muted-foreground"
-                    data-component="PipelineShift"
-                  >
-                    {t('pipeline-shift.needed')}
-                  </text>
-                </g>
-              )}
+              <circle
+                id={`${block}-dot`}
+                data-component="PipelineShift"
+                cx={X0 + Math.min(day, total) * DAY}
+                cy={row.y + H}
+                r="6"
+                className="fill-primary"
+              />
             </g>
           )
         })}
+
+        <text
+          id="pipeline-shift-takeaway"
+          data-component="PipelineShift"
+          x={X0}
+          y="262"
+          fontSize="14"
+          className="fill-foreground"
+          style={{ opacity: now >= START + PLAY ? 1 : 0 }}
+        >
+          {t('pipeline-shift.takeaway')}
+        </text>
       </svg>
+      <StoryToggle id="pipeline-shift" component="PipelineShift" story={story} />
 
       <figcaption
         id="pipeline-shift-caption"

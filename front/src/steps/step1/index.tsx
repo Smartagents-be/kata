@@ -24,6 +24,7 @@ import { PickTheNext } from './PickTheNext'
 import { PickTheTier } from './PickTheTier'
 import { PlanItTwice } from './PlanItTwice'
 import { PriceOneTurn } from './PriceOneTurn'
+import { PromptCache } from './PromptCache'
 import { PromptParts } from './PromptParts'
 import { ReadYourWindow } from './ReadYourWindow'
 import { ReasoningCost } from './ReasoningCost'
@@ -110,6 +111,7 @@ const step1: Step = {
         'sampling-knobs': <SamplingKnobs />,
         'token-attention': <TokenAttention />,
         'token-kinds': <TokenKinds />,
+        'prompt-cache': <PromptCache />,
         'pick-the-next': <PickTheNext />,
       },
     },

@@ -1,5 +1,7 @@
 import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
+import { StoryToggle } from '@/shared/motion/StoryToggle'
+import { beat, glide, useStory } from '@/shared/motion/useStory'
 
 /**
  * The two corrections, drawn as the window each one leaves behind. On the left the correction went
@@ -27,6 +29,13 @@ import { useTranslation } from 'react-i18next'
  * **in the same session** and names no keystroke, on the unit's rule that the binding is a
  * harness's. The three dots under the left stack are the opposite claim, that this window only
  * grows from here.
+ *
+ * **It plays the two moves on `useStory`'s clock** (October 2026, at the owner's asking), because the
+ * difference is an action: pasting on against taking out. Both windows start the same, the request
+ * and the wrong file. On the left the correction slides in under it and the next turn after that,
+ * and nothing leaves. On the right a playhead runs back up to the request, the two rows take their
+ * strike and their dashes, and the rewritten request takes the place below them. The last frame is
+ * the drawing described above, and it is what reduced motion shows.
  */
 const FRAME_W = 270
 const FRAME_H = 240
@@ -41,7 +50,15 @@ interface Block {
   y: number
   h: number
   state: 'held' | 'bulk' | 'yours' | 'dropped'
+  /** How far it has come in, on the story clock. */
+  shown?: number
 }
+
+/** The story's beats, in ms. */
+const SPLIT = 1500
+const BACK = 1000
+const DROP = SPLIT + BACK
+const LENGTH = 5000
 
 const FORWARD: readonly Block[] = [
   { key: 'request', y: 42, h: 30, state: 'held' },
@@ -82,13 +99,21 @@ function Window({
   blocks,
   growing,
   dropped,
+  droppedShown = 1,
+  noteShown = 1,
+  playhead,
 }: {
   block: string
   x: number
   blocks: readonly Block[]
-  growing?: boolean
+  /** How far the three dots have come in; absent on a window that does not grow. */
+  growing?: number
   /** Message key for the label under the dropped rows, when the window has any. */
   dropped?: string
+  droppedShown?: number
+  noteShown?: number
+  /** The y of the rewind's playhead while it runs back up the window. */
+  playhead?: number
 }) {
   const { t } = useTranslation('step2')
 
@@ -123,6 +148,7 @@ function Window({
           id={`two-windows-${block}-${turn.key}`}
           data-component="TwoWindows"
           data-state={turn.state}
+          style={{ opacity: turn.shown ?? 1 }}
         >
           <rect
             x={x + PAD}
@@ -158,13 +184,14 @@ function Window({
           fontSize="11"
           textAnchor="middle"
           className="fill-muted-foreground"
+          style={{ opacity: droppedShown }}
         >
           {t(dropped)}
         </text>
       )}
 
       {/* The stack goes on from here, which is the left window's whole problem. */}
-      {growing &&
+      {growing !== undefined &&
         [240, 248, 256].map((dotY) => (
           <circle
             key={dotY}
@@ -174,8 +201,22 @@ function Window({
             cy={dotY}
             r="1.5"
             className="fill-muted-foreground/60"
+            style={{ opacity: growing }}
           />
         ))}
+
+      {playhead !== undefined && (
+        <line
+          id={`two-windows-${block}-playhead`}
+          data-component="TwoWindows"
+          x1={x + 4}
+          x2={x + FRAME_W - 4}
+          y1={playhead}
+          y2={playhead}
+          strokeWidth="2.5"
+          className="stroke-primary"
+        />
+      )}
 
       <text
         id={`two-windows-${block}-note`}
@@ -185,6 +226,7 @@ function Window({
         fontSize="13"
         textAnchor="middle"
         className="fill-muted-foreground"
+        style={{ opacity: noteShown }}
       >
         {t(`two-windows.${block}.note`)}
       </text>
@@ -194,13 +236,38 @@ function Window({
 
 export function TwoWindows() {
   const { t } = useTranslation('step2')
+  const [ref, now, story] = useStory<SVGSVGElement>(LENGTH, 3500)
   const titleId = useId()
 
+  /* Left: the correction and the turn after it are pasted on, and nothing leaves. */
+  const forward = FORWARD.map((turn) =>
+    turn.key === 'fix'
+      ? { ...turn, shown: beat(now, SPLIT, 400) }
+      : turn.key === 'next'
+        ? { ...turn, shown: beat(now, SPLIT + 1100, 400) }
+        : turn,
+  )
+  /* Right: until the rewind lands, the window is the left one's first two rows; then they are struck. */
+  const k = glide(now, DROP, 500)
+  const rewind: Block[] = REWIND.map((turn, index) => {
+    if (turn.state !== 'dropped') {
+      return { ...turn, shown: beat(now, turn.key === 'rewritten' ? DROP + 800 : DROP + 1500, 400) }
+    }
+    const from = FORWARD[index]
+    return now < DROP
+      ? { ...from }
+      : { ...turn, y: from.y + (turn.y - from.y) * k, h: from.h + (turn.h - from.h) * k }
+  })
+  const running = now >= SPLIT && now < DROP
+  const playhead = running ? 240 - glide(now, SPLIT, BACK) * (240 - 40) : undefined
+  const notes = beat(now, DROP + 2000, 400)
+
   return (
-    <figure id="two-windows" data-component="TwoWindows" className="my-8 flex justify-center">
+    <figure id="two-windows" data-component="TwoWindows" className="my-8 flex flex-col items-center gap-2">
       <svg
         id="two-windows-svg"
         data-component="TwoWindows"
+        ref={ref}
         viewBox="0 0 640 306"
         role="img"
         aria-labelledby={titleId}
@@ -210,14 +277,24 @@ export function TwoWindows() {
           {t('two-windows.description')}
         </title>
 
-        <Window block="forward" x={LEFT_X} blocks={FORWARD} growing />
+        <Window
+          block="forward"
+          x={LEFT_X}
+          blocks={forward}
+          growing={beat(now, SPLIT + 1800, 400)}
+          noteShown={notes}
+        />
         <Window
           block="rewind"
           x={RIGHT_X}
-          blocks={REWIND}
+          blocks={rewind}
           dropped="two-windows.rewind.dropped"
+          droppedShown={beat(now, DROP + 400, 400)}
+          noteShown={notes}
+          playhead={playhead}
         />
       </svg>
+      <StoryToggle id="two-windows" component="TwoWindows" story={story} />
     </figure>
   )
 }

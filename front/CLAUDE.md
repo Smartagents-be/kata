@@ -106,6 +106,19 @@ The two arbitrary variants in there earn their place: `[&_figure]:my-0` drops th
 carries for prose flow, and `[&_svg]:max-w-none` lifts the cap so the drawing fills its box before
 being magnified.
 
+**A figure that tells a story runs on `shared/motion/useStory.ts`**, and that hook is what makes it
+work on a slide (October 2026). The engine keeps every slide mounted and hides the inactive ones
+with `visibility`, so a figure cannot tell on its own whether anybody sees it; the hook finds its
+slide (a direct child of `<deck-stage>`), listens for the engine's own `slidechange`, and restarts
+the story when that slide becomes active. On a unit page it starts when the figure scrolls into
+view. A story figure renders as a pure function of the hook's clock, so its reduced-motion state is
+simply its last frame. `AgentLoop` is pure CSS and needs none of this, since a loop has no start.
+**Every animated figure carries a pause button**, `shared/motion/StoryToggle.tsx`, `AgentLoop`
+included (where it sets `animation-play-state`), at the owner's asking. On a slide it lets go of
+focus after a click, because the deck advances on Space and a focused button would take that Space
+too. **Every animated figure is also on a slide**, at the owner's asking; `PromptCache` got
+`deck-tokens-cache-turns` for that.
+
 One bug that transform exposed, fixed in `shared/components/ConnectBoard.tsx` rather than in the
 deck: the board measures anchors with `getBoundingClientRect` (post-transform) and draws them into
 an overlay `<svg>` that has no `viewBox` and is therefore addressed in layout pixels

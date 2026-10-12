@@ -1,178 +1,95 @@
 import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
+import { StoryToggle } from '@/shared/motion/StoryToggle'
+import { beat, useStory } from '@/shared/motion/useStory'
 
 /**
- * One hour, drawn twice, with the turns that fit in it. The slow band gets through two and starts a
- * third; the fast band gets through eleven. Each turn is cut the same way, into the change you make,
- * the waiting the loop costs you and the look you take at the result, so what separates the two
- * bands is the middle segment and nothing else.
+ * How often an agent can prove in an hour that its change works, drawn twice. A try is a row of
+ * boxes from "the agent changes the code" to "proof: it works", the agent's own work in teal and
+ * everything in between dashed, which is the course's mark for where nothing is happening: the
+ * change is on its way and nobody can see it yet. Not running it locally there are three boxes in
+ * between, a push, a pipeline and a deploy to a test environment, under a bracket that says how long
+ * that takes; running it locally there is one, a restart. A dot plays the hour through each row at
+ * the speed of its minutes, and the count on the right is how many tries got all the way to proof.
  *
  * It closes the `run-own-machine` section of the `enablement` unit, at the
- * `data-figure="loops-per-hour"` slot, the way the `FlowDiagram`s close their sections in
- * `workflows`. It sat under `reachable-one-step` first, and moved when that section was cut: the
- * hinge paragraph of `run-own-machine` is the one that states the gap between changing something and
- * finding out, and this figure is that gap measured. **The two band labels name running it locally
- * and nothing else.** They read "Deploying to find out" against "With the shortcuts in" while the
- * figure sat under the deploy argument, and were rewritten with the move, because a band labelled
- * for prose that is no longer in the unit is the failure to watch for here.
+ * `data-figure="loops-per-hour"` slot, under the paragraph where the agent opens the page, sees the
+ * wrong column and fixes it in the same pass: this figure is that pass, counted.
  *
- * **This figure is on the clock, and never on step size.** It measures an hour and counts turns.
- * Few long steps against many short ones, measured as distance to a target, was `IterationPaths` in
- * the `evolution` unit, and both went in October 2026 at the owner's asking because the drawing did
- * not explain itself. Do not redraw this one in that vocabulary to bring the argument back.
+ * **It was redrawn in October 2026 at the owner's asking, because the band it replaced did not
+ * explain itself.** That was one hour as a band cut into turns of change, wait and look, two turns
+ * against eleven, and a reader could not tell what a turn was or what the wait was for. Three things
+ * from the redraw are the decisions now.
  *
- * Three things about how it is drawn are decisions rather than styling.
+ * **The question is the title and it does not change**: the owner called a caption that changed per
+ * step unnecessary, so the drawing tells the story and the one line above it says what it answers.
  *
- * **The waiting is drawn as nothing at all.** A turn is a box, the work in it is solid, and the wait
- * is the empty part of the box. So the slow band reads as two mostly empty rooms and the fast band
- * as eleven full ones, which is the argument without a single extra tone. It was drawn with a pale
- * fill on the wait first, and that spent six greys and teals on a figure that needs three.
+ * **The point is proof, wherever it runs.** The owner's own framing: the agent has to be able to show
+ * that its result works, and a good setup is what makes that fast. So the slow row is not a row that
+ * cannot check; it checks against a test environment, with more in between. The boxes name what is
+ * in between (push, pipeline, deploy) rather than calling it "waiting", because "you wait for it" and
+ * "you look at it" were rejected as saying nothing.
  *
- * **Both bands take the same fills**, and that is what makes the sentence above true. The slow band
- * was grey and the fast one teal, which read as the bands being two different kinds of thing when
- * the whole claim is that they are one hour spent two ways. It also made the legend a lie for one
- * band, since the swatches can only be drawn in one palette. So `FILL` is the only palette, a part
- * is the same colour wherever it appears, and the emptiness is left to carry the difference. Give
- * either band a hue of its own and the figure starts arguing two things at once.
+ * **Little text, and real units.** The per-box minutes, a legend and a running clock label were in the
+ * first redraw and came out at the owner's asking once the bracket carried the point. The minutes
+ * stay in the data, so the dot keeps time, and the bracket is the one place they are printed. They are
+ * illustrative and the caption-free drawing does not say so; the paragraph around it does not claim a
+ * number. **It is still on the clock and never on step size**, which `IterationPaths` drew and the
+ * owner removed: every row is the same hour, and what it counts is tries.
  *
- * **The band runs the full width of the viewBox** (`BAND_X` at 1, `BAND_W` at 638), so its edges land
- * on the prose column's edges and the svg carries no `max-w`. Inset, it read as a narrower picture
- * sitting inside the text rather than as a measure of the column it is in. Both bands are pinned to
- * `BAND_W` because the hour is the same hour, and that equality is the whole drawing.
+ * The count is 2 against 10 with these minutes (23 and 6 per try), where the band said 2 against 11.
+ * Reduced motion shows the end of the hour.
  */
-const BAND_X = 1
-const BAND_W = 638
-const BAND_H = 36
+type Stage = { kind: 'agent' | 'wait'; min: number; lines: string[] }
 
-type Part = 'change' | 'wait' | 'look'
-type Segment = { part: Part; w: number }
-
-/** A slow turn: the waiting is almost all of it. Two of these fit, and a third is left hanging. */
-const SLOW_TURN: Segment[] = [
-  { part: 'change', w: 30 },
-  { part: 'wait', w: 218 },
-  { part: 'look', w: 32 },
-]
-
-/** A fast turn, with the same three parts and the waiting cut down to the size of the other two. */
-const FAST_TURN: Segment[] = [
-  { part: 'change', w: 18 },
-  { part: 'wait', w: 18 },
-  { part: 'look', w: 22 },
-]
-
-/** Two whole turns and the start of a third, which is what an hour buys when every loop waits. */
-const SLOW: Segment[][] = [
-  SLOW_TURN,
-  SLOW_TURN,
-  [
-    { part: 'change', w: 30 },
-    { part: 'wait', w: 48 },
-  ],
-]
-
-/** Eleven whole turns, filling the same band exactly. */
-const FAST: Segment[][] = Array.from({ length: 11 }, () => FAST_TURN)
-
-/**
- * Two tones and an absence, and **both bands take them**. A part is the same colour wherever it
- * appears, so the drawing says one thing about the parts and one thing about the bands rather than
- * mixing the two claims into one palette. The wait carries no fill, because it is the part where
- * nothing happens.
- */
-const FILL: Record<Part, string> = {
-  change: 'fill-primary',
-  wait: 'fill-none',
-  look: 'fill-primary/50',
-}
-
-/**
- * One band, cut into turns and each turn into its three parts. A turn is closed off by a hairline of
- * its own, because the count is what the figure argues and loose fills do not read as a turn.
- */
-function Band({ block, turns, y }: { block: string; turns: Segment[][]; y: number }) {
-  let x = BAND_X
-
-  return (
-    <g id={`loops-per-hour-${block}-band`} data-component="Band">
-      {turns.map((turn, turnIndex) => {
-        const turnLeft = x
-        const turnWidth = turn.reduce((total, segment) => total + segment.w, 0)
-        x += turnWidth
-
-        let inner = turnLeft
-
-        return (
-          <g key={turnIndex} id={`loops-per-hour-${block}-turn-${turnIndex}`} data-component="Band">
-            {turn.map((segment, index) => {
-              const left = inner
-              inner += segment.w
-
-              return (
-                <rect
-                  key={index}
-                  id={`loops-per-hour-${block}-turn-${turnIndex}-segment-${index}`}
-                  data-component="Band"
-                  data-state={segment.part}
-                  x={left}
-                  y={y}
-                  width={segment.w}
-                  height={BAND_H}
-                  className={FILL[segment.part]}
-                />
-              )
-            })}
-            {/* Where this turn ends and the next begins. The first needs none: the band's own
-                outline is already standing there. */}
-            {turnIndex > 0 && (
-              <line
-                id={`loops-per-hour-${block}-turn-${turnIndex}-divider`}
-                data-component="Band"
-                x1={turnLeft}
-                y1={y}
-                x2={turnLeft}
-                y2={y + BAND_H}
-                strokeWidth="1"
-                className="stroke-border"
-              />
-            )}
-          </g>
-        )
-      })}
-
-      {/* The band's own outline, over the fills, so the hour reads as one box either way. */}
-      <rect
-        id={`loops-per-hour-${block}-outline`}
-        data-component="Band"
-        x={BAND_X}
-        y={y}
-        width={BAND_W}
-        height={BAND_H}
-        strokeWidth="1"
-        className="fill-none stroke-border"
-      />
-    </g>
-  )
-}
+const W = 640
+const BW = 92
+const GAP = 16
+const BOX_H = 54
+const HOUR = 60
+/** How long the hour takes to play, in ms. */
+const PLAY = 18000
+const START = 1500
+const LENGTH = START + PLAY
 
 export function LoopsPerHour() {
   const { t } = useTranslation('step2')
+  const [ref, now, story] = useStory<SVGSVGElement>(LENGTH, 4000)
   const titleId = useId()
+  const minute = beat(now, START, PLAY) * HOUR
 
-  // Laid out at measured offsets rather than on an even pitch: the longest label is the middle one
-  // in both languages, and an even pitch runs it into the swatch after it in Dutch.
-  const legend: { part: Part; x: number }[] = [
-    { part: 'change', x: 0 },
-    { part: 'wait', x: 230 },
-    { part: 'look', x: 460 },
+  const rows: { id: string; name: string; y: number; stages: Stage[] }[] = [
+    {
+      id: 'slow',
+      name: t('loops-per-hour.slow'),
+      y: 82,
+      stages: [
+        { kind: 'agent', min: 2, lines: [t('loops-per-hour.change.1'), t('loops-per-hour.change.2')] },
+        { kind: 'wait', min: 1, lines: [t('loops-per-hour.push')] },
+        { kind: 'wait', min: 10, lines: [t('loops-per-hour.pipeline')] },
+        { kind: 'wait', min: 7, lines: [t('loops-per-hour.deploy.1'), t('loops-per-hour.deploy.2')] },
+        { kind: 'agent', min: 3, lines: [t('loops-per-hour.proof.1'), t('loops-per-hour.proof.2')] },
+      ],
+    },
+    {
+      id: 'fast',
+      name: t('loops-per-hour.fast'),
+      y: 200,
+      stages: [
+        { kind: 'agent', min: 2, lines: [t('loops-per-hour.change.1'), t('loops-per-hour.change.2')] },
+        { kind: 'wait', min: 1, lines: [t('loops-per-hour.restart')] },
+        { kind: 'agent', min: 3, lines: [t('loops-per-hour.proof.1'), t('loops-per-hour.proof.2')] },
+      ],
+    },
   ]
 
   return (
-    <figure id="loops-per-hour" data-component="LoopsPerHour" className="my-8 flex justify-center">
+    <figure id="loops-per-hour" data-component="LoopsPerHour" className="my-8 flex flex-col items-center gap-2">
       <svg
         id="loops-per-hour-svg"
         data-component="LoopsPerHour"
-        viewBox="0 0 640 250"
+        ref={ref}
+        viewBox={`0 0 ${W} 290`}
         role="img"
         aria-labelledby={titleId}
         className="h-auto w-full"
@@ -181,101 +98,160 @@ export function LoopsPerHour() {
           {t('loops-per-hour.description')}
         </title>
 
-        {/* The hour itself, bracketed once over both bands, because it is the same hour. */}
         <text
-          id="loops-per-hour-hour-label"
+          id="loops-per-hour-question"
           data-component="LoopsPerHour"
-          x="320"
-          y="16"
-          fontSize="13"
-          textAnchor="middle"
-          className="fill-muted-foreground"
+          x="1"
+          y="20"
+          fontSize="15"
+          className="fill-foreground font-medium"
         >
-          {t('loops-per-hour.hour')}
+          {t('loops-per-hour.question')}
         </text>
-        <path
-          id="loops-per-hour-hour-bracket"
+        {/* the hour, filling as it plays: the same hour for both rows */}
+        <rect
+          id="loops-per-hour-hour"
           data-component="LoopsPerHour"
-          d={`M${BAND_X} 26 v8 M${BAND_X} 30 H${BAND_X + BAND_W} M${BAND_X + BAND_W} 26 v8`}
+          x="1"
+          y="32"
+          width={W - 2}
+          height="8"
+          rx="4"
           strokeWidth="1"
-          className="fill-none stroke-border"
+          className="fill-muted stroke-border"
+        />
+        <rect
+          id="loops-per-hour-hour-fill"
+          data-component="LoopsPerHour"
+          x="1"
+          y="32"
+          width={((W - 2) * minute) / HOUR}
+          height="8"
+          rx="4"
+          className="fill-primary"
         />
 
-        <text
-          id="loops-per-hour-slow-label"
-          data-component="LoopsPerHour"
-          x={BAND_X}
-          y="62"
-          fontSize="14"
-          className="fill-foreground font-medium"
-        >
-          {t('loops-per-hour.slow')}
-        </text>
-        <text
-          id="loops-per-hour-slow-count"
-          data-component="LoopsPerHour"
-          x={BAND_X + BAND_W}
-          y="62"
-          fontSize="13"
-          textAnchor="end"
-          className="fill-muted-foreground"
-        >
-          {t('loops-per-hour.turns', { turns: 2 })}
-        </text>
-        <Band block="slow" turns={SLOW} y={72} />
-
-        <text
-          id="loops-per-hour-fast-label"
-          data-component="LoopsPerHour"
-          x={BAND_X}
-          y="142"
-          fontSize="14"
-          className="fill-foreground font-medium"
-        >
-          {t('loops-per-hour.fast')}
-        </text>
-        <text
-          id="loops-per-hour-fast-count"
-          data-component="LoopsPerHour"
-          x={BAND_X + BAND_W}
-          y="142"
-          fontSize="13"
-          textAnchor="end"
-          className="fill-muted-foreground"
-        >
-          {t('loops-per-hour.turns', { turns: 11 })}
-        </text>
-        <Band block="fast" turns={FAST} y={152} />
-
-        {/* What the three parts of a turn are, named once, since both bands are cut the same way.
-            The wait swatch is an empty box on purpose: that is exactly how it is drawn above. */}
-        <g id="loops-per-hour-legend" data-component="LoopsPerHour">
-          {legend.map(({ part, x }, index) => (
-            <g key={part} id={`loops-per-hour-legend-${index}`} data-component="LoopsPerHour">
-              <rect
-                id={`loops-per-hour-legend-${index}-swatch`}
+        {rows.map((row) => {
+          const total = row.stages.reduce((sum, s) => sum + s.min, 0)
+          const tries = Math.floor(minute / total + 1e-9)
+          const within = minute - tries * total
+          let from = 0
+          const placed = row.stages.map((stage, index) => {
+            const x = 1 + index * (BW + GAP)
+            const at = { ...stage, x, from, to: from + stage.min }
+            from += stage.min
+            return at
+          })
+          const current = placed.find((s) => within < s.to) ?? placed[placed.length - 1]
+          const k = Math.min(1, (within - current.from) / (current.to - current.from))
+          const waits = placed.filter((s) => s.kind === 'wait')
+          const bx0 = waits[0].x
+          const bx1 = waits[waits.length - 1].x + BW
+          const between = waits.reduce((sum, s) => sum + s.min, 0)
+          const block = `loops-per-hour-${row.id}`
+          return (
+            <g key={row.id} id={block} data-component="LoopsPerHour">
+              <text
+                id={`${block}-name`}
                 data-component="LoopsPerHour"
-                x={BAND_X + x}
-                y="216"
-                width="14"
-                height="14"
-                strokeWidth="1"
-                className={`${FILL[part]} stroke-border`}
+                x="1"
+                y={row.y - 14}
+                fontSize="14"
+                className="fill-foreground font-medium"
+              >
+                {row.name}
+              </text>
+              <text
+                id={`${block}-count`}
+                data-component="LoopsPerHour"
+                x={W - 1}
+                y={row.y - 14}
+                fontSize="14"
+                textAnchor="end"
+                className="fill-foreground font-mono font-medium"
+              >
+                {t('loops-per-hour.proven', { n: tries })}
+              </text>
+              {placed.map((stage, index) => (
+                <g key={index} id={`${block}-stage-${index}`} data-component="LoopsPerHour">
+                  {index > 0 && (
+                    <path
+                      id={`${block}-stage-${index}-link`}
+                      data-component="LoopsPerHour"
+                      d={`M ${stage.x - GAP} ${row.y + BOX_H / 2} H ${stage.x}`}
+                      strokeWidth="1.5"
+                      className="stroke-primary/40"
+                    />
+                  )}
+                  <rect
+                    id={`${block}-stage-${index}-box`}
+                    data-component="LoopsPerHour"
+                    x={stage.x}
+                    y={row.y}
+                    width={BW}
+                    height={BOX_H}
+                    rx="8"
+                    strokeWidth={stage === current ? 2.6 : 1.5}
+                    strokeDasharray={stage.kind === 'wait' ? '5 4' : undefined}
+                    className={
+                      stage.kind === 'agent'
+                        ? 'fill-primary/10 stroke-primary'
+                        : 'fill-background stroke-primary/50'
+                    }
+                  />
+                  {stage.lines.map((line, n) => (
+                    <text
+                      key={n}
+                      id={`${block}-stage-${index}-label-${n}`}
+                      data-component="LoopsPerHour"
+                      x={stage.x + BW / 2}
+                      y={row.y + BOX_H / 2 + 4 - (stage.lines.length - 1) * 7 + n * 14}
+                      fontSize="12"
+                      textAnchor="middle"
+                      className={
+                        index === placed.length - 1 && n === 0
+                          ? 'fill-foreground font-semibold'
+                          : 'fill-foreground'
+                      }
+                    >
+                      {line}
+                    </text>
+                  ))}
+                </g>
+              ))}
+              {/* everything between the change and the proof, and how long it takes */}
+              <path
+                id={`${block}-between`}
+                data-component="LoopsPerHour"
+                d={`M ${bx0} ${row.y + BOX_H + 6} V ${row.y + BOX_H + 11} H ${bx1} V ${row.y + BOX_H + 6}`}
+                fill="none"
+                strokeWidth="1.2"
+                className="stroke-muted-foreground"
               />
               <text
-                id={`loops-per-hour-legend-${index}-label`}
+                id={`${block}-between-label`}
                 data-component="LoopsPerHour"
-                x={BAND_X + x + 22}
-                y="228"
+                x={(bx0 + bx1) / 2}
+                y={row.y + BOX_H + 27}
                 fontSize="13"
-                className="fill-muted-foreground"
+                textAnchor="middle"
+                className="fill-foreground font-medium"
               >
-                {t(`loops-per-hour.${part}`)}
+                {t('loops-per-hour.between', { n: between })}
               </text>
+              <circle
+                id={`${block}-dot`}
+                data-component="LoopsPerHour"
+                cx={current.x + 8 + (BW - 16) * k}
+                cy={row.y + BOX_H}
+                r="6"
+                className="fill-primary"
+              />
             </g>
-          ))}
-        </g>
+          )
+        })}
       </svg>
+      <StoryToggle id="loops-per-hour" component="LoopsPerHour" story={story} />
     </figure>
   )
 }

@@ -1,6 +1,8 @@
-import type { CSSProperties } from 'react'
+import { useState, type CSSProperties } from 'react'
+import { useReducedMotion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { cn } from '@/shared/lib/utils'
+import { StoryToggle } from '@/shared/motion/StoryToggle'
 
 /** The drawing's own coordinate space. Everything below is placed in these units. */
 const W = 700
@@ -58,9 +60,16 @@ const NODES = [
  * paragraph above says the same two sentences), the nodes widen, and `tool_use` and `tool_result`
  * move out past the right of the ring, clear of the entry chip and the exit card they would
  * otherwise reach.
+ *
+ * **It can be paused** (October 2026, at the owner's asking), with the same `StoryToggle` as the
+ * story figures: the button sets `animation-play-state` on everything inside the frame, so the ring,
+ * the comet and the pulses all hold where they are and carry on together. Under reduced motion there
+ * is nothing running and so no button, since the CSS has already taken the animation away.
  */
 export function AgentLoop() {
   const { t } = useTranslation('step1')
+  const reduced = useReducedMotion() ?? false
+  const [playing, setPlaying] = useState(true)
 
   return (
     <figure
@@ -73,7 +82,7 @@ export function AgentLoop() {
       <div
         id="agent-loop-frame"
         data-component="AgentLoop"
-        className="@container w-full max-w-2xl"
+        className={cn('@container w-full max-w-2xl', !playing && '[&_*]:[animation-play-state:paused]')}
       >
         <div
           id="agent-loop-stage"
@@ -324,6 +333,14 @@ export function AgentLoop() {
           </div>
         </div>
       </div>
+      {!reduced && (
+        <StoryToggle
+          id="agent-loop"
+          component="AgentLoop"
+          story={{ playing, toggle: () => setPlaying(!playing) }}
+          className="max-w-2xl"
+        />
+      )}
 
       <figcaption
         id="agent-loop-caption"
