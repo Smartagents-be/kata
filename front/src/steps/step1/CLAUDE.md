@@ -1461,7 +1461,11 @@ claims that tool results are always the least trustworthy layer or that injectio
 "Test your knowledge" heading `tools` and `agent-patterns` use. **It carries no version numbers anywhere, and that is
 the decision.** Tiers
 outlive releases, so the unit teaches Opus, Sonnet and Haiku as dispositions; a card naming this
-quarter's release is wrong by the next one. **The lead no longer says that out loud**: the paragraph
+quarter's release is wrong by the next one. **Each card also names OpenAI's matching tier** (Haiku /
+Luna, Sonnet / Terra, Opus / Sol, the GPT-5.6 line, all three in Copilot), at the owner's asking on
+13 October 2026, so a card body may only state what holds for both: Luna costs a 10th of Terra and
+Haiku a 20th of Sonnet, hence "10 to 20 times less", and Terra is half of Sol as Sonnet is half of
+Opus. OpenAI's GPT-6 line has no middle name, which is why the cards stay on 5.6. **The lead no longer says that out loud**: the paragraph
 naming the three tiers and telling the student the names change and the shape does not was cut, so
 the figure now opens the unit and the only thing dating it is the small `(October 2026)` line moved
 under it. What survives of the claim is `model.cost.3`, which marks ratios and prices as changing (it names no month since 13 October 2026: the table's caption carries it, and the `lead.3` line dating the cards was cut the same day at the owner's asking), and

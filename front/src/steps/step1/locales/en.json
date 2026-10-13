@@ -569,23 +569,23 @@
   "mcp-parts.tool.who": "model requests a tool",
 
 
-  "tiers.opus.name": "Opus",
+  "tiers.opus.name": "Opus / Sol",
   "tiers.opus.character": "For complex work",
   "tiers.opus.body": "For tasks with many dependencies or hard decisions. It is the most expensive of the 3.",
   "tiers.opus.tag.1": "high-stakes analysis",
   "tiers.opus.tag.2": "long-form reasoning",
   "tiers.opus.tag.3": "edge cases",
 
-  "tiers.sonnet.name": "Sonnet",
+  "tiers.sonnet.name": "Sonnet / Terra",
   "tiers.sonnet.character": "A starting point to evaluate",
   "tiers.sonnet.body": "For routine coding and analysis, at half the price of the top tier.",
   "tiers.sonnet.tag.1": "agentic coding",
   "tiers.sonnet.tag.2": "anything new",
   "tiers.sonnet.tag.3": "honesty matters",
 
-  "tiers.haiku.name": "Haiku",
+  "tiers.haiku.name": "Haiku / Luna",
   "tiers.haiku.character": "For well-defined tasks",
-  "tiers.haiku.body": "For classification, extraction and tightly specified operations. It costs 20 times less than the middle tier and is often faster. On max reasoning it is often good enough for coding work too.",
+  "tiers.haiku.body": "For classification, extraction and tightly specified operations. It costs 10 to 20 times less than the middle tier and is often faster. On max reasoning it is often good enough for coding work too.",
   "tiers.haiku.tag.1": "classification",
   "tiers.haiku.tag.2": "structured extraction",
   "tiers.haiku.tag.3": "routing layers",
