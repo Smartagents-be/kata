@@ -1115,7 +1115,7 @@ picker where its Thinking Effort setting sits (VS Code, Visual Studio and the CL
 `steering`**, so `instruction.1` closes on a link to it in half a clause rather than describing the
 move: the cascade is what this unit argues, and a paragraph that also said how to catch one mid-run
 would answer the problem in the same breath as posing it. It links into a unit the student has not
-met, which the step does elsewhere (`PickTheTier`'s amber verdict, `recap`'s closing section) and
+met, which the step does elsewhere (`PickTheTier`'s `redact` verdict, `recap`'s closing section) and
 which is only allowed where the target owns the answer outright.
 
 `ReasoningCost` is the figure under `reasoning-level.3`, and it draws the two quantities that
@@ -1639,13 +1639,12 @@ are built from. Five situations against three tiers here, so more than one lands
 nothing falls out by elimination. Three decisions in it are worth keeping. **The tier column does not
 shuffle**, which is the one place it departs from `PatternMatch`: an ordered scale scrambled reads as
 noise, and only the situations shuffle. **The tier names are mono**, because they are names the
-machine answers to. And **`redact` cannot be got wrong**: every tier will strip those log
-lines and only the amount that gets past the strip changes, so it comes back **amber** (the design
-system's caution colour, neither `--success` nor `--destructive`) with an explanation that prints
-whatever you picked, and it closes by pointing at step 2, because repeating work is that step's
-problem rather than this one's. Marking it right or wrong would teach that a lookup table exists
-here. That amber verdict is `ConnectBoard`'s `answer: 'any'`, so any board can have a row with no
-wrong answer; `PatternMatch` has none.
+machine answers to. And **`redact` is Haiku**: it used to be an amber row with no wrong answer,
+on the argument that larger tiers catch formats nobody wrote down, but its card says the patterns
+are fully defined, and the owner (October 2026) ruled that a card saying that has one right answer.
+Its wrong-answer sentence closes by pointing at step 2, because repeating work is that step's
+problem rather than this one's. The amber verdict survives as `ConnectBoard`'s `answer: 'any'`,
+which no row uses now; leave it, a board may want a row with no wrong answer again.
 
 Three things inside `ConnectBoard` are load-bearing and easy to break. An arrowhead can be
 **re-aimed by dragging it**, and the grip that does it is invisible on purpose: a dot on the arrow

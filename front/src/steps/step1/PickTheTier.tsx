@@ -18,14 +18,12 @@ const TIERS = ['haiku', 'sonnet', 'opus'] as const
  * board would give it away. `plan` is the trap: it looks big enough for the top tier until you
  * notice the plan already did the thinking.
  *
- * `redact` is the one that cannot be got wrong, and that is the point of it. Every tier will strip
- * those lines; what changes is how much gets past the strip. Marking a judgement call right or wrong
- * would teach that there is a lookup table here, so `any` brings it back amber instead, which is
- * this design system's caution colour rather than either verdict.
+ * `redact` is the small tier, like `queues`: its card says the patterns are fully defined, so a
+ * larger model has nothing left to add.
  */
 const SCENARIOS: readonly ConnectItem[] = [
   { id: 'queues', answer: 'haiku' },
-  { id: 'redact', answer: 'any' },
+  { id: 'redact', answer: 'haiku' },
   { id: 'limit', answer: 'sonnet' },
   { id: 'plan', answer: 'sonnet' },
   { id: 'flaky', answer: 'opus' },
