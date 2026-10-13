@@ -265,22 +265,31 @@ a `data-assistant` pair (see below). The `REVIEW.md` validation pass
 read the Esc behaviour differently (a second Esc interrupts the turn and queued prompts then run),
 which is one of the points in this file still to recheck; `Ctrl+C` is correct under either reading.
 
-**Steering in IntelliJ (checked 13 October 2026, from docs and changelogs, not yet rehearsed).**
-`steering` is written against these, and the class works in IntelliJ:
+**Steering in IntelliJ (rehearsed by hand on 13 October 2026, Free plan).** `steering` is written
+against this, and the class works in IntelliJ. The agent picker lists **Local**, **Copilot**
+(terminal icon, the Copilot CLI agent and the default) and, behind Upgrade, Cloud, Claude (Preview)
+and Codex (Preview). Nothing in it is labelled "Copilot CLI", so the course says "the Copilot agent".
 
-- **Typing into a running agent:** IntelliJ's regular agent mode blocks the chat until the turn is
-  done (open feature request microsoft/copilot-intellij-feedback#2020). The Copilot CLI agent inside
-  JetBrains turns Send into a dropdown while a request runs: Add to Queue, Steer with Message (yields
-  after the active tool call), Stop and Send (changelog 22 June 2026). Copilot CLI in a terminal
-  treats a plain prompt mid-task as steering.
-- **Rewinding:** plugin 1.18.0 (changelog 22 September 2026) lets you re-edit an earlier message in
-  an agent session, and it rewinds the conversation and the file changes. Copilot CLI: Esc twice on
-  an empty prompt opens the rewind picker.
-- **Stop button:** a YouTrack report (LLM-29106) has it hang after a turn; untested here.
-- **Worktrees:** only the Copilot CLI agent has them in JetBrains (agent picker, Copilot CLI, isolation
-  Worktree or Workspace; changelog 13 May 2026). The VS Code docs say a worktree session forces "Allow
-  all" approvals and is not a security boundary; for JetBrains that is a third-party report. Copilot
-  CLI itself has `--worktree[=NAME]` (under `<repo>.worktrees/`), `/worktree` and `/move`.
+- **Typing into a running agent:** on Copilot, a sentence typed mid-run waits in a STEERING block
+  (X to remove it) and arrives after the current step; **Send Immediately** sends it at once and
+  stops that step. On Local you cannot send until the turn is done (matches the open feature request
+  microsoft/copilot-intellij-feedback#2020). The Add to Queue / Steer with Message / Stop and Send
+  dropdown from the June 2026 changelog did not show up.
+- **Stop button:** works, does not hang; written files stay on disk, and after a follow-up message
+  the agent carries on where it was.
+- **Rewinding:** editing an earlier message drops every later message and rewinds the files too
+  (confirmed on a clean run: files created after that message disappeared).
+- **Worktrees:** the isolation dropdown beside the agent (Workspace or Worktree) is only active in a
+  new chat. A Worktree session lands in `<repo>.worktrees/copilot-worktree-<timestamp>-<id>` on a
+  `copilot/worktree-<timestamp>-<id>` branch. **Approvals are not forced**: Default Approvals stays,
+  and it asked Allow Once or Skip for `git status` (the VS Code docs say VS Code forces "Allow all";
+  JetBrains does not). Nothing reaches your project until **Apply**, which moves the changes in as
+  uncommitted files and leaves the worktree clean; Undo All drops them.
+- **Asking back:** the agent used an Ask User tool on its own when the prompt had a typo, which is
+  the behaviour the `## Gaps` rule asks for.
+- **Copilot CLI in a terminal:** a plain prompt mid-task is steering; Esc twice on an empty prompt
+  opens the rewind picker; `--worktree[=NAME]`, `/worktree` and `/move` exist (from the docs, not
+  rehearsed).
 - **Cost of queuing:** every message is a request either way, so typing into a run is not cheaper
   than stopping it; the unit calls it lighter.
 

@@ -20,9 +20,9 @@ import { TaskCard } from '@/shared/components/TaskCard'
  * further up the unit, which owns it, and a card move repeating it would say it twice to the one
  * reader who gets both.
  *
- * **The `queue` move splits by assistant.** IntelliJ's Copilot agent mode blocks the chat while a
- * turn runs, so the Copilot move sends the student to the Copilot CLI agent and its Steer with
- * Message option (JetBrains changelog, June 2026), on `CheckPermissions`'s pattern.
+ * **The `queue` move splits by assistant**, on `CheckPermissions`'s pattern: the Copilot move names
+ * the Copilot agent, because IntelliJ's Local agent cannot take a sentence mid-run, and it ends on
+ * Send Immediately (rehearsed in IntelliJ, 13 October 2026).
  *
  * Ungraded, like every `TaskCard`; the tick is a bookmark and `TaskCard` says why.
  */

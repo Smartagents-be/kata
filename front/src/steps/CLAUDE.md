@@ -31,8 +31,7 @@ reasoning behind all three are in each step's own file.
 paired in October 2026 because it is the unit whose subject is the files themselves, and their paths
 are where the two products differ most. `steering` followed in three places only: its moves figure names
 the key or button, its worktree paragraph names each product's own worktree mode, and its card's
-`queue` move sends a Copilot student to the Copilot CLI agent, since IntelliJ's agent mode cannot
-take a sentence mid-run. The rest of step 2 still names Claude Code's terms or both in one sentence.
+`queue` move names IntelliJ's Copilot agent and its Send Immediately button. The rest of step 2 still names Claude Code's terms or both in one sentence.
 Steps 0 and 1 carry almost all of it; `step3`'s share is two filename pairs and is documented under
 that step. The Copilot side was written for **Copilot
 CLI**, the terminal one, because every exercise in step 1 already runs commands in a terminal against

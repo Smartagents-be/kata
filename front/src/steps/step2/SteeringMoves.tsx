@@ -15,10 +15,10 @@ import { useAssistant } from '@/shared/assistant/useAssistant'
  * the owner could not see why row 2 stopped until the problem column said so.
  *
  * **The middle column names the key or the button**, so it reads `useAssistant()` itself on the
- * `front/CLAUDE.md` rule for figures. The Copilot side is IntelliJ first, since that is where the
- * class works: its agent mode blocks the chat while a turn runs (an open feature request in
- * microsoft/copilot-intellij-feedback, checked October 2026), so row 1 says to stop first there.
- * Rewinding in IntelliJ is editing an earlier message, which plugin 1.18.0 added in September 2026.
+ * `front/CLAUDE.md` rule for figures. The Copilot side is IntelliJ's default Copilot agent, rehearsed
+ * by hand on 13 October 2026: a sentence typed mid-run waits in a STEERING block until the current
+ * step is done, and Send Immediately sends it at once and stops that step, which is row 2's move.
+ * Rewinding is editing an earlier message, and it rewinds the chat and the files.
  *
  * Muted boxes are what happens to you, teal boxes are what you do; the right column has no box
  * because it is a reading of the window, not an action.

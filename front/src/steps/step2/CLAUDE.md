@@ -391,12 +391,13 @@ section after it.
 Typing into a running agent is called **lighter** than stopping, never cheaper. It used to say
 cheaper, and that was wrong: the agent keeps spending tokens until the sentence lands, Esc in
 Claude Code keeps the work already done, and in Copilot every message you send is a request either
-way. What it saves is breaking off the step in progress. **IntelliJ's Copilot agent mode cannot do
-it at all**: the chat is blocked while a turn runs (an open feature request in
-microsoft/copilot-intellij-feedback, checked October 2026, not yet rehearsed by hand), so
-`mid-flight.2` says so, the table's Copilot row 1 says to stop first, and the card's `queue` move
-splits by assistant. Queue, Steer with Message and Stop and Send exist only in the Copilot CLI agent
-inside JetBrains. Do not put "cheaper" back, and do not promise "on the next turn": when a queued
+way. What it saves is breaking off the step in progress. **IntelliJ was rehearsed by hand on 13 October
+2026** (Free plan, the default Copilot agent): a sentence typed mid-run waits in a STEERING block
+until the current step is done, Send Immediately sends it at once and stops that step, Stop leaves
+written files on disk and the agent carries on after a follow-up, and editing an earlier message
+rewinds the chat and the files. The Local agent cannot take a sentence mid-run at all, which is
+what `mid-flight.2` says. No Add to Queue or Steer with Message dropdown showed up, so the course
+names neither. Do not put "cheaper" back, and do not promise "on the next turn": when a queued
 sentence lands differs per harness.
 
 `When it is going nowhere` is the newest of the five, and **where it sits is the argument**:
@@ -417,9 +418,12 @@ The two-contexts-two-bills cost is no longer in the unit's prose; it lives on th
 note, and `parallel` still may not argue it. **The section is a `data-assistant` pair since October
 2026**, at the owner's asking, because both products now make the worktree themselves: Claude Code
 with `claude --worktree <name>` (a new branch `worktree-<name>` under `.claude/worktrees/`, checked
-against code.claude.com/docs/en/worktrees), Copilot in IntelliJ only through the Copilot CLI agent's
-Worktree isolation, where approvals are forced to "allow all" (stated in the VS Code docs, only
-reported for JetBrains; still to rehearse). The plain `git worktree add` block stays under both, as
+against code.claude.com/docs/en/worktrees), Copilot in IntelliJ by picking Worktree beside the Copilot
+agent in a new chat (the choice is greyed out once a chat has started). Rehearsed on 13 October
+2026: the worktree lands in `<repo>.worktrees/copilot-worktree-<timestamp>-<id>` on a
+`copilot/worktree-...` branch, approvals are **not** forced (it still asked Allow Once or Skip,
+which the VS Code docs would have you expect otherwise), and nothing reaches your project until
+Apply, which moves the changes in as uncommitted files. The plain `git worktree add` block stays under both, as
 the way that works in any tool, and the closing paragraph keeps the caveat that a worktree locks
 nothing.
 
@@ -487,7 +491,7 @@ heading the rest of the step uses, with the quiz under it. **Four moves rather t
 the `data-audience="self"` aside owns the rewind experiment and a fifth move would say it twice to
 the one reader who gets both. **The `gap` move is why the card exists**: `LateFeePolicy` computes in
 cents and names no currency anywhere in `exercises/step2/java`, so asking for the fee in euros is the only
-place in the course where a student watches an agent decline to guess. The `queue` move splits by assistant, because IntelliJ's agent mode cannot take a sentence mid-run.
+place in the course where a student watches an agent decline to guess. The `queue` move splits by assistant: the Copilot one names the Copilot agent and Send Immediately.
 Nothing on the card is graded,
 and nothing it asks for touches a package, so `mvn verify -Pgraded` and the `challenge` tests are
 safe from it.
