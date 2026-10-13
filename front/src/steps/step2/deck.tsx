@@ -250,18 +250,6 @@ const deck: SlideSpec[] = [
     // and at 1.5 the note sat on the drawing's own column labels.
     scale: 1.3,
   },
-  // The one drawing in the unit the board had no slide for. TwoWindows rides 1.3 at 640x306; this
-  // one is 640x262 with a note, so it takes a little more room.
-  {
-    id: 'deck-step2-steering-worktree',
-    kind: 'figure',
-    ns: 'step2',
-    eyebrow: 'steering.title',
-    title: 'deck.steering.worktree.title',
-    note: 'deck.steering.worktree.note',
-    figure: <WorktreeEach />,
-    scale: 1.4,
-  },
   {
     id: 'deck-step2-steering-nowhere',
     kind: 'statement',
@@ -509,6 +497,18 @@ const deck: SlideSpec[] = [
       'deck.parallel.attention.2',
       'deck.parallel.attention.3',
     ],
+  },
+
+  // Moved here with its section from `steering` in October 2026.
+  {
+    id: 'deck-step2-parallel-worktree',
+    kind: 'figure',
+    ns: 'step2',
+    eyebrow: 'parallel.title',
+    title: 'deck.parallel.worktree.title',
+    note: 'deck.parallel.worktree.note',
+    figure: <WorktreeEach />,
+    scale: 1.4,
   },
 
   // ── goals ─────────────────────────────────────────────────────────────────────────────────

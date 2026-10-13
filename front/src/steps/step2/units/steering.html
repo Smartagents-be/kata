@@ -74,50 +74,6 @@
 
 <div data-figure="loop-in-window"></div>
 
-<h2 data-i18n="steering.worktree-each.heading">A worktree each</h2>
-
-<p data-i18n="steering.worktree-each.1">
-  While 1 agent works, you mostly wait. 3 agents are not 3 times the work, because the waiting
-  overlaps. Give each agent a scoped task and its own worktree, though: a separate folder on your
-  disk, with its own checkout of the same repository, on its own branch.
-</p>
-
-<p data-assistant="claude" data-i18n="steering.worktree-each.2.claude">
-  Claude Code does it itself: <code>claude --worktree statement</code> starts in
-  <code>.claude/worktrees/statement</code>, on a new branch <code>worktree-statement</code>.
-</p>
-
-<p data-assistant="copilot" data-i18n="steering.worktree-each.2.copilot">
-  In IntelliJ, start a new chat with the Copilot agent and pick Worktree. Your project stays
-  untouched until you press Apply.
-</p>
-
-<p data-i18n="steering.worktree-each.3">Git does it too, in any tool:</p>
-
-<pre data-commands><code>git worktree add -b feat/statement ../kata-statement
-git worktree add -b feat/native ../kata-native</code></pre>
-
-<div data-figure="worktree-each"></div>
-
-<p data-i18n="steering.worktree-each.4">
-  What is not in Git, such as <code>node_modules</code> or a <code>.env</code>, does not come along:
-  you install or copy that separately. A worktree separates the files, not the access. An agent with
-  broad rights can still reach the other folder, and permissions and a sandbox handle that.
-</p>
-
-<p data-i18n="steering.worktree-each.5">
-  When they are done, let a separate agent merge the branches. It reads both diffs, resolves the
-  conflicts and runs the tests. You review the result.
-</p>
-
-<pre><code>Merge feat/statement and feat/native into main. Resolve any conflicts,
-run mvn test, and tell me what you changed and why.</code></pre>
-
-<p data-i18n="steering.worktree-each.6">Then clean up the folders:</p>
-
-<pre data-commands><code>git worktree remove ../kata-statement
-git worktree remove ../kata-native</code></pre>
-
 <h2 data-i18n="steering.stop-at-the-gap.heading">Make it stop at the gap</h2>
 
 <p data-i18n="steering.stop-at-the-gap.1">

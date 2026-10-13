@@ -411,29 +411,7 @@ stops at recovering the run: **when not to use an agent at all is a different to
 the course on purpose rather than half-told here, so a paragraph about what agents are bad at does
 not belong in this section.
 
-Its worktree section is **not** a second telling of `goals`. `goals` argues one worktree as
-isolation from your own day, so a four-hour run does not make your branch unusable. `steering` argues
-one worktree *per agent*, so several run at once without colliding, because the waiting overlaps.
-The two-contexts-two-bills cost is no longer in the unit's prose; it lives on the worktree slide's
-note, and `parallel` still may not argue it. **The section is a `data-assistant` pair since October
-2026**, at the owner's asking, because both products now make the worktree themselves: Claude Code
-with `claude --worktree <name>` (a new branch `worktree-<name>` under `.claude/worktrees/`, checked
-against code.claude.com/docs/en/worktrees), Copilot in IntelliJ by picking Worktree beside the Copilot
-agent in a new chat (the choice is greyed out once a chat has started). Rehearsed on 13 October
-2026: the worktree lands in `<repo>.worktrees/copilot-worktree-<timestamp>-<id>` on a
-`copilot/worktree-...` branch, approvals are **not** forced (it still asked Allow Once or Skip,
-which the VS Code docs would have you expect otherwise), and nothing reaches your project until
-Apply, which moves the changes in as uncommitted files. The plain `git worktree add` block stays under both, as
-the way that works in any tool, and the closing paragraph keeps the caveat that a worktree locks
-nothing.
-
-**The definition, though, is `steering`'s alone**, because `steering` reads first: a second checkout
-of the same repository, on its own branch, in its own folder, sharing the same history.
-`goals.own-worktree.1` used to write it out a second time and now names the worktree in half a
-sentence and links here, which is what `parallel.many-agents-once.2` already did. Two arguments, one
-definition. Do not let a third site explain what a worktree is.
-
-**The unit is drawn now, five figures, and the two windows are a pair.** `TwoWindows` plays the two
+**The unit is drawn now, four figures, and the two windows are a pair.** `TwoWindows` plays the two
 moves since October 2026 (pasting on against taking out, with a playhead running back up the right
 window), and its last frame is the drawing this paragraph describes. `TwoWindows` sits under
 `Interrupt, or go back`, after the choosing paragraph and above the self aside, so the aside stays
@@ -464,17 +442,6 @@ dashed and never teal: it is being written, it is just the same shape again, and
 Neither window figure may borrow the other's argument, wrong direction against no direction, and
 neither is about the clock, which is `LoopsPerHour`'s.
 
-`WorktreeEach` was redrawn in October 2026, at the owner's asking, as a left-to-right flow: `~/kata`
-on main, `git worktree add` making two **separate folders on your disk** with an agent each, a third
-agent merging the branches, and `~/kata` on main with both changes. The old drawing (two frames on
-one history box, no line between them) read as vague and never showed what the owner cares about
-most, that **a separate agent merges the worktrees afterwards**, so the section now ends on that
-merge: a paragraph, a copyable merge prompt, and the `git worktree remove` clean-up. The figure says
-"separate folders", never "copy", because the history stays shared. **It names the same folders and
-branches as the `<pre>` above it**, on the `SkillTree` rule, as literals rather than locale keys,
-because a path is not translated. Teal is the two worktrees and the merging agent; the codebase
-before and after stays muted.
-
 The gap section turns on **stopping** and nothing else. An agent that writes a guess down and then
 builds on it has told you what it guessed underneath a diff that already depends on the guess. Do
 not soften the stop into "flag it and continue". **The rule no longer writes to a `gaps.md`**
@@ -487,9 +454,9 @@ has the agent list its assumptions under its summary rather than in a file. The 
 `stop-at-the-gap.1` links `setup` for it.
 
 `steering` closes on an ungraded `TaskCard`, `SteerARun`, under the same `<hr>` and `ui:quiz.title`
-heading the rest of the step uses, with the quiz under it. **Four moves rather than five**, because
-the `data-audience="self"` aside owns the rewind experiment and a fifth move would say it twice to
-the one reader who gets both. **The `gap` move is why the card exists**: `LateFeePolicy` computes in
+heading the rest of the step uses, with the quiz under it. **Three moves**: the worktree move went with its section to `parallel`
+in October 2026, and the `data-audience="self"` aside owns the rewind experiment, so a move for it
+would say it twice to the one reader who gets both. **The `gap` move is why the card exists**: `LateFeePolicy` computes in
 cents and names no currency anywhere in `exercises/step2/java`, so asking for the fee in euros is the only
 place in the course where a student watches an agent decline to guess. The `queue` move splits by assistant: the Copilot one names the Copilot agent and Send Immediately.
 Nothing on the card is graded,
@@ -1219,13 +1186,49 @@ paragraph under it is the other half of the trade and is the only place in the u
 arrangement with the quality of what it hands back. Keep the pair: the warning alone reads as a
 reason not to use it.
 
-Four boundaries hold the unit up and every one of them is another unit a second time, so each is a
+Three boundaries hold the unit up and every one of them is another unit a second time, so each is a
 link and a clause rather than a paragraph. **`steering` owns the mid-run window**,
-which is what `one-agent-time.1` points at instead of describing interrupting, and **`steering` owns
-one worktree per agent**, which is why `many-agents-once.2` names the worktree in half a sentence and
-does not argue for it. **`goals` owns the long-running outcome**, so `interactive-agent-background.3` says the jobs
-behind you are goals rather than instructions and hands off. The agents-are-two-bills argument is
-`steering`'s too and must not turn up here.
+which is what `one-agent-time.1` points at instead of describing interrupting. **`goals` owns the long-running outcome**, so `interactive-agent-background.3` says the jobs
+behind you are goals rather than instructions and hands off. The agents-are-two-bills line lives on the worktree slide's note and
+nowhere in the prose.
+
+**`A worktree each` is this unit's since October 2026**, moved from `steering` at the owner's asking:
+running several agents at once is this unit's subject, and correcting one running agent is
+`steering`'s. It sits right after `Many agents at once`, whose `.2` now points at "the next section"
+instead of linking back four units. `steering`'s card lost its worktree move with it, because this
+unit has no card. It is **not** a second telling of `goals`. `goals` argues one worktree as isolation
+from your own day, so a four-hour run does not make your branch unusable; this section argues one
+worktree *per agent*, so several run at once without colliding, because the waiting overlaps, and
+it ends on a separate agent merging the branches.
+
+The two-contexts-two-bills cost stays on the worktree slide's note, not in the prose. **The section is a `data-assistant` pair since October
+2026**, at the owner's asking, because both products now make the worktree themselves: Claude Code
+with `claude --worktree <name>` (a new branch `worktree-<name>` under `.claude/worktrees/`, checked
+against code.claude.com/docs/en/worktrees), Copilot in IntelliJ by picking Worktree beside the Copilot
+agent in a new chat (the choice is greyed out once a chat has started). Rehearsed on 13 October
+2026: the worktree lands in `<repo>.worktrees/copilot-worktree-<timestamp>-<id>` on a
+`copilot/worktree-...` branch, approvals are **not** forced (it still asked Allow Once or Skip,
+which the VS Code docs would have you expect otherwise), and nothing reaches your project until
+Apply, which moves the changes in as uncommitted files. The plain `git worktree add` block stays under both, as
+the way that works in any tool, and the closing paragraph keeps the caveat that a worktree locks
+nothing.
+
+**The definition is this section's alone**, because `parallel` reads before `goals`: a second checkout
+of the same repository, on its own branch, in its own folder, sharing the same history.
+`goals.own-worktree.1` used to write it out a second time and now names the worktree in half a
+sentence and links here. Two arguments, one
+definition. Do not let a third site explain what a worktree is.
+
+`WorktreeEach` was redrawn in October 2026, at the owner's asking, as a left-to-right flow: `~/kata`
+on main, `git worktree add` making two **separate folders on your disk** with an agent each, a third
+agent merging the branches, and `~/kata` on main with both changes. The old drawing (two frames on
+one history box, no line between them) read as vague and never showed what the owner cares about
+most, that **a separate agent merges the worktrees afterwards**, so the section now ends on that
+merge: a paragraph, a copyable merge prompt, and the `git worktree remove` clean-up. The figure says
+"separate folders", never "copy", because the history stays shared. **It names the same folders and
+branches as the `<pre>` above it**, on the `SkillTree` rule, as literals rather than locale keys,
+because a path is not translated. Teal is the two worktrees and the merging agent; the codebase
+before and after stays muted.
 
 The warning aside closes `Many agents at once` and it is **step 2's second
 `data-variant="warning"`**, `setup`'s being the first and `The builder and the critic`'s the third.
@@ -1591,7 +1594,7 @@ a single trailing `cd` put both jobs in the statement worktree and straight back
 the page tells the student to run these two at once, so the collision is the page's to prevent. It is
 an environment prefix rather than `--server.port=8081` for a reason that is only visible on screen:
 a browser takes a line break after a hyphen, and the flag split across two lines in the middle of
-`RunSheet`. `steering.worktree-each`'s identical `<pre>` needs none of this, because that unit never
+`RunSheet`. `parallel.worktree-each`'s identical `<pre>` needs none of this, because that unit never
 says where the reader is standing.
 
 There used to be a third obstacle on the native flag, and it is worth knowing why it went. Step 1 and

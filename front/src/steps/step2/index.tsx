@@ -126,16 +126,14 @@ const step2: Step = {
       id: 'steering',
       title: 'steering.title',
       html: steering,
-      // Five slots inside the prose. The moves table opens the unit in place of the three
+      // Four slots inside the prose. The moves table opens the unit in place of the three
       // paragraphs that told it, and the gap rule's two rows sit under the rule itself. The two
       // windows share one frame geometry on purpose: the unit's vocabulary is the window, so they
-      // are one window in two states. The worktree drawing sits before the paragraph on what a
-      // worktree does not lock, so that caveat keeps the last word in prose.
+      // are one window in two states. The worktree section and its drawing moved to `parallel`.
       inlineFigures: {
         'steering-moves': <SteeringMoves />,
         'two-windows': <TwoWindows />,
         'loop-in-window': <LoopInWindow />,
-        'worktree-each': <WorktreeEach />,
         'gap-rule': <GapRule />,
       },
       // Then the task under the prose, four moves against exercises/step2/java, and the quiz under
@@ -279,7 +277,9 @@ const step2: Step = {
       // One slot, and it closes the unit rather than sitting under the first section: the drawing
       // names all five arrangements, so under `One agent at a time` it would spend four of them
       // early. Nothing below it reads it back, which is why its rows carry their own notes.
-      inlineFigures: { 'agents-at-once': <AgentsAtOnce /> },
+      // The worktree drawing sits in `A worktree each`, moved here from `steering` in October 2026
+      // because running several agents at once is this unit's subject, not that one's.
+      inlineFigures: { 'worktree-each': <WorktreeEach />, 'agents-at-once': <AgentsAtOnce /> },
       // Four questions, and they are situations rather than definitions: which arrangement a piece
       // of work wants, what four unread diffs actually cost, what an orchestrator moves, and what a
       // builder and a critic looping at each other are actually selling you. The
