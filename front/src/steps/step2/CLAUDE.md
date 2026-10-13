@@ -1331,11 +1331,10 @@ and `Sonnet`, and `research-frontier-model.3` under it is a `<small>` line sayin
 `model.lead.3`'s precedent in step 1 (since cut), and it is what lets the figure be concrete without dating the
 unit. The tags are literals rather than locale keys, like every model name in the course.
 
-The frontier tier is the seam worth knowing about: **`step1/model` names it (Fable, Astra) and
-links here**, so this section is the only place that says what it is for: a new frontier release is
-ahead and sometimes worth its price for hours-long agent sessions, multistep research and
-root-cause work, and the top tier catches up later (`.2`, from Anthropic's own coding measurement and
-OpenAI's Sol page, 13 October 2026). The step-1 half must not grow use cases of its own.
+The frontier tier is the seam worth knowing about: **`step1/model` names it (Fable, Astra),
+says what a new release is worth its price for and that the top tier catches up later** (13 October
+2026). This section builds on that for one use only, broad research handed down a relay, and must
+not repeat step 1's list.
 
 `Ultracode` is described at the level of what it does to your bill, a fleet fanned out
 programmatically, and it stays there on purpose: naming a flag, a menu or a script shape dates the

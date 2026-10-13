@@ -1468,7 +1468,7 @@ Haiku a 20th of Sonnet, hence "10 to 20 times less", and Terra is half of Sol as
 Opus. OpenAI's GPT-6 line has no middle name, which is why the cards stay on 5.6. **The lead no longer says that out loud**: the paragraph
 naming the three tiers and telling the student the names change and the shape does not was cut, so
 the figure now opens the unit and the only thing dating it is the small `(October 2026)` line moved
-under it. What survives of the claim is `model.cost.3`, which marks ratios and prices as changing (it names no month since 13 October 2026: the table's caption carries it, and the `lead.3` line dating the cards was cut the same day at the owner's asking), and
+under it. What survives of the claim is `model.cost.4`, which marks ratios and prices as changing (it names no month since 13 October 2026: the table's caption carries it, and the `lead.3` line dating the cards was cut the same day at the owner's asking), and
 the prose must keep those claims dated and scoped. Do not infer a fixed latency ratio or guaranteed
 model disposition from the tier names. The cards offer candidates to evaluate, not behaviour promises.
 Two boundaries with units either side of it hold the unit up. `prompt` owns the **reasoning level**
@@ -1508,7 +1508,7 @@ It is also the one thing in the unit that names versions, and that is a knowing 
 drift. `ModelTiers` beside it stays version-free on the reasoning its own component comment gives
 (tier names outlive releases), so the table is placed to be read as *evidence for a claim* and never
 as a reference: it sits under the paragraph stating the one-twenty-forty ratio, and the paragraphs
-after it name the frontier row and say prices change; `PriceOneTurn` at the foot of the unit puts
+after it name the frontier row, say the top tier catches up, and say prices change; `PriceOneTurn` at the foot of the unit puts
 the student's own count against them (`cost.4`, which described that sum, was cut on 13 October 2026
 because the card's description says the same). Keep that order. Moved anywhere else it becomes a price list,
 which is exactly what the paragraph under it tells the student not to learn.
@@ -1525,9 +1525,11 @@ reordering all three, and reversing them means rewriting both of those paragraph
 was considered and rejected: the numbers are what a student would actually be billed, so the row is
 named rather than hidden. `model.cost.2` is that naming, and three things about it are the decision.
 It sits **after** the figure, because the row is the surprise and a warning ahead of the table spends
-it early. It names the row with both vendors' models (Fable, Astra) and stops: what the frontier
-model is good at, and the top tier catching up with it, live in step 2's `goals` section on research
-and `cost.2` links there (13 October 2026, at the owner's asking). And it never calls the row a fourth
+it early. It names the row with both vendors' models (Fable, Astra) and says what a new frontier release is
+sometimes worth its price for, and `cost.3` says the top tier catches up later, from Anthropic's own
+coding measurement and OpenAI's Sol page (13 October 2026, at the owner's asking, reversing the old
+rule that this step says nothing about what the frontier model is good at). Step 2's `goals` builds
+on it for research only. And it never calls the row a fourth
 tier, which is what keeps `ModelTiers` at three cards, `model.cost.1` at one-twenty-forty, `model.speed.1`
 at "the slowest of the three" and `PickTheTier` at three targets. Promoting it to a tier means
 visiting all four.
@@ -1628,7 +1630,7 @@ it sits is the decision. Directly under `ModelPricing` it reads as how the rates
 which is also why it carries **no prices and no plan names**, and no currency beyond Copilot's
 credit value ($0.01, a unit conversion rather than a price): the one table in the course with prices
 is a few inches up the page, and a second set of numbers here turns
-both into the price list `model.cost.3` tells the student not to learn. What it argues is the thing
+both into the price list `model.cost.4` tells the student not to learn. What it argues is the thing
 the table cannot: the tokens are the same either way, but a key shows you the number while a plan
 hides it until you hit the limit, and then the cost arrives as waiting. It closes on who holds the
 key in a company, which is **the only place in step 1 the team question appears**. That paragraph
@@ -2480,7 +2482,7 @@ than a price list. What a Copilot reader needs instead is in `model.api-vs-subsc
 asking (October 2026) because a reader told they spend credits had no way to turn them into money.
 That is a unit, not a price, so it does not compete with `ModelPricing`. The paragraph still names no
 model's rate and no plan's allowance, since a second set of figures a few inches under the one table
-with a currency turns both into the price list `model.cost.3` tells the student not to learn. It also
+with a currency turns both into the price list `model.cost.4` tells the student not to learn. It also
 says where IntelliJ shows the credits each turn used, which is what `PriceOneTurn`'s Copilot moves
 count.
 
