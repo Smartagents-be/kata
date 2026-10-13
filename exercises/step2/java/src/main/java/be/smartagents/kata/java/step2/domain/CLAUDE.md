@@ -13,7 +13,7 @@ carries what is true of these four types and nothing else.
 - Money is a whole number of cents in a `long`, never a floating point type. `assess` returns cents
   and every total built on it stays in cents. A rounding change here shows up as a wrong fee three
   layers away, in a response nobody is looking at.
-- Nothing in this package imports from `adapter`, `web` or `config`. The dependency points inwards,
+- Nothing in this package imports from `application`, `adapter` or `config`. The dependency points inwards,
   which is what makes the domain testable without a Spring context.
 
 ## The flag for this file

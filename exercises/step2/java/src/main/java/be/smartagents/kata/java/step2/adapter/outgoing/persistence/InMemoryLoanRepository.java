@@ -1,7 +1,7 @@
 package be.smartagents.kata.java.step2.adapter.outgoing.persistence;
 
 import be.smartagents.kata.java.step2.domain.Loan;
-import be.smartagents.kata.java.step2.application.LoanRepository;
+import be.smartagents.kata.java.step2.application.ports.LoanRepository;
 import java.util.ArrayList;
 import java.util.List;
 

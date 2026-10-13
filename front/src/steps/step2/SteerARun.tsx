@@ -1,3 +1,5 @@
+import type { Assistant } from '@/shared/assistant/assistant'
+import { useAssistant } from '@/shared/assistant/useAssistant'
 import { TaskCard } from '@/shared/components/TaskCard'
 
 /**
@@ -18,18 +20,27 @@ import { TaskCard } from '@/shared/components/TaskCard'
  * further up the unit, which owns it, and a card move repeating it would say it twice to the one
  * reader who gets both.
  *
+ * **The `queue` move splits by assistant.** IntelliJ's Copilot agent mode blocks the chat while a
+ * turn runs, so the Copilot move sends the student to the Copilot CLI agent and its Steer with
+ * Message option (JetBrains changelog, June 2026), on `CheckPermissions`'s pattern.
+ *
  * Ungraded, like every `TaskCard`; the tick is a bookmark and `TaskCard` says why.
  */
-const MOVES = ['escape', 'queue', 'gap', 'worktree'] as const
+const MOVES: Record<Assistant, readonly string[]> = {
+  claude: ['escape', 'queue.claude', 'gap', 'worktree'],
+  copilot: ['escape', 'queue.copilot', 'gap', 'worktree'],
+}
 
 export function SteerARun() {
+  const { assistant } = useAssistant()
+
   return (
     <TaskCard
       block="steer-a-run"
       namespace="step2"
       prefix="steer"
       storageKey="kata.step2.steer"
-      moves={MOVES}
+      moves={MOVES[assistant]}
       className="my-8"
     />
   )

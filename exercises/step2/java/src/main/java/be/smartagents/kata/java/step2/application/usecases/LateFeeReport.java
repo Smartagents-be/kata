@@ -1,5 +1,6 @@
-package be.smartagents.kata.java.step2.application;
+package be.smartagents.kata.java.step2.application.usecases;
 
+import be.smartagents.kata.java.step2.application.ports.LoanRepository;
 import be.smartagents.kata.java.step2.domain.LateFeePolicy;
 import be.smartagents.kata.java.step2.domain.Loan;
 

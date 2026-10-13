@@ -25,10 +25,11 @@
 </p>
 
 <p data-i18n="workflows.naive.3">
-  A throwaway that turns out to have users is recoverable. Point the agent at what already runs, ask
-  it to write the specs the code implies, one per feature, and read them for what it got wrong. You
-  are retrofitting the workflow you skipped, and it costs less than the rewrite you were bracing
-  for.
+  A throwaway that turns out to have users is recoverable, in the order
+  <a href="/steps/step2/gates">the unit on quality gates</a> gives for legacy code. Put the gates in
+  first: tests that pin down what runs today, and the checks set at today's level. Then write a spec
+  for each change you make next. What already ran needs none: the tests record it. You are
+  retrofitting the workflow you skipped, and it costs less than the rewrite you were bracing for.
 </p>
 
 <!-- Filled by the FlowDiagram element registered under this name in steps/step2/index.tsx. The
@@ -38,7 +39,7 @@
 <h2 data-i18n="workflows.plan-based.heading">Plan-based</h2>
 
 <p data-i18n="workflows.plan-based.1">
-  1 step up costs a mode switch. Ask for a plan instead of the change, every time, not only when
+  Plan-based asks 1 thing more than naive: you turn on plan mode. Ask for a plan instead of the change, every time, not only when
   the task looks hard. <a href="/steps/step1/prompt">Step 1's unit on the prompt</a> introduced plan
   mode as meta-prompting the provider already built for you. Using it 1 time is a trick. Using it by
   default is a workflow, and it buys better work at the price of waiting longer for it.
@@ -46,7 +47,7 @@
 
 <p data-i18n="workflows.plan-based.2">
   The plan is not the part worth having. The agent interviews you <svg data-icon="pattern"></svg>
-  and its questions are the ones you skipped: which tier gets a grace period, what happens when the
+  and its questions are the ones you skipped: how many days late a member can be before the fee starts, what happens when the
   list comes back empty. You answer them before a line exists, which is what you would have done
   designing it yourself. The workflow puts you back in the design.
 </p>
@@ -56,10 +57,12 @@
 <h2 data-i18n="workflows.spec-driven.heading">Spec-driven</h2>
 
 <p data-i18n="workflows.spec-driven.1">
-  Write the feature down before anybody builds it, 1 markdown file per feature, kept in the
-  repository beside the code. What it does, in detail. What it deliberately does not do. The
-  acceptance criteria somebody can hold the result to, and the specs this one depends on. The
-  out-of-scope part earns its place fastest, because that is where an agent invents things.
+  Write the feature down before anybody builds it, in 1 folder per feature, kept in the repository
+  beside the code. <code>spec.md</code> says what it does, in detail, what it deliberately does not
+  do, the acceptance criteria somebody can hold the result to, and the specs this one depends on.
+  The out-of-scope part earns its place fastest, because that is where an agent invents things.
+  <code>plan.md</code> says how it gets built: which parts change, in what order, and how you test
+  it. It is the plan from plan-based, except this one stays in the repository.
 </p>
 
 <p data-i18n="workflows.spec-driven.2">
@@ -72,8 +75,9 @@
 <p data-i18n="workflows.spec-driven.3">
   You do not write them from scratch. Describe the feature in 2 sentences, ask for the spec in
   your format, then cut what the agent invented. Reviewing a draft is faster than facing an empty
-  file, and a draft that guessed wrong shows you exactly what you never decided. Then build the feature in a
-  fresh session, with the spec and without the conversation that wrote it.
+  file, and a draft that guessed wrong shows you exactly what you never decided. Ask for the plan
+  only once the spec is right, and read it the same way. Then build the feature in a fresh session,
+  with the spec and the plan and without the conversation that wrote them.
 </p>
 
 <div data-figure="flow-spec"></div>

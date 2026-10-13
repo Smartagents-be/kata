@@ -18,7 +18,7 @@ import { useTranslation } from 'react-i18next'
 const ROWS = [
   { id: 'naive', before: 20, run: 230, after: 250 },
   { id: 'plan-based', before: 125, run: 210, after: 165, tag: 'plan', at: 'before', kept: false },
-  { id: 'spec-driven', before: 250, run: 172, after: 78, tag: 'spec.md', at: 'before', kept: true },
+  { id: 'spec-driven', before: 250, run: 172, after: 78, tag: 'spec.md + plan.md', at: 'before', kept: true },
   { id: 'audit-driven', before: 53, run: 197, after: 250, tag: 'audit.md', at: 'after', kept: true },
 ] as const
 

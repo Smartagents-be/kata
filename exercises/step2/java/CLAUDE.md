@@ -17,8 +17,8 @@ One `@SpringBootApplication`, scoped to its own package by the default component
 src/main/java/be/smartagents/kata/java/step2/
   Step2Application.java         the entry point; default scan of ...step2 only
   domain/                       Loan, MediaType, MemberTier, LateFeePolicy (the branchy method)
-  application/                  LateFeeReport, MemberStatements (forTier is the challenge stub),
-                                and LoanRepository, the port the use cases read through
+  application/usecases/         LateFeeReport, MemberStatements (forTier is the challenge stub)
+  application/ports/            LoanRepository, the port the use cases read through
   adapter/incoming/web/         LoanController (GET /api/loans/statement/{tier}), StatementResponse,
                                 StatementCode (the fourth flag, kept shifted)
   adapter/outgoing/persistence/ InMemoryLoanRepository, which implements LoanRepository
@@ -27,7 +27,7 @@ src/main/java/be/smartagents/kata/java/step2/
   config/                       LoanDataConfig: the seeded overdue shelf the endpoint reports on
 src/test/java/be/smartagents/kata/java/step2/
   domain/                       LateFeePolicyTest: the one thin shipped test (keeps default green)
-  application/                  MemberStatementsTest: @Tag("challenge") spec for the missing method
+  application/usecases/         MemberStatementsTest: @Tag("challenge") spec for the missing method
   adapter/incoming/web/         LoanControllerTest: @Tag("challenge") spec for the endpoint
   grading/                      FlagRevealIT, Flag, Veil: the graded-profile reveal, run by failsafe
 ```

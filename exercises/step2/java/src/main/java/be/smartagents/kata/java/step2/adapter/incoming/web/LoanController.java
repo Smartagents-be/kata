@@ -1,6 +1,6 @@
 package be.smartagents.kata.java.step2.adapter.incoming.web;
 
-import be.smartagents.kata.java.step2.application.MemberStatements;
+import be.smartagents.kata.java.step2.application.usecases.MemberStatements;
 import be.smartagents.kata.java.step2.domain.MemberTier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

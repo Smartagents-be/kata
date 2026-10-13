@@ -4,7 +4,7 @@ import be.smartagents.kata.java.step2.adapter.outgoing.persistence.InMemoryLoanR
 import be.smartagents.kata.java.step2.domain.Loan;
 import be.smartagents.kata.java.step2.domain.MediaType;
 import be.smartagents.kata.java.step2.domain.MemberTier;
-import be.smartagents.kata.java.step2.application.LoanRepository;
+import be.smartagents.kata.java.step2.application.ports.LoanRepository;
 import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

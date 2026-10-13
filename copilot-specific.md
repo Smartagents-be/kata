@@ -259,10 +259,30 @@ Copilot CLI reader with a prompt queued, which is exactly what `steering.mid-fli
 one paragraph earlier, Escape removes the queued sentence rather than stopping the run.
 `steering.mid-flight.1` therefore names the stop key per harness in one shared sentence (`Esc` in
 Claude Code, `Ctrl+C` in Copilot CLI, the Stop button in IntelliJ), and `steer.escape.label`, the
-deck title and the quiz distractor say "stop" instead of naming a key. That avoids a `data-assistant`
-pair, since step 2 is not written for two assistants outside `setup`. The `REVIEW.md` validation pass
+deck title and the quiz distractor say "stop" instead of naming a key. That sentence stays shared;
+where `steering` does need the product, the figure reads the assistant and the worktree paragraph is
+a `data-assistant` pair (see below). The `REVIEW.md` validation pass
 read the Esc behaviour differently (a second Esc interrupts the turn and queued prompts then run),
 which is one of the points in this file still to recheck; `Ctrl+C` is correct under either reading.
+
+**Steering in IntelliJ (checked 13 October 2026, from docs and changelogs, not yet rehearsed).**
+`steering` is written against these, and the class works in IntelliJ:
+
+- **Typing into a running agent:** IntelliJ's regular agent mode blocks the chat until the turn is
+  done (open feature request microsoft/copilot-intellij-feedback#2020). The Copilot CLI agent inside
+  JetBrains turns Send into a dropdown while a request runs: Add to Queue, Steer with Message (yields
+  after the active tool call), Stop and Send (changelog 22 June 2026). Copilot CLI in a terminal
+  treats a plain prompt mid-task as steering.
+- **Rewinding:** plugin 1.18.0 (changelog 22 September 2026) lets you re-edit an earlier message in
+  an agent session, and it rewinds the conversation and the file changes. Copilot CLI: Esc twice on
+  an empty prompt opens the rewind picker.
+- **Stop button:** a YouTrack report (LLM-29106) has it hang after a turn; untested here.
+- **Worktrees:** only the Copilot CLI agent has them in JetBrains (agent picker, Copilot CLI, isolation
+  Worktree or Workspace; changelog 13 May 2026). The VS Code docs say a worktree session forces "Allow
+  all" approvals and is not a security boundary; for JetBrains that is a third-party report. Copilot
+  CLI itself has `--worktree[=NAME]` (under `<repo>.worktrees/`), `/worktree` and `/move`.
+- **Cost of queuing:** every message is a request either way, so typing into a run is not cheaper
+  than stopping it; the unit calls it lighter.
 
 Three surfaces exist and they are not interchangeable: the **CLI** (what the course assumes), **VS
 Code agent mode** (MCP through `.vscode/mcp.json`, a new chat rather than `/clear`, no `/context` to
@@ -430,4 +450,9 @@ See [Managing large tool output](https://docs.github.com/en/copilot/concepts/age
 - [Adding MCP servers for Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-mcp-servers)
 - [Custom instructions for Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-custom-instructions)
 - [Updates to Copilot interaction data usage policy, 25 March 2026](https://github.blog/news-insights/company-news/updates-to-github-copilot-interaction-data-usage-policy/)
+- [Copilot CLI agent in JetBrains, 13 May 2026](https://github.blog/changelog/2026-05-13-introducing-copilot-cli-agent-and-unified-sessions-view-in-github-copilot-for-jetbrains-ides/)
+- [Queue and steer in JetBrains, 22 June 2026](https://github.blog/changelog/2026-06-22-new-features-and-claude-as-agent-provider-preview-in-jetbrains-ides/)
+- [Re-edit earlier messages in JetBrains, 22 September 2026](https://github.blog/changelog/2026-09-22-new-features-and-improvements-in-copilot-for-jetbrains/)
+- [Cancel and roll back in Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/cancel-and-roll-back)
+- [Code isolation in VS Code](https://code.visualstudio.com/docs/copilot/agents/copilot-cli)
 - [Plan before you build](https://github.blog/changelog/2026-01-21-github-copilot-cli-plan-before-you-build-steer-as-you-go/)

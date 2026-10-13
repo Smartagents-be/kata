@@ -73,9 +73,11 @@
 <h2 data-i18n="engineering.hexagonal-architecture.heading">Hexagonal architecture</h2>
 
 <p data-i18n="engineering.hexagonal-architecture.1">
-  Inside each module the domain sits in the middle. Everything that talks to the outside world lives
-  in adapters around it: what calls in under <code>adapter/incoming/</code>, what the use cases call
-  out to under <code>adapter/outgoing/</code>. No class outside <code>adapter/</code> names Postgres
+  Inside each module the domain sits in the middle. Around it, <code>application/</code> holds the
+  use cases in <code>usecases/</code> and the ports they reach the outside through in
+  <code>ports/</code>. Everything that talks to the outside world lives in adapters around that:
+  what calls in under <code>adapter/incoming/</code>, what the use cases call out to under
+  <code>adapter/outgoing/</code>. No class outside <code>adapter/</code> names Postgres
   or S3. So the code that talks to the database sits in 1 folder, and swapping the database starts
   there.
 </p>
@@ -83,9 +85,16 @@
 <div data-figure="domain-tree"></div>
 
 <p data-i18n="engineering.hexagonal-architecture.2">
-  What that saves with an agent is the search. It opens <code>application/</code> for a use case
+  What that saves with an agent is the search. It opens <code>application/usecases/</code> for a use case
   and <code>adapter/outgoing/</code> for the thing that talks to S3, instead of reading half your
   repository into the context first <svg data-icon="coin"></svg>.
+</p>
+
+<p data-i18n="engineering.hexagonal-architecture.3">
+  It also makes each part testable on its own. The domain depends on nothing, so you test its rules
+  without a database or a mock. A use case only sets the order of the steps, and its test swaps each
+  outgoing port for an in-memory version. Only an adapter needs the real Postgres, and that is what
+  an <a href="/steps/step2/gates">integration test</a> is for.
 </p>
 
 <div data-figure="hexagon-ports"></div>

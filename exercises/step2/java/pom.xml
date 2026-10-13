@@ -120,7 +120,7 @@
                     <exclude>be/smartagents/kata/java/step2/adapter/incoming/**</exclude>
                     <exclude>be/smartagents/kata/java/step2/config/**</exclude>
                     <exclude>be/smartagents/kata/java/step2/aot/**</exclude>
-                    <exclude>be/smartagents/kata/java/step2/application/MemberStatements*</exclude>
+                    <exclude>be/smartagents/kata/java/step2/application/usecases/MemberStatements*</exclude>
                   </excludes>
                 </configuration>
               </execution>

@@ -27,8 +27,12 @@ import { FileTree, type TreeNode } from './FileTree'
  * worth more to the deck slide's height than to completeness.
  *
  * **Inside a module the layout is the hexagon**: `domain/` is the rules and depends on nothing,
- * `application/` is one class per use case plus the ports those use cases own, `adapter/` implements
- * those ports, and nothing under `adapter/` is mentioned anywhere above it. **The ports sit in
+ * `application/` holds one class per use case under `usecases/` and the ports those use cases own
+ * under `ports/`, `adapter/` implements those ports, and nothing under `adapter/` is mentioned
+ * anywhere above it. **`usecases/` and `ports/` are folders of their own** (October 2026, at the
+ * owner's asking), the owner's own preference for the application layer, and they carry **no note**
+ * on purpose: `application/`'s note and the ports' own notes already say it. They cost the tree 2
+ * rows, which is why `deck-step2-engineering-domain` came down in `scale`. **The ports sit in
  * `application/` and not in `domain/`** (October 2026, at the owner's asking): that is the functional
  * core and imperative shell split the owner's own course teaches, where the core takes no
  * dependency at all, not even on an interface, and the shell owns the ports it loads and writes
@@ -43,8 +47,8 @@ import { FileTree, type TreeNode } from './FileTree'
  * package they cover is this repo's own rule, so the example keeps it.
  *
  * Nothing here exists in this repo. It is an example, and the caption says so. `exercises/step2/java`
- * has the same layout inside its one module since October 2026 (`domain/`, the port in
- * `application/`, `adapter/incoming/` and `adapter/outgoing/`), but it is 1 Maven module with 1
+ * has the same layout inside its one module since October 2026 (`domain/`, `application/usecases/`
+ * and the port in `application/ports/`, `adapter/incoming/` and `adapter/outgoing/`), but it is 1 Maven module with 1
  * capability, not this multi-module repository.
  */
 const TREE: TreeNode = {
@@ -78,10 +82,19 @@ const TREE: TreeNode = {
               directory: true,
               note: 'domain-tree.application.note',
               children: [
-                { name: 'RecordPayment.java' },
-                { name: 'RefundPayment.java' },
-                { name: 'PaymentRepository.java', note: 'domain-tree.repository-port.note' },
-                { name: 'Archive.java', note: 'domain-tree.archive-port.note' },
+                {
+                  name: 'usecases',
+                  directory: true,
+                  children: [{ name: 'RecordPayment.java' }, { name: 'RefundPayment.java' }],
+                },
+                {
+                  name: 'ports',
+                  directory: true,
+                  children: [
+                    { name: 'PaymentRepository.java', note: 'domain-tree.repository-port.note' },
+                    { name: 'Archive.java', note: 'domain-tree.archive-port.note' },
+                  ],
+                },
               ],
             },
             {
@@ -126,7 +139,7 @@ const TREE: TreeNode = {
           note: 'domain-tree.test.note',
           children: [
             { name: 'domain/PaymentTest.java' },
-            { name: 'application/RecordPaymentTest.java' },
+            { name: 'application/usecases/RecordPaymentTest.java' },
           ],
         },
       ],

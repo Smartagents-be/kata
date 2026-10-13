@@ -33,7 +33,7 @@ than about a habit you practise.
 **Unit titles are 1 word or a few, at the owner's asking (October 2026).** The sidebar reads
 Setup, Domain language, Quality gates, Steering, Skills and scripts, Workflows, Feedback
 loop, Parallel work, Long runs and Workshop (Setup, Domeintaal, Quality gates, Bijsturen,
-Skills en scripts, Werkwijzen, Feedbacklus, Parallel werk, Lange runs, Workshop). The longer titles
+Skills en scripts, Processen, Feedbacklus, Parallel werk, Lange runs, Workshop). The longer titles
 they replaced each carried a claim or a verb, and the owner found them too long to scan. Only the
 `*.title` strings moved: unit ids, URLs and keys stayed. A link that named a unit by its title was
 repointed to the new one in steps 1, 2 and 3 and in both languages, so grep the old title before
@@ -112,6 +112,13 @@ holds the coin. **Do not let either section reach for the other's icon or the ot
 Merged again, the unit says "structure is good" twice and never says what either kind of structure
 buys.
 
+**`hexagonal-architecture.3` carries testability** (October 2026, at the owner's asking): the domain
+is tested with no mock, a use case with an in-memory version of each outgoing port, an adapter with
+an integration test. It says the **port** is swapped and not the adapter, on purpose, because that
+is what the use case actually depends on, and the adapter's own test is against the real system, as
+`gates`' table says. It takes **no icon** on the rule above, and it sits before `HexagonPorts`, which
+still closes the section.
+
 Five figures sit in it and each is fenced off from the next (`VerticalSlices` and `SliceSkills` are written up below).
 `WordsToFiles` is the vocabulary: one prompt, three candidate files, and a line to the one the
 sentence named, with the other two left muted so the drawing reads as narrowing rather than as
@@ -183,20 +190,27 @@ its own, assembled by a host). What the old rejection was about still holds and 
 it: no BOM, no starter or autoconfigure modules, no per-domain configuration module, so the figure
 spends its rows on the packaging and not on scaffolding. `incoming/` and `outgoing/` stay as their
 own rows, because `HexagonPorts` takes its column labels from their notes and `exercises/step2/java`
-uses the same two folders. Its height is held at or under the old tree's, because `deck-step2-engineering-domain`
-was already at `scale: 0.9` for the footer.
+uses the same two folders. Its height was held at or under the old tree's, because `deck-step2-engineering-domain`
+was already at `scale: 0.9` for the footer, until `application/` split into `usecases/` and
+`ports/` (October 2026, at the owner's asking): those 2 rows were worth it, carry no note, and the
+slide came down to fit them. `hexagonal-architecture.1` names both folders in 1 sentence, so the
+prose says where the ports `hexagonal-architecture.3` swaps actually live.
 
 **`exercises/step2/java` has the hexagon's layout inside its one module** since October 2026, at
 the owner's asking (plan 016), reversing the old decision that it stayed layered by technology:
-`domain/` (unchanged, its `CLAUDE.md` and setup flag included), `application/` with the
-`LoanRepository` port, `adapter/incoming/web/` and `adapter/outgoing/persistence/`. `config/`, `aot/`
+`domain/` (unchanged, its `CLAUDE.md` and setup flag included), `application/usecases/`,
+`application/ports/` with the `LoanRepository` port, `adapter/incoming/web/` and
+`adapter/outgoing/persistence/`. `config/`, `aot/`
 and `Step2Application` stay outside the hexagon, as framework wiring the figure has no place for.
 **It stays 1 Maven module with no capability package**: the project has effectively 1 capability,
 so slicing it would show nothing. The move was a pure move, and it was verified to change nothing a
 grader reads: `mvn verify -Pgraded` printed the same 39.0, 21 and 42.4, the same 8 `challenge` tests
 failed, the endpoint answered the same 500 and the native image printed the same miss. The one build
 edit was the JaCoCo exclude, `web/**` to `adapter/incoming/**`. A future move needs the same before
-and after check.
+and after check. **`application/` split into `usecases/` and `ports/` later in October 2026**, at
+the owner's asking and in `DomainTree` with it, and that move passed the same check (39.0, 21,
+42.4, the same 8 red tests); its one build edit was the JaCoCo exclude, now
+`application/usecases/MemberStatements*`.
 
 Each figure's own docblock carries the rest, including why `WordsToFiles` draws no badly-named
 repository next to the good one. **Its fourth section, `Quality gates`, moved to `gates`** with
@@ -303,7 +317,11 @@ checks, tools, one row per kind, translated as one key (`deterministic-checks.ta
 `setup.claude-md.table`'s precedent, which is why the paragraph after it is now
 `deterministic-checks.2`. Formatting (Spotless, Checkstyle), compiler checks (Error Prone, NullAway)
 and dependency rules (Maven Enforcer, license-maven-plugin) were the three added, the owner's pick
-from four offered (API compatibility was the one left out). The rows run in `SameGate`'s four groups
+from four offered (API compatibility was the one left out). **Each row names 1 tool since October
+2026**, the owner's pick: JUnit, Testcontainers, Pact, ArchUnit, JaCoCo, PIT, Sonar, Error Prone,
+JaCoCo (complexity, through its `check` goal's `COMPLEXITY` counter), Spotless, Maven Enforcer,
+Dependabot and push protection. 1 example is enough for a student to place the kind; do not grow
+the column back into a list. The rows run in `SameGate`'s four groups
 without labelling them: tests, the numbers about the tests, the code, what you ship. It carries
 `data-layout="stack"`, so on a phone each row stacks instead of breaking words across 3 narrow
 columns (`front/CLAUDE.md` has the rule). Two rows were reworded at the owner's asking: the
@@ -319,7 +337,10 @@ other misses**, nor rank them: that contrast is the honest flag's discovery, kep
 A draft closed on the workshop grading 3 of the checks, and that sentence was cut: it was an aside,
 and the paragraph should end on bringing the rules into `mvn verify`. The vulnerability row says a
 CVE scan's answer moves without the code moving, which is the one honest exception to the section's
-"same answer every run", stated rather than hidden. The secrets row says "before they leave your
+"same answer every run", stated rather than hidden. Since its tool became Dependabot it says the scan
+runs again when a new CVE is published, not "on every build": Dependabot alerts fire when an
+advisory lands in the GitHub Advisory Database or the dependency graph changes, and no build turns
+red (docs.github.com, checked 13 October 2026). The secrets row says "before they leave your
 machine", because push protection blocks the push, after the commit. Facts behind the
 list, checked 10 October 2026: Pact's consumer and provider halves (docs.pact.io), PIT's bytecode
 mutation and `withHistory` (pitest.org), and **`scmMutationCoverage` was removed in PIT 1.18.0**, so
@@ -352,21 +373,31 @@ the whole diff, and the second said what you do with the correction is the decis
 look alike and leave very different windows behind. Both were the section below them stated ahead of
 time, which is what `Interrupt, or go back` argues at length. Do not write an introduction back in.
 
-`Mid-flight` opens the unit instead, and it is the **mechanics** of correcting a run rather than the
-choice between them: interrupt while it is thinking and there is nothing on disk, queue a sentence
-while it works, or stop it and throw the session away. The two sections under it argue the choice, so
-this one sorts the moves by where the agent is when you catch it and stops. Three decisions in it.
-It **names the stop key per harness** in one parenthesis (`Esc` in Claude Code, `Ctrl+C` in Copilot
-CLI, the Stop button in IntelliJ), on `REVIEW.md`'s finding that Escape is Claude-only: in Copilot
-CLI a second Esc interrupts the turn and then runs queued prompts, while Ctrl+C cancels and clears
-the queue. The IntelliJ button is still to be rehearsed. The deck title, the `steer.escape` move and
-the quiz distractor say "stop" for the same reason. `Interrupt, or go back` deliberately names no
-key for rewinding, because that binding differs per harness. Its third paragraph is the destructive
-move and is deliberately thin, because `When it is going nowhere` owns when to reach for it and
-`step1/session` owns `/clear` itself, so it hands off with "there is a section on that below" rather
-than naming a position that an insertion would break. And it must not grow the window argument: what
-an interrupt *leaves behind* is the section after it, and a paragraph here about the wrong turn being
-re-sent every turn is that section a page early.
+`Mid-flight` opens the unit instead, and since October 2026 it opens on a drawing,
+**`SteeringMoves`**, which replaced the three paragraphs that told its moves (the owner asked for
+less text, more drawing and nothing said twice; the unit went from 1144 words to about 610, and
+every claim the cut dropped was put back as one short sentence). The table has four rows from light
+to heavy, and its argument is the right-hand column, what stays in the context. Rows 2 and 3 both
+say **"wrong direction"**, because that is why you stop rather than type into the run: the owner
+could not see why row 2 stopped until the problem column said so. Row 4 is **"after a few attempts,
+still not what you wanted"**, not a failing test: "draait in rondjes" and "faalt op dezelfde
+manier" were both rejected as too narrow. The middle column names the key or button per assistant,
+so the figure reads `useAssistant()`. The three paragraphs under it are what the table cannot carry:
+the stop key per harness in one parenthesis (`Esc` in Claude Code, `Ctrl+C` in Copilot CLI, the Stop
+button in IntelliJ), that nothing is on disk while it thinks, and that a new session costs what the
+run worked out. It must not grow the window argument: what an interrupt *leaves behind* is the
+section after it.
+
+Typing into a running agent is called **lighter** than stopping, never cheaper. It used to say
+cheaper, and that was wrong: the agent keeps spending tokens until the sentence lands, Esc in
+Claude Code keeps the work already done, and in Copilot every message you send is a request either
+way. What it saves is breaking off the step in progress. **IntelliJ's Copilot agent mode cannot do
+it at all**: the chat is blocked while a turn runs (an open feature request in
+microsoft/copilot-intellij-feedback, checked October 2026, not yet rehearsed by hand), so
+`mid-flight.2` says so, the table's Copilot row 1 says to stop first, and the card's `queue` move
+splits by assistant. Queue, Steer with Message and Stop and Send exist only in the Copilot CLI agent
+inside JetBrains. Do not put "cheaper" back, and do not promise "on the next turn": when a queued
+sentence lands differs per harness.
 
 `When it is going nowhere` is the newest of the five, and **where it sits is the argument**:
 directly after `Interrupt, or go back`, because it is that section's counterpart. One is an agent
@@ -381,10 +412,16 @@ not belong in this section.
 
 Its worktree section is **not** a second telling of `goals`. `goals` argues one worktree as
 isolation from your own day, so a four-hour run does not make your branch unusable. `steering` argues
-one worktree *per agent*, so several run at once without colliding, and closes on the cost `goals`
-does not raise: two agents are two contexts and two bills, and your reading is the bottleneck rather
-than their speed. Keep those two arguments apart. Merged, the step says "use a worktree" twice and
-neither time says why.
+one worktree *per agent*, so several run at once without colliding, because the waiting overlaps.
+The two-contexts-two-bills cost is no longer in the unit's prose; it lives on the worktree slide's
+note, and `parallel` still may not argue it. **The section is a `data-assistant` pair since October
+2026**, at the owner's asking, because both products now make the worktree themselves: Claude Code
+with `claude --worktree <name>` (a new branch `worktree-<name>` under `.claude/worktrees/`, checked
+against code.claude.com/docs/en/worktrees), Copilot in IntelliJ only through the Copilot CLI agent's
+Worktree isolation, where approvals are forced to "allow all" (stated in the VS Code docs, only
+reported for JetBrains; still to rehearse). The plain `git worktree add` block stays under both, as
+the way that works in any tool, and the closing paragraph keeps the caveat that a worktree locks
+nothing.
 
 **The definition, though, is `steering`'s alone**, because `steering` reads first: a second checkout
 of the same repository, on its own branch, in its own folder, sharing the same history.
@@ -392,7 +429,7 @@ of the same repository, on its own branch, in its own folder, sharing the same h
 sentence and links here, which is what `parallel.many-agents-once.2` already did. Two arguments, one
 definition. Do not let a third site explain what a worktree is.
 
-**The unit is drawn now, three figures, and the two windows are a pair.** `TwoWindows` plays the two
+**The unit is drawn now, five figures, and the two windows are a pair.** `TwoWindows` plays the two
 moves since October 2026 (pasting on against taking out, with a playhead running back up the right
 window), and its last frame is the drawing this paragraph describes. `TwoWindows` sits under
 `Interrupt, or go back`, after the choosing paragraph and above the self aside, so the aside stays
@@ -423,8 +460,8 @@ dashed and never teal: it is being written, it is just the same shape again, and
 Neither window figure may borrow the other's argument, wrong direction against no direction, and
 neither is about the clock, which is `LoopsPerHour`'s.
 
-`WorktreeEach` sits between the isolation paragraph and the cost paragraph, so the two-bills
-argument keeps the last word in prose rather than under a drawing that does not make it. **It names
+`WorktreeEach` sits between the `git worktree` block and the paragraph on what a worktree does not
+lock, so that caveat keeps the last word in prose rather than under a drawing that does not make it. **It names
 the same two folders and branches as the `<pre>` above it**, on the `SkillTree` rule that the
 drawing and the pre name the same thing, and those labels are literals rather than locale keys
 because a path is not translated. Its teal is the frame rather than the boxes, the one figure in
@@ -434,31 +471,35 @@ because whose attention they get is `AgentsAtOnce`'s argument in `parallel`. It 
 drawing too. No line runs between the two frames, and the note under the history box reads that
 absence out loud; do not wire them together.
 
-The `gaps.md` section turns on its third part and nothing else. Never assume and write the gap down
-are bookkeeping; **stopping** is the lesson, because an agent that logs an assumption and then builds
-on it has told you what it guessed underneath a diff that already depends on the guess. The rule
-belongs in `CLAUDE.md` rather than a prompt, and the unit says so, because you cannot name a gap you
-do not know about yet. Do not soften the stop into "flag it and continue". That the rule belongs in
-`CLAUDE.md` is now stated on the page rather than only here: `stop-at-the-gap.2` names the file and
-links `setup`, which is the seam where the unit turns from moves you make in flight into a file you
-edit once.
+The gap section turns on **stopping** and nothing else. An agent that writes a guess down and then
+builds on it has told you what it guessed underneath a diff that already depends on the guess. Do
+not soften the stop into "flag it and continue". **The rule no longer writes to a `gaps.md`**
+(October 2026, at the owner's asking): the file read as the familiar list of what an app still
+lacks, and logging is the bookkeeping the section says is not the point. The answer goes into a test
+or into `CLAUDE.md` instead, so it is decided *in the repository*, which is what the rule checks.
+`GapRule` draws the two rows under the rule's `<pre>`, and the quiz's `logged-and-carried-on` now
+has the agent list its assumptions under its summary rather than in a file. The rule belongs in
+`CLAUDE.md` rather than a prompt, because you cannot name a gap you do not know about yet;
+`stop-at-the-gap.1` links `setup` for it.
 
 `steering` closes on an ungraded `TaskCard`, `SteerARun`, under the same `<hr>` and `ui:quiz.title`
 heading the rest of the step uses, with the quiz under it. **Four moves rather than five**, because
 the `data-audience="self"` aside owns the rewind experiment and a fifth move would say it twice to
 the one reader who gets both. **The `gap` move is why the card exists**: `LateFeePolicy` computes in
 cents and names no currency anywhere in `exercises/step2/java`, so asking for the fee in euros is the only
-place in the course where a student watches an agent decline to guess. Nothing on the card is graded,
+place in the course where a student watches an agent decline to guess. The `queue` move splits by assistant, because IntelliJ's agent mode cannot take a sentence mid-run.
+Nothing on the card is graded,
 and nothing it asks for touches a package, so `mvn verify -Pgraded` and the `challenge` tests are
 safe from it.
 
-**A gap is a *leemte* in Dutch and never an *opening***, which in that language is an aperture or a
-vacancy. It runs through `stop-at-the-gap.heading`, `.2`, `.3` and `workshop.flag.statement.help`, so
-a rewording of any of them keeps the noun.
+**A gap is an *open vraag* in Dutch, never a *leemte* and never an *opening*.** The owner rejected
+*leemte* as Netherlands Dutch in October 2026 (the course's Dutch is Flemish), and *opening* is an
+aperture or a vacancy. It runs through `stop-at-the-gap.heading` and `.1`, so a rewording keeps the
+noun.
 
-The interrupt-or-go-back section deliberately does not name a keystroke. Rewinding to an earlier
-message is described as something "most harnesses let you do", since the binding differs per harness
-and a wrong one dates the unit. It carries one of the step's two `data-audience="self"` asides, the
+The interrupt-or-go-back section deliberately does not name a keystroke. It names the three tools
+that let you rewind (Claude Code, Copilot CLI, and IntelliJ since plugin 1.18.0 in September 2026),
+and `SteeringMoves` carries the key per assistant, so the prose does not date with a binding. It carries one of the step's two `data-audience="self"` asides, the
 other being `workshop`'s. Two others are gone: `setup`'s, on reading a skill's description with the
 body covered, went with the hooks paragraph when that unit was trimmed, and `engineering`'s
 file-counting diagnostic went with the prose under its `Domain-driven design` heading.
@@ -793,6 +834,21 @@ turns on, so the two move together, and it belongs in that paragraph rather than
 own: the section is about where naive belongs, and a second paragraph making the same kind of claim
 read as an afterthought. Do not tidy any of it into agreement with `engineering`.
 
+`naive.3`, the throwaway that turns out to have users, follows `gates`' legacy-code order and links
+there: **gates first**, then a spec per change from then on, and **no specs for what already ran**,
+because the tests record it. Until October 2026 it told the agent to write the specs the code
+implies, one per feature. The owner rejected that as contradicting the gates-first rule the course
+repeats everywhere, and practitioner sources agree: a spec derived from code records what it does,
+bugs included, as if intended. Do not bring back reverse-engineered specs as the recovery step.
+
+**Spec-driven keeps two files per feature, `spec.md` and `plan.md`** (October 2026, at the owner's
+asking). It used to be one `spec.md`, which undersold the method: Spec Kit keeps `spec.md`,
+`plan.md` and `tasks.md` per feature, Kiro `requirements.md`, `design.md` and `tasks.md`. The owner
+chose spec and plan only, so **do not add `tasks.md`**. The plan is the one plan-based leaves in the
+session, kept this time, and that is the contrast `spec-driven.1` draws and the reason
+`WorkflowWeights` shows a solid `spec.md + plan.md` against plan-based's dashed `plan`. `flow-spec`
+draws `spec`, `plan` and `code` in the project frame, and the deck slide's title names both.
+
 It carries eight figures, and five of them are one set. `FlowDiagram` closes each section with who
 talks to what: `you → agent → [project: code]`, then the same with a two-way link to the agent, then
 a spec joining the code inside the project, then `defer`'s two sessions, then `audit-driven`'s
@@ -895,7 +951,7 @@ into what you settle first, what the agent runs, and what you read afterwards, s
 the work moves rather than shrinks. That equal total is the argument, which is why the bars are one
 figure and not four: four separate drawings say nothing on their own. `naive` and `audit-driven` come out close on that axis deliberately, because they are
 close, and what separates them is the second thing the figure carries: the artifact. A kept artifact
-is a solid pill (`spec.md`, `audit.md`), the plan is a dashed outline on the step-1 reading of a
+is a solid pill (`spec.md + plan.md`, `audit.md`), the plan is a dashed outline on the step-1 reading of a
 dash, since it goes when the session does, and `naive` has no tag at all, which has to read as
 deliberate rather than as a gap. The proportions are hand-authored, and the only place that is
 recorded is the component's own docblock: it carried a caption saying so, on `NextToken`'s
@@ -1503,7 +1559,7 @@ carries that whole argument in one paragraph now, and it is where the correction
 `workshop.native.1` and `.2` (which claimed the wiring was the student's) survives.
 
 **Those two flags are the pair the `two-jobs` stage exists for**, and the reason they may be run at
-once is genuine rather than staged: the challenge lives in `application/` and `adapter/incoming/web/`, the image lives
+once is genuine rather than staged: the challenge lives in `application/usecases/` and `adapter/incoming/web/`, the image lives
 in the build and `aot/`, and neither job touches the other's files. What they cannot share is a
 folder, because two Maven builds in one `target/` fight over it, and **that is the one concrete
 reason the worktrees are needed here**, so the paragraph states it rather than asserting isolation in

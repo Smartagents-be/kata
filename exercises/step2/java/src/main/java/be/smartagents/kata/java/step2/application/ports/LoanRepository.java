@@ -1,4 +1,4 @@
-package be.smartagents.kata.java.step2.application;
+package be.smartagents.kata.java.step2.application.ports;
 
 import be.smartagents.kata.java.step2.domain.Loan;
 import java.util.List;

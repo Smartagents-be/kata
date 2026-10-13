@@ -12,6 +12,7 @@ import { GateWalk } from './GateWalk'
 import { GoalGate } from './GoalGate'
 import { HexagonPorts } from './HexagonPorts'
 import { HookTree } from './HookTree'
+import { GapRule } from './GapRule'
 import { LoopInWindow } from './LoopInWindow'
 import { LoopsPerHour } from './LoopsPerHour'
 import { ModelRelay } from './ModelRelay'
@@ -24,6 +25,7 @@ import { SameGate } from './SameGate'
 import { ScriptRuns } from './ScriptRuns'
 import { SetupFlags } from './SetupFlags'
 import { SteerARun } from './SteerARun'
+import { SteeringMoves } from './SteeringMoves'
 import { SkillShape } from './SkillShape'
 import { SliceSkills } from './SliceSkills'
 import { SkillTree } from './SkillTree'
@@ -124,14 +126,17 @@ const step2: Step = {
       id: 'steering',
       title: 'steering.title',
       html: steering,
-      // Three slots inside the prose, one per section that argues something spatial. The two
+      // Five slots inside the prose. The moves table opens the unit in place of the three
+      // paragraphs that told it, and the gap rule's two rows sit under the rule itself. The two
       // windows share one frame geometry on purpose: the unit's vocabulary is the window, so they
-      // are one window in two states. The worktree drawing sits before the cost paragraph, so the
-      // two-bills argument keeps the last word in prose.
+      // are one window in two states. The worktree drawing sits before the paragraph on what a
+      // worktree does not lock, so that caveat keeps the last word in prose.
       inlineFigures: {
+        'steering-moves': <SteeringMoves />,
         'two-windows': <TwoWindows />,
         'loop-in-window': <LoopInWindow />,
         'worktree-each': <WorktreeEach />,
+        'gap-rule': <GapRule />,
       },
       // Then the task under the prose, four moves against exercises/step2/java, and the quiz under
       // that. The unit writes the `ui:quiz.title` heading itself, so `showsExerciseHeading` hands
@@ -177,12 +182,17 @@ const step2: Step = {
             links={['both', 'one']}
           />
         ),
-        // The spec joins the code inside the frame, which is the section's claim drawn: a spec is
-        // not a document beside the work, it is a file in it.
+        // The spec and the plan join the code inside the frame, which is the section's claim drawn:
+        // they are not documents beside the work, they are files in it. The plan is the one
+        // `flow-plan` left in the session, kept this time.
         'flow-spec': (
           <FlowDiagram
             id="flow-spec"
-            nodes={['you', 'agent', { label: 'project', nodes: ['spec', 'code'], links: ['one'] }]}
+            nodes={[
+              'you',
+              'agent',
+              { label: 'project', nodes: ['spec', 'plan', 'code'], links: ['one', 'one'] },
+            ]}
             links={['both', 'both']}
           />
         ),

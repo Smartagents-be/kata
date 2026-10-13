@@ -2,6 +2,7 @@ import type { SlideSpec } from '@/shared/deck/slide-spec'
 import { AgentsAtOnce } from './AgentsAtOnce'
 import { DomainTree } from './DomainTree'
 import { FlowDiagram } from './FlowDiagram'
+import { GapRule } from './GapRule'
 import { GateReach } from './GateReach'
 import { GoalGate } from './GoalGate'
 import { HookTree } from './HookTree'
@@ -14,6 +15,7 @@ import { ScriptRuns } from './ScriptRuns'
 import { SkillShape } from './SkillShape'
 import { SliceSkills } from './SliceSkills'
 import { SkillTree } from './SkillTree'
+import { SteeringMoves } from './SteeringMoves'
 import { TwoWindows } from './TwoWindows'
 import { VerticalSlices } from './VerticalSlices'
 import { WindowSpend } from './WindowSpend'
@@ -146,7 +148,7 @@ const deck: SlideSpec[] = [
     title: 'deck.engineering.domain.title',
     // The tallest tree in the step: at anything past this the last rows land on the footer.
     figure: <DomainTree />,
-    scale: 0.9,
+    scale: 0.84,
   },
 
   // ── gates ─────────────────────────────────────────────────────────────────────────────────
@@ -223,18 +225,16 @@ const deck: SlideSpec[] = [
       'deck.steering.divider.4',
     ],
   },
-  // The unit opened on its second section until this landed.
+  // The unit opens on this table now, so the slide is the same drawing rather than three points
+  // that summarised the prose it replaced.
   {
     id: 'deck-step2-steering-midflight',
-    kind: 'statement',
+    kind: 'figure',
     ns: 'step2',
     eyebrow: 'steering.title',
     title: 'deck.steering.midflight.title',
-    points: [
-      'deck.steering.midflight.1',
-      'deck.steering.midflight.2',
-      'deck.steering.midflight.3',
-    ],
+    figure: <SteeringMoves />,
+    scale: 1.3,
   },
   // The slide's own title is what this drawing argues, so it stopped being a statement the moment
   // the unit was drawn: the two windows are on the board and on the student's screen, one drawing.
@@ -274,18 +274,16 @@ const deck: SlideSpec[] = [
       'deck.steering.nowhere.3',
     ],
   },
+  // Its four points walked the rule as three steps, one of them logging the gap to a file; the
+  // file is gone from the rule, and the drawing says the rest.
   {
     id: 'deck-step2-steering-gaps',
-    kind: 'statement',
+    kind: 'figure',
     ns: 'step2',
     eyebrow: 'steering.title',
     title: 'deck.steering.gaps.title',
-    points: [
-      'deck.steering.gaps.1',
-      'deck.steering.gaps.2',
-      'deck.steering.gaps.3',
-      'deck.steering.gaps.4',
-    ],
+    figure: <GapRule />,
+    scale: 1.5,
   },
 
   // ── patterns ──────────────────────────────────────────────────────────────────────────────

@@ -68,19 +68,19 @@
     <tr><th>Check</th><th>What it checks</th><th>Tools</th></tr>
   </thead>
   <tbody>
-    <tr><td>Unit tests</td><td>The rules inside 1 module, in seconds.</td><td>JUnit, AssertJ</td></tr>
+    <tr><td>Unit tests</td><td>The rules inside 1 module, in seconds.</td><td>JUnit</td></tr>
     <tr><td>Integration tests</td><td>An adapter against what it really talks to: a Postgres in a container or a real cloud service, not a mock.</td><td>Testcontainers</td></tr>
     <tr><td>Contract tests</td><td>Whether a screen and its endpoint, or 2 services, still agree, without starting both. The consumer records what it expects, and the provider replays it against its own code.</td><td>Pact</td></tr>
     <tr><td>Architecture tests</td><td>Your architecture as rules the build fails on: the domain imports nothing from an adapter, and 1 module uses only what another one makes public.</td><td>ArchUnit</td></tr>
     <tr><td>Coverage</td><td>Which lines and branches your tests run. When an agent writes the tests, aim for 100%.</td><td>JaCoCo</td></tr>
     <tr><td>Mutation testing</td><td>Whether your tests really test your logic: the tool changes the code in small ways and counts how many of those changes make a test fail.</td><td>PIT</td></tr>
-    <tr><td>Static analysis</td><td>Known bug patterns, code smells and security flaws such as SQL injection.</td><td>PMD, Sonar</td></tr>
-    <tr><td>Compiler checks</td><td>Bug patterns and possible null dereferences, as compile errors.</td><td>Error Prone, NullAway</td></tr>
-    <tr><td>Cyclomatic complexity</td><td>The number of paths through 1 method. McCabe's limit of 10 keeps a method small enough to read and to test.</td><td>JaCoCo, PMD, Sonar</td></tr>
-    <tr><td>Formatting</td><td>Whether the code follows the house style.</td><td>Spotless, Checkstyle</td></tr>
-    <tr><td>Dependency rules</td><td>Banned libraries, 2 versions of the same library, a licence you may not ship.</td><td>Maven Enforcer, license-maven-plugin</td></tr>
-    <tr><td>Vulnerability scans</td><td>Every dependency against known CVEs. A new CVE turns yesterday's green build red, so the scan runs on every build.</td><td>OWASP Dependency-Check, Trivy, Dependabot</td></tr>
-    <tr><td>Secret scanning</td><td>Keys in your code, stopped before they leave your machine.</td><td>gitleaks as a pre-commit hook, push protection on GitHub</td></tr>
+    <tr><td>Static analysis</td><td>Known bug patterns, code smells and security flaws such as SQL injection.</td><td>Sonar</td></tr>
+    <tr><td>Compiler checks</td><td>Bug patterns and possible null dereferences, as compile errors.</td><td>Error Prone</td></tr>
+    <tr><td>Cyclomatic complexity</td><td>The number of paths through 1 method. McCabe's limit of 10 keeps a method small enough to read and to test.</td><td>JaCoCo</td></tr>
+    <tr><td>Formatting</td><td>Whether the code follows the house style.</td><td>Spotless</td></tr>
+    <tr><td>Dependency rules</td><td>Banned libraries, 2 versions of the same library, a licence you may not ship.</td><td>Maven Enforcer</td></tr>
+    <tr><td>Vulnerability scans</td><td>Every dependency against known CVEs. A new CVE can make yesterday's code unsafe without a line changing, so the scan runs again each time a new CVE is published.</td><td>Dependabot</td></tr>
+    <tr><td>Secret scanning</td><td>Keys in your code, stopped before they leave your machine.</td><td>Push protection on GitHub</td></tr>
   </tbody>
 </table>
 

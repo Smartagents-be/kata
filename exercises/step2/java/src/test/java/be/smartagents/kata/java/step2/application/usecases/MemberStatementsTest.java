@@ -1,8 +1,9 @@
-package be.smartagents.kata.java.step2.application;
+package be.smartagents.kata.java.step2.application.usecases;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
+import be.smartagents.kata.java.step2.application.ports.LoanRepository;
 import be.smartagents.kata.java.step2.adapter.outgoing.persistence.InMemoryLoanRepository;
 import be.smartagents.kata.java.step2.domain.Loan;
 import be.smartagents.kata.java.step2.domain.MediaType;
