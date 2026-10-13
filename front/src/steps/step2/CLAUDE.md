@@ -501,7 +501,11 @@ safe from it.
 aperture or a vacancy. It runs through `stop-at-the-gap.heading` and `.1`, so a rewording keeps the
 noun.
 
-The interrupt-or-go-back section deliberately does not name a keystroke. It names the three tools
+**Its `self` aside is a `data-assistant` pair nested inside the audience wrapper** (October 2026, at
+the owner's asking): "go back and change it" was not something a student could do without being
+told how, so each variant names the move (Esc twice or `/rewind`; the pencil on the message in IntelliJ's
+Copilot chat) and gives the three prompts to copy, against `exercises/step2/java`. The
+interrupt-or-go-back section deliberately does not name a keystroke. It names the three tools
 that let you rewind (Claude Code, Copilot CLI, and IntelliJ since plugin 1.18.0 in September 2026),
 and `SteeringMoves` carries the key per assistant, so the prose does not date with a binding. It carries one of the step's two `data-audience="self"` asides, the
 other being `workshop`'s. Two others are gone: `setup`'s, on reading a skill's description with the

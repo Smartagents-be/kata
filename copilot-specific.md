@@ -277,7 +277,7 @@ and Codex (Preview). Nothing in it is labelled "Copilot CLI", so the course says
   dropdown from the June 2026 changelog did not show up.
 - **Stop button:** works, does not hang; written files stay on disk, and after a follow-up message
   the agent carries on where it was.
-- **Rewinding:** editing an earlier message drops every later message and rewinds the files too
+- **Rewinding:** editing an earlier message (the pencil on it) drops every later message and rewinds the files too
   (confirmed on a clean run: files created after that message disappeared).
 - **Worktrees:** the isolation dropdown beside the agent (Workspace or Worktree) is only active in a
   new chat. A Worktree session lands in `<repo>.worktrees/copilot-worktree-<timestamp>-<id>` on a

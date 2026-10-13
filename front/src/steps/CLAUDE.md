@@ -26,10 +26,10 @@ reasoning behind all three are in each step's own file.
 
 ## Assistant variants across the steps
 
-**Step 2 is the one step not written for two assistants, except its `setup` unit and three spots in
+**Step 2 is the one step not written for two assistants, except its `setup` unit and four spots in
 `steering`**, and every other step is, on the `data-assistant` rule in `front/CLAUDE.md`. `setup` was
 paired in October 2026 because it is the unit whose subject is the files themselves, and their paths
-are where the two products differ most. `steering` followed in three places only: its moves figure names
+are where the two products differ most. `steering` followed in four places only: its rewind experiment names the keys or the pencil, its moves figure names
 the key or button, its worktree paragraph names each product's own worktree mode, and its card's
 `queue` move names IntelliJ's Copilot agent and its Send Immediately button. The rest of step 2 still names Claude Code's terms or both in one sentence.
 Steps 0 and 1 carry almost all of it; `step3`'s share is two filename pairs and is documented under

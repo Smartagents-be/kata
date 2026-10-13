@@ -38,10 +38,20 @@
 
 <div data-figure="two-windows"></div>
 
-<aside data-audience="self" data-i18n="steering.interrupt-or-go-back.3">
-  <p>
-    Try it 1 time: send a vague request, go back and change it, then ask what it has read. The file
-    from the first attempt is not in the answer.
+<aside data-audience="self">
+  <p data-assistant="claude" data-i18n="steering.interrupt-or-go-back.3.claude">
+    Try it 1 time in <code>exercises/step2/java</code>. Send <code>Explain how the statement
+    works.</code> and let it start. Press <kbd>Esc</kbd> twice (or type <code>/rewind</code>), pick
+    that message, and send <code>Explain how LateFeePolicy calculates the fee.</code> instead. Then
+    ask <code>Which files have you read in this conversation?</code> The files from the first attempt
+    are not in the answer.
+  </p>
+  <p data-assistant="copilot" data-i18n="steering.interrupt-or-go-back.3.copilot">
+    Try it 1 time in <code>exercises/step2/java</code>, with the Copilot agent. Send <code>Explain
+    how the statement works.</code> and let it start. Click the pencil on your message in the chat, change it to
+    <code>Explain how LateFeePolicy calculates the fee.</code> and send it. Then ask <code>Which files
+    have you read in this conversation?</code> The files from the first attempt are not in the
+    answer.
   </p>
 </aside>
 
