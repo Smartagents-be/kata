@@ -1,25 +1,25 @@
 <p data-i18n="session.lead.1">
-  Everything earlier in this conversation. Your previous turns, the agent's replies, the system
-  messages the harness slipped in, every tool call it made. And usually the bulk of it: the tool
-  results. A file it opened, a test run it executed, a stack trace you pasted.
+  Everything earlier in this conversation: your turns, the agent's replies, the system messages the
+  harness added, every tool call. And usually the bulk of it: tool results. A file it opened, a test
+  run, a stack trace you pasted.
 </p>
 
 <p data-i18n="session.lead.2">
-  Time sets this layer apart from the other 3. A prompt is written for 1 turn, the
-  harness loads the same material into every request, a tool result arrives the moment something
-  runs. The session is the only layer with a history behind it, because it is the history.
+  Time sets this layer apart from the other 3. A prompt is for 1 turn, the harness loads the same
+  material into every request, and a tool result arrives when something runs. The session is the
+  only layer with a history, because it is the history.
 </p>
 
 <p data-i18n="session.lead.3">
-  So the other layers end up here too. A page the agent fetched an hour ago can still go out with
-  every request, until the harness clears or summarises it.
+  So the other layers end up here too: a page the agent fetched an hour ago still goes out with
+  every request.
 </p>
 
-<h2 data-i18n="session.wrote-almost-none.heading">You hardly had to write any of it yourself</h2>
+<h2 data-i18n="session.wrote-almost-none.heading">You wrote almost none of it</h2>
 
 <p data-i18n="session.wrote-almost-none.1">
-  Count what is in there and your own words barely register. You type a sentence, and the agent opens 2 files, runs the test suite and pastes the output back. Your sentence is 14 tokens.
-  Everything around it is 5,000.
+  You type 1 sentence, and the agent opens 2 files, runs the test suite and pastes the output back.
+  Your sentence is 14 tokens. Everything around it is 5,000.
 </p>
 
 <!-- One short session weighed by where each block came from: the two teal ones are the only things
@@ -28,16 +28,16 @@
 <div data-figure="session-makeup"></div>
 
 <p data-i18n="session.wrote-almost-none.2">
-  2 bars in that stack are yours, and they are the short ones. Everything else landed there without
-  you typing a word. So this is the layer you author least and are still responsible for. It fills
-  itself up, mostly with output nobody read, while you are busy thinking about something else.
+  Only the 2 short bars in that stack are yours. This is the layer you write least and are still
+  responsible for. It fills itself, mostly with output nobody read, while you think about something
+  else.
 </p>
 
 <p data-i18n="session.wrote-almost-none.3">
-  You can change the session after the work: remove history with a rewind (press <kbd>Esc</kbd>
-  2 times on an empty prompt), summarise it with compaction, or clear it for a fresh task. And you
-  can come back to it: <code>--continue</code> reopens your last session, <code>/resume</code> an
-  older one.
+  You can change the session afterwards: remove history with a rewind (in a terminal <kbd>Esc</kbd>
+  2 times on an empty prompt, in IntelliJ by editing an earlier message), summarise it with
+  compaction, or clear it. From a terminal you can also come back to it: <code>--continue</code>
+  reopens your last session, <code>/resume</code> an older one.
 </p>
 
 <h2 data-i18n="session.sessions-where-money.heading">The session sets your bill</h2>
@@ -55,9 +55,9 @@
 </p>
 
 <p data-i18n="session.sessions-where-money.3">
-  So ask everything you want to know about a piece of code while it is in front of you
-  <svg data-icon="coin"></svg> But not forever: the same session that makes your second question
-  cheap makes your 50th expensive and vague.
+  So ask everything about a piece of code while it is in front of you <svg data-icon="coin"></svg>
+  Not forever, though: the session that makes your 2nd question cheap makes your 50th expensive and
+  vague.
 </p>
 
 <!-- Moved here from `context` with its anchor: the pile-up happens over time, and time is this
@@ -70,9 +70,9 @@
 </p>
 
 <p data-i18n="session.entropy.2">
-  That is entropy: disorder in the context rises with every turn unless somebody spends energy
-  pushing it back down. You see it when the agent starts contradicting itself, re-proposes an idea
-  you already rejected, or edits a file back to a version you moved past an hour ago.
+  That is entropy: disorder in the context rises every turn unless somebody spends energy pushing it
+  down. You see it when the agent contradicts itself, re-proposes an idea you rejected, or puts a
+  file back to a version you left an hour ago.
 </p>
 
 <p data-i18n="session.entropy.3">
@@ -84,7 +84,8 @@
 
 <p data-i18n="session.compaction-clear.1">
   Compaction replaces the conversation so far with a summary, and you go on in the same session.
-  <code>/clear</code> starts a new session: the conversation is gone, and nothing is summarised.
+  <code>/clear</code> starts a new session: the conversation leaves the context, and nothing is
+  summarised.
 </p>
 
 <ul>
@@ -117,14 +118,13 @@
 <!-- Verified October 2026. Claude Code: code.claude.com/docs/en/model-config (default auto-compact
      thresholds). Copilot CLI: docs.github.com/en/copilot/concepts/agents/copilot-cli/context-management. -->
 <p data-assistant="claude" data-i18n="session.compaction-clear.6.claude">
-  Claude Code compacts when the context is about full, and <code>/autocompact</code> sets that point lower,
-  anywhere from 100K to 1M tokens, so compaction comes earlier. It still picks the moment. You only
-  move it.
+  Claude Code compacts when the context is about full. <code>/autocompact</code> sets that point
+  lower, anywhere from 100K to 1M tokens. It still picks the moment. You only move it.
 </p>
 
 <p data-assistant="copilot" data-i18n="session.compaction-clear.6.copilot">
   Copilot CLI starts early on its own: from about 80% of the context it compacts in the background,
-  while you keep working. You cannot change that threshold.
+  while you keep working.
 </p>
 
 <!-- Moved here from `context`. Compaction above is the mechanism, this is what it does to the
@@ -133,8 +133,8 @@
 <h2 data-i18n="session.amnesia-context-fatigue.heading">Amnesia and context fatigue</h2>
 
 <p data-i18n="session.amnesia-context-fatigue.1">
-  After compaction, the summary is what stays. The constraint you gave at the start is now 1 line in
-  it, or it did not make the cut at all.
+  After compaction, the summary is what stays. An early constraint is now 1 line in it, or it did
+  not make the cut.
 </p>
 
 <p data-i18n="session.amnesia-context-fatigue.2">
@@ -156,18 +156,19 @@
 <h2 data-i18n="session.window-not-memory.heading">The context is not your memory</h2>
 
 <p data-assistant="claude" data-i18n="session.window-not-memory.1.claude">
-  Anything that has to survive a clear belongs somewhere other than the transcript. The code on disk
-  survives. A plan written to a file survives. <code>CLAUDE.md</code> is read again at the start of
-  every session and after compaction, which is why a standing instruction goes there and not in a
-  message you sent an hour ago. Keep that file short: Anthropic advises under 200 lines, because a
-  longer file costs more context and is followed less well.
+  Anything that has to survive a clear belongs outside the transcript. The code on disk survives. A
+  plan written to a file survives. <code>CLAUDE.md</code> is read again at the start of every
+  session and after compaction, so a standing instruction goes there, not in a message from an hour
+  ago. Keep it under 200 lines, as Anthropic advises: a longer file costs more context and is
+  followed less well.
 </p>
 
 <p data-assistant="copilot" data-i18n="session.window-not-memory.1.copilot">
-  Anything that has to survive a clear belongs somewhere other than the transcript. The code on disk
-  survives. A plan written to a file survives. <code>AGENTS.md</code> is read again at the start of every session, which is why a standing instruction goes there and not in a
-  message you sent an hour ago. Keep that file short and concrete: a long file costs more context,
-  and GitHub warns that instructions in it can then be overlooked.
+  Anything that has to survive a clear belongs outside the transcript. The code on disk survives. A
+  plan written to a file survives. <code>AGENTS.md</code> is read again at the start of every
+  session, so a standing instruction goes there, not in a message from an hour ago. Keep it short
+  and concrete: a long file costs more context, and GitHub warns that instructions in a very long
+  file can be overlooked.
 </p>
 
 <p data-i18n="session.window-not-memory.3">
@@ -177,8 +178,8 @@
 
 <aside data-audience="self" data-i18n="session.window-not-memory.4">
   <p>
-    Watch your own session once. Ask the agent what it has read so far in this conversation, and
-    check how much of that list still has anything to do with what you are doing now.
+    Watch your own session once. Ask the agent what it has read in this conversation, and check how
+    much of that still matters for what you are doing now.
   </p>
 </aside>
 

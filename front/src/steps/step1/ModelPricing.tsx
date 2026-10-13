@@ -18,10 +18,10 @@ const COLUMNS = [
  * It sits under the paragraph that states the ratios and above the one that says the ratios outlive
  * the numbers, so it is read as evidence for a claim rather than as a reference table.
  *
- * Three things the prose already argues can be checked against it by eye: the small tier as one unit
- * with the middle at two and the top at four, output at five times input in every row, and a cache
- * read at a tenth of input or less, which is what `tokens.prompt-caching.1` says caching costs. The top two tiers
- * read their cache cheaper than a tenth, which is why that sentence says "or less".
+ * Three things the prose already argues can be checked against it by eye: the middle tier at roughly 20
+ * times the small one and the top at roughly 40, output at five times input in every row, and a cache
+ * read at a tenth of input or less, which is what `tokens.prompt-caching.1` says caching costs. Every tier above
+ * the small one reads its cache cheaper than a tenth, which is why that sentence says "or less".
  *
  * It scrolls in its own box rather than wrapping. Six columns of machine output do not reflow into
  * a phone, and a table that reflows stops being one.

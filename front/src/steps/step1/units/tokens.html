@@ -27,17 +27,19 @@
   <!-- States the unit first and says what is counted in it, then the negation. The word `context` is
        deliberately not used: no unit defines it before `context` itself takes the window apart. -->
   <p data-i18n="tokens.lead.2">
-    Text reaches a language model as tokens. They measure how much text fits and how much is
-    processed. A token count is not a word count or a character count. Images become tokens too,
-    and are billed the same way. Claude counts roughly (width ÷ 28) × (height ÷ 28): 1 token per
-    block of 28 by 28 pixels. A screenshot of 1000 by 1000 pixels is about 1,300 tokens. A larger
-    image is scaled down first, so on current models 1 image costs at most about 4,800 tokens.
+    Tokens measure how much text fits and how much is processed. A token is usually a few characters
+    rather than a whole word, so a token count is neither a word count nor a character count.
   </p>
 
   <p data-i18n="tokens.lead.3">
-    A token is usually a few characters, rather than a whole word. The exact split depends on the
-    model and the language. For context limits and cost estimates, use the token count your tool
-    reports.
+    The exact split depends on the model and the language, so for context limits and cost estimates,
+    use the token count your tool reports.
+  </p>
+
+  <p data-i18n="tokens.lead.4">
+    Images become tokens too, billed the same way. Claude counts roughly 1 token per block of 28 by
+    28 pixels, so a screenshot of 1000 by 1000 pixels is about 1,300 tokens. A larger image is
+    scaled down first: on current models 1 image costs at most about 4,800 tokens.
   </p>
 
   <h2 data-i18n="tokens.reading.heading">Reading</h2>
@@ -45,10 +47,10 @@
   <h3 data-i18n="tokens.not-words.heading">Models do not process text as separate words</h3>
 
   <p data-i18n="tokens.not-words.1">
-    A tokeniser uses a fixed vocabulary and segmentation rules learned from text. Common words often
-    stay whole; other words split into smaller pieces. Different tokenisers draw
-    different boundaries, even between versions of the same model. Claude Opus 5.5 cuts finer than
-    Opus 4.6: the same text becomes about 30% more tokens, each shorter on average.
+    A tokeniser cuts text with a fixed vocabulary and rules learned from text: common words often
+    stay whole, others split into pieces. Each tokeniser cuts differently, even between versions of
+    one model. Claude Opus 5.5 cuts finer than Opus 4.6: the same text becomes about 30% more
+    tokens, shorter on average.
   </p>
 </div>
 
@@ -60,28 +62,28 @@
        id 61. So text and code are about level and ids and hashes are nearly 3 times either (61/22 is
        2.8, 61/21 is 2.9). Nothing here may say text is the cheapest any more: in Dutch it is not. -->
   <p data-i18n="tokens.not-words.2">
-  In these examples, text and Java code use similar numbers of tokens per character. A log line
-  uses nearly 2 times as many, an id nearly 3 times. Those ratios depend on the text and the tokeniser. Long logs full of ids
-  can fill the context quickly.
-</p>
+    In these examples, text and Java cost about the same per character, a log line nearly 2 times as
+    much and an id nearly 3 times. The ratios vary with the text and the tokeniser. Long logs full
+    of ids can fill the context quickly.
+  </p>
 
   <!-- Counts follow the shared example: 10 English tokens and 12 Dutch tokens.
        Fragmentation alone is not evidence of training exposure or language capability. -->
   <p data-i18n="tokens.not-words.3">
-    The sentence above uses 10 tokens in English and 12 in Dutch with this tokeniser. Most languages
-    need more tokens than English for the same content. A tokeniser learns its pieces mostly from
-    English text, so English words stay whole more often. Other languages cost more and fill the
-    context sooner. That says nothing about the quality of the answers.
+    With this tokeniser the sentence above is 10 tokens in English and 12 in Dutch. Tokenisers learn
+    their pieces mostly from English text, so most other languages need more tokens for the same
+    content. They cost more and fill the context sooner, which says nothing about the quality of the
+    answers.
   </p>
 
   <!-- The heading is the name of the thing, and `.1` names it last, after saying what it is. -->
   <h3 data-i18n="tokens.attention.heading">Attention</h3>
 
   <p data-i18n="tokens.attention.1">
-    In <code>He deposits his money at the bank</code>, <code>bank</code> could mean a river bank or
-    an institution that handles money. The words <code>deposits</code> and <code>money</code> help
-    identify the right meaning. The model weighs information from other tokens to make such
-    connections. That weighing is called <strong>attention</strong>.
+    In <code>He deposits his money at the bank</code>, <code>bank</code> could be a river bank or a
+    financial institution. <code>deposits</code> and <code>money</code> point to the right meaning.
+    To make such connections, the model weighs information from other tokens. That weighing is
+    called <strong>attention</strong>.
   </p>
 </div>
 
@@ -94,24 +96,21 @@
        and value aggregation are separate operations, both learned during training and used
        during inference. No numerical example: the role of each vector is the point. -->
   <p data-i18n="tokens.attention.2">
-    In every attention step, the model computes 3 vectors for each token: a <strong>query</strong>, a
-    <strong>key</strong> and a <strong>value</strong>. They serve different roles. When a token
-    seeks information from other tokens, its query expresses what it needs. When other tokens attend
-    to this token, its key expresses what it offers. Its value contains the information it actually
-    contributes.
+    In every attention step, the model computes 3 vectors for each token. Its <strong>query</strong>
+    holds what it needs from other tokens, its <strong>key</strong> what it offers them, and its
+    <strong>value</strong> the information it actually passes on.
   </p>
 
   <p data-i18n="tokens.attention.5">
-    For <code>bank</code>, the model compares its query with the keys of every earlier token and
-    itself. It calculates their <strong>dot product</strong>: multiply the numbers at corresponding
-    positions in the 2 vectors, then add the results. Each comparison produces a score.
+    For <code>bank</code>, the model takes the <strong>dot product</strong> of its query with the
+    key of every earlier token and its own: multiply the numbers at matching positions in the 2
+    vectors, then add them up. That is the score.
   </p>
 
   <p data-i18n="tokens.attention.6">
-    The scores are converted into weights that add up to 100%. The higher the score, the more the
-    corresponding value contributes. The model multiplies each value-vector by its weight and adds
-    the vectors together, position by position. That lets information from <code>deposits</code>
-    and <code>money</code> weigh heavily in understanding <code>bank</code>.
+    The scores become weights that add up to 100%. The model multiplies each value vector by its
+    weight and adds them position by position, so a higher score means a bigger share. That is how
+    <code>deposits</code> and <code>money</code> count heavily in what <code>bank</code> means.
   </p>
 
   <p data-i18n="tokens.attention.7">
@@ -125,9 +124,9 @@
        A closing line saying the pairs are not what you are billed for was cut at the course
        owner's asking: it read oddly and answered a question the paragraph does not raise. -->
   <p data-i18n="tokens.attention.3">
-    That step happens many times side by side, and again in every layer, each time with new vectors.
-    This drawing shows 1 run with invented weights and omits attention to the token itself. It has
-    21 pairs for 7 tokens and 91 for 14.
+    That step runs many times side by side and again in every layer, each time with new vectors.
+    This drawing shows 1 run, with invented weights and without a token's attention to itself: 21
+    pairs for 7 tokens, 91 for 14.
   </p>
 
   <h2 data-i18n="tokens.writing.heading">Writing</h2>
@@ -138,14 +137,13 @@
        first reuse within one answer, then across requests. Rates are `prompt-caching.1`'s, at the
        foot of the unit. -->
   <p data-i18n="tokens.one-at-a-time.1">
-  The model gives every token in its vocabulary a score, based on the context so far, and 1 token is
-  picked. That token goes on the end of the text, and the next prediction starts from that longer
-  sequence. A token depends only on what comes before it, so adding one changes nothing that was
-  already calculated. The model reuses those calculations from a cache instead of working through
-  the whole text again. That also works across requests: when a request starts with the same text as
-  an earlier one, that start can be reused, at a lower rate <svg data-icon="coin"></svg> That is
-  prompt caching, and its rates close this unit.
-</p>
+    The model scores every token in its vocabulary based on the text so far, and 1 is picked and
+    appended, so the next prediction starts from a longer text. A token depends only on what comes
+    before it, so appending changes nothing already calculated: the model reuses that work from a
+    cache rather than redoing it. Across requests too, a request that starts with the same text as
+    an earlier one can reuse that start at a lower rate <svg data-icon="coin"></svg> That is prompt
+    caching, and its rates close this unit.
+  </p>
 </div>
 
 <div data-figure="next-token"></div>
@@ -165,9 +163,9 @@
        from teaching that a model is a lookup table with extra steps, and it is what the fan of scores
        on the figure above is for. -->
   <p data-i18n="tokens.one-at-a-time.3">
-    The favourite is not always what comes out. Those scores are probabilities, and the model picks
-    one according to them, so ask the same question 2 times and you can get 2 different answers. None
-    of the other words above was impossible. They were only less likely.
+    The favourite does not always come out. The scores are probabilities and the model picks one
+    according to them, so the same question asked 2 times can get 2 different answers. None of the
+    other words above was impossible, only less likely.
   </p>
 </div>
 
@@ -199,9 +197,9 @@
   <!-- The embedding, said once and here, where the network that uses it is drawn. The widths are
        the ones `TokenNetwork`'s note uses; the reasoning is in step1/CLAUDE.md. -->
   <p data-i18n="tokens.inside.2">
-    To calculate with a token at all, the model first turns it into a list of numbers: its
-    embedding. The length of that list is the model's width: 2,880 numbers in gpt-oss-120b, 4,096 in
-    Llama 3 8B, 12,288 in GPT-3. The network below uses 4, so you can check it by hand.
+    To calculate with a token, the model first turns it into a list of numbers: its embedding. That
+    list's length is the model's width: 2,880 in gpt-oss-120b, 4,096 in Llama 3 8B, 12,288 in GPT-3.
+    The network below uses 4, so you can check it by hand.
   </p>
 </div>
 
@@ -216,15 +214,14 @@
   <h3 data-i18n="tokens.expensive-part.heading">The real cost</h3>
 
   <p data-i18n="tokens.expensive-part.1">
-  Output is priced above input in the table in the <a href="/steps/step1/model">model unit</a>. The
-  model reads the whole input at once, but writes the answer 1 token at a time, with a separate
-  pass for each token.
-</p>
+    Output is priced above input in the table in the <a href="/steps/step1/model">model unit</a>.
+    The model reads all input at once but writes 1 token at a time, 1 pass per token.
+  </p>
 
   <p data-i18n="tokens.expensive-part.2">
-    Thinking is writing too. Reasoning is billed as output, including the reasoning you never see:
-    what reaches your screen is at most a summary, and the bill is for the whole thing. Here is 1 turn
-    deep in a session, with the reading and the writing side by side.
+    Thinking is writing too. All reasoning is billed as output, though at most a summary of it
+    reaches your screen. Here is 1 turn deep in a session, with the reading and the writing side by
+    side.
   </p>
 </div>
 
@@ -232,9 +229,8 @@
 
 <div data-audience="self">
   <p data-i18n="tokens.expensive-part.3">
-    The token counts in this turn are an example. The price ratios are real. Most of the context comes
-    from the cache and costs next to nothing. The reasoning, which you never even see, is more than
-    half the bill.
+    The token counts in this turn are an example; the price ratios are real. Most of the context
+    comes from the cache and costs next to nothing. The reasoning is more than half the bill.
   </p>
 
   <!-- Moved here whole from the old `harness` unit, which repeated what the step had already said
@@ -246,13 +242,13 @@
 
   <p data-i18n="tokens.prompt-caching.1">
     On Anthropic’s API, a cache write costs 1.25 times input for a 5-minute cache or 2 times for a
-    1-hour one. A cache read costs 0.1 times input or less, depending on the model. Copilot bills it
-    too. Your harness and account decide which lifetime you get, and the usage report shows it.
+    1-hour one, and a cache read 0.1 times input or less, depending on the model. Copilot bills it
+    too. Your harness and account decide the lifetime.
   </p>
 
   <p data-i18n="tokens.prompt-caching.2">
-    The cache only matches from the start, and each model has its own. So pick your model, effort and
-    tools before you begin.
+    The cache only matches from the start, and each model has its own. So pick your model before you
+    begin.
   </p>
 </div>
 

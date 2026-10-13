@@ -130,7 +130,8 @@ measures it (see `ReadYourWindow`). The quiz question kept
 its id and choice ids so no progress is lost, and asks the same case. The paragraph's advice is a
 gem rather than "keep them up to date": a line in the instruction file that has the agent propose an
 edit to it whenever the student contradicts it, which the student approves. It says *propose*
-because both products ask before an edit by default but a student may have turned that off. The
+because an edit is not always put to the student: Claude Code's default auto mode sends most edits
+to its classifier rather than to you (since v2.1.283), and either product can be set to edit freely. The
 quiz explanation names the same tip; its cutoff distractor is false on purpose. Neither `session`
 question may be dropped to get back to 3 in one place: amnesia and entropy are opposite failure
 modes and both earn one. `agent-patterns` closes on `PatternMatch`, a drag-to-connect exercise whose three
@@ -273,7 +274,7 @@ the same. It said "up to 35%" for 4.7 against 4.6 once, which is not the figure 
 tokens of the same text" on its own read to the course owner as the newer model being less
 efficient, and the claim here is only where the boundaries fall.
 **Token density is an input measurement, not a language-quality evaluation.** `not-words.3`
-uses the shared sentence's current 13 English / 17 Dutch counts. Fragmentation alone does not
+uses the shared sentence's current 10 English / 12 Dutch counts. Fragmentation alone does not
 establish training exposure or prediction quality. Keep the density ratios scoped to the displayed
 samples, and update prose, locale and deck counts together when the example changes.
 
@@ -585,7 +586,7 @@ requests, which is the distinction `REVIEW.md` asks to keep. Retained
 input is processed again across requests, subject to cache rates and pruning.
 
 **`expensive-part` is the last prose section, and `TokenKinds` is its figure.** Its heading is
-`The real cost` (`De echte kosten`), and it reads as a claim because it sits under the `Writing`
+`The real cost` (`De echte kostenpost`), and it reads as a claim because it sits under the `Writing`
 part heading: it was `Writing is the expensive part` while the parts were implicit, and the part
 heading now carries the first half. `.1` opens straight on `Output is priced above input`, which
 still reads well under `Writing`, and its second sentence gives the mechanism only: input is read at
@@ -607,9 +608,10 @@ almost all new input arrives as a cache write, so plain input in such a turn is 
 a row for it would be empty in practice. Copilot also bills by token at each model's published rates
 (`copilot-specific.md`), so the figure carries no assistant variant; that Copilot's harness writes
 the cache the same way is not verified, which is one reason the caption names the rates it was
-priced at and nothing else. **It is priced at Claude Sonnet 5.5**, the middle tier, because its cache
-read is exactly a tenth of input and every multiplier comes out round; Opus 5.5 reads at 0.05x and
-Fable 5.1 at 0.025x, which is what "or less" covers. The facts behind the rows (output 5x input in
+priced at and nothing else. **It is priced at Claude Sonnet 5.5**, the middle tier. It reads its cache
+at 0.05x of input, as Opus 5.5 does, and Fable 5.1 at 0.025x; only the small tier still reads at a
+tenth, which is what "or less" covers (pricing page re-read 13 October 2026, when the Sonnet row
+was corrected from $0.20 to $0.10). The facts behind the rows (output 5x input in
 every tier, 5-minute write 1.25x, 1-hour 2x, reasoning billed as output tokens whether or not they
 are returned) were checked against Anthropic's pricing and extended-thinking docs in October 2026.
 **Every number is computed, none typed**: the rates come off `pricing.ts`'s Sonnet row, the same data
@@ -618,8 +620,8 @@ the figure cannot drift from the table. The counts (40,000 / 3,000 / 3,000 / 800
 authored numbers, and the prose says the turn is made up and its ratios are not. **The dollar total
 is the course's one currency outside `ModelPricing`** and it is allowed because it is a sum, not a
 rate: the table under the bars prints multipliers against input rather than prices, so it is not a
-second price list, and it must not become one. The total prints to four places, `$0.0535`, because
-three rounds to `$0.054` and a student redoing the sum by hand gets 0.0535. **Reading your own
+second price list, and it must not become one. The total prints to four places, `$0.0495`, because
+three rounds to `$0.050` and a student redoing the sum by hand gets 0.0495. **Reading your own
 breakdown is deliberately not here**: `/usage` and what it prints against these four kinds is left to
 a later item, so do not add a task card or a move to this section for it.
 
@@ -730,8 +732,10 @@ nothing, and a long pause that finds the cache expired. It was animated row by r
 **still on purpose** now, at the owner's asking: the five rows are a comparison and read best side
 by side. Its Dutch says "vraag" rather than "beurt", which the owner found odd here. The fourth row is a model switch rather than a new MCP server on
 purpose, for the reason in the next sentence; its docblock has the rest. The deck's statement slide
-(`deck-tokens-cache`) still states the rule, and `deck-tokens-cache-turns` after it shows the figure. `prompt-caching.2` states the prefix rule with model, effort and tools as
-what to settle early, and does not use connecting an MCP server mid-session as its example.
+(`deck-tokens-cache`) still states the rule, and `deck-tokens-cache-turns` after it shows the figure. `prompt-caching.2` states the prefix rule with only the model as what to settle early
+(13 October 2026): in Claude Code on the 5.5 models a change of effort keeps the cache, and so does
+an MCP server connecting mid-session while tool search defers its tools, so naming effort and tools
+there gave a reason that no longer holds.
 
 **`SequentialSteps` draws the run as it is done, plan file included** (redrawn October 2026, at the
 owner's asking, because "stop here, pick it up later" and "no room for step 4" said nothing without
@@ -884,7 +888,7 @@ and **only the summary is left**, with the next turn landing under it. The first
 the newest turns under the summary and put the trigger line at the top; both were wrong and were
 corrected at the owner's asking, and the docblock carries the doc quotes.
 
-**Lost in the middle is stated in prose and deliberately not drawn.** `context.more-context-not.3`
+**Lost in the middle is stated in prose and deliberately not drawn.** `context.more-context-not.2`
 names the term (it was `entropy.3` until entropy moved to `session`: a long input is about the size
 of one request, and that stayed) and
 says where the line sits, because a gloss that leaves out the position leaves a reader unable to say
@@ -908,7 +912,8 @@ owner first got plain-word kinds and asked for the readout's terms instead. So t
 entry like any machine output, and only the eyebrow, caption and description translate. It is a
 redraw and not a screenshot (also the owner's choice): a shot shows one product and one machine's
 setup. The MCP row is one plain reading, as in the readout. Its counts are
-invented (1 square is 1,000 tokens of a 200,000-token window) and its caption says so; the
+invented (1 square is 1,000 tokens of a 200,000-token window) and its caption says so, and also
+that many current models have a 1M window, so a student's own readout shows more free space; the
 share-by-volume figure for a real session stays `SessionMakeup` in `session`. Whether Copilot in
 IntelliJ has a comparable readout is not verified; the Copilot labels are the CLI's. It is not on the
 deck yet. Nothing in the prose may grow a description of the command
@@ -933,8 +938,11 @@ the corrected end state is a package per feature (`health/`) rather than control
 variant was measured once too, with the same result. Contradicting it ("we give every feature its
 own package now…") made the agent move the code and propose the `CLAUDE.md` edit, then ask before
 applying it, in every run. **Planting and cleanup split by assistant**: Claude Code appends to the
-project's `CLAUDE.md`; Copilot CLI only reads `CLAUDE.md` at the repository root, so it gets a new
+project's `CLAUDE.md`; Copilot CLI gets a new
 `AGENTS.md` in `exercises/step1/java`, which the Copilot run showed it reads from the current folder.
+GitHub's docs (re-read 13 October 2026) say Copilot CLI discovers `CLAUDE.md` and `AGENTS.md` at the
+repo root, the current folder and the folders between, so it also loads that folder's `CLAUDE.md`;
+the planted `AGENTS.md` still works.
 Cleanup removes only `web/` and `health/` and the planted lines, never `git restore .`, which would
 also wipe a student's own work in that folder (a started `EntryController`). The task keeps the agent
 away from `EntryController`, `services/` and `desk/`; do not widen it to any of those. The shell
@@ -949,7 +957,8 @@ memory defined, task-specific, bad or wrong, more is not free, what you give), a
 that grows and what you do about it. So entropy, amnesia and context fatigue, with `ContextFalloff`,
 their deck slides and their 2 quiz questions, moved from `context` to `session`, and
 `context.model-stateless.3` ("clear often") went. Inside `session` the duplicates were then merged:
-clearing for a new task is said once (`entropy.3`, which absorbed `window-not-memory.2`), "a summary
+clearing for a new task is said in `entropy.3` (which absorbed `window-not-memory.2`) and again in
+`compaction-clear.4`, which is the compact-or-clear choice and was added later, "a summary
 loses detail" once (`amnesia-context-fatigue`), and the instruction file once (`window-not-memory.1`).
 `context` still argues the re-send and the cost per message, so `session` does not
 re-argue them: it owns what `context` cannot, namely that this is the only layer with a time axis (the
@@ -1012,8 +1021,10 @@ a `/model` choice and MCP connections stay) changes nothing in the context. The 
 `compaction-clear.2` says "when the context nears its limit" rather than "when it is full",
 because neither product waits for 100% and Copilot CLI starts at about 80%. `.6` is a `data-assistant` pair:
 `.6.claude` names `/autocompact`, which lowers the threshold (100K to 1M tokens) so compaction comes
-earlier, and `.6.copilot` says Copilot CLI already starts at about 80%, in the background, and that
-the threshold is not configurable. Sources, read October 2026:
+earlier, and `.6.copilot` says Copilot CLI already starts at about 80%, in the background. It no
+longer says the threshold cannot be changed: github/copilot-cli#3026 (closed 15 May 2026) added the
+`COPILOT_BACKGROUND_COMPACTION_THRESHOLD` variable, and the owner chose to leave that detail out
+rather than name it (13 October 2026). Sources, read October 2026:
 code.claude.com/docs/en/model-config#default-auto-compact-thresholds, code.claude.com/docs/en/costs,
 code.claude.com/docs/en/prompt-caching#compacting-the-conversation, and
 docs.github.com/en/copilot/concepts/agents/copilot-cli/context-management. All three numbers are
@@ -1086,7 +1097,10 @@ exercise) was cut, since `.1` already carries the payoff and the `plan` card's d
 the caveat; the old `.3` is now `.2`. **`What no longer works` is not a myth list for its
 own sake**: each of its 4 habits (typing "think hard", "think step by step", role prompts, shouting in
 capitals) is either documented as ignored (Claude Code passes "think hard" through as ordinary text,
-code.claude.com/docs/en/model-config) or measured as not helping, and that is the bar for adding a 5th. "Think step by step" met it in October 2026 (OpenAI's
+code.claude.com/docs/en/model-config) or measured as not helping, and that is the bar for adding a 5th.
+Anthropic does document that a phrase like "think hard" can nudge *whether* the model thinks on that
+turn (thinking-steering-and-cost, read 13 October 2026), so `.1` says it is not a setting and at most
+a nudge, with the reasoning level as the dial, rather than that it does nothing. "Think step by step" met it in October 2026 (OpenAI's
 reasoning best practices; Anthropic's "prefer general instructions over prescriptive steps").
 
 Four things in it are boundaries with other units. **The word *entropy* is not used here**:
@@ -1175,13 +1189,12 @@ than naming a command, and that sequencing is the reason rather than an oversigh
 run of prose.** The unit carries no `<h3>` and no setting paragraph over the card, unlike `tools` and
 `context`: a paragraph here would leave a classroom with a card whose ask nobody had been given, and
 that is the bug `workshop.the-board.1` and `harness.check-yourself.1` were both deleted for. So the
-figure carries the situation, the counter's 6 wishes, the one line the student types, and the
-command that scores it, and `plan.description` carries the sentence the prose would have said. **The
-situation block was added after a review**: the sheet used to open on "What the counter asked for"
-with nobody having said who the counter was, what endpoint the wishes were about, or that the agent
-never sees them, and the course owner could not tell what the exercise was. It names the endpoint
-and the empty `EntryController` and says the agent sees only the one line; it says nothing about how
-to implement any wish, which stays the rule. The wishes' numbers are digits now, and
+figure carries the counter's 6 wishes, the one line the student types, and the
+command that scores it, and `plan.description` carries the sentence the prose would have said. **A
+situation block above the wishes was added after a review and removed again** (13 October 2026, at
+the owner's asking): it named the endpoint and the empty `EntryController` and said the agent never
+sees the wishes, and the owner judged it unnecessary, since the wishes' label, the prompt line and the
+task card carry what the student needs. Nothing on the sheet may say how to implement any wish. The wishes' numbers are digits now, and
 `check-entry.mjs`'s `minus 1` label moved with them. Four things in it are
 decisions. **The brief is read rather than drawn**: the student works from the words, and the argument
 stays in the task card's description. **It is one wish per line**, which reads worse
@@ -1369,7 +1382,7 @@ still takes some context) and `.3` (calling a tool takes space). The per-product
 says little; a specialised agent for a separate tool set) were cut in the same trim: configuration
 detail and a repeat of `.3`. **`agent-patterns` owns what a sub-agent costs**, so it does not come back here.
 
-`tools` **is titled "The agentic loop"** (NL "De agentic loop") while its id, its URL and its key prefix
+`tools` **is titled "The agentic loop and tools"** (NL "De agentic loop en tools") while its id, its URL and its key prefix
 stay `tools`, and that split is the decision: the page now opens on the loop that makes a model an
 agent, and a tool call is one turn of it, so the title names the larger idea and the id keeps every
 link and every `tools.*` key where it was. The layer is still tool results, so the layer names in
@@ -1509,16 +1522,19 @@ named rather than hidden. `model.cost.2` is that naming, and three things about 
 It sits **after** the figure, because the row is the surprise and a warning ahead of the table spends
 it early. It sorts and stops: what the frontier tier is good at is not taught here, since this step
 is about the window rather than about the family. And it calls the row a ceiling rather than a fourth
-tier, which is what keeps `ModelTiers` at three cards, `model.cost.1` at one-two-four, `model.speed.1`
+tier, which is what keeps `ModelTiers` at three cards, `model.cost.1` at one-twenty-forty, `model.speed.1`
 at "the slowest of the three" and `PickTheTier` at three targets. Promoting it to a tier means
 visiting all four.
 Four claims the prose already makes can be checked against it by eye, and a row edited without them
-in mind breaks the unit: the small tier as one unit against two and four, output at five times
+in mind breaks the unit: the middle tier at roughly 20 times the small one and the top at 40, output at five times
 input in every row, and a cache read at a tenth of input or less, which is what `tokens`'s caching
 section says (`tokens.prompt-caching.1`, which read "roughly a tenth" until the top two tiers started
 reading their cache at a twentieth and a fortieth).
 
-**The ratio was one-three-five until October 2026, and it moved because the prices did.** Opus 5.5
+**The ratio was one-three-five until October 2026, then one-two-four, and it moved because the
+prices did.** On 13 October 2026 the small row went from Haiku 4.5 ($1) to Haiku 5.5 ($0.10 up to
+100,000 tokens per prompt, 5 times that above), at the owner's asking, so the ratio became
+one-twenty-forty and `model.cost.1`, the deck title and the table's caption moved with it. Opus 5.5
 came in at $4 and Sonnet 5.5 at $2, so the table, `model.cost.1` and the deck's two pricing slides were all rewritten together. The next re-read of the
 pricing page has to visit the same five, and `tokens.prompt-caching.1`, in both languages. The unsupported fixed speed ratio was removed; latency is task-dependent and the chart is illustrative. Prices and model names have no `nl` entry, like every other machine-shaped string
 here; only the unit label, the column heads and the caption translate. The unit (`$ per million

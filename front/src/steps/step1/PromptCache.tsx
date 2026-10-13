@@ -9,7 +9,7 @@ import { useAssistant } from '@/shared/assistant/useAssistant'
  * that turn costs.
  *
  * It sits under `tokens.prompt-caching.2`, which states the rule ("The cache only matches from the
- * start, and each model has its own. So pick your model, effort and tools before you begin.") and
+ * start, and each model has its own. So pick your model before you begin.") and
  * this is that rule played out. **It reverses a recorded decision** (October 2026, at the owner's
  * asking): the section was drawn nowhere because a prefix diagram "would draw 'read from the first
  * byte' and stop". A single prefix would. Five rows of it show four cases one cannot: the
@@ -21,7 +21,8 @@ import { useAssistant } from '@/shared/assistant/useAssistant'
  * that example either. The pause row names no number of minutes, because how long the cache lives
  * depends on harness and account, which `prompt-caching.1` already says.
  *
- * The rates are the paragraph's: a read at 0.1 times input, a write at 1.25 times for a 5-minute
+ * The rates are the paragraph's: a read at 0.1 times input (the standard rate; the 5.5 tiers read
+ * cheaper, which the labels' "or less" covers), a write at 1.25 times for a 5-minute
  * cache. Token counts per block are illustrative and the caption says so. The instruction file is
  * named per assistant, since the figure sits in a step written for two.
  *

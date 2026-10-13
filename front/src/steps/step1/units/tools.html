@@ -4,12 +4,12 @@
      after four units had already used it and then repeated what `context` and this unit say about
      it, so do not grow a second definition anywhere else. -->
 <p data-i18n="tools.lead.1">
-  An agent is a model that works in a loop. You give it a goal, and the model picks the next step.
-  When that step is a tool call, the software you work in runs it, such as Claude Code, Copilot or
-  Cursor. That software is the <strong>harness</strong>. It puts the result into the context, and
-  the model decides again with that result added. The loop stops as soon as the model needs no more
-  tools and gives you an answer. That is called the agentic loop. In the literature the same loop
-  is called ReAct: reason, act, look at the result, and go again.
+  An agent is a model that works in a loop. You give it a goal and the model picks the next step. If
+  that step is a tool call, the software you work in runs it: Claude Code, Copilot or Cursor. That
+  software is the <strong>harness</strong>. It puts the result in the context and the model decides
+  again with that result. The loop stops when the model needs no more tools and gives you an answer.
+  That is the agentic loop, called ReAct in the literature: reason, act, look at the result, go
+  again.
 </p>
 
 <!-- What the loop looks like on the wire, from Anthropic's tool-use docs (how tool use works, and
@@ -18,11 +18,10 @@
      The three names are the ones AgentLoop's labels carry. -->
 <p data-i18n="tools.lead.2">
   Underneath, it is an exchange of messages. In the Claude API the model ends its turn with
-  <code>stop_reason: "tool_use"</code> and a <code>tool_use</code> block for every tool it wants
-  to use. There can be several at once. Your harness runs them all and sends the output back as
-  <code>tool_result</code> blocks. Then the model takes its next turn. If a tool fails, that comes
-  back as a result too, marked as an error, so the model can try something else. The loop ends on
-  <code>end_turn</code>.
+  <code>stop_reason: "tool_use"</code> and 1 <code>tool_use</code> block per tool call, sometimes
+  several at once. Your harness runs them all and sends the output back as <code>tool_result</code>
+  blocks, and the model takes its next turn. A failed tool comes back as a result too, marked as an
+  error, so the model can try something else. The loop ends on <code>end_turn</code>.
 </p>
 
 <!-- Ported from the ontbijtsessie deck's agents slide. The ring draws no window, so the frame below
@@ -36,11 +35,11 @@
      comes from rather than a thing that runs, and `McpServer` two figures down owns it. Which tools
      each product ships is `what-it-can-call`'s, so this paragraph names none of them by product. -->
 <p data-i18n="tools.lead.3">
-  A tool is a request the model makes to your system. The model cannot open a file or run a
-  command itself. So everything an agent can do comes from the tools the harness gives it:
-  <code>grep</code> to search your codebase, an edit tool to change a file, <code>curl</code> to
-  call an API. The harness puts the results of those tools in the context. The tool itself runs
-  outside the context: on your machine, against your files or at somebody else's API.
+  A tool is a request the model makes to your system. The model cannot open a file or run a command
+  itself, so everything an agent can do comes from the tools the harness gives it: <code>grep</code>
+  to search your codebase, an edit tool to change a file, <code>curl</code> to call an API. The
+  harness puts their results in the context, but the tool itself runs outside it: on your machine,
+  against your files or at somebody else's API.
 </p>
 
 <!-- The tool straddles the frame on purpose. The dashed half is the argument of the figure: the
@@ -48,10 +47,9 @@
 <div data-figure="tools-in-context"></div>
 
 <p data-i18n="tools.lead.4">
-  The model does not see how a tool runs. It only gets the result. Suppose the harness returns
-  only the first 100 lines of a file with 1,000 lines. Unless the result says it is a fragment,
-  the model does not know that 900 lines are missing. It then bases its answer on an incomplete
-  picture of the file.
+  The model does not see a tool run, only its result. Suppose the harness returns the first 100
+  lines of a 1,000-line file. Unless the result says it is a fragment, the model does not know 900
+  lines are missing, and answers from an incomplete picture of the file.
 </p>
 
 <h2 data-i18n="tools.what-it-can-call.heading">What the agent can call</h2>
@@ -61,32 +59,31 @@
      reference. Claude Code leaves Glob and Grep out of its default set on macOS, Linux and WSL and
      searches through Bash; only the Windows default set carries them. Re-read both before naming another tool. -->
 <p data-assistant="claude" data-i18n="tools.what-it-can-call.1.claude">
-  Claude Code comes with a short list of built-in tools. <code>Read</code> opens a file,
-  <code>Write</code> creates a new file and <code>Edit</code> changes an existing one.
-  <code>WebFetch</code> reads a web page, <code>WebSearch</code> searches the web and
-  <code>Agent</code> hands a task to a sub-agent. <code>Bash</code> is the shell. On macOS, Linux
-  and WSL, Claude Code also searches through that shell, with <code>find</code> and
-  <code>grep</code>. By default, only Windows has <code>Glob</code> and <code>Grep</code> as tools
-  of their own.
+  Claude Code's built-in tools include these. <code>Read</code> opens a file, <code>Write</code>
+  creates or overwrites one and <code>Edit</code> changes one. <code>WebFetch</code> reads a web
+  page, <code>WebSearch</code> searches the web and <code>Agent</code> hands a task to a sub-agent.
+  <code>Bash</code> is the shell, or <code>PowerShell</code> on Windows. On macOS, Linux and WSL
+  Claude Code also searches through the shell, with <code>find</code> and <code>grep</code>. Only on
+  Windows are <code>Glob</code> and <code>Grep</code> separate tools by default.
 </p>
 
 <p data-assistant="copilot" data-i18n="tools.what-it-can-call.1.copilot">
-  Copilot CLI has its own set of tools, under other names. <code>view</code> reads a file or a
-  folder, <code>create</code> creates a new file and <code>edit</code> changes an existing one.
-  Some models use <code>apply_patch</code> for that instead. <code>glob</code> finds files by name
-  and <code>grep</code> searches their contents. <code>web_fetch</code> reads a web page and
+  Copilot CLI names its tools differently. <code>view</code> reads a file or folder,
+  <code>create</code> creates a new file and <code>edit</code> changes an existing one, or
+  <code>apply_patch</code> on some models. <code>glob</code> finds files by name and
+  <code>grep</code> searches their contents. <code>web_fetch</code> reads a web page and
   <code>task</code> hands work to a sub-agent. Everything else goes through <code>bash</code>, or
-  through <code>powershell</code> on Windows.
+  <code>powershell</code> on Windows.
 </p>
 
 <h2 data-i18n="tools.mcp-servers.heading">MCP servers</h2>
 
 <p data-i18n="tools.mcp-servers.1">
-  An MCP server can give your agent access to many kinds of software and data sources. Think of
-  calendars, documents, design tools or internal business systems, for example. MCP stands for
-  Model Context Protocol: a standard for connecting your harness to such a server, running on
-  your machine or elsewhere. When the model asks to use one of its tools, your harness sends the
-  request to the server. The server runs the tool, and your harness adds the result to the context.
+  An MCP server can give your agent access to all kinds of software and data sources, such as
+  calendars, documents, design tools or internal business systems. MCP stands for Model Context
+  Protocol, a standard for connecting your harness to such a server, on your machine or elsewhere.
+  When the model asks for one of its tools, your harness passes the request on, the server runs the
+  tool, and your harness adds the result to the context.
 </p>
 
 <!-- The same frame and prompt as tools-in-context, with one wire crossing the border and fanning
@@ -132,11 +129,11 @@
      is what the closing warning rests on. Whether Copilot expands ${VAR}
      in that file was not checked, so the Copilot half does not say. -->
 <p data-assistant="claude" data-i18n="tools.mcp-servers.6.claude">
-  <code>claude mcp add</code> saves a server for you alone, in this project. Add
-  <code>--scope project</code> and it goes into <code>.mcp.json</code> in the root of the
-  repository. Commit that file and your team gets the same servers. Claude Code asks you before it
-  starts a server from it. Leave secrets out: write <code>${API_KEY}</code> and Claude Code reads the
-  value from your environment.
+  <code>claude mcp add</code> saves a server for you alone, in this project. Add <code>--scope
+  project</code> and it goes into <code>.mcp.json</code> in the root of the repository. Commit that
+  file and your team gets the same servers. In an interactive session, Claude Code asks you before
+  it starts a server from it. Leave secrets out: write <code>${API_KEY}</code> and Claude Code reads
+  the value from your environment.
 </p>
 
 <p data-assistant="copilot" data-i18n="tools.mcp-servers.6.copilot">
@@ -166,10 +163,9 @@
 </p>
 
 <p data-i18n="tools.what-mcp-costs-you.3">
-  Calling a tool also takes space: the request and the content your harness passes on enter the context.
-  A long database result can take far more room than the tool's description. Ask for the part you
-  need, and turn off tools that do not serve this task. That also gives the model fewer similar
-  tools to choose between.
+  Calling a tool takes space too: the request and the content your harness passes on enter the
+  context, and a long database result can take far more room than the tool's description. Turn off
+  tools this task does not need. That also leaves the model fewer similar tools to choose between.
 </p>
 
 <h2 data-i18n="tools.check-tool-results.heading">Check what tools return</h2>
@@ -193,11 +189,10 @@
 <!-- Results are distinct from user instructions, but that distinction does not guarantee that
      a model will ignore injected instructions. Keep the risk conditional, not inevitable. -->
 <p data-i18n="tools.check-tool-results.3">
-  Even though the model receives that text as a tool result, it can still treat it as an instruction
-  and take the wrong next step. The risk is highest when the same agent can read your private data,
-  reads untrusted content and can send data out. Limit the agent's access to what the task needs.
-  Configure your harness to ask for permission before sensitive actions, such as sending data or
-  deleting files.
+  The model gets that text as a tool result and can still treat it as an instruction, taking the
+  wrong next step. The risk is highest when the same agent can read your private data, reads
+  untrusted content and can send data out. Limit its access to what the task needs, and have your
+  harness ask permission before sensitive actions such as sending data or deleting files.
 </p>
 
 <h2 data-i18n="tools.large-tool-results.heading">Large tool results</h2>
@@ -207,24 +202,23 @@
      These are output-handling defaults, not the model's context limit. Claude's limits can be
      overridden by configuration or tool metadata; image and error results follow different rules. -->
 <p data-assistant="claude" data-i18n="tools.large-tool-results.1.claude">
-  Claude Code saves large text results from MCP tools to a file. For successful results without
-  images, this happens by default above 25,000 tokens or 50,000 characters. The model then gets
-  a message with the file path and can read the parts it needs. Other tools, such as <code>Bash</code>,
-  have their own limits and can truncate output or return a file path with a preview.
+  By default Claude Code saves a successful MCP text result without images to a file once it passes
+  25,000 tokens or 50,000 characters. The model then gets the file path and can read the parts it
+  needs. Other tools, such as <code>Bash</code>, have their own limits and can truncate output or
+  return a file path with a preview.
 </p>
 
 <p data-assistant="copilot" data-i18n="tools.large-tool-results.1.copilot">
-  Copilot CLI saves tool output larger than 20 KiB to a temporary file by default, including output
-  from MCP tools. The model gets the file path and a preview instead of the full output. It can
-  then read the parts it needs. For Copilot in your IDE this is not documented, so ask for only the
-  part you need.
+  By default Copilot CLI saves any tool output over 20 KiB, MCP tools included, to a temporary file.
+  The model gets the file path and a preview instead, and can read the parts it needs. For Copilot
+  in your IDE this is not documented.
 </p>
 
 <p data-i18n="tools.large-tool-results.2">
-  Only the content your harness passes to the model counts as input. That content is sent again
-  on later turns for as long as it stays in the active context. Your harness can remove or summarise
-  old results, and caching can make repeated input cheaper. Ask for the relevant part of a log
-  <svg data-icon="coin"></svg>.
+  Only what your harness passes to the model counts as input, and it is sent again on every later
+  turn while it stays in the active context. Your harness can remove or summarise old results, and
+  caching can make repeated input cheaper. Ask only for the part you need, such as the relevant
+  lines of a log <svg data-icon="coin"></svg>.
 </p>
 
 <!-- Everything below the rule is the doing part of the unit, under one heading that matches the one
@@ -237,10 +231,7 @@
 <h3 data-i18n="tools.connect-one.heading">Try it yourself</h3>
 
 <p data-i18n="tools.connect-one.1">
-  You fetch the 9 book titles from step 1's catalogue in 2 ways and measure what each route leaves
-  in your context and what it costs.
-  Then you see why you would sometimes still want the more expensive tool. Every command and prompt
-  is on the card.
+  Every command and prompt for this task is on the card below.
 </p>
 
 <!-- The warning `--allow-unrestricted-file-access` needs, now shared rather than per assistant: the
@@ -248,9 +239,9 @@
      0.0.55 the server blocks `file://` URLs without it (checked against `--help` on 0.0.83), and the
      flag page is a `file://` page. -->
 <p data-i18n="tools.connect-one.2">
-  The browser server starts with <code>--allow-unrestricted-file-access</code>, so it can open a page
-  from disk. That also lets it open any file outside your project, so the last step on the card puts
-  the server back without it.
+  The browser server starts with <code>--allow-unrestricted-file-access</code> so it can open a page
+  from disk. That also lets it open any file outside your project, so the card's last step removes
+  the server again.
 </p>
 
 <!-- The unit's first task. The two fetches, the measurement and the flag are the card's moves, so no

@@ -2,8 +2,11 @@ import { useTranslation } from 'react-i18next'
 import { CopyCommand } from '@/shared/components/CopyCommand'
 
 /**
- * Everything `PlanItTwice` needs, on one sheet: the situation, what the counter asked for, the one
- * line the student types both times, and the command that scores what came out.
+ * Everything `PlanItTwice` needs, on one sheet: what the counter asked for, the one line the student
+ * types both times, and the command that scores what came out. A situation block opened the sheet
+ * for a while (who the counter is, which endpoint, that the agent never sees the wishes) and was
+ * removed on 13 October 2026 at the owner's asking: the wishes' label, the prompt and the task card
+ * already carry all of it.
  *
  * **It is a figure rather than prose because guided mode drops every run of prose.** The task under
  * it is worked in class as well as alone, and a brief that vanished on the projector would leave the
@@ -62,26 +65,6 @@ export function EntryBrief() {
       aria-label={t('entry-brief.description')}
       className="my-8 flex flex-col gap-4"
     >
-      {/* Who is asking, for what, and what the two runs measure. The sheet opened on the wishes
-          once, and a reader met "the counter" with nobody having said what it was or what the
-          wishes were for; the card underneath said it, a scroll too late. */}
-      <div id="entry-brief-situation" data-component="EntryBrief" className="flex flex-col gap-2">
-        <span
-          id="entry-brief-situation-label"
-          data-component="EntryBrief"
-          className="eyebrow text-primary"
-        >
-          {t('entry-brief.situation.label')}
-        </span>
-        <p
-          id="entry-brief-situation-text"
-          data-component="EntryBrief"
-          className="text-foreground text-sm leading-relaxed"
-        >
-          {t('entry-brief.situation.text')}
-        </p>
-      </div>
-
       <div id="entry-brief-asked" data-component="EntryBrief" className="flex flex-col gap-2">
         <span
           id="entry-brief-asked-label"

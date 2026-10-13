@@ -7,8 +7,9 @@
      same claim drawn. -->
 <div data-audience="self">
   <p data-i18n="context.lead.1">
-  Each turn, the harness sends the model 1 request. Everything in it is the <strong>context</strong>.
-</p>
+    Every call the harness makes to the model is 1 request. Everything in it is the
+    <strong>context</strong>.
+  </p>
 </div>
 
 
@@ -28,15 +29,17 @@
   </p>
 
   <p data-assistant="claude" data-i18n="context.model-stateless.2.claude">
-    Claude Code calls those files memory. You write <code>CLAUDE.md</code>. Claude also keeps its own notes per project and loads
-    the first 200 lines of them. Type <code>/memory</code> to see both. So memory is not something the
-    model remembers: it is text that comes back into the context every session.
+    Claude Code calls those files memory: the <code>CLAUDE.md</code> you write, and the notes Claude
+    keeps per project, of which it loads the first 200 lines or 25 KB. <code>/memory</code> shows
+    both. So memory is not something the model remembers: it is text that comes back into the
+    context every session.
   </p>
 
   <p data-assistant="copilot" data-i18n="context.model-stateless.2.copilot">
-    Copilot works the same way. You write <code>AGENTS.md</code>. With Copilot Memory, still in preview,
-    Copilot also stores facts about a repository itself, and deletes a fact it has not used for 28
-    days. So memory is not something the model remembers: it is text that is handed to it again.
+    Copilot works the same way: you write <code>AGENTS.md</code>, and with Copilot Memory (still in
+    preview, in Copilot CLI and on GitHub) Copilot stores facts about a repository itself, deleting
+    any it has not used for 28 days. So memory is not something the model remembers: it is text
+    handed to it again.
   </p>
 
   <h2 data-i18n="context.task-specific.heading">
@@ -44,16 +47,15 @@
 </h2>
 
   <p data-i18n="context.task-specific.1">
-    The model predicts from what it learned and what is in the context. It was trained on code from a
-    great many projects. Without the current code, the failing case and your conventions, it falls
-    back on what is common across them: an answer that could fit any project, but not necessarily
-    yours.
+    The model predicts from its training, code from a great many projects, and from what is in the
+    context. Without the current code, the failing case and your conventions, it falls back on what
+    those projects have in common: an answer that could fit any project, not necessarily yours.
   </p>
 
   <p data-i18n="context.task-specific.2">
-    Below you can see how much 1 piece of context changes. Both pages come from the same prompt: a
-    landing page for a book rental. On the left the model got only that prompt, on the right also 1
-    screenshot of an existing design as an example.
+    Below you see what 1 piece of context changes. Both pages come from the same prompt: a landing
+    page for a book rental. The left one got only that prompt, the right one also 1 screenshot of an
+    existing design as an example.
   </p>
 </div>
 
@@ -64,68 +66,64 @@
 <div data-figure="oneshot-compare" data-audience="self"></div>
 
 <p data-audience="self" data-i18n="context.task-specific.3">
-  On the left you see the default choices that keep coming back in AI-made designs: everything
-  centred, a large serif headline, a little pill with a dot above it and the same rounded corners
-  everywhere. That 1 example on the right steered the design somewhere else straight away. It is not
-  finished, but it is closer to what you want.
+  The left one shows defaults that keep coming back in AI-made designs: everything centred, a large
+  serif headline, a little pill with a dot above it, the same rounded corners everywhere. The 1
+  example on the right steered the design elsewhere at once. Not finished, but closer to what you
+  want.
 </p>
 
 <!-- The figure's payoff turned on the student's own repository. It stays descriptive on purpose:
      arranging a repository so an agent works well in it is step 2's `setup`, and this paragraph is
      only why the codebase counts as context at all. -->
 <p data-audience="self" data-i18n="context.task-specific.4">
-  Your codebase is that example. Every file the agent reads steers the answer the way that image did.
-  Claude Code's system prompt even tells it, in so many words, to write code that reads like the
-  surrounding code. Do things one way consistently and the agent copies that. Let a project drift for
-  years and it copies the drift.
+  Your codebase is that example: every file the agent reads steers the answer the way that image
+  did. Claude Code's system prompt explicitly tells it to write code that reads like the surrounding
+  code. Work one way consistently and the agent copies it. Let a project drift for years and it
+  copies the drift.
 </p>
 
 <div data-audience="self">
   <h2 data-i18n="context.bad-context-bad.heading">Bad context, bad answers</h2>
 
   <p data-i18n="context.bad-context-bad.1">
-    Missing context produces generic output: code that could sit in any project. A
-    <code>UserService</code> interface with a <code>UserServiceImpl</code> beside it, because that is
-    what the tutorials do. A try-catch that logs the exception and carries on. It compiles, but it
-    can break your domain rules. It answers a question nobody in your team asked.
+    Missing context produces generic code. A <code>UserService</code> interface with a
+    <code>UserServiceImpl</code> beside it, because the tutorials do that. A try-catch that logs the
+    exception and carries on. It compiles, but it can break your domain rules: it answers a question
+    nobody in your team asked.
   </p>
 
   <p data-i18n="context.bad-context-bad.2">
-    Often that gap can be closed, because the agent can use its <a href="/steps/step1/tools">tools</a>
-    to fetch what it lacks: read files, search your codebase, run the tests or <code>git log</code>, or
-    pull documentation from the web. When that is not enough, it interviews you
-    <svg data-icon="pattern"></svg> It is not guaranteed to do either.
+    The agent can often close that gap with its <a href="/steps/step1/tools">tools</a>: read files,
+    search your codebase, run the tests or <code>git log</code>, pull documentation from the web. If
+    that is not enough, it interviews you <svg data-icon="pattern"></svg> Neither is guaranteed.
   </p>
 
   <p data-i18n="context.bad-context-bad.3">
-  Wrong context can mislead the model. A realistic case: your <code>CLAUDE.md</code> or <code>AGENTS.md</code> still says new
-  endpoints go in a <code>web</code> package, while the team has long given every feature its own
-  package. The agent follows the file, and nothing in the code stops it. So put a line in that file
-  that has the agent propose an edit to it whenever you say something that contradicts it. You approve, and the file stays current
-  <svg data-icon="gem"></svg> When in doubt, also have the agent read the existing code.
-</p>
-
+    Wrong context can mislead the model. Say your <code>CLAUDE.md</code> or <code>AGENTS.md</code>
+    still says new endpoints go in a <code>web</code> package, while the team has long given every
+    feature its own package. The agent follows the file, and nothing in the code stops it. So add a
+    line to that file: whenever you contradict it, the agent proposes an edit to the file. You
+    approve, and the file stays current <svg data-icon="gem"></svg> When in doubt, also have the
+    agent read the existing code.
+  </p>
 
   <h2 data-i18n="context.more-context-not.heading">More context is not free</h2>
 
   <p data-i18n="context.more-context-not.1">
-  Everything in the context is sent again with every message. The cache makes that cheaper, not free.
-</p>
-
-  <p data-i18n="context.more-context-not.2">
-    So the goal is not maximum context. It is context that is small enough and good enough. The file
-    that matters instead of the whole directory.
+    Everything in the context is sent again with every message. The cache makes that cheaper, not
+    free. So aim for small and good enough, not maximum: the file that matters, not the whole
+    directory.
   </p>
 
   <!-- Moved here from the old `Entropy` section when that went to `session`: entropy is the pile-up
-       over time, which is `session`'s, while this is about the size of one request. It is last
-       rather than second so `.2` keeps its key. -->
-  <p data-i18n="context.more-context-not.3">
-    Even relevant material can be missed in a long context. Some models and tasks show weaker
-    retrieval for information placed in the middle. That is called <strong>lost in the
-    middle</strong>. More broadly, answers get less reliable as the input grows, even when the task
-    stays just as easy. Researchers call that <strong>context rot</strong>. Keep critical
-    constraints easy to find and check whether the result follows them.
+       over time, which is `session`'s, while this is about the size of one request. The old `.2`
+       ("aim for small and good enough") was merged into `.1` in October 2026, so this took its key. -->
+  <p data-i18n="context.more-context-not.2">
+    A long context can hide even relevant material. Some models, on some tasks, find information in
+    the middle less reliably: <strong>lost in the middle</strong>. More broadly, answers get less
+    reliable as the input grows, even when the task stays as easy. Researchers call that
+    <strong>context rot</strong>. Keep critical constraints easy to find, and check the result
+    follows them.
   </p>
 
   <!-- The four moves are the ones Anthropic's own guidance backs (best practices, common workflows,
@@ -136,25 +134,26 @@
   <h2 data-i18n="context.you-choose-most.heading">What you give the agent</h2>
 
   <p data-i18n="context.you-choose-most.1">
-  Per task, give what holds for that task only: the class and the scenario, as in the
-  <a href="/steps/step1/prompt">prompt unit</a>, and the failing assertion with the relevant stack
-  trace lines <svg data-icon="coin"></svg> Also point at a class that follows your conventions, so
-  the agent has a concrete reference.
-</p>
+    Per task, give what holds for that task only: the class and the scenario (see the
+    <a href="/steps/step1/prompt">prompt unit</a>), and the failing assertion with the relevant
+    stack trace lines <svg data-icon="coin"></svg> Also point at a class that follows your
+    conventions, as a concrete reference.
+  </p>
 
   <p data-i18n="context.you-choose-most.2">
-    When you do not know where a change belongs, ask the agent to locate it and report before
-    editing. Starting in <code>exercises/step1/java</code> focuses discovery on that project. The working
-    directory is also the default boundary: the agent asks before it reads or edits files outside
-    it. That is a permission prompt, not a sandbox.
+    If you do not know where a change belongs, have the agent find the place and report before it
+    edits. Starting in <code>exercises/step1/java</code> focuses its search on that project. That
+    folder is also the default boundary: the agent asks before it first reads outside it. A
+    permission prompt, not a sandbox.
   </p>
 
   <p data-i18n="context.you-choose-most.3">
-    What holds for every task does not belong in your prompt but in the project: in your
-    <code>CLAUDE.md</code> or <code>AGENTS.md</code>, in rules per part of the codebase, and in gates that fail when it goes wrong. Only a gate is
-    certain. Whether the agent keeps to your DDD rules you otherwise only find out by reading the code
-    yourself. So write rules like that down as architecture tests that fail when a class breaks them.
-    How to set that up is in <a href="/steps/step2/setup">step 2</a>.
+    What holds for every task belongs in the project, not your prompt: in your
+    <code>CLAUDE.md</code> or <code>AGENTS.md</code>, in rules per part of the codebase, and in
+    gates that fail when it goes wrong. Only a gate is certain. Without one, you only learn whether
+    the agent kept to your DDD rules by reading the code yourself. So write such rules as
+    architecture tests that fail when a class breaks them. <a href="/steps/step2/setup">Step 2</a>
+    shows how.
   </p>
 
   <!-- What the context costs in trust rather than tokens. The plan facts are dated and were read on
@@ -172,11 +171,10 @@
   </p>
 
   <p data-assistant="claude" data-i18n="context.leaves-your-machine.2.claude">
-    What happens to it next depends on your account. On a Team or Enterprise plan or the API,
-    Anthropic does not train on it and keeps it 30 days. On a personal Free, Pro or Max account it
-    trains on your sessions while that setting is on in
-    <code>claude.ai/settings/data-privacy-controls</code>, and then keeps them 5 years. Check which
-    account your company expects you to use.
+    What happens next depends on your account. On Team, Enterprise or the API, Anthropic does not
+    train on it and keeps it 30 days. On a personal Free, Pro or Max account it trains on your
+    sessions while the setting at <code>claude.ai/settings/data-privacy-controls</code> is on, and
+    then keeps them 5 years. Check which account your company expects you to use.
   </p>
 
   <p data-assistant="copilot" data-i18n="context.leaves-your-machine.2.copilot">
