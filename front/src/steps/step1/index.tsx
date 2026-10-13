@@ -203,8 +203,8 @@ const step1: Step = {
         'usage-readout': <UnitShot id="usage-readout" src="/session-usage.png" namespace="step1" />,
         'session-windows': <SessionWindows />,
         'speed-at-scale': <SpeedAtScale />,
-        // The sum `model.cost.4` describes, asked for, and it sits above the board because the
-        // paragraph set it up a screen earlier.
+        // The one place the course multiplies the student's own readings against the rates, and it
+        // sits above the board. Its description carries the method `model.cost.4` used to state.
         'price-one-turn': <PriceOneTurn />,
         'pick-the-tier': <PickTheTier />,
       },

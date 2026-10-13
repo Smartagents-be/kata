@@ -1327,14 +1327,15 @@ that cannot be handed over.
 
 `ModelRelay` is also the one dated thing in the step. The prose says "the frontier model", "the top
 tier" and "the middle tier" and names no release; the drawing tags its three columns `Fable`, `Opus`
-and `Sonnet`, and `research-frontier-model.3` under it is a `<small>` line saying when. That split is
-`model.lead.3`'s precedent in step 1, and it is what lets the figure be concrete without dating the
+and `Sonnet`, and `research-frontier-model.3` under it is a `<small>` line saying when. That split was
+`model.lead.3`'s precedent in step 1 (since cut), and it is what lets the figure be concrete without dating the
 unit. The tags are literals rather than locale keys, like every model name in the course.
 
-The frontier tier is the seam worth knowing about: **`step1/model` names it and deliberately stops**,
-on the grounds that what it is good at is a question about work rather than about context. This
-section is the answer to that, so the two are a pair and the step-1 half must not grow one of its
-own.
+The frontier tier is the seam worth knowing about: **`step1/model` names it (Fable, Astra) and
+links here**, so this section is the only place that says what it is for: a new frontier release is
+ahead and sometimes worth its price for hours-long agent sessions, multistep research and
+root-cause work, and the top tier catches up later (`.2`, from Anthropic's own coding measurement and
+OpenAI's Sol page, 13 October 2026). The step-1 half must not grow use cases of its own.
 
 `Ultracode` is described at the level of what it does to your bill, a fleet fanned out
 programmatically, and it stays there on purpose: naming a flag, a menu or a script shape dates the

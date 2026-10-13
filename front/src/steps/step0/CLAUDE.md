@@ -93,7 +93,7 @@ Three things about the section are decisions, and each of them is a thing the st
 say and this one cannot. **It names no command**, so `/clear` and `/context` stay introduced where
 they are used (`step1/session` and `ReadYourWindow` in `step1/tools`), and rule two gives the habit
 instead: start each flag on a fresh session. **It carries no numbers and does no arithmetic**, so
-`model.cost.4` stays the one paragraph in the course that multiplies. And **it counts nothing**,
+step 1's `PriceOneTurn` card stays the one place in the course that multiplies. And **it counts nothing**,
 since it covers boards of two, three and five flags, which is what the step 1 wording
 ("three flags, three routes in", "five lines come out of the trace") could not do.
 

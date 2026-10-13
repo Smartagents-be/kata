@@ -617,7 +617,7 @@ const deck: SlideSpec[] = [
     scale: 1.77,
   },
   // The one place the course multiplies, and on a board the tutor can do it with the room's own
-  // number. It carries no currency of its own, the way `model.cost.4` does not: `ModelPricing` on
+  // number. It carries no currency of its own: `ModelPricing` on
   // the slide before it is the only place in the course a number has one.
   {
     id: 'deck-model-money',

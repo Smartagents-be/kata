@@ -24,30 +24,18 @@
 <div data-figure="model-pricing"></div>
 
 <!-- The table has four rows and the step teaches three tiers, so this names the fourth one where
-     the student meets it. It goes after the figure rather than before it: the row is the surprise,
-     and a warning ahead of the table would spend it early. Keep it to the sorting. What the
-     frontier tier is good at belongs nowhere in this step, which is about the window rather than
-     about the family. -->
+     the student meets it, with both vendors' names, and sends the student to step 2's `goals` for
+     what it is for (13 October 2026, at the owner's asking). Keep it to naming: the use cases, and
+     the top tier catching up, live in that one section only. -->
 <p data-i18n="model.cost.2">
-  The bottom row is not one of the 3. Providers also ship a frontier model, priced past the top
-  tier and kept for work the top tier cannot hold together. It is a ceiling rather than a 4th tier.
+  The bottom row is the frontier model, Fable at Anthropic and Astra at OpenAI, priced past the top
+  tier. What it is for is in <a href="/steps/step2/goals">step 2</a>.
 </p>
 
 <p data-i18n="model.cost.3">
   Prices change. Check today's, and try a model on your own work before you pick one.
 </p>
 
-<!-- The one place the course multiplies: the student's own readings, taken on `PriceOneTurn`
-     below, against the table's rate. It carries no prices of its own, so `ModelPricing` stays the only
-     price list. It measures and argues nothing; the tier-as-multiplier paragraph that once
-     closed this section stays out. The sum itself is asked for by `PriceOneTurn` at the foot of the
-     unit, so this paragraph states the method and the card collects the answer. -->
-<p data-i18n="model.cost.4">
-  <code>/context</code> counts what fills the context now, not the work done across requests. For an
-  API estimate, add uncached input, cache writes, cache reads and output at their own rates, for
-  every request and model. The exercise below reads what your harness reports; the provider's bill
-  settles the actual charge.
-</p>
 
 <!-- Sits under `Cost` because it is how the rates above reach you, and it is why the section carries
      no prices and no plan names (Copilot's $0.01 per credit is a unit conversion): `ModelPricing` is a few inches up the page
@@ -190,13 +178,13 @@
 
 <!-- The doing part, under the heading `QuizPanel` renders over a quiz, the same shape `tools` and
      `agent-patterns` use. Nothing sits between the rule and the first card, and nothing between the two:
-     the sum comes before the sorting because `cost.4` set it up a screen earlier and the board
-     answers a different question. -->
+     the sum comes before the sorting because it uses the table above and the board answers a
+     different question. -->
 <hr />
 
 <h2 data-i18n="ui:quiz.title">Test your knowledge</h2>
 
-<!-- What `cost.4` describes, asked for. The count comes from `ReadYourWindow` two units back, which
+<!-- The sum against the table's rates, asked for. The count comes from `ReadYourWindow` two units back, which
      nothing else in the course ever spends, and the rate comes off the table above. Nothing grades
      it: the number is the student's own and the card is a tick. -->
 <div data-figure="price-one-turn"></div>

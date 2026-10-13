@@ -1508,8 +1508,9 @@ It is also the one thing in the unit that names versions, and that is a knowing 
 drift. `ModelTiers` beside it stays version-free on the reasoning its own component comment gives
 (tier names outlive releases), so the table is placed to be read as *evidence for a claim* and never
 as a reference: it sits under the paragraph stating the one-twenty-forty ratio, and the paragraphs
-after it sort the rows, date the ratios along with the numbers, and close on `cost.4` putting the
-student's own count against them. Keep that order. Moved anywhere else it becomes a price list,
+after it name the frontier row and say prices change; `PriceOneTurn` at the foot of the unit puts
+the student's own count against them (`cost.4`, which described that sum, was cut on 13 October 2026
+because the card's description says the same). Keep that order. Moved anywhere else it becomes a price list,
 which is exactly what the paragraph under it tells the student not to learn.
 
 **Three things on this page sort the same three tiers, and all three now run cheapest first**:
@@ -1524,8 +1525,9 @@ reordering all three, and reversing them means rewriting both of those paragraph
 was considered and rejected: the numbers are what a student would actually be billed, so the row is
 named rather than hidden. `model.cost.2` is that naming, and three things about it are the decision.
 It sits **after** the figure, because the row is the surprise and a warning ahead of the table spends
-it early. It sorts and stops: what the frontier tier is good at is not taught here, since this step
-is about the window rather than about the family. And it calls the row a ceiling rather than a fourth
+it early. It names the row with both vendors' models (Fable, Astra) and stops: what the frontier
+model is good at, and the top tier catching up with it, live in step 2's `goals` section on research
+and `cost.2` links there (13 October 2026, at the owner's asking). And it never calls the row a fourth
 tier, which is what keeps `ModelTiers` at three cards, `model.cost.1` at one-twenty-forty, `model.speed.1`
 at "the slowest of the three" and `PickTheTier` at three targets. Promoting it to a tier means
 visiting all four.
@@ -1552,7 +1554,7 @@ warns against. What the caption does carry is the month the prices were read,
 which is the thing that makes the table's staleness visible; a rewrite that drops it leaves the
 figure ageing silently.
 
-`model.cost.4` and `PriceOneTurn` read cumulative usage separately from `/context` occupancy.
+`PriceOneTurn` reads cumulative usage separately from `/context` occupancy.
 The task retains its component and storage identity so progress is not discarded. Counters absent
 from a product/account are unknown, not zero. Estimate API costs from each model and category's rate
 across requests. On a Claude subscription that estimate is not the charge; on Copilot the credits
@@ -1564,8 +1566,7 @@ and after, then an API estimate), and Copilot gets `ask.copilot`, `count.copilot
 or later) and convert them at $0.01 a credit, with `/usage` named as the Copilot CLI route. That is
 **the first move in the step that names IntelliJ**, on the October 2026 class being IntelliJ users
 (`REVIEW.md` §1); the rest of the Copilot side still assumes Copilot CLI. `price.description` is
-shared, so it names neither command. `model.cost.4` says the exercise reads "what your harness
-reports" rather than `/usage` for the same reason.
+shared, so it names neither command.
 
 `SpeedAtScale` is the section's figure and it settles a **threshold**, not a ratio: three counts of
 calls on one axis, the small tier against the top tier, and a guide line at the couple of minutes
@@ -2212,7 +2213,7 @@ wrong rather than misplaced. What went with the move is worth knowing. The old `
 the course's second pointer at `model.cost.4`, and `hunt.count.label` is what replaced it: the card
 says the growth between the student's two `/context` readings is not total usage or a bill, rather
 than working out a cost here, so
-`cost.4` is still the one place the course multiplies. The intro's version of that rule has since
+`PriceOneTurn` is still the one place the course multiplies. The intro's version of that rule has since
 been cut as well (step 0's own file says why), so `hunt.count.label` is now the only thing anywhere
 near a board that points at what a hunt cost. It names no command and does no arithmetic, and it may
 not grow either. The old `house-rules.4` carried the five same-shape
