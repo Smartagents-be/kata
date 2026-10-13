@@ -40,18 +40,19 @@
 
 <aside data-audience="self">
   <p data-assistant="claude" data-i18n="steering.interrupt-or-go-back.3.claude">
-    Try it 1 time in <code>exercises/step2/java</code>. Send <code>Explain how the statement
-    works.</code> and let it start. Press <kbd>Esc</kbd> twice (or type <code>/rewind</code>), pick
-    that message, and send <code>Explain how LateFeePolicy calculates the fee.</code> instead. Then
-    ask <code>Which files have you read in this conversation?</code> The files from the first attempt
-    are not in the answer.
+    Try it 1 time in <code>exercises/step2/java</code>. Send <code>Read LoanDataConfig.java and
+    summarise it.</code> The output shows it reading that file. Press <kbd>Esc</kbd> twice, pick that
+    message and choose <strong>Restore conversation</strong>: the Summarize options keep a summary
+    instead of dropping it. Send <code>Explain how LateFeePolicy calculates the fee.</code> in its
+    place, then ask <code>Have you read LoanDataConfig.java in this conversation?</code> It says no.
+    As far as it knows, it never did.
   </p>
   <p data-assistant="copilot" data-i18n="steering.interrupt-or-go-back.3.copilot">
-    Try it 1 time in <code>exercises/step2/java</code>, with the Copilot agent. Send <code>Explain
-    how the statement works.</code> and let it start. Click the pencil on your message in the chat, change it to
-    <code>Explain how LateFeePolicy calculates the fee.</code> and send it. Then ask <code>Which files
-    have you read in this conversation?</code> The files from the first attempt are not in the
-    answer.
+    Try it 1 time in <code>exercises/step2/java</code>, with the Copilot agent. Send <code>Read
+    LoanDataConfig.java and summarise it.</code> The chat shows it reading that file. Click the
+    pencil on that message, change it to <code>Explain how LateFeePolicy calculates the fee.</code>
+    and send it. Then ask <code>Have you read LoanDataConfig.java in this conversation?</code> It says
+    no. As far as it knows, it never did.
   </p>
 </aside>
 
@@ -77,8 +78,8 @@
 
 <p data-i18n="steering.worktree-each.1">
   While 1 agent works, you mostly wait. 3 agents are not 3 times the work, because the waiting
-  overlaps. So let several work at once, each in its own worktree: a second checkout of the same
-  repository, on its own branch, in its own folder, sharing the same history.
+  overlaps. Give each agent a scoped task and its own worktree, though: a separate folder on your
+  disk, with its own checkout of the same repository, on its own branch.
 </p>
 
 <p data-assistant="claude" data-i18n="steering.worktree-each.2.claude">
@@ -99,11 +100,23 @@ git worktree add -b feat/native ../kata-native</code></pre>
 <div data-figure="worktree-each"></div>
 
 <p data-i18n="steering.worktree-each.4">
-  A worktree is a fresh checkout: what is not in Git, such as <code>node_modules</code> or a
-  <code>.env</code>, is not in it. It keeps their changes apart but locks nothing, so an agent with
-  broad file access can still reach the other folder. Permissions and a sandbox handle that. Give
-  each agent a scoped task, and review and test each branch before you merge.
+  What is not in Git, such as <code>node_modules</code> or a <code>.env</code>, does not come along:
+  you install or copy that separately. A worktree separates the files, not the access. An agent with
+  broad rights can still reach the other folder, and permissions and a sandbox handle that.
 </p>
+
+<p data-i18n="steering.worktree-each.5">
+  When they are done, let a separate agent merge the branches. It reads both diffs, resolves the
+  conflicts and runs the tests. You review the result.
+</p>
+
+<pre><code>Merge feat/statement and feat/native into main. Resolve any conflicts,
+run mvn test, and tell me what you changed and why.</code></pre>
+
+<p data-i18n="steering.worktree-each.6">Then clean up the folders:</p>
+
+<pre data-commands><code>git worktree remove ../kata-statement
+git worktree remove ../kata-native</code></pre>
 
 <h2 data-i18n="steering.stop-at-the-gap.heading">Make it stop at the gap</h2>
 

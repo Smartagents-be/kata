@@ -2,154 +2,84 @@ import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * Two checkouts of one repository, each with its own agent working its own files, both standing
- * on the same history. No line runs from one folder to the other, and the note under the history
- * box reads that absence out loud; do not wire the frames together.
+ * Two agents on one codebase, read left to right: `~/kata` on main, `git worktree add` making two
+ * separate folders beside it with an agent each, a third agent merging the branches, and `~/kata`
+ * on main again with both changes in it. Redrawn in October 2026 at the owner's asking: the old
+ * drawing (two frames standing on one history box) read as vague, and it never showed the part the
+ * owner cares about most, that **a separate agent merges the worktrees afterwards**.
  *
- * It sits after `worktree-each.2`, the isolation paragraph, and **before the cost paragraph**, so
- * the two-bills argument keeps the last word in prose rather than under a drawing that does not
- * make it.
+ * **It says "separate folders", never "copy".** A worktree checks the files out into a new folder
+ * on your disk, but the history stays shared; the prose under it says what does not come along.
  *
  * **The folder names and branches are the ones the `<pre>` above it creates**, on `SkillTree`'s
- * rule that the tree and the pre name the same thing: change one and the other moves with it. They
- * are literals rather than locale keys for the same reason the pre has no `data-i18n`, a path is
+ * rule that the drawing and the pre name the same thing: change one and the other moves with it.
+ * Paths, branches, `main` and the command are literals rather than locale keys, because a path is
  * not translated.
  *
- * **Teal is the frame rather than the boxes**, the one figure in the step where that is true: the
- * folder line is what this section adds. The agents stay muted because whose attention they get is
- * `AgentsAtOnce`'s argument in `parallel`, and an agent drawn teal here would say somebody is
- * watching it, which is not this section's claim. The boxes borrow `flow.node.agent` and
- * `flow.node.code` from `FlowDiagram`, so a rewording there moves this drawing too.
+ * Teal is the two worktrees and the merging agent, which are what the section adds; the start and
+ * end folders are the codebase you already had, so they stay muted.
  */
-const FRAME_W = 250
-const FRAME_H = 118
-const FRAME_Y = 20
-const PAD = 16
-/** So a connector reads as arriving at the history box rather than touching either shape. */
-const STANDOFF = 6
-
-const HISTORY = { x: 195, y: 196, w: 250, h: 34 }
+const WIDTH = 760
+const HEIGHT = 275
 
 const FOLDERS = [
-  { key: 'statement', x: 30, folder: '../kata-statement', branch: 'feat/statement' },
-  { key: 'native', x: 360, folder: '../kata-native', branch: 'feat/native' },
+  { key: 'statement', y: 38, folder: '~/kata-statement', branch: 'feat/statement', agent: 1 },
+  { key: 'native', y: 182, folder: '~/kata-native', branch: 'feat/native', agent: 2 },
 ] as const
 
-/** One worktree: the teal folder line, its path and branch, and the agent on its own code. */
-function Worktree({
-  block,
-  x,
-  folder,
-  branch,
-}: {
-  block: string
-  x: number
-  folder: string
-  branch: string
-}) {
-  const { t } = useTranslation('step2')
-  const boxY = FRAME_Y + 62
+const MUTED_BOX = 'fill-muted-foreground/10 stroke-muted-foreground/60'
+const TEAL_BOX = 'fill-primary/10 stroke-primary'
+
+/** A folder outline: a tab on the top-left edge, then the body. */
+function folderPath(x: number, y: number, w: number, h: number) {
+  return `M${x + 6} ${y} h44 l8 8 h${w - 64} a6 6 0 0 1 6 6 v${h - 20} a6 6 0 0 1 -6 6 h${-(w - 12)} a6 6 0 0 1 -6 -6 v${-(h - 12)} a6 6 0 0 1 6 -6 z`
+}
+
+/** The codebase on main, before and after: a muted folder with its path, branch and a caption. */
+function Codebase({ block, x, caption }: { block: string; x: number; caption: string }) {
+  const w = block === 'start' ? 150 : 120
+  const cx = x + w / 2
 
   return (
     <g id={`worktree-each-${block}`} data-component="WorktreeEach">
-      <rect
-        id={`worktree-each-${block}-frame`}
-        data-component="WorktreeEach"
-        x={x}
-        y={FRAME_Y}
-        width={FRAME_W}
-        height={FRAME_H}
-        rx="8"
-        strokeWidth="1.5"
-        className="fill-primary/5 stroke-primary/50"
-      />
-      <text
+      <path
         id={`worktree-each-${block}-folder`}
         data-component="WorktreeEach"
-        x={x + PAD}
-        y={FRAME_Y + 26}
-        fontSize="12.5"
+        d={folderPath(x, 104, w, 82)}
+        strokeWidth="1.5"
+        className={MUTED_BOX}
+      />
+      <text
+        data-component="WorktreeEach"
+        x={cx}
+        y="140"
+        fontSize="13"
+        textAnchor="middle"
         className="fill-foreground font-mono"
       >
-        {folder}
+        ~/kata
       </text>
       <text
-        id={`worktree-each-${block}-branch`}
         data-component="WorktreeEach"
-        x={x + PAD}
-        y={FRAME_Y + 44}
-        fontSize="11"
+        x={cx}
+        y="160"
+        fontSize="12"
+        textAnchor="middle"
         className="fill-muted-foreground font-mono"
       >
-        {branch}
+        main
       </text>
-
-      <rect
-        id={`worktree-each-${block}-agent`}
-        data-component="WorktreeEach"
-        x={x + PAD}
-        y={boxY}
-        width={70}
-        height={30}
-        rx="6"
-        strokeWidth="1.5"
-        className="fill-background stroke-muted-foreground/60"
-      />
       <text
+        id={`worktree-each-${block}-caption`}
         data-component="WorktreeEach"
-        x={x + PAD + 35}
-        y={boxY + 19}
+        x={cx}
+        y="206"
         fontSize="12"
         textAnchor="middle"
-        className="fill-foreground"
+        className="fill-muted-foreground"
       >
-        {t('flow.node.agent')}
+        {caption}
       </text>
-
-      <line
-        id={`worktree-each-${block}-wire`}
-        data-component="WorktreeEach"
-        x1={x + PAD + 70 + STANDOFF}
-        y1={boxY + 15}
-        x2={x + PAD + 70 + 44 - STANDOFF}
-        y2={boxY + 15}
-        strokeWidth="1.5"
-        className="stroke-muted-foreground/60"
-      />
-
-      <rect
-        id={`worktree-each-${block}-code`}
-        data-component="WorktreeEach"
-        x={x + PAD + 70 + 44}
-        y={boxY}
-        width={70}
-        height={30}
-        rx="6"
-        strokeWidth="1.5"
-        className="fill-background stroke-muted-foreground/60"
-      />
-      <text
-        data-component="WorktreeEach"
-        x={x + PAD + 70 + 44 + 35}
-        y={boxY + 19}
-        fontSize="12"
-        textAnchor="middle"
-        className="fill-foreground"
-      >
-        {t('flow.node.code')}
-      </text>
-
-      {/* Down onto the shared history, which is the half of the definition the frames cannot say. */}
-      <line
-        id={`worktree-each-${block}-history-wire`}
-        data-component="WorktreeEach"
-        x1={x + FRAME_W / 2}
-        y1={FRAME_Y + FRAME_H + STANDOFF}
-        x2={block === 'statement' ? HISTORY.x + 50 : HISTORY.x + HISTORY.w - 50}
-        y2={HISTORY.y - STANDOFF}
-        strokeWidth="1.5"
-        className="stroke-muted-foreground/60"
-      />
     </g>
   )
 }
@@ -157,65 +87,174 @@ function Worktree({
 export function WorktreeEach() {
   const { t } = useTranslation('step2')
   const titleId = useId()
+  const markerId = useId()
 
   return (
     <figure id="worktree-each" data-component="WorktreeEach" className="my-8 flex justify-center">
       <svg
         id="worktree-each-svg"
         data-component="WorktreeEach"
-        viewBox="0 0 640 262"
+        viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         role="img"
         aria-labelledby={titleId}
-        className="h-auto w-full max-w-2xl"
+        className="h-auto w-full"
       >
         <title id={titleId} data-component="WorktreeEach">
           {t('worktree-each.description')}
         </title>
+        <defs>
+          <marker
+            id={markerId}
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="7"
+            markerHeight="7"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" className="fill-muted-foreground" />
+          </marker>
+        </defs>
+
+        <text
+          id="worktree-each-title"
+          data-component="WorktreeEach"
+          x="0"
+          y="18"
+          fontSize="16"
+          className="fill-foreground font-semibold"
+        >
+          {t('worktree-each.title')}
+        </text>
+
+        <text
+          id="worktree-each-command"
+          data-component="WorktreeEach"
+          x="81"
+          y="88"
+          fontSize="11"
+          textAnchor="middle"
+          className="fill-muted-foreground font-mono"
+        >
+          git worktree add
+        </text>
+        <Codebase block="start" x={4} caption={t('worktree-each.start')} />
+
+        {/* Out to the two folders, and in again to the agent that merges them. */}
+        <g
+          id="worktree-each-arrows"
+          data-component="WorktreeEach"
+          fill="none"
+          strokeWidth="1.5"
+          className="stroke-muted-foreground"
+        >
+          <path d="M160 130 C 190 130, 190 78, 222 78" markerEnd={`url(#${markerId})`} />
+          <path d="M160 160 C 190 160, 190 222, 222 222" markerEnd={`url(#${markerId})`} />
+          <path d="M430 80 C 462 80, 462 130, 494 130" markerEnd={`url(#${markerId})`} />
+          <path d="M430 224 C 462 224, 462 160, 494 160" markerEnd={`url(#${markerId})`} />
+          <path d="M608 145 h22" markerEnd={`url(#${markerId})`} />
+        </g>
 
         {FOLDERS.map((folder) => (
-          <Worktree
+          <g
             key={folder.key}
-            block={folder.key}
-            x={folder.x}
-            folder={folder.folder}
-            branch={folder.branch}
-          />
+            id={`worktree-each-${folder.key}`}
+            data-component="WorktreeEach"
+          >
+            <path
+              id={`worktree-each-${folder.key}-folder`}
+              data-component="WorktreeEach"
+              d={folderPath(226, folder.y, 202, 82)}
+              strokeWidth="1.5"
+              className={TEAL_BOX}
+            />
+            <text
+              data-component="WorktreeEach"
+              x="242"
+              y={folder.y + 30}
+              fontSize="13"
+              className="fill-foreground font-mono"
+            >
+              {folder.folder}
+            </text>
+            <text
+              data-component="WorktreeEach"
+              x="242"
+              y={folder.y + 48}
+              fontSize="12"
+              className="fill-muted-foreground font-mono"
+            >
+              {folder.branch}
+            </text>
+            <rect
+              id={`worktree-each-${folder.key}-agent`}
+              data-component="WorktreeEach"
+              x="242"
+              y={folder.y + 56}
+              width="82"
+              height="20"
+              rx="4"
+              className="fill-background stroke-muted-foreground/60"
+            />
+            <text
+              data-component="WorktreeEach"
+              x="283"
+              y={folder.y + 70}
+              fontSize="11.5"
+              textAnchor="middle"
+              className="fill-muted-foreground"
+            >
+              {t('worktree-each.agent', { n: folder.agent })}
+            </text>
+          </g>
         ))}
 
-        <rect
-          id="worktree-each-history"
-          data-component="WorktreeEach"
-          x={HISTORY.x}
-          y={HISTORY.y}
-          width={HISTORY.w}
-          height={HISTORY.h}
-          rx="6"
-          strokeWidth="1.5"
-          className="fill-none stroke-muted-foreground/60"
-        />
         <text
-          id="worktree-each-history-label"
+          id="worktree-each-apart"
           data-component="WorktreeEach"
-          x={HISTORY.x + HISTORY.w / 2}
-          y={HISTORY.y + HISTORY.h / 2 + 4}
+          x="330"
+          y="160"
           fontSize="12"
           textAnchor="middle"
           className="fill-muted-foreground"
         >
-          {t('worktree-each.history')}
+          {t('worktree-each.apart')}
         </text>
 
-        <text
-          id="worktree-each-note"
-          data-component="WorktreeEach"
-          x="320"
-          y="254"
-          fontSize="13"
-          textAnchor="middle"
-          className="fill-muted-foreground"
-        >
-          {t('worktree-each.note')}
-        </text>
+        <g id="worktree-each-merge" data-component="WorktreeEach">
+          <rect
+            data-component="WorktreeEach"
+            x="498"
+            y="118"
+            width="110"
+            height="54"
+            rx="6"
+            strokeWidth="1.5"
+            className={TEAL_BOX}
+          />
+          <text
+            data-component="WorktreeEach"
+            x="553"
+            y="141"
+            fontSize="13"
+            textAnchor="middle"
+            className="fill-foreground"
+          >
+            {t('worktree-each.agent', { n: 3 })}
+          </text>
+          <text
+            data-component="WorktreeEach"
+            x="553"
+            y="159"
+            fontSize="12"
+            textAnchor="middle"
+            className="fill-muted-foreground"
+          >
+            {t('worktree-each.merge')}
+          </text>
+        </g>
+
+        <Codebase block="end" x={634} caption={t('worktree-each.end')} />
       </svg>
     </figure>
   )

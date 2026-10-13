@@ -464,16 +464,16 @@ dashed and never teal: it is being written, it is just the same shape again, and
 Neither window figure may borrow the other's argument, wrong direction against no direction, and
 neither is about the clock, which is `LoopsPerHour`'s.
 
-`WorktreeEach` sits between the `git worktree` block and the paragraph on what a worktree does not
-lock, so that caveat keeps the last word in prose rather than under a drawing that does not make it. **It names
-the same two folders and branches as the `<pre>` above it**, on the `SkillTree` rule that the
-drawing and the pre name the same thing, and those labels are literals rather than locale keys
-because a path is not translated. Its teal is the frame rather than the boxes, the one figure in
-the step where that is true: the folder line is what the section adds, and the agents stay muted
-because whose attention they get is `AgentsAtOnce`'s argument in `parallel`. It borrows
-`flow.node.agent` and `flow.node.code`, so a rewording of `FlowDiagram`'s vocabulary moves this
-drawing too. No line runs between the two frames, and the note under the history box reads that
-absence out loud; do not wire them together.
+`WorktreeEach` was redrawn in October 2026, at the owner's asking, as a left-to-right flow: `~/kata`
+on main, `git worktree add` making two **separate folders on your disk** with an agent each, a third
+agent merging the branches, and `~/kata` on main with both changes. The old drawing (two frames on
+one history box, no line between them) read as vague and never showed what the owner cares about
+most, that **a separate agent merges the worktrees afterwards**, so the section now ends on that
+merge: a paragraph, a copyable merge prompt, and the `git worktree remove` clean-up. The figure says
+"separate folders", never "copy", because the history stays shared. **It names the same folders and
+branches as the `<pre>` above it**, on the `SkillTree` rule, as literals rather than locale keys,
+because a path is not translated. Teal is the two worktrees and the merging agent; the codebase
+before and after stays muted.
 
 The gap section turns on **stopping** and nothing else. An agent that writes a guess down and then
 builds on it has told you what it guessed underneath a diff that already depends on the guess. Do
@@ -503,8 +503,12 @@ noun.
 
 **Its `self` aside is a `data-assistant` pair nested inside the audience wrapper** (October 2026, at
 the owner's asking): "go back and change it" was not something a student could do without being
-told how, so each variant names the move (Esc twice or `/rewind`; the pencil on the message in IntelliJ's
-Copilot chat) and gives the three prompts to copy, against `exercises/step2/java`. The
+told how, so each variant names the move (Esc twice and **Restore conversation**, not a Summarize
+option, which keeps a summary; the pencil on the message in IntelliJ's Copilot chat) and gives the
+three prompts to copy, against `exercises/step2/java`. The first prompt names a file
+(`LoanDataConfig.java`, which the fee question never needs) so the student sees it being read and
+can ask about that one file afterwards; a vague first request left them unable to tell what it had
+read. The
 interrupt-or-go-back section deliberately does not name a keystroke. It names the three tools
 that let you rewind (Claude Code, Copilot CLI, and IntelliJ since plugin 1.18.0 in September 2026),
 and `SteeringMoves` carries the key per assistant, so the prose does not date with a binding. It carries one of the step's two `data-audience="self"` asides, the
