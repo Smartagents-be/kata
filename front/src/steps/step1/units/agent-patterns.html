@@ -26,21 +26,24 @@
 
 <p data-i18n="agent-patterns.decomposition.2">
   Decomposition cuts a task into subtasks, and those again where needed, until every piece is small
-  enough to carry out in a single pass. It takes 2 common forms. An agent can write a plan and work
-  through its tasks one after another itself: that is the sequential workflow further down. Or it
-  solves it with sub-agents, like the coordinator below but over more than 1 level, as in the
-  figure: every piece goes to a sub-agent, and every result goes back to whoever handed the piece
-  out. In Claude Code a sub-agent can cut its piece again for sub-agents of its own. In Copilot in
-  IntelliJ a sub-agent cannot start sub-agents, so the main agent does all the cutting itself.
+  enough to carry out in a single pass. An agent can write a plan and work through it task by task
+  itself: that is the sequential workflow further down. Or it hands every piece to a sub-agent, as
+  in the figure: the coordinator below, but over several levels. Every result goes back to whoever
+  handed the piece out.
 </p>
 
 <p data-i18n="agent-patterns.decomposition.3">
-  That has a cost: every level is more model calls, so more time and more tokens. Use it for a
-  large, vague task, not for a change you can describe in 1 sentence.
+  In Claude Code a sub-agent can cut its piece again for sub-agents of its own. In Copilot in
+  IntelliJ a sub-agent cannot start sub-agents, so the main agent does all the cutting itself.
+</p>
+
+<p data-i18n="agent-patterns.decomposition.4">
+  Every level adds model calls, so more time and more tokens. Use it for a large, vague task, not
+  for a change you can describe in 1 sentence.
 </p>
 
 <!-- Filled by the DecompositionTree element registered under this name in steps/step1/index.tsx: the
-     tree `.2` and `.3` describe, on `.1`'s example. Reword that example and the drawing has to follow,
+     tree `.2` to `.4` describe, on `.1`'s example. Reword that example and the drawing has to follow,
      in both languages. -->
 <div data-figure="decomposition-tree"></div>
 
@@ -49,15 +52,16 @@
 <p data-i18n="agent-patterns.coordinator.1">
   A coordinator hands parts of a task to sub-agents, ideally on a cheaper model
   <svg data-icon="coin"></svg> Splitting multiplies tokens though: Anthropic measured its
-  multi-agent research system at about 15 times the tokens of a chat. Some built-in sub-agents
-  already run on a small model, such as Claude Code's Explore and Copilot CLI's explore and task
-  agents, while sub-agents in IntelliJ use your main model. Check which model a worker runs on.
+  multi-agent research system at about 15 times the tokens of a chat. Copilot CLI's built-in explore
+  and task agents already run on a small model. Claude Code's Explore and sub-agents in IntelliJ use
+  your main model, so check which model a worker runs on.
 </p>
 
 <p data-i18n="agent-patterns.coordinator.2">
   A sub-agent does not see your conversation, so put the decisions that matter in its brief. Some
-  also skip your <code>CLAUDE.md</code> or <code>AGENTS.md</code>, such as Claude Code's Explore and
-  Plan. A fork starts from a copy of your conversation.
+  also skip your <code>CLAUDE.md</code> or <code>AGENTS.md</code>, such as Explore and Plan in
+  Claude Code, and explore, task and code-review in Copilot CLI. A fork starts from a copy of your
+  conversation.
 </p>
 
 <p data-i18n="agent-patterns.coordinator.3">
@@ -70,8 +74,8 @@
 <h2 data-i18n="agent-patterns.sequential.heading">The sequential workflow</h2>
 
 <p data-i18n="agent-patterns.sequential.1">
-  Nothing is handed out here. The agent first writes a plan with tasks into a file, then works
-  through them one at a time. After every task it tests before it starts the next.
+  Nothing is handed out here. The agent writes a plan with tasks into a file, then works through
+  them one at a time and tests each before it starts the next.
 </p>
 
 <p data-i18n="agent-patterns.sequential.2">
@@ -86,8 +90,7 @@
 
 <p data-i18n="agent-patterns.reflection.1">
   Reflection <svg data-icon="pattern"></svg> is the agent putting a critic on its own work. The
-  critic is a sub-agent, told to attack the result rather than help with it: find what is wrong and
-  report it.
+  critic is a sub-agent told to find what is wrong with the result and report it, not to help.
 </p>
 
 <p data-i18n="agent-patterns.reflection.2">
@@ -111,19 +114,18 @@
 <h2 data-i18n="agent-patterns.routing.heading">Routing</h2>
 
 <p data-i18n="agent-patterns.routing.1">
-  Routing <svg data-icon="pattern"></svg> sorts a request first and then sends it to the handler
-  that fits: a model, a skill or a sub-agent. Your harness already does it. A custom agent is 1
-  Markdown file with a description, the tools it may use and its instructions, in
-  <code>.claude/agents/</code> for Claude Code or <code>.github/agents/</code> for Copilot. The
-  harness picks a skill or a custom agent by its description, so that description decides whether
-  it ever gets used.
+  Routing <svg data-icon="pattern"></svg> sorts a request and sends it to the handler that fits: a
+  model, a skill or a sub-agent. Your harness already does it. A custom agent is 1 Markdown file
+  with a description, its allowed tools and its instructions, in <code>.claude/agents/</code> for
+  Claude Code or <code>.github/agents/</code> for Copilot. The harness picks a skill or custom agent
+  by its description, so that description decides whether it ever gets used.
 </p>
 
 <p data-i18n="agent-patterns.routing.2">
-  The sorting needs no large model. Jev, from TypeSafe AI, is built for decisions like this: it
-  answers with a choice and a probability, not with text. A community project, jev-model-router,
-  uses it to pick the Claude model for each turn in Claude Code. Plain code checks each answer
-  before the model is switched.
+  The sorting needs no model that writes text. Jev, from TypeSafe AI, is a decision model (TypeSafe
+  calls it a System One model) that answers with a choice and a probability. A community project,
+  jev-model-router, uses it to pick the Claude model for each turn in Claude Code, and plain code
+  checks each answer before the model is switched.
 </p>
 
 <!-- Everything below the rule is the doing part of the unit, under the heading QuizPanel renders

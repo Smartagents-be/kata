@@ -55,19 +55,18 @@
      board deliberately has none. -->
 
 <p data-i18n="workshop.lead.1">
-  The backend has been holding out on you. <code>GET /api/titles</code> returns 9 book titles,
-  and there is a great deal more to that response and the pipeline behind it than 9 lines let on.
-  5 flags sit on the board below, leetspeak wrapped in <code>{curly braces}</code>. 4 of them
-  come out of this service and 1 comes off your own machine, and
-  <a href="/steps/step1/truth">where each one came from</a> is the only thing separating them.
+  <code>GET /api/titles</code> returns 9 book titles. But that response and the pipeline behind it
+  hold more than those 9 lines. The board below has 5 flags, in leetspeak between <code>{curly
+  braces}</code>. You get 4 out of this service and 1 off your own machine, and
+  <a href="/steps/step1/truth">where each one comes from</a> is the only difference.
 </p>
 
 <p data-i18n="workshop.lead.2">
-  Getting all 5 onto that board is this whole step. Each row names its flag's way in and the
-  Hint behind it says where to aim. Your agent does the legwork, under
-  <a href="/steps/step0/welcome">the house rules from the intro</a>. Start it in the backend and ask
-  from there: running the service and calling the endpoint are its job, not yours. Leave the service
-  up while you work, so the Catalogue page in the sidebar can show you the 9 it will admit to.
+  Finding all 5 is the whole task. Each row names the way in to its flag, and its Hint says where to
+  look. Your agent does the work, under <a href="/steps/step0/welcome">the house rules from the
+  intro</a>. Start it in the backend and ask from there: it runs the service and calls the endpoint,
+  not you. Leave the service running, so the Catalogue page in the sidebar shows you the 9 titles it
+  returns.
 </p>
 
 <pre data-assistant="claude" data-commands><code>cd exercises/step1/java
@@ -83,11 +82,10 @@ copilot</code></pre>
 <h3 data-i18n="workshop.one-window.heading">One context</h3>
 
 <p data-i18n="workshop.one-window.1">
-  Work all 5 from a single session. 1 flag, 1 session is the house rule, and here you break
-  it on purpose. Nothing on the board needs a clear between the flags, and keeping them together is
-  the point. Source files, a whole response read back, a
-  <a href="/steps/step1/tools">trace and a console dump</a> all go into that one context, one after
-  another. You have spent 8 units on what that costs.
+  The house rule is 1 flag, 1 session, and here you break it on purpose: nothing on the board needs
+  a clear between flags, and keeping them together is the point. Source files, a whole response, a
+  <a href="/steps/step1/tools">trace and a console dump</a> all pile into that one context. You have
+  spent 8 units on what that costs.
 </p>
 
 <div data-figure="one-window"></div>

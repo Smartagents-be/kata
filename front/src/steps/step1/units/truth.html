@@ -5,31 +5,30 @@
 </p>
 
 <p data-i18n="truth.lead.2">
-  Everything else has to reach it somehow. You put it in the context yourself, or the agent goes and
-  finds it with <a href="/steps/step1/tools">a tool</a>. Ask which version of Spring Boot this
-  project builds on and a current agent opens <code>pom.xml</code> on its own. What it does not look
-  up is what it thinks it already knows: how an API works, which dependency a feature needs, what
-  changed in the latest release. That comes straight from training.
+  Everything else reaches it another way: you put it in the context, or the agent finds it with
+  <a href="/steps/step1/tools">a tool</a>. Ask which Spring Boot version this project uses and a
+  current agent opens <code>pom.xml</code> on its own. What it does not look up is what it thinks it
+  already knows: how an API works, which dependency a feature needs, what changed in the latest
+  release. That comes from training.
 </p>
 
 <p data-i18n="truth.lead.3">
-  So which of the 3 is the truth? The one it went and discovered, the one you handed it, or the
-  one it already had. All 3 arrive in the same voice.
+  So which of the 3 is the truth: what it discovered, what you handed it, or what it already had?
+  All 3 arrive in the same voice.
 </p>
 
 <h2 data-i18n="truth.cutoff.heading">The cutoff</h2>
 
 <p data-i18n="truth.cutoff.1">
-  Training stopped on a date, and providers publish that date for every model. Whatever was
-  published after it is not something the model knows a little less well. It has never seen it. A
-  framework released last spring, a library that threw out its whole configuration format between
-  one minor version and the next: none of that is in there.
+  Training stopped on a date, and providers publish that date for every model. The model does not
+  know what came after it a little less well. It has never seen it. A framework released last month,
+  a library that replaced its configuration format in a minor version: none of that is in there.
 </p>
 
 <p data-i18n="truth.cutoff.2">
-  The answer still arrives. It describes the version line before yours, in the same level tone as
-  everything else. It is out of date rather than wrong, and that is harder to spot. This is the half
-  of the model that ages while you are not looking.
+  The answer still arrives, in the same level tone, and describes the version line before yours. It
+  is out of date rather than wrong, which is harder to spot. This half of the model ages while you
+  are not looking.
 </p>
 
 <!-- The release line with the cutoff across it. The far side is dashed rather than faded on
@@ -40,10 +39,10 @@
 <h2 data-i18n="truth.grounding.heading">Grounding</h2>
 
 <p data-i18n="truth.grounding.1">
-  Put the evidence in the context and the answer changes source. The <code>pom.xml</code> on disk, the
-  release notes fetched off the web, the output of a command that ran a second ago: once any of it
-  is in the context, the model is reading rather than remembering. That is a grounded answer, and it
-  is the one you want for anything with a fact behind it.
+  Put the evidence in the context and the answer changes source. Once the <code>pom.xml</code> on
+  disk, release notes from the web or the output of a command you just ran is in the context, the
+  model reads instead of remembering. That is a grounded answer, and you want it for anything with a
+  fact behind it.
 </p>
 
 <!-- The same question answered out of two windows. The two answer chips are drawn identically on
@@ -69,35 +68,33 @@
 <h2 data-i18n="truth.proof.heading">Proof</h2>
 
 <p data-i18n="truth.proof.1">
-  Grounded is still not proved, and that is the answer to the question up top: the source is not
-  the same thing as the check. The agent read a file and told you what it says, and you are taking
-  its word for the reading. Run whatever can be run: <code>mvn test</code>, a
-  <code>curl</code> at the endpoint, 1 line of <code>jshell</code>. An answer with a command
-  behind it is one you can check yourself.
+  Grounded is still not proved, and that answers the question up top: a source is not a check. The
+  agent read a file and told you what it says, so you are taking its word for the reading. Run
+  whatever can be run: <code>mvn test</code>, a <code>curl</code> at the endpoint, 1 line of
+  <code>jshell</code>. An answer with a command behind it is one you can check yourself.
 </p>
 
 <p data-i18n="truth.proof.2">
-  Ask for the check rather than the conclusion, then. Not "does this handle an empty list" but a
-  test that goes red on an empty list <svg data-icon="gem"></svg> Reasoning about what the code does
-  and running it are 2 different claims, and only one of them can fail in front of you.
+  Ask for the check rather than the conclusion: a test that goes red on an empty list, not "does
+  this handle an empty list" <svg data-icon="gem"></svg> Reasoning about code and running it are 2
+  different claims, and only the second can fail in front of you.
 </p>
 
 <p data-i18n="truth.proof.3">
   Dependencies deserve the same check. Models invent package names that sound right, often the same
-  ones every time, so attackers register exactly those names with malware inside. Check that a
-  package exists, and that it is the one you meant, before you add it.
+  ones every time, so an attacker can register exactly those names with malware inside. Before you
+  add a package, check that it exists and is the one you meant.
 </p>
 
 <h2 data-i18n="truth.hallucinations.heading">Hallucinations</h2>
 
 <p data-i18n="truth.hallucinations.1">
-  With nothing in the context to read, the model answers anyway. Answering is what it does, and you
-  have met it once already: the quiz back in <a href="/steps/step1/context">the context unit</a>
-  had an agent answer confidently about a mail that a setting it never read had switched off. Ask which method on
-  <code>Catalog</code> filters titles by author and you get <code>findAllByAuthorOrdered</code>,
-  spelled exactly the way a Spring method is spelled, on a class that has no such method. Nothing was
-  looked up, and nothing was deliberately made up. The next likely token landed where a fact should
-  have been, and that is a hallucination.
+  With nothing in the context to read, the model answers anyway. You met that in the quiz in
+  <a href="/steps/step1/context">the context unit</a>: an agent answered confidently about a mail
+  that was switched off by a setting it never read. Ask which method on <code>Catalog</code> filters
+  titles by author and you get <code>findAllByAuthorOrdered</code>, named like a Spring method, on a
+  class that has no such method. Nothing was looked up and nothing was deliberately made up. The
+  next likely token landed where a fact should have been, and that is a hallucination.
 </p>
 
 <!-- One answer taken apart into its claims. The left column is uniform on purpose: nothing about
@@ -106,10 +103,9 @@
 <div data-figure="answer-provenance"></div>
 
 <p data-i18n="truth.hallucinations.2">
-  2 of those were read and 1 was not, and the answer says the same thing about all 3. A
-  hallucination is expensive because the model sounds the same whether it read your file or filled
-  the gap. Training makes that worse: a confident guess scores better than "I do not know". So give
-  the agent that way out, and ask it to say when it has not checked something. Then stop reading the
-  tone and start asking where the answer came from. <a href="/steps/step1/workshop">The workshop</a>
-  is that question 5 times over.
+  2 of those were read and 1 was not, and the answer sounds the same about all 3, whether the model
+  read your file or filled a gap. Training makes that worse: a confident guess scores better than "I
+  do not know". So give the agent that way out, and ask it to say when it has not checked something.
+  Then judge the answer by where it came from, not by its tone. <a href="/steps/step1/workshop">The
+  workshop</a> asks that 5 times.
 </p>

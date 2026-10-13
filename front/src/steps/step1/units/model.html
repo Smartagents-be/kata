@@ -4,8 +4,8 @@
 </p>
 
 <p data-i18n="model.lead.2">
-  A provider ships a family rather than a model. They differ in what they cost per token, how fast
-  they answer and how well each holds a long task together.
+  A provider ships a family rather than a model. Its models differ in price per token, speed and how
+  well they hold a long task together.
 </p>
 
 <div data-figure="model-tiers"></div>
@@ -19,10 +19,9 @@
 <h2 data-i18n="model.cost.heading">Cost</h2>
 
 <p data-i18n="model.cost.1">
-  Price is per token, and the tiers are further apart than most people expect. The middle tier costs
-  roughly 20 times the small one, the top tier roughly 40 times <svg data-icon="coin"></svg> Output
-  runs about 5 times the price of input in every tier, so a model that answers at length costs more
-  than the same model answering briefly.
+  The tiers are further apart in price than most people expect. The middle tier costs roughly 20
+  times the small one, the top tier roughly 40 times <svg data-icon="coin"></svg> Output costs 5
+  times input in every tier, so a long answer costs more than a short one from the same model.
 </p>
 
 <!-- Filled by the ModelPricing element registered under this name in steps/step1/index.tsx. It sits
@@ -41,8 +40,7 @@
 </p>
 
 <p data-i18n="model.cost.3">
-  These prices are a snapshot from October 2026, and they change. Check today’s prices and try a
-  model on your own work before you pick one.
+  Prices change. Check today's, and try a model on your own work before you pick one.
 </p>
 
 <!-- The one place the course multiplies: the student's own readings, taken on `PriceOneTurn`
@@ -51,7 +49,10 @@
      closed this section stays out. The sum itself is asked for by `PriceOneTurn` at the foot of the
      unit, so this paragraph states the method and the card collects the answer. -->
 <p data-i18n="model.cost.4">
-  <code>/context</code> measures the tokens currently occupying the context. It does not total the work done across requests. For an API estimate, add uncached input, cache writes, cache reads and output at their own rates, for every request and model. The exercise below reads what your harness reports; the provider’s billing report settles the actual charge.
+  <code>/context</code> counts what fills the context now, not the work done across requests. For an
+  API estimate, add uncached input, cache writes, cache reads and output at their own rates, for
+  every request and model. The exercise below reads what your harness reports; the provider's bill
+  settles the actual charge.
 </p>
 
 <!-- Sits under `Cost` because it is how the rates above reach you, and it is why the section carries
@@ -61,50 +62,51 @@
 <h2 data-i18n="model.api-vs-subscription.heading">API vs subscription</h2>
 
 <p data-i18n="model.api-vs-subscription.1">
-  The harness is where you choose how you pay. Hand it an API key and the provider bills
-  you per token, at the rates above, for exactly what went up and what came back. Sign in with a
-  subscription instead and the same usage comes off a plan you paid for before you started.
+  The harness is where you choose how you pay. With an API key, the provider bills every token you
+  send and get back, at the rates above. Sign in with a subscription and the same usage comes off a
+  plan you paid for in advance.
 </p>
 
 <p data-assistant="claude" data-i18n="model.api-vs-subscription.2.claude">
-  That choice also decides which models you can reach. A subscription buys you into 1 provider's own program, so you get their family and nothing else. A key is looser. Most open-source harnesses
-  take one, and that is what lets you point the same tool at whichever provider's models you like.
+  That choice also decides which models you can reach. A subscription gets you 1 provider's family
+  and nothing else. A key is looser: most open-source harnesses take one, so you can point the same
+  tool at any provider's models.
 </p>
 
 <p data-assistant="copilot" data-i18n="model.api-vs-subscription.2.copilot">
-  That choice also decides which models you can reach. A Copilot seat is a subscription, but the
-  picker behind it is not 1 provider's family: you choose the model per conversation, across
-  vendors, and the 3 tiers in this unit turn up there under several names. A key is looser
-  still. Most
-  open-source harnesses take one, and that is what lets you point the same tool at whichever
-  provider's models you like.
+  That choice also decides which models you can reach. A Copilot seat is a subscription, but its
+  picker spans vendors, so the 3 tiers in this unit turn up there under several names, and you can
+  switch between them during a chat. A key is looser still: most open-source harnesses take one, so
+  you can point the same tool at any provider's models.
 </p>
 
 <p data-assistant="claude" data-i18n="model.api-vs-subscription.3.claude">
-  On an API key, every request adds to a bill. A subscription has limits instead, shared by every
-  Claude app you use <svg data-icon="coin"></svg> Watch out: if <code>ANTHROPIC_API_KEY</code> is
-  set in your shell, Claude Code can bill that key instead of your plan.
+  A subscription has limits instead of a bill, shared by every Claude app you use
+  <svg data-icon="coin"></svg> If <code>ANTHROPIC_API_KEY</code> is set in your shell, Claude Code
+  can bill that key instead of your plan.
 </p>
 
 <p data-assistant="copilot" data-i18n="model.api-vs-subscription.3.copilot">
-  The tokens are the same either way. What differs is how the bill reaches you. On a key, a long
-  context is a number growing on an invoice while you work, and you can go and look at it <svg
-  data-icon="coin"></svg> A Copilot seat draws the same tokens out of a monthly allowance of AI
-  credits, and 1 credit is $0.01. Every model has its own rate for input, output and cached tokens,
-  so the same task costs a different number of credits on a different model. In IntelliJ, the chat
-  shows under each turn how many credits it used. The allowance does not roll into next month. On a
-  company seat, the credits of every seat go into one pool the whole company shares. Your admin
-  decides how much of it you may use and can give each person or team a different limit. When you
-  reach yours, the agent stops. Autocomplete is the part of Copilot you are not charged for.
-  Everything the agent does is.
+  The tokens are the same either way. On a key, a long context is a number growing on an invoice you
+  can check while you work <svg data-icon="coin"></svg> A Copilot seat draws them from a monthly
+  allowance of AI credits, at $0.01 a credit. Each model has its own rate for input, output and
+  cached tokens, so the same task costs a different number of credits per model. In IntelliJ, the
+  chat shows under each turn how many credits it used. Unused credits do not roll into next month.
+</p>
+
+<p data-assistant="copilot" data-i18n="model.api-vs-subscription.4.copilot">
+  On a company seat, every seat's credits go into one pool the whole company shares, and your admin
+  can give each person or team a different limit on it. When you reach yours, the agent stops. Code
+  completions and next edit suggestions cost no credits. Chat and everything the agent does cost
+  credits.
 </p>
 
 <!-- The only place in step 1 the team question comes up. It stops at what the arrangement makes
      visible to the student and is not a section on procurement. -->
-<p data-i18n="model.api-vs-subscription.4">
-  In a company the choice is rarely yours. Someone bought seats, or someone holds a key and watches
-  what it spends. Worth finding out which, because it decides whether a long context is your problem
-  or a line on somebody's report.
+<p data-i18n="model.api-vs-subscription.5">
+  In a company the choice is rarely yours: someone bought seats, or someone holds a key and watches
+  its spend. Find out which. It decides whether a long context is your problem or a line on
+  somebody's report.
 </p>
 
 <!-- Claude only, and every element of the section carries the attribute, the two figure markers
@@ -114,31 +116,30 @@
      place and nothing below would be true for that reader, and a paragraph saying so would be a
      section-long detour into a product this one does not have.
 
-     Four paragraphs and two figures under one heading, which is longer than this course usually
+     Three paragraphs and two figures under one heading, which is longer than this course usually
      runs. It was two sections until the headings were merged: placing the window is what the first
-     two paragraphs are for, and a heading in between made the mechanic read as background to a tip.
+     paragraph is for (it was two until October 2026), and a heading in between made the mechanic
+     read as background to a tip.
      The hedge in the first sentence is deliberate too. This is one vendor's arrangement rather than
      how models are billed, so a flat claim here dates faster than anything else in the unit. -->
 <h2 data-assistant="claude" data-i18n="model.five-hour-window.heading">The 5-hour limit</h2>
 
 <p data-assistant="claude" data-i18n="model.five-hour-window.1">
-  Claude subscriptions have a usage allowance that resets every 5 hours. That is a plan rule, not
-  the size of the context, and your harness shows when the next reset comes.
+  Claude subscriptions have a usage allowance that resets every 5 hours: a plan rule, not the size
+  of the context, and your harness shows when the next reset comes. A weekly limit sits on top and
+  can run out even after the 5-hour one has reset. Hit either and you wait, or pay for usage credits
+  if your plan allows it.
 </p>
 
-<p data-assistant="claude" data-i18n="model.five-hour-window.2">
-  A weekly limit sits on top, and it can run out even when the 5-hour one has reset. Hit either and
-  you wait, or buy extra usage if your plan allows it.
-</p>
 
 <div data-assistant="claude" data-figure="usage-readout"></div>
 
-<p data-assistant="claude" data-i18n="model.five-hour-window.3">
+<p data-assistant="claude" data-i18n="model.five-hour-window.2">
   If the clock starts at your first message, start early: the reset then lands on your lunch break
   instead of in the middle of a task.
 </p>
 
-<p data-assistant="claude" data-i18n="model.five-hour-window.4">
+<p data-assistant="claude" data-i18n="model.five-hour-window.3">
   Plan your important work around the allowance you actually have <svg data-icon="gem"></svg> A
   reset does not give back what you used, and starting early does not lift the weekly limit.
 </p>
@@ -183,8 +184,9 @@
      is what the two paragraphs collided on; do not let "top rate for deciding" come back here. -->
 <p data-i18n="model.let-it-pick.1">
   You can also let the tool choose. In Copilot, pick <strong>Auto</strong> in the model picker: it
-  chooses per prompt and gives 10% off your credits <svg data-icon="coin"></svg> In Claude Code,
-  <code>opusplan</code> lets Opus plan and Sonnet build.
+  picks the model as you go and takes 10% off your credits on a paid plan
+  <svg data-icon="coin"></svg> In Claude Code, <code>opusplan</code> lets Opus plan and Sonnet
+  build.
 </p>
 
 <p data-i18n="model.let-it-pick.2">

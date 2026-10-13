@@ -667,9 +667,9 @@ Copilot CLI runs a custom agent as a sub-agent without the repository's custom i
 it sets `include-custom-instructions: true` (docs.github.com, "Creating custom agents for Copilot
 CLI"). What holds in both products is that a sub-agent starts without the conversation, a fork
 being the exception, so that is the claim, and the move is to put the decisions in the briefing.
-The sentence naming Explore and Plan is the only product example, and it names no Copilot agent:
-the command reference's list of built-ins that skip instructions was not read verbatim, so do not
-add one without reading it first. `recap.lead.7` says the same in its own line.
+The sentence names Explore and Plan for Claude Code and, since 13 October 2026, explore, task and
+code-review for Copilot CLI: the CLI command reference now lists those built-ins verbatim as not
+receiving repository instructions. `recap.lead.7` says the same in its own line.
 
 Decomposition is the first of the five pattern sections, ahead of the coordinator. It argues the gap
 rather than the mechanism: a request arrives thinner than the thing it asks for, the same way a
@@ -693,11 +693,11 @@ the coordinator is: the agent cuts, the parts are cut again, the leaves work at 
 every result climbs back to whoever handed the piece out. **Who cuts the middle differs per
 assistant and the tags follow it**: Claude Code sub-agents can spawn their own, "up to three layers
 below the main conversation", so the middle boxes are sub-agents; Copilot in the IDE sub-agents
-"cannot create other subagents", so the middle boxes say "no sub-agent" and `decomposition.2` says
-the same in one ungated sentence per product.
+"cannot create other subagents", so the middle boxes say "no sub-agent" and `decomposition.3` says
+the same in one ungated sentence per product (it was the tail of `.2` until `.2` was split, 13 October 2026).
 It is **Google Cloud's hierarchical task decomposition pattern**: a root agent cuts the task "through
 multiple layers" until a worker can execute a piece "directly", and it is "an implementation of the
-coordinator pattern". `decomposition.2` and `.3` say exactly that, and `.3` names the cost, more
+coordinator pattern". `decomposition.2` and `.3` say exactly that, and `.4` names the cost, more
 model calls per level, and when not to bother (a change you can describe in 1 sentence, which is
 Claude Code's own "skip the plan" line). **Two drawings came before it and both were wrong**: the
 first, `UnderSpecified`, drew "the agent asks / you decide", which is the interview pattern from
@@ -1464,7 +1464,7 @@ outlive releases, so the unit teaches Opus, Sonnet and Haiku as dispositions; a 
 quarter's release is wrong by the next one. **The lead no longer says that out loud**: the paragraph
 naming the three tiers and telling the student the names change and the shape does not was cut, so
 the figure now opens the unit and the only thing dating it is the small `(October 2026)` line moved
-under it. What survives of the claim is `model.cost.3`, which marks ratios and prices as dated examples, and
+under it. What survives of the claim is `model.cost.3`, which marks ratios and prices as changing (it names no month since 13 October 2026: `lead.3` and the table's caption already carry it), and
 the prose must keep those claims dated and scoped. Do not infer a fixed latency ratio or guaranteed
 model disposition from the tier names. The cards offer candidates to evaluate, not behaviour promises.
 Two boundaries with units either side of it hold the unit up. `prompt` owns the **reasoning level**
@@ -1486,7 +1486,7 @@ redefining it, the same rule `agent-patterns.coordinator.3` follows. It adds two
 the tier choice is one of the things that pattern automates, and **why the expensive model is good
 at writing the brief, namely that providers fine-tune the smaller tiers on output from the larger
 ones**, so it is writing for something trained on its own answers. It closes by **naming the saving
-in this unit's own ratio** (the gap priced above, four against one) rather than in `agent-patterns`'s words:
+in this unit's own ratio** (the gap priced above) rather than in `agent-patterns`'s words:
 it carried "top rate for deciding, a fraction of it for doing" near-verbatim from
 `agent-patterns.coordinator.1`, and a back-pointer that repeats the sentence it points at is the pointer
 failing. Do not let that phrasing come back. The paragraph that used to sit
@@ -1503,7 +1503,7 @@ rate carries a currency**, which is why it exists (the only other dollar figure 
 It is also the one thing in the unit that names versions, and that is a knowing exception rather than
 drift. `ModelTiers` beside it stays version-free on the reasoning its own component comment gives
 (tier names outlive releases), so the table is placed to be read as *evidence for a claim* and never
-as a reference: it sits under the paragraph stating the one-two-four ratio, and the paragraphs
+as a reference: it sits under the paragraph stating the one-twenty-forty ratio, and the paragraphs
 after it sort the rows, date the ratios along with the numbers, and close on `cost.4` putting the
 student's own count against them. Keep that order. Moved anywhere else it becomes a price list,
 which is exactly what the paragraph under it tells the student not to learn.
@@ -1512,7 +1512,7 @@ which is exactly what the paragraph under it tells the student not to learn.
 `ModelTiers`, this table and `PickTheTier`'s column. The cards ran most-expensive-first until they
 were flipped to match, which had the unit sorting one scale in two directions twelve lines apart
 while each component's comment defended its own. The direction is the table's because the prose reads
-in it: `model.cost.1` calls the small one a unit and counts up to two and four, and `model.speed.1`
+in it: `model.cost.1` puts the middle and top tiers at roughly 20 and 40 times the small one, and `model.speed.1`
 opens on the small tier and closes on the top being slowest. So reordering any one of the three means
 reordering all three, and reversing them means rewriting both of those paragraphs first.
 
@@ -1584,11 +1584,12 @@ about a product they do not have. Because there is no sibling, the keys carry no
 the suffix exists so a missing Dutch half of a *pair* falls back to the right language, and a block
 with no pair cannot do that.
 
-It is **one section over four paragraphs and two figures**, which is longer than the rule the rest of
+It is **one section over three paragraphs and two figures**, which is longer than the rule the rest of
 the course keeps to, and it was written as two headings before they were merged. Placing the window
-is not a second subject: it is what the first two paragraphs are for, and a heading between them made
-the mechanic read as background to a tip. So `five-hour-window.3` and `.4` sit under the same heading
-as `.1` and `.2`, and a rewrite that splits them again has to answer why the first half is worth
+is not a second subject: it is what the first paragraph is for (the 5-hour and weekly limits were two
+paragraphs until 13 October 2026, merged at the owner's asking), and a heading between them made
+the mechanic read as background to a tip. So `five-hour-window.2` and `.3` sit under the same heading
+as `.1`, and a rewrite that splits them again has to answer why the first half is worth
 knowing on its own.
 
 Two things in there are easy to break. The section is **Claude-only** (`data-assistant="claude"`
@@ -1600,7 +1601,7 @@ be rewritten in terms of the other.
 
 `usage-readout` is the shot of what the harness prints, and it is `UnitShot` from `shared`, which
 moved out of step 2 when this became its second caller. Its caption names the tool and the month and
-says nothing about what is in the picture, because `five-hour-window.2` already says what the
+says nothing about what is in the picture, because `five-hour-window.1` already says what the
 readout carries. The image is **uncropped**, promo line and all: it is machine output, and tidying
 one is the same move as inventing one. What makes it age visibly is the month in the caption, the
 same job `ModelPricing`'s caption does.
@@ -1854,9 +1855,10 @@ sentences for. Three things in `TheCutoff` are load bearing. The far side is **d
 faded**: a gradient or a lighter fill would say the recent versions are known less well, which is the
 exact reading `truth.cutoff.1` exists to kill, and dashed is already this step's stroke for "nothing
 behind this" on `AnswerProvenance`'s invented row. It carries **no date**, because every model has a
-different one and any number printed there is wrong for somebody in the room. And its versions are
-`3.5.0` on the near side and `4.1.0` on the far one, `4.1.0` being what `exercises/step1/java`'s pom
-declares, so a Boot upgrade there means moving the number here.
+different one and any number printed there is wrong for somebody in the room. And its versions
+carry **no real numbers either** (`v1` to `v5`, since 13 October 2026, at the owner's asking): they
+were Spring Boot 3.3 to 4.1 with 4.0 past the line, and models trained after 4.0 shipped made that
+false. Any real version here goes stale the same way. `TrainedOrGrounded` keeps its real Boot example.
 
 It also changes what guided mode gets. `The cutoff` had no figure, so its heading was dropped with
 the prose and the section did not exist in class; the marker gives that heading something to sit
@@ -2200,11 +2202,12 @@ is the trap the help dialog spends three sentences on: an agent doing character 
 sounds exactly as sure when it is wrong. **The house rules moved to step 0's `welcome`**, where they are the rules
 of every board in the course rather than of this one, so `lead.2` links to them in half a sentence
 and the unit keeps only the game (two lead paragraphs, the launcher, the rule
-over the task card and the two sentences that close the step). Do not
+over the task card; the two sentences that closed the step moved to `recap`). Do not
 write a rule back onto this page: a rule that is true here and nowhere else is the sign the rule is
 wrong rather than misplaced. What went with the move is worth knowing. The old `house-rules.5` was
 the course's second pointer at `model.cost.4`, and `hunt.count.label` is what replaced it: the card
-sends the student's two `/context` readings to the rates rather than working them out here, so
+says the growth between the student's two `/context` readings is not total usage or a bill, rather
+than working out a cost here, so
 `cost.4` is still the one place the course multiplies. The intro's version of that rule has since
 been cut as well (step 0's own file says why), so `hunt.count.label` is now the only thing anywhere
 near a board that points at what a hunt cost. It names no command and does no arithmetic, and it may
@@ -2393,7 +2396,7 @@ in there, that is their build to unpick and the flags above are what they have d
 
 ## The assistant variants
 
-20 blocks in step 1 vary, 13 of them in the unit HTML and 7 on task cards, and nearly all of them are the same kind of thing, a filename or a
+21 blocks in step 1 vary, 14 of them in the unit HTML and 7 on task cards, and nearly all of them are the same kind of thing, a filename or a
 command: the launcher `<pre>` pair under `workshop`'s lead (`claude` against `copilot`, each after
 the same `cd`), which is the only pair left there now that the setup command has moved to
 `install.txt`,
@@ -2466,7 +2469,7 @@ and `CutItUp` are untouched. Compaction is automatic in both, so
 in Claude Code, from about 80% in Copilot CLI), and that is `compaction-clear.6`'s pair plus
 the one string `WindowFill` swaps, not a reason to split anything else. And `ModelTiers`, `ModelPricing` and
 `PickTheTier` stay exactly as they are: the tiers are taught as dispositions, Copilot's own picker
-offers Claude models among others, and the table is evidence for the one-two-four ratio rather
+offers Claude models among others, and the table is evidence for the one-twenty-forty ratio rather
 than a price list. What a Copilot reader needs instead is in `model.api-vs-subscription.3`, and it
 **names one number and no rates**: what 1 AI credit is worth ($0.01), added at the course owner's
 asking (October 2026) because a reader told they spend credits had no way to turn them into money.
