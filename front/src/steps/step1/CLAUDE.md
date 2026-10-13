@@ -1464,7 +1464,7 @@ outlive releases, so the unit teaches Opus, Sonnet and Haiku as dispositions; a 
 quarter's release is wrong by the next one. **The lead no longer says that out loud**: the paragraph
 naming the three tiers and telling the student the names change and the shape does not was cut, so
 the figure now opens the unit and the only thing dating it is the small `(October 2026)` line moved
-under it. What survives of the claim is `model.cost.3`, which marks ratios and prices as changing (it names no month since 13 October 2026: `lead.3` and the table's caption already carry it), and
+under it. What survives of the claim is `model.cost.3`, which marks ratios and prices as changing (it names no month since 13 October 2026: the table's caption carries it, and the `lead.3` line dating the cards was cut the same day at the owner's asking), and
 the prose must keep those claims dated and scoped. Do not infer a fixed latency ratio or guaranteed
 model disposition from the tier names. The cards offer candidates to evaluate, not behaviour promises.
 Two boundaries with units either side of it hold the unit up. `prompt` owns the **reasoning level**
