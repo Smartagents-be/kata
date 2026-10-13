@@ -557,7 +557,7 @@
   "tiers.sonnet.tag.2": "alles wat nieuw is",
   "tiers.sonnet.tag.3": "eerlijkheid telt",
   "tiers.haiku.character": "Voor duidelijk afgebakende taken",
-  "tiers.haiku.body": "Voor classificatie, extractie en nauwkeurig omschreven handelingen. Het kost 20 keer minder dan het middenmodel en is vaak sneller.",
+  "tiers.haiku.body": "Voor classificatie, extractie en nauwkeurig omschreven handelingen. Het kost 20 keer minder dan het middenmodel en is vaak sneller. Op max reasoning is het ook vaak goed genoeg voor codeerwerk.",
   "tiers.haiku.tag.1": "classificatie",
   "tiers.haiku.tag.2": "gestructureerd extraheren",
   "tiers.haiku.tag.3": "routeringslagen",

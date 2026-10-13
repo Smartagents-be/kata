@@ -585,7 +585,7 @@
 
   "tiers.haiku.name": "Haiku",
   "tiers.haiku.character": "For well-defined tasks",
-  "tiers.haiku.body": "For classification, extraction and tightly specified operations. It costs 20 times less than the middle tier and is often faster.",
+  "tiers.haiku.body": "For classification, extraction and tightly specified operations. It costs 20 times less than the middle tier and is often faster. On max reasoning it is often good enough for coding work too.",
   "tiers.haiku.tag.1": "classification",
   "tiers.haiku.tag.2": "structured extraction",
   "tiers.haiku.tag.3": "routing layers",
