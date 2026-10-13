@@ -777,7 +777,7 @@
   "tools.what-mcp-costs-you.1.copilot": "Copilot CLI gebruikt tool search zodra je genoeg tools hebt op een ondersteund model: het laadt de volledige beschrijving van een tool pas als het model die nodig heeft. Daaronder laden alle beschrijvingen meteen, dus neemt elke verbonden server context in voor je hem gebruikt <svg data-icon=\"coin\"></svg>.",
   "tools.what-mcp-costs-you.3": "Ook een tool aanroepen neemt ruimte in: het verzoek en de inhoud die je harness doorgeeft, komen in de context, en een lang resultaat uit een databank kan veel meer plaats innemen dan de beschrijving van de tool. Zet tools uit die deze taak niet nodig heeft. Dan hoeft het model ook tussen minder vergelijkbare tools te kiezen.",
   "model.lead.1": "Je kiest zelf welk model je agent gebruikt.",
-  "model.lead.2": "Een provider levert een familie, geen model. Die modellen verschillen in prijs per token, snelheid en hoe goed ze een lange taak bij elkaar houden.",
+  "model.lead.2": "Een provider biedt meerdere modellen aan. Ze verschillen in prijs per token, snelheid en hoe goed ze een lange taak bij elkaar houden.",
   "model.cost.heading": "Kosten",
   "model.cost.1": "De tiers liggen qua prijs verder uit elkaar dan de meeste mensen denken. Het middenmodel kost ruwweg 20 keer zoveel als het kleine, het topmodel ruwweg 40 keer <svg data-icon=\"coin\"></svg> Output kost in elke tier 5 keer zoveel als input, dus een lang antwoord kost meer dan een kort van hetzelfde model.",
   "model.cost.2": "De onderste rij is het frontier model, Fable bij Anthropic en Astra bij OpenAI: duurder dan het topmodel. Waarvoor het dient, zie je in <a href=\"/steps/step2/goals\">stap 2</a>.",
