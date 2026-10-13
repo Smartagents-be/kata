@@ -1,4 +1,3 @@
-import { PanelChip } from '@/shared/components/Panel'
 import { useStepText } from '@/shared/i18n/useStepText'
 
 /**
@@ -17,7 +16,6 @@ import { useStepText } from '@/shared/i18n/useStepText'
  */
 const TIERS = ['haiku', 'sonnet', 'opus'] as const
 
-const TAGS = [1, 2, 3] as const
 
 /**
  * The `model` unit's only figure, and it argues one thing: three tiers, three dispositions, three
@@ -28,7 +26,8 @@ const TAGS = [1, 2, 3] as const
  * of it rather than by borrowing a frame that would mean nothing.
  *
  * Tier names stay English in every language, like every other machine-shaped string in this step;
- * only the disposition, the body and the tags are translated.
+ * only the disposition and the body are translated. The cards carried 3 tag chips each until
+ * 13 October 2026, when the owner had them removed: they read badly under the paragraph.
  */
 export function ModelTiers() {
   const { text } = useStepText('step1')
@@ -77,20 +76,6 @@ export function ModelTiers() {
           >
             {text(`tiers.${tier}.body`)}
           </p>
-
-          <ul
-            id={`model-tiers-item-${index}-tags`}
-            data-component="ModelTiers"
-            className="mt-3 flex flex-wrap gap-2"
-          >
-            {TAGS.map((tag) => (
-              <li key={tag}>
-                <PanelChip id={`model-tiers-item-${index}-tag-${tag - 1}`} tone="muted">
-                  {text(`tiers.${tier}.tag.${tag}`)}
-                </PanelChip>
-              </li>
-            ))}
-          </ul>
         </div>
       ))}
     </div>
