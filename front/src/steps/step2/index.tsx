@@ -18,6 +18,7 @@ import { LoopInWindow } from './LoopInWindow'
 import { LoopsPerHour } from './LoopsPerHour'
 import { ModelRelay } from './ModelRelay'
 import { Preflight } from './Preflight'
+import { ProofLoop } from './ProofLoop'
 import { ProjectTree } from './ProjectTree'
 import { ReadEachTime } from './ReadEachTime'
 import { RunSheet } from './RunSheet'
@@ -49,6 +50,7 @@ import patterns from './units/patterns.html?raw'
 import workflows from './units/workflows.html?raw'
 import enablement from './units/enablement.html?raw'
 import parallel from './units/parallel.html?raw'
+import proof from './units/proof.html?raw'
 import goals from './units/goals.html?raw'
 import workshop from './units/workshop.html?raw'
 
@@ -57,8 +59,8 @@ import workshop from './units/workshop.html?raw'
  * the code yourself, one unit each. `setup` opens the step, since every session starts from what the
  * repository tells the agent before your first message.
  *
- * `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`, `enablement`, `parallel` and
- * `goals` each carry a drawing. `engineering`, `gates`, `steering`,
+ * `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`, `enablement`, `parallel`,
+ * `proof` and `goals` each carry a drawing. `engineering`, `gates`, `steering`,
  * `patterns` and `enablement` close on an ungraded task card; `steering`, `patterns`, `workflows` and `goals`
  * carry a quiz; and `setup` and the closing `workshop` unit each carry a flag board, which is why
  * this registry is .tsx. Both boards are browser-graded, so the step still talks to the service
@@ -291,6 +293,15 @@ const step2: Step = {
       // unit carries no task card, so the HTML writes no `ui:quiz.title` and `QuizPanel` prints its
       // own heading under the closing figure, the way `workflows` and `goals` do.
       quiz: parallelQuiz,
+    },
+    {
+      id: 'proof',
+      title: 'proof.title',
+      html: proof,
+      // One slot, and it closes the unit: the drawing names all 5 stages of the order, so under an
+      // earlier heading it would spend the later ones early. No card and no quiz, so the HTML
+      // writes no `ui:quiz.title` either.
+      inlineFigures: { 'proof-loop': <ProofLoop /> },
     },
     {
       id: 'goals',

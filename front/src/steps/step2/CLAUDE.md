@@ -16,14 +16,15 @@ in Dutch). There is no exception for size or capacity either: "context window" a
 "contextvenster" are gone from student text, as step 1's file records. Usage and billing windows, time windows and
 component names such as `TwoWindows`, `LoopInWindow` and `WindowSpend` are untouched.
 
-`step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Nine
+`step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Ten
 units, `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`,
-`enablement`, `parallel` and `goals`, four of
-them carrying a quiz, and the unit HTML is the source for what each argues. Seven of the nine close
+`enablement`, `parallel`, `proof` and `goals`, four of
+them carrying a quiz, and the unit HTML is the source for what each argues. Seven of the ten close
 on something the student does: `gates`, `steering`, `patterns` and
 `enablement` on an ungraded `TaskCard`, `setup` on a graded flag board, and `steering`, `patterns`, `workflows`
 and `goals` on a quiz, three of them under a card. `workflows` is the one that is framing prose and
-a quiz with no card, and `engineering` closes on its last figure since its card was cut (below). Six carry one
+a quiz with no card, `engineering` closes on its last figure since its card was cut (below), and
+`proof` is prose and a figure with neither. Seven carry one
 habit each. `workflows` is outside that count, and deliberately so: it carries five ways of
 handing work over rather than one habit, and its argument is the choice between them. `parallel` is
 outside it on the same reasoning, four arrangements of agents rather than one habit. `enablement`
@@ -32,8 +33,9 @@ than about a habit you practise.
 
 **Unit titles are 1 word or a few, at the owner's asking (October 2026).** The sidebar reads
 Setup, Domain language, Quality gates, Steering, Skills and scripts, Workflows, Feedback
-loop, Parallel work, Long runs and Workshop (Setup, Domeintaal, Quality gates, Bijsturen,
-Skills en scripts, Processen, Feedbacklus, Parallel werk, Lange runs, Workshop). The longer titles
+loop, Parallel work, Prove your work, Long runs and Workshop (Setup, Domeintaal, Quality gates,
+Bijsturen, Skills en scripts, Processen, Feedbacklus, Parallel werk, Bewijs je werk, Lange runs,
+Workshop). The longer titles
 they replaced each carried a claim or a verb, and the owner found them too long to scan. Only the
 `*.title` strings moved: unit ids, URLs and keys stayed. A link that named a unit by its title was
 repointed to the new one in steps 1, 2 and 3 and in both languages, so grep the old title before
@@ -1295,6 +1297,55 @@ The figure grew by about a quarter when that row landed, so **`deck-step2-parall
 came down from `scale` 1.02 to 0.78**. That number is measured against the footer rather than
 chosen, so a sixth row moves it again.
 
+`proof` sits between `parallel` and `goals`, added at the course owner's asking (October 2026), and
+what it owns is **the order a change is proved in**: reproduce, lock, implement, prove, reason. Five
+sections, 1 per stage with the last 2 stages sharing one, opening on the environment and closing on
+the claim that this is what engineers did before agents (replicate first, then test-driven). It
+opens straight on its first `<h2>` and carries no lead, on `enablement`'s precedent. **It carries no
+card and no quiz**, which is a scope decision rather than a judgement that neither fits: the owner
+asked for the section and a drawing.
+
+**Its title is `Prove your work`, and the owner's brief said "Proof your work".** The verb is
+*prove*; *proof* as a verb is the Dutch showing through, on `lesson-writing`'s rule. The unit id,
+the URL and the key prefix are `proof`, the noun, so nothing has to move if the title is reworded.
+
+Every neighbour it touches is a link and a clause, and each is easy to collapse.
+**`enablement.run-own-machine` owns running the application locally**, so
+`proof.run-like-production.1` links there and adds only what proof asks on top: the agent starts all
+of it itself, and it is the real database, the real migrations and the build production gets. It
+names no project and no command, for the reason `run-own-machine` names none. **`goals` owns the
+command that answers yes or no**, so `implement-then-prove.1` names it in a clause and links.
+**`gates`' `Legacy code` owns tests before any change on code that has none**: that is a baseline
+over a whole module, and this is 1 check for 1 change, so do not let either grow into the other.
+`enablement.where-day-goes.question-3` ("a test you watched fail and then pass") is the reviewer's
+half of `lock-before-fix.1`'s "watch it fail" and stays a question there.
+
+**"A check that has never been red says nothing about the fix" is as far as that sentence may go.**
+It is about the order, red before green. It must not grow into tests that assert nothing or into
+coverage that can be faked, which is the honest flag's discovery, on the constraint recorded under
+`gates` above.
+
+**The example is an invoice total, not this kata's loans domain, on purpose.** A bug invented in
+`exercises/step2/java` would send a student hunting for it in the capstone's module, and the real
+red-then-green in that project is the `challenge` profile, which is `workshop`'s. So the `<pre>`
+is a prompt against a domain the repository does not have, and it names `mvn verify` and never
+`-Pgraded`, on `gates`' rule. The `<pre>` is the whole order in 1 prompt and carries no key.
+
+`ProofLoop` closes the unit, on `AgentsAtOnce`'s placement: it names all 5 stages. **Teal is the
+check and nothing else**: `Lock` writes it, `Prove` runs it again, and the track under those 2 cards
+runs dashed from `red` to solid at `green`, which is the figure's argument (1 check answering
+twice). `red` and `green` are muted and teal on `GoalGate`'s precedent, never `--destructive` and
+`--success`. The band under the row is the environment, drawn as the ground the 5 stages stand on
+rather than as a 6th stage. It is DOM on `WorkflowTimeline`'s precedent, and it is **not a loop**
+despite the name: `GoalGate` in `goals` owns the check-and-repair loop, so do not draw a return
+arrow from `Prove` back to `Implement`.
+
+The deck gained `deck-step2-proof` (the divider, 4 points) and `deck-step2-proof-loop`
+(`ProofLoop` at `scale` 1.7, limited by the frame's width rather than the footer).
+**`RunSheet`'s chips do not name `proof`**, so "between them they name all nine" below is still
+nine, of ten. The statement job runs this order for real (failing tests, then the endpoint), so a
+chip there would be honest; adding it is a separate decision.
+
 `goals` was **`Goal-oriented`, then `Long-running goals and cost`, and is now `Long runs`**. The first
 change was a widening rather than a rename. The unit used to argue one thing, handing over an outcome instead of an instruction, and it
 now surveys four ways of spending a lot of tokens on purpose: a goal-shaped run, a fan-out under
@@ -1367,7 +1418,7 @@ The quiz is the step's second and is in `quiz.ts` beside `workflowsQuiz`. One qu
 move that has a wrong branch, so the relay has none, on the same reasoning that leaves spec-driven
 out of the `workflows` quiz.
 
-A tenth unit, `workshop`, closes the step as its capstone, and **it is a run rather than a page**.
+An eleventh unit, `workshop`, closes the step as its capstone, and **it is a run rather than a page**.
 That is the shape to hold on to before editing anything in it. The page is not five flags described
 one after another; it is five stages a student works in order, and the flags fall out of three of
 them. The rewrite that made it one is recorded below, along with what the old shape got right, so

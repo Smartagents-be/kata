@@ -9,6 +9,7 @@ import { HookTree } from './HookTree'
 import { LoopsPerHour } from './LoopsPerHour'
 import { ModelRelay } from './ModelRelay'
 import { ProjectTree } from './ProjectTree'
+import { ProofLoop } from './ProofLoop'
 import { ReadEachTime } from './ReadEachTime'
 import { RunSheet } from './RunSheet'
 import { ScriptRuns } from './ScriptRuns'
@@ -509,6 +510,32 @@ const deck: SlideSpec[] = [
     note: 'deck.parallel.worktree.note',
     figure: <WorktreeEach />,
     scale: 1.4,
+  },
+
+  // ── proof ─────────────────────────────────────────────────────────────────────────────────
+  {
+    id: 'deck-step2-proof',
+    kind: 'divider',
+    ns: 'step2',
+    eyebrow: 'step.title',
+    title: 'proof.title',
+    points: [
+      'deck.proof.divider.1',
+      'deck.proof.divider.2',
+      'deck.proof.divider.3',
+      'deck.proof.divider.4',
+    ],
+  },
+  {
+    id: 'deck-step2-proof-loop',
+    kind: 'figure',
+    ns: 'step2',
+    eyebrow: 'proof.title',
+    title: 'deck.proof.loop.title',
+    // A row of 5 cards with a track and a band under it: wide and shallow, so the frame's width
+    // is what limits it rather than the footer.
+    figure: <ProofLoop />,
+    scale: 1.7,
   },
 
   // ── goals ─────────────────────────────────────────────────────────────────────────────────
