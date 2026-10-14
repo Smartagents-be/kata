@@ -16,15 +16,14 @@ in Dutch). There is no exception for size or capacity either: "context window" a
 "contextvenster" are gone from student text, as step 1's file records. Usage and billing windows, time windows and
 component names such as `TwoWindows`, `LoopInWindow` and `WindowSpend` are untouched.
 
-`step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Ten
+`step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Nine
 units, `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`,
-`enablement`, `parallel`, `proof` and `goals`, four of
-them carrying a quiz, and the unit HTML is the source for what each argues. Seven of the ten close
+`enablement`, `parallel` and `goals`, four of
+them carrying a quiz, and the unit HTML is the source for what each argues. Seven of the nine close
 on something the student does: `gates`, `steering`, `patterns` and
 `enablement` on an ungraded `TaskCard`, `setup` on a graded flag board, and `steering`, `patterns`, `workflows`
 and `goals` on a quiz, three of them under a card. `workflows` is the one that is framing prose and
-a quiz with no card, `engineering` closes on its last figure since its card was cut (below), and
-`proof` is prose and a figure with neither. Seven carry one
+a quiz with no card, and `engineering` closes on its last figure since its card was cut (below). Six carry one
 habit each. `workflows` is outside that count, and deliberately so: it carries five ways of
 handing work over rather than one habit, and its argument is the choice between them. `parallel` is
 outside it on the same reasoning, four arrangements of agents rather than one habit. `enablement`
@@ -32,12 +31,12 @@ is the fourth one outside it, for its own reason: it is about what has to be tru
 than about a habit you practise.
 
 **Unit titles are 1 word or a few, at the owner's asking (October 2026).** The sidebar reads
-Setup, Domain language, Quality gates, Steering, Skills and scripts, Workflows, Feedback
-loop, Parallel work, Prove your work, Long runs and Workshop (Setup, Domeintaal, Quality gates,
-Bijsturen, Skills en scripts, Processen, Feedbacklus, Parallel werk, Bewijs je werk, Lange runs,
-Workshop). The longer titles
+Setup, Domain language, Quality gates, Steering, Skills and scripts, Workflows, Prove your
+work, Parallel work, Long runs and Workshop (Setup, Domeintaal, Quality gates, Bijsturen, Skills en
+scripts, Processen, Bewijs je werk, Parallel werk, Lange runs, Workshop). The longer titles
 they replaced each carried a claim or a verb, and the owner found them too long to scan. Only the
-`*.title` strings moved: unit ids, URLs and keys stayed. A link that named a unit by its title was
+`*.title` strings moved then. The unit ids, and so the URLs, followed the titles later that month
+(the mapping is in `front/src/steps/CLAUDE.md`); file names and key prefixes stayed. A link that named a unit by its title was
 repointed to the new one in steps 1, 2 and 3 and in both languages, so grep the old title before
 reintroducing one. Do not grow a title back into a sentence.
 
@@ -176,12 +175,11 @@ stay inside the detailed module (`payments`, keeping the proof of each payment),
 was tried in the newsroom version and cut for exactly that reason. **`Vertical slices` runs to 3 paragraphs and 2 figures, past the 2-paragraph rule, at the owner's
 asking (October 2026)**: `vertical-slices.3` and `SliceSkills` argue the T-shaped profile from the
 slice (it runs from the screen to production, so you judge every layer it touches), with the
-fields named on the crossbar and the backend specialism as the stem. **`enablement`'s `t-shaped`
-section and `SkillShape` stay as they are, on purpose**: the owner chose 2 figures for the shape
-over moving or merging, because the 2 sections give 2 different reasons (the slice here, the agent
-implementing faster there). Do not label `SkillShape`, do not give `SliceSkills` an I beside it, and
-do not merge the two sections. `deck-step2-engineering-skills` puts `SliceSkills` on a slide at
-`scale` 1.3, the same as the slices slide before it. **The ArchUnit and unit-test items in `gates` say "module", not
+fields named on the crossbar and the backend specialism as the stem. **`enablement`'s `t-shaped` section points here and has no figure of its own**: it was a second
+argument and a second figure (`SkillShape`, an I beside a T) until the owner had it cut to 1
+paragraph and a link (October 2026), keeping only the migration example. Do not give `SliceSkills`
+an I beside it. `deck-step2-engineering-skills` puts `SliceSkills` on a slide at
+`scale` 1.3, the same as the slices slide before it, under a note that is `t-shaped`'s closing pair. **The ArchUnit and unit-test items in `gates` say "module", not
 "slice"**, because 2 slices in 1 module share its domain; the module is the boundary a rule
 enforces.
 
@@ -848,7 +846,26 @@ sketch, except that its breadboards became diagrams (the term was unknown to the
 students too), and its 1 message is the dashed line: prototypes are the highest rung you still
 throw away. No slide and no quiz question yet; either is a separate decision.
 
-It carries nine figures, and five of them are one set. `FlowDiagram` draws, per section, who
+**"Where the specs live" is an `<h3>` inside spec-driven, after `flow-spec`, not a sixth workflow**
+(October 2026, at the owner's asking; the `<h3>` was the owner's call for that reason). Its keys
+take their section from the `<h3>`, `workflows.where-specs-live.*`, on step 1's `tokens` rule.
+**3 kinds of file and no fourth: `intent.md`, `spec.md`, `plan.md`.** 1 intent is cut into several
+specs, 1 per vertical slice, and each spec gets exactly 1 plan of numbered steps that name the
+requirement and the test. The set and the homes follow Anthropic's AI-native SDLC playbook
+(claude.com, August 2026): a folder in the product repository, a directory in a monorepo, a repo of
+its own only when intent spans many repositories, and an MCP connector when a tracker holds it.
+Splitting 1 intent into several specs is the owner's, not the playbook's, which pairs them 1 to 1;
+the vertical-slice cut is Matt Pocock's `to-tickets` and this step's `engineering`. Google Conductor
+(`spec.md` and `plan.md` per track) is the other precedent; Spec Kit's `tasks.md` stays out, as
+above. `spec-driven.1`'s "1 folder per feature" stays as written at the owner's choice: it is the
+1-repository default the `<h3>` then grows. **Keep the multi-repo advice product neutral** (an MCP
+server for the place, or a skill that fetches): the class works in Copilot in IntelliJ.
+`SpecTree` draws it on `FileTree`, with the step's loans domain as the example (late fees, split
+into 2 invented services) and a caption saying it is not this repository.
+It has a slide, `deck-step2-workflows-where`, after the spec slide, at the owner's asking; the
+fidelity ladder still has none.
+
+It carries ten figures, and five of them are one set. `FlowDiagram` draws, per section, who
 talks to what: `you → agent → [project: code]`, then the same with a two-way link to the agent, then
 a spec joining the code inside the project, then `defer`'s two sessions, then `audit-driven`'s
 six-box chain closed into a cycle. **They are read down the unit rather than one at a time**, so a
@@ -973,13 +990,15 @@ now carries one. It stands on its own here: this unit is about what has to be tr
 a condition has no wrong answer to offer a question the way a choice between five workflows does.
 Run it locally front and back, grow the crossbar, and count where the day goes.
 
-**It was `Enablement`, then `What it asks of you`, and is now `Feedback loop`**, on `goals`'s precedent: the unit id, the
-URL, the namespace prefix, the deck eyebrow key and every `/steps/step2/enablement` link stay where
-they are, so nothing that pointed at it moved. The old title was the one abstract noun in a step of
+**It was `Enablement`, then `What it asks of you`, and is now `Feedback loop`**, on `goals`'s precedent: the file name, the
+namespace prefix and the deck eyebrow key stay `enablement`. The unit id, and so the URL, later
+followed the title to `feedback-loop`. The old title was the one abstract noun in a step of
 plain ones, it appeared in neither language's prose, and it was all that bound three sections that
 do not build on one another. The middle one read back onto all three: your check has to keep up, what
 is asked of you moves up a level, and the week is what it asks of your time. Three step 3 blocks
-called the unit by its old title and were repointed with it, in both languages.
+called the unit by its old title and were repointed with it, in both languages. **It is now
+`Prove your work`, at `/steps/step2/proof`**, since a separate `proof` unit was merged into it
+(below); file name and key prefix are still `enablement`, and the 3 step 3 links moved again.
 
 **It opens straight on its first `<h2>` and carries no lead, which is deliberate.** The two lead
 paragraphs it was drafted with said the work comes back fast and the checking is what takes the
@@ -1091,44 +1110,21 @@ with that login. **Local data belongs to `run-own-machine` and is a clause there
 argument**, so a section written back in here does not get to make it either. `LoopsPerHour` was this section's figure and stayed in the unit rather than going with it,
 moved up under `run-own-machine`, which is where it is documented.
 
-`t-shaped` argues the shape from the agent rather than from the market. Implementation gets faster
-with every release, so what is asked of you moves up a level: keep the specialism, know enough of
-what sits around it to judge what comes back, and take the closing pair as the point, namely that
-**the agent handles the detail for everyone alike, so knowing the detail is worth less than it was
-and knowing what good engineering looks like is not**. It said "the market moved first, which means
-the upskilling is on you" before, which put the cause outside the course and outside the agent. Keep
-the cause where it is now. The `engineering` pointer hangs off that closing sentence rather than
-standing as a paragraph of its own: as a second paragraph it opened on the link and then restated
-the breadth claim the section had already made three sentences earlier, which is what made it read
-oddly. One section, one paragraph, and the link names the unit rather than teaching it again. **The
-section carries exactly one example and it sits in the middle of that paragraph**: the migration that
-drops a column two other services still read, put back after the section spent a while with none at
-all and `SkillShape` carrying the whole of the concrete. It went in there rather than at either end
-because the opening claim and the closing pair are both load bearing, and it is the migration rather
-than the frontend state bug or the build pipeline the section used to name alongside it, because
-`run-own-machine` above it already runs its scenario in the browser and the cut `reachable-one-step`
-section was the one that talked about pipelines. One case is the budget. A second turns the paragraph
-into a list and the closing pair stops landing.
+`t-shaped` is **1 paragraph that points at `engineering`'s T-shaped profile** (October 2026, at the
+owner's asking, who found it said the shape a second time). It keeps the reason the shape matters
+here, the agent implements faster so what is asked of you moves up a level, and **1 example**: the
+migration that drops a column 2 other services still read. **It still closes on the pair** (knowing
+the detail is worth less than it was, knowing good software engineering is not), which the owner
+kept, and the same pair is the note on `deck-step2-engineering-skills`. `SkillShape` under it was
+cut. Do not grow it back into an argument for the shape; `vertical-slices.3` makes it.
 
 **A `code-got-cheap` section closed the unit and was cut.** It said code used to be the expensive
 part and a craftsman built it slowly, that this is over and nobody is buying code from you any more,
 and that what sells is knowing what to build and being able to tell whether what came back is right,
 so think while the agent types and be the architect rather than the bricklayer. Both halves of it
-have homes now: `t-shaped` carries the worth of the knowledge in one sentence, knowing the detail
-being worth less than it was and knowing what good engineering looks like not, and
+have homes now: `t-shaped` carries the worth of the knowledge in its closing pair, and
 `where-day-goes`'s second paragraph carries the thinking. A section written back in would be one of
 those two a second time.
-
-`SkillShape` sits under `t-shaped`, which is now the middle section, so the
-figure closes neither the unit nor its own section's argument; `where-day-goes` closes the unit. Nothing after it reads the drawing back,
-which is the part that has to survive the move: its own labels carry
-what it argues. An I beside a T, and **the stem is the same depth in both**. A T drawn with a
-shortened stem argues "get shallower", which is not the claim under it. The crossbar is the only teal
-thing in the figure, on the step's rule that teal is what the shape adds. The dashed baseline both
-stems land on **carries no label**: it had one reading "the depth you already had, unchanged" and it
-was cut, because two stems ending on one line say that already and the key is gone from both bundles.
-Only the T's half is captioned now, which is the same rule the crossbar's colour follows: what is
-named is what the shape adds.
 
 `parallel` follows `enablement` and took the slot the cut `quality` unit left, though it is not a
 rewrite of it: what it owns is **how many agents you have running, and what each arrangement costs
@@ -1297,28 +1293,24 @@ The figure grew by about a quarter when that row landed, so **`deck-step2-parall
 came down from `scale` 1.02 to 0.78**. That number is measured against the footer rather than
 chosen, so a sixth row moves it again.
 
-`proof` sits between `parallel` and `goals`, added at the course owner's asking (October 2026), and
-what it owns is **the order a change is proved in**: reproduce, lock, implement, prove, reason. Five
-sections, 1 per stage with the last 2 stages sharing one, opening on the environment and closing on
-the claim that this is what engineers did before agents (replicate first, then test-driven). It
-opens straight on its first `<h2>` and carries no lead, on `enablement`'s precedent. **It carries no
-card and no quiz**, which is a scope decision rather than a judgement that neither fits: the owner
-asked for the section and a drawing.
+**`proof` was a unit of its own for a day and is now 4 sections of `enablement`** (October 2026).
+It was added between `parallel` and `goals` at the owner's asking, and the owner then found most of it
+repeated `enablement` and step 1's `truth`, so it was merged here under its own title. What it
+brought is **the order a change is proved in**: `reproduce-first`, `lock-before-fix` with the prompt,
+`implement-then-prove` and `test-driven-before`, between `run-own-machine` and `t-shaped`, closed by
+`ProofLoop`. Its opening section, the environment, became `run-own-machine.3` (the agent starts it
+all itself, real migrations, the build production gets). `implement-then-prove` was cut to 1
+paragraph: "you read output, not an opinion" and the clause linking `goals` were `truth.proof` and
+`goals` said again. **It carries no card or quiz of its own**; the unit's card is still `CountTheDay`.
 
-**Its title is `Prove your work`, and the owner's brief said "Proof your work".** The verb is
-*prove*; *proof* as a verb is the Dutch showing through, on `lesson-writing`'s rule. The unit id,
-the URL and the key prefix are `proof`, the noun, so nothing has to move if the title is reworded.
+**The title is `Prove your work`, and the owner's brief said "Proof your work".** The verb is
+*prove*; *proof* as a verb is the Dutch showing through, on `lesson-writing`'s rule.
 
-Every neighbour it touches is a link and a clause, and each is easy to collapse.
-**`enablement.run-own-machine` owns running the application locally**, so
-`proof.run-like-production.1` links there and adds only what proof asks on top: the agent starts all
-of it itself, and it is the real database, the real migrations and the build production gets. It
-names no project and no command, for the reason `run-own-machine` names none. **`goals` owns the
-command that answers yes or no**, so `implement-then-prove.1` names it in a clause and links.
-**`gates`' `Legacy code` owns tests before any change on code that has none**: that is a baseline
-over a whole module, and this is 1 check for 1 change, so do not let either grow into the other.
-`enablement.where-day-goes.question-3` ("a test you watched fail and then pass") is the reviewer's
-half of `lock-before-fix.1`'s "watch it fail" and stays a question there.
+Every neighbour these sections touch is easy to collapse into them. **`gates`' `Legacy code` owns
+tests before any change on code that has none**: that is a baseline over a whole module, and this is
+1 check for 1 change, so do not let either grow into the other. `where-day-goes.question-3` ("a test
+you watched fail and then pass") is the reviewer's half of `lock-before-fix.1`'s "watch it fail" and
+stays a question there.
 
 **"A check that has never been red says nothing about the fix" is as far as that sentence may go.**
 It is about the order, red before green. It must not grow into tests that assert nothing or into
@@ -1329,28 +1321,31 @@ coverage that can be faked, which is the honest flag's discovery, on the constra
 `exercises/step2/java` would send a student hunting for it in the capstone's module, and the real
 red-then-green in that project is the `challenge` profile, which is `workshop`'s. So the `<pre>`
 is a prompt against a domain the repository does not have, and it names `mvn verify` and never
-`-Pgraded`, on `gates`' rule. The `<pre>` is the whole order in 1 prompt and carries no key.
+`-Pgraded`, on `gates`' rule. The `<pre>` is the whole order in 1 prompt, written in the 6 parts of step 1's `PromptParts`, and carries no key.
 
-`ProofLoop` closes the unit, on `AgentsAtOnce`'s placement: it names all 5 stages. **Teal is the
-check and nothing else**: `Lock` writes it, `Prove` runs it again, and the track under those 2 cards
-runs dashed from `red` to solid at `green`, which is the figure's argument (1 check answering
-twice). `red` and `green` are muted and teal on `GoalGate`'s precedent, never `--destructive` and
-`--success`. The band under the row is the environment, drawn as the ground the 5 stages stand on
-rather than as a 6th stage. It is DOM on `WorkflowTimeline`'s precedent, and it is **not a loop**
-despite the name: `GoalGate` in `goals` owns the check-and-repair loop, so do not draw a return
-arrow from `Prove` back to `Implement`.
+`ProofLoop` closes the order rather than opening it: it names all 5 stages. **It was redrawn at the
+owner's asking, who called the first version lazy and too wordy**: a sentence under every stage, a
+red-to-green track and an environment band, all saying what the prose had just said. Now the question
+is the title ("What proves the fix works?", on `LoopsPerHour`'s precedent) and each stage carries 1
+piece of evidence from the invoice prompt, in mono: `29.99`, `✗ test`, nothing under `Implement`,
+`✓ test 30.00`, `not checked: VAT report`. Do not put the notes back, and keep those values in step
+with the prompt. **Teal is the check and nothing else**: `Lock` and `Prove` are the tinted cards, and
+the 2 test results are the argument (1 check answering twice), muted and teal on `GoalGate`'s
+precedent, never `--destructive` and `--success`. It is DOM on `WorkflowTimeline`'s precedent, and it
+is **not a loop** despite the name: `GoalGate` in `goals` owns the check-and-repair loop, so do not
+draw a return arrow from `Prove` back to `Implement`.
 
-The deck gained `deck-step2-proof` (the divider, 4 points) and `deck-step2-proof-loop`
-(`ProofLoop` at `scale` 1.7, limited by the frame's width rather than the footer).
-**`RunSheet`'s chips do not name `proof`**, so "between them they name all nine" below is still
-nine, of ten. The statement job runs this order for real (failing tests, then the endpoint), so a
-chip there would be honest; adding it is a separate decision.
+In the deck it is `deck-step2-enablement-loop` (`ProofLoop` at `scale` 1.7, limited by the frame's
+width rather than the footer), after the clock, and the unit's divider
+carries 5 points: the environment, reproduce and lock, implement and prove, then the 2 it had.
+**`RunSheet`'s chips do not name this order.** The statement job runs it for real (failing tests,
+then the endpoint), so a chip there would be honest; adding it is a separate decision.
 
 `goals` was **`Goal-oriented`, then `Long-running goals and cost`, and is now `Long runs`**. The first
 change was a widening rather than a rename. The unit used to argue one thing, handing over an outcome instead of an instruction, and it
 now surveys four ways of spending a lot of tokens on purpose: a goal-shaped run, a fan-out under
-`ultracode`, research on the frontier model, and a design tool. **The unit id, the URL and the
-namespace prefix all stay `goals`**, so nothing that pointed at it moved, and the references from
+`ultracode`, research on the frontier model, and a design tool. **The file name and the
+namespace prefix stay `goals`**, while the unit id and the URL later followed the title to `long-runs`, and the references from
 `parallel`, `workshop` and the flag help texts still read "the goals lesson" the way `patterns` is
 referenced by id rather than by title. The old argument is intact and is the first three sections;
 what went is `whole-job.3` (the skill sweep, which now closes `most-waiting` as the thing you start
@@ -1418,7 +1413,7 @@ The quiz is the step's second and is in `quiz.ts` beside `workflowsQuiz`. One qu
 move that has a wrong branch, so the relay has none, on the same reasoning that leaves spec-driven
 out of the `workflows` quiz.
 
-An eleventh unit, `workshop`, closes the step as its capstone, and **it is a run rather than a page**.
+A tenth unit, `workshop`, closes the step as its capstone, and **it is a run rather than a page**.
 That is the shape to hold on to before editing anything in it. The page is not five flags described
 one after another; it is five stages a student works in order, and the flags fall out of three of
 them. The rewrite that made it one is recorded below, along with what the old shape got right, so

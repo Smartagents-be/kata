@@ -52,8 +52,8 @@
   Put the slices that belong together in 1 module: a business capability, named after what the
   business does.
   <code>payments/</code> holds the form, the endpoint, the rules and the table for
-  payments. Every slice is 1 turn of <a href="/steps/step2/enablement">the feedback loop</a>, and
-  the module keeps that turn short, the way <a href="/steps/step2/gates">the unit on quality
+  payments. Every slice is 1 turn of <a href="/steps/step2/proof">the feedback loop</a>, and
+  the module keeps that turn short, the way <a href="/steps/step2/quality-gates">the unit on quality
   gates</a> asks: <code>mvn -pl payments verify</code> answers about the part you changed
   and nothing else.
 </p>
@@ -94,7 +94,7 @@
   It also makes each part testable on its own. The domain depends on nothing, so you test its rules
   without a database or a mock. A use case only sets the order of the steps, and its test swaps each
   outgoing port for an in-memory version. Only an adapter needs the real Postgres, and that is what
-  an <a href="/steps/step2/gates">integration test</a> is for.
+  an <a href="/steps/step2/quality-gates">integration test</a> is for.
 </p>
 
 <div data-figure="hexagon-ports"></div>

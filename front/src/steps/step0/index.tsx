@@ -41,7 +41,7 @@ const step0: Step = {
   locales: { en, nl },
   units: [
     {
-      id: 'welcome',
+      id: 'how-it-works',
       title: 'welcome.title',
       html: welcome,
       inlineFigures: {
@@ -53,7 +53,7 @@ const step0: Step = {
       quiz: understoodQuiz,
     },
     {
-      id: 'backend',
+      id: 'right-project',
       title: 'backend.title',
       html: backend,
       // The loop the board then runs three times, at the marker under the unit's one code block.

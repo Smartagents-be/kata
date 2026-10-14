@@ -117,7 +117,7 @@ const step1: Step = {
       },
     },
     {
-      id: 'prompt',
+      id: 'intent',
       title: 'prompt.title',
       html: prompt,
       inlineFigures: {
@@ -133,7 +133,7 @@ const step1: Step = {
       quiz: promptQuiz,
     },
     {
-      id: 'tools',
+      id: 'agentic-loop',
       title: 'tools.title',
       html: tools,
       inlineFigures: {
@@ -210,7 +210,7 @@ const step1: Step = {
       },
     },
     {
-      id: 'truth',
+      id: 'grounding',
       title: 'truth.title',
       html: truth,
       inlineFigures: {
@@ -240,7 +240,7 @@ const step1: Step = {
       },
     },
     {
-      id: 'recap',
+      id: 'takeaways',
       title: 'recap.title',
       html: recap,
     },

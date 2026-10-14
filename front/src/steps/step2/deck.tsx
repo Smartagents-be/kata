@@ -13,9 +13,9 @@ import { ProofLoop } from './ProofLoop'
 import { ReadEachTime } from './ReadEachTime'
 import { RunSheet } from './RunSheet'
 import { ScriptRuns } from './ScriptRuns'
-import { SkillShape } from './SkillShape'
 import { SliceSkills } from './SliceSkills'
 import { SkillTree } from './SkillTree'
+import { SpecTree } from './SpecTree'
 import { SteeringMoves } from './SteeringMoves'
 import { TwoWindows } from './TwoWindows'
 import { VerticalSlices } from './VerticalSlices'
@@ -138,6 +138,9 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'engineering.title',
     title: 'deck.engineering.skills.title',
+    // The line `enablement`'s `t-shaped` closes on, at the owner's asking: the reason the breadth is
+    // worth building, said where the T is drawn.
+    note: 'deck.engineering.skills.note',
     figure: <SliceSkills />,
     scale: 1.3,
   },
@@ -363,6 +366,15 @@ const deck: SlideSpec[] = [
     scale: 1.5,
   },
   {
+    id: 'deck-step2-workflows-where',
+    kind: 'figure',
+    ns: 'step2',
+    eyebrow: 'workflows.title',
+    title: 'deck.workflows.where.title',
+    figure: <SpecTree />,
+    scale: 1.5,
+  },
+  {
     id: 'deck-step2-workflows-audit',
     kind: 'figure',
     ns: 'step2',
@@ -419,6 +431,8 @@ const deck: SlideSpec[] = [
       'deck.enablement.divider.1',
       'deck.enablement.divider.2',
       'deck.enablement.divider.3',
+      'deck.enablement.divider.4',
+      'deck.enablement.divider.5',
     ],
   },
   {
@@ -431,13 +445,16 @@ const deck: SlideSpec[] = [
     scale: 1.5,
   },
   {
-    id: 'deck-step2-enablement-shape',
+    id: 'deck-step2-enablement-loop',
     kind: 'figure',
     ns: 'step2',
     eyebrow: 'enablement.title',
-    title: 'deck.enablement.shape.title',
-    figure: <SkillShape />,
-    scale: 1.5,
+    title: 'deck.enablement.loop.title',
+    // A row of 5 cards with a track and a band under it: wide and shallow, so the frame's width
+    // is what limits it rather than the footer. Came over with its sections from `proof` (October
+    // 2026), so it follows the unit's order: after the clock.
+    figure: <ProofLoop />,
+    scale: 1.7,
   },
   {
     id: 'deck-step2-enablement-day',
@@ -510,32 +527,6 @@ const deck: SlideSpec[] = [
     note: 'deck.parallel.worktree.note',
     figure: <WorktreeEach />,
     scale: 1.4,
-  },
-
-  // ── proof ─────────────────────────────────────────────────────────────────────────────────
-  {
-    id: 'deck-step2-proof',
-    kind: 'divider',
-    ns: 'step2',
-    eyebrow: 'step.title',
-    title: 'proof.title',
-    points: [
-      'deck.proof.divider.1',
-      'deck.proof.divider.2',
-      'deck.proof.divider.3',
-      'deck.proof.divider.4',
-    ],
-  },
-  {
-    id: 'deck-step2-proof-loop',
-    kind: 'figure',
-    ns: 'step2',
-    eyebrow: 'proof.title',
-    title: 'deck.proof.loop.title',
-    // A row of 5 cards with a track and a band under it: wide and shallow, so the frame's width
-    // is what limits it rather than the footer.
-    figure: <ProofLoop />,
-    scale: 1.7,
   },
 
   // ── goals ─────────────────────────────────────────────────────────────────────────────────

@@ -28,8 +28,8 @@ import { ScriptRuns } from './ScriptRuns'
 import { SetupFlags } from './SetupFlags'
 import { SteerARun } from './SteerARun'
 import { SteeringMoves } from './SteeringMoves'
-import { SkillShape } from './SkillShape'
 import { SliceSkills } from './SliceSkills'
+import { SpecTree } from './SpecTree'
 import { SkillTree } from './SkillTree'
 import { TwoWindows } from './TwoWindows'
 import { VerticalSlices } from './VerticalSlices'
@@ -50,7 +50,6 @@ import patterns from './units/patterns.html?raw'
 import workflows from './units/workflows.html?raw'
 import enablement from './units/enablement.html?raw'
 import parallel from './units/parallel.html?raw'
-import proof from './units/proof.html?raw'
 import goals from './units/goals.html?raw'
 import workshop from './units/workshop.html?raw'
 
@@ -59,8 +58,8 @@ import workshop from './units/workshop.html?raw'
  * the code yourself, one unit each. `setup` opens the step, since every session starts from what the
  * repository tells the agent before your first message.
  *
- * `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`, `enablement`, `parallel`,
- * `proof` and `goals` each carry a drawing. `engineering`, `gates`, `steering`,
+ * `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`, `enablement`, `parallel`
+ * and `goals` each carry a drawing. `engineering`, `gates`, `steering`,
  * `patterns` and `enablement` close on an ungraded task card; `steering`, `patterns`, `workflows` and `goals`
  * carry a quiz; and `setup` and the closing `workshop` unit each carry a flag board, which is why
  * this registry is .tsx. Both boards are browser-graded, so the step still talks to the service
@@ -91,7 +90,7 @@ const step2: Step = {
       figure: <SetupFlags />,
     },
     {
-      id: 'engineering',
+      id: 'domain-language',
       title: 'engineering.title',
       html: engineering,
       // Five slots inside the prose. `words-to-files` is what a thing is called, `vertical-slices`
@@ -109,7 +108,7 @@ const step2: Step = {
       },
     },
     {
-      id: 'gates',
+      id: 'quality-gates',
       title: 'gates.title',
       html: gates,
       // Two slots inside the prose. `same-gate` came over from `engineering`
@@ -146,7 +145,7 @@ const step2: Step = {
       quiz: steeringQuiz,
     },
     {
-      id: 'patterns',
+      id: 'skills',
       title: 'patterns.title',
       html: patterns,
       // One slot, under the `Scripts` section, at the <div data-figure="script-runs"> the unit
@@ -163,9 +162,9 @@ const step2: Step = {
       id: 'workflows',
       title: 'workflows.title',
       html: workflows,
-      // Nine slots inside the prose. Five of them say who talks to what, and they
+      // Ten slots inside the prose. Five of them say who talks to what, and they
       // are a set: teal is what that workflow adds, so a change to one is a change to all five.
-      // Then the fidelity ladder, the switchable audit, and the closing pair. None of them grades
+      // Then the fidelity ladder, the spec tree, the switchable audit, and the closing pair. None of them grades
       // anything.
       inlineFigures: {
         // The project is the same frame in all five, and what is inside it is what changes. Here it
@@ -201,6 +200,9 @@ const step2: Step = {
         // Not one of the five: the rungs a design question can be answered on, under the prototype
         // paragraph inside the spec section, with prototypes the highest one you still throw away.
         'fidelity-ladder': <FidelityLadder />,
+        // Not one of the five either: where spec-driven work keeps its files, under the `<h3>` after
+        // `flow-spec`. 1 intent cut into specs, 1 plan each.
+        'spec-tree': <SpecTree />,
         // Two sessions rather than one row. What the agent turns up mid-task drops out of the row
         // into a file, and a later session starts from that file: the repeated `findings.md` is the
         // only thing the two share, which is the section's point.
@@ -258,18 +260,19 @@ const step2: Step = {
       quiz: workflowsQuiz,
     },
     {
-      id: 'enablement',
+      id: 'proof',
       title: 'enablement.title',
       html: enablement,
-      // Two slots inside the prose, one per section that has something to draw. The bands close
-      // `run-own-machine`, whose closing sentence is the agent writing a change in seconds and your
-      // check having to keep up, so they are that claim measured. The profile shapes close
-      // `t-shaped`, the middle section, and `where-day-goes` runs two paragraphs after them, so
-      // neither figure is read back by the prose and both have to carry their argument in their own
-      // labels.
+      // Two slots inside the prose. The bands close `run-own-machine`, whose closing sentence is
+      // the agent writing a change in seconds and your check having to keep up, so they are that
+      // claim measured. `proof-loop` closes the order (reproduce, lock, implement, prove), which
+      // came over from the `proof` unit in October 2026: it names all 5 stages, so under an earlier
+      // heading it would spend the later ones early. Neither is read back by the prose, so each
+      // carries its argument in its own labels. `t-shaped` has no figure: `SliceSkills` in
+      // `engineering` draws the T.
       inlineFigures: {
         'loops-per-hour': <LoopsPerHour />,
-        'skill-shape': <SkillShape />,
+        'proof-loop': <ProofLoop />,
       },
       // And the task under the prose, at the <hr> and the shared heading the unit's HTML now
       // writes. The section tells the student to count where the hours go, so the card is that
@@ -295,16 +298,7 @@ const step2: Step = {
       quiz: parallelQuiz,
     },
     {
-      id: 'proof',
-      title: 'proof.title',
-      html: proof,
-      // One slot, and it closes the unit: the drawing names all 5 stages of the order, so under an
-      // earlier heading it would spend the later ones early. No card and no quiz, so the HTML
-      // writes no `ui:quiz.title` either.
-      inlineFigures: { 'proof-loop': <ProofLoop /> },
-    },
-    {
-      id: 'goals',
+      id: 'long-runs',
       title: 'goals.title',
       html: goals,
       // Four slots, one per expensive move the unit surveys. `window-spend` sits under the lead

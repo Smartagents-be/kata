@@ -13,7 +13,7 @@
 
 <p data-i18n="workflows.naive.1">
   Almost everybody starts here. It is the vibe coding the
-  <a href="/steps/step2/engineering">unit on domain language</a> argued against: ask, skim, run, and paste
+  <a href="/steps/step2/domain-language">unit on domain language</a> argued against: ask, skim, run, and paste
   the error when it breaks. Nothing is written down, because nothing was decided.
 </p>
 
@@ -26,7 +26,7 @@
 
 <p data-i18n="workflows.naive.3">
   A throwaway that turns out to have users is recoverable, in the order
-  <a href="/steps/step2/gates">the unit on quality gates</a> gives for legacy code. Put the gates in
+  <a href="/steps/step2/quality-gates">the unit on quality gates</a> gives for legacy code. Put the gates in
   first: tests that pin down what runs today, and the checks set at today's level. Then write a spec
   for each change you make next. What already ran needs none: the tests record it. You are
   retrofitting the workflow you skipped, and it costs less than the rewrite you were bracing for.
@@ -40,7 +40,7 @@
 
 <p data-i18n="workflows.plan-based.1">
   Plan-based asks 1 thing more than naive: you turn on plan mode. Ask for a plan instead of the change, every time, not only when
-  the task looks hard. <a href="/steps/step1/prompt">Step 1's unit on the prompt</a> introduced plan
+  the task looks hard. <a href="/steps/step1/intent">Step 1's unit on the prompt</a> introduced plan
   mode as meta-prompting the provider already built for you. Using it 1 time is a trick. Using it by
   default is a workflow, and it buys better work at the price of waiting longer for it.
 </p>
@@ -99,6 +99,33 @@
 </p>
 
 <div data-figure="flow-spec"></div>
+
+<!-- An <h3> and not an <h2>: where the files live is part of spec-driven work, not a sixth workflow
+     beside it. Its keys take their section from this heading, step 1's `tokens` rule. -->
+<h3 data-i18n="workflows.where-specs-live.heading">Where the specs live</h3>
+
+<p data-i18n="workflows.where-specs-live.1">
+  Start from the intent: 1 file saying what is wanted, why, and under which constraints, signed off
+  by whoever owns the product. Cut it into specs, 1 per
+  <a href="/steps/step2/domain-language">vertical slice</a>, so each one can be built and tested on its
+  own. Each spec gets 1 plan: numbered steps, each naming the requirement it meets and the test that
+  proves it.
+</p>
+
+<div data-figure="spec-tree"></div>
+
+<p data-i18n="workflows.where-specs-live.2">
+  In 1 repository or a monorepo, the specs sit in a folder beside the code, and the agent finds them
+  without help. Once an intent spans several repositories, none of them is its home. Keep the specs
+  in 1 central place then, a repository of their own or the tracker your team already uses, and give
+  the agent a way to read them: an MCP server for that place, or a skill that knows where to fetch
+  them.
+</p>
+
+<p data-i18n="workflows.where-specs-live.3">
+  Write in each spec which repository it changes. The agent in that repository then reads its own
+  spec and plan, and leaves the rest.
+</p>
 
 <h2 data-i18n="workflows.defer.heading">Defer</h2>
 
@@ -177,7 +204,7 @@
 <p data-i18n="workflows.pick-per-task.3">
   So read the task before you pick. Ask how long this code will live, and how much of the diff you
   will have to read yourself. Then take the cheapest workflow that answers those. Deciding between
-  them is the engineering. <a href="/steps/step2/enablement">The next unit</a> is about how fast you
+  them is the engineering. <a href="/steps/step2/proof">The next unit</a> is about how fast you
   find out whether the work holds.
 </p>
 

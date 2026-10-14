@@ -11,11 +11,9 @@ import { useTranslation } from 'react-i18next'
  * specialism's depth, drawn as concrete parts rather than as a bar, so a reader sees what "deep"
  * means beside what "enough to judge" means.
  *
- * **This is a second figure for the same shape, and that is the owner's choice (October 2026).**
- * `SkillShape` under `enablement`'s `t-shaped` draws the shape abstractly, for a different reason
- * (the agent implements faster, so what is asked of you moves up a level). This one names the
- * fields, for the slice's reason. Keep them apart: do not give this one an I beside it, and do not
- * give `SkillShape` labels.
+ * **It is the course's only drawing of the T (October 2026).** `SkillShape`, an unlabelled I beside
+ * a T under `enablement`'s `t-shaped`, was cut at the owner's asking, and that section now points
+ * here. Do not give this one an I beside it.
  *
  * Colour follows the step's rule that teal is what the shape adds: the breadth cells are teal, the
  * specialism and its stem are muted, because the depth is what you already had.

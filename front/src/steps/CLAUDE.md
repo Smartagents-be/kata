@@ -24,6 +24,26 @@ knows. `step3` is **soft skills**: the part of working this way that is not abou
 one step with no Java behind it and nothing for a machine to grade. Unit lists, order, titles and the
 reasoning behind all three are in each step's own file.
 
+## Unit ids follow the titles
+
+**A unit's id is its URL and is built from its title**, at the owner's asking (October 2026), after
+step 2's titles were shortened and the URLs no longer said what the page was. Only the `id` in each
+step's `index.tsx` and the `/steps/stepN/<id>` links moved. The unit HTML file, the key prefix in the
+locales, the deck slide ids and every backticked unit name in these `CLAUDE.md` files keep the old
+word, so a design note reading `enablement` means the unit at `/steps/step2/proof`:
+
+| Step | File and key prefix | Unit id (URL) |
+|---|---|---|
+| step0 | `welcome`, `backend` | `how-it-works`, `right-project` |
+| step1 | `prompt`, `tools`, `truth`, `recap` | `intent`, `agentic-loop`, `grounding`, `takeaways` |
+| step2 | `engineering`, `gates`, `patterns`, `enablement`, `goals` | `domain-language`, `quality-gates`, `skills`, `proof`, `long-runs` |
+| step3 | `impostor` | `confidence` |
+
+Every `workshop` keeps its id whatever its title says: it is the role the unit plays in each step,
+and the docs name it that way throughout. Retitling a unit now means moving its id and grepping
+`/steps/stepN/<old>` with it. Progress is keyed by unit id, so a rename drops that unit's tick from
+a student's browser.
+
 ## Assistant variants across the steps
 
 **Step 2 is the one step not written for two assistants, except its `setup` unit and a few spots in

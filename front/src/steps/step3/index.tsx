@@ -46,7 +46,7 @@ const step3: Step = {
       quiz: expectationsQuiz,
     },
     {
-      id: 'impostor',
+      id: 'confidence',
       title: 'impostor.title',
       html: impostor,
       // The course's closing exercise, and the one thing in step 3 the student does. Ungraded: the

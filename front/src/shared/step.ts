@@ -45,7 +45,7 @@ export interface QuizQuestion {
  * no lesson in front of it (the workshop at the end of a step).
  */
 export interface Unit {
-  /** Path segment for this unit, e.g. /steps/step1/prompt. Never translated: it is a URL. */
+  /** Path segment for this unit, e.g. /steps/step1/intent. Never translated: it is a URL. */
   id: string
   /** Message key, e.g. 'prompt.title'. */
   title: string

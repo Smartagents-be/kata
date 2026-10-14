@@ -52,7 +52,7 @@ export const Lesson: React.FC = () => {
 
       <AbsoluteFill>
         <SpringIn rise={40} from={0.97} style={{ position: "absolute", left: 42, top: 105 }}>
-          <Browser url="localhost:5173/steps/step2/patterns" width={BROWSER_WIDTH} height={BROWSER_HEIGHT}>
+          <Browser url="localhost:5173/steps/step2/skills" width={BROWSER_WIDTH} height={BROWSER_HEIGHT}>
             <Img
               src={staticFile("shots/patterns-full.png")}
               style={{

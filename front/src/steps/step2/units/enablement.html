@@ -10,30 +10,95 @@
 
 <p data-i18n="enablement.run-own-machine.2">
   Give the agent the same setup: the running app, and the browser server from
-  <a href="/steps/step1/tools">step 1's unit on the agentic loop</a>. Now it checks its own work
+  <a href="/steps/step1/agentic-loop">step 1's unit on the agentic loop</a>. Now it checks its own work
   before handing it back. It opens the page, sees the wrong column and fixes it in the same pass
   <svg data-icon="gem"></svg>.
+</p>
+
+<p data-i18n="enablement.run-own-machine.3">
+  Put all of it in a development container, and you and the agent work with the same machinery. It
+  starts from 1 command, with the real database, the real migrations and the build production gets.
+  A test against a mock only tells you the mock works. What the agent cannot run, it cannot check.
 </p>
 
 <!-- Filled by the LoopsPerHour element registered under this name in steps/step2/index.tsx. It is
      on the clock rather than on step size. -->
 <div data-figure="loops-per-hour"></div>
 
+<h2 data-i18n="enablement.reproduce-first.heading">Reproduce first</h2>
+
+<p data-i18n="enablement.reproduce-first.1">
+  Before anything gets fixed, the problem has to be on the screen. Say the total on an invoice comes
+  back 1 cent too low. Have the agent call the running app and show the wrong number, the way the
+  customer saw it. Without that, it fixes the bug it guessed at, not the one the customer hit. A new
+  feature starts the same way: write down what it should return, concretely enough that you can see
+  today's app does not do that yet.
+</p>
+
+<h2 data-i18n="enablement.lock-before-fix.heading">Lock it before the fix</h2>
+
+<p data-i18n="enablement.lock-before-fix.1">
+  Before the agent touches the code, it pins the problem down in something it can run again.
+  Usually that is a test that fails for exactly that reason. Sometimes a test is the wrong tool. Then
+  it is a <code>curl</code> call to the running app, with the response it should give, or an action
+  you expect to see: a row written, a mail in the queue. Run it and watch it fail. A check that has
+  never been red says nothing about the fix.
+</p>
+
+<!-- One prompt carrying the whole order, built from the 6 parts of step 1's `PromptParts` (goal,
+     context, example, limit with the reason, output format, done when). The invoice is not this
+     kata's domain on purpose: a bug invented in exercises/step2/java would send a student looking
+     for it in the capstone's module. -->
+<pre><code>The total on invoice INV-2041 comes back 1 cent too low: 3 lines of
+10.00 each, and the invoice says 29.99. @InvoiceService.java
+
+Before you change any code, call GET /api/invoices/INV-2041 on the
+running app and show me the response. Then write a test that fails for
+that reason, the way InvoiceServiceTest covers the discount case. Run
+it and show me it failing.
+
+Do not change how a single line is rounded: the VAT report reads those
+amounts.
+
+Only then fix it. Done when that test passes, the same call returns
+30.00, and mvn verify is green. Finish with the files you changed, 1
+line each, and what you could not check.</code></pre>
+
+<h2 data-i18n="enablement.implement-then-prove.heading">Implement, then prove</h2>
+
+<p data-i18n="enablement.implement-then-prove.1">
+  Only now does the code change. The agent runs the same test and the same <code>curl</code> call
+  again, then the whole build, because a fix that turns 1 test green can turn another one red. Then
+  have it read the request back: what is done, what is not, and what it had no way to check. Green
+  means the check passes. Whether the check asked the right question is still yours to read.
+</p>
+
+<h2 data-i18n="enablement.test-driven-before.heading">Test-driven, as before</h2>
+
+<p data-i18n="enablement.test-driven-before.1">
+  None of this arrived with agents. Replicate the bug, write the failing test, then write the code:
+  you worked that way when you typed all of it yourself, on the days you had the discipline. That is
+  test-driven development with the reproduction in front of it. An agent told to work in that order
+  keeps to it, on the 10th change as on the first. What used to cost discipline now costs 1 sentence
+  in your prompt.
+</p>
+
+<!-- Filled by the ProofLoop element registered under this name in steps/step2/index.tsx. It closes
+     the order rather than opening it because it names all 5 stages, so under an earlier heading it
+     would spend the later ones early. Its band is `run-own-machine`, the ground the stages stand on. -->
+<div data-figure="proof-loop"></div>
+
 <h2 data-i18n="enablement.t-shaped.heading">T-shaped</h2>
 
 <p data-i18n="enablement.t-shaped.1">
-  An agent implements faster than you do, and it has been getting better at it with every release.
-  What it asks of you moves up a level. Keep the specialism you have, and know enough of what sits
-  around it to judge whether what the agent produced holds. Say the change
-  comes back with a database migration in it. Your specialism is the Java side. You do not have to
-  be able to write that migration, but you do have to notice that it drops a column 2 other
-  services still read. The agent handles the detail for everyone alike, so knowing the detail is worth less than it
-  was. Knowing what good software engineering looks like is not, and <a href="/steps/step2/engineering">the unit on domain language</a> argues for exactly that.
+  An agent implements faster than you, so what it asks of you moves up a level: the T-shaped profile
+  from <a href="/steps/step2/domain-language">the unit on domain language</a>. Say the change comes
+  back with a database migration in it. You do not have to be able to write it, but you do have to
+  notice that it drops a column 2 other services still read. The agent handles the detail for
+  everyone alike, so knowing the detail is worth less than it was. Knowing what good software
+  engineering looks like is not.
 </p>
 
-<!-- Filled by the SkillShape element registered under this name in steps/step2/index.tsx. Its own
-     labels carry what it argues, so nothing after it reads the drawing back. -->
-<div data-figure="skill-shape"></div>
 
 <h2 data-i18n="enablement.where-day-goes.heading">Where the day goes</h2>
 
