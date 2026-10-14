@@ -11,10 +11,10 @@
      rows and where they come from, which the board itself says, and the pointer at house rule one,
      which `welcome` states for every board in the course. Do not write either back.
 
-     It was the step's one `data-assistant` pair, naming `.github/copilot-instructions.md` for
-     Copilot, and it is one shared line now: no workshop in this repository has that file, while the
-     step projects ship a `CLAUDE.md` that Copilot reads too (the CLI's standard locations, and
-     IntelliJ since plugin 1.6.1). Do not split it again unless a workshop ships a Copilot-only file.
+     It is the step's one `data-assistant` pair, at the owner's asking: each reader is told the
+     instructions file of their own product, `CLAUDE.md` or `AGENTS.md`, and that their own agent
+     reads it. It once named `.github/copilot-instructions.md` for Copilot and was merged into one
+     line naming `CLAUDE.md` for both; neither of those is the shape any more.
 
      There was a `Two candidates` section here, saying row 3's build prints two strings in the flag's
      shape and only one line is ticked, and it is gone: house rule three already tells the student
@@ -23,9 +23,13 @@
      this page on. Both of those stay. The section also closed the step by pointing at `tokens`, and
      that is the pager's job. Do not write either back. -->
 
-<p data-i18n="workshop.lead.1">
+<p data-assistant="claude" data-i18n="workshop.lead.1.claude">
   When a workshop has a <code>README.md</code> or a <code>CLAUDE.md</code> in it, read them first.
-  Copilot reads that <code>CLAUDE.md</code> too.
+  Claude reads that <code>CLAUDE.md</code> too.
+</p>
+<p data-assistant="copilot" data-i18n="workshop.lead.1.copilot">
+  When a workshop has a <code>README.md</code> or an <code>AGENTS.md</code> in it, read them first.
+  Copilot reads that <code>AGENTS.md</code> too.
 </p>
 
 <div data-figure="flags"></div>

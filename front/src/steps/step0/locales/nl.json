@@ -64,7 +64,8 @@
   "loop.you.body": "lees de flag af",
   "loop.box.body": "plak de flag",
 
-  "workshop.lead.1": "Staat er een <code>README.md</code> of een <code>CLAUDE.md</code> in een workshop, lees die dan eerst. Copilot leest die <code>CLAUDE.md</code> ook.",
+  "workshop.lead.1.claude": "Staat er een <code>README.md</code> of een <code>CLAUDE.md</code> in een workshop, lees die dan eerst. Claude leest die <code>CLAUDE.md</code> ook.",
+  "workshop.lead.1.copilot": "Staat er een <code>README.md</code> of een <code>AGENTS.md</code> in een workshop, lees die dan eerst. Copilot leest die <code>AGENTS.md</code> ook.",
 
   "code.panel.title": "Probeer het: los deze pagina op",
   "code.panel.label": "De flag van de pagina",

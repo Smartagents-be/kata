@@ -52,6 +52,6 @@ The product detail behind those blocks, what the course leaves out on purpose, a
 dated are in **`copilot-specific.md` at the repo root**. Read it before writing a Copilot claim:
 Copilot's billing changed under this course once already.
 
-Where the student is told to set it is step 0's, which varies no block of its own any more, and which
+Where the student is told to set it is step 0's, which varies 1 block of its own (`workshop`'s lead), and which
 21 blocks vary (14 in the unit HTML, 7 on task cards) is step 1's; both are
 written up in those steps' files.

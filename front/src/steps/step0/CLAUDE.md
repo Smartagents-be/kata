@@ -11,11 +11,12 @@ assistant, which is why the `data-assistant` rule's own page belongs to `welcome
 thing now, the house rules every board in the course is played under, and they are written up at the
 foot of this file.
 
-**The step no longer uses the assistant rule itself.** `workshop`'s lead was a
-`workshop.lead.1.claude` / `workshop.lead.1.copilot` pair, sending Copilot readers to
-`.github/copilot-instructions.md`, a file no workshop in this repository has. It is one shared
-`workshop.lead.1` now, naming the `CLAUDE.md` the step projects ship and saying Copilot reads it too.
-`welcome` still sets the setting; the first page that exercises it is in step 1.
+**The step varies one block, `workshop`'s lead**, a `workshop.lead.1.claude` /
+`workshop.lead.1.copilot` pair at the owner's asking: a Claude Code reader is told `CLAUDE.md` and
+that Claude reads it, a Copilot reader `AGENTS.md` and that Copilot reads it. It was once one shared
+line naming `CLAUDE.md` for both and saying Copilot reads it too, and before that a pair sending
+Copilot readers to `.github/copilot-instructions.md`; do not go back to either. `welcome` sets the
+setting, so this lead is the first block a student sees it change.
 
 **`welcome`'s lead points at `install.txt`**, the second paragraph on the first page a student reads,
 because a student who opens the course in the browser never sees the README that says the same
