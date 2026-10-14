@@ -6,6 +6,7 @@ import { CountTheDay } from './CountTheDay'
 import { CheckPermissions } from './CheckPermissions'
 import { Debrief } from './Debrief'
 import { DomainTree } from './DomainTree'
+import { FidelityLadder } from './FidelityLadder'
 import { FlowDiagram } from './FlowDiagram'
 import { GateReach } from './GateReach'
 import { GateWalk } from './GateWalk'
@@ -160,9 +161,10 @@ const step2: Step = {
       id: 'workflows',
       title: 'workflows.title',
       html: workflows,
-      // Eight slots inside the prose. Five of them close a section with who talks to what, and they
+      // Nine slots inside the prose. Five of them say who talks to what, and they
       // are a set: teal is what that workflow adds, so a change to one is a change to all five.
-      // Then the switchable audit, and the closing pair. None of them grades anything.
+      // Then the fidelity ladder, the switchable audit, and the closing pair. None of them grades
+      // anything.
       inlineFigures: {
         // The project is the same frame in all five, and what is inside it is what changes. Here it
         // holds the code and nothing else: there is no artifact, which is the section's point.
@@ -194,6 +196,9 @@ const step2: Step = {
             links={['both', 'both']}
           />
         ),
+        // Not one of the five: the rungs a design question can be answered on, under the prototype
+        // paragraph inside the spec section, with prototypes the highest one you still throw away.
+        'fidelity-ladder': <FidelityLadder />,
         // Two sessions rather than one row. What the agent turns up mid-task drops out of the row
         // into a file, and a later session starts from that file: the repeated `findings.md` is the
         // only thing the two share, which is the section's point.

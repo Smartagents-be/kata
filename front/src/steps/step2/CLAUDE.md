@@ -828,7 +828,25 @@ session, kept this time, and that is the contrast `spec-driven.1` draws and the 
 `WorkflowWeights` shows a solid `spec.md + plan.md` against plan-based's dashed `plan`. `flow-spec`
 draws `spec`, `plan` and `code` in the project frame, and the deck slide's title names both.
 
-It carries eight figures, and five of them are one set. `FlowDiagram` closes each section with who
+**How you reach the spec is 3 paragraphs, `.3` to `.5`, and prototyping is one of them, not a
+sixth workflow** (October 2026, at the owner's asking, after aihero.dev's `/prototype` skill).
+`.3` is requirements and acceptance criteria gathered the way a team always did, then the agent
+interviewing you or the people who decide directly, with `grill-me` named as the skill. Naming it in
+prose is the owner's choice; what `setup` records is that it was rejected as the `SkillTree` example,
+and that still holds. `.4` is the prototype for a question words cannot settle: throwaway code that
+runs, the question at the top, the answer into the spec and the code nowhere. `.5` is the draft,
+the plan and the fresh session, so the plan comes after both routes, which is the order the owner
+asked for. It replaced "describe the feature in 2 sentences", which skipped the gathering. The
+prototype is not a workflow because it hands no work over, and a sixth would break the order the
+unit argues and the four `WorkflowWeights`, `WorkflowTimeline`, the deck and the quiz name. It is
+also not `naive.2`'s trial version, which asks whether the idea holds at all, nor step 3's
+`prototype-starts-conversation`, which is about the people you show one to. **`FidelityLadder` sits
+under `.4` and `flow-spec` still closes the section.** The ladder's 5 rungs are the owner's own
+sketch, except that its breadboards became diagrams (the term was unknown to the owner, so to the
+students too), and its 1 message is the dashed line: prototypes are the highest rung you still
+throw away. No slide and no quiz question yet; either is a separate decision.
+
+It carries nine figures, and five of them are one set. `FlowDiagram` draws, per section, who
 talks to what: `you → agent → [project: code]`, then the same with a two-way link to the agent, then
 a spec joining the code inside the project, then `defer`'s two sessions, then `audit-driven`'s
 six-box chain closed into a cycle. **They are read down the unit rather than one at a time**, so a

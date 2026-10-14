@@ -73,11 +73,29 @@
 </p>
 
 <p data-i18n="workflows.spec-driven.3">
-  You do not write them from scratch. Describe the feature in 2 sentences, ask for the spec in
-  your format, then cut what the agent invented. Reviewing a draft is faster than facing an empty
-  file, and a draft that guessed wrong shows you exactly what you never decided. Ask for the plan
-  only once the spec is right, and read it the same way. Then build the feature in a fresh session,
-  with the spec and the plan and without the conversation that wrote them.
+  A good spec starts with the work you always did: gather the requirements and the acceptance
+  criteria from the people who decide on them. Then have the agent interview you, or them
+  directly. A skill such as <code>grill-me</code> keeps asking until every design decision is made.
+</p>
+
+<p data-i18n="workflows.spec-driven.4">
+  Some questions you cannot answer in words: a state machine with more edge cases than you can hold
+  in your head, a screen you can only judge once you see 3 versions of it. Ask for a prototype. The
+  agent writes code that runs and will never ship, 1 HTML file with the question at the top, and
+  you click through it until you can answer. The answer goes into the spec. The prototype does not.
+</p>
+
+<!-- Filled by the FidelityLadder element registered under this name in steps/step2/index.tsx. Not
+     one of the five flows: it sits with the prototype paragraph, and flow-spec still closes the
+     section. -->
+<div data-figure="fidelity-ladder"></div>
+
+<p data-i18n="workflows.spec-driven.5">
+  With those answers, the agent writes the draft. Ask for the spec in your format and cut what it
+  invented: reviewing a draft is faster than facing an empty file, and a draft that guessed wrong
+  shows you exactly what you never decided. Ask for the plan only once the spec is right, and read
+  it the same way. Then build the feature in a fresh session, with the spec and the plan and
+  without the conversation that wrote them.
 </p>
 
 <div data-figure="flow-spec"></div>

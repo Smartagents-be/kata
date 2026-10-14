@@ -208,9 +208,11 @@ export const promptQuiz: QuizQuestion[] = [
 ]
 
 /**
- * The three questions under the `truth` unit. Each one hands the student a result and asks where
- * the answer came from, which is the unit's whole question: an answer read off disk, an answer from
- * the far side of the training cutoff, and a reading reported as a conclusion.
+ * The three questions under the `truth` unit, one per thing it asks of the student: tell a cause
+ * the agent found from one that filled a gap, get past the training cutoff, and know what counts as
+ * proof. Rewritten 14 October 2026 at the owner's asking, with new ids, when `Hallucinations` moved
+ * to the 2-causes example: the old three were stiffly worded and one asked about a misreading a
+ * current model rarely makes.
  *
  * `contextQuiz`'s `invented-userservice` owns the missing-context case and is deliberately not
  * repeated here. Nothing in these three re-argues that a model is an average either; `context` owns
@@ -218,75 +220,75 @@ export const promptQuiz: QuizQuestion[] = [
  */
 export const truthQuiz: QuizQuestion[] = [
   {
-    id: 'no-signal-in-the-answer',
-    question: 'quiz.no-signal-in-the-answer.question',
+    id: 'two-causes',
+    question: 'quiz.two-causes.question',
     choices: [
       {
-        id: 'nothing-does',
-        label: 'quiz.no-signal-in-the-answer.nothing-does',
+        id: 'ask-the-source',
+        label: 'quiz.two-causes.ask-the-source',
         correct: true,
       },
       {
-        id: 'names-a-filename',
-        label: 'quiz.no-signal-in-the-answer.names-a-filename',
+        id: 'ask-if-sure',
+        label: 'quiz.two-causes.ask-if-sure',
       },
       {
-        id: 'hedged-ones',
-        label: 'quiz.no-signal-in-the-answer.hedged-ones',
+        id: 'most-detailed',
+        label: 'quiz.two-causes.most-detailed',
       },
       {
-        id: 'quoted-code',
-        label: 'quiz.no-signal-in-the-answer.quoted-code',
+        id: 'listed-first',
+        label: 'quiz.two-causes.listed-first',
       },
     ],
-    explanation: 'quiz.no-signal-in-the-answer.explanation',
+    explanation: 'quiz.two-causes.explanation',
   },
   {
-    id: 'config-format-changed',
-    question: 'quiz.config-format-changed.question',
+    id: 'option-gone-after-cutoff',
+    question: 'quiz.option-gone-after-cutoff.question',
     choices: [
-      {
-        id: 'past-the-cutoff',
-        label: 'quiz.config-format-changed.past-the-cutoff',
-        correct: true,
-      },
-      {
-        id: 'knows-but-common',
-        label: 'quiz.config-format-changed.knows-but-common',
-      },
       {
         id: 'read-the-docs',
-        label: 'quiz.config-format-changed.read-the-docs',
-      },
-      {
-        id: 'scores-higher',
-        label: 'quiz.config-format-changed.scores-higher',
-      },
-    ],
-    explanation: 'quiz.config-format-changed.explanation',
-  },
-  {
-    id: 'read-it-and-said-so',
-    question: 'quiz.read-it-and-said-so.question',
-    choices: [
-      {
-        id: 'still-a-reading',
-        label: 'quiz.read-it-and-said-so.still-a-reading',
+        label: 'quiz.option-gone-after-cutoff.read-the-docs',
         correct: true,
       },
       {
-        id: 'file-too-long',
-        label: 'quiz.read-it-and-said-so.file-too-long',
+        id: 'raise-effort',
+        label: 'quiz.option-gone-after-cutoff.raise-effort',
       },
       {
-        id: 'after-cutoff',
-        label: 'quiz.read-it-and-said-so.after-cutoff',
+        id: 'say-newest',
+        label: 'quiz.option-gone-after-cutoff.say-newest',
       },
       {
-        id: 'nothing-in-window',
-        label: 'quiz.read-it-and-said-so.nothing-in-window',
+        id: 'ask-if-sure',
+        label: 'quiz.option-gone-after-cutoff.ask-if-sure',
       },
     ],
-    explanation: 'quiz.read-it-and-said-so.explanation',
+    explanation: 'quiz.option-gone-after-cutoff.explanation',
+  },
+  {
+    id: 'what-proves-a-fix',
+    question: 'quiz.what-proves-a-fix.question',
+    choices: [
+      {
+        id: 'red-then-green',
+        label: 'quiz.what-proves-a-fix.red-then-green',
+        correct: true,
+      },
+      {
+        id: 'reread-code',
+        label: 'quiz.what-proves-a-fix.reread-code',
+      },
+      {
+        id: 'quotes-the-line',
+        label: 'quiz.what-proves-a-fix.quotes-the-line',
+      },
+      {
+        id: 'build-passes',
+        label: 'quiz.what-proves-a-fix.build-passes',
+      },
+    ],
+    explanation: 'quiz.what-proves-a-fix.explanation',
   },
 ]

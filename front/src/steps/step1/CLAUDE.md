@@ -1833,8 +1833,10 @@ would sit between two exercises with nothing new to ask for. The quiz is there f
 the problem, which the rejection did not cover: this unit has no `data-audience` wrapper, no task and
 no board, so guided mode filtered it down to two figures and nothing else. `truthQuiz` is the one
 thing on the page that survives into the classroom, and the unit writes no heading of its own, so
-`QuizPanel` prints it the way it does under `prompt`. Its three questions ask where an answer came
-from, and none of them re-argues learned patterns versus current evidence: `contextQuiz`'s `invented-userservice` still owns the
+`QuizPanel` prints it the way it does under `prompt`. Its three questions (`two-causes`,
+`option-gone-after-cutoff`, `what-proves-a-fix`, rewritten with new ids on 14 October 2026 at the
+owner's asking) cover a hallucinated cause, the cutoff and what counts as proof, and none of them
+re-argues learned patterns versus current evidence: `contextQuiz`'s `invented-userservice` still owns the
 missing-context case.
 
 **The lead poses the question and does not answer it**, which is what the four sections are for. It
@@ -1886,19 +1888,23 @@ the solid prompt bar and the faint stack are the step's own vocabulary, which is
 without a legend.
 
 **`AnswerProvenance`'s left column is uniform on purpose** and the second column is where everything
-varies, because the second column is the one a student is never handed. The three claims are true of
-`exercises/step1/java` apart from the middle one, which is a method `Catalog` does not have, so both
-sources can be opened and checked. The invented row is **the step's dashed stroke rather than
+varies, because the second column is the one a student is never handed. It is 1 answer to "why is
+this endpoint slow?" with 2 causes, the course owner's own case (14 October 2026): a long Redis
+`SCAN` at session start, backed by a file and a trace with its seconds, and an unrelated cause
+backed by nothing. It replaced 3 claims about `Catalog`, one of them a method `Catalog` does not
+have, which the owner rejected because an agent with tools reads `Catalog.java` before it answers.
+So the figure is no longer about `exercises/step1/java` and its sources cannot be opened; that was
+the price of an example a current model still produces. The invented row is **the step's dashed stroke rather than
 `--destructive`**: nothing failed, and a red row would say the agent was caught. Amber is wrong for
 the same reason, since it belongs to a cost tip and a hazard aside. It is DOM rather than SVG on
-`ModelTiers`'s precedent, since there is no geometry in it. Its symbols and filenames are
-machine-shaped, so they are data in the component with no key and no `nl` entry, the way
-`ModelPricing`'s numbers are.
+`ModelTiers`'s precedent, since there is no geometry in it. The filename is machine-shaped data
+with no `nl` entry; the causes, the trace line and the fixed title question translate, and the
+trace's 2 numbers are also the component's `SCAN_S` and `TOTAL_S`, so they move together.
 
 None of the three carries a caption, on the rule that a caption states provenance and the prose does
 the explaining. `TrainedOrGrounded` and `AnswerProvenance` are read by the paragraph under them:
-`truth.grounding.2` opens on "Only the context changed" and `truth.hallucinations.2` on two of the
-three having been read, so **rewriting either figure means visiting that opening sentence**, in both
+`truth.grounding.2` opens on "Only the context changed" and `truth.hallucinations.2` on the answer
+sounding the same about both causes, so **rewriting either figure means visiting that opening sentence**, in both
 languages. `TheCutoff` is the one that closes its section rather than opening one, so it is read by
 the two paragraphs above it and there is no sentence under it to keep in step.
 
@@ -1918,10 +1924,10 @@ one place the two genuinely meet: an agent answers confidently about a mail that
 read switched off (it was a UserService the model never opened until October 2026, when the owner
 pointed out that an agent with tools simply reads the file it is asked about; what it still misses
 is the file that decides), and it never names the term. Leave it where it is. A quiz sitting on the page that owns the word would be graded
-before the word had been given. `truth.hallucinations.1` names that quiz early on as the place the
-student already met the case, so the early ask is a paid-off callback rather than a silent
-duplicate, and it sits ahead of the `Catalog` example rather than after the term, so the paragraph
-still closes on the word arriving, and rewording either side means visiting the other, in both languages. **`tools` owns how evidence gets into the window**, so
+before the word had been given. `truth.hallucinations.1` pointed back at that quiz until 14 October 2026, and the owner had the
+callback cut: the quiz is an agent concluding wrongly from a file it did read, while the paragraph
+opens on nothing in the context to read, so the callback named a different failure. Do not put it
+back. The paragraph opens on the claim, gives the `Catalog` example and closes on the term. **`tools` owns how evidence gets into the window**, so
 `truth.lead.2` and `truth.grounding.2` each link to it in half a sentence rather than describing a
 fetch; `tools` also owns
 checking tool results for relevance and injected instructions, which is why grounding here stops at *reading rather
@@ -1941,11 +1947,12 @@ Two smaller decisions. **`Hallucinations` comes last rather than first**, becaus
 worth having once the reader knows what grounding and proof would have caught, and the section
 names it in its closing clause on the step's name-the-term-last rule. And **every example in it is
 this repository**: the Boot version and the `@WebMvcTest` dependency out of `exercises/step1/java`'s
-`pom.xml` across the first three sections, then a method that does not exist on `Catalog` in the fourth. `truth.proof.3` adds the one check that is specific to code: invented package names, which
+`pom.xml` across the first three sections. The fourth is the exception: since 14 October 2026 its
+example is a slow endpoint with 2 causes, one found and one filled in, which is not this repository
+(see `AnswerProvenance` above). `truth.proof.3` adds the one check that is specific to code: invented package names, which
 attackers register (slopsquatting), so the advice is to check that a dependency exists. The thread is
 deliberately one subject asked three ways (guessed, grounded, proved), which is what lets those sections read as
-one argument instead of three topics; `Catalog` is picked because the student has already called it
-from `/catalog`, so the invented method is measured against a class they have met.
+one argument instead of three topics.
 
 `workshop` is the step's capstone, a flag board: five flags, **one per place an answer can come
 from**. In board order, the student finds the first in a file on their own machine that has been in

@@ -70,8 +70,8 @@
 <p data-i18n="truth.proof.1">
   Grounded is still not proved, and that answers the question up top: a source is not a check. The
   agent read a file and told you what it says, so you are taking its word for the reading. Run
-  whatever can be run: <code>mvn test</code>, a <code>curl</code> at the endpoint, 1 line of
-  <code>jshell</code>. An answer with a command behind it is one you can check yourself.
+  whatever can be run: <code>mvn test</code>, a <code>curl</code> at the endpoint. An
+  answer with a command behind it is one you can check yourself.
 </p>
 
 <p data-i18n="truth.proof.2">
@@ -89,12 +89,10 @@
 <h2 data-i18n="truth.hallucinations.heading">Hallucinations</h2>
 
 <p data-i18n="truth.hallucinations.1">
-  With nothing in the context to read, the model answers anyway. You met that in the quiz in
-  <a href="/steps/step1/context">the context unit</a>: an agent answered confidently about a mail
-  that was switched off by a setting it never read. Ask which method on <code>Catalog</code> filters
-  titles by author and you get <code>findAllByAuthorOrdered</code>, named like a Spring method, on a
-  class that has no such method. Nothing was looked up and nothing was deliberately made up. The
-  next likely token landed where a fact should have been, and that is a hallucination.
+  You ask the agent why an endpoint is slow, and you get 2 causes: a long scan over Redis at the
+  start of every session, and a problem that has nothing to do with it. It found the first in the
+  code. The second sounds just as likely, but nothing it read or measured points at it. That is a
+  hallucination.
 </p>
 
 <!-- One answer taken apart into its claims. The left column is uniform on purpose: nothing about
@@ -103,9 +101,8 @@
 <div data-figure="answer-provenance"></div>
 
 <p data-i18n="truth.hallucinations.2">
-  2 of those were read and 1 was not, and the answer sounds the same about all 3, whether the model
-  read your file or filled a gap. Training makes that worse: a confident guess scores better than "I
-  do not know". So give the agent that way out, and ask it to say when it has not checked something.
-  Then judge the answer by where it came from, not by its tone. <a href="/steps/step1/workshop">The
-  workshop</a> asks that 5 times.
+  The answer sounds the same about both causes. Training makes that worse: a confident guess scores
+  better than "I do not know". So ask the agent where it saw each cause, and have it say what it has
+  not checked. Then judge the answer by where it came from, not by its tone.
+  <a href="/steps/step1/workshop">The workshop</a> asks that 5 times.
 </p>
