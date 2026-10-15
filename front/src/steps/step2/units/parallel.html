@@ -9,7 +9,7 @@
 </p>
 
 <p data-i18n="parallel.one-agent-time.2">
-  Reach for it when there is 1 thing you care about. A late-fee rule that rounds the wrong way, a
+  Reach for it when there is 1 thing you care about. A bug in the late-fee calculation, a
   query that got slow, a domain model you are still arguing with yourself about. That work is deep,
   and depth is where your attention buys more than throughput does. Nothing else is running, so
   nothing else is asking for you.
@@ -19,20 +19,24 @@
 
 <p data-i18n="parallel.many-agents-once.1">
   Open 4 sessions and you get 4 times the output and a quarter of the attention. Nobody reads
-  4 runs as they happen, so you stop steering and start receiving. Everything you gave up at the
-  start comes back as reading at the end. All at once, in 4 places, on work you did not watch
-  being made.
+  4 runs as they happen, so you stop steering and start receiving. What you did not watch while it
+  ran, you read afterwards, in 4 separate diffs.
 </p>
 
 <p data-i18n="parallel.many-agents-once.2">
   It pays when the work splits cleanly and each piece has a check of its own. 4 modules, 4
-  builds that go green or red without you. Give each agent its own git worktree, the next
-  section, or they edit the same files and you find out at merge time.
+  builds that go green or red without you. Give each agent its own git worktree, or they
+  edit the same files and you find out at merge time.
 </p>
 
 <aside data-variant="warning" data-i18n="parallel.many-agents-once.3">
-  The ceiling you hit first is you. 4 streams of output in an afternoon is more than anyone
-  reads carefully, and the 10th diff gets less of you than the first did. You run out of attention well before you run out of tokens.
+  <p>
+    The ceiling you hit first is you. 4 streams of output in an afternoon is more than anyone
+    reads carefully, and the 10th diff gets less of you than the first did. You run out of attention well before you run out of tokens.
+    You will not read every line any more, so let the
+    <a href="/steps/step2/quality-gates">quality gates</a> do part of the reading for you,
+    and have 1 more agent merge the branches and check the integration.
+  </p>
 </aside>
 
 <h2 data-i18n="parallel.worktree-each.heading">A worktree each</h2>
@@ -44,8 +48,8 @@
 </p>
 
 <p data-assistant="claude" data-i18n="parallel.worktree-each.2.claude">
-  Claude Code does it itself: <code>claude --worktree statement</code> starts in
-  <code>.claude/worktrees/statement</code>, on a new branch <code>worktree-statement</code>.
+  Claude Code does it itself: <code>claude --worktree loan-statement</code> starts in
+  <code>.claude/worktrees/loan-statement</code>, on a new branch <code>worktree-loan-statement</code>.
 </p>
 
 <p data-assistant="copilot" data-i18n="parallel.worktree-each.2.copilot">
@@ -55,8 +59,8 @@
 
 <p data-i18n="parallel.worktree-each.3">Git does it too, in any tool:</p>
 
-<pre data-commands><code>git worktree add -b feat/statement ../kata-statement
-git worktree add -b feat/native ../kata-native</code></pre>
+<pre data-commands><code>git worktree add -b feat/loan-statement ../kata-loan-statement
+git worktree add -b feat/native-image ../kata-native-image</code></pre>
 
 <div data-figure="worktree-each"></div>
 
@@ -67,17 +71,22 @@ git worktree add -b feat/native ../kata-native</code></pre>
 </p>
 
 <p data-i18n="parallel.worktree-each.5">
-  When they are done, let a separate agent merge the branches. It reads both diffs, resolves the
-  conflicts and runs the tests. You review the result.
+  When they are done, let a separate agent bring each branch up to date. It merges main into the
+  branch, resolves the conflicts there, runs the full gate and opens a pull request. Your CI runs the
+  slower checks, such as the native build, and you review. Take the second branch only once the first
+  is merged: main then holds the first change, and the gate shows whether the 2 break each other.
 </p>
 
-<pre><code>Merge feat/statement and feat/native into main. Resolve any conflicts,
-run mvn test, and tell me what you changed and why.</code></pre>
+<pre><code>In ../kata-loan-statement, merge main into feat/loan-statement and run mvn verify.
+Do not change a test or lower a threshold to get it green.
+For each conflict, tell me what each side wanted and what you kept.
+If that is a domain decision, stop and ask me.
+Then push the branch and open a pull request against main.</code></pre>
 
-<p data-i18n="parallel.worktree-each.6">Then clean up the folders:</p>
+<p data-i18n="parallel.worktree-each.6">Once both are merged, clean up the folders:</p>
 
-<pre data-commands><code>git worktree remove ../kata-statement
-git worktree remove ../kata-native</code></pre>
+<pre data-commands><code>git worktree remove ../kata-loan-statement
+git worktree remove ../kata-native-image</code></pre>
 
 <h2 data-i18n="parallel.orchestrator.heading">The orchestrator</h2>
 

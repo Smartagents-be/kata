@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next'
 
 /**
  * Two agents on one codebase, read left to right: `~/kata` on main, `git worktree add` making two
- * separate folders beside it with an agent each, a third agent merging the branches, and `~/kata`
- * on main again with both changes in it. Redrawn in October 2026 at the owner's asking: the old
+ * separate folders beside it with an agent each, a third agent merging main into each branch and
+ * opening a pull request for it, and `~/kata` on main again with both changes in it. Redrawn in October 2026 at the owner's asking: the old
  * drawing (two frames standing on one history box) read as vague, and it never showed the part the
  * owner cares about most, that **a separate agent merges the worktrees afterwards**.
  *
@@ -23,8 +23,8 @@ const WIDTH = 760
 const HEIGHT = 275
 
 const FOLDERS = [
-  { key: 'statement', y: 38, folder: '~/kata-statement', branch: 'feat/statement', agent: 1 },
-  { key: 'native', y: 182, folder: '~/kata-native', branch: 'feat/native', agent: 2 },
+  { key: 'statement', y: 38, folder: '~/kata-loan-statement', branch: 'feat/loan-statement', agent: 1 },
+  { key: 'native', y: 182, folder: '~/kata-native-image', branch: 'feat/native-image', agent: 2 },
 ] as const
 
 const MUTED_BOX = 'fill-muted-foreground/10 stroke-muted-foreground/60'

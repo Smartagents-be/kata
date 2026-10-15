@@ -98,8 +98,8 @@ const STAGES: readonly Stage[] = [
     units: ['parallel'],
     checks: [
       'cd ../../..',
-      'git worktree add -b feat/statement ../kata-statement',
-      'git worktree add -b feat/native ../kata-native',
+      'git worktree add -b feat/loan-statement ../kata-loan-statement',
+      'git worktree add -b feat/native-image ../kata-native-image',
     ],
     pays: ['statement-endpoint', 'native-image'],
     jobs: [
@@ -107,7 +107,7 @@ const STAGES: readonly Stage[] = [
         key: 'build',
         units: ['workflows'],
         checks: [
-          'cd ../kata-statement/exercises/step2/java',
+          'cd ../kata-loan-statement/exercises/step2/java',
           'mvn test -Pchallenge',
           'mvn spring-boot:run',
           'curl localhost:8082/api/loans/statement/STUDENT',
@@ -119,7 +119,7 @@ const STAGES: readonly Stage[] = [
         // purpose, is what `goals` is about from its title down.
         units: ['goals', 'workflows'],
         checks: [
-          'cd ../kata-native/exercises/step2/java',
+          'cd ../kata-native-image/exercises/step2/java',
           'mvn -Pnative native:compile',
           // Not `--server.port=8081`: a browser takes a line break after a hyphen and split that
           // flag in two inside the drawing. The port itself is load bearing, since the job in the

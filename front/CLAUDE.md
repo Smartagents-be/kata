@@ -224,6 +224,9 @@ broke every page.
   `--destructive` stay reserved for passed and failed. The triangle is drawn by `index.css` from the
   `--warning-triangle` mask rather than written into the prose, because it is the callout's shape
   rather than part of the sentence, and a translation that dropped it would drop the warning.
+  The panel is a grid, so **a warning that holds a link or any other inline element wraps its text
+  in a `<p>`**, in the HTML and in `nl.json`: bare text beside an `<a>` becomes separate grid items,
+  and everything after the link drops into the triangle's column one word per line.
 - **Every route change starts at the top.** The window keeps its scroll position across a
   navigation, so `AppShell` sends it back to 0 whenever the pathname changes; without it the pager
   at the foot of a long unit drops you into the middle of the next one. A location carrying a hash

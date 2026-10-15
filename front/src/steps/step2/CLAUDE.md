@@ -1155,10 +1155,13 @@ it and that opening sentence stops pointing at anything.
 knowing before writing any of it back: the fan-out never reaching your screen, four runs therefore
 arriving as one thing to read, one plan behind all four making them less likely to write over each
 other, and what you give up being which sub-agent decided what, so the brief is the thing to ask
-for. Two things follow. The warning aside under `Many agents at once` **no longer has an answer
-anywhere in the unit**, which is the decision rather than an oversight: the ceiling that section
-names is your attention, and a paragraph saying an orchestrator lifts the collision half of it was
-arguing with the strongest claim in the unit while leaving the other half standing. And
+for. Two things follow. The warning aside under `Many agents at once` **gets no answer from an
+orchestrator**, which is the decision rather than an oversight: the ceiling that section names is
+your attention, and a paragraph saying an orchestrator lifts the collision half of it was arguing
+with the strongest claim in the unit while leaving the other half standing. Its one answer is its
+own last line, at the owner's asking (October 2026): you will not read every line, so the quality
+gates do part of the reading and 1 more agent merges the branches and checks the integration. Both
+share the reading out and neither lifts the ceiling, which is why the line may stay. And
 `agents-at-once.orchestrated.note` ("four runs, one thing to read") carries that claim in the unit,
 and the quiz's `coordination-moves` choice is the only other place it is made, so a rewrite of the
 note leaves the claim standing only in an answer a student reads once.
@@ -1236,10 +1239,14 @@ definition. Do not let a third site explain what a worktree is.
 
 `WorktreeEach` was redrawn in October 2026, at the owner's asking, as a left-to-right flow: `~/kata`
 on main, `git worktree add` making two **separate folders on your disk** with an agent each, a third
-agent merging the branches, and `~/kata` on main with both changes. The old drawing (two frames on
+agent merging main into each branch and opening a pull request per branch, and `~/kata` on main with both changes. The old drawing (two frames on
 one history box, no line between them) read as vague and never showed what the owner cares about
 most, that **a separate agent merges the worktrees afterwards**, so the section now ends on that
-merge: a paragraph, a copyable merge prompt, and the `git worktree remove` clean-up. The figure says
+merge: a paragraph, a copyable merge prompt, and the `git worktree remove` clean-up. **The merge runs
+through pull requests** (October 2026, at the owner's asking): it merged both branches straight into
+`main` and ran `mvn test`, which skipped the gate, CI and review. Now the agent merges `main` into each
+branch, runs `mvn verify` and opens a PR, the second only after the first is merged so the gate sees
+both changes, and CI takes the slow checks such as the native build. The figure says
 "separate folders", never "copy", because the history stays shared. **It names the same folders and
 branches as the `<pre>` above it**, on the `SkillTree` rule, as literals rather than locale keys,
 because a path is not translated. Teal is the two worktrees and the merging agent; the codebase
@@ -1769,7 +1776,7 @@ rather than an argument: `steering` owns it, and `parallel`'s aside owns the att
 
 **Three things about the commands in that stage are load bearing, and each of them was a bug
 first.** The `git` lines are the one exception to "every command runs from `exercises/step2/java`", and
-the page says so: left unqualified they resolve to `exercises/step2/kata-statement`, which plants two full
+the page says so: left unqualified they resolve to `exercises/step2/kata-loan-statement`, which plants two full
 checkouts of this repository inside the working tree. So the worktree `<pre>` runs `cd ../../..` and
 stops there, and **each job's own `<pre>` opens with its own `cd` from the repository root**, because
 a single trailing `cd` put both jobs in the statement worktree and straight back into the one

@@ -77,8 +77,8 @@ mvn verify -Pgraded</code></pre>
 </p>
 
 <pre data-commands><code>cd ../../..
-git worktree add -b feat/statement ../kata-statement
-git worktree add -b feat/native ../kata-native</code></pre>
+git worktree add -b feat/loan-statement ../kata-loan-statement
+git worktree add -b feat/native-image ../kata-native-image</code></pre>
 
 <p data-i18n="workshop.two-jobs.2">
   In the first, the spec exists and it is failing. A tagged suite describes a method nobody wrote,
@@ -87,7 +87,7 @@ git worktree add -b feat/native ../kata-native</code></pre>
   the response.
 </p>
 
-<pre data-commands><code>cd ../kata-statement/exercises/step2/java
+<pre data-commands><code>cd ../kata-loan-statement/exercises/step2/java
 mvn test -Pchallenge
 mvn spring-boot:run
 curl localhost:8082/api/loans/statement/STUDENT</code></pre>
@@ -100,7 +100,7 @@ curl localhost:8082/api/loans/statement/STUDENT</code></pre>
   starts, and where the flag should be it prints a miss. Your plan was a piece short, and the image tells you which piece.
 </p>
 
-<pre data-commands><code>cd ../kata-native/exercises/step2/java
+<pre data-commands><code>cd ../kata-native-image/exercises/step2/java
 mvn -Pnative native:compile
 SERVER_PORT=8081 ./target/kata-agentic-java-step2</code></pre>
 
