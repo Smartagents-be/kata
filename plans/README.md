@@ -33,6 +33,7 @@ Two repo-wide rules every executor inherits, whatever the plan:
 | 014 | Deck assistant filter + step 2 deck scope | P3 | S+M | — | TODO |
 | 015 | Vertical slices in `engineering`, deterministic checks in `gates` | P1 | M | — | DONE (implemented and reviewed 2026-10-10, left uncommitted for the owner's review) |
 | 016 | Lay out `exercises/step2/java` the way `Hexagonal architecture` draws it | P1 | M | — | DONE (executed 2026-10-11: pure move verified identical on graded, challenge, endpoint and native; card retired; left uncommitted for the owner's review) |
+| 017 | A dev container for the kata, demoed at the foot of `Prove your work` | P1 | M | — | DONE (executed 2026-10-15: container verified on Docker, `run` move moved to step 1 because step 2's only endpoint is the challenge's 500; VS Code route and login not run; left uncommitted for the owner's review) |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) |
 REJECTED (with one-line rationale).

@@ -52,6 +52,8 @@ a student's browser.
 files themselves, and their paths are where the two products differ most. The rest followed in
 October 2026 where a sentence names a key, a button or a product's own mode: `steering`'s moves
 figure, its rewind experiment and its card's `queue` move, and the worktree paragraph in `parallel`.
+`enablement`'s `SameMachinery` card followed in October 2026: its `agent` move is a pair, because
+the kata's dev container carries both CLIs.
 The rest of step 2 still names Claude Code's terms or both in one sentence.
 Steps 0 and 1 carry almost all of it; `step3`'s share is two filename pairs and is documented under
 that step. The Copilot side was written for **Copilot

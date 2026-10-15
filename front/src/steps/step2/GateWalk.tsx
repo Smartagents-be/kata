@@ -4,8 +4,7 @@ import { TaskCard } from '@/shared/components/TaskCard'
  * The `gates` unit's closing exercise on the shared {@link TaskCard}: walk the gates on your own
  * project, time them, and pick the one to bring closer to the agent.
  *
- * **It names no project and no command**, on `CountTheDay`'s precedent and for a reason of this
- * step's own: the obvious target is `exercises/step2/java`, and its gates are what `workshop`'s
+ * **It names no project and no command**, for a reason of this step's own: the obvious target is `exercises/step2/java`, and its gates are what `workshop`'s
  * pre-flight runs and its board grades. A card here asking a student to time `mvn verify -Pgraded`
  * would spend that stage a unit early and name the profile the capstone owns. Every move runs
  * against whatever the student is actually working on.

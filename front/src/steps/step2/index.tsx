@@ -2,8 +2,8 @@ import type { Step } from '@/shared/step'
 import deck from './deck'
 import { AgentsAtOnce } from './AgentsAtOnce'
 import { AuditExample } from './AuditExample'
-import { CountTheDay } from './CountTheDay'
 import { CheckPermissions } from './CheckPermissions'
+import { ContainerMap } from './ContainerMap'
 import { Debrief } from './Debrief'
 import { DomainTree } from './DomainTree'
 import { FidelityLadder } from './FidelityLadder'
@@ -24,6 +24,7 @@ import { ReadEachTime } from './ReadEachTime'
 import { RunSheet } from './RunSheet'
 import { SameEveryRun } from './SameEveryRun'
 import { SameGate } from './SameGate'
+import { SameMachinery } from './SameMachinery'
 import { ScriptRuns } from './ScriptRuns'
 import { SetupFlags } from './SetupFlags'
 import { SteerARun } from './SteerARun'
@@ -263,7 +264,7 @@ const step2: Step = {
       id: 'proof',
       title: 'enablement.title',
       html: enablement,
-      // Two slots inside the prose. The bands close `run-own-machine`, whose closing sentence is
+      // Three slots inside the prose. The bands close `run-own-machine`, whose closing sentence is
       // the agent writing a change in seconds and your check having to keep up, so they are that
       // claim measured. `proof-loop` closes the order (reproduce, lock, implement, prove), which
       // came over from the `proof` unit in October 2026: it names all 5 stages, so under an earlier
@@ -273,12 +274,14 @@ const step2: Step = {
       inlineFigures: {
         'loops-per-hour': <LoopsPerHour />,
         'proof-loop': <ProofLoop />,
+        // Under `development-container.1`: what the container holds and where the app runs.
+        'container-map': <ContainerMap />,
       },
       // And the task under the prose, at the <hr> and the shared heading the unit's HTML now
-      // writes. The section tells the student to count where the hours go, so the card is that
-      // instruction with a stopwatch on it. It grades nothing and posts nothing; the tick is a
-      // bookmark.
-      figure: <CountTheDay />,
+      // writes. `run-own-machine.3` says to put everything in a development container, so the card
+      // is the tutor's demo of the kata's own, with the agent inside it. It grades nothing and posts
+      // nothing; the tick is a bookmark.
+      figure: <SameMachinery />,
     },
     {
       id: 'parallel',

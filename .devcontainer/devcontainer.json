@@ -1,0 +1,39 @@
+{
+  "name": "kata",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": { "CLAUDE_CODE_VERSION": "2.1.300", "COPILOT_VERSION": "1.0.98" }
+  },
+  "remoteUser": "node",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "workspaceFolder": "/workspace",
+  "mounts": [
+    // The agents' logins and settings survive a rebuild. With no keychain in here, Copilot CLI keeps
+    // its token as plain text in its volume, the way Claude Code keeps its own in ~/.claude.
+    "source=kata-claude-config-${devcontainerId},target=/home/node/.claude,type=volume",
+    "source=kata-copilot-config-${devcontainerId},target=/home/node/.copilot,type=volume",
+    // Maven's downloads survive a rebuild too, so the first `mvn verify` is the only slow one.
+    "source=kata-m2-${devcontainerId},target=/home/node/.m2,type=volume",
+    // Git history is read-only in here. You commit and push from your laptop anyway, and a
+    // writable .git would let whatever runs in the container plant a hook that runs on your laptop.
+    "source=${localWorkspaceFolder}/.git,target=/workspace/.git,type=bind,readonly",
+    // The container's node_modules hold Linux binaries; a volume keeps them off the host's copy.
+    "source=kata-node-modules-${devcontainerId},target=/workspace/front/node_modules,type=volume"
+  ],
+  "containerEnv": {
+    "CLAUDE_CONFIG_DIR": "/home/node/.claude",
+    "COPILOT_HOME": "/home/node/.copilot",
+    // The versions that were rehearsed are the versions that run in class.
+    "DISABLE_AUTOUPDATER": "1",
+    "COPILOT_AUTO_UPDATE": "false"
+  },
+  // 5173 the frontend, 8080 step 1's service, 8082 step 2's. An IDE forwards these; the
+  // devcontainer CLI does not.
+  "forwardPorts": [5173, 8080, 8082],
+  // So the frontend is also published, for the CLI route: open localhost:5174 on your laptop once
+  // `npm run dev -- --host 0.0.0.0` runs in front/. 5174 rather than 5173 so it does not clash with a
+  // Vite you run on the laptop itself, and on 127.0.0.1 so nothing outside your machine reaches it.
+  // Vite proxies /api to the service inside the container, so the catalogue works through it too.
+  "appPort": ["127.0.0.1:5174:5173"],
+  "postCreateCommand": "sudo /usr/bin/chown node:node /workspace/front/node_modules && npm ci --prefix front"
+}

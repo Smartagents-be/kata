@@ -278,8 +278,7 @@ there rather than re-arguing it. Its constraints (keep every check, keep every t
 block and not decoration: a build gets faster by deleting its slow tests, and that is the proxy trap
 from `Quality gates` a second time. **It names `mvn verify` and never `-Pgraded`**, and `GateWalk`
 names no command at all, because the kata's gates are what `workshop`'s pre-flight runs and its
-board grades. The card runs on the student's own project for that reason, on `CountTheDay`'s
-precedent.
+board grades. The card runs on the student's own project for that reason.
 
 `quality-gates.3` and `short-feedback-loops` used to pull against each other, while the hook in that
 paragraph was a Stop hook running the minute-long `mvn verify`. It is a pre-edit guard now, which is
@@ -977,15 +976,9 @@ four words they had not been given yet.
 
 `enablement` follows `workflows` and owns the one thing the rest of the step leaves out: **how long
 it takes to find out**. Every other unit decides what you hand over or what you do while it runs;
-this one is about the machinery around you that answers you in seconds instead of in a deploy. Three
-sections, and it closes on `CountTheDay`, an ungraded `TaskCard` under the same `<hr>` and "Test
-yourself" heading the rest of the course uses. The unit told the student to count where the hours
-go and then asked them to count nothing, which is what the card answers. **It names no project and
-no command**, and that is a condition of it existing: `run-own-machine` was stripped of this
-repository's own two-terminal setup so a reader on their own stack would not have to translate it,
-and a card naming `mvn spring-boot:run` puts that straight back. Its `fit` move sends the reader
-back into `LoopsPerHour` with a number of their own, which is what turns that figure from a drawing
-into a measurement; that number is 10 since the redraw, and the bracket's minutes are where theirs goes. **It has no quiz, and that half is no longer borrowed from `workflows`**, which
+this one is about the machinery around you that answers you in seconds instead of in a deploy. It
+closes on `SameMachinery`, an ungraded `TaskCard` under the same `<hr>` and "Test yourself" heading
+the rest of the course uses, and that card is documented under `proof` below. **It has no quiz, and that half is no longer borrowed from `workflows`**, which
 now carries one. It stands on its own here: this unit is about what has to be true around you, and
 a condition has no wrong answer to offer a question the way a choice between five workflows does.
 Run it locally front and back, grow the crossbar, and count where the day goes.
@@ -1043,8 +1036,8 @@ one sentence each and stops on the fix. Two closers went in turn, "That is a who
 reached you" and then the bare fragment "A whole loop that never reached you", so the paragraph ends
 on the gem with no line reading the scene back. Do not write a third one: the scene is the payoff.
 
-`LoopsPerHour` closes the section, under the paragraph where the agent opens the page, sees the wrong
-column and fixes it in the same pass. **It was moved here when `reachable-one-step` was cut**, and
+`LoopsPerHour` sits under the paragraph where the agent opens the page, sees the wrong column and
+fixes it in the same pass (`.2`), with `.3` after it leading into `development-container`. **It was moved here when `reachable-one-step` was cut**, and
 **redrawn in October 2026 at the owner's asking because the band it was did not explain itself**:
 one hour cut into turns of change, wait and look, two against eleven, and a reader could tell
 neither what a turn was nor what the wait was for. It now asks the question the owner put to it,
@@ -1117,6 +1110,12 @@ migration that drops a column 2 other services still read. **It still closes on 
 the detail is worth less than it was, knowing good software engineering is not), which the owner
 kept, and the same pair is the note on `deck-step2-engineering-skills`. `SkillShape` under it was
 cut. Do not grow it back into an argument for the shape; `vertical-slices.3` makes it.
+
+**`where-day-goes` opens on "Coding by hand is dead"**, at the owner's asking (October 2026), with
+`deck-step2-enablement-dead` as its slide. "Dead" is the course's own claim and the Pragmatic
+Engineer's word: DHH never said it. What is quoted, in the prose and on the slide, is his "done
+writing code by hand" from the Rails World 2026 keynote (late September 2026, linked). Do not put
+"dead" in his mouth, and keep the quote English in Dutch too.
 
 **A `code-got-cheap` section closed the unit and was cut.** It said code used to be the expensive
 part and a craftsman built it slowly, that this is over and nobody is buying code from you any more,
@@ -1301,7 +1300,95 @@ brought is **the order a change is proved in**: `reproduce-first`, `lock-before-
 `ProofLoop`. Its opening section, the environment, became `run-own-machine.3` (the agent starts it
 all itself, real migrations, the build production gets). `implement-then-prove` was cut to 1
 paragraph: "you read output, not an opinion" and the clause linking `goals` were `truth.proof` and
-`goals` said again. **It carries no card or quiz of its own**; the unit's card is still `CountTheDay`.
+`goals` said again. **It carries no card or quiz of its own**; the unit's card is `SameMachinery`.
+
+**`SameMachinery` replaced `CountTheDay` (October 2026, at the owner's asking, plan 017).** That card
+had the student time a loop on their own project and split a working day, with a `fit` move that
+compared their number with `LoopsPerHour`'s 10. It could not be done in class, and the owner does
+not want students working on their own code, so it went with its `count.*` keys. What replaced it
+is the demo `run-own-machine.3` asks for: the kata's own dev container (`.devcontainer/` at the repo
+root), with the agent running inside it next to the JDK, Maven, Node and the app it starts. Six
+moves: open it, start the agent, have it start step 1's service and count the titles, have it start
+the frontend and open `localhost:5174/catalog` on the laptop (`view`, the one path `ContainerMap`
+draws from the browser in), run that project's `mvn verify` yourself beside it, and stop it. The devcontainer CLI has no stop command,
+so `stop` is `docker stop` on the container the CLI labels with the folder it was started from
+(`devcontainer.local_folder`), which is why it runs from the kata's root. **The service is step 1's and not step 2's, on purpose**:
+step 2's only endpoint is `/api/loans/statement/{tier}`, which answers 500 until the student writes
+`forTier`, and an agent shown that 500 on the projector sets about the `challenge` flag in front of
+the class. The prompt asks for a count rather than the titles, so they are not read out on screen.
+**It names the kata and its commands on purpose**, which reverses `CountTheDay`'s "names no project
+and no command": a demo of this repository's container has nothing else to name. Five decisions
+travel with it:
+- **Both agents are in the image, and students do it themselves when they can.** It was planned as
+  a trainer demo with Claude Code only; the owner then had Copilot CLI added (pinned,
+  `COPILOT_AUTO_UPDATE=false`, its login in a `~/.copilot` volume through `COPILOT_HOME`), because
+  the class is on Copilot and a container with no agent of theirs in it is a demo they can only
+  watch. Only the `agent` move is an assistant pair (`agent.claude`, `agent.copilot`), on
+  `SurviveTheClear`'s pattern. The description only says what the container holds, at the owner's
+  asking: who can do it, building before class and "nothing is graded" were cut as too much, and
+  the sandbox explanation moved to the `development-container` section. No IDE is needed either (next bullet), so an IntelliJ student
+  does it from a terminal; Copilot CLI in the container is the terminal agent, not the plugin.
+- **The firewall is left out on purpose.** Anthropic's example container
+  (github.com/anthropics/claude-code, `.devcontainer/`) adds one with `NET_ADMIN`; the docs say it is
+  not required, and here its allowlist would also need Maven Central and npm. So the agent is
+  **never run in bypass mode, with `--dangerously-skip-permissions`, or with Copilot CLI's
+  `--allow-all` or `--yolo`** in this container, on the card or in the demo: the docs pair skipped
+  permissions with egress restrictions.
+- **`.git` is mounted read-only in the container** (owner's choice, October 2026). Students
+  commit and push from their laptop anyway, since the container has no git identity and no SSH
+  keys, and a writable `.git` would let whatever runs inside plant a hook that runs on the laptop
+  at the next commit. Status, log and diff still work in there; commit and hooks are refused.
+  The rest of the repo stays writable, so a script or build config the agent writes still runs at
+  the next local build, which is the half the card's description warns about.
+- **The card claims "the same machinery" and never isolation.** Anthropic's own warning
+  (code.claude.com/docs/en/devcontainer) is that with skipped permissions a dev container does not
+  stop a malicious project from exfiltrating what it can reach, the agent's credentials included,
+  and that dev containers are for trusted repositories. Copilot CLI has no keychain in here either,
+  so it keeps its token as plain text in its volume. On top of that, VS Code's Dev Containers
+  extension forwards the host's git credentials and SSH agent into the container by default. Do not
+  write "isolated", "sealed" or "safe" into the card or the notes.
+- **The tutor builds the container and logs in before class.** A first build pulls several images
+  and fills the Maven cache, which is minutes on a venue network, and the login shows an account on
+  the projector (the browser callback sometimes needs the "paste code" fallback). The Claude Code
+  version is pinned in the Dockerfile and `DISABLE_AUTOUPDATER` is on, so class day runs what was
+  rehearsed. Copilot CLI is pinned the same way, with `COPILOT_AUTO_UPDATE=false`. Bump either pin
+  on purpose.
+- **No IDE, at the owner's asking: barebones.** Every move is the devcontainer CLI through
+  `npx -y @devcontainers/cli@0.89.0` (`up`, then `exec … claude`, `exec … copilot` and
+  `exec … bash -c "…"`), so Docker and Node are all a student needs. That CLI does not forward
+  ports, which is why the `run` move has the agent `curl` from inside the container; `forwardPorts`
+  stays in `devcontainer.json` for whoever opens it in an IDE. The VS Code and JetBrains routes were
+  dropped from the card, and the JetBrains one was never rehearsed.
+**`development-container` is a section of its own** (October 2026, at the owner's asking), directly
+after `run-own-machine`, whose `.3` it picks up. `LoopsPerHour` moved up to sit under `.2` with it,
+so `.3` runs straight into the new heading instead of being cut off from it by the clock. The section says what the container is (an image, your repo mounted
+in rather than copied, volumes for what has to survive) and what it keeps the agent from reaching
+and what it does not. That second paragraph was the card's description for a while and read as
+crammed there, so the card is back to 1 sentence and the explanation lives in prose. **It names the container a
+sandbox, at the owner's asking, and says in the same breath that the sandbox has gaps.** Keep that
+"gaps" half (the internet, and a script in the repo running at the next local build): it is what
+stops the word reading as a claim of isolation. `setup.settings.3` is the other sandbox in this
+step, Claude Code's own OS-level one around its tools; the two are different mechanisms and neither
+paragraph should describe the other. **`ContainerMap` sits between its 2 paragraphs**,
+at the owner's asking: what the container holds and where the app runs once the agent starts it,
+which is its title question. Your
+laptop is a dashed frame holding `~/kata`, your browser and the container, the container a solid
+frame holding the tools, the agents and the app (the frontend and step 1's service, joined by
+Vite's `/api` proxy), and teal is the app and nothing else. Your browser reaches the frontend on
+`localhost:5174`, and the container is a CSS subgrid of the figure's grid so that arrow lands on
+the frontend's row; keep it a subgrid, or the browser points at the frame. Its note, "reachable inside the
+container only", is the devcontainer CLI forwarding no ports, and it holds for the service:
+`devcontainer.json` publishes only the frontend (`appPort`, `127.0.0.1:5174:5173`, so a student
+can view the app from their laptop once Vite runs with `--host 0.0.0.0`, and Vite's proxy reaches
+the service from inside); if the card ever moves to an IDE route
+that forwards them, the note goes. Versions and paths in it are literals, so a bump in the
+Dockerfile is a bump here too.
+
+The `run` command asks for the service "in the background", because `mvn spring-boot:run` does not
+return and a demo that waits on it stalls. Verified on 15 October 2026 (plan 017): the image builds,
+all 4 projects verify inside it, step 2's native image compiles in it (1m 30s), and the services and
+Vite answer from the host through published ports, Vite only with `--host 0.0.0.0`. Port forwarding
+through VS Code and the login were not run.
 
 **The title is `Prove your work`, and the owner's brief said "Proof your work".** The verb is
 *prove*; *proof* as a verb is the Dutch showing through, on `lesson-writing`'s rule.

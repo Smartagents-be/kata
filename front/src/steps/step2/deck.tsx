@@ -457,6 +457,16 @@ const deck: SlideSpec[] = [
     scale: 1.7,
   },
   {
+    // At the owner's asking (October 2026). "Dead" is the course's claim; the note is DHH's own words
+    // from the Rails World 2026 keynote, which never said "dead".
+    id: 'deck-step2-enablement-dead',
+    kind: 'statement',
+    ns: 'step2',
+    eyebrow: 'enablement.title',
+    title: 'deck.enablement.dead.title',
+    note: 'deck.enablement.dead.note',
+  },
+  {
     id: 'deck-step2-enablement-day',
     kind: 'statement',
     ns: 'step2',

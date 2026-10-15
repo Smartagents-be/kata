@@ -91,6 +91,9 @@ exercises/
   step2/java/    the loans domain, the graded and challenge profiles, the native-image flag
   step3/java/    an empty scaffold, buildable, kept as the template a Java step is copied from
 front/           the curriculum
+.devcontainer/   the kata's dev container: GraalVM JDK 25, Maven, Node, and a pinned Claude Code
+                 and Copilot CLI, no firewall. Step 2's `Prove your work` card uses it; the
+                 reasoning is in front/src/steps/step2/CLAUDE.md
 README.md        the front door: prerequisites, "ask your assistant to execute install.txt", the
                  two run commands. Deliberately short, and the author's to own
 install.txt      what that instruction points at. Written for an agent, read by a human: it runs

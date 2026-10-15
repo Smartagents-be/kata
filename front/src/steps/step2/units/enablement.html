@@ -15,15 +15,37 @@
   <svg data-icon="gem"></svg>.
 </p>
 
+<!-- Filled by the LoopsPerHour element registered under this name in steps/step2/index.tsx. It is
+     on the clock rather than on step size, and it sits under .2, where the agent checks its own
+     work, so .3 leads straight into the development-container section. -->
+<div data-figure="loops-per-hour"></div>
+
 <p data-i18n="enablement.run-own-machine.3">
   Put all of it in a development container, and you and the agent work with the same machinery. It
   starts from 1 command, with the real database, the real migrations and the build production gets.
   A test against a mock only tells you the mock works. What the agent cannot run, it cannot check.
 </p>
 
-<!-- Filled by the LoopsPerHour element registered under this name in steps/step2/index.tsx. It is
-     on the clock rather than on step size. -->
-<div data-figure="loops-per-hour"></div>
+<h2 data-i18n="enablement.development-container.heading">A development container</h2>
+
+<p data-i18n="enablement.development-container.1">
+  The kata ships one, in <code>.devcontainer/</code>. The <code>Dockerfile</code> builds an image
+  with the JDK, Maven, Node, Claude Code and Copilot CLI in it. Your repo is not copied in: the
+  folder on your laptop is mounted into the container, so a file the agent writes there is a file in
+  your repo. What has to outlive the container, such as your login and Maven's downloads, sits in a
+  volume that the next container mounts again. Everything else goes when the container does.
+</p>
+
+<!-- Filled by the ContainerMap element registered under this name in steps/step2/index.tsx: what
+     the container holds and where the app runs once the agent starts it. -->
+<div data-figure="container-map"></div>
+
+<p data-i18n="enablement.development-container.2">
+  The container is also a sandbox for the agent. It sees the repo and nothing else on your laptop:
+  not your home folder, not your SSH keys, and the git history is read-only. The sandbox has gaps,
+  though. The agent can still reach the internet, and a script it writes in the repo runs on your
+  laptop at your next local build. Read the diff before you build.
+</p>
 
 <h2 data-i18n="enablement.reproduce-first.heading">Reproduce first</h2>
 
@@ -102,8 +124,12 @@ line each, and what you could not check.</code></pre>
 
 <h2 data-i18n="enablement.where-day-goes.heading">Where the day goes</h2>
 
+<!-- The claim is the course's own: "dead" is the Pragmatic Engineer's word, not DHH's. What he said,
+     and what is quoted, is "done writing code by hand" (Rails World 2026 keynote, September 2026). -->
 <p data-i18n="enablement.where-day-goes.1">
-  You are not typing the code any more, so count where the hours go. They go on driving the
+  Coding by hand is dead. David Heinemeier Hansson, who created Ruby on Rails, said in his
+  <a href="https://www.youtube.com/watch?v=vDjW_dRyKXY" target="_blank" rel="noreferrer">Rails World 2026 keynote</a> that his company is "done writing code by
+  hand". So count where the hours go. They go on driving the
   system end to end and reading whether it did what you wanted.
   <a href="/steps/step2/steering">The steering unit</a> covers what you do while a run is in flight.
   This is the other half, the part after it comes back. It is most of your week.
@@ -133,10 +159,10 @@ line each, and what you could not check.</code></pre>
 </p>
 
 <!-- The doing part of the unit, under the rule and the heading the rest of the course puts over its
-     exercises. The card is the CountTheDay element registered in steps/step2/index.tsx, and it goes
-     straight under the heading: its description carries the setting, so a paragraph here would say
-     it twice. The section above tells the student to count where the hours go, so the card is that
-     instruction with a stopwatch on it. -->
+     exercises. The card is the SameMachinery element registered in steps/step2/index.tsx, and it
+     goes straight under the heading: its description carries the setting, so a paragraph here would
+     say it twice. run-own-machine.3 says to put everything in a development container, so the card
+     is the kata's own, and the development-container section above explains what it is. -->
 <hr />
 
 <h2 data-i18n="ui:quiz.title">Test your knowledge</h2>
