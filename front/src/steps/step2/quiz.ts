@@ -357,16 +357,19 @@ export const spendingQuiz: QuizQuestion[] = [
 ]
 
 /**
- * The four questions under `parallel`, the step's third quiz. The unit surveys five arrangements of
+ * The three questions under `parallel`, the step's third quiz. The unit surveys four arrangements of
  * agents and argues that what separates them is how much of your attention each one gets, so every
  * question hands the student a situation and asks which arrangement it wants or what one of them
  * already cost: `deep-not-wide` is work that is deep rather than wide, `green-and-unread` is four
- * green builds and two diffs actually read, `who-holds-the-wires` is what an orchestrator moves
- * and what it does not, and `pair-buys-rounds` is what a builder and a critic looping at each other
- * are actually selling you.
+ * green builds and two diffs actually read, and `pair-buys-rounds` is what a builder and a critic
+ * looping at each other are actually selling you.
+ *
+ * A fourth, `who-holds-the-wires`, asked what an orchestrator moves. It went with the unit's
+ * orchestrator section in October 2026: the coordinator is `step1/agent-patterns`'s, and that unit
+ * is where a question about it belongs.
  *
  * `Working in parallel with agents` has no question of its own, on the same reasoning that leaves
- * spec-driven out of `workflowsQuiz`: it is the answer the other three are measured against, and it
+ * spec-driven out of `workflowsQuiz`: it is the answer the others are measured against, and it
  * turns up as a choice inside two of them.
  *
  * No distractor claims an orchestrator stops two agents writing over each other. That claim was cut
@@ -424,30 +427,6 @@ export const parallelQuiz: QuizQuestion[] = [
       },
     ],
     explanation: 'quiz.green-and-unread.explanation',
-  },
-  {
-    id: 'who-holds-the-wires',
-    question: 'quiz.who-holds-the-wires.question',
-    choices: [
-      {
-        id: 'coordination-moves',
-        label: 'quiz.who-holds-the-wires.coordination-moves',
-        correct: true,
-      },
-      {
-        id: 'inherits-context',
-        label: 'quiz.who-holds-the-wires.inherits-context',
-      },
-      {
-        id: 'answer-each',
-        label: 'quiz.who-holds-the-wires.answer-each',
-      },
-      {
-        id: 'runs-in-turn',
-        label: 'quiz.who-holds-the-wires.runs-in-turn',
-      },
-    ],
-    explanation: 'quiz.who-holds-the-wires.explanation',
   },
   {
     id: 'pair-buys-rounds',

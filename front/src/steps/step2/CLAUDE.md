@@ -1127,17 +1127,17 @@ those two a second time.
 
 `parallel` follows `enablement` and took the slot the cut `quality` unit left, though it is not a
 rewrite of it: what it owns is **how many agents you have running, and what each arrangement costs
-you in control**. Five sections and the order is the argument: `One agent at a time` (the most
-control, and the shape for work that is deep rather than wide), `Many agents at once` (output up,
-control down, and all of the reading arriving at the end), `The orchestrator` (the same four agents
-with the coordination moved into one of them), `The builder and the critic` (two agents pointed at
-each other and you out of the loop entirely), then `Working in parallel with agents`
+you in control**. The arrangements run in an order that is the argument: `One agent at a time` (the
+most control, and the shape for work that is deep rather than wide), `Many agents at once` (output
+up, control down, and all of the reading arriving at the end), `A worktree each` (how those agents
+stay out of each other's files), `The builder and the critic` (two agents pointed at each other and
+you out of the loop entirely), then `Working in parallel with agents`
 (control back in the middle, which is what most days actually look like). Running most-to-least and
 then landing in the middle is what makes the last section read as the answer rather than as a fifth
 option. It carries no exercise, on `workflows`'s reasoning: there is nothing a card could ask for
 that the student's own week would not answer better. **It does carry a quiz**, on the reasoning
 `workflows` arrived at: a card asks for work and there is none to ask for here, but a question can
-ask which arrangement a situation wants. The four in `quiz.ts` are situations, one per arrangement
+ask which arrangement a situation wants. The three in `quiz.ts` are situations, one per arrangement
 with something to get wrong. `Working in parallel with agents` has none, because it is the answer the
 other four are measured against and it turns up as a choice inside two of them. **No distractor may
 claim an orchestrator stops two agents writing over each other**: that claim was cut from the unit
@@ -1145,42 +1145,22 @@ while still half believed, and a distractor this file does not flatly reject is 
 can defend. **It opens
 straight on its first `<h2>` and carries no lead**, on `enablement`'s and `steering`'s precedent.
 
-**`The orchestrator` sits directly after `Many agents at once` because it is that section answered**,
-not because it is the next thing in a list. Four sessions you opened yourself and four sub-agents one
-agent briefs are the same amount of work running; what changes is who holds the wires. So the
-section opens on "a better-managed version of that" and stops at where the coordination went. Move
-it and that opening sentence stops pointing at anything.
+**There is no orchestrator section, and that is the decision** (October 2026, at the owner's asking).
+It ran as `The orchestrator` between `A worktree each` and `The builder and the critic`, with its
+own row in `AgentsAtOnce` and the quiz question `who-holds-the-wires`, and the owner found it was
+`step1/agent-patterns`'s coordinator a second time: that unit owns the whole mechanism (model
+inheritance or configuration, fresh versus forked context, the cost of context acquisition), and
+decomposition there already says the agent splits the work and hands it out. All that is left here
+is **one sentence in `many-agents-once.2`**: the splitting can go to 1 agent too, with the `pattern`
+icon and a link calling it the coordinator, step 1's word, not "orchestrator". Do not grow it back
+into a section, a figure row or a quiz question. The quiz's `deep-not-wide.orchestrated`
+distractor stays, because it is a wrong answer to a different question. The warning aside under
+`Many agents at once` still gets no answer from an orchestrator: the ceiling it names is your
+attention, and its one answer is its own last line (quality gates do part of the reading, 1 more
+agent merges the branches), which shares the reading out without lifting the ceiling.
 
-**It is one paragraph, and it ran to two until the second was cut.** What went with it is worth
-knowing before writing any of it back: the fan-out never reaching your screen, four runs therefore
-arriving as one thing to read, one plan behind all four making them less likely to write over each
-other, and what you give up being which sub-agent decided what, so the brief is the thing to ask
-for. Two things follow. The warning aside under `Many agents at once` **gets no answer from an
-orchestrator**, which is the decision rather than an oversight: the ceiling that section names is
-your attention, and a paragraph saying an orchestrator lifts the collision half of it was arguing
-with the strongest claim in the unit while leaving the other half standing. Its one answer is its
-own last line, at the owner's asking (October 2026): you will not read every line, so the quality
-gates do part of the reading and 1 more agent merges the branches and checks the integration. Both
-share the reading out and neither lifts the ceiling, which is why the line may stay. And
-`agents-at-once.orchestrated.note` ("four runs, one thing to read") carries that claim in the unit,
-and the quiz's `coordination-moves` choice is the only other place it is made, so a rewrite of the
-note leaves the claim standing only in an answer a student reads once.
-
-Its name is a knowing exception. **`step1/agent-patterns` calls this the coordinator**, and it owns the
-whole mechanism: model inheritance or configuration, fresh versus forked context, and the cost
-of context acquisition. Do not reintroduce blank-worker or automatically-cheaper-worker claims.
-The heading says
-
-`The orchestrator` because that is the name the pattern travels under, and `orchestrator.1` bridges to
-step 1's word **in its own second sentence** rather than leaving the course with two unconnected
-terms. If either name changes, the other has to move with it. `model`'s closing section is the second
-neighbour: it owns why the expensive tier is the one that writes the brief, and this section no
-longer mentions a brief at all, so do not let it grow a sentence about who writes one. And the paragraph carries
-the `pattern` icon, since this is one of the course's AI design patterns rather than a habit.
-
-**`The builder and the critic` sits after `The orchestrator` for the reason the orchestrator sits
-after `Many agents at once`**: it is the same move taken one step further, the checking handed over
-as well as the coordination. Put it after `Working in parallel with agents` and that section stops
+**`The builder and the critic` comes late because it is `Many agents at once` taken furthest**: the
+checking is handed over as well as the work. Put it after `Working in parallel with agents` and that section stops
 being the answer the unit lands on. It is also the one section in the step that prints a prompt,
 and the prompt is there because the arrangement lives in it: you are in none of the rounds, so
 anything you did not write down never gets asked. **`step1/agent-patterns` owns reflection**, so the first
@@ -1199,7 +1179,9 @@ copy-pasteable form.
 **Its aside is this unit's second `data-variant="warning"`**, and the two carry different costs on
 purpose: `Many agents at once` has your attention degrading, this one has the clock and the bill.
 It may not grow into `steering`'s two-contexts-two-bills argument or into `goals`'s window ceiling.
-Long and expensive, kept for walled-off work that has to come back good, and it stops there. The
+Slowest and most expensive, kept for work that stands apart where quality counts for more than
+time, and it stops there. It names no run time (October 2026): "2 hours is an ordinary run" was
+never measured, and the prompt above it caps the loop at 3 rounds. The
 paragraph under it is the other half of the trade and is the only place in the unit crediting an
 arrangement with the quality of what it hands back. Keep the pair: the warning alone reads as a
 reason not to use it.
@@ -1264,8 +1246,8 @@ them apart, or the step loses the only place it says an agent can hand you more 
 sharp for.
 
 `AgentsAtOnce` is the figure and **closes the unit rather than opening it**, which is
-`WorkflowWeights`'s placement decision made again: it names all five arrangements, so under the
-first heading it would put four labels in front of a reader who has not been given them. Nothing
+`WorkflowWeights`'s placement decision made again: it names all four arrangements, so under the
+first heading it would put three labels in front of a reader who has not been given them. Nothing
 below it reads it back, so its row names and its right-hand notes carry the comparison, the way
 `ScriptRuns` puts what each row produces on the right instead of into prose. **Teal is the agent you
 are actually watching**, and that is the only colour rule in it. The dash carries the rest: solid
@@ -1275,29 +1257,32 @@ happen. It borrows `flow.node.you` and `flow.node.agent` from
 `FlowDiagram` rather than declaring its own words, so the two figures name the same boxes and a
 rewording moves both.
 
-**Rows two and three are the pair the figure exists for**, and two things keep them a pair. They run
-**the same number of agents**, so the comparison is about who holds the wires and not about volume,
-and the orchestrator's extra box sits at `LEAD_X` in the gap between `you` and the agent column every
-row shares, so the drawing says what an orchestrator is: a hop inserted between you and the work.
-Its sub-agents are **muted but solid** rather than dashed, which is the one place the colour rule
-needs reading carefully: dashed means nobody is watching, and here somebody is, just not you. That is
-what makes the last row different from row three at a glance. Changing the sub-agent count, or
-dashing them, ends both arguments.
+**An orchestrator row sat between rows two and three until October 2026** and went with its
+section; see above. Do not draw it back.
 
-**Row four is the pair, and it is the one row where the grammar splits inside a row.** The wire from
+**The last row's three background boxes are named for their jobs** (`tests`, `docs`, `analysis`,
+October 2026, at the owner's asking): with plain `agent` boxes the owner read the row as `4 at once`
+with a teal on top, and then as a coordinator handing out pieces. The names say three separate
+goals rather than copies of one job, and `interactive-agent-background.2` says the rest in prose:
+you started them yourself and they report to you, not to the agent in front. That sentence is the
+difference from step 1's coordinator; the figure only carries the names, and its geometry is
+unchanged on purpose.
+
+**Row three is the pair, and it is the one row where the grammar splits inside a row.** The wire from
 `you` is dashed because you walked away; the wire between the two agents is solid because they are
-holding each other. That is what `feedState` is for and its only caller. Its two boxes are the only
-ones in the figure that are not called `agent`, since a pair of boxes with one word on both of them
-says nothing about which end criticises, and its link is the only wire in the figure with an
+holding each other. That is what `feedState` is for and its only caller. Its two boxes are named,
+since a pair of boxes with one word on both of them says nothing about which end criticises, and its link is the only wire in the figure with an
 arrowhead: every other one runs left to right and needs no head to say so, while this one running
 both ways is what makes the pair a loop rather than two agents standing near each other. The two
 are stacked rather than set side by side because a third column of boxes pushes the longest Dutch
 note off the viewBox, and the notes have to stay in one column. `AgentsAtOnce`'s own docblock
 carries the geometry.
 
-The figure grew by about a quarter when that row landed, so **`deck-step2-parallel-arrangements`
-came down from `scale` 1.02 to 0.78**. That number is measured against the footer rather than
-chosen, so a sixth row moves it again.
+**`deck-step2-parallel-arrangements` carries `scale` 1.02**: 0.78 while the orchestrator row was
+there, back up when it went. That number is measured against the footer rather than chosen, so
+another row moves it again. The slide's title says how many agents you run against how much
+control you keep, since "smart orchestration" named the row that is gone, and the divider lost its
+orchestration point with it.
 
 **`proof` was a unit of its own for a day and is now 4 sections of `enablement`** (October 2026).
 It was added between `parallel` and `goals` at the owner's asking, and the owner then found most of it

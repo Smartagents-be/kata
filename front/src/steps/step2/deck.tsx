@@ -499,7 +499,6 @@ const deck: SlideSpec[] = [
       'deck.parallel.divider.1',
       'deck.parallel.divider.2',
       'deck.parallel.divider.3',
-      'deck.parallel.divider.4',
     ],
   },
   {
@@ -508,11 +507,11 @@ const deck: SlideSpec[] = [
     ns: 'step2',
     eyebrow: 'parallel.title',
     title: 'deck.parallel.arrangements.title',
-    // Five rows with their notes are nearly the whole frame on their own; this is the largest
-    // scale that keeps the last row's note off the footer, and the pair's row is what took it
-    // down from the 1.02 the four-row drawing carried.
+    // Four rows with their notes are nearly the whole frame on their own; this is the largest
+    // scale that keeps the last row's note off the footer. It was 0.78 while the drawing carried a
+    // fifth row, the orchestrator, which went in October 2026.
     figure: <AgentsAtOnce />,
-    scale: 0.78,
+    scale: 1.02,
   },
   {
     id: 'deck-step2-parallel-attention',

@@ -2,9 +2,9 @@ import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 /**
- * Five ways of arranging agents, drawn as how much of your attention each one gets: one agent on a
- * live wire, four agents on four dashed ones, four behind an orchestrator you brief instead, a pair
- * arguing with each other on a wire you let go of, and one live wire with three running behind it.
+ * Four ways of arranging agents, drawn as how much of your attention each one gets: one agent on a
+ * live wire, four agents on four dashed ones, a pair arguing with each other on a wire you let go
+ * of, and one live wire with three running behind it.
  *
  * It closes the `parallel` unit rather than opening it, on `WorkflowWeights`'s reasoning: the rows
  * are named, and a reader who met the drawing under the first section would be looking at three
@@ -15,21 +15,21 @@ import { useTranslation } from 'react-i18next'
  * carries the rest of the grammar, on the step 1 reading of one: solid means somebody has it, dashed
  * means nobody does. Row one is a single teal wire. Row two is four dashed ones and no teal at all,
  * because four at once is nobody watched, which is exactly what the paragraph above the figure says.
- * Row three keeps the teal on the orchestrator and leaves its sub-agents muted but solid, because
- * somebody is watching them even though it is not you. Row four is the teal back plus three dashed
- * wires. What tells rows two and four apart is that teal, and not the wires.
+ * The last row is the teal back plus three dashed wires, and its three are named for their jobs
+ * (`tests`, `docs`, `analysis`, from the section's own prose) where row two's are all `agent`: four
+ * copies of one kind of work against three separate goals you started yourself. The teal and those
+ * names are what tell rows two and four apart, not the wires. The names also keep the row from
+ * reading as a coordinator handing out pieces, which is what the owner saw in it with plain
+ * `agent` boxes (October 2026).
  *
- * **Rows two and three run the same four agents and differ only in who holds the wires**, which is
- * the whole reason the orchestrator gets a row rather than a sentence. Its extra box sits in the gap
- * between `you` and the agent column every row shares, so the drawing says what an orchestrator is:
- * a hop inserted between you and the work. Keep the sub-agent count equal to row two's, or the
- * comparison turns into one about volume.
+ * An orchestrator row sat between rows two and three until October 2026, an extra box between `you`
+ * and four muted sub-agents. It went with the unit's orchestrator section: the coordinator is
+ * `step1/agent-patterns`'s, and `parallel` now names it in one sentence and links there.
  *
- * **Row four is the one place the grammar is split across a row**, and it has to be: the wire from
+ * **Row three is the one place the grammar is split across a row**, and it has to be: the wire from
  * you is dashed because you walked away, and the wire between the two agents is solid because they
  * are holding each other. That is `feedState` on the row, and it is the only reason it exists. Both
- * boxes stay muted for the same reason the orchestrator's sub-agents do, somebody is watching and
- * it is not you. The two agents are stacked rather than set side by side so the notes stay in one
+ * boxes stay muted rather than dashed, because somebody is watching them and it is not you. The two agents are stacked rather than set side by side so the notes stay in one
  * column; a third column of boxes pushes the longest Dutch note off the viewBox.
  *
  * The arrowheads on that link are the only ones in the figure, and they are the row's content:
@@ -47,8 +47,6 @@ import { useTranslation } from 'react-i18next'
  */
 const YOU_W = 52
 const YOU_H = 26
-const LEAD_X = 130
-const LEAD_W = 64
 const AGENT_X = 250
 const AGENT_W = 64
 /**
@@ -68,12 +66,7 @@ interface Row {
   /** Top of the `you` box, placed so its centre is the mean of what it feeds. */
   youY: number
   /**
-   * The orchestrator row's extra box. When it is here, `you` feeds only this and every agent wire
-   * leaves it instead, which is the two-hop shape drawn rather than described.
-   */
-  lead?: { y: number; h: number }
-  /**
-   * The state of the wires leaving `you` (or the lead), when it differs from the state of the agent
+   * The state of the wires leaving `you`, when it differs from the state of the agent
    * they arrive at. Only the pair needs it: nobody is holding that wire, and the two agents on the
    * end of it are holding each other.
    */
@@ -110,20 +103,8 @@ const ROWS: readonly Row[] = [
     ],
   },
   {
-    key: 'orchestrated',
-    dy: 226,
-    youY: 63,
-    lead: { y: 63, h: 26 },
-    agents: [
-      { y: 24, h: 20, state: 'idle' },
-      { y: 52, h: 20, state: 'idle' },
-      { y: 80, h: 20, state: 'idle' },
-      { y: 108, h: 20, state: 'idle' },
-    ],
-  },
-  {
     key: 'recursive',
-    dy: 378,
+    dy: 226,
     youY: 24,
     feedState: 'background',
     link: [0, 1],
@@ -134,13 +115,13 @@ const ROWS: readonly Row[] = [
   },
   {
     key: 'mixed',
-    dy: 510,
+    dy: 358,
     youY: 68,
     agents: [
       { y: 24, h: 24, state: 'watched' },
-      { y: 58, h: 20, state: 'background' },
-      { y: 86, h: 20, state: 'background' },
-      { y: 114, h: 20, state: 'background' },
+      { y: 58, h: 20, state: 'background', label: 'tests' },
+      { y: 86, h: 20, state: 'background', label: 'docs' },
+      { y: 114, h: 20, state: 'background', label: 'analysis' },
     ],
   },
 ]
@@ -167,7 +148,7 @@ export function AgentsAtOnce() {
       <svg
         id="agents-at-once-svg"
         data-component="AgentsAtOnce"
-        viewBox="0 0 640 650"
+        viewBox="0 0 640 498"
         role="img"
         aria-labelledby={titleId}
         className="h-auto w-full max-w-2xl"
@@ -210,21 +191,6 @@ export function AgentsAtOnce() {
               {t(`agents-at-once.${row.key}.name`)}
             </text>
 
-            {/* The hop from you to the orchestrator, and the only wire on that row you are on. */}
-            {row.lead && (
-              <line
-                id={`agents-at-once-${row.key}-lead-wire`}
-                data-component="AgentsAtOnce"
-                data-state="watched"
-                x1={YOU_W + STANDOFF}
-                y1={row.youY + YOU_H / 2}
-                x2={LEAD_X - STANDOFF}
-                y2={row.lead.y + row.lead.h / 2}
-                strokeWidth="2.5"
-                className={WIRE.watched}
-              />
-            )}
-
             {row.agents.map((agent, index) => {
               if (agent.fed === false) return null
               const state = row.feedState ?? agent.state
@@ -234,8 +200,8 @@ export function AgentsAtOnce() {
                   id={`agents-at-once-${row.key}-wire-${index}`}
                   data-component="AgentsAtOnce"
                   data-state={state}
-                  x1={row.lead ? LEAD_X + LEAD_W + STANDOFF : YOU_W + STANDOFF}
-                  y1={row.lead ? row.lead.y + row.lead.h / 2 : row.youY + YOU_H / 2}
+                  x1={YOU_W + STANDOFF}
+                  y1={row.youY + YOU_H / 2}
                   x2={AGENT_X - STANDOFF}
                   y2={agent.y + agent.h / 2}
                   strokeWidth={state === 'watched' ? 2.5 : 1.5}
@@ -259,31 +225,6 @@ export function AgentsAtOnce() {
                 markerEnd={`url(#${markerId})`}
                 className={WIRE.idle}
               />
-            )}
-
-            {row.lead && (
-              <g id={`agents-at-once-${row.key}-lead`} data-component="AgentsAtOnce">
-                <rect
-                  x={LEAD_X}
-                  y={row.lead.y}
-                  width={LEAD_W}
-                  height={row.lead.h}
-                  rx="6"
-                  strokeWidth="2"
-                  className={BOX.watched}
-                  data-component="AgentsAtOnce"
-                />
-                <text
-                  x={LEAD_X + LEAD_W / 2}
-                  y={row.lead.y + row.lead.h / 2 + 4}
-                  fontSize="12"
-                  textAnchor="middle"
-                  className="fill-foreground"
-                  data-component="AgentsAtOnce"
-                >
-                  {t('flow.node.agent')}
-                </text>
-              </g>
             )}
 
             <rect

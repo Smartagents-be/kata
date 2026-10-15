@@ -25,8 +25,11 @@
 
 <p data-i18n="parallel.many-agents-once.2">
   It pays when the work splits cleanly and each piece has a check of its own. 4 modules, 4
-  builds that go green or red without you. Give each agent its own git worktree, or they
-  edit the same files and you find out at merge time.
+  builds that go green or red without you. The splitting can go to 1 agent too, which hands each
+  piece to a sub-agent <svg data-icon="pattern"></svg>
+  <a href="/steps/step1/agent-patterns">Step 1's unit on agent patterns</a> calls that the
+  coordinator. Give each agent its own git worktree, or they edit the same files and you find out
+  at merge time.
 </p>
 
 <aside data-variant="warning" data-i18n="parallel.many-agents-once.3">
@@ -88,16 +91,6 @@ Then push the branch and open a pull request against main.</code></pre>
 <pre data-commands><code>git worktree remove ../kata-loan-statement
 git worktree remove ../kata-native-image</code></pre>
 
-<h2 data-i18n="parallel.orchestrator.heading">The orchestrator</h2>
-
-<p data-i18n="parallel.orchestrator.1">
-  There is a better-managed version of that. You talk to 1 agent, and it hands the pieces to
-  sub-agents it briefs itself <svg data-icon="pattern"></svg>
-  <a href="/steps/step1/agent-patterns">Step 1's unit on agent patterns</a> called this the coordinator and
-  worked out what it costs. It moves the coordination. In the agent, not
-  in your head.
-</p>
-
 <h2 data-i18n="parallel.builder-critic.heading">The builder and the critic</h2>
 
 <p data-i18n="parallel.builder-critic.1">
@@ -158,9 +151,9 @@ Return the diff and check results for my review; do not publish.</code></pre>
 </ul>
 
 <aside data-variant="warning" data-i18n="parallel.builder-critic.4">
-  Nothing else in this unit is this slow or this expensive. 2 hours is an ordinary run, and every
-  round pays for the whole design being read and written again. Keep it for work that is walled off
-  from everything else and has to come back good.
+  This is the slowest and most expensive arrangement in the unit. Every round, the critic reads the
+  whole change again and the builder rewrites what it flagged. Keep it for work that stands apart
+  from the rest, where quality counts for more than time.
 </aside>
 
 <p data-i18n="parallel.builder-critic.5">
@@ -181,8 +174,9 @@ Return the diff and check results for my review; do not publish.</code></pre>
 <p data-i18n="parallel.interactive-agent-background.2">
   The one in front you
   work with the way you would if it were the only one, answering it and reading the diff it hands
-  back. The ones behind are running goals that take an hour and need nothing from you until they
-  report. Middling control, and most days look like this.
+  back. The ones behind you started yourself, each on a goal of its own that takes an hour. They
+  report to you, not to the agent in front, and need nothing from you until then. Middling control,
+  and most days look like this.
 </p>
 
 <p data-i18n="parallel.interactive-agent-background.3">

@@ -288,16 +288,16 @@ const step2: Step = {
       title: 'parallel.title',
       html: parallel,
       // One slot, and it closes the unit rather than sitting under the first section: the drawing
-      // names all five arrangements, so under `One agent at a time` it would spend four of them
+      // names all four arrangements, so under `One agent at a time` it would spend three of them
       // early. Nothing below it reads it back, which is why its rows carry their own notes.
       // The worktree drawing sits in `A worktree each`, moved here from `steering` in October 2026
       // because running several agents at once is this unit's subject, not that one's.
       inlineFigures: { 'worktree-each': <WorktreeEach />, 'agents-at-once': <AgentsAtOnce /> },
-      // Four questions, and they are situations rather than definitions: which arrangement a piece
-      // of work wants, what four unread diffs actually cost, what an orchestrator moves, and what a
-      // builder and a critic looping at each other are actually selling you. The
-      // unit carries no task card, so the HTML writes no `ui:quiz.title` and `QuizPanel` prints its
-      // own heading under the closing figure, the way `workflows` and `goals` do.
+      // Three questions, and they are situations rather than definitions: which arrangement a piece
+      // of work wants, what four unread diffs actually cost, and what a builder and a critic looping
+      // at each other are actually selling you. The unit carries no task card, so the HTML writes no
+      // `ui:quiz.title` and `QuizPanel` prints its own heading under the closing figure, the way
+      // `workflows` and `goals` do.
       quiz: parallelQuiz,
     },
     {
