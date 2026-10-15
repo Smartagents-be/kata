@@ -49,7 +49,7 @@
   "machinery.same.label": "Draai de build van dat project zelf in de container, in een tweede terminal, op dezelfde JDK en dezelfde Maven als de service van de agent.",
   "machinery.same.command": "npx -y @devcontainers/cli@0.89.0 exec --workspace-folder . bash -c \"cd exercises/step1/java && mvn verify\"",
   "machinery.stop.label": "Als je klaar bent, stop je de container vanuit de map van de kata. Je aanmeldingen en de downloads van Maven blijven in hun volumes staan voor de volgende keer.",
-  "machinery.stop.command": "docker stop $(docker ps -q --filter \"label=devcontainer.local_folder=$PWD\")",
+  "machinery.stop.command": "docker ps -q --filter \"label=devcontainer.local_folder=$PWD\" | xargs -r docker stop",
   "gate-walk.title": "Analyseer je eigen kwaliteitsbewaking",
   "gate-walk.description": "Deze oefening voer je uit op je eigen dagelijkse werk, niet binnen de oefenomgeving van de kata. Er wordt niets beoordeeld en niets verstuurd. Het vinkje dient puur als bladwijzer voor jezelf.",
   "gate-walk.todo": "Vink deze opdracht af",

@@ -1312,7 +1312,9 @@ moves: open it, start the agent, have it start step 1's service and count the ti
 the frontend and open `localhost:5174/catalog` on the laptop (`view`, the one path `ContainerMap`
 draws from the browser in), run that project's `mvn verify` yourself beside it, and stop it. The devcontainer CLI has no stop command,
 so `stop` is `docker stop` on the container the CLI labels with the folder it was started from
-(`devcontainer.local_folder`), which is why it runs from the kata's root. **The service is step 1's and not step 2's, on purpose**:
+(`devcontainer.local_folder`), which is why it runs from the kata's root. It pipes through
+`xargs -r` rather than `docker stop $(...)`, because the substitution form errors with "requires at
+least 1 argument" when the container is already stopped; `-r` works on GNU and macOS xargs alike. **The service is step 1's and not step 2's, on purpose**:
 step 2's only endpoint is `/api/loans/statement/{tier}`, which answers 500 until the student writes
 `forTier`, and an agent shown that 500 on the projector sets about the `challenge` flag in front of
 the class. The prompt asks for a count rather than the titles, so they are not read out on screen.
