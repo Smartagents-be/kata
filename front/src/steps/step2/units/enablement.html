@@ -43,8 +43,10 @@
 <p data-i18n="enablement.development-container.2">
   The container is also a sandbox for the agent. It sees what is in the container and nothing else
   on your laptop: not your home folder, not your SSH keys. The sandbox has gaps, though. The agent
-  can still reach the internet. And if you share your laptop's folder with the container instead of
-  cloning the repo into it, what the agent writes there runs on your laptop at your next build.
+  can still reach the internet. And when the container shares your laptop's folder, the agent edits
+  the files your laptop builds, so what it writes there runs on your laptop at your next build. You
+  can close that gap by cloning the repo into the container instead. Nothing the agent writes then
+  touches your laptop, but you pay for it in ease of use.
 </p>
 
 <h2 data-i18n="enablement.reproduce-first.heading">Reproduce first</h2>
