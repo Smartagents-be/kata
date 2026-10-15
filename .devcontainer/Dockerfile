@@ -30,6 +30,7 @@ ENV DEVCONTAINER=true
 RUN mkdir -p /workspace/front/node_modules /home/node/.claude /home/node/.copilot /home/node/.m2 \
     /workspace/exercises/step0/java/target /workspace/exercises/step1/java/target \
     /workspace/exercises/step2/java/target /workspace/exercises/step3/java/target \
+    /workspace/front/dist /workspace/.playwright-mcp /workspace/.shots /workspace/review \
     /usr/local/share/npm-global \
   && chown -R node:node /workspace /home/node/.claude /home/node/.copilot /home/node/.m2 \
     /usr/local/share/npm-global

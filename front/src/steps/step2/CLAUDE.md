@@ -1372,8 +1372,14 @@ travel with it:
   the middle of a session**, which is why the section still tells the student to run it. A Maven or
   npm pre-step was rejected: it would mean editing the step projects' poms, which are exercises.
   Tested by planting each of 8 hiding spots in a clone: all caught. Bash only, so Windows needs WSL.
-  **Add a path to its expected list only when it is a container-only volume, read-only in the
-  container, or never run on the laptop**, and say which in the comment beside it.
+  **Its expected list may only hold paths the container cannot write**: a container-only volume or
+  a read-only mount, added in the same change as its mount. "Never run on the laptop" was the old
+  test and a fifth review broke it: `front/dist` is served and shipped from the laptop, the
+  maintainer's `review/` notes are read by agents there (a planted note is a prompt injection), and
+  `step[0-9]` let through `target/` folders no volume covered. So `front/dist`, `.playwright-mcp`,
+  `.shots` and `review` are container-only volumes now, `.impeccable` is read-only, and the step
+  pattern is `step[0-3]`. Tested by writing into every listed path from the container: nothing
+  reached the laptop, and the 8 earlier plants are still caught.
 - **Two kata dev containers cannot run at once.** Both publish `127.0.0.1:5174`, and on Docker
   Desktop the second one then starts with no network at all, which shows up as `npm ci` failing
   with "Exit handler never called!" and DNS errors. Stop the first, or change `appPort` in a copy.

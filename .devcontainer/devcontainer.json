@@ -29,6 +29,8 @@
     "source=${localWorkspaceFolder}/.devcontainer,target=/workspace/.devcontainer,type=bind,readonly",
     "source=${localWorkspaceFolder}/.claude,target=/workspace/.claude,type=bind,readonly",
     "source=${localWorkspaceFolder}/.idea,target=/workspace/.idea,type=bind,readonly",
+    // .impeccable's git-ignored files are read by the Impeccable tool on your laptop.
+    "source=${localWorkspaceFolder}/.impeccable,target=/workspace/.impeccable,type=bind,readonly",
     // Builds in here write to volumes, not to the target/ folders on your laptop. Maven on your
     // laptop skips compiling when target/ is newer than the sources, so classes built in here would
     // otherwise run on your laptop unseen: target/ is git-ignored.
@@ -36,6 +38,14 @@
     "source=kata-target-step1-${devcontainerId},target=/workspace/exercises/step1/java/target,type=volume",
     "source=kata-target-step2-${devcontainerId},target=/workspace/exercises/step2/java/target,type=volume",
     "source=kata-target-step3-${devcontainerId},target=/workspace/exercises/step3/java/target,type=volume",
+    // The same for the other git-ignored folders review.sh expects: what is written to them in here
+    // stays in here. front/dist is served and shipped from your laptop; the other 3 are the
+    // maintainer's scratch folders, read by agents on the laptop. On a laptop without them, Docker
+    // leaves an empty folder where each one mounts, which git does not show.
+    "source=kata-front-dist-${devcontainerId},target=/workspace/front/dist,type=volume",
+    "source=kata-scratch-playwright-${devcontainerId},target=/workspace/.playwright-mcp,type=volume",
+    "source=kata-scratch-shots-${devcontainerId},target=/workspace/.shots,type=volume",
+    "source=kata-scratch-review-${devcontainerId},target=/workspace/review,type=volume",
     // The container's node_modules hold Linux binaries; a volume keeps them off the host's copy.
     "source=kata-node-modules-${devcontainerId},target=/workspace/front/node_modules,type=volume"
   ],

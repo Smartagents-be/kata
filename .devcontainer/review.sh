@@ -14,17 +14,18 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
-# Ignored on purpose, and either out of the container's reach or never run on your laptop.
+# Ignored on purpose. Every entry here must be a path the container cannot write: a container-only
+# volume or a read-only mount in devcontainer.json. "Never run on the laptop" is not enough, since a
+# file an agent on the laptop reads is as good as code. Add a path only together with its mount.
 expected() {
   case "$1" in
-    exercises/step[0-9]/java/target/) return 0 ;;     # a container-only volume in there
-    front/node_modules/) return 0 ;;                  # a container-only volume in there
-    front/dist/) return 0 ;;                          # build output, served, never executed here
+    exercises/step[0-3]/java/target/) return 0 ;;     # container-only volumes, 1 per step
+    front/node_modules/ | front/dist/) return 0 ;;    # container-only volumes
+    .playwright-mcp/ | .shots/ | review/) return 0 ;; # container-only volumes
     .idea/*) return 0 ;;                              # read-only in the container
     .claude/settings.local.json) return 0 ;;          # read-only in the container
-    .DS_Store | */.DS_Store) return 0 ;;              # macOS folder metadata
-    .playwright-mcp/ | .shots/ | review/) return 0 ;; # maintainer scratch, never built or run
-    .impeccable/hook.cache.json | .impeccable/config.local.json | .impeccable/live/sessions/) return 0 ;;
+    .impeccable/*) return 0 ;;                        # read-only in the container
+    .DS_Store | */.DS_Store) return 0 ;;              # macOS folder metadata, a file and never code
     *) return 1 ;;
   esac
 }
