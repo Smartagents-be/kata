@@ -28,6 +28,8 @@ ENV PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH
 # at all: a sudo rule to chown it was root in all but name, since /workspace is node's to symlink.
 ENV DEVCONTAINER=true
 RUN mkdir -p /workspace/front/node_modules /home/node/.claude /home/node/.copilot /home/node/.m2 \
+    /workspace/exercises/step0/java/target /workspace/exercises/step1/java/target \
+    /workspace/exercises/step2/java/target /workspace/exercises/step3/java/target \
     /usr/local/share/npm-global \
   && chown -R node:node /workspace /home/node/.claude /home/node/.copilot /home/node/.m2 \
     /usr/local/share/npm-global

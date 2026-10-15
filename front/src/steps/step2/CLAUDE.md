@@ -1347,6 +1347,19 @@ travel with it:
   `front/node_modules`; since `/workspace` is `node`'s, a symlink there turned that into root. The
   image now creates every volume target owned by `node`, Docker creates each new volume with that
   owner, and nothing needs sudo. Do not add sudo back for a convenience.
+- **What the container keeps from running on the laptop, checked end to end** (October 2026, after
+  a third security review). The rule: anything your laptop runs later that git does not show is
+  either read-only in the container or kept in a container-only volume. Read-only: `.devcontainer/`
+  (`initializeCommand` runs on the laptop at the next `up`), `.git` (hooks), the root `.claude/`
+  (`settings.local.json` is git-ignored and Claude Code on the laptop runs its hooks at start) and
+  `.idea/` (IntelliJ run configurations, partly git-ignored). Volumes: `front/node_modules` and the
+  4 `exercises/stepN/java/target/` folders, because Maven on the laptop skips compiling when
+  `target/` is newer than the sources and would run classes built in the container unseen.
+  **What is left, on purpose**: `exercises/step2/java/.claude/` stays writable because the workshop
+  has the agent write a hook and a skill there, so its git-ignored `settings.local.json` is the one
+  known path the mounts do not close; tracked or new files anywhere show in `git status`. That is
+  why `development-container.2` says to run `git status --ignored` as well as read the diff. A new
+  git-ignored file that the laptop executes needs a mount here, or that sentence stops being enough.
 - **Two kata dev containers cannot run at once.** Both publish `127.0.0.1:5174`, and on Docker
   Desktop the second one then starts with no network at all, which shows up as `npm ci` failing
   with "Exit handler never called!" and DNS errors. Stop the first, or change `appPort` in a copy.

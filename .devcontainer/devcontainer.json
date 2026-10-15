@@ -17,9 +17,21 @@
     // Git history is read-only in here. You commit and push from your laptop anyway, and a
     // writable .git would let whatever runs in the container plant a hook that runs on your laptop.
     "source=${localWorkspaceFolder}/.git,target=/workspace/.git,type=bind,readonly",
-    // This folder is read-only in here too. devcontainer.json decides what runs on your laptop
-    // (initializeCommand) and what gets mounted, so the agent must not be able to edit it.
+    // Read-only in here too, because your laptop runs what is in them and git does not show all of
+    // it. devcontainer.json decides what runs on your laptop at the next `up` (initializeCommand)
+    // and what gets mounted. .claude/settings.local.json is git-ignored and Claude Code on your
+    // laptop runs its hooks at start. .idea holds IntelliJ's run configurations, some of them
+    // git-ignored. The agent in here cannot save "always allow" choices for the project as a result.
     "source=${localWorkspaceFolder}/.devcontainer,target=/workspace/.devcontainer,type=bind,readonly",
+    "source=${localWorkspaceFolder}/.claude,target=/workspace/.claude,type=bind,readonly",
+    "source=${localWorkspaceFolder}/.idea,target=/workspace/.idea,type=bind,readonly",
+    // Builds in here write to volumes, not to the target/ folders on your laptop. Maven on your
+    // laptop skips compiling when target/ is newer than the sources, so classes built in here would
+    // otherwise run on your laptop unseen: target/ is git-ignored.
+    "source=kata-target-step0-${devcontainerId},target=/workspace/exercises/step0/java/target,type=volume",
+    "source=kata-target-step1-${devcontainerId},target=/workspace/exercises/step1/java/target,type=volume",
+    "source=kata-target-step2-${devcontainerId},target=/workspace/exercises/step2/java/target,type=volume",
+    "source=kata-target-step3-${devcontainerId},target=/workspace/exercises/step3/java/target,type=volume",
     // The container's node_modules hold Linux binaries; a volume keeps them off the host's copy.
     "source=kata-node-modules-${devcontainerId},target=/workspace/front/node_modules,type=volume"
   ],
