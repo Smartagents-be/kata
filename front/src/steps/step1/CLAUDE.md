@@ -2093,7 +2093,7 @@ command to run any more, and no script they are about to open that a warning wou
 not let a help key open on what the eyebrow already says, and do not let one close on what its own
 first sentence already said (`flag.decode.help` lost "no trace will show it" and `flag.debug.help`
 "at the default log level it never prints" for that reason). The two ends of the seam are marked
-now: `truth.hallucinations.2` closes on the workshop and `workshop.lead.1` links back, so rewording
+now: `truth.hallucinations.2` closes on the workshop and `workshop.lead.2` links back, so rewording
 either means visiting the other, in both languages.
 
 **The board runs easiest first, and the order is `machine`, `system`, `debug-config`,

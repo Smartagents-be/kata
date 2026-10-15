@@ -1,11 +1,15 @@
 <!-- The capstone, and deliberately the leanest unit in the step. The per-flag technique lives on
      the board itself (each row's hint line and its Hint dialog, the `flag.*` keys), so the prose
-     does not repeat it, and the three house rules now live in step 0's `welcome`, so `lead.2` links
+     does not repeat it, and the three house rules now live in step 0's `welcome`, so `lead.3` links
      to them rather than restating any of them.
 
-     The two lead paragraphs are the game and nothing else: `lead.1` is what is on the board and
-     `lead.2` is how the hunt is played, with the launcher under it. The page carries the game and
-     the board carries every technique. There was a third paragraph and a second `<pre>` pair here,
+     `lead.1` says what the service is, a library's catalogue lookup and nothing more, so the
+     student knows what they are pointing the agent at before the hunt starts. It names no flag and
+     no technique, and it must stay that way.
+
+     The two lead paragraphs after it are the game and nothing else: `lead.2` is what is on the board and
+     `lead.3` is how the hunt is played, with the launcher under it. The page carries the game and
+     the board carries every technique. There was another paragraph and a second `<pre>` pair here,
      the consent for the setup script and the command that ran it, and both went when the line
      moved to install time. Do not write either back: `install.txt` carries the consent now, the
      student's agent runs it long before they reach this page, and a page that says a line was
@@ -15,15 +19,15 @@
      of them were labelled tools / session / harness once, and the three nouns all meant something
      other than the unit that owns them: a Spring request is not the student's session, and Spring's
      log config is not the harness. What actually separates them is where the answer comes from,
-     which is the unit directly above this one. `lead.1` links back to it and the five
+     which is the unit directly above this one. `lead.2` links back to it and the five
      `flag.*.help` keys open on the provenance rather than on a layer.
 
      `system` is the one flag no file holds: it is the whole response read as a whole rather than
-     anything hidden in the pipeline. So `lead.1` no longer says the flags are things the pipeline
+     anything hidden in the pipeline. So `lead.2` no longer says the flags are things the pipeline
      keeps back, and the Catalogue page is an instrument on this page rather than a mention. The
      design and the one rule protecting it are in `front/src/steps/step1/CLAUDE.md`.
 
-     `lead.1` is one set of five under one provenance rule, and it must stay that. It said four
+     `lead.2` is one set of five under one provenance rule, and it must stay that. It said four
      flags and then a fifth once, which made the reader hold two counts before they had seen the
      board: the machine flag is one of the five, named as coming from outside the service in the
      same sentence as the four that come out of it, and it is not an exception bolted on afterwards.
@@ -34,15 +38,15 @@
      `flag.machine.help.claude` and `.copilot`, which survive guided mode where this prose does not.
      Do not grow them back onto the page.
 
-     `lead.1` used to close on three sentences, one per flag, saying where each one sits. They were
+     `lead.2` used to close on three sentences, one per flag, saying where each one sits. They were
      the board's own hint lines a second time, so they went, and nothing on this page may name a
      technique again. The launcher `<pre>` is the agent and nothing
      else for the same reason: it ran `mvn spring-boot:run` and a `curl` before, which is the
      student doing by hand the two things the first house rule hands to the agent.
 
-     The Catalogue pointer sits in `lead.2` rather than in `lead.1`, with the fact that the service
-     has to stay up beside it: `lead.1` promised that page before anything had started the service,
-     so the pointer failed silently. `lead.1` keeps the endpoint, the nine titles, what a flag looks
+     The Catalogue pointer sits in `lead.3` rather than in `lead.2`, with the fact that the service
+     has to stay up beside it: `lead.2` promised that page before anything had started the service,
+     so the pointer failed silently. `lead.2` keeps the endpoint, the nine titles, what a flag looks
      like and the link to `truth`, and nothing else. `one-window.1` names itself as the exception to
      step 0's second house rule, which is the hedge that rule already carries; the reconciliation is
      done here rather than on `welcome`, so `welcome` is untouched.
@@ -55,13 +59,18 @@
      board deliberately has none. -->
 
 <p data-i18n="workshop.lead.1">
+  The service behind this page is an application a library could use to look up the books it
+  holds. It is a simple one: the only function described so far is fetching the catalogue.
+</p>
+
+<p data-i18n="workshop.lead.2">
   <code>GET /api/titles</code> returns 9 book titles. But that response and the pipeline behind it
   hold more than those 9 lines. The board below has 5 flags, in leetspeak between <code>{curly
   braces}</code>. You get 4 out of this service and 1 off your own machine, and
   <a href="/steps/step1/grounding">where each one comes from</a> is the only difference.
 </p>
 
-<p data-i18n="workshop.lead.2">
+<p data-i18n="workshop.lead.3">
   Finding all 5 is the whole task. Each row names the way in to its flag, and its Hint says where to
   look. Your agent does the work, under <a href="/steps/step0/how-it-works">the house rules from the
   intro</a>. Start it in the backend and ask from there: it runs the service and calls the endpoint,
