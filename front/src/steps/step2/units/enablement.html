@@ -44,8 +44,9 @@
   The container is also a sandbox for the agent. It sees the repo and nothing else on your laptop:
   not your home folder, not your SSH keys, and the git history is read-only. The sandbox has gaps,
   though. The agent can still reach the internet, and a script it writes in the repo runs on your
-  laptop at your next local build. Read the diff before you build, and
-  <code>git status --ignored</code> for the files the diff leaves out.
+  laptop at your next local build. Read the diff before you build, and run
+  <code>.devcontainer/review.sh</code> for the files the diff leaves out. It also runs by itself
+  when the container starts and stops.
 </p>
 
 <h2 data-i18n="enablement.reproduce-first.heading">Reproduce first</h2>

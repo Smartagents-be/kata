@@ -1311,8 +1311,8 @@ root), with the agent running inside it next to the JDK, Maven, Node and the app
 moves: open it, start the agent, have it start step 1's service and count the titles, have it start
 the frontend and open `localhost:5174/catalog` on the laptop (`view`, the one path `ContainerMap`
 draws from the browser in), run that project's `mvn verify` yourself beside it, and stop it. The devcontainer CLI has no stop command,
-so `stop` is `docker stop` on the container the CLI labels with the folder it was started from
-(`devcontainer.local_folder`), which is why it runs from the kata's root. **The service is step 1's and not step 2's, on purpose**:
+so `stop` is `.devcontainer/stop.sh`: `docker stop` on the container the CLI labels with the
+folder it was started from (`devcontainer.local_folder`), then `review.sh`. **The service is step 1's and not step 2's, on purpose**:
 step 2's only endpoint is `/api/loans/statement/{tier}`, which answers 500 until the student writes
 `forTier`, and an agent shown that 500 on the projector sets about the `challenge` flag in front of
 the class. The prompt asks for a count rather than the titles, so they are not read out on screen.
@@ -1358,8 +1358,22 @@ travel with it:
   **What is left, on purpose**: `exercises/step2/java/.claude/` stays writable because the workshop
   has the agent write a hook and a skill there, so its git-ignored `settings.local.json` is the one
   known path the mounts do not close; tracked or new files anywhere show in `git status`. That is
-  why `development-container.2` says to run `git status --ignored` as well as read the diff. A new
-  git-ignored file that the laptop executes needs a mount here, or that sentence stops being enough.
+  why `development-container.2` names a check as well as the diff. A new git-ignored file that the
+  laptop executes needs a mount here, or the check's expected list grows a hole.
+- **`.devcontainer/review.sh` is that check** (October 2026, after a fourth security review found
+  the ignore patterns unanchored: an `out/` folder of sources, a `.class` in `src/main/resources`, a
+  `node_modules` shadowing a real package and a `.gitignore` that hides itself all reach the laptop's
+  build unseen). It fails on any git-ignored path outside a short expected list, and on any nested
+  git repository; new files `git status` does show are left to the diff, or every session's new
+  files would fail it. It runs by itself at both ends of a session: as `initializeCommand` before
+  every `up` (on the laptop, so `up` refuses to start over a planted file) and at the end of
+  `stop.sh`, which is the card's `stop` move. It lives in `.devcontainer/`, read-only in the
+  container, so the agent cannot edit the check. **What it cannot do is run before a laptop build in
+  the middle of a session**, which is why the section still tells the student to run it. A Maven or
+  npm pre-step was rejected: it would mean editing the step projects' poms, which are exercises.
+  Tested by planting each of 8 hiding spots in a clone: all caught. Bash only, so Windows needs WSL.
+  **Add a path to its expected list only when it is a container-only volume, read-only in the
+  container, or never run on the laptop**, and say which in the comment beside it.
 - **Two kata dev containers cannot run at once.** Both publish `127.0.0.1:5174`, and on Docker
   Desktop the second one then starts with no network at all, which shows up as `npm ci` failing
   with "Exit handler never called!" and DNS errors. Stop the first, or change `appPort` in a copy.

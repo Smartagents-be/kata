@@ -4,6 +4,10 @@
     "dockerfile": "Dockerfile",
     "args": { "CLAUDE_CODE_VERSION": "2.1.300", "COPILOT_VERSION": "1.0.98" }
   },
+  // Runs on your laptop before every `up`: review.sh fails if the last session left files git does
+  // not show. This file and the script are read-only inside the container, so the agent cannot
+  // change either.
+  "initializeCommand": ["${localWorkspaceFolder}/.devcontainer/review.sh"],
   "remoteUser": "node",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
   "workspaceFolder": "/workspace",
