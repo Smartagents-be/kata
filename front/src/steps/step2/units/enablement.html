@@ -30,9 +30,9 @@
 
 <p data-i18n="enablement.development-container.1">
   The kata ships one, in <code>.devcontainer/</code>. The <code>Dockerfile</code> builds an image
-  with the JDK, Maven, Node, Claude Code and Copilot CLI in it. Your repo is not copied in: the
-  folder on your laptop is mounted into the container, so a file the agent writes there is a file in
-  your repo. What has to outlive the container, such as your login and Maven's downloads, sits in a
+  with the JDK, Maven, Node, Claude Code and Copilot CLI in it. Your IDE connects to the container
+  (VS Code and IntelliJ both can), so the editing, the build and the agent all run inside it. What
+  has to outlive the container, such as your login and Maven's downloads, sits in a
   volume that the next container mounts again. Everything else goes when the container does.
 </p>
 
@@ -41,12 +41,10 @@
 <div data-figure="container-map"></div>
 
 <p data-i18n="enablement.development-container.2">
-  The container is also a sandbox for the agent. It sees the repo and nothing else on your laptop:
-  not your home folder, not your SSH keys, and the git history is read-only. The sandbox has gaps,
-  though. The agent can still reach the internet, and a script it writes in the repo runs on your
-  laptop at your next local build. Read the diff before you build, and run
-  <code>.devcontainer/review.sh</code> for the files the diff leaves out. It also runs by itself
-  when the container starts and stops.
+  The container is also a sandbox for the agent. It sees what is in the container and nothing else
+  on your laptop: not your home folder, not your SSH keys. The sandbox has gaps, though. The agent
+  can still reach the internet. And if you share your laptop's folder with the container instead of
+  cloning the repo into it, what the agent writes there runs on your laptop at your next build.
 </p>
 
 <h2 data-i18n="enablement.reproduce-first.heading">Reproduce first</h2>

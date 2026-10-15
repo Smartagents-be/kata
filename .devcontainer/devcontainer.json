@@ -4,10 +4,6 @@
     "dockerfile": "Dockerfile",
     "args": { "CLAUDE_CODE_VERSION": "2.1.300", "COPILOT_VERSION": "1.0.98" }
   },
-  // Runs on your laptop before every `up`: review.sh fails if the last session left files git does
-  // not show. This file and the script are read-only inside the container, so the agent cannot
-  // change either.
-  "initializeCommand": ["${localWorkspaceFolder}/.devcontainer/review.sh"],
   "remoteUser": "node",
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
   "workspaceFolder": "/workspace",
@@ -38,7 +34,7 @@
     "source=kata-target-step1-${devcontainerId},target=/workspace/exercises/step1/java/target,type=volume",
     "source=kata-target-step2-${devcontainerId},target=/workspace/exercises/step2/java/target,type=volume",
     "source=kata-target-step3-${devcontainerId},target=/workspace/exercises/step3/java/target,type=volume",
-    // The same for the other git-ignored folders review.sh expects: what is written to them in here
+    // The same for the other git-ignored folders: what is written to them in here
     // stays in here. front/dist is served and shipped from your laptop; the other 3 are the
     // maintainer's scratch folders, read by agents on the laptop. On a laptop without them, Docker
     // leaves an empty folder where each one mounts, which git does not show.

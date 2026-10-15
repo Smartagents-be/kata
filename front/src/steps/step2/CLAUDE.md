@@ -1311,8 +1311,8 @@ root), with the agent running inside it next to the JDK, Maven, Node and the app
 moves: open it, start the agent, have it start step 1's service and count the titles, have it start
 the frontend and open `localhost:5174/catalog` on the laptop (`view`, the one path `ContainerMap`
 draws from the browser in), run that project's `mvn verify` yourself beside it, and stop it. The devcontainer CLI has no stop command,
-so `stop` is `.devcontainer/stop.sh`: `docker stop` on the container the CLI labels with the
-folder it was started from (`devcontainer.local_folder`), then `review.sh`. **The service is step 1's and not step 2's, on purpose**:
+so `stop` is `docker stop` on the container the CLI labels with the folder it was started from
+(`devcontainer.local_folder`), which is why it runs from the kata's root. **The service is step 1's and not step 2's, on purpose**:
 step 2's only endpoint is `/api/loans/statement/{tier}`, which answers 500 until the student writes
 `forTier`, and an agent shown that 500 on the projector sets about the `challenge` flag in front of
 the class. The prompt asks for a count rather than the titles, so they are not read out on screen.
@@ -1358,28 +1358,16 @@ travel with it:
   **What is left, on purpose**: `exercises/step2/java/.claude/` stays writable because the workshop
   has the agent write a hook and a skill there, so its git-ignored `settings.local.json` is the one
   known path the mounts do not close; tracked or new files anywhere show in `git status`. That is
-  why `development-container.2` names a check as well as the diff. A new git-ignored file that the
-  laptop executes needs a mount here, or the check's expected list grows a hole.
-- **`.devcontainer/review.sh` is that check** (October 2026, after a fourth security review found
-  the ignore patterns unanchored: an `out/` folder of sources, a `.class` in `src/main/resources`, a
-  `node_modules` shadowing a real package and a `.gitignore` that hides itself all reach the laptop's
-  build unseen). It fails on any git-ignored path outside a short expected list, and on any nested
-  git repository; new files `git status` does show are left to the diff, or every session's new
-  files would fail it. It runs by itself at both ends of a session: as `initializeCommand` before
-  every `up` (on the laptop, so `up` refuses to start over a planted file) and at the end of
-  `stop.sh`, which is the card's `stop` move. It lives in `.devcontainer/`, read-only in the
-  container, so the agent cannot edit the check. **What it cannot do is run before a laptop build in
-  the middle of a session**, which is why the section still tells the student to run it. A Maven or
-  npm pre-step was rejected: it would mean editing the step projects' poms, which are exercises.
-  Tested by planting each of 8 hiding spots in a clone: all caught. Bash only, so Windows needs WSL.
-  **Its expected list may only hold paths the container cannot write**: a container-only volume or
-  a read-only mount, added in the same change as its mount. "Never run on the laptop" was the old
-  test and a fifth review broke it: `front/dist` is served and shipped from the laptop, the
-  maintainer's `review/` notes are read by agents there (a planted note is a prompt injection), and
-  `step[0-9]` let through `target/` folders no volume covered. So `front/dist`, `.playwright-mcp`,
-  `.shots` and `review` are container-only volumes now, `.impeccable` is read-only, and the step
-  pattern is `step[0-3]`. Tested by writing into every listed path from the container: nothing
-  reached the laptop, and the 8 earlier plants are still caught.
+  the shared-folder gap `development-container.2` names, and why it points at cloning instead.
+- **A check script, `review.sh`, came and went** (October 2026). After a fourth and fifth security
+  review it listed git-ignored files the container left behind and ran before every `up` and after
+  stop. A sixth review flagged it again, and the owner chose the stricter model instead: the section
+  now says your IDE connects to the container (VS Code and IntelliJ both can, IntelliJ through
+  "Create Dev Container and Clone Sources"), and that sharing the laptop's folder rather than
+  cloning the repo in is the gap. Anthropic's docs say the same: a writable project mount "can
+  still modify that code", so a sandbox there is not a hard control. **Do not bring back a check
+  script**; the card stays a demo on the kata's own trusted code with a shared folder, and the
+  read-only mounts and container-only volumes above stay as cheap defence in depth.
 - **Two kata dev containers cannot run at once.** Both publish `127.0.0.1:5174`, and on Docker
   Desktop the second one then starts with no network at all, which shows up as `npm ci` failing
   with "Exit handler never called!" and DNS errors. Stop the first, or change `appPort` in a copy.
