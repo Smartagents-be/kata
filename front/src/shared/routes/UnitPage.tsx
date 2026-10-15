@@ -9,8 +9,6 @@ import { UnitPager } from '@/shared/components/UnitPager'
 import { useStepText } from '@/shared/i18n/useStepText'
 import { showsExerciseHeading } from '@/shared/lib/content'
 import { useMode } from '@/shared/mode/useMode'
-import { unitKey } from '@/shared/progress/progress'
-import { useProgress } from '@/shared/progress/useProgress'
 import type { Step, Unit } from '@/shared/step'
 import { findStep, findUnit } from '@/steps'
 
@@ -69,8 +67,6 @@ function UnitView({ step, unit }: { step: Step; unit: Unit }) {
   const { text } = useStepText(step.id)
   const { mode } = useMode()
   const { assistant } = useAssistant()
-  const { markComplete } = useProgress()
-  const markDone = () => markComplete(unitKey(step.id, unit.id))
 
   // A unit carrying both a task and a quiz writes "Test your knowledge" above the task itself, so the
   // quiz joins that section instead of opening a second one with the same name. It is asked of the
@@ -122,7 +118,6 @@ function UnitView({ step, unit }: { step: Step; unit: Unit }) {
           key={`${step.id}/${unit.id}`}
           questions={unit.quiz}
           namespace={step.id}
-          onPass={markDone}
           heading={!sharedHeading}
         />
       )}

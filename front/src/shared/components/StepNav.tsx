@@ -1,16 +1,8 @@
-import { CheckIcon } from 'lucide-react'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import type { Transition, Variants } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, useParams } from 'react-router-dom'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@/shared/components/ui/tooltip'
 import { useStepText } from '@/shared/i18n/useStepText'
-import { useProgress } from '@/shared/progress/useProgress'
-import { unitKey } from '@/shared/progress/progress'
 import type { Step } from '@/shared/step'
 import { cn } from '@/shared/lib/utils'
 import { DURATION, EASE_QUIET, SPRING_NAV } from '@/shared/motion/motion'
@@ -122,7 +114,6 @@ function StepEntry({
 }) {
   const { t } = useTranslation()
   const { text } = useStepText(step.id)
-  const { isComplete } = useProgress()
   const reduced = useReducedMotion()
 
   return (
@@ -199,9 +190,7 @@ function StepEntry({
               data-component="StepEntry"
               className="flex flex-col gap-2.5 pt-3 pl-1"
             >
-              {step.units.map((unit, unitIndex) => {
-                const done = isComplete(unitKey(step.id, unit.id))
-                return (
+              {step.units.map((unit, unitIndex) => (
                   <motion.li
                     key={unit.id}
                     id={`step-nav-step-${index}-unit-${unitIndex}`}
@@ -226,49 +215,16 @@ function StepEntry({
                     >
                       {({ isActive }) => (
                         <>
-                          {/*
-                            The number cell doubles as a completion marker: a finished unit shows a
-                            teal check in place of its count. Mono either way, because both are the
-                            machine's bookkeeping rather than prose.
-                          */}
+                          {/* Mono, because the count is the machine's bookkeeping rather than prose. */}
                           <span
                             id={`step-nav-step-${index}-unit-${unitIndex}-number`}
                             data-component="StepEntry"
-                            data-state={done ? 'done' : 'todo'}
                             className={cn(
                               'flex w-[1.125rem] shrink-0 items-center font-mono text-[0.8125rem] tabular-nums',
-                              done
-                                ? 'text-primary'
-                                : isActive
-                                  ? 'text-primary/70'
-                                  : 'text-muted-foreground/60',
+                              isActive ? 'text-primary/70' : 'text-muted-foreground/60',
                             )}
                           >
-                            {done ? (
-                              // Only the check is the trigger, not the cell around it: an unfinished
-                              // unit shows its number there and has nothing to say about being done.
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <CheckIcon
-                                    id={`step-nav-step-${index}-unit-${unitIndex}-check`}
-                                    data-component="StepEntry"
-                                    aria-label={t('nav.unitDone')}
-                                    className="size-3.5"
-                                    strokeWidth={3}
-                                  />
-                                </TooltipTrigger>
-                                <TooltipContent
-                                  id={`step-nav-step-${index}-unit-${unitIndex}-check-tooltip`}
-                                  data-component="StepEntry"
-                                  side="right"
-                                  sideOffset={6}
-                                >
-                                  {t('nav.unitDone')}
-                                </TooltipContent>
-                              </Tooltip>
-                            ) : (
-                              String(unitIndex + 1).padStart(2, '0')
-                            )}
+                            {String(unitIndex + 1).padStart(2, '0')}
                           </span>
                           <span
                             id={`step-nav-step-${index}-unit-${unitIndex}-label`}
@@ -276,9 +232,7 @@ function StepEntry({
                             className={cn(
                               isActive
                                 ? 'text-primary font-semibold'
-                                : done
-                                  ? 'text-primary/75 group-hover:text-primary'
-                                  : 'text-muted-foreground group-hover:text-foreground',
+                                : 'text-muted-foreground group-hover:text-foreground',
                             )}
                           >
                             {text(unit.title)}
@@ -287,8 +241,7 @@ function StepEntry({
                       )}
                     </NavLink>
                   </motion.li>
-                )
-              })}
+              ))}
             </ul>
           </motion.div>
         ) : null}

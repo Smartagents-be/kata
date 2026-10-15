@@ -52,14 +52,11 @@ function shuffled<T>(items: readonly T[]): T[] {
 export function QuizPanel({
   questions,
   namespace,
-  onPass,
   heading = true,
 }: {
   questions: QuizQuestion[]
   /** The step the questions belong to; their text is read from that step's namespace. */
   namespace: string
-  /** Fired once, on check, when every question was answered correctly. Marks the unit done. */
-  onPass?: () => void
   /**
    * False when the unit's own prose already put "Test your knowledge" on the page, above a task the quiz
    * arrives after. The two then share one heading instead of printing it twice; the rule is
@@ -77,12 +74,6 @@ export function QuizPanel({
   function onSubmit(event: FormEvent) {
     event.preventDefault()
     setChecked(true)
-    const allCorrect = order.every(
-      (question) => question.choices.find((choice) => choice.id === picked[question.id])?.correct,
-    )
-    if (allCorrect) {
-      onPass?.()
-    }
   }
 
   return (

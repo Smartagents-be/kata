@@ -6,7 +6,6 @@ import { AssistantProvider } from '@/shared/assistant/AssistantProvider'
 // Imported for its side effect: initialises the one i18next instance before anything renders.
 import '@/shared/i18n/i18n'
 import { ModeProvider } from '@/shared/mode/ModeProvider'
-import { ProgressProvider } from '@/shared/progress/ProgressProvider'
 import './index.css'
 
 createRoot(document.getElementById('root')!).render(
@@ -14,9 +13,7 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <ModeProvider>
         <AssistantProvider>
-          <ProgressProvider>
-            <App />
-          </ProgressProvider>
+          <App />
         </AssistantProvider>
       </ModeProvider>
     </BrowserRouter>

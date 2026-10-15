@@ -4,7 +4,6 @@
   "nav.unitCount": "{{count}} pagina's",
   "nav.unitCount_one": "{{count}} pagina",
   "nav.unitCount_other": "{{count}} pagina's",
-  "nav.unitDone": "Afgerond",
   "nav.toggleSteps": "Toon of verberg de stappen",
   "nav.service": "De service",
 
@@ -21,7 +20,7 @@
   "settings.presentation": "Presentatie",
   "settings.reset": "Mijn voortgang resetten",
   "settings.reset.title": "Je voortgang resetten?",
-  "settings.reset.body": "Hiermee wis je elke flag die je in deze browser hebt gevonden en elke pagina die op afgerond staat, in elke stap. Dat kan je niet ongedaan maken. Je taal, je assistent en je zelfstudie-instelling blijven zoals ze zijn.",
+  "settings.reset.body": "Hiermee wis je elke flag die je in deze browser hebt gevonden, in elke stap. Dat kan je niet ongedaan maken. Je taal, je assistent en je zelfstudie-instelling blijven zoals ze zijn.",
   "settings.reset.cancel": "Annuleren",
   "settings.reset.confirm": "Resetten",
   "settings.close": "Sluiten",

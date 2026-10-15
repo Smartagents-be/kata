@@ -2,7 +2,7 @@
  * Throwing away what a browser has recorded about a run through the kata.
  *
  * Two kinds of thing are stored, and the line between them is what this draws. **Progress** is what
- * you did: the flags you captured and the pages you finished. **Preferences** are how you read
+ * you did: the flags you captured. **Preferences** are how you read
  * them: your language, which assistant the instructions should name, and whether the notes show. A
  * reset takes the first kind only, so a room of machines can be handed to the next group without
  * anyone setting the language again.
@@ -16,16 +16,14 @@
  * that must survive a reset needs a key outside it, the way `kata.mode` and `kata.assistant` do.
  */
 
-import { PROGRESS_STORAGE_KEY } from '@/shared/progress/progress'
-
 const STEP_FLAG_KEY = /^kata\.step\d+\./
 
-/** Forget every flag captured in this browser and every unit marked done, in every step. */
+/** Forget every flag captured in this browser, in every step. */
 export function resetProgress(): void {
   try {
     const stored = Object.keys(window.localStorage)
     stored
-      .filter((key) => STEP_FLAG_KEY.test(key) || key === PROGRESS_STORAGE_KEY)
+      .filter((key) => STEP_FLAG_KEY.test(key))
       .forEach((key) => {
         window.localStorage.removeItem(key)
       })

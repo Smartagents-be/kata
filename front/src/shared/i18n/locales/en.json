@@ -4,7 +4,6 @@
   "nav.unitCount": "{{count}} pages",
   "nav.unitCount_one": "{{count}} page",
   "nav.unitCount_other": "{{count}} pages",
-  "nav.unitDone": "Completed",
   "nav.toggleSteps": "Show or hide the steps",
   "nav.service": "The service",
 
@@ -21,7 +20,7 @@
   "settings.presentation": "Presentation",
   "settings.reset": "Reset my progress",
   "settings.reset.title": "Reset your progress?",
-  "settings.reset.body": "This forgets every flag you captured in this browser and every page marked done, in every step. There is no undo. Your language, your assistant and your self-learning setting stay as they are.",
+  "settings.reset.body": "This forgets every flag you captured in this browser, in every step. There is no undo. Your language, your assistant and your self-learning setting stay as they are.",
   "settings.reset.cancel": "Cancel",
   "settings.reset.confirm": "Reset it",
   "settings.close": "Close",

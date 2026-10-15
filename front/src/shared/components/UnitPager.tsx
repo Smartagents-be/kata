@@ -2,8 +2,6 @@ import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useStepText } from '@/shared/i18n/useStepText'
-import { unitKey } from '@/shared/progress/progress'
-import { useProgress } from '@/shared/progress/useProgress'
 import { cn } from '@/shared/lib/utils'
 import { neighbours, unitPath, type UnitLocation } from '@/steps'
 
@@ -47,7 +45,6 @@ import { neighbours, unitPath, type UnitLocation } from '@/steps'
  */
 export function UnitPager({ stepId, unitId }: { stepId: string; unitId: string }) {
   const { t } = useTranslation()
-  const { markComplete } = useProgress()
   const { previous, next } = neighbours(stepId, unitId)
 
   return (
@@ -58,15 +55,7 @@ export function UnitPager({ stepId, unitId }: { stepId: string; unitId: string }
       className="flex items-stretch"
     >
       {previous && <PagerLink location={previous} direction="previous" solo={!next} />}
-      {/* Moving on is what marks a unit done: the check appears in the sidebar as you leave. */}
-      {next && (
-        <PagerLink
-          location={next}
-          direction="next"
-          solo={!previous}
-          onActivate={() => markComplete(unitKey(stepId, unitId))}
-        />
-      )}
+      {next && <PagerLink location={next} direction="next" solo={!previous} />}
     </nav>
   )
 }
@@ -75,14 +64,11 @@ function PagerLink({
   location,
   direction,
   solo,
-  onActivate,
 }: {
   location: UnitLocation
   direction: 'previous' | 'next'
   /** True at either end of the curriculum, where this half stands alone and rounds both ends. */
   solo: boolean
-  /** Fired as the link is followed; used to record the unit just left as complete. */
-  onActivate?: () => void
 }) {
   const { t } = useTranslation()
   // The neighbour may live in another step, so its title is read from that step's namespace.
@@ -95,7 +81,6 @@ function PagerLink({
       id={`unit-pager-${direction}`}
       data-component="PagerLink"
       to={unitPath(location.step.id, location.unit.id)}
-      onClick={onActivate}
       className={cn(
         // The ring is inset so it is drawn on the fill rather than outside it, where on the filled
         // half it would ring the card instead of the control.

@@ -568,17 +568,18 @@ And it reloads the page after clearing, because every board reads its storage on
 would otherwise go on showing flags that are gone.
 
 The line it cuts along is **progress against preference**, and `shared/lib/reset.ts` is where that
-line is drawn. Progress is what you did, so the captured flags and the finished pages both go;
+line is drawn. Progress is what you did, so the captured flags go;
 preference is how you read, so the language and the mode both stay, and a room of machines can be
 handed to the next group without anyone setting the language again. The flags are cleared by **key
 shape, not by a list**: `shared` may not import a step, so it removes every `localStorage` key
-matching `kata.step<N>.`, plus `kata.completed`. Step 0 writes one key per answer box, step 1's
+matching `kata.step<N>.`. Step 0 writes one key per answer box, step 1's
 board and step 2's workshop one key each. A step storing something under that prefix is opting into
 being cleared; anything that must survive a reset needs a key outside it, the way `kata.mode` does.
 
-Progress is browser-only
-(`shared/progress/`): a unit is marked done when the student pages past it or aces its quiz. It is a
-convenience, not a grade, and it degrades to "nothing done" if localStorage is unavailable.
+**No page is marked done.** The sidebar used to swap a unit's number for a check once the student
+paged past it or aced its quiz, and it was removed on purpose: a quiz can be answered again after
+the check, so the tick meant nothing, and the checks replacing the numbers made the list harder to
+navigate. Do not bring a completion marker back.
 
 When writing or translating lesson text, use the `lesson-writing` skill in
 `.claude/skills/lesson-writing/`. Its main rule: no em-dashes anywhere in student-facing prose.

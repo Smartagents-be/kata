@@ -41,8 +41,7 @@ word, so a design note reading `enablement` means the unit at `/steps/step2/proo
 
 Every `workshop` keeps its id whatever its title says: it is the role the unit plays in each step,
 and the docs name it that way throughout. Retitling a unit now means moving its id and grepping
-`/steps/stepN/<old>` with it. Progress is keyed by unit id, so a rename drops that unit's tick from
-a student's browser.
+`/steps/stepN/<old>` with it.
 
 ## Assistant variants across the steps
 

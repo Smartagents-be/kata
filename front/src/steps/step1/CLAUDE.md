@@ -22,8 +22,7 @@ board. Ten units — `tokens`, `prompt`, `tools`, `context`, `session`,
 fourth was called `intro` until it was renamed, id and all, so its URL is `/steps/step1/context` and
 its prose keys read `context.<section>.<n>`. Old links to `/steps/step1/intro` are dead and there is
 no redirect, which is the decision: the app has no route aliases anywhere and one unit is not the
-place to start. A student mid-run loses that one unit's tick out of `kata.completed`, since progress
-is keyed by `step/unit`.
+place to start.
 That order is the registry's, and nothing recites it any more: `workshop`'s opening list went with
 its capstone rewrite, so moving a unit is a registry change and nothing else. **The two layers a student writes and reads for
 themselves come before the theory**, which is why `prompt` and `tools` sit ahead of `context` rather
