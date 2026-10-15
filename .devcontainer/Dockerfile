@@ -12,7 +12,7 @@ ARG COPILOT_VERSION=1.0.98
 
 # build-essential and zlib1g-dev are what native-image links against.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git less procps lsof sudo curl jq nano build-essential zlib1g-dev \
+    git less procps lsof curl jq nano build-essential zlib1g-dev \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # The JDK and Maven come from their official images rather than from apt, which has neither JDK 25
@@ -23,15 +23,14 @@ ENV JAVA_HOME=/opt/java/graalvm
 ENV MAVEN_HOME=/usr/share/maven
 ENV PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH
 
-# The node_modules volume is created root-owned, so postCreateCommand needs sudo for exactly one
-# chown. The rule allows that command with those arguments and nothing else: an unrestricted chown
-# would be root in all but name.
+# Every directory a volume mounts onto exists here, owned by node, so Docker creates each new
+# volume with that owner. That includes front/node_modules, which is why the container needs no sudo
+# at all: a sudo rule to chown it was root in all but name, since /workspace is node's to symlink.
 ENV DEVCONTAINER=true
-RUN mkdir -p /workspace /home/node/.claude /home/node/.copilot /home/node/.m2 /usr/local/share/npm-global \
-  && chown -R node:node /workspace /home/node/.claude /home/node/.copilot /home/node/.m2 /usr/local/share/npm-global \
-  && printf '%s\n' 'node ALL=(root) NOPASSWD: /usr/bin/chown node\:node /workspace/front/node_modules' \
-       > /etc/sudoers.d/node-node-modules \
-  && chmod 0440 /etc/sudoers.d/node-node-modules
+RUN mkdir -p /workspace/front/node_modules /home/node/.claude /home/node/.copilot /home/node/.m2 \
+    /usr/local/share/npm-global \
+  && chown -R node:node /workspace /home/node/.claude /home/node/.copilot /home/node/.m2 \
+    /usr/local/share/npm-global
 
 USER node
 ENV NPM_CONFIG_PREFIX=/usr/local/share/npm-global

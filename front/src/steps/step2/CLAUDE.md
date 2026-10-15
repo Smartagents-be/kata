@@ -1340,6 +1340,16 @@ travel with it:
   at the next commit. Status, log and diff still work in there; commit and hooks are refused.
   The rest of the repo stays writable, so a script or build config the agent writes still runs at
   the next local build, which is the half the card's description warns about.
+- **`.devcontainer/` is mounted read-only in the container too, and the image has no `sudo`**
+  (October 2026, after a security review of the first version). `devcontainer.json` decides what
+  runs on the laptop (`initializeCommand`) and what gets mounted, so an agent that could edit it
+  could escape at the next `up`. The first version also gave `node` sudo for 1 `chown` of
+  `front/node_modules`; since `/workspace` is `node`'s, a symlink there turned that into root. The
+  image now creates every volume target owned by `node`, Docker creates each new volume with that
+  owner, and nothing needs sudo. Do not add sudo back for a convenience.
+- **Two kata dev containers cannot run at once.** Both publish `127.0.0.1:5174`, and on Docker
+  Desktop the second one then starts with no network at all, which shows up as `npm ci` failing
+  with "Exit handler never called!" and DNS errors. Stop the first, or change `appPort` in a copy.
 - **The card claims "the same machinery" and never isolation.** Anthropic's own warning
   (code.claude.com/docs/en/devcontainer) is that with skipped permissions a dev container does not
   stop a malicious project from exfiltrating what it can reach, the agent's credentials included,

@@ -17,6 +17,9 @@
     // Git history is read-only in here. You commit and push from your laptop anyway, and a
     // writable .git would let whatever runs in the container plant a hook that runs on your laptop.
     "source=${localWorkspaceFolder}/.git,target=/workspace/.git,type=bind,readonly",
+    // This folder is read-only in here too. devcontainer.json decides what runs on your laptop
+    // (initializeCommand) and what gets mounted, so the agent must not be able to edit it.
+    "source=${localWorkspaceFolder}/.devcontainer,target=/workspace/.devcontainer,type=bind,readonly",
     // The container's node_modules hold Linux binaries; a volume keeps them off the host's copy.
     "source=kata-node-modules-${devcontainerId},target=/workspace/front/node_modules,type=volume"
   ],
@@ -35,5 +38,5 @@
   // Vite you run on the laptop itself, and on 127.0.0.1 so nothing outside your machine reaches it.
   // Vite proxies /api to the service inside the container, so the catalogue works through it too.
   "appPort": ["127.0.0.1:5174:5173"],
-  "postCreateCommand": "sudo /usr/bin/chown node:node /workspace/front/node_modules && npm ci --prefix front"
+  "postCreateCommand": "npm ci --prefix front"
 }
