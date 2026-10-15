@@ -926,9 +926,9 @@ two views cannot drift: `toMarkdown` pads the same cells the table renders. That
 the switch exists rather than a second `<pre>`, and it is what the paragraph under the figure turns
 on, namely that an audit looks like a report and is a file that diffs. Three things in it are
 decisions. The subject is **security rather than this course**, because a reader can tell a missing
-`aud` check from a half-set header and cannot tell whether a curriculum unit is thin; the repository's
-own `audit.md` is named in the prose instead, which is where the evidence belongs, and the caption
-says the table is not a run against this repository. **Each status is used once**, so the four rows
+`aud` check from a half-set header and cannot tell whether a curriculum unit is thin; the caption
+says the table is not a run against this repository, and the prose no longer points at the
+repository's own `audit.md` either. **Each status is used once**, so the four rows
 teach the legend by standing next to each other and the figure needs no legend line. And the solid
 row **carries no remark on purpose**, because the paragraph under it claims a row you can stop
 carrying around is worth as much as the rest. The table is sized to fit the prose column: only the
