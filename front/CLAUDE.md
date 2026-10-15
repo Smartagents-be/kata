@@ -186,6 +186,16 @@ The look comes from a design system authored outside this repo (a Claude Design 
 `Educational Design System v3.dc.html`) and lives here as tokens in `front/src/index.css`. Nothing
 else holds a colour: components name tokens, so a change to the palette is a change to one file.
 
+`src/shadcn.css` is **vendored verbatim** from `shadcn@4.21.5` (`dist/tailwind.css`), and is the
+one exception: its `#000` values are mask alpha, not palette. The `shadcn` package is not a
+dependency on purpose. That stylesheet was all the app took from it, and its CLI dragged in a
+`braces` advisory with no fixed release. `npx shadcn@latest add …` still works without it. To
+re-sync, copy the file from a fresh `shadcn` tarball rather than adding the package back. The
+`overrides` entry in `package.json` lifts typography's pinned `postcss-selector-parser` from 6 to
+7.1.6 for an advisory; the built CSS was byte-identical across that change. **Never run
+`npm audit fix --force` here**: it once downgraded `shadcn` to the empty 1.0.0 placeholder and
+broke every page.
+
 - **One teal does the heavy lifting.** `--primary` marks the primary action, the active step, the
   active unit, the current language, the focus ring and a prose list's bullets. That last one is
   `--tw-prose-bullets`, which was `--border` and is now the brand colour, so it is one line in
