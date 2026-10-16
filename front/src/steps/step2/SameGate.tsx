@@ -20,7 +20,7 @@ import { useTranslation } from 'react-i18next'
  * containment here (`RunSheet`'s rule), and who typed the code is not a container.
  *
  * **The gate is the only teal thing**, on the step's rule that teal is what the shape adds.
- * `GoalGate` in `goals` colours its gate the same way and that is deliberate rather than drift: a
+ * `GoalGate` in `enablement` colours its gate the same way and that is deliberate rather than drift: a
  * gate is a gate in both units. What keeps them apart is the structure. `GoalGate` is a row with a
  * return path, and it argues that a goal's only exit is a command answering yes. This one has no
  * loop and no command in it, and argues who the gate is for.

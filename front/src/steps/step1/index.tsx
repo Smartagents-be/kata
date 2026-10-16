@@ -7,6 +7,7 @@ import { BundleCompare } from './BundleCompare'
 import { ConnectOne } from './ConnectOne'
 import { WindowGrid } from './WindowGrid'
 import { ContextFalloff } from './ContextFalloff'
+import { ContextZone } from './ContextZone'
 import { CoordinatorFanout } from './CoordinatorFanout'
 import { CutItUp } from './CutItUp'
 import { DecompositionTree } from './DecompositionTree'
@@ -156,6 +157,8 @@ const step1: Step = {
       inlineFigures: {
         'window-grid': <WindowGrid />,
         'oneshot-compare': <OneShotCompare />,
+        // Under `more-context-not.3`: the drop-off as a band on a to-scale axis, memes and all.
+        'context-zone': <ContextZone />,
         // The unit's task: `bad-context-bad.3` worked, a stale rule followed and then corrected.
         'read-your-window': <ReadYourWindow />,
       },

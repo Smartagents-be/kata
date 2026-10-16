@@ -126,6 +126,23 @@
     follows them.
   </p>
 
+  <!-- The drop-off as a number, at the owner's asking (16 October 2026). It is a practitioners' rule
+       of thumb (Dex Horthy's "dumb zone", Matt Pocock's "smart zone"), not a measured threshold, and
+       the sentence says so; `ContextZone` draws it as a band for the same reason. -->
+  <p data-i18n="context.more-context-not.3">
+    That drop starts long before the context is full. People who work with agents every day put it
+    somewhere around 100K to 150K tokens, as a rule of thumb rather than a measured line. A larger
+    context mostly adds room past that point.
+  </p>
+</div>
+
+<!-- Filled by the ContextZone element registered under this name in steps/step1/index.tsx. The
+     self-audience wrapper closes before it and reopens after it, because a wrapped marker is not cut
+     into a segment and the figure would vanish. -->
+<div data-figure="context-zone"></div>
+
+<div data-audience="self">
+
   <!-- The four moves are the ones Anthropic's own guidance backs (best practices, common workflows,
        large codebases, and Claude Code 101's explore-first lesson). Naming the class and the case is
        `prompt.be-exact`'s, so it is a link here and not a second telling. "Tell it where not to look"

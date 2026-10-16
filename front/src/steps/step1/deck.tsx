@@ -4,6 +4,7 @@ import { AnswerProvenance } from './AnswerProvenance'
 import { BudgetWindow } from './BudgetWindow'
 import { BundleCompare } from './BundleCompare'
 import { ContextFalloff } from './ContextFalloff'
+import { ContextZone } from './ContextZone'
 import { CoordinatorFanout } from './CoordinatorFanout'
 import { DecompositionTree } from './DecompositionTree'
 import { ExactAsk } from './ExactAsk'
@@ -419,6 +420,17 @@ const deck: SlideSpec[] = [
     figure: <OneShotCompare />,
     scale: 1.36,
     figureWidth: 1000,
+  },
+  // `more-context-not.3`'s drop-off, at the owner's asking (October 2026). 640x252 with no note, so it
+  // rides where step 2's GoalGate (640x204) does, a little smaller for the extra height.
+  {
+    id: 'deck-context-zone',
+    kind: 'figure',
+    ns: 'step1',
+    eyebrow: 'context.title',
+    title: 'deck.context.zone.title',
+    figure: <ContextZone />,
+    scale: 1.6,
   },
   // `you-choose-most`'s split, per task against fixed in the project, and why only a gate is certain.
   {

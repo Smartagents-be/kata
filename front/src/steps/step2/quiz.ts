@@ -268,20 +268,14 @@ export const steeringQuiz: QuizQuestion[] = [
 ]
 
 /**
- * The three questions under `goals`, and the lighter of the step's quizzes: the unit is a survey
- * of expensive moves, so each question takes one of them and asks what it actually costs.
- * `report-on-a-wish` is a goal with no command behind it, `fleet-bill` is the reading every agent in
- * a fan-out pays again, and `window-tail` is the timing the unit's opening figure draws.
+ * The 1 question under `enablement`, which came over with its `goal-check` section from the cut
+ * `goals` unit (October 2026). `report-on-a-wish` is a goal with no command behind it, which is the
+ * sentence the capstone is built on. Its 2 siblings went with the unit: `fleet-bill` is what
+ * `ReadEachTime` in `parallel` now draws, and `window-tail` was step 1's `model` asked a 3rd time.
  *
- * The frontier-model relay has no question of its own, on the same reasoning that leaves spec-driven
- * out of the `workflows` quiz: it is a habit rather than a decision with a wrong branch, and the one
- * thing a student could get wrong about it (letting the expensive tier write the code) is the cost
- * argument `fleet-bill` already asks in a sharper setting.
- *
- * Array order is not display order: `QuizPanel` shuffles both the questions and the choices on every
- * mount, so nothing here may lean on the question above it or name a position.
+ * The unit also closes on a task card, so `showsExerciseHeading` keeps 1 "Test your knowledge".
  */
-export const spendingQuiz: QuizQuestion[] = [
+export const proofQuiz: QuizQuestion[] = [
   {
     id: 'report-on-a-wish',
     question: 'quiz.report-on-a-wish.question',
@@ -306,58 +300,10 @@ export const spendingQuiz: QuizQuestion[] = [
     ],
     explanation: 'quiz.report-on-a-wish.explanation',
   },
-  {
-    id: 'fleet-bill',
-    question: 'quiz.fleet-bill.question',
-    choices: [
-      {
-        id: 'read-again',
-        label: 'quiz.fleet-bill.read-again',
-        correct: true,
-      },
-      {
-        id: 'overwrote',
-        label: 'quiz.fleet-bill.overwrote',
-      },
-      {
-        id: 'gathered',
-        label: 'quiz.fleet-bill.gathered',
-      },
-      {
-        id: 'pricier-tier',
-        label: 'quiz.fleet-bill.pricier-tier',
-      },
-    ],
-    explanation: 'quiz.fleet-bill.explanation',
-  },
-  {
-    id: 'window-tail',
-    question: 'quiz.window-tail.question',
-    choices: [
-      {
-        id: 'spend-it',
-        label: 'quiz.window-tail.spend-it',
-        correct: true,
-      },
-      {
-        id: 'save-it',
-        label: 'quiz.window-tail.save-it',
-      },
-      {
-        id: 'keep-busy',
-        label: 'quiz.window-tail.keep-busy',
-      },
-      {
-        id: 'upgrade-small',
-        label: 'quiz.window-tail.upgrade-small',
-      },
-    ],
-    explanation: 'quiz.window-tail.explanation',
-  },
 ]
 
 /**
- * The three questions under `parallel`, the step's third quiz. The unit surveys four arrangements of
+ * The three questions under `parallel`, the step's last quiz. The unit surveys four arrangements of
  * agents and argues that what separates them is how much of your attention each one gets, so every
  * question hands the student a situation and asks which arrangement it wants or what one of them
  * already cost: `deep-not-wide` is work that is deep rather than wide, `green-and-unread` is four

@@ -42,6 +42,19 @@
   </p>
 </aside>
 
+<p data-i18n="parallel.many-agents-once.4">
+  Tokens are the other cost. Every fresh agent reads its way in before it does anything: your
+  <code>CLAUDE.md</code> or <code>AGENTS.md</code>, the files it opens, the working out. 5 agents
+  do that reading 5 times. So split work that is big next to that reading, such as an audit or the
+  same migration in 10 modules. Keep 1 agent when the pieces touch the same files, depend on each
+  other, or are so small that reading in is most of the job.
+</p>
+
+<!-- Filled by the ReadEachTime element registered under this name in steps/step2/index.tsx. It came
+     over from the cut `goals` unit (October 2026) and sits under the cost paragraph: what it draws
+     is the bill, and `AgentsAtOnce` at the foot of the unit draws the attention. -->
+<div data-figure="read-each-time"></div>
+
 <h2 data-i18n="parallel.worktree-each.heading">A worktree each</h2>
 
 <p data-i18n="parallel.worktree-each.1">
@@ -183,8 +196,20 @@ Return the diff and check results for my review; do not publish.</code></pre>
   Scaffolding a new domain is the shape of it. Behind you, one agent is writing tests against the
   part you settled an hour ago while another brings the docs up to date. Up front you and the agent
   are still arguing the model out and writing the spec that comes of it. The agents behind you are
-  running goals rather than instructions, so you can leave them alone.
-  <a href="/steps/step2/long-runs">The unit on long runs</a> is where that shape is argued.
+  running goals rather than instructions, each with a check in it the way
+  <a href="/steps/step2/proof">the unit on proving your work</a> sets one up, so you can leave them
+  alone.
+</p>
+
+<!-- What survived of the cut `goals` unit's long-run sections: the timing, the worktree and the
+     split across sessions, in 1 paragraph. The drop-off it ends on is drawn in step 1's `context`. -->
+<p data-i18n="parallel.interactive-agent-background.4">
+  A goal like that can run for hours, so start it in the morning and read it after lunch
+  <svg data-icon="gem"></svg> Give it a worktree of its own, so it never touches the files you have
+  open. And split it across sessions: the plan and the progress go in a file, and each module starts
+  fresh, the way the sequential workflow in
+  <a href="/steps/step1/agent-patterns">step 1's unit on agent patterns</a> does it. 1 session
+  running all afternoon gets less reliable long before its context is full.
 </p>
 
 <!-- Filled by the AgentsAtOnce element registered under this name in steps/step2/index.tsx. It

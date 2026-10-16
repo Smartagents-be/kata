@@ -16,7 +16,6 @@ import { HookTree } from './HookTree'
 import { GapRule } from './GapRule'
 import { LoopInWindow } from './LoopInWindow'
 import { LoopsPerHour } from './LoopsPerHour'
-import { ModelRelay } from './ModelRelay'
 import { Preflight } from './Preflight'
 import { ProofLoop } from './ProofLoop'
 import { ProjectTree } from './ProjectTree'
@@ -35,14 +34,13 @@ import { SkillTree } from './SkillTree'
 import { TwoWindows } from './TwoWindows'
 import { VerticalSlices } from './VerticalSlices'
 import { WordsToFiles } from './WordsToFiles'
-import { WindowSpend } from './WindowSpend'
 import { WorkflowTimeline } from './WorkflowTimeline'
 import { WorkflowWeights } from './WorkflowWeights'
 import { WorktreeEach } from './WorktreeEach'
 import { Workshop } from './Workshop'
 import en from './locales/en.json'
 import nl from './locales/nl.json'
-import { parallelQuiz, patternsQuiz, spendingQuiz, steeringQuiz, workflowsQuiz } from './quiz'
+import { parallelQuiz, patternsQuiz, proofQuiz, steeringQuiz, workflowsQuiz } from './quiz'
 import setup from './units/setup.html?raw'
 import engineering from './units/engineering.html?raw'
 import gates from './units/gates.html?raw'
@@ -51,7 +49,6 @@ import patterns from './units/patterns.html?raw'
 import workflows from './units/workflows.html?raw'
 import enablement from './units/enablement.html?raw'
 import parallel from './units/parallel.html?raw'
-import goals from './units/goals.html?raw'
 import workshop from './units/workshop.html?raw'
 
 /**
@@ -59,9 +56,9 @@ import workshop from './units/workshop.html?raw'
  * the code yourself, one unit each. `setup` opens the step, since every session starts from what the
  * repository tells the agent before your first message.
  *
- * `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`, `enablement`, `parallel`
- * and `goals` each carry a drawing. `engineering`, `gates`, `steering`,
- * `patterns` and `enablement` close on an ungraded task card; `steering`, `patterns`, `workflows` and `goals`
+ * `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`, `enablement` and
+ * `parallel` each carry a drawing. `engineering`, `gates`, `steering`, `patterns` and `enablement`
+ * close on an ungraded task card; `steering`, `patterns`, `workflows`, `enablement` and `parallel`
  * carry a quiz; and `setup` and the closing `workshop` unit each carry a flag board, which is why
  * this registry is .tsx. Both boards are browser-graded, so the step still talks to the service
  * only through the `mvn verify -Pgraded` run the student does outside the app.
@@ -264,7 +261,7 @@ const step2: Step = {
       id: 'proof',
       title: 'enablement.title',
       html: enablement,
-      // Three slots inside the prose. The bands close `run-own-machine`, whose closing sentence is
+      // Four slots inside the prose (`goal-gate` is the fourth, below). The bands close `run-own-machine`, whose closing sentence is
       // the agent writing a change in seconds and your check having to keep up, so they are that
       // claim measured. `proof-loop` closes the order (reproduce, lock, implement, prove), which
       // came over from the `proof` unit in October 2026: it names all 5 stages, so under an earlier
@@ -276,47 +273,40 @@ const step2: Step = {
         'proof-loop': <ProofLoop />,
         // Under `development-container.1`: what the container holds and where the app runs.
         'container-map': <ContainerMap />,
+        // Under `goal-check`, which came over from the cut `goals` unit with it (October 2026).
+        // It is the check-and-repair loop `ProofLoop` deliberately is not.
+        'goal-gate': <GoalGate />,
       },
       // And the task under the prose, at the <hr> and the shared heading the unit's HTML now
       // writes. `run-own-machine.3` says to put everything in a development container, so the card
       // is the tutor's demo of the kata's own, with the agent inside it. It grades nothing and posts
       // nothing; the tick is a bookmark.
       figure: <SameMachinery />,
+      // 1 question, from the cut `goals` unit: a goal with no command that answers yes or no.
+      quiz: proofQuiz,
     },
     {
       id: 'parallel',
       title: 'parallel.title',
       html: parallel,
-      // One slot, and it closes the unit rather than sitting under the first section: the drawing
+      // `agents-at-once` closes the unit rather than sitting under the first section: the drawing
       // names all four arrangements, so under `One agent at a time` it would spend three of them
       // early. Nothing below it reads it back, which is why its rows carry their own notes.
       // The worktree drawing sits in `A worktree each`, moved here from `steering` in October 2026
       // because running several agents at once is this unit's subject, not that one's.
-      inlineFigures: { 'worktree-each': <WorktreeEach />, 'agents-at-once': <AgentsAtOnce /> },
+      // `read-each-time` came over from the cut `goals` unit (October 2026) and sits under
+      // `many-agents-once.4`, the token cost of splitting, beside the attention cost the aside names.
+      inlineFigures: {
+        'worktree-each': <WorktreeEach />,
+        'read-each-time': <ReadEachTime />,
+        'agents-at-once': <AgentsAtOnce />,
+      },
       // Three questions, and they are situations rather than definitions: which arrangement a piece
       // of work wants, what four unread diffs actually cost, and what a builder and a critic looping
       // at each other are actually selling you. The unit carries no task card, so the HTML writes no
       // `ui:quiz.title` and `QuizPanel` prints its own heading under the closing figure, the way
-      // `workflows` and `goals` do.
+      // `workflows` does.
       quiz: parallelQuiz,
-    },
-    {
-      id: 'long-runs',
-      title: 'goals.title',
-      html: goals,
-      // Four slots, one per expensive move the unit surveys. `window-spend` sits under the lead
-      // because the tail of a window is what two later sections lean on, so it is the one figure in
-      // this unit read forwards. The other three close the section that argues them, and none of
-      // them is read back by prose, so each carries its argument in its own labels.
-      inlineFigures: {
-        'window-spend': <WindowSpend />,
-        'goal-gate': <GoalGate />,
-        'read-each-time': <ReadEachTime />,
-        'model-relay': <ModelRelay />,
-      },
-      // The step's second quiz. One question per expensive move, since the unit's argument is what
-      // each of them costs rather than what each of them is.
-      quiz: spendingQuiz,
     },
     {
       id: 'workshop',

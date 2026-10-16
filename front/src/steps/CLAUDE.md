@@ -36,7 +36,7 @@ word, so a design note reading `enablement` means the unit at `/steps/step2/proo
 |---|---|---|
 | step0 | `welcome`, `backend` | `how-it-works`, `right-project` |
 | step1 | `prompt`, `tools`, `truth`, `recap` | `intent`, `agentic-loop`, `grounding`, `takeaways` |
-| step2 | `engineering`, `gates`, `patterns`, `enablement`, `goals` | `domain-language`, `quality-gates`, `skills`, `proof`, `long-runs` |
+| step2 | `engineering`, `gates`, `patterns`, `enablement` | `domain-language`, `quality-gates`, `skills`, `proof` |
 | step3 | `impostor` | `confidence` |
 
 Every `workshop` keeps its id whatever its title says: it is the role the unit plays in each step,

@@ -1,5 +1,7 @@
 import { useId } from 'react'
 import { useTranslation } from 'react-i18next'
+import type { Assistant } from '@/shared/assistant/assistant'
+import { useAssistant } from '@/shared/assistant/useAssistant'
 
 /**
  * What a fan-out actually pays for, drawn as the thing each agent holds. On the left, one agent that
@@ -7,9 +9,9 @@ import { useTranslation } from 'react-i18next'
  * agents, each holding an identical copy of that same reading in front of its one piece. The work is
  * the same work in both, so what the drawing says is that the reading is bought five times.
  *
- * It sits under `ultracode.3` in `goals`, the paragraph that counts the cost, rather than under the
- * one that describes the fan-out. **What it draws is what the agents hold and never the
- * arrangement.** `AgentsAtOnce` in `parallel` owns how many agents you have running and what that
+ * It sits under `many-agents-once.4` in `parallel`, the paragraph that counts the token cost of
+ * splitting, and came there from the cut `goals` unit in October 2026. **What it draws is what the
+ * agents hold and never the arrangement.** `AgentsAtOnce` in `parallel` owns how many agents you have running and what that
  * costs your attention, so a wire, a lead agent or a row per arrangement belongs there.
  *
  * It is stacked blocks inside a frame, which is `steering`'s vocabulary in `TwoWindows` and
@@ -20,8 +22,8 @@ import { useTranslation } from 'react-i18next'
  * telling twice. Relabel the copies, resize them, or reorder them, and the figure stops arguing
  * anything.
  *
- * `CLAUDE.md` is a literal rather than a locale key, on `WorktreeEach`'s rule: a filename is not
- * translated.
+ * The instructions file is a literal rather than a locale key, on `WorktreeEach`'s rule: a filename
+ * is not translated. It reads `useAssistant()`, so a Copilot reader sees `AGENTS.md`.
  */
 const TOP = 44
 const PAD = 12
@@ -36,6 +38,8 @@ const FLEET_X = 207
 
 /** Three blocks of reading in every box, and only the left one says what they are. */
 const READING = ['claude-md', 'files', 'working-out'] as const
+/** Typed per assistant, so a third one is a compile error here rather than the wrong filename. */
+const INSTRUCTIONS: Record<Assistant, string> = { claude: 'CLAUDE.md', copilot: 'AGENTS.md' }
 const READ_H = READING.length * BLOCK_H + (READING.length - 1) * BLOCK_GAP
 
 /** Where the reading stops and the work starts, in both kinds of box. */
@@ -60,6 +64,7 @@ function Held({
   labelled: boolean
 }) {
   const { t } = useTranslation('step2')
+  const { assistant } = useAssistant()
   const inner = width - PAD * 2
 
   return (
@@ -101,7 +106,7 @@ function Held({
                 fontSize="11.5"
                 className={slug === 'claude-md' ? 'fill-foreground font-mono' : 'fill-foreground'}
               >
-                {slug === 'claude-md' ? 'CLAUDE.md' : t(`read-each-time.${slug}`)}
+                {slug === 'claude-md' ? INSTRUCTIONS[assistant] : t(`read-each-time.${slug}`)}
               </text>
             )}
           </g>

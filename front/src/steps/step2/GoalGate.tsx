@@ -9,12 +9,13 @@ import { beat, glide, useStory } from '@/shared/motion/useStory'
  * is why it is the only teal box: what the section adds is that the exit is a command rather than an
  * opinion, and a goal whose check is "cleaner code" has no box to draw here at all.
  *
- * It closes `Automated quality assurance` in `goals`, at the `data-figure="goal-gate"` slot. Nothing under
- * it reads it back, so the two arrow labels and the line inside the gate carry it.
+ * It closes `A goal and its check` in `enablement`, at the `data-figure="goal-gate"` slot, and came
+ * there from the cut `goals` unit in October 2026. Nothing under it reads it back, so the two arrow
+ * labels and the line inside the gate carry it.
  *
  * **The gate carries the waiting**, in its own second line rather than in a note beside the figure:
- * the section after it argues that most of a four-hour run is the test suite, and this is where that
- * claim is drawn. It is drawn as a property of the box and never as a band of time, since
+ * most of a run that takes hours is the test suite, and since `goals` went, this line is the only
+ * place that claim is made. It is drawn as a property of the box and never as a band of time, since
  * `LoopsPerHour` in `enablement` owns the clock.
  *
  * `mvn verify` is a literal rather than a locale key, on `WorktreeEach`'s rule: a command is not

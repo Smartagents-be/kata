@@ -13,7 +13,7 @@ prohibitions are in the root `CLAUDE.md`. None of them is repeated here.
 `change`, `expectations` and `impostor`, and **the order runs from the team inwards**: what the job
 turns into and who else has to move with it, then what the people around you now believe about your
 speed, then what the change does to you. `impostor` closes the step because it is the personal one
-and there is nothing useful after it. Unit ids are single words on the tree's own convention (`session`, `goals`,
+and there is nothing useful after it. Unit ids are single words on the tree's own convention (`session`, `parallel`,
 `steering`) while the titles are the two-word terms a reader would search for, so the URL is
 `/steps/step3/expectations` and the sidebar says "Expectation management".
 
@@ -67,7 +67,9 @@ most easily lost in a rewrite here. The soft skill is the new part; the claim un
 link and one clause. Almost every lean points at step 2. `change` takes six of them, one per section
 and no unit twice: `you-test-engineer` at `gates` for the floor,
 `process-was-bottleneck` at `enablement` for one person carrying more of the stack,
-`person-still-decides` at `goals` for the work running without you between decisions,
+`person-still-decides` at `parallel` for the work running without you between decisions (it leaned
+on `goals` until that unit was cut in October 2026, and `parallel`'s background goals are where that
+work now runs; `enablement` was not an option, since `process-was-bottleneck` already holds it),
 `way-working-decision` at `patterns` for something done by hand turning into a script, `code-got-cheap`
 at `workflows` for spec-driven work keeping the description, `environment-beats-project` at `setup`
 for the environment being files. The seventh, `business-moves-closer`, links forward to

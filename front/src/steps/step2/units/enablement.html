@@ -112,6 +112,34 @@ line each, and what you could not check.</code></pre>
      would spend the later ones early. Its band is `run-own-machine`, the ground the stages stand on. -->
 <div data-figure="proof-loop"></div>
 
+<!-- Moved here from the old `goals` unit (October 2026), which was cut. It owns the sentence the
+     capstone is built on: if you cannot name the command that answers yes or no, you do not have a
+     goal. `where-day-goes` and `workshop.goal.1` lean on it, so neither restates it. -->
+<h2 data-i18n="enablement.goal-check.heading">A goal and its check</h2>
+
+<p data-i18n="enablement.goal-check.1">
+  The same check can carry a whole job. Say what has to be true when the work is done, what must
+  not change, and which command answers yes or no. The middle is the agent's to work out.
+  "90 percent line coverage" is a number the build prints. "Cleaner code" is not. If you cannot
+  name the command, you do not have a goal yet.
+</p>
+
+<pre><code>&gt; Goal: every method under article/ scores 10 or lower on
+  cyclomatic complexity. Run `mvn verify` after each class you
+  change, keep it green, and do not change a public signature.</code></pre>
+
+<p data-i18n="enablement.goal-check.2">
+  Claude Code turns that check into a loop. <code>/goal mvn verify exits 0</code> keeps the agent
+  working, and after every turn a separate model decides whether the condition holds. That model
+  only reads what the run printed, so name the command in the condition. Autopilot in Copilot CLI
+  also keeps going without you, but there the agent decides when it is done. Cap it with
+  <code>--max-autopilot-continues</code>.
+</p>
+
+<!-- Filled by the GoalGate element registered under this name in steps/step2/index.tsx. It came
+     over from `goals` with this section, and it is the loop `ProofLoop` above deliberately is not. -->
+<div data-figure="goal-gate"></div>
+
 <h2 data-i18n="enablement.t-shaped.heading">T-shaped</h2>
 
 <p data-i18n="enablement.t-shaped.1">

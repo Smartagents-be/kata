@@ -41,7 +41,7 @@ import { FLAGS_STORAGE_KEY, flags } from './flags'
  * will hold. It reads the board's own key and listens for `FLAGS_CHANGED_EVENT`, so it owns no
  * progress and writes none.
  *
- * **Each stage names the units it draws on**, and between them they name all ten. Every chip has to
+ * **Each stage names the units it draws on**, and between them they name every unit ahead of `workshop`. Every chip has to
  * be a unit the stage genuinely runs, which is a rule rather than a decoration: three were cut for
  * failing it. They are plain text and not links, because the sidebar is this app's navigation, a
  * dozen router links here would take the first dozen tab stops on the page, and on a slide they
@@ -84,9 +84,9 @@ const STAGES: readonly Stage[] = [
   },
   {
     key: 'goal',
-    // The outcome and its exit are `goals`; the shape of the fix, small methods, is `engineering`,
-    // and the floor and the ceiling it has to clear are `gates`.
-    units: ['goals', 'engineering', 'gates'],
+    // The outcome and its exit are `enablement`'s `A goal and its check`; the shape of the fix,
+    // small methods, is `engineering`, and the floor and the ceiling it has to clear are `gates`.
+    units: ['enablement', 'engineering', 'gates'],
     checks: ['mvn verify -Pgraded'],
     pays: ['coverage-floor', 'complexity-ceiling', 'honest-coverage'],
   },
@@ -115,9 +115,9 @@ const STAGES: readonly Stage[] = [
       },
       {
         key: 'compile',
-        // Planning a build you cannot afford to repeat is `workflows`; minutes a try, spent on
-        // purpose, is what `goals` is about from its title down.
-        units: ['goals', 'workflows'],
+        // Planning a build you cannot afford to repeat is `workflows`. It named `goals` too, for the
+        // minutes a try, until that unit was cut in October 2026.
+        units: ['workflows'],
         checks: [
           'cd ../kata-native-image/exercises/step2/java',
           'mvn -Pnative native:compile',

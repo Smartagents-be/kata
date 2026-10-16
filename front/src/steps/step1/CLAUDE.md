@@ -896,6 +896,22 @@ for it and rejected: this is the heaviest unit in the step, the step's diagram v
 bars and dashes, and a plotted curve with axes would be the only one of its kind in the course.
 Revisit only if the unit is ever split.
 
+**Context rot got a number and a figure, and that is not lost in the middle drawn.**
+`context.more-context-not.3` (16 October 2026, at the owner's asking) says the drop starts long
+before the context is full, around 100K to 150K tokens, and calls that a rule of thumb rather than
+a measured line: it is practitioners' shorthand (Dex Horthy's "dumb zone", Matt Pocock's "smart
+zone"), with estimates from about 40% of the window to 150K, and the research behind it (Chroma's
+context rot, Liu et al.) shows degradation without a fixed cutoff. Do not harden the sentence into a
+limit. `ContextZone` draws it: 1 axis to 1M, to scale, the band at 100K to 150K, and **2 memes**
+over the two sides (a big brain, a brainlet at a shape sorter). The memes are the owner's choice,
+made knowingly against the rule that a raster is only ever a screenshot; they live in
+`front/public/context-zone-*.png`, cut from the owner's sketch, and every label is SVG text so the
+Dutch and the per-assistant limit work. It is an axis with a band, not a plotted curve, so the
+rejection above still stands. The figure is on the deck as `deck-context-zone`. With this in
+`context`, `session.amnesia-context-fatigue.2` lost "and it did not get dumber": next to a figure
+saying a full context makes the model less reliable, that clause read as a contradiction, and the
+paragraph's point (after compaction the evidence is gone) does not need it.
+
 `context` closes on `ReadYourWindow`, ticked to `kata.step1.window`, and **`/context` is named
 nowhere in the prose**. The command had two paragraphs above the card, one per assistant, plus
 a third on the count starting above zero, and all three were cut. **What the readout carries is now
@@ -1085,7 +1101,8 @@ use tomorrow**: `Few-shot prompting`, `Output format`, `Paste the real error` an
 works`, plus `be-exact.2` on scope and its reason and `instruction.2` under `PromptParts`. They were
 picked from a sweep of Anthropic's, OpenAI's and GitHub's prompting guides (October 2026), and what
 the sweep turned up that another unit already owns was left out on purpose: a check the agent can
-run is step 2's `goals` (`instruction.2` names it as the last part and links there), asking for proof
+run is step 2's `enablement`, `A goal and its check` (`instruction.2` names it as the last part and
+links there; it pointed at `goals` until that unit was cut in October 2026), asking for proof
 is `truth`'s, starting over when a session goes nowhere is step 2's `steering`, and being interviewed
 is plan mode, above. "Tests first, and the tests are the spec" was also left out, since step 2's
 `gates` is the more natural home and that was not decided. **Few-shot and one-shot share 1 paragraph**
@@ -1527,8 +1544,8 @@ It sits **after** the figure, because the row is the surprise and a warning ahea
 it early. It names the row with both vendors' models (Fable, Astra) and says what a new frontier release is
 sometimes worth its price for, and `cost.3` says the top tier catches up later, from Anthropic's own
 coding measurement and OpenAI's Sol page (13 October 2026, at the owner's asking, reversing the old
-rule that this step says nothing about what the frontier model is good at). Step 2's `goals` builds
-on it for research only. And it never calls the row a fourth
+rule that this step says nothing about what the frontier model is good at). Step 2's `goals` built
+on it for research until that unit was cut (October 2026); nothing in step 2 builds on it now. And it never calls the row a fourth
 tier, which is what keeps `ModelTiers` at three cards, `model.cost.1` at one-twenty-forty, `model.speed.1`
 at "the slowest of the three" and `PickTheTier` at three targets. Promoting it to a tier means
 visiting all four.
@@ -1937,8 +1954,8 @@ it names the move and stops, since how the page gets fetched is `tools`'s to say
 `flag.decode.help` behind the workshop board's Hint, is this unit's proof section applied**: both
 tell the student to make the agent run the decode rather than reason about it, in the words of that
 exercise. The general rule belongs
-here and the applied one belongs there, so do not let either grow into the other. Step 2's `goals`
-is the third neighbour worth knowing about: it owns "if you cannot name the command that answers yes
+here and the applied one belongs there, so do not let either grow into the other. Step 2's `enablement`
+is the third neighbour worth knowing about: its `A goal and its check` (from the cut `goals` unit) owns "if you cannot name the command that answers yes
 or no, you do not have a goal", which is about the instruction you hand over. `Proof` is about
 checking an answer you already have. Keep them apart.
 

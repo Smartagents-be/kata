@@ -1,13 +1,13 @@
 import type { SlideSpec } from '@/shared/deck/slide-spec'
 import { AgentsAtOnce } from './AgentsAtOnce'
 import { DomainTree } from './DomainTree'
+import { ElectedToLead } from './ElectedToLead'
 import { FlowDiagram } from './FlowDiagram'
 import { GapRule } from './GapRule'
 import { GateReach } from './GateReach'
 import { GoalGate } from './GoalGate'
 import { HookTree } from './HookTree'
 import { LoopsPerHour } from './LoopsPerHour'
-import { ModelRelay } from './ModelRelay'
 import { ProjectTree } from './ProjectTree'
 import { ProofLoop } from './ProofLoop'
 import { ReadEachTime } from './ReadEachTime'
@@ -19,7 +19,6 @@ import { SpecTree } from './SpecTree'
 import { SteeringMoves } from './SteeringMoves'
 import { TwoWindows } from './TwoWindows'
 import { VerticalSlices } from './VerticalSlices'
-import { WindowSpend } from './WindowSpend'
 import { WorkflowTimeline } from './WorkflowTimeline'
 import { WorkflowWeights } from './WorkflowWeights'
 import { WorktreeEach } from './WorktreeEach'
@@ -163,6 +162,19 @@ const deck: SlideSpec[] = [
     eyebrow: 'step.title',
     title: 'gates.title',
     points: ['deck.gates.divider.1', 'deck.gates.divider.2', 'deck.gates.divider.3'],
+  },
+  // `gates.lead.2` as a meme, at the owner's asking (October 2026): the agent writes faster than you
+  // read, and the note is the half that makes it the point rather than an excuse. The image is only 500
+  // wide, so 1.5 is as far as it magnifies before it blurs.
+  {
+    id: 'deck-step2-gates-read',
+    kind: 'figure',
+    ns: 'step2',
+    eyebrow: 'gates.title',
+    title: 'deck.gates.read.title',
+    note: 'deck.gates.read.note',
+    figure: <ElectedToLead />,
+    scale: 1.5,
   },
   // Came over from `engineering` with the `Quality gates` section, and still a statement: the
   // proxy claim has no drawing, and `SameGate` deliberately ranks none of its four groups.
@@ -456,6 +468,27 @@ const deck: SlideSpec[] = [
     figure: <ProofLoop />,
     scale: 1.7,
   },
+  // The goal slides came over from the cut `goals` unit (October 2026), with the section they
+  // illustrate. Its `true` slide went: the 3 points below already say what it said.
+  {
+    id: 'deck-step2-enablement-goal',
+    kind: 'statement',
+    ns: 'step2',
+    eyebrow: 'enablement.title',
+    title: 'deck.enablement.goal.title',
+    points: ['deck.enablement.goal.1', 'deck.enablement.goal.2', 'deck.enablement.goal.3'],
+  },
+  {
+    id: 'deck-step2-enablement-gate',
+    kind: 'figure',
+    ns: 'step2',
+    eyebrow: 'enablement.title',
+    // 640x204, so it takes the magnification ProofLoop does. The title names the exit rather than
+    // the command: the slide before it already says name the command.
+    title: 'deck.enablement.gate.title',
+    figure: <GoalGate />,
+    scale: 1.7,
+  },
   {
     // At the owner's asking (October 2026). "Dead" is the course's claim; the note is DHH's own words
     // from the Rails World 2026 keynote, which never said "dead".
@@ -499,6 +532,7 @@ const deck: SlideSpec[] = [
       'deck.parallel.divider.1',
       'deck.parallel.divider.2',
       'deck.parallel.divider.3',
+      'deck.parallel.divider.4',
     ],
   },
   {
@@ -525,6 +559,18 @@ const deck: SlideSpec[] = [
       'deck.parallel.attention.3',
     ],
   },
+  // Came over from the cut `goals` unit (October 2026) with its figure: the attention slide above is
+  // the first cost of many agents, this is the second.
+  {
+    id: 'deck-step2-parallel-reading',
+    kind: 'figure',
+    ns: 'step2',
+    eyebrow: 'parallel.title',
+    title: 'deck.parallel.reading.title',
+    note: 'deck.parallel.reading.note',
+    figure: <ReadEachTime />,
+    scale: 1.4,
+  },
 
   // Moved here with its section from `steering` in October 2026.
   {
@@ -536,91 +582,6 @@ const deck: SlideSpec[] = [
     note: 'deck.parallel.worktree.note',
     figure: <WorktreeEach />,
     scale: 1.4,
-  },
-
-  // ── goals ─────────────────────────────────────────────────────────────────────────────────
-  {
-    id: 'deck-step2-goals',
-    kind: 'divider',
-    ns: 'step2',
-    eyebrow: 'step.title',
-    title: 'goals.title',
-    points: [
-      'deck.goals.divider.1',
-      'deck.goals.divider.2',
-      'deck.goals.divider.3',
-      'deck.goals.divider.4',
-    ],
-  },
-  // `WindowSpend` sits under the unit's lead and is the one figure in the step read forwards, so
-  // on the board it arrives before the conclusion `deck.goals.divider.3` states.
-  {
-    id: 'deck-step2-goals-window',
-    kind: 'figure',
-    ns: 'step2',
-    eyebrow: 'goals.title',
-    title: 'deck.goals.window.title',
-    // Columns against a ceiling, so the drawing carries to the back of a room at a scale the wire
-    // figures cannot take. The title deliberately says something the drawing does not: the figure's
-    // own labels already carry the unspent half, so a heading repeating them buys nothing.
-    figure: <WindowSpend />,
-    // 1.9 clipped "one window" off the left edge: this drawing runs the full width of its viewBox,
-    // so it reaches the frame sooner than a figure with margins does.
-    scale: 1.7,
-  },
-  {
-    id: 'deck-step2-goals-true',
-    kind: 'statement',
-    ns: 'step2',
-    eyebrow: 'goals.title',
-    title: 'deck.goals.true.title',
-    points: ['deck.goals.true.1', 'deck.goals.true.2', 'deck.goals.true.3'],
-  },
-  {
-    id: 'deck-step2-goals-shape',
-    kind: 'statement',
-    ns: 'step2',
-    eyebrow: 'goals.title',
-    title: 'deck.goals.shape.title',
-    points: ['deck.goals.shape.1', 'deck.goals.shape.2', 'deck.goals.shape.3'],
-  },
-  {
-    id: 'deck-step2-goals-gate',
-    kind: 'figure',
-    ns: 'step2',
-    eyebrow: 'goals.title',
-    // The shortest drawing in the step at 640x204, so it takes the same magnification WindowSpend
-    // (640x228) does. The title names the exit rather than the command: `deck.goals.divider.2` and
-    // `deck.goals.shape.3` already say name the command, and a third telling on the slide that
-    // draws it would be the drawing read out loud.
-    title: 'deck.goals.gate.title',
-    figure: <GoalGate />,
-    scale: 1.7,
-  },
-  {
-    id: 'deck-step2-goals-fleet',
-    kind: 'figure',
-    ns: 'step2',
-    eyebrow: 'goals.title',
-    title: 'deck.goals.fleet.title',
-    note: 'deck.goals.fleet.note',
-    // 640x288 with a note under it. The title was already the drawing's whole argument, so the
-    // board was paraphrasing a figure the students have; carrying the figure costs no extra slide.
-    figure: <ReadEachTime />,
-    scale: 1.4,
-  },
-  {
-    id: 'deck-step2-goals-relay',
-    kind: 'figure',
-    ns: 'step2',
-    eyebrow: 'goals.title',
-    // 640x246 and no note, so it rides where LoopsPerHour (640x250) does. The title names what the
-    // two teal arrows are labelled with rather than what the tiers are like, which keeps it off
-    // ModelTiers's ground in step 1. The `<small>` date under the figure belongs to the unit page:
-    // the slide does not carry it and the tutor says it out loud.
-    title: 'deck.goals.relay.title',
-    figure: <ModelRelay />,
-    scale: 1.5,
   },
 
   // ── workshop ──────────────────────────────────────────────────────────────────────────────

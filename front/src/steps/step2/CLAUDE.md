@@ -14,15 +14,15 @@ prohibitions are in the root `CLAUDE.md`. None of them is repeated here.
 every student-facing string in steps 2 and 3 calls what the agent holds "the context" ("de context"
 in Dutch). There is no exception for size or capacity either: "context window" and
 "contextvenster" are gone from student text, as step 1's file records. Usage and billing windows, time windows and
-component names such as `TwoWindows`, `LoopInWindow` and `WindowSpend` are untouched.
+component names such as `TwoWindows` and `LoopInWindow` are untouched.
 
-`step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Nine
+`step2` is **agentic engineering**: how you work with an agent, as opposed to what it knows. Eight
 units, `setup`, `engineering`, `gates`, `steering`, `patterns`, `workflows`,
-`enablement`, `parallel` and `goals`, four of
-them carrying a quiz, and the unit HTML is the source for what each argues. Seven of the nine close
+`enablement` and `parallel`, five of
+them carrying a quiz, and the unit HTML is the source for what each argues. Seven of the eight close
 on something the student does: `gates`, `steering`, `patterns` and
-`enablement` on an ungraded `TaskCard`, `setup` on a graded flag board, and `steering`, `patterns`, `workflows`
-and `goals` on a quiz, three of them under a card. `workflows` is the one that is framing prose and
+`enablement` on an ungraded `TaskCard`, `setup` on a graded flag board, and `steering`, `patterns`, `workflows`,
+`enablement` and `parallel` on a quiz, three of them under a card. `workflows` is the one that is framing prose and
 a quiz with no card, and `engineering` closes on its last figure since its card was cut (below). Six carry one
 habit each. `workflows` is outside that count, and deliberately so: it carries five ways of
 handing work over rather than one habit, and its argument is the choice between them. `parallel` is
@@ -32,8 +32,9 @@ than about a habit you practise.
 
 **Unit titles are 1 word or a few, at the owner's asking (October 2026).** The sidebar reads
 Setup, Domain language, Quality gates, Steering, Skills and scripts, Workflows, Prove your
-work, Parallel work, Long runs and Workshop (Setup, Domeintaal, Quality gates, Bijsturen, Skills en
-scripts, Processen, Bewijs je werk, Parallel werk, Lange runs, Workshop). The longer titles
+work, Parallel work and Workshop (Setup, Domeintaal, Quality gates, Bijsturen, Skills en
+scripts, Processen, Bewijs je werk, Parallel werk, Workshop). Long runs (Lange runs) sat between
+the last two until it was cut (October 2026, see `goals` below). The longer titles
 they replaced each carried a claim or a verb, and the owner found them too long to scan. Only the
 `*.title` strings moved then. The unit ids, and so the URLs, followed the titles later that month
 (the mapping is in `front/src/steps/CLAUDE.md`); file names and key prefixes stayed. A link that named a unit by its title was
@@ -50,7 +51,7 @@ weight (a coverage floor and a complexity ceiling wired into `mvn verify`, the p
 hundred percent coverage from tests asserting nothing is green and worthless, and an agent
 over-commenting and under-logging). Most of it was a third telling: `gates`' `Quality gates`
 owns the bar in the build, `patterns` owns turning a repeated correction into a skill, `setup` owns
-`CLAUDE.md`, and `goals` owns the check that answers yes or no. **Over-commenting and under-logging
+`CLAUDE.md`, and `enablement`'s `A goal and its check` owns the check that answers yes or no. **Over-commenting and under-logging
 is the one argument that had no second home**, and it survives nowhere in the course: neither term
 is in a unit, in a board hint or in a skill file, in either language. The proxy trap went the other
 way and has two homes now, `gates.quality-gates.1` and `workshop.flag.honest.help`, so it
@@ -81,7 +82,7 @@ figure of its gates.
 Three references were repointed in the same change rather than left
 dangling: `workshop.lead.2` says "the kind of code a quality gate exists for" instead of naming the
 unit, `step3`'s `change.you-test-engineer.2` links to `gates` (it linked to `engineering` until the section moved), and the capstone's pointer at
-`engineering` and `goals` is now a chip in `RunSheet` rather than a link in `workshop.lead.1`.
+`engineering` and `enablement` is now a chip in `RunSheet` rather than a link in `workshop.lead.1`.
 
 **An `evolution` unit opened the step until October 2026, titled Increments, and the owner cut it.**
 It argued that a version now costs an hour, so you take small steps on something that already runs,
@@ -269,8 +270,8 @@ reasoning is in its docblock.
 **The speed of a gate is a gate of its own**, and that sentence is the author's, added while the
 unit was being written: a few minutes a loop compound, and bringing the time down is work you hand
 an agent as a goal against a number. The code block in `short-feedback-loops` is that goal, in
-`goals`' `> Goal:` shape rather than as a slash command, because `goals` is where the shape is
-argued and the only place that names the commands (`executable-completion-check.2`: Claude Code's
+`enablement`'s `> Goal:` shape rather than as a slash command, because its `A goal and its check`
+is where the shape is argued and the only place that names the commands (`goal-check.2`: Claude Code's
 `/goal`, whose separate evaluator reads only the transcript, and Copilot CLI's autopilot, where the
 agent itself decides it is done; read on code.claude.com/docs/en/goal and GitHub's autopilot page,
 10 October 2026, and IntelliJ's Autopilot left out as unverified); `short-feedback-loops.3` points
@@ -791,8 +792,9 @@ slide is a separate decision, not an oversight to tidy.
 The quiz renders under the closing figure from the registry, so the unit's HTML gets no
 `<h2 data-i18n="ui:quiz.title">`: that heading belongs to a task card, and `QuizPanel` writes its
 own. `setup`, `engineering`, `gates`, `steering`, `patterns` and `enablement` carry the heading
-because they carry cards. `goals`
-follows this unit's shape rather than theirs, for the same reason.
+because they carry cards. `parallel`
+follows this unit's shape rather than theirs, for the same reason, and `enablement` carries both a
+card and a quiz, so its 1 question shares the card's heading.
 
 Two of the four are already taught elsewhere, and the unit **points rather than repeats**, the same
 rule `agent-patterns.coordinator.3` follows in step 1. Plan mode belongs to `step1/prompt`, which defines it
@@ -983,7 +985,7 @@ now carries one. It stands on its own here: this unit is about what has to be tr
 a condition has no wrong answer to offer a question the way a choice between five workflows does.
 Run it locally front and back, grow the crossbar, and count where the day goes.
 
-**It was `Enablement`, then `What it asks of you`, and is now `Feedback loop`**, on `goals`'s precedent: the file name, the
+**It was `Enablement`, then `What it asks of you`, and is now `Feedback loop`**, on `goals`'s precedent (that unit is cut now): the file name, the
 namespace prefix and the deck eyebrow key stay `enablement`. The unit id, and so the URL, later
 followed the title to `feedback-loop`. The old title was the one abstract noun in a step of
 plain ones, it appeared in neither language's prose, and it was all that bound three sections that
@@ -1076,10 +1078,11 @@ is a paragraph and a link for that half. Its second paragraph is the hours that 
 and it is where the cut `code-got-cheap` section's surviving instruction lives: work the
 implementation details, argue both sides, come out with a design decision you could defend, because
 a decision you did not make is one the agent made for you. Keep it about deciding rather than about
-structure, or it turns into `engineering` a second time. And `goals` owns "if you cannot name the command that answers yes or no,
-you do not have a goal": that is about the instruction you hand over, while this unit is about the
-harness on your own machine. Keep the two apart or the step tells a student twice to make things
-measurable and never says why the second one is different.
+structure, or it turns into `engineering` a second time. And `goal-check` owns "if you cannot name the command that answers yes or no,
+you do not have a goal": that is about the instruction you hand over, while the rest of this unit is
+about the harness on your own machine. The two now share a unit (October 2026, when `goals` was cut);
+keep them in their own sections or the unit tells a student twice to make things measurable and
+never says why the second one is different.
 
 **`where-day-goes` carries the review questions**, at the course owner's asking: 4 questions for
 every plan and diff (files touched, assumptions, proof, size) and a line on changed tests, between
@@ -1178,7 +1181,8 @@ copy-pasteable form.
 
 **Its aside is this unit's second `data-variant="warning"`**, and the two carry different costs on
 purpose: `Many agents at once` has your attention degrading, this one has the clock and the bill.
-It may not grow into `steering`'s two-contexts-two-bills argument or into `goals`'s window ceiling.
+It may not grow into `steering`'s two-contexts-two-bills argument or into an allowance argument,
+which is step 1's `model`.
 Slowest and most expensive, kept for work that stands apart where quality counts for more than
 time, and it stops there. It names no run time (October 2026): "2 hours is an ordinary run" was
 never measured, and the prompt above it caps the loop at 3 rounds. The
@@ -1188,17 +1192,23 @@ reason not to use it.
 
 Three boundaries hold the unit up and every one of them is another unit a second time, so each is a
 link and a clause rather than a paragraph. **`steering` owns the mid-run window**,
-which is what `one-agent-time.1` points at instead of describing interrupting. **`goals` owns the long-running outcome**, so `interactive-agent-background.3` says the jobs
-behind you are goals rather than instructions and hands off. The agents-are-two-bills line lives on the worktree slide's note and
+which is what `one-agent-time.1` points at instead of describing interrupting. **`enablement` owns the goal and its check**, so `interactive-agent-background.3` says the jobs
+behind you are goals rather than instructions and links there. **What survived of `goals`'s long-run
+sections is `interactive-agent-background.4`** (October 2026): start it hours early, give it its own
+worktree, split it over sessions with the plan in a file (pointing at step 1's sequential workflow),
+and the drop-off long before the context is full (drawn in step 1's `context`). 1 paragraph, and it
+may not grow back into the unit that was cut. **`many-agents-once.4` is the token cost of splitting**,
+with `ReadEachTime` under it (also from `goals`): the aside above it is the attention cost, this is the
+reading every fresh agent does again, and it closes on when to keep 1 agent. Together with
+`AgentsAtOnce` that is the course's 1 place saying when to run several agents and when not to. The agents-are-two-bills line lives on the worktree slide's note and
 nowhere in the prose.
 
 **`A worktree each` is this unit's since October 2026**, moved from `steering` at the owner's asking:
 running several agents at once is this unit's subject, and correcting one running agent is
 `steering`'s. It sits right after `Many agents at once`, whose `.2` now points at "the next section"
 instead of linking back four units. `steering`'s card lost its worktree move with it, because this
-unit has no card. It is **not** a second telling of `goals`. `goals` argues one worktree as isolation
-from your own day, so a four-hour run does not make your branch unusable; this section argues one
-worktree *per agent*, so several run at once without colliding, because the waiting overlaps, and
+unit has no card. `goals` argued one worktree as isolation from your own day until it was cut; that
+survives as a clause of `interactive-agent-background.4`, and this section argues one worktree *per agent*, so several run at once without colliding, because the waiting overlaps, and
 it ends on a separate agent merging the branches.
 
 The two-contexts-two-bills cost stays on the worktree slide's note, not in the prose. **The section is a `data-assistant` pair since October
@@ -1213,11 +1223,9 @@ Apply, which moves the changes in as uncommitted files. The plain `git worktree 
 the way that works in any tool, and the closing paragraph keeps the caveat that a worktree locks
 nothing.
 
-**The definition is this section's alone**, because `parallel` reads before `goals`: a second checkout
-of the same repository, on its own branch, in its own folder, sharing the same history.
-`goals.own-worktree.1` used to write it out a second time and now names the worktree in half a
-sentence and links here. Two arguments, one
-definition. Do not let a third site explain what a worktree is.
+**The definition is this section's alone**: a second checkout of the same repository, on its own
+branch, in its own folder, sharing the same history. `goals.own-worktree.1` wrote it out a second time
+once, and that unit is gone. One definition. Do not let a third site explain what a worktree is.
 
 `WorktreeEach` was redrawn in October 2026, at the owner's asking, as a left-to-right flow: `~/kata`
 on main, `git worktree add` making two **separate folders on your disk** with an agent each, a third
@@ -1285,7 +1293,7 @@ control you keep, since "smart orchestration" named the row that is gone, and th
 orchestration point with it.
 
 **`proof` was a unit of its own for a day and is now 4 sections of `enablement`** (October 2026).
-It was added between `parallel` and `goals` at the owner's asking, and the owner then found most of it
+It was added between `parallel` and `goals` (since cut) at the owner's asking, and the owner then found most of it
 repeated `enablement` and step 1's `truth`, so it was merged here under its own title. What it
 brought is **the order a change is proved in**: `reproduce-first`, `lock-before-fix` with the prompt,
 `implement-then-prove` and `test-driven-before`, between `run-own-machine` and `t-shaped`, closed by
@@ -1293,6 +1301,7 @@ brought is **the order a change is proved in**: `reproduce-first`, `lock-before-
 all itself, real migrations, the build production gets). `implement-then-prove` was cut to 1
 paragraph: "you read output, not an opinion" and the clause linking `goals` were `truth.proof` and
 `goals` said again. **It carries no card or quiz of its own**; the unit's card is `SameMachinery`.
+`goal-check` arrived after it, from the cut `goals` unit, with `GoalGate` and the 1 quiz question.
 
 **`SameMachinery` replaced `CountTheDay` (October 2026, at the owner's asking, plan 017).** That card
 had the student time a loop on their own project and split a working day, with a `fit` move that
@@ -1444,7 +1453,7 @@ piece of evidence from the invoice prompt, in mono: `29.99`, `✗ test`, nothing
 with the prompt. **Teal is the check and nothing else**: `Lock` and `Prove` are the tinted cards, and
 the 2 test results are the argument (1 check answering twice), muted and teal on `GoalGate`'s
 precedent, never `--destructive` and `--success`. It is DOM on `WorkflowTimeline`'s precedent, and it
-is **not a loop** despite the name: `GoalGate` in `goals` owns the check-and-repair loop, so do not
+is **not a loop** despite the name: `GoalGate`, a section further down the same unit, owns the check-and-repair loop, so do not
 draw a return arrow from `Prove` back to `Implement`.
 
 In the deck it is `deck-step2-enablement-loop` (`ProofLoop` at `scale` 1.7, limited by the frame's
@@ -1453,79 +1462,41 @@ carries 5 points: the environment, reproduce and lock, implement and prove, then
 **`RunSheet`'s chips do not name this order.** The statement job runs it for real (failing tests,
 then the endpoint), so a chip there would be honest; adding it is a separate decision.
 
-`goals` was **`Goal-oriented`, then `Long-running goals and cost`, and is now `Long runs`**. The first
-change was a widening rather than a rename. The unit used to argue one thing, handing over an outcome instead of an instruction, and it
-now surveys four ways of spending a lot of tokens on purpose: a goal-shaped run, a fan-out under
-`ultracode`, research on the frontier model, and a design tool. **The file name and the
-namespace prefix stay `goals`**, while the unit id and the URL later followed the title to `long-runs`, and the references from
-`parallel`, `workshop` and the flag help texts still read "the goals lesson" the way `patterns` is
-referenced by id rather than by title. The old argument is intact and is the first three sections;
-what went is `whole-job.3` (the skill sweep, which now closes `most-waiting` as the thing you start
-before lunch) and `lead.2`'s middle, since asking why a route was chosen was the paragraph nobody
-was going to act on. Its last sentence survives as the close of `goal-oriented.1`, because
-`deck.goals.true.2` says the same thing on a slide.
+**`gates` has a meme slide, `deck-step2-gates-read`**, right after its divider (16 October 2026,
+at the owner's asking): The Simpsons' "I was elected to lead, not to read" (`ElectedToLead`,
+`public/elected-to-lead.png`), titled with `gates.lead.2`'s claim. Its note ("Let the gates read the
+code. You read the decisions.") is load bearing: without it the slide says not reading is fine.
+Deck only; the unit page already says it in prose. The licensing of memes was raised and the owner
+chose them knowingly, as for step 1's `ContextZone`.
 
-**Context capacity and subscription allowance are distinct.** Goal-shaped work needs useful outcomes,
-checks, a budget and a stopping condition. Remaining allowance is an opportunity only when the work
-is valuable and the weekly/monthly limits permit it. Do not teach quota exhaustion as the objective.
-**The `window-tail` question and `WindowSpend` must hold for a Copilot seat too**, since step 2 has
-no assistant variants and the October 2026 class is on Copilot: a seat draws on a monthly pool with
-no rolling window. So they say "period" and never "window", name no 5-hour reset and no minutes
-left, and the explanation names one limit from each product (a weekly limit, an admin budget). The
-question was rewritten in review (October 2026) because it listed every condition for the right
-answer, so it now gives only the symptom and `keep-busy` is the trap the unit warns about.
+**`goals` (Long runs, URL `long-runs`) was cut on 16 October 2026, at the owner's asking**, after a
+review found most of it repeated other units and some of it did not hold for the class. Where each
+part went, so nobody rebuilds it from the history:
 
-**The check is a section of its own now**, `An executable completion check`, and it still owns the sentence
-the capstone is built on: if you cannot name the command that answers yes or no, you do not have a
-goal. `enablement.where-day-goes` hands to it and must not restate it.
+- **Kept and moved.** The goal shape and its executable check became `enablement`'s `A goal and its
+  check` (`goal-check.*`), with the complexity `> Goal:` example, `/goal` and Copilot CLI's
+  autopilot (now capped with `--max-autopilot-continues`, checked on GitHub's autopilot page),
+  `GoalGate` and the quiz question `report-on-a-wish` (`proofQuiz`). `ReadEachTime` moved to
+  `parallel` under `many-agents-once.4`, reading `useAssistant()` for `CLAUDE.md` or `AGENTS.md`.
+  The timing, the worktree and splitting a long run over sessions are 1 paragraph,
+  `parallel.interactive-agent-background.4`. The drop-off before the context is full is step 1's
+  `context.more-context-not.3` and `ContextZone`. Deck: `goals-shape` and `goals-gate` became
+  `deck-step2-enablement-goal` and `-gate`, `goals-fleet` became `deck-step2-parallel-reading`.
+- **Cut, and why.** The allowance lead, `WindowSpend` and `window-tail`: step 1's `model` and
+  `recap` already teach the 5-hour, weekly and Copilot credit limits. The ultracode section and
+  `fleet-bill`: Claude-only, and the cost argument is step 1's `agent-patterns` plus `ReadEachTime`.
+  The frontier relay and `ModelRelay`: step 1's `model` already says what the frontier model is
+  worth and has `opusplan` for the relay, and the unit assumed a frontier model an organisation
+  often does not allow. `Design tools`: Claude-only and not about long runs. The `most-waiting`
+  arithmetic: `gates.short-feedback-loops.2` already makes it with the same 4-minute build.
+  `goals-true`, `goals-window`, `goals-relay` and the divider went from the deck.
 
-Four figures, and each is drawn to stay out of another one's argument, which is the constraint to
-read before touching any of them. `WindowSpend` illustrates **subscription usage against a period allowance** and is drawn as
-columns, never as a band cut into turns, because `LoopsPerHour` in `enablement` owns the band and
-owns the clock. Its caption distinguishes allowance from context capacity and requires checking
-other limits and budget. `GoalGate` draws the check/repair loop; the enclosing goal also needs a
-budget or stopping condition. It plays the loop (October 2026, at the owner's asking): two red
-attempts back along the return path and a third that goes green, because the repetition is the
-argument, and its first box says what the agent does ("the agent changes the code") since "the
-agent's pass" read as nothing in Dutch. The waiting is a
-line **inside the gate box** rather than a stretch of time, for the same reason. `ReadEachTime`
-draws **what each agent is holding**, one context against five identical copies of it, and never
-the arrangement, because `AgentsAtOnce` in `parallel` owns how many agents you have running and what
-that costs your attention. It was two bars measuring the bill first, and the boxes replaced them:
-the cost is easier to feel as the same three blocks bought again than as a longer bar. That makes it
-stacked blocks inside a frame, which is `steering`'s vocabulary, so **the repetition is what keeps
-the two apart**: `TwoWindows` and `LoopInWindow` are one window in two states, and this is one
-context copied. The three teal blocks are identical in all six boxes and only the left one labels
-them. Relabel a copy, resize it or reorder it and the figure stops arguing anything. `ModelRelay` draws **what you spend each tier on and in which order**, never what the
-tiers are like, because `ModelTiers` in `step1/model` owns the dispositions. Its two teal arrows are
-the figure: they are labelled with what you do, since the reading between the tiers is the part
-that cannot be handed over.
+Every link to `/steps/step2/long-runs` was repointed in the same change: `gates`, `workshop`, the
+coverage flag's help, step 1's `prompt.instruction.2` go to `proof`, and step 3's
+`change.person-still-decides.1` to `parallel`. The URL is dead with no redirect, on the decision
+step 1 took for `intro` and `harness`.
 
-`ModelRelay` is also the one dated thing in the step. The prose says "the frontier model", "the top
-tier" and "the middle tier" and names no release; the drawing tags its three columns `Fable`, `Opus`
-and `Sonnet`, and `research-frontier-model.3` under it is a `<small>` line saying when. That split was
-`model.lead.3`'s precedent in step 1 (since cut), and it is what lets the figure be concrete without dating the
-unit. The tags are literals rather than locale keys, like every model name in the course.
-
-The frontier tier is the seam worth knowing about: **`step1/model` names it (Fable, Astra),
-says what a new release is worth its price for and that the top tier catches up later** (13 October
-2026). This section builds on that for one use only, broad research handed down a relay, and must
-not repeat step 1's list.
-
-`Ultracode` is described at the level of what it does to your bill, a fleet fanned out
-programmatically, and it stays there on purpose: naming a flag, a menu or a script shape dates the
-unit the way `copilot-specific.md` records that Copilot's billing already dated a claim once. It
-points at `workflows` for the specs rather than arguing spec-driven a second time.
-
-`Design tools` grounds itself in this repository's own design system, which came out of a Claude
-Design project, and that is the only concrete in the section. It is the shortest of the four and
-should stay that way: what it adds to the unit is the timing, and the timing is the lead's.
-
-The quiz is the step's second and is in `quiz.ts` beside `workflowsQuiz`. One question per expensive
-move that has a wrong branch, so the relay has none, on the same reasoning that leaves spec-driven
-out of the `workflows` quiz.
-
-A tenth unit, `workshop`, closes the step as its capstone, and **it is a run rather than a page**.
+A ninth unit, `workshop`, closes the step as its capstone, and **it is a run rather than a page**.
 That is the shape to hold on to before editing anything in it. The page is not five flags described
 one after another; it is five stages a student works in order, and the flags fall out of three of
 them. The rewrite that made it one is recorded below, along with what the old shape got right, so
@@ -1583,14 +1554,16 @@ green; `FLAGS_CHANGED_EVENT` on `FlagBoard` carries it, the figure reads the boa
 nothing, and `live={false}` on the slide keeps a tutor's own collection off the projector.
 
 **Each stage names the units it draws on**, which is what makes the page a capstone rather than a
-sixth exercise: between them they name all nine, beside the stage where each is used. **Every chip
+sixth exercise: between them they name every unit ahead of it, beside the stage where each is used. **Every chip
 has to be a unit the stage genuinely runs.** Three were cut for failing that: `evolution` on the
 native row, whose lesson that stage suspends; `enablement` on the endpoint row, which was one `curl`;
 and `evolution` again on the goal row, where it was crediting that unit for a sentence `goals` wrote.
+When `goals` was cut (October 2026) its 2 chips moved: the goal row names `enablement`, and the
+native job lost its `goals` chip rather than gaining one that only looks apt.
 The last `evolution` chip, on the pre-flight row, went with the unit in October 2026.
 A chip that only looks apt is the next one to go. They are plain text and **not links**: a dozen
 router links inside one figure took the first dozen tab stops on the page and would have been a way
-out of the deck, so the prose keeps the two links that matter (`goals` in `workshop.goal.1`, `setup`
+out of the deck, so the prose keeps the two links that matter (`enablement` in `workshop.goal.1`, `setup`
 in `workshop.pre-flight.2`) and the chips do the naming.
 
 **Two ungraded `TaskCard`s now sit in it, `Preflight` and `Debrief`, and that reverses the other
@@ -1784,9 +1757,9 @@ rather than that sentence.**
 `RuntimeHintsRegistrar`**: wiring the build and planning the hint are the exercise. Do not spell out
 the fix here either; the runtime miss is what the student is meant to read.
 
-**`goals` closes by naming this unit back**, at the end of `goals.left-with.1`, which is the last
-paragraph of that unit. What is load bearing is the pair rather than its address, so a rewrite of
-either end has to leave the other pointing at something. The other end moved in this rewrite:
+**`goals` closed by naming this unit back**, at the end of `goals.left-with.1`, until it was cut
+(October 2026). Nothing names the workshop back now except the pager, which is enough: the unit
+before it is `parallel`. The other end moved in this rewrite:
 `workshop.lead.1` is now the house rule and names no unit, and the pointers it used to carry are the
 `RunSheet` chips.
 
