@@ -95,7 +95,9 @@
   invented: reviewing a draft is faster than facing an empty file, and a draft that guessed wrong
   shows you exactly what you never decided. Ask for the plan only once the spec is right, and read
   it the same way. Then build the feature in a fresh session, with the spec and the plan and
-  without the conversation that wrote them.
+  without the conversation that wrote them. Merge as it goes rather than at the end: every plan step
+  that comes back green is a merge worth doing. You read 1 step of diff while the next is being
+  written, and a run that goes wrong at step 6 has not taken the first 5 down with it.
 </p>
 
 <div data-figure="flow-spec"></div>
@@ -124,7 +126,9 @@
 
 <p data-i18n="workflows.where-specs-live.3">
   Write in each spec which repository it changes. The agent in that repository then reads its own
-  spec and plan, and leaves the rest.
+  spec and plan, and leaves the rest. The same cut lets <a href="/steps/step2/parallel">several
+  agents</a> build at once: 5 specs, 5 agents, each on its own slice. Without the specs it is 5
+  agents guessing, and you read 5 wrong answers instead of 1.
 </p>
 
 <h2 data-i18n="workflows.defer.heading">Defer</h2>

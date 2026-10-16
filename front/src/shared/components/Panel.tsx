@@ -117,6 +117,7 @@ export function Panel({
       {description !== undefined && (
         <p
           id={`${block}-description`}
+          data-deck="hide"
           data-component="Panel"
           className="text-muted-foreground mt-2 max-w-[58ch] text-[0.9375rem] leading-relaxed"
         >

@@ -93,7 +93,8 @@
 <p data-i18n="gates.legacy-code.1">
   Old code with no documentation and no tests needs a different order. Before the agent changes
   anything, put the gates in place: regression tests until every line is covered, and the checks
-  above set at today's level, so they fail on whatever gets worse. Those tests record what the code
+  above set at today's level, so they fail on whatever gets worse. Give the agent an environment
+  where it runs the app and those tests itself. Those tests record what the code
   does today, odd parts included. From then on the gates, the coverage among them, check every
   change for regression. They are the source of truth.
 </p>
@@ -103,6 +104,10 @@
   decide and neither does the agent. Ask the product owner whether the new behaviour is what they
   want. If it is, update the test. If it is not, it is a regression: fix the code.
 </p>
+
+<!-- Filled by the LegacyFlow element registered under this name in steps/step2/index.tsx. It closes
+     the section, and in guided mode it is what is left of it under the moved heading. -->
+<div data-figure="legacy-flow"></div>
 
 <h2 data-i18n="gates.short-feedback-loops.heading">Short feedback loops</h2>
 
@@ -115,7 +120,8 @@
 
 <p data-i18n="gates.short-feedback-loops.2">
   So the speed of a gate is a gate too. A 4-minute build sounds cheap, but 10 runs an hour is 40
-  minutes of waiting. Put a number on it and hand it over as a goal:
+  minutes of waiting. On a goal that takes 40 passes, that is nearly 3 hours. The agent writes a
+  class in seconds, and your build sets the pace. Put a number on it and hand it over as a goal:
 </p>
 
 <pre><code>&gt; Goal: `mvn verify` finishes in under a minute on this machine.

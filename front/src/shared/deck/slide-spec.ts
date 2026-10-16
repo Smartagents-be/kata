@@ -65,4 +65,11 @@ export interface SlideSpec {
    * and `scale` lowered to match.
    */
   figureWidth?: number
+  /**
+   * Marks a slide as the moment the room does something: `task` for an exercise, `quiz` for a unit's
+   * questions. `SlideTemplate` draws it as a label beside the eyebrow, so the tutor sees from the back
+   * of the room that this is where the class stops listening and starts working. `exerciseSlides.ts`
+   * makes the marker slides; an exercise that is itself on a slide carries the badge too.
+   */
+  badge?: 'task' | 'quiz'
 }

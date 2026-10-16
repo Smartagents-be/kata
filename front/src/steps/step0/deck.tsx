@@ -1,4 +1,5 @@
 import type { SlideSpec } from '@/shared/deck/slide-spec'
+import { quizSlide } from '@/shared/deck/exerciseSlides'
 
 /**
  * Step 0 on the board: the rules of the game before anything is taught.
@@ -59,6 +60,7 @@ const deck: SlideSpec[] = [
       'deck.welcome.rules.3',
     ],
   },
+  quizSlide('deck-step0-welcome-quiz', 'step0', 'welcome.title'),
 
   // ── backend ───────────────────────────────────────────────────────────────────────────────
   {
@@ -78,6 +80,7 @@ const deck: SlideSpec[] = [
     ns: 'step0',
     eyebrow: 'backend.title',
     title: 'deck.backend.herrings.title',
+    note: 'deck.backend.herrings.note',
   },
 
   // ── workshop ──────────────────────────────────────────────────────────────────────────────
@@ -87,6 +90,7 @@ const deck: SlideSpec[] = [
   {
     id: 'deck-step0-workshop',
     kind: 'divider',
+    badge: 'task',
     ns: 'step0',
     eyebrow: 'step.title',
     title: 'workshop.title',

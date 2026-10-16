@@ -59,7 +59,10 @@ needs no third. That is the thing to notice before writing a section about metri
 step. **`gates.quality-gates.1` carries the claim**, saying in plain words that a number measures
 something that usually comes with quality rather than quality itself, that an agent told to hit it
 hits it, and that the checks worth wiring in are the ones hard to pass without the real work. The
-word "proxy" left the prose in October 2026: the owner found "aims for the proxy" unclear. It
+word "proxy" left the prose in October 2026: the owner found "aims for the proxy" unclear. It left
+`deck.gates.proxy.title` on 16 October 2026 too (the owner found it a strange sentence), which now
+says the agent meets every threshold you set, not necessarily the quality behind it. "The number"
+was tried first and rejected (which number?); a coverage example would name it but is ruled out above. It
 carries no coverage example on purpose. **`gates.quality-gates.2` is the evidence**, added at the
 owner's asking the same month: METR's June 2025 measurement of o3 cheating on RE-Bench (39 of 128
 runs; a sped-up clock and a monkey-patched evaluator are the two examples named; asked afterwards,
@@ -256,7 +259,7 @@ one thing the unit needs from it, the decisions that stay with a person (what to
 whether a change does what you meant, when it ships) against the checking a machine takes, and links
 there. It lists them without counting them. Do not bring the drawing back as the unit's opener.
 
-Two figures and each has one job. `SameGate` is who a machine gate is for; `GateReach` is speed and
+Two figures in the gates' own argument and each has one job (`LegacyFlow`, above, is the order). `SameGate` is who a machine gate is for; `GateReach` is speed and
 how far a miss has got drawn as **one axis**, which is the claim `short-feedback-loops.1` closes on:
 the further out a gate sits, the slower it answers and the more a miss has already touched.
 **Do not give `GateReach` numbers**: that would turn orders of magnitude into a benchmark that the
@@ -299,8 +302,16 @@ the agent. It was `quality-gates.3` and `.4` until October 2026 and moved into a
 (keys `gates.legacy-code.1` and `.2`), and the owner sharpened it on the way: it used to say a
 change is confirmed with "the stakeholders" before the tests or the code move, and it now says a
 failing test goes to the product owner, and if the behaviour is not wanted it is a regression and
-the code gets fixed. Keep both the order and the role. `deck-step2-gates-old-code` carries the same
-three steps in class.
+the code gets fixed. Keep both the order and the role. **`LegacyFlow` closes the section** (16 October 2026, at the
+owner's asking) and is also `deck-step2-gates-old-code`, which carried the same steps as points
+until then. It is **2 flows, the owner's split**: up front and once (old code, regression tests,
+quality thresholds at today's level ("checks" was the first label, and read as
+nothing), an environment the agent runs it all in), then every change (the gates
+answer, and a failing test goes to the product owner, who sends you to the test or the code). The gates box
+branches green or red, on `--success` and `--destructive` at the owner's asking (passed and failed,
+said of a gate). The
+environment arrived with it, as 1 sentence in `legacy-code.1`. Teal is the gates only; its
+docblock has the layout reasons.
 
 The old `.3` closed on "mix kinds of tests, and let mutation testing check the tests themselves".
 That sentence went, because `Deterministic checks` now carries the kinds. **Neither section says
@@ -836,8 +847,8 @@ interviewing you or the people who decide directly, with `grill-me` named as the
 prose is the owner's choice; what `setup` records is that it was rejected as the `SkillTree` example,
 and that still holds. `.4` is the prototype for a question words cannot settle: throwaway code that
 runs, the question at the top, the answer into the spec and the code nowhere. `.5` is the draft,
-the plan and the fresh session, so the plan comes after both routes, which is the order the owner
-asked for. It replaced "describe the feature in 2 sentences", which skipped the gathering. The
+the plan, the fresh session and merging per green plan step, so the plan comes after both routes,
+which is the order the owner asked for. It replaced "describe the feature in 2 sentences", which skipped the gathering. The
 prototype is not a workflow because it hands no work over, and a sixth would break the order the
 unit argues and the four `WorkflowWeights`, `WorkflowTimeline`, the deck and the quiz name. It is
 also not `naive.2`'s trial version, which asks whether the idea holds at all, nor step 3's
@@ -859,7 +870,8 @@ Splitting 1 intent into several specs is the owner's, not the playbook's, which 
 the vertical-slice cut is Matt Pocock's `to-tickets` and this step's `engineering`. Google Conductor
 (`spec.md` and `plan.md` per track) is the other precedent; Spec Kit's `tasks.md` stays out, as
 above. `spec-driven.1`'s "1 folder per feature" stays as written at the owner's choice: it is the
-1-repository default the `<h3>` then grows. **Keep the multi-repo advice product neutral** (an MCP
+1-repository default the `<h3>` then grows. `.3` ends on the fan-out (1 spec per agent, or 5 agents guessing) and links `parallel`, which owns
+how many agents to run; do not argue the split again here. **Keep the multi-repo advice product neutral** (an MCP
 server for the place, or a skill that fetches): the class works in Copilot in IntelliJ.
 `SpecTree` draws it on `FileTree`, with the step's loans domain as the example (late fees, split
 into 2 invented services) and a caption saying it is not this repository.
@@ -1464,10 +1476,13 @@ then the endpoint), so a chip there would be honest; adding it is a separate dec
 
 **`gates` has a meme slide, `deck-step2-gates-read`**, right after its divider (16 October 2026,
 at the owner's asking): The Simpsons' "I was elected to lead, not to read" (`ElectedToLead`,
-`public/elected-to-lead.png`), titled with `gates.lead.2`'s claim. Its note ("Let the gates read the
-code. You read the decisions.") is load bearing: without it the slide says not reading is fine.
+`public/elected-to-lead.png`), titled with `gates.lead.2`'s claim. Its note ("Let the gates verify the code and the behaviour.", the owner's wording, 16 October
+2026) is load bearing: without it the slide says not reading is fine. It replaced "Let the gates
+read the code. You read the decisions."
 Deck only; the unit page already says it in prose. The licensing of memes was raised and the owner
-chose them knowingly, as for step 1's `ContextZone`.
+chose them knowingly, as for step 1's `ContextZone`. **"lead" is struck through and "code" written
+over it** (owner's call, same day), as an SVG layer over the untouched PNG; the coordinates and why
+it is teal are in the component's docblock.
 
 **`goals` (Long runs, URL `long-runs`) was cut on 16 October 2026, at the owner's asking**, after a
 review found most of it repeated other units and some of it did not hold for the class. Where each
@@ -1476,19 +1491,24 @@ part went, so nobody rebuilds it from the history:
 - **Kept and moved.** The goal shape and its executable check became `enablement`'s `A goal and its
   check` (`goal-check.*`), with the complexity `> Goal:` example, `/goal` and Copilot CLI's
   autopilot (now capped with `--max-autopilot-continues`, checked on GitHub's autopilot page),
-  `GoalGate` and the quiz question `report-on-a-wish` (`proofQuiz`). `ReadEachTime` moved to
+  `GoalGate` and the quiz question `report-on-a-wish` (`proofQuiz`). Its `too-long` distractor became
+  `more-agents` the same day: `parallel` now teaches splitting a long run over sessions, so "split it
+  into 4 shorter goals" had turned defensible. Do not bring it back. `ReadEachTime` moved to
   `parallel` under `many-agents-once.4`, reading `useAssistant()` for `CLAUDE.md` or `AGENTS.md`.
   The timing, the worktree and splitting a long run over sessions are 1 paragraph,
   `parallel.interactive-agent-background.4`. The drop-off before the context is full is step 1's
   `context.more-context-not.3` and `ContextZone`. Deck: `goals-shape` and `goals-gate` became
   `deck-step2-enablement-goal` and `-gate`, `goals-fleet` became `deck-step2-parallel-reading`.
+  3 smaller ideas got homes the same day, at the owner's asking: specs before a fan-out (5 agents
+  guessing) closes `workflows.where-specs-live.3`, merging a run in pieces closes
+  `workflows.spec-driven.5` per plan step, and the long-goal waiting (40 passes of a 4-minute build,
+  the build sets the pace) is the middle of `gates.short-feedback-loops.2`.
 - **Cut, and why.** The allowance lead, `WindowSpend` and `window-tail`: step 1's `model` and
   `recap` already teach the 5-hour, weekly and Copilot credit limits. The ultracode section and
   `fleet-bill`: Claude-only, and the cost argument is step 1's `agent-patterns` plus `ReadEachTime`.
   The frontier relay and `ModelRelay`: step 1's `model` already says what the frontier model is
   worth and has `opusplan` for the relay, and the unit assumed a frontier model an organisation
-  often does not allow. `Design tools`: Claude-only and not about long runs. The `most-waiting`
-  arithmetic: `gates.short-feedback-loops.2` already makes it with the same 4-minute build.
+  often does not allow. `Design tools`: Claude-only and not about long runs.
   `goals-true`, `goals-window`, `goals-relay` and the divider went from the deck.
 
 Every link to `/steps/step2/long-runs` was repointed in the same change: `gates`, `workshop`, the

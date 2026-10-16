@@ -34,6 +34,7 @@ import { ToolsInContext } from './ToolsInContext'
 import { TrainedOrGrounded } from './TrainedOrGrounded'
 import { WindowFill } from './WindowFill'
 import { WindowGrid } from './WindowGrid'
+import { quizSlide, taskSlide } from '@/shared/deck/exerciseSlides'
 
 /**
  * Step 1 on the board.
@@ -163,10 +164,9 @@ const deck: SlideSpec[] = [
     ns: 'step1',
     eyebrow: 'tokens.title',
     // Where the unit puts it, between the loop and the network: the same four scores the network is
-    // about to produce, reshaped by each setting. The note is the qualifier the room needs, that
-    // none of these is a setting they can turn.
+    // about to produce, reshaped by each setting. It had a note saying none of these is a setting
+    // you can turn; it went in October 2026 (owner's call), the unit page still says it.
     title: 'deck.tokens.sampling.title',
-    note: 'deck.tokens.sampling.note',
     figure: <SamplingKnobs />,
     scale: 1.4,
   },
@@ -179,45 +179,36 @@ const deck: SlideSpec[] = [
     // picked from come out of this, one token in as numbers and through the network a layer per click.
     title: 'deck.tokens.network.title',
     figure: <TokenNetwork />,
-    // Lowered from 1.1 when the footer became the review's 2-line simplification note: in Dutch, with
-    // a node's calculation open, 1.1 pushed the eyebrow under the heading and clipped the last line.
-    scale: 0.98,
+    // Back up once the simplification note was hidden on slides (`data-deck="hide"`, October 2026):
+    // that note was what forced it down to 0.98.
+    scale: 1.2,
   },
   {
     id: 'deck-tokens-kinds',
     kind: 'figure',
     ns: 'step1',
     eyebrow: 'tokens.title',
-    // Where the unit puts it: the last thing taught, ahead of the exercise. The note is the one
-    // qualifier the numbers cannot do without, since the turn is invented and the rates are not.
+    // Where the unit puts it: the last thing taught, ahead of the exercise.
     title: 'deck.tokens.kinds.title',
-    note: 'deck.tokens.kinds.note',
     figure: <TokenKinds />,
     scale: 1.4,
   },
-  // Prompt caching closes the unit's prose since it moved here from the old harness unit, so its
-  // statement slide follows the cost figure and comes ahead of the exercise, where the unit has it.
+  // Prompt caching closes the unit's prose, so its slide follows the cost figure and comes ahead of
+  // the exercise. 1 slide since October 2026 (owner's call): a statement of the rule and then this
+  // figure said it twice, so the rule is the title and `PromptCache` shows it.
   {
     id: 'deck-tokens-cache',
-    kind: 'statement',
-    ns: 'step1',
-    eyebrow: 'tokens.title',
-    title: 'deck.tokens.cache.title',
-    note: 'deck.tokens.cache.note',
-  },
-  // The statement says the rule; this plays it, turn by turn, the way the unit does under it.
-  {
-    id: 'deck-tokens-cache-turns',
     kind: 'figure',
     ns: 'step1',
     eyebrow: 'tokens.title',
-    title: 'deck.tokens.cache-turns.title',
+    title: 'deck.tokens.cache.title',
     figure: <PromptCache />,
     scale: 1.3,
   },
   {
     id: 'deck-tokens-pick',
     kind: 'figure',
+    badge: 'task',
     ns: 'step1',
     eyebrow: 'tokens.title',
     // The unit's exercise, worked at the board. The title is a plain label on purpose: the answer
@@ -271,6 +262,7 @@ const deck: SlideSpec[] = [
     ns: 'step1',
     eyebrow: 'prompt.title',
     title: 'deck.prompt.plan.title',
+    points: ['deck.prompt.plan.1', 'deck.prompt.plan.2', 'deck.prompt.plan.3', 'deck.prompt.plan.4'],
   },
   {
     id: 'deck-prompt-bundle',
@@ -291,6 +283,8 @@ const deck: SlideSpec[] = [
     figure: <ExactAsk />,
     scale: 1.77,
   },
+  taskSlide('deck-prompt-task', 'step1', 'prompt.title', 'plan.title'),
+  quizSlide('deck-prompt-quiz', 'step1', 'prompt.title'),
 
   // ── tools ─────────────────────────────────────────────────────────────────────────────────
   {
@@ -358,12 +352,15 @@ const deck: SlideSpec[] = [
     title: 'deck.tools.injection.title',
     note: 'deck.tools.injection.note',
   },
+  taskSlide('deck-tools-connect-task', 'step1', 'tools.title', 'connect.title'),
+  taskSlide('deck-tools-shutter-task', 'step1', 'tools.title', 'shutter.panel.title'),
   // Graded in the browser and writing no progress key, the same shape `deck-tools-budget` already
   // has. **The title must not name what makes the result odd**, which is the prohibition the card
   // carries: naming it turns four results into a search for one sentence.
   {
     id: 'deck-tools-spot',
     kind: 'figure',
+    badge: 'task',
     ns: 'step1',
     eyebrow: 'tools.title',
     title: 'deck.tools.spot.title',
@@ -375,6 +372,7 @@ const deck: SlideSpec[] = [
   {
     id: 'deck-tools-budget',
     kind: 'figure',
+    badge: 'task',
     ns: 'step1',
     eyebrow: 'tools.title',
     title: 'deck.tools.budget.title',
@@ -451,6 +449,8 @@ const deck: SlideSpec[] = [
     title: 'deck.context.data.title',
     note: 'deck.context.data.note',
   },
+  taskSlide('deck-context-task', 'step1', 'context.title', 'window.title'),
+  quizSlide('deck-context-quiz', 'step1', 'context.title'),
 
   // ── session ───────────────────────────────────────────────────────────────────────────────
   {
@@ -515,6 +515,8 @@ const deck: SlideSpec[] = [
     title: 'deck.session.memory.title',
     note: 'deck.session.memory.note',
   },
+  taskSlide('deck-session-task', 'step1', 'session.title', 'survive.title'),
+  quizSlide('deck-session-quiz', 'step1', 'session.title'),
 
   // ── agent-patterns ──────────────────────────────────────────────────────────────────────────
   {
@@ -587,9 +589,11 @@ const deck: SlideSpec[] = [
     title: 'deck.agent-patterns.routing.title',
     note: 'deck.agent-patterns.routing.note',
   },
+  taskSlide('deck-agent-patterns-task', 'step1', 'agent-patterns.title', 'cut.title'),
   {
     id: 'deck-agent-patterns-patterns',
     kind: 'figure',
+    badge: 'task',
     ns: 'step1',
     eyebrow: 'agent-patterns.title',
     title: 'deck.agent-patterns.patterns.title',
@@ -624,7 +628,6 @@ const deck: SlideSpec[] = [
     ns: 'step1',
     eyebrow: 'model.title',
     title: 'deck.model.pricing.title',
-    note: 'deck.model.pricing.note',
     figure: <ModelPricing />,
     scale: 1.77,
   },
@@ -663,11 +666,17 @@ const deck: SlideSpec[] = [
     ns: 'step1',
     eyebrow: 'model.title',
     title: 'deck.model.reasoning.title',
+    // DeepSWE as a pointer, at the owner's asking (16 October 2026): score against cost per model
+    // and effort, measured on mini-swe-agent rather than Claude Code or Copilot. Link only, no
+    // figure: its table lists each model's best effort, so it cannot show 1 model across levels.
+    note: 'deck.model.reasoning.note',
     points: ['deck.model.reasoning.1', 'deck.model.reasoning.2', 'deck.model.reasoning.3'],
   },
+  taskSlide('deck-model-task', 'step1', 'model.title', 'price.title'),
   {
     id: 'deck-model-pick',
     kind: 'figure',
+    badge: 'task',
     ns: 'step1',
     eyebrow: 'model.title',
     title: 'deck.model.pick.title',
@@ -706,7 +715,7 @@ const deck: SlideSpec[] = [
     title: 'deck.truth.grounded.title',
     figure: <TrainedOrGrounded />,
     // 1.85 fits the frame's width but crowds it: the panel titles run into the heading and the
-    // answer chips land on the footer's 88px clearance. This is the largest that still reads as a
+    // answer chips land on the footer's clearance (88px then, 60px since October 2026). This is the largest that still reads as a
     // drawing under a heading rather than a drawing pushing one out of the way.
     scale: 1.7,
   },
@@ -731,6 +740,7 @@ const deck: SlideSpec[] = [
     title: 'deck.truth.proof.title',
     points: ['deck.truth.proof.1', 'deck.truth.proof.2', 'deck.truth.proof.3'],
   },
+  quizSlide('deck-truth-quiz', 'step1', 'truth.title'),
 
   // ── workshop ──────────────────────────────────────────────────────────────────────────────
   {
@@ -744,6 +754,7 @@ const deck: SlideSpec[] = [
   {
     id: 'deck-workshop-flags',
     kind: 'statement',
+    badge: 'task',
     ns: 'step1',
     eyebrow: 'workshop.title',
     title: 'deck.workshop.flags.title',

@@ -10,8 +10,9 @@ import { cn } from '@/shared/lib/utils'
  * scale the tutor's other decks use, so a slide written here and a slide written there are the same
  * size.
  *
- * The frame reserves 88px at the foot for the footer, and the footer is the only thing allowed to
- * sit in it. Do not shrink that padding and do not position slide content against the bottom edge,
+ * The frame reserves 60px at the foot for the footer, and the footer is the only thing allowed to
+ * sit in it. It was 88px with a 22px footer until October 2026, when the owner asked for a smaller
+ * footer to give the slides more room. Do not shrink that padding and do not position slide content against the bottom edge,
  * or a long slide runs over the page number.
  *
  * `align` picks between the three shapes. A content slide is `top`: the eyebrow and heading stay
@@ -66,7 +67,7 @@ export function Slide({
         id={`deck-slide-${index}-frame`}
         data-component="Slide"
         className={cn(
-          'absolute inset-0 flex flex-col px-[120px] pt-[100px] pb-[88px]',
+          'absolute inset-0 flex flex-col px-[120px] pt-[100px] pb-[60px]',
           align === 'center' && 'justify-center',
           align === 'golden' && 'pt-[180px]',
         )}
@@ -74,20 +75,20 @@ export function Slide({
         {children}
       </div>
 
-      {/* The hairline is the footer's own top edge, so the 88px reserve above it stays honest:
-          16px of clearance under the line, then the 26px text row, all inside the reserve. */}
+      {/* The hairline is the footer's own top edge, so the 60px reserve above it stays honest:
+          10px of clearance under the line, then the 18px text row and 24px to the edge. */}
       <footer
         id={`deck-slide-${index}-footer`}
         data-component="Slide"
         className={cn(
-          'absolute right-[120px] bottom-[40px] left-[120px] flex items-center justify-between border-t pt-[16px]',
+          'absolute right-[120px] bottom-[24px] left-[120px] flex items-center justify-between border-t pt-[10px]',
           dark ? 'border-header-foreground/20' : 'border-border',
         )}
       >
         <span
           id={`deck-slide-${index}-wordmark`}
           data-component="Slide"
-          className="font-heading text-[22px] font-bold tracking-tight"
+          className="font-heading text-[16px] font-bold tracking-tight"
         >
           Agentic development
         </span>
@@ -95,11 +96,11 @@ export function Slide({
           id={`deck-slide-${index}-watermark`}
           data-component="Slide"
           className={cn(
-            'flex items-center gap-[10px] text-[20px]',
+            'flex items-center gap-[8px] text-[15px]',
             dark ? 'text-header-foreground/70' : 'text-muted-foreground',
           )}
         >
-          <SmartAgentsMark size={26} />
+          <SmartAgentsMark size={18} />
           <span className={cn('font-semibold', dark ? 'text-header-foreground' : 'text-foreground')}>
             SmartAgents
           </span>
@@ -108,7 +109,7 @@ export function Slide({
           <span
             id={`deck-slide-${index}-pageno`}
             data-component="Slide"
-            className="ml-[14px] font-mono text-[20px] tabular-nums"
+            className="ml-[12px] font-mono text-[15px] tabular-nums"
           >
             {index + 1} / {total}
           </span>

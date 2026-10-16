@@ -17,6 +17,10 @@ import { useAssistant } from '@/shared/assistant/useAssistant'
  * 10 to 15 percent of the line, so the big brain gets a sliver and the brainlet the rest. The
  * owner's sketch put the band near 40 percent; drawn honestly, the point is sharper.
  *
+ * **The 2 memes are the same height** (150, owner's call, 16 October 2026). Sized to their stretch,
+ * the big brain shrank to a thumbnail beside a wall of brainlet, and the slide read as one picture.
+ * The axis carries the proportion, so the pictures do not have to: the brain spills past the band.
+ *
  * **The band is a range and not a line** because the number is a practitioners' rule of thumb, not a
  * measured threshold, and `context.more-context-not.3` says so. Do not sharpen it into 1 tick.
  *
@@ -34,6 +38,10 @@ const BAND_FROM = at(100)
 const BAND_TO = at(150)
 const BAND_MID = (BAND_FROM + BAND_TO) / 2
 
+/** Both memes stand on the band's top edge at 1 height; widths follow each PNG's own ratio. */
+const MEME_H = 150
+const MEME_Y = AXIS_Y - 10 - MEME_H
+
 /** Typed per assistant, so a third one is a compile error here rather than a wrong limit. */
 const LIMIT: Record<Assistant, string> = {
   claude: 'context-zone.limit.claude',
@@ -50,7 +58,7 @@ export function ContextZone() {
       <svg
         id="context-zone-svg"
         data-component="ContextZone"
-        viewBox="0 0 640 252"
+        viewBox="0 28 640 224"
         role="img"
         aria-labelledby={titleId}
         className="h-auto w-full max-w-xl"
@@ -59,15 +67,15 @@ export function ContextZone() {
           {t('context-zone.description')}
         </title>
 
-        {/* the sliver before the drop-off: centred over it, and allowed to spill a little past it */}
+        {/* the sliver before the drop-off: starts at the axis's start and spills past the band */}
         <image
           id="context-zone-sharp"
           data-component="ContextZone"
           href="/context-zone-sharp.png"
           x={LEFT - 8}
-          y="84"
-          width="104"
-          height="102"
+          y={MEME_Y}
+          width="153"
+          height={MEME_H}
         />
 
         {/* everything after it */}
@@ -75,10 +83,10 @@ export function ContextZone() {
           id="context-zone-dull"
           data-component="ContextZone"
           href="/context-zone-dull.png"
-          x="150"
-          y="8"
-          width="450"
-          height="179"
+          x="232"
+          y={MEME_Y}
+          width="378"
+          height={MEME_H}
         />
 
         {/* the axis: teal while the model is sharp, muted after */}

@@ -429,6 +429,7 @@ export function TokenSplit() {
 
       <figcaption
         id="token-split-caption"
+        data-deck="hide"
         data-component="TokenSplit"
         className="text-muted-foreground text-xs"
       >

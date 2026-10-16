@@ -137,6 +137,7 @@ export function WindowGrid() {
 
       <figcaption
         id="window-grid-caption"
+        data-deck="hide"
         data-component="WindowGrid"
         className="text-muted-foreground font-mono text-xs"
       >

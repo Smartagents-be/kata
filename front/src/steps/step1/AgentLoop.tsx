@@ -344,6 +344,7 @@ export function AgentLoop() {
 
       <figcaption
         id="agent-loop-caption"
+        data-deck="hide"
         data-component="AgentLoop"
         className="text-muted-foreground text-center text-xs"
       >

@@ -286,8 +286,8 @@ export const proofQuiz: QuizQuestion[] = [
         correct: true,
       },
       {
-        id: 'too-long',
-        label: 'quiz.report-on-a-wish.too-long',
+        id: 'more-agents',
+        label: 'quiz.report-on-a-wish.more-agents',
       },
       {
         id: 'wrong-tier',

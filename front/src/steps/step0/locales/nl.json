@@ -130,6 +130,7 @@
   "deck.backend.divider.1": "<hi>Eigen project per stap:</hi> Elke stap vormt een afzonderlijk Maven-project.",
   "deck.backend.divider.2": "<hi>Geen copy-paste:</hi> Codeblokken laat je uitvoeren door je agent, niet via je klembord.",
   "deck.backend.herrings.title": "Niet elke string tussen accolades is <hi>de flag</hi>",
+  "deck.backend.herrings.note": "Vanaf de workshop van deze stap staan er ook strings in de output die op een flag lijken en het niet zijn.",
   "deck.workshop.divider.1": "Voer 2 runs uit op het platform.",
   "deck.workshop.divider.2": "De machine genereert het antwoord, jij leest het af.",
   "deck.workshop.divider.3": "De laatste run drukt 2 kandidaten af."

@@ -242,6 +242,7 @@ export function TokenKinds() {
 
       <figcaption
         id="token-kinds-caption"
+        data-deck="hide"
         data-component="TokenKinds"
         className="text-muted-foreground text-xs"
       >

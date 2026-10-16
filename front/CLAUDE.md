@@ -97,6 +97,21 @@ lives in **that step's** namespace rather than `ui`, because `i18n.ts` types Dut
 `Record<MessageKey, string>` and a `ui` key with no Dutch is a build failure; only the deck chrome
 and the cross-step opening slide stay in `ui`.
 
+**A slide carries less than the page, at the owner's asking (October 2026).** The students get the
+units as their documentation, so fine print stays there: a figure marks its disclaimer, source or
+date line `data-deck="hide"` and `SlideFigure` drops it (`NextToken`'s "the scores are for
+illustration" is the case that set the rule). A slide's own `note` follows the same rule: one line
+that lands the point, never a caveat about how the numbers were made. Mark a new caption the same
+way when it is fine print rather than part of the drawing.
+
+**Every exercise and quiz has a stop on the board** (October 2026, at the owner's asking). Where a
+unit asks the room to do something, the deck carries a marker slide from `shared/deck/exerciseSlides.ts`
+(`taskSlide` names the task card by its own title key, `quizSlide` says "Test your knowledge"), at
+the end of that unit's run of slides, in the unit's own order. An exercise that is already on a
+slide gets no marker, only the same `badge`, the filled label beside the eyebrow. The work stays in
+the unit: the marker never copies a task's moves or a quiz's questions. A new task or quiz in a unit
+gets its marker in the same change.
+
 `SlideFigure` is what makes the reuse work. A page figure is built for a prose column (the SVG ones
 cap at `max-w-xl`, the DOM ones are sized in rem, which the fixed canvas knows nothing about), so it
 is **magnified with a transform** rather than restyled, which handles both kinds identically and
@@ -162,7 +177,7 @@ Slide type is written in px, not Tailwind's rem scale: the canvas is a fixed 192
 unit, so an 84px heading is 84px, and rem would track a browser font-size the canvas does not. The
 sizes follow the scale the tutor's other decks use, documented in that repo's
 `.claude/commands/new-presentation.md`, which is also where the footer-clearance rule comes from.
-`Slide` reserves 88px at the foot for the footer and nothing else may sit in it.
+`Slide` reserves 60px at the foot for the footer (88px until the owner asked for a smaller footer, October 2026) and nothing else may sit in it.
 
 Vertical placement is `align`, and the third value is the one with an argument behind it. `top` pins
 a heading so it does not move across a run of content slides, `center` is for a divider with no

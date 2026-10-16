@@ -1,6 +1,7 @@
 import type { SlideSpec } from '@/shared/deck/slide-spec'
 import { PipelineShift } from './PipelineShift'
 import { SdlcStages } from './SdlcStages'
+import { quizSlide, taskSlide } from '@/shared/deck/exerciseSlides'
 
 /**
  * Step 3 on the board. This step is argued out loud by design: three units of conversation, two
@@ -80,6 +81,7 @@ const deck: SlideSpec[] = [
     ns: 'step3',
     eyebrow: 'change.title',
     title: 'deck.change.gates.title',
+    points: ['deck.change.gates.1', 'deck.change.gates.2', 'deck.change.gates.3'],
   },
   // It names no file: a SlideSpec has no assistant mechanism, so naming CLAUDE.md here would be
   // wrong for half the room with nothing filtering it.
@@ -118,6 +120,7 @@ const deck: SlideSpec[] = [
     ns: 'step3',
     eyebrow: 'expectations.title',
     title: 'deck.expectations.prototypes.title',
+    note: 'deck.expectations.prototypes.note',
   },
   {
     id: 'deck-step3-expectations-missing',
@@ -169,6 +172,7 @@ const deck: SlideSpec[] = [
       'deck.expectations.velocity.3',
     ],
   },
+  quizSlide('deck-step3-expectations-quiz', 'step3', 'expectations.title'),
 
   // ── impostor ──────────────────────────────────────────────────────────────────────────────
   {
@@ -211,6 +215,7 @@ const deck: SlideSpec[] = [
     title: 'deck.impostor.written.title',
     note: 'deck.impostor.written.note',
   },
+  taskSlide('deck-step3-impostor-task', 'step3', 'impostor.title', 'take.title'),
 ]
 
 export default deck

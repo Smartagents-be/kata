@@ -730,8 +730,9 @@ prefix cannot, the first write, two reads of what was sent before, a model switc
 nothing, and a long pause that finds the cache expired. It was animated row by row first and is
 **still on purpose** now, at the owner's asking: the five rows are a comparison and read best side
 by side. Its Dutch says "vraag" rather than "beurt", which the owner found odd here. The fourth row is a model switch rather than a new MCP server on
-purpose, for the reason in the next sentence; its docblock has the rest. The deck's statement slide
-(`deck-tokens-cache`) still states the rule, and `deck-tokens-cache-turns` after it shows the figure. `prompt-caching.2` states the prefix rule with only the model as what to settle early
+purpose, for the reason in the next sentence; its docblock has the rest. The deck has 1 slide for it,
+`deck-tokens-cache`: the rule as its title and `PromptCache` under it (a separate statement slide
+before the figure was cut in October 2026, at the owner's asking). `prompt-caching.2` states the prefix rule with only the model as what to settle early
 (13 October 2026): in Claude Code on the 5.5 models a change of effort keeps the cache, and so does
 an MCP server connecting mid-session while tool search defers its tools, so naming effort and tools
 there gave a reason that no longer holds.
@@ -907,7 +908,9 @@ over the two sides (a big brain, a brainlet at a shape sorter). The memes are th
 made knowingly against the rule that a raster is only ever a screenshot; they live in
 `front/public/context-zone-*.png`, cut from the owner's sketch, and every label is SVG text so the
 Dutch and the per-assistant limit work. It is an axis with a band, not a plotted curve, so the
-rejection above still stands. The figure is on the deck as `deck-context-zone`. With this in
+rejection above still stands. **The 2 memes are 1 height** (owner's call, same day): sized to their
+stretch, the brain shrank to a thumbnail, and the axis already carries the proportion. The figure is
+on the deck as `deck-context-zone`, titled "LLMs hit the dumb zone early" at the owner's wording. With this in
 `context`, `session.amnesia-context-fatigue.2` lost "and it did not get dumber": next to a figure
 saying a full context makes the model less reliable, that clause read as a contradiction, and the
 paragraph's point (after compaction the evidence is gone) does not need it.

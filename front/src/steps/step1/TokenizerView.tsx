@@ -170,7 +170,7 @@ export function TokenizerView() {
           ))}
         </div>
 
-        <p id="tokenizer-view-note" data-component="TokenizerView" className="text-muted-foreground text-xs">
+        <p id="tokenizer-view-note" data-deck="hide" data-component="TokenizerView" className="text-muted-foreground text-xs">
           {t('tokenizer-view.note')}
         </p>
       </div>

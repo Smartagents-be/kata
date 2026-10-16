@@ -808,6 +808,7 @@ export function NextToken() {
 
       <figcaption
         id="next-token-caption"
+        data-deck="hide"
         data-component="NextToken"
         className="text-muted-foreground text-xs"
       >

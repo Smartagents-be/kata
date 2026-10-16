@@ -89,11 +89,11 @@ Guided mode drops every run of prose (`front/src/shared/lib/content.ts:185`).
   - the install step and prerequisites (welcome)
   - the step 2 capstone goal sentence
 - recap, expectations and impostor are nearly empty in guided mode (*Design*: the deck carries them).
-- No slide for ReasoningCost, SpeedAtScale, WordsToFiles, HexagonPorts, the builder-critic prompt, the personal instructions file, permissions, blast radius, or invented packages (*Design*: add one only where the class needs the actionable instruction).
+- No slide for ReasoningCost, SpeedAtScale, WordsToFiles, HexagonPorts, the builder-critic prompt, the personal instructions file, permissions, or invented packages (*Design*: add one only where the class needs the actionable instruction).
 
 ## 7. Writing
 
-- The 5 Oct accuracy pass (PR #1, `f5a83cd`) fixed real overstatements, but some paragraphs swapped them for jargon and stacked hedges. context is already rewritten; harness, model, recap and goals were partly rewritten on 7 Oct. Target the confusing sentences only; keep accurate qualifications, and do not bring back the old overstatements.
+- The 5 Oct accuracy pass (PR #1, `f5a83cd`) fixed real overstatements, but some paragraphs swapped them for jargon and stacked hedges. context is already rewritten; harness, model and recap were partly rewritten on 7 Oct. Target the confusing sentences only; keep accurate qualifications, and do not bring back the old overstatements.
 - steering lost its cost paragraph, but its slide keeps the point; fix the page reference in `expectations.html:73` (and the other pointers) or restore the paragraph.
 - Numbers written as words: about 40 lines across EN, NL, README and install.txt (*Design*, house style; list in `review/text-sweep.md`).
 - Dutch, check and choose:
@@ -119,9 +119,9 @@ Characterisation tests (`gates.legacy-code.1`/`.2`) and a review checklist (`ena
   - a local MCP server is third-party code running with your rights (remote ones run elsewhere); pin the version for a class, which does not replace review
   - keep credential values out of committed configs (env references are fine; a committed secret must be rotated)
   - the client's actual data policy for its configured service (training vs retention), and which code or data never goes into a context (audit 13)
-- **Copilot cloud agent and Copilot code review** (optional): issue to PR on a `copilot/` branch, human approval, required checks you configure yourself. Keep the two apart; fit them into gates, parallel and goals only if time allows.
+- **Copilot cloud agent and Copilot code review** (optional): issue to PR on a `copilot/` branch, human approval, required checks you configure yourself. Keep the two apart; fit them into gates, parallel and proof only if time allows.
 - **Review, what is still missing:** an AI reviewer gets a fresh context plus the acceptance criteria, and the test-first loop (the agent writes the tests, you read them and watch them fail, then the implementation follows). The 4 review questions and the changed-tests warning are in `enablement`.
-- **Long-running goals per tool:** `goals.executable-completion-check.2` now names `/goal` (Claude Code) and autopilot (Copilot CLI). Still missing: the Autopilot agent mode in IntelliJ (*Unverified*: not found in GitHub's JetBrains changelogs) and the cloud agent.
+- **Long-running goals per tool:** `enablement.goal-check.2` now names `/goal` (Claude Code) and autopilot (Copilot CLI, capped with `--max-autopilot-continues`). Still missing: the Autopilot agent mode in IntelliJ (*Unverified*: not found in GitHub's JetBrains changelogs) and the cloud agent.
 - **Team ownership:** which agent files are shared and reviewed (instructions, rules, skills, hooks, a project MCP config) and which stay personal. Each tool has its own syntax.
 - **Resuming a session:** `session.wrote-almost-none.3` now names `--continue` and `/resume`. Still missing: IntelliJ's sessions view.
 - **Cost governance on Copilot:** pooled credits, user budgets (hard stops), the Auto model; a long builder-critic run can consume substantial credits (measure; duration alone does not predict it). On Claude: `opusplan`, and an exported `ANTHROPIC_API_KEY` taking precedence over the subscription.
@@ -138,8 +138,7 @@ All *Design*, depending on the run sheet; nothing here needs deleting from the k
 - prompt: the trainer runs PlanItTwice's one-shot baseline live, and pairs do the plan half on the same model.
 - harness: CutItUp (60 to 120 min).
 - model: the 5-hour window (Claude-only). PriceOneTurn now has a Copilot route, so keep a short version if cost is a goal.
-- Step 2 cards to self-study or homework: FifteenMinutes, WhereWouldItGo's plan move, SteerARun, SameEveryRun, CountTheDay, GateWalk, the builder-critic run. CheckPermissions becomes a trainer demo.
-- goals: ultracode, Claude Design and the frontier relay (Claude-specific).
+- Step 2 cards to self-study or homework: SteerARun, SameEveryRun, GateWalk, the builder-critic run. CheckPermissions becomes a trainer demo.
 - Capstone: keep pre-flight, rows 1 to 3 and the statement job. The native row and the debrief audit become demo or homework.
 - Quizzes: 1 question per unit by show of hands (31 questions would take about 35 min).
 - Repetition: the standing-instruction exercise (session and setup: run it once, refer back), compaction cost in session, and `context.why-bites-hardest.2`.
@@ -205,8 +204,6 @@ All *Design*, depending on the run sheet; nothing here needs deleting from the k
 - engineering:
   - Give the agent the target structure (pasting the tree is one way).
   - The deck dividers keep the "compression" claim cut from the page.
-- gates:
-  - Blast radius needs 1 concrete example.
 - steering:
   - IntelliJ worktrees and queue/steer options (*unverified*): add the chosen route, or keep portable git.
   - The rewind is never practised in class (a trainer demo is enough).
@@ -215,11 +212,8 @@ All *Design*, depending on the run sheet; nothing here needs deleting from the k
   - "The further down, the more you settle first" contradicts the audit's build-first.
   - Spec Kit could be named (optional).
   - The exercise's `audit.md` shares a name with the repo's own; fine as prose, but keep the files apart if students run a real audit.
-- enablement: CountTheDay misses waiting on builds as its own category.
 - parallel: add 1 Copilot route for sub-agents and critics (IntelliJ custom agent plus "Enable Subagent", or the CLI's `/fleet`).
-- goals:
-  - 2 quiz stems contain their key (*Design*).
-  - The "(August 2026)" stamp: keep it as the example's date or mark a verified date.
+- enablement: the `report-on-a-wish` quiz stem, moved from the cut goals unit, may give its key away (*Design*).
 - workshop:
   - "1 of the 3 does not move" didn't happen in the dry run (mutation score 42% to 95% on the first pass): soften it, keep the exercise, do not raise the gate to force a failure.
   - "Built to resist a one-shot" doesn't hold: `NativeImageFlag`'s Javadoc names the fix. Remove the guaranteed-failure claim and the answer detail.

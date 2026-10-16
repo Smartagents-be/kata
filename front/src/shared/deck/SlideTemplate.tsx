@@ -6,7 +6,7 @@ import type { SlideSpec } from '@/shared/deck/slide-spec'
 /**
  * The one template every slide goes through.
  *
- * `Slide` is the frame: the 1920x1080 ground, the padding, the 88px the footer owns, and the three
+ * `Slide` is the frame: the 1920x1080 ground, the padding, the 60px the footer owns, and the three
  * vertical placements. It is unchanged and stays that way. This is the layer above it, the shape
  * the content keeps, so that a deck of forty slides reads as one deck rather than forty drawings
  * with a page number under each.
@@ -37,7 +37,7 @@ export function SlideTemplate({
   index: number
   total: number
 }) {
-  const { id, kind, ns = 'ui', eyebrow, title, note, points, figure, scale, figureWidth } = spec
+  const { id, kind, ns = 'ui', eyebrow, title, note, points, figure, scale, figureWidth, badge } = spec
   const { t } = useTranslation(ns)
 
   // A module's title card sits on the deep-teal header surface, one per step, so its teal and its
@@ -72,14 +72,33 @@ export function SlideTemplate({
       align={kind === 'figure' ? 'top' : 'golden'}
       surface={dark ? 'dark' : 'light'}
     >
-      {eyebrow && (
-        <p
-          id={`${id}-eyebrow`}
+      {(eyebrow || badge) && (
+        <div
+          id={`${id}-eyebrow-row`}
           data-component="SlideTemplate"
-          className={`eyebrow mb-10 text-[26px] ${dark ? 'text-chart-3' : 'text-primary'}`}
+          className="mb-10 flex items-center gap-6"
         >
-          {t(eyebrow)}
-        </p>
+          {/* The badge is the one filled thing above a heading in the deck, so an exercise or a quiz
+              reads as a stop from the back of the room. Its words are the deck chrome's, in `ui`. */}
+          {badge && (
+            <span
+              id={`${id}-badge`}
+              data-component="SlideTemplate"
+              className="bg-primary text-primary-foreground rounded-full px-5 py-1.5 text-[24px] font-semibold"
+            >
+              {t(`ui:deck.badge.${badge}`)}
+            </span>
+          )}
+          {eyebrow && (
+            <p
+              id={`${id}-eyebrow`}
+              data-component="SlideTemplate"
+              className={`eyebrow text-[26px] ${dark ? 'text-chart-3' : 'text-primary'}`}
+            >
+              {t(eyebrow)}
+            </p>
+          )}
+        </div>
       )}
 
       <h1

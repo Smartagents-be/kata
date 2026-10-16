@@ -80,6 +80,7 @@ export function FileTree({
       {caption && (
         <figcaption
           id={`${id}-caption`}
+          data-deck="hide"
           data-component="FileTree"
           className="text-muted-foreground mt-3 border-t pt-3 font-mono text-xs"
         >

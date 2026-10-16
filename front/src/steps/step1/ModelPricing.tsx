@@ -119,6 +119,7 @@ export function ModelPricing() {
 
           <caption
             id="model-pricing-caption"
+            data-deck="hide"
             data-component="ModelPricing"
             className="text-muted-foreground pt-3 text-left text-xs"
           >

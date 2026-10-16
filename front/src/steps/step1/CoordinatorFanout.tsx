@@ -310,6 +310,7 @@ export function CoordinatorFanout() {
       <StoryToggle id="coordinator-fanout" component="CoordinatorFanout" story={story} className="max-w-xl" />
       <figcaption
         id="coordinator-fanout-caption"
+        data-deck="hide"
         data-component="CoordinatorFanout"
         className="text-muted-foreground w-full max-w-3xl text-xs"
       >

@@ -9,6 +9,7 @@ import { DomainTree } from './DomainTree'
 import { FidelityLadder } from './FidelityLadder'
 import { FlowDiagram } from './FlowDiagram'
 import { GateReach } from './GateReach'
+import { LegacyFlow } from './LegacyFlow'
 import { GateWalk } from './GateWalk'
 import { GoalGate } from './GoalGate'
 import { HexagonPorts } from './HexagonPorts'
@@ -109,12 +110,14 @@ const step2: Step = {
       id: 'quality-gates',
       title: 'gates.title',
       html: gates,
-      // Two slots inside the prose. `same-gate` came over from `engineering`
+      // Three slots inside the prose. `same-gate` came over from `engineering`
       // with the `Quality gates` section it closes. `gate-reach` closes `short-feedback-loops` and
       // nothing reads it back, because its note is the unit's last two sections in one line: the
       // slower a gate answers, the further a miss has got.
       inlineFigures: {
         'same-gate': <SameGate />,
+        // Closes `Legacy code` (October 2026): the order and who decides, drawn.
+        'legacy-flow': <LegacyFlow />,
         'gate-reach': <GateReach />,
       },
       // The task under the prose, run against the student's own project rather than the kata,

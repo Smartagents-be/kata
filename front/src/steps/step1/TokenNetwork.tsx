@@ -648,6 +648,7 @@ export function TokenNetwork() {
             it. Each line is short enough to read under the drawing on a slide. */}
         <div
           id="token-network-note"
+          data-deck="hide"
           data-component="TokenNetwork"
           className="border-border text-muted-foreground mt-2 flex flex-col gap-1 border-t pt-2 text-xs leading-relaxed"
         >

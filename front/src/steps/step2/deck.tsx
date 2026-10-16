@@ -5,6 +5,7 @@ import { ElectedToLead } from './ElectedToLead'
 import { FlowDiagram } from './FlowDiagram'
 import { GapRule } from './GapRule'
 import { GateReach } from './GateReach'
+import { LegacyFlow } from './LegacyFlow'
 import { GoalGate } from './GoalGate'
 import { HookTree } from './HookTree'
 import { LoopsPerHour } from './LoopsPerHour'
@@ -22,6 +23,7 @@ import { VerticalSlices } from './VerticalSlices'
 import { WorkflowTimeline } from './WorkflowTimeline'
 import { WorkflowWeights } from './WorkflowWeights'
 import { WorktreeEach } from './WorktreeEach'
+import { quizSlide, taskSlide } from '@/shared/deck/exerciseSlides'
 
 /**
  * Step 2 on the board, on step 1's shape: one divider per unit in registry order, that unit's own
@@ -92,9 +94,11 @@ const deck: SlideSpec[] = [
     figure: <HookTree />,
     scale: 1.5,
   },
+  taskSlide('deck-step2-setup-task', 'step2', 'setup.title', 'access.title'),
   {
     id: 'deck-step2-setup-flags',
     kind: 'statement',
+    badge: 'task',
     ns: 'step2',
     eyebrow: 'setup.title',
     title: 'deck.setup.flags.title',
@@ -203,11 +207,12 @@ const deck: SlideSpec[] = [
   },
   {
     id: 'deck-step2-gates-old-code',
-    kind: 'statement',
+    kind: 'figure',
     ns: 'step2',
     eyebrow: 'gates.title',
     title: 'deck.gates.old-code.title',
-    points: ['deck.gates.old-code.1', 'deck.gates.old-code.2', 'deck.gates.old-code.3'],
+    figure: <LegacyFlow />,
+    scale: 1.45,
   },
   {
     id: 'deck-step2-gates-reach',
@@ -221,6 +226,7 @@ const deck: SlideSpec[] = [
   {
     id: 'deck-step2-gates-walk',
     kind: 'statement',
+    badge: 'task',
     ns: 'step2',
     eyebrow: 'gates.title',
     title: 'deck.gates.walk.title',
@@ -289,6 +295,8 @@ const deck: SlideSpec[] = [
     figure: <GapRule />,
     scale: 1.5,
   },
+  taskSlide('deck-step2-steering-task', 'step2', 'steering.title', 'steer.title'),
+  quizSlide('deck-step2-steering-quiz', 'step2', 'steering.title'),
 
   // ── patterns ──────────────────────────────────────────────────────────────────────────────
   {
@@ -318,6 +326,8 @@ const deck: SlideSpec[] = [
     figure: <ScriptRuns />,
     scale: 1.5,
   },
+  taskSlide('deck-step2-patterns-task', 'step2', 'patterns.title', 'script.title'),
+  quizSlide('deck-step2-patterns-quiz', 'step2', 'patterns.title'),
 
   // ── workflows ─────────────────────────────────────────────────────────────────────────────
   {
@@ -431,6 +441,7 @@ const deck: SlideSpec[] = [
     figure: <WorkflowTimeline />,
     scale: 1.3,
   },
+  quizSlide('deck-step2-workflows-quiz', 'step2', 'workflows.title'),
 
   // ── enablement ────────────────────────────────────────────────────────────────────────────
   {
@@ -520,6 +531,8 @@ const deck: SlideSpec[] = [
       'deck.enablement.review.4',
     ],
   },
+  taskSlide('deck-step2-enablement-task', 'step2', 'enablement.title', 'machinery.title'),
+  quizSlide('deck-step2-enablement-quiz', 'step2', 'enablement.title'),
 
   // ── parallel ──────────────────────────────────────────────────────────────────────────────
   {
@@ -583,6 +596,7 @@ const deck: SlideSpec[] = [
     figure: <WorktreeEach />,
     scale: 1.4,
   },
+  quizSlide('deck-step2-parallel-quiz', 'step2', 'parallel.title'),
 
   // ── workshop ──────────────────────────────────────────────────────────────────────────────
   {
@@ -626,6 +640,7 @@ const deck: SlideSpec[] = [
   {
     id: 'deck-step2-workshop-flags',
     kind: 'statement',
+    badge: 'task',
     ns: 'step2',
     eyebrow: 'workshop.title',
     title: 'deck.workshop.flags.title',

@@ -114,6 +114,7 @@ export function SdlcStages() {
             </span>
             <span
               id={`sdlc-stages-${stage.key}-body`}
+              data-deck="hide"
               data-component="SdlcStages"
               className="text-muted-foreground"
             >
@@ -288,6 +289,7 @@ export function SdlcStages() {
 
       <figcaption
         id="sdlc-stages-caption"
+        data-deck="hide"
         data-component="SdlcStages"
         className="text-muted-foreground text-xs"
       >

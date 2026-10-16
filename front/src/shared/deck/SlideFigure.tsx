@@ -54,8 +54,10 @@ export function SlideFigure({
           // prose. `my-0` drops the `my-8` that spaces it from the paragraphs either side, which
           // here would just push it off centre. `max-w-none` lifts the `max-w-xl` the SVG figures
           // cap themselves at, so the drawing fills `width` before it is magnified rather than
-          // being magnified with empty space either side of it.
-          'origin-center shrink-0 [&_figure]:my-0 [&_svg]:max-w-none'
+          // being magnified with empty space either side of it. And anything a figure marks
+          // `data-deck="hide"` is dropped: its fine print (how the numbers were made, a source, a
+          // date) is for the reader of the unit page, not for a room (October 2026, owner's call).
+          'origin-center shrink-0 [&_figure]:my-0 [&_svg]:max-w-none [&_[data-deck=hide]]:hidden'
         }
       >
         {children}

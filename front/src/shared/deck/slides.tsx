@@ -1,3 +1,4 @@
+import { MagicMeme, SteroidsMeme } from '@/shared/deck/OpeningMemes'
 import { SlideTemplate } from '@/shared/deck/SlideTemplate'
 import type { SlideSpec } from '@/shared/deck/slide-spec'
 import { steps } from '@/steps'
@@ -19,8 +20,8 @@ import { steps } from '@/steps'
  */
 
 /**
- * The slides that belong to no step. Just the opening question so far, which is why it carries no
- * eyebrow naming a unit: it is asked before the course starts.
+ * The slides that belong to no step: the opening question, which is why it carries no eyebrow
+ * naming a unit (it is asked before the course starts), and the 2 memes that answer it.
  */
 const OPENING: SlideSpec[] = [
   {
@@ -33,6 +34,28 @@ const OPENING: SlideSpec[] = [
     // two tags are the deck's whole emphasis vocabulary and `SlideTemplate` is where they are
     // mapped; a tag it does not know renders as literal text on the slide.
     title: 'deck.slide.opening.question',
+  },
+  // The answer, as 2 memes (16 October 2026, at the owner's asking): what the room expects AI to be,
+  // then what the day wants instead. Rasters with SVG text over them; `OpeningMemes` says why.
+  {
+    id: 'deck-opening-magic',
+    kind: 'figure',
+    eyebrow: 'deck.slide.opening.eyebrow',
+    title: 'deck.slide.magic.title',
+    // Without it the slide sneers at vibe coding, and the course gives it a place: step 3's
+    // `expectations` and step 2's `workflows` keep throwaway prototypes as its home.
+    note: 'deck.slide.magic.note',
+    figure: <MagicMeme />,
+    scale: 1.35,
+  },
+  {
+    id: 'deck-opening-steroids',
+    kind: 'figure',
+    eyebrow: 'deck.slide.opening.eyebrow',
+    title: 'deck.slide.steroids.title',
+    note: 'deck.slide.steroids.note',
+    figure: <SteroidsMeme />,
+    scale: 1.25,
   },
 ]
 

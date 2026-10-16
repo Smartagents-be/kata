@@ -232,6 +232,7 @@ export function PromptCache() {
       </svg>
       <figcaption
         id="prompt-cache-caption"
+        data-deck="hide"
         data-component="PromptCache"
         className="text-muted-foreground text-xs"
       >

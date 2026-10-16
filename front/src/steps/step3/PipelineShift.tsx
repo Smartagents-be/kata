@@ -234,6 +234,7 @@ export function PipelineShift() {
 
       <figcaption
         id="pipeline-shift-caption"
+        data-deck="hide"
         data-component="PipelineShift"
         className="text-muted-foreground text-xs"
       >
