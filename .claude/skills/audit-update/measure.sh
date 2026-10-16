@@ -73,8 +73,15 @@ drift=0
 for idx in "$steps"/step*/index.tsx; do
   step=$(basename "$(dirname "$idx")")
   total=0; count=0
-  # units in registry order, which is course order and Table 2's row order
-  for unit in $(perl -0777 -ne 'while(/^\s{6}id: '\''([a-z0-9-]+)'\''/gm){print "$1\n"}' "$idx"); do
+  # units in registry order, which is course order and Table 2's row order. A unit's id is its URL
+  # and follows its title, while its HTML file and key prefix keep the old word (see
+  # front/src/steps/CLAUDE.md), so the file is resolved through the registry's `html:` import rather
+  # than guessed from the id. Table 2 names a unit by its file, which is the word every CLAUDE.md
+  # uses for it.
+  for unit in $(perl -0777 -ne '
+      my %file; while(/^import (\w+) from '\''\.\/units\/([a-z0-9-]+)\.html\?raw'\''/gm){ $file{$1}=$2 }
+      while(/^\s{6}id: '\''[a-z0-9-]+'\''.*?^\s{6}html: (\w+)/gms){ print(($file{$1} // "?$1"), "\n") }
+    ' "$idx"); do
     f="$steps/$step/units/$unit.html"
     [ -f "$f" ] || { printf "  %-22s NO HTML FILE (registry lists it)\n" "$step/$unit"; continue; }
     read -r w fig self <<<"$(measure_unit "$f")"
