@@ -569,7 +569,7 @@
   "quiz.deep-not-wide.explanation": "Here the decision is the work, and you make it in a conversation you follow step by step. Agents in the background cannot start on a model that is not settled yet.",
   "quiz.green-and-unread.question": "4 agents worked all afternoon at once on 4 modules, each in its own worktree. All the tests are green. Of the 4 diffs, you have read 2 carefully. What is going on here?",
   "quiz.green-and-unread.reading-at-the-end": "The steering you skipped along the way comes back now as reading, and the last diff gets less attention than the first.",
-  "quiz.green-and-unread.builds-are-the-check": "It all went well: the tests are the quality check, and they are all green.",
+  "quiz.green-and-unread.builds-are-the-check": "You can merge all 4: green tests show the code does what you wanted.",
   "quiz.green-and-unread.window-too-small": "The agents lost quality for lack of context, so their later work is weaker than the start.",
   "quiz.green-and-unread.shared-branch": "The agents should have worked on 1 branch, so everything would have been merged along the way.",
   "quiz.green-and-unread.explanation": "With 4 at once you stop steering and only receive results. Green tests say the checks passed, not that the code is what you wanted, and your attention runs out long before your tokens do.",

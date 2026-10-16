@@ -785,7 +785,7 @@
   "quiz.deep-not-wide.explanation": "Hier is de beslissing het werk, en die neem je in een gesprek dat je stap voor stap volgt. Agents op de achtergrond kunnen niet beginnen aan een model dat nog niet vastligt.",
   "quiz.green-and-unread.question": "4 agents werkten de hele namiddag tegelijk aan 4 modules, elk in een eigen worktree. Alle tests zijn groen. Van de 4 diffs heb je er 2 grondig gelezen. Wat is hier aan de hand?",
   "quiz.green-and-unread.reading-at-the-end": "Het bijsturen dat je onderweg oversloeg, komt nu terug als leeswerk, en de laatste diff krijgt minder aandacht dan de eerste.",
-  "quiz.green-and-unread.builds-are-the-check": "Alles liep goed: de tests zijn de kwaliteitscontrole, en ze zijn allemaal groen.",
+  "quiz.green-and-unread.builds-are-the-check": "Je kan alle 4 mergen: groene tests tonen dat de code doet wat je wou.",
   "quiz.green-and-unread.window-too-small": "De agents verloren kwaliteit door te weinig context, dus hun latere werk is zwakker dan het begin.",
   "quiz.green-and-unread.shared-branch": "De agents hadden op 1 branch moeten werken, dan was alles onderweg al samengevoegd.",
   "quiz.green-and-unread.explanation": "Met 4 tegelijk stuur je niet meer bij, je krijgt alleen nog resultaten binnen. Groene tests zeggen dat de controles slaagden, niet dat de code is wat jij wou, en je aandacht raakt op lang voor je tokens.",
