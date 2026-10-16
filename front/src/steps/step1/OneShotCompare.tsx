@@ -9,9 +9,12 @@ import { useTranslation } from 'react-i18next'
  * less generic. Dragging the divider is the point, so the geometry lives here in the step
  * rather than in the unit HTML.
  *
- * The two images are different generated designs, not one layout shot twice, so they are
- * laid out with `object-cover` anchored top-left (their logos and navs line up) and the
- * "before" is revealed with `clip-path` so both stay pixel-for-pixel the same size.
+ * The two images are different designs, not one layout shot twice, so they are laid out with
+ * `object-cover` anchored top-left (their logos and navs line up) and the "before" is revealed
+ * with `clip-path` so both stay pixel-for-pixel the same size. Both were redrawn in October 2026
+ * at the owner's asking, at 2:1 so nothing is cropped: the left one piles up the AI tells (stat
+ * cards, a chart, a score ring, a gradient headline), the right one follows award-winning sites of
+ * the time (a type-led hero, 1 flat colour, 1 object, facts in a hairline row).
  */
 const STEP = 2 // percent moved per arrow key
 
@@ -157,6 +160,7 @@ export function OneShotCompare() {
 
       <figcaption
         id="oneshot-compare-hint"
+        data-deck="hide"
         data-component="OneShotCompare"
         className="text-muted-foreground font-mono text-xs"
       >

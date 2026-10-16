@@ -37,7 +37,8 @@ export function SlideTemplate({
   index: number
   total: number
 }) {
-  const { id, kind, ns = 'ui', eyebrow, title, note, points, figure, scale, figureWidth, badge } = spec
+  const { id, kind, ns = 'ui', eyebrow, title, note, points, figure, scale, figureWidth, badge, stop } = spec
+  const badges = badge === undefined ? [] : Array.isArray(badge) ? badge : [badge]
   const { t } = useTranslation(ns)
 
   // A module's title card sits on the deep-teal header surface, one per step, so its teal and its
@@ -70,25 +71,29 @@ export function SlideTemplate({
       total={total}
       label={id}
       align={kind === 'figure' ? 'top' : 'golden'}
-      surface={dark ? 'dark' : 'light'}
+      surface={dark ? 'dark' : stop ? 'stop' : 'light'}
     >
-      {(eyebrow || badge) && (
+      {(eyebrow || badges.length > 0) && (
+        // The row is held to the eyebrow's own 35px line, so a badge (which is taller) centres on
+        // it and spills over rather than pushing the heading down: the h1 of an exercise slide
+        // lands where every other slide's does.
         <div
           id={`${id}-eyebrow-row`}
           data-component="SlideTemplate"
-          className="mb-10 flex items-center gap-6"
+          className="mb-10 flex h-[35px] items-center gap-6"
         >
           {/* The badge is the one filled thing above a heading in the deck, so an exercise or a quiz
               reads as a stop from the back of the room. Its words are the deck chrome's, in `ui`. */}
-          {badge && (
+          {badges.map((b, badgeIndex) => (
             <span
-              id={`${id}-badge`}
+              key={b}
+              id={`${id}-badge-${badgeIndex}`}
               data-component="SlideTemplate"
               className="bg-primary text-primary-foreground rounded-full px-5 py-1.5 text-[24px] font-semibold"
             >
-              {t(`ui:deck.badge.${badge}`)}
+              {t(`ui:deck.badge.${b}`)}
             </span>
-          )}
+          ))}
           {eyebrow && (
             <p
               id={`${id}-eyebrow`}
@@ -105,11 +110,12 @@ export function SlideTemplate({
         id={`${id}-title`}
         data-component="SlideTemplate"
         className={
+          // `text-balance` evens the lines of a heading that wraps, so none ends on 1 word.
           kind === 'title' || kind === 'divider'
-            ? 'font-heading max-w-[22ch] text-[96px] leading-[1.04] font-semibold tracking-tight'
+            ? 'font-heading max-w-[22ch] text-[96px] leading-[1.04] font-semibold tracking-tight text-balance'
             : kind === 'statement'
-              ? 'font-heading max-w-[26ch] text-[84px] leading-[1.08] font-semibold tracking-tight'
-              : 'font-heading max-w-[34ch] text-[56px] leading-[1.12] font-semibold tracking-tight'
+              ? 'font-heading max-w-[26ch] text-[84px] leading-[1.08] font-semibold tracking-tight text-balance'
+              : 'font-heading max-w-[34ch] text-[56px] leading-[1.12] font-semibold tracking-tight text-balance'
         }
       >
         <Trans i18nKey={title} ns={ns} components={emphasis} />
@@ -121,8 +127,8 @@ export function SlideTemplate({
           data-component="SlideTemplate"
           className={
             kind === 'figure'
-              ? 'text-muted-foreground mt-6 max-w-[60ch] text-[28px] leading-[1.4]'
-              : `mt-10 max-w-[46ch] text-[34px] leading-[1.4] ${dark ? 'text-header-foreground/70' : 'text-muted-foreground'}`
+              ? 'text-muted-foreground mt-6 max-w-[60ch] text-[28px] leading-[1.4] text-pretty'
+              : `mt-10 max-w-[46ch] text-[34px] leading-[1.4] text-pretty ${dark ? 'text-header-foreground/70' : 'text-muted-foreground'}`
           }
         >
           <Trans i18nKey={note} ns={ns} components={emphasis} />
@@ -142,15 +148,17 @@ export function SlideTemplate({
               key={point}
               id={`${id}-points-${pointIndex}`}
               data-component="SlideTemplate"
-              className="flex items-baseline gap-6 text-[36px] leading-[1.35]"
+              className="flex items-start gap-6 text-[36px] leading-[1.35]"
             >
               {/* The marker is drawn, not typed: a short rule in the slide's accent, so the list
-                  reads as placed rather than pasted from a document. */}
+                  reads as placed rather than pasted from a document. It sits on the middle of the
+                  first line (half the 48.6px line less half its own 5px), never on the middle of
+                  the item, which on a point that wraps put it between 2 lines. */}
               <span
                 aria-hidden="true"
-                className={`h-[5px] w-[36px] shrink-0 self-center rounded-full ${dark ? 'bg-chart-3' : 'bg-primary'}`}
+                className={`mt-[22px] h-[5px] w-[36px] shrink-0 rounded-full ${dark ? 'bg-chart-3' : 'bg-primary'}`}
               />
-              <span>
+              <span className="text-pretty">
                 <Trans i18nKey={point} ns={ns} components={emphasis} />
               </span>
             </li>

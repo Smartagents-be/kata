@@ -71,5 +71,12 @@ export interface SlideSpec {
    * of the room that this is where the class stops listening and starts working. `exerciseSlides.ts`
    * makes the marker slides; an exercise that is itself on a slide carries the badge too.
    */
-  badge?: 'task' | 'quiz'
+  badge?: 'task' | 'quiz' | ('task' | 'quiz')[]
+  /**
+   * Marks a marker slide from `exerciseSlides.ts`: an exercise or quiz that happens in the unit,
+   * not on the board. It puts the slide on the pale teal `--stop` ground, so a room sees from the
+   * back that this is where it stops listening (October 2026, owner's call). A slide that carries
+   * the work itself (a figure with a badge, a flag list) stays on the light ground.
+   */
+  stop?: boolean
 }

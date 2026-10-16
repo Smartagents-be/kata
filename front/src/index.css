@@ -52,6 +52,8 @@
     /* The header is the one dark-teal surface in a light UI: white ink, a translucent control. */
     --color-header: var(--header);
     --color-header-foreground: var(--header-foreground);
+    /* The deck's stop slides: the pale teal ground a room reads as "your turn". */
+    --color-stop: var(--stop);
     --radius-sm: calc(var(--radius) * 0.6);
     --radius-md: calc(var(--radius) * 0.8);
     --radius-lg: var(--radius);
@@ -150,6 +152,10 @@
        page is what makes the band read as the band. */
     --header: oklch(0.28 0.055 185);
     --header-foreground: oklch(1 0 0);
+    /* The ground of the deck's exercise and quiz stops, and nothing else: a pale teal that reads as
+       a different kind of slide from the back of a room without competing with the 4 dark module
+       cards. */
+    --stop: oklch(0.925 0.04 185);
     --secondary: oklch(0.94 0.006 195);
     --secondary-foreground: oklch(0.26 0.012 200);
     --muted: oklch(0.972 0.004 190);

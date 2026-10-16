@@ -46,7 +46,7 @@ const OPENING: SlideSpec[] = [
     // `expectations` and step 2's `workflows` keep throwaway prototypes as its home.
     note: 'deck.slide.magic.note',
     figure: <MagicMeme />,
-    scale: 1.35,
+    scale: 1.76,
   },
   {
     id: 'deck-opening-steroids',
@@ -55,12 +55,26 @@ const OPENING: SlideSpec[] = [
     title: 'deck.slide.steroids.title',
     note: 'deck.slide.steroids.note',
     figure: <SteroidsMeme />,
-    scale: 1.25,
+    scale: 1.47,
   },
 ]
 
-/** The deck, in order: the opening, then each step's own slides as that step registered them. */
-const DECK: SlideSpec[] = [...OPENING, ...steps.flatMap((step) => step.deck ?? [])]
+/**
+ * The last slide asks the opening question again (October 2026, at the owner's asking for a deck
+ * that does not stop on an exercise marker). Same eyebrow shape, same two terms in the same two
+ * colours, so the room meets the question it answered at 9 with a day behind it.
+ */
+const CLOSING: SlideSpec[] = [
+  {
+    id: 'deck-closing',
+    kind: 'statement',
+    eyebrow: 'deck.slide.closing.eyebrow',
+    title: 'deck.slide.closing.question',
+  },
+]
+
+/** The deck, in order: the opening, each step's own slides as that step registered them, the close. */
+const DECK: SlideSpec[] = [...OPENING, ...steps.flatMap((step) => step.deck ?? []), ...CLOSING]
 
 /**
  * A fragment, not a wrapper element. The engine treats every direct element child of `<deck-stage>`

@@ -42,10 +42,11 @@ export function Slide({
   /**
    * Which ground the slide sits on. `light` is the warm off-white every content slide keeps;
    * `dark` is the app's one dark surface, the deep-teal header, which the four module title cards
-   * borrow so a step boundary reads from the back of the room. This is a per-slide surface, not
-   * dark mode: the deck's dark-mode wrapper was removed on purpose and stays removed.
+   * borrow so a step boundary reads from the back of the room. `stop` is the pale teal of an
+   * exercise or quiz marker. This is a per-slide surface, not dark mode: the deck's dark-mode
+   * wrapper was removed on purpose and stays removed.
    */
-  surface?: 'light' | 'dark'
+  surface?: 'light' | 'dark' | 'stop'
   children: ReactNode
 }) {
   const dark = surface === 'dark'
@@ -60,7 +61,11 @@ export function Slide({
       // reach it. The slide covers the canvas edge to edge, so the ground colour is painted here.
       className={cn(
         'font-sans relative overflow-hidden',
-        dark ? 'bg-header text-header-foreground' : 'bg-background text-foreground',
+        dark
+          ? 'bg-header text-header-foreground'
+          : surface === 'stop'
+            ? 'bg-stop text-foreground'
+            : 'bg-background text-foreground',
       )}
     >
       <div
@@ -82,7 +87,7 @@ export function Slide({
         data-component="Slide"
         className={cn(
           'absolute right-[120px] bottom-[24px] left-[120px] flex items-center justify-between border-t pt-[10px]',
-          dark ? 'border-header-foreground/20' : 'border-border',
+          dark ? 'border-header-foreground/20' : surface === 'stop' ? 'border-foreground/15' : 'border-border',
         )}
       >
         <span

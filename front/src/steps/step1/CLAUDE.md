@@ -780,12 +780,14 @@ projects and falls back on what is common across them, at the owner's asking, wo
 Dribbble reference), and `.3` is the conclusion. `.2` names no Dribbble (October 2026): the owner did not know
 the site and the source does not matter, so it says "a screenshot of an existing design", and the
 alt text says "an example design". `.3` now names what is generic on the left, at the owner's
-asking: centred, a large serif headline, a pill with a dot above it, the same rounded corners
-everywhere. Two of those are in Anthropic's own list of traits AI-generated design "clusters
-around" (`anthropics/skills`, `frontend-design/SKILL.md`, read October 2026: "a high-contrast serif
-display", "one border-radius on everything"); the other two are only visible in the image, so the
-sentence says "keep coming back" and does not cite Anthropic, and it says AI rather than Claude,
-since that list does. Re-shooting the image means re-reading `.3` against it. The old "check that the agent has those
+asking: cards with made-up numbers, a score in a ring, a gradient headline, a pill above it, the
+same rounded corners everywhere. **Both images were redrawn on 16 October 2026** at the owner's
+asking: the left one to carry more AI tells (stat cards, a chart, a score ring, a toast, a "Trusted
+by" row), the right one modelled on that month's Awwwards winners (Aardvark Book Club's type-led
+hero, 1 flat colour and 1 object, facts in a hairline row like OFFF's), built from the old right
+image's own content. They are hand-built mockups in the shape of the old outputs, not a fresh model
+run. The sentence says "keep coming back" and AI rather than Claude. Re-shooting the image means
+re-reading `.3` against it. The old "check that the agent has those
 before it changes code" went, since `you-choose-most` already carries that move.
 **`session.window-not-memory.1` says to keep the instruction file short** (October 2026, at the
 owner's asking), so "write it in `CLAUDE.md`" does not read as "write a lot in it". It came from
@@ -797,10 +799,10 @@ context and reduce adherence); the re-read after compaction is also from that pa
 after compaction, so that half does not claim it.
 **`bad-context-bad.4` was cut** (October 2026, at the owner's asking): the dead bug hunt that
 comes back after a fix is what `session.entropy.1` and `.2` already say (a file put back to a version you
-left an hour ago), and clearing once a problem is closed is `session.entropy.3`'s. The deck's `deck-context-stale` and
-`deck-context-bad-code` were rewritten in the same pass, to the stale instruction file and to
-`you-choose-most`'s per-task-against-project split, since both still quoted text the unit no
-longer had.
+left an hour ago), and clearing once a problem is closed is `session.entropy.3`'s. The deck's `deck-context-stale` was
+rewritten in the same pass, to the stale instruction file. `deck-context-bad-code` ("Only a gate is
+certain") was cut on 16 October 2026 at the owner's asking: next to its note it read as if
+`CLAUDE.md` or `AGENTS.md` were a gate, and a gate has nothing to do with that file.
 **`context.bad-context-bad.2` names what the agent can fetch and where that stops** (October 2026,
 at the owner's asking): it said "the harness can go and get what it lacks", which named nothing and
 gave the harness the model's decision. It now lists reading files, searching the codebase, running
@@ -848,7 +850,12 @@ in the project. A gate catches the result of missing context; it does not make t
 so do not reword `.3` as if it did. Do not bring the cut section back. **"Tell it where not to look" was left out on purpose**: Anthropic does that with
 settings (`permissions.deny`, `claudeMdExcludes`) rather than in the prompt, and settings are step
 2's guardrails, so the access half of the same FEEDBACK item lands there and not here. The folder
-claim is worded for both products (both start in the current folder and scope to it) and says
+claim is worded for both products (both start in the current folder and scope to it). **Reading
+outside that folder was measured on 16 October 2026** (a `../outside/note.txt` read in a scratch
+project): Copilot CLI 1.0.98 asks for it, with its view tool and with `cat`; Claude Code 2.1.301 asks
+in Manual mode (`default`) but in auto mode, its starting mode since v2.1.283, the classifier
+approved the read and nobody was asked. So `.2` says a read outside it "needs approval" (from you or the
+classifier) and must not go back to "the agent asks". It says
 nothing about which instruction files load, because that half differs between them and only
 narrows downward.
 
@@ -1049,12 +1056,12 @@ docs.github.com/en/copilot/concepts/agents/copilot-cli/context-management. All t
 dated and are the first thing to check when this section is next touched.
 
 On the deck it sits on `deck-session-clear`, whose note now says the difference out loud (compaction
-can trigger automatically or manually and costs a request; clearing makes no summary request). **The figure is a container
-(`@container`), and that is for the slide.** Under its charts the table made it too tall to magnify,
-so when its own box is `@5xl` or wider the table moves beside the charts, and only the deck's
-`figureWidth: 1400` gives it that much room; the page column and a phone never do. The table's
-stacking is `@md` on the same container for the same reason: the viewport says nothing about the
-column the figure is in. Its `scale` is fitted to the box `SlideFigure` clips at.
+can trigger automatically or manually and costs a request; clearing makes no summary request). **On
+the slide the table is `data-deck="hide"`** (October 2026, owner's call): beside the charts it held
+them to 14px and the note already says what it says, so the slide shows the 2 charts alone. The
+figure is still a container (`@container`): the table moves beside the charts at `@5xl` and stacks
+under `@md`, because the viewport says nothing about the column the figure is in. Its `scale` is
+fitted to the box `SlideFigure` clips at.
 
 It closes on `SurviveTheClear` and then `sessionQuiz`, under the same `<hr>` and "Test your knowledge"
 heading the other units use, with no prose between the rule and the card. Four moves: find a thing you would have to say

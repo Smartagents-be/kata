@@ -54,7 +54,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'change.title',
     title: 'deck.change.decides.title',
     figure: <SdlcStages />,
-    scale: 1.2,
+    scale: 1.79,
   },
   {
     id: 'deck-step3-change-pipelines',
@@ -63,7 +63,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'change.title',
     title: 'deck.change.pipelines.title',
     figure: <PipelineShift />,
-    scale: 1.5,
+    scale: 1.69,
   },
   {
     id: 'deck-step3-change-rethink',

@@ -444,8 +444,11 @@ export function WindowFill() {
           its heading and the two answers side by side, each answer carrying its column's name, since a
           column header a screen away is no header at all.
         */}
+        {/* Hidden on the deck (October 2026, owner's call): on a slide the note says the same and
+            the table beside the charts kept them at 14px. */}
         <table
           id="window-fill-table"
+          data-deck="hide"
           data-component="WindowFill"
           className="w-full border-collapse text-sm @5xl:text-lg"
         >

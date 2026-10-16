@@ -64,7 +64,8 @@ reason, and a chip in the corner reads as a control. It is `pointer-events-none`
 
 **`points` is the third shape**, a short list under the heading, in the same `<hi>`/`<mute>`
 markup as the title, at three to five entries of a few words each: a longer list is the tutor's
-script, which is what `note`'s rule already forbids. A slide may carry both, at the tutor's asking:
+script, which is what `note`'s rule already forbids. The dash sits on a point's first line, never on
+the middle of a point that wraps. A slide may carry both, at the tutor's asking:
 the note then sits between heading and list as a subtitle, which `SlideTemplate` already renders
 in that order.
 **Every unit divider carries the unit's essence as points**, deck-wide and at the tutor's own
@@ -110,7 +111,24 @@ unit asks the room to do something, the deck carries a marker slide from `shared
 the end of that unit's run of slides, in the unit's own order. An exercise that is already on a
 slide gets no marker, only the same `badge`, the filled label beside the eyebrow. The work stays in
 the unit: the marker never copies a task's moves or a quiz's questions. A new task or quiz in a unit
-gets its marker in the same change.
+gets its marker in the same change. **A marker sits on its own ground, `--stop`** (a pale teal, the
+slide's `stop` flag), so a room sees from the back that it is their turn; a slide that carries the
+work itself keeps the light ground. **2 markers never follow each other** (both October 2026, owner's
+call): where a unit ends on more than 1 thing to do, `stopSlide` makes 1 slide of them, "Your turn"
+with a badge per kind and each task's card title (or "Test your knowledge") as a point.
+
+**The deck is fitted, not guessed** (October 2026, at the owner's asking for maximum clarity). Every
+figure's `scale` is the largest at which its painted content fits the room under the heading in
+both languages and both assistants, less a margin (10% for an interactive figure, 7% for a story);
+`SlideFigure`'s `pt-8` keeps a full-height drawing off the heading. A figure whose content sits
+left in its box (`WindowGrid`, `AnswerProvenance`, `AgentsAtOnce`) gets a `figureWidth` the
+size of that content, or the magnification pushes its left edge out first and the slide keeps a
+blank right half. A drawing whose smallest text
+would still land under about 14px on the board leaves the slide for a statement in its own words
+(`DomainTree`, `RunSheet`); an instruction meant for a reader at a screen ("Click a node", "Drag the
+divider") is `data-deck="hide"`. Headings take `text-balance`, notes and points `text-pretty`, so no
+line ends on 1 word, and a point is a few words, not a sentence: a label and a clause that fits on 1
+line in both languages. The deck closes on the opening question asked again (`deck-closing`).
 
 `SlideFigure` is what makes the reuse work. A page figure is built for a prose column (the SVG ones
 cap at `max-w-xl`, the DOM ones are sized in rem, which the fixed canvas knows nothing about), so it

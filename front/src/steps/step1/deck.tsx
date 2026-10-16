@@ -34,7 +34,7 @@ import { ToolsInContext } from './ToolsInContext'
 import { TrainedOrGrounded } from './TrainedOrGrounded'
 import { WindowFill } from './WindowFill'
 import { WindowGrid } from './WindowGrid'
-import { quizSlide, taskSlide } from '@/shared/deck/exerciseSlides'
+import { quizSlide, stopSlide, taskSlide } from '@/shared/deck/exerciseSlides'
 
 /**
  * Step 1 on the board.
@@ -106,7 +106,7 @@ const deck: SlideSpec[] = [
     // swapped for its id, so the network further on starts from a number the room has seen made.
     title: 'deck.tokens.tokenizer.title',
     figure: <TokenizerView />,
-    scale: 1.7,
+    scale: 1.66,
   },
   {
     id: 'deck-tokens-split',
@@ -119,7 +119,7 @@ const deck: SlideSpec[] = [
     // `TokenSplit` gained a heading row and four bar rows between the chips and the panel, which is
     // about 130 layout px on a drawing that was fitted at 395. `SlideFigure` clips rather than
     // shrinks, so 1.77 took the caption off the bottom.
-    scale: 1.4,
+    scale: 1.63,
   },
   {
     id: 'deck-tokens-language',
@@ -142,7 +142,7 @@ const deck: SlideSpec[] = [
     title: 'deck.tokens.attention.title',
     note: 'deck.tokens.attention.note',
     figure: <TokenAttention />,
-    scale: 1.33,
+    scale: 1.27,
   },
   {
     id: 'deck-tokens-next',
@@ -155,7 +155,7 @@ const deck: SlideSpec[] = [
     // against the room under the heading and comes out narrower than its neighbours. It was drawn at
     // 0.8 when the candidate list and the branch tree stacked under each other; one fan is a good
     // deal shorter than that pair was, which is where the room to grow came from.
-    scale: 1.15,
+    scale: 1.2,
     figureWidth: 1250,
   },
   {
@@ -168,7 +168,7 @@ const deck: SlideSpec[] = [
     // you can turn; it went in October 2026 (owner's call), the unit page still says it.
     title: 'deck.tokens.sampling.title',
     figure: <SamplingKnobs />,
-    scale: 1.4,
+    scale: 1.74,
   },
   {
     id: 'deck-tokens-network',
@@ -181,7 +181,7 @@ const deck: SlideSpec[] = [
     figure: <TokenNetwork />,
     // Back up once the simplification note was hidden on slides (`data-deck="hide"`, October 2026):
     // that note was what forced it down to 0.98.
-    scale: 1.2,
+    scale: 1.23,
   },
   {
     id: 'deck-tokens-kinds',
@@ -191,7 +191,7 @@ const deck: SlideSpec[] = [
     // Where the unit puts it: the last thing taught, ahead of the exercise.
     title: 'deck.tokens.kinds.title',
     figure: <TokenKinds />,
-    scale: 1.4,
+    scale: 1.79,
   },
   // Prompt caching closes the unit's prose, so its slide follows the cost figure and comes ahead of
   // the exercise. 1 slide since October 2026 (owner's call): a statement of the rule and then this
@@ -203,7 +203,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'tokens.title',
     title: 'deck.tokens.cache.title',
     figure: <PromptCache />,
-    scale: 1.3,
+    scale: 1.72,
   },
   {
     id: 'deck-tokens-pick',
@@ -215,7 +215,7 @@ const deck: SlideSpec[] = [
     // is the exercise, so a claim here would give it away.
     title: 'deck.tokens.pick.title',
     figure: <PickTheNext />,
-    scale: 1,
+    scale: 1.03,
   },
 
   // ── prompt ────────────────────────────────────────────────────────────────────────────────
@@ -234,7 +234,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'prompt.title',
     title: 'deck.prompt.parts.title',
     figure: <PromptParts />,
-    scale: 1.77,
+    scale: 1.66,
   },
   {
     id: 'deck-prompt-reasoning',
@@ -271,7 +271,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'prompt.title',
     title: 'deck.prompt.bundle.title',
     figure: <BundleCompare />,
-    scale: 1.11,
+    scale: 1.08,
     figureWidth: 1100,
   },
   {
@@ -281,10 +281,9 @@ const deck: SlideSpec[] = [
     eyebrow: 'prompt.title',
     title: 'deck.prompt.exact.title',
     figure: <ExactAsk />,
-    scale: 1.77,
+    scale: 1.79,
   },
-  taskSlide('deck-prompt-task', 'step1', 'prompt.title', 'plan.title'),
-  quizSlide('deck-prompt-quiz', 'step1', 'prompt.title'),
+  stopSlide('deck-prompt-stop', 'step1', 'prompt.title', [{ task: 'plan.title' }, 'quiz']),
 
   // ── tools ─────────────────────────────────────────────────────────────────────────────────
   {
@@ -304,7 +303,7 @@ const deck: SlideSpec[] = [
     title: 'deck.tools.loop.title',
     note: 'deck.tools.loop.note',
     figure: <AgentLoop />,
-    scale: 1.2,
+    scale: 1.49,
   },
   {
     id: 'deck-tools-in-context',
@@ -314,7 +313,7 @@ const deck: SlideSpec[] = [
     title: 'deck.tools.in-context.title',
     note: 'deck.tools.in-context.note',
     figure: <ToolsInContext />,
-    scale: 1.24,
+    scale: 1.16,
   },
   {
     id: 'deck-tools-mcp',
@@ -323,7 +322,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'tools.title',
     title: 'deck.tools.mcp.title',
     figure: <McpServer />,
-    scale: 1.46,
+    scale: 1.71,
   },
   {
     id: 'deck-tools-parts',
@@ -332,7 +331,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'tools.title',
     title: 'deck.tools.parts.title',
     figure: <McpParts />,
-    scale: 1.77,
+    scale: 1.81,
   },
   // Loaded definitions can consume context even for unused tools. Tool search changes what is
   // loaded; server count is not a context budget. `agent-patterns` owns what a sub-agent costs.
@@ -352,8 +351,7 @@ const deck: SlideSpec[] = [
     title: 'deck.tools.injection.title',
     note: 'deck.tools.injection.note',
   },
-  taskSlide('deck-tools-connect-task', 'step1', 'tools.title', 'connect.title'),
-  taskSlide('deck-tools-shutter-task', 'step1', 'tools.title', 'shutter.panel.title'),
+  stopSlide('deck-tools-stop', 'step1', 'tools.title', [{ task: 'connect.title' }, { task: 'shutter.panel.title' }]),
   // Graded in the browser and writing no progress key, the same shape `deck-tools-budget` already
   // has. **The title must not name what makes the result odd**, which is the prohibition the card
   // carries: naming it turns four results into a search for one sentence.
@@ -365,9 +363,10 @@ const deck: SlideSpec[] = [
     eyebrow: 'tools.title',
     title: 'deck.tools.spot.title',
     figure: <SpotInjection />,
-    // The tallest DOM figure in the step, so it is laid out wide and barely magnified.
-    scale: 0.95,
-    figureWidth: 1450,
+    // The tallest DOM figure in the step. Its results are fixed-width machine output, so laying it
+    // out wide only spread the hairlines: it is laid out at 1000 and magnified to fit the height.
+    scale: 1.11,
+    figureWidth: 1000,
   },
   {
     id: 'deck-tools-budget',
@@ -377,7 +376,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'tools.title',
     title: 'deck.tools.budget.title',
     figure: <BudgetWindow />,
-    scale: 1.1,
+    scale: 1.3,
     figureWidth: 1150,
   },
 
@@ -397,7 +396,8 @@ const deck: SlideSpec[] = [
     eyebrow: 'context.title',
     title: 'deck.context.diagram.title',
     figure: <WindowGrid />,
-    scale: 1.8,
+    scale: 2.69,
+    figureWidth: 600,
   },
   // `deck.context.divider.2` promises that wrong context is worse than missing context; this is
   // `bad-context-bad.3`'s stale instruction file.
@@ -416,7 +416,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'context.title',
     title: 'deck.context.oneshot.title',
     figure: <OneShotCompare />,
-    scale: 1.36,
+    scale: 1.32,
     figureWidth: 1000,
   },
   // `more-context-not.3`'s drop-off, at the owner's asking (October 2026). 640x252 with no note, so it
@@ -428,16 +428,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'context.title',
     title: 'deck.context.zone.title',
     figure: <ContextZone />,
-    scale: 1.6,
-  },
-  // `you-choose-most`'s split, per task against fixed in the project, and why only a gate is certain.
-  {
-    id: 'deck-context-bad-code',
-    kind: 'statement',
-    ns: 'step1',
-    eyebrow: 'context.title',
-    title: 'deck.context.bad-code.title',
-    note: 'deck.context.bad-code.note',
+    scale: 1.89,
   },
   // `leaves-your-machine`: what the context costs in trust rather than tokens. The note names no plan,
   // since which plan trains on what is a dated, per-assistant fact the unit's variant pair carries.
@@ -449,8 +440,7 @@ const deck: SlideSpec[] = [
     title: 'deck.context.data.title',
     note: 'deck.context.data.note',
   },
-  taskSlide('deck-context-task', 'step1', 'context.title', 'window.title'),
-  quizSlide('deck-context-quiz', 'step1', 'context.title'),
+  stopSlide('deck-context-stop', 'step1', 'context.title', [{ task: 'window.title' }, 'quiz']),
 
   // ── session ───────────────────────────────────────────────────────────────────────────────
   {
@@ -468,7 +458,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'session.title',
     title: 'deck.session.makeup.title',
     figure: <SessionMakeup />,
-    scale: 1.59,
+    scale: 1.58,
   },
   {
     id: 'deck-session-entropy',
@@ -483,17 +473,15 @@ const deck: SlideSpec[] = [
     kind: 'figure',
     ns: 'step1',
     eyebrow: 'session.title',
-    // The title is the unit's claim and the note says the difference out loud: the drawing and its
-    // table carry when and what it costs, the note is the one line a tutor says over them. Five
-    // figure slides in this deck carry a note.
+    // The title is the unit's claim and the note says the difference out loud: the drawing carries
+    // when, the note what it costs, the one line a tutor says over them.
     title: 'deck.session.clear.title',
     note: 'deck.session.clear.note',
     figure: <WindowFill />,
-    // Laid out wide enough that the figure's container query puts the table beside the charts
-    // rather than under them, which is the only way two charts and a table magnify at all; then
-    // fitted to the room under the heading, which the height decides.
-    scale: 1.15,
-    figureWidth: 1400,
+    // The table is `data-deck="hide"` since October 2026 (owner's call): the note says what it
+    // says, and beside the charts it held them to 14px. The 2 charts alone are fitted to the room
+    // under the heading, which the height decides.
+    scale: 1.23,
   },
   {
     id: 'deck-session-falloff',
@@ -501,9 +489,8 @@ const deck: SlideSpec[] = [
     ns: 'step1',
     eyebrow: 'session.title',
     title: 'deck.session.falloff.title',
-    note: 'deck.session.falloff.note',
     figure: <ContextFalloff />,
-    scale: 1.12,
+    scale: 1.0,
   },
   {
     id: 'deck-session-memory',
@@ -515,8 +502,7 @@ const deck: SlideSpec[] = [
     title: 'deck.session.memory.title',
     note: 'deck.session.memory.note',
   },
-  taskSlide('deck-session-task', 'step1', 'session.title', 'survive.title'),
-  quizSlide('deck-session-quiz', 'step1', 'session.title'),
+  stopSlide('deck-session-stop', 'step1', 'session.title', [{ task: 'survive.title' }, 'quiz']),
 
   // ── agent-patterns ──────────────────────────────────────────────────────────────────────────
   {
@@ -535,7 +521,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'agent-patterns.title',
     title: 'deck.agent-patterns.map.title',
     figure: <PatternMap />,
-    scale: 1.45,
+    scale: 1.74,
   },
   {
     id: 'deck-agent-patterns-decomposition',
@@ -546,7 +532,7 @@ const deck: SlideSpec[] = [
     title: 'deck.agent-patterns.decomposition.title',
     note: 'deck.agent-patterns.decomposition.note',
     figure: <DecompositionTree />,
-    scale: 1.55,
+    scale: 1.28,
   },
   {
     id: 'deck-agent-patterns-coordinator',
@@ -556,7 +542,7 @@ const deck: SlideSpec[] = [
     title: 'deck.agent-patterns.coordinator.title',
     note: 'deck.agent-patterns.coordinator.note',
     figure: <CoordinatorFanout />,
-    scale: 1.14,
+    scale: 1.13,
   },
   {
     id: 'deck-agent-patterns-sequential',
@@ -567,7 +553,7 @@ const deck: SlideSpec[] = [
     note: 'deck.agent-patterns.sequential.note',
     figure: <SequentialSteps />,
     // `SequentialSteps` is a 600x252 viewBox since its redraw, with a pause button under it.
-    scale: 1.55,
+    scale: 1.46,
   },
   {
     id: 'deck-agent-patterns-reflection',
@@ -577,7 +563,7 @@ const deck: SlideSpec[] = [
     title: 'deck.agent-patterns.reflection.title',
     note: 'deck.agent-patterns.reflection.note',
     figure: <ReflectionLoop />,
-    scale: 1.55,
+    scale: 1.39,
   },
   // Routing has no figure in the unit, so it is a statement: the claim and the Jev example, said
   // out loud, ahead of the board that tests the other patterns.
@@ -600,7 +586,7 @@ const deck: SlideSpec[] = [
     figure: <PatternMatch />,
     // Both `PatternMatch` scenarios were rewritten longer, so the board is taller than 1.28 was
     // fitted for and the Check button along its bottom edge is what a clip takes first.
-    scale: 1.18,
+    scale: 1.2,
     figureWidth: 1250,
   },
 
@@ -620,7 +606,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'model.title',
     title: 'deck.model.tiers.title',
     figure: <ModelTiers />,
-    scale: 1.33,
+    scale: 1.79,
   },
   {
     id: 'deck-model-pricing',
@@ -629,7 +615,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'model.title',
     title: 'deck.model.pricing.title',
     figure: <ModelPricing />,
-    scale: 1.77,
+    scale: 1.79,
   },
   // The one place the course multiplies, and on a board the tutor can do it with the room's own
   // number. It carries no currency of its own: `ModelPricing` on
@@ -681,7 +667,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'model.title',
     title: 'deck.model.pick.title',
     figure: <PickTheTier />,
-    scale: 1.17,
+    scale: 1.2,
     figureWidth: 1250,
   },
 
@@ -717,7 +703,7 @@ const deck: SlideSpec[] = [
     // 1.85 fits the frame's width but crowds it: the panel titles run into the heading and the
     // answer chips land on the footer's clearance (88px then, 60px since October 2026). This is the largest that still reads as a
     // drawing under a heading rather than a drawing pushing one out of the way.
-    scale: 1.7,
+    scale: 1.84,
   },
   {
     id: 'deck-truth-provenance',
@@ -729,8 +715,8 @@ const deck: SlideSpec[] = [
     // Laid out wide and magnified less than the drawing above it. This one is text in two columns,
     // so `width * scale` has to stay inside the frame or `SlideFigure`'s `overflow-hidden` takes
     // the left edge off the symbols, which is where the claims are.
-    scale: 1.5,
-    figureWidth: 1100,
+    scale: 1.92,
+    figureWidth: 840,
   },
   {
     id: 'deck-truth-proof',

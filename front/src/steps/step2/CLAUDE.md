@@ -195,7 +195,7 @@ it: no BOM, no starter or autoconfigure modules, no per-domain configuration mod
 spends its rows on the packaging and not on scaffolding. `incoming/` and `outgoing/` stay as their
 own rows, because `HexagonPorts` takes its column labels from their notes and `exercises/step2/java`
 uses the same two folders. Its height was held at or under the old tree's, because `deck-step2-engineering-domain`
-was already at `scale: 0.9` for the footer, until `application/` split into `usecases/` and
+was at `scale: 0.9` for the footer (the slide is a statement now, see the workshop section), until `application/` split into `usecases/` and
 `ports/` (October 2026, at the owner's asking): those 2 rows were worth it, carry no note, and the
 slide came down to fit them. `hexagonal-architecture.1` names both folders in 1 sentence, so the
 prose says where the ports `hexagonal-architecture.3` swaps actually live.
@@ -1795,10 +1795,14 @@ prefixes matching the `<h2>` above them printed the heading twice in guided mode
 gone and the card's title is all that is left.
 
 The deck gained two slides in the same change, `deck-step2-workshop-rule` (the house rule, as a
-statement) and `deck-step2-workshop-sheet` (`RunSheet` at 1.03, height-fitted). **`RunSheet` is the only workshop
-element that may go on a slide**, and the reason is the deck's own rule: the board and both cards
-write to localStorage, so on a projector they would tick the tutor's machine. The drawing stores
-nothing.
+statement) and `deck-step2-workshop-sheet`. **`RunSheet` is the only workshop element that may go
+on a slide**, and the reason is the deck's own rule: the board and both cards write to localStorage,
+so on a projector they would tick the tutor's machine. The drawing stores nothing. **It is no longer
+on it, though** (October 2026, owner's call for a readable deck): height-fitted at 1.03 its commands
+were 12px on the board, so `deck-step2-workshop-sheet` is a statement now, the 4 stages as points in
+the sheet's own names and hand lines (`deck.workshop.sheet.1` to `.4`). `DomainTree` went the same
+way for the same reason: at 0.84 its notes were 10px, so `deck-step2-engineering-domain` names the
+shape in 4 points lifted from the tree's notes. Both drawings stay in their units.
 
 
 ## Accuracy constraints after PR #1 integration

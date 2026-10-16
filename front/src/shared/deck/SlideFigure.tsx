@@ -43,7 +43,8 @@ export function SlideFigure({
     <div
       id={`${block}-figure`}
       data-component="SlideFigure"
-      className="flex flex-1 items-center justify-center overflow-hidden"
+      // `pt-8` keeps a drawing fitted to the full height off the heading above it.
+      className="flex flex-1 items-center justify-center overflow-hidden pt-8"
     >
       <div
         id={`${block}-figure-scale`}

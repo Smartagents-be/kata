@@ -250,6 +250,7 @@ export function TokenNetwork() {
           </Button>
           <span
             id="token-network-hint"
+            data-deck="hide"
             data-component="TokenNetwork"
             className="text-muted-foreground text-xs sm:ml-auto"
           >

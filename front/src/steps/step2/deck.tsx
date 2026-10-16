@@ -1,6 +1,5 @@
 import type { SlideSpec } from '@/shared/deck/slide-spec'
 import { AgentsAtOnce } from './AgentsAtOnce'
-import { DomainTree } from './DomainTree'
 import { ElectedToLead } from './ElectedToLead'
 import { FlowDiagram } from './FlowDiagram'
 import { GapRule } from './GapRule'
@@ -12,7 +11,6 @@ import { LoopsPerHour } from './LoopsPerHour'
 import { ProjectTree } from './ProjectTree'
 import { ProofLoop } from './ProofLoop'
 import { ReadEachTime } from './ReadEachTime'
-import { RunSheet } from './RunSheet'
 import { ScriptRuns } from './ScriptRuns'
 import { SliceSkills } from './SliceSkills'
 import { SkillTree } from './SkillTree'
@@ -23,7 +21,7 @@ import { VerticalSlices } from './VerticalSlices'
 import { WorkflowTimeline } from './WorkflowTimeline'
 import { WorkflowWeights } from './WorkflowWeights'
 import { WorktreeEach } from './WorktreeEach'
-import { quizSlide, taskSlide } from '@/shared/deck/exerciseSlides'
+import { quizSlide, stopSlide, taskSlide } from '@/shared/deck/exerciseSlides'
 
 /**
  * Step 2 on the board, on step 1's shape: one divider per unit in registry order, that unit's own
@@ -73,7 +71,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'setup.title',
     title: 'deck.setup.project.title',
     figure: <ProjectTree />,
-    scale: 1.5,
+    scale: 1.79,
   },
   {
     id: 'deck-step2-setup-skills',
@@ -83,7 +81,7 @@ const deck: SlideSpec[] = [
     title: 'deck.setup.skills.title',
     note: 'deck.setup.skills.note',
     figure: <SkillTree />,
-    scale: 1.5,
+    scale: 1.79,
   },
   {
     id: 'deck-step2-setup-hooks',
@@ -92,7 +90,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'setup.title',
     title: 'deck.setup.hooks.title',
     figure: <HookTree />,
-    scale: 1.5,
+    scale: 1.79,
   },
   taskSlide('deck-step2-setup-task', 'step2', 'setup.title', 'access.title'),
   {
@@ -133,7 +131,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'engineering.title',
     title: 'deck.engineering.slices.title',
     figure: <VerticalSlices />,
-    scale: 1.3,
+    scale: 1.6,
   },
   {
     id: 'deck-step2-engineering-skills',
@@ -145,17 +143,23 @@ const deck: SlideSpec[] = [
     // worth building, said where the T is drawn.
     note: 'deck.engineering.skills.note',
     figure: <SliceSkills />,
-    scale: 1.3,
+    scale: 1.7,
   },
   {
     id: 'deck-step2-engineering-domain',
-    kind: 'figure',
+    kind: 'statement',
     ns: 'step2',
     eyebrow: 'engineering.title',
     title: 'deck.engineering.domain.title',
-    // The tallest tree in the step: at anything past this the last rows land on the footer.
-    figure: <DomainTree />,
-    scale: 0.84,
+    // A statement since October 2026 (owner's call): `DomainTree` is the tallest tree in the step
+    // and only fitted at 0.84, which put its labels at 10px on the board. The slide names the shape
+    // in 4 lines lifted from the tree's own notes, and the tree stays in the unit.
+    points: [
+      'deck.engineering.domain.1',
+      'deck.engineering.domain.2',
+      'deck.engineering.domain.3',
+      'deck.engineering.domain.4',
+    ],
   },
 
   // ── gates ─────────────────────────────────────────────────────────────────────────────────
@@ -178,7 +182,7 @@ const deck: SlideSpec[] = [
     title: 'deck.gates.read.title',
     note: 'deck.gates.read.note',
     figure: <ElectedToLead />,
-    scale: 1.5,
+    scale: 2.15,
   },
   // Came over from `engineering` with the `Quality gates` section, and still a statement: the
   // proxy claim has no drawing, and `SameGate` deliberately ranks none of its four groups.
@@ -212,7 +216,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'gates.title',
     title: 'deck.gates.old-code.title',
     figure: <LegacyFlow />,
-    scale: 1.45,
+    scale: 1.64,
   },
   {
     id: 'deck-step2-gates-reach',
@@ -221,7 +225,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'gates.title',
     title: 'deck.gates.reach.title',
     figure: <GateReach />,
-    scale: 1.5,
+    scale: 1.87,
   },
   {
     id: 'deck-step2-gates-walk',
@@ -256,7 +260,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'steering.title',
     title: 'deck.steering.midflight.title',
     figure: <SteeringMoves />,
-    scale: 1.3,
+    scale: 1.63,
   },
   // The slide's own title is what this drawing argues, so it stopped being a statement the moment
   // the unit was drawn: the two windows are on the board and on the student's screen, one drawing.
@@ -270,7 +274,7 @@ const deck: SlideSpec[] = [
     figure: <TwoWindows />,
     // Lower than the room would allow: this is the one figure slide in the step carrying a note,
     // and at 1.5 the note sat on the drawing's own column labels.
-    scale: 1.3,
+    scale: 1.25,
   },
   {
     id: 'deck-step2-steering-nowhere',
@@ -293,10 +297,9 @@ const deck: SlideSpec[] = [
     eyebrow: 'steering.title',
     title: 'deck.steering.gaps.title',
     figure: <GapRule />,
-    scale: 1.5,
+    scale: 1.8,
   },
-  taskSlide('deck-step2-steering-task', 'step2', 'steering.title', 'steer.title'),
-  quizSlide('deck-step2-steering-quiz', 'step2', 'steering.title'),
+  stopSlide('deck-step2-steering-stop', 'step2', 'steering.title', [{ task: 'steer.title' }, 'quiz']),
 
   // ── patterns ──────────────────────────────────────────────────────────────────────────────
   {
@@ -324,10 +327,9 @@ const deck: SlideSpec[] = [
     eyebrow: 'patterns.title',
     title: 'deck.patterns.runs.title',
     figure: <ScriptRuns />,
-    scale: 1.5,
+    scale: 1.79,
   },
-  taskSlide('deck-step2-patterns-task', 'step2', 'patterns.title', 'script.title'),
-  quizSlide('deck-step2-patterns-quiz', 'step2', 'patterns.title'),
+  stopSlide('deck-step2-patterns-stop', 'step2', 'patterns.title', [{ task: 'script.title' }, 'quiz']),
 
   // ── workflows ─────────────────────────────────────────────────────────────────────────────
   {
@@ -355,7 +357,7 @@ const deck: SlideSpec[] = [
         links={['one', 'one']}
       />
     ),
-    scale: 1.5,
+    scale: 3.43,
   },
   {
     id: 'deck-step2-workflows-plan',
@@ -370,7 +372,7 @@ const deck: SlideSpec[] = [
         links={['both', 'one']}
       />
     ),
-    scale: 1.5,
+    scale: 3.43,
   },
   {
     id: 'deck-step2-workflows-spec',
@@ -385,7 +387,7 @@ const deck: SlideSpec[] = [
         links={['both', 'both']}
       />
     ),
-    scale: 1.5,
+    scale: 3.43,
   },
   {
     id: 'deck-step2-workflows-where',
@@ -394,7 +396,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'workflows.title',
     title: 'deck.workflows.where.title',
     figure: <SpecTree />,
-    scale: 1.5,
+    scale: 1.79,
   },
   {
     id: 'deck-step2-workflows-audit',
@@ -421,7 +423,7 @@ const deck: SlideSpec[] = [
         loopBy="agent"
       />
     ),
-    scale: 1.3,
+    scale: 1.75,
   },
   {
     id: 'deck-step2-workflows-weights',
@@ -430,7 +432,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'workflows.title',
     title: 'deck.workflows.weights.title',
     figure: <WorkflowWeights />,
-    scale: 1.5,
+    scale: 1.79,
   },
   {
     id: 'deck-step2-workflows-timeline',
@@ -439,7 +441,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'workflows.title',
     title: 'deck.workflows.timeline.title',
     figure: <WorkflowTimeline />,
-    scale: 1.3,
+    scale: 1.79,
   },
   quizSlide('deck-step2-workflows-quiz', 'step2', 'workflows.title'),
 
@@ -465,7 +467,7 @@ const deck: SlideSpec[] = [
     eyebrow: 'enablement.title',
     title: 'deck.enablement.loops.title',
     figure: <LoopsPerHour />,
-    scale: 1.5,
+    scale: 1.58,
   },
   {
     id: 'deck-step2-enablement-loop',
@@ -477,7 +479,7 @@ const deck: SlideSpec[] = [
     // is what limits it rather than the footer. Came over with its sections from `proof` (October
     // 2026), so it follows the unit's order: after the clock.
     figure: <ProofLoop />,
-    scale: 1.7,
+    scale: 1.79,
   },
   // The goal slides came over from the cut `goals` unit (October 2026), with the section they
   // illustrate. Its `true` slide went: the 3 points below already say what it said.
@@ -498,7 +500,7 @@ const deck: SlideSpec[] = [
     // the command: the slide before it already says name the command.
     title: 'deck.enablement.gate.title',
     figure: <GoalGate />,
-    scale: 1.7,
+    scale: 1.72,
   },
   {
     // At the owner's asking (October 2026). "Dead" is the course's claim; the note is DHH's own words
@@ -531,8 +533,7 @@ const deck: SlideSpec[] = [
       'deck.enablement.review.4',
     ],
   },
-  taskSlide('deck-step2-enablement-task', 'step2', 'enablement.title', 'machinery.title'),
-  quizSlide('deck-step2-enablement-quiz', 'step2', 'enablement.title'),
+  stopSlide('deck-step2-enablement-stop', 'step2', 'enablement.title', [{ task: 'machinery.title' }, 'quiz']),
 
   // ── parallel ──────────────────────────────────────────────────────────────────────────────
   {
@@ -558,7 +559,8 @@ const deck: SlideSpec[] = [
     // scale that keeps the last row's note off the footer. It was 0.78 while the drawing carried a
     // fifth row, the orchestrator, which went in October 2026.
     figure: <AgentsAtOnce />,
-    scale: 1.02,
+    scale: 1.15,
+    figureWidth: 790,
   },
   {
     id: 'deck-step2-parallel-attention',
@@ -582,7 +584,7 @@ const deck: SlideSpec[] = [
     title: 'deck.parallel.reading.title',
     note: 'deck.parallel.reading.note',
     figure: <ReadEachTime />,
-    scale: 1.4,
+    scale: 1.59,
   },
 
   // Moved here with its section from `steering` in October 2026.
@@ -594,7 +596,7 @@ const deck: SlideSpec[] = [
     title: 'deck.parallel.worktree.title',
     note: 'deck.parallel.worktree.note',
     figure: <WorktreeEach />,
-    scale: 1.4,
+    scale: 1.79,
   },
   quizSlide('deck-step2-parallel-quiz', 'step2', 'parallel.title'),
 
@@ -618,24 +620,21 @@ const deck: SlideSpec[] = [
     title: 'deck.workshop.rule.title',
     points: ['deck.workshop.rule.1', 'deck.workshop.rule.2', 'deck.workshop.rule.3'],
   },
-  // The one workshop element that is safe on a slide: `RunSheet` writes no progress, unlike the
-  // board and the two cards around it, so a room can look at the whole capstone at once.
   {
     id: 'deck-step2-workshop-sheet',
-    kind: 'figure',
+    kind: 'statement',
     ns: 'step2',
     eyebrow: 'workshop.title',
     title: 'deck.workshop.sheet.title',
-    // `live={false}`: the pips read the viewer's own collection, and the viewer here is the tutor.
-    figure: <RunSheet live={false} />,
-    // Fitted rather than chosen, and height is the binding constraint: the drawing measures 722px
-    // tall at any layout width from 1000 to 1200, against 755 of room under a `top` heading, so 1.04
-    // is the ceiling and this sits just under it. Above that `SlideFigure`'s overflow clips, and
-    // what it takes first is the two `no flag` stages the figure argues from. `figureWidth` buys
-    // back some of the frame's width without touching the type size, which stays what it is: this
-    // is a dense drawing and it cannot be a large one. Re-measure both if a stage gains a line.
-    scale: 1.03,
-    figureWidth: 1100,
+    // A statement since October 2026 (owner's call): `RunSheet` is the densest drawing in the step
+    // and height-bound at 1.03, which left its commands at 12px on the board. The 4 stages are the
+    // sheet's own names and hand lines, and the sheet stays in the unit.
+    points: [
+      'deck.workshop.sheet.1',
+      'deck.workshop.sheet.2',
+      'deck.workshop.sheet.3',
+      'deck.workshop.sheet.4',
+    ],
   },
   {
     id: 'deck-step2-workshop-flags',
