@@ -1,9 +1,8 @@
 import { useId } from 'react'
 
 /**
- * The SmartAgents mark, the same inline rebuild of `smartagents.be/assets/logo.svg` the video
- * project carries in `video/src/components/Logo.tsx`, with the animation left behind: a slide is
- * a still. The geometry is data so the two copies can be diffed if the mark ever changes.
+ * The SmartAgents mark, an inline rebuild of `smartagents.be/assets/logo.svg`, still because a
+ * slide is a still. The geometry is data so it can be diffed against the logo if the mark changes.
  *
  * It sits in `components` rather than in `deck` because both readings of the course carry it: the
  * footer of every slide, and the foot of the app shell.

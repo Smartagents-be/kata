@@ -6,7 +6,7 @@ This is the one review file. It holds:
 - the original review, including what was in `FEEDBACK.md` (the open content gaps from `audit.md`, cited as "audit N", and the course owner's own notes);
 - the 4 validation passes of 7 Oct (`plans/reports/review-*.md`: exercise mechanics, external facts, content, and a summary), folded into the bullets below.
 
-Exact replacement texts (EN and NL), sources and dry-run evidence are in `review/` (local only, excluded from git: it describes exercise internals, so never commit it). Dry-run results in there are evidence of that run, not a guarantee for every student, model or laptop. `FEEDBACK N` tags in code comments and step `CLAUDE.md` files point at `FEEDBACK.md` as it was at `06e6271`, which is in git history. The older review of PR #1 (`plans/reviews/2026-10-05-*`) is complete and not repeated here.
+Exact replacement texts (EN and NL), sources and dry-run evidence are in `review/` (local only, excluded from git: it describes exercise internals, so never commit it). Dry-run results in there are evidence of that run, not a guarantee for every student, model or laptop. `FEEDBACK N` tags in code comments and step `CLAUDE.md` files point at `FEEDBACK.md` as it was at `06e6271`, which is in git history.
 
 **Labels.** **Must** = fix before the class, for the route we actually teach (not every possible route). No label = fix if time allows. *Design* = a teaching or scheduling choice, not a defect. *Unverified* = needs a rehearsal on the client's setup before it goes into the course. Fixed items are removed; git history has them.
 
@@ -17,7 +17,7 @@ Exact replacement texts (EN and NL), sources and dry-run evidence are in `review
 - **1 day does not hold the course** (*Design*). About 915 min of material against 405 teaching minutes; 915 is an author estimate, not a measured class. Pick a classroom subset and keep the rest as self-study. `review/run-sheet.md` is one proposal (27 units, 9 hands-on tasks, the step 2 capstone as a background goal of about 90 min).
 - **Must: IntelliJ project layout.** Today the pages assume the repo root and the step reference assumes the step folder (`step1/locales/en.json:240`). Pick one: open the step folder (`exercises/stepN/java`) and make code blocks folder-relative, or open the root and link each pom.
 - **JDK floor** (*Design*). Steps 0 to 2 built and passed on JDK 21 in a dry run. Lowering to 21 means changing all 4 poms, the setup check, README and `.idea` together, then rerunning the profiles. Keep GraalVM 25 only for the native flag. Java 17 is a separate decision.
-- **Must: auto-loaded files must be student-safe** (see section 3). A student branch without the maintainer notes, `audit.md`, this file, `plans/`, `video/` and the maintainer skills is one way; the minimum is that nothing an agent loads on its own leaks or forbids the exercises.
+- **Must: auto-loaded files must be student-safe** (see section 3). A student branch without the maintainer notes, `audit.md`, this file and the maintainer skills is one way; the minimum is that nothing an agent loads on its own leaks or forbids the exercises.
 
 ## 2. Before the day, with the client
 
