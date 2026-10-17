@@ -139,12 +139,12 @@ the shared `ConnectBoard`, which `model`'s `PickTheTier` is too; the reasoning f
 `model` below.
 
 `tokens` opens the step, ahead of `context`, and gives the step's unit of measurement a page before
-anything is measured in it. It is prose, seven figures and one exercise. **It still carries no quiz**,
+anything is measured in it. It is prose, nine figures and one exercise. **It still carries no quiz**,
 and that half of the old decision holds: `contextQuiz` and `promptQuiz` are two pages away on either side, and the step's
 third quiz sits under `truth` near the end. What it does carry is
 `PickTheNext` under the usual "Test your knowledge" heading, and the reasoning for it is under that
 component below. **Its prose is self-only**, the same wrapper shape `context` uses: in class the
-teacher talks it through at the board, so a guided student gets the seven figures and the exercise
+teacher talks it through at the board, so a guided student gets the nine figures and the exercise
 and nothing else. The figure markers stay top-level and carry no attribute, which is what keeps them on
 both audiences' pages, and the wrapper closes before each one and reopens after it. `TokenizerView`
 is the only marker in the unit with no heading above it, under `lead.1`, so a guided page opens on it
@@ -212,10 +212,13 @@ use to someone working with an agent. What a student needs is that the cuts diff
 **The attention section, and the facts it rests on** (checked October 2026). The heading is the
 name of the thing, and `attention.1` names it last after the bank example. English contrasts a river
 bank with a financial institution; Dutch contrasts a seat with a financial institution. `.2`
-explains the different roles of query, key and value. `.5` explains the dot product (Dutch:
-inwendig product), `.6` distinguishes scoring keys from combining values, and `.7` distinguishes
-learning the calculations during training from using them during inference. There is no numerical
-example: the course owner found it distracting. `.3` counts the drawing's inter-token links
+is the owner's own framing, each vector as the question it answers (query: what am I looking for,
+key: what am I relevant for, value: what do I pass on), and `.5` puts `bank` on it. A lookup table
+and a walk-through without those questions were tried first and read as unclear. `.7` says the
+calculation is learned in training and why the KV cache keeps keys and values but never queries. **It is deliberately shallow** (October
+2026, at the owner's asking, once `kv-cache` was added): the dot product and the weights adding up
+to 100% were cut, with `.6` whole, and must not come back. There is no numerical example either:
+the course owner found it distracting. `.3` counts the drawing's inter-token links
 and stops there: a closing line saying they are not billable rereads was cut at the owner's asking. There is no `.4`: the cache paragraph that closed this section (inference reuse, prompt caching,
 "keep that context relevant") read oddly to the owner and repeated `one-at-a-time.1` right below
 it, so the two were merged there. Do not infer usage from context occupancy or from the number of
@@ -230,7 +233,7 @@ It introduces no new categories of language relationships. The explanation inclu
 self-attention; the figure omits it to focus on links between tokens, and `.3` says so.
 
 Four things about it are decisions. **Nothing in the unit draws the teal context frame**, not one of
-the seven figures and not the exercise, and that is what protects `tools`: `ToolsInContext` is the first frame a student
+the nine figures and not the exercise, and that is what protects `tools`: `ToolsInContext` is the first frame a student
 meets, so every unit above it stays out of that vocabulary rather than spending it early, the way
 `ModelTiers` does and the way `PromptParts` does with its oval. The word *context* is likewise used as an ordinary one throughout, since no unit
 defines it before `context` does. **Attention and writing use different examples.** `TokenAttention`
@@ -570,7 +573,13 @@ unit and moved here whole (October 2026, at the owner's asking) when that unit w
 `agent-patterns`. `one-at-a-time.1` names the mechanism and the term and points down the page, and
 `prompt-caching` closes the prose after `expensive-part` with the rates, the prefix rule and the
 lifetime, in 2 paragraphs where the old section had 3 (its opening sentence would have repeated
-`one-at-a-time.1`, so `.1` opens on the rates).
+`one-at-a-time.1`, so `.1` opens on the rates). **`kv-cache` sits right before it** (October 2026,
+at the owner's asking): 1 paragraph that names the KV cache, sizes it for Llama 3 70B and ties it to
+RAM prices, always together with the model's weights, since the cache alone is not the reason, and
+`KvCache` under it, which replays `NextToken`'s 3 passes with and without the cache (7 tokens worked
+out against 18). Inside 1 answer first, then across requests: its second sentence hands over to
+`prompt-caching`, and the deck keeps the same order. **The deck adds `RamMeme` after it, and only
+the deck**: the owner wanted the joke on the board and not in the text, so do not wire it into the unit.
 `expensive-part.3` does not link them a second time (the user cut that repeat), and it names
 no rate and says nothing about how the cache matches, and it must stay that way. `TokenKinds` prints
 a cost column (tokens times rate, per row) so every share on the cost bar can be redone by hand: a

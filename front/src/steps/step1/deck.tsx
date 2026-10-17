@@ -19,6 +19,8 @@ import { PatternMatch } from './PatternMatch'
 import { PickTheNext } from './PickTheNext'
 import { PickTheTier } from './PickTheTier'
 import { PromptCache } from './PromptCache'
+import { KvCache } from './KvCache'
+import { RamMeme } from './RamMeme'
 import { PromptParts } from './PromptParts'
 import { ReflectionLoop } from './ReflectionLoop'
 import { SamplingKnobs } from './SamplingKnobs'
@@ -192,6 +194,29 @@ const deck: SlideSpec[] = [
     title: 'deck.tokens.kinds.title',
     figure: <TokenKinds />,
     scale: 1.79,
+  },
+  // The KV cache gets its own section ahead of prompt caching, so its slide sits between the cost
+  // figure and the prompt cache: inside 1 answer first, then across requests.
+  {
+    id: 'deck-tokens-kv',
+    kind: 'figure',
+    ns: 'step1',
+    eyebrow: 'tokens.title',
+    title: 'deck.tokens.kv.title',
+    figure: <KvCache />,
+    scale: 1.72,
+  },
+  // Deck only (October 2026, at the owner's asking): the unit says it in 1 sentence, the board
+  // gets the meme. `RamMeme` says why it is a raster.
+  {
+    id: 'deck-tokens-ram',
+    kind: 'figure',
+    ns: 'step1',
+    eyebrow: 'tokens.title',
+    title: 'deck.tokens.ram.title',
+    note: 'deck.tokens.ram.note',
+    figure: <RamMeme />,
+    scale: 1.3,
   },
   // Prompt caching closes the unit's prose, so its slide follows the cost figure and comes ahead of
   // the exercise. 1 slide since October 2026 (owner's call): a statement of the rule and then this

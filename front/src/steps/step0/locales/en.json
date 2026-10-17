@@ -80,10 +80,9 @@
   "quiz.agent-says-it-found-it.explanation": "A flag the agent works out in its head is often a few characters off. The platform checks 1 exact string, and only the program's output is sure to hold it.",
 
   "deck.title": "Introduction",
-  "deck.welcome.divider.1": "<hi>Your way:</hi> read it alone, or follow in class",
-  "deck.welcome.divider.2": "<hi>Your assistant:</hi> pick it under the cogwheel",
-  "deck.welcome.divider.3": "<hi>A flag:</hi> any answer in braces, {like_this}",
-  "deck.welcome.divider.4": "<hi>The game:</hi> your agent hunts, your browser checks",
+  "deck.welcome.divider.1": "<hi>Your assistant:</hi> pick it under the cogwheel",
+  "deck.welcome.divider.2": "<hi>A flag:</hi> any answer in braces, {like_this}",
+  "deck.welcome.divider.3": "<hi>The game:</hi> your agent hunts, your browser checks",
   "deck.welcome.rules.title": "House rules, for every workshop",
   "deck.welcome.rules.1": "<hi>Let the agent do the work:</hi> only your agent hunts",
   "deck.welcome.rules.2": "<hi>1 flag per session:</hi> a fresh session for each flag",

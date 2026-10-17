@@ -20,10 +20,27 @@ import { steps } from '@/steps'
  */
 
 /**
- * The slides that belong to no step: the opening question, which is why it carries no eyebrow
- * naming a unit (it is asked before the course starts), and the 2 memes that answer it.
+ * The slides that belong to no step: the tutor introducing themself, the opening question, which is
+ * why it carries no eyebrow naming a unit (it is asked before the course starts), and the 2 memes
+ * that answer it.
  */
 const OPENING: SlideSpec[] = [
+  // The tutor first (October 2026, at the owner's asking). Photo and every line are taken from
+  // Tom's profile on the smartagents-website (`profile.tom.*`, `media/team/tom-880.jpg`), where they
+  // were already written and approved: nothing on this slide is invented about a real person.
+  {
+    id: 'deck-intro',
+    kind: 'statement',
+    eyebrow: 'deck.slide.intro.eyebrow',
+    title: 'deck.slide.intro.name',
+    note: 'deck.slide.intro.role',
+    // Oldest first, at the owner's asking, so the career reads down to Isabel. The doctorate opens it
+    // in small type: true, and less relevant to this room than the 3 jobs under it. Isabel is not on
+    // the website; its line is the owner's own.
+    points: ['deck.slide.intro.point.1', 'deck.slide.intro.point.2', 'deck.slide.intro.point.3'],
+    fineprint: 'deck.slide.intro.fineprint',
+    portrait: { src: '/tom-haeldermans.jpg', alt: 'deck.slide.intro.alt' },
+  },
   {
     id: 'deck-opening',
     kind: 'statement',
@@ -46,7 +63,7 @@ const OPENING: SlideSpec[] = [
     // `expectations` and step 2's `workflows` keep throwaway prototypes as its home.
     note: 'deck.slide.magic.note',
     figure: <MagicMeme />,
-    scale: 1.76,
+    scale: 1.65,
   },
   {
     id: 'deck-opening-steroids',

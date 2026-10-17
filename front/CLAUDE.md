@@ -42,8 +42,8 @@ the rest of it.
 
 **Every slide carries the SmartAgents watermark**, in the footer beside the page number: the mark,
 the name, `© 2026`, above a hairline that spans the frame. The mark is
-`shared/components/SmartAgentsMark.tsx`, a static port of the geometry
-`video/src/components/Logo.tsx` rebuilt from `smartagents.be/assets/logo.svg`, and its cyan-to-blue
+`shared/components/SmartAgentsMark.tsx`, an inline rebuild of
+`smartagents.be/assets/logo.svg`, and its cyan-to-blue
 gradient is deliberately not a token: it is the brand's own and not ours to restyle, so it lives
 inside that component and nowhere else. The gradient id is per instance (`useId`), because the mark
 is on every slide and two SVG gradients with one id resolve to the first. It sits in `components`
@@ -129,6 +129,13 @@ would still land under about 14px on the board leaves the slide for a statement 
 divider") is `data-deck="hide"`. Headings take `text-balance`, notes and points `text-pretty`, so no
 line ends on 1 word, and a point is a few words, not a sentence: a label and a clause that fits on 1
 line in both languages. The deck closes on the opening question asked again (`deck-closing`).
+It opens one slide before that question, on the tutor introducing themself (`deck-intro`, October
+2026, at the owner's asking): a `statement` with a `portrait` beside it. Its photo and every line
+come from Tom's profile on the smartagents-website (`profile.tom.*`, `media/team/tom-880.jpg`), where
+they were already approved, except the Isabel line and the Q-Park beside Cegeka, which are the owner's own words. So **reword it
+from those sources and never invent a line about a real person**. Both at the owner's asking: the
+jobs read oldest first, down to Isabel, and the doctorate opens them as a small `fineprint`, since it
+is true and less relevant to this room than the jobs.
 
 `SlideFigure` is what makes the reuse work. A page figure is built for a prose column (the SVG ones
 cap at `max-w-xl`, the DOM ones are sized in rem, which the fixed canvas knows nothing about), so it

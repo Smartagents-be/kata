@@ -66,6 +66,18 @@ export interface SlideSpec {
    */
   figureWidth?: number
   /**
+   * Message key for one small, set-back line between the note and the points: a fact worth having on
+   * the slide that the tutor does not want the room to read first. Only the intro uses it, for the
+   * doctorate.
+   */
+  fineprint?: string
+  /**
+   * A photo standing on the right of a text slide, beside the heading rather than under it. Only the
+   * tutor's own intro slide uses it: a portrait is a person standing next to what they say, not a
+   * drawing to magnify, so it does not go through `figure`. `alt` is a message key.
+   */
+  portrait?: { src: string; alt: string }
+  /**
    * Marks a slide as the moment the room does something: `task` for an exercise, `quiz` for a unit's
    * questions. `SlideTemplate` draws it as a label beside the eyebrow, so the tutor sees from the back
    * of the room that this is where the class stops listening and starts working. `exerciseSlides.ts`

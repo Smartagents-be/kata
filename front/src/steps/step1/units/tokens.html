@@ -1,4 +1,4 @@
-<!-- In class the teacher talks through this at the board, so the page keeps only the seven figures and
+<!-- In class the teacher talks through this at the board, so the page keeps only the nine figures and
      the exercise: every prose block is self-learning only, the same wrapper shape `context` uses.
      The figure markers stay top-level and carry no attribute so both audiences get them; a marker
      nested inside a data-audience wrapper is left as an empty div, which is why the wrapper closes
@@ -92,30 +92,28 @@
 <div data-audience="self">
   <!-- The bank example follows the reader's language. English uses the river-bank ambiguity;
        Dutch uses a seat versus a financial institution. The diagram's weights are illustrative
-       and omit self-attention, while the explanation below includes it. Query/key comparison
-       and value aggregation are separate operations, both learned during training and used
-       during inference. No numerical example: the role of each vector is the point. -->
+       and omit self-attention, while the explanation below includes it. Kept short at the owner's
+       asking (October 2026), with no dot product and no softmax. `.2` is the owner's own framing,
+       each vector as the question it answers, and must keep it: a lookup table and a walk-through
+       without the 3 questions were both tried and read as unclear. `.5` puts `bank` on it, `.7` says
+       the calculation is learned and why the KV cache keeps no queries. -->
   <p data-i18n="tokens.attention.2">
-    In every attention step, the model computes 3 vectors for each token. Its <strong>query</strong>
-    holds what it needs from other tokens, its <strong>key</strong> what it offers them, and its
-    <strong>value</strong> the information it actually passes on.
+    For each token the model computes 3 vectors. The <strong>query</strong> is the question the
+    current token asks: what am I looking for? The <strong>key</strong> is what every token says
+    about itself: what am I relevant for? The <strong>value</strong> is the actual content: what do I
+    pass on if you pick me?
   </p>
 
   <p data-i18n="tokens.attention.5">
-    For <code>bank</code>, the model takes the <strong>dot product</strong> of its query with the
-    key of every earlier token and its own: multiply the numbers at matching positions in the 2
-    vectors, then add them up. That is the score.
-  </p>
-
-  <p data-i18n="tokens.attention.6">
-    The scores become weights that add up to 100%. The model multiplies each value vector by its
-    weight and adds them position by position, so a higher score means a bigger share. That is how
-    <code>deposits</code> and <code>money</code> count heavily in what <code>bank</code> means.
+    For <code>bank</code>, the model compares its query with the key of every token before it and
+    its own. The better they match, the more of that value counts: a lot of <code>deposits</code>
+    and <code>money</code>, little of <code>the</code>. So <code>bank</code> here means a bank for
+    money.
   </p>
 
   <p data-i18n="tokens.attention.7">
-    During training, the model learns how to calculate these vectors to make useful connections.
-    When it writes, it uses those learned calculations.
+    How to compute those vectors is learned in training. The KV cache further down keeps only keys
+    and values: a query is only needed for the new token.
   </p>
 
   <!-- Explain what repeated attention contributes without introducing heads as unexplained jargon.
@@ -238,6 +236,26 @@
        because it is a rate: `one-at-a-time.1` already says what the cache reuses, so this section
        opens on the numbers rather than defining it twice. `ModelPricing`'s cache-read column and
        `recap.lead.2` both lean on these lines. -->
+  <h3 data-i18n="tokens.kv-cache.heading">KV cache</h3>
+
+  <!-- Its own section, ahead of prompt caching (October 2026, at the owner's asking): it names the
+       cache `one-at-a-time.1` reuses, and its second sentence hands over to the next section. Llama 3 70B: 80 layers x K and V x 8 KV heads x 128 dims x 2 bytes (bf16) is
+       327,680 bytes a token, 32.8 GB for 100,000. The cache is named together with the weights, never
+       alone, as the reason memory got expensive. DRAM contract prices roughly doubled in early 2026 (TrendForce). -->
+  <p data-i18n="tokens.kv-cache.1">
+    The cache the model reuses while writing is the <strong>KV cache</strong>: the key and value of
+    every token so far. Prompt caching keeps it for your next request. It sits in the GPU's memory,
+    and for Llama 3 70B that is about 320 KB per token, or 32 GB for 1 conversation of 100,000
+    tokens. That cache and the model's weights are why AI data centres buy memory in bulk, and why
+    RAM has become so expensive.
+  </p>
+</div>
+
+<!-- Filled by `KvCache`: the 3 passes of `NextToken`'s favourite chain, with and without the cache.
+     Top level and outside the wrapper, so guided mode titles it with the heading above. -->
+<div data-figure="kv-cache"></div>
+
+<div data-audience="self">
   <h3 data-i18n="tokens.prompt-caching.heading">Prompt caching</h3>
 
   <p data-i18n="tokens.prompt-caching.1">

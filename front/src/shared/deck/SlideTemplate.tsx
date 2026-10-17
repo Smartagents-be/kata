@@ -37,7 +37,8 @@ export function SlideTemplate({
   index: number
   total: number
 }) {
-  const { id, kind, ns = 'ui', eyebrow, title, note, points, figure, scale, figureWidth, badge, stop } = spec
+  const { id, kind, ns = 'ui', eyebrow, title, note, points, figure, scale, figureWidth, badge, stop, portrait, fineprint } =
+    spec
   const badges = badge === undefined ? [] : Array.isArray(badge) ? badge : [badge]
   const { t } = useTranslation(ns)
 
@@ -126,12 +127,24 @@ export function SlideTemplate({
           id={`${id}-note`}
           data-component="SlideTemplate"
           className={
+            // `whitespace-pre-line` lets a message put a sentence on its own line with `\n`, so a
+            // two-sentence note breaks between the sentences rather than wherever the width runs out.
             kind === 'figure'
-              ? 'text-muted-foreground mt-6 max-w-[60ch] text-[28px] leading-[1.4] text-pretty'
-              : `mt-10 max-w-[46ch] text-[34px] leading-[1.4] text-pretty ${dark ? 'text-header-foreground/70' : 'text-muted-foreground'}`
+              ? 'text-muted-foreground mt-6 max-w-[60ch] text-[28px] leading-[1.4] text-pretty whitespace-pre-line'
+              : `mt-10 max-w-[46ch] text-[34px] leading-[1.4] text-pretty whitespace-pre-line ${dark ? 'text-header-foreground/70' : 'text-muted-foreground'}`
           }
         >
           <Trans i18nKey={note} ns={ns} components={emphasis} />
+        </p>
+      )}
+
+      {fineprint && (
+        <p
+          id={`${id}-fineprint`}
+          data-component="SlideTemplate"
+          className="text-muted-foreground mt-6 text-[26px] leading-[1.4] text-pretty"
+        >
+          <Trans i18nKey={fineprint} ns={ns} components={emphasis} />
         </p>
       )}
 
@@ -141,7 +154,7 @@ export function SlideTemplate({
           data-component="SlideTemplate"
           // px, not ch: the list itself is not sized in the points' 36px, so a ch cap here would
           // measure against the inherited body size and wrap every line at a third of the frame.
-          className="mt-14 flex max-w-[1250px] flex-col gap-7"
+          className={`mt-14 flex flex-col gap-7 ${portrait ? 'max-w-[1050px]' : 'max-w-[1250px]'}`}
         >
           {points.map((point, pointIndex) => (
             <li
@@ -164,6 +177,21 @@ export function SlideTemplate({
             </li>
           ))}
         </ul>
+      )}
+
+      {portrait && (
+        // Pinned to the frame's right edge, from the heading's own line down to above the footer, so
+        // the text column keeps the golden placement every text slide has and the photo stands
+        // beside it. The list above is capped narrower while it is there, so the two never touch.
+        <img
+          id={`${id}-portrait`}
+          data-component="SlideTemplate"
+          src={portrait.src}
+          alt={t(portrait.alt)}
+          width={880}
+          height={1320}
+          className="absolute top-[180px] right-[120px] h-[760px] w-auto rounded-lg object-cover"
+        />
       )}
 
       {figure && (

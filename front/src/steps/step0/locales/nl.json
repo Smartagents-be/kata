@@ -119,10 +119,9 @@
   "quiz.agent-says-it-found-it.explanation": "Een flag die de agent zelf uitrekent, zit er vaak een paar tekens naast. Het platform controleert 1 exacte string, en alleen de output van het programma bevat die zeker.",
 
   "deck.title": "Introductie",
-  "deck.welcome.divider.1": "<hi>Op jouw manier:</hi> lees het zelf, of volg in de les",
-  "deck.welcome.divider.2": "<hi>Jouw assistent:</hi> kies hem onder het tandwiel",
-  "deck.welcome.divider.3": "<hi>Een flag:</hi> elk antwoord tussen accolades, {zoals_dit}",
-  "deck.welcome.divider.4": "<hi>Het spel:</hi> je agent zoekt, je browser controleert",
+  "deck.welcome.divider.1": "<hi>Jouw assistent:</hi> kies hem onder het tandwiel",
+  "deck.welcome.divider.2": "<hi>Een flag:</hi> elk antwoord tussen accolades, {zoals_dit}",
+  "deck.welcome.divider.3": "<hi>Het spel:</hi> je agent zoekt, je browser controleert",
   "deck.welcome.rules.title": "Huisregels, voor elke workshop",
   "deck.welcome.rules.1": "<hi>Laat de agent het werk doen:</hi> alleen je agent zoekt",
   "deck.welcome.rules.2": "<hi>1 flag per sessie:</hi> een nieuwe sessie voor elke flag",

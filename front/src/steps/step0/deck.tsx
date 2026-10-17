@@ -43,7 +43,6 @@ const deck: SlideSpec[] = [
       'deck.welcome.divider.1',
       'deck.welcome.divider.2',
       'deck.welcome.divider.3',
-      'deck.welcome.divider.4',
     ],
   },
   {
